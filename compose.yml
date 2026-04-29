@@ -1,0 +1,13 @@
+services:
+  opencode:
+    build: .
+    volumes:
+      - ./workspace:/workspace
+      - opencode_data:/home/opencode/.local/share/opencode
+    working_dir: /workspace
+    env_file:
+      - opencode.env
+    restart: unless-stopped
+
+volumes:
+  opencode_data:

@@ -1,0 +1,7 @@
+- API Key in opencode.env (siehe opencode.env.example)
+- `docker compose up -d`
+- `docker compose exec opencode bash`
+- `opencode`
+- Aufräumen
+- Daten da lassen: `docker compose down`
+- Opencode Daten löschen: `docker compose down -v`
