@@ -1,3 +1,4 @@
 .env
+opencode.env
 *.env
 .envrc

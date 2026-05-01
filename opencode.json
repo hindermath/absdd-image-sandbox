@@ -1,18 +1,31 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "gwdg/glm-4.7",
+  "model": "chat-ai/glm-4.7",
   "autoupdate": true,
   "provider": {
-    "gwdg": {
+    "chat-ai": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "GWDG",
+      "name": "chat-ai",
       "options": {
         "baseURL": "https://chat-ai.academiccloud.de/v1",
         "apiKey": "{env:GWDG_API_KEY}"
       },
       "models": {
+        "qwen3-coder-30b-a3b-instruct": {
+          "name": "Qwen 3 Coder 30B A3B Instruct",
+          "options": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "repetition_penalty": 1.05
+          }
+        },
         "glm-4.7": {
-          "name": "glm-4.7"
+          "name": "GLM-4.7",
+          "options": {
+            "temperature": 0.7,
+            "top_p": 1.0
+          }
         },
         "devstral-2-123b-instruct-2512": {
           "name": "devstral-2-123b-instruct-2512"
@@ -27,6 +40,26 @@
           "name": "claude-opus-4-6"
         }
       }
+    }
+  },
+  "agent": {
+    "coding": {
+      "description": "Standard-Agent fuer Coding mit GLM-4.7 fuer Implementierung, Debugging und Refactoring. / Standard coding agent using GLM-4.7 for implementation, debugging, and refactoring.",
+      "model": "chat-ai/glm-4.7",
+      "temperature": 0.7,
+      "top_p": 1.0
+    },
+    "coding-qwen": {
+      "description": "Alternativer Coding-Agent mit Qwen 3 Coder fuer fokussierte Code-Erzeugung und praezise Aenderungen. / Alternative coding agent using Qwen 3 Coder for focused code generation and precise edits.",
+      "model": "chat-ai/qwen3-coder-30b-a3b-instruct",
+      "temperature": 0.7,
+      "top_p": 0.8
+    },
+    "brainstorm": {
+      "description": "Kreativerer Agent mit GLM-4.7 fuer Ideen, Namensfindung und Design-Optionen. / More creative agent using GLM-4.7 for ideas, naming, and design options.",
+      "model": "chat-ai/glm-4.7",
+      "temperature": 1.0,
+      "top_p": 0.95
     }
   }
 }

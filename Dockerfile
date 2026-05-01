@@ -1,7 +1,7 @@
 FROM debian:trixie
 
 RUN apt-get -y update && apt-get -y install nodejs npm
-RUN npm i -g 'opencode-ai@1.14.21'
+RUN npm i -g opencode-ai@latest
 
 RUN useradd -m opencode
 USER opencode
