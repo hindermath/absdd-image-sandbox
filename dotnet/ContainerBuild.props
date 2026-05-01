@@ -1,0 +1,17 @@
+<Project>
+  <PropertyGroup>
+    <_RepoDirectoryBuildProps>$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildProjectDirectory)'))</_RepoDirectoryBuildProps>
+  </PropertyGroup>
+
+  <Import
+    Project="$(_RepoDirectoryBuildProps)"
+    Condition="'$(_RepoDirectoryBuildProps)' != '' and '$(_RepoDirectoryBuildProps)' != '/rider-projects/Directory.Build.props'" />
+
+  <PropertyGroup Condition="$([System.String]::Copy('$(MSBuildProjectDirectory)').StartsWith('/rider-projects/'))">
+    <_ContainerProjectKey>$([System.String]::Copy('$(MSBuildProjectDirectory)').Replace('/rider-projects/', '').Replace('/', '_').Replace(':', '_'))</_ContainerProjectKey>
+    <DefaultItemExcludes>$(DefaultItemExcludes);**/bin/**;**/obj/**</DefaultItemExcludes>
+    <BaseIntermediateOutputPath>/dotnet-build/obj/$(_ContainerProjectKey)/$(MSBuildProjectName)/</BaseIntermediateOutputPath>
+    <MSBuildProjectExtensionsPath>/dotnet-build/obj/$(_ContainerProjectKey)/$(MSBuildProjectName)/</MSBuildProjectExtensionsPath>
+    <BaseOutputPath>/dotnet-build/bin/$(_ContainerProjectKey)/$(MSBuildProjectName)/</BaseOutputPath>
+  </PropertyGroup>
+</Project>

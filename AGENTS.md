@@ -10,7 +10,8 @@ This repository contains a small Docker-based Opencode environment, not an appli
 - `opencode.env.example`: documents the required `GWDG_API_KEY` variable.
 - `workspace/`: mounted into the container as `/workspace`; place working project files there.
 - `/mnt/c/Users/thinder/RiderProjects`: mounted into the container as `/rider-projects` for Windows/Rider projects.
-- `dotnet/Directory.Build.props`: mounted into `/rider-projects` to redirect .NET build artifacts to `/dotnet-build`.
+- `dotnet/ContainerBuild.props`: mounted into `/dotnet-config` and loaded through `DirectoryBuildPropsPath` to redirect .NET build artifacts to `/dotnet-build`.
+- `dotnet/dotnet-wrapper.sh`: installed as `/usr/local/bin/dotnet` to filter one known workload verification noise line while preserving real output and exit codes.
 - `README.md`: user-facing setup and operation guide.
 
 There is currently no `src/`, `tests/`, or asset directory.
@@ -74,7 +75,11 @@ The `--pull` flag is important because the Dockerfile uses `mcr.microsoft.com/do
 
 Do not require a real API key for validation unless the change explicitly affects live Opencode usage.
 
-For .NET projects under `/rider-projects`, keep `bin` and `obj` output off the Windows bind mount. The mounted `Directory.Build.props` sends build output to the `dotnet_build` volume at `/dotnet-build`.
+For .NET projects under `/rider-projects`, keep `bin`, `obj`, and AppHost output off the Windows bind mount. The mounted `ContainerBuild.props` sends build output to the `dotnet_build` volume at `/dotnet-build` and imports repository-specific `Directory.Build.props` files when present.
+
+The Compose environment disables general .NET workload update notifications with `DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE=true` and disables the MSBuild workload resolver with `MSBuildEnableWorkloadResolver=false`. The Dockerfile also sets `dotnet workload config --update-mode manifests` as root to reduce workload verification noise with .NET 10 SDK images. Do not run this command after switching to the `opencode` user because it needs elevated privileges. Install real workloads explicitly in the Dockerfile and re-enable the resolver if a project requires MAUI, WebAssembly, or another optional SDK workload.
+
+The `dotnet` wrapper must only filter the exact workload verification message. Do not broaden the filter, because normal warnings and build errors must stay visible.
 
 ## Commit & Pull Request Guidelines
 

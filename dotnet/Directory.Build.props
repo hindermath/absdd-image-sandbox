@@ -1,8 +1,0 @@
-<Project>
-  <PropertyGroup>
-    <_ContainerProjectKey>$([System.String]::Copy('$(MSBuildProjectDirectory)').Replace('/rider-projects/', '').Replace('/', '_').Replace(':', '_'))</_ContainerProjectKey>
-    <DefaultItemExcludes>$(DefaultItemExcludes);**/bin/**;**/obj/**</DefaultItemExcludes>
-    <BaseIntermediateOutputPath>/dotnet-build/obj/$(_ContainerProjectKey)/$(MSBuildProjectName)/</BaseIntermediateOutputPath>
-    <BaseOutputPath>/dotnet-build/bin/$(_ContainerProjectKey)/$(MSBuildProjectName)/</BaseOutputPath>
-  </PropertyGroup>
-</Project>

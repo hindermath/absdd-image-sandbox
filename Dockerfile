@@ -3,8 +3,11 @@ FROM mcr.microsoft.com/dotnet/sdk:latest
 RUN apt-get -y update \
     && apt-get -y install --no-install-recommends nodejs npm \
     && rm -rf /var/lib/apt/lists/*
-RUN dotnet workload update
+RUN dotnet workload config --update-mode manifests \
+    && dotnet workload update
 RUN npm i -g opencode-ai@latest
+COPY ./dotnet/dotnet-wrapper.sh /usr/local/bin/dotnet
+RUN chmod 0755 /usr/local/bin/dotnet
 
 RUN useradd -m opencode
 RUN mkdir -p /dotnet-build && chown opencode:opencode /dotnet-build

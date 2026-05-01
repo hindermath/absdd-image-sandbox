@@ -55,7 +55,8 @@ Der Container bleibt im Hintergrund aktiv. Danach kann eine Shell im Container g
 - `opencode.env.example`: Vorlage fuer die lokale Datei `opencode.env`.
 - `workspace/`: lokales Arbeitsverzeichnis, im Container unter `/workspace`.
 - `/mnt/c/Users/thinder/RiderProjects`: Windows-Projekte, im Container unter `/rider-projects`.
-- `dotnet/Directory.Build.props`: leitet .NET-Build-Artefakte in das Container-Volume `/dotnet-build`.
+- `dotnet/ContainerBuild.props`: leitet .NET-Build-Artefakte fuer Rider-Projekte in das Container-Volume `/dotnet-build`.
+- `dotnet/dotnet-wrapper.sh`: filtert eine bekannte .NET-Workload-Verifikationsmeldung aus der Ausgabe.
 - `AGENTS.md`: Regeln fuer KI-Agenten wie Opencode oder Codex.
 
 ### Docker unter Ubuntu oder WSL2 installieren
@@ -190,13 +191,15 @@ ls
 
 Aenderungen im Container wirken direkt auf die Windows-Dateien. Rider unter Windows sieht dieselben Dateien. Builds auf `/mnt/c` koennen langsamer sein als Builds im Linux-Dateisystem.
 
-Damit .NET auf Windows-Dateien keine Probleme mit `bin`, `obj` oder Dateizeitstempeln bekommt, wird eine Projektdatei in den Container eingebunden:
+Damit .NET auf Windows-Dateien keine Probleme mit `bin`, `obj`, AppHost-Dateien oder Dateizeitstempeln bekommt, wird eine MSBuild-Konfiguration in den Container eingebunden:
 
 ```text
-dotnet/Directory.Build.props -> /rider-projects/Directory.Build.props
+dotnet/ContainerBuild.props -> /dotnet-config/ContainerBuild.props
 ```
 
-Diese Datei sorgt dafuer, dass Build-Artefakte nicht unter `/rider-projects`, sondern im Linux-Volume `/dotnet-build` liegen. Das verhindert typische Fehler wie `Access to the path ... obj ... is denied`.
+Compose setzt dazu die Umgebungsvariable `DirectoryBuildPropsPath`. Dadurch wird die Konfiguration sehr frueh im MSBuild-Ablauf geladen. Repo-eigene `Directory.Build.props`-Dateien werden von `ContainerBuild.props` weiter importiert, damit projektspezifische Einstellungen erhalten bleiben.
+
+Die Build-Artefakte liegen nicht unter `/rider-projects`, sondern im Linux-Volume `/dotnet-build`. Das verhindert typische Fehler wie `Access to the path ... obj ... is denied` oder Fehler beim Erstellen von `apphost`.
 
 ### .NET und C# im Container nutzen
 
@@ -253,6 +256,32 @@ Opencode wird beim Image-Build mit der neuesten npm-Version installiert:
 RUN npm i -g opencode-ai@latest
 ```
 
+Die .NET-Workload-Hinweismeldung wird im Container deaktiviert:
+
+```text
+DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE=true
+MSBuildEnableWorkloadResolver=false
+```
+
+Die erste Variable betrifft allgemeine Update-Benachrichtigungen. Die zweite Variable deaktiviert den MSBuild-Workload-Resolver. Das ist fuer normale Konsolen-, Library-, Test- und Web-Projekte sinnvoll, weil dort keine optionalen SDK-Workloads wie MAUI gebraucht werden.
+
+Gegen die Meldung `An issue was encountered verifying workloads` wird beim Image-Build zusaetzlich der Manifest-Modus gesetzt:
+
+```dockerfile
+RUN dotnet workload config --update-mode manifests \
+    && dotnet workload update
+```
+
+Dieser Befehl laeuft beim Image-Build als `root`, weil `dotnet workload config` erhoehte Rechte braucht. Normale .NET-Projekte koennen weiter gebaut und gestartet werden. Wenn ein Projekt echte Workloads wie MAUI oder spezielle WebAssembly-Tools braucht, muessen diese gezielt im Dockerfile ergaenzt und `MSBuildEnableWorkloadResolver` wieder aktiviert werden.
+
+Zusaetzlich wird im Image ein schmaler Wrapper unter `/usr/local/bin/dotnet` installiert. Er ruft intern `/usr/bin/dotnet` auf und filtert nur diese bekannte Zeile aus der Fehlerausgabe:
+
+```text
+An issue was encountered verifying workloads. For more information, run "dotnet workload update".
+```
+
+Andere Warnungen, Fehler und der Exit-Code von `dotnet` bleiben erhalten.
+
 ### Aufraeumen
 
 Container stoppen, Daten behalten:
@@ -279,14 +308,26 @@ Wenn Docker keine Berechtigung hat, entweder `sudo docker ...` verwenden oder de
 
 Wenn der API-Key nicht funktioniert, `opencode.env` pruefen. Den Key nicht im Terminalverlauf, in Screenshots oder in Git-Ausgaben zeigen.
 
-Wenn .NET unter `/rider-projects` einen Fehler zu `obj`, `bin` oder `Access denied` meldet, den Container neu bauen und starten:
+Wenn .NET unter `/rider-projects` einen Fehler zu `obj`, `bin`, `apphost` oder `Access denied` meldet, den Container neu bauen und starten:
 
 ```bash
 docker compose build --pull
 docker compose up -d
 ```
 
-Danach pruefen, ob `/rider-projects/Directory.Build.props` und `/dotnet-build` im Container vorhanden sind.
+Danach im Container pruefen, ob die allgemeine MSBuild-Konfiguration und das Build-Volume vorhanden sind:
+
+```bash
+test "$DirectoryBuildPropsPath" = "/dotnet-config/ContainerBuild.props"
+ls /dotnet-config/ContainerBuild.props
+ls /dotnet-build
+```
+
+Wenn eine Warnung `MSB3539` zu `BaseIntermediateOutputPath` erscheint, laeuft wahrscheinlich noch ein alter Container. Dann den Container neu erstellen:
+
+```bash
+docker compose up -d --force-recreate
+```
 
 Wenn danach ein Fehler wie `Duplicate TargetFrameworkAttribute` erscheint, liegen meist alte `obj`-Dateien im Windows-Projektordner. Diese Ordner einmal loeschen und danach erneut bauen:
 
@@ -298,6 +339,18 @@ Wenn die Ausgabe nur erwartete Build-Ordner zeigt, koennen sie geloescht werden:
 
 ```bash
 find /rider-projects/ConsoleApp1 -type d \( -name bin -o -name obj \) -prune -exec rm -rf {} +
+```
+
+Wenn ein Fehler wie `Root element is missing` fuer `/rider-projects/Directory.Build.props` erscheint, liegt im Windows-Projektroot eine alte oder leere MSBuild-Datei. Diese Datei darf dort nicht mehr liegen. Pruefen:
+
+```bash
+ls -l /rider-projects/Directory.Build.props
+```
+
+Wenn die Datei leer oder unerwuenscht ist, loeschen:
+
+```bash
+rm /rider-projects/Directory.Build.props
 ```
 
 ### Kompakter Testablauf
@@ -348,7 +401,8 @@ The container stays active in the background. You can then open a shell inside i
 - `opencode.env.example`: template for the local `opencode.env` file.
 - `workspace/`: local working directory, mounted as `/workspace`.
 - `/mnt/c/Users/thinder/RiderProjects`: Windows projects, mounted as `/rider-projects`.
-- `dotnet/Directory.Build.props`: redirects .NET build artifacts to the container volume `/dotnet-build`.
+- `dotnet/ContainerBuild.props`: redirects .NET build artifacts for Rider projects to the container volume `/dotnet-build`.
+- `dotnet/dotnet-wrapper.sh`: filters a known .NET workload verification message from command output.
 - `AGENTS.md`: rules for AI agents such as Opencode or Codex.
 
 ### Install Docker on Ubuntu or WSL2
@@ -483,13 +537,15 @@ ls
 
 Changes inside the container are written directly to the Windows files. Rider on Windows sees the same files. Builds on `/mnt/c` can be slower than builds inside the Linux file system.
 
-To avoid .NET problems with `bin`, `obj`, or file timestamps on Windows files, a project file is mounted into the container:
+To avoid .NET problems with `bin`, `obj`, AppHost files, or file timestamps on Windows files, an MSBuild configuration file is mounted into the container:
 
 ```text
-dotnet/Directory.Build.props -> /rider-projects/Directory.Build.props
+dotnet/ContainerBuild.props -> /dotnet-config/ContainerBuild.props
 ```
 
-This file makes .NET write build artifacts to the Linux volume `/dotnet-build` instead of `/rider-projects`. This prevents common errors such as `Access to the path ... obj ... is denied`.
+Compose sets the `DirectoryBuildPropsPath` environment variable for this. The configuration is loaded very early in the MSBuild process. Repository-specific `Directory.Build.props` files are still imported by `ContainerBuild.props`, so project settings remain active.
+
+Build artifacts are written to the Linux volume `/dotnet-build` instead of `/rider-projects`. This prevents common errors such as `Access to the path ... obj ... is denied` or errors while creating `apphost`.
 
 ### Use .NET and C# inside the container
 
@@ -546,6 +602,32 @@ Opencode is installed during the image build with the newest npm version:
 RUN npm i -g opencode-ai@latest
 ```
 
+The .NET workload notification is disabled inside the container:
+
+```text
+DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE=true
+MSBuildEnableWorkloadResolver=false
+```
+
+The first variable affects general update notifications. The second variable disables the MSBuild workload resolver. This is useful for normal console, library, test, and web projects because they do not need optional SDK workloads such as MAUI.
+
+To address the message `An issue was encountered verifying workloads`, the image build also sets manifest mode:
+
+```dockerfile
+RUN dotnet workload config --update-mode manifests \
+    && dotnet workload update
+```
+
+This command runs as `root` during the image build because `dotnet workload config` needs elevated privileges. Normal .NET projects can still be built and started. If a project needs real workloads such as MAUI or special WebAssembly tools, add them explicitly in the Dockerfile and enable `MSBuildEnableWorkloadResolver` again.
+
+The image also installs a small wrapper at `/usr/local/bin/dotnet`. It calls `/usr/bin/dotnet` internally and filters only this known line from error output:
+
+```text
+An issue was encountered verifying workloads. For more information, run "dotnet workload update".
+```
+
+Other warnings, errors, and the `dotnet` exit code are preserved.
+
 ### Clean up
 
 Stop the container but keep data:
@@ -572,14 +654,26 @@ If Docker has no permission, use `sudo docker ...` or add the user to the `docke
 
 If the API key does not work, check `opencode.env`. Do not show the key in terminal history, screenshots, or Git output.
 
-If .NET reports an `obj`, `bin`, or `Access denied` error under `/rider-projects`, rebuild and start the container:
+If .NET reports an `obj`, `bin`, `apphost`, or `Access denied` error under `/rider-projects`, rebuild and start the container:
 
 ```bash
 docker compose build --pull
 docker compose up -d
 ```
 
-Then check inside the container that `/rider-projects/Directory.Build.props` and `/dotnet-build` exist.
+Then check inside the container that the general MSBuild configuration and build volume exist:
+
+```bash
+test "$DirectoryBuildPropsPath" = "/dotnet-config/ContainerBuild.props"
+ls /dotnet-config/ContainerBuild.props
+ls /dotnet-build
+```
+
+If a warning `MSB3539` about `BaseIntermediateOutputPath` appears, an old container is probably still running. Recreate the container:
+
+```bash
+docker compose up -d --force-recreate
+```
 
 If an error like `Duplicate TargetFrameworkAttribute` appears after that, old `obj` files are usually still present in the Windows project folder. Delete these folders once and build again:
 
@@ -591,6 +685,18 @@ If the output only shows expected build folders, they can be deleted:
 
 ```bash
 find /rider-projects/ConsoleApp1 -type d \( -name bin -o -name obj \) -prune -exec rm -rf {} +
+```
+
+If an error like `Root element is missing` appears for `/rider-projects/Directory.Build.props`, an old or empty MSBuild file exists in the Windows project root. This file must not stay there. Check it:
+
+```bash
+ls -l /rider-projects/Directory.Build.props
+```
+
+If the file is empty or unwanted, delete it:
+
+```bash
+rm /rider-projects/Directory.Build.props
 ```
 
 ### Compact test procedure
