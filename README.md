@@ -3,50 +3,81 @@
 ## Inhaltsverzeichnis
 
 - [Deutsch](#deutsch)
-  - [Zweck](#zweck)
-  - [Wichtige Dateien](#wichtige-dateien)
-  - [Voraussetzungen](#voraussetzungen)
+  - [Zielgruppe und Zweck](#zielgruppe-und-zweck)
+  - [Grundidee](#grundidee)
+  - [Projektstruktur](#projektstruktur)
+  - [Docker unter Ubuntu oder WSL2 installieren](#docker-unter-ubuntu-oder-wsl2-installieren)
+  - [Docker-Berechtigungen pruefen](#docker-berechtigungen-pruefen)
   - [API-Key einrichten](#api-key-einrichten)
   - [Container bauen und starten](#container-bauen-und-starten)
-  - [Rider-Projekte einbinden](#rider-projekte-einbinden)
+  - [Rider-Projekte aus Windows einbinden](#rider-projekte-aus-windows-einbinden)
+  - [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen)
   - [Opencode verwenden](#opencode-verwenden)
   - [Konfiguration](#konfiguration)
-  - [Opencode-Version](#opencode-version)
   - [Aufraeumen](#aufraeumen)
+  - [Haeufige Probleme](#haeufige-probleme)
 - [English](#english)
-  - [Purpose](#purpose)
-  - [Important files](#important-files)
-  - [Requirements](#requirements)
+  - [Target group and purpose](#target-group-and-purpose)
+  - [Basic idea](#basic-idea)
+  - [Project structure](#project-structure)
+  - [Install Docker on Ubuntu or WSL2](#install-docker-on-ubuntu-or-wsl2)
+  - [Check Docker permissions](#check-docker-permissions)
   - [Set up the API key](#set-up-the-api-key)
   - [Build and start the container](#build-and-start-the-container)
-  - [Mount Rider projects](#mount-rider-projects)
+  - [Mount Rider projects from Windows](#mount-rider-projects-from-windows)
+  - [Use .NET and C# inside the container](#use-net-and-c-inside-the-container)
   - [Use Opencode](#use-opencode)
   - [Configuration](#configuration)
-  - [Opencode version](#opencode-version-1)
   - [Clean up](#clean-up)
+  - [Common problems](#common-problems)
 
 ## Deutsch
 
-### Zweck
+### Zielgruppe und Zweck
 
-Dieses Repository stellt eine kleine Docker-Umgebung fuer Opencode bereit. Der Container startet nicht direkt Opencode, sondern bleibt laufen. Danach kann eine Shell im Container geoeffnet und Opencode manuell gestartet werden.
+Diese Anleitung richtet sich an Auszubildende der Fachinformatik ab dem 1. Lehrjahr. Sie erklaert nicht nur die Befehle, sondern auch kurz, warum sie gebraucht werden.
 
-Der lokale Ordner `workspace` wird im Container als `/workspace` eingebunden. Dort kann mit Projektdaten gearbeitet werden.
+Dieses Repository stellt eine Docker-Umgebung fuer Opencode, .NET und C# bereit. Die Umgebung ist fuer Entwicklung unter WSL2 gedacht. Projekte koennen weiter unter Windows mit JetBrains Rider bearbeitet werden.
 
-### Wichtige Dateien
+### Grundidee
 
-- `Dockerfile`: baut das Container-Image auf Basis des offiziellen Microsoft-.NET-SDK-Images `mcr.microsoft.com/dotnet/sdk:latest`.
-- `compose.yml`: definiert den Docker-Compose-Service `opencode`.
-- `opencode.json`: enthaelt die Opencode-Konfiguration fuer den Provider `chat-ai`.
-- `opencode.env.example`: Beispiel fuer die benoetigte Umgebungsvariable `GWDG_API_KEY`.
-- `workspace`: Arbeitsverzeichnis, das in den Container eingebunden wird.
-- `/mnt/c/Users/thinder/RiderProjects`: Windows-/Rider-Projekte, eingebunden als `/rider-projects`.
+Docker erstellt aus dem `Dockerfile` ein Image. Aus diesem Image startet Docker Compose einen Container. Der Container enthaelt das aktuelle Microsoft .NET SDK, Node.js, npm und Opencode.
 
-### Voraussetzungen
+Der Container bleibt im Hintergrund aktiv. Danach kann eine Shell im Container geoeffnet werden. Dort koennen Befehle wie `dotnet`, `opencode` oder `ls` ausgefuehrt werden.
 
-Docker muss installiert sein. Docker Compose muss als modernes Docker-Plugin verfuegbar sein.
+### Projektstruktur
 
-Pruefen:
+- `Dockerfile`: beschreibt das Container-Image. Es nutzt `mcr.microsoft.com/dotnet/sdk:latest`.
+- `compose.yml`: beschreibt den Service `opencode`, Volumes und Build-Regeln.
+- `opencode.json`: enthaelt Provider, Modelle und Agenten fuer Opencode.
+- `opencode.env.example`: Vorlage fuer die lokale Datei `opencode.env`.
+- `workspace/`: lokales Arbeitsverzeichnis, im Container unter `/workspace`.
+- `/mnt/c/Users/thinder/RiderProjects`: Windows-Projekte, im Container unter `/rider-projects`.
+- `AGENTS.md`: Regeln fuer KI-Agenten wie Opencode oder Codex.
+
+### Docker unter Ubuntu oder WSL2 installieren
+
+Zuerst die Paketlisten aktualisieren:
+
+```bash
+sudo apt update
+```
+
+Docker Engine und Docker Compose installieren:
+
+```bash
+sudo apt install -y docker.io docker-compose-v2
+```
+
+Docker-Dienst starten:
+
+```bash
+sudo systemctl enable --now docker
+```
+
+Unter WSL2 funktioniert `systemctl` nur, wenn systemd aktiv ist. Falls der Befehl scheitert, kann Docker auch ueber Docker Desktop fuer Windows bereitgestellt werden. In diesem Fall muss die WSL-Integration fuer die verwendete Distribution aktiviert sein.
+
+Installation pruefen:
 
 ```bash
 docker --version
@@ -54,31 +85,34 @@ docker compose version
 docker info
 ```
 
-Die Compose-Datei kann ohne Secret-Ausgabe so geprueft werden:
+Die Compose-Datei kann ohne Secret-Ausgabe geprueft werden:
 
 ```bash
 docker compose config --no-interpolate
 ```
 
-Wenn `docker compose` fehlt, kann auf Ubuntu 24.04 dieses Paket installiert werden:
+### Docker-Berechtigungen pruefen
+
+Wenn `docker info` mit `permission denied` scheitert, darf der aktuelle Benutzer noch nicht auf Docker zugreifen.
+
+Schneller Test mit `sudo`:
 
 ```bash
-sudo apt install docker-compose-v2
+sudo docker info
 ```
 
-Wenn `docker info` wegen fehlender Rechte scheitert, gibt es zwei Wege:
-
-```bash
-sudo docker compose up -d
-```
-
-Oder den aktuellen Benutzer dauerhaft fuer Docker freigeben:
+Dauerhafte Freigabe fuer den aktuellen Benutzer:
 
 ```bash
 sudo usermod -aG docker "$USER"
 ```
 
-Danach ist ein neues Login noetig. Erst danach sollte `docker info` ohne `sudo` funktionieren.
+Danach komplett neu anmelden. Erst danach wird die neue Gruppenzugehoerigkeit aktiv. Pruefen:
+
+```bash
+id
+docker info
+```
 
 ### API-Key einrichten
 
@@ -88,15 +122,15 @@ Vor dem Start muss eine lokale Datei `opencode.env` angelegt werden:
 cp opencode.env.example opencode.env
 ```
 
-Danach in `opencode.env` den echten API-Key setzen:
+Danach den echten Key eintragen:
 
 ```text
 GWDG_API_KEY=dein_echter_key
 ```
 
-Alternativ kann der vorhandene Key aus der lokalen Opencode-Datei `~/.local/share/opencode/auth.json` uebernommen werden. In diesem Setup wird der Wert aus `chat-ai.key` als `GWDG_API_KEY` in `opencode.env` gespeichert.
+Alternativ kann der vorhandene Key aus `~/.local/share/opencode/auth.json` uebernommen werden. In diesem Setup wird `chat-ai.key` als `GWDG_API_KEY` gespeichert.
 
-Die Datei `opencode.env` wird nicht versioniert. Sie ist in `.gitignore` ausdruecklich ausgeschlossen und darf nicht ins GitLab-Repository gepusht werden. Da sie einen Secret-Wert enthaelt, sollte sie nur fuer den aktuellen Benutzer lesbar sein:
+Wichtig: `opencode.env` enthaelt ein Secret. Die Datei ist in `.gitignore` ausgeschlossen und darf nicht nach GitLab gepusht werden.
 
 ```bash
 chmod 600 opencode.env
@@ -104,39 +138,56 @@ chmod 600 opencode.env
 
 ### Container bauen und starten
 
-Aus dem Repository-Verzeichnis starten:
+In das Repository wechseln:
 
 ```bash
-docker compose up -d
+cd /home/thinder/ade-dev-sandbox
 ```
 
-Beim ersten Start wird das Image gebaut. Das kann etwas dauern, weil Debian-Pakete installiert werden und Opencode ueber npm geladen wird.
-
-Compose ist so konfiguriert, dass beim Build auch nach einem neueren Basisimage gesucht wird. Explizit kann das so ausgefuehrt werden:
+Image bauen und dabei nach dem neuesten .NET-Basisimage suchen:
 
 ```bash
 docker compose build --pull
+```
+
+Container starten:
+
+```bash
 docker compose up -d
 ```
 
-### Rider-Projekte einbinden
+Status anzeigen:
 
-Da die Entwicklung in WSL2 stattfindet, werden die Windows-Projekte aus Rider direkt in den Container eingebunden:
-
-```text
-/mnt/c/Users/thinder/RiderProjects -> /rider-projects
+```bash
+docker compose ps
 ```
 
-Im Container koennen die Projekte so geoeffnet werden:
+Beim ersten Build werden das .NET-SDK-Basisimage und npm-Pakete geladen. Das kann einige Minuten dauern.
+
+### Rider-Projekte aus Windows einbinden
+
+Die Windows-Projekte liegen unter:
+
+```text
+/mnt/c/Users/thinder/RiderProjects
+```
+
+Sie werden im Container hier eingebunden:
+
+```text
+/rider-projects
+```
+
+Im Container kann dorthin gewechselt werden:
 
 ```bash
 cd /rider-projects
 ls
 ```
 
-Aenderungen im Container wirken direkt auf die Windows-Dateien. Rider unter Windows sieht diese Aenderungen ebenfalls. Builds auf `/mnt/c` koennen langsamer sein als Builds im Linux-Dateisystem.
+Aenderungen im Container wirken direkt auf die Windows-Dateien. Rider unter Windows sieht dieselben Dateien. Builds auf `/mnt/c` koennen langsamer sein als Builds im Linux-Dateisystem.
 
-### Opencode verwenden
+### .NET und C# im Container nutzen
 
 Shell im Container oeffnen:
 
@@ -144,41 +195,54 @@ Shell im Container oeffnen:
 docker compose exec opencode bash
 ```
 
-Opencode starten:
+.NET-Version pruefen:
+
+```bash
+dotnet --info
+```
+
+Beispiel fuer ein neues Konsolenprojekt:
+
+```bash
+cd /rider-projects
+dotnet new console -n DemoApp
+cd DemoApp
+dotnet run
+```
+
+### Opencode verwenden
+
+Opencode im Container starten:
 
 ```bash
 opencode
 ```
 
+Der Container startet Opencode nicht automatisch. Das ist Absicht. So kann zuerst entschieden werden, in welchem Projektverzeichnis gearbeitet wird.
+
 ### Konfiguration
 
-Die Datei `opencode.json` nutzt den Provider `chat-ai` mit der Basis-URL:
+`opencode.json` nutzt den Provider `chat-ai` mit dieser Basis-URL:
 
 ```text
 https://chat-ai.academiccloud.de/v1
 ```
 
-Der API-Key wird aus der Umgebungsvariable `GWDG_API_KEY` gelesen. Das Standardmodell ist:
+Der API-Key wird aus `GWDG_API_KEY` gelesen. Das Standardmodell ist:
 
 ```text
 chat-ai/glm-4.7
 ```
 
-Zusaetzlich sind Agenten fuer Coding, Qwen-Coding und Brainstorming eingerichtet.
-
-### Opencode-Version
-
-Im `Dockerfile` wird Opencode mit diesem Befehl installiert:
+Opencode wird beim Image-Build mit der neuesten npm-Version installiert:
 
 ```dockerfile
 RUN npm i -g opencode-ai@latest
 ```
 
-Dadurch wird beim Neubau des Images die aktuellste Version von `opencode-ai` aus npm installiert.
-
 ### Aufraeumen
 
-Container stoppen, Daten aber behalten:
+Container stoppen, Daten behalten:
 
 ```bash
 docker compose down
@@ -190,28 +254,65 @@ Container stoppen und persistente Opencode-Daten loeschen:
 docker compose down -v
 ```
 
+### Haeufige Probleme
+
+Wenn `docker compose` nicht gefunden wird, fehlt meist `docker-compose-v2`:
+
+```bash
+sudo apt install -y docker-compose-v2
+```
+
+Wenn Docker keine Berechtigung hat, entweder `sudo docker ...` verwenden oder den Benutzer zur Gruppe `docker` hinzufuegen.
+
+Wenn der API-Key nicht funktioniert, `opencode.env` pruefen. Den Key nicht im Terminalverlauf, in Screenshots oder in Git-Ausgaben zeigen.
+
 ## English
 
-### Purpose
+### Target group and purpose
 
-This repository provides a small Docker environment for Opencode. The container does not start Opencode directly. It keeps running, so you can open a shell inside the container and start Opencode manually.
+This guide is written for first-year IT specialist apprentices and later. It explains the commands and also why they are needed.
 
-The local `workspace` folder is mounted into the container as `/workspace`. This is where project files can be used.
+This repository provides a Docker environment for Opencode, .NET, and C#. It is designed for development with WSL2. Projects can still be edited on Windows with JetBrains Rider.
 
-### Important files
+### Basic idea
 
-- `Dockerfile`: builds the container image from the official Microsoft .NET SDK image `mcr.microsoft.com/dotnet/sdk:latest`.
-- `compose.yml`: defines the Docker Compose service `opencode`.
-- `opencode.json`: contains the Opencode configuration for the `chat-ai` provider.
-- `opencode.env.example`: example file for the required `GWDG_API_KEY` environment variable.
-- `workspace`: working directory mounted into the container.
-- `/mnt/c/Users/thinder/RiderProjects`: Windows/Rider projects, mounted as `/rider-projects`.
+Docker builds an image from the `Dockerfile`. Docker Compose starts a container from that image. The container includes the current Microsoft .NET SDK, Node.js, npm, and Opencode.
 
-### Requirements
+The container stays active in the background. You can then open a shell inside it and run commands such as `dotnet`, `opencode`, or `ls`.
 
-Docker must be installed. Docker Compose must be available as the modern Docker plugin.
+### Project structure
 
-Check this with:
+- `Dockerfile`: describes the container image. It uses `mcr.microsoft.com/dotnet/sdk:latest`.
+- `compose.yml`: describes the `opencode` service, volumes, and build rules.
+- `opencode.json`: contains provider, model, and agent settings for Opencode.
+- `opencode.env.example`: template for the local `opencode.env` file.
+- `workspace/`: local working directory, mounted as `/workspace`.
+- `/mnt/c/Users/thinder/RiderProjects`: Windows projects, mounted as `/rider-projects`.
+- `AGENTS.md`: rules for AI agents such as Opencode or Codex.
+
+### Install Docker on Ubuntu or WSL2
+
+First update the package lists:
+
+```bash
+sudo apt update
+```
+
+Install Docker Engine and Docker Compose:
+
+```bash
+sudo apt install -y docker.io docker-compose-v2
+```
+
+Start the Docker service:
+
+```bash
+sudo systemctl enable --now docker
+```
+
+On WSL2, `systemctl` only works if systemd is enabled. If the command fails, Docker can also be provided by Docker Desktop for Windows. In that case, enable WSL integration for the used distribution.
+
+Check the installation:
 
 ```bash
 docker --version
@@ -219,31 +320,34 @@ docker compose version
 docker info
 ```
 
-The Compose file can be checked without printing secret values:
+Check the Compose file without printing secret values:
 
 ```bash
 docker compose config --no-interpolate
 ```
 
-If `docker compose` is missing, this package can be installed on Ubuntu 24.04:
+### Check Docker permissions
+
+If `docker info` fails with `permission denied`, the current user is not allowed to access Docker yet.
+
+Quick test with `sudo`:
 
 ```bash
-sudo apt install docker-compose-v2
+sudo docker info
 ```
 
-If `docker info` fails because of missing permissions, there are two options:
-
-```bash
-sudo docker compose up -d
-```
-
-Or allow the current user to use Docker permanently:
+Permanent access for the current user:
 
 ```bash
 sudo usermod -aG docker "$USER"
 ```
 
-After that, a new login is required. Only then should `docker info` work without `sudo`.
+Log out completely and log in again. Only then is the new group membership active. Check it:
+
+```bash
+id
+docker info
+```
 
 ### Set up the API key
 
@@ -253,15 +357,15 @@ Before starting the container, create a local `opencode.env` file:
 cp opencode.env.example opencode.env
 ```
 
-Then set the real API key in `opencode.env`:
+Then enter the real key:
 
 ```text
 GWDG_API_KEY=your_real_key
 ```
 
-Alternatively, the existing key can be copied from the local Opencode file `~/.local/share/opencode/auth.json`. In this setup, the value from `chat-ai.key` is stored as `GWDG_API_KEY` in `opencode.env`.
+Alternatively, copy the existing key from `~/.local/share/opencode/auth.json`. In this setup, `chat-ai.key` is stored as `GWDG_API_KEY`.
 
-The `opencode.env` file is not versioned. It is explicitly excluded in `.gitignore` and must not be pushed to the GitLab repository. Because it contains a secret value, only the current user should be able to read it:
+Important: `opencode.env` contains a secret. The file is excluded in `.gitignore` and must not be pushed to GitLab.
 
 ```bash
 chmod 600 opencode.env
@@ -269,39 +373,56 @@ chmod 600 opencode.env
 
 ### Build and start the container
 
-Run this from the repository directory:
+Change into the repository:
 
 ```bash
-docker compose up -d
+cd /home/thinder/ade-dev-sandbox
 ```
 
-On the first start, Docker builds the image. This can take some time because Debian packages are installed and Opencode is downloaded through npm.
-
-Compose is configured to check for a newer base image during builds. This can also be run explicitly:
+Build the image and check for the newest .NET base image:
 
 ```bash
 docker compose build --pull
+```
+
+Start the container:
+
+```bash
 docker compose up -d
 ```
 
-### Mount Rider projects
+Show the status:
 
-Because development happens in WSL2, the Windows projects from Rider are mounted directly into the container:
-
-```text
-/mnt/c/Users/thinder/RiderProjects -> /rider-projects
+```bash
+docker compose ps
 ```
 
-Inside the container, open the projects like this:
+The first build downloads the .NET SDK base image and npm packages. This can take several minutes.
+
+### Mount Rider projects from Windows
+
+The Windows projects are stored here:
+
+```text
+/mnt/c/Users/thinder/RiderProjects
+```
+
+They are mounted inside the container here:
+
+```text
+/rider-projects
+```
+
+Inside the container, change to that directory:
 
 ```bash
 cd /rider-projects
 ls
 ```
 
-Changes made inside the container are written directly to the Windows files. Rider on Windows can see the same changes. Builds on `/mnt/c` can be slower than builds inside the Linux file system.
+Changes inside the container are written directly to the Windows files. Rider on Windows sees the same files. Builds on `/mnt/c` can be slower than builds inside the Linux file system.
 
-### Use Opencode
+### Use .NET and C# inside the container
 
 Open a shell inside the container:
 
@@ -309,37 +430,50 @@ Open a shell inside the container:
 docker compose exec opencode bash
 ```
 
-Start Opencode:
+Check the .NET version:
+
+```bash
+dotnet --info
+```
+
+Example for a new console project:
+
+```bash
+cd /rider-projects
+dotnet new console -n DemoApp
+cd DemoApp
+dotnet run
+```
+
+### Use Opencode
+
+Start Opencode inside the container:
 
 ```bash
 opencode
 ```
 
+The container does not start Opencode automatically. This is intentional. It lets you choose the project directory first.
+
 ### Configuration
 
-The `opencode.json` file uses the `chat-ai` provider with this base URL:
+`opencode.json` uses the `chat-ai` provider with this base URL:
 
 ```text
 https://chat-ai.academiccloud.de/v1
 ```
 
-The API key is read from the `GWDG_API_KEY` environment variable. The default model is:
+The API key is read from `GWDG_API_KEY`. The default model is:
 
 ```text
 chat-ai/glm-4.7
 ```
 
-Additional agents are configured for coding, Qwen coding, and brainstorming.
-
-### Opencode version
-
-The `Dockerfile` installs Opencode with this command:
+Opencode is installed during the image build with the newest npm version:
 
 ```dockerfile
 RUN npm i -g opencode-ai@latest
 ```
-
-This means that each new image build installs the latest `opencode-ai` version from npm.
 
 ### Clean up
 
@@ -354,3 +488,15 @@ Stop the container and delete persistent Opencode data:
 ```bash
 docker compose down -v
 ```
+
+### Common problems
+
+If `docker compose` is not found, `docker-compose-v2` is usually missing:
+
+```bash
+sudo apt install -y docker-compose-v2
+```
+
+If Docker has no permission, use `sudo docker ...` or add the user to the `docker` group.
+
+If the API key does not work, check `opencode.env`. Do not show the key in terminal history, screenshots, or Git output.
