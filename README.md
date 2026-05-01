@@ -16,6 +16,7 @@
   - [Konfiguration](#konfiguration)
   - [Aufraeumen](#aufraeumen)
   - [Haeufige Probleme](#haeufige-probleme)
+  - [Kompakter Testablauf](#kompakter-testablauf)
 - [English](#english)
   - [Target group and purpose](#target-group-and-purpose)
   - [Basic idea](#basic-idea)
@@ -30,6 +31,7 @@
   - [Configuration](#configuration)
   - [Clean up](#clean-up)
   - [Common problems](#common-problems)
+  - [Compact test procedure](#compact-test-procedure)
 
 ## Deutsch
 
@@ -266,6 +268,32 @@ Wenn Docker keine Berechtigung hat, entweder `sudo docker ...` verwenden oder de
 
 Wenn der API-Key nicht funktioniert, `opencode.env` pruefen. Den Key nicht im Terminalverlauf, in Screenshots oder in Git-Ausgaben zeigen.
 
+### Kompakter Testablauf
+
+Dieser Ablauf prueft das Setup in einer sinnvollen Reihenfolge. Er eignet sich gut nach einer Neuinstallation oder nach Aenderungen an `Dockerfile`, `compose.yml` oder `opencode.json`.
+
+Auf dem Host ausfuehren:
+
+```bash
+cd /home/thinder/ade-dev-sandbox
+docker compose config --no-interpolate
+docker compose build --pull
+docker compose up -d
+docker compose ps
+docker compose exec opencode bash
+```
+
+Danach im Container pruefen:
+
+```bash
+dotnet --info
+node --version
+npm --version
+opencode --version
+ls /workspace
+ls /rider-projects
+```
+
 ## English
 
 ### Target group and purpose
@@ -500,3 +528,29 @@ sudo apt install -y docker-compose-v2
 If Docker has no permission, use `sudo docker ...` or add the user to the `docker` group.
 
 If the API key does not work, check `opencode.env`. Do not show the key in terminal history, screenshots, or Git output.
+
+### Compact test procedure
+
+This procedure checks the setup in a useful order. It is a good choice after a fresh installation or after changes to `Dockerfile`, `compose.yml`, or `opencode.json`.
+
+Run this on the host:
+
+```bash
+cd /home/thinder/ade-dev-sandbox
+docker compose config --no-interpolate
+docker compose build --pull
+docker compose up -d
+docker compose ps
+docker compose exec opencode bash
+```
+
+Then check this inside the container:
+
+```bash
+dotnet --info
+node --version
+npm --version
+opencode --version
+ls /workspace
+ls /rider-projects
+```
