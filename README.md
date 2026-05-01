@@ -13,6 +13,8 @@
   - [Rider-Projekte aus Windows einbinden](#rider-projekte-aus-windows-einbinden)
   - [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen)
   - [Spec Kit verwenden](#spec-kit-verwenden)
+  - [Beispiel: ConsoleApp2 mit Opencode und Spec Kit](#beispiel-consoleapp2-mit-opencode-und-spec-kit)
+  - [Pflichtablauf fuer ein SDD-Feature](#pflichtablauf-fuer-ein-sdd-feature)
   - [Opencode verwenden](#opencode-verwenden)
   - [Konfiguration](#konfiguration)
   - [Aufraeumen](#aufraeumen)
@@ -29,6 +31,8 @@
   - [Mount Rider projects from Windows](#mount-rider-projects-from-windows)
   - [Use .NET and C# inside the container](#use-net-and-c-inside-the-container)
   - [Use Spec Kit](#use-spec-kit)
+  - [Example: ConsoleApp2 with Opencode and Spec Kit](#example-consoleapp2-with-opencode-and-spec-kit)
+  - [Required flow for an SDD feature](#required-flow-for-an-sdd-feature)
   - [Use Opencode](#use-opencode)
   - [Configuration](#configuration)
   - [Clean up](#clean-up)
@@ -262,6 +266,76 @@ Wenn Spec Kit nach dem Script-Typ fragt, fuer diesen Linux-Container `sh` auswae
 Spec Kit weist darauf hin, dass Agentenordner private Daten enthalten koennen. Fuer Projekte unter `/rider-projects` sollte deshalb im jeweiligen Anwendungsrepo geprueft werden, ob `.opencode/` oder sensible Teile davon in die Projekt-`.gitignore` gehoeren.
 
 Spec Kit erzeugt Projektdateien fuer spec-driven development. Diese Dateien gehoeren normalerweise in das jeweilige Anwendungsrepo unter `/rider-projects`, nicht in dieses Docker-Setup-Repo.
+
+### Beispiel: ConsoleApp2 mit Opencode und Spec Kit
+
+Dieses Beispiel zeigt den kompletten Einstieg fuer eine neue Konsolenanwendung. Es wird im Container ausgefuehrt.
+
+```bash
+cd /rider-projects
+dotnet new console -n ConsoleApp2
+cd ConsoleApp2
+dotnet run
+```
+
+Danach Opencode einmal im Projekt initialisieren. Dadurch kann Opencode projektspezifische Regeln erkennen oder anlegen:
+
+```bash
+opencode /init
+```
+
+Danach Spec Kit fuer Opencode einrichten:
+
+```bash
+specify init . --integration opencode --force
+```
+
+Wenn Spec Kit nach dem Script-Typ fragt, `sh` auswaehlen. Nach erfolgreicher Initialisierung stehen in Opencode die Slash-Commands `/speckit.*` zur Verfuegung.
+
+Wenn das Projekt mit Git verwaltet wird, pruefen:
+
+```bash
+git status --short
+```
+
+Danach entscheiden, ob `.opencode/` vollstaendig versioniert werden soll oder ob sensible Teile in die Projekt-`.gitignore` gehoeren.
+
+### Pflichtablauf fuer ein SDD-Feature
+
+SDD bedeutet spec-driven development. Ein Feature wird zuerst beschrieben, dann geplant, dann in Aufgaben zerlegt und erst danach implementiert. Fuer die Ausbildung werden auch die Qualitaetsschritte immer ausgefuehrt.
+
+Empfohlene Reihenfolge in Opencode:
+
+```text
+/speckit.constitution
+/speckit.specify
+/speckit.clarify
+/speckit.plan
+/speckit.checklist
+/speckit.tasks
+/speckit.analyze
+/speckit.implement
+```
+
+Die Schritte haben diese Aufgabe:
+
+- `/speckit.constitution`: Projektprinzipien und technische Leitplanken festlegen.
+- `/speckit.specify`: Feature fachlich beschreiben, ohne direkt Code zu planen.
+- `/speckit.clarify`: offene Fragen klaeren, bevor technische Planung beginnt.
+- `/speckit.plan`: technische Umsetzung planen.
+- `/speckit.checklist`: Anforderungen auf Vollstaendigkeit und Klarheit pruefen.
+- `/speckit.tasks`: konkrete umsetzbare Aufgaben erzeugen.
+- `/speckit.analyze`: Konsistenz zwischen Spezifikation, Plan und Aufgaben pruefen.
+- `/speckit.implement`: Aufgaben umsetzen.
+
+Nach der Implementierung immer ausfuehren:
+
+```bash
+dotnet test
+dotnet run
+```
+
+Wenn das Projekt keine Tests enthaelt, mindestens `dotnet build` ausfuehren und in der Dokumentation notieren, warum keine Tests vorhanden sind.
 
 ### Opencode verwenden
 
@@ -648,6 +722,76 @@ If Spec Kit asks for the script type, choose `sh` for this Linux container.
 Spec Kit warns that agent folders can contain private data. For projects under `/rider-projects`, check whether `.opencode/` or sensitive parts of it should be added to that application repository's `.gitignore`.
 
 Spec Kit creates project files for spec-driven development. These files normally belong in the application repository under `/rider-projects`, not in this Docker setup repository.
+
+### Example: ConsoleApp2 with Opencode and Spec Kit
+
+This example shows the complete start for a new console application. Run it inside the container.
+
+```bash
+cd /rider-projects
+dotnet new console -n ConsoleApp2
+cd ConsoleApp2
+dotnet run
+```
+
+Then initialize Opencode once in the project. This lets Opencode detect or create project-specific rules:
+
+```bash
+opencode /init
+```
+
+Then set up Spec Kit for Opencode:
+
+```bash
+specify init . --integration opencode --force
+```
+
+If Spec Kit asks for the script type, choose `sh`. After successful initialization, the `/speckit.*` slash commands are available in Opencode.
+
+If the project is managed with Git, check:
+
+```bash
+git status --short
+```
+
+Then decide whether `.opencode/` should be fully versioned or whether sensitive parts belong in the project `.gitignore`.
+
+### Required flow for an SDD feature
+
+SDD means spec-driven development. A feature is described first, then planned, then split into tasks, and only then implemented. For training, the quality steps are always required.
+
+Recommended order in Opencode:
+
+```text
+/speckit.constitution
+/speckit.specify
+/speckit.clarify
+/speckit.plan
+/speckit.checklist
+/speckit.tasks
+/speckit.analyze
+/speckit.implement
+```
+
+The steps have these roles:
+
+- `/speckit.constitution`: define project principles and technical guardrails.
+- `/speckit.specify`: describe the feature from a user and domain view, without planning code yet.
+- `/speckit.clarify`: answer open questions before technical planning starts.
+- `/speckit.plan`: plan the technical implementation.
+- `/speckit.checklist`: check requirements for completeness and clarity.
+- `/speckit.tasks`: create concrete actionable tasks.
+- `/speckit.analyze`: check consistency between specification, plan, and tasks.
+- `/speckit.implement`: implement the tasks.
+
+After implementation, always run:
+
+```bash
+dotnet test
+dotnet run
+```
+
+If the project has no tests, run at least `dotnet build` and document why no tests exist.
 
 ### Use Opencode
 
