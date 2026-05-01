@@ -21,6 +21,7 @@
   - [Aufraeumen](#aufraeumen)
   - [Haeufige Probleme](#haeufige-probleme)
   - [Kompakter Testablauf](#kompakter-testablauf)
+  - [Merksaetze](#merksaetze)
 - [English](#english)
   - [Target group and purpose](#target-group-and-purpose)
   - [Basic idea](#basic-idea)
@@ -40,6 +41,7 @@
   - [Clean up](#clean-up)
   - [Common problems](#common-problems)
   - [Compact test procedure](#compact-test-procedure)
+  - [Quick rules](#quick-rules)
 
 ## Deutsch
 
@@ -531,6 +533,50 @@ ls /workspace
 ls /rider-projects
 ```
 
+### Merksaetze
+
+- Nach Aenderungen am `Dockerfile` immer neu bauen:
+
+```bash
+docker compose build --pull --no-cache
+docker compose up -d --force-recreate
+```
+
+- Nach reinen Aenderungen an `compose.yml` reicht meistens:
+
+```bash
+docker compose up -d --force-recreate
+```
+
+- ASP.NET-Apps muessen im Container auf `0.0.0.0` lauschen:
+
+```bash
+dotnet run --urls http://0.0.0.0:5102
+```
+
+- Windows erreicht Web-Apps dann ueber `http://localhost:<port>`.
+- Freigegeben ist lokal die Port-Range `5100-5199`.
+- `opencode.env` enthaelt ein Secret und darf nicht committed werden.
+- `opencode.jsonc` ist die kommentierte OpenCode-Konfiguration fuer den Container.
+- `specify-cli` ist bewusst auf eine Version gepinnt. Updates werden manuell im Dockerfile gemacht.
+- Fuer neue Projekte unter `/rider-projects` zuerst projektlokal initialisieren:
+
+```bash
+opencode --prompt "/init"
+specify init . --integration opencode --force
+```
+
+- Wenn Spec Kit nach dem Script-Typ fragt, `sh` waehlen.
+- Projektregeln fuer OpenCode gehoeren in die jeweilige Projektdatei `AGENTS.md`.
+- `.opencode/` kann sensible Daten enthalten. Pro Projekt entscheiden, ob der Ordner ganz oder teilweise in `.gitignore` gehoert.
+- Bei `bin`-, `obj`- oder `apphost`-Fehlern pruefen:
+
+```bash
+echo "$DirectoryBuildPropsPath"
+ls /dotnet-config/ContainerBuild.props
+ls /dotnet-build
+```
+
 ## English
 
 ### Target group and purpose
@@ -1019,4 +1065,48 @@ opencode --version
 specify version
 ls /workspace
 ls /rider-projects
+```
+
+### Quick rules
+
+- After changes to the `Dockerfile`, always rebuild:
+
+```bash
+docker compose build --pull --no-cache
+docker compose up -d --force-recreate
+```
+
+- After changes only to `compose.yml`, this is usually enough:
+
+```bash
+docker compose up -d --force-recreate
+```
+
+- ASP.NET apps must listen on `0.0.0.0` inside the container:
+
+```bash
+dotnet run --urls http://0.0.0.0:5102
+```
+
+- Windows can then reach web apps through `http://localhost:<port>`.
+- The local published port range is `5100-5199`.
+- `opencode.env` contains a secret and must not be committed.
+- `opencode.jsonc` is the commented OpenCode configuration for the container.
+- `specify-cli` is intentionally pinned to a version. Updates are made manually in the Dockerfile.
+- For new projects under `/rider-projects`, initialize inside the project:
+
+```bash
+opencode --prompt "/init"
+specify init . --integration opencode --force
+```
+
+- If Spec Kit asks for script type, choose `sh`.
+- OpenCode project rules belong in the project's own `AGENTS.md`.
+- `.opencode/` can contain sensitive data. Decide per project whether the folder or parts of it belong in `.gitignore`.
+- For `bin`, `obj`, or `apphost` errors, check:
+
+```bash
+echo "$DirectoryBuildPropsPath"
+ls /dotnet-config/ContainerBuild.props
+ls /dotnet-build
 ```
