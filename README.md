@@ -12,6 +12,7 @@
   - [Container bauen und starten](#container-bauen-und-starten)
   - [Rider-Projekte aus Windows einbinden](#rider-projekte-aus-windows-einbinden)
   - [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen)
+  - [ASP.NET-Web-App aus Windows erreichen](#aspnet-web-app-aus-windows-erreichen)
   - [Spec Kit verwenden](#spec-kit-verwenden)
   - [Beispiel: ConsoleApp2 mit Opencode und Spec Kit](#beispiel-consoleapp2-mit-opencode-und-spec-kit)
   - [Pflichtablauf fuer ein SDD-Feature](#pflichtablauf-fuer-ein-sdd-feature)
@@ -30,6 +31,7 @@
   - [Build and start the container](#build-and-start-the-container)
   - [Mount Rider projects from Windows](#mount-rider-projects-from-windows)
   - [Use .NET and C# inside the container](#use-net-and-c-inside-the-container)
+  - [Reach an ASP.NET web app from Windows](#reach-an-aspnet-web-app-from-windows)
   - [Use Spec Kit](#use-spec-kit)
   - [Example: ConsoleApp2 with Opencode and Spec Kit](#example-consoleapp2-with-opencode-and-spec-kit)
   - [Required flow for an SDD feature](#required-flow-for-an-sdd-feature)
@@ -232,6 +234,40 @@ dotnet run
 ```
 
 Wenn ein Projekt bereits fehlerhafte `bin`- oder `obj`-Ordner auf dem Windows-Mount hat, koennen diese in Rider oder im Terminal geloescht werden. Danach erneut im Container bauen.
+
+### ASP.NET-Web-App aus Windows erreichen
+
+Der Container gibt die lokale Port-Range `5100-5199` nach Windows frei:
+
+```yaml
+ports:
+  - "127.0.0.1:5100-5199:5100-5199"
+```
+
+Nach einer Aenderung an `compose.yml` muss der Container neu erstellt werden:
+
+```bash
+cd /home/thinder/ade-dev-sandbox
+docker compose up -d --force-recreate
+docker compose exec opencode bash
+```
+
+Eine ASP.NET-App muss im Container auf `0.0.0.0` lauschen. `localhost` reicht nicht, weil `localhost` im Container nur den Container selbst meint.
+
+Beispiel fuer `WebApplication2`:
+
+```bash
+cd /rider-projects/WebApplication2/WebApplication2
+dotnet run --urls http://0.0.0.0:5102
+```
+
+Danach unter Windows im Browser oeffnen:
+
+```text
+http://localhost:5102
+```
+
+Wenn eine App einen anderen Port nutzt, muss dieser in der freigegebenen Range `5100-5199` liegen oder in `compose.yml` zusaetzlich eingetragen werden.
 
 ### Spec Kit verwenden
 
@@ -688,6 +724,40 @@ dotnet run
 ```
 
 If a project already has broken `bin` or `obj` folders on the Windows mount, delete them in Rider or in the terminal. Then build again inside the container.
+
+### Reach an ASP.NET web app from Windows
+
+The container publishes the local port range `5100-5199` to Windows:
+
+```yaml
+ports:
+  - "127.0.0.1:5100-5199:5100-5199"
+```
+
+After a change to `compose.yml`, recreate the container:
+
+```bash
+cd /home/thinder/ade-dev-sandbox
+docker compose up -d --force-recreate
+docker compose exec opencode bash
+```
+
+An ASP.NET app must listen on `0.0.0.0` inside the container. `localhost` is not enough because `localhost` inside the container only means the container itself.
+
+Example for `WebApplication2`:
+
+```bash
+cd /rider-projects/WebApplication2/WebApplication2
+dotnet run --urls http://0.0.0.0:5102
+```
+
+Then open this in a Windows browser:
+
+```text
+http://localhost:5102
+```
+
+If an app uses another port, it must be inside the published range `5100-5199` or be added to `compose.yml`.
 
 ### Use Spec Kit
 
