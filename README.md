@@ -55,6 +55,7 @@ Der Container bleibt im Hintergrund aktiv. Danach kann eine Shell im Container g
 - `opencode.env.example`: Vorlage fuer die lokale Datei `opencode.env`.
 - `workspace/`: lokales Arbeitsverzeichnis, im Container unter `/workspace`.
 - `/mnt/c/Users/thinder/RiderProjects`: Windows-Projekte, im Container unter `/rider-projects`.
+- `dotnet/Directory.Build.props`: leitet .NET-Build-Artefakte in das Container-Volume `/dotnet-build`.
 - `AGENTS.md`: Regeln fuer KI-Agenten wie Opencode oder Codex.
 
 ### Docker unter Ubuntu oder WSL2 installieren
@@ -189,6 +190,14 @@ ls
 
 Aenderungen im Container wirken direkt auf die Windows-Dateien. Rider unter Windows sieht dieselben Dateien. Builds auf `/mnt/c` koennen langsamer sein als Builds im Linux-Dateisystem.
 
+Damit .NET auf Windows-Dateien keine Probleme mit `bin`, `obj` oder Dateizeitstempeln bekommt, wird eine Projektdatei in den Container eingebunden:
+
+```text
+dotnet/Directory.Build.props -> /rider-projects/Directory.Build.props
+```
+
+Diese Datei sorgt dafuer, dass Build-Artefakte nicht unter `/rider-projects`, sondern im Linux-Volume `/dotnet-build` liegen. Das verhindert typische Fehler wie `Access to the path ... obj ... is denied`.
+
 ### .NET und C# im Container nutzen
 
 Shell im Container oeffnen:
@@ -211,6 +220,8 @@ dotnet new console -n DemoApp
 cd DemoApp
 dotnet run
 ```
+
+Wenn ein Projekt bereits fehlerhafte `bin`- oder `obj`-Ordner auf dem Windows-Mount hat, koennen diese in Rider oder im Terminal geloescht werden. Danach erneut im Container bauen.
 
 ### Opencode verwenden
 
@@ -268,6 +279,27 @@ Wenn Docker keine Berechtigung hat, entweder `sudo docker ...` verwenden oder de
 
 Wenn der API-Key nicht funktioniert, `opencode.env` pruefen. Den Key nicht im Terminalverlauf, in Screenshots oder in Git-Ausgaben zeigen.
 
+Wenn .NET unter `/rider-projects` einen Fehler zu `obj`, `bin` oder `Access denied` meldet, den Container neu bauen und starten:
+
+```bash
+docker compose build --pull
+docker compose up -d
+```
+
+Danach pruefen, ob `/rider-projects/Directory.Build.props` und `/dotnet-build` im Container vorhanden sind.
+
+Wenn danach ein Fehler wie `Duplicate TargetFrameworkAttribute` erscheint, liegen meist alte `obj`-Dateien im Windows-Projektordner. Diese Ordner einmal loeschen und danach erneut bauen:
+
+```bash
+find /rider-projects/ConsoleApp1 -type d \( -name bin -o -name obj \) -prune -print
+```
+
+Wenn die Ausgabe nur erwartete Build-Ordner zeigt, koennen sie geloescht werden:
+
+```bash
+find /rider-projects/ConsoleApp1 -type d \( -name bin -o -name obj \) -prune -exec rm -rf {} +
+```
+
 ### Kompakter Testablauf
 
 Dieser Ablauf prueft das Setup in einer sinnvollen Reihenfolge. Er eignet sich gut nach einer Neuinstallation oder nach Aenderungen an `Dockerfile`, `compose.yml` oder `opencode.json`.
@@ -316,6 +348,7 @@ The container stays active in the background. You can then open a shell inside i
 - `opencode.env.example`: template for the local `opencode.env` file.
 - `workspace/`: local working directory, mounted as `/workspace`.
 - `/mnt/c/Users/thinder/RiderProjects`: Windows projects, mounted as `/rider-projects`.
+- `dotnet/Directory.Build.props`: redirects .NET build artifacts to the container volume `/dotnet-build`.
 - `AGENTS.md`: rules for AI agents such as Opencode or Codex.
 
 ### Install Docker on Ubuntu or WSL2
@@ -450,6 +483,14 @@ ls
 
 Changes inside the container are written directly to the Windows files. Rider on Windows sees the same files. Builds on `/mnt/c` can be slower than builds inside the Linux file system.
 
+To avoid .NET problems with `bin`, `obj`, or file timestamps on Windows files, a project file is mounted into the container:
+
+```text
+dotnet/Directory.Build.props -> /rider-projects/Directory.Build.props
+```
+
+This file makes .NET write build artifacts to the Linux volume `/dotnet-build` instead of `/rider-projects`. This prevents common errors such as `Access to the path ... obj ... is denied`.
+
 ### Use .NET and C# inside the container
 
 Open a shell inside the container:
@@ -472,6 +513,8 @@ dotnet new console -n DemoApp
 cd DemoApp
 dotnet run
 ```
+
+If a project already has broken `bin` or `obj` folders on the Windows mount, delete them in Rider or in the terminal. Then build again inside the container.
 
 ### Use Opencode
 
@@ -528,6 +571,27 @@ sudo apt install -y docker-compose-v2
 If Docker has no permission, use `sudo docker ...` or add the user to the `docker` group.
 
 If the API key does not work, check `opencode.env`. Do not show the key in terminal history, screenshots, or Git output.
+
+If .NET reports an `obj`, `bin`, or `Access denied` error under `/rider-projects`, rebuild and start the container:
+
+```bash
+docker compose build --pull
+docker compose up -d
+```
+
+Then check inside the container that `/rider-projects/Directory.Build.props` and `/dotnet-build` exist.
+
+If an error like `Duplicate TargetFrameworkAttribute` appears after that, old `obj` files are usually still present in the Windows project folder. Delete these folders once and build again:
+
+```bash
+find /rider-projects/ConsoleApp1 -type d \( -name bin -o -name obj \) -prune -print
+```
+
+If the output only shows expected build folders, they can be deleted:
+
+```bash
+find /rider-projects/ConsoleApp1 -type d \( -name bin -o -name obj \) -prune -exec rm -rf {} +
+```
 
 ### Compact test procedure
 

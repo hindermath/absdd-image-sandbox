@@ -6,6 +6,8 @@ services:
     volumes:
       - ./workspace:/workspace
       - /mnt/c/Users/thinder/RiderProjects:/rider-projects
+      - ./dotnet/Directory.Build.props:/rider-projects/Directory.Build.props:ro
+      - dotnet_build:/dotnet-build
       - opencode_data:/home/opencode/.local/share/opencode
     working_dir: /workspace
     env_file:
@@ -13,4 +15,5 @@ services:
     restart: unless-stopped
 
 volumes:
+  dotnet_build:
   opencode_data:

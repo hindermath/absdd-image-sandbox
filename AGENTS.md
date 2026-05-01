@@ -10,6 +10,7 @@ This repository contains a small Docker-based Opencode environment, not an appli
 - `opencode.env.example`: documents the required `GWDG_API_KEY` variable.
 - `workspace/`: mounted into the container as `/workspace`; place working project files there.
 - `/mnt/c/Users/thinder/RiderProjects`: mounted into the container as `/rider-projects` for Windows/Rider projects.
+- `dotnet/Directory.Build.props`: mounted into `/rider-projects` to redirect .NET build artifacts to `/dotnet-build`.
 - `README.md`: user-facing setup and operation guide.
 
 There is currently no `src/`, `tests/`, or asset directory.
@@ -72,6 +73,8 @@ docker compose build --pull
 The `--pull` flag is important because the Dockerfile uses `mcr.microsoft.com/dotnet/sdk:latest`.
 
 Do not require a real API key for validation unless the change explicitly affects live Opencode usage.
+
+For .NET projects under `/rider-projects`, keep `bin` and `obj` output off the Windows bind mount. The mounted `Directory.Build.props` sends build output to the `dotnet_build` volume at `/dotnet-build`.
 
 ## Commit & Pull Request Guidelines
 
