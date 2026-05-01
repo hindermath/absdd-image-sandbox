@@ -2,9 +2,9 @@
 
 ## Project Structure & Module Organization
 
-This repository contains a small Docker-based Opencode environment, not an application codebase.
+This repository contains a small Docker-based Opencode, .NET, and Spec Kit environment, not an application codebase.
 
-- `Dockerfile`: builds from the official Microsoft .NET SDK `latest` image and installs `opencode-ai@latest`.
+- `Dockerfile`: builds from the official Microsoft .NET SDK `latest` image and installs `opencode-ai@latest`, `uv`, and `specify-cli`.
 - `compose.yml`: defines the `opencode` service, pulls newer build base images, and mounts local state.
 - `opencode.json`: configures the `chat-ai` provider, models, and agents.
 - `opencode.env.example`: documents the required `GWDG_API_KEY` variable.
@@ -37,6 +37,13 @@ docker compose exec opencode bash
 ```
 
 Opens a shell inside the running container.
+
+```bash
+specify version
+specify check
+```
+
+Verifies the Spec Kit CLI installation inside the container.
 
 ```bash
 cd /rider-projects
@@ -80,6 +87,8 @@ For .NET projects under `/rider-projects`, keep `bin`, `obj`, and AppHost output
 The Compose environment disables general .NET workload update notifications with `DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE=true` and disables the MSBuild workload resolver with `MSBuildEnableWorkloadResolver=false`. The Dockerfile also sets `dotnet workload config --update-mode manifests` as root to reduce workload verification noise with .NET 10 SDK images. Do not run this command after switching to the `opencode` user because it needs elevated privileges. Install real workloads explicitly in the Dockerfile and re-enable the resolver if a project requires MAUI, WebAssembly, or another optional SDK workload.
 
 The `dotnet` wrapper must only filter the exact workload verification message. Do not broaden the filter, because normal warnings and build errors must stay visible.
+
+Spec Kit is installed with `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.8.3`. Keep the version pinned unless intentionally upgrading and updating documentation.
 
 ## Commit & Pull Request Guidelines
 

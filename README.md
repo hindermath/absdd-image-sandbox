@@ -12,6 +12,7 @@
   - [Container bauen und starten](#container-bauen-und-starten)
   - [Rider-Projekte aus Windows einbinden](#rider-projekte-aus-windows-einbinden)
   - [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen)
+  - [Spec Kit verwenden](#spec-kit-verwenden)
   - [Opencode verwenden](#opencode-verwenden)
   - [Konfiguration](#konfiguration)
   - [Aufraeumen](#aufraeumen)
@@ -27,6 +28,7 @@
   - [Build and start the container](#build-and-start-the-container)
   - [Mount Rider projects from Windows](#mount-rider-projects-from-windows)
   - [Use .NET and C# inside the container](#use-net-and-c-inside-the-container)
+  - [Use Spec Kit](#use-spec-kit)
   - [Use Opencode](#use-opencode)
   - [Configuration](#configuration)
   - [Clean up](#clean-up)
@@ -226,6 +228,36 @@ dotnet run
 
 Wenn ein Projekt bereits fehlerhafte `bin`- oder `obj`-Ordner auf dem Windows-Mount hat, koennen diese in Rider oder im Terminal geloescht werden. Danach erneut im Container bauen.
 
+### Spec Kit verwenden
+
+Spec Kit ist im Container als `specify` installiert. Die Installation erfolgt im Dockerfile mit der offiziellen GitHub-Quelle und ist auf Version `v0.8.3` gepinnt:
+
+```dockerfile
+RUN uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.8.3
+```
+
+Version und Umgebung pruefen:
+
+```bash
+specify version
+specify check
+```
+
+Ein vorhandenes Projekt kann vorbereitet werden, nachdem in sein Verzeichnis gewechselt wurde:
+
+```bash
+cd /rider-projects/TinyPl0
+specify init . --integration opencode
+```
+
+Falls eine Integration nicht verfuegbar ist, zuerst die unterstuetzten Optionen pruefen:
+
+```bash
+specify init --help
+```
+
+Spec Kit erzeugt Projektdateien fuer spec-driven development. Diese Dateien gehoeren normalerweise in das jeweilige Anwendungsrepo unter `/rider-projects`, nicht in dieses Docker-Setup-Repo.
+
 ### Opencode verwenden
 
 Opencode im Container starten:
@@ -255,6 +287,8 @@ Opencode wird beim Image-Build mit der neuesten npm-Version installiert:
 ```dockerfile
 RUN npm i -g opencode-ai@latest
 ```
+
+Spec Kit wird beim Image-Build mit `uv` installiert. Dafuer enthaelt das Image auch `git`, `curl` und `ca-certificates`.
 
 Die .NET-Workload-Hinweismeldung wird im Container deaktiviert:
 
@@ -375,6 +409,7 @@ dotnet --info
 node --version
 npm --version
 opencode --version
+specify version
 ls /workspace
 ls /rider-projects
 ```
@@ -572,6 +607,36 @@ dotnet run
 
 If a project already has broken `bin` or `obj` folders on the Windows mount, delete them in Rider or in the terminal. Then build again inside the container.
 
+### Use Spec Kit
+
+Spec Kit is installed in the container as `specify`. The Dockerfile installs it from the official GitHub source and pins version `v0.8.3`:
+
+```dockerfile
+RUN uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.8.3
+```
+
+Check the version and environment:
+
+```bash
+specify version
+specify check
+```
+
+An existing project can be prepared after changing into its directory:
+
+```bash
+cd /rider-projects/TinyPl0
+specify init . --integration opencode
+```
+
+If an integration is not available, check the supported options first:
+
+```bash
+specify init --help
+```
+
+Spec Kit creates project files for spec-driven development. These files normally belong in the application repository under `/rider-projects`, not in this Docker setup repository.
+
 ### Use Opencode
 
 Start Opencode inside the container:
@@ -601,6 +666,8 @@ Opencode is installed during the image build with the newest npm version:
 ```dockerfile
 RUN npm i -g opencode-ai@latest
 ```
+
+Spec Kit is installed during the image build with `uv`. For that reason, the image also includes `git`, `curl`, and `ca-certificates`.
 
 The .NET workload notification is disabled inside the container:
 
@@ -721,6 +788,7 @@ dotnet --info
 node --version
 npm --version
 opencode --version
+specify version
 ls /workspace
 ls /rider-projects
 ```
