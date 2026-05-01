@@ -1,0 +1,118 @@
+{
+  // Schema fuer Editor-Unterstuetzung:
+  // Viele Editoren nutzen diese URL fuer Autovervollstaendigung und Validierung.
+  "$schema": "https://opencode.ai/config.json",
+
+  // Standardmodell, wenn kein spezieller Agent gewaehlt wird.
+  // Format: <provider-id>/<modell-id>
+  "model": "chat-ai/glm-4.7",
+
+  // OpenCode darf sich beim Start selbst aktualisieren.
+  "autoupdate": true,
+
+  // Provider-Konfiguration:
+  // "chat-ai" ist hier ein frei gewaehlter Provider-Name innerhalb dieser Datei.
+  "provider": {
+    "chat-ai": {
+      // OpenAI-kompatibler Adapter aus dem AI SDK.
+      "npm": "@ai-sdk/openai-compatible",
+
+      // Anzeigename in OpenCode.
+      "name": "chat-ai",
+
+      "options": {
+        // API-Endpunkt der AcademicCloud/GWDG-kompatiblen Chat-AI-Schnittstelle.
+        "baseURL": "https://chat-ai.academiccloud.de/v1",
+
+        // Der echte API-Key steht nicht in Git.
+        // Er wird aus opencode.env als Umgebungsvariable gelesen.
+        "apiKey": "{env:GWDG_API_KEY}"
+      },
+
+      // Modell-IDs, die dieser Provider anbietet.
+      // Die Keys links werden in Agenten als Teil von "chat-ai/<key>" verwendet.
+      "models": {
+        "qwen3-coder-30b-a3b-instruct": {
+          "name": "Qwen 3 Coder 30B A3B Instruct",
+          "options": {
+            // Modellnahe Optionen bleiben hier, weil sie spezifisch fuer Qwen sind.
+            "top_k": 20,
+            "repetition_penalty": 1.05
+          }
+        },
+        "glm-4.7": {
+          "name": "GLM-4.7"
+        },
+        "devstral-2-123b-instruct-2512": {
+          "name": "devstral-2-123b-instruct-2512"
+        },
+        "qwen3-30b-a3b-instruct-2507": {
+          "name": "qwen3-30b-a3b-instruct-2507"
+        },
+        "OpenAI gpt-5.4": {
+          "name": "openai-gpt5.4"
+        },
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    }
+  },
+
+  // Agenten sind vordefinierte Arbeitsmodi.
+  // temperature:
+  // - 0.0 bis 0.2: sehr deterministisch, gut fuer Analyse
+  // - 0.3 bis 0.5: fokussiert, gut fuer Coding
+  // - 0.6 bis 1.0: kreativer, gut fuer Brainstorming
+  // top_p steuert ebenfalls Vielfalt. Niedriger = fokussierter, hoeher = freier.
+  "agent": {
+    "coding": {
+      "description": "Standard-Agent fuer Coding mit GLM-4.7 fuer Implementierung, Debugging und Refactoring. / Standard coding agent using GLM-4.7 for implementation, debugging, and refactoring.",
+      "model": "chat-ai/glm-4.7",
+      "temperature": 0.3,
+      "top_p": 0.8
+    },
+
+    "coding-qwen": {
+      "description": "Alternativer Coding-Agent mit Qwen 3 Coder fuer fokussierte Code-Erzeugung und praezise Aenderungen. / Alternative coding agent using Qwen 3 Coder for focused code generation and precise edits.",
+      "model": "chat-ai/qwen3-coder-30b-a3b-instruct",
+      "temperature": 0.3,
+      "top_p": 0.8
+    },
+
+    "coding-devstral": {
+      "description": "Coding-Agent mit Devstral fuer Implementierung, Debugging und Refactoring. / Coding agent using Devstral for implementation, debugging, and refactoring.",
+      "model": "chat-ai/devstral-2-123b-instruct-2512",
+      "temperature": 0.3,
+      "top_p": 0.8
+    },
+
+    "coding-qwen-general": {
+      "description": "Coding-Agent mit Qwen 3 30B fuer allgemeine Entwicklungsaufgaben. / Coding agent using Qwen 3 30B for general development tasks.",
+      "model": "chat-ai/qwen3-30b-a3b-instruct-2507",
+      "temperature": 0.3,
+      "top_p": 0.8
+    },
+
+    "coding-gpt-5-4": {
+      "description": "Coding-Agent mit OpenAI GPT-5.4 fuer komplexe Implementierung und Refactoring. / Coding agent using OpenAI GPT-5.4 for complex implementation and refactoring.",
+      "model": "chat-ai/OpenAI gpt-5.4",
+      "temperature": 0.3,
+      "top_p": 0.8
+    },
+
+    "coding-claude-opus": {
+      "description": "Coding-Agent mit Claude Opus 4.6 fuer komplexe Analyse, Architektur und Refactoring. / Coding agent using Claude Opus 4.6 for complex analysis, architecture, and refactoring.",
+      "model": "chat-ai/claude-opus-4-6",
+      "temperature": 0.3,
+      "top_p": 0.8
+    },
+
+    "brainstorm": {
+      "description": "Kreativerer Agent mit GLM-4.7 fuer Ideen, Namensfindung und Design-Optionen. / More creative agent using GLM-4.7 for ideas, naming, and design options.",
+      "model": "chat-ai/glm-4.7",
+      "temperature": 0.7,
+      "top_p": 0.9
+    }
+  }
+}

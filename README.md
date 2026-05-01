@@ -53,12 +53,13 @@ Der Container bleibt im Hintergrund aktiv. Danach kann eine Shell im Container g
 
 - `Dockerfile`: beschreibt das Container-Image. Es nutzt `mcr.microsoft.com/dotnet/sdk:latest`.
 - `compose.yml`: beschreibt den Service `opencode`, Volumes und Build-Regeln.
-- `opencode.json`: enthaelt Provider, Modelle und Agenten fuer Opencode.
+- `opencode.jsonc`: enthaelt Provider, Modelle und Agenten fuer Opencode. JSONC erlaubt Kommentare und ist deshalb fuer Lernzwecke besser lesbar.
 - `opencode.env.example`: Vorlage fuer die lokale Datei `opencode.env`.
 - `workspace/`: lokales Arbeitsverzeichnis, im Container unter `/workspace`.
 - `/mnt/c/Users/thinder/RiderProjects`: Windows-Projekte, im Container unter `/rider-projects`.
 - `dotnet/ContainerBuild.props`: leitet .NET-Build-Artefakte fuer Rider-Projekte in das Container-Volume `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: filtert eine bekannte .NET-Workload-Verifikationsmeldung aus der Ausgabe.
+- `spec-kit/patch-specify-cli.py`: passt Spec Kit fuer Windows-/WSL-Bind-Mounts an.
 - `AGENTS.md`: Regeln fuer KI-Agenten wie Opencode oder Codex.
 
 ### Docker unter Ubuntu oder WSL2 installieren
@@ -247,7 +248,7 @@ Ein vorhandenes Projekt kann vorbereitet werden, nachdem in sein Verzeichnis gew
 
 ```bash
 cd /rider-projects/TinyPl0
-specify init . --integration opencode
+specify init . --integration opencode --force
 ```
 
 Falls eine Integration nicht verfuegbar ist, zuerst die unterstuetzten Optionen pruefen:
@@ -255,6 +256,10 @@ Falls eine Integration nicht verfuegbar ist, zuerst die unterstuetzten Optionen 
 ```bash
 specify init --help
 ```
+
+Wenn Spec Kit nach dem Script-Typ fragt, fuer diesen Linux-Container `sh` auswaehlen.
+
+Spec Kit weist darauf hin, dass Agentenordner private Daten enthalten koennen. Fuer Projekte unter `/rider-projects` sollte deshalb im jeweiligen Anwendungsrepo geprueft werden, ob `.opencode/` oder sensible Teile davon in die Projekt-`.gitignore` gehoeren.
 
 Spec Kit erzeugt Projektdateien fuer spec-driven development. Diese Dateien gehoeren normalerweise in das jeweilige Anwendungsrepo unter `/rider-projects`, nicht in dieses Docker-Setup-Repo.
 
@@ -270,7 +275,7 @@ Der Container startet Opencode nicht automatisch. Das ist Absicht. So kann zuers
 
 ### Konfiguration
 
-`opencode.json` nutzt den Provider `chat-ai` mit dieser Basis-URL:
+`opencode.jsonc` nutzt den Provider `chat-ai` mit dieser Basis-URL:
 
 ```text
 https://chat-ai.academiccloud.de/v1
@@ -289,6 +294,8 @@ RUN npm i -g opencode-ai@latest
 ```
 
 Spec Kit wird beim Image-Build mit `uv` installiert. Dafuer enthaelt das Image auch `git`, `curl` und `ca-certificates`.
+
+Nach der Installation wird Spec Kit im Container gepatcht. Der Patch verhindert, dass Python-Kopiervorgaenge Dateirechte oder Zeitstempel auf dem Windows-Mount uebernehmen wollen. Das ist wichtig, weil `/mnt/c` solche Metadatenoperationen mit `Operation not permitted` ablehnen kann.
 
 Die .NET-Workload-Hinweismeldung wird im Container deaktiviert:
 
@@ -389,7 +396,7 @@ rm /rider-projects/Directory.Build.props
 
 ### Kompakter Testablauf
 
-Dieser Ablauf prueft das Setup in einer sinnvollen Reihenfolge. Er eignet sich gut nach einer Neuinstallation oder nach Aenderungen an `Dockerfile`, `compose.yml` oder `opencode.json`.
+Dieser Ablauf prueft das Setup in einer sinnvollen Reihenfolge. Er eignet sich gut nach einer Neuinstallation oder nach Aenderungen an `Dockerfile`, `compose.yml` oder `opencode.jsonc`.
 
 Auf dem Host ausfuehren:
 
@@ -432,12 +439,13 @@ The container stays active in the background. You can then open a shell inside i
 
 - `Dockerfile`: describes the container image. It uses `mcr.microsoft.com/dotnet/sdk:latest`.
 - `compose.yml`: describes the `opencode` service, volumes, and build rules.
-- `opencode.json`: contains provider, model, and agent settings for Opencode.
+- `opencode.jsonc`: contains provider, model, and agent settings for Opencode. JSONC allows comments and is easier to read for learning.
 - `opencode.env.example`: template for the local `opencode.env` file.
 - `workspace/`: local working directory, mounted as `/workspace`.
 - `/mnt/c/Users/thinder/RiderProjects`: Windows projects, mounted as `/rider-projects`.
 - `dotnet/ContainerBuild.props`: redirects .NET build artifacts for Rider projects to the container volume `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: filters a known .NET workload verification message from command output.
+- `spec-kit/patch-specify-cli.py`: adapts Spec Kit for Windows/WSL bind mounts.
 - `AGENTS.md`: rules for AI agents such as Opencode or Codex.
 
 ### Install Docker on Ubuntu or WSL2
@@ -626,7 +634,7 @@ An existing project can be prepared after changing into its directory:
 
 ```bash
 cd /rider-projects/TinyPl0
-specify init . --integration opencode
+specify init . --integration opencode --force
 ```
 
 If an integration is not available, check the supported options first:
@@ -634,6 +642,10 @@ If an integration is not available, check the supported options first:
 ```bash
 specify init --help
 ```
+
+If Spec Kit asks for the script type, choose `sh` for this Linux container.
+
+Spec Kit warns that agent folders can contain private data. For projects under `/rider-projects`, check whether `.opencode/` or sensitive parts of it should be added to that application repository's `.gitignore`.
 
 Spec Kit creates project files for spec-driven development. These files normally belong in the application repository under `/rider-projects`, not in this Docker setup repository.
 
@@ -649,7 +661,7 @@ The container does not start Opencode automatically. This is intentional. It let
 
 ### Configuration
 
-`opencode.json` uses the `chat-ai` provider with this base URL:
+`opencode.jsonc` uses the `chat-ai` provider with this base URL:
 
 ```text
 https://chat-ai.academiccloud.de/v1
@@ -668,6 +680,8 @@ RUN npm i -g opencode-ai@latest
 ```
 
 Spec Kit is installed during the image build with `uv`. For that reason, the image also includes `git`, `curl`, and `ca-certificates`.
+
+After installation, Spec Kit is patched inside the container. The patch prevents Python copy operations from preserving file permissions or timestamps on the Windows mount. This is important because `/mnt/c` can reject these metadata operations with `Operation not permitted`.
 
 The .NET workload notification is disabled inside the container:
 
@@ -768,7 +782,7 @@ rm /rider-projects/Directory.Build.props
 
 ### Compact test procedure
 
-This procedure checks the setup in a useful order. It is a good choice after a fresh installation or after changes to `Dockerfile`, `compose.yml`, or `opencode.json`.
+This procedure checks the setup in a useful order. It is a good choice after a fresh installation or after changes to `Dockerfile`, `compose.yml`, or `opencode.jsonc`.
 
 Run this on the host:
 
