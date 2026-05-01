@@ -8,6 +8,7 @@
   - [Voraussetzungen](#voraussetzungen)
   - [API-Key einrichten](#api-key-einrichten)
   - [Container bauen und starten](#container-bauen-und-starten)
+  - [Rider-Projekte einbinden](#rider-projekte-einbinden)
   - [Opencode verwenden](#opencode-verwenden)
   - [Konfiguration](#konfiguration)
   - [Opencode-Version](#opencode-version)
@@ -18,6 +19,7 @@
   - [Requirements](#requirements)
   - [Set up the API key](#set-up-the-api-key)
   - [Build and start the container](#build-and-start-the-container)
+  - [Mount Rider projects](#mount-rider-projects)
   - [Use Opencode](#use-opencode)
   - [Configuration](#configuration)
   - [Opencode version](#opencode-version-1)
@@ -38,6 +40,7 @@ Der lokale Ordner `workspace` wird im Container als `/workspace` eingebunden. Do
 - `opencode.json`: enthaelt die Opencode-Konfiguration fuer den Provider `chat-ai`.
 - `opencode.env.example`: Beispiel fuer die benoetigte Umgebungsvariable `GWDG_API_KEY`.
 - `workspace`: Arbeitsverzeichnis, das in den Container eingebunden wird.
+- `/mnt/c/Users/thinder/RiderProjects`: Windows-/Rider-Projekte, eingebunden als `/rider-projects`.
 
 ### Voraussetzungen
 
@@ -116,6 +119,23 @@ docker compose build --pull
 docker compose up -d
 ```
 
+### Rider-Projekte einbinden
+
+Da die Entwicklung in WSL2 stattfindet, werden die Windows-Projekte aus Rider direkt in den Container eingebunden:
+
+```text
+/mnt/c/Users/thinder/RiderProjects -> /rider-projects
+```
+
+Im Container koennen die Projekte so geoeffnet werden:
+
+```bash
+cd /rider-projects
+ls
+```
+
+Aenderungen im Container wirken direkt auf die Windows-Dateien. Rider unter Windows sieht diese Aenderungen ebenfalls. Builds auf `/mnt/c` koennen langsamer sein als Builds im Linux-Dateisystem.
+
 ### Opencode verwenden
 
 Shell im Container oeffnen:
@@ -185,6 +205,7 @@ The local `workspace` folder is mounted into the container as `/workspace`. This
 - `opencode.json`: contains the Opencode configuration for the `chat-ai` provider.
 - `opencode.env.example`: example file for the required `GWDG_API_KEY` environment variable.
 - `workspace`: working directory mounted into the container.
+- `/mnt/c/Users/thinder/RiderProjects`: Windows/Rider projects, mounted as `/rider-projects`.
 
 ### Requirements
 
@@ -262,6 +283,23 @@ Compose is configured to check for a newer base image during builds. This can al
 docker compose build --pull
 docker compose up -d
 ```
+
+### Mount Rider projects
+
+Because development happens in WSL2, the Windows projects from Rider are mounted directly into the container:
+
+```text
+/mnt/c/Users/thinder/RiderProjects -> /rider-projects
+```
+
+Inside the container, open the projects like this:
+
+```bash
+cd /rider-projects
+ls
+```
+
+Changes made inside the container are written directly to the Windows files. Rider on Windows can see the same changes. Builds on `/mnt/c` can be slower than builds inside the Linux file system.
 
 ### Use Opencode
 

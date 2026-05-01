@@ -5,6 +5,7 @@ services:
       pull: true
     volumes:
       - ./workspace:/workspace
+      - /mnt/c/Users/thinder/RiderProjects:/rider-projects
       - opencode_data:/home/opencode/.local/share/opencode
     working_dir: /workspace
     env_file:

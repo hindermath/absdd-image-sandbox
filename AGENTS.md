@@ -9,6 +9,7 @@ This repository contains a small Docker-based Opencode environment, not an appli
 - `opencode.json`: configures the `chat-ai` provider, models, and agents.
 - `opencode.env.example`: documents the required `GWDG_API_KEY` variable.
 - `workspace/`: mounted into the container as `/workspace`; place working project files there.
+- `/mnt/c/Users/thinder/RiderProjects`: mounted into the container as `/rider-projects` for Windows/Rider projects.
 - `README.md`: user-facing setup and operation guide.
 
 There is currently no `src/`, `tests/`, or asset directory.
@@ -34,6 +35,12 @@ docker compose exec opencode bash
 ```
 
 Opens a shell inside the running container.
+
+```bash
+cd /rider-projects
+```
+
+Moves to the mounted Windows/Rider projects directory inside the container.
 
 ```bash
 docker compose down
