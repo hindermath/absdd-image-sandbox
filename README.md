@@ -1,5 +1,28 @@
 # Opencode Docker-Umgebung
 
+## Inhaltsverzeichnis
+
+- [Deutsch](#deutsch)
+  - [Zweck](#zweck)
+  - [Wichtige Dateien](#wichtige-dateien)
+  - [Voraussetzungen](#voraussetzungen)
+  - [API-Key einrichten](#api-key-einrichten)
+  - [Container bauen und starten](#container-bauen-und-starten)
+  - [Opencode verwenden](#opencode-verwenden)
+  - [Konfiguration](#konfiguration)
+  - [Opencode-Version](#opencode-version)
+  - [Aufraeumen](#aufraeumen)
+- [English](#english)
+  - [Purpose](#purpose)
+  - [Important files](#important-files)
+  - [Requirements](#requirements)
+  - [Set up the API key](#set-up-the-api-key)
+  - [Build and start the container](#build-and-start-the-container)
+  - [Use Opencode](#use-opencode)
+  - [Configuration](#configuration)
+  - [Opencode version](#opencode-version-1)
+  - [Clean up](#clean-up)
+
 ## Deutsch
 
 ### Zweck
