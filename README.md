@@ -281,7 +281,7 @@ dotnet run
 Danach Opencode einmal im Projekt initialisieren. Dadurch kann Opencode projektspezifische Regeln erkennen oder anlegen:
 
 ```bash
-opencode /init
+opencode --prompt "/init"
 ```
 
 Danach Spec Kit fuer Opencode einrichten:
@@ -737,7 +737,7 @@ dotnet run
 Then initialize Opencode once in the project. This lets Opencode detect or create project-specific rules:
 
 ```bash
-opencode /init
+opencode --prompt "/init"
 ```
 
 Then set up Spec Kit for Opencode:
