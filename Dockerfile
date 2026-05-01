@@ -1,6 +1,8 @@
-FROM debian:trixie
+FROM mcr.microsoft.com/dotnet/sdk:latest
 
-RUN apt-get -y update && apt-get -y install nodejs npm
+RUN apt-get -y update \
+    && apt-get -y install --no-install-recommends nodejs npm \
+    && rm -rf /var/lib/apt/lists/*
 RUN npm i -g opencode-ai@latest
 
 RUN useradd -m opencode

@@ -33,7 +33,7 @@ Der lokale Ordner `workspace` wird im Container als `/workspace` eingebunden. Do
 
 ### Wichtige Dateien
 
-- `Dockerfile`: baut das Container-Image auf Basis von Debian Trixie.
+- `Dockerfile`: baut das Container-Image auf Basis des offiziellen Microsoft-.NET-SDK-Images `mcr.microsoft.com/dotnet/sdk:latest`.
 - `compose.yml`: definiert den Docker-Compose-Service `opencode`.
 - `opencode.json`: enthaelt die Opencode-Konfiguration fuer den Provider `chat-ai`.
 - `opencode.env.example`: Beispiel fuer die benoetigte Umgebungsvariable `GWDG_API_KEY`.
@@ -49,6 +49,12 @@ Pruefen:
 docker --version
 docker compose version
 docker info
+```
+
+Die Compose-Datei kann ohne Secret-Ausgabe so geprueft werden:
+
+```bash
+docker compose config --no-interpolate
 ```
 
 Wenn `docker compose` fehlt, kann auf Ubuntu 24.04 dieses Paket installiert werden:
@@ -102,6 +108,13 @@ docker compose up -d
 ```
 
 Beim ersten Start wird das Image gebaut. Das kann etwas dauern, weil Debian-Pakete installiert werden und Opencode ueber npm geladen wird.
+
+Compose ist so konfiguriert, dass beim Build auch nach einem neueren Basisimage gesucht wird. Explizit kann das so ausgefuehrt werden:
+
+```bash
+docker compose build --pull
+docker compose up -d
+```
 
 ### Opencode verwenden
 
@@ -167,7 +180,7 @@ The local `workspace` folder is mounted into the container as `/workspace`. This
 
 ### Important files
 
-- `Dockerfile`: builds the container image based on Debian Trixie.
+- `Dockerfile`: builds the container image from the official Microsoft .NET SDK image `mcr.microsoft.com/dotnet/sdk:latest`.
 - `compose.yml`: defines the Docker Compose service `opencode`.
 - `opencode.json`: contains the Opencode configuration for the `chat-ai` provider.
 - `opencode.env.example`: example file for the required `GWDG_API_KEY` environment variable.
@@ -183,6 +196,12 @@ Check this with:
 docker --version
 docker compose version
 docker info
+```
+
+The Compose file can be checked without printing secret values:
+
+```bash
+docker compose config --no-interpolate
 ```
 
 If `docker compose` is missing, this package can be installed on Ubuntu 24.04:
@@ -236,6 +255,13 @@ docker compose up -d
 ```
 
 On the first start, Docker builds the image. This can take some time because Debian packages are installed and Opencode is downloaded through npm.
+
+Compose is configured to check for a newer base image during builds. This can also be run explicitly:
+
+```bash
+docker compose build --pull
+docker compose up -d
+```
 
 ### Use Opencode
 
