@@ -578,12 +578,17 @@ rm /rider-projects/Directory.Build.props
 
 ### Kompakter Testablauf
 
-Dieser Ablauf prueft das Setup in einer sinnvollen Reihenfolge. Er eignet sich gut nach einer Neuinstallation oder nach Aenderungen an `Dockerfile`, `compose.yml` oder `opencode.jsonc`.
+Dieser Ablauf prueft das Setup in einer sinnvollen Reihenfolge. Er eignet sich gut nach einer Neuinstallation, nach Aenderungen an `Dockerfile`, `compose.yml` oder `opencode.jsonc` und als erster Test auf macOS mit Docker Desktop.
+
+Der Test besteht aus zwei Teilen:
+
+1. Auf dem Host wird Docker Compose geprueft, das Image gebaut und der Container gestartet.
+2. Im Container wird geprueft, ob .NET, OpenCode, Spec Kit und die gemounteten Verzeichnisse funktionieren.
 
 Auf dem Host ausfuehren:
 
 ```bash
-cd /home/thinder/ade-dev-sandbox
+cd /Users/thorstenhindermann/ade-dev-sandbox
 docker compose config --no-interpolate
 docker compose build --pull
 docker compose up -d
@@ -601,6 +606,40 @@ opencode --version
 specify version
 ls /workspace
 ls /rider-projects
+```
+
+Was die Befehle bedeuten:
+
+- `docker compose config --no-interpolate` prueft die Compose-Datei, ohne Variablenwerte und Secrets in der Ausgabe auszubreiten.
+- `docker compose build --pull` baut das Image und laedt vorher nach Moeglichkeit aktuelle Basisimages.
+- `docker compose up -d` startet den Container im Hintergrund.
+- `docker compose ps` zeigt, ob der Service `opencode` laeuft.
+- `docker compose exec opencode bash` oeffnet eine Shell im laufenden Container.
+- `dotnet --info` zeigt, ob das .NET SDK im Container installiert und nutzbar ist.
+- `node --version` und `npm --version` pruefen die Node.js-Werkzeuge, die OpenCode braucht.
+- `opencode --version` prueft die installierte OpenCode CLI.
+- `specify version` prueft die installierte Spec Kit CLI.
+- `ls /workspace` prueft das lokale Projekt-Workspace-Mount.
+- `ls /rider-projects` prueft den ueber `RIDER_PROJECTS_DIR` konfigurierten Host-Mount.
+
+Erwartetes Ergebnis:
+
+- `docker compose ps` zeigt den Service `opencode` als laufend.
+- `dotnet --info` gibt SDK-Informationen aus und endet ohne Fehler.
+- `opencode --version` und `specify version` geben Versionsinformationen aus.
+- `ls /rider-projects` zeigt die Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthaelt.
+
+macOS-Hinweis: Wenn Docker Desktop gerade erst installiert wurde, Docker Desktop zuerst einmal starten und warten, bis die Engine laeuft. Danach funktionieren `docker --version`, `docker compose version` und `docker info` im Terminal.
+
+Windows-Hinweis: Wenn Docker Desktop aus PowerShell verwendet wird, muss `RIDER_PROJECTS_DIR` in `.env` als Windows-Pfad gesetzt werden, zum Beispiel `C:\Users\thinder\RiderProjects`. Wenn die Befehle aus Ubuntu/WSL2 laufen, wird der WSL-Pfad verwendet, zum Beispiel `/mnt/c/Users/thinder/RiderProjects`.
+
+Sicherheits-Hinweis: `opencode.env` enthaelt den API-Key. Diese Datei nie committen, nie in Screenshots zeigen und nicht in Chat- oder Ticket-Systeme kopieren. Fuer Tests reicht es, zu pruefen, dass OpenCode startet; der Key muss nicht sichtbar gemacht werden.
+
+Wenn der Build bewusst komplett frisch laufen soll:
+
+```bash
+docker compose build --pull --no-cache
+docker compose up -d --force-recreate
 ```
 
 ### Merksaetze
@@ -1180,12 +1219,17 @@ rm /rider-projects/Directory.Build.props
 
 ### Compact test procedure
 
-This procedure checks the setup in a useful order. It is a good choice after a fresh installation or after changes to `Dockerfile`, `compose.yml`, or `opencode.jsonc`.
+This procedure checks the setup in a useful order. It is a good choice after a fresh installation, after changes to `Dockerfile`, `compose.yml`, or `opencode.jsonc`, and as a first test on macOS with Docker Desktop.
+
+The test has two parts:
+
+1. On the host, Docker Compose is checked, the image is built, and the container is started.
+2. Inside the container, .NET, OpenCode, Spec Kit, and the mounted directories are checked.
 
 Run this on the host:
 
 ```bash
-cd /home/thinder/ade-dev-sandbox
+cd /Users/thorstenhindermann/ade-dev-sandbox
 docker compose config --no-interpolate
 docker compose build --pull
 docker compose up -d
@@ -1203,6 +1247,40 @@ opencode --version
 specify version
 ls /workspace
 ls /rider-projects
+```
+
+What the commands mean:
+
+- `docker compose config --no-interpolate` checks the Compose file without expanding variable values and secrets in the output.
+- `docker compose build --pull` builds the image and tries to download current base images first.
+- `docker compose up -d` starts the container in the background.
+- `docker compose ps` shows whether the `opencode` service is running.
+- `docker compose exec opencode bash` opens a shell in the running container.
+- `dotnet --info` shows whether the .NET SDK is installed and usable inside the container.
+- `node --version` and `npm --version` check the Node.js tools required by OpenCode.
+- `opencode --version` checks the installed OpenCode CLI.
+- `specify version` checks the installed Spec Kit CLI.
+- `ls /workspace` checks the local project workspace mount.
+- `ls /rider-projects` checks the host mount configured through `RIDER_PROJECTS_DIR`.
+
+Expected result:
+
+- `docker compose ps` shows the `opencode` service as running.
+- `dotnet --info` prints SDK information and exits without an error.
+- `opencode --version` and `specify version` print version information.
+- `ls /rider-projects` shows the projects from the host directory or stays empty if that directory does not contain projects yet.
+
+macOS note: If Docker Desktop was just installed, start Docker Desktop once and wait until the engine is running. After that, `docker --version`, `docker compose version`, and `docker info` work in the terminal.
+
+Windows note: If Docker Desktop is used from PowerShell, set `RIDER_PROJECTS_DIR` in `.env` as a Windows path, for example `C:\Users\thinder\RiderProjects`. If the commands run from Ubuntu/WSL2, use the WSL path, for example `/mnt/c/Users/thinder/RiderProjects`.
+
+Security note: `opencode.env` contains the API key. Never commit this file, never show it in screenshots, and do not copy it into chat or ticket systems. For tests, it is enough to check that OpenCode starts; the key must not be made visible.
+
+If the build should intentionally run fully fresh:
+
+```bash
+docker compose build --pull --no-cache
+docker compose up -d --force-recreate
 ```
 
 ### Quick rules
