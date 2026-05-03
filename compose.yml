@@ -5,7 +5,9 @@ services:
       pull: true
     volumes:
       - ./workspace:/workspace
-      - /mnt/c/Users/thinder/RiderProjects:/rider-projects
+      - type: bind
+        source: ${RIDER_PROJECTS_DIR:-./workspace}
+        target: /rider-projects
       - ./dotnet/ContainerBuild.props:/dotnet-config/ContainerBuild.props:ro
       - dotnet_build:/dotnet-build
       - opencode_data:/home/opencode/.local/share/opencode

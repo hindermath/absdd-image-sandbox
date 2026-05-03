@@ -9,7 +9,7 @@ This repository contains a small Docker-based Opencode, .NET, and Spec Kit envir
 - `opencode.jsonc`: configures the `chat-ai` provider, models, and agents. Keep comments useful for first-year IT specialist apprentices.
 - `opencode.env.example`: documents the required `GWDG_API_KEY` variable.
 - `workspace/`: mounted into the container as `/workspace`; place working project files there.
-- `/mnt/c/Users/thinder/RiderProjects`: mounted into the container as `/rider-projects` for Windows/Rider projects.
+- `RIDER_PROJECTS_DIR`: host directory mounted into the container as `/rider-projects` for Rider projects.
 - `dotnet/ContainerBuild.props`: mounted into `/dotnet-config` and loaded through `DirectoryBuildPropsPath` to redirect .NET build artifacts to `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: installed as `/usr/local/bin/dotnet` to filter one known workload verification noise line while preserving real output and exit codes.
 - `spec-kit/patch-specify-cli.py`: patches Spec Kit copy behavior so initialization works better on Windows/WSL bind mounts.
@@ -95,7 +95,7 @@ Spec Kit is installed with `uv tool install specify-cli --from git+https://githu
 
 For Spec Kit initialization under `/rider-projects`, prefer `specify init . --integration opencode --force`. If prompted for script type, choose `sh` in this Linux container. For each application repository, decide whether `.opencode/` or sensitive parts of it belong in that repository's `.gitignore`.
 
-Spec Kit is patched after installation to avoid Python metadata-preserving copy operations on `/mnt/c`. Keep this patch narrow; it should only affect copying behavior, not Spec Kit command semantics.
+Spec Kit is patched after installation to avoid Python metadata-preserving copy operations on host bind mounts. Keep this patch narrow; it should only affect copying behavior, not Spec Kit command semantics.
 
 ## Commit & Pull Request Guidelines
 

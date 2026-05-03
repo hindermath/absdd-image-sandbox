@@ -7,6 +7,7 @@
   - [Grundidee](#grundidee)
   - [Projektstruktur](#projektstruktur)
   - [Docker unter Ubuntu oder WSL2 installieren](#docker-unter-ubuntu-oder-wsl2-installieren)
+  - [Docker-Desktop-Profile fuer macOS und Windows](#docker-desktop-profile-fuer-macos-und-windows)
   - [Docker-Berechtigungen pruefen](#docker-berechtigungen-pruefen)
   - [API-Key einrichten](#api-key-einrichten)
   - [Container bauen und starten](#container-bauen-und-starten)
@@ -27,6 +28,7 @@
   - [Basic idea](#basic-idea)
   - [Project structure](#project-structure)
   - [Install Docker on Ubuntu or WSL2](#install-docker-on-ubuntu-or-wsl2)
+  - [Docker Desktop profiles for macOS and Windows](#docker-desktop-profiles-for-macos-and-windows)
   - [Check Docker permissions](#check-docker-permissions)
   - [Set up the API key](#set-up-the-api-key)
   - [Build and start the container](#build-and-start-the-container)
@@ -49,7 +51,7 @@
 
 Diese Anleitung richtet sich an Auszubildende der Fachinformatik ab dem 1. Lehrjahr. Sie erklaert nicht nur die Befehle, sondern auch kurz, warum sie gebraucht werden.
 
-Dieses Repository stellt eine Docker-Umgebung fuer Opencode, .NET und C# bereit. Die Umgebung ist fuer Entwicklung unter WSL2 gedacht. Projekte koennen weiter unter Windows mit JetBrains Rider bearbeitet werden.
+Dieses Repository stellt eine Docker-Umgebung fuer Opencode, .NET und C# bereit. Die Umgebung laeuft mit Docker Engine unter Linux/WSL2 und mit Docker Desktop unter macOS oder Windows. Projekte koennen weiter mit JetBrains Rider auf dem Host bearbeitet werden.
 
 ### Grundidee
 
@@ -61,10 +63,11 @@ Der Container bleibt im Hintergrund aktiv. Danach kann eine Shell im Container g
 
 - `Dockerfile`: beschreibt das Container-Image. Es nutzt `mcr.microsoft.com/dotnet/sdk:latest`.
 - `compose.yml`: beschreibt den Service `opencode`, Volumes und Build-Regeln.
+- `.env.example`: Vorlage fuer den plattformabhaengigen `RIDER_PROJECTS_DIR`-Mount.
 - `opencode.jsonc`: enthaelt Provider, Modelle und Agenten fuer Opencode. JSONC erlaubt Kommentare und ist deshalb fuer Lernzwecke besser lesbar.
 - `opencode.env.example`: Vorlage fuer die lokale Datei `opencode.env`.
 - `workspace/`: lokales Arbeitsverzeichnis, im Container unter `/workspace`.
-- `/mnt/c/Users/thinder/RiderProjects`: Windows-Projekte, im Container unter `/rider-projects`.
+- `RIDER_PROJECTS_DIR`: Host-Verzeichnis fuer Rider-Projekte, im Container unter `/rider-projects`.
 - `dotnet/ContainerBuild.props`: leitet .NET-Build-Artefakte fuer Rider-Projekte in das Container-Volume `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: filtert eine bekannte .NET-Workload-Verifikationsmeldung aus der Ausgabe.
 - `spec-kit/patch-specify-cli.py`: passt Spec Kit fuer Windows-/WSL-Bind-Mounts an.
@@ -101,6 +104,71 @@ docker info
 ```
 
 Die Compose-Datei kann ohne Secret-Ausgabe geprueft werden:
+
+```bash
+docker compose config --no-interpolate
+```
+
+### Docker-Desktop-Profile fuer macOS und Windows
+
+Wenn Docker Desktop verwendet wird, bleibt der Container ein Linux-Container. Der Unterschied liegt nur im Host-Pfad, der nach `/rider-projects` eingebunden wird.
+
+Docker Desktop kann fuer private Nutzung, Ausbildung, Lernen, kleine Unternehmen und nicht-kommerzielle Open-Source-Projekte kostenlos genutzt werden. Kommerzielle Nutzung in groesseren Unternehmen mit mehr als 250 Mitarbeitenden oder mehr als 10 Mio. USD Jahresumsatz benoetigt ein bezahltes Docker-Abo. Im Zweifel gelten die aktuellen Docker Subscription Service Agreement Bedingungen.
+
+macOS mit Homebrew:
+
+```bash
+brew install --cask docker
+open -a Docker
+```
+
+Danach im Terminal pruefen:
+
+```bash
+docker --version
+docker compose version
+docker info
+```
+
+Windows mit Winget:
+
+```powershell
+winget install --id Docker.DockerDesktop -e
+```
+
+Danach Docker Desktop aus dem Startmenue starten, die Lizenzbedingungen akzeptieren und sicherstellen, dass das WSL2-Backend aktiviert ist. Alternativ kann der Installer von der offiziellen Docker-Webseite verwendet werden.
+
+Zuerst die Compose-Umgebungsdatei anlegen:
+
+```bash
+cp .env.example .env
+```
+
+Danach `RIDER_PROJECTS_DIR` passend zur Plattform setzen.
+
+macOS:
+
+```text
+RIDER_PROJECTS_DIR=/Users/thorstenhindermann/RiderProjects
+```
+
+Windows mit Docker Desktop aus PowerShell:
+
+```text
+RIDER_PROJECTS_DIR=C:\Users\thinder\RiderProjects
+```
+
+Windows mit Docker Desktop aus Ubuntu/WSL2:
+
+```text
+RIDER_PROJECTS_DIR=/mnt/c/Users/thinder/RiderProjects
+```
+
+Wenn kein separates Rider-Projektverzeichnis gebraucht wird, kann der Standard aus `.env.example` bleiben. Dann zeigt `/rider-projects` wie `/workspace` auf das lokale `workspace/`-Verzeichnis.
+
+Die Datei `.env` enthaelt keine Secrets, ist aber lokal und plattformabhaengig. Sie wird nicht committed. Der API-Key bleibt getrennt in `opencode.env`.
+
+Konfiguration pruefen:
 
 ```bash
 docker compose config --no-interpolate
@@ -181,13 +249,15 @@ Beim ersten Build werden das .NET-SDK-Basisimage und npm-Pakete geladen. Das kan
 
 ### Rider-Projekte aus Windows einbinden
 
-Die Windows-Projekte liegen unter:
+Das Host-Verzeichnis fuer Rider-Projekte wird ueber `RIDER_PROJECTS_DIR` gesetzt. Typische Werte sind:
 
 ```text
-/mnt/c/Users/thinder/RiderProjects
+RIDER_PROJECTS_DIR=/mnt/c/Users/thinder/RiderProjects
+RIDER_PROJECTS_DIR=C:\Users\thinder\RiderProjects
+RIDER_PROJECTS_DIR=/Users/thorstenhindermann/RiderProjects
 ```
 
-Sie werden im Container hier eingebunden:
+Das Verzeichnis wird im Container hier eingebunden:
 
 ```text
 /rider-projects
@@ -200,9 +270,9 @@ cd /rider-projects
 ls
 ```
 
-Aenderungen im Container wirken direkt auf die Windows-Dateien. Rider unter Windows sieht dieselben Dateien. Builds auf `/mnt/c` koennen langsamer sein als Builds im Linux-Dateisystem.
+Aenderungen im Container wirken direkt auf die Host-Dateien. Rider auf dem Host sieht dieselben Dateien. Builds auf Windows- oder macOS-Bind-Mounts koennen langsamer sein als Builds im Linux-Dateisystem.
 
-Damit .NET auf Windows-Dateien keine Probleme mit `bin`, `obj`, AppHost-Dateien oder Dateizeitstempeln bekommt, wird eine MSBuild-Konfiguration in den Container eingebunden:
+Damit .NET auf Host-Dateien keine Probleme mit `bin`, `obj`, AppHost-Dateien oder Dateizeitstempeln bekommt, wird eine MSBuild-Konfiguration in den Container eingebunden:
 
 ```text
 dotnet/ContainerBuild.props -> /dotnet-config/ContainerBuild.props
@@ -407,7 +477,7 @@ RUN npm i -g opencode-ai@latest
 
 Spec Kit wird beim Image-Build mit `uv` installiert. Dafuer enthaelt das Image auch `git`, `curl` und `ca-certificates`.
 
-Nach der Installation wird Spec Kit im Container gepatcht. Der Patch verhindert, dass Python-Kopiervorgaenge Dateirechte oder Zeitstempel auf dem Windows-Mount uebernehmen wollen. Das ist wichtig, weil `/mnt/c` solche Metadatenoperationen mit `Operation not permitted` ablehnen kann.
+Nach der Installation wird Spec Kit im Container gepatcht. Der Patch verhindert, dass Python-Kopiervorgaenge Dateirechte oder Zeitstempel auf Host-Bind-Mounts uebernehmen wollen. Das ist wichtig, weil Windows- und WSL-Mounts solche Metadatenoperationen mit `Operation not permitted` ablehnen koennen.
 
 Die .NET-Workload-Hinweismeldung wird im Container deaktiviert:
 
@@ -583,7 +653,7 @@ ls /dotnet-build
 
 This guide is written for first-year IT specialist apprentices and later. It explains the commands and also why they are needed.
 
-This repository provides a Docker environment for Opencode, .NET, and C#. It is designed for development with WSL2. Projects can still be edited on Windows with JetBrains Rider.
+This repository provides a Docker environment for Opencode, .NET, and C#. It runs with Docker Engine on Linux/WSL2 and with Docker Desktop on macOS or Windows. Projects can still be edited with JetBrains Rider on the host.
 
 ### Basic idea
 
@@ -595,10 +665,11 @@ The container stays active in the background. You can then open a shell inside i
 
 - `Dockerfile`: describes the container image. It uses `mcr.microsoft.com/dotnet/sdk:latest`.
 - `compose.yml`: describes the `opencode` service, volumes, and build rules.
+- `.env.example`: template for the platform-specific `RIDER_PROJECTS_DIR` mount.
 - `opencode.jsonc`: contains provider, model, and agent settings for Opencode. JSONC allows comments and is easier to read for learning.
 - `opencode.env.example`: template for the local `opencode.env` file.
 - `workspace/`: local working directory, mounted as `/workspace`.
-- `/mnt/c/Users/thinder/RiderProjects`: Windows projects, mounted as `/rider-projects`.
+- `RIDER_PROJECTS_DIR`: host directory for Rider projects, mounted as `/rider-projects`.
 - `dotnet/ContainerBuild.props`: redirects .NET build artifacts for Rider projects to the container volume `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: filters a known .NET workload verification message from command output.
 - `spec-kit/patch-specify-cli.py`: adapts Spec Kit for Windows/WSL bind mounts.
@@ -635,6 +706,71 @@ docker info
 ```
 
 Check the Compose file without printing secret values:
+
+```bash
+docker compose config --no-interpolate
+```
+
+### Docker Desktop profiles for macOS and Windows
+
+When Docker Desktop is used, the container is still a Linux container. Only the host path mounted into `/rider-projects` changes.
+
+Docker Desktop can be used free of charge for personal use, education, learning, small businesses, and non-commercial open source projects. Commercial use in larger companies with more than 250 employees or more than USD 10 million in annual revenue requires a paid Docker subscription. When in doubt, the current Docker Subscription Service Agreement terms apply.
+
+macOS with Homebrew:
+
+```bash
+brew install --cask docker
+open -a Docker
+```
+
+Then check in the terminal:
+
+```bash
+docker --version
+docker compose version
+docker info
+```
+
+Windows with Winget:
+
+```powershell
+winget install --id Docker.DockerDesktop -e
+```
+
+Then start Docker Desktop from the Start menu, accept the license terms, and make sure the WSL2 backend is enabled. Alternatively, use the installer from the official Docker website.
+
+First create the Compose environment file:
+
+```bash
+cp .env.example .env
+```
+
+Then set `RIDER_PROJECTS_DIR` for the current platform.
+
+macOS:
+
+```text
+RIDER_PROJECTS_DIR=/Users/thorstenhindermann/RiderProjects
+```
+
+Windows with Docker Desktop from PowerShell:
+
+```text
+RIDER_PROJECTS_DIR=C:\Users\thinder\RiderProjects
+```
+
+Windows with Docker Desktop from Ubuntu/WSL2:
+
+```text
+RIDER_PROJECTS_DIR=/mnt/c/Users/thinder/RiderProjects
+```
+
+If no separate Rider project directory is needed, keep the default from `.env.example`. Then `/rider-projects` points to the local `workspace/` directory, just like `/workspace`.
+
+The `.env` file contains no secrets, but it is local and platform-specific. It is not committed. The API key stays separate in `opencode.env`.
+
+Check the configuration:
 
 ```bash
 docker compose config --no-interpolate
@@ -715,13 +851,15 @@ The first build downloads the .NET SDK base image and npm packages. This can tak
 
 ### Mount Rider projects from Windows
 
-The Windows projects are stored here:
+The host directory for Rider projects is set through `RIDER_PROJECTS_DIR`. Typical values are:
 
 ```text
-/mnt/c/Users/thinder/RiderProjects
+RIDER_PROJECTS_DIR=/mnt/c/Users/thinder/RiderProjects
+RIDER_PROJECTS_DIR=C:\Users\thinder\RiderProjects
+RIDER_PROJECTS_DIR=/Users/thorstenhindermann/RiderProjects
 ```
 
-They are mounted inside the container here:
+The directory is mounted inside the container here:
 
 ```text
 /rider-projects
@@ -734,9 +872,9 @@ cd /rider-projects
 ls
 ```
 
-Changes inside the container are written directly to the Windows files. Rider on Windows sees the same files. Builds on `/mnt/c` can be slower than builds inside the Linux file system.
+Changes inside the container are written directly to the host files. Rider on the host sees the same files. Builds on Windows or macOS bind mounts can be slower than builds inside the Linux file system.
 
-To avoid .NET problems with `bin`, `obj`, AppHost files, or file timestamps on Windows files, an MSBuild configuration file is mounted into the container:
+To avoid .NET problems with `bin`, `obj`, AppHost files, or file timestamps on host files, an MSBuild configuration file is mounted into the container:
 
 ```text
 dotnet/ContainerBuild.props -> /dotnet-config/ContainerBuild.props
@@ -941,7 +1079,7 @@ RUN npm i -g opencode-ai@latest
 
 Spec Kit is installed during the image build with `uv`. For that reason, the image also includes `git`, `curl`, and `ca-certificates`.
 
-After installation, Spec Kit is patched inside the container. The patch prevents Python copy operations from preserving file permissions or timestamps on the Windows mount. This is important because `/mnt/c` can reject these metadata operations with `Operation not permitted`.
+After installation, Spec Kit is patched inside the container. The patch prevents Python copy operations from preserving file permissions or timestamps on host bind mounts. This is important because Windows and WSL mounts can reject these metadata operations with `Operation not permitted`.
 
 The .NET workload notification is disabled inside the container:
 
