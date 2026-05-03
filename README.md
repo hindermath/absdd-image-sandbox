@@ -305,11 +305,13 @@ cd DemoApp
 dotnet run
 ```
 
+`dotnet new console` erstellt eine einfache Konsolenanwendung. `dotnet run` baut und startet das Projekt. Die Dateien liegen auf dem Host im `RIDER_PROJECTS_DIR`-Verzeichnis und koennen dort mit Rider geoeffnet werden.
+
 Wenn ein Projekt bereits fehlerhafte `bin`- oder `obj`-Ordner auf dem Windows-Mount hat, koennen diese in Rider oder im Terminal geloescht werden. Danach erneut im Container bauen.
 
-### ASP.NET-Web-App aus Windows erreichen
+### ASP.NET-Web-App vom Host erreichen
 
-Der Container gibt die lokale Port-Range `5100-5199` nach Windows frei:
+Der Container gibt die lokale Port-Range `5100-5199` an den Host frei:
 
 ```yaml
 ports:
@@ -319,25 +321,44 @@ ports:
 Nach einer Aenderung an `compose.yml` muss der Container neu erstellt werden:
 
 ```bash
-cd /home/thinder/ade-dev-sandbox
+cd /Users/thorstenhindermann/ade-dev-sandbox
 docker compose up -d --force-recreate
 docker compose exec opencode bash
 ```
 
 Eine ASP.NET-App muss im Container auf `0.0.0.0` lauschen. `localhost` reicht nicht, weil `localhost` im Container nur den Container selbst meint.
 
-Beispiel fuer `WebApplication2`:
+Beispiel fuer eine Razor-Pages-Web-App:
 
 ```bash
-cd /rider-projects/WebApplication2/WebApplication2
+cd /rider-projects
+dotnet new webapp -n WebApp1
+cd WebApp1
 dotnet run --urls http://0.0.0.0:5102
 ```
 
-Danach unter Windows im Browser oeffnen:
+Danach auf dem Host im Browser oeffnen:
 
 ```text
 http://localhost:5102
 ```
+
+Beispiel fuer eine minimale ASP.NET-App:
+
+```bash
+cd /rider-projects
+dotnet new web -n MinimalWebApp1
+cd MinimalWebApp1
+dotnet run --urls http://0.0.0.0:5103
+```
+
+Danach auf dem Host im Browser oeffnen:
+
+```text
+http://localhost:5103
+```
+
+Der Unterschied: `dotnet new webapp` erstellt eine Web-App mit Razor Pages und mehr Projektstruktur. `dotnet new web` erstellt eine sehr kleine ASP.NET-App, die gut zum Verstehen des Grundprinzips ist.
 
 Wenn eine App einen anderen Port nutzt, muss dieser in der freigegebenen Range `5100-5199` liegen oder in `compose.yml` zusaetzlich eingetragen werden.
 
@@ -946,11 +967,13 @@ cd DemoApp
 dotnet run
 ```
 
+`dotnet new console` creates a simple console application. `dotnet run` builds and starts the project. The files are stored on the host in the `RIDER_PROJECTS_DIR` directory and can be opened there with Rider.
+
 If a project already has broken `bin` or `obj` folders on the Windows mount, delete them in Rider or in the terminal. Then build again inside the container.
 
-### Reach an ASP.NET web app from Windows
+### Reach an ASP.NET web app from the host
 
-The container publishes the local port range `5100-5199` to Windows:
+The container publishes the local port range `5100-5199` to the host:
 
 ```yaml
 ports:
@@ -960,25 +983,44 @@ ports:
 After a change to `compose.yml`, recreate the container:
 
 ```bash
-cd /home/thinder/ade-dev-sandbox
+cd /Users/thorstenhindermann/ade-dev-sandbox
 docker compose up -d --force-recreate
 docker compose exec opencode bash
 ```
 
 An ASP.NET app must listen on `0.0.0.0` inside the container. `localhost` is not enough because `localhost` inside the container only means the container itself.
 
-Example for `WebApplication2`:
+Example for a Razor Pages web app:
 
 ```bash
-cd /rider-projects/WebApplication2/WebApplication2
+cd /rider-projects
+dotnet new webapp -n WebApp1
+cd WebApp1
 dotnet run --urls http://0.0.0.0:5102
 ```
 
-Then open this in a Windows browser:
+Then open this in a browser on the host:
 
 ```text
 http://localhost:5102
 ```
+
+Example for a minimal ASP.NET app:
+
+```bash
+cd /rider-projects
+dotnet new web -n MinimalWebApp1
+cd MinimalWebApp1
+dotnet run --urls http://0.0.0.0:5103
+```
+
+Then open this in a browser on the host:
+
+```text
+http://localhost:5103
+```
+
+The difference: `dotnet new webapp` creates a web app with Razor Pages and more project structure. `dotnet new web` creates a very small ASP.NET app that is useful for understanding the basic idea.
 
 If an app uses another port, it must be inside the published range `5100-5199` or be added to `compose.yml`.
 
