@@ -27,7 +27,7 @@ shutil.copytree = _container_copytree_no_metadata
 
 def main() -> None:
     candidates = list(
-        Path("/home/opencode/.local/share/uv/tools/specify-cli").glob(
+        (Path.home() / ".local/share/uv/tools/specify-cli").glob(
             "lib/python*/site-packages/specify_cli/__init__.py"
         )
     )

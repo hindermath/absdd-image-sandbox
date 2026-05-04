@@ -10,7 +10,7 @@ services:
         target: /rider-projects
       - ./dotnet/ContainerBuild.props:/dotnet-config/ContainerBuild.props:ro
       - dotnet_build:/dotnet-build
-      - opencode_data:/home/opencode/.local/share/opencode
+      - opencode_data:/home/adedev/.local/share/opencode
     ports:
       - "127.0.0.1:5100-5199:5100-5199"
     working_dir: /rider-projects

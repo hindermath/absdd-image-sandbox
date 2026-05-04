@@ -59,6 +59,8 @@ Docker erstellt aus dem `Dockerfile` ein Image. Aus diesem Image startet Docker 
 
 Der Container bleibt im Hintergrund aktiv. Danach kann eine Shell im Container geoeffnet werden. Dort koennen Befehle wie `dotnet`, `opencode` oder `ls` ausgefuehrt werden.
 
+Die Shell laeuft im Container als Linux-Benutzer `adedev`. Deshalb beginnt die Promptzeile nach dem Einstieg zum Beispiel mit `adedev@...`. Der Compose-Service heisst `ade`; das OpenCode-Programm heisst weiterhin `opencode`.
+
 ### Projektstruktur
 
 - `Dockerfile`: beschreibt das Container-Image. Es nutzt `mcr.microsoft.com/dotnet/sdk:latest`.
@@ -721,10 +723,12 @@ Docker builds an image from the `Dockerfile`. Docker Compose starts a container 
 
 The container stays active in the background. You can then open a shell inside it and run commands such as `dotnet`, `opencode`, or `ls`.
 
+The shell runs as the Linux user `adedev` inside the container. That is why the prompt starts with something like `adedev@...` after entering the container. The Compose service is named `ade`; the OpenCode command is still named `opencode`.
+
 ### Project structure
 
 - `Dockerfile`: describes the container image. It uses `mcr.microsoft.com/dotnet/sdk:latest`.
-- `compose.yml`: describes the `opencode` service, volumes, and build rules.
+- `compose.yml`: describes the `ade` service, volumes, and build rules.
 - `.env.example`: template for the platform-specific `RIDER_PROJECTS_DIR` mount.
 - `opencode.jsonc`: contains provider, model, and agent settings for Opencode. JSONC allows comments and is easier to read for learning.
 - `opencode.env.example`: template for the local `opencode.env` file.
@@ -1307,7 +1311,7 @@ What the commands mean:
 
 Expected result:
 
-- `docker compose ps` shows the `opencode` service as running.
+- `docker compose ps` shows the `ade` service as running.
 - `dotnet --info` prints SDK information and exits without an error.
 - `opencode --version` and `specify version` print version information.
 - `ls /rider-projects` shows the projects from the host directory or stays empty if that directory does not contain projects yet.
