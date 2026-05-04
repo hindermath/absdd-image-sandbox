@@ -62,7 +62,7 @@ Der Container bleibt im Hintergrund aktiv. Danach kann eine Shell im Container g
 ### Projektstruktur
 
 - `Dockerfile`: beschreibt das Container-Image. Es nutzt `mcr.microsoft.com/dotnet/sdk:latest`.
-- `compose.yml`: beschreibt den Service `opencode`, Volumes und Build-Regeln.
+- `compose.yml`: beschreibt den Service `ade`, Volumes und Build-Regeln.
 - `.env.example`: Vorlage fuer den plattformabhaengigen `RIDER_PROJECTS_DIR`-Mount.
 - `opencode.jsonc`: enthaelt Provider, Modelle und Agenten fuer Opencode. JSONC erlaubt Kommentare und ist deshalb fuer Lernzwecke besser lesbar.
 - `opencode.env.example`: Vorlage fuer die lokale Datei `opencode.env`.
@@ -287,7 +287,7 @@ Die Build-Artefakte liegen nicht unter `/rider-projects`, sondern im Linux-Volum
 Shell im Container oeffnen:
 
 ```bash
-docker compose exec opencode bash
+docker compose exec ade bash
 ```
 
 .NET-Version pruefen:
@@ -323,7 +323,7 @@ Nach einer Aenderung an `compose.yml` muss der Container neu erstellt werden:
 ```bash
 cd /Users/thorstenhindermann/ade-dev-sandbox
 docker compose up -d --force-recreate
-docker compose exec opencode bash
+docker compose exec ade bash
 ```
 
 Eine ASP.NET-App muss im Container auf `0.0.0.0` lauschen. `localhost` reicht nicht, weil `localhost` im Container nur den Container selbst meint.
@@ -614,7 +614,7 @@ docker compose config --no-interpolate
 docker compose build --pull
 docker compose up -d
 docker compose ps
-docker compose exec opencode bash
+docker compose exec ade bash
 ```
 
 Danach im Container pruefen:
@@ -634,8 +634,8 @@ Was die Befehle bedeuten:
 - `docker compose config --no-interpolate` prueft die Compose-Datei, ohne Variablenwerte und Secrets in der Ausgabe auszubreiten.
 - `docker compose build --pull` baut das Image und laedt vorher nach Moeglichkeit aktuelle Basisimages.
 - `docker compose up -d` startet den Container im Hintergrund.
-- `docker compose ps` zeigt, ob der Service `opencode` laeuft.
-- `docker compose exec opencode bash` oeffnet eine Shell im laufenden Container.
+- `docker compose ps` zeigt, ob der Service `ade` laeuft.
+- `docker compose exec ade bash` oeffnet eine Shell im laufenden Container.
 - `dotnet --info` zeigt, ob das .NET SDK im Container installiert und nutzbar ist.
 - `node --version` und `npm --version` pruefen die Node.js-Werkzeuge, die OpenCode braucht.
 - `opencode --version` prueft die installierte OpenCode CLI.
@@ -645,7 +645,7 @@ Was die Befehle bedeuten:
 
 Erwartetes Ergebnis:
 
-- `docker compose ps` zeigt den Service `opencode` als laufend.
+- `docker compose ps` zeigt den Service `ade` als laufend.
 - `dotnet --info` gibt SDK-Informationen aus und endet ohne Fehler.
 - `opencode --version` und `specify version` geben Versionsinformationen aus.
 - `ls /rider-projects` zeigt die Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthaelt.
@@ -949,7 +949,7 @@ Build artifacts are written to the Linux volume `/dotnet-build` instead of `/rid
 Open a shell inside the container:
 
 ```bash
-docker compose exec opencode bash
+docker compose exec ade bash
 ```
 
 Check the .NET version:
@@ -985,7 +985,7 @@ After a change to `compose.yml`, recreate the container:
 ```bash
 cd /Users/thorstenhindermann/ade-dev-sandbox
 docker compose up -d --force-recreate
-docker compose exec opencode bash
+docker compose exec ade bash
 ```
 
 An ASP.NET app must listen on `0.0.0.0` inside the container. `localhost` is not enough because `localhost` inside the container only means the container itself.
@@ -1276,7 +1276,7 @@ docker compose config --no-interpolate
 docker compose build --pull
 docker compose up -d
 docker compose ps
-docker compose exec opencode bash
+docker compose exec ade bash
 ```
 
 Then check this inside the container:
@@ -1296,8 +1296,8 @@ What the commands mean:
 - `docker compose config --no-interpolate` checks the Compose file without expanding variable values and secrets in the output.
 - `docker compose build --pull` builds the image and tries to download current base images first.
 - `docker compose up -d` starts the container in the background.
-- `docker compose ps` shows whether the `opencode` service is running.
-- `docker compose exec opencode bash` opens a shell in the running container.
+- `docker compose ps` shows whether the `ade` service is running.
+- `docker compose exec ade bash` opens a shell in the running container.
 - `dotnet --info` shows whether the .NET SDK is installed and usable inside the container.
 - `node --version` and `npm --version` check the Node.js tools required by OpenCode.
 - `opencode --version` checks the installed OpenCode CLI.

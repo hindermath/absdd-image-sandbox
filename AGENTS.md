@@ -31,10 +31,10 @@ Validates the Compose file without printing values from `opencode.env`.
 docker compose up -d
 ```
 
-Builds the image if needed and starts the `opencode` container.
+Builds the image if needed and starts the `ade` container.
 
 ```bash
-docker compose exec opencode bash
+docker compose exec ade bash
 ```
 
 Opens a shell inside the running container.
