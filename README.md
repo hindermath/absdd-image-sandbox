@@ -5,6 +5,7 @@
 - [Deutsch](#deutsch)
   - [Zielgruppe und Zweck](#zielgruppe-und-zweck)
   - [Grundidee](#grundidee)
+  - [Begriffe und Ausfuehrungsort](#begriffe-und-ausfuehrungsort)
   - [Projektstruktur](#projektstruktur)
   - [Docker unter Ubuntu oder WSL2 installieren](#docker-unter-ubuntu-oder-wsl2-installieren)
   - [Docker-Desktop-Profile fuer macOS und Windows](#docker-desktop-profile-fuer-macos-und-windows)
@@ -29,6 +30,7 @@
 - [English](#english)
   - [Target group and purpose](#target-group-and-purpose)
   - [Basic idea](#basic-idea)
+  - [Terms and command location](#terms-and-command-location)
   - [Project structure](#project-structure)
   - [Install Docker on Ubuntu or WSL2](#install-docker-on-ubuntu-or-wsl2)
   - [Docker Desktop profiles for macOS and Windows](#docker-desktop-profiles-for-macos-and-windows)
@@ -55,7 +57,7 @@
 
 ### Zielgruppe und Zweck
 
-Diese Anleitung richtet sich an Auszubildende der Fachinformatik ab dem 1. Lehrjahr. Sie erklaert nicht nur die Befehle, sondern auch kurz, warum sie gebraucht werden.
+Diese Anleitung richtet sich an angehende Fachinformatiker:innen ab dem 1. Lehrjahr. Sie erklaert nicht nur die Befehle, sondern auch kurz, warum sie gebraucht werden.
 
 Dieses Repository stellt eine Docker-Umgebung fuer Opencode, .NET und C# bereit. Die Umgebung laeuft mit Docker Engine unter Linux/WSL2 und mit Docker Desktop unter macOS oder Windows. Projekte koennen weiter mit JetBrains Rider auf dem Host bearbeitet werden.
 
@@ -67,11 +69,24 @@ Der Container bleibt im Hintergrund aktiv. Danach kann eine Shell im Container g
 
 Die Shell laeuft im Container als Linux-Benutzer `adedev`. Deshalb beginnt die Promptzeile nach dem Einstieg zum Beispiel mit `adedev@...`. Der Compose-Service heisst `ade`; das OpenCode-Programm heisst weiterhin `opencode`.
 
+### Begriffe und Ausfuehrungsort
+
+Viele Fehler entstehen, wenn ein Befehl am falschen Ort ausgefuehrt wird. Diese Anleitung trennt deshalb zwischen Host und Container.
+
+- Host: der eigene Rechner oder die WSL2-Umgebung. Dort werden `docker compose ...`-Befehle ausgefuehrt.
+- Container: die Linux-Umgebung, die Docker aus dem Image startet. Dort werden Werkzeuge wie `dotnet`, `java`, `mvn`, `opencode`, `codex` und `specify` ausgefuehrt.
+- Image: die Vorlage fuer den Container. Nach Aenderungen am `Dockerfile` muss das Image neu gebaut werden.
+- Bind-Mount: ein Host-Verzeichnis wird direkt in den Container eingebunden, zum Beispiel `/rider-projects` oder `/java-projects`.
+- Volume: ein von Docker verwalteter Speicherbereich, zum Beispiel fuer `/dotnet-build` oder lokale Agenten-Daten.
+- Service: der Name in `compose.yml`. In diesem Repository heisst der Service `ade`.
+
+Wenn der Prompt mit `adedev@...` beginnt, befindet sich die Shell im Container. Wenn der Prompt den normalen Rechnernamen oder die WSL2-Shell zeigt, befindet sie sich auf dem Host.
+
 ### Projektstruktur
 
 - `Dockerfile`: beschreibt das Container-Image. Es nutzt `mcr.microsoft.com/dotnet/sdk:latest`.
 - `compose.yml`: beschreibt den Service `ade`, Volumes und Build-Regeln.
-- `.env.example`: Vorlage fuer den plattformabhaengigen `RIDER_PROJECTS_DIR`-Mount.
+- `.env.example`: Vorlage fuer die plattformabhaengigen Mounts `RIDER_PROJECTS_DIR` und `JAVA_PROJECTS_DIR`.
 - `opencode.jsonc`: enthaelt Provider, Modelle und Agenten fuer Opencode. JSONC erlaubt Kommentare und ist deshalb fuer Lernzwecke besser lesbar.
 - `opencode.env.example`: Vorlage fuer die lokale Datei `opencode.env`.
 - `workspace/`: lokales Arbeitsverzeichnis, im Container unter `/workspace`.
@@ -122,7 +137,7 @@ docker compose config --no-interpolate
 
 ### Docker-Desktop-Profile fuer macOS und Windows
 
-Wenn Docker Desktop verwendet wird, bleibt der Container ein Linux-Container. Der Unterschied liegt nur im Host-Pfad, der nach `/rider-projects` eingebunden wird.
+Wenn Docker Desktop verwendet wird, bleibt der Container ein Linux-Container. Der Unterschied liegt nur in den Host-Pfaden, die nach `/rider-projects` und `/java-projects` eingebunden werden.
 
 Docker Desktop kann fuer private Nutzung, Ausbildung, Lernen, kleine Unternehmen und nicht-kommerzielle Open-Source-Projekte kostenlos genutzt werden. Kommerzielle Nutzung in groesseren Unternehmen mit mehr als 250 Mitarbeitenden oder mehr als 10 Mio. USD Jahresumsatz benoetigt ein bezahltes Docker-Abo. Im Zweifel gelten die aktuellen Docker Subscription Service Agreement Bedingungen.
 
@@ -181,6 +196,8 @@ JAVA_PROJECTS_DIR=/mnt/c/Users/thinder/JavaProjects
 Wenn kein separates Rider- oder Java-Projektverzeichnis gebraucht wird, kann der Standard aus `.env.example` bleiben. Dann zeigt `/rider-projects` auf `workspace/` und `/java-projects` auf `java-projects/`.
 
 Die Datei `.env` enthaelt keine Secrets, ist aber lokal und plattformabhaengig. Sie wird nicht committed. Der API-Key bleibt getrennt in `opencode.env`.
+
+Hinweis fuer Auszubildende: In `.env` stehen nur Pfade. In `opencode.env` steht ein Secret. Diese Trennung ist wichtig, damit ein API-Key nicht versehentlich in Git landet.
 
 Konfiguration pruefen:
 
@@ -687,10 +704,10 @@ Der Test besteht aus zwei Teilen:
 1. Auf dem Host wird Docker Compose geprueft, das Image gebaut und der Container gestartet.
 2. Im Container wird geprueft, ob .NET, OpenCode, Spec Kit und die gemounteten Verzeichnisse funktionieren.
 
-Auf dem Host ausfuehren:
+Auf dem Host ausfuehren. Der erste Befehl wechselt in dieses Repository; den Pfad bei Bedarf anpassen:
 
 ```bash
-cd /Users/thorstenhindermann/ade-dev-sandbox
+cd /home/thinder/ade-dev-sandbox
 docker compose config --no-interpolate
 docker compose build --pull
 docker compose up -d
@@ -814,11 +831,24 @@ The container stays active in the background. You can then open a shell inside i
 
 The shell runs as the Linux user `adedev` inside the container. That is why the prompt starts with something like `adedev@...` after entering the container. The Compose service is named `ade`; the OpenCode command is still named `opencode`.
 
+### Terms and command location
+
+Many errors happen when a command is run in the wrong place. This guide therefore separates host and container.
+
+- Host: your computer or the WSL2 environment. Run `docker compose ...` commands there.
+- Container: the Linux environment started by Docker from the image. Run tools such as `dotnet`, `java`, `mvn`, `opencode`, `codex`, and `specify` there.
+- Image: the template for the container. After changes to the `Dockerfile`, rebuild the image.
+- Bind mount: a host directory is mounted directly into the container, for example `/rider-projects` or `/java-projects`.
+- Volume: storage managed by Docker, for example for `/dotnet-build` or local agent data.
+- Service: the name in `compose.yml`. In this repository, the service is named `ade`.
+
+If the prompt starts with `adedev@...`, the shell is inside the container. If the prompt shows the normal computer name or the WSL2 shell, the shell is on the host.
+
 ### Project structure
 
 - `Dockerfile`: describes the container image. It uses `mcr.microsoft.com/dotnet/sdk:latest`.
 - `compose.yml`: describes the `ade` service, volumes, and build rules.
-- `.env.example`: template for the platform-specific `RIDER_PROJECTS_DIR` mount.
+- `.env.example`: template for the platform-specific mounts `RIDER_PROJECTS_DIR` and `JAVA_PROJECTS_DIR`.
 - `opencode.jsonc`: contains provider, model, and agent settings for Opencode. JSONC allows comments and is easier to read for learning.
 - `opencode.env.example`: template for the local `opencode.env` file.
 - `workspace/`: local working directory, mounted as `/workspace`.
@@ -869,7 +899,7 @@ docker compose config --no-interpolate
 
 ### Docker Desktop profiles for macOS and Windows
 
-When Docker Desktop is used, the container is still a Linux container. Only the host path mounted into `/rider-projects` changes.
+When Docker Desktop is used, the container is still a Linux container. Only the host paths mounted into `/rider-projects` and `/java-projects` change.
 
 Docker Desktop can be used free of charge for personal use, education, learning, small businesses, and non-commercial open source projects. Commercial use in larger companies with more than 250 employees or more than USD 10 million in annual revenue requires a paid Docker subscription. When in doubt, the current Docker Subscription Service Agreement terms apply.
 
@@ -928,6 +958,8 @@ JAVA_PROJECTS_DIR=/mnt/c/Users/thinder/JavaProjects
 If no separate Rider or Java project directory is needed, keep the default from `.env.example`. Then `/rider-projects` points to `workspace/` and `/java-projects` points to `java-projects/`.
 
 The `.env` file contains no secrets, but it is local and platform-specific. It is not committed. The API key stays separate in `opencode.env`.
+
+Note for apprentices: `.env` only contains paths. `opencode.env` contains a secret. This separation is important so an API key is not accidentally committed to Git.
 
 Check the configuration:
 
@@ -1434,10 +1466,10 @@ The test has two parts:
 1. On the host, Docker Compose is checked, the image is built, and the container is started.
 2. Inside the container, .NET, OpenCode, Spec Kit, and the mounted directories are checked.
 
-Run this on the host:
+Run this on the host. The first command changes into this repository; adjust the path if needed:
 
 ```bash
-cd /Users/thorstenhindermann/ade-dev-sandbox
+cd /home/thinder/ade-dev-sandbox
 docker compose config --no-interpolate
 docker compose build --pull
 docker compose up -d
