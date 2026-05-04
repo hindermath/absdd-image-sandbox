@@ -13,6 +13,8 @@
   - [Container bauen und starten](#container-bauen-und-starten)
   - [Rider-Projekte aus Windows einbinden](#rider-projekte-aus-windows-einbinden)
   - [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen)
+  - [Java-Projekte einbinden](#java-projekte-einbinden)
+  - [Java und Maven im Container nutzen](#java-und-maven-im-container-nutzen)
   - [ASP.NET-Web-App aus Windows erreichen](#aspnet-web-app-aus-windows-erreichen)
   - [Spec Kit verwenden](#spec-kit-verwenden)
   - [Beispiel: ConsoleApp2 mit Opencode und Spec Kit](#beispiel-consoleapp2-mit-opencode-und-spec-kit)
@@ -35,6 +37,8 @@
   - [Build and start the container](#build-and-start-the-container)
   - [Mount Rider projects from Windows](#mount-rider-projects-from-windows)
   - [Use .NET and C# inside the container](#use-net-and-c-inside-the-container)
+  - [Mount Java projects](#mount-java-projects)
+  - [Use Java and Maven inside the container](#use-java-and-maven-inside-the-container)
   - [Reach an ASP.NET web app from Windows](#reach-an-aspnet-web-app-from-windows)
   - [Use Spec Kit](#use-spec-kit)
   - [Example: ConsoleApp2 with Opencode and Spec Kit](#example-consoleapp2-with-opencode-and-spec-kit)
@@ -57,7 +61,7 @@ Dieses Repository stellt eine Docker-Umgebung fuer Opencode, .NET und C# bereit.
 
 ### Grundidee
 
-Docker erstellt aus dem `Dockerfile` ein Image. Aus diesem Image startet Docker Compose einen Container. Der Container enthaelt das aktuelle Microsoft .NET SDK, Node.js, npm, Opencode und Codex CLI.
+Docker erstellt aus dem `Dockerfile` ein Image. Aus diesem Image startet Docker Compose einen Container. Der Container enthaelt das aktuelle Microsoft .NET SDK, Java JDK 21, Maven, Node.js, npm, Opencode und Codex CLI.
 
 Der Container bleibt im Hintergrund aktiv. Danach kann eine Shell im Container geoeffnet werden. Dort koennen Befehle wie `dotnet`, `opencode`, `codex` oder `ls` ausgefuehrt werden.
 
@@ -72,6 +76,8 @@ Die Shell laeuft im Container als Linux-Benutzer `adedev`. Deshalb beginnt die P
 - `opencode.env.example`: Vorlage fuer die lokale Datei `opencode.env`.
 - `workspace/`: lokales Arbeitsverzeichnis, im Container unter `/workspace`.
 - `RIDER_PROJECTS_DIR`: Host-Verzeichnis fuer Rider-Projekte, im Container unter `/rider-projects`.
+- `JAVA_PROJECTS_DIR`: Host-Verzeichnis fuer Java-Projekte, im Container unter `/java-projects`.
+- `java-projects/`: lokales Fallback-Verzeichnis fuer Java-Projekte, wenn `JAVA_PROJECTS_DIR` nicht gesetzt ist.
 - `dotnet/ContainerBuild.props`: leitet .NET-Build-Artefakte fuer Rider-Projekte in das Container-Volume `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: filtert eine bekannte .NET-Workload-Verifikationsmeldung aus der Ausgabe.
 - `spec-kit/patch-specify-cli.py`: passt Spec Kit fuer Windows-/WSL-Bind-Mounts an.
@@ -149,27 +155,30 @@ Zuerst die Compose-Umgebungsdatei anlegen:
 cp .env.example .env
 ```
 
-Danach `RIDER_PROJECTS_DIR` passend zur Plattform setzen.
+Danach `RIDER_PROJECTS_DIR` und `JAVA_PROJECTS_DIR` passend zur Plattform setzen.
 
 macOS:
 
 ```text
 RIDER_PROJECTS_DIR=/Users/thorstenhindermann/RiderProjects
+JAVA_PROJECTS_DIR=/Users/thorstenhindermann/JavaProjects
 ```
 
 Windows mit Docker Desktop aus PowerShell:
 
 ```text
 RIDER_PROJECTS_DIR=C:\Users\thinder\RiderProjects
+JAVA_PROJECTS_DIR=C:\Users\thinder\JavaProjects
 ```
 
 Windows mit Docker Desktop aus Ubuntu/WSL2:
 
 ```text
 RIDER_PROJECTS_DIR=/mnt/c/Users/thinder/RiderProjects
+JAVA_PROJECTS_DIR=/mnt/c/Users/thinder/JavaProjects
 ```
 
-Wenn kein separates Rider-Projektverzeichnis gebraucht wird, kann der Standard aus `.env.example` bleiben. Dann zeigt `/rider-projects` wie `/workspace` auf das lokale `workspace/`-Verzeichnis.
+Wenn kein separates Rider- oder Java-Projektverzeichnis gebraucht wird, kann der Standard aus `.env.example` bleiben. Dann zeigt `/rider-projects` auf `workspace/` und `/java-projects` auf `java-projects/`.
 
 Die Datei `.env` enthaelt keine Secrets, ist aber lokal und plattformabhaengig. Sie wird nicht committed. Der API-Key bleibt getrennt in `opencode.env`.
 
@@ -313,6 +322,52 @@ dotnet run
 `dotnet new console` erstellt eine einfache Konsolenanwendung. `dotnet run` baut und startet das Projekt. Die Dateien liegen auf dem Host im `RIDER_PROJECTS_DIR`-Verzeichnis und koennen dort mit Rider geoeffnet werden.
 
 Wenn ein Projekt bereits fehlerhafte `bin`- oder `obj`-Ordner auf dem Windows-Mount hat, koennen diese in Rider oder im Terminal geloescht werden. Danach erneut im Container bauen.
+
+### Java-Projekte einbinden
+
+Das Host-Verzeichnis fuer Java-Projekte wird ueber `JAVA_PROJECTS_DIR` gesetzt. In dieser WSL2-Umgebung ist der lokale Wert:
+
+```text
+JAVA_PROJECTS_DIR=/mnt/c/Users/thinder/JavaProjects
+```
+
+Das Verzeichnis wird im Container hier eingebunden:
+
+```text
+/java-projects
+```
+
+So bleiben .NET-/Rider-Projekte und Java-Projekte getrennt:
+
+- `/rider-projects`: .NET-, C#- und Rider-Projekte.
+- `/java-projects`: Java-, Maven- und Spring-Boot-Projekte.
+
+### Java und Maven im Container nutzen
+
+Java-Version pruefen:
+
+```bash
+java --version
+javac --version
+mvn --version
+```
+
+Beispiel fuer ein neues Maven-Projekt:
+
+```bash
+cd /java-projects
+mvn archetype:generate -DgroupId=de.example -DartifactId=demo-java -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+cd demo-java
+mvn test
+```
+
+Spring-Boot-Projekte werden normalerweise ueber Maven oder einen Projekt-Wrapper gestartet, zum Beispiel:
+
+```bash
+mvn spring-boot:run
+```
+
+Gradle und Spring Boot CLI sind absichtlich nicht global installiert. Viele Unternehmensprojekte bringen ihren eigenen Maven- oder Gradle-Wrapper mit. Das ist reproduzierbarer als globale Werkzeugversionen.
 
 ### ASP.NET-Web-App vom Host erreichen
 
@@ -512,6 +567,8 @@ Der API-Key wird aus `GWDG_API_KEY` gelesen. Das Standardmodell ist:
 chat-ai/glm-4.7
 ```
 
+Java JDK 21 und Maven werden beim Image-Build aus den Ubuntu-Paketquellen installiert. Sie sind fuer Java-Grundlagen, Maven-Projekte und Spring-Boot-Projekte vorbereitet.
+
 Opencode und Codex CLI werden beim Image-Build mit der neuesten npm-Version installiert:
 
 ```dockerfile
@@ -645,6 +702,9 @@ Danach im Container pruefen:
 
 ```bash
 dotnet --info
+java --version
+javac --version
+mvn --version
 node --version
 npm --version
 opencode --version
@@ -652,6 +712,7 @@ codex --version
 specify version
 ls /workspace
 ls /rider-projects
+ls /java-projects
 ```
 
 Was die Befehle bedeuten:
@@ -662,19 +723,23 @@ Was die Befehle bedeuten:
 - `docker compose ps` zeigt, ob der Service `ade` laeuft.
 - `docker compose exec ade bash` oeffnet eine Shell im laufenden Container.
 - `dotnet --info` zeigt, ob das .NET SDK im Container installiert und nutzbar ist.
+- `java --version`, `javac --version` und `mvn --version` pruefen JDK und Maven.
 - `node --version` und `npm --version` pruefen die Node.js-Werkzeuge, die OpenCode und Codex CLI brauchen.
 - `opencode --version` prueft die installierte OpenCode CLI.
 - `codex --version` prueft die installierte Codex CLI.
 - `specify version` prueft die installierte Spec Kit CLI.
 - `ls /workspace` prueft das lokale Projekt-Workspace-Mount.
 - `ls /rider-projects` prueft den ueber `RIDER_PROJECTS_DIR` konfigurierten Host-Mount.
+- `ls /java-projects` prueft den ueber `JAVA_PROJECTS_DIR` konfigurierten Host-Mount.
 
 Erwartetes Ergebnis:
 
 - `docker compose ps` zeigt den Service `ade` als laufend.
 - `dotnet --info` gibt SDK-Informationen aus und endet ohne Fehler.
+- `java --version` und `mvn --version` geben Versionsinformationen aus.
 - `opencode --version`, `codex --version` und `specify version` geben Versionsinformationen aus.
 - `ls /rider-projects` zeigt die Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthaelt.
+- `ls /java-projects` zeigt Java-Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthaelt.
 
 macOS-Hinweis: Wenn Docker Desktop gerade erst installiert wurde, Docker Desktop zuerst einmal starten und warten, bis die Engine laeuft. Danach funktionieren `docker --version`, `docker compose version` und `docker info` im Terminal.
 
@@ -743,7 +808,7 @@ This repository provides a Docker environment for Opencode, .NET, and C#. It run
 
 ### Basic idea
 
-Docker builds an image from the `Dockerfile`. Docker Compose starts a container from that image. The container includes the current Microsoft .NET SDK, Node.js, npm, Opencode, and Codex CLI.
+Docker builds an image from the `Dockerfile`. Docker Compose starts a container from that image. The container includes the current Microsoft .NET SDK, Java JDK 21, Maven, Node.js, npm, Opencode, and Codex CLI.
 
 The container stays active in the background. You can then open a shell inside it and run commands such as `dotnet`, `opencode`, `codex`, or `ls`.
 
@@ -758,6 +823,8 @@ The shell runs as the Linux user `adedev` inside the container. That is why the 
 - `opencode.env.example`: template for the local `opencode.env` file.
 - `workspace/`: local working directory, mounted as `/workspace`.
 - `RIDER_PROJECTS_DIR`: host directory for Rider projects, mounted as `/rider-projects`.
+- `JAVA_PROJECTS_DIR`: host directory for Java projects, mounted as `/java-projects`.
+- `java-projects/`: local fallback directory for Java projects when `JAVA_PROJECTS_DIR` is not set.
 - `dotnet/ContainerBuild.props`: redirects .NET build artifacts for Rider projects to the container volume `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: filters a known .NET workload verification message from command output.
 - `spec-kit/patch-specify-cli.py`: adapts Spec Kit for Windows/WSL bind mounts.
@@ -835,27 +902,30 @@ First create the Compose environment file:
 cp .env.example .env
 ```
 
-Then set `RIDER_PROJECTS_DIR` for the current platform.
+Then set `RIDER_PROJECTS_DIR` and `JAVA_PROJECTS_DIR` for the current platform.
 
 macOS:
 
 ```text
 RIDER_PROJECTS_DIR=/Users/thorstenhindermann/RiderProjects
+JAVA_PROJECTS_DIR=/Users/thorstenhindermann/JavaProjects
 ```
 
 Windows with Docker Desktop from PowerShell:
 
 ```text
 RIDER_PROJECTS_DIR=C:\Users\thinder\RiderProjects
+JAVA_PROJECTS_DIR=C:\Users\thinder\JavaProjects
 ```
 
 Windows with Docker Desktop from Ubuntu/WSL2:
 
 ```text
 RIDER_PROJECTS_DIR=/mnt/c/Users/thinder/RiderProjects
+JAVA_PROJECTS_DIR=/mnt/c/Users/thinder/JavaProjects
 ```
 
-If no separate Rider project directory is needed, keep the default from `.env.example`. Then `/rider-projects` points to the local `workspace/` directory, just like `/workspace`.
+If no separate Rider or Java project directory is needed, keep the default from `.env.example`. Then `/rider-projects` points to `workspace/` and `/java-projects` points to `java-projects/`.
 
 The `.env` file contains no secrets, but it is local and platform-specific. It is not committed. The API key stays separate in `opencode.env`.
 
@@ -999,6 +1069,52 @@ dotnet run
 `dotnet new console` creates a simple console application. `dotnet run` builds and starts the project. The files are stored on the host in the `RIDER_PROJECTS_DIR` directory and can be opened there with Rider.
 
 If a project already has broken `bin` or `obj` folders on the Windows mount, delete them in Rider or in the terminal. Then build again inside the container.
+
+### Mount Java Projects
+
+The host directory for Java projects is set through `JAVA_PROJECTS_DIR`. In this WSL2 environment, the local value is:
+
+```text
+JAVA_PROJECTS_DIR=/mnt/c/Users/thinder/JavaProjects
+```
+
+The directory is mounted inside the container here:
+
+```text
+/java-projects
+```
+
+This keeps .NET/Rider projects and Java projects separated:
+
+- `/rider-projects`: .NET, C#, and Rider projects.
+- `/java-projects`: Java, Maven, and Spring Boot projects.
+
+### Use Java and Maven Inside the Container
+
+Check Java versions:
+
+```bash
+java --version
+javac --version
+mvn --version
+```
+
+Example for a new Maven project:
+
+```bash
+cd /java-projects
+mvn archetype:generate -DgroupId=com.example -DartifactId=demo-java -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+cd demo-java
+mvn test
+```
+
+Spring Boot projects are normally started through Maven or a project wrapper, for example:
+
+```bash
+mvn spring-boot:run
+```
+
+Gradle and Spring Boot CLI are intentionally not installed globally. Many company projects include their own Maven or Gradle wrapper. This is more reproducible than global tool versions.
 
 ### Reach an ASP.NET web app from the host
 
@@ -1198,6 +1314,8 @@ The API key is read from `GWDG_API_KEY`. The default model is:
 chat-ai/glm-4.7
 ```
 
+Java JDK 21 and Maven are installed during the image build from the Ubuntu package sources. They prepare the container for Java basics, Maven projects, and Spring Boot projects.
+
 Opencode and Codex CLI are installed during the image build with the newest npm version:
 
 ```dockerfile
@@ -1331,6 +1449,9 @@ Then check this inside the container:
 
 ```bash
 dotnet --info
+java --version
+javac --version
+mvn --version
 node --version
 npm --version
 opencode --version
@@ -1338,6 +1459,7 @@ codex --version
 specify version
 ls /workspace
 ls /rider-projects
+ls /java-projects
 ```
 
 What the commands mean:
@@ -1348,19 +1470,23 @@ What the commands mean:
 - `docker compose ps` shows whether the `ade` service is running.
 - `docker compose exec ade bash` opens a shell in the running container.
 - `dotnet --info` shows whether the .NET SDK is installed and usable inside the container.
+- `java --version`, `javac --version`, and `mvn --version` check JDK and Maven.
 - `node --version` and `npm --version` check the Node.js tools required by OpenCode and Codex CLI.
 - `opencode --version` checks the installed OpenCode CLI.
 - `codex --version` checks the installed Codex CLI.
 - `specify version` checks the installed Spec Kit CLI.
 - `ls /workspace` checks the local project workspace mount.
 - `ls /rider-projects` checks the host mount configured through `RIDER_PROJECTS_DIR`.
+- `ls /java-projects` checks the host mount configured through `JAVA_PROJECTS_DIR`.
 
 Expected result:
 
 - `docker compose ps` shows the `ade` service as running.
 - `dotnet --info` prints SDK information and exits without an error.
+- `java --version` and `mvn --version` print version information.
 - `opencode --version`, `codex --version`, and `specify version` print version information.
 - `ls /rider-projects` shows the projects from the host directory or stays empty if that directory does not contain projects yet.
+- `ls /java-projects` shows Java projects from the host directory or stays empty if that directory does not contain projects yet.
 
 macOS note: If Docker Desktop was just installed, start Docker Desktop once and wait until the engine is running. After that, `docker --version`, `docker compose version`, and `docker info` work in the terminal.
 

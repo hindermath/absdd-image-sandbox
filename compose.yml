@@ -8,6 +8,9 @@ services:
       - type: bind
         source: ${RIDER_PROJECTS_DIR:-./workspace}
         target: /rider-projects
+      - type: bind
+        source: ${JAVA_PROJECTS_DIR:-./java-projects}
+        target: /java-projects
       - ./dotnet/ContainerBuild.props:/dotnet-config/ContainerBuild.props:ro
       - dotnet_build:/dotnet-build
       - opencode_data:/home/adedev/.local/share/opencode

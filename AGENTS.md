@@ -4,7 +4,7 @@
 
 This repository contains a small Docker-based Opencode, .NET, and Spec Kit environment, not an application codebase.
 
-- `Dockerfile`: builds from the official Microsoft .NET SDK `latest` image and installs `opencode-ai@latest`, `@openai/codex@latest`, `uv`, and `specify-cli`.
+- `Dockerfile`: builds from the official Microsoft .NET SDK `latest` image and installs Java JDK 21, Maven, `opencode-ai@latest`, `@openai/codex@latest`, `uv`, and `specify-cli`.
 - `compose.yml`: defines the `ade` service, pulls newer build base images, and mounts local state.
 - The container runs commands as the Linux user `adedev`; keep home-directory paths under `/home/adedev`.
 - `opencode.jsonc`: configures the `chat-ai` provider, models, and agents. Keep comments useful for first-year IT specialist apprentices.
@@ -12,6 +12,8 @@ This repository contains a small Docker-based Opencode, .NET, and Spec Kit envir
 - `opencode.env.example`: documents the required `GWDG_API_KEY` variable.
 - `workspace/`: mounted into the container as `/workspace`; place working project files there.
 - `RIDER_PROJECTS_DIR`: host directory mounted into the container as `/rider-projects` for Rider projects.
+- `JAVA_PROJECTS_DIR`: host directory mounted into the container as `/java-projects` for Java, Maven, and Spring Boot projects.
+- `java-projects/`: local fallback mount for `/java-projects` when `JAVA_PROJECTS_DIR` is not set.
 - `dotnet/ContainerBuild.props`: mounted into `/dotnet-config` and loaded through `DirectoryBuildPropsPath` to redirect .NET build artifacts to `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: installed as `/usr/local/bin/dotnet` to filter one known workload verification noise line while preserving real output and exit codes.
 - `spec-kit/patch-specify-cli.py`: patches Spec Kit copy behavior so initialization works better on Windows/WSL bind mounts.
@@ -86,6 +88,8 @@ The `--pull` flag is important because the Dockerfile uses `mcr.microsoft.com/do
 Do not require a real API key for validation unless the change explicitly affects live Opencode usage.
 
 For .NET projects under `/rider-projects`, keep `bin`, `obj`, and AppHost output off the Windows bind mount. The mounted `ContainerBuild.props` sends build output to the `dotnet_build` volume at `/dotnet-build` and imports repository-specific `Directory.Build.props` files when present.
+
+For Java projects, use `/java-projects` and prefer project-local Maven or Gradle wrappers when a repository provides them. The container includes JDK 21 and Maven for baseline Java and Spring Boot development. Gradle and Spring Boot CLI are not installed globally unless this repository is intentionally extended.
 
 ASP.NET apps must bind to `0.0.0.0` inside the container to be reachable from Windows. Compose publishes `127.0.0.1:5100-5199:5100-5199`; keep sample web app ports in that range unless the Compose file is updated.
 

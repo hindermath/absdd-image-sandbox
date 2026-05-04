@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:latest
 
 RUN apt-get -y update \
-    && apt-get -y install --no-install-recommends ca-certificates curl git \
+    && apt-get -y install --no-install-recommends ca-certificates curl git openjdk-21-jdk-headless maven \
     && curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
     && apt-get -y install --no-install-recommends nodejs \
     && rm -rf /var/lib/apt/lists/*
