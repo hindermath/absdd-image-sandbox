@@ -7,7 +7,7 @@ RUN apt-get -y update \
     && rm -rf /var/lib/apt/lists/*
 RUN dotnet workload config --update-mode manifests \
     && dotnet workload update
-RUN npm i -g opencode-ai@latest
+RUN npm i -g opencode-ai@latest @openai/codex@latest
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
     && install -m 0755 /root/.local/bin/uv /usr/local/bin/uv \
     && install -m 0755 /root/.local/bin/uvx /usr/local/bin/uvx
@@ -22,6 +22,7 @@ ENV PATH="/home/adedev/.local/bin:${PATH}"
 RUN uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.8.3 \
     && python3 /usr/local/bin/patch-specify-cli.py
 RUN mkdir -p /home/adedev/.local/share/opencode
+RUN mkdir -p /home/adedev/.codex
 COPY --chown=adedev:adedev ./opencode.jsonc /home/adedev/.config/opencode/opencode.jsonc
 
 CMD ["/bin/bash", "-c", "while :; do sleep 1; done;"]

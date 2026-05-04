@@ -18,6 +18,7 @@
   - [Beispiel: ConsoleApp2 mit Opencode und Spec Kit](#beispiel-consoleapp2-mit-opencode-und-spec-kit)
   - [Pflichtablauf fuer ein SDD-Feature](#pflichtablauf-fuer-ein-sdd-feature)
   - [Opencode verwenden](#opencode-verwenden)
+  - [Codex CLI verwenden](#codex-cli-verwenden)
   - [Konfiguration](#konfiguration)
   - [Aufraeumen](#aufraeumen)
   - [Haeufige Probleme](#haeufige-probleme)
@@ -39,6 +40,7 @@
   - [Example: ConsoleApp2 with Opencode and Spec Kit](#example-consoleapp2-with-opencode-and-spec-kit)
   - [Required flow for an SDD feature](#required-flow-for-an-sdd-feature)
   - [Use Opencode](#use-opencode)
+  - [Use Codex CLI](#use-codex-cli)
   - [Configuration](#configuration)
   - [Clean up](#clean-up)
   - [Common problems](#common-problems)
@@ -55,9 +57,9 @@ Dieses Repository stellt eine Docker-Umgebung fuer Opencode, .NET und C# bereit.
 
 ### Grundidee
 
-Docker erstellt aus dem `Dockerfile` ein Image. Aus diesem Image startet Docker Compose einen Container. Der Container enthaelt das aktuelle Microsoft .NET SDK, Node.js, npm und Opencode.
+Docker erstellt aus dem `Dockerfile` ein Image. Aus diesem Image startet Docker Compose einen Container. Der Container enthaelt das aktuelle Microsoft .NET SDK, Node.js, npm, Opencode und Codex CLI.
 
-Der Container bleibt im Hintergrund aktiv. Danach kann eine Shell im Container geoeffnet werden. Dort koennen Befehle wie `dotnet`, `opencode` oder `ls` ausgefuehrt werden.
+Der Container bleibt im Hintergrund aktiv. Danach kann eine Shell im Container geoeffnet werden. Dort koennen Befehle wie `dotnet`, `opencode`, `codex` oder `ls` ausgefuehrt werden.
 
 Die Shell laeuft im Container als Linux-Benutzer `adedev`. Deshalb beginnt die Promptzeile nach dem Einstieg zum Beispiel mit `adedev@...`. Der Compose-Service heisst `ade`; das OpenCode-Programm heisst weiterhin `opencode`.
 
@@ -73,6 +75,7 @@ Die Shell laeuft im Container als Linux-Benutzer `adedev`. Deshalb beginnt die P
 - `dotnet/ContainerBuild.props`: leitet .NET-Build-Artefakte fuer Rider-Projekte in das Container-Volume `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: filtert eine bekannte .NET-Workload-Verifikationsmeldung aus der Ausgabe.
 - `spec-kit/patch-specify-cli.py`: passt Spec Kit fuer Windows-/WSL-Bind-Mounts an.
+- `codex_data`: Docker-Volume fuer Codex CLI-Daten unter `/home/adedev/.codex`.
 - `AGENTS.md`: Regeln fuer KI-Agenten wie Opencode oder Codex.
 
 ### Docker unter Ubuntu oder WSL2 installieren
@@ -478,6 +481,23 @@ opencode
 
 Der Container startet Opencode nicht automatisch. Das ist Absicht. So kann zuerst entschieden werden, in welchem Projektverzeichnis gearbeitet wird.
 
+### Codex CLI verwenden
+
+Codex CLI ist ebenfalls im Container installiert:
+
+```bash
+codex --version
+```
+
+Codex startet nicht automatisch. Fuer ein Projekt zuerst in das Projektverzeichnis wechseln und dann Codex starten:
+
+```bash
+cd /rider-projects/MeinProjekt
+codex
+```
+
+Lokale Codex-Daten liegen im Docker-Volume `codex_data` unter `/home/adedev/.codex`. Dieses Volume ist nicht Teil des Git-Repositories. Zugangsdaten und private Sitzungsdaten duerfen nicht in Projektordner kopiert oder committed werden.
+
 ### Konfiguration
 
 `opencode.jsonc` nutzt den Provider `chat-ai` mit dieser Basis-URL:
@@ -492,11 +512,13 @@ Der API-Key wird aus `GWDG_API_KEY` gelesen. Das Standardmodell ist:
 chat-ai/glm-4.7
 ```
 
-Opencode wird beim Image-Build mit der neuesten npm-Version installiert:
+Opencode und Codex CLI werden beim Image-Build mit der neuesten npm-Version installiert:
 
 ```dockerfile
-RUN npm i -g opencode-ai@latest
+RUN npm i -g opencode-ai@latest @openai/codex@latest
 ```
+
+Codex CLI speichert lokale Daten im Docker-Volume `codex_data`. Dieses Volume wird im Container nach `/home/adedev/.codex` eingebunden. Dadurch bleiben Codex-Daten zwischen Container-Neustarts erhalten, ohne dass sie in das Git-Repository geschrieben werden.
 
 Spec Kit wird beim Image-Build mit `uv` installiert. Dafuer enthaelt das Image auch `git`, `curl` und `ca-certificates`.
 
@@ -626,6 +648,7 @@ dotnet --info
 node --version
 npm --version
 opencode --version
+codex --version
 specify version
 ls /workspace
 ls /rider-projects
@@ -639,8 +662,9 @@ Was die Befehle bedeuten:
 - `docker compose ps` zeigt, ob der Service `ade` laeuft.
 - `docker compose exec ade bash` oeffnet eine Shell im laufenden Container.
 - `dotnet --info` zeigt, ob das .NET SDK im Container installiert und nutzbar ist.
-- `node --version` und `npm --version` pruefen die Node.js-Werkzeuge, die OpenCode braucht.
+- `node --version` und `npm --version` pruefen die Node.js-Werkzeuge, die OpenCode und Codex CLI brauchen.
 - `opencode --version` prueft die installierte OpenCode CLI.
+- `codex --version` prueft die installierte Codex CLI.
 - `specify version` prueft die installierte Spec Kit CLI.
 - `ls /workspace` prueft das lokale Projekt-Workspace-Mount.
 - `ls /rider-projects` prueft den ueber `RIDER_PROJECTS_DIR` konfigurierten Host-Mount.
@@ -649,7 +673,7 @@ Erwartetes Ergebnis:
 
 - `docker compose ps` zeigt den Service `ade` als laufend.
 - `dotnet --info` gibt SDK-Informationen aus und endet ohne Fehler.
-- `opencode --version` und `specify version` geben Versionsinformationen aus.
+- `opencode --version`, `codex --version` und `specify version` geben Versionsinformationen aus.
 - `ls /rider-projects` zeigt die Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthaelt.
 
 macOS-Hinweis: Wenn Docker Desktop gerade erst installiert wurde, Docker Desktop zuerst einmal starten und warten, bis die Engine laeuft. Danach funktionieren `docker --version`, `docker compose version` und `docker info` im Terminal.
@@ -719,9 +743,9 @@ This repository provides a Docker environment for Opencode, .NET, and C#. It run
 
 ### Basic idea
 
-Docker builds an image from the `Dockerfile`. Docker Compose starts a container from that image. The container includes the current Microsoft .NET SDK, Node.js, npm, and Opencode.
+Docker builds an image from the `Dockerfile`. Docker Compose starts a container from that image. The container includes the current Microsoft .NET SDK, Node.js, npm, Opencode, and Codex CLI.
 
-The container stays active in the background. You can then open a shell inside it and run commands such as `dotnet`, `opencode`, or `ls`.
+The container stays active in the background. You can then open a shell inside it and run commands such as `dotnet`, `opencode`, `codex`, or `ls`.
 
 The shell runs as the Linux user `adedev` inside the container. That is why the prompt starts with something like `adedev@...` after entering the container. The Compose service is named `ade`; the OpenCode command is still named `opencode`.
 
@@ -737,6 +761,7 @@ The shell runs as the Linux user `adedev` inside the container. That is why the 
 - `dotnet/ContainerBuild.props`: redirects .NET build artifacts for Rider projects to the container volume `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: filters a known .NET workload verification message from command output.
 - `spec-kit/patch-specify-cli.py`: adapts Spec Kit for Windows/WSL bind mounts.
+- `codex_data`: Docker volume for Codex CLI data under `/home/adedev/.codex`.
 - `AGENTS.md`: rules for AI agents such as Opencode or Codex.
 
 ### Install Docker on Ubuntu or WSL2
@@ -1142,6 +1167,23 @@ opencode
 
 The container does not start Opencode automatically. This is intentional. It lets you choose the project directory first.
 
+### Use Codex CLI
+
+Codex CLI is also installed inside the container:
+
+```bash
+codex --version
+```
+
+Codex does not start automatically. First switch to the project directory, then start Codex:
+
+```bash
+cd /rider-projects/MyProject
+codex
+```
+
+Local Codex data is stored in the Docker volume `codex_data` under `/home/adedev/.codex`. This volume is not part of the Git repository. Credentials and private session data must not be copied into project folders or committed.
+
 ### Configuration
 
 `opencode.jsonc` uses the `chat-ai` provider with this base URL:
@@ -1156,11 +1198,13 @@ The API key is read from `GWDG_API_KEY`. The default model is:
 chat-ai/glm-4.7
 ```
 
-Opencode is installed during the image build with the newest npm version:
+Opencode and Codex CLI are installed during the image build with the newest npm version:
 
 ```dockerfile
-RUN npm i -g opencode-ai@latest
+RUN npm i -g opencode-ai@latest @openai/codex@latest
 ```
+
+Codex CLI stores local data in the Docker volume `codex_data`. This volume is mounted into the container at `/home/adedev/.codex`. This keeps Codex data across container restarts without writing it into the Git repository.
 
 Spec Kit is installed during the image build with `uv`. For that reason, the image also includes `git`, `curl`, and `ca-certificates`.
 
@@ -1290,6 +1334,7 @@ dotnet --info
 node --version
 npm --version
 opencode --version
+codex --version
 specify version
 ls /workspace
 ls /rider-projects
@@ -1303,8 +1348,9 @@ What the commands mean:
 - `docker compose ps` shows whether the `ade` service is running.
 - `docker compose exec ade bash` opens a shell in the running container.
 - `dotnet --info` shows whether the .NET SDK is installed and usable inside the container.
-- `node --version` and `npm --version` check the Node.js tools required by OpenCode.
+- `node --version` and `npm --version` check the Node.js tools required by OpenCode and Codex CLI.
 - `opencode --version` checks the installed OpenCode CLI.
+- `codex --version` checks the installed Codex CLI.
 - `specify version` checks the installed Spec Kit CLI.
 - `ls /workspace` checks the local project workspace mount.
 - `ls /rider-projects` checks the host mount configured through `RIDER_PROJECTS_DIR`.
@@ -1313,7 +1359,7 @@ Expected result:
 
 - `docker compose ps` shows the `ade` service as running.
 - `dotnet --info` prints SDK information and exits without an error.
-- `opencode --version` and `specify version` print version information.
+- `opencode --version`, `codex --version`, and `specify version` print version information.
 - `ls /rider-projects` shows the projects from the host directory or stays empty if that directory does not contain projects yet.
 
 macOS note: If Docker Desktop was just installed, start Docker Desktop once and wait until the engine is running. After that, `docker --version`, `docker compose version`, and `docker info` work in the terminal.

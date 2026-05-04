@@ -4,10 +4,11 @@
 
 This repository contains a small Docker-based Opencode, .NET, and Spec Kit environment, not an application codebase.
 
-- `Dockerfile`: builds from the official Microsoft .NET SDK `latest` image and installs `opencode-ai@latest`, `uv`, and `specify-cli`.
+- `Dockerfile`: builds from the official Microsoft .NET SDK `latest` image and installs `opencode-ai@latest`, `@openai/codex@latest`, `uv`, and `specify-cli`.
 - `compose.yml`: defines the `ade` service, pulls newer build base images, and mounts local state.
 - The container runs commands as the Linux user `adedev`; keep home-directory paths under `/home/adedev`.
 - `opencode.jsonc`: configures the `chat-ai` provider, models, and agents. Keep comments useful for first-year IT specialist apprentices.
+- Codex CLI state is stored in the `codex_data` Docker volume mounted at `/home/adedev/.codex`; do not replace this with a bind mount to a committed directory.
 - `opencode.env.example`: documents the required `GWDG_API_KEY` variable.
 - `workspace/`: mounted into the container as `/workspace`; place working project files there.
 - `RIDER_PROJECTS_DIR`: host directory mounted into the container as `/rider-projects` for Rider projects.
