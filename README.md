@@ -18,6 +18,7 @@
   - [Java und Maven im Container nutzen](#java-und-maven-im-container-nutzen)
   - [ASP.NET-Web-App aus Windows erreichen](#aspnet-web-app-aus-windows-erreichen)
   - [Spec Kit verwenden](#spec-kit-verwenden)
+  - [Spec-Kit-Governance-Presets installieren](#spec-kit-governance-presets-installieren)
   - [Beispiel: ConsoleApp2 mit Opencode und Spec Kit](#beispiel-consoleapp2-mit-opencode-und-spec-kit)
   - [Pflichtablauf fuer ein SDD-Feature](#pflichtablauf-fuer-ein-sdd-feature)
   - [Opencode verwenden](#opencode-verwenden)
@@ -43,6 +44,7 @@
   - [Use Java and Maven inside the container](#use-java-and-maven-inside-the-container)
   - [Reach an ASP.NET web app from Windows](#reach-an-aspnet-web-app-from-windows)
   - [Use Spec Kit](#use-spec-kit)
+  - [Install Spec Kit governance presets](#install-spec-kit-governance-presets)
   - [Example: ConsoleApp2 with Opencode and Spec Kit](#example-consoleapp2-with-opencode-and-spec-kit)
   - [Required flow for an SDD feature](#required-flow-for-an-sdd-feature)
   - [Use Opencode](#use-opencode)
@@ -472,6 +474,47 @@ Wenn Spec Kit nach dem Script-Typ fragt, fuer diesen Linux-Container `sh` auswae
 Spec Kit weist darauf hin, dass Agentenordner private Daten enthalten koennen. Fuer Projekte unter `/rider-projects` sollte deshalb im jeweiligen Anwendungsrepo geprueft werden, ob `.opencode/` oder sensible Teile davon in die Projekt-`.gitignore` gehoeren.
 
 Spec Kit erzeugt Projektdateien fuer spec-driven development. Diese Dateien gehoeren normalerweise in das jeweilige Anwendungsrepo unter `/rider-projects`, nicht in dieses Docker-Setup-Repo.
+
+### Spec-Kit-Governance-Presets installieren
+
+Nach `specify init` koennen die sechs Governance-Presets in einem Projekt installiert werden. Die Presets erweitern Spec Kit um verbindliche Regeln fuer sichere Entwicklung, Softwarearchitektur, iSAQB/arc42, Barrierefreiheit, Plattform-Paritaet und KI-Agenten-Paritaet.
+
+Fuer C#/.NET-Level-2-Projekte ist in der home-baseline-Umgebung die Standardentscheidung: alle sechs Presets installieren, sofern das Projekt keine begruendete Ausnahme dokumentiert.
+
+Die Befehle werden im jeweiligen Projektverzeichnis im Container ausgefuehrt, also zum Beispiel unter `/rider-projects/TinyPl0`:
+
+```bash
+cd /rider-projects/TinyPl0
+
+specify preset add --from https://github.com/hindermath/spec-kit-preset-security-governance/archive/refs/tags/v0.2.0.zip --priority 10
+specify preset add --from https://github.com/hindermath/spec-kit-preset-architecture-governance/archive/refs/tags/v0.2.0.zip --priority 20
+specify preset add --from https://github.com/hindermath/spec-kit-preset-isaqb-architecture-governance/archive/refs/tags/v0.1.0.zip --priority 30
+specify preset add --from https://github.com/hindermath/spec-kit-preset-a11y-governance/archive/refs/tags/v0.2.0.zip --priority 40
+specify preset add --from https://github.com/hindermath/spec-kit-preset-cross-platform-governance/archive/refs/tags/v0.1.0.zip --priority 50
+specify preset add --from https://github.com/hindermath/spec-kit-preset-agent-parity-governance/archive/refs/tags/v0.1.0.zip --priority 60
+```
+
+Die Prioritaet steuert, welches Preset bei gleichen Template-Bausteinen zuerst wirkt. Kleinere Zahl bedeutet hoehere Prioritaet. Deshalb steht `security-governance` auf `10`.
+
+Installation pruefen:
+
+```bash
+specify preset list
+specify preset info security-governance
+specify preset resolve constitution-template.md
+specify preset resolve agent-guidance-addendum-template.md
+git status --short
+```
+
+Wenn das Projekt die Presets dauerhaft nutzen soll, werden die Preset-Dateien und die erzeugten Agenten-/Command-Dateien im Anwendungsrepo committed und gepusht:
+
+```bash
+git add .specify/presets .agents .claude .gemini .github .opencode
+git commit -m "chore: configure spec-kit governance presets"
+git push
+```
+
+Wichtig: `.specify/presets/` gehoert dann zur Projekt-Policy. Lokale Caches wie `.specify/presets/.cache/` sollten nicht committed werden.
 
 ### Beispiel: ConsoleApp2 mit Opencode und Spec Kit
 
@@ -1234,6 +1277,47 @@ If Spec Kit asks for the script type, choose `sh` for this Linux container.
 Spec Kit warns that agent folders can contain private data. For projects under `/rider-projects`, check whether `.opencode/` or sensitive parts of it should be added to that application repository's `.gitignore`.
 
 Spec Kit creates project files for spec-driven development. These files normally belong in the application repository under `/rider-projects`, not in this Docker setup repository.
+
+### Install Spec Kit governance presets
+
+After `specify init`, the six governance presets can be installed in a project. The presets extend Spec Kit with binding rules for secure development, software architecture, iSAQB/arc42, accessibility, platform parity, and AI-agent parity.
+
+For C#/.NET Level-2 projects in the home-baseline environment, the default decision is to install all six presets unless the project documents a justified exception.
+
+Run the commands inside the target project directory in the container, for example under `/rider-projects/TinyPl0`:
+
+```bash
+cd /rider-projects/TinyPl0
+
+specify preset add --from https://github.com/hindermath/spec-kit-preset-security-governance/archive/refs/tags/v0.2.0.zip --priority 10
+specify preset add --from https://github.com/hindermath/spec-kit-preset-architecture-governance/archive/refs/tags/v0.2.0.zip --priority 20
+specify preset add --from https://github.com/hindermath/spec-kit-preset-isaqb-architecture-governance/archive/refs/tags/v0.1.0.zip --priority 30
+specify preset add --from https://github.com/hindermath/spec-kit-preset-a11y-governance/archive/refs/tags/v0.2.0.zip --priority 40
+specify preset add --from https://github.com/hindermath/spec-kit-preset-cross-platform-governance/archive/refs/tags/v0.1.0.zip --priority 50
+specify preset add --from https://github.com/hindermath/spec-kit-preset-agent-parity-governance/archive/refs/tags/v0.1.0.zip --priority 60
+```
+
+Priority controls which preset is applied first when template building blocks overlap. Lower number means higher priority. That is why `security-governance` uses priority `10`.
+
+Verify the installation:
+
+```bash
+specify preset list
+specify preset info security-governance
+specify preset resolve constitution-template.md
+specify preset resolve agent-guidance-addendum-template.md
+git status --short
+```
+
+If the project should use the presets permanently, commit and push the preset files and generated agent/command files in the application repository:
+
+```bash
+git add .specify/presets .agents .claude .gemini .github .opencode
+git commit -m "chore: configure spec-kit governance presets"
+git push
+```
+
+Important: `.specify/presets/` then becomes part of the project policy. Local caches such as `.specify/presets/.cache/` should not be committed.
 
 ### Example: ConsoleApp2 with Opencode and Spec Kit
 
