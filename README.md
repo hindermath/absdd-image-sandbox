@@ -9,6 +9,7 @@
   - [Projektstruktur](#projektstruktur)
   - [Docker unter Ubuntu oder WSL2 installieren](#docker-unter-ubuntu-oder-wsl2-installieren)
   - [Docker-Desktop-Profile fuer macOS und Windows](#docker-desktop-profile-fuer-macos-und-windows)
+  - [Podman unter macOS mit Homebrew verwenden](#podman-unter-macos-mit-homebrew-verwenden)
   - [Docker-Berechtigungen pruefen](#docker-berechtigungen-pruefen)
   - [API-Key einrichten](#api-key-einrichten)
   - [Container bauen und starten](#container-bauen-und-starten)
@@ -35,6 +36,7 @@
   - [Project structure](#project-structure)
   - [Install Docker on Ubuntu or WSL2](#install-docker-on-ubuntu-or-wsl2)
   - [Docker Desktop profiles for macOS and Windows](#docker-desktop-profiles-for-macos-and-windows)
+  - [Use Podman on macOS with Homebrew](#use-podman-on-macos-with-homebrew)
   - [Check Docker permissions](#check-docker-permissions)
   - [Set up the API key](#set-up-the-api-key)
   - [Build and start the container](#build-and-start-the-container)
@@ -205,6 +207,120 @@ Konfiguration pruefen:
 
 ```bash
 docker compose config --no-interpolate
+```
+
+### Podman unter macOS mit Homebrew verwenden
+
+Podman ist eine Alternative zu Docker Desktop. Unter macOS laeuft der eigentliche Linux-Container ebenfalls in einer kleinen virtuellen Maschine. Diese virtuelle Maschine heisst bei Podman `machine`.
+
+Podman und Podman Compose mit Homebrew installieren:
+
+```bash
+brew install podman podman-compose
+```
+
+Installation pruefen:
+
+```bash
+podman --version
+podman compose version
+```
+
+Die Podman-Machine einmalig anlegen:
+
+```bash
+podman machine init
+```
+
+Die Podman-Machine starten:
+
+```bash
+podman machine start
+```
+
+Danach pruefen, ob Podman laeuft:
+
+```bash
+podman info
+```
+
+Vor dem Start auch bei Podman die lokalen Umgebungsdateien anlegen. `.env` enthaelt lokale Pfade, `opencode.env` enthaelt den geheimen API-Key:
+
+```bash
+cp .env.example .env
+cp opencode.env.example opencode.env
+chmod 600 opencode.env
+```
+
+Danach in `opencode.env` den echten `GWDG_API_KEY` eintragen. Den Key nicht im Terminal ausgeben und nicht committen.
+
+In das Repository wechseln:
+
+```bash
+cd /Users/thorstenhindermann/ade-dev-sandbox
+```
+
+Compose-Datei pruefen, ohne Variablenwerte und Secrets auszubreiten:
+
+```bash
+podman compose config --no-interpolate
+```
+
+Image bauen und dabei nach dem neuesten .NET-Basisimage suchen:
+
+```bash
+podman compose build --pull
+```
+
+Container im Hintergrund starten:
+
+```bash
+podman compose up -d
+```
+
+Status anzeigen:
+
+```bash
+podman compose ps
+```
+
+Bash im laufenden `ade`-Container oeffnen:
+
+```bash
+podman compose exec ade bash
+```
+
+Die Container-Shell wieder verlassen:
+
+```bash
+exit
+```
+
+Container stoppen, Daten behalten:
+
+```bash
+podman compose down
+```
+
+Container stoppen und persistente Container-/Volume-Daten aus diesem Compose-Projekt loeschen:
+
+```bash
+podman compose down -v
+```
+
+Wenn Podman danach nicht mehr gebraucht wird, kann auch die Podman-Machine gestoppt werden:
+
+```bash
+podman machine stop
+```
+
+Falls `podman compose ...` auf einer Installation nicht verfuegbar ist, kann derselbe Ablauf mit `podman-compose ...` ausgefuehrt werden, zum Beispiel:
+
+```bash
+podman-compose build --pull
+podman-compose up -d
+podman-compose exec ade bash
+podman-compose down
 ```
 
 ### Docker-Berechtigungen pruefen
@@ -1008,6 +1124,120 @@ Check the configuration:
 
 ```bash
 docker compose config --no-interpolate
+```
+
+### Use Podman on macOS with Homebrew
+
+Podman is an alternative to Docker Desktop. On macOS, the actual Linux container also runs inside a small virtual machine. In Podman, this virtual machine is called a `machine`.
+
+Install Podman and Podman Compose with Homebrew:
+
+```bash
+brew install podman podman-compose
+```
+
+Check the installation:
+
+```bash
+podman --version
+podman compose version
+```
+
+Create the Podman machine once:
+
+```bash
+podman machine init
+```
+
+Start the Podman machine:
+
+```bash
+podman machine start
+```
+
+Then check whether Podman is running:
+
+```bash
+podman info
+```
+
+Before starting the container, create the local environment files for Podman as well. `.env` contains local paths, and `opencode.env` contains the secret API key:
+
+```bash
+cp .env.example .env
+cp opencode.env.example opencode.env
+chmod 600 opencode.env
+```
+
+Then enter the real `GWDG_API_KEY` in `opencode.env`. Do not print the key in the terminal and do not commit it.
+
+Change into the repository:
+
+```bash
+cd /Users/thorstenhindermann/ade-dev-sandbox
+```
+
+Check the Compose file without expanding variable values and secrets:
+
+```bash
+podman compose config --no-interpolate
+```
+
+Build the image and check for the newest .NET base image:
+
+```bash
+podman compose build --pull
+```
+
+Start the container in the background:
+
+```bash
+podman compose up -d
+```
+
+Show the status:
+
+```bash
+podman compose ps
+```
+
+Open Bash inside the running `ade` container:
+
+```bash
+podman compose exec ade bash
+```
+
+Leave the container shell again:
+
+```bash
+exit
+```
+
+Stop the container but keep data:
+
+```bash
+podman compose down
+```
+
+Stop the container and delete persistent container/volume data from this Compose project:
+
+```bash
+podman compose down -v
+```
+
+If Podman is not needed afterwards, the Podman machine can also be stopped:
+
+```bash
+podman machine stop
+```
+
+If `podman compose ...` is not available on an installation, run the same flow with `podman-compose ...`, for example:
+
+```bash
+podman-compose build --pull
+podman-compose up -d
+podman-compose exec ade bash
+podman-compose down
 ```
 
 ### Check Docker permissions
