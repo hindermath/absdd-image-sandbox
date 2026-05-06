@@ -318,6 +318,18 @@ podman-compose down -v
 
 Hinweis: Auf manchen Installationen funktioniert auch `podman compose ...`. Wenn dieser Befehl aber Docker Compose als Provider startet oder den Docker-Daemon sucht, fuer dieses Repository `podman-compose ...` verwenden.
 
+WSL2- und Windows-Hinweis: Wenn dieselbe Umgebung einmal mit Podman Desktop unter Windows und einmal mit Podman in WSL2 gestartet wird, duerfen nicht beide Container gleichzeitig laufen. Beide Varianten veroeffentlichen dieselbe Port-Range `127.0.0.1:5100-5199`. Vor dem Start in WSL2 den Windows-Container in Podman Desktop oder PowerShell stoppen:
+
+```powershell
+podman compose down
+```
+
+Vor dem Start unter Windows den WSL2-Container stoppen:
+
+```bash
+podman-compose down
+```
+
 ### Podman unter macOS mit Homebrew verwenden
 
 Podman ist eine Alternative zu Docker Desktop. Unter macOS laeuft der eigentliche Linux-Container ebenfalls in einer kleinen virtuellen Maschine. Diese virtuelle Maschine heisst bei Podman `machine`.
@@ -552,6 +564,18 @@ podman compose down -v
 ```
 
 Wenn `podman compose ...` meldet, dass ein externer Compose-Provider wie `docker-compose.exe` verwendet wird, ist das nicht automatisch ein Fehler. Wichtig ist, dass der Befehl gegen die laufende Podman-Machine arbeitet. Wenn der Befehl stattdessen den Docker-Daemon sucht oder mit Docker-Desktop-Fehlern abbricht, in Podman Desktop unter Settings die Compose-Unterstuetzung einrichten und danach `podman compose version` erneut pruefen.
+
+WSL2- und Windows-Hinweis: Wenn dieselbe Umgebung einmal mit Podman Desktop unter Windows und einmal mit Podman in WSL2 gestartet wird, duerfen nicht beide Container gleichzeitig laufen. Beide Varianten veroeffentlichen dieselbe Port-Range `127.0.0.1:5100-5199`. Vor dem Start unter Windows den WSL2-Container stoppen:
+
+```bash
+podman-compose down
+```
+
+Vor dem Start in WSL2 den Windows-Container in Podman Desktop oder PowerShell stoppen:
+
+```powershell
+podman compose down
+```
 
 ### Docker-Berechtigungen pruefen
 
@@ -1039,6 +1063,28 @@ Wenn Docker keine Berechtigung hat, entweder `sudo docker ...` verwenden oder de
 
 Wenn der API-Key nicht funktioniert, `opencode.env` pruefen. Den Key nicht im Terminalverlauf, in Screenshots oder in Git-Ausgaben zeigen.
 
+Wenn Podman mit `container name "ade-dev-sandbox_ade_1" is already in use`, `can only create exec sessions on running containers` oder `rootlessport listen tcp 127.0.0.1:5100: bind: address already in use` abbricht, laeuft meist dieselbe Umgebung noch auf der anderen Seite von Windows/WSL2 oder ein alter Container belegt die Port-Range. Es darf nur eine Variante gleichzeitig laufen: entweder Podman Desktop unter Windows oder Podman in WSL2.
+
+In WSL2 pruefen und stoppen:
+
+```bash
+podman-compose ps
+podman-compose down
+```
+
+Unter Windows in PowerShell pruefen und stoppen:
+
+```powershell
+podman compose ps
+podman compose down
+```
+
+Danach die gewuenschte Seite neu starten. Beispiel fuer WSL2:
+
+```bash
+podman-compose up -d
+```
+
 Wenn .NET unter `/rider-projects` einen Fehler zu `obj`, `bin`, `apphost` oder `Access denied` meldet, den Container neu bauen und starten:
 
 ```bash
@@ -1461,6 +1507,18 @@ podman-compose down -v
 
 Note: On some installations, `podman compose ...` also works. If that command starts Docker Compose as a provider or searches for the Docker daemon, use `podman-compose ...` for this repository.
 
+WSL2 and Windows note: If the same environment is started once with Podman Desktop on Windows and once with Podman in WSL2, both containers must not run at the same time. Both variants publish the same port range `127.0.0.1:5100-5199`. Before starting in WSL2, stop the Windows container in Podman Desktop or PowerShell:
+
+```powershell
+podman compose down
+```
+
+Before starting on Windows, stop the WSL2 container:
+
+```bash
+podman-compose down
+```
+
 ### Use Podman on macOS with Homebrew
 
 Podman is an alternative to Docker Desktop. On macOS, the actual Linux container also runs inside a small virtual machine. In Podman, this virtual machine is called a `machine`.
@@ -1695,6 +1753,18 @@ podman compose down -v
 ```
 
 If `podman compose ...` reports that it is using an external Compose provider such as `docker-compose.exe`, that is not automatically an error. The important part is that the command talks to the running Podman machine. If the command instead searches for the Docker daemon or fails with Docker Desktop errors, set up Compose support in Podman Desktop under Settings and then check `podman compose version` again.
+
+WSL2 and Windows note: If the same environment is started once with Podman Desktop on Windows and once with Podman in WSL2, both containers must not run at the same time. Both variants publish the same port range `127.0.0.1:5100-5199`. Before starting on Windows, stop the WSL2 container:
+
+```bash
+podman-compose down
+```
+
+Before starting in WSL2, stop the Windows container in Podman Desktop or PowerShell:
+
+```powershell
+podman compose down
+```
 
 ### Check Docker permissions
 
@@ -2181,6 +2251,28 @@ sudo apt install -y docker-compose-v2
 If Docker has no permission, use `sudo docker ...` or add the user to the `docker` group.
 
 If the API key does not work, check `opencode.env`. Do not show the key in terminal history, screenshots, or Git output.
+
+If Podman fails with `container name "ade-dev-sandbox_ade_1" is already in use`, `can only create exec sessions on running containers`, or `rootlessport listen tcp 127.0.0.1:5100: bind: address already in use`, the same environment is usually still running on the other side of Windows/WSL2 or an old container still owns the port range. Only one variant may run at a time: either Podman Desktop on Windows or Podman in WSL2.
+
+Check and stop it in WSL2:
+
+```bash
+podman-compose ps
+podman-compose down
+```
+
+Check and stop it on Windows in PowerShell:
+
+```powershell
+podman compose ps
+podman compose down
+```
+
+Then restart the side you want to use. Example for WSL2:
+
+```bash
+podman-compose up -d
+```
 
 If .NET reports an `obj`, `bin`, `apphost`, or `Access denied` error under `/rider-projects`, rebuild and start the container:
 
