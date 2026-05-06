@@ -43,7 +43,7 @@ docker compose exec ade bash
 
 Opens a shell inside the running container.
 
-On macOS with Podman, use the equivalent `podman compose ...` commands. Initialize and start the Podman machine before running Compose commands:
+On macOS or Windows with Podman, use the equivalent `podman compose ...` commands. Initialize and start the Podman machine before running Compose commands:
 
 ```bash
 podman machine init
@@ -95,7 +95,7 @@ docker compose build --pull
 
 The `--pull` flag is important because the Dockerfile uses `mcr.microsoft.com/dotnet/sdk:latest`.
 
-On macOS with Podman, the equivalent validation path is:
+On macOS or Windows with Podman, the equivalent validation path is:
 
 ```bash
 podman compose config --no-interpolate

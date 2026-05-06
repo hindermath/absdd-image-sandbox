@@ -12,7 +12,8 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
     && install -m 0755 /root/.local/bin/uv /usr/local/bin/uv \
     && install -m 0755 /root/.local/bin/uvx /usr/local/bin/uvx
 COPY ./dotnet/dotnet-wrapper.sh /usr/local/bin/dotnet
-RUN chmod 0755 /usr/local/bin/dotnet
+RUN sed -i 's/\r$//' /usr/local/bin/dotnet \
+    && chmod 0755 /usr/local/bin/dotnet
 COPY ./spec-kit/patch-specify-cli.py /usr/local/bin/patch-specify-cli.py
 
 RUN useradd -m adedev

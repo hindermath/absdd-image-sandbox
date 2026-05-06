@@ -11,6 +11,7 @@
   - [Docker-Desktop-Profile fuer macOS und Windows](#docker-desktop-profile-fuer-macos-und-windows)
   - [Podman unter Ubuntu 24.04 LTS verwenden](#podman-unter-ubuntu-2404-lts-verwenden)
   - [Podman unter macOS mit Homebrew verwenden](#podman-unter-macos-mit-homebrew-verwenden)
+  - [Podman unter Windows mit Podman Desktop verwenden](#podman-unter-windows-mit-podman-desktop-verwenden)
   - [Docker-Berechtigungen pruefen](#docker-berechtigungen-pruefen)
   - [API-Key einrichten](#api-key-einrichten)
   - [Container bauen und starten](#container-bauen-und-starten)
@@ -39,6 +40,7 @@
   - [Docker Desktop profiles for macOS and Windows](#docker-desktop-profiles-for-macos-and-windows)
   - [Use Podman on Ubuntu 24.04 LTS](#use-podman-on-ubuntu-2404-lts)
   - [Use Podman on macOS with Homebrew](#use-podman-on-macos-with-homebrew)
+  - [Use Podman on Windows with Podman Desktop](#use-podman-on-windows-with-podman-desktop)
   - [Check Docker permissions](#check-docker-permissions)
   - [Set up the API key](#set-up-the-api-key)
   - [Build and start the container](#build-and-start-the-container)
@@ -429,6 +431,127 @@ podman-compose up -d
 podman-compose exec ade bash
 podman-compose down
 ```
+
+### Podman unter Windows mit Podman Desktop verwenden
+
+Podman ist eine Alternative zu Docker Desktop. Unter Windows laufen Linux-Container in einer kleinen virtuellen Maschine. Podman nennt diese virtuelle Maschine `machine`. Podman Desktop kann Podman, die Machine und die Compose-Unterstuetzung einrichten.
+
+Podman Desktop mit Winget installieren:
+
+```powershell
+winget install --id RedHat.Podman-Desktop -e
+```
+
+Danach Podman Desktop aus dem Startmenue starten. Beim ersten Start die Einrichtung durchlaufen:
+
+- WSL2 als Provider verwenden, wenn keine Hyper-V-Anforderung besteht.
+- Podman installieren lassen, wenn Podman noch fehlt.
+- Eine Podman-Machine erstellen lassen.
+- Die Compose-Unterstuetzung installieren lassen.
+
+Falls WSL2 noch nicht bereit ist, PowerShell als Administrator oeffnen und WSL aktualisieren beziehungsweise aktivieren:
+
+```powershell
+wsl --update
+wsl --install --no-distribution
+```
+
+Wenn Windows einen Neustart verlangt, den Rechner neu starten. Danach pruefen:
+
+```powershell
+wsl --status
+podman --version
+podman machine list
+podman info
+podman compose version
+```
+
+Wenn noch keine Machine existiert oder sie gestoppt ist:
+
+```powershell
+podman machine init
+podman machine start
+```
+
+Vor dem Start die lokalen Umgebungsdateien im Repository anlegen. Diese Befehle laufen in PowerShell auf dem Windows-Host:
+
+```powershell
+Copy-Item .env.example .env
+Copy-Item opencode.env.example opencode.env
+```
+
+Danach in `opencode.env` den echten `GWDG_API_KEY` eintragen. Den Key nicht im Terminal ausgeben und nicht committen.
+
+In `.env` Windows-Pfade setzen, wenn Rider- oder Java-Projekte ausserhalb dieses Repositorys liegen:
+
+```text
+RIDER_PROJECTS_DIR=C:\Users\thinder\RiderProjects
+JAVA_PROJECTS_DIR=C:\Users\thinder\JavaProjects
+```
+
+Wenn kein separates Rider- oder Java-Projektverzeichnis gebraucht wird, kann der Standard aus `.env.example` bleiben. Dann zeigt `/rider-projects` auf `workspace/` und `/java-projects` auf `java-projects/`.
+
+In das Repository wechseln:
+
+```powershell
+cd C:\Users\thinder\ade-dev-sandbox
+```
+
+Compose-Datei pruefen, ohne Variablenwerte und Secrets auszubreiten:
+
+```powershell
+podman compose config --no-interpolate
+```
+
+Image ueber die Compose-Konfiguration bauen:
+
+```powershell
+podman compose build --pull
+```
+
+Nur das Image direkt aus diesem Verzeichnis bauen, ohne den Compose-Service zu starten:
+
+```powershell
+podman build --pull -t ade-dev-sandbox .
+```
+
+Container im Hintergrund starten:
+
+```powershell
+podman compose up -d
+```
+
+Status anzeigen:
+
+```powershell
+podman compose ps
+```
+
+Bash im laufenden `ade`-Container oeffnen:
+
+```powershell
+podman compose exec ade bash
+```
+
+Die Container-Shell wieder verlassen:
+
+```bash
+exit
+```
+
+Container stoppen, Daten behalten:
+
+```powershell
+podman compose down
+```
+
+Container stoppen und persistente Container-/Volume-Daten aus diesem Compose-Projekt loeschen:
+
+```powershell
+podman compose down -v
+```
+
+Wenn `podman compose ...` meldet, dass ein externer Compose-Provider wie `docker-compose.exe` verwendet wird, ist das nicht automatisch ein Fehler. Wichtig ist, dass der Befehl gegen die laufende Podman-Machine arbeitet. Wenn der Befehl stattdessen den Docker-Daemon sucht oder mit Docker-Desktop-Fehlern abbricht, in Podman Desktop unter Settings die Compose-Unterstuetzung einrichten und danach `podman compose version` erneut pruefen.
 
 ### Docker-Berechtigungen pruefen
 
@@ -1451,6 +1574,127 @@ podman-compose up -d
 podman-compose exec ade bash
 podman-compose down
 ```
+
+### Use Podman on Windows with Podman Desktop
+
+Podman is an alternative to Docker Desktop. On Windows, Linux containers run inside a small virtual machine. Podman calls this virtual machine a `machine`. Podman Desktop can set up Podman, the machine, and Compose support.
+
+Install Podman Desktop with Winget:
+
+```powershell
+winget install --id RedHat.Podman-Desktop -e
+```
+
+Then start Podman Desktop from the Start menu. During first-time setup:
+
+- Use WSL2 as the provider unless Hyper-V is required.
+- Let Podman Desktop install Podman if Podman is missing.
+- Create a Podman machine.
+- Install Compose support.
+
+If WSL2 is not ready yet, open PowerShell as Administrator and update or enable WSL:
+
+```powershell
+wsl --update
+wsl --install --no-distribution
+```
+
+If Windows asks for a restart, restart the computer. Then verify the setup:
+
+```powershell
+wsl --status
+podman --version
+podman machine list
+podman info
+podman compose version
+```
+
+If no machine exists yet or the machine is stopped:
+
+```powershell
+podman machine init
+podman machine start
+```
+
+Before starting the container, create the local environment files in the repository. Run these commands in PowerShell on the Windows host:
+
+```powershell
+Copy-Item .env.example .env
+Copy-Item opencode.env.example opencode.env
+```
+
+Then enter the real `GWDG_API_KEY` in `opencode.env`. Do not print the key in the terminal and do not commit it.
+
+Set Windows paths in `.env` if Rider or Java projects are outside this repository:
+
+```text
+RIDER_PROJECTS_DIR=C:\Users\thinder\RiderProjects
+JAVA_PROJECTS_DIR=C:\Users\thinder\JavaProjects
+```
+
+If no separate Rider or Java project directory is needed, keep the defaults from `.env.example`. Then `/rider-projects` points to `workspace/` and `/java-projects` points to `java-projects/`.
+
+Change into the repository:
+
+```powershell
+cd C:\Users\thinder\ade-dev-sandbox
+```
+
+Check the Compose file without expanding variable values and secrets:
+
+```powershell
+podman compose config --no-interpolate
+```
+
+Build the image through the Compose configuration:
+
+```powershell
+podman compose build --pull
+```
+
+Build only the image directly from this directory, without starting the Compose service:
+
+```powershell
+podman build --pull -t ade-dev-sandbox .
+```
+
+Start the container in the background:
+
+```powershell
+podman compose up -d
+```
+
+Show the status:
+
+```powershell
+podman compose ps
+```
+
+Open Bash in the running `ade` container:
+
+```powershell
+podman compose exec ade bash
+```
+
+Leave the container shell again:
+
+```bash
+exit
+```
+
+Stop the container and keep data:
+
+```powershell
+podman compose down
+```
+
+Stop the container and delete persistent container and volume data from this Compose project:
+
+```powershell
+podman compose down -v
+```
+
+If `podman compose ...` reports that it is using an external Compose provider such as `docker-compose.exe`, that is not automatically an error. The important part is that the command talks to the running Podman machine. If the command instead searches for the Docker daemon or fails with Docker Desktop errors, set up Compose support in Podman Desktop under Settings and then check `podman compose version` again.
 
 ### Check Docker permissions
 
