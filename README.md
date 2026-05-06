@@ -9,6 +9,7 @@
   - [Projektstruktur](#projektstruktur)
   - [Docker unter Ubuntu oder WSL2 installieren](#docker-unter-ubuntu-oder-wsl2-installieren)
   - [Docker-Desktop-Profile fuer macOS und Windows](#docker-desktop-profile-fuer-macos-und-windows)
+  - [Podman unter Ubuntu 24.04 LTS verwenden](#podman-unter-ubuntu-2404-lts-verwenden)
   - [Podman unter macOS mit Homebrew verwenden](#podman-unter-macos-mit-homebrew-verwenden)
   - [Docker-Berechtigungen pruefen](#docker-berechtigungen-pruefen)
   - [API-Key einrichten](#api-key-einrichten)
@@ -36,6 +37,7 @@
   - [Project structure](#project-structure)
   - [Install Docker on Ubuntu or WSL2](#install-docker-on-ubuntu-or-wsl2)
   - [Docker Desktop profiles for macOS and Windows](#docker-desktop-profiles-for-macos-and-windows)
+  - [Use Podman on Ubuntu 24.04 LTS](#use-podman-on-ubuntu-2404-lts)
   - [Use Podman on macOS with Homebrew](#use-podman-on-macos-with-homebrew)
   - [Check Docker permissions](#check-docker-permissions)
   - [Set up the API key](#set-up-the-api-key)
@@ -90,6 +92,7 @@ Wenn der Prompt mit `adedev@...` beginnt, befindet sich die Shell im Container. 
 
 - `Dockerfile`: beschreibt das Container-Image. Es nutzt `mcr.microsoft.com/dotnet/sdk:latest`.
 - `compose.yml`: beschreibt den Service `ade`, Volumes und Build-Regeln.
+- `.dockerignore` und `.containerignore`: schliessen lokale Secrets, Git-Daten und Arbeitsverzeichnisse aus dem Build-Kontext aus.
 - `.env.example`: Vorlage fuer die plattformabhaengigen Mounts `RIDER_PROJECTS_DIR` und `JAVA_PROJECTS_DIR`.
 - `opencode.jsonc`: enthaelt Provider, Modelle und Agenten fuer Opencode. JSONC erlaubt Kommentare und ist deshalb fuer Lernzwecke besser lesbar.
 - `opencode.env.example`: Vorlage fuer die lokale Datei `opencode.env`.
@@ -208,6 +211,110 @@ Konfiguration pruefen:
 ```bash
 docker compose config --no-interpolate
 ```
+
+### Podman unter Ubuntu 24.04 LTS verwenden
+
+Podman ist eine Alternative zu Docker. Unter Ubuntu laeuft Podman direkt auf dem Linux-Host. Eine Podman-Machine wie unter macOS wird nicht gebraucht.
+
+Podman, Podman Compose und Flatpak installieren:
+
+```bash
+sudo apt update
+sudo apt install -y podman podman-compose flatpak
+```
+
+Installation pruefen:
+
+```bash
+podman --version
+podman-compose --version
+podman run --rm quay.io/podman/hello
+```
+
+Podman Desktop optional ueber Flathub installieren:
+
+```bash
+flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install --user flathub io.podman_desktop.PodmanDesktop
+```
+
+Podman Desktop starten:
+
+```bash
+flatpak run io.podman_desktop.PodmanDesktop
+```
+
+Vor dem Start die lokalen Umgebungsdateien anlegen. `.env` enthaelt lokale Pfade, `opencode.env` enthaelt den geheimen API-Key:
+
+```bash
+cp .env.example .env
+cp opencode.env.example opencode.env
+chmod 600 opencode.env
+```
+
+Danach in `opencode.env` den echten `GWDG_API_KEY` eintragen. Den Key nicht im Terminal ausgeben und nicht committen.
+
+In das Repository wechseln:
+
+```bash
+cd /home/thinder/ade-dev-sandbox
+```
+
+Compose-Datei pruefen, ohne Variablenwerte und Secrets auszubreiten:
+
+```bash
+podman-compose config --no-interpolate
+```
+
+Image ueber die Compose-Konfiguration bauen:
+
+```bash
+podman-compose build --pull
+```
+
+Nur das Image direkt aus diesem Verzeichnis bauen, ohne den Compose-Service zu starten:
+
+```bash
+podman build --pull -t ade-dev-sandbox .
+```
+
+Container im Hintergrund starten:
+
+```bash
+podman-compose up -d
+```
+
+Status anzeigen:
+
+```bash
+podman-compose ps
+```
+
+Bash im laufenden `ade`-Container oeffnen:
+
+```bash
+podman-compose exec ade bash
+```
+
+Die Container-Shell wieder verlassen:
+
+```bash
+exit
+```
+
+Container stoppen, Daten behalten:
+
+```bash
+podman-compose down
+```
+
+Container stoppen und persistente Container-/Volume-Daten aus diesem Compose-Projekt loeschen:
+
+```bash
+podman-compose down -v
+```
+
+Hinweis: Auf manchen Installationen funktioniert auch `podman compose ...`. Wenn dieser Befehl aber Docker Compose als Provider startet oder den Docker-Daemon sucht, fuer dieses Repository `podman-compose ...` verwenden.
 
 ### Podman unter macOS mit Homebrew verwenden
 
@@ -1007,6 +1114,7 @@ If the prompt starts with `adedev@...`, the shell is inside the container. If th
 
 - `Dockerfile`: describes the container image. It uses `mcr.microsoft.com/dotnet/sdk:latest`.
 - `compose.yml`: describes the `ade` service, volumes, and build rules.
+- `.dockerignore` and `.containerignore`: exclude local secrets, Git data, and working directories from the build context.
 - `.env.example`: template for the platform-specific mounts `RIDER_PROJECTS_DIR` and `JAVA_PROJECTS_DIR`.
 - `opencode.jsonc`: contains provider, model, and agent settings for Opencode. JSONC allows comments and is easier to read for learning.
 - `opencode.env.example`: template for the local `opencode.env` file.
@@ -1125,6 +1233,110 @@ Check the configuration:
 ```bash
 docker compose config --no-interpolate
 ```
+
+### Use Podman on Ubuntu 24.04 LTS
+
+Podman is an alternative to Docker. On Ubuntu, Podman runs directly on the Linux host. A Podman machine like on macOS is not needed.
+
+Install Podman, Podman Compose, and Flatpak:
+
+```bash
+sudo apt update
+sudo apt install -y podman podman-compose flatpak
+```
+
+Check the installation:
+
+```bash
+podman --version
+podman-compose --version
+podman run --rm quay.io/podman/hello
+```
+
+Optionally install Podman Desktop through Flathub:
+
+```bash
+flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install --user flathub io.podman_desktop.PodmanDesktop
+```
+
+Start Podman Desktop:
+
+```bash
+flatpak run io.podman_desktop.PodmanDesktop
+```
+
+Before starting the container, create the local environment files. `.env` contains local paths, and `opencode.env` contains the secret API key:
+
+```bash
+cp .env.example .env
+cp opencode.env.example opencode.env
+chmod 600 opencode.env
+```
+
+Then enter the real `GWDG_API_KEY` in `opencode.env`. Do not print the key in the terminal and do not commit it.
+
+Change into the repository:
+
+```bash
+cd /home/thinder/ade-dev-sandbox
+```
+
+Check the Compose file without expanding variable values and secrets:
+
+```bash
+podman-compose config --no-interpolate
+```
+
+Build the image through the Compose configuration:
+
+```bash
+podman-compose build --pull
+```
+
+Build only the image directly from this directory, without starting the Compose service:
+
+```bash
+podman build --pull -t ade-dev-sandbox .
+```
+
+Start the container in the background:
+
+```bash
+podman-compose up -d
+```
+
+Show the status:
+
+```bash
+podman-compose ps
+```
+
+Open Bash inside the running `ade` container:
+
+```bash
+podman-compose exec ade bash
+```
+
+Leave the container shell again:
+
+```bash
+exit
+```
+
+Stop the container but keep data:
+
+```bash
+podman-compose down
+```
+
+Stop the container and delete persistent container/volume data from this Compose project:
+
+```bash
+podman-compose down -v
+```
+
+Note: On some installations, `podman compose ...` also works. If that command starts Docker Compose as a provider or searches for the Docker daemon, use `podman-compose ...` for this repository.
 
 ### Use Podman on macOS with Homebrew
 
