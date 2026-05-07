@@ -1,0 +1,11 @@
+# Copy this file into the container as /home/developer/.codex/config.toml.
+# This example is configured for Azure OpenAI.
+model = "gpt-5.4"
+model_provider = "azure"
+model_reasoning_effort = "medium"
+
+[model_providers.azure]
+name = "Azure OpenAI"
+base_url = "https://<changeme>.openai.azure.com/openai/v1"
+env_key = "AZURE_OPENAI_API_KEY"
+wire_api = "responses"
