@@ -407,6 +407,16 @@ Image bauen und dabei das aktuelle Sandbox-Basisimage ziehen:
 podman compose build --pull
 ```
 
+Wenn `podman compose build --pull` meldet, dass ein externer Compose-Provider wie `/usr/local/bin/docker-compose` verwendet wird, ist das unter macOS nicht automatisch ein Fehler. Bricht der Build aber beim privaten GitLab-Basisimage mit `Requesting bearer token` und `403 Forbidden` ab, verwendet der externe Provider wahrscheinlich andere Registry-Anmeldedaten als `podman login`. Dann das Basisimage und das Projektimage direkt mit Podman bauen und Compose nur fuer den Start verwenden:
+
+```bash
+podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox:latest
+podman build --pull -t ade-dev-sandbox-ade .
+podman compose up -d --no-build --force-recreate
+```
+
+Danach direkt mit der Statuspruefung fortfahren.
+
 Container im Hintergrund starten:
 
 ```bash
@@ -1070,15 +1080,16 @@ Die wichtigsten Einstellungen:
 Wenn `opencode.jsonc` geaendert wird, gibt es zwei Wege:
 
 ```bash
-podman cp opencode.jsonc ade-dev-sandbox_ade_1:/home/adedev/.config/opencode/opencode.jsonc
-podman exec --user root ade-dev-sandbox_ade_1 chown adedev:adedev /home/adedev/.config/opencode/opencode.jsonc
+CONTAINER_NAME=$(podman ps --filter name=ade-dev-sandbox --format '{{.Names}}' | head -n 1)
+podman cp opencode.jsonc "${CONTAINER_NAME}:/home/adedev/.config/opencode/opencode.jsonc"
+podman exec --user root "$CONTAINER_NAME" chown adedev:adedev /home/adedev/.config/opencode/opencode.jsonc
 ```
 
 Dieser Weg aktualisiert den laufenden Container sofort. Er aendert aber nicht das bereits gebaute Image. Fuer neue Container muss das Image neu gebaut werden:
 
 ```bash
-podman-compose build --pull
-podman-compose up -d --force-recreate
+podman compose build --pull
+podman compose up -d --force-recreate
 ```
 
 Nach einer Aenderung kann die geladene Konfiguration geprueft werden:
@@ -1122,18 +1133,19 @@ Die Datei `codex/requirements.toml` setzt Schranken, die normale Benutzer- oder 
 Fuer eine dauerhafte Aenderung muss das Image neu gebaut und der Container neu erzeugt werden:
 
 ```bash
-podman-compose build --pull
-podman-compose up -d --force-recreate
+podman compose build --pull
+podman compose up -d --force-recreate
 ```
 
 Fuer einen laufenden Container koennen die Konfigurationsdateien testweise kopiert werden. Das ersetzt keinen Image-Build und installiert auch kein neues Paket wie `bubblewrap`:
 
 ```bash
-podman exec --user root ade-dev-sandbox_ade_1 mkdir -p /etc/codex
-podman cp codex/config.toml ade-dev-sandbox_ade_1:/etc/codex/config.toml
-podman cp codex/config.toml ade-dev-sandbox_ade_1:/etc/codex/managed_config.toml
-podman cp codex/requirements.toml ade-dev-sandbox_ade_1:/etc/codex/requirements.toml
-podman exec --user root ade-dev-sandbox_ade_1 chmod 0644 /etc/codex/config.toml /etc/codex/managed_config.toml /etc/codex/requirements.toml
+CONTAINER_NAME=$(podman ps --filter name=ade-dev-sandbox --format '{{.Names}}' | head -n 1)
+podman exec --user root "$CONTAINER_NAME" mkdir -p /etc/codex
+podman cp codex/config.toml "${CONTAINER_NAME}:/etc/codex/config.toml"
+podman cp codex/config.toml "${CONTAINER_NAME}:/etc/codex/managed_config.toml"
+podman cp codex/requirements.toml "${CONTAINER_NAME}:/etc/codex/requirements.toml"
+podman exec --user root "$CONTAINER_NAME" chmod 0644 /etc/codex/config.toml /etc/codex/managed_config.toml /etc/codex/requirements.toml
 ```
 
 Nach einer Aenderung kann die wirksame Sandbox grob geprueft werden:
@@ -1216,11 +1228,11 @@ Wenn der API-Key nicht funktioniert, `opencode.env` pruefen. Den Key nicht im Te
 
 Wenn `codex` oder `opencode` im Container mit `Permission denied` oder `EACCES` unter `/home/adedev/.codex` oder `/home/adedev/.local/share/opencode` abbrechen, gehoeren wahrscheinlich alte persistente Volumes noch einem frueheren Container-Benutzer. Das kann nach einem Image- oder Basisimage-Wechsel passieren. Die Verzeichnisse im Image sind bereits fuer `adedev` angelegt; vorhandene Volumes ueberdecken diese Verzeichnisse aber und muessen einmalig korrigiert werden.
 
-Fuer Podman in WSL2:
+Fuer Podman auf macOS, Windows oder WSL2 zuerst den tatsaechlichen Container-Namen ermitteln. Je nach Compose-Provider kann er zum Beispiel `ade-dev-sandbox-ade-1` oder `ade-dev-sandbox_ade_1` heissen:
 
 ```bash
-podman ps --format '{{.Names}}'
-podman exec --user root ade-dev-sandbox_ade_1 bash -lc 'chown -R adedev:adedev /home/adedev/.codex /home/adedev/.local/share/opencode'
+CONTAINER_NAME=$(podman ps --filter name=ade-dev-sandbox --format '{{.Names}}' | head -n 1)
+podman exec --user root "$CONTAINER_NAME" bash -lc 'chown -R adedev:adedev /home/adedev/.codex /home/adedev/.local/share/opencode'
 ```
 
 Fuer Docker Compose:
@@ -1229,7 +1241,7 @@ Fuer Docker Compose:
 docker compose exec --user root ade bash -lc 'chown -R adedev:adedev /home/adedev/.codex /home/adedev/.local/share/opencode'
 ```
 
-Wenn Podman mit `container name "ade-dev-sandbox_ade_1" is already in use`, `can only create exec sessions on running containers` oder `rootlessport listen tcp 127.0.0.1:5100: bind: address already in use` abbricht, laeuft meist dieselbe Umgebung noch auf der anderen Seite von Windows/WSL2 oder ein alter Container belegt die Port-Range. Es darf nur eine Variante gleichzeitig laufen: entweder Podman Desktop unter Windows oder Podman in WSL2.
+Wenn Podman mit Meldungen wie `container name "ade-dev-sandbox-ade-1" is already in use`, `container name "ade-dev-sandbox_ade_1" is already in use`, `can only create exec sessions on running containers` oder `rootlessport listen tcp 127.0.0.1:5100: bind: address already in use` abbricht, laeuft meist dieselbe Umgebung noch in einer anderen Podman-Machine oder ein alter Container belegt die Port-Range. Es darf nur eine Variante gleichzeitig laufen.
 
 In WSL2 pruefen und stoppen:
 
@@ -1261,7 +1273,8 @@ docker compose up -d
 Wenn der Fehler auf `/dotnet-build/...` zeigt, gehoert wahrscheinlich das persistente Build-Volume noch einem frueheren Container-Benutzer. Das kann nach einem Image- oder Basisimage-Wechsel passieren. Dann das Volume einmalig korrigieren:
 
 ```bash
-podman exec --user root ade-dev-sandbox_ade_1 bash -lc 'chown -R adedev:adedev /dotnet-build'
+CONTAINER_NAME=$(podman ps --filter name=ade-dev-sandbox --format '{{.Names}}' | head -n 1)
+podman exec --user root "$CONTAINER_NAME" bash -lc 'chown -R adedev:adedev /dotnet-build'
 ```
 
 Mit Docker Compose:
@@ -1773,6 +1786,16 @@ Build the image and pull the current Sandbox base image:
 ```bash
 podman compose build --pull
 ```
+
+If `podman compose build --pull` reports that it is using an external Compose provider such as `/usr/local/bin/docker-compose`, that is not automatically an error on macOS. If the build then fails on the private GitLab base image with `Requesting bearer token` and `403 Forbidden`, the external provider probably uses different registry credentials than `podman login`. In that case, pull the base image and build the project image directly with Podman, and use Compose only for startup:
+
+```bash
+podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox:latest
+podman build --pull -t ade-dev-sandbox-ade .
+podman compose up -d --no-build --force-recreate
+```
+
+Then continue directly with the status check.
 
 Start the container in the background:
 
@@ -2437,15 +2460,16 @@ The most important settings:
 When `opencode.jsonc` changes, there are two paths:
 
 ```bash
-podman cp opencode.jsonc ade-dev-sandbox_ade_1:/home/adedev/.config/opencode/opencode.jsonc
-podman exec --user root ade-dev-sandbox_ade_1 chown adedev:adedev /home/adedev/.config/opencode/opencode.jsonc
+CONTAINER_NAME=$(podman ps --filter name=ade-dev-sandbox --format '{{.Names}}' | head -n 1)
+podman cp opencode.jsonc "${CONTAINER_NAME}:/home/adedev/.config/opencode/opencode.jsonc"
+podman exec --user root "$CONTAINER_NAME" chown adedev:adedev /home/adedev/.config/opencode/opencode.jsonc
 ```
 
 This updates the running container immediately. It does not change the already built image. For new containers, rebuild the image:
 
 ```bash
-podman-compose build --pull
-podman-compose up -d --force-recreate
+podman compose build --pull
+podman compose up -d --force-recreate
 ```
 
 After a change, check the loaded configuration:
@@ -2489,18 +2513,19 @@ The file `codex/requirements.toml` sets constraints that normal user or project 
 For a durable change, rebuild the image and recreate the container:
 
 ```bash
-podman-compose build --pull
-podman-compose up -d --force-recreate
+podman compose build --pull
+podman compose up -d --force-recreate
 ```
 
 For a running container, the configuration files can be copied for testing. This does not replace an image build and does not install a new package such as `bubblewrap`:
 
 ```bash
-podman exec --user root ade-dev-sandbox_ade_1 mkdir -p /etc/codex
-podman cp codex/config.toml ade-dev-sandbox_ade_1:/etc/codex/config.toml
-podman cp codex/config.toml ade-dev-sandbox_ade_1:/etc/codex/managed_config.toml
-podman cp codex/requirements.toml ade-dev-sandbox_ade_1:/etc/codex/requirements.toml
-podman exec --user root ade-dev-sandbox_ade_1 chmod 0644 /etc/codex/config.toml /etc/codex/managed_config.toml /etc/codex/requirements.toml
+CONTAINER_NAME=$(podman ps --filter name=ade-dev-sandbox --format '{{.Names}}' | head -n 1)
+podman exec --user root "$CONTAINER_NAME" mkdir -p /etc/codex
+podman cp codex/config.toml "${CONTAINER_NAME}:/etc/codex/config.toml"
+podman cp codex/config.toml "${CONTAINER_NAME}:/etc/codex/managed_config.toml"
+podman cp codex/requirements.toml "${CONTAINER_NAME}:/etc/codex/requirements.toml"
+podman exec --user root "$CONTAINER_NAME" chmod 0644 /etc/codex/config.toml /etc/codex/managed_config.toml /etc/codex/requirements.toml
 ```
 
 After a change, roughly check the effective sandbox:
@@ -2583,11 +2608,11 @@ If the API key does not work, check `opencode.env`. Do not show the key in termi
 
 If `codex` or `opencode` exits inside the container with `Permission denied` or `EACCES` below `/home/adedev/.codex` or `/home/adedev/.local/share/opencode`, old persistent volumes probably still belong to an earlier container user. This can happen after an image or base-image change. The image already creates these directories for `adedev`, but existing volumes hide the image directories and need a one-time ownership fix.
 
-For Podman in WSL2:
+For Podman on macOS, Windows, or WSL2, first resolve the actual container name. Depending on the Compose provider, it can be named for example `ade-dev-sandbox-ade-1` or `ade-dev-sandbox_ade_1`:
 
 ```bash
-podman ps --format '{{.Names}}'
-podman exec --user root ade-dev-sandbox_ade_1 bash -lc 'chown -R adedev:adedev /home/adedev/.codex /home/adedev/.local/share/opencode'
+CONTAINER_NAME=$(podman ps --filter name=ade-dev-sandbox --format '{{.Names}}' | head -n 1)
+podman exec --user root "$CONTAINER_NAME" bash -lc 'chown -R adedev:adedev /home/adedev/.codex /home/adedev/.local/share/opencode'
 ```
 
 For Docker Compose:
@@ -2596,7 +2621,7 @@ For Docker Compose:
 docker compose exec --user root ade bash -lc 'chown -R adedev:adedev /home/adedev/.codex /home/adedev/.local/share/opencode'
 ```
 
-If Podman fails with `container name "ade-dev-sandbox_ade_1" is already in use`, `can only create exec sessions on running containers`, or `rootlessport listen tcp 127.0.0.1:5100: bind: address already in use`, the same environment is usually still running on the other side of Windows/WSL2 or an old container still owns the port range. Only one variant may run at a time: either Podman Desktop on Windows or Podman in WSL2.
+If Podman fails with messages such as `container name "ade-dev-sandbox-ade-1" is already in use`, `container name "ade-dev-sandbox_ade_1" is already in use`, `can only create exec sessions on running containers`, or `rootlessport listen tcp 127.0.0.1:5100: bind: address already in use`, the same environment is usually still running in another Podman machine or an old container still owns the port range. Only one variant may run at a time.
 
 Check and stop it in WSL2:
 
@@ -2628,7 +2653,8 @@ docker compose up -d
 If the error points to `/dotnet-build/...`, the persistent build volume probably still belongs to an earlier container user. This can happen after an image or base-image change. Fix the volume ownership once:
 
 ```bash
-podman exec --user root ade-dev-sandbox_ade_1 bash -lc 'chown -R adedev:adedev /dotnet-build'
+CONTAINER_NAME=$(podman ps --filter name=ade-dev-sandbox --format '{{.Names}}' | head -n 1)
+podman exec --user root "$CONTAINER_NAME" bash -lc 'chown -R adedev:adedev /dotnet-build'
 ```
 
 With Docker Compose:
