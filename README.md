@@ -535,22 +535,22 @@ Compose-Datei pruefen, ohne Variablenwerte und Secrets auszubreiten:
 podman compose config --no-interpolate
 ```
 
-Image ueber die Compose-Konfiguration bauen:
+Auf Windows zuerst das Basisimage mit Podman ziehen. Dieser Schritt prueft, ob der Registry-Login fuer Podman funktioniert:
 
 ```powershell
-podman compose build --pull
+podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox:latest
 ```
 
-Nur das Image direkt aus diesem Verzeichnis bauen, ohne den Compose-Service zu starten:
+Danach das Projektimage direkt mit Podman bauen. Der Tag `ade-dev-sandbox-ade` entspricht dem Image-Namen, den Compose fuer den Service `ade` erwartet:
 
 ```powershell
-podman build --pull -t ade-dev-sandbox .
+podman build --pull -t ade-dev-sandbox-ade .
 ```
 
-Container im Hintergrund starten:
+Container im Hintergrund starten, ohne dass Compose noch einmal baut:
 
 ```powershell
-podman compose up -d
+podman compose up -d --no-build --force-recreate
 ```
 
 Status anzeigen:
@@ -583,7 +583,7 @@ Container stoppen und persistente Container-/Volume-Daten aus diesem Compose-Pro
 podman compose down -v
 ```
 
-Wenn `podman compose ...` meldet, dass ein externer Compose-Provider wie `docker-compose.exe` verwendet wird, ist das nicht automatisch ein Fehler. Wichtig ist, dass der Befehl gegen die laufende Podman-Machine arbeitet. Wenn der Befehl stattdessen den Docker-Daemon sucht oder mit Docker-Desktop-Fehlern abbricht, in Podman Desktop unter Settings die Compose-Unterstuetzung einrichten und danach `podman compose version` erneut pruefen.
+Wenn `podman compose ...` meldet, dass ein externer Compose-Provider wie `docker-compose.exe` verwendet wird, ist das nicht automatisch ein Fehler. Unter Windows sollte der Build trotzdem direkt mit `podman build` laufen, weil `docker-compose.exe` eigene Registry-Anmeldedaten verwenden kann und dann trotz erfolgreichem `podman login` mit `403 Forbidden` am GitLab-Basisimage scheitert. Compose wird in diesem Ablauf nur fuer `up --no-build`, `ps`, `exec` und `down` verwendet.
 
 WSL2- und Windows-Hinweis: Wenn dieselbe Umgebung einmal mit Podman Desktop unter Windows und einmal mit Podman in WSL2 gestartet wird, duerfen nicht beide Container gleichzeitig laufen. Beide Varianten veroeffentlichen dieselbe Port-Range `127.0.0.1:5100-5199`. Vor dem Start unter Windows den WSL2-Container stoppen:
 
@@ -1902,22 +1902,22 @@ Check the Compose file without expanding variable values and secrets:
 podman compose config --no-interpolate
 ```
 
-Build the image through the Compose configuration:
+On Windows, pull the base image with Podman first. This step verifies that the registry login works for Podman:
 
 ```powershell
-podman compose build --pull
+podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox:latest
 ```
 
-Build only the image directly from this directory, without starting the Compose service:
+Then build the project image directly with Podman. The tag `ade-dev-sandbox-ade` matches the image name Compose expects for the `ade` service:
 
 ```powershell
-podman build --pull -t ade-dev-sandbox .
+podman build --pull -t ade-dev-sandbox-ade .
 ```
 
-Start the container in the background:
+Start the container in the background without letting Compose build again:
 
 ```powershell
-podman compose up -d
+podman compose up -d --no-build --force-recreate
 ```
 
 Show the status:
@@ -1950,7 +1950,7 @@ Stop the container and delete persistent container and volume data from this Com
 podman compose down -v
 ```
 
-If `podman compose ...` reports that it is using an external Compose provider such as `docker-compose.exe`, that is not automatically an error. The important part is that the command talks to the running Podman machine. If the command instead searches for the Docker daemon or fails with Docker Desktop errors, set up Compose support in Podman Desktop under Settings and then check `podman compose version` again.
+If `podman compose ...` reports that it is using an external Compose provider such as `docker-compose.exe`, that is not automatically an error. On Windows, still run the build directly with `podman build`, because `docker-compose.exe` can use separate registry credentials and then fail on the GitLab base image with `403 Forbidden` even after a successful `podman login`. In this flow, Compose is only used for `up --no-build`, `ps`, `exec`, and `down`.
 
 WSL2 and Windows note: If the same environment is started once with Podman Desktop on Windows and once with Podman in WSL2, both containers must not run at the same time. Both variants publish the same port range `127.0.0.1:5100-5199`. Before starting on Windows, stop the WSL2 container:
 
