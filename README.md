@@ -1208,10 +1208,59 @@ Container stoppen, Daten behalten:
 docker compose down
 ```
 
-Container stoppen und persistente Opencode-Daten loeschen:
+Container stoppen und persistente Container-/Volume-Daten dieses Compose-Projekts loeschen:
 
 ```bash
 docker compose down -v
+```
+
+Diese Befehle gelten sinngemaess auf Linux, macOS und Windows. Entscheidend ist, ob die Umgebung mit Docker oder Podman gestartet wurde. Unter Windows koennen die Befehle in PowerShell, im Windows Terminal oder in WSL2 laufen. Wichtig ist nur, dass derselbe Container-Provider angesprochen wird, der die Container auch gestartet hat.
+
+Vor dem Aufraeumen zuerst anzeigen, wie viel Speicher Container, Images, Volumes und Build-Cache belegen:
+
+```bash
+docker system df
+podman system df
+```
+
+Eine vorsichtige Bereinigung entfernt nur ungenutzte Daten, zum Beispiel gestoppte Container, ungenutzte Networks und nicht mehr verwendete Images oder Caches. Laufende Container und die von ihnen verwendeten Images und Volumes bleiben erhalten:
+
+```bash
+docker system prune
+podman system prune
+```
+
+Mit `-a` werden zusaetzlich alle ungenutzten Images entfernt, nicht nur unbenannte Zwischen-Images. Auch hier bleiben Images erhalten, die von laufenden Containern verwendet werden:
+
+```bash
+docker system prune -a
+podman system prune -a
+```
+
+Gezieltes Aufraeumen ist ebenfalls moeglich:
+
+```bash
+docker container prune
+docker image prune
+docker builder prune
+
+podman container prune
+podman image prune
+podman image prune --build-cache
+```
+
+Volumes sind der riskante Teil, weil dort persistente Daten liegen koennen, zum Beispiel `opencode_data`, `codex_data` und `dotnet_build`. Volumes nur loeschen, wenn diese Daten bewusst entfernt werden sollen:
+
+```bash
+docker volume prune
+podman volume prune
+```
+
+Die haerteste Variante loescht ungenutzte Images, Container, Networks, Build-Cache und ungenutzte Volumes. Das ist nicht der normale Standardbefehl fuer dieses Projekt:
+
+```bash
+docker system prune -a --volumes
+podman system prune -a --volumes
 ```
 
 ### Haeufige Probleme
@@ -2588,10 +2637,59 @@ Stop the container but keep data:
 docker compose down
 ```
 
-Stop the container and delete persistent Opencode data:
+Stop the container and delete persistent container/volume data for this Compose project:
 
 ```bash
 docker compose down -v
+```
+
+These commands apply in the same way on Linux, macOS, and Windows. The important distinction is whether the environment was started with Docker or Podman. On Windows, the commands can run in PowerShell, Windows Terminal, or WSL2. The important point is to use the same container provider that started the containers.
+
+Before cleaning up, first show how much space is used by containers, images, volumes, and build cache:
+
+```bash
+docker system df
+podman system df
+```
+
+A cautious cleanup removes only unused data, for example stopped containers, unused networks, and no-longer-used images or caches. Running containers and the images and volumes used by them are kept:
+
+```bash
+docker system prune
+podman system prune
+```
+
+With `-a`, all unused images are removed as well, not only unnamed intermediate images. Images used by running containers are still kept:
+
+```bash
+docker system prune -a
+podman system prune -a
+```
+
+Targeted cleanup is also possible:
+
+```bash
+docker container prune
+docker image prune
+docker builder prune
+
+podman container prune
+podman image prune
+podman image prune --build-cache
+```
+
+Volumes are the risky part because they can contain persistent data, for example `opencode_data`, `codex_data`, and `dotnet_build`. Delete volumes only when these data are intentionally no longer needed:
+
+```bash
+docker volume prune
+podman volume prune
+```
+
+The hardest variant deletes unused images, containers, networks, build cache, and unused volumes. It is not the normal default command for this project:
+
+```bash
+docker system prune -a --volumes
+podman system prune -a --volumes
 ```
 
 ### Common problems
