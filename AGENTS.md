@@ -4,7 +4,7 @@
 
 This repository contains a small Docker-based Opencode, .NET, and Spec Kit environment, not an application codebase.
 
-- `Dockerfile`: builds from the official Microsoft .NET SDK `latest` image and installs Java JDK 21, Maven, `opencode-ai@latest`, `@openai/codex@latest`, `uv`, and `specify-cli`.
+- `Dockerfile`: builds from the shared `agent-sandbox` image and installs the current .NET SDK package, Java JDK 21, Maven, `opencode-ai@latest`, `@openai/codex@latest`, `uv`, `specify-cli`, and common CLI helper tools.
 - `compose.yml`: defines the `ade` service, pulls newer build base images, and mounts local state.
 - The container runs commands as the Linux user `adedev`; keep home-directory paths under `/home/adedev`.
 - `opencode.jsonc`: configures the `chat-ai` provider, models, and agents. Keep comments useful for first-year IT specialist apprentices.
@@ -93,7 +93,7 @@ For Dockerfile changes, also run:
 docker compose build --pull
 ```
 
-The `--pull` flag is important because the Dockerfile uses `mcr.microsoft.com/dotnet/sdk:latest`.
+The `--pull` flag is important because the Dockerfile uses the registry-hosted `agent-sandbox:latest` base image.
 
 On macOS or Windows with Podman, the equivalent validation path is:
 

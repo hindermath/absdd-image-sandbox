@@ -71,7 +71,7 @@ Dieses Repository stellt eine Docker-Umgebung fuer Opencode, .NET und C# bereit.
 
 ### Grundidee
 
-Docker erstellt aus dem `Dockerfile` ein Image. Aus diesem Image startet Docker Compose einen Container. Der Container enthaelt das aktuelle Microsoft .NET SDK, Java JDK 21, Maven, Node.js, npm, Opencode und Codex CLI.
+Docker erstellt aus dem `Dockerfile` ein Image. Aus diesem Image startet Docker Compose einen Container. Der Container enthaelt das aktuelle Microsoft .NET SDK, Java JDK 21, Maven, Node.js, npm, Opencode, Codex CLI und gaengige Agenten-Hilfswerkzeuge.
 
 Der Container bleibt im Hintergrund aktiv. Danach kann eine Shell im Container geoeffnet werden. Dort koennen Befehle wie `dotnet`, `opencode`, `codex` oder `ls` ausgefuehrt werden.
 
@@ -92,7 +92,7 @@ Wenn der Prompt mit `adedev@...` beginnt, befindet sich die Shell im Container. 
 
 ### Projektstruktur
 
-- `Dockerfile`: beschreibt das Container-Image. Es nutzt `mcr.microsoft.com/dotnet/sdk:latest`.
+- `Dockerfile`: beschreibt das Container-Image. Es erbt vom gemeinsamen `agent-sandbox`-Image und installiert darauf .NET SDK, Java JDK 21, Maven, Opencode, Codex CLI, `uv`, Spec Kit und gaengige CLI-Hilfswerkzeuge.
 - `compose.yml`: beschreibt den Service `ade`, Volumes und Build-Regeln.
 - `.dockerignore` und `.containerignore`: schliessen lokale Secrets, Git-Daten und Arbeitsverzeichnisse aus dem Build-Kontext aus.
 - `.env.example`: Vorlage fuer die plattformabhaengigen Mounts `RIDER_PROJECTS_DIR` und `JAVA_PROJECTS_DIR`.
@@ -262,6 +262,12 @@ In das Repository wechseln:
 cd /home/thinder/ade-dev-sandbox
 ```
 
+Vor dem ersten Build bei der GitLab Container Registry anmelden. Als Passwort einen GitLab-Token mit mindestens `read_registry` verwenden:
+
+```bash
+podman login docker.gitlab-ce.gwdg.de
+```
+
 Compose-Datei pruefen, ohne Variablenwerte und Secrets auszubreiten:
 
 ```bash
@@ -381,13 +387,19 @@ In das Repository wechseln:
 cd /Users/thorstenhindermann/ade-dev-sandbox
 ```
 
+Vor dem ersten Build bei der GitLab Container Registry anmelden. Als Passwort einen GitLab-Token mit mindestens `read_registry` verwenden:
+
+```bash
+podman login docker.gitlab-ce.gwdg.de
+```
+
 Compose-Datei pruefen, ohne Variablenwerte und Secrets auszubreiten:
 
 ```bash
 podman compose config --no-interpolate
 ```
 
-Image bauen und dabei nach dem neuesten .NET-Basisimage suchen:
+Image bauen und dabei das aktuelle Sandbox-Basisimage ziehen:
 
 ```bash
 podman compose build --pull
@@ -507,6 +519,12 @@ In das Repository wechseln:
 
 ```powershell
 cd C:\Users\thinder\ade-dev-sandbox
+```
+
+Vor dem ersten Build bei der GitLab Container Registry anmelden. Als Passwort einen GitLab-Token mit mindestens `read_registry` verwenden:
+
+```powershell
+podman login docker.gitlab-ce.gwdg.de
 ```
 
 Compose-Datei pruefen, ohne Variablenwerte und Secrets auszubreiten:
@@ -630,7 +648,13 @@ In das Repository wechseln:
 cd /home/thinder/ade-dev-sandbox
 ```
 
-Image bauen und dabei nach dem neuesten .NET-Basisimage suchen:
+Vor dem ersten Build bei der GitLab Container Registry anmelden. Als Passwort einen GitLab-Token mit mindestens `read_registry` verwenden:
+
+```bash
+docker login docker.gitlab-ce.gwdg.de
+```
+
+Image bauen und dabei das aktuelle Sandbox-Basisimage ziehen:
 
 ```bash
 docker compose build --pull
@@ -648,7 +672,7 @@ Status anzeigen:
 docker compose ps
 ```
 
-Beim ersten Build werden das .NET-SDK-Basisimage und npm-Pakete geladen. Das kann einige Minuten dauern.
+Beim ersten Build werden das Sandbox-Basisimage, das .NET-SDK-Paket und npm-Pakete geladen. Das kann einige Minuten dauern.
 
 ### Rider-Projekte aus Windows einbinden
 
@@ -991,19 +1015,23 @@ Lokale Codex-Daten liegen im Docker-Volume `codex_data` unter `/home/adedev/.cod
 https://chat-ai.academiccloud.de/v1
 ```
 
-Der API-Key wird aus `GWDG_API_KEY` gelesen. Das Standardmodell ist:
+Der API-Key wird aus `GWDG_API_KEY` gelesen. Das Standardmodell fuer normale Coding-Aufgaben ist:
 
 ```text
-chat-ai/glm-4.7
+chat-ai/qwen3-coder-30b-a3b-instruct
 ```
 
-Java JDK 21 und Maven werden beim Image-Build aus den Ubuntu-Paketquellen installiert. Sie sind fuer Java-Grundlagen, Maven-Projekte und Spring-Boot-Projekte vorbereitet.
+Der Standard-Agent `coding` nutzt dieses Modell mit fokussierten Coding-Parametern. `glm-4.7` bleibt als kleineres Modell fuer Nebenaufgaben und als Alternative fuer Analyse und Brainstorming konfiguriert.
+
+Java JDK 21 und Maven werden beim Image-Build aus den Debian-Paketquellen installiert. Sie sind fuer Java-Grundlagen, Maven-Projekte und Spring-Boot-Projekte vorbereitet.
 
 Opencode und Codex CLI werden beim Image-Build mit der neuesten npm-Version installiert:
 
 ```dockerfile
 RUN npm i -g opencode-ai@latest @openai/codex@latest
 ```
+
+Zusaetzlich installiert das Image haeufig genutzte CLI-Werkzeuge fuer Agenten-Workflows: `git`, `python`, `python3`, `jq`, `yq`, `rg`, `fd`, `fdfind`, `direnv`, `shellcheck`, `shfmt`, `delta`, `tree`, `just`, `wget` und `curl`. Das Debian-Paket fuer `fd` heisst `fd-find` und liefert den Befehl `fdfind`; das Image legt zusaetzlich den erwarteten Befehl `fd` als Symlink an. `mas` ist ein macOS-App-Store-Werkzeug und wird im Linux-Container nicht installiert.
 
 Codex CLI speichert lokale Daten im Docker-Volume `codex_data`. Dieses Volume wird im Container nach `/home/adedev/.codex` eingebunden. Dadurch bleiben Codex-Daten zwischen Container-Neustarts erhalten, ohne dass sie in das Git-Repository geschrieben werden.
 
@@ -1019,6 +1047,8 @@ MSBuildEnableWorkloadResolver=false
 ```
 
 Die erste Variable betrifft allgemeine Update-Benachrichtigungen. Die zweite Variable deaktiviert den MSBuild-Workload-Resolver. Das ist fuer normale Konsolen-, Library-, Test- und Web-Projekte sinnvoll, weil dort keine optionalen SDK-Workloads wie MAUI gebraucht werden.
+
+Das Image erbt vom gemeinsamen `agent-sandbox`-Image auf Debian 13. .NET wird deshalb im Dockerfile ueber die Microsoft-Paketquelle fuer Debian 13 installiert. Der Build-Parameter `DOTNET_SDK_PACKAGE` steht standardmaessig auf `dotnet-sdk-10.0`.
 
 Gegen die Meldung `An issue was encountered verifying workloads` wird beim Image-Build zusaetzlich der Manifest-Modus gesetzt:
 
@@ -1063,6 +1093,21 @@ Wenn Docker keine Berechtigung hat, entweder `sudo docker ...` verwenden oder de
 
 Wenn der API-Key nicht funktioniert, `opencode.env` pruefen. Den Key nicht im Terminalverlauf, in Screenshots oder in Git-Ausgaben zeigen.
 
+Wenn `codex` oder `opencode` im Container mit `Permission denied` oder `EACCES` unter `/home/adedev/.codex` oder `/home/adedev/.local/share/opencode` abbrechen, gehoeren wahrscheinlich alte persistente Volumes noch einem frueheren Container-Benutzer. Das kann nach einem Image- oder Basisimage-Wechsel passieren. Die Verzeichnisse im Image sind bereits fuer `adedev` angelegt; vorhandene Volumes ueberdecken diese Verzeichnisse aber und muessen einmalig korrigiert werden.
+
+Fuer Podman in WSL2:
+
+```bash
+podman ps --format '{{.Names}}'
+podman exec --user root ade-dev-sandbox_ade_1 bash -lc 'chown -R adedev:adedev /home/adedev/.codex /home/adedev/.local/share/opencode'
+```
+
+Fuer Docker Compose:
+
+```bash
+docker compose exec --user root ade bash -lc 'chown -R adedev:adedev /home/adedev/.codex /home/adedev/.local/share/opencode'
+```
+
 Wenn Podman mit `container name "ade-dev-sandbox_ade_1" is already in use`, `can only create exec sessions on running containers` oder `rootlessport listen tcp 127.0.0.1:5100: bind: address already in use` abbricht, laeuft meist dieselbe Umgebung noch auf der anderen Seite von Windows/WSL2 oder ein alter Container belegt die Port-Range. Es darf nur eine Variante gleichzeitig laufen: entweder Podman Desktop unter Windows oder Podman in WSL2.
 
 In WSL2 pruefen und stoppen:
@@ -1090,6 +1135,18 @@ Wenn .NET unter `/rider-projects` einen Fehler zu `obj`, `bin`, `apphost` oder `
 ```bash
 docker compose build --pull
 docker compose up -d
+```
+
+Wenn der Fehler auf `/dotnet-build/...` zeigt, gehoert wahrscheinlich das persistente Build-Volume noch einem frueheren Container-Benutzer. Das kann nach einem Image- oder Basisimage-Wechsel passieren. Dann das Volume einmalig korrigieren:
+
+```bash
+podman exec --user root ade-dev-sandbox_ade_1 bash -lc 'chown -R adedev:adedev /dotnet-build'
+```
+
+Mit Docker Compose:
+
+```bash
+docker compose exec --user root ade bash -lc 'chown -R adedev:adedev /dotnet-build'
 ```
 
 Danach im Container pruefen, ob die allgemeine MSBuild-Konfiguration und das Build-Volume vorhanden sind:
@@ -1260,7 +1317,7 @@ This repository provides a Docker environment for Opencode, .NET, and C#. It run
 
 ### Basic idea
 
-Docker builds an image from the `Dockerfile`. Docker Compose starts a container from that image. The container includes the current Microsoft .NET SDK, Java JDK 21, Maven, Node.js, npm, Opencode, and Codex CLI.
+Docker builds an image from the `Dockerfile`. Docker Compose starts a container from that image. The container includes the current Microsoft .NET SDK, Java JDK 21, Maven, Node.js, npm, Opencode, Codex CLI, and common agent helper tools.
 
 The container stays active in the background. You can then open a shell inside it and run commands such as `dotnet`, `opencode`, `codex`, or `ls`.
 
@@ -1281,7 +1338,7 @@ If the prompt starts with `adedev@...`, the shell is inside the container. If th
 
 ### Project structure
 
-- `Dockerfile`: describes the container image. It uses `mcr.microsoft.com/dotnet/sdk:latest`.
+- `Dockerfile`: describes the container image. It inherits from the shared `agent-sandbox` image and installs .NET SDK, Java JDK 21, Maven, Opencode, Codex CLI, `uv`, Spec Kit, and common CLI helper tools on top.
 - `compose.yml`: describes the `ade` service, volumes, and build rules.
 - `.dockerignore` and `.containerignore`: exclude local secrets, Git data, and working directories from the build context.
 - `.env.example`: template for the platform-specific mounts `RIDER_PROJECTS_DIR` and `JAVA_PROJECTS_DIR`.
@@ -1451,6 +1508,12 @@ Change into the repository:
 cd /home/thinder/ade-dev-sandbox
 ```
 
+Before the first build, log in to the GitLab container registry. Use a GitLab token with at least `read_registry` as the password:
+
+```bash
+podman login docker.gitlab-ce.gwdg.de
+```
+
 Check the Compose file without expanding variable values and secrets:
 
 ```bash
@@ -1570,13 +1633,19 @@ Change into the repository:
 cd /Users/thorstenhindermann/ade-dev-sandbox
 ```
 
+Before the first build, log in to the GitLab container registry. Use a GitLab token with at least `read_registry` as the password:
+
+```bash
+podman login docker.gitlab-ce.gwdg.de
+```
+
 Check the Compose file without expanding variable values and secrets:
 
 ```bash
 podman compose config --no-interpolate
 ```
 
-Build the image and check for the newest .NET base image:
+Build the image and pull the current Sandbox base image:
 
 ```bash
 podman compose build --pull
@@ -1696,6 +1765,12 @@ Change into the repository:
 
 ```powershell
 cd C:\Users\thinder\ade-dev-sandbox
+```
+
+Before the first build, log in to the GitLab container registry. Use a GitLab token with at least `read_registry` as the password:
+
+```powershell
+podman login docker.gitlab-ce.gwdg.de
 ```
 
 Check the Compose file without expanding variable values and secrets:
@@ -1819,7 +1894,13 @@ Change into the repository:
 cd /home/thinder/ade-dev-sandbox
 ```
 
-Build the image and check for the newest .NET base image:
+Before the first build, log in to the GitLab container registry. Use a GitLab token with at least `read_registry` as the password:
+
+```bash
+docker login docker.gitlab-ce.gwdg.de
+```
+
+Build the image and pull the current Sandbox base image:
 
 ```bash
 docker compose build --pull
@@ -1837,7 +1918,7 @@ Show the status:
 docker compose ps
 ```
 
-The first build downloads the .NET SDK base image and npm packages. This can take several minutes.
+The first build downloads the Sandbox base image, the .NET SDK package, and npm packages. This can take several minutes.
 
 ### Mount Rider projects from Windows
 
@@ -2180,19 +2261,23 @@ Local Codex data is stored in the Docker volume `codex_data` under `/home/adedev
 https://chat-ai.academiccloud.de/v1
 ```
 
-The API key is read from `GWDG_API_KEY`. The default model is:
+The API key is read from `GWDG_API_KEY`. The default model for normal coding tasks is:
 
 ```text
-chat-ai/glm-4.7
+chat-ai/qwen3-coder-30b-a3b-instruct
 ```
 
-Java JDK 21 and Maven are installed during the image build from the Ubuntu package sources. They prepare the container for Java basics, Maven projects, and Spring Boot projects.
+The default agent `coding` uses this model with focused coding parameters. `glm-4.7` remains configured as the smaller model for side tasks and as an alternative for analysis and brainstorming.
+
+Java JDK 21 and Maven are installed during the image build from the Debian package sources. They prepare the container for Java basics, Maven projects, and Spring Boot projects.
 
 Opencode and Codex CLI are installed during the image build with the newest npm version:
 
 ```dockerfile
 RUN npm i -g opencode-ai@latest @openai/codex@latest
 ```
+
+The image also installs common CLI tools for agent workflows: `git`, `python`, `python3`, `jq`, `yq`, `rg`, `fd`, `fdfind`, `direnv`, `shellcheck`, `shfmt`, `delta`, `tree`, `just`, `wget`, and `curl`. The Debian package for `fd` is named `fd-find` and provides the `fdfind` command; the image also adds the expected `fd` command as a symlink. `mas` is a macOS App Store tool and is not installed in the Linux container.
 
 Codex CLI stores local data in the Docker volume `codex_data`. This volume is mounted into the container at `/home/adedev/.codex`. This keeps Codex data across container restarts without writing it into the Git repository.
 
@@ -2208,6 +2293,8 @@ MSBuildEnableWorkloadResolver=false
 ```
 
 The first variable affects general update notifications. The second variable disables the MSBuild workload resolver. This is useful for normal console, library, test, and web projects because they do not need optional SDK workloads such as MAUI.
+
+The image inherits from the shared `agent-sandbox` image on Debian 13. .NET is therefore installed in the Dockerfile through the Microsoft package feed for Debian 13. The build argument `DOTNET_SDK_PACKAGE` defaults to `dotnet-sdk-10.0`.
 
 To address the message `An issue was encountered verifying workloads`, the image build also sets manifest mode:
 
@@ -2252,6 +2339,21 @@ If Docker has no permission, use `sudo docker ...` or add the user to the `docke
 
 If the API key does not work, check `opencode.env`. Do not show the key in terminal history, screenshots, or Git output.
 
+If `codex` or `opencode` exits inside the container with `Permission denied` or `EACCES` below `/home/adedev/.codex` or `/home/adedev/.local/share/opencode`, old persistent volumes probably still belong to an earlier container user. This can happen after an image or base-image change. The image already creates these directories for `adedev`, but existing volumes hide the image directories and need a one-time ownership fix.
+
+For Podman in WSL2:
+
+```bash
+podman ps --format '{{.Names}}'
+podman exec --user root ade-dev-sandbox_ade_1 bash -lc 'chown -R adedev:adedev /home/adedev/.codex /home/adedev/.local/share/opencode'
+```
+
+For Docker Compose:
+
+```bash
+docker compose exec --user root ade bash -lc 'chown -R adedev:adedev /home/adedev/.codex /home/adedev/.local/share/opencode'
+```
+
 If Podman fails with `container name "ade-dev-sandbox_ade_1" is already in use`, `can only create exec sessions on running containers`, or `rootlessport listen tcp 127.0.0.1:5100: bind: address already in use`, the same environment is usually still running on the other side of Windows/WSL2 or an old container still owns the port range. Only one variant may run at a time: either Podman Desktop on Windows or Podman in WSL2.
 
 Check and stop it in WSL2:
@@ -2279,6 +2381,18 @@ If .NET reports an `obj`, `bin`, `apphost`, or `Access denied` error under `/rid
 ```bash
 docker compose build --pull
 docker compose up -d
+```
+
+If the error points to `/dotnet-build/...`, the persistent build volume probably still belongs to an earlier container user. This can happen after an image or base-image change. Fix the volume ownership once:
+
+```bash
+podman exec --user root ade-dev-sandbox_ade_1 bash -lc 'chown -R adedev:adedev /dotnet-build'
+```
+
+With Docker Compose:
+
+```bash
+docker compose exec --user root ade bash -lc 'chown -R adedev:adedev /dotnet-build'
 ```
 
 Then check inside the container that the general MSBuild configuration and build volume exist:

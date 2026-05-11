@@ -1,13 +1,42 @@
-FROM mcr.microsoft.com/dotnet/sdk:latest
+FROM docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox:latest
 
+ARG DOTNET_SDK_PACKAGE=dotnet-sdk-10.0
+
+USER root
 RUN apt-get -y update \
-    && apt-get -y install --no-install-recommends ca-certificates curl git openjdk-21-jdk-headless maven \
+    && apt-get -y install --no-install-recommends \
+        ca-certificates \
+        curl \
+        direnv \
+        fd-find \
+        git \
+        git-delta \
+        jq \
+        just \
+        maven \
+        openjdk-21-jdk-headless \
+        python-is-python3 \
+        python3 \
+        python3-venv \
+        ripgrep \
+        shellcheck \
+        shfmt \
+        tree \
+        wget \
+        yq \
+    && wget https://packages.microsoft.com/config/debian/13/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+    && dpkg -i packages-microsoft-prod.deb \
+    && rm packages-microsoft-prod.deb \
+    && apt-get -y update \
+    && apt-get -y install --no-install-recommends "${DOTNET_SDK_PACKAGE}" \
     && curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
     && apt-get -y install --no-install-recommends nodejs \
+    && ln -sf /usr/bin/fdfind /usr/local/bin/fd \
     && rm -rf /var/lib/apt/lists/*
 RUN dotnet workload config --update-mode manifests \
     && dotnet workload update
-RUN npm i -g opencode-ai@latest @openai/codex@latest
+RUN npm i -g opencode-ai@latest @openai/codex@latest \
+    && ln -sf "$(npm root -g)/@openai/codex/bin/codex.js" /usr/local/bin/codex
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
     && install -m 0755 /root/.local/bin/uv /usr/local/bin/uv \
     && install -m 0755 /root/.local/bin/uvx /usr/local/bin/uvx
@@ -20,6 +49,7 @@ RUN useradd -m adedev
 RUN mkdir -p /dotnet-build && chown adedev:adedev /dotnet-build
 USER adedev
 ENV PATH="/home/adedev/.local/bin:${PATH}"
+WORKDIR /home/adedev
 RUN uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.8.3 \
     && python3 /usr/local/bin/patch-specify-cli.py
 RUN mkdir -p /home/adedev/.local/share/opencode
