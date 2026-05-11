@@ -1,0 +1,73 @@
+# DE: Admin-erzwingende Codex-Sicherheitsanforderungen fuer den ADE-Container.
+# EN: Admin-enforced Codex security requirements for the ADE container.
+#
+# DE: Diese Datei wird im Image nach /etc/codex/requirements.toml kopiert.
+# EN: This file is copied into the image as /etc/codex/requirements.toml.
+#
+# DE: Normale Benutzer- oder Projektkonfiguration darf diese Schranken nicht abschwaechen.
+# EN: Normal user or project configuration must not weaken these constraints.
+
+# DE: "never" ist nicht erlaubt, damit riskante Aktionen nicht ohne Rueckfrage laufen.
+# EN: "never" is not allowed, so risky actions cannot run without approval.
+allowed_approval_policies = ["untrusted", "on-request"]
+
+# DE: Vollzugriff ist nicht erlaubt.
+# EN: Full access is not allowed.
+allowed_sandbox_modes = ["read-only", "workspace-write"]
+
+# DE: Live- und Cache-Websuche sind nicht erlaubt; "disabled" bleibt implizit erlaubt.
+# EN: Live and cached web search are not allowed; "disabled" remains implicitly allowed.
+allowed_web_search_modes = []
+
+[features]
+# DE: Diese Oberflaechen bleiben auch dann deaktiviert, wenn ein Benutzer sie lokal einschalten will.
+# EN: These surfaces stay disabled even if a user tries to enable them locally.
+browser_use = false
+computer_use = false
+in_app_browser = false
+
+[permissions.filesystem]
+# DE: Diese Pfade und Muster darf Codex nicht lesen.
+# EN: Codex must not read these paths and patterns.
+# DE: Das schuetzt lokale Secrets, Container-Authentifizierung und Agenten-Zustand.
+# EN: This protects local secrets, container authentication, and agent state.
+deny_read = [
+  "*.env",
+  "*.env.*",
+  "**/*.env",
+  "**/*.env.*",
+  ".env",
+  "**/.env",
+  "opencode.env",
+  "**/opencode.env",
+  "codex.env",
+  "**/codex.env",
+  "/home/adedev/.ssh/**",
+  "/home/adedev/.gnupg/**",
+  "/home/adedev/.docker/**",
+  "/home/adedev/.config/gh/**",
+  "/home/adedev/.config/glab-cli/**",
+  "/home/adedev/.config/containers/**",
+  "/home/adedev/.local/share/containers/**",
+  "/home/adedev/.codex/**",
+  "/home/adedev/.local/share/opencode/**",
+]
+
+[rules]
+# DE: Command-Regeln greifen, wenn Codex Shell-Kommandos ausserhalb der Sandbox ausfuehren will.
+# EN: Command rules apply when Codex wants to run shell commands outside the sandbox.
+# DE: "forbidden" blockiert, "prompt" verlangt bewusste Freigabe.
+# EN: "forbidden" blocks, "prompt" requires deliberate approval.
+prefix_rules = [
+  { pattern = [{ token = "rm" }], decision = "forbidden", justification = "Destruktive Loeschbefehle sind in dieser Umgebung nicht erlaubt. Nutze gezielte Dateioperationen oder frage den Benutzer." },
+  { pattern = [{ token = "sudo" }], decision = "forbidden", justification = "Der Container soll nicht per sudo eskalieren. Aendere das Dockerfile oder starte einen Root-Befehl bewusst ausserhalb von Codex." },
+  { pattern = [{ token = "su" }], decision = "forbidden", justification = "Benutzerwechsel ist in dieser Sandbox nicht vorgesehen." },
+  { pattern = [{ token = "dd" }], decision = "forbidden", justification = "Blockorientierte Schreiboperationen sind fuer diese Entwicklungsumgebung zu riskant." },
+  { pattern = [{ token = "mkfs" }], decision = "forbidden", justification = "Dateisystem-Erstellung ist in dieser Entwicklungsumgebung nicht vorgesehen." },
+  { pattern = [{ token = "mount" }], decision = "forbidden", justification = "Mount-Operationen duerfen nicht automatisiert aus Codex heraus laufen." },
+  { pattern = [{ token = "umount" }], decision = "forbidden", justification = "Unmount-Operationen duerfen nicht automatisiert aus Codex heraus laufen." },
+  { pattern = [{ token = "git" }, { any_of = ["commit", "push", "tag"] }], decision = "prompt", justification = "Repository-aendernde Git-Aktionen brauchen bewusste Freigabe." },
+  { pattern = [{ any_of = ["docker", "podman", "podman-compose"] }], decision = "prompt", justification = "Container-Aktionen koennen Netzwerk, Volumes, Images oder Ports betreffen." },
+  { pattern = [{ any_of = ["curl", "wget"] }], decision = "prompt", justification = "Explizite Netzwerkabrufe brauchen Freigabe." },
+  { pattern = [{ any_of = ["npm", "npx", "mvn", "dotnet"] }], decision = "prompt", justification = "Build- und Paketmanager-Befehle koennen Code ausfuehren oder Abhaengigkeiten nachladen." },
+]

@@ -5,6 +5,7 @@ ARG DOTNET_SDK_PACKAGE=dotnet-sdk-10.0
 USER root
 RUN apt-get -y update \
     && apt-get -y install --no-install-recommends \
+        bubblewrap \
         ca-certificates \
         curl \
         direnv \
@@ -44,6 +45,10 @@ COPY ./dotnet/dotnet-wrapper.sh /usr/local/bin/dotnet
 RUN sed -i 's/\r$//' /usr/local/bin/dotnet \
     && chmod 0755 /usr/local/bin/dotnet
 COPY ./spec-kit/patch-specify-cli.py /usr/local/bin/patch-specify-cli.py
+RUN mkdir -p /etc/codex
+COPY ./codex/config.toml /etc/codex/config.toml
+COPY ./codex/config.toml /etc/codex/managed_config.toml
+COPY ./codex/requirements.toml /etc/codex/requirements.toml
 
 RUN useradd -m adedev
 RUN mkdir -p /dotnet-build && chown adedev:adedev /dotnet-build

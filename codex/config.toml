@@ -1,0 +1,123 @@
+# DE: Systemweite Codex-Standardkonfiguration fuer den ADE-Container.
+# EN: System-wide Codex default configuration for the ADE container.
+#
+# DE: Diese Datei wird im Image nach /etc/codex/config.toml und /etc/codex/managed_config.toml kopiert.
+# EN: This file is copied into the image as /etc/codex/config.toml and /etc/codex/managed_config.toml.
+#
+# DE: Wichtig: Nicht nach /home/adedev/.codex/config.toml kopieren.
+# EN: Important: Do not copy this to /home/adedev/.codex/config.toml.
+# DE: /home/adedev/.codex wird durch das Docker-/Podman-Volume codex_data ueberlagert.
+# EN: /home/adedev/.codex is overlaid by the Docker/Podman volume codex_data.
+
+# DE: "untrusted" erlaubt nur Codex' vertrauenswuerdige Basisbefehle ohne Nachfrage.
+# EN: "untrusted" allows only Codex's trusted basic commands without approval.
+# DE: Alles andere wird dem Benutzer zur Freigabe vorgelegt.
+# EN: Everything else is presented to the user for approval.
+approval_policy = "untrusted"
+
+# DE: Codex darf im Workspace schreiben, aber nicht mit Vollzugriff laufen.
+# EN: Codex may write in the workspace, but must not run with full access.
+sandbox_mode = "workspace-write"
+
+# DE: Live-Websuche ist standardmaessig deaktiviert.
+# EN: Live web search is disabled by default.
+# DE: Falls Recherche noetig ist, soll sie bewusst temporaer aktiviert werden.
+# EN: If research is needed, it should be enabled deliberately and temporarily.
+web_search = "disabled"
+
+# DE: Updates erfolgen kontrolliert ueber Dockerfile, Git-Commit und Image-Build.
+# EN: Updates are managed through Dockerfile, Git commit, and image build.
+check_for_update_on_startup = false
+
+# DE: Login-Shells laden zusaetzliche Startdateien und koennen Nebeneffekte haben.
+# EN: Login shells load additional startup files and can have side effects.
+allow_login_shell = false
+
+# DE: Der Container hat keinen passenden grafischen Editor fuer Datei-Links.
+# EN: The container has no matching graphical editor for file links.
+file_opener = "none"
+
+# DE: Reasoning-Ereignisse sollen nicht unnoetig in TUI- oder Exec-Ausgaben erscheinen.
+# EN: Reasoning events should not unnecessarily appear in TUI or exec output.
+hide_agent_reasoning = true
+
+# DE: Keine automatische Co-Author-Zeile in Git-Commits erzwingen.
+# EN: Do not force an automatic co-author trailer in Git commits.
+commit_attribution = ""
+
+[history]
+# DE: Session-Transkripte werden nicht dauerhaft gespeichert.
+# EN: Session transcripts are not persisted.
+# DE: Das reduziert lokale Datenhaltung im codex_data-Volume.
+# EN: This reduces local data retention in the codex_data volume.
+persistence = "none"
+
+[otel]
+# DE: Keine Telemetrie aus dem Container exportieren.
+# EN: Do not export telemetry from the container.
+exporter = "none"
+metrics_exporter = "none"
+trace_exporter = "none"
+
+# DE: Prompts duerfen nicht in Telemetrie-Logs geschrieben werden.
+# EN: Prompts must not be written to telemetry logs.
+log_user_prompt = false
+
+[sandbox_workspace_write]
+# DE: Netzwerkzugriff innerhalb der Workspace-Sandbox bleibt aus.
+# EN: Network access inside the workspace sandbox stays off.
+# DE: Netzwerkbefehle muessen ueber Approval bewusst freigegeben werden.
+# EN: Network commands must be approved deliberately.
+network_access = false
+
+# DE: /tmp und $TMPDIR sind nicht automatisch beschreibbar.
+# EN: /tmp and $TMPDIR are not writable automatically.
+# DE: Dadurch werden Nebenablaeufe ausserhalb der Projektverzeichnisse reduziert.
+# EN: This reduces side effects outside the project directories.
+exclude_slash_tmp = true
+exclude_tmpdir_env_var = true
+
+# DE: Diese Projektpfade sind die beabsichtigten Arbeitsbereiche im Container.
+# EN: These project paths are the intended work areas inside the container.
+writable_roots = [
+  "/workspace",
+  "/rider-projects",
+  "/java-projects",
+]
+
+[shell_environment_policy]
+# DE: Nur eine reduzierte, stabile Menge an Umgebungsvariablen erben.
+# EN: Inherit only a reduced, stable set of environment variables.
+inherit = "core"
+
+# DE: Typische Secret-Variablen werden aus Shell-Kommandos entfernt.
+# EN: Typical secret variables are removed from shell commands.
+# DE: GWDG_API_KEY bleibt damit nicht automatisch in jedem Subprozess sichtbar.
+# EN: This keeps GWDG_API_KEY from being automatically visible in every subprocess.
+exclude = [
+  "*KEY*",
+  "*SECRET*",
+  "*TOKEN*",
+  "*PASSWORD*",
+  "*CREDENTIAL*",
+]
+
+[features]
+# DE: App-/Connector- und Browser-/Computer-Use-Flaechen sind im Container aus.
+# EN: App/connector and browser/computer-use surfaces are off in the container.
+apps = false
+browser_use = false
+computer_use = false
+in_app_browser = false
+
+# DE: Langzeit-Memories und automatische Skill-Abhaengigkeitsinstallationen sind aus.
+# EN: Long-term memories and automatic skill dependency installation are off.
+memories = false
+skill_mcp_dependency_install = false
+
+[apps._default]
+# DE: Falls App-Unterstuetzung spaeter aktiviert wird, startet sie restriktiv.
+# EN: If app support is enabled later, it starts restrictively.
+enabled = false
+destructive_enabled = false
+open_world_enabled = false

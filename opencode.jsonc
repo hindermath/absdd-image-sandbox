@@ -17,9 +17,193 @@
   // EN: Default agent for normal work in OpenCode.
   "default_agent": "coding",
 
-  // DE: OpenCode darf sich beim Start selbst aktualisieren.
-  // EN: OpenCode may update itself when it starts.
-  "autoupdate": true,
+  // DE: OpenCode darf keine Sitzungen teilen.
+  // EN: OpenCode must not share sessions.
+  // DE: Das verhindert versehentliche oeffentliche Links zu Chat-Verlaeufen.
+  // EN: This prevents accidental public links to chat history.
+  "share": "disabled",
+
+  // DE: Updates erfolgen kontrolliert ueber Dockerfile, Commit und Image-Build.
+  // EN: Updates happen in a controlled way through Dockerfile, commit, and image build.
+  // DE: OpenCode soll sich beim Start nicht selbst aktualisieren.
+  // EN: OpenCode must not update itself during startup.
+  "autoupdate": false,
+
+  // DE: Nur der GWDG/AcademicCloud-Provider wird in diesem Setup genutzt.
+  // EN: Only the GWDG/AcademicCloud provider is used in this setup.
+  // DE: Andere automatisch erkannte Provider bleiben damit deaktiviert.
+  // EN: Other automatically detected providers stay disabled.
+  "enabled_providers": ["chat-ai"],
+
+  // DE: Globale Sicherheitsregeln fuer OpenCode-Werkzeuge.
+  // EN: Global security rules for OpenCode tools.
+  // DE: OpenCode ist ohne diese Regeln recht offen eingestellt.
+  // EN: OpenCode is quite open without these rules.
+  // DE: Die Regeln sind fuer einen ISO-9001/27001-Kontext bewusst vorsichtig.
+  // EN: The rules are intentionally careful for an ISO 9001/27001 context.
+  // DE: "allow" laeuft ohne Nachfrage, "ask" fragt nach, "deny" blockiert.
+  // EN: "allow" runs without approval, "ask" asks, and "deny" blocks.
+  // DE: Bei Musterregeln gewinnt die letzte passende Regel.
+  // EN: For pattern rules, the last matching rule wins.
+  "permission": {
+    // DE: Grundregel: Alles fragt nach, wenn unten nichts Spezielleres steht.
+    // EN: Base rule: everything asks unless a more specific rule below applies.
+    "*": "ask",
+
+    // DE: Lesen ist im Projekt erlaubt, aber Secrets und lokale Tool-Daten sind gesperrt.
+    // EN: Reading is allowed in the project, but secrets and local tool data are blocked.
+    // DE: Beispiel-Dateien bleiben lesbar, weil sie keine echten Geheimnisse enthalten duerfen.
+    // EN: Example files stay readable because they must not contain real secrets.
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "**/*.env": "deny",
+      "**/*.env.*": "deny",
+      ".env": "deny",
+      "**/.env": "deny",
+      "opencode.env": "deny",
+      "**/opencode.env": "deny",
+      "codex.env": "deny",
+      "**/codex.env": "deny",
+      "$HOME/.ssh/**": "deny",
+      "$HOME/.gnupg/**": "deny",
+      "$HOME/.docker/**": "deny",
+      "$HOME/.config/gh/**": "deny",
+      "$HOME/.config/glab-cli/**": "deny",
+      "$HOME/.config/containers/**": "deny",
+      "$HOME/.local/share/containers/**": "deny",
+      "$HOME/.codex/**": "deny",
+      "$HOME/.local/share/opencode/**": "deny",
+      ".env.example": "allow",
+      "**/.env.example": "allow",
+      "*.env.example": "allow",
+      "**/*.env.example": "allow"
+    },
+
+    // DE: Datei- und Inhaltssuche ist fuer normale Code-Analyse erlaubt.
+    // EN: File and content search is allowed for normal code analysis.
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+
+    // DE: Aenderungen brauchen Freigabe; Secret-Dateien bleiben gesperrt.
+    // EN: Changes need approval; secret files stay blocked.
+    "edit": {
+      "*": "ask",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "**/*.env": "deny",
+      "**/*.env.*": "deny",
+      ".env": "deny",
+      "**/.env": "deny",
+      "opencode.env": "deny",
+      "**/opencode.env": "deny",
+      "codex.env": "deny",
+      "**/codex.env": "deny",
+      "$HOME/.ssh/**": "deny",
+      "$HOME/.gnupg/**": "deny",
+      "$HOME/.docker/**": "deny",
+      "$HOME/.config/gh/**": "deny",
+      "$HOME/.config/glab-cli/**": "deny",
+      "$HOME/.config/containers/**": "deny",
+      "$HOME/.local/share/containers/**": "deny",
+      "$HOME/.codex/**": "deny",
+      "$HOME/.local/share/opencode/**": "deny"
+    },
+
+    // DE: Shell-Kommandos sind der groesste Hebel fuer Risiko.
+    // EN: Shell commands are the biggest source of risk.
+    // DE: Nur sehr einfache Lese- und Git-Status-Kommandos laufen ohne Nachfrage.
+    // EN: Only simple read-only and Git status commands run without approval.
+    // DE: Build-, Netzwerk-, Container- und Paketmanager-Kommandos fragen nach.
+    // EN: Build, network, container, and package-manager commands ask for approval.
+    // DE: Offensichtlich destruktive Kommandos werden blockiert.
+    // EN: Clearly destructive commands are blocked.
+    "bash": {
+      "*": "ask",
+      "pwd": "allow",
+      "ls": "allow",
+      "ls *": "allow",
+      "git status": "allow",
+      "git status *": "allow",
+      "git diff": "allow",
+      "git diff *": "allow",
+      "git log": "allow",
+      "git log *": "allow",
+      "git show": "allow",
+      "git show *": "allow",
+      "git branch": "allow",
+      "git branch *": "allow",
+      "git remote": "allow",
+      "git remote *": "allow",
+      "git commit *": "ask",
+      "git push *": "ask",
+      "docker *": "ask",
+      "podman *": "ask",
+      "podman-compose *": "ask",
+      "docker compose *": "ask",
+      "dotnet *": "ask",
+      "mvn *": "ask",
+      "npm *": "ask",
+      "npx *": "ask",
+      "curl *": "ask",
+      "wget *": "ask",
+      "python *": "ask",
+      "python3 *": "ask",
+      "chmod *": "ask",
+      "chown *": "ask",
+      "rm *": "deny",
+      "sudo *": "deny",
+      "su *": "deny",
+      "dd *": "deny",
+      "mkfs *": "deny",
+      "mount *": "deny",
+      "umount *": "deny",
+      "ssh *": "ask",
+      "scp *": "ask",
+      "rsync *": "ask"
+    },
+
+    // DE: Zugriff ausserhalb des Projektverzeichnisses muss bestaetigt werden.
+    // EN: Access outside the project directory must be approved.
+    // DE: OpenCode-interne Arbeitsverzeichnisse sind eng begrenzt erlaubt.
+    // EN: OpenCode internal work directories are allowed only narrowly.
+    "external_directory": {
+      "*": "ask",
+      "/tmp/opencode/*": "allow",
+      "/home/adedev/.local/share/opencode/tool-output/*": "allow"
+    },
+
+    // DE: Netzwerkzugriff durch OpenCode selbst braucht Freigabe.
+    // EN: Network access by OpenCode itself needs approval.
+    "webfetch": "ask",
+    "websearch": "ask",
+    "codesearch": "ask",
+
+    // DE: Subagenten und Skills koennen viel Kontext und Rechte erhalten.
+    // EN: Subagents and skills can receive broad context and permissions.
+    "task": "ask",
+    "skill": "ask",
+    "lsp": "ask",
+
+    // DE: Aufgabenlisten sind lokal und fuer Arbeitsschritte unkritisch.
+    // EN: Todo lists are local and low-risk for work steps.
+    "todowrite": "allow",
+
+    // DE: OpenCode soll bei Wiederholungsschleifen immer nachfragen.
+    // EN: OpenCode must ask when it detects repeated tool loops.
+    "doom_loop": "ask",
+
+    // DE: Der Agent soll nicht eigenstaendig Rueckfragen erzwingen.
+    // EN: The agent must not force user questions on its own.
+    "question": "deny",
+
+    // DE: Repository-Klone und Repository-Uebersichten sind bewusst gesperrt.
+    // EN: Repository clones and repository overviews are blocked on purpose.
+    "repo_clone": "deny",
+    "repo_overview": "deny"
+  },
 
   // DE: Provider-Konfiguration fuer die GWDG Chat-AI-Schnittstelle.
   // EN: Provider configuration for the GWDG Chat AI interface.
@@ -182,6 +366,49 @@
       "model": "chat-ai/glm-4.7",
       "temperature": 0.7,
       "top_p": 0.9
+    },
+
+    "security-review": {
+      "description": "Read-only-Agent fuer Sicherheits- und Architekturpruefung. Er darf analysieren, aber keine Dateien aendern. / Read-only agent for security and architecture review. It may analyze, but it must not change files.",
+      "mode": "primary",
+      "model": "chat-ai/qwen3-coder-30b-a3b-instruct",
+      "temperature": 0.2,
+      "top_p": 0.9,
+      "permission": {
+        // DE: Dieser Agent ist fuer Pruefung gedacht, nicht fuer Umsetzung.
+        // EN: This agent is meant for review, not for implementation.
+        "edit": "deny",
+
+        // DE: Shell bleibt stark eingeschraenkt und fragt bei fast allem nach.
+        // EN: Shell access stays restricted and asks for almost everything.
+        "bash": {
+          "*": "ask",
+          "pwd": "allow",
+          "ls": "allow",
+          "ls *": "allow",
+          "git status": "allow",
+          "git status *": "allow",
+          "git diff": "allow",
+          "git diff *": "allow",
+          "git log": "allow",
+          "git log *": "allow",
+          "git show": "allow",
+          "git show *": "allow",
+          "rm *": "deny",
+          "sudo *": "deny",
+          "su *": "deny"
+        },
+
+        // DE: Keine Subagenten aus dem Review-Agenten heraus.
+        // EN: No subagents from inside the review agent.
+        "task": "deny",
+
+        // DE: Externe Quellen muessen bewusst freigegeben werden.
+        // EN: External sources must be approved on purpose.
+        "webfetch": "ask",
+        "websearch": "ask",
+        "codesearch": "ask"
+      }
     }
   }
 }

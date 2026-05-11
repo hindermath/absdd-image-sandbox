@@ -98,6 +98,8 @@ Wenn der Prompt mit `adedev@...` beginnt, befindet sich die Shell im Container. 
 - `.env.example`: Vorlage fuer die plattformabhaengigen Mounts `RIDER_PROJECTS_DIR` und `JAVA_PROJECTS_DIR`.
 - `opencode.jsonc`: enthaelt Provider, Modelle und Agenten fuer Opencode. JSONC erlaubt Kommentare und ist deshalb fuer Lernzwecke besser lesbar.
 - `opencode.env.example`: Vorlage fuer die lokale Datei `opencode.env`.
+- `codex/config.toml`: systemweite Codex-Standardkonfiguration fuer den Container. Sie wird nach `/etc/codex/config.toml` und `/etc/codex/managed_config.toml` kopiert.
+- `codex/requirements.toml`: admin-erzwingende Codex-Sicherheitsanforderungen. Sie wird nach `/etc/codex/requirements.toml` kopiert.
 - `workspace/`: lokales Arbeitsverzeichnis, im Container unter `/workspace`.
 - `RIDER_PROJECTS_DIR`: Host-Verzeichnis fuer Rider-Projekte, im Container unter `/rider-projects`.
 - `JAVA_PROJECTS_DIR`: Host-Verzeichnis fuer Java-Projekte, im Container unter `/java-projects`.
@@ -990,6 +992,30 @@ opencode
 
 Der Container startet Opencode nicht automatisch. Das ist Absicht. So kann zuerst entschieden werden, in welchem Projektverzeichnis gearbeitet wird.
 
+Fuer Sicherheits- und Architekturpruefungen gibt es den read-only-Agenten `security-review`. Er ist fuer Reviews gedacht und darf keine Dateien aendern.
+
+Interaktiv im Projekt starten:
+
+```bash
+cd /rider-projects/MeinProjekt
+opencode --agent security-review
+```
+
+Dann im Prompt eine konkrete Prueffrage stellen, zum Beispiel:
+
+```text
+Pruefe dieses Projekt auf Sicherheitsrisiken, unsichere Konfiguration, Secret-Leaks und Architekturprobleme. Aendere keine Dateien, sondern liefere Findings mit Datei- und Zeilenhinweisen.
+```
+
+Als einmaligen nicht-interaktiven Review-Lauf:
+
+```bash
+cd /rider-projects/MeinProjekt
+opencode run --agent security-review "Pruefe dieses Projekt auf Sicherheitsrisiken, unsichere Konfiguration, Secret-Leaks und Architekturprobleme. Aendere keine Dateien, sondern liefere Findings mit Datei- und Zeilenhinweisen."
+```
+
+Wenn aus einem Finding eine Aenderung entstehen soll, danach bewusst mit dem normalen `coding`-Agenten oder manuell umsetzen. `security-review` ist absichtlich auf Analyse begrenzt.
+
 ### Codex CLI verwenden
 
 Codex CLI ist ebenfalls im Container installiert:
@@ -1023,6 +1049,101 @@ chat-ai/qwen3-coder-30b-a3b-instruct
 
 Der Standard-Agent `coding` nutzt dieses Modell mit fokussierten Coding-Parametern. `glm-4.7` bleibt als kleineres Modell fuer Nebenaufgaben und als Alternative fuer Analyse und Brainstorming konfiguriert.
 
+#### OpenCode-Haertung
+
+Die Datei `opencode.jsonc` enthaelt Sicherheitsregeln fuer OpenCode. Das ist wichtig, weil OpenCode ohne eigene `permission`-Regeln viele Aktionen standardmaessig erlaubt. In einer Umgebung mit ISO-9001-/ISO-27001-Anforderungen sollen riskante Aktionen deshalb nicht ohne bewusste Freigabe laufen.
+
+Die wichtigsten Einstellungen:
+
+- `share` steht auf `disabled`. OpenCode darf keine Sitzungen als oeffentliche Links teilen.
+- `autoupdate` steht auf `false`. Updates erfolgen kontrolliert ueber Dockerfile, Git-Commit und Image-Build.
+- `enabled_providers` enthaelt nur `chat-ai`. Andere automatisch erkannte Provider werden nicht verwendet.
+- `permission` setzt als Grundregel `ask`. OpenCode fragt also nach, wenn keine engere Regel greift.
+- Lesen, Suchen und Listen im Projekt sind erlaubt. Das ist fuer Code-Analyse noetig.
+- Echte Secret-Dateien und lokale Tool-Daten sind fuer Lesen und Schreiben gesperrt, zum Beispiel `.env`, `opencode.env`, `codex.env`, `~/.ssh`, GitHub-/GitLab-CLI-Konfiguration, Docker-/Podman-Konfiguration, Codex-Daten und OpenCode-Daten.
+- Datei-Aenderungen stehen auf `ask`. OpenCode darf also nicht still Dateien schreiben.
+- Shell-Kommandos stehen grundsaetzlich auf `ask`. Einfache Statusbefehle wie `pwd`, `ls`, `git status`, `git diff`, `git log` und `git show` sind erlaubt.
+- Destruktive Kommandos wie `rm`, `sudo`, `su`, `dd`, `mkfs`, `mount` und `umount` sind gesperrt.
+- Netzwerkzugriffe ueber OpenCode-Werkzeuge wie `webfetch`, `websearch` und `codesearch` fragen nach.
+- Der Agent `security-review` ist fuer Sicherheits- und Architekturpruefungen gedacht. Er ist read-only und darf keine Dateien aendern.
+
+Wenn `opencode.jsonc` geaendert wird, gibt es zwei Wege:
+
+```bash
+podman cp opencode.jsonc ade-dev-sandbox_ade_1:/home/adedev/.config/opencode/opencode.jsonc
+podman exec --user root ade-dev-sandbox_ade_1 chown adedev:adedev /home/adedev/.config/opencode/opencode.jsonc
+```
+
+Dieser Weg aktualisiert den laufenden Container sofort. Er aendert aber nicht das bereits gebaute Image. Fuer neue Container muss das Image neu gebaut werden:
+
+```bash
+podman-compose build --pull
+podman-compose up -d --force-recreate
+```
+
+Nach einer Aenderung kann die geladene Konfiguration geprueft werden:
+
+```bash
+opencode debug config
+opencode debug agent coding
+opencode debug agent security-review
+```
+
+#### Codex-Haertung
+
+Codex CLI wird ebenfalls gehaertet. Die Konfiguration liegt im Repository unter `codex/config.toml` und `codex/requirements.toml`. Beim Image-Build werden diese Dateien systemweit nach `/etc/codex` kopiert.
+
+Die wichtigsten Einstellungen in `codex/config.toml`:
+
+- `approval_policy = "untrusted"`: Codex darf nur einen kleinen Satz vertrauenswuerdiger Basisbefehle ohne Rueckfrage ausfuehren.
+- `sandbox_mode = "workspace-write"`: Codex darf innerhalb der vorgesehenen Arbeitsbereiche schreiben, aber nicht mit Vollzugriff laufen.
+- `web_search = "disabled"`: Websuche ist standardmaessig deaktiviert.
+- `check_for_update_on_startup = false`: Updates erfolgen kontrolliert ueber Dockerfile und Image-Build.
+- `history.persistence = "none"`: Session-Transkripte werden nicht dauerhaft gespeichert.
+- `otel.exporter = "none"` und `log_user_prompt = false`: Es wird keine Telemetrie exportiert und Prompts werden nicht geloggt.
+- `sandbox_workspace_write.network_access = false`: Shell-Kommandos in der Sandbox haben keinen direkten Netzwerkzugriff.
+- `sandbox_workspace_write.exclude_slash_tmp = true`: `/tmp` wird nicht automatisch beschreibbar.
+- `sandbox_workspace_write.writable_roots`: Schreibrechte sind auf `/workspace`, `/rider-projects` und `/java-projects` begrenzt.
+- `shell_environment_policy.inherit = "core"`: Subprozesse erben nur eine reduzierte Umgebung.
+- Secret-Variablen mit Namen wie `*KEY*`, `*SECRET*`, `*TOKEN*`, `*PASSWORD*` und `*CREDENTIAL*` werden aus Subprozessen entfernt.
+- App-, Browser- und Computer-Use-Flaechen sind deaktiviert.
+
+Die Datei `codex/requirements.toml` setzt Schranken, die normale Benutzer- oder Projektkonfiguration nicht abschwaechen darf:
+
+- `allowed_approval_policies = ["untrusted", "on-request"]`: Der Modus `never` ist nicht erlaubt.
+- `allowed_sandbox_modes = ["read-only", "workspace-write"]`: `danger-full-access` ist nicht erlaubt.
+- `allowed_web_search_modes = []`: Nur deaktivierte Websuche ist erlaubt.
+- Secret-Dateien und lokale Tool-Daten sind fuer Codex gesperrt, zum Beispiel `.env`, `opencode.env`, `codex.env`, `~/.ssh`, Docker-/Podman-Konfiguration, Codex-Daten und OpenCode-Daten.
+- Gefaehrliche Shell-Prefixe wie `rm`, `sudo`, `su`, `dd`, `mkfs`, `mount` und `umount` sind verboten.
+- Git-Schreibaktionen, Container-Befehle, Netzwerkabrufe und Build-/Paketmanager-Befehle verlangen eine Rueckfrage.
+
+`codex/config.toml` wird absichtlich nicht nach `/home/adedev/.codex/config.toml` kopiert. Dieses Verzeichnis wird durch das persistente Docker-/Podman-Volume `codex_data` ueberlagert. Eine Datei im Image waere dort bei laufendem Compose-Setup nicht sichtbar.
+
+Fuer eine dauerhafte Aenderung muss das Image neu gebaut und der Container neu erzeugt werden:
+
+```bash
+podman-compose build --pull
+podman-compose up -d --force-recreate
+```
+
+Fuer einen laufenden Container koennen die Konfigurationsdateien testweise kopiert werden. Das ersetzt keinen Image-Build und installiert auch kein neues Paket wie `bubblewrap`:
+
+```bash
+podman exec --user root ade-dev-sandbox_ade_1 mkdir -p /etc/codex
+podman cp codex/config.toml ade-dev-sandbox_ade_1:/etc/codex/config.toml
+podman cp codex/config.toml ade-dev-sandbox_ade_1:/etc/codex/managed_config.toml
+podman cp codex/requirements.toml ade-dev-sandbox_ade_1:/etc/codex/requirements.toml
+podman exec --user root ade-dev-sandbox_ade_1 chmod 0644 /etc/codex/config.toml /etc/codex/managed_config.toml /etc/codex/requirements.toml
+```
+
+Nach einer Aenderung kann die wirksame Sandbox grob geprueft werden:
+
+```bash
+codex debug prompt-input "Test"
+```
+
+In der Ausgabe sollten `sandbox_mode` als `workspace-write`, Netzwerkzugriff als eingeschraenkt und die Writable-Roots `/rider-projects`, `/workspace` und `/java-projects` sichtbar sein.
+
 Java JDK 21 und Maven werden beim Image-Build aus den Debian-Paketquellen installiert. Sie sind fuer Java-Grundlagen, Maven-Projekte und Spring-Boot-Projekte vorbereitet.
 
 Opencode und Codex CLI werden beim Image-Build mit der neuesten npm-Version installiert:
@@ -1031,7 +1152,7 @@ Opencode und Codex CLI werden beim Image-Build mit der neuesten npm-Version inst
 RUN npm i -g opencode-ai@latest @openai/codex@latest
 ```
 
-Zusaetzlich installiert das Image haeufig genutzte CLI-Werkzeuge fuer Agenten-Workflows: `git`, `python`, `python3`, `jq`, `yq`, `rg`, `fd`, `fdfind`, `direnv`, `shellcheck`, `shfmt`, `delta`, `tree`, `just`, `wget` und `curl`. Das Debian-Paket fuer `fd` heisst `fd-find` und liefert den Befehl `fdfind`; das Image legt zusaetzlich den erwarteten Befehl `fd` als Symlink an. `mas` ist ein macOS-App-Store-Werkzeug und wird im Linux-Container nicht installiert.
+Zusaetzlich installiert das Image haeufig genutzte CLI-Werkzeuge fuer Agenten-Workflows: `git`, `python`, `python3`, `jq`, `yq`, `rg`, `fd`, `fdfind`, `direnv`, `shellcheck`, `shfmt`, `delta`, `tree`, `just`, `wget`, `curl` und `bubblewrap`. Das Debian-Paket fuer `fd` heisst `fd-find` und liefert den Befehl `fdfind`; das Image legt zusaetzlich den erwarteten Befehl `fd` als Symlink an. `bubblewrap` wird fuer die Linux-Sandbox von Codex installiert. `mas` ist ein macOS-App-Store-Werkzeug und wird im Linux-Container nicht installiert.
 
 Codex CLI speichert lokale Daten im Docker-Volume `codex_data`. Dieses Volume wird im Container nach `/home/adedev/.codex` eingebunden. Dadurch bleiben Codex-Daten zwischen Container-Neustarts erhalten, ohne dass sie in das Git-Repository geschrieben werden.
 
@@ -1344,6 +1465,8 @@ If the prompt starts with `adedev@...`, the shell is inside the container. If th
 - `.env.example`: template for the platform-specific mounts `RIDER_PROJECTS_DIR` and `JAVA_PROJECTS_DIR`.
 - `opencode.jsonc`: contains provider, model, and agent settings for Opencode. JSONC allows comments and is easier to read for learning.
 - `opencode.env.example`: template for the local `opencode.env` file.
+- `codex/config.toml`: system-wide Codex default configuration for the container. It is copied to `/etc/codex/config.toml` and `/etc/codex/managed_config.toml`.
+- `codex/requirements.toml`: admin-enforced Codex security requirements. It is copied to `/etc/codex/requirements.toml`.
 - `workspace/`: local working directory, mounted as `/workspace`.
 - `RIDER_PROJECTS_DIR`: host directory for Rider projects, mounted as `/rider-projects`.
 - `JAVA_PROJECTS_DIR`: host directory for Java projects, mounted as `/java-projects`.
@@ -2236,6 +2359,30 @@ opencode
 
 The container does not start Opencode automatically. This is intentional. It lets you choose the project directory first.
 
+For security and architecture checks, use the read-only `security-review` agent. It is meant for reviews and must not change files.
+
+Start it interactively inside a project:
+
+```bash
+cd /rider-projects/MyProject
+opencode --agent security-review
+```
+
+Then ask a concrete review question, for example:
+
+```text
+Check this project for security risks, unsafe configuration, secret leaks, and architecture issues. Do not change files; return findings with file and line references.
+```
+
+Run a one-off non-interactive review:
+
+```bash
+cd /rider-projects/MyProject
+opencode run --agent security-review "Check this project for security risks, unsafe configuration, secret leaks, and architecture issues. Do not change files; return findings with file and line references."
+```
+
+If a finding should become a change, implement it afterwards with the normal `coding` agent or manually. `security-review` is intentionally limited to analysis.
+
 ### Use Codex CLI
 
 Codex CLI is also installed inside the container:
@@ -2269,6 +2416,101 @@ chat-ai/qwen3-coder-30b-a3b-instruct
 
 The default agent `coding` uses this model with focused coding parameters. `glm-4.7` remains configured as the smaller model for side tasks and as an alternative for analysis and brainstorming.
 
+#### OpenCode Hardening
+
+The file `opencode.jsonc` contains security rules for OpenCode. This matters because OpenCode allows many actions by default when no custom `permission` rules are set. In an environment with ISO 9001 and ISO 27001 requirements, risky actions should not run without explicit approval.
+
+The most important settings:
+
+- `share` is set to `disabled`. OpenCode must not share sessions as public links.
+- `autoupdate` is set to `false`. Updates happen in a controlled way through Dockerfile, Git commit, and image build.
+- `enabled_providers` contains only `chat-ai`. Other automatically detected providers are not used.
+- `permission` uses `ask` as the base rule. OpenCode asks when no narrower rule applies.
+- Reading, searching, and listing inside the project are allowed. This is needed for code analysis.
+- Real secret files and local tool data are blocked for reading and writing, for example `.env`, `opencode.env`, `codex.env`, `~/.ssh`, GitHub/GitLab CLI config, Docker/Podman config, Codex data, and OpenCode data.
+- File changes use `ask`. OpenCode must not write files silently.
+- Shell commands use `ask` by default. Simple status commands such as `pwd`, `ls`, `git status`, `git diff`, `git log`, and `git show` are allowed.
+- Destructive commands such as `rm`, `sudo`, `su`, `dd`, `mkfs`, `mount`, and `umount` are blocked.
+- Network access through OpenCode tools such as `webfetch`, `websearch`, and `codesearch` asks for approval.
+- The `security-review` agent is meant for security and architecture reviews. It is read-only and must not change files.
+
+When `opencode.jsonc` changes, there are two paths:
+
+```bash
+podman cp opencode.jsonc ade-dev-sandbox_ade_1:/home/adedev/.config/opencode/opencode.jsonc
+podman exec --user root ade-dev-sandbox_ade_1 chown adedev:adedev /home/adedev/.config/opencode/opencode.jsonc
+```
+
+This updates the running container immediately. It does not change the already built image. For new containers, rebuild the image:
+
+```bash
+podman-compose build --pull
+podman-compose up -d --force-recreate
+```
+
+After a change, check the loaded configuration:
+
+```bash
+opencode debug config
+opencode debug agent coding
+opencode debug agent security-review
+```
+
+#### Codex Hardening
+
+Codex CLI is hardened as well. The configuration lives in the repository under `codex/config.toml` and `codex/requirements.toml`. During the image build, these files are copied system-wide to `/etc/codex`.
+
+The most important settings in `codex/config.toml`:
+
+- `approval_policy = "untrusted"`: Codex may run only a small trusted set of basic commands without approval.
+- `sandbox_mode = "workspace-write"`: Codex may write inside the intended work areas, but must not run with full access.
+- `web_search = "disabled"`: Web search is disabled by default.
+- `check_for_update_on_startup = false`: Updates happen through Dockerfile and image build.
+- `history.persistence = "none"`: Session transcripts are not persisted.
+- `otel.exporter = "none"` and `log_user_prompt = false`: Telemetry is not exported and prompts are not logged.
+- `sandbox_workspace_write.network_access = false`: Shell commands inside the sandbox have no direct network access.
+- `sandbox_workspace_write.exclude_slash_tmp = true`: `/tmp` is not writable automatically.
+- `sandbox_workspace_write.writable_roots`: write access is limited to `/workspace`, `/rider-projects`, and `/java-projects`.
+- `shell_environment_policy.inherit = "core"`: subprocesses inherit only a reduced environment.
+- Secret variables with names such as `*KEY*`, `*SECRET*`, `*TOKEN*`, `*PASSWORD*`, and `*CREDENTIAL*` are removed from subprocesses.
+- App, browser, and computer-use surfaces are disabled.
+
+The file `codex/requirements.toml` sets constraints that normal user or project configuration must not weaken:
+
+- `allowed_approval_policies = ["untrusted", "on-request"]`: the `never` mode is not allowed.
+- `allowed_sandbox_modes = ["read-only", "workspace-write"]`: `danger-full-access` is not allowed.
+- `allowed_web_search_modes = []`: only disabled web search is allowed.
+- Secret files and local tool data are blocked for Codex, for example `.env`, `opencode.env`, `codex.env`, `~/.ssh`, Docker/Podman config, Codex data, and OpenCode data.
+- Dangerous shell prefixes such as `rm`, `sudo`, `su`, `dd`, `mkfs`, `mount`, and `umount` are forbidden.
+- Git write actions, container commands, network downloads, and build/package-manager commands require approval.
+
+`codex/config.toml` is intentionally not copied to `/home/adedev/.codex/config.toml`. That directory is overlaid by the persistent Docker/Podman volume `codex_data`. A file baked into the image would not be visible there while Compose is running.
+
+For a durable change, rebuild the image and recreate the container:
+
+```bash
+podman-compose build --pull
+podman-compose up -d --force-recreate
+```
+
+For a running container, the configuration files can be copied for testing. This does not replace an image build and does not install a new package such as `bubblewrap`:
+
+```bash
+podman exec --user root ade-dev-sandbox_ade_1 mkdir -p /etc/codex
+podman cp codex/config.toml ade-dev-sandbox_ade_1:/etc/codex/config.toml
+podman cp codex/config.toml ade-dev-sandbox_ade_1:/etc/codex/managed_config.toml
+podman cp codex/requirements.toml ade-dev-sandbox_ade_1:/etc/codex/requirements.toml
+podman exec --user root ade-dev-sandbox_ade_1 chmod 0644 /etc/codex/config.toml /etc/codex/managed_config.toml /etc/codex/requirements.toml
+```
+
+After a change, roughly check the effective sandbox:
+
+```bash
+codex debug prompt-input "Test"
+```
+
+The output should show `sandbox_mode` as `workspace-write`, restricted network access, and the writable roots `/rider-projects`, `/workspace`, and `/java-projects`.
+
 Java JDK 21 and Maven are installed during the image build from the Debian package sources. They prepare the container for Java basics, Maven projects, and Spring Boot projects.
 
 Opencode and Codex CLI are installed during the image build with the newest npm version:
@@ -2277,7 +2519,7 @@ Opencode and Codex CLI are installed during the image build with the newest npm 
 RUN npm i -g opencode-ai@latest @openai/codex@latest
 ```
 
-The image also installs common CLI tools for agent workflows: `git`, `python`, `python3`, `jq`, `yq`, `rg`, `fd`, `fdfind`, `direnv`, `shellcheck`, `shfmt`, `delta`, `tree`, `just`, `wget`, and `curl`. The Debian package for `fd` is named `fd-find` and provides the `fdfind` command; the image also adds the expected `fd` command as a symlink. `mas` is a macOS App Store tool and is not installed in the Linux container.
+The image also installs common CLI tools for agent workflows: `git`, `python`, `python3`, `jq`, `yq`, `rg`, `fd`, `fdfind`, `direnv`, `shellcheck`, `shfmt`, `delta`, `tree`, `just`, `wget`, `curl`, and `bubblewrap`. The Debian package for `fd` is named `fd-find` and provides the `fdfind` command; the image also adds the expected `fd` command as a symlink. `bubblewrap` is installed for Codex's Linux sandbox. `mas` is a macOS App Store tool and is not installed in the Linux container.
 
 Codex CLI stores local data in the Docker volume `codex_data`. This volume is mounted into the container at `/home/adedev/.codex`. This keeps Codex data across container restarts without writing it into the Git repository.
 
