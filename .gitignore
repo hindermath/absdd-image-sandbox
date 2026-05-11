@@ -3,3 +3,4 @@ opencode.env
 *.env
 !.env.example
 .envrc
+.vscode/
