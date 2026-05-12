@@ -1,114 +1,239 @@
-# Opencode Docker-Umgebung
+# Opencode Docker-Umgebung / Opencode Docker Environment
 
-## Inhaltsverzeichnis
+Eine vorbereitete Container-Lernumgebung für angehende Fachinformatiker:innen.
+Sprachen und Werkzeuge: .NET, C#, Java, Maven, Node.js, Opencode, Codex CLI, Spec Kit.
 
-- [Deutsch](#deutsch)
-  - [Zielgruppe und Zweck](#zielgruppe-und-zweck)
-  - [Grundidee](#grundidee)
-  - [Begriffe und Ausfuehrungsort](#begriffe-und-ausfuehrungsort)
-  - [Projektstruktur](#projektstruktur)
-  - [Docker unter Ubuntu oder WSL2 installieren](#docker-unter-ubuntu-oder-wsl2-installieren)
-  - [Docker-Desktop-Profile fuer macOS und Windows](#docker-desktop-profile-fuer-macos-und-windows)
-  - [Podman unter Ubuntu 24.04 LTS verwenden](#podman-unter-ubuntu-2404-lts-verwenden)
-  - [Podman unter macOS mit Homebrew verwenden](#podman-unter-macos-mit-homebrew-verwenden)
-  - [Podman unter Windows mit Podman Desktop verwenden](#podman-unter-windows-mit-podman-desktop-verwenden)
-  - [Docker-Berechtigungen pruefen](#docker-berechtigungen-pruefen)
-  - [API-Key einrichten](#api-key-einrichten)
-  - [Container bauen und starten](#container-bauen-und-starten)
-  - [Rider-Projekte aus Windows einbinden](#rider-projekte-aus-windows-einbinden)
-  - [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen)
-  - [Java-Projekte einbinden](#java-projekte-einbinden)
-  - [Java und Maven im Container nutzen](#java-und-maven-im-container-nutzen)
-  - [ASP.NET-Web-App aus Windows erreichen](#aspnet-web-app-aus-windows-erreichen)
-  - [Spec Kit verwenden](#spec-kit-verwenden)
-  - [Spec-Kit-Governance-Presets installieren](#spec-kit-governance-presets-installieren)
-  - [Beispiel: ConsoleApp2 mit Opencode und Spec Kit](#beispiel-consoleapp2-mit-opencode-und-spec-kit)
-  - [Pflichtablauf fuer ein SDD-Feature](#pflichtablauf-fuer-ein-sdd-feature)
-  - [Opencode verwenden](#opencode-verwenden)
-  - [Codex CLI verwenden](#codex-cli-verwenden)
-  - [Konfiguration](#konfiguration)
-  - [Aufraeumen](#aufraeumen)
-  - [Haeufige Probleme](#haeufige-probleme)
-  - [Kompakter Testablauf](#kompakter-testablauf)
-  - [Merksaetze](#merksaetze)
-- [English](#english)
-  - [Target group and purpose](#target-group-and-purpose)
-  - [Basic idea](#basic-idea)
-  - [Terms and command location](#terms-and-command-location)
-  - [Project structure](#project-structure)
-  - [Install Docker on Ubuntu or WSL2](#install-docker-on-ubuntu-or-wsl2)
-  - [Docker Desktop profiles for macOS and Windows](#docker-desktop-profiles-for-macos-and-windows)
-  - [Use Podman on Ubuntu 24.04 LTS](#use-podman-on-ubuntu-2404-lts)
-  - [Use Podman on macOS with Homebrew](#use-podman-on-macos-with-homebrew)
-  - [Use Podman on Windows with Podman Desktop](#use-podman-on-windows-with-podman-desktop)
-  - [Check Docker permissions](#check-docker-permissions)
-  - [Set up the API key](#set-up-the-api-key)
-  - [Build and start the container](#build-and-start-the-container)
-  - [Mount Rider projects from Windows](#mount-rider-projects-from-windows)
-  - [Use .NET and C# inside the container](#use-net-and-c-inside-the-container)
-  - [Mount Java projects](#mount-java-projects)
-  - [Use Java and Maven inside the container](#use-java-and-maven-inside-the-container)
-  - [Reach an ASP.NET web app from Windows](#reach-an-aspnet-web-app-from-windows)
-  - [Use Spec Kit](#use-spec-kit)
-  - [Install Spec Kit governance presets](#install-spec-kit-governance-presets)
-  - [Example: ConsoleApp2 with Opencode and Spec Kit](#example-consoleapp2-with-opencode-and-spec-kit)
-  - [Required flow for an SDD feature](#required-flow-for-an-sdd-feature)
-  - [Use Opencode](#use-opencode)
-  - [Use Codex CLI](#use-codex-cli)
-  - [Configuration](#configuration)
-  - [Clean up](#clean-up)
-  - [Common problems](#common-problems)
-  - [Compact test procedure](#compact-test-procedure)
-  - [Quick rules](#quick-rules)
+*A ready-to-use container learning environment for IT-specialist apprentices.
+Languages and tools: .NET, C#, Java, Maven, Node.js, Opencode, Codex CLI, Spec Kit.*
+
+---
+
+## Inhaltsverzeichnis / Table of Contents
+
+### Deutsch
+
+- [Auf einen Blick](#auf-einen-blick)
+- [Schnellstart in 10 Minuten](#schnellstart-in-10-minuten)
+- [Voraussetzungen](#voraussetzungen)
+- [Zielgruppe und Zweck](#zielgruppe-und-zweck)
+- [Lernpfad für Azubis](#lernpfad-für-azubis)
+- [Grundidee](#grundidee)
+- [Begriffe und Ausführungsort](#begriffe-und-ausführungsort)
+- [Projektstruktur](#projektstruktur)
+- [Docker unter Ubuntu oder WSL2 installieren](#docker-unter-ubuntu-oder-wsl2-installieren)
+- [Docker-Desktop-Profile für macOS und Windows](#docker-desktop-profile-für-macos-und-windows)
+- [Podman unter Ubuntu 24.04 LTS verwenden](#podman-unter-ubuntu-2404-lts-verwenden)
+- [Podman unter macOS mit Homebrew verwenden](#podman-unter-macos-mit-homebrew-verwenden)
+- [Podman unter Windows mit Podman Desktop verwenden](#podman-unter-windows-mit-podman-desktop-verwenden)
+- [Docker-Berechtigungen prüfen](#docker-berechtigungen-prüfen)
+- [API-Key einrichten](#api-key-einrichten)
+- [Container bauen und starten](#container-bauen-und-starten)
+- [Rider-Projekte aus Windows einbinden](#rider-projekte-aus-windows-einbinden)
+- [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen)
+- [Java-Projekte einbinden](#java-projekte-einbinden)
+- [Java und Maven im Container nutzen](#java-und-maven-im-container-nutzen)
+- [ASP.NET-Web-App vom Host erreichen](#aspnet-web-app-vom-host-erreichen)
+- [Spec Kit verwenden](#spec-kit-verwenden)
+- [Spec-Kit-Governance-Presets installieren](#spec-kit-governance-presets-installieren)
+- [Beispiel: ConsoleApp2 mit Opencode und Spec Kit](#beispiel-consoleapp2-mit-opencode-und-spec-kit)
+- [Pflichtablauf für ein SDD-Feature](#pflichtablauf-für-ein-sdd-feature)
+- [Opencode verwenden](#opencode-verwenden)
+- [Codex CLI verwenden](#codex-cli-verwenden)
+- [Konfiguration](#konfiguration)
+- [Aufräumen](#aufräumen)
+- [Häufige Probleme](#häufige-probleme)
+- [Kompakter Testablauf](#kompakter-testablauf)
+- [Merksätze](#merksätze)
+- [Glossar](#glossar)
+- [Barrierefreiheit](#barrierefreiheit)
+
+### English
+
+- [At a glance](#at-a-glance)
+- [Quick start in 10 minutes](#quick-start-in-10-minutes)
+- [Prerequisites](#prerequisites)
+- [Target group and purpose](#target-group-and-purpose)
+- [Learning path for apprentices](#learning-path-for-apprentices)
+- [Basic idea](#basic-idea)
+- [Terms and command location](#terms-and-command-location)
+- [Project structure](#project-structure)
+- [Install Docker on Ubuntu or WSL2](#install-docker-on-ubuntu-or-wsl2)
+- [Docker Desktop profiles for macOS and Windows](#docker-desktop-profiles-for-macos-and-windows)
+- [Use Podman on Ubuntu 24.04 LTS](#use-podman-on-ubuntu-2404-lts)
+- [Use Podman on macOS with Homebrew](#use-podman-on-macos-with-homebrew)
+- [Use Podman on Windows with Podman Desktop](#use-podman-on-windows-with-podman-desktop)
+- [Check Docker permissions](#check-docker-permissions)
+- [Set up the API key](#set-up-the-api-key)
+- [Build and start the container](#build-and-start-the-container)
+- [Mount Rider projects from Windows](#mount-rider-projects-from-windows)
+- [Use .NET and C# inside the container](#use-net-and-c-inside-the-container)
+- [Mount Java projects](#mount-java-projects)
+- [Use Java and Maven inside the container](#use-java-and-maven-inside-the-container)
+- [Reach an ASP.NET web app from the host](#reach-an-aspnet-web-app-from-the-host)
+- [Use Spec Kit](#use-spec-kit)
+- [Install Spec Kit governance presets](#install-spec-kit-governance-presets)
+- [Example: ConsoleApp2 with Opencode and Spec Kit](#example-consoleapp2-with-opencode-and-spec-kit)
+- [Required flow for an SDD feature](#required-flow-for-an-sdd-feature)
+- [Use Opencode](#use-opencode)
+- [Use Codex CLI](#use-codex-cli)
+- [Configuration](#configuration)
+- [Clean up](#clean-up)
+- [Common problems](#common-problems)
+- [Compact test procedure](#compact-test-procedure)
+- [Quick rules](#quick-rules)
+- [Glossary](#glossary)
+- [Accessibility](#accessibility)
+
+---
 
 ## Deutsch
 
+### Auf einen Blick
+
+| Punkt | Information |
+|---|---|
+| Zielgruppe | Fachinformatiker:innen ab dem 1. Lehrjahr |
+| Lernziel | Reproduzierbare Entwicklungsumgebung im Container nutzen |
+| Sprachen | C# / .NET, Java, Bash, PowerShell |
+| Container | Docker oder Podman, auf Linux, macOS oder Windows |
+| Zeitbedarf für den Schnellstart | etwa 10 Minuten Lesen, 15 bis 30 Minuten erster Build |
+| Zeitbedarf für volle Erkundung | mehrere Übungseinheiten über mehrere Wochen |
+| Vorwissen | Grundlagen Shell, grobes Verständnis von Git |
+| Barrierefreiheit | WCAG 2.2 Level AA, siehe Abschnitt [Barrierefreiheit](#barrierefreiheit) |
+
+### Schnellstart in 10 Minuten
+
+Dieser Schnellstart richtet sich an alle, die das Setup zuerst nur ausprobieren wollen. Die Details folgen in den späteren Abschnitten.
+
+Schritt 1: Voraussetzungen prüfen.
+
+- Docker Engine oder Docker Desktop ist installiert.
+- Eine Shell ist offen (Bash unter Linux/macOS, PowerShell unter Windows).
+- Du kennst den Pfad zu diesem Repository auf deinem Rechner.
+
+Schritt 2: In das Repository wechseln. Ersetze `<benutzer>` durch deinen Anmeldenamen.
+
+```bash
+cd /home/<benutzer>/ade-dev-sandbox     # Linux / WSL2
+cd /Users/<benutzer>/ade-dev-sandbox    # macOS
+```
+
+```powershell
+cd C:\Users\<benutzer>\ade-dev-sandbox  # Windows
+```
+
+Schritt 3: Lokale Konfigurationsdateien anlegen. `.env` enthält nur Pfade, `opencode.env` enthält den geheimen API-Key.
+
+```bash
+cp .env.example .env
+cp opencode.env.example opencode.env
+chmod 600 opencode.env
+```
+
+Schritt 4: In `opencode.env` den echten `GWDG_API_KEY` eintragen. Den Key nicht in das Terminal ausgeben und nicht committen.
+
+Schritt 5: Container bauen und starten.
+
+```bash
+docker compose build --pull
+docker compose up -d
+docker compose ps
+```
+
+Schritt 6: Eine Shell im Container öffnen.
+
+```bash
+docker compose exec ade bash
+```
+
+Schritt 7: Im Container prüfen, ob alles bereit ist.
+
+```bash
+dotnet --info
+opencode --version
+specify version
+```
+
+Wenn diese drei Befehle Versionsinformationen ausgeben, ist der Schnellstart erfolgreich abgeschlossen. Für die ersten echten Übungen geht es weiter im Abschnitt [Lernpfad für Azubis](#lernpfad-für-azubis).
+
+### Voraussetzungen
+
+Diese Anleitung geht von folgenden Mindestvoraussetzungen aus. Die Werte sind großzügig gewählt, damit der Container auch beim Bauen größerer Projekte stabil läuft.
+
+| Anforderung | Mindestwert | Empfohlen | Hinweis |
+|---|---|---|---|
+| Betriebssystem | Ubuntu 22.04, macOS 13, Windows 11 | aktuelle LTS oder Folgeversion | Für Windows wird WSL2 empfohlen. |
+| Arbeitsspeicher (RAM) | 8 GiB | 16 GiB oder mehr | .NET, Java und Container brauchen Speicher. |
+| Freier Plattenspeicher | 20 GiB | 50 GiB oder mehr | Images, Volumes und Build-Cache wachsen. |
+| Internet | 10 Mbit/s | 50 Mbit/s | Erste Builds laden viele Pakete. |
+| Berechtigungen | lokales Benutzerkonto | sudo oder Admin für die Installation | Für die Container-Nutzung selbst reicht der normale Benutzer. |
+| Vorkenntnisse | Shell-Grundlagen, Git-Grundlagen | dazu Editor-Erfahrung | Editor: Visual Studio Code oder JetBrains Rider. |
+
+Wenn ein Punkt nicht erfüllt ist, geht der Schnellstart trotzdem oft. Das Setup wird aber langsamer oder weniger stabil.
+
 ### Zielgruppe und Zweck
 
-Diese Anleitung richtet sich an angehende Fachinformatiker:innen ab dem 1. Lehrjahr. Sie erklaert nicht nur die Befehle, sondern auch kurz, warum sie gebraucht werden.
+Diese Anleitung richtet sich an angehende Fachinformatiker:innen ab dem 1. Lehrjahr. Sie erklärt nicht nur die Befehle, sondern auch kurz, warum sie gebraucht werden.
 
-Dieses Repository stellt eine Docker-Umgebung fuer Opencode, .NET und C# bereit. Die Umgebung laeuft mit Docker Engine unter Linux/WSL2 und mit Docker Desktop unter macOS oder Windows. Projekte koennen weiter mit JetBrains Rider auf dem Host bearbeitet werden.
+Dieses Repository stellt eine Docker-Umgebung für Opencode, .NET und C# bereit. Die Umgebung läuft mit Docker Engine unter Linux oder WSL2 und mit Docker Desktop unter macOS oder Windows. Projekte können weiter mit JetBrains Rider auf dem Host bearbeitet werden.
+
+### Lernpfad für Azubis
+
+Die README ist lang. Sie ist aber kein Buch, das du in einem Stück lesen musst. Dieser Lernpfad zeigt eine sinnvolle Reihenfolge.
+
+| Phase | Abschnitte | Lernziel |
+|---|---|---|
+| Phase 1: Verstehen | [Grundidee](#grundidee), [Begriffe und Ausführungsort](#begriffe-und-ausführungsort), [Projektstruktur](#projektstruktur) | Was ist ein Container? Was ist ein Image? Wo läuft welcher Befehl? |
+| Phase 2: Aufsetzen | [Voraussetzungen](#voraussetzungen), eine der Installationssektionen (Docker oder Podman), [API-Key einrichten](#api-key-einrichten), [Container bauen und starten](#container-bauen-und-starten) | Container läuft auf dem eigenen Rechner. |
+| Phase 3: Erste Übungen | [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen), [Java und Maven im Container nutzen](#java-und-maven-im-container-nutzen) | Ein eigenes Konsolenprojekt anlegen, bauen und starten. |
+| Phase 4: Werkzeuge der Praxis | [Spec Kit verwenden](#spec-kit-verwenden), [Opencode verwenden](#opencode-verwenden), [Codex CLI verwenden](#codex-cli-verwenden) | KI-Werkzeuge für Spezifikation und Code richtig einsetzen. |
+| Phase 5: Qualität und Sicherheit | [Spec-Kit-Governance-Presets installieren](#spec-kit-governance-presets-installieren), [Pflichtablauf für ein SDD-Feature](#pflichtablauf-für-ein-sdd-feature), [Konfiguration](#konfiguration) | Regelwerk, sichere Entwicklung, Qualitätsprozess. |
+| Phase 6: Betrieb und Fehlerbehebung | [Aufräumen](#aufräumen), [Häufige Probleme](#häufige-probleme), [Kompakter Testablauf](#kompakter-testablauf) | Eigene Umgebung pflegen und Fehler verstehen. |
+
+Empfehlung für das erste Lehrjahr: Phasen 1 bis 3. Phasen 4 bis 6 sind danach an der Reihe und auch passend für höhere Lehrjahre oder Umschulungen.
 
 ### Grundidee
 
-Docker erstellt aus dem `Dockerfile` ein Image. Aus diesem Image startet Docker Compose einen Container. Der Container enthaelt das aktuelle Microsoft .NET SDK, Java JDK 21, Maven, Node.js, npm, Opencode, Codex CLI und gaengige Agenten-Hilfswerkzeuge.
+Docker erstellt aus dem `Dockerfile` ein Image. Aus diesem Image startet Docker Compose einen Container. Der Container enthält das aktuelle Microsoft .NET SDK, Java JDK 21, Maven, Node.js, npm, Opencode, Codex CLI und gängige Agenten-Hilfswerkzeuge.
 
-Der Container bleibt im Hintergrund aktiv. Danach kann eine Shell im Container geoeffnet werden. Dort koennen Befehle wie `dotnet`, `opencode`, `codex` oder `ls` ausgefuehrt werden.
+Der Container bleibt im Hintergrund aktiv. Danach kann eine Shell im Container geöffnet werden. Dort können Befehle wie `dotnet`, `opencode`, `codex` oder `ls` ausgeführt werden.
 
-Die Shell laeuft im Container als Linux-Benutzer `adedev`. Deshalb beginnt die Promptzeile nach dem Einstieg zum Beispiel mit `adedev@...`. Der Compose-Service heisst `ade`; das OpenCode-Programm heisst weiterhin `opencode`.
+Die Shell läuft im Container als Linux-Benutzer `adedev`. Deshalb beginnt die Promptzeile nach dem Einstieg zum Beispiel mit `adedev@...`. Der Compose-Service heißt `ade`; das OpenCode-Programm heißt weiterhin `opencode`.
 
-### Begriffe und Ausfuehrungsort
+### Begriffe und Ausführungsort
 
-Viele Fehler entstehen, wenn ein Befehl am falschen Ort ausgefuehrt wird. Diese Anleitung trennt deshalb zwischen Host und Container.
+Viele Fehler entstehen, wenn ein Befehl am falschen Ort ausgeführt wird. Diese Anleitung trennt deshalb zwischen Host und Container.
 
-- Host: der eigene Rechner oder die WSL2-Umgebung. Dort werden `docker compose ...`-Befehle ausgefuehrt.
-- Container: die Linux-Umgebung, die Docker aus dem Image startet. Dort werden Werkzeuge wie `dotnet`, `java`, `mvn`, `opencode`, `codex` und `specify` ausgefuehrt.
-- Image: die Vorlage fuer den Container. Nach Aenderungen am `Dockerfile` muss das Image neu gebaut werden.
+- Host: der eigene Rechner oder die WSL2-Umgebung. Dort werden `docker compose ...`-Befehle ausgeführt.
+- Container: die Linux-Umgebung, die Docker aus dem Image startet. Dort werden Werkzeuge wie `dotnet`, `java`, `mvn`, `opencode`, `codex` und `specify` ausgeführt.
+- Image: die Vorlage für den Container. Nach Änderungen am `Dockerfile` muss das Image neu gebaut werden.
 - Bind-Mount: ein Host-Verzeichnis wird direkt in den Container eingebunden, zum Beispiel `/rider-projects` oder `/java-projects`.
-- Volume: ein von Docker verwalteter Speicherbereich, zum Beispiel fuer `/dotnet-build` oder lokale Agenten-Daten.
-- Service: der Name in `compose.yml`. In diesem Repository heisst der Service `ade`.
+- Volume: ein von Docker verwalteter Speicherbereich, zum Beispiel für `/dotnet-build` oder lokale Agenten-Daten.
+- Service: der Name in `compose.yml`. In diesem Repository heißt der Service `ade`.
 
 Wenn der Prompt mit `adedev@...` beginnt, befindet sich die Shell im Container. Wenn der Prompt den normalen Rechnernamen oder die WSL2-Shell zeigt, befindet sie sich auf dem Host.
 
+Ein vollständigeres Begriffsregister steht im Abschnitt [Glossar](#glossar).
+
 ### Projektstruktur
 
-- `Dockerfile`: beschreibt das Container-Image. Es erbt vom gemeinsamen `agent-sandbox`-Image und installiert darauf .NET SDK, Java JDK 21, Maven, Opencode, Codex CLI, `uv`, Spec Kit und gaengige CLI-Hilfswerkzeuge.
+- `Dockerfile`: beschreibt das Container-Image. Es erbt vom gemeinsamen `agent-sandbox`-Image und installiert darauf .NET SDK, Java JDK 21, Maven, Opencode, Codex CLI, `uv`, Spec Kit und gängige CLI-Hilfswerkzeuge.
 - `compose.yml`: beschreibt den Service `ade`, Volumes und Build-Regeln.
-- `.dockerignore` und `.containerignore`: schliessen lokale Secrets, Git-Daten und Arbeitsverzeichnisse aus dem Build-Kontext aus.
-- `.env.example`: Vorlage fuer die plattformabhaengigen Mounts `RIDER_PROJECTS_DIR` und `JAVA_PROJECTS_DIR`.
-- `opencode.jsonc`: enthaelt Provider, Modelle und Agenten fuer Opencode. JSONC erlaubt Kommentare und ist deshalb fuer Lernzwecke besser lesbar.
-- `opencode.env.example`: Vorlage fuer die lokale Datei `opencode.env`.
-- `codex/config.toml`: systemweite Codex-Standardkonfiguration fuer den Container. Sie wird nach `/etc/codex/config.toml` und `/etc/codex/managed_config.toml` kopiert.
+- `.dockerignore` und `.containerignore`: schließen lokale Secrets, Git-Daten und Arbeitsverzeichnisse aus dem Build-Kontext aus.
+- `.env.example`: Vorlage für die plattformabhängigen Mounts `RIDER_PROJECTS_DIR` und `JAVA_PROJECTS_DIR`.
+- `opencode.jsonc`: enthält Provider, Modelle und Agenten für Opencode. JSONC erlaubt Kommentare und ist deshalb für Lernzwecke besser lesbar.
+- `opencode.env.example`: Vorlage für die lokale Datei `opencode.env`.
+- `codex/config.toml`: systemweite Codex-Standardkonfiguration für den Container. Sie wird nach `/etc/codex/config.toml` und `/etc/codex/managed_config.toml` kopiert.
 - `codex/requirements.toml`: admin-erzwingende Codex-Sicherheitsanforderungen. Sie wird nach `/etc/codex/requirements.toml` kopiert.
 - `workspace/`: lokales Arbeitsverzeichnis, im Container unter `/workspace`.
-- `RIDER_PROJECTS_DIR`: Host-Verzeichnis fuer Rider-Projekte, im Container unter `/rider-projects`.
-- `JAVA_PROJECTS_DIR`: Host-Verzeichnis fuer Java-Projekte, im Container unter `/java-projects`.
-- `java-projects/`: lokales Fallback-Verzeichnis fuer Java-Projekte, wenn `JAVA_PROJECTS_DIR` nicht gesetzt ist.
-- `dotnet/ContainerBuild.props`: leitet .NET-Build-Artefakte fuer Rider-Projekte in das Container-Volume `/dotnet-build`.
+- `RIDER_PROJECTS_DIR`: Host-Verzeichnis für Rider-Projekte, im Container unter `/rider-projects`.
+- `JAVA_PROJECTS_DIR`: Host-Verzeichnis für Java-Projekte, im Container unter `/java-projects`.
+- `java-projects/`: lokales Fallback-Verzeichnis für Java-Projekte, wenn `JAVA_PROJECTS_DIR` nicht gesetzt ist.
+- `dotnet/ContainerBuild.props`: leitet .NET-Build-Artefakte für Rider-Projekte in das Container-Volume `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: filtert eine bekannte .NET-Workload-Verifikationsmeldung aus der Ausgabe.
-- `spec-kit/patch-specify-cli.py`: passt Spec Kit fuer Windows-/WSL-Bind-Mounts an.
-- `codex_data`: Docker-Volume fuer Codex CLI-Daten unter `/home/adedev/.codex`.
-- `AGENTS.md`: Regeln fuer KI-Agenten wie Opencode oder Codex.
+- `spec-kit/patch-specify-cli.py`: passt Spec Kit für Windows- und WSL-Bind-Mounts an.
+- `codex_data`: Docker-Volume für Codex-CLI-Daten unter `/home/adedev/.codex`.
+- `AGENTS.md`: Regeln für KI-Agenten wie Opencode oder Codex.
 
 ### Docker unter Ubuntu oder WSL2 installieren
 
@@ -130,9 +255,9 @@ Docker-Dienst starten:
 sudo systemctl enable --now docker
 ```
 
-Unter WSL2 funktioniert `systemctl` nur, wenn systemd aktiv ist. Falls der Befehl scheitert, kann Docker auch ueber Docker Desktop fuer Windows bereitgestellt werden. In diesem Fall muss die WSL-Integration fuer die verwendete Distribution aktiviert sein.
+Unter WSL2 funktioniert `systemctl` nur, wenn systemd aktiv ist. Falls der Befehl scheitert, kann Docker auch über Docker Desktop für Windows bereitgestellt werden. In diesem Fall muss die WSL-Integration für die verwendete Distribution aktiviert sein.
 
-Installation pruefen:
+Installation prüfen:
 
 ```bash
 docker --version
@@ -140,17 +265,17 @@ docker compose version
 docker info
 ```
 
-Die Compose-Datei kann ohne Secret-Ausgabe geprueft werden:
+Die Compose-Datei kann ohne Secret-Ausgabe geprüft werden:
 
 ```bash
 docker compose config --no-interpolate
 ```
 
-### Docker-Desktop-Profile fuer macOS und Windows
+### Docker-Desktop-Profile für macOS und Windows
 
 Wenn Docker Desktop verwendet wird, bleibt der Container ein Linux-Container. Der Unterschied liegt nur in den Host-Pfaden, die nach `/rider-projects` und `/java-projects` eingebunden werden.
 
-Docker Desktop kann fuer private Nutzung, Ausbildung, Lernen, kleine Unternehmen und nicht-kommerzielle Open-Source-Projekte kostenlos genutzt werden. Kommerzielle Nutzung in groesseren Unternehmen mit mehr als 250 Mitarbeitenden oder mehr als 10 Mio. USD Jahresumsatz benoetigt ein bezahltes Docker-Abo. Im Zweifel gelten die aktuellen Docker Subscription Service Agreement Bedingungen.
+Docker Desktop kann für private Nutzung, Ausbildung, Lernen, kleine Unternehmen und nicht-kommerzielle Open-Source-Projekte kostenlos genutzt werden. Kommerzielle Nutzung in größeren Unternehmen mit mehr als 250 Mitarbeitenden oder mehr als 10 Mio. USD Jahresumsatz benötigt ein bezahltes Docker-Abo. Im Zweifel gelten die aktuellen Bedingungen des Docker Subscription Service Agreement.
 
 macOS mit Homebrew:
 
@@ -159,7 +284,7 @@ brew install --cask docker
 open -a Docker
 ```
 
-Danach im Terminal pruefen:
+Danach im Terminal prüfen:
 
 ```bash
 docker --version
@@ -173,7 +298,7 @@ Windows mit Winget:
 winget install --id Docker.DockerDesktop -e
 ```
 
-Danach Docker Desktop aus dem Startmenue starten, die Lizenzbedingungen akzeptieren und sicherstellen, dass das WSL2-Backend aktiviert ist. Alternativ kann der Installer von der offiziellen Docker-Webseite verwendet werden.
+Danach Docker Desktop aus dem Startmenü starten, die Lizenzbedingungen akzeptieren und sicherstellen, dass das WSL2-Backend aktiviert ist. Alternativ kann der Installer von der offiziellen Docker-Webseite verwendet werden.
 
 Zuerst die Compose-Umgebungsdatei anlegen:
 
@@ -186,31 +311,31 @@ Danach `RIDER_PROJECTS_DIR` und `JAVA_PROJECTS_DIR` passend zur Plattform setzen
 macOS:
 
 ```text
-RIDER_PROJECTS_DIR=/Users/thorstenhindermann/RiderProjects
-JAVA_PROJECTS_DIR=/Users/thorstenhindermann/JavaProjects
+RIDER_PROJECTS_DIR=/Users/<benutzer>/RiderProjects
+JAVA_PROJECTS_DIR=/Users/<benutzer>/JavaProjects
 ```
 
 Windows mit Docker Desktop aus PowerShell:
 
 ```text
-RIDER_PROJECTS_DIR=C:\Users\thinder\RiderProjects
-JAVA_PROJECTS_DIR=C:\Users\thinder\JavaProjects
+RIDER_PROJECTS_DIR=C:\Users\<benutzer>\RiderProjects
+JAVA_PROJECTS_DIR=C:\Users\<benutzer>\JavaProjects
 ```
 
 Windows mit Docker Desktop aus Ubuntu/WSL2:
 
 ```text
-RIDER_PROJECTS_DIR=/mnt/c/Users/thinder/RiderProjects
-JAVA_PROJECTS_DIR=/mnt/c/Users/thinder/JavaProjects
+RIDER_PROJECTS_DIR=/mnt/c/Users/<benutzer>/RiderProjects
+JAVA_PROJECTS_DIR=/mnt/c/Users/<benutzer>/JavaProjects
 ```
 
 Wenn kein separates Rider- oder Java-Projektverzeichnis gebraucht wird, kann der Standard aus `.env.example` bleiben. Dann zeigt `/rider-projects` auf `workspace/` und `/java-projects` auf `java-projects/`.
 
-Die Datei `.env` enthaelt keine Secrets, ist aber lokal und plattformabhaengig. Sie wird nicht committed. Der API-Key bleibt getrennt in `opencode.env`.
+Die Datei `.env` enthält keine Secrets, ist aber lokal und plattformabhängig. Sie wird nicht committed. Der API-Key bleibt getrennt in `opencode.env`.
 
-Hinweis fuer Auszubildende: In `.env` stehen nur Pfade. In `opencode.env` steht ein Secret. Diese Trennung ist wichtig, damit ein API-Key nicht versehentlich in Git landet.
+Hinweis für Auszubildende: In `.env` stehen nur Pfade. In `opencode.env` steht ein Secret. Diese Trennung ist wichtig, damit ein API-Key nicht versehentlich in Git landet.
 
-Konfiguration pruefen:
+Konfiguration prüfen:
 
 ```bash
 docker compose config --no-interpolate
@@ -218,7 +343,7 @@ docker compose config --no-interpolate
 
 ### Podman unter Ubuntu 24.04 LTS verwenden
 
-Podman ist eine Alternative zu Docker. Unter Ubuntu laeuft Podman direkt auf dem Linux-Host. Eine Podman-Machine wie unter macOS wird nicht gebraucht.
+Podman ist eine Alternative zu Docker. Unter Ubuntu läuft Podman direkt auf dem Linux-Host. Eine Podman-Machine wie unter macOS wird nicht gebraucht.
 
 Podman, Podman Compose und Flatpak installieren:
 
@@ -227,7 +352,7 @@ sudo apt update
 sudo apt install -y podman podman-compose flatpak
 ```
 
-Installation pruefen:
+Installation prüfen:
 
 ```bash
 podman --version
@@ -235,7 +360,7 @@ podman-compose --version
 podman run --rm quay.io/podman/hello
 ```
 
-Podman Desktop optional ueber Flathub installieren:
+Podman Desktop optional über Flathub installieren:
 
 ```bash
 flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -248,7 +373,7 @@ Podman Desktop starten:
 flatpak run io.podman_desktop.PodmanDesktop
 ```
 
-Vor dem Start die lokalen Umgebungsdateien anlegen. `.env` enthaelt lokale Pfade, `opencode.env` enthaelt den geheimen API-Key:
+Vor dem Start die lokalen Umgebungsdateien anlegen. `.env` enthält lokale Pfade, `opencode.env` enthält den geheimen API-Key:
 
 ```bash
 cp .env.example .env
@@ -261,7 +386,7 @@ Danach in `opencode.env` den echten `GWDG_API_KEY` eintragen. Den Key nicht im T
 In das Repository wechseln:
 
 ```bash
-cd /home/thinder/ade-dev-sandbox
+cd /home/<benutzer>/ade-dev-sandbox
 ```
 
 Vor dem ersten Build bei der GitLab Container Registry anmelden. Als Passwort einen GitLab-Token mit mindestens `read_registry` verwenden:
@@ -270,13 +395,13 @@ Vor dem ersten Build bei der GitLab Container Registry anmelden. Als Passwort ei
 podman login docker.gitlab-ce.gwdg.de
 ```
 
-Compose-Datei pruefen, ohne Variablenwerte und Secrets auszubreiten:
+Compose-Datei prüfen, ohne Variablenwerte und Secrets auszubreiten:
 
 ```bash
 podman-compose config --no-interpolate
 ```
 
-Image ueber die Compose-Konfiguration bauen:
+Image über die Compose-Konfiguration bauen:
 
 ```bash
 podman-compose build --pull
@@ -300,7 +425,7 @@ Status anzeigen:
 podman-compose ps
 ```
 
-Bash im laufenden `ade`-Container oeffnen:
+Bash im laufenden `ade`-Container öffnen:
 
 ```bash
 podman-compose exec ade bash
@@ -318,15 +443,15 @@ Container stoppen, Daten behalten:
 podman-compose down
 ```
 
-Container stoppen und persistente Container-/Volume-Daten aus diesem Compose-Projekt loeschen:
+Container stoppen und persistente Container- und Volume-Daten aus diesem Compose-Projekt löschen:
 
 ```bash
 podman-compose down -v
 ```
 
-Hinweis: Auf manchen Installationen funktioniert auch `podman compose ...`. Wenn dieser Befehl aber Docker Compose als Provider startet oder den Docker-Daemon sucht, fuer dieses Repository `podman-compose ...` verwenden.
+Hinweis: Auf manchen Installationen funktioniert auch `podman compose ...`. Wenn dieser Befehl aber Docker Compose als Provider startet oder den Docker-Daemon sucht, für dieses Repository `podman-compose ...` verwenden.
 
-WSL2- und Windows-Hinweis: Wenn dieselbe Umgebung einmal mit Podman Desktop unter Windows und einmal mit Podman in WSL2 gestartet wird, duerfen nicht beide Container gleichzeitig laufen. Beide Varianten veroeffentlichen dieselbe Port-Range `127.0.0.1:5100-5199`. Vor dem Start in WSL2 den Windows-Container in Podman Desktop oder PowerShell stoppen:
+WSL2- und Windows-Hinweis: Wenn dieselbe Umgebung einmal mit Podman Desktop unter Windows und einmal mit Podman in WSL2 gestartet wird, dürfen nicht beide Container gleichzeitig laufen. Beide Varianten veröffentlichen dieselbe Port-Range `127.0.0.1:5100-5199`. Vor dem Start in WSL2 den Windows-Container in Podman Desktop oder PowerShell stoppen:
 
 ```powershell
 podman compose down
@@ -340,7 +465,7 @@ podman-compose down
 
 ### Podman unter macOS mit Homebrew verwenden
 
-Podman ist eine Alternative zu Docker Desktop. Unter macOS laeuft der eigentliche Linux-Container ebenfalls in einer kleinen virtuellen Maschine. Diese virtuelle Maschine heisst bei Podman `machine`.
+Podman ist eine Alternative zu Docker Desktop. Unter macOS läuft der eigentliche Linux-Container ebenfalls in einer kleinen virtuellen Maschine. Diese virtuelle Maschine heißt bei Podman `machine`.
 
 Podman und Podman Compose mit Homebrew installieren:
 
@@ -348,7 +473,7 @@ Podman und Podman Compose mit Homebrew installieren:
 brew install podman podman-compose
 ```
 
-Installation pruefen:
+Installation prüfen:
 
 ```bash
 podman --version
@@ -367,13 +492,13 @@ Die Podman-Machine starten:
 podman machine start
 ```
 
-Danach pruefen, ob Podman laeuft:
+Danach prüfen, ob Podman läuft:
 
 ```bash
 podman info
 ```
 
-Vor dem Start auch bei Podman die lokalen Umgebungsdateien anlegen. `.env` enthaelt lokale Pfade, `opencode.env` enthaelt den geheimen API-Key:
+Vor dem Start auch bei Podman die lokalen Umgebungsdateien anlegen. `.env` enthält lokale Pfade, `opencode.env` enthält den geheimen API-Key:
 
 ```bash
 cp .env.example .env
@@ -386,7 +511,7 @@ Danach in `opencode.env` den echten `GWDG_API_KEY` eintragen. Den Key nicht im T
 In das Repository wechseln:
 
 ```bash
-cd /Users/thorstenhindermann/ade-dev-sandbox
+cd /Users/<benutzer>/ade-dev-sandbox
 ```
 
 Vor dem ersten Build bei der GitLab Container Registry anmelden. Als Passwort einen GitLab-Token mit mindestens `read_registry` verwenden:
@@ -395,7 +520,7 @@ Vor dem ersten Build bei der GitLab Container Registry anmelden. Als Passwort ei
 podman login docker.gitlab-ce.gwdg.de
 ```
 
-Compose-Datei pruefen, ohne Variablenwerte und Secrets auszubreiten:
+Compose-Datei prüfen, ohne Variablenwerte und Secrets auszubreiten:
 
 ```bash
 podman compose config --no-interpolate
@@ -407,7 +532,7 @@ Image bauen und dabei das aktuelle Sandbox-Basisimage ziehen:
 podman compose build --pull
 ```
 
-Wenn `podman compose build --pull` meldet, dass ein externer Compose-Provider wie `/usr/local/bin/docker-compose` verwendet wird, ist das unter macOS nicht automatisch ein Fehler. Bricht der Build aber beim privaten GitLab-Basisimage mit `Requesting bearer token` und `403 Forbidden` ab, verwendet der externe Provider wahrscheinlich andere Registry-Anmeldedaten als `podman login`. Dann das Basisimage und das Projektimage direkt mit Podman bauen und Compose nur fuer den Start verwenden:
+Wenn `podman compose build --pull` meldet, dass ein externer Compose-Provider wie `/usr/local/bin/docker-compose` verwendet wird, ist das unter macOS nicht automatisch ein Fehler. Bricht der Build aber beim privaten GitLab-Basisimage mit `Requesting bearer token` und `403 Forbidden` ab, verwendet der externe Provider wahrscheinlich andere Registry-Anmeldedaten als `podman login`. Dann das Basisimage und das Projektimage direkt mit Podman bauen und Compose nur für den Start verwenden:
 
 ```bash
 podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox:latest
@@ -415,7 +540,7 @@ podman build --pull -t ade-dev-sandbox-ade .
 podman compose up -d --no-build --force-recreate
 ```
 
-Danach direkt mit der Statuspruefung fortfahren.
+Danach direkt mit der Statusprüfung fortfahren.
 
 Container im Hintergrund starten:
 
@@ -429,7 +554,7 @@ Status anzeigen:
 podman compose ps
 ```
 
-Bash im laufenden `ade`-Container oeffnen:
+Bash im laufenden `ade`-Container öffnen:
 
 ```bash
 podman compose exec ade bash
@@ -447,7 +572,7 @@ Container stoppen, Daten behalten:
 podman compose down
 ```
 
-Container stoppen und persistente Container-/Volume-Daten aus diesem Compose-Projekt loeschen:
+Container stoppen und persistente Container- und Volume-Daten aus diesem Compose-Projekt löschen:
 
 ```bash
 podman compose down -v
@@ -459,7 +584,7 @@ Wenn Podman danach nicht mehr gebraucht wird, kann auch die Podman-Machine gesto
 podman machine stop
 ```
 
-Falls `podman compose ...` auf einer Installation nicht verfuegbar ist, kann derselbe Ablauf mit `podman-compose ...` ausgefuehrt werden, zum Beispiel:
+Falls `podman compose ...` auf einer Installation nicht verfügbar ist, kann derselbe Ablauf mit `podman-compose ...` ausgeführt werden, zum Beispiel:
 
 ```bash
 podman-compose build --pull
@@ -470,7 +595,7 @@ podman-compose down
 
 ### Podman unter Windows mit Podman Desktop verwenden
 
-Podman ist eine Alternative zu Docker Desktop. Unter Windows laufen Linux-Container in einer kleinen virtuellen Maschine. Podman nennt diese virtuelle Maschine `machine`. Podman Desktop kann Podman, die Machine und die Compose-Unterstuetzung einrichten.
+Podman ist eine Alternative zu Docker Desktop. Unter Windows laufen Linux-Container in einer kleinen virtuellen Maschine. Podman nennt diese virtuelle Maschine `machine`. Podman Desktop kann Podman, die Machine und die Compose-Unterstützung einrichten.
 
 Podman Desktop mit Winget installieren:
 
@@ -478,21 +603,21 @@ Podman Desktop mit Winget installieren:
 winget install --id RedHat.Podman-Desktop -e
 ```
 
-Danach Podman Desktop aus dem Startmenue starten. Beim ersten Start die Einrichtung durchlaufen:
+Danach Podman Desktop aus dem Startmenü starten. Beim ersten Start die Einrichtung durchlaufen:
 
 - WSL2 als Provider verwenden, wenn keine Hyper-V-Anforderung besteht.
 - Podman installieren lassen, wenn Podman noch fehlt.
 - Eine Podman-Machine erstellen lassen.
-- Die Compose-Unterstuetzung installieren lassen.
+- Die Compose-Unterstützung installieren lassen.
 
-Falls WSL2 noch nicht bereit ist, PowerShell als Administrator oeffnen und WSL aktualisieren beziehungsweise aktivieren:
+Falls WSL2 noch nicht bereit ist, PowerShell als Administrator öffnen und WSL aktualisieren beziehungsweise aktivieren:
 
 ```powershell
 wsl --update
 wsl --install --no-distribution
 ```
 
-Wenn Windows einen Neustart verlangt, den Rechner neu starten. Danach pruefen:
+Wenn Windows einen Neustart verlangt, den Rechner neu starten. Danach prüfen:
 
 ```powershell
 wsl --status
@@ -518,11 +643,11 @@ Copy-Item opencode.env.example opencode.env
 
 Danach in `opencode.env` den echten `GWDG_API_KEY` eintragen. Den Key nicht im Terminal ausgeben und nicht committen.
 
-In `.env` Windows-Pfade setzen, wenn Rider- oder Java-Projekte ausserhalb dieses Repositorys liegen:
+In `.env` Windows-Pfade setzen, wenn Rider- oder Java-Projekte außerhalb dieses Repositorys liegen:
 
 ```text
-RIDER_PROJECTS_DIR=C:\Users\thinder\RiderProjects
-JAVA_PROJECTS_DIR=C:\Users\thinder\JavaProjects
+RIDER_PROJECTS_DIR=C:\Users\<benutzer>\RiderProjects
+JAVA_PROJECTS_DIR=C:\Users\<benutzer>\JavaProjects
 ```
 
 Wenn kein separates Rider- oder Java-Projektverzeichnis gebraucht wird, kann der Standard aus `.env.example` bleiben. Dann zeigt `/rider-projects` auf `workspace/` und `/java-projects` auf `java-projects/`.
@@ -530,7 +655,7 @@ Wenn kein separates Rider- oder Java-Projektverzeichnis gebraucht wird, kann der
 In das Repository wechseln:
 
 ```powershell
-cd C:\Users\thinder\ade-dev-sandbox
+cd C:\Users\<benutzer>\ade-dev-sandbox
 ```
 
 Vor dem ersten Build bei der GitLab Container Registry anmelden. Als Passwort einen GitLab-Token mit mindestens `read_registry` verwenden:
@@ -539,19 +664,19 @@ Vor dem ersten Build bei der GitLab Container Registry anmelden. Als Passwort ei
 podman login docker.gitlab-ce.gwdg.de
 ```
 
-Compose-Datei pruefen, ohne Variablenwerte und Secrets auszubreiten:
+Compose-Datei prüfen, ohne Variablenwerte und Secrets auszubreiten:
 
 ```powershell
 podman compose config --no-interpolate
 ```
 
-Auf Windows zuerst das Basisimage mit Podman ziehen. Dieser Schritt prueft, ob der Registry-Login fuer Podman funktioniert:
+Auf Windows zuerst das Basisimage mit Podman ziehen. Dieser Schritt prüft, ob der Registry-Login für Podman funktioniert:
 
 ```powershell
 podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox:latest
 ```
 
-Danach das Projektimage direkt mit Podman bauen. Der Tag `ade-dev-sandbox-ade` entspricht dem Image-Namen, den Compose fuer den Service `ade` erwartet:
+Danach das Projektimage direkt mit Podman bauen. Der Tag `ade-dev-sandbox-ade` entspricht dem Image-Namen, den Compose für den Service `ade` erwartet:
 
 ```powershell
 podman build --pull -t ade-dev-sandbox-ade .
@@ -569,7 +694,7 @@ Status anzeigen:
 podman compose ps
 ```
 
-Bash im laufenden `ade`-Container oeffnen:
+Bash im laufenden `ade`-Container öffnen:
 
 ```powershell
 podman compose exec ade bash
@@ -587,15 +712,15 @@ Container stoppen, Daten behalten:
 podman compose down
 ```
 
-Container stoppen und persistente Container-/Volume-Daten aus diesem Compose-Projekt loeschen:
+Container stoppen und persistente Container- und Volume-Daten aus diesem Compose-Projekt löschen:
 
 ```powershell
 podman compose down -v
 ```
 
-Wenn `podman compose ...` meldet, dass ein externer Compose-Provider wie `docker-compose.exe` verwendet wird, ist das nicht automatisch ein Fehler. Unter Windows sollte der Build trotzdem direkt mit `podman build` laufen, weil `docker-compose.exe` eigene Registry-Anmeldedaten verwenden kann und dann trotz erfolgreichem `podman login` mit `403 Forbidden` am GitLab-Basisimage scheitert. Compose wird in diesem Ablauf nur fuer `up --no-build`, `ps`, `exec` und `down` verwendet.
+Wenn `podman compose ...` meldet, dass ein externer Compose-Provider wie `docker-compose.exe` verwendet wird, ist das nicht automatisch ein Fehler. Unter Windows sollte der Build trotzdem direkt mit `podman build` laufen, weil `docker-compose.exe` eigene Registry-Anmeldedaten verwenden kann und dann trotz erfolgreichem `podman login` mit `403 Forbidden` am GitLab-Basisimage scheitert. Compose wird in diesem Ablauf nur für `up --no-build`, `ps`, `exec` und `down` verwendet.
 
-WSL2- und Windows-Hinweis: Wenn dieselbe Umgebung einmal mit Podman Desktop unter Windows und einmal mit Podman in WSL2 gestartet wird, duerfen nicht beide Container gleichzeitig laufen. Beide Varianten veroeffentlichen dieselbe Port-Range `127.0.0.1:5100-5199`. Vor dem Start unter Windows den WSL2-Container stoppen:
+WSL2- und Windows-Hinweis: Wenn dieselbe Umgebung einmal mit Podman Desktop unter Windows und einmal mit Podman in WSL2 gestartet wird, dürfen nicht beide Container gleichzeitig laufen. Beide Varianten veröffentlichen dieselbe Port-Range `127.0.0.1:5100-5199`. Vor dem Start unter Windows den WSL2-Container stoppen:
 
 ```bash
 podman-compose down
@@ -607,7 +732,7 @@ Vor dem Start in WSL2 den Windows-Container in Podman Desktop oder PowerShell st
 podman compose down
 ```
 
-### Docker-Berechtigungen pruefen
+### Docker-Berechtigungen prüfen
 
 Wenn `docker info` mit `permission denied` scheitert, darf der aktuelle Benutzer noch nicht auf Docker zugreifen.
 
@@ -617,13 +742,13 @@ Schneller Test mit `sudo`:
 sudo docker info
 ```
 
-Dauerhafte Freigabe fuer den aktuellen Benutzer:
+Dauerhafte Freigabe für den aktuellen Benutzer:
 
 ```bash
 sudo usermod -aG docker "$USER"
 ```
 
-Danach komplett neu anmelden. Erst danach wird die neue Gruppenzugehoerigkeit aktiv. Pruefen:
+Danach komplett neu anmelden. Erst danach wird die neue Gruppenzugehörigkeit aktiv. Prüfen:
 
 ```bash
 id
@@ -644,9 +769,9 @@ Danach den echten Key eintragen:
 GWDG_API_KEY=dein_echter_key
 ```
 
-Alternativ kann der vorhandene Key aus `~/.local/share/opencode/auth.json` uebernommen werden. In diesem Setup wird `chat-ai.key` als `GWDG_API_KEY` gespeichert.
+Alternativ kann der vorhandene Key aus `~/.local/share/opencode/auth.json` übernommen werden. In diesem Setup wird `chat-ai.key` als `GWDG_API_KEY` gespeichert.
 
-Wichtig: `opencode.env` enthaelt ein Secret. Die Datei ist in `.gitignore` ausgeschlossen und darf nicht nach GitLab gepusht werden.
+Wichtig: `opencode.env` enthält ein Secret. Die Datei ist in `.gitignore` ausgeschlossen und darf nicht nach GitLab gepusht werden.
 
 ```bash
 chmod 600 opencode.env
@@ -657,7 +782,7 @@ chmod 600 opencode.env
 In das Repository wechseln:
 
 ```bash
-cd /home/thinder/ade-dev-sandbox
+cd /home/<benutzer>/ade-dev-sandbox
 ```
 
 Vor dem ersten Build bei der GitLab Container Registry anmelden. Als Passwort einen GitLab-Token mit mindestens `read_registry` verwenden:
@@ -688,12 +813,12 @@ Beim ersten Build werden das Sandbox-Basisimage, das .NET-SDK-Paket und npm-Pake
 
 ### Rider-Projekte aus Windows einbinden
 
-Das Host-Verzeichnis fuer Rider-Projekte wird ueber `RIDER_PROJECTS_DIR` gesetzt. Typische Werte sind:
+Das Host-Verzeichnis für Rider-Projekte wird über `RIDER_PROJECTS_DIR` gesetzt. Typische Werte sind:
 
 ```text
-RIDER_PROJECTS_DIR=/mnt/c/Users/thinder/RiderProjects
-RIDER_PROJECTS_DIR=C:\Users\thinder\RiderProjects
-RIDER_PROJECTS_DIR=/Users/thorstenhindermann/RiderProjects
+RIDER_PROJECTS_DIR=/mnt/c/Users/<benutzer>/RiderProjects
+RIDER_PROJECTS_DIR=C:\Users\<benutzer>\RiderProjects
+RIDER_PROJECTS_DIR=/Users/<benutzer>/RiderProjects
 ```
 
 Das Verzeichnis wird im Container hier eingebunden:
@@ -709,7 +834,7 @@ cd /rider-projects
 ls
 ```
 
-Aenderungen im Container wirken direkt auf die Host-Dateien. Rider auf dem Host sieht dieselben Dateien. Builds auf Windows- oder macOS-Bind-Mounts koennen langsamer sein als Builds im Linux-Dateisystem.
+Änderungen im Container wirken direkt auf die Host-Dateien. Rider auf dem Host sieht dieselben Dateien. Builds auf Windows- oder macOS-Bind-Mounts können langsamer sein als Builds im Linux-Dateisystem.
 
 Damit .NET auf Host-Dateien keine Probleme mit `bin`, `obj`, AppHost-Dateien oder Dateizeitstempeln bekommt, wird eine MSBuild-Konfiguration in den Container eingebunden:
 
@@ -717,25 +842,25 @@ Damit .NET auf Host-Dateien keine Probleme mit `bin`, `obj`, AppHost-Dateien ode
 dotnet/ContainerBuild.props -> /dotnet-config/ContainerBuild.props
 ```
 
-Compose setzt dazu die Umgebungsvariable `DirectoryBuildPropsPath`. Dadurch wird die Konfiguration sehr frueh im MSBuild-Ablauf geladen. Repo-eigene `Directory.Build.props`-Dateien werden von `ContainerBuild.props` weiter importiert, damit projektspezifische Einstellungen erhalten bleiben.
+Compose setzt dazu die Umgebungsvariable `DirectoryBuildPropsPath`. Dadurch wird die Konfiguration sehr früh im MSBuild-Ablauf geladen. Repo-eigene `Directory.Build.props`-Dateien werden von `ContainerBuild.props` weiter importiert, damit projektspezifische Einstellungen erhalten bleiben.
 
 Die Build-Artefakte liegen nicht unter `/rider-projects`, sondern im Linux-Volume `/dotnet-build`. Das verhindert typische Fehler wie `Access to the path ... obj ... is denied` oder Fehler beim Erstellen von `apphost`.
 
 ### .NET und C# im Container nutzen
 
-Shell im Container oeffnen:
+Shell im Container öffnen:
 
 ```bash
 docker compose exec ade bash
 ```
 
-.NET-Version pruefen:
+.NET-Version prüfen:
 
 ```bash
 dotnet --info
 ```
 
-Beispiel fuer ein neues Konsolenprojekt:
+Beispiel für ein neues Konsolenprojekt:
 
 ```bash
 cd /rider-projects
@@ -744,16 +869,16 @@ cd DemoApp
 dotnet run
 ```
 
-`dotnet new console` erstellt eine einfache Konsolenanwendung. `dotnet run` baut und startet das Projekt. Die Dateien liegen auf dem Host im `RIDER_PROJECTS_DIR`-Verzeichnis und koennen dort mit Rider geoeffnet werden.
+`dotnet new console` erstellt eine einfache Konsolenanwendung. `dotnet run` baut und startet das Projekt. Die Dateien liegen auf dem Host im `RIDER_PROJECTS_DIR`-Verzeichnis und können dort mit Rider geöffnet werden.
 
-Wenn ein Projekt bereits fehlerhafte `bin`- oder `obj`-Ordner auf dem Windows-Mount hat, koennen diese in Rider oder im Terminal geloescht werden. Danach erneut im Container bauen.
+Wenn ein Projekt bereits fehlerhafte `bin`- oder `obj`-Ordner auf dem Windows-Mount hat, können diese in Rider oder im Terminal gelöscht werden. Danach erneut im Container bauen.
 
 ### Java-Projekte einbinden
 
-Das Host-Verzeichnis fuer Java-Projekte wird ueber `JAVA_PROJECTS_DIR` gesetzt. In dieser WSL2-Umgebung ist der lokale Wert:
+Das Host-Verzeichnis für Java-Projekte wird über `JAVA_PROJECTS_DIR` gesetzt. In einer WSL2-Umgebung ist ein typischer Wert:
 
 ```text
-JAVA_PROJECTS_DIR=/mnt/c/Users/thinder/JavaProjects
+JAVA_PROJECTS_DIR=/mnt/c/Users/<benutzer>/JavaProjects
 ```
 
 Das Verzeichnis wird im Container hier eingebunden:
@@ -769,7 +894,7 @@ So bleiben .NET-/Rider-Projekte und Java-Projekte getrennt:
 
 ### Java und Maven im Container nutzen
 
-Java-Version pruefen:
+Java-Version prüfen:
 
 ```bash
 java --version
@@ -777,7 +902,7 @@ javac --version
 mvn --version
 ```
 
-Beispiel fuer ein neues Maven-Projekt:
+Beispiel für ein neues Maven-Projekt:
 
 ```bash
 cd /java-projects
@@ -786,7 +911,7 @@ cd demo-java
 mvn test
 ```
 
-Spring-Boot-Projekte werden normalerweise ueber Maven oder einen Projekt-Wrapper gestartet, zum Beispiel:
+Spring-Boot-Projekte werden normalerweise über Maven oder einen Projekt-Wrapper gestartet, zum Beispiel:
 
 ```bash
 mvn spring-boot:run
@@ -803,17 +928,17 @@ ports:
   - "127.0.0.1:5100-5199:5100-5199"
 ```
 
-Nach einer Aenderung an `compose.yml` muss der Container neu erstellt werden:
+Nach einer Änderung an `compose.yml` muss der Container neu erstellt werden:
 
 ```bash
-cd /Users/thorstenhindermann/ade-dev-sandbox
+cd /Users/<benutzer>/ade-dev-sandbox
 docker compose up -d --force-recreate
 docker compose exec ade bash
 ```
 
 Eine ASP.NET-App muss im Container auf `0.0.0.0` lauschen. `localhost` reicht nicht, weil `localhost` im Container nur den Container selbst meint.
 
-Beispiel fuer eine Razor-Pages-Web-App:
+Beispiel für eine Razor-Pages-Web-App:
 
 ```bash
 cd /rider-projects
@@ -822,13 +947,13 @@ cd WebApp1
 dotnet run --urls http://0.0.0.0:5102
 ```
 
-Danach auf dem Host im Browser oeffnen:
+Danach auf dem Host im Browser öffnen:
 
 ```text
 http://localhost:5102
 ```
 
-Beispiel fuer eine minimale ASP.NET-App:
+Beispiel für eine minimale ASP.NET-App:
 
 ```bash
 cd /rider-projects
@@ -837,7 +962,7 @@ cd MinimalWebApp1
 dotnet run --urls http://0.0.0.0:5103
 ```
 
-Danach auf dem Host im Browser oeffnen:
+Danach auf dem Host im Browser öffnen:
 
 ```text
 http://localhost:5103
@@ -845,7 +970,7 @@ http://localhost:5103
 
 Der Unterschied: `dotnet new webapp` erstellt eine Web-App mit Razor Pages und mehr Projektstruktur. `dotnet new web` erstellt eine sehr kleine ASP.NET-App, die gut zum Verstehen des Grundprinzips ist.
 
-Wenn eine App einen anderen Port nutzt, muss dieser in der freigegebenen Range `5100-5199` liegen oder in `compose.yml` zusaetzlich eingetragen werden.
+Wenn eine App einen anderen Port nutzt, muss dieser in der freigegebenen Range `5100-5199` liegen oder in `compose.yml` zusätzlich eingetragen werden.
 
 ### Spec Kit verwenden
 
@@ -855,7 +980,7 @@ Spec Kit ist im Container als `specify` installiert. Die Installation erfolgt im
 RUN uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.8.3
 ```
 
-Version und Umgebung pruefen:
+Version und Umgebung prüfen:
 
 ```bash
 specify version
@@ -869,25 +994,25 @@ cd /rider-projects/TinyPl0
 specify init . --integration opencode --force
 ```
 
-Falls eine Integration nicht verfuegbar ist, zuerst die unterstuetzten Optionen pruefen:
+Falls eine Integration nicht verfügbar ist, zuerst die unterstützten Optionen prüfen:
 
 ```bash
 specify init --help
 ```
 
-Wenn Spec Kit nach dem Script-Typ fragt, fuer diesen Linux-Container `sh` auswaehlen.
+Wenn Spec Kit nach dem Script-Typ fragt, für diesen Linux-Container `sh` auswählen.
 
-Spec Kit weist darauf hin, dass Agentenordner private Daten enthalten koennen. Fuer Projekte unter `/rider-projects` sollte deshalb im jeweiligen Anwendungsrepo geprueft werden, ob `.opencode/` oder sensible Teile davon in die Projekt-`.gitignore` gehoeren.
+Spec Kit weist darauf hin, dass Agentenordner private Daten enthalten können. Für Projekte unter `/rider-projects` sollte deshalb im jeweiligen Anwendungsrepo geprüft werden, ob `.opencode/` oder sensible Teile davon in die Projekt-`.gitignore` gehören.
 
-Spec Kit erzeugt Projektdateien fuer spec-driven development. Diese Dateien gehoeren normalerweise in das jeweilige Anwendungsrepo unter `/rider-projects`, nicht in dieses Docker-Setup-Repo.
+Spec Kit erzeugt Projektdateien für spec-driven development. Diese Dateien gehören normalerweise in das jeweilige Anwendungsrepo unter `/rider-projects`, nicht in dieses Docker-Setup-Repo.
 
 ### Spec-Kit-Governance-Presets installieren
 
-Nach `specify init` koennen die sechs Governance-Presets in einem Projekt installiert werden. Die Presets erweitern Spec Kit um verbindliche Regeln fuer sichere Entwicklung, Softwarearchitektur, iSAQB/arc42, Barrierefreiheit, Plattform-Paritaet und KI-Agenten-Paritaet.
+Nach `specify init` können die sechs Governance-Presets in einem Projekt installiert werden. Die Presets erweitern Spec Kit um verbindliche Regeln für sichere Entwicklung, Softwarearchitektur, iSAQB/arc42, Barrierefreiheit, Plattform-Parität und KI-Agenten-Parität.
 
-Fuer C#/.NET-Level-2-Projekte ist in der home-baseline-Umgebung die Standardentscheidung: alle sechs Presets installieren, sofern das Projekt keine begruendete Ausnahme dokumentiert.
+Für C#/.NET-Level-2-Projekte ist in der home-baseline-Umgebung die Standardentscheidung: alle sechs Presets installieren, sofern das Projekt keine begründete Ausnahme dokumentiert.
 
-Die Befehle werden im jeweiligen Projektverzeichnis im Container ausgefuehrt, also zum Beispiel unter `/rider-projects/TinyPl0`:
+Die Befehle werden im jeweiligen Projektverzeichnis im Container ausgeführt, also zum Beispiel unter `/rider-projects/TinyPl0`:
 
 ```bash
 cd /rider-projects/TinyPl0
@@ -900,9 +1025,9 @@ specify preset add --from https://github.com/hindermath/spec-kit-preset-cross-pl
 specify preset add --from https://github.com/hindermath/spec-kit-preset-agent-parity-governance/archive/refs/tags/v0.1.0.zip --priority 60
 ```
 
-Die Prioritaet steuert, welches Preset bei gleichen Template-Bausteinen zuerst wirkt. Kleinere Zahl bedeutet hoehere Prioritaet. Deshalb steht `security-governance` auf `10`.
+Die Priorität steuert, welches Preset bei gleichen Template-Bausteinen zuerst wirkt. Kleinere Zahl bedeutet höhere Priorität. Deshalb steht `security-governance` auf `10`.
 
-Installation pruefen:
+Installation prüfen:
 
 ```bash
 specify preset list
@@ -920,11 +1045,11 @@ git commit -m "chore: configure spec-kit governance presets"
 git push
 ```
 
-Wichtig: `.specify/presets/` gehoert dann zur Projekt-Policy. Lokale Caches wie `.specify/presets/.cache/` sollten nicht committed werden.
+Wichtig: `.specify/presets/` gehört dann zur Projekt-Policy. Lokale Caches wie `.specify/presets/.cache/` sollten nicht committed werden.
 
 ### Beispiel: ConsoleApp2 mit Opencode und Spec Kit
 
-Dieses Beispiel zeigt den kompletten Einstieg fuer eine neue Konsolenanwendung. Es wird im Container ausgefuehrt.
+Dieses Beispiel zeigt den kompletten Einstieg für eine neue Konsolenanwendung. Es wird im Container ausgeführt.
 
 ```bash
 cd /rider-projects
@@ -939,25 +1064,25 @@ Danach Opencode einmal im Projekt initialisieren. Dadurch kann Opencode projekts
 opencode --prompt "/init"
 ```
 
-Danach Spec Kit fuer Opencode einrichten:
+Danach Spec Kit für Opencode einrichten:
 
 ```bash
 specify init . --integration opencode --force
 ```
 
-Wenn Spec Kit nach dem Script-Typ fragt, `sh` auswaehlen. Nach erfolgreicher Initialisierung stehen in Opencode die Slash-Commands `/speckit.*` zur Verfuegung.
+Wenn Spec Kit nach dem Script-Typ fragt, `sh` auswählen. Nach erfolgreicher Initialisierung stehen in Opencode die Slash-Commands `/speckit.*` zur Verfügung.
 
-Wenn das Projekt mit Git verwaltet wird, pruefen:
+Wenn das Projekt mit Git verwaltet wird, prüfen:
 
 ```bash
 git status --short
 ```
 
-Danach entscheiden, ob `.opencode/` vollstaendig versioniert werden soll oder ob sensible Teile in die Projekt-`.gitignore` gehoeren.
+Danach entscheiden, ob `.opencode/` vollständig versioniert werden soll oder ob sensible Teile in die Projekt-`.gitignore` gehören.
 
-### Pflichtablauf fuer ein SDD-Feature
+### Pflichtablauf für ein SDD-Feature
 
-SDD bedeutet spec-driven development. Ein Feature wird zuerst beschrieben, dann geplant, dann in Aufgaben zerlegt und erst danach implementiert. Fuer die Ausbildung werden auch die Qualitaetsschritte immer ausgefuehrt.
+SDD bedeutet spec-driven development. Ein Feature wird zuerst beschrieben, dann geplant, dann in Aufgaben zerlegt und erst danach implementiert. Für die Ausbildung werden auch die Qualitätsschritte immer ausgeführt.
 
 Empfohlene Reihenfolge in Opencode:
 
@@ -976,21 +1101,21 @@ Die Schritte haben diese Aufgabe:
 
 - `/speckit.constitution`: Projektprinzipien und technische Leitplanken festlegen.
 - `/speckit.specify`: Feature fachlich beschreiben, ohne direkt Code zu planen.
-- `/speckit.clarify`: offene Fragen klaeren, bevor technische Planung beginnt.
+- `/speckit.clarify`: offene Fragen klären, bevor technische Planung beginnt.
 - `/speckit.plan`: technische Umsetzung planen.
-- `/speckit.checklist`: Anforderungen auf Vollstaendigkeit und Klarheit pruefen.
+- `/speckit.checklist`: Anforderungen auf Vollständigkeit und Klarheit prüfen.
 - `/speckit.tasks`: konkrete umsetzbare Aufgaben erzeugen.
-- `/speckit.analyze`: Konsistenz zwischen Spezifikation, Plan und Aufgaben pruefen.
+- `/speckit.analyze`: Konsistenz zwischen Spezifikation, Plan und Aufgaben prüfen.
 - `/speckit.implement`: Aufgaben umsetzen.
 
-Nach der Implementierung immer ausfuehren:
+Nach der Implementierung immer ausführen:
 
 ```bash
 dotnet test
 dotnet run
 ```
 
-Wenn das Projekt keine Tests enthaelt, mindestens `dotnet build` ausfuehren und in der Dokumentation notieren, warum keine Tests vorhanden sind.
+Wenn das Projekt keine Tests enthält, mindestens `dotnet build` ausführen und in der Dokumentation notieren, warum keine Tests vorhanden sind.
 
 ### Opencode verwenden
 
@@ -1002,7 +1127,7 @@ opencode
 
 Der Container startet Opencode nicht automatisch. Das ist Absicht. So kann zuerst entschieden werden, in welchem Projektverzeichnis gearbeitet wird.
 
-Fuer Sicherheits- und Architekturpruefungen gibt es den read-only-Agenten `security-review`. Er ist fuer Reviews gedacht und darf keine Dateien aendern.
+Für Sicherheits- und Architekturprüfungen gibt es den read-only-Agenten `security-review`. Er ist für Reviews gedacht und darf keine Dateien ändern.
 
 Interaktiv im Projekt starten:
 
@@ -1011,20 +1136,20 @@ cd /rider-projects/MeinProjekt
 opencode --agent security-review
 ```
 
-Dann im Prompt eine konkrete Prueffrage stellen, zum Beispiel:
+Dann im Prompt eine konkrete Prüffrage stellen, zum Beispiel:
 
 ```text
-Pruefe dieses Projekt auf Sicherheitsrisiken, unsichere Konfiguration, Secret-Leaks und Architekturprobleme. Aendere keine Dateien, sondern liefere Findings mit Datei- und Zeilenhinweisen.
+Prüfe dieses Projekt auf Sicherheitsrisiken, unsichere Konfiguration, Secret-Leaks und Architekturprobleme. Ändere keine Dateien, sondern liefere Findings mit Datei- und Zeilenhinweisen.
 ```
 
 Als einmaligen nicht-interaktiven Review-Lauf:
 
 ```bash
 cd /rider-projects/MeinProjekt
-opencode run --agent security-review "Pruefe dieses Projekt auf Sicherheitsrisiken, unsichere Konfiguration, Secret-Leaks und Architekturprobleme. Aendere keine Dateien, sondern liefere Findings mit Datei- und Zeilenhinweisen."
+opencode run --agent security-review "Prüfe dieses Projekt auf Sicherheitsrisiken, unsichere Konfiguration, Secret-Leaks und Architekturprobleme. Ändere keine Dateien, sondern liefere Findings mit Datei- und Zeilenhinweisen."
 ```
 
-Wenn aus einem Finding eine Aenderung entstehen soll, danach bewusst mit dem normalen `coding`-Agenten oder manuell umsetzen. `security-review` ist absichtlich auf Analyse begrenzt.
+Wenn aus einem Finding eine Änderung entstehen soll, danach bewusst mit dem normalen `coding`-Agenten oder manuell umsetzen. `security-review` ist absichtlich auf Analyse begrenzt.
 
 ### Codex CLI verwenden
 
@@ -1034,14 +1159,14 @@ Codex CLI ist ebenfalls im Container installiert:
 codex --version
 ```
 
-Codex startet nicht automatisch. Fuer ein Projekt zuerst in das Projektverzeichnis wechseln und dann Codex starten:
+Codex startet nicht automatisch. Für ein Projekt zuerst in das Projektverzeichnis wechseln und dann Codex starten:
 
 ```bash
 cd /rider-projects/MeinProjekt
 codex
 ```
 
-Lokale Codex-Daten liegen im Docker-Volume `codex_data` unter `/home/adedev/.codex`. Dieses Volume ist nicht Teil des Git-Repositories. Zugangsdaten und private Sitzungsdaten duerfen nicht in Projektordner kopiert oder committed werden.
+Lokale Codex-Daten liegen im Docker-Volume `codex_data` unter `/home/adedev/.codex`. Dieses Volume ist nicht Teil des Git-Repositories. Zugangsdaten und private Sitzungsdaten dürfen nicht in Projektordner kopiert oder committed werden.
 
 ### Konfiguration
 
@@ -1051,33 +1176,33 @@ Lokale Codex-Daten liegen im Docker-Volume `codex_data` unter `/home/adedev/.cod
 https://chat-ai.academiccloud.de/v1
 ```
 
-Der API-Key wird aus `GWDG_API_KEY` gelesen. Das Standardmodell fuer normale Coding-Aufgaben ist:
+Der API-Key wird aus `GWDG_API_KEY` gelesen. Das Standardmodell für normale Coding-Aufgaben ist:
 
 ```text
 chat-ai/qwen3-coder-30b-a3b-instruct
 ```
 
-Der Standard-Agent `coding` nutzt dieses Modell mit fokussierten Coding-Parametern. `glm-4.7` bleibt als kleineres Modell fuer Nebenaufgaben und als Alternative fuer Analyse und Brainstorming konfiguriert.
+Der Standard-Agent `coding` nutzt dieses Modell mit fokussierten Coding-Parametern. `glm-4.7` bleibt als kleineres Modell für Nebenaufgaben und als Alternative für Analyse und Brainstorming konfiguriert.
 
-#### OpenCode-Haertung
+#### OpenCode-Härtung
 
-Die Datei `opencode.jsonc` enthaelt Sicherheitsregeln fuer OpenCode. Das ist wichtig, weil OpenCode ohne eigene `permission`-Regeln viele Aktionen standardmaessig erlaubt. In einer Umgebung mit ISO-9001-/ISO-27001-Anforderungen sollen riskante Aktionen deshalb nicht ohne bewusste Freigabe laufen.
+Die Datei `opencode.jsonc` enthält Sicherheitsregeln für OpenCode. Das ist wichtig, weil OpenCode ohne eigene `permission`-Regeln viele Aktionen standardmäßig erlaubt. In einer Umgebung mit ISO-9001- und ISO-27001-Anforderungen sollen riskante Aktionen deshalb nicht ohne bewusste Freigabe laufen.
 
 Die wichtigsten Einstellungen:
 
-- `share` steht auf `disabled`. OpenCode darf keine Sitzungen als oeffentliche Links teilen.
-- `autoupdate` steht auf `false`. Updates erfolgen kontrolliert ueber Dockerfile, Git-Commit und Image-Build.
-- `enabled_providers` enthaelt nur `chat-ai`. Andere automatisch erkannte Provider werden nicht verwendet.
+- `share` steht auf `disabled`. OpenCode darf keine Sitzungen als öffentliche Links teilen.
+- `autoupdate` steht auf `false`. Updates erfolgen kontrolliert über Dockerfile, Git-Commit und Image-Build.
+- `enabled_providers` enthält nur `chat-ai`. Andere automatisch erkannte Provider werden nicht verwendet.
 - `permission` setzt als Grundregel `ask`. OpenCode fragt also nach, wenn keine engere Regel greift.
-- Lesen, Suchen und Listen im Projekt sind erlaubt. Das ist fuer Code-Analyse noetig.
-- Echte Secret-Dateien und lokale Tool-Daten sind fuer Lesen und Schreiben gesperrt, zum Beispiel `.env`, `opencode.env`, `codex.env`, `~/.ssh`, GitHub-/GitLab-CLI-Konfiguration, Docker-/Podman-Konfiguration, Codex-Daten und OpenCode-Daten.
-- Datei-Aenderungen stehen auf `ask`. OpenCode darf also nicht still Dateien schreiben.
-- Shell-Kommandos stehen grundsaetzlich auf `ask`. Einfache Statusbefehle wie `pwd`, `ls`, `git status`, `git diff`, `git log` und `git show` sind erlaubt.
+- Lesen, Suchen und Listen im Projekt sind erlaubt. Das ist für Code-Analyse nötig.
+- Echte Secret-Dateien und lokale Tool-Daten sind für Lesen und Schreiben gesperrt, zum Beispiel `.env`, `opencode.env`, `codex.env`, `~/.ssh`, GitHub-/GitLab-CLI-Konfiguration, Docker-/Podman-Konfiguration, Codex-Daten und OpenCode-Daten.
+- Datei-Änderungen stehen auf `ask`. OpenCode darf also nicht still Dateien schreiben.
+- Shell-Kommandos stehen grundsätzlich auf `ask`. Einfache Statusbefehle wie `pwd`, `ls`, `git status`, `git diff`, `git log` und `git show` sind erlaubt.
 - Destruktive Kommandos wie `rm`, `sudo`, `su`, `dd`, `mkfs`, `mount` und `umount` sind gesperrt.
-- Netzwerkzugriffe ueber OpenCode-Werkzeuge wie `webfetch`, `websearch` und `codesearch` fragen nach.
-- Der Agent `security-review` ist fuer Sicherheits- und Architekturpruefungen gedacht. Er ist read-only und darf keine Dateien aendern.
+- Netzwerkzugriffe über OpenCode-Werkzeuge wie `webfetch`, `websearch` und `codesearch` fragen nach.
+- Der Agent `security-review` ist für Sicherheits- und Architekturprüfungen gedacht. Er ist read-only und darf keine Dateien ändern.
 
-Wenn `opencode.jsonc` geaendert wird, gibt es zwei Wege:
+Wenn `opencode.jsonc` geändert wird, gibt es zwei Wege:
 
 ```bash
 CONTAINER_NAME=$(podman ps --filter name=ade-dev-sandbox --format '{{.Names}}' | head -n 1)
@@ -1085,14 +1210,14 @@ podman cp opencode.jsonc "${CONTAINER_NAME}:/home/adedev/.config/opencode/openco
 podman exec --user root "$CONTAINER_NAME" chown adedev:adedev /home/adedev/.config/opencode/opencode.jsonc
 ```
 
-Dieser Weg aktualisiert den laufenden Container sofort. Er aendert aber nicht das bereits gebaute Image. Fuer neue Container muss das Image neu gebaut werden:
+Dieser Weg aktualisiert den laufenden Container sofort. Er ändert aber nicht das bereits gebaute Image. Für neue Container muss das Image neu gebaut werden:
 
 ```bash
 podman compose build --pull
 podman compose up -d --force-recreate
 ```
 
-Nach einer Aenderung kann die geladene Konfiguration geprueft werden:
+Nach einer Änderung kann die geladene Konfiguration geprüft werden:
 
 ```bash
 opencode debug config
@@ -1100,16 +1225,16 @@ opencode debug agent coding
 opencode debug agent security-review
 ```
 
-#### Codex-Haertung
+#### Codex-Härtung
 
-Codex CLI wird ebenfalls gehaertet. Die Konfiguration liegt im Repository unter `codex/config.toml` und `codex/requirements.toml`. Beim Image-Build werden diese Dateien systemweit nach `/etc/codex` kopiert.
+Codex CLI wird ebenfalls gehärtet. Die Konfiguration liegt im Repository unter `codex/config.toml` und `codex/requirements.toml`. Beim Image-Build werden diese Dateien systemweit nach `/etc/codex` kopiert.
 
 Die wichtigsten Einstellungen in `codex/config.toml`:
 
-- `approval_policy = "untrusted"`: Codex darf nur einen kleinen Satz vertrauenswuerdiger Basisbefehle ohne Rueckfrage ausfuehren.
+- `approval_policy = "untrusted"`: Codex darf nur einen kleinen Satz vertrauenswürdiger Basisbefehle ohne Rückfrage ausführen.
 - `sandbox_mode = "workspace-write"`: Codex darf innerhalb der vorgesehenen Arbeitsbereiche schreiben, aber nicht mit Vollzugriff laufen.
-- `web_search = "disabled"`: Websuche ist standardmaessig deaktiviert.
-- `check_for_update_on_startup = false`: Updates erfolgen kontrolliert ueber Dockerfile und Image-Build.
+- `web_search = "disabled"`: Websuche ist standardmäßig deaktiviert.
+- `check_for_update_on_startup = false`: Updates erfolgen kontrolliert über Dockerfile und Image-Build.
 - `history.persistence = "none"`: Session-Transkripte werden nicht dauerhaft gespeichert.
 - `otel.exporter = "none"` und `log_user_prompt = false`: Es wird keine Telemetrie exportiert und Prompts werden nicht geloggt.
 - `sandbox_workspace_write.network_access = false`: Shell-Kommandos in der Sandbox haben keinen direkten Netzwerkzugriff.
@@ -1117,27 +1242,27 @@ Die wichtigsten Einstellungen in `codex/config.toml`:
 - `sandbox_workspace_write.writable_roots`: Schreibrechte sind auf `/workspace`, `/rider-projects` und `/java-projects` begrenzt.
 - `shell_environment_policy.inherit = "core"`: Subprozesse erben nur eine reduzierte Umgebung.
 - Secret-Variablen mit Namen wie `*KEY*`, `*SECRET*`, `*TOKEN*`, `*PASSWORD*` und `*CREDENTIAL*` werden aus Subprozessen entfernt.
-- App-, Browser- und Computer-Use-Flaechen sind deaktiviert.
+- App-, Browser- und Computer-Use-Flächen sind deaktiviert.
 
-Die Datei `codex/requirements.toml` setzt Schranken, die normale Benutzer- oder Projektkonfiguration nicht abschwaechen darf:
+Die Datei `codex/requirements.toml` setzt Schranken, die normale Benutzer- oder Projektkonfiguration nicht abschwächen darf:
 
 - `allowed_approval_policies = ["untrusted", "on-request"]`: Der Modus `never` ist nicht erlaubt.
 - `allowed_sandbox_modes = ["read-only", "workspace-write"]`: `danger-full-access` ist nicht erlaubt.
 - `allowed_web_search_modes = []`: Nur deaktivierte Websuche ist erlaubt.
-- Secret-Dateien und lokale Tool-Daten sind fuer Codex gesperrt, zum Beispiel `.env`, `opencode.env`, `codex.env`, `~/.ssh`, Docker-/Podman-Konfiguration, Codex-Daten und OpenCode-Daten.
-- Gefaehrliche Shell-Prefixe wie `rm`, `sudo`, `su`, `dd`, `mkfs`, `mount` und `umount` sind verboten.
-- Git-Schreibaktionen, Container-Befehle, Netzwerkabrufe und Build-/Paketmanager-Befehle verlangen eine Rueckfrage.
+- Secret-Dateien und lokale Tool-Daten sind für Codex gesperrt, zum Beispiel `.env`, `opencode.env`, `codex.env`, `~/.ssh`, Docker-/Podman-Konfiguration, Codex-Daten und OpenCode-Daten.
+- Gefährliche Shell-Prefixe wie `rm`, `sudo`, `su`, `dd`, `mkfs`, `mount` und `umount` sind verboten.
+- Git-Schreibaktionen, Container-Befehle, Netzwerkabrufe und Build-/Paketmanager-Befehle verlangen eine Rückfrage.
 
-`codex/config.toml` wird absichtlich nicht nach `/home/adedev/.codex/config.toml` kopiert. Dieses Verzeichnis wird durch das persistente Docker-/Podman-Volume `codex_data` ueberlagert. Eine Datei im Image waere dort bei laufendem Compose-Setup nicht sichtbar.
+`codex/config.toml` wird absichtlich nicht nach `/home/adedev/.codex/config.toml` kopiert. Dieses Verzeichnis wird durch das persistente Docker-/Podman-Volume `codex_data` überlagert. Eine Datei im Image wäre dort bei laufendem Compose-Setup nicht sichtbar.
 
-Fuer eine dauerhafte Aenderung muss das Image neu gebaut und der Container neu erzeugt werden:
+Für eine dauerhafte Änderung muss das Image neu gebaut und der Container neu erzeugt werden:
 
 ```bash
 podman compose build --pull
 podman compose up -d --force-recreate
 ```
 
-Fuer einen laufenden Container koennen die Konfigurationsdateien testweise kopiert werden. Das ersetzt keinen Image-Build und installiert auch kein neues Paket wie `bubblewrap`:
+Für einen laufenden Container können die Konfigurationsdateien testweise kopiert werden. Das ersetzt keinen Image-Build und installiert auch kein neues Paket wie `bubblewrap`:
 
 ```bash
 CONTAINER_NAME=$(podman ps --filter name=ade-dev-sandbox --format '{{.Names}}' | head -n 1)
@@ -1148,15 +1273,15 @@ podman cp codex/requirements.toml "${CONTAINER_NAME}:/etc/codex/requirements.tom
 podman exec --user root "$CONTAINER_NAME" chmod 0644 /etc/codex/config.toml /etc/codex/managed_config.toml /etc/codex/requirements.toml
 ```
 
-Nach einer Aenderung kann die wirksame Sandbox grob geprueft werden:
+Nach einer Änderung kann die wirksame Sandbox grob geprüft werden:
 
 ```bash
 codex debug prompt-input "Test"
 ```
 
-In der Ausgabe sollten `sandbox_mode` als `workspace-write`, Netzwerkzugriff als eingeschraenkt und die Writable-Roots `/rider-projects`, `/workspace` und `/java-projects` sichtbar sein.
+In der Ausgabe sollten `sandbox_mode` als `workspace-write`, Netzwerkzugriff als eingeschränkt und die Writable-Roots `/rider-projects`, `/workspace` und `/java-projects` sichtbar sein.
 
-Java JDK 21 und Maven werden beim Image-Build aus den Debian-Paketquellen installiert. Sie sind fuer Java-Grundlagen, Maven-Projekte und Spring-Boot-Projekte vorbereitet.
+Java JDK 21 und Maven werden beim Image-Build aus den Debian-Paketquellen installiert. Sie sind für Java-Grundlagen, Maven-Projekte und Spring-Boot-Projekte vorbereitet.
 
 Opencode und Codex CLI werden beim Image-Build mit der neuesten npm-Version installiert:
 
@@ -1164,13 +1289,13 @@ Opencode und Codex CLI werden beim Image-Build mit der neuesten npm-Version inst
 RUN npm i -g opencode-ai@latest @openai/codex@latest
 ```
 
-Zusaetzlich installiert das Image haeufig genutzte CLI-Werkzeuge fuer Agenten-Workflows: `git`, `python`, `python3`, `jq`, `yq`, `rg`, `fd`, `fdfind`, `direnv`, `shellcheck`, `shfmt`, `delta`, `tree`, `just`, `wget`, `curl` und `bubblewrap`. Das Debian-Paket fuer `fd` heisst `fd-find` und liefert den Befehl `fdfind`; das Image legt zusaetzlich den erwarteten Befehl `fd` als Symlink an. `bubblewrap` wird fuer die Linux-Sandbox von Codex installiert. `mas` ist ein macOS-App-Store-Werkzeug und wird im Linux-Container nicht installiert.
+Zusätzlich installiert das Image häufig genutzte CLI-Werkzeuge für Agenten-Workflows: `git`, `python`, `python3`, `jq`, `yq`, `rg`, `fd`, `fdfind`, `direnv`, `shellcheck`, `shfmt`, `delta`, `tree`, `just`, `wget`, `curl` und `bubblewrap`. Das Debian-Paket für `fd` heißt `fd-find` und liefert den Befehl `fdfind`; das Image legt zusätzlich den erwarteten Befehl `fd` als Symlink an. `bubblewrap` wird für die Linux-Sandbox von Codex installiert. `mas` ist ein macOS-App-Store-Werkzeug und wird im Linux-Container nicht installiert.
 
 Codex CLI speichert lokale Daten im Docker-Volume `codex_data`. Dieses Volume wird im Container nach `/home/adedev/.codex` eingebunden. Dadurch bleiben Codex-Daten zwischen Container-Neustarts erhalten, ohne dass sie in das Git-Repository geschrieben werden.
 
-Spec Kit wird beim Image-Build mit `uv` installiert. Dafuer enthaelt das Image auch `git`, `curl` und `ca-certificates`.
+Spec Kit wird beim Image-Build mit `uv` installiert. Dafür enthält das Image auch `git`, `curl` und `ca-certificates`.
 
-Nach der Installation wird Spec Kit im Container gepatcht. Der Patch verhindert, dass Python-Kopiervorgaenge Dateirechte oder Zeitstempel auf Host-Bind-Mounts uebernehmen wollen. Das ist wichtig, weil Windows- und WSL-Mounts solche Metadatenoperationen mit `Operation not permitted` ablehnen koennen.
+Nach der Installation wird Spec Kit im Container gepatcht. Der Patch verhindert, dass Python-Kopiervorgänge Dateirechte oder Zeitstempel auf Host-Bind-Mounts übernehmen wollen. Das ist wichtig, weil Windows- und WSL-Mounts solche Metadatenoperationen mit `Operation not permitted` ablehnen können.
 
 Die .NET-Workload-Hinweismeldung wird im Container deaktiviert:
 
@@ -1179,20 +1304,20 @@ DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE=true
 MSBuildEnableWorkloadResolver=false
 ```
 
-Die erste Variable betrifft allgemeine Update-Benachrichtigungen. Die zweite Variable deaktiviert den MSBuild-Workload-Resolver. Das ist fuer normale Konsolen-, Library-, Test- und Web-Projekte sinnvoll, weil dort keine optionalen SDK-Workloads wie MAUI gebraucht werden.
+Die erste Variable betrifft allgemeine Update-Benachrichtigungen. Die zweite Variable deaktiviert den MSBuild-Workload-Resolver. Das ist für normale Konsolen-, Library-, Test- und Web-Projekte sinnvoll, weil dort keine optionalen SDK-Workloads wie MAUI gebraucht werden.
 
-Das Image erbt vom gemeinsamen `agent-sandbox`-Image auf Debian 13. .NET wird deshalb im Dockerfile ueber die Microsoft-Paketquelle fuer Debian 13 installiert. Der Build-Parameter `DOTNET_SDK_PACKAGE` steht standardmaessig auf `dotnet-sdk-10.0`.
+Das Image erbt vom gemeinsamen `agent-sandbox`-Image auf Debian 13. .NET wird deshalb im Dockerfile über die Microsoft-Paketquelle für Debian 13 installiert. Der Build-Parameter `DOTNET_SDK_PACKAGE` steht standardmäßig auf `dotnet-sdk-10.0`.
 
-Gegen die Meldung `An issue was encountered verifying workloads` wird beim Image-Build zusaetzlich der Manifest-Modus gesetzt:
+Gegen die Meldung `An issue was encountered verifying workloads` wird beim Image-Build zusätzlich der Manifest-Modus gesetzt:
 
 ```dockerfile
 RUN dotnet workload config --update-mode manifests \
     && dotnet workload update
 ```
 
-Dieser Befehl laeuft beim Image-Build als `root`, weil `dotnet workload config` erhoehte Rechte braucht. Normale .NET-Projekte koennen weiter gebaut und gestartet werden. Wenn ein Projekt echte Workloads wie MAUI oder spezielle WebAssembly-Tools braucht, muessen diese gezielt im Dockerfile ergaenzt und `MSBuildEnableWorkloadResolver` wieder aktiviert werden.
+Dieser Befehl läuft beim Image-Build als `root`, weil `dotnet workload config` erhöhte Rechte braucht. Normale .NET-Projekte können weiter gebaut und gestartet werden. Wenn ein Projekt echte Workloads wie MAUI oder spezielle WebAssembly-Tools braucht, müssen diese gezielt im Dockerfile ergänzt und `MSBuildEnableWorkloadResolver` wieder aktiviert werden.
 
-Zusaetzlich wird im Image ein schmaler Wrapper unter `/usr/local/bin/dotnet` installiert. Er ruft intern `/usr/bin/dotnet` auf und filtert nur diese bekannte Zeile aus der Fehlerausgabe:
+Zusätzlich wird im Image ein schmaler Wrapper unter `/usr/local/bin/dotnet` installiert. Er ruft intern `/usr/bin/dotnet` auf und filtert nur diese bekannte Zeile aus der Fehlerausgabe:
 
 ```text
 An issue was encountered verifying workloads. For more information, run "dotnet workload update".
@@ -1200,7 +1325,7 @@ An issue was encountered verifying workloads. For more information, run "dotnet 
 
 Andere Warnungen, Fehler und der Exit-Code von `dotnet` bleiben erhalten.
 
-### Aufraeumen
+### Aufräumen
 
 Container stoppen, Daten behalten:
 
@@ -1208,15 +1333,15 @@ Container stoppen, Daten behalten:
 docker compose down
 ```
 
-Container stoppen und persistente Container-/Volume-Daten dieses Compose-Projekts loeschen:
+Container stoppen und persistente Container- und Volume-Daten dieses Compose-Projekts löschen:
 
 ```bash
 docker compose down -v
 ```
 
-Diese Befehle gelten sinngemaess auf Linux, macOS und Windows. Entscheidend ist, ob die Umgebung mit Docker oder Podman gestartet wurde. Unter Windows koennen die Befehle in PowerShell, im Windows Terminal oder in WSL2 laufen. Wichtig ist nur, dass derselbe Container-Provider angesprochen wird, der die Container auch gestartet hat.
+Diese Befehle gelten sinngemäß auf Linux, macOS und Windows. Entscheidend ist, ob die Umgebung mit Docker oder Podman gestartet wurde. Unter Windows können die Befehle in PowerShell, im Windows Terminal oder in WSL2 laufen. Wichtig ist nur, dass derselbe Container-Provider angesprochen wird, der die Container auch gestartet hat.
 
-Vor dem Aufraeumen zuerst anzeigen, wie viel Speicher Container, Images, Volumes und Build-Cache belegen:
+Vor dem Aufräumen zuerst anzeigen, wie viel Speicher Container, Images, Volumes und Build-Cache belegen:
 
 ```bash
 docker system df
@@ -1230,14 +1355,14 @@ docker system prune
 podman system prune
 ```
 
-Mit `-a` werden zusaetzlich alle ungenutzten Images entfernt, nicht nur unbenannte Zwischen-Images. Auch hier bleiben Images erhalten, die von laufenden Containern verwendet werden:
+Mit `-a` werden zusätzlich alle ungenutzten Images entfernt, nicht nur unbenannte Zwischen-Images. Auch hier bleiben Images erhalten, die von laufenden Containern verwendet werden:
 
 ```bash
 docker system prune -a
 podman system prune -a
 ```
 
-Gezieltes Aufraeumen ist ebenfalls moeglich:
+Gezieltes Aufräumen ist ebenfalls möglich:
 
 ```bash
 docker container prune
@@ -1249,21 +1374,21 @@ podman image prune
 podman image prune --build-cache
 ```
 
-Volumes sind der riskante Teil, weil dort persistente Daten liegen koennen, zum Beispiel `opencode_data`, `codex_data` und `dotnet_build`. Volumes nur loeschen, wenn diese Daten bewusst entfernt werden sollen:
+Volumes sind der riskante Teil, weil dort persistente Daten liegen können, zum Beispiel `opencode_data`, `codex_data` und `dotnet_build`. Volumes nur löschen, wenn diese Daten bewusst entfernt werden sollen:
 
 ```bash
 docker volume prune
 podman volume prune
 ```
 
-Die haerteste Variante loescht ungenutzte Images, Container, Networks, Build-Cache und ungenutzte Volumes. Das ist nicht der normale Standardbefehl fuer dieses Projekt:
+Die härteste Variante löscht ungenutzte Images, Container, Networks, Build-Cache und ungenutzte Volumes. Das ist nicht der normale Standardbefehl für dieses Projekt:
 
 ```bash
 docker system prune -a --volumes
 podman system prune -a --volumes
 ```
 
-### Haeufige Probleme
+### Häufige Probleme
 
 Wenn `docker compose` nicht gefunden wird, fehlt meist `docker-compose-v2`:
 
@@ -1271,42 +1396,42 @@ Wenn `docker compose` nicht gefunden wird, fehlt meist `docker-compose-v2`:
 sudo apt install -y docker-compose-v2
 ```
 
-Wenn Docker keine Berechtigung hat, entweder `sudo docker ...` verwenden oder den Benutzer zur Gruppe `docker` hinzufuegen.
+Wenn Docker keine Berechtigung hat, entweder `sudo docker ...` verwenden oder den Benutzer zur Gruppe `docker` hinzufügen.
 
-Wenn der API-Key nicht funktioniert, `opencode.env` pruefen. Den Key nicht im Terminalverlauf, in Screenshots oder in Git-Ausgaben zeigen.
+Wenn der API-Key nicht funktioniert, `opencode.env` prüfen. Den Key nicht im Terminalverlauf, in Screenshots oder in Git-Ausgaben zeigen.
 
-Wenn `codex` oder `opencode` im Container mit `Permission denied` oder `EACCES` unter `/home/adedev/.codex` oder `/home/adedev/.local/share/opencode` abbrechen, gehoeren wahrscheinlich alte persistente Volumes noch einem frueheren Container-Benutzer. Das kann nach einem Image- oder Basisimage-Wechsel passieren. Die Verzeichnisse im Image sind bereits fuer `adedev` angelegt; vorhandene Volumes ueberdecken diese Verzeichnisse aber und muessen einmalig korrigiert werden.
+Wenn `codex` oder `opencode` im Container mit `Permission denied` oder `EACCES` unter `/home/adedev/.codex` oder `/home/adedev/.local/share/opencode` abbrechen, gehören wahrscheinlich alte persistente Volumes noch einem früheren Container-Benutzer. Das kann nach einem Image- oder Basisimage-Wechsel passieren. Die Verzeichnisse im Image sind bereits für `adedev` angelegt; vorhandene Volumes überdecken diese Verzeichnisse aber und müssen einmalig korrigiert werden.
 
-Fuer Podman auf macOS, Windows oder WSL2 zuerst den tatsaechlichen Container-Namen ermitteln. Je nach Compose-Provider kann er zum Beispiel `ade-dev-sandbox-ade-1` oder `ade-dev-sandbox_ade_1` heissen:
+Für Podman auf macOS, Windows oder WSL2 zuerst den tatsächlichen Container-Namen ermitteln. Je nach Compose-Provider kann er zum Beispiel `ade-dev-sandbox-ade-1` oder `ade-dev-sandbox_ade_1` heißen:
 
 ```bash
 CONTAINER_NAME=$(podman ps --filter name=ade-dev-sandbox --format '{{.Names}}' | head -n 1)
 podman exec --user root "$CONTAINER_NAME" bash -lc 'chown -R adedev:adedev /home/adedev/.codex /home/adedev/.local/share/opencode'
 ```
 
-Fuer Docker Compose:
+Für Docker Compose:
 
 ```bash
 docker compose exec --user root ade bash -lc 'chown -R adedev:adedev /home/adedev/.codex /home/adedev/.local/share/opencode'
 ```
 
-Wenn Podman mit Meldungen wie `container name "ade-dev-sandbox-ade-1" is already in use`, `container name "ade-dev-sandbox_ade_1" is already in use`, `can only create exec sessions on running containers` oder `rootlessport listen tcp 127.0.0.1:5100: bind: address already in use` abbricht, laeuft meist dieselbe Umgebung noch in einer anderen Podman-Machine oder ein alter Container belegt die Port-Range. Es darf nur eine Variante gleichzeitig laufen.
+Wenn Podman mit Meldungen wie `container name "ade-dev-sandbox-ade-1" is already in use`, `container name "ade-dev-sandbox_ade_1" is already in use`, `can only create exec sessions on running containers` oder `rootlessport listen tcp 127.0.0.1:5100: bind: address already in use` abbricht, läuft meist dieselbe Umgebung noch in einer anderen Podman-Machine oder ein alter Container belegt die Port-Range. Es darf nur eine Variante gleichzeitig laufen.
 
-In WSL2 pruefen und stoppen:
+In WSL2 prüfen und stoppen:
 
 ```bash
 podman-compose ps
 podman-compose down
 ```
 
-Unter Windows in PowerShell pruefen und stoppen:
+Unter Windows in PowerShell prüfen und stoppen:
 
 ```powershell
 podman compose ps
 podman compose down
 ```
 
-Danach die gewuenschte Seite neu starten. Beispiel fuer WSL2:
+Danach die gewünschte Seite neu starten. Beispiel für WSL2:
 
 ```bash
 podman-compose up -d
@@ -1319,7 +1444,7 @@ docker compose build --pull
 docker compose up -d
 ```
 
-Wenn der Fehler auf `/dotnet-build/...` zeigt, gehoert wahrscheinlich das persistente Build-Volume noch einem frueheren Container-Benutzer. Das kann nach einem Image- oder Basisimage-Wechsel passieren. Dann das Volume einmalig korrigieren:
+Wenn der Fehler auf `/dotnet-build/...` zeigt, gehört wahrscheinlich das persistente Build-Volume noch einem früheren Container-Benutzer. Das kann nach einem Image- oder Basisimage-Wechsel passieren. Dann das Volume einmalig korrigieren:
 
 ```bash
 CONTAINER_NAME=$(podman ps --filter name=ade-dev-sandbox --format '{{.Names}}' | head -n 1)
@@ -1332,7 +1457,7 @@ Mit Docker Compose:
 docker compose exec --user root ade bash -lc 'chown -R adedev:adedev /dotnet-build'
 ```
 
-Danach im Container pruefen, ob die allgemeine MSBuild-Konfiguration und das Build-Volume vorhanden sind:
+Danach im Container prüfen, ob die allgemeine MSBuild-Konfiguration und das Build-Volume vorhanden sind:
 
 ```bash
 test "$DirectoryBuildPropsPath" = "/dotnet-config/ContainerBuild.props"
@@ -1340,31 +1465,31 @@ ls /dotnet-config/ContainerBuild.props
 ls /dotnet-build
 ```
 
-Wenn eine Warnung `MSB3539` zu `BaseIntermediateOutputPath` erscheint, laeuft wahrscheinlich noch ein alter Container. Dann den Container neu erstellen:
+Wenn eine Warnung `MSB3539` zu `BaseIntermediateOutputPath` erscheint, läuft wahrscheinlich noch ein alter Container. Dann den Container neu erstellen:
 
 ```bash
 docker compose up -d --force-recreate
 ```
 
-Wenn danach ein Fehler wie `Duplicate TargetFrameworkAttribute` erscheint, liegen meist alte `obj`-Dateien im Windows-Projektordner. Diese Ordner einmal loeschen und danach erneut bauen:
+Wenn danach ein Fehler wie `Duplicate TargetFrameworkAttribute` erscheint, liegen meist alte `obj`-Dateien im Windows-Projektordner. Diese Ordner einmal löschen und danach erneut bauen:
 
 ```bash
 find /rider-projects/ConsoleApp1 -type d \( -name bin -o -name obj \) -prune -print
 ```
 
-Wenn die Ausgabe nur erwartete Build-Ordner zeigt, koennen sie geloescht werden:
+Wenn die Ausgabe nur erwartete Build-Ordner zeigt, können sie gelöscht werden:
 
 ```bash
 find /rider-projects/ConsoleApp1 -type d \( -name bin -o -name obj \) -prune -exec rm -rf {} +
 ```
 
-Wenn ein Fehler wie `Root element is missing` fuer `/rider-projects/Directory.Build.props` erscheint, liegt im Windows-Projektroot eine alte oder leere MSBuild-Datei. Diese Datei darf dort nicht mehr liegen. Pruefen:
+Wenn ein Fehler wie `Root element is missing` für `/rider-projects/Directory.Build.props` erscheint, liegt im Windows-Projektroot eine alte oder leere MSBuild-Datei. Diese Datei darf dort nicht mehr liegen. Prüfen:
 
 ```bash
 ls -l /rider-projects/Directory.Build.props
 ```
 
-Wenn die Datei leer oder unerwuenscht ist, loeschen:
+Wenn die Datei leer oder unerwünscht ist, löschen:
 
 ```bash
 rm /rider-projects/Directory.Build.props
@@ -1372,17 +1497,17 @@ rm /rider-projects/Directory.Build.props
 
 ### Kompakter Testablauf
 
-Dieser Ablauf prueft das Setup in einer sinnvollen Reihenfolge. Er eignet sich gut nach einer Neuinstallation, nach Aenderungen an `Dockerfile`, `compose.yml` oder `opencode.jsonc` und als erster Test auf macOS mit Docker Desktop.
+Dieser Ablauf prüft das Setup in einer sinnvollen Reihenfolge. Er eignet sich gut nach einer Neuinstallation, nach Änderungen an `Dockerfile`, `compose.yml` oder `opencode.jsonc` und als erster Test auf macOS mit Docker Desktop.
 
 Der Test besteht aus zwei Teilen:
 
-1. Auf dem Host wird Docker Compose geprueft, das Image gebaut und der Container gestartet.
-2. Im Container wird geprueft, ob .NET, OpenCode, Spec Kit und die gemounteten Verzeichnisse funktionieren.
+1. Auf dem Host wird Docker Compose geprüft, das Image gebaut und der Container gestartet.
+2. Im Container wird geprüft, ob .NET, OpenCode, Spec Kit und die gemounteten Verzeichnisse funktionieren.
 
-Auf dem Host ausfuehren. Der erste Befehl wechselt in dieses Repository; den Pfad bei Bedarf anpassen:
+Auf dem Host ausführen. Der erste Befehl wechselt in dieses Repository; den Pfad bei Bedarf anpassen:
 
 ```bash
-cd /home/thinder/ade-dev-sandbox
+cd /home/<benutzer>/ade-dev-sandbox
 docker compose config --no-interpolate
 docker compose build --pull
 docker compose up -d
@@ -1390,7 +1515,7 @@ docker compose ps
 docker compose exec ade bash
 ```
 
-Danach im Container pruefen:
+Danach im Container prüfen:
 
 ```bash
 dotnet --info
@@ -1409,20 +1534,20 @@ ls /java-projects
 
 Was die Befehle bedeuten:
 
-- `docker compose config --no-interpolate` prueft die Compose-Datei, ohne Variablenwerte und Secrets in der Ausgabe auszubreiten.
-- `docker compose build --pull` baut das Image und laedt vorher nach Moeglichkeit aktuelle Basisimages.
+- `docker compose config --no-interpolate` prüft die Compose-Datei, ohne Variablenwerte und Secrets in der Ausgabe auszubreiten.
+- `docker compose build --pull` baut das Image und lädt vorher nach Möglichkeit aktuelle Basisimages.
 - `docker compose up -d` startet den Container im Hintergrund.
-- `docker compose ps` zeigt, ob der Service `ade` laeuft.
-- `docker compose exec ade bash` oeffnet eine Shell im laufenden Container.
+- `docker compose ps` zeigt, ob der Service `ade` läuft.
+- `docker compose exec ade bash` öffnet eine Shell im laufenden Container.
 - `dotnet --info` zeigt, ob das .NET SDK im Container installiert und nutzbar ist.
-- `java --version`, `javac --version` und `mvn --version` pruefen JDK und Maven.
-- `node --version` und `npm --version` pruefen die Node.js-Werkzeuge, die OpenCode und Codex CLI brauchen.
-- `opencode --version` prueft die installierte OpenCode CLI.
-- `codex --version` prueft die installierte Codex CLI.
-- `specify version` prueft die installierte Spec Kit CLI.
-- `ls /workspace` prueft das lokale Projekt-Workspace-Mount.
-- `ls /rider-projects` prueft den ueber `RIDER_PROJECTS_DIR` konfigurierten Host-Mount.
-- `ls /java-projects` prueft den ueber `JAVA_PROJECTS_DIR` konfigurierten Host-Mount.
+- `java --version`, `javac --version` und `mvn --version` prüfen JDK und Maven.
+- `node --version` und `npm --version` prüfen die Node.js-Werkzeuge, die OpenCode und Codex CLI brauchen.
+- `opencode --version` prüft die installierte OpenCode CLI.
+- `codex --version` prüft die installierte Codex CLI.
+- `specify version` prüft die installierte Spec Kit CLI.
+- `ls /workspace` prüft das lokale Projekt-Workspace-Mount.
+- `ls /rider-projects` prüft den über `RIDER_PROJECTS_DIR` konfigurierten Host-Mount.
+- `ls /java-projects` prüft den über `JAVA_PROJECTS_DIR` konfigurierten Host-Mount.
 
 Erwartetes Ergebnis:
 
@@ -1430,14 +1555,14 @@ Erwartetes Ergebnis:
 - `dotnet --info` gibt SDK-Informationen aus und endet ohne Fehler.
 - `java --version` und `mvn --version` geben Versionsinformationen aus.
 - `opencode --version`, `codex --version` und `specify version` geben Versionsinformationen aus.
-- `ls /rider-projects` zeigt die Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthaelt.
-- `ls /java-projects` zeigt Java-Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthaelt.
+- `ls /rider-projects` zeigt die Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthält.
+- `ls /java-projects` zeigt Java-Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthält.
 
-macOS-Hinweis: Wenn Docker Desktop gerade erst installiert wurde, Docker Desktop zuerst einmal starten und warten, bis die Engine laeuft. Danach funktionieren `docker --version`, `docker compose version` und `docker info` im Terminal.
+macOS-Hinweis: Wenn Docker Desktop gerade erst installiert wurde, Docker Desktop zuerst einmal starten und warten, bis die Engine läuft. Danach funktionieren `docker --version`, `docker compose version` und `docker info` im Terminal.
 
-Windows-Hinweis: Wenn Docker Desktop aus PowerShell verwendet wird, muss `RIDER_PROJECTS_DIR` in `.env` als Windows-Pfad gesetzt werden, zum Beispiel `C:\Users\thinder\RiderProjects`. Wenn die Befehle aus Ubuntu/WSL2 laufen, wird der WSL-Pfad verwendet, zum Beispiel `/mnt/c/Users/thinder/RiderProjects`.
+Windows-Hinweis: Wenn Docker Desktop aus PowerShell verwendet wird, muss `RIDER_PROJECTS_DIR` in `.env` als Windows-Pfad gesetzt werden, zum Beispiel `C:\Users\<benutzer>\RiderProjects`. Wenn die Befehle aus Ubuntu/WSL2 laufen, wird der WSL-Pfad verwendet, zum Beispiel `/mnt/c/Users/<benutzer>/RiderProjects`.
 
-Sicherheits-Hinweis: `opencode.env` enthaelt den API-Key. Diese Datei nie committen, nie in Screenshots zeigen und nicht in Chat- oder Ticket-Systeme kopieren. Fuer Tests reicht es, zu pruefen, dass OpenCode startet; der Key muss nicht sichtbar gemacht werden.
+Sicherheits-Hinweis: `opencode.env` enthält den API-Key. Diese Datei nie committen, nie in Screenshots zeigen und nicht in Chat- oder Ticket-Systeme kopieren. Für Tests reicht es, zu prüfen, dass OpenCode startet; der Key muss nicht sichtbar gemacht werden.
 
 Wenn der Build bewusst komplett frisch laufen soll:
 
@@ -1446,43 +1571,43 @@ docker compose build --pull --no-cache
 docker compose up -d --force-recreate
 ```
 
-### Merksaetze
+### Merksätze
 
-- Nach Aenderungen am `Dockerfile` immer neu bauen:
+- Nach Änderungen am `Dockerfile` immer neu bauen:
 
 ```bash
 docker compose build --pull --no-cache
 docker compose up -d --force-recreate
 ```
 
-- Nach reinen Aenderungen an `compose.yml` reicht meistens:
+- Nach reinen Änderungen an `compose.yml` reicht meistens:
 
 ```bash
 docker compose up -d --force-recreate
 ```
 
-- ASP.NET-Apps muessen im Container auf `0.0.0.0` lauschen:
+- ASP.NET-Apps müssen im Container auf `0.0.0.0` lauschen:
 
 ```bash
 dotnet run --urls http://0.0.0.0:5102
 ```
 
-- Windows erreicht Web-Apps dann ueber `http://localhost:<port>`.
+- Windows erreicht Web-Apps dann über `http://localhost:<port>`.
 - Freigegeben ist lokal die Port-Range `5100-5199`.
-- `opencode.env` enthaelt ein Secret und darf nicht committed werden.
-- `opencode.jsonc` ist die kommentierte OpenCode-Konfiguration fuer den Container.
+- `opencode.env` enthält ein Secret und darf nicht committed werden.
+- `opencode.jsonc` ist die kommentierte OpenCode-Konfiguration für den Container.
 - `specify-cli` ist bewusst auf eine Version gepinnt. Updates werden manuell im Dockerfile gemacht.
-- Fuer neue Projekte unter `/rider-projects` zuerst projektlokal initialisieren:
+- Für neue Projekte unter `/rider-projects` zuerst projektlokal initialisieren:
 
 ```bash
 opencode --prompt "/init"
 specify init . --integration opencode --force
 ```
 
-- Wenn Spec Kit nach dem Script-Typ fragt, `sh` waehlen.
-- Projektregeln fuer OpenCode gehoeren in die jeweilige Projektdatei `AGENTS.md`.
-- `.opencode/` kann sensible Daten enthalten. Pro Projekt entscheiden, ob der Ordner ganz oder teilweise in `.gitignore` gehoert.
-- Bei `bin`-, `obj`- oder `apphost`-Fehlern pruefen:
+- Wenn Spec Kit nach dem Script-Typ fragt, `sh` wählen.
+- Projektregeln für OpenCode gehören in die jeweilige Projektdatei `AGENTS.md`.
+- `.opencode/` kann sensible Daten enthalten. Pro Projekt entscheiden, ob der Ordner ganz oder teilweise in `.gitignore` gehört.
+- Bei `bin`-, `obj`- oder `apphost`-Fehlern prüfen:
 
 ```bash
 echo "$DirectoryBuildPropsPath"
@@ -1490,13 +1615,177 @@ ls /dotnet-config/ContainerBuild.props
 ls /dotnet-build
 ```
 
+### Glossar
+
+Dieses Glossar erklärt die wichtigsten Begriffe in einfacher Form. Wer den Begriff nicht kennt, sollte zuerst hier nachsehen, bevor er weiterliest.
+
+| Begriff | Bedeutung |
+|---|---|
+| Agent | Ein KI-Programm wie OpenCode oder Codex, das im Container Aufgaben ausführen kann. |
+| API-Key | Ein geheimer Schlüssel, mit dem ein Programm einen Online-Dienst nutzen darf. Wie ein Passwort, aber für Maschinen. |
+| ASP.NET | Web-Framework von Microsoft für serverseitige Webanwendungen in C#. |
+| Bind-Mount | Ein Verzeichnis vom Host, das direkt in den Container eingebunden wird. Änderungen wirken in beide Richtungen. |
+| Build | Der Bauschritt, der aus Quellcode ein ausführbares Programm macht. |
+| Compose | Werkzeug, das Container über eine Datei `compose.yml` startet und stoppt. |
+| Container | Ein gekapselter Linux-Prozess, der aus einem Image gestartet wird. Wie eine kleine virtuelle Umgebung, aber leichter als eine virtuelle Maschine. |
+| Dockerfile | Eine Textdatei, die beschreibt, wie ein Image gebaut wird. |
+| Engine | Der laufende Hintergrunddienst von Docker oder Podman. Ohne Engine kein Container. |
+| Host | Dein eigener Rechner. Im Gegensatz dazu der Container. |
+| Image | Die Vorlage für Container. Aus einem Image können viele Container gestartet werden. |
+| JDK | Java Development Kit. Enthält Compiler `javac` und Laufzeit `java`. |
+| JSONC | JSON mit erlaubten Kommentaren. Wird in `opencode.jsonc` verwendet. |
+| Maven | Werkzeug für Java-Projekte. Baut Projekte und verwaltet Abhängigkeiten. |
+| MSBuild | Bauwerkzeug von Microsoft für .NET-Projekte. |
+| Mount | Allgemein: ein Verzeichnis irgendwo einhängen. Hier meist Bind-Mount oder Volume. |
+| .NET SDK | Software Development Kit für die Programmiersprachen C#, F# und VB.NET. |
+| Podman | Alternative zu Docker. Läuft ohne Daemon und braucht meistens keine Root-Rechte. |
+| Port | Eine nummerierte Tür auf einem Rechner, über die Netzwerkdienste erreicht werden. |
+| Provider | Hier: der Anbieter eines KI-Modells, zum Beispiel `chat-ai`. |
+| Registry | Speicherort für Container-Images im Netz, zum Beispiel die GitLab Container Registry. |
+| Rider | Eine integrierte Entwicklungsumgebung (IDE) von JetBrains für .NET. |
+| Rootless | Ohne Administrator- oder Root-Rechte. Podman läuft standardmäßig rootless. |
+| Sandbox | Eine geschützte Umgebung, in der ein Programm nicht überall hin schreiben darf. |
+| SDD | Spec-Driven Development. Erst beschreiben, dann planen, dann umsetzen. |
+| Secret | Eine geheime Information wie ein API-Key oder ein Passwort. |
+| Service | Ein benannter Container in `compose.yml`. In diesem Repository: `ade`. |
+| Shell | Ein Programm wie Bash, mit dem Befehle eingegeben werden. |
+| Spec Kit | Eine CLI, die einen festen Ablauf für die Erstellung von Software-Spezifikationen anbietet. |
+| Volume | Ein von Docker oder Podman verwalteter Speicherbereich, getrennt vom Host-Dateisystem. |
+| WSL2 | Windows Subsystem for Linux Version 2. Eine echte Linux-Umgebung in Windows. |
+
+### Barrierefreiheit
+
+Diese README erfüllt WCAG 2.2 Level AA so weit wie es Markdown auf GitHub erlaubt.
+
+| WCAG-Kriterium | Umsetzung |
+|---|---|
+| 1.3.1 Info und Beziehungen | Konsistente Heading-Hierarchie H1 → H2 → H3 → H4. Tabellen mit Kopfzeile. Listen statt freien Text, wo es passt. |
+| 1.4.1 Verwendung von Farbe | Keine Information allein durch Farbe. Status wird durch Text wie *erlaubt*, *gesperrt*, *fragt nach* ausgedrückt. |
+| 2.4.4 Linkzweck | Sprechende Linktexte im Inhaltsverzeichnis. Keine "hier klicken"-Formulierungen. |
+| 2.4.6 Überschriften und Beschriftungen | Bilinguale Überschriften am Anfang. Klare, eigenständige Sektionsüberschriften. |
+| 3.1.1 Sprache der Seite | Hauptsprache Deutsch im DE-Block, Englisch im EN-Block. (Plattform-Einschränkung: GitHub-Markdown unterstützt kein `lang`-Attribut.) |
+| 3.1.5 Lesbarkeit | Zielsprachniveau CEFR B2. Kurze Sätze. Fachbegriffe werden eingeführt und im Glossar erklärt. |
+| 4.1.1 Syntaxanalyse | Alle Code-Blöcke haben eine Sprachangabe (`bash`, `powershell`, `yaml`, `dockerfile`, `text` …). |
+| 4.1.2 Name, Rolle, Wert | Markdown-Standardelemente. Keine eingebetteten HTML-Komponenten mit eigener Logik. |
+
+Bekannte Einschränkungen der Plattform:
+
+- WCAG 3.1.2 (Sprache von Teilen): GitHub entfernt HTML-`lang`-Attribute. Sprachwechsel zwischen DE und EN sind nur über Sektionsüberschriften signalisiert.
+- Lange Codeblöcke können auf kleinen Bildschirmen horizontales Scrollen verursachen. Das ist ein Markdown-Limit.
+
+Tipps für Lernende mit Screenreader oder Braille-Display:
+
+- Das Inhaltsverzeichnis nutzen, um schnell in die richtige Sektion zu springen.
+- Innerhalb einer Sektion sind die Schritte als nummerierte oder ungeordnete Listen aufgebaut.
+- Code-Blöcke werden im Fließtext immer mit einem erklärenden Satz vorbereitet.
+
+---
+
 ## English
+
+### At a glance
+
+| Item | Information |
+|---|---|
+| Target group | IT-specialist apprentices, first year and later |
+| Learning goal | Use a reproducible container development environment |
+| Languages | C# / .NET, Java, Bash, PowerShell |
+| Container | Docker or Podman, on Linux, macOS, or Windows |
+| Time for the quick start | About 10 minutes of reading, 15 to 30 minutes for the first build |
+| Time for full exploration | Several training units across several weeks |
+| Prerequisite knowledge | Shell basics, rough understanding of Git |
+| Accessibility | WCAG 2.2 Level AA, see section [Accessibility](#accessibility) |
+
+### Quick start in 10 minutes
+
+This quick start is for anyone who wants to try the setup first. Details follow in the later sections.
+
+Step 1: Check prerequisites.
+
+- Docker Engine or Docker Desktop is installed.
+- A shell is open (Bash on Linux/macOS, PowerShell on Windows).
+- You know the path to this repository on your machine.
+
+Step 2: Change into the repository. Replace `<user>` with your login name.
+
+```bash
+cd /home/<user>/ade-dev-sandbox     # Linux / WSL2
+cd /Users/<user>/ade-dev-sandbox    # macOS
+```
+
+```powershell
+cd C:\Users\<user>\ade-dev-sandbox  # Windows
+```
+
+Step 3: Create local configuration files. `.env` only contains paths; `opencode.env` contains the secret API key.
+
+```bash
+cp .env.example .env
+cp opencode.env.example opencode.env
+chmod 600 opencode.env
+```
+
+Step 4: Enter the real `GWDG_API_KEY` in `opencode.env`. Do not print the key in the terminal and do not commit it.
+
+Step 5: Build and start the container.
+
+```bash
+docker compose build --pull
+docker compose up -d
+docker compose ps
+```
+
+Step 6: Open a shell inside the container.
+
+```bash
+docker compose exec ade bash
+```
+
+Step 7: Inside the container, check that everything is ready.
+
+```bash
+dotnet --info
+opencode --version
+specify version
+```
+
+If these three commands print version information, the quick start is complete. For your first real exercises, continue with the section [Learning path for apprentices](#learning-path-for-apprentices).
+
+### Prerequisites
+
+This guide assumes the following minimum requirements. The values are generous so the container stays stable when building larger projects.
+
+| Requirement | Minimum | Recommended | Note |
+|---|---|---|---|
+| Operating system | Ubuntu 22.04, macOS 13, Windows 11 | Current LTS or follow-up version | WSL2 is recommended on Windows. |
+| RAM | 8 GiB | 16 GiB or more | .NET, Java, and containers need memory. |
+| Free disk space | 20 GiB | 50 GiB or more | Images, volumes, and build cache grow. |
+| Internet | 10 Mbit/s | 50 Mbit/s | First builds download many packages. |
+| Permissions | Local user account | sudo or admin for installation | The container itself runs as a normal user. |
+| Prior knowledge | Shell basics, Git basics | Plus editor experience | Editor: Visual Studio Code or JetBrains Rider. |
+
+If one item is missing, the quick start usually still works. The setup will be slower or less stable, though.
 
 ### Target group and purpose
 
 This guide is written for first-year IT specialist apprentices and later. It explains the commands and also why they are needed.
 
-This repository provides a Docker environment for Opencode, .NET, and C#. It runs with Docker Engine on Linux/WSL2 and with Docker Desktop on macOS or Windows. Projects can still be edited with JetBrains Rider on the host.
+This repository provides a Docker environment for Opencode, .NET, and C#. It runs with Docker Engine on Linux or WSL2 and with Docker Desktop on macOS or Windows. Projects can still be edited with JetBrains Rider on the host.
+
+### Learning path for apprentices
+
+The README is long. But it is not a book you must read in one sitting. This learning path shows a sensible order.
+
+| Phase | Sections | Learning goal |
+|---|---|---|
+| Phase 1: Understand | [Basic idea](#basic-idea), [Terms and command location](#terms-and-command-location), [Project structure](#project-structure) | What is a container? What is an image? Where does which command run? |
+| Phase 2: Set up | [Prerequisites](#prerequisites), one installation section (Docker or Podman), [Set up the API key](#set-up-the-api-key), [Build and start the container](#build-and-start-the-container) | The container runs on your own machine. |
+| Phase 3: First exercises | [Use .NET and C# inside the container](#use-net-and-c-inside-the-container), [Use Java and Maven inside the container](#use-java-and-maven-inside-the-container) | Create, build, and run your own console project. |
+| Phase 4: Practice tools | [Use Spec Kit](#use-spec-kit), [Use Opencode](#use-opencode), [Use Codex CLI](#use-codex-cli) | Use AI tools for specification and code correctly. |
+| Phase 5: Quality and security | [Install Spec Kit governance presets](#install-spec-kit-governance-presets), [Required flow for an SDD feature](#required-flow-for-an-sdd-feature), [Configuration](#configuration) | Rules, secure development, quality process. |
+| Phase 6: Operation and troubleshooting | [Clean up](#clean-up), [Common problems](#common-problems), [Compact test procedure](#compact-test-procedure) | Keep your environment healthy and understand errors. |
+
+Recommendation for the first year: phases 1 to 3. Phases 4 to 6 come next and suit later years or retraining.
 
 ### Basic idea
 
@@ -1519,6 +1808,8 @@ Many errors happen when a command is run in the wrong place. This guide therefor
 
 If the prompt starts with `adedev@...`, the shell is inside the container. If the prompt shows the normal computer name or the WSL2 shell, the shell is on the host.
 
+A more complete term reference is in the section [Glossary](#glossary).
+
 ### Project structure
 
 - `Dockerfile`: describes the container image. It inherits from the shared `agent-sandbox` image and installs .NET SDK, Java JDK 21, Maven, Opencode, Codex CLI, `uv`, Spec Kit, and common CLI helper tools on top.
@@ -1535,7 +1826,7 @@ If the prompt starts with `adedev@...`, the shell is inside the container. If th
 - `java-projects/`: local fallback directory for Java projects when `JAVA_PROJECTS_DIR` is not set.
 - `dotnet/ContainerBuild.props`: redirects .NET build artifacts for Rider projects to the container volume `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: filters a known .NET workload verification message from command output.
-- `spec-kit/patch-specify-cli.py`: adapts Spec Kit for Windows/WSL bind mounts.
+- `spec-kit/patch-specify-cli.py`: adapts Spec Kit for Windows and WSL bind mounts.
 - `codex_data`: Docker volume for Codex CLI data under `/home/adedev/.codex`.
 - `AGENTS.md`: rules for AI agents such as Opencode or Codex.
 
@@ -1615,22 +1906,22 @@ Then set `RIDER_PROJECTS_DIR` and `JAVA_PROJECTS_DIR` for the current platform.
 macOS:
 
 ```text
-RIDER_PROJECTS_DIR=/Users/thorstenhindermann/RiderProjects
-JAVA_PROJECTS_DIR=/Users/thorstenhindermann/JavaProjects
+RIDER_PROJECTS_DIR=/Users/<user>/RiderProjects
+JAVA_PROJECTS_DIR=/Users/<user>/JavaProjects
 ```
 
 Windows with Docker Desktop from PowerShell:
 
 ```text
-RIDER_PROJECTS_DIR=C:\Users\thinder\RiderProjects
-JAVA_PROJECTS_DIR=C:\Users\thinder\JavaProjects
+RIDER_PROJECTS_DIR=C:\Users\<user>\RiderProjects
+JAVA_PROJECTS_DIR=C:\Users\<user>\JavaProjects
 ```
 
 Windows with Docker Desktop from Ubuntu/WSL2:
 
 ```text
-RIDER_PROJECTS_DIR=/mnt/c/Users/thinder/RiderProjects
-JAVA_PROJECTS_DIR=/mnt/c/Users/thinder/JavaProjects
+RIDER_PROJECTS_DIR=/mnt/c/Users/<user>/RiderProjects
+JAVA_PROJECTS_DIR=/mnt/c/Users/<user>/JavaProjects
 ```
 
 If no separate Rider or Java project directory is needed, keep the default from `.env.example`. Then `/rider-projects` points to `workspace/` and `/java-projects` points to `java-projects/`.
@@ -1690,7 +1981,7 @@ Then enter the real `GWDG_API_KEY` in `opencode.env`. Do not print the key in th
 Change into the repository:
 
 ```bash
-cd /home/thinder/ade-dev-sandbox
+cd /home/<user>/ade-dev-sandbox
 ```
 
 Before the first build, log in to the GitLab container registry. Use a GitLab token with at least `read_registry` as the password:
@@ -1747,7 +2038,7 @@ Stop the container but keep data:
 podman-compose down
 ```
 
-Stop the container and delete persistent container/volume data from this Compose project:
+Stop the container and delete persistent container and volume data from this Compose project:
 
 ```bash
 podman-compose down -v
@@ -1815,7 +2106,7 @@ Then enter the real `GWDG_API_KEY` in `opencode.env`. Do not print the key in th
 Change into the repository:
 
 ```bash
-cd /Users/thorstenhindermann/ade-dev-sandbox
+cd /Users/<user>/ade-dev-sandbox
 ```
 
 Before the first build, log in to the GitLab container registry. Use a GitLab token with at least `read_registry` as the password:
@@ -1876,7 +2167,7 @@ Stop the container but keep data:
 podman compose down
 ```
 
-Stop the container and delete persistent container/volume data from this Compose project:
+Stop the container and delete persistent container and volume data from this Compose project:
 
 ```bash
 podman compose down -v
@@ -1950,8 +2241,8 @@ Then enter the real `GWDG_API_KEY` in `opencode.env`. Do not print the key in th
 Set Windows paths in `.env` if Rider or Java projects are outside this repository:
 
 ```text
-RIDER_PROJECTS_DIR=C:\Users\thinder\RiderProjects
-JAVA_PROJECTS_DIR=C:\Users\thinder\JavaProjects
+RIDER_PROJECTS_DIR=C:\Users\<user>\RiderProjects
+JAVA_PROJECTS_DIR=C:\Users\<user>\JavaProjects
 ```
 
 If no separate Rider or Java project directory is needed, keep the defaults from `.env.example`. Then `/rider-projects` points to `workspace/` and `/java-projects` points to `java-projects/`.
@@ -1959,7 +2250,7 @@ If no separate Rider or Java project directory is needed, keep the defaults from
 Change into the repository:
 
 ```powershell
-cd C:\Users\thinder\ade-dev-sandbox
+cd C:\Users\<user>\ade-dev-sandbox
 ```
 
 Before the first build, log in to the GitLab container registry. Use a GitLab token with at least `read_registry` as the password:
@@ -2086,7 +2377,7 @@ chmod 600 opencode.env
 Change into the repository:
 
 ```bash
-cd /home/thinder/ade-dev-sandbox
+cd /home/<user>/ade-dev-sandbox
 ```
 
 Before the first build, log in to the GitLab container registry. Use a GitLab token with at least `read_registry` as the password:
@@ -2120,9 +2411,9 @@ The first build downloads the Sandbox base image, the .NET SDK package, and npm 
 The host directory for Rider projects is set through `RIDER_PROJECTS_DIR`. Typical values are:
 
 ```text
-RIDER_PROJECTS_DIR=/mnt/c/Users/thinder/RiderProjects
-RIDER_PROJECTS_DIR=C:\Users\thinder\RiderProjects
-RIDER_PROJECTS_DIR=/Users/thorstenhindermann/RiderProjects
+RIDER_PROJECTS_DIR=/mnt/c/Users/<user>/RiderProjects
+RIDER_PROJECTS_DIR=C:\Users\<user>\RiderProjects
+RIDER_PROJECTS_DIR=/Users/<user>/RiderProjects
 ```
 
 The directory is mounted inside the container here:
@@ -2177,12 +2468,12 @@ dotnet run
 
 If a project already has broken `bin` or `obj` folders on the Windows mount, delete them in Rider or in the terminal. Then build again inside the container.
 
-### Mount Java Projects
+### Mount Java projects
 
-The host directory for Java projects is set through `JAVA_PROJECTS_DIR`. In this WSL2 environment, the local value is:
+The host directory for Java projects is set through `JAVA_PROJECTS_DIR`. In a WSL2 environment, a typical value is:
 
 ```text
-JAVA_PROJECTS_DIR=/mnt/c/Users/thinder/JavaProjects
+JAVA_PROJECTS_DIR=/mnt/c/Users/<user>/JavaProjects
 ```
 
 The directory is mounted inside the container here:
@@ -2196,7 +2487,7 @@ This keeps .NET/Rider projects and Java projects separated:
 - `/rider-projects`: .NET, C#, and Rider projects.
 - `/java-projects`: Java, Maven, and Spring Boot projects.
 
-### Use Java and Maven Inside the Container
+### Use Java and Maven inside the container
 
 Check Java versions:
 
@@ -2235,7 +2526,7 @@ ports:
 After a change to `compose.yml`, recreate the container:
 
 ```bash
-cd /Users/thorstenhindermann/ade-dev-sandbox
+cd /Users/<user>/ade-dev-sandbox
 docker compose up -d --force-recreate
 docker compose exec ade bash
 ```
@@ -2488,7 +2779,7 @@ chat-ai/qwen3-coder-30b-a3b-instruct
 
 The default agent `coding` uses this model with focused coding parameters. `glm-4.7` remains configured as the smaller model for side tasks and as an alternative for analysis and brainstorming.
 
-#### OpenCode Hardening
+#### OpenCode hardening
 
 The file `opencode.jsonc` contains security rules for OpenCode. This matters because OpenCode allows many actions by default when no custom `permission` rules are set. In an environment with ISO 9001 and ISO 27001 requirements, risky actions should not run without explicit approval.
 
@@ -2529,7 +2820,7 @@ opencode debug agent coding
 opencode debug agent security-review
 ```
 
-#### Codex Hardening
+#### Codex hardening
 
 Codex CLI is hardened as well. The configuration lives in the repository under `codex/config.toml` and `codex/requirements.toml`. During the image build, these files are copied system-wide to `/etc/codex`.
 
@@ -2637,7 +2928,7 @@ Stop the container but keep data:
 docker compose down
 ```
 
-Stop the container and delete persistent container/volume data for this Compose project:
+Stop the container and delete persistent container and volume data for this Compose project:
 
 ```bash
 docker compose down -v
@@ -2811,7 +3102,7 @@ The test has two parts:
 Run this on the host. The first command changes into this repository; adjust the path if needed:
 
 ```bash
-cd /home/thinder/ade-dev-sandbox
+cd /home/<user>/ade-dev-sandbox
 docker compose config --no-interpolate
 docker compose build --pull
 docker compose up -d
@@ -2864,7 +3155,7 @@ Expected result:
 
 macOS note: If Docker Desktop was just installed, start Docker Desktop once and wait until the engine is running. After that, `docker --version`, `docker compose version`, and `docker info` work in the terminal.
 
-Windows note: If Docker Desktop is used from PowerShell, set `RIDER_PROJECTS_DIR` in `.env` as a Windows path, for example `C:\Users\thinder\RiderProjects`. If the commands run from Ubuntu/WSL2, use the WSL path, for example `/mnt/c/Users/thinder/RiderProjects`.
+Windows note: If Docker Desktop is used from PowerShell, set `RIDER_PROJECTS_DIR` in `.env` as a Windows path, for example `C:\Users\<user>\RiderProjects`. If the commands run from Ubuntu/WSL2, use the WSL path, for example `/mnt/c/Users/<user>/RiderProjects`.
 
 Security note: `opencode.env` contains the API key. Never commit this file, never show it in screenshots, and do not copy it into chat or ticket systems. For tests, it is enough to check that OpenCode starts; the key must not be made visible.
 
@@ -2918,3 +3209,67 @@ echo "$DirectoryBuildPropsPath"
 ls /dotnet-config/ContainerBuild.props
 ls /dotnet-build
 ```
+
+### Glossary
+
+This glossary explains the most important terms in simple form. If you do not know a term, check here before reading on.
+
+| Term | Meaning |
+|---|---|
+| Agent | An AI program such as OpenCode or Codex that can run tasks inside the container. |
+| API key | A secret value that lets a program use an online service. Like a password, but for machines. |
+| ASP.NET | Microsoft's web framework for server-side web applications in C#. |
+| Bind mount | A directory from the host mounted directly into the container. Changes propagate in both directions. |
+| Build | The step that turns source code into a runnable program. |
+| Compose | A tool that starts and stops containers based on a `compose.yml` file. |
+| Container | An isolated Linux process started from an image. Like a small virtual environment, but lighter than a virtual machine. |
+| Dockerfile | A text file that describes how an image is built. |
+| Engine | The background daemon for Docker or Podman. Without an engine, no container. |
+| Host | Your own computer. The opposite of the container. |
+| Image | The template for containers. Many containers can be started from one image. |
+| JDK | Java Development Kit. Contains the compiler `javac` and the runtime `java`. |
+| JSONC | JSON that allows comments. Used in `opencode.jsonc`. |
+| Maven | A tool for Java projects. Builds projects and manages dependencies. |
+| MSBuild | Microsoft's build tool for .NET projects. |
+| Mount | In general: attach a directory somewhere. Here usually a bind mount or a volume. |
+| .NET SDK | Software Development Kit for the programming languages C#, F#, and VB.NET. |
+| Podman | An alternative to Docker. Runs without a daemon and usually needs no root rights. |
+| Port | A numbered door on a computer through which network services are reached. |
+| Provider | Here: the supplier of an AI model, for example `chat-ai`. |
+| Registry | An online storage for container images, for example the GitLab Container Registry. |
+| Rider | An integrated development environment (IDE) from JetBrains for .NET. |
+| Rootless | Without administrator or root rights. Podman runs rootless by default. |
+| Sandbox | A protected environment in which a program may not write everywhere. |
+| SDD | Spec-Driven Development. Describe first, then plan, then implement. |
+| Secret | A secret value such as an API key or a password. |
+| Service | A named container in `compose.yml`. In this repository: `ade`. |
+| Shell | A program such as Bash for typing commands. |
+| Spec Kit | A CLI that provides a fixed flow for producing software specifications. |
+| Volume | Storage managed by Docker or Podman, separate from the host file system. |
+| WSL2 | Windows Subsystem for Linux Version 2. A real Linux environment inside Windows. |
+
+### Accessibility
+
+This README aims to meet WCAG 2.2 Level AA as far as Markdown on GitHub allows.
+
+| WCAG criterion | Implementation |
+|---|---|
+| 1.3.1 Info and relationships | Consistent heading hierarchy H1 → H2 → H3 → H4. Tables with header rows. Lists instead of running text where it fits. |
+| 1.4.1 Use of color | No information conveyed by color alone. Status is expressed by words such as *allowed*, *blocked*, *asks*. |
+| 2.4.4 Link purpose | Descriptive link texts in the table of contents. No "click here" wording. |
+| 2.4.6 Headings and labels | Bilingual headings at the top. Clear, self-contained section headings. |
+| 3.1.1 Language of the page | Main language German in the DE block, English in the EN block. (Platform limitation: GitHub Markdown does not support a `lang` attribute.) |
+| 3.1.5 Reading level | Target reading level CEFR B2. Short sentences. Technical terms are introduced and explained in the glossary. |
+| 4.1.1 Parsing | All code blocks carry a language tag (`bash`, `powershell`, `yaml`, `dockerfile`, `text` …). |
+| 4.1.2 Name, role, value | Standard Markdown elements only. No embedded HTML components with custom logic. |
+
+Known platform limitations:
+
+- WCAG 3.1.2 (Language of parts): GitHub strips HTML `lang` attributes. Language switches between DE and EN are signaled only through section headings.
+- Long code blocks can cause horizontal scrolling on small screens. This is a Markdown limitation.
+
+Tips for learners using a screen reader or Braille display:
+
+- Use the table of contents to jump quickly into the right section.
+- Inside a section, the steps are organized as numbered or unordered lists.
+- A code block is always introduced by a sentence that explains what comes next.
