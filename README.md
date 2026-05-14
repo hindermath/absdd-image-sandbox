@@ -1381,6 +1381,53 @@ Die erste Variable betrifft allgemeine Update-Benachrichtigungen. Die zweite Var
 
 Das Image erbt vom gemeinsamen `agent-sandbox`-Image auf Debian 13. Das Basisimage ist im Dockerfile per `sha256`-Digest gepinnt; der lesbare `latest`-Tag bleibt nur als Kommentar mit Beobachtungsdatum erhalten. Ein Update des Basisimages erfolgt bewusst über Digest-Änderung im Dockerfile, Review, Git-Commit und neuen Image-Build. .NET wird über die Microsoft-Paketquelle für Debian 13 installiert. Der Build-Parameter `DOTNET_SDK_PACKAGE` steht standardmäßig auf `dotnet-sdk-10.0`.
 
+Die Sicherheitsfreigabe wird in `docs/security/sandbox-freigabe.md` als Entwurf dokumentiert. Das zugehörige KI-Werkzeug-Inventar liegt in `docs/security/ai-tools-inventory.md`. Offene `_TODO_`-Felder müssen durch Owner, Betrieb oder CISO/ISB gepflegt werden und werden nicht durch Annahmen ersetzt.
+
+#### Secret-Scanning
+
+Dieses Repository nutzt `pre-commit` mit `gitleaks` `v8.30.1`, um Klartext-Geheimnisse vor Commits zu finden. Vor der Arbeit einmalig den Hook installieren:
+
+```bash
+uv tool install pre-commit
+pre-commit install
+```
+
+Vor einem Commit oder als Vollscan:
+
+```bash
+pre-commit run --all-files
+```
+
+Wenn `pre-commit` nicht installiert ist, kann der Vollscan auch ohne dauerhafte Installation laufen:
+
+```bash
+uvx pre-commit run --all-files
+```
+
+Die Gitleaks-Konfiguration liegt in `.gitleaks.toml`. Sie erweitert die Standardregeln und erlaubt nur dokumentierte Platzhalterwerte in Beispiel-Dateien wie `opencode.env.example`. Echte Secrets dürfen nicht allowlisted werden. Die Audit-Notiz steht zusätzlich in `docs/security/secret-scanning.md`.
+
+GitLab CE kann diesen lokalen Hook nicht vollständig serverseitig erzwingen. Audit-Text: "Client-side Control, in GitLab CE nicht vollständig serverseitig erzwingbar; zentrale Push-Blockade nur mit GitLab Ultimate Secret Push Protection oder Admin-Server-Hook." Als zusätzliche Kontrolle enthält `.gitlab-ci.yml` einen `secret_scan`-Job mit demselben gepinnten Gitleaks-Release. Dieser CI-Job erkennt Secrets nach dem Push bzw. im Merge Request, ersetzt aber keine zentrale Pre-Receive-Blockade.
+
+#### Audit-Export
+
+Agentennutzung muss als Metadaten-Audit nachvollziehbar sein. Das Image installiert deshalb `audit-export` aus `scripts/audit-export.sh`. Der Compose-Service bindet `${AUDIT_DIR:-./audit-logs}` nach `/audit` ein.
+
+Der Export liest nur Dateinamen und Dateizeitstempel aus den OpenCode- und Codex-Datenverzeichnissen. Er liest keine Prompt-Texte, Antwort-Texte, Roh-Sitzungsinhalte oder API-Keys.
+
+Mindestens einmal pro Arbeitstag und zwingend vor `docker compose down -v` oder `podman compose down -v` im Container ausführen:
+
+```bash
+audit-export
+```
+
+Der Standardpfad ist:
+
+```text
+/audit/YYYY-MM-DD.jsonl
+```
+
+Auf dem Host landet diese Datei standardmäßig unter `audit-logs/`. Echte Audit-JSONL-Dateien bleiben untracked; nur `audit-logs/README.md` und `audit-logs/.gitkeep` gehören ins Repository. Das README in `audit-logs/` beschreibt Inhalt, Zugriff, Aufbewahrung und Löschung.
+
 Gegen die Meldung `An issue was encountered verifying workloads` wird beim Image-Build zusätzlich der Manifest-Modus gesetzt:
 
 ```dockerfile
@@ -3059,6 +3106,53 @@ MSBuildEnableWorkloadResolver=false
 The first variable affects general update notifications. The second variable disables the MSBuild workload resolver. This is useful for normal console, library, test, and web projects because they do not need optional SDK workloads such as MAUI.
 
 The image inherits from the shared `agent-sandbox` image on Debian 13. The base image is pinned in the Dockerfile by `sha256` digest; the readable `latest` tag stays only as a comment with the observation date. A base-image update happens deliberately through a digest change in the Dockerfile, review, Git commit, and a new image build. .NET is installed through the Microsoft package feed for Debian 13. The build argument `DOTNET_SDK_PACKAGE` defaults to `dotnet-sdk-10.0`.
+
+The security approval is documented as a draft in `docs/security/sandbox-freigabe.md`. The related AI tool inventory lives in `docs/security/ai-tools-inventory.md`. Open `_TODO_` fields must be maintained by the owner, operations, or CISO/ISB and are not replaced with assumptions.
+
+#### Secret Scanning
+
+This repository uses `pre-commit` with `gitleaks` `v8.30.1` to find plaintext secrets before commits. Install the hook once before working:
+
+```bash
+uv tool install pre-commit
+pre-commit install
+```
+
+Before a commit, or as a full scan:
+
+```bash
+pre-commit run --all-files
+```
+
+If `pre-commit` is not installed, the full scan can also run without persistent installation:
+
+```bash
+uvx pre-commit run --all-files
+```
+
+The Gitleaks configuration is in `.gitleaks.toml`. It extends the default rules and allows only documented placeholder values in example files such as `opencode.env.example`. Real secrets must not be allowlisted. The audit note is also recorded in `docs/security/secret-scanning.md`.
+
+GitLab CE cannot fully enforce this local hook on the server side. Audit text: "Client-side Control, in GitLab CE nicht vollständig serverseitig erzwingbar; zentrale Push-Blockade nur mit GitLab Ultimate Secret Push Protection oder Admin-Server-Hook." As an additional control, `.gitlab-ci.yml` contains a `secret_scan` job with the same pinned Gitleaks release. This CI job detects secrets after push or in merge requests, but it does not replace central pre-receive blocking.
+
+#### Audit Export
+
+Agent use must be traceable as a metadata audit trail. The image therefore installs `audit-export` from `scripts/audit-export.sh`. The Compose service mounts `${AUDIT_DIR:-./audit-logs}` to `/audit`.
+
+The export reads only file names and file timestamps from the OpenCode and Codex data directories. It does not read prompt text, response text, raw session contents, or API keys.
+
+Run it inside the container at least once per workday and always before `docker compose down -v` or `podman compose down -v`:
+
+```bash
+audit-export
+```
+
+The default path is:
+
+```text
+/audit/YYYY-MM-DD.jsonl
+```
+
+On the host, this file is written to `audit-logs/` by default. Real audit JSONL files stay untracked; only `audit-logs/README.md` and `audit-logs/.gitkeep` belong in the repository. The README in `audit-logs/` describes contents, access, retention, and deletion.
 
 To address the message `An issue was encountered verifying workloads`, the image build also sets manifest mode:
 

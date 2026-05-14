@@ -4,3 +4,7 @@ opencode.env
 !.env.example
 .envrc
 .vscode/
+gl-secret-detection-report.json
+audit-logs/*
+!audit-logs/.gitkeep
+!audit-logs/README.md

@@ -92,5 +92,10 @@ RUN uv tool install specify-cli --from git+https://github.com/github/spec-kit.gi
 RUN mkdir -p /home/adedev/.local/share/opencode
 RUN mkdir -p /home/adedev/.codex
 COPY --chown=adedev:adedev ./opencode.jsonc /home/adedev/.config/opencode/opencode.jsonc
+USER root
+COPY ./scripts/audit-export.sh /usr/local/bin/audit-export
+RUN sed -i 's/\r$//' /usr/local/bin/audit-export \
+    && chmod 0755 /usr/local/bin/audit-export
+USER adedev
 
 CMD ["/bin/bash", "-c", "while :; do sleep 1; done;"]

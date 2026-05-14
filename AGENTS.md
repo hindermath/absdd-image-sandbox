@@ -175,3 +175,22 @@ chmod 600 opencode.env
 ```
 
 If copying credentials from `~/.local/share/opencode/auth.json`, only write the key into `opencode.env` and do not print it in logs or documentation.
+
+Run the repository secret scan before committing:
+
+```bash
+pre-commit install
+pre-commit run --all-files
+```
+
+If `pre-commit` is not installed in the current environment, install it first with `uv tool install pre-commit` or run it via `uvx pre-commit run --all-files`.
+
+Audit text for P1-3: "Client-side Control, in GitLab CE nicht vollständig serverseitig erzwingbar; zentrale Push-Blockade nur mit GitLab Ultimate Secret Push Protection oder Admin-Server-Hook."
+
+Run the agent-session audit export at least once per workday and always before `docker compose down -v` or `podman compose down -v`:
+
+```bash
+audit-export
+```
+
+The export writes metadata only to `/audit/YYYY-MM-DD.jsonl`. Do not extend it to include prompt text, response text, raw session payloads, or secrets. The default host directory is `audit-logs/`; generated JSONL files stay untracked.

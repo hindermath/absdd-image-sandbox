@@ -1,0 +1,15 @@
+title = "ade-dev-sandbox gitleaks configuration"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Allow documented placeholder values in example files only"
+condition = "AND"
+regexTarget = "line"
+paths = [
+  '''(^|/)(\.env\.example|opencode\.env\.example|codex\.env\.example|codex\.config\.toml\.example)$''',
+]
+regexes = [
+  '''(?i)\b(changeme|example|dummy|placeholder|your[-_ ]?(api[-_ ]?)?key)\b''',
+]
