@@ -1,10 +1,10 @@
 # Opencode Docker-Umgebung / Opencode Docker Environment
 
 Eine vorbereitete Container-Lernumgebung für angehende Fachinformatiker:innen.
-Sprachen und Werkzeuge: .NET, C#, Java, Maven, Node.js, Opencode, Codex CLI, Spec Kit.
+Sprachen und Werkzeuge: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, Opencode, Codex CLI, Spec Kit.
 
 *A ready-to-use container learning environment for IT-specialist apprentices.
-Languages and tools: .NET, C#, Java, Maven, Node.js, Opencode, Codex CLI, Spec Kit.*
+Languages and tools: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, Opencode, Codex CLI, Spec Kit.*
 
 ---
 
@@ -32,6 +32,8 @@ Languages and tools: .NET, C#, Java, Maven, Node.js, Opencode, Codex CLI, Spec K
 - [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen)
 - [Java-Projekte einbinden](#java-projekte-einbinden)
 - [Java und Maven im Container nutzen](#java-und-maven-im-container-nutzen)
+- [Go im Container nutzen](#go-im-container-nutzen)
+- [Rust im Container nutzen](#rust-im-container-nutzen)
 - [ASP.NET-Web-App vom Host erreichen](#aspnet-web-app-vom-host-erreichen)
 - [Spec Kit verwenden](#spec-kit-verwenden)
 - [Spec-Kit-Governance-Presets installieren](#spec-kit-governance-presets-installieren)
@@ -69,6 +71,8 @@ Languages and tools: .NET, C#, Java, Maven, Node.js, Opencode, Codex CLI, Spec K
 - [Use .NET and C# inside the container](#use-net-and-c-inside-the-container)
 - [Mount Java projects](#mount-java-projects)
 - [Use Java and Maven inside the container](#use-java-and-maven-inside-the-container)
+- [Use Go inside the container](#use-go-inside-the-container)
+- [Use Rust inside the container](#use-rust-inside-the-container)
 - [Reach an ASP.NET web app from the host](#reach-an-aspnet-web-app-from-the-host)
 - [Use Spec Kit](#use-spec-kit)
 - [Install Spec Kit governance presets](#install-spec-kit-governance-presets)
@@ -94,7 +98,7 @@ Languages and tools: .NET, C#, Java, Maven, Node.js, Opencode, Codex CLI, Spec K
 |---|---|
 | Zielgruppe | Fachinformatiker:innen ab dem 1. Lehrjahr |
 | Lernziel | Reproduzierbare Entwicklungsumgebung im Container nutzen |
-| Sprachen | C# / .NET, Java, Bash, PowerShell |
+| Sprachen | C# / .NET, Java, Go, Rust, Python, Bash, PowerShell |
 | Container | Docker oder Podman, auf Linux, macOS oder Windows |
 | Zeitbedarf für den Schnellstart | etwa 10 Minuten Lesen, 15 bis 30 Minuten erster Build |
 | Zeitbedarf für volle Erkundung | mehrere Übungseinheiten über mehrere Wochen |
@@ -175,7 +179,7 @@ Wenn ein Punkt nicht erfüllt ist, geht der Schnellstart trotzdem oft. Das Setup
 
 Diese Anleitung richtet sich an angehende Fachinformatiker:innen ab dem 1. Lehrjahr. Sie erklärt nicht nur die Befehle, sondern auch kurz, warum sie gebraucht werden.
 
-Dieses Repository stellt eine Docker-Umgebung für Opencode, .NET und C# bereit. Die Umgebung läuft mit Docker Engine unter Linux oder WSL2 und mit Docker Desktop unter macOS oder Windows. Projekte können weiter mit JetBrains Rider auf dem Host bearbeitet werden.
+Dieses Repository stellt eine Docker-Umgebung für Opencode, .NET, C#, Java, Go, Rust und Python bereit. Die Umgebung läuft mit Docker Engine unter Linux oder WSL2 und mit Docker Desktop unter macOS oder Windows. Projekte können weiter mit JetBrains Rider auf dem Host bearbeitet werden.
 
 ### Lernpfad für Azubis
 
@@ -185,7 +189,7 @@ Die README ist lang. Sie ist aber kein Buch, das du in einem Stück lesen musst.
 |---|---|---|
 | Phase 1: Verstehen | [Grundidee](#grundidee), [Begriffe und Ausführungsort](#begriffe-und-ausführungsort), [Projektstruktur](#projektstruktur) | Was ist ein Container? Was ist ein Image? Wo läuft welcher Befehl? |
 | Phase 2: Aufsetzen | [Voraussetzungen](#voraussetzungen), eine der Installationssektionen (Docker oder Podman), [API-Key einrichten](#api-key-einrichten), [Container bauen und starten](#container-bauen-und-starten) | Container läuft auf dem eigenen Rechner. |
-| Phase 3: Erste Übungen | [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen), [Java und Maven im Container nutzen](#java-und-maven-im-container-nutzen) | Ein eigenes Konsolenprojekt anlegen, bauen und starten. |
+| Phase 3: Erste Übungen | [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen), [Java und Maven im Container nutzen](#java-und-maven-im-container-nutzen), [Go im Container nutzen](#go-im-container-nutzen), [Rust im Container nutzen](#rust-im-container-nutzen) | Ein eigenes Konsolenprojekt anlegen, bauen und starten. |
 | Phase 4: Werkzeuge der Praxis | [Spec Kit verwenden](#spec-kit-verwenden), [Opencode verwenden](#opencode-verwenden), [Codex CLI verwenden](#codex-cli-verwenden) | KI-Werkzeuge für Spezifikation und Code richtig einsetzen. |
 | Phase 5: Qualität und Sicherheit | [Spec-Kit-Governance-Presets installieren](#spec-kit-governance-presets-installieren), [Pflichtablauf für ein SDD-Feature](#pflichtablauf-für-ein-sdd-feature), [Konfiguration](#konfiguration) | Regelwerk, sichere Entwicklung, Qualitätsprozess. |
 | Phase 6: Betrieb und Fehlerbehebung | [Aufräumen](#aufräumen), [Häufige Probleme](#häufige-probleme), [Kompakter Testablauf](#kompakter-testablauf) | Eigene Umgebung pflegen und Fehler verstehen. |
@@ -194,7 +198,7 @@ Empfehlung für das erste Lehrjahr: Phasen 1 bis 3. Phasen 4 bis 6 sind danach a
 
 ### Grundidee
 
-Docker erstellt aus dem `Dockerfile` ein Image. Aus diesem Image startet Docker Compose einen Container. Der Container enthält das aktuelle Microsoft .NET SDK, Java JDK 21, Maven, Node.js, npm, Opencode, Codex CLI und gängige Agenten-Hilfswerkzeuge.
+Docker erstellt aus dem `Dockerfile` ein Image. Aus diesem Image startet Docker Compose einen Container. Der Container enthält das Microsoft .NET SDK, Java JDK 21, Maven, Go, Rust, Python, Node.js, npm, Opencode, Codex CLI und gängige Agenten-Hilfswerkzeuge.
 
 Der Container bleibt im Hintergrund aktiv. Danach kann eine Shell im Container geöffnet werden. Dort können Befehle wie `dotnet`, `opencode`, `codex` oder `ls` ausgeführt werden.
 
@@ -205,7 +209,7 @@ Die Shell läuft im Container als Linux-Benutzer `adedev`. Deshalb beginnt die P
 Viele Fehler entstehen, wenn ein Befehl am falschen Ort ausgeführt wird. Diese Anleitung trennt deshalb zwischen Host und Container.
 
 - Host: der eigene Rechner oder die WSL2-Umgebung. Dort werden `docker compose ...`-Befehle ausgeführt.
-- Container: die Linux-Umgebung, die Docker aus dem Image startet. Dort werden Werkzeuge wie `dotnet`, `java`, `mvn`, `opencode`, `codex` und `specify` ausgeführt.
+- Container: die Linux-Umgebung, die Docker aus dem Image startet. Dort werden Werkzeuge wie `dotnet`, `java`, `mvn`, `go`, `cargo`, `python`, `opencode`, `codex` und `specify` ausgeführt.
 - Image: die Vorlage für den Container. Nach Änderungen am `Dockerfile` muss das Image neu gebaut werden.
 - Bind-Mount: ein Host-Verzeichnis wird direkt in den Container eingebunden, zum Beispiel `/rider-projects` oder `/java-projects`.
 - Volume: ein von Docker verwalteter Speicherbereich, zum Beispiel für `/dotnet-build` oder lokale Agenten-Daten.
@@ -217,7 +221,7 @@ Ein vollständigeres Begriffsregister steht im Abschnitt [Glossar](#glossar).
 
 ### Projektstruktur
 
-- `Dockerfile`: beschreibt das Container-Image. Es erbt vom gemeinsamen `agent-sandbox`-Image und installiert darauf .NET SDK, Java JDK 21, Maven, Opencode, Codex CLI, `uv`, Spec Kit und gängige CLI-Hilfswerkzeuge.
+- `Dockerfile`: beschreibt das Container-Image. Es erbt vom gemeinsamen `agent-sandbox`-Image und installiert darauf .NET SDK, Java JDK 21, Maven, Go, Rust, Python, Opencode, Codex CLI, `uv`, Spec Kit und gängige CLI-Hilfswerkzeuge.
 - `compose.yml`: beschreibt den Service `ade`, Volumes und Build-Regeln.
 - `.dockerignore` und `.containerignore`: schließen lokale Secrets, Git-Daten und Arbeitsverzeichnisse aus dem Build-Kontext aus.
 - `.env.example`: Vorlage für die plattformabhängigen Mounts `RIDER_PROJECTS_DIR` und `JAVA_PROJECTS_DIR`.
@@ -891,6 +895,7 @@ So bleiben .NET-/Rider-Projekte und Java-Projekte getrennt:
 
 - `/rider-projects`: .NET-, C#- und Rider-Projekte.
 - `/java-projects`: Java-, Maven- und Spring-Boot-Projekte.
+- `/workspace`: allgemeine Übungen, zum Beispiel für Go-, Rust- oder Python-Projekte.
 
 ### Java und Maven im Container nutzen
 
@@ -918,6 +923,66 @@ mvn spring-boot:run
 ```
 
 Gradle und Spring Boot CLI sind absichtlich nicht global installiert. Viele Unternehmensprojekte bringen ihren eigenen Maven- oder Gradle-Wrapper mit. Das ist reproduzierbarer als globale Werkzeugversionen.
+
+### Go im Container nutzen
+
+Go-Version und Go-Werkzeuge prüfen:
+
+```bash
+go version
+gopls version
+staticcheck -version
+govulncheck -version
+dlv version
+```
+
+Beispiel für ein kleines Go-Projekt:
+
+```bash
+cd /workspace
+mkdir -p demo-go
+cd demo-go
+go mod init example.com/demo-go
+cat > main.go <<'EOF'
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello from Go")
+}
+EOF
+gofmt -w main.go
+go test ./...
+go run .
+```
+
+Go-Webframeworks werden nicht global installiert. Für erste Webübungen reicht die Standardbibliothek `net/http`. Frameworks wie `gin`, `fiber` oder `chi` gehören projektlokal in `go.mod`.
+
+### Rust im Container nutzen
+
+Rust-Version und Rust-Werkzeuge prüfen:
+
+```bash
+rustc --version
+cargo --version
+rustfmt --version
+cargo clippy --version
+rust-analyzer --version
+```
+
+Beispiel für ein kleines Rust-Projekt:
+
+```bash
+cd /workspace
+cargo new demo-rust
+cd demo-rust
+cargo fmt
+cargo clippy -- -D warnings
+cargo run
+```
+
+Rust-Webframeworks werden nicht global installiert. Frameworks und Laufzeiten wie `tokio`, `axum`, `actix-web` oder `serde` gehören projektlokal in `Cargo.toml`.
 
 ### ASP.NET-Web-App vom Host erreichen
 
@@ -1283,6 +1348,10 @@ In der Ausgabe sollten `sandbox_mode` als `workspace-write`, Netzwerkzugriff als
 
 Java JDK 21 und Maven werden beim Image-Build aus den Debian-Paketquellen installiert. Sie sind für Java-Grundlagen, Maven-Projekte und Spring-Boot-Projekte vorbereitet.
 
+Go wird beim Image-Build als offizielles Go-Tarball nach `/usr/local/go` installiert. Die Version ist im Dockerfile über `GO_VERSION` gepinnt, damit Updates bewusst über eine Dockerfile-Änderung, einen Git-Commit und einen neuen Image-Build erfolgen. Zusätzlich werden `gopls`, `staticcheck`, `govulncheck` und `dlv` in `/home/adedev/go/bin` installiert; auch diese Werkzeugversionen sind über Dockerfile-Build-Argumente gepinnt.
+
+Rust wird beim Image-Build mit `rustup` für den Linux-Benutzer `adedev` installiert. Die Toolchain ist im Dockerfile über `RUST_TOOLCHAIN` gepinnt. Installiert werden außerdem die Komponenten `rustfmt`, `clippy`, `rust-analyzer` und `rust-src`.
+
 Opencode und Codex CLI werden beim Image-Build mit der neuesten npm-Version installiert:
 
 ```dockerfile
@@ -1290,6 +1359,8 @@ RUN npm i -g opencode-ai@latest @openai/codex@latest
 ```
 
 Zusätzlich installiert das Image häufig genutzte CLI-Werkzeuge für Agenten-Workflows: `git`, `python`, `python3`, `jq`, `yq`, `rg`, `fd`, `fdfind`, `direnv`, `shellcheck`, `shfmt`, `delta`, `tree`, `just`, `wget`, `curl` und `bubblewrap`. Das Debian-Paket für `fd` heißt `fd-find` und liefert den Befehl `fdfind`; das Image legt zusätzlich den erwarteten Befehl `fd` als Symlink an. `bubblewrap` wird für die Linux-Sandbox von Codex installiert. `mas` ist ein macOS-App-Store-Werkzeug und wird im Linux-Container nicht installiert.
+
+Der `PATH` enthält zusätzlich `/usr/local/go/bin`, `/home/adedev/go/bin` und `/home/adedev/.cargo/bin`. Dadurch sind Go, Go-Zusatzwerkzeuge und Rust-Werkzeuge nach dem Öffnen einer Container-Shell direkt verfügbar.
 
 Codex CLI speichert lokale Daten im Docker-Volume `codex_data`. Dieses Volume wird im Container nach `/home/adedev/.codex` eingebunden. Dadurch bleiben Codex-Daten zwischen Container-Neustarts erhalten, ohne dass sie in das Git-Repository geschrieben werden.
 
@@ -1502,7 +1573,7 @@ Dieser Ablauf prüft das Setup in einer sinnvollen Reihenfolge. Er eignet sich g
 Der Test besteht aus zwei Teilen:
 
 1. Auf dem Host wird Docker Compose geprüft, das Image gebaut und der Container gestartet.
-2. Im Container wird geprüft, ob .NET, OpenCode, Spec Kit und die gemounteten Verzeichnisse funktionieren.
+2. Im Container wird geprüft, ob .NET, Java, Go, Rust, OpenCode, Spec Kit und die gemounteten Verzeichnisse funktionieren.
 
 Auf dem Host ausführen. Der erste Befehl wechselt in dieses Repository; den Pfad bei Bedarf anpassen:
 
@@ -1522,6 +1593,11 @@ dotnet --info
 java --version
 javac --version
 mvn --version
+go version
+gopls version
+rustc --version
+cargo --version
+cargo clippy --version
 node --version
 npm --version
 opencode --version
@@ -1541,6 +1617,8 @@ Was die Befehle bedeuten:
 - `docker compose exec ade bash` öffnet eine Shell im laufenden Container.
 - `dotnet --info` zeigt, ob das .NET SDK im Container installiert und nutzbar ist.
 - `java --version`, `javac --version` und `mvn --version` prüfen JDK und Maven.
+- `go version` und `gopls version` prüfen Go und den Go Language Server.
+- `rustc --version`, `cargo --version` und `cargo clippy --version` prüfen die Rust-Toolchain und Clippy.
 - `node --version` und `npm --version` prüfen die Node.js-Werkzeuge, die OpenCode und Codex CLI brauchen.
 - `opencode --version` prüft die installierte OpenCode CLI.
 - `codex --version` prüft die installierte Codex CLI.
@@ -1554,6 +1632,7 @@ Erwartetes Ergebnis:
 - `docker compose ps` zeigt den Service `ade` als laufend.
 - `dotnet --info` gibt SDK-Informationen aus und endet ohne Fehler.
 - `java --version` und `mvn --version` geben Versionsinformationen aus.
+- `go version`, `gopls version`, `rustc --version`, `cargo --version` und `cargo clippy --version` geben Versionsinformationen aus.
 - `opencode --version`, `codex --version` und `specify version` geben Versionsinformationen aus.
 - `ls /rider-projects` zeigt die Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthält.
 - `ls /java-projects` zeigt Java-Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthält.
@@ -1626,6 +1705,7 @@ Dieses Glossar erklärt die wichtigsten Begriffe in einfacher Form. Wer den Begr
 | ASP.NET | Web-Framework von Microsoft für serverseitige Webanwendungen in C#. |
 | Bind-Mount | Ein Verzeichnis vom Host, das direkt in den Container eingebunden wird. Änderungen wirken in beide Richtungen. |
 | Build | Der Bauschritt, der aus Quellcode ein ausführbares Programm macht. |
+| Cargo | Build- und Paketwerkzeug für Rust-Projekte. |
 | Compose | Werkzeug, das Container über eine Datei `compose.yml` startet und stoppt. |
 | Container | Ein gekapselter Linux-Prozess, der aus einem Image gestartet wird. Wie eine kleine virtuelle Umgebung, aber leichter als eine virtuelle Maschine. |
 | Dockerfile | Eine Textdatei, die beschreibt, wie ein Image gebaut wird. |
@@ -1644,6 +1724,7 @@ Dieses Glossar erklärt die wichtigsten Begriffe in einfacher Form. Wer den Begr
 | Registry | Speicherort für Container-Images im Netz, zum Beispiel die GitLab Container Registry. |
 | Rider | Eine integrierte Entwicklungsumgebung (IDE) von JetBrains für .NET. |
 | Rootless | Ohne Administrator- oder Root-Rechte. Podman läuft standardmäßig rootless. |
+| Rustup | Werkzeug, das Rust-Toolchains und Komponenten wie `rustfmt` oder `clippy` installiert. |
 | Sandbox | Eine geschützte Umgebung, in der ein Programm nicht überall hin schreiben darf. |
 | SDD | Spec-Driven Development. Erst beschreiben, dann planen, dann umsetzen. |
 | Secret | Eine geheime Information wie ein API-Key oder ein Passwort. |
@@ -1689,7 +1770,7 @@ Tipps für Lernende mit Screenreader oder Braille-Display:
 |---|---|
 | Target group | IT-specialist apprentices, first year and later |
 | Learning goal | Use a reproducible container development environment |
-| Languages | C# / .NET, Java, Bash, PowerShell |
+| Languages | C# / .NET, Java, Go, Rust, Python, Bash, PowerShell |
 | Container | Docker or Podman, on Linux, macOS, or Windows |
 | Time for the quick start | About 10 minutes of reading, 15 to 30 minutes for the first build |
 | Time for full exploration | Several training units across several weeks |
@@ -1770,7 +1851,7 @@ If one item is missing, the quick start usually still works. The setup will be s
 
 This guide is written for first-year IT specialist apprentices and later. It explains the commands and also why they are needed.
 
-This repository provides a Docker environment for Opencode, .NET, and C#. It runs with Docker Engine on Linux or WSL2 and with Docker Desktop on macOS or Windows. Projects can still be edited with JetBrains Rider on the host.
+This repository provides a Docker environment for Opencode, .NET, C#, Java, Go, Rust, and Python. It runs with Docker Engine on Linux or WSL2 and with Docker Desktop on macOS or Windows. Projects can still be edited with JetBrains Rider on the host.
 
 ### Learning path for apprentices
 
@@ -1780,7 +1861,7 @@ The README is long. But it is not a book you must read in one sitting. This lear
 |---|---|---|
 | Phase 1: Understand | [Basic idea](#basic-idea), [Terms and command location](#terms-and-command-location), [Project structure](#project-structure) | What is a container? What is an image? Where does which command run? |
 | Phase 2: Set up | [Prerequisites](#prerequisites), one installation section (Docker or Podman), [Set up the API key](#set-up-the-api-key), [Build and start the container](#build-and-start-the-container) | The container runs on your own machine. |
-| Phase 3: First exercises | [Use .NET and C# inside the container](#use-net-and-c-inside-the-container), [Use Java and Maven inside the container](#use-java-and-maven-inside-the-container) | Create, build, and run your own console project. |
+| Phase 3: First exercises | [Use .NET and C# inside the container](#use-net-and-c-inside-the-container), [Use Java and Maven inside the container](#use-java-and-maven-inside-the-container), [Use Go inside the container](#use-go-inside-the-container), [Use Rust inside the container](#use-rust-inside-the-container) | Create, build, and run your own console project. |
 | Phase 4: Practice tools | [Use Spec Kit](#use-spec-kit), [Use Opencode](#use-opencode), [Use Codex CLI](#use-codex-cli) | Use AI tools for specification and code correctly. |
 | Phase 5: Quality and security | [Install Spec Kit governance presets](#install-spec-kit-governance-presets), [Required flow for an SDD feature](#required-flow-for-an-sdd-feature), [Configuration](#configuration) | Rules, secure development, quality process. |
 | Phase 6: Operation and troubleshooting | [Clean up](#clean-up), [Common problems](#common-problems), [Compact test procedure](#compact-test-procedure) | Keep your environment healthy and understand errors. |
@@ -1789,7 +1870,7 @@ Recommendation for the first year: phases 1 to 3. Phases 4 to 6 come next and su
 
 ### Basic idea
 
-Docker builds an image from the `Dockerfile`. Docker Compose starts a container from that image. The container includes the current Microsoft .NET SDK, Java JDK 21, Maven, Node.js, npm, Opencode, Codex CLI, and common agent helper tools.
+Docker builds an image from the `Dockerfile`. Docker Compose starts a container from that image. The container includes the Microsoft .NET SDK, Java JDK 21, Maven, Go, Rust, Python, Node.js, npm, Opencode, Codex CLI, and common agent helper tools.
 
 The container stays active in the background. You can then open a shell inside it and run commands such as `dotnet`, `opencode`, `codex`, or `ls`.
 
@@ -1800,7 +1881,7 @@ The shell runs as the Linux user `adedev` inside the container. That is why the 
 Many errors happen when a command is run in the wrong place. This guide therefore separates host and container.
 
 - Host: your computer or the WSL2 environment. Run `docker compose ...` commands there.
-- Container: the Linux environment started by Docker from the image. Run tools such as `dotnet`, `java`, `mvn`, `opencode`, `codex`, and `specify` there.
+- Container: the Linux environment started by Docker from the image. Run tools such as `dotnet`, `java`, `mvn`, `go`, `cargo`, `python`, `opencode`, `codex`, and `specify` there.
 - Image: the template for the container. After changes to the `Dockerfile`, rebuild the image.
 - Bind mount: a host directory is mounted directly into the container, for example `/rider-projects` or `/java-projects`.
 - Volume: storage managed by Docker, for example for `/dotnet-build` or local agent data.
@@ -1812,7 +1893,7 @@ A more complete term reference is in the section [Glossary](#glossary).
 
 ### Project structure
 
-- `Dockerfile`: describes the container image. It inherits from the shared `agent-sandbox` image and installs .NET SDK, Java JDK 21, Maven, Opencode, Codex CLI, `uv`, Spec Kit, and common CLI helper tools on top.
+- `Dockerfile`: describes the container image. It inherits from the shared `agent-sandbox` image and installs .NET SDK, Java JDK 21, Maven, Go, Rust, Python, Opencode, Codex CLI, `uv`, Spec Kit, and common CLI helper tools on top.
 - `compose.yml`: describes the `ade` service, volumes, and build rules.
 - `.dockerignore` and `.containerignore`: exclude local secrets, Git data, and working directories from the build context.
 - `.env.example`: template for the platform-specific mounts `RIDER_PROJECTS_DIR` and `JAVA_PROJECTS_DIR`.
@@ -2486,6 +2567,7 @@ This keeps .NET/Rider projects and Java projects separated:
 
 - `/rider-projects`: .NET, C#, and Rider projects.
 - `/java-projects`: Java, Maven, and Spring Boot projects.
+- `/workspace`: general exercises, for example Go, Rust, or Python projects.
 
 ### Use Java and Maven inside the container
 
@@ -2513,6 +2595,66 @@ mvn spring-boot:run
 ```
 
 Gradle and Spring Boot CLI are intentionally not installed globally. Many company projects include their own Maven or Gradle wrapper. This is more reproducible than global tool versions.
+
+### Use Go inside the container
+
+Check the Go version and Go tools:
+
+```bash
+go version
+gopls version
+staticcheck -version
+govulncheck -version
+dlv version
+```
+
+Example for a small Go project:
+
+```bash
+cd /workspace
+mkdir -p demo-go
+cd demo-go
+go mod init example.com/demo-go
+cat > main.go <<'EOF'
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello from Go")
+}
+EOF
+gofmt -w main.go
+go test ./...
+go run .
+```
+
+Go web frameworks are not installed globally. For first web exercises, the standard library package `net/http` is enough. Frameworks such as `gin`, `fiber`, or `chi` belong in the project's `go.mod`.
+
+### Use Rust inside the container
+
+Check the Rust version and Rust tools:
+
+```bash
+rustc --version
+cargo --version
+rustfmt --version
+cargo clippy --version
+rust-analyzer --version
+```
+
+Example for a small Rust project:
+
+```bash
+cd /workspace
+cargo new demo-rust
+cd demo-rust
+cargo fmt
+cargo clippy -- -D warnings
+cargo run
+```
+
+Rust web frameworks are not installed globally. Frameworks and runtimes such as `tokio`, `axum`, `actix-web`, or `serde` belong in the project's `Cargo.toml`.
 
 ### Reach an ASP.NET web app from the host
 
@@ -2878,6 +3020,10 @@ The output should show `sandbox_mode` as `workspace-write`, restricted network a
 
 Java JDK 21 and Maven are installed during the image build from the Debian package sources. They prepare the container for Java basics, Maven projects, and Spring Boot projects.
 
+Go is installed during the image build as the official Go tarball under `/usr/local/go`. The version is pinned in the Dockerfile through `GO_VERSION`, so updates happen deliberately through a Dockerfile change, a Git commit, and a new image build. The image also installs `gopls`, `staticcheck`, `govulncheck`, and `dlv` under `/home/adedev/go/bin`; these tool versions are pinned through Dockerfile build arguments as well.
+
+Rust is installed during the image build with `rustup` for the Linux user `adedev`. The toolchain is pinned in the Dockerfile through `RUST_TOOLCHAIN`. The image also installs the components `rustfmt`, `clippy`, `rust-analyzer`, and `rust-src`.
+
 Opencode and Codex CLI are installed during the image build with the newest npm version:
 
 ```dockerfile
@@ -2885,6 +3031,8 @@ RUN npm i -g opencode-ai@latest @openai/codex@latest
 ```
 
 The image also installs common CLI tools for agent workflows: `git`, `python`, `python3`, `jq`, `yq`, `rg`, `fd`, `fdfind`, `direnv`, `shellcheck`, `shfmt`, `delta`, `tree`, `just`, `wget`, `curl`, and `bubblewrap`. The Debian package for `fd` is named `fd-find` and provides the `fdfind` command; the image also adds the expected `fd` command as a symlink. `bubblewrap` is installed for Codex's Linux sandbox. `mas` is a macOS App Store tool and is not installed in the Linux container.
+
+The `PATH` also includes `/usr/local/go/bin`, `/home/adedev/go/bin`, and `/home/adedev/.cargo/bin`. This makes Go, Go helper tools, and Rust tools directly available after opening a container shell.
 
 Codex CLI stores local data in the Docker volume `codex_data`. This volume is mounted into the container at `/home/adedev/.codex`. This keeps Codex data across container restarts without writing it into the Git repository.
 
@@ -3097,7 +3245,7 @@ This procedure checks the setup in a useful order. It is a good choice after a f
 The test has two parts:
 
 1. On the host, Docker Compose is checked, the image is built, and the container is started.
-2. Inside the container, .NET, OpenCode, Spec Kit, and the mounted directories are checked.
+2. Inside the container, .NET, Java, Go, Rust, OpenCode, Spec Kit, and the mounted directories are checked.
 
 Run this on the host. The first command changes into this repository; adjust the path if needed:
 
@@ -3117,6 +3265,11 @@ dotnet --info
 java --version
 javac --version
 mvn --version
+go version
+gopls version
+rustc --version
+cargo --version
+cargo clippy --version
 node --version
 npm --version
 opencode --version
@@ -3136,6 +3289,8 @@ What the commands mean:
 - `docker compose exec ade bash` opens a shell in the running container.
 - `dotnet --info` shows whether the .NET SDK is installed and usable inside the container.
 - `java --version`, `javac --version`, and `mvn --version` check JDK and Maven.
+- `go version` and `gopls version` check Go and the Go language server.
+- `rustc --version`, `cargo --version`, and `cargo clippy --version` check the Rust toolchain and Clippy.
 - `node --version` and `npm --version` check the Node.js tools required by OpenCode and Codex CLI.
 - `opencode --version` checks the installed OpenCode CLI.
 - `codex --version` checks the installed Codex CLI.
@@ -3149,6 +3304,7 @@ Expected result:
 - `docker compose ps` shows the `ade` service as running.
 - `dotnet --info` prints SDK information and exits without an error.
 - `java --version` and `mvn --version` print version information.
+- `go version`, `gopls version`, `rustc --version`, `cargo --version`, and `cargo clippy --version` print version information.
 - `opencode --version`, `codex --version`, and `specify version` print version information.
 - `ls /rider-projects` shows the projects from the host directory or stays empty if that directory does not contain projects yet.
 - `ls /java-projects` shows Java projects from the host directory or stays empty if that directory does not contain projects yet.
@@ -3221,6 +3377,7 @@ This glossary explains the most important terms in simple form. If you do not kn
 | ASP.NET | Microsoft's web framework for server-side web applications in C#. |
 | Bind mount | A directory from the host mounted directly into the container. Changes propagate in both directions. |
 | Build | The step that turns source code into a runnable program. |
+| Cargo | Build and package tool for Rust projects. |
 | Compose | A tool that starts and stops containers based on a `compose.yml` file. |
 | Container | An isolated Linux process started from an image. Like a small virtual environment, but lighter than a virtual machine. |
 | Dockerfile | A text file that describes how an image is built. |
@@ -3239,6 +3396,7 @@ This glossary explains the most important terms in simple form. If you do not kn
 | Registry | An online storage for container images, for example the GitLab Container Registry. |
 | Rider | An integrated development environment (IDE) from JetBrains for .NET. |
 | Rootless | Without administrator or root rights. Podman runs rootless by default. |
+| Rustup | A tool that installs Rust toolchains and components such as `rustfmt` or `clippy`. |
 | Sandbox | A protected environment in which a program may not write everywhere. |
 | SDD | Spec-Driven Development. Describe first, then plan, then implement. |
 | Secret | A secret value such as an API key or a password. |

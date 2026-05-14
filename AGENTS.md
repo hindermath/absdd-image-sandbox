@@ -1,10 +1,24 @@
 # Repository Guidelines
 
+## Active Compliance Work Queue
+
+This repository has open audit findings against GWDG guideline `RL-SE-001` v2.1.0 ("Sichere Softwareentwicklung") and checklist `CL_12` v1.0 ("Agentische KI in Sandbox-Umgebungen"). The complete work list with concrete tasks, acceptance criteria, verification steps, and escalation rules is in `COMPLIANCE-PLAN_RL-SE-001.md`.
+
+**Read `COMPLIANCE-PLAN_RL-SE-001.md` at the start of every Codex session.** That file is the single source of truth for:
+
+- the priority order of open work (P0 must run first, then P1, P2, P3);
+- the per-task commit and pull request conventions used for these changes;
+- the items that must NOT be handled by an agent and have to be escalated to a human (API key rotation, formal sandbox approval, platform-side branch protection rules, QISMS register entries).
+
+At the end of every Codex session, append a short session log under `docs/security/agent-session-log/<YYYY-MM-DD-HHMM>.md` as required by the plan. The log records which plan IDs were completed, partially completed, or escalated.
+
+The plan and these guidelines work together: this `AGENTS.md` file describes the repository conventions; `COMPLIANCE-PLAN_RL-SE-001.md` describes the audit-driven work to bring those conventions into provable conformance.
+
 ## Project Structure & Module Organization
 
 This repository contains a small Docker-based Opencode, .NET, and Spec Kit environment, not an application codebase.
 
-- `Dockerfile`: builds from the shared `agent-sandbox` image and installs the current .NET SDK package, Java JDK 21, Maven, `opencode-ai@latest`, `@openai/codex@latest`, `uv`, `specify-cli`, and common CLI helper tools.
+- `Dockerfile`: builds from the shared `agent-sandbox` image and installs the current .NET SDK package, Java JDK 21, Maven, pinned Go and Rust toolchains, Python, `opencode-ai@latest`, `@openai/codex@latest`, `uv`, `specify-cli`, and common CLI helper tools.
 - `compose.yml`: defines the `ade` service, pulls newer build base images, and mounts local state.
 - The container runs commands as the Linux user `adedev`; keep home-directory paths under `/home/adedev`.
 - `opencode.jsonc`: configures the `chat-ai` provider, models, and agents. Keep comments useful for first-year IT specialist apprentices.
@@ -95,6 +109,21 @@ docker compose build --pull
 
 The `--pull` flag is important because the Dockerfile uses the registry-hosted `agent-sandbox:latest` base image.
 
+After Dockerfile changes that affect language toolchains, also verify the container tools:
+
+```bash
+dotnet --info
+java --version
+javac --version
+mvn --version
+go version
+gopls version
+rustc --version
+cargo --version
+cargo clippy --version
+python --version
+```
+
 On macOS or Windows with Podman, the equivalent validation path is:
 
 ```bash
@@ -109,6 +138,10 @@ Do not require a real API key for validation unless the change explicitly affect
 For .NET projects under `/rider-projects`, keep `bin`, `obj`, and AppHost output off the Windows bind mount. The mounted `ContainerBuild.props` sends build output to the `dotnet_build` volume at `/dotnet-build` and imports repository-specific `Directory.Build.props` files when present.
 
 For Java projects, use `/java-projects` and prefer project-local Maven or Gradle wrappers when a repository provides them. The container includes JDK 21 and Maven for baseline Java and Spring Boot development. Gradle and Spring Boot CLI are not installed globally unless this repository is intentionally extended.
+
+For Go projects, use `/workspace` unless a project-specific mount is configured. Keep dependencies in `go.mod`, run `gofmt`/`go test ./...`, and add web frameworks such as `gin`, `fiber`, or `chi` per project instead of installing them globally.
+
+For Rust projects, use `/workspace` unless a project-specific mount is configured. Keep dependencies in `Cargo.toml`, run `cargo fmt`, `cargo clippy -- -D warnings`, and `cargo test`. Add frameworks such as `tokio`, `axum`, `actix-web`, or `serde` per project instead of installing them globally.
 
 ASP.NET apps must bind to `0.0.0.0` inside the container to be reachable from Windows. Compose publishes `127.0.0.1:5100-5199:5100-5199`; keep sample web app ports in that range unless the Compose file is updated.
 
