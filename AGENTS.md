@@ -18,8 +18,8 @@ The plan and these guidelines work together: this `AGENTS.md` file describes the
 
 This repository contains a small Docker-based Opencode, .NET, and Spec Kit environment, not an application codebase.
 
-- `Dockerfile`: builds from the shared `agent-sandbox` image and installs the current .NET SDK package, Java JDK 21, Maven, pinned Go and Rust toolchains, Python, `opencode-ai@latest`, `@openai/codex@latest`, `uv`, `specify-cli`, and common CLI helper tools.
-- `compose.yml`: defines the `ade` service, pulls newer build base images, and mounts local state.
+- `Dockerfile`: builds from the shared `agent-sandbox` image pinned by digest and installs the current .NET SDK package, Java JDK 21, Maven, pinned Go and Rust toolchains, Python, pinned `opencode-ai` and `@openai/codex`, `uv`, `specify-cli`, and common CLI helper tools.
+- `compose.yml`: defines the `ade` service, builds the local image, and mounts local state.
 - The container runs commands as the Linux user `adedev`; keep home-directory paths under `/home/adedev`.
 - `opencode.jsonc`: configures the `chat-ai` provider, models, and agents. Keep comments useful for first-year IT specialist apprentices.
 - Codex CLI state is stored in the `codex_data` Docker volume mounted at `/home/adedev/.codex`; do not replace this with a bind mount to a committed directory.
@@ -107,7 +107,7 @@ For Dockerfile changes, also run:
 docker compose build --pull
 ```
 
-The `--pull` flag is important because the Dockerfile uses the registry-hosted `agent-sandbox:latest` base image.
+The `--pull` flag is still useful for registry access checks, but the Dockerfile pins the registry-hosted `agent-sandbox` base image by digest for reproducible builds. Update the digest deliberately in the Dockerfile when the base image should change.
 
 After Dockerfile changes that affect language toolchains, also verify the container tools:
 

@@ -530,7 +530,7 @@ Compose-Datei prüfen, ohne Variablenwerte und Secrets auszubreiten:
 podman compose config --no-interpolate
 ```
 
-Image bauen und dabei das aktuelle Sandbox-Basisimage ziehen:
+Image bauen und dabei das gepinnte Sandbox-Basisimage nachziehen:
 
 ```bash
 podman compose build --pull
@@ -539,7 +539,7 @@ podman compose build --pull
 Wenn `podman compose build --pull` meldet, dass ein externer Compose-Provider wie `/usr/local/bin/docker-compose` verwendet wird, ist das unter macOS nicht automatisch ein Fehler. Bricht der Build aber beim privaten GitLab-Basisimage mit `Requesting bearer token` und `403 Forbidden` ab, verwendet der externe Provider wahrscheinlich andere Registry-Anmeldedaten als `podman login`. Dann das Basisimage und das Projektimage direkt mit Podman bauen und Compose nur für den Start verwenden:
 
 ```bash
-podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox:latest
+podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox@sha256:a21e15872aed8b0e4b9e18e0ff1e678318968efb4b8367ddf9fa4a63fc1d294c
 podman build --pull -t ade-dev-sandbox-ade .
 podman compose up -d --no-build --force-recreate
 ```
@@ -674,10 +674,10 @@ Compose-Datei prüfen, ohne Variablenwerte und Secrets auszubreiten:
 podman compose config --no-interpolate
 ```
 
-Auf Windows zuerst das Basisimage mit Podman ziehen. Dieser Schritt prüft, ob der Registry-Login für Podman funktioniert:
+Auf Windows zuerst das gepinnte Basisimage mit Podman ziehen. Dieser Schritt prüft, ob der Registry-Login für Podman funktioniert:
 
 ```powershell
-podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox:latest
+podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox@sha256:a21e15872aed8b0e4b9e18e0ff1e678318968efb4b8367ddf9fa4a63fc1d294c
 ```
 
 Danach das Projektimage direkt mit Podman bauen. Der Tag `ade-dev-sandbox-ade` entspricht dem Image-Namen, den Compose für den Service `ade` erwartet:
@@ -795,7 +795,7 @@ Vor dem ersten Build bei der GitLab Container Registry anmelden. Als Passwort ei
 docker login docker.gitlab-ce.gwdg.de
 ```
 
-Image bauen und dabei das aktuelle Sandbox-Basisimage ziehen:
+Image bauen und dabei das gepinnte Sandbox-Basisimage nachziehen:
 
 ```bash
 docker compose build --pull
@@ -813,7 +813,7 @@ Status anzeigen:
 docker compose ps
 ```
 
-Beim ersten Build werden das Sandbox-Basisimage, das .NET-SDK-Paket und npm-Pakete geladen. Das kann einige Minuten dauern.
+Beim ersten Build werden das gepinnte Sandbox-Basisimage, das .NET-SDK-Paket und npm-Pakete geladen. Das kann einige Minuten dauern.
 
 ### Rider-Projekte aus Windows einbinden
 
@@ -1304,7 +1304,7 @@ Die wichtigsten Einstellungen in `codex/config.toml`:
 - `otel.exporter = "none"` und `log_user_prompt = false`: Es wird keine Telemetrie exportiert und Prompts werden nicht geloggt.
 - `sandbox_workspace_write.network_access = false`: Shell-Kommandos in der Sandbox haben keinen direkten Netzwerkzugriff.
 - `sandbox_workspace_write.exclude_slash_tmp = true`: `/tmp` wird nicht automatisch beschreibbar.
-- `sandbox_workspace_write.writable_roots`: Schreibrechte sind auf `/workspace`, `/rider-projects` und `/java-projects` begrenzt.
+- `sandbox_workspace_write.writable_roots`: Schreibrechte sind auf `/workspace`, `/rider-projects`, `/java-projects`, `/go-projects`, `/rust-projects` und `/python-projects` begrenzt.
 - `shell_environment_policy.inherit = "core"`: Subprozesse erben nur eine reduzierte Umgebung.
 - Secret-Variablen mit Namen wie `*KEY*`, `*SECRET*`, `*TOKEN*`, `*PASSWORD*` und `*CREDENTIAL*` werden aus Subprozessen entfernt.
 - App-, Browser- und Computer-Use-Flächen sind deaktiviert.
@@ -1344,7 +1344,7 @@ Nach einer Änderung kann die wirksame Sandbox grob geprüft werden:
 codex debug prompt-input "Test"
 ```
 
-In der Ausgabe sollten `sandbox_mode` als `workspace-write`, Netzwerkzugriff als eingeschränkt und die Writable-Roots `/rider-projects`, `/workspace` und `/java-projects` sichtbar sein.
+In der Ausgabe sollten `sandbox_mode` als `workspace-write`, Netzwerkzugriff als eingeschränkt und die Writable-Roots `/workspace`, `/rider-projects`, `/java-projects`, `/go-projects`, `/rust-projects` und `/python-projects` sichtbar sein.
 
 Java JDK 21 und Maven werden beim Image-Build aus den Debian-Paketquellen installiert. Sie sind für Java-Grundlagen, Maven-Projekte und Spring-Boot-Projekte vorbereitet.
 
@@ -1352,10 +1352,12 @@ Go wird beim Image-Build als offizielles Go-Tarball nach `/usr/local/go` install
 
 Rust wird beim Image-Build mit `rustup` für den Linux-Benutzer `adedev` installiert. Die Toolchain ist im Dockerfile über `RUST_TOOLCHAIN` gepinnt. Installiert werden außerdem die Komponenten `rustfmt`, `clippy`, `rust-analyzer` und `rust-src`.
 
-Opencode und Codex CLI werden beim Image-Build mit der neuesten npm-Version installiert:
+OpenCode und Codex CLI werden beim Image-Build als konkret gepinnte npm-Pakete installiert. Die Versionen stehen im Dockerfile in `OPENCODE_VERSION` und `CODEX_VERSION`; Updates erfolgen bewusst über Dockerfile-Änderung, Git-Commit und neuen Image-Build:
 
 ```dockerfile
-RUN npm i -g opencode-ai@latest @openai/codex@latest
+ARG OPENCODE_VERSION=1.14.50
+ARG CODEX_VERSION=0.130.0
+RUN npm i -g "opencode-ai@${OPENCODE_VERSION}" "@openai/codex@${CODEX_VERSION}"
 ```
 
 Zusätzlich installiert das Image häufig genutzte CLI-Werkzeuge für Agenten-Workflows: `git`, `python`, `python3`, `jq`, `yq`, `rg`, `fd`, `fdfind`, `direnv`, `shellcheck`, `shfmt`, `delta`, `tree`, `just`, `wget`, `curl` und `bubblewrap`. Das Debian-Paket für `fd` heißt `fd-find` und liefert den Befehl `fdfind`; das Image legt zusätzlich den erwarteten Befehl `fd` als Symlink an. `bubblewrap` wird für die Linux-Sandbox von Codex installiert. `mas` ist ein macOS-App-Store-Werkzeug und wird im Linux-Container nicht installiert.
@@ -1377,7 +1379,7 @@ MSBuildEnableWorkloadResolver=false
 
 Die erste Variable betrifft allgemeine Update-Benachrichtigungen. Die zweite Variable deaktiviert den MSBuild-Workload-Resolver. Das ist für normale Konsolen-, Library-, Test- und Web-Projekte sinnvoll, weil dort keine optionalen SDK-Workloads wie MAUI gebraucht werden.
 
-Das Image erbt vom gemeinsamen `agent-sandbox`-Image auf Debian 13. .NET wird deshalb im Dockerfile über die Microsoft-Paketquelle für Debian 13 installiert. Der Build-Parameter `DOTNET_SDK_PACKAGE` steht standardmäßig auf `dotnet-sdk-10.0`.
+Das Image erbt vom gemeinsamen `agent-sandbox`-Image auf Debian 13. Das Basisimage ist im Dockerfile per `sha256`-Digest gepinnt; der lesbare `latest`-Tag bleibt nur als Kommentar mit Beobachtungsdatum erhalten. Ein Update des Basisimages erfolgt bewusst über Digest-Änderung im Dockerfile, Review, Git-Commit und neuen Image-Build. .NET wird über die Microsoft-Paketquelle für Debian 13 installiert. Der Build-Parameter `DOTNET_SDK_PACKAGE` steht standardmäßig auf `dotnet-sdk-10.0`.
 
 Gegen die Meldung `An issue was encountered verifying workloads` wird beim Image-Build zusätzlich der Manifest-Modus gesetzt:
 
@@ -1606,12 +1608,15 @@ specify version
 ls /workspace
 ls /rider-projects
 ls /java-projects
+ls /go-projects
+ls /rust-projects
+ls /python-projects
 ```
 
 Was die Befehle bedeuten:
 
 - `docker compose config --no-interpolate` prüft die Compose-Datei, ohne Variablenwerte und Secrets in der Ausgabe auszubreiten.
-- `docker compose build --pull` baut das Image und lädt vorher nach Möglichkeit aktuelle Basisimages.
+- `docker compose build --pull` baut das Image und prüft bzw. lädt vorher nach Möglichkeit die gepinnten Basisimages.
 - `docker compose up -d` startet den Container im Hintergrund.
 - `docker compose ps` zeigt, ob der Service `ade` läuft.
 - `docker compose exec ade bash` öffnet eine Shell im laufenden Container.
@@ -1626,6 +1631,7 @@ Was die Befehle bedeuten:
 - `ls /workspace` prüft das lokale Projekt-Workspace-Mount.
 - `ls /rider-projects` prüft den über `RIDER_PROJECTS_DIR` konfigurierten Host-Mount.
 - `ls /java-projects` prüft den über `JAVA_PROJECTS_DIR` konfigurierten Host-Mount.
+- `ls /go-projects`, `ls /rust-projects` und `ls /python-projects` prüfen die sprachspezifischen Host-Mounts.
 
 Erwartetes Ergebnis:
 
@@ -1636,6 +1642,7 @@ Erwartetes Ergebnis:
 - `opencode --version`, `codex --version` und `specify version` geben Versionsinformationen aus.
 - `ls /rider-projects` zeigt die Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthält.
 - `ls /java-projects` zeigt Java-Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthält.
+- `ls /go-projects`, `ls /rust-projects` und `ls /python-projects` zeigen sprachspezifische Projekte oder bleiben leer.
 
 macOS-Hinweis: Wenn Docker Desktop gerade erst installiert wurde, Docker Desktop zuerst einmal starten und warten, bis die Engine läuft. Danach funktionieren `docker --version`, `docker compose version` und `docker info` im Terminal.
 
@@ -2202,7 +2209,7 @@ Check the Compose file without expanding variable values and secrets:
 podman compose config --no-interpolate
 ```
 
-Build the image and pull the current Sandbox base image:
+Build the image and pull the pinned Sandbox base image:
 
 ```bash
 podman compose build --pull
@@ -2211,7 +2218,7 @@ podman compose build --pull
 If `podman compose build --pull` reports that it is using an external Compose provider such as `/usr/local/bin/docker-compose`, that is not automatically an error on macOS. If the build then fails on the private GitLab base image with `Requesting bearer token` and `403 Forbidden`, the external provider probably uses different registry credentials than `podman login`. In that case, pull the base image and build the project image directly with Podman, and use Compose only for startup:
 
 ```bash
-podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox:latest
+podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox@sha256:a21e15872aed8b0e4b9e18e0ff1e678318968efb4b8367ddf9fa4a63fc1d294c
 podman build --pull -t ade-dev-sandbox-ade .
 podman compose up -d --no-build --force-recreate
 ```
@@ -2346,10 +2353,10 @@ Check the Compose file without expanding variable values and secrets:
 podman compose config --no-interpolate
 ```
 
-On Windows, pull the base image with Podman first. This step verifies that the registry login works for Podman:
+On Windows, pull the pinned base image with Podman first. This step verifies that the registry login works for Podman:
 
 ```powershell
-podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox:latest
+podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox@sha256:a21e15872aed8b0e4b9e18e0ff1e678318968efb4b8367ddf9fa4a63fc1d294c
 ```
 
 Then build the project image directly with Podman. The tag `ade-dev-sandbox-ade` matches the image name Compose expects for the `ade` service:
@@ -2467,7 +2474,7 @@ Before the first build, log in to the GitLab container registry. Use a GitLab to
 docker login docker.gitlab-ce.gwdg.de
 ```
 
-Build the image and pull the current Sandbox base image:
+Build the image and pull the pinned Sandbox base image:
 
 ```bash
 docker compose build --pull
@@ -2485,7 +2492,7 @@ Show the status:
 docker compose ps
 ```
 
-The first build downloads the Sandbox base image, the .NET SDK package, and npm packages. This can take several minutes.
+The first build downloads the pinned Sandbox base image, the .NET SDK package, and npm packages. This can take several minutes.
 
 ### Mount Rider projects from Windows
 
@@ -2976,7 +2983,7 @@ The most important settings in `codex/config.toml`:
 - `otel.exporter = "none"` and `log_user_prompt = false`: Telemetry is not exported and prompts are not logged.
 - `sandbox_workspace_write.network_access = false`: Shell commands inside the sandbox have no direct network access.
 - `sandbox_workspace_write.exclude_slash_tmp = true`: `/tmp` is not writable automatically.
-- `sandbox_workspace_write.writable_roots`: write access is limited to `/workspace`, `/rider-projects`, and `/java-projects`.
+- `sandbox_workspace_write.writable_roots`: write access is limited to `/workspace`, `/rider-projects`, `/java-projects`, `/go-projects`, `/rust-projects`, and `/python-projects`.
 - `shell_environment_policy.inherit = "core"`: subprocesses inherit only a reduced environment.
 - Secret variables with names such as `*KEY*`, `*SECRET*`, `*TOKEN*`, `*PASSWORD*`, and `*CREDENTIAL*` are removed from subprocesses.
 - App, browser, and computer-use surfaces are disabled.
@@ -3016,7 +3023,7 @@ After a change, roughly check the effective sandbox:
 codex debug prompt-input "Test"
 ```
 
-The output should show `sandbox_mode` as `workspace-write`, restricted network access, and the writable roots `/rider-projects`, `/workspace`, and `/java-projects`.
+The output should show `sandbox_mode` as `workspace-write`, restricted network access, and the writable roots `/workspace`, `/rider-projects`, `/java-projects`, `/go-projects`, `/rust-projects`, and `/python-projects`.
 
 Java JDK 21 and Maven are installed during the image build from the Debian package sources. They prepare the container for Java basics, Maven projects, and Spring Boot projects.
 
@@ -3024,10 +3031,12 @@ Go is installed during the image build as the official Go tarball under `/usr/lo
 
 Rust is installed during the image build with `rustup` for the Linux user `adedev`. The toolchain is pinned in the Dockerfile through `RUST_TOOLCHAIN`. The image also installs the components `rustfmt`, `clippy`, `rust-analyzer`, and `rust-src`.
 
-Opencode and Codex CLI are installed during the image build with the newest npm version:
+OpenCode and Codex CLI are installed during the image build as explicitly pinned npm packages. The versions are declared in the Dockerfile through `OPENCODE_VERSION` and `CODEX_VERSION`; updates happen deliberately through a Dockerfile change, Git commit, and a new image build:
 
 ```dockerfile
-RUN npm i -g opencode-ai@latest @openai/codex@latest
+ARG OPENCODE_VERSION=1.14.50
+ARG CODEX_VERSION=0.130.0
+RUN npm i -g "opencode-ai@${OPENCODE_VERSION}" "@openai/codex@${CODEX_VERSION}"
 ```
 
 The image also installs common CLI tools for agent workflows: `git`, `python`, `python3`, `jq`, `yq`, `rg`, `fd`, `fdfind`, `direnv`, `shellcheck`, `shfmt`, `delta`, `tree`, `just`, `wget`, `curl`, and `bubblewrap`. The Debian package for `fd` is named `fd-find` and provides the `fdfind` command; the image also adds the expected `fd` command as a symlink. `bubblewrap` is installed for Codex's Linux sandbox. `mas` is a macOS App Store tool and is not installed in the Linux container.
@@ -3049,7 +3058,7 @@ MSBuildEnableWorkloadResolver=false
 
 The first variable affects general update notifications. The second variable disables the MSBuild workload resolver. This is useful for normal console, library, test, and web projects because they do not need optional SDK workloads such as MAUI.
 
-The image inherits from the shared `agent-sandbox` image on Debian 13. .NET is therefore installed in the Dockerfile through the Microsoft package feed for Debian 13. The build argument `DOTNET_SDK_PACKAGE` defaults to `dotnet-sdk-10.0`.
+The image inherits from the shared `agent-sandbox` image on Debian 13. The base image is pinned in the Dockerfile by `sha256` digest; the readable `latest` tag stays only as a comment with the observation date. A base-image update happens deliberately through a digest change in the Dockerfile, review, Git commit, and a new image build. .NET is installed through the Microsoft package feed for Debian 13. The build argument `DOTNET_SDK_PACKAGE` defaults to `dotnet-sdk-10.0`.
 
 To address the message `An issue was encountered verifying workloads`, the image build also sets manifest mode:
 
@@ -3278,12 +3287,15 @@ specify version
 ls /workspace
 ls /rider-projects
 ls /java-projects
+ls /go-projects
+ls /rust-projects
+ls /python-projects
 ```
 
 What the commands mean:
 
 - `docker compose config --no-interpolate` checks the Compose file without expanding variable values and secrets in the output.
-- `docker compose build --pull` builds the image and tries to download current base images first.
+- `docker compose build --pull` builds the image and checks or downloads the pinned base images first.
 - `docker compose up -d` starts the container in the background.
 - `docker compose ps` shows whether the `ade` service is running.
 - `docker compose exec ade bash` opens a shell in the running container.
@@ -3298,6 +3310,7 @@ What the commands mean:
 - `ls /workspace` checks the local project workspace mount.
 - `ls /rider-projects` checks the host mount configured through `RIDER_PROJECTS_DIR`.
 - `ls /java-projects` checks the host mount configured through `JAVA_PROJECTS_DIR`.
+- `ls /go-projects`, `ls /rust-projects`, and `ls /python-projects` check the language-specific host mounts.
 
 Expected result:
 
@@ -3308,6 +3321,7 @@ Expected result:
 - `opencode --version`, `codex --version`, and `specify version` print version information.
 - `ls /rider-projects` shows the projects from the host directory or stays empty if that directory does not contain projects yet.
 - `ls /java-projects` shows Java projects from the host directory or stays empty if that directory does not contain projects yet.
+- `ls /go-projects`, `ls /rust-projects`, and `ls /python-projects` show language-specific projects or stay empty.
 
 macOS note: If Docker Desktop was just installed, start Docker Desktop once and wait until the engine is running. After that, `docker --version`, `docker compose version`, and `docker info` work in the terminal.
 

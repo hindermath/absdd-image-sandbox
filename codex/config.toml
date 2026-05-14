@@ -83,6 +83,9 @@ writable_roots = [
   "/workspace",
   "/rider-projects",
   "/java-projects",
+  "/go-projects",
+  "/rust-projects",
+  "/python-projects",
 ]
 
 [shell_environment_policy]

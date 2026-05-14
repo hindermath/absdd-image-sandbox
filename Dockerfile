@@ -1,4 +1,5 @@
-FROM docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox:latest
+# Tag latest observed on 2026-05-14, pinned here by digest for reproducible builds.
+FROM docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox@sha256:a21e15872aed8b0e4b9e18e0ff1e678318968efb4b8367ddf9fa4a63fc1d294c
 
 ARG DOTNET_SDK_PACKAGE=dotnet-sdk-10.0
 ARG GO_VERSION=1.26.3
@@ -7,6 +8,8 @@ ARG STATICCHECK_VERSION=v0.7.0
 ARG GOVULNCHECK_VERSION=v1.3.0
 ARG DELVE_VERSION=v1.26.3
 ARG RUST_TOOLCHAIN=1.95.0
+ARG OPENCODE_VERSION=1.14.50
+ARG CODEX_VERSION=0.130.0
 
 USER root
 RUN apt-get -y update \
@@ -58,7 +61,7 @@ RUN printf '%s\n' 'export PATH="/usr/local/go/bin:/home/adedev/go/bin:/home/aded
     > /etc/profile.d/ade-toolchains.sh
 RUN dotnet workload config --update-mode manifests \
     && dotnet workload update
-RUN npm i -g opencode-ai@latest @openai/codex@latest \
+RUN npm i -g "opencode-ai@${OPENCODE_VERSION}" "@openai/codex@${CODEX_VERSION}" \
     && ln -sf "$(npm root -g)/@openai/codex/bin/codex.js" /usr/local/bin/codex
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
     && install -m 0755 /root/.local/bin/uv /usr/local/bin/uv \
