@@ -1,5 +1,7 @@
 services:
   ade:
+    # Network decision: keep Compose default bridge with free egress for the
+    # learning environment. See docs/security/network-decision.md.
     build:
       context: .
       pull: true

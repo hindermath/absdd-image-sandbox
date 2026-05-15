@@ -4,7 +4,33 @@ Eine vorbereitete Container-Lernumgebung für angehende Fachinformatiker:innen.
 Sprachen und Werkzeuge: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, Opencode, Codex CLI, Spec Kit.
 
 *A ready-to-use container learning environment for IT-specialist apprentices.
-Languages and tools: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, Opencode, Codex CLI, Spec Kit.*
+Languages and tools: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, Opencode CLI/TUI, Codex CLI/TUI, Spec Kit
+
+---
+
+## Hinweis für Auszubildende und Kolleg:innen / Note for Apprentices and Colleagues
+
+Dieses Repository ist die zentrale Vorlage für die ADE-Entwicklungsumgebung. Bitte arbeitet für eigene Übungen, Anpassungen und Experimente nicht direkt im Ursprungsrepo, sondern erstellt zuerst einen persönlichen Fork in GitLab.
+
+Empfohlener Ablauf:
+
+1. In GitLab über **Fork** eine eigene Kopie des Repositories erstellen.
+2. Den eigenen Fork lokal klonen.
+3. Änderungen in eigenen Branches vornehmen.
+4. Relevante Verbesserungen per Merge Request zurück an das Ursprungsrepo vorschlagen.
+
+Lokale Secret-Dateien wie `opencode.env` und `.env` werden nicht mitgeforkt und dürfen nicht committed werden.
+
+This repository is the central template for the ADE development environment. For your own exercises, changes, and experiments, do not work directly in the upstream repository. Create a personal fork in GitLab first.
+
+Recommended flow:
+
+1. Use **Fork** in GitLab to create your own copy of the repository.
+2. Clone your own fork locally.
+3. Make changes in your own branches.
+4. Propose useful improvements back to the upstream repository through a merge request.
+
+Local secret files such as `opencode.env` and `.env` are not included in forks and must not be committed.
 
 ---
 
