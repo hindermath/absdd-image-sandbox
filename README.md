@@ -4,7 +4,19 @@ Eine vorbereitete Container-Lernumgebung für angehende Fachinformatiker:innen.
 Sprachen und Werkzeuge: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, Opencode, Codex CLI, Spec Kit.
 
 *A ready-to-use container learning environment for IT-specialist apprentices.
-Languages and tools: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, Opencode CLI/TUI, Codex CLI/TUI, Spec Kit
+Languages and tools: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, Opencode CLI/TUI, Codex CLI/TUI, Spec Kit*
+
+---
+
+## Kurzlebige Aufgabenumgebung / Short-Lived Task Environment
+
+Dieses Image ist für agentische KI-Aufgaben gedacht, die bewusst kurzlebig bearbeitet werden: Image bauen, Container starten, Aufgabe erledigen, relevante Ergebnisse sichern und die laufende Umgebung danach wieder stoppen oder löschen. Es ist keine dauerhaft gepflegte VM und sollte nicht als langlebiger Arbeitsplatz mit dauerhaftem Zustand verstanden werden.
+
+Persistente Daten liegen nur dort, wo sie bewusst gemountet oder in Volumes abgelegt werden, zum Beispiel in Projektverzeichnissen, `/workspace`, `opencode_data`, `codex_data` oder `dotnet_build`. Vor dem Löschen von Volumes prüfen, ob dort noch benötigte Daten liegen.
+
+This image is intended for short-lived agentic AI tasks: build the image, start the container, complete the task, save the relevant results, then stop or remove the running environment. It is not a long-lived VM and should not be treated as a permanent workstation with permanent state.
+
+Persistent data exists only where it is intentionally mounted or stored in volumes, for example in project directories, `/workspace`, `opencode_data`, `codex_data`, or `dotnet_build`. Check volumes before deleting them.
 
 ---
 
@@ -54,6 +66,8 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 - [Docker-Berechtigungen prüfen](#docker-berechtigungen-prüfen)
 - [API-Key einrichten](#api-key-einrichten)
 - [Container bauen und starten](#container-bauen-und-starten)
+- [Image-SBOM erzeugen](#image-sbom-erzeugen)
+- [Image-SBOM auswerten](#image-sbom-auswerten)
 - [Rider-Projekte aus Windows einbinden](#rider-projekte-aus-windows-einbinden)
 - [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen)
 - [Java-Projekte einbinden](#java-projekte-einbinden)
@@ -94,6 +108,8 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 - [Check Docker permissions](#check-docker-permissions)
 - [Set up the API key](#set-up-the-api-key)
 - [Build and start the container](#build-and-start-the-container)
+- [Generate an image SBOM](#generate-an-image-sbom)
+- [Analyze an image SBOM](#analyze-an-image-sbom)
 - [Mount Rider projects from Windows](#mount-rider-projects-from-windows)
 - [Use .NET and C# inside the container](#use-net-and-c-inside-the-container)
 - [Mount Java projects](#mount-java-projects)
@@ -842,6 +858,94 @@ docker compose ps
 ```
 
 Beim ersten Build werden das gepinnte Sandbox-Basisimage, das .NET-SDK-Paket und npm-Pakete geladen. Das kann einige Minuten dauern.
+
+### Image-SBOM erzeugen
+
+Eine SBOM ist eine *Software Bill of Materials*, also eine maschinenlesbare Stückliste für Software. Für dieses Container-Image listet sie Betriebssystempakete, Bibliotheken, installierte Werkzeuge und Versionen auf. Das hilft bei Lieferkettentransparenz: Wenn später eine Schwachstelle in einer bestimmten Komponente bekannt wird, kann geprüft werden, ob das Image betroffen ist.
+
+Für dieses Repository wird eine CycloneDX-JSON-SBOM erzeugt. Vor der Verteilung oder Übergabe eines neu gebauten Sandbox-Images ist dieser Schritt Pflicht.
+
+Linux, macOS oder WSL2:
+
+```bash
+./scripts/build-and-sbom.sh
+```
+
+Windows PowerShell, zum Beispiel mit Podman:
+
+```powershell
+.\scripts\build-and-sbom.ps1 -Runtime podman
+```
+
+Wenn das Image bereits gebaut ist und nur die SBOM neu erzeugt werden soll:
+
+```bash
+./scripts/build-and-sbom.sh --skip-build
+```
+
+```powershell
+.\scripts\build-and-sbom.ps1 -Runtime podman -SkipBuild
+```
+
+Die Skripte verwenden lokal installiertes `syft`, wenn es vorhanden ist. Wenn `syft` nicht im `PATH` liegt, nutzen sie als Fallback das Container-Image `docker.io/anchore/syft:latest`. Dafür muss Docker oder Podman öffentliche Images ziehen können.
+
+Die erzeugten Dateien liegen unter `sboms/`, zum Beispiel `sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json`. Diese Dateien sind Build-Artefakte und werden durch `.gitignore` nicht committed. Für Releases können sie separat als Release-Artefakt abgelegt werden.
+
+### Image-SBOM auswerten
+
+Die SBOM kann mit den mitgelieferten Skripten lokal zusammengefasst und durchsucht werden. Ohne weitere Parameter wird die neueste Datei aus `sboms/*.cdx.json` verwendet.
+
+Windows PowerShell:
+
+```powershell
+.\scripts\analyze-sbom.ps1
+```
+
+macOS, Linux oder WSL2:
+
+```bash
+./scripts/analyze-sbom.sh
+```
+
+Die Ausgabe zeigt Format, CycloneDX-Version, Erzeugungszeit, Anzahl der Komponenten, Komponententypen, Paket-Ökosysteme aus `purl` und erkannte Lizenzen.
+
+Nach Komponenten suchen:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -Search "openssl|dotnet|node|python|rust|go"
+.\scripts\analyze-sbom.ps1 -ComponentType library -Search "openssl|dotnet|node|python|rust|go"
+```
+
+```bash
+./scripts/analyze-sbom.sh --search 'openssl|dotnet|node|python|rust|go'
+./scripts/analyze-sbom.sh --type library --search 'openssl|dotnet|node|python|rust|go'
+```
+
+Der Typfilter `library` blendet reine Datei-Einträge aus und ist meist die sinnvollste Sicht für Paket- und CVE-Fragen.
+
+Eine bestimmte SBOM-Datei auswerten:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -SbomPath .\sboms\2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
+```
+
+```bash
+./scripts/analyze-sbom.sh --file sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
+```
+
+Optional kann ein Schwachstellenscan gegen die SBOM laufen, wenn `grype` oder `trivy` installiert ist:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -Scan
+.\scripts\analyze-sbom.ps1 -Scan -Scanner trivy
+```
+
+```bash
+./scripts/analyze-sbom.sh --scan
+./scripts/analyze-sbom.sh --scan --scanner trivy
+```
+
+Das Bash-Skript nutzt für die lokale Zusammenfassung `jq`, wenn verfügbar, und fällt sonst auf `python3` oder `python` zurück. Das PowerShell-Skript nutzt `ConvertFrom-Json` und benötigt für die Basis-Auswertung keine Zusatzwerkzeuge. Für CVE-Auswertungen ist eines der Scanner-Werkzeuge `grype` oder `trivy` erforderlich.
 
 ### Rider-Projekte aus Windows einbinden
 
@@ -2636,6 +2740,94 @@ docker compose ps
 ```
 
 The first build downloads the pinned Sandbox base image, the .NET SDK package, and npm packages. This can take several minutes.
+
+### Generate an image SBOM
+
+An SBOM is a *Software Bill of Materials*, a machine-readable inventory for software. For this container image, it lists operating-system packages, libraries, installed tools, and versions. This supports supply-chain transparency: if a vulnerability is later disclosed for a specific component, the image can be checked for exposure.
+
+This repository generates a CycloneDX JSON SBOM. Before distributing or handing over a rebuilt Sandbox image, this step is required.
+
+Linux, macOS, or WSL2:
+
+```bash
+./scripts/build-and-sbom.sh
+```
+
+Windows PowerShell, for example with Podman:
+
+```powershell
+.\scripts\build-and-sbom.ps1 -Runtime podman
+```
+
+If the image is already built and only the SBOM should be regenerated:
+
+```bash
+./scripts/build-and-sbom.sh --skip-build
+```
+
+```powershell
+.\scripts\build-and-sbom.ps1 -Runtime podman -SkipBuild
+```
+
+The scripts use a locally installed `syft` when it is available. If `syft` is not in `PATH`, they fall back to the container image `docker.io/anchore/syft:latest`. Docker or Podman must then be able to pull public images.
+
+Generated files are written to `sboms/`, for example `sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json`. These files are build artifacts and are ignored by `.gitignore`. For releases, they can be attached separately as release artifacts.
+
+### Analyze an image SBOM
+
+The SBOM can be summarized and searched locally with the provided scripts. Without parameters, the newest file from `sboms/*.cdx.json` is used.
+
+Windows PowerShell:
+
+```powershell
+.\scripts\analyze-sbom.ps1
+```
+
+macOS, Linux, or WSL2:
+
+```bash
+./scripts/analyze-sbom.sh
+```
+
+The output shows the format, CycloneDX version, generation time, component count, component types, package ecosystems from `purl`, and detected licenses.
+
+Search for components:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -Search "openssl|dotnet|node|python|rust|go"
+.\scripts\analyze-sbom.ps1 -ComponentType library -Search "openssl|dotnet|node|python|rust|go"
+```
+
+```bash
+./scripts/analyze-sbom.sh --search 'openssl|dotnet|node|python|rust|go'
+./scripts/analyze-sbom.sh --type library --search 'openssl|dotnet|node|python|rust|go'
+```
+
+The `library` type filter hides raw file entries and is usually the most useful view for package and CVE questions.
+
+Analyze a specific SBOM file:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -SbomPath .\sboms\2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
+```
+
+```bash
+./scripts/analyze-sbom.sh --file sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
+```
+
+Optionally run a vulnerability scan against the SBOM when `grype` or `trivy` is installed:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -Scan
+.\scripts\analyze-sbom.ps1 -Scan -Scanner trivy
+```
+
+```bash
+./scripts/analyze-sbom.sh --scan
+./scripts/analyze-sbom.sh --scan --scanner trivy
+```
+
+The Bash script uses `jq` for local summaries when available and otherwise falls back to `python3` or `python`. The PowerShell script uses `ConvertFrom-Json` and needs no additional tool for the basic analysis. CVE analysis requires one of the scanner tools, `grype` or `trivy`.
 
 ### Mount Rider projects from Windows
 

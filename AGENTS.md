@@ -109,6 +109,23 @@ docker compose build --pull
 
 The `--pull` flag is still useful for registry access checks, but the Dockerfile pins the registry-hosted `agent-sandbox` base image by digest for reproducible builds. Update the digest deliberately in the Dockerfile when the base image should change.
 
+Before distributing or handing over a rebuilt sandbox image, generate a
+CycloneDX JSON SBOM from the final image:
+
+```bash
+scripts/build-and-sbom.sh --skip-build
+```
+
+On Windows, use the PowerShell variant:
+
+```powershell
+.\scripts\build-and-sbom.ps1 -SkipBuild
+```
+
+Generated `sboms/*.cdx.json` files are build artifacts. Keep `sboms/.gitkeep`
+tracked, but do not commit generated SBOM files unless the release process
+explicitly requires it.
+
 After Dockerfile changes that affect language toolchains, also verify the container tools:
 
 ```bash

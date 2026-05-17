@@ -10,3 +10,5 @@ audit-logs/*
 !audit-logs/README.md
 workspace/audit-evidence/
 __pycache__/
+sboms/*
+!sboms/.gitkeep
