@@ -64,6 +64,7 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 - [Spec Kit verwenden](#spec-kit-verwenden)
 - [Spec-Kit-Governance-Presets installieren](#spec-kit-governance-presets-installieren)
 - [Beispiel: ConsoleApp2 mit Opencode und Spec Kit](#beispiel-consoleapp2-mit-opencode-und-spec-kit)
+- [Pilot: ASP.NET-Web-App mit Opencode und Spec Kit](#pilot-aspnet-web-app-mit-opencode-und-spec-kit)
 - [Pflichtablauf für ein SDD-Feature](#pflichtablauf-für-ein-sdd-feature)
 - [Opencode verwenden](#opencode-verwenden)
 - [Codex CLI verwenden](#codex-cli-verwenden)
@@ -103,6 +104,7 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 - [Use Spec Kit](#use-spec-kit)
 - [Install Spec Kit governance presets](#install-spec-kit-governance-presets)
 - [Example: ConsoleApp2 with Opencode and Spec Kit](#example-consoleapp2-with-opencode-and-spec-kit)
+- [Pilot: ASP.NET web app with Opencode and Spec Kit](#pilot-aspnet-web-app-with-opencode-and-spec-kit)
 - [Required flow for an SDD feature](#required-flow-for-an-sdd-feature)
 - [Use Opencode](#use-opencode)
 - [Use Codex CLI](#use-codex-cli)
@@ -1171,6 +1173,74 @@ git status --short
 
 Danach entscheiden, ob `.opencode/` vollständig versioniert werden soll oder ob sensible Teile in die Projekt-`.gitignore` gehören.
 
+### Pilot: ASP.NET-Web-App mit Opencode und Spec Kit
+
+Für C#/.NET-Projekte unter `/rider-projects` ist dieser Pilotablauf ein gutes erstes End-to-End-Beispiel. Er erzeugt eine kleine Razor-Pages-Web-App, initialisiert Opencode, initialisiert Spec Kit und führt danach die Projekt-Constitution aus.
+
+```bash
+cd /rider-projects
+mkdir -p specify-pilot
+cd specify-pilot
+
+dotnet new webapp -n SpecifyPilot -o . --force
+dotnet restore
+dotnet build --no-restore
+```
+
+Danach Opencode im Projekt starten und das Init-Kommando ausführen:
+
+```bash
+opencode
+```
+
+Im Opencode-Prompt:
+
+```text
+/init
+```
+
+Wenn Opencode fragt, ob es `AGENTS.md` anlegen oder ändern darf, nur Dateien im aktuellen Pilotprojekt freigeben. Danach Spec Kit für Opencode initialisieren:
+
+```bash
+specify init . --integration opencode --script sh --force
+```
+
+Dann die sechs Governance-Presets aus dem Abschnitt [Spec-Kit-Governance-Presets installieren](#spec-kit-governance-presets-installieren) installieren und prüfen:
+
+```bash
+specify preset list
+```
+
+Zum Abschluss Opencode erneut starten und die Spec-Kit-Constitution erzeugen:
+
+```bash
+opencode
+```
+
+Im Opencode-Prompt:
+
+```text
+/speckit.constitution
+```
+
+Eine sinnvolle kurze Eingabe ist:
+
+```text
+Projektname: SpecifyPilot. Projekttyp: ASP.NET Core Razor Pages Web App in der ADE-Lernumgebung. Ziel: minimale, auditierbare Pilot-Constitution für Auszubildende und Kolleg:innen.
+```
+
+Danach sollten mindestens diese Dateien vorhanden sein:
+
+```bash
+test -f AGENTS.md
+test -f .specify/memory/constitution.md
+test -d .opencode/command
+test -d .specify/presets
+dotnet build --no-restore
+```
+
+Die Pilot-Evidenz für dieses Repository ist in `docs/security/spec-kit-pilot.md` dokumentiert. Das Pilotprojekt selbst bleibt im Anwendungsbereich unter `/rider-projects/specify-pilot` und wird nicht in dieses Docker-Setup-Repository übernommen.
+
 ### Pflichtablauf für ein SDD-Feature
 
 SDD bedeutet spec-driven development. Ein Feature wird zuerst beschrieben, dann geplant, dann in Aufgaben zerlegt und erst danach implementiert. Für die Ausbildung werden auch die Qualitätsschritte immer ausgeführt.
@@ -1394,7 +1464,7 @@ Codex CLI speichert lokale Daten im Docker-Volume `codex_data`. Dieses Volume wi
 
 Spec Kit wird beim Image-Build mit `uv` installiert. Dafür enthält das Image auch `git`, `curl` und `ca-certificates`.
 
-Nach der Installation wird Spec Kit im Container gepatcht. Der Patch verhindert, dass Python-Kopiervorgänge Dateirechte oder Zeitstempel auf Host-Bind-Mounts übernehmen wollen. Das ist wichtig, weil Windows- und WSL-Mounts solche Metadatenoperationen mit `Operation not permitted` ablehnen können.
+Nach der Installation wird Spec Kit im Container gepatcht. Der Patch verhindert, dass Python-Kopiervorgänge Datei- oder Verzeichnis-Metadaten wie Rechte oder Zeitstempel auf Host-Bind-Mounts übernehmen wollen. Das ist wichtig, weil Windows- und WSL-Mounts solche Metadatenoperationen mit `Operation not permitted` ablehnen können.
 
 Die .NET-Workload-Hinweismeldung wird im Container deaktiviert:
 
@@ -2897,6 +2967,74 @@ git status --short
 
 Then decide whether `.opencode/` should be fully versioned or whether sensitive parts belong in the project `.gitignore`.
 
+### Pilot: ASP.NET web app with Opencode and Spec Kit
+
+For C#/.NET projects under `/rider-projects`, this pilot flow is a practical first end-to-end example. It creates a small Razor Pages web app, initializes Opencode, initializes Spec Kit, and then runs the project constitution command.
+
+```bash
+cd /rider-projects
+mkdir -p specify-pilot
+cd specify-pilot
+
+dotnet new webapp -n SpecifyPilot -o . --force
+dotnet restore
+dotnet build --no-restore
+```
+
+Then start Opencode in the project and run the init command:
+
+```bash
+opencode
+```
+
+At the Opencode prompt:
+
+```text
+/init
+```
+
+If Opencode asks whether it may create or change `AGENTS.md`, only approve files in the current pilot project. Then initialize Spec Kit for Opencode:
+
+```bash
+specify init . --integration opencode --script sh --force
+```
+
+Install the six governance presets from [Install Spec Kit governance presets](#install-spec-kit-governance-presets), then verify them:
+
+```bash
+specify preset list
+```
+
+Finally, start Opencode again and create the Spec Kit constitution:
+
+```bash
+opencode
+```
+
+At the Opencode prompt:
+
+```text
+/speckit.constitution
+```
+
+A useful short input is:
+
+```text
+Project name: SpecifyPilot. Project type: ASP.NET Core Razor Pages web app in the ADE learning environment. Goal: minimal, auditable pilot constitution for apprentices and colleagues.
+```
+
+Afterwards, at least these files should exist:
+
+```bash
+test -f AGENTS.md
+test -f .specify/memory/constitution.md
+test -d .opencode/command
+test -d .specify/presets
+dotnet build --no-restore
+```
+
+The pilot evidence for this repository is documented in `docs/security/spec-kit-pilot.md`. The pilot project itself remains in the application area under `/rider-projects/specify-pilot` and is not copied into this Docker setup repository.
+
 ### Required flow for an SDD feature
 
 SDD means spec-driven development. A feature is described first, then planned, then split into tasks, and only then implemented. For training, the quality steps are always required.
@@ -3120,7 +3258,7 @@ Codex CLI stores local data in the Docker volume `codex_data`. This volume is mo
 
 Spec Kit is installed during the image build with `uv`. For that reason, the image also includes `git`, `curl`, and `ca-certificates`.
 
-After installation, Spec Kit is patched inside the container. The patch prevents Python copy operations from preserving file permissions or timestamps on host bind mounts. This is important because Windows and WSL mounts can reject these metadata operations with `Operation not permitted`.
+After installation, Spec Kit is patched inside the container. The patch prevents Python copy operations from preserving file or directory metadata such as permissions or timestamps on host bind mounts. This is important because Windows and WSL mounts can reject these metadata operations with `Operation not permitted`.
 
 The .NET workload notification is disabled inside the container:
 

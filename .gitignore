@@ -8,3 +8,5 @@ gl-secret-detection-report.json
 audit-logs/*
 !audit-logs/.gitkeep
 !audit-logs/README.md
+workspace/audit-evidence/
+__pycache__/
