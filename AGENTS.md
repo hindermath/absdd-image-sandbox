@@ -183,6 +183,14 @@ For pull requests, include:
 - notes about configuration or secret handling
 - screenshots only if documentation rendering or UI output is relevant
 
+GitLab repository governance lives in this repository and in the GitLab project
+settings. `.gitlab/CODEOWNERS` and
+`.gitlab/merge_request_templates/Default.md` are repository-side guidance.
+Platform-side enforcement such as protected-branch rules, Code Owner approval,
+and push rules must be configured separately in GitLab by an Owner or Admin.
+For the current GitLab CE status and signed-commit limitations, see
+`docs/security/branch-protection.md`.
+
 ## Security & Configuration Tips
 
 Never commit `opencode.env`; it contains `GWDG_API_KEY` and is ignored by `.gitignore`. Keep local secret files restricted:

@@ -1,0 +1,12 @@
+# GitLab CODEOWNERS for ade-dev-sandbox.
+#
+# TODO: Replace @thinder with dedicated GWDG team handles when those groups
+# exist in this GitLab CE instance and have access to the project.
+
+* @thinder
+
+/Dockerfile @thinder
+/compose.yml @thinder
+/codex/ @thinder
+/opencode.jsonc @thinder
+/docs/security/ @thinder
