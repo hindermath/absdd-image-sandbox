@@ -1614,11 +1614,30 @@ Agentennutzung muss als Metadaten-Audit nachvollziehbar sein. Das Image installi
 
 Der Export liest nur Dateinamen und Dateizeitstempel aus den OpenCode- und Codex-Datenverzeichnissen. Er liest keine Prompt-Texte, Antwort-Texte, Roh-Sitzungsinhalte oder API-Keys.
 
-Mindestens einmal pro Arbeitstag und zwingend vor `docker compose down -v` oder `podman compose down -v` im Container ausführen:
+Mindestens einmal pro Arbeitstag und zwingend vor dem Entfernen der Container-Volumes ausführen. Der dokumentierte Standardweg zum Beenden ist der Wrapper, weil er zuerst `audit-export` im laufenden Container startet und danach `compose down` ausführt.
+
+Windows PowerShell mit Podman:
+
+```powershell
+.\scripts\compose-down-with-audit.ps1 -Engine podman
+.\scripts\compose-down-with-audit.ps1 -Engine podman -Volumes
+```
+
+macOS/Linux mit Podman oder Docker:
+
+```bash
+bash scripts/compose-down-with-audit.sh --podman
+bash scripts/compose-down-with-audit.sh --podman -v
+bash scripts/compose-down-with-audit.sh --docker -v
+```
+
+Falls der Wrapper nicht genutzt werden kann, den Export manuell im Container ausführen und danach erst `docker compose down -v` oder `podman compose down -v` starten:
 
 ```bash
 audit-export
 ```
+
+Zusätzlich installiert das Image einen Best-Effort-Stop-Hook über `/usr/local/bin/ade-entrypoint`. Bei einem normalen `docker compose down`, `podman compose down` oder `SIGTERM` ruft der Entrypoint einmalig `audit-export` auf, sofern `ADE_AUDIT_ON_STOP=true` gesetzt ist. Dieser Hook ist eine zusätzliche Absicherung, ersetzt aber nicht den Wrapper: harte Kills, Host-Abbrüche oder sehr kurze Stop-Timeouts können den Export verhindern.
 
 Der Standardpfad ist:
 
@@ -3496,11 +3515,30 @@ Agent use must be traceable as a metadata audit trail. The image therefore insta
 
 The export reads only file names and file timestamps from the OpenCode and Codex data directories. It does not read prompt text, response text, raw session contents, or API keys.
 
-Run it inside the container at least once per workday and always before `docker compose down -v` or `podman compose down -v`:
+Run it at least once per workday and always before removing container volumes. The documented standard stop path is the wrapper, because it runs `audit-export` in the running container first and then executes `compose down`.
+
+Windows PowerShell with Podman:
+
+```powershell
+.\scripts\compose-down-with-audit.ps1 -Engine podman
+.\scripts\compose-down-with-audit.ps1 -Engine podman -Volumes
+```
+
+macOS/Linux with Podman or Docker:
+
+```bash
+bash scripts/compose-down-with-audit.sh --podman
+bash scripts/compose-down-with-audit.sh --podman -v
+bash scripts/compose-down-with-audit.sh --docker -v
+```
+
+If the wrapper cannot be used, run the export manually inside the container before running `docker compose down -v` or `podman compose down -v`:
 
 ```bash
 audit-export
 ```
+
+In addition, the image installs a best-effort stop hook through `/usr/local/bin/ade-entrypoint`. On normal `docker compose down`, `podman compose down`, or `SIGTERM`, the entrypoint runs `audit-export` once when `ADE_AUDIT_ON_STOP=true` is set. This hook is an additional safety net, not a replacement for the wrapper: hard kills, host aborts, or very short stop timeouts can still prevent the export.
 
 The default path is:
 

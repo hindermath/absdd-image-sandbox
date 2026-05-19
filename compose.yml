@@ -38,6 +38,10 @@ services:
       DirectoryBuildPropsPath: /dotnet-config/ContainerBuild.props
       DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE: "true"
       MSBuildEnableWorkloadResolver: "false"
+      # Best-effort shutdown safety net: the image entrypoint runs
+      # audit-export on graceful container termination. The documented
+      # standard stop path remains scripts/compose-down-with-audit.*.
+      ADE_AUDIT_ON_STOP: "true"
     restart: unless-stopped
 
 volumes:

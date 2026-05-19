@@ -212,10 +212,18 @@ If `pre-commit` is not installed in the current environment, install it first wi
 
 Audit text for P1-3: "Client-side Control, in GitLab CE nicht vollständig serverseitig erzwingbar; zentrale Push-Blockade nur mit GitLab Ultimate Secret Push Protection oder Admin-Server-Hook."
 
-Run the agent-session audit export at least once per workday and always before `docker compose down -v` or `podman compose down -v`:
+Run the agent-session audit export at least once per workday and always before removing Compose volumes. The standard stop path is the wrapper, because it exports metadata before running `compose down`:
 
 ```bash
-audit-export
+bash scripts/compose-down-with-audit.sh --podman -v
 ```
+
+On Windows PowerShell with Podman:
+
+```powershell
+.\scripts\compose-down-with-audit.ps1 -Engine podman -Volumes
+```
+
+If the wrapper cannot be used, run `audit-export` inside the container before `docker compose down -v` or `podman compose down -v`. The image entrypoint also runs `audit-export` as a best-effort hook on graceful container shutdown when `ADE_AUDIT_ON_STOP=true` is set, but hard kills or host aborts can still skip it.
 
 The export writes metadata only to `/audit/YYYY-MM-DD.jsonl`. Do not extend it to include prompt text, response text, raw session payloads, or secrets. The default host directory is `audit-logs/`; generated JSONL files stay untracked.
