@@ -94,8 +94,10 @@ RUN mkdir -p /home/adedev/.codex
 COPY --chown=adedev:adedev ./opencode.jsonc /home/adedev/.config/opencode/opencode.jsonc
 USER root
 COPY ./scripts/audit-export.sh /usr/local/bin/audit-export
-RUN sed -i 's/\r$//' /usr/local/bin/audit-export \
-    && chmod 0755 /usr/local/bin/audit-export
+COPY ./scripts/container-entrypoint.sh /usr/local/bin/ade-entrypoint
+RUN sed -i 's/\r$//' /usr/local/bin/audit-export /usr/local/bin/ade-entrypoint \
+    && chmod 0755 /usr/local/bin/audit-export /usr/local/bin/ade-entrypoint
 USER adedev
 
+ENTRYPOINT ["/usr/local/bin/ade-entrypoint"]
 CMD ["/bin/bash", "-c", "while :; do sleep 1; done;"]
