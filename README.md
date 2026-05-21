@@ -1,12 +1,16 @@
 # Opencode Docker-Umgebung / Opencode Docker Environment
 
-Eine vorbereitete Container-Lernumgebung für angehende Fachinformatiker:innen.
+Eine vorbereitete Container-Lern- und Entwicklungsumgebung für Fachinformatiker:innen.
 Sprachen und Werkzeuge: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, Opencode, Codex CLI, Spec Kit.
 
-*A ready-to-use container learning environment for IT-specialist apprentices.
+*A ready-to-use container learning and development environment for IT-specialist apprentices.
 Languages and tools: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, Opencode CLI/TUI, Codex CLI/TUI, Spec Kit*
 
 ---
+
+> **Dokumentationsstandard:** Diese Dokumentation ist so aufbereitet, dass sie für Auszubildende der Fachinformatik ab mindestens dem 1. Lehrjahr geeignet ist. Sie verwendet ein Sprachniveau nach CEFR B2, berücksichtigt Barrierefreiheit nach WCAG 2.2 Level AA und führt Inhalte zuerst auf Deutsch und danach auf Englisch auf.
+>
+> **Documentation standard:** This documentation is prepared for IT-specialist apprentices from at least the first year of training. It uses CEFR B2 language level, considers accessibility according to WCAG 2.2 Level AA, and presents content first in German and then in English.
 
 ## Kurzlebige Aufgabenumgebung / Short-Lived Task Environment
 
@@ -28,8 +32,9 @@ Empfohlener Ablauf:
 
 1. In GitLab über **Fork** eine eigene Kopie des Repositories erstellen.
 2. Den eigenen Fork lokal klonen.
-3. Änderungen in eigenen Branches vornehmen.
-4. Relevante Verbesserungen per Merge Request zurück an das Ursprungsrepo vorschlagen.
+3. Wenn etwas auffällt oder nicht so funktioniert wie beschrieben, bitte zuerst im eigenen Fork prüfen, ob es dort auch passiert. Wenn ja, dann gerne eine Verbesserung per Issue im Ursprungsrepo vorschlagen.
+4. Bei Änderungen diese in eigenen Branches vornehmen.
+5. Relevante Verbesserungen per Merge Request zurück an das Ursprungsrepo vorschlagen.
 
 Lokale Secret-Dateien wie `opencode.env` und `.env` werden nicht mitgeforkt und dürfen nicht committed werden.
 
@@ -39,8 +44,9 @@ Recommended flow:
 
 1. Use **Fork** in GitLab to create your own copy of the repository.
 2. Clone your own fork locally.
-3. Make changes in your own branches.
-4. Propose useful improvements back to the upstream repository through a merge request.
+3. If you notice any issues or something doesn't work as described, first check if it also happens in your own fork. If it does, feel free to propose an improvement via an issue in the upstream repository.
+4. Make changes in your own branches.
+5. Propose useful improvements back to the upstream repository through a merge request.
 
 Local secret files such as `opencode.env` and `.env` are not included in forks and must not be committed.
 
@@ -58,6 +64,7 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 - [Grundidee](#grundidee)
 - [Begriffe und Ausführungsort](#begriffe-und-ausführungsort)
 - [Projektstruktur](#projektstruktur)
+- [Docker und Podman: gleiche Befehle](#docker-und-podman-gleiche-befehle)
 - [Docker unter Ubuntu oder WSL2 installieren](#docker-unter-ubuntu-oder-wsl2-installieren)
 - [Docker-Desktop-Profile für macOS und Windows](#docker-desktop-profile-für-macos-und-windows)
 - [Podman unter Ubuntu 24.04 LTS verwenden](#podman-unter-ubuntu-2404-lts-verwenden)
@@ -66,23 +73,25 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 - [Docker-Berechtigungen prüfen](#docker-berechtigungen-prüfen)
 - [API-Key einrichten](#api-key-einrichten)
 - [Container bauen und starten](#container-bauen-und-starten)
-- [Image-SBOM erzeugen](#image-sbom-erzeugen)
-- [Image-SBOM auswerten](#image-sbom-auswerten)
 - [Rider-Projekte aus Windows einbinden](#rider-projekte-aus-windows-einbinden)
 - [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen)
 - [Java-Projekte einbinden](#java-projekte-einbinden)
 - [Java und Maven im Container nutzen](#java-und-maven-im-container-nutzen)
 - [Go im Container nutzen](#go-im-container-nutzen)
 - [Rust im Container nutzen](#rust-im-container-nutzen)
+- [Python im Container nutzen](#python-im-container-nutzen)
+- [Skripte mit Bash und PowerShell](#skripte-mit-bash-und-powershell)
 - [ASP.NET-Web-App vom Host erreichen](#aspnet-web-app-vom-host-erreichen)
 - [Spec Kit verwenden](#spec-kit-verwenden)
+- [Opencode verwenden](#opencode-verwenden)
+- [Codex CLI verwenden](#codex-cli-verwenden)
 - [Spec-Kit-Governance-Presets installieren](#spec-kit-governance-presets-installieren)
 - [Beispiel: ConsoleApp2 mit Opencode und Spec Kit](#beispiel-consoleapp2-mit-opencode-und-spec-kit)
 - [Pilot: ASP.NET-Web-App mit Opencode und Spec Kit](#pilot-aspnet-web-app-mit-opencode-und-spec-kit)
 - [Pflichtablauf für ein SDD-Feature](#pflichtablauf-für-ein-sdd-feature)
-- [Opencode verwenden](#opencode-verwenden)
-- [Codex CLI verwenden](#codex-cli-verwenden)
 - [Konfiguration](#konfiguration)
+- [Image-SBOM erzeugen](#image-sbom-erzeugen)
+- [Image-SBOM auswerten](#image-sbom-auswerten)
 - [Aufräumen](#aufräumen)
 - [Häufige Probleme](#häufige-probleme)
 - [Kompakter Testablauf](#kompakter-testablauf)
@@ -100,6 +109,7 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 - [Basic idea](#basic-idea)
 - [Terms and command location](#terms-and-command-location)
 - [Project structure](#project-structure)
+- [Docker and Podman: the same commands](#docker-and-podman-the-same-commands)
 - [Install Docker on Ubuntu or WSL2](#install-docker-on-ubuntu-or-wsl2)
 - [Docker Desktop profiles for macOS and Windows](#docker-desktop-profiles-for-macos-and-windows)
 - [Use Podman on Ubuntu 24.04 LTS](#use-podman-on-ubuntu-2404-lts)
@@ -108,23 +118,25 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 - [Check Docker permissions](#check-docker-permissions)
 - [Set up the API key](#set-up-the-api-key)
 - [Build and start the container](#build-and-start-the-container)
-- [Generate an image SBOM](#generate-an-image-sbom)
-- [Analyze an image SBOM](#analyze-an-image-sbom)
 - [Mount Rider projects from Windows](#mount-rider-projects-from-windows)
 - [Use .NET and C# inside the container](#use-net-and-c-inside-the-container)
 - [Mount Java projects](#mount-java-projects)
 - [Use Java and Maven inside the container](#use-java-and-maven-inside-the-container)
 - [Use Go inside the container](#use-go-inside-the-container)
 - [Use Rust inside the container](#use-rust-inside-the-container)
+- [Use Python inside the container](#use-python-inside-the-container)
+- [Scripting with Bash and PowerShell](#scripting-with-bash-and-powershell)
 - [Reach an ASP.NET web app from the host](#reach-an-aspnet-web-app-from-the-host)
 - [Use Spec Kit](#use-spec-kit)
+- [Use Opencode](#use-opencode)
+- [Use Codex CLI](#use-codex-cli)
 - [Install Spec Kit governance presets](#install-spec-kit-governance-presets)
 - [Example: ConsoleApp2 with Opencode and Spec Kit](#example-consoleapp2-with-opencode-and-spec-kit)
 - [Pilot: ASP.NET web app with Opencode and Spec Kit](#pilot-aspnet-web-app-with-opencode-and-spec-kit)
 - [Required flow for an SDD feature](#required-flow-for-an-sdd-feature)
-- [Use Opencode](#use-opencode)
-- [Use Codex CLI](#use-codex-cli)
 - [Configuration](#configuration)
+- [Generate an image SBOM](#generate-an-image-sbom)
+- [Analyze an image SBOM](#analyze-an-image-sbom)
 - [Clean up](#clean-up)
 - [Common problems](#common-problems)
 - [Compact test procedure](#compact-test-procedure)
@@ -152,6 +164,8 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 ### Schnellstart in 10 Minuten
 
 Dieser Schnellstart richtet sich an alle, die das Setup zuerst nur ausprobieren wollen. Die Details folgen in den späteren Abschnitten.
+
+> **Docker oder Podman:** Dieser Schnellstart nutzt Docker. Mit Podman die Befehle sinngemäß ersetzen (`podman compose` oder `podman-compose`) und für die Erstanmeldung an der GitLab-Registry den passenden Podman-Abschnitt nutzen: [Ubuntu](#podman-unter-ubuntu-2404-lts-verwenden), [macOS](#podman-unter-macos-mit-homebrew-verwenden), [Windows](#podman-unter-windows-mit-podman-desktop-verwenden).
 
 Schritt 1: Voraussetzungen prüfen.
 
@@ -233,7 +247,7 @@ Die README ist lang. Sie ist aber kein Buch, das du in einem Stück lesen musst.
 |---|---|---|
 | Phase 1: Verstehen | [Grundidee](#grundidee), [Begriffe und Ausführungsort](#begriffe-und-ausführungsort), [Projektstruktur](#projektstruktur) | Was ist ein Container? Was ist ein Image? Wo läuft welcher Befehl? |
 | Phase 2: Aufsetzen | [Voraussetzungen](#voraussetzungen), eine der Installationssektionen (Docker oder Podman), [API-Key einrichten](#api-key-einrichten), [Container bauen und starten](#container-bauen-und-starten) | Container läuft auf dem eigenen Rechner. |
-| Phase 3: Erste Übungen | [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen), [Java und Maven im Container nutzen](#java-und-maven-im-container-nutzen), [Go im Container nutzen](#go-im-container-nutzen), [Rust im Container nutzen](#rust-im-container-nutzen) | Ein eigenes Konsolenprojekt anlegen, bauen und starten. |
+| Phase 3: Erste Übungen | [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen), [Java und Maven im Container nutzen](#java-und-maven-im-container-nutzen), [Go im Container nutzen](#go-im-container-nutzen), [Rust im Container nutzen](#rust-im-container-nutzen), [Python im Container nutzen](#python-im-container-nutzen), [Skripte mit Bash und PowerShell](#skripte-mit-bash-und-powershell) | Ein eigenes Konsolen- oder Skriptprojekt anlegen, bauen und starten. |
 | Phase 4: Werkzeuge der Praxis | [Spec Kit verwenden](#spec-kit-verwenden), [Opencode verwenden](#opencode-verwenden), [Codex CLI verwenden](#codex-cli-verwenden) | KI-Werkzeuge für Spezifikation und Code richtig einsetzen. |
 | Phase 5: Qualität und Sicherheit | [Spec-Kit-Governance-Presets installieren](#spec-kit-governance-presets-installieren), [Pflichtablauf für ein SDD-Feature](#pflichtablauf-für-ein-sdd-feature), [Konfiguration](#konfiguration) | Regelwerk, sichere Entwicklung, Qualitätsprozess. |
 | Phase 6: Betrieb und Fehlerbehebung | [Aufräumen](#aufräumen), [Häufige Probleme](#häufige-probleme), [Kompakter Testablauf](#kompakter-testablauf) | Eigene Umgebung pflegen und Fehler verstehen. |
@@ -268,7 +282,7 @@ Ein vollständigeres Begriffsregister steht im Abschnitt [Glossar](#glossar).
 - `Dockerfile`: beschreibt das Container-Image. Es erbt vom gemeinsamen `agent-sandbox`-Image und installiert darauf .NET SDK, Java JDK 21, Maven, Go, Rust, Python, Opencode, Codex CLI, `uv`, Spec Kit und gängige CLI-Hilfswerkzeuge.
 - `compose.yml`: beschreibt den Service `ade`, Volumes und Build-Regeln.
 - `.dockerignore` und `.containerignore`: schließen lokale Secrets, Git-Daten und Arbeitsverzeichnisse aus dem Build-Kontext aus.
-- `.env.example`: Vorlage für die plattformabhängigen Mounts `RIDER_PROJECTS_DIR` und `JAVA_PROJECTS_DIR`.
+- `.env.example`: Vorlage für die plattformabhängigen Projekt-Mounts `RIDER_PROJECTS_DIR`, `JAVA_PROJECTS_DIR`, `GO_PROJECTS_DIR`, `RUST_PROJECTS_DIR` und `PYTHON_PROJECTS_DIR`.
 - `opencode.jsonc`: enthält Provider, Modelle und Agenten für Opencode. JSONC erlaubt Kommentare und ist deshalb für Lernzwecke besser lesbar.
 - `opencode.env.example`: Vorlage für die lokale Datei `opencode.env`.
 - `codex/config.toml`: systemweite Codex-Standardkonfiguration für den Container. Sie wird nach `/etc/codex/config.toml` und `/etc/codex/managed_config.toml` kopiert.
@@ -277,11 +291,35 @@ Ein vollständigeres Begriffsregister steht im Abschnitt [Glossar](#glossar).
 - `RIDER_PROJECTS_DIR`: Host-Verzeichnis für Rider-Projekte, im Container unter `/rider-projects`.
 - `JAVA_PROJECTS_DIR`: Host-Verzeichnis für Java-Projekte, im Container unter `/java-projects`.
 - `java-projects/`: lokales Fallback-Verzeichnis für Java-Projekte, wenn `JAVA_PROJECTS_DIR` nicht gesetzt ist.
+- `GO_PROJECTS_DIR`: Host-Verzeichnis für Go-Projekte, im Container unter `/go-projects`.
+- `go-projects/`: lokales Fallback-Verzeichnis für Go-Projekte, wenn `GO_PROJECTS_DIR` nicht gesetzt ist.
+- `RUST_PROJECTS_DIR`: Host-Verzeichnis für Rust-Projekte, im Container unter `/rust-projects`.
+- `rust-projects/`: lokales Fallback-Verzeichnis für Rust-Projekte, wenn `RUST_PROJECTS_DIR` nicht gesetzt ist.
+- `PYTHON_PROJECTS_DIR`: Host-Verzeichnis für Python-Projekte, im Container unter `/python-projects`.
+- `python-projects/`: lokales Fallback-Verzeichnis für Python-Projekte, wenn `PYTHON_PROJECTS_DIR` nicht gesetzt ist.
 - `dotnet/ContainerBuild.props`: leitet .NET-Build-Artefakte für Rider-Projekte in das Container-Volume `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: filtert eine bekannte .NET-Workload-Verifikationsmeldung aus der Ausgabe.
 - `spec-kit/patch-specify-cli.py`: passt Spec Kit für Windows- und WSL-Bind-Mounts an.
 - `codex_data`: Docker-Volume für Codex-CLI-Daten unter `/home/adedev/.codex`.
 - `AGENTS.md`: Regeln für KI-Agenten wie Opencode oder Codex.
+
+### Docker und Podman: gleiche Befehle
+
+Diese Anleitung zeigt die meisten Beispiele mit `docker`. Podman ist weitgehend befehlskompatibel. Die allgemeinen Abschnitte wie [Container bauen und starten](#container-bauen-und-starten), [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen), [ASP.NET-Web-App vom Host erreichen](#aspnet-web-app-vom-host-erreichen) und [Kompakter Testablauf](#kompakter-testablauf) gelten deshalb für beide Werkzeuge. Ersetze die Befehle sinngemäß:
+
+| Docker | Podman |
+|---|---|
+| `docker compose build --pull` | `podman compose build --pull` oder `podman-compose build --pull` |
+| `docker compose up -d` | `podman compose up -d` oder `podman-compose up -d` |
+| `docker compose ps` | `podman compose ps` oder `podman-compose ps` |
+| `docker compose exec ade bash` | `podman compose exec ade bash` oder `podman-compose exec ade bash` |
+| `docker compose down` | `podman compose down` oder `podman-compose down` |
+| `docker compose down -v` | `podman compose down -v` oder `podman-compose down -v` |
+| `docker info` | `podman info` |
+
+Hinweis zur Schreibweise: Auf vielen Linux-Installationen heißt der Compose-Befehl `podman-compose` (mit Bindestrich). Auf macOS und Windows mit Podman Desktop funktioniert oft `podman compose` (mit Leerzeichen). Wenn eine Variante nicht vorhanden ist, die jeweils andere verwenden.
+
+Für eine vollständige Schritt-für-Schritt-Anleitung mit Podman gibt es eigene Abschnitte für [Ubuntu](#podman-unter-ubuntu-2404-lts-verwenden), [macOS](#podman-unter-macos-mit-homebrew-verwenden) und [Windows](#podman-unter-windows-mit-podman-desktop-verwenden). Ein wichtiger Unterschied bleibt: Beim Bauen des privaten GitLab-Basisimages verwenden externe Compose-Provider unter macOS und Windows manchmal andere Registry-Anmeldedaten. Deshalb bauen die Podman-Abschnitte das Image dort bewusst direkt mit `podman build`. Für den normalen Betrieb mit `up`, `ps`, `exec` und `down` sind die Befehle aber austauschbar.
 
 ### Docker unter Ubuntu oder WSL2 installieren
 
@@ -784,6 +822,8 @@ podman compose down
 
 Wenn `docker info` mit `permission denied` scheitert, darf der aktuelle Benutzer noch nicht auf Docker zugreifen.
 
+Hinweis für Podman: Podman läuft standardmäßig rootless. Eine Docker-Gruppe wird dann meist nicht gebraucht. Dieser Abschnitt gilt vor allem für Docker.
+
 Schneller Test mit `sudo`:
 
 ```bash
@@ -827,6 +867,8 @@ chmod 600 opencode.env
 
 ### Container bauen und starten
 
+> **Docker oder Podman:** Diese Befehle nutzen Docker. Mit Podman gelten sie sinngemäß — ersetze `docker compose` durch `podman compose` oder `podman-compose` (siehe [Docker und Podman: gleiche Befehle](#docker-und-podman-gleiche-befehle)). Eine vollständige Podman-Anleitung steht in den Abschnitten [Podman unter Ubuntu](#podman-unter-ubuntu-2404-lts-verwenden), [Podman unter macOS](#podman-unter-macos-mit-homebrew-verwenden) und [Podman unter Windows](#podman-unter-windows-mit-podman-desktop-verwenden).
+
 In das Repository wechseln:
 
 ```bash
@@ -858,94 +900,6 @@ docker compose ps
 ```
 
 Beim ersten Build werden das gepinnte Sandbox-Basisimage, das .NET-SDK-Paket und npm-Pakete geladen. Das kann einige Minuten dauern.
-
-### Image-SBOM erzeugen
-
-Eine SBOM ist eine *Software Bill of Materials*, also eine maschinenlesbare Stückliste für Software. Für dieses Container-Image listet sie Betriebssystempakete, Bibliotheken, installierte Werkzeuge und Versionen auf. Das hilft bei Lieferkettentransparenz: Wenn später eine Schwachstelle in einer bestimmten Komponente bekannt wird, kann geprüft werden, ob das Image betroffen ist.
-
-Für dieses Repository wird eine CycloneDX-JSON-SBOM erzeugt. Vor der Verteilung oder Übergabe eines neu gebauten Sandbox-Images ist dieser Schritt Pflicht.
-
-Linux, macOS oder WSL2:
-
-```bash
-./scripts/build-and-sbom.sh
-```
-
-Windows PowerShell, zum Beispiel mit Podman:
-
-```powershell
-.\scripts\build-and-sbom.ps1 -Runtime podman
-```
-
-Wenn das Image bereits gebaut ist und nur die SBOM neu erzeugt werden soll:
-
-```bash
-./scripts/build-and-sbom.sh --skip-build
-```
-
-```powershell
-.\scripts\build-and-sbom.ps1 -Runtime podman -SkipBuild
-```
-
-Die Skripte verwenden lokal installiertes `syft`, wenn es vorhanden ist. Wenn `syft` nicht im `PATH` liegt, nutzen sie als Fallback das Container-Image `docker.io/anchore/syft:latest`. Dafür muss Docker oder Podman öffentliche Images ziehen können.
-
-Die erzeugten Dateien liegen unter `sboms/`, zum Beispiel `sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json`. Diese Dateien sind Build-Artefakte und werden durch `.gitignore` nicht committed. Für Releases können sie separat als Release-Artefakt abgelegt werden.
-
-### Image-SBOM auswerten
-
-Die SBOM kann mit den mitgelieferten Skripten lokal zusammengefasst und durchsucht werden. Ohne weitere Parameter wird die neueste Datei aus `sboms/*.cdx.json` verwendet.
-
-Windows PowerShell:
-
-```powershell
-.\scripts\analyze-sbom.ps1
-```
-
-macOS, Linux oder WSL2:
-
-```bash
-./scripts/analyze-sbom.sh
-```
-
-Die Ausgabe zeigt Format, CycloneDX-Version, Erzeugungszeit, Anzahl der Komponenten, Komponententypen, Paket-Ökosysteme aus `purl` und erkannte Lizenzen.
-
-Nach Komponenten suchen:
-
-```powershell
-.\scripts\analyze-sbom.ps1 -Search "openssl|dotnet|node|python|rust|go"
-.\scripts\analyze-sbom.ps1 -ComponentType library -Search "openssl|dotnet|node|python|rust|go"
-```
-
-```bash
-./scripts/analyze-sbom.sh --search 'openssl|dotnet|node|python|rust|go'
-./scripts/analyze-sbom.sh --type library --search 'openssl|dotnet|node|python|rust|go'
-```
-
-Der Typfilter `library` blendet reine Datei-Einträge aus und ist meist die sinnvollste Sicht für Paket- und CVE-Fragen.
-
-Eine bestimmte SBOM-Datei auswerten:
-
-```powershell
-.\scripts\analyze-sbom.ps1 -SbomPath .\sboms\2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
-```
-
-```bash
-./scripts/analyze-sbom.sh --file sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
-```
-
-Optional kann ein Schwachstellenscan gegen die SBOM laufen, wenn `grype` oder `trivy` installiert ist:
-
-```powershell
-.\scripts\analyze-sbom.ps1 -Scan
-.\scripts\analyze-sbom.ps1 -Scan -Scanner trivy
-```
-
-```bash
-./scripts/analyze-sbom.sh --scan
-./scripts/analyze-sbom.sh --scan --scanner trivy
-```
-
-Das Bash-Skript nutzt für die lokale Zusammenfassung `jq`, wenn verfügbar, und fällt sonst auf `python3` oder `python` zurück. Das PowerShell-Skript nutzt `ConvertFrom-Json` und benötigt für die Basis-Auswertung keine Zusatzwerkzeuge. Für CVE-Auswertungen ist eines der Scanner-Werkzeuge `grype` oder `trivy` erforderlich.
 
 ### Rider-Projekte aus Windows einbinden
 
@@ -989,6 +943,8 @@ Shell im Container öffnen:
 ```bash
 docker compose exec ade bash
 ```
+
+Mit Podman: `podman compose exec ade bash` oder `podman-compose exec ade bash`.
 
 .NET-Version prüfen:
 
@@ -1091,6 +1047,8 @@ go run .
 
 Go-Webframeworks werden nicht global installiert. Für erste Webübungen reicht die Standardbibliothek `net/http`. Frameworks wie `gin`, `fiber` oder `chi` gehören projektlokal in `go.mod`.
 
+Für eigene Host-Projekte gibt es zusätzlich den konfigurierbaren Mount `/go-projects` (Variable `GO_PROJECTS_DIR`), analog zu `/java-projects`. `/workspace` ist der einfache Standard für schnelle Übungen.
+
 ### Rust im Container nutzen
 
 Rust-Version und Rust-Werkzeuge prüfen:
@@ -1116,6 +1074,132 @@ cargo run
 
 Rust-Webframeworks werden nicht global installiert. Frameworks und Laufzeiten wie `tokio`, `axum`, `actix-web` oder `serde` gehören projektlokal in `Cargo.toml`.
 
+Für eigene Host-Projekte gibt es zusätzlich den konfigurierbaren Mount `/rust-projects` (Variable `RUST_PROJECTS_DIR`), analog zu `/java-projects`. `/workspace` ist der einfache Standard für schnelle Übungen.
+
+### Python im Container nutzen
+
+Python-Version und Werkzeuge prüfen:
+
+```bash
+python --version
+python3 --version
+uv --version
+```
+
+Im Container sind `python` und `python3` dasselbe Python 3. Zusätzlich ist `uv` installiert, ein schnelles Werkzeug für virtuelle Umgebungen und Pakete.
+
+Beispiel für ein kleines Python-Programm mit Test:
+
+```bash
+cd /workspace
+mkdir -p demo-python
+cd demo-python
+cat > main.py <<'EOF'
+def greet(name: str) -> str:
+    return f"Hallo aus Python, {name}"
+
+
+if __name__ == "__main__":
+    print(greet("ADE"))
+EOF
+cat > test_main.py <<'EOF'
+import unittest
+
+from main import greet
+
+
+class TestGreet(unittest.TestCase):
+    def test_greet(self):
+        self.assertEqual(greet("ADE"), "Hallo aus Python, ADE")
+
+
+if __name__ == "__main__":
+    unittest.main()
+EOF
+python main.py
+python -m unittest
+```
+
+`unittest` ist Teil der Standardbibliothek und braucht keine Installation. Für zusätzliche Pakete sollte eine virtuelle Umgebung genutzt werden, damit nichts global installiert wird. Das Paket `python3-venv` ist im Image vorhanden:
+
+```bash
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install pytest
+pytest
+deactivate
+```
+
+`pip install` lädt aus dem Netz und funktioniert nur mit Internetzugang. Alternativ und moderner verwaltet `uv` Umgebung und Pakete in einem Schritt, zum Beispiel mit `uv init` und `uv run`.
+
+Python-Webframeworks werden nicht global installiert. Frameworks wie `flask`, `django` oder `fastapi` gehören projektlokal in die virtuelle Umgebung oder in `pyproject.toml`.
+
+Für eigene Host-Projekte gibt es zusätzlich den konfigurierbaren Mount `/python-projects` (Variable `PYTHON_PROJECTS_DIR`), analog zu `/java-projects`. `/workspace` ist der einfache Standard für schnelle Übungen.
+
+### Skripte mit Bash und PowerShell
+
+Bash ist die Standard-Shell **im Container**. PowerShell ist hier die Shell **auf dem Windows-Host**, mit der die Container-Befehle (`docker`/`podman`) ausgeführt werden. `pwsh` ist im Linux-Container standardmäßig nicht installiert. Deshalb laufen Bash-Skripte im Container und PowerShell-Skripte auf dem Host.
+
+Für Bash-Skripte sind `shellcheck` (Prüfung) und `shfmt` (Formatierung) installiert.
+
+Bash-Version und Werkzeuge prüfen:
+
+```bash
+bash --version
+shellcheck --version
+shfmt --version
+```
+
+Beispiel für ein kleines Bash-Skript im Container:
+
+```bash
+cd /workspace
+mkdir -p demo-bash
+cd demo-bash
+cat > hello.sh <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+
+greet() {
+  local name="$1"
+  echo "Hallo aus Bash, ${name}"
+}
+
+greet "ADE"
+EOF
+shfmt -w hello.sh
+shellcheck hello.sh
+chmod +x hello.sh
+./hello.sh
+```
+
+`shfmt -w` formatiert das Skript, `shellcheck` prüft es auf typische Fehler, danach wird es ausführbar gemacht und gestartet.
+
+PowerShell-Version auf dem Windows-Host prüfen:
+
+```powershell
+$PSVersionTable.PSVersion
+```
+
+Beispiel für ein kleines PowerShell-Skript auf dem Host:
+
+```powershell
+Set-Location $HOME
+New-Item -ItemType Directory -Force demo-powershell | Out-Null
+Set-Location demo-powershell
+@'
+function Get-Greeting {
+    param([string]$Name)
+    "Hallo aus PowerShell, $Name"
+}
+
+Get-Greeting -Name "ADE"
+'@ | Set-Content hello.ps1
+.\hello.ps1
+```
+
+Wenn das Ausführen blockiert wird, die Ausführungsrichtlinie prüfen: `Get-ExecutionPolicy` und bei Bedarf `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`. Im Container selbst werden Skripte mit Bash geschrieben.
+
 ### ASP.NET-Web-App vom Host erreichen
 
 Der Container gibt die lokale Port-Range `5100-5199` an den Host frei:
@@ -1132,6 +1216,8 @@ cd /Users/<benutzer>/ade-dev-sandbox
 docker compose up -d --force-recreate
 docker compose exec ade bash
 ```
+
+Mit Podman: `podman compose up -d --force-recreate` und `podman compose exec ade bash` (oder jeweils `podman-compose ...`).
 
 Eine ASP.NET-App muss im Container auf `0.0.0.0` lauschen. `localhost` reicht nicht, weil `localhost` im Container nur den Container selbst meint.
 
@@ -1202,6 +1288,57 @@ Wenn Spec Kit nach dem Script-Typ fragt, für diesen Linux-Container `sh` auswä
 Spec Kit weist darauf hin, dass Agentenordner private Daten enthalten können. Für Projekte unter `/rider-projects` sollte deshalb im jeweiligen Anwendungsrepo geprüft werden, ob `.opencode/` oder sensible Teile davon in die Projekt-`.gitignore` gehören.
 
 Spec Kit erzeugt Projektdateien für spec-driven development. Diese Dateien gehören normalerweise in das jeweilige Anwendungsrepo unter `/rider-projects`, nicht in dieses Docker-Setup-Repo.
+
+### Opencode verwenden
+
+Opencode im Container starten:
+
+```bash
+opencode
+```
+
+Der Container startet Opencode nicht automatisch. Das ist Absicht. So kann zuerst entschieden werden, in welchem Projektverzeichnis gearbeitet wird.
+
+Für Sicherheits- und Architekturprüfungen gibt es den read-only-Agenten `security-review`. Er ist für Reviews gedacht und darf keine Dateien ändern.
+
+Interaktiv im Projekt starten:
+
+```bash
+cd /rider-projects/MeinProjekt
+opencode --agent security-review
+```
+
+Dann im Prompt eine konkrete Prüffrage stellen, zum Beispiel:
+
+```text
+Prüfe dieses Projekt auf Sicherheitsrisiken, unsichere Konfiguration, Secret-Leaks und Architekturprobleme. Ändere keine Dateien, sondern liefere Findings mit Datei- und Zeilenhinweisen.
+```
+
+Als einmaligen nicht-interaktiven Review-Lauf:
+
+```bash
+cd /rider-projects/MeinProjekt
+opencode run --agent security-review "Prüfe dieses Projekt auf Sicherheitsrisiken, unsichere Konfiguration, Secret-Leaks und Architekturprobleme. Ändere keine Dateien, sondern liefere Findings mit Datei- und Zeilenhinweisen."
+```
+
+Wenn aus einem Finding eine Änderung entstehen soll, danach bewusst mit dem normalen `coding`-Agenten oder manuell umsetzen. `security-review` ist absichtlich auf Analyse begrenzt.
+
+### Codex CLI verwenden
+
+Codex CLI ist ebenfalls im Container installiert:
+
+```bash
+codex --version
+```
+
+Codex startet nicht automatisch. Für ein Projekt zuerst in das Projektverzeichnis wechseln und dann Codex starten:
+
+```bash
+cd /rider-projects/MeinProjekt
+codex
+```
+
+Lokale Codex-Daten liegen im Docker-Volume `codex_data` unter `/home/adedev/.codex`. Dieses Volume ist nicht Teil des Git-Repositories. Zugangsdaten und private Sitzungsdaten dürfen nicht in Projektordner kopiert oder committed werden.
 
 ### Spec-Kit-Governance-Presets installieren
 
@@ -1382,57 +1519,6 @@ dotnet run
 
 Wenn das Projekt keine Tests enthält, mindestens `dotnet build` ausführen und in der Dokumentation notieren, warum keine Tests vorhanden sind.
 
-### Opencode verwenden
-
-Opencode im Container starten:
-
-```bash
-opencode
-```
-
-Der Container startet Opencode nicht automatisch. Das ist Absicht. So kann zuerst entschieden werden, in welchem Projektverzeichnis gearbeitet wird.
-
-Für Sicherheits- und Architekturprüfungen gibt es den read-only-Agenten `security-review`. Er ist für Reviews gedacht und darf keine Dateien ändern.
-
-Interaktiv im Projekt starten:
-
-```bash
-cd /rider-projects/MeinProjekt
-opencode --agent security-review
-```
-
-Dann im Prompt eine konkrete Prüffrage stellen, zum Beispiel:
-
-```text
-Prüfe dieses Projekt auf Sicherheitsrisiken, unsichere Konfiguration, Secret-Leaks und Architekturprobleme. Ändere keine Dateien, sondern liefere Findings mit Datei- und Zeilenhinweisen.
-```
-
-Als einmaligen nicht-interaktiven Review-Lauf:
-
-```bash
-cd /rider-projects/MeinProjekt
-opencode run --agent security-review "Prüfe dieses Projekt auf Sicherheitsrisiken, unsichere Konfiguration, Secret-Leaks und Architekturprobleme. Ändere keine Dateien, sondern liefere Findings mit Datei- und Zeilenhinweisen."
-```
-
-Wenn aus einem Finding eine Änderung entstehen soll, danach bewusst mit dem normalen `coding`-Agenten oder manuell umsetzen. `security-review` ist absichtlich auf Analyse begrenzt.
-
-### Codex CLI verwenden
-
-Codex CLI ist ebenfalls im Container installiert:
-
-```bash
-codex --version
-```
-
-Codex startet nicht automatisch. Für ein Projekt zuerst in das Projektverzeichnis wechseln und dann Codex starten:
-
-```bash
-cd /rider-projects/MeinProjekt
-codex
-```
-
-Lokale Codex-Daten liegen im Docker-Volume `codex_data` unter `/home/adedev/.codex`. Dieses Volume ist nicht Teil des Git-Repositories. Zugangsdaten und private Sitzungsdaten dürfen nicht in Projektordner kopiert oder committed werden.
-
 ### Konfiguration
 
 `opencode.jsonc` nutzt den Provider `chat-ai` mit dieser Basis-URL:
@@ -1474,6 +1560,8 @@ CONTAINER_NAME=$(podman ps --filter name=ade-dev-sandbox --format '{{.Names}}' |
 podman cp opencode.jsonc "${CONTAINER_NAME}:/home/adedev/.config/opencode/opencode.jsonc"
 podman exec --user root "$CONTAINER_NAME" chown adedev:adedev /home/adedev/.config/opencode/opencode.jsonc
 ```
+
+Mit Docker statt Podman gelten dieselben Schritte mit `docker compose cp` und `docker compose exec --user root ade ...`.
 
 Dieser Weg aktualisiert den laufenden Container sofort. Er ändert aber nicht das bereits gebaute Image. Für neue Container muss das Image neu gebaut werden:
 
@@ -1538,6 +1626,8 @@ podman cp codex/requirements.toml "${CONTAINER_NAME}:/etc/codex/requirements.tom
 podman exec --user root "$CONTAINER_NAME" chmod 0644 /etc/codex/config.toml /etc/codex/managed_config.toml /etc/codex/requirements.toml
 ```
 
+Mit Docker statt Podman gelten dieselben Schritte mit `docker compose cp` und `docker compose exec --user root ade ...`.
+
 Nach einer Änderung kann die wirksame Sandbox grob geprüft werden:
 
 ```bash
@@ -1581,7 +1671,7 @@ Die erste Variable betrifft allgemeine Update-Benachrichtigungen. Die zweite Var
 
 Das Image erbt vom gemeinsamen `agent-sandbox`-Image auf Debian 13. Das Basisimage ist im Dockerfile per `sha256`-Digest gepinnt; der lesbare `latest`-Tag bleibt nur als Kommentar mit Beobachtungsdatum erhalten. Ein Update des Basisimages erfolgt bewusst über Digest-Änderung im Dockerfile, Review, Git-Commit und neuen Image-Build. .NET wird über die Microsoft-Paketquelle für Debian 13 installiert. Der Build-Parameter `DOTNET_SDK_PACKAGE` steht standardmäßig auf `dotnet-sdk-10.0`.
 
-Die Sicherheitsfreigabe wird in `docs/security/sandbox-freigabe.md` als Entwurf dokumentiert. Das zugehörige KI-Werkzeug-Inventar liegt in `docs/security/ai-tools-inventory.md`. Offene `_TODO_`-Felder müssen durch Owner, Betrieb oder CISO/ISB gepflegt werden und werden nicht durch Annahmen ersetzt.
+Die Sicherheitsfreigabe wird in `docs/security/sandbox-freigabe.md` als Entwurf dokumentiert. Die MR/PR-Anleitung fuer CISO/ISB oder KI-Beauftragte:n (KIB) liegt in `docs/security/sandbox-freigabe-review.md`. Das zugehörige KI-Werkzeug-Inventar liegt in `docs/security/ai-tools-inventory.md`. Offene `_TODO_`-Felder müssen durch Owner, Betrieb, CISO/ISB oder KIB gepflegt werden und werden nicht durch Annahmen ersetzt.
 
 #### Secret-Scanning
 
@@ -1663,6 +1753,94 @@ An issue was encountered verifying workloads. For more information, run "dotnet 
 ```
 
 Andere Warnungen, Fehler und der Exit-Code von `dotnet` bleiben erhalten.
+
+### Image-SBOM erzeugen
+
+Eine SBOM ist eine *Software Bill of Materials*, also eine maschinenlesbare Stückliste für Software. Für dieses Container-Image listet sie Betriebssystempakete, Bibliotheken, installierte Werkzeuge und Versionen auf. Das hilft bei Lieferkettentransparenz: Wenn später eine Schwachstelle in einer bestimmten Komponente bekannt wird, kann geprüft werden, ob das Image betroffen ist.
+
+Für dieses Repository wird eine CycloneDX-JSON-SBOM erzeugt. Vor der Verteilung oder Übergabe eines neu gebauten Sandbox-Images ist dieser Schritt Pflicht.
+
+Linux, macOS oder WSL2:
+
+```bash
+./scripts/build-and-sbom.sh
+```
+
+Windows PowerShell, zum Beispiel mit Podman:
+
+```powershell
+.\scripts\build-and-sbom.ps1 -Runtime podman
+```
+
+Wenn das Image bereits gebaut ist und nur die SBOM neu erzeugt werden soll:
+
+```bash
+./scripts/build-and-sbom.sh --skip-build
+```
+
+```powershell
+.\scripts\build-and-sbom.ps1 -Runtime podman -SkipBuild
+```
+
+Die Skripte verwenden lokal installiertes `syft`, wenn es vorhanden ist. Wenn `syft` nicht im `PATH` liegt, nutzen sie als Fallback das Container-Image `docker.io/anchore/syft:latest`. Dafür muss Docker oder Podman öffentliche Images ziehen können.
+
+Die erzeugten Dateien liegen unter `sboms/`, zum Beispiel `sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json`. Diese Dateien sind Build-Artefakte und werden durch `.gitignore` nicht committed. Für Releases können sie separat als Release-Artefakt abgelegt werden.
+
+### Image-SBOM auswerten
+
+Die SBOM kann mit den mitgelieferten Skripten lokal zusammengefasst und durchsucht werden. Ohne weitere Parameter wird die neueste Datei aus `sboms/*.cdx.json` verwendet.
+
+Windows PowerShell:
+
+```powershell
+.\scripts\analyze-sbom.ps1
+```
+
+macOS, Linux oder WSL2:
+
+```bash
+./scripts/analyze-sbom.sh
+```
+
+Die Ausgabe zeigt Format, CycloneDX-Version, Erzeugungszeit, Anzahl der Komponenten, Komponententypen, Paket-Ökosysteme aus `purl` und erkannte Lizenzen.
+
+Nach Komponenten suchen:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -Search "openssl|dotnet|node|python|rust|go"
+.\scripts\analyze-sbom.ps1 -ComponentType library -Search "openssl|dotnet|node|python|rust|go"
+```
+
+```bash
+./scripts/analyze-sbom.sh --search 'openssl|dotnet|node|python|rust|go'
+./scripts/analyze-sbom.sh --type library --search 'openssl|dotnet|node|python|rust|go'
+```
+
+Der Typfilter `library` blendet reine Datei-Einträge aus und ist meist die sinnvollste Sicht für Paket- und CVE-Fragen.
+
+Eine bestimmte SBOM-Datei auswerten:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -SbomPath .\sboms\2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
+```
+
+```bash
+./scripts/analyze-sbom.sh --file sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
+```
+
+Optional kann ein Schwachstellenscan gegen die SBOM laufen, wenn `grype` oder `trivy` installiert ist:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -Scan
+.\scripts\analyze-sbom.ps1 -Scan -Scanner trivy
+```
+
+```bash
+./scripts/analyze-sbom.sh --scan
+./scripts/analyze-sbom.sh --scan --scanner trivy
+```
+
+Das Bash-Skript nutzt für die lokale Zusammenfassung `jq`, wenn verfügbar, und fällt sonst auf `python3` oder `python` zurück. Das PowerShell-Skript nutzt `ConvertFrom-Json` und benötigt für die Basis-Auswertung keine Zusatzwerkzeuge. Für CVE-Auswertungen ist eines der Scanner-Werkzeuge `grype` oder `trivy` erforderlich.
 
 ### Aufräumen
 
@@ -1838,10 +2016,12 @@ rm /rider-projects/Directory.Build.props
 
 Dieser Ablauf prüft das Setup in einer sinnvollen Reihenfolge. Er eignet sich gut nach einer Neuinstallation, nach Änderungen an `Dockerfile`, `compose.yml` oder `opencode.jsonc` und als erster Test auf macOS mit Docker Desktop.
 
+> **Docker oder Podman:** Die Beispiele nutzen Docker. Mit Podman dieselben Schritte ausführen und `docker compose` durch `podman compose` oder `podman-compose` ersetzen (siehe [Docker und Podman: gleiche Befehle](#docker-und-podman-gleiche-befehle)).
+
 Der Test besteht aus zwei Teilen:
 
 1. Auf dem Host wird Docker Compose geprüft, das Image gebaut und der Container gestartet.
-2. Im Container wird geprüft, ob .NET, Java, Go, Rust, OpenCode, Spec Kit und die gemounteten Verzeichnisse funktionieren.
+2. Im Container wird geprüft, ob .NET, Java, Go, Rust, Python, OpenCode, Spec Kit und die gemounteten Verzeichnisse funktionieren.
 
 Auf dem Host ausführen. Der erste Befehl wechselt in dieses Repository; den Pfad bei Bedarf anpassen:
 
@@ -1866,6 +2046,7 @@ gopls version
 rustc --version
 cargo --version
 cargo clippy --version
+python --version
 node --version
 npm --version
 opencode --version
@@ -1890,6 +2071,7 @@ Was die Befehle bedeuten:
 - `java --version`, `javac --version` und `mvn --version` prüfen JDK und Maven.
 - `go version` und `gopls version` prüfen Go und den Go Language Server.
 - `rustc --version`, `cargo --version` und `cargo clippy --version` prüfen die Rust-Toolchain und Clippy.
+- `python --version` prüft die installierte Python-Version.
 - `node --version` und `npm --version` prüfen die Node.js-Werkzeuge, die OpenCode und Codex CLI brauchen.
 - `opencode --version` prüft die installierte OpenCode CLI.
 - `codex --version` prüft die installierte Codex CLI.
@@ -1904,7 +2086,7 @@ Erwartetes Ergebnis:
 - `docker compose ps` zeigt den Service `ade` als laufend.
 - `dotnet --info` gibt SDK-Informationen aus und endet ohne Fehler.
 - `java --version` und `mvn --version` geben Versionsinformationen aus.
-- `go version`, `gopls version`, `rustc --version`, `cargo --version` und `cargo clippy --version` geben Versionsinformationen aus.
+- `go version`, `gopls version`, `rustc --version`, `cargo --version`, `cargo clippy --version` und `python --version` geben Versionsinformationen aus.
 - `opencode --version`, `codex --version` und `specify version` geben Versionsinformationen aus.
 - `ls /rider-projects` zeigt die Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthält.
 - `ls /java-projects` zeigt Java-Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthält.
@@ -1924,6 +2106,8 @@ docker compose up -d --force-recreate
 ```
 
 ### Merksätze
+
+> **Docker oder Podman:** Die folgenden `docker`-Befehle gelten mit Podman sinngemäß (`podman compose` oder `podman-compose`), siehe [Docker und Podman: gleiche Befehle](#docker-und-podman-gleiche-befehle).
 
 - Nach Änderungen am `Dockerfile` immer neu bauen:
 
@@ -2054,6 +2238,8 @@ Tipps für Lernende mit Screenreader oder Braille-Display:
 
 This quick start is for anyone who wants to try the setup first. Details follow in the later sections.
 
+> **Docker or Podman:** This quick start uses Docker. With Podman, substitute the commands accordingly (`podman compose` or `podman-compose`) and use the matching Podman section for the first GitLab registry login: [Ubuntu](#use-podman-on-ubuntu-2404-lts), [macOS](#use-podman-on-macos-with-homebrew), [Windows](#use-podman-on-windows-with-podman-desktop).
+
 Step 1: Check prerequisites.
 
 - Docker Engine or Docker Desktop is installed.
@@ -2134,7 +2320,7 @@ The README is long. But it is not a book you must read in one sitting. This lear
 |---|---|---|
 | Phase 1: Understand | [Basic idea](#basic-idea), [Terms and command location](#terms-and-command-location), [Project structure](#project-structure) | What is a container? What is an image? Where does which command run? |
 | Phase 2: Set up | [Prerequisites](#prerequisites), one installation section (Docker or Podman), [Set up the API key](#set-up-the-api-key), [Build and start the container](#build-and-start-the-container) | The container runs on your own machine. |
-| Phase 3: First exercises | [Use .NET and C# inside the container](#use-net-and-c-inside-the-container), [Use Java and Maven inside the container](#use-java-and-maven-inside-the-container), [Use Go inside the container](#use-go-inside-the-container), [Use Rust inside the container](#use-rust-inside-the-container) | Create, build, and run your own console project. |
+| Phase 3: First exercises | [Use .NET and C# inside the container](#use-net-and-c-inside-the-container), [Use Java and Maven inside the container](#use-java-and-maven-inside-the-container), [Use Go inside the container](#use-go-inside-the-container), [Use Rust inside the container](#use-rust-inside-the-container), [Use Python inside the container](#use-python-inside-the-container), [Scripting with Bash and PowerShell](#scripting-with-bash-and-powershell) | Create, build, and run your own console or script project. |
 | Phase 4: Practice tools | [Use Spec Kit](#use-spec-kit), [Use Opencode](#use-opencode), [Use Codex CLI](#use-codex-cli) | Use AI tools for specification and code correctly. |
 | Phase 5: Quality and security | [Install Spec Kit governance presets](#install-spec-kit-governance-presets), [Required flow for an SDD feature](#required-flow-for-an-sdd-feature), [Configuration](#configuration) | Rules, secure development, quality process. |
 | Phase 6: Operation and troubleshooting | [Clean up](#clean-up), [Common problems](#common-problems), [Compact test procedure](#compact-test-procedure) | Keep your environment healthy and understand errors. |
@@ -2169,7 +2355,7 @@ A more complete term reference is in the section [Glossary](#glossary).
 - `Dockerfile`: describes the container image. It inherits from the shared `agent-sandbox` image and installs .NET SDK, Java JDK 21, Maven, Go, Rust, Python, Opencode, Codex CLI, `uv`, Spec Kit, and common CLI helper tools on top.
 - `compose.yml`: describes the `ade` service, volumes, and build rules.
 - `.dockerignore` and `.containerignore`: exclude local secrets, Git data, and working directories from the build context.
-- `.env.example`: template for the platform-specific mounts `RIDER_PROJECTS_DIR` and `JAVA_PROJECTS_DIR`.
+- `.env.example`: template for the platform-specific project mounts `RIDER_PROJECTS_DIR`, `JAVA_PROJECTS_DIR`, `GO_PROJECTS_DIR`, `RUST_PROJECTS_DIR`, and `PYTHON_PROJECTS_DIR`.
 - `opencode.jsonc`: contains provider, model, and agent settings for Opencode. JSONC allows comments and is easier to read for learning.
 - `opencode.env.example`: template for the local `opencode.env` file.
 - `codex/config.toml`: system-wide Codex default configuration for the container. It is copied to `/etc/codex/config.toml` and `/etc/codex/managed_config.toml`.
@@ -2178,11 +2364,35 @@ A more complete term reference is in the section [Glossary](#glossary).
 - `RIDER_PROJECTS_DIR`: host directory for Rider projects, mounted as `/rider-projects`.
 - `JAVA_PROJECTS_DIR`: host directory for Java projects, mounted as `/java-projects`.
 - `java-projects/`: local fallback directory for Java projects when `JAVA_PROJECTS_DIR` is not set.
+- `GO_PROJECTS_DIR`: host directory for Go projects, mounted as `/go-projects`.
+- `go-projects/`: local fallback directory for Go projects when `GO_PROJECTS_DIR` is not set.
+- `RUST_PROJECTS_DIR`: host directory for Rust projects, mounted as `/rust-projects`.
+- `rust-projects/`: local fallback directory for Rust projects when `RUST_PROJECTS_DIR` is not set.
+- `PYTHON_PROJECTS_DIR`: host directory for Python projects, mounted as `/python-projects`.
+- `python-projects/`: local fallback directory for Python projects when `PYTHON_PROJECTS_DIR` is not set.
 - `dotnet/ContainerBuild.props`: redirects .NET build artifacts for Rider projects to the container volume `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: filters a known .NET workload verification message from command output.
 - `spec-kit/patch-specify-cli.py`: adapts Spec Kit for Windows and WSL bind mounts.
 - `codex_data`: Docker volume for Codex CLI data under `/home/adedev/.codex`.
 - `AGENTS.md`: rules for AI agents such as Opencode or Codex.
+
+### Docker and Podman: the same commands
+
+This guide shows most examples with `docker`. Podman is largely command-compatible. The general sections such as [Build and start the container](#build-and-start-the-container), [Use .NET and C# inside the container](#use-net-and-c-inside-the-container), [Reach an ASP.NET web app from the host](#reach-an-aspnet-web-app-from-the-host), and [Compact test procedure](#compact-test-procedure) therefore apply to both tools. Substitute the commands accordingly:
+
+| Docker | Podman |
+|---|---|
+| `docker compose build --pull` | `podman compose build --pull` or `podman-compose build --pull` |
+| `docker compose up -d` | `podman compose up -d` or `podman-compose up -d` |
+| `docker compose ps` | `podman compose ps` or `podman-compose ps` |
+| `docker compose exec ade bash` | `podman compose exec ade bash` or `podman-compose exec ade bash` |
+| `docker compose down` | `podman compose down` or `podman-compose down` |
+| `docker compose down -v` | `podman compose down -v` or `podman-compose down -v` |
+| `docker info` | `podman info` |
+
+Note on spelling: On many Linux installations, the Compose command is `podman-compose` (with a hyphen). On macOS and Windows with Podman Desktop, `podman compose` (with a space) often works. If one variant is missing, use the other.
+
+For a full step-by-step guide with Podman, there are dedicated sections for [Ubuntu](#use-podman-on-ubuntu-2404-lts), [macOS](#use-podman-on-macos-with-homebrew), and [Windows](#use-podman-on-windows-with-podman-desktop). One important difference remains: when building the private GitLab base image, external Compose providers on macOS and Windows sometimes use different registry credentials. That is why the Podman sections build the image directly with `podman build` there. For normal operation with `up`, `ps`, `exec`, and `down`, the commands are interchangeable.
 
 ### Install Docker on Ubuntu or WSL2
 
@@ -2685,6 +2895,8 @@ podman compose down
 
 If `docker info` fails with `permission denied`, the current user is not allowed to access Docker yet.
 
+Note for Podman: Podman runs rootless by default, so a Docker group is usually not needed. This section mainly applies to Docker.
+
 Quick test with `sudo`:
 
 ```bash
@@ -2728,6 +2940,8 @@ chmod 600 opencode.env
 
 ### Build and start the container
 
+> **Docker or Podman:** These commands use Docker. With Podman they apply in the same way — replace `docker compose` with `podman compose` or `podman-compose` (see [Docker and Podman: the same commands](#docker-and-podman-the-same-commands)). A full Podman guide is in the sections [Use Podman on Ubuntu](#use-podman-on-ubuntu-2404-lts), [Use Podman on macOS](#use-podman-on-macos-with-homebrew), and [Use Podman on Windows](#use-podman-on-windows-with-podman-desktop).
+
 Change into the repository:
 
 ```bash
@@ -2759,94 +2973,6 @@ docker compose ps
 ```
 
 The first build downloads the pinned Sandbox base image, the .NET SDK package, and npm packages. This can take several minutes.
-
-### Generate an image SBOM
-
-An SBOM is a *Software Bill of Materials*, a machine-readable inventory for software. For this container image, it lists operating-system packages, libraries, installed tools, and versions. This supports supply-chain transparency: if a vulnerability is later disclosed for a specific component, the image can be checked for exposure.
-
-This repository generates a CycloneDX JSON SBOM. Before distributing or handing over a rebuilt Sandbox image, this step is required.
-
-Linux, macOS, or WSL2:
-
-```bash
-./scripts/build-and-sbom.sh
-```
-
-Windows PowerShell, for example with Podman:
-
-```powershell
-.\scripts\build-and-sbom.ps1 -Runtime podman
-```
-
-If the image is already built and only the SBOM should be regenerated:
-
-```bash
-./scripts/build-and-sbom.sh --skip-build
-```
-
-```powershell
-.\scripts\build-and-sbom.ps1 -Runtime podman -SkipBuild
-```
-
-The scripts use a locally installed `syft` when it is available. If `syft` is not in `PATH`, they fall back to the container image `docker.io/anchore/syft:latest`. Docker or Podman must then be able to pull public images.
-
-Generated files are written to `sboms/`, for example `sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json`. These files are build artifacts and are ignored by `.gitignore`. For releases, they can be attached separately as release artifacts.
-
-### Analyze an image SBOM
-
-The SBOM can be summarized and searched locally with the provided scripts. Without parameters, the newest file from `sboms/*.cdx.json` is used.
-
-Windows PowerShell:
-
-```powershell
-.\scripts\analyze-sbom.ps1
-```
-
-macOS, Linux, or WSL2:
-
-```bash
-./scripts/analyze-sbom.sh
-```
-
-The output shows the format, CycloneDX version, generation time, component count, component types, package ecosystems from `purl`, and detected licenses.
-
-Search for components:
-
-```powershell
-.\scripts\analyze-sbom.ps1 -Search "openssl|dotnet|node|python|rust|go"
-.\scripts\analyze-sbom.ps1 -ComponentType library -Search "openssl|dotnet|node|python|rust|go"
-```
-
-```bash
-./scripts/analyze-sbom.sh --search 'openssl|dotnet|node|python|rust|go'
-./scripts/analyze-sbom.sh --type library --search 'openssl|dotnet|node|python|rust|go'
-```
-
-The `library` type filter hides raw file entries and is usually the most useful view for package and CVE questions.
-
-Analyze a specific SBOM file:
-
-```powershell
-.\scripts\analyze-sbom.ps1 -SbomPath .\sboms\2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
-```
-
-```bash
-./scripts/analyze-sbom.sh --file sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
-```
-
-Optionally run a vulnerability scan against the SBOM when `grype` or `trivy` is installed:
-
-```powershell
-.\scripts\analyze-sbom.ps1 -Scan
-.\scripts\analyze-sbom.ps1 -Scan -Scanner trivy
-```
-
-```bash
-./scripts/analyze-sbom.sh --scan
-./scripts/analyze-sbom.sh --scan --scanner trivy
-```
-
-The Bash script uses `jq` for local summaries when available and otherwise falls back to `python3` or `python`. The PowerShell script uses `ConvertFrom-Json` and needs no additional tool for the basic analysis. CVE analysis requires one of the scanner tools, `grype` or `trivy`.
 
 ### Mount Rider projects from Windows
 
@@ -2890,6 +3016,8 @@ Open a shell inside the container:
 ```bash
 docker compose exec ade bash
 ```
+
+With Podman: `podman compose exec ade bash` or `podman-compose exec ade bash`.
 
 Check the .NET version:
 
@@ -2992,6 +3120,8 @@ go run .
 
 Go web frameworks are not installed globally. For first web exercises, the standard library package `net/http` is enough. Frameworks such as `gin`, `fiber`, or `chi` belong in the project's `go.mod`.
 
+For your own host projects, there is also the configurable mount `/go-projects` (variable `GO_PROJECTS_DIR`), analogous to `/java-projects`. `/workspace` is the simple default for quick exercises.
+
 ### Use Rust inside the container
 
 Check the Rust version and Rust tools:
@@ -3017,6 +3147,132 @@ cargo run
 
 Rust web frameworks are not installed globally. Frameworks and runtimes such as `tokio`, `axum`, `actix-web`, or `serde` belong in the project's `Cargo.toml`.
 
+For your own host projects, there is also the configurable mount `/rust-projects` (variable `RUST_PROJECTS_DIR`), analogous to `/java-projects`. `/workspace` is the simple default for quick exercises.
+
+### Use Python inside the container
+
+Check the Python version and tools:
+
+```bash
+python --version
+python3 --version
+uv --version
+```
+
+Inside the container, `python` and `python3` are the same Python 3. The fast environment and package tool `uv` is also installed.
+
+Example for a small Python program with a test:
+
+```bash
+cd /workspace
+mkdir -p demo-python
+cd demo-python
+cat > main.py <<'EOF'
+def greet(name: str) -> str:
+    return f"Hello from Python, {name}"
+
+
+if __name__ == "__main__":
+    print(greet("ADE"))
+EOF
+cat > test_main.py <<'EOF'
+import unittest
+
+from main import greet
+
+
+class TestGreet(unittest.TestCase):
+    def test_greet(self):
+        self.assertEqual(greet("ADE"), "Hello from Python, ADE")
+
+
+if __name__ == "__main__":
+    unittest.main()
+EOF
+python main.py
+python -m unittest
+```
+
+`unittest` is part of the standard library and needs no installation. For additional packages, use a virtual environment so nothing is installed globally. The `python3-venv` package is present in the image:
+
+```bash
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install pytest
+pytest
+deactivate
+```
+
+`pip install` downloads from the network and only works with internet access. As a modern alternative, `uv` manages the environment and packages in one step, for example with `uv init` and `uv run`.
+
+Python web frameworks are not installed globally. Frameworks such as `flask`, `django`, or `fastapi` belong in the project's virtual environment or in `pyproject.toml`.
+
+For your own host projects, there is also the configurable mount `/python-projects` (variable `PYTHON_PROJECTS_DIR`), analogous to `/java-projects`. `/workspace` is the simple default for quick exercises.
+
+### Scripting with Bash and PowerShell
+
+Bash is the default shell **inside the container**. PowerShell is the shell **on the Windows host** that runs the container commands (`docker`/`podman`). `pwsh` is not installed inside the Linux container by default. Therefore, Bash scripts run inside the container and PowerShell scripts run on the host.
+
+For Bash scripts, `shellcheck` (checking) and `shfmt` (formatting) are installed.
+
+Check the Bash version and tools:
+
+```bash
+bash --version
+shellcheck --version
+shfmt --version
+```
+
+Example for a small Bash script inside the container:
+
+```bash
+cd /workspace
+mkdir -p demo-bash
+cd demo-bash
+cat > hello.sh <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+
+greet() {
+  local name="$1"
+  echo "Hello from Bash, ${name}"
+}
+
+greet "ADE"
+EOF
+shfmt -w hello.sh
+shellcheck hello.sh
+chmod +x hello.sh
+./hello.sh
+```
+
+`shfmt -w` formats the script, `shellcheck` checks it for common mistakes, then it is made executable and started.
+
+Check the PowerShell version on the Windows host:
+
+```powershell
+$PSVersionTable.PSVersion
+```
+
+Example for a small PowerShell script on the host:
+
+```powershell
+Set-Location $HOME
+New-Item -ItemType Directory -Force demo-powershell | Out-Null
+Set-Location demo-powershell
+@'
+function Get-Greeting {
+    param([string]$Name)
+    "Hello from PowerShell, $Name"
+}
+
+Get-Greeting -Name "ADE"
+'@ | Set-Content hello.ps1
+.\hello.ps1
+```
+
+If running is blocked, check the execution policy: `Get-ExecutionPolicy` and, if needed, `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`. Inside the container, scripts are written with Bash.
+
 ### Reach an ASP.NET web app from the host
 
 The container publishes the local port range `5100-5199` to the host:
@@ -3033,6 +3289,8 @@ cd /Users/<user>/ade-dev-sandbox
 docker compose up -d --force-recreate
 docker compose exec ade bash
 ```
+
+With Podman: `podman compose up -d --force-recreate` and `podman compose exec ade bash` (or `podman-compose ...` respectively).
 
 An ASP.NET app must listen on `0.0.0.0` inside the container. `localhost` is not enough because `localhost` inside the container only means the container itself.
 
@@ -3103,6 +3361,57 @@ If Spec Kit asks for the script type, choose `sh` for this Linux container.
 Spec Kit warns that agent folders can contain private data. For projects under `/rider-projects`, check whether `.opencode/` or sensitive parts of it should be added to that application repository's `.gitignore`.
 
 Spec Kit creates project files for spec-driven development. These files normally belong in the application repository under `/rider-projects`, not in this Docker setup repository.
+
+### Use Opencode
+
+Start Opencode inside the container:
+
+```bash
+opencode
+```
+
+The container does not start Opencode automatically. This is intentional. It lets you choose the project directory first.
+
+For security and architecture checks, use the read-only `security-review` agent. It is meant for reviews and must not change files.
+
+Start it interactively inside a project:
+
+```bash
+cd /rider-projects/MyProject
+opencode --agent security-review
+```
+
+Then ask a concrete review question, for example:
+
+```text
+Check this project for security risks, unsafe configuration, secret leaks, and architecture issues. Do not change files; return findings with file and line references.
+```
+
+Run a one-off non-interactive review:
+
+```bash
+cd /rider-projects/MyProject
+opencode run --agent security-review "Check this project for security risks, unsafe configuration, secret leaks, and architecture issues. Do not change files; return findings with file and line references."
+```
+
+If a finding should become a change, implement it afterwards with the normal `coding` agent or manually. `security-review` is intentionally limited to analysis.
+
+### Use Codex CLI
+
+Codex CLI is also installed inside the container:
+
+```bash
+codex --version
+```
+
+Codex does not start automatically. First switch to the project directory, then start Codex:
+
+```bash
+cd /rider-projects/MyProject
+codex
+```
+
+Local Codex data is stored in the Docker volume `codex_data` under `/home/adedev/.codex`. This volume is not part of the Git repository. Credentials and private session data must not be copied into project folders or committed.
 
 ### Install Spec Kit governance presets
 
@@ -3283,57 +3592,6 @@ dotnet run
 
 If the project has no tests, run at least `dotnet build` and document why no tests exist.
 
-### Use Opencode
-
-Start Opencode inside the container:
-
-```bash
-opencode
-```
-
-The container does not start Opencode automatically. This is intentional. It lets you choose the project directory first.
-
-For security and architecture checks, use the read-only `security-review` agent. It is meant for reviews and must not change files.
-
-Start it interactively inside a project:
-
-```bash
-cd /rider-projects/MyProject
-opencode --agent security-review
-```
-
-Then ask a concrete review question, for example:
-
-```text
-Check this project for security risks, unsafe configuration, secret leaks, and architecture issues. Do not change files; return findings with file and line references.
-```
-
-Run a one-off non-interactive review:
-
-```bash
-cd /rider-projects/MyProject
-opencode run --agent security-review "Check this project for security risks, unsafe configuration, secret leaks, and architecture issues. Do not change files; return findings with file and line references."
-```
-
-If a finding should become a change, implement it afterwards with the normal `coding` agent or manually. `security-review` is intentionally limited to analysis.
-
-### Use Codex CLI
-
-Codex CLI is also installed inside the container:
-
-```bash
-codex --version
-```
-
-Codex does not start automatically. First switch to the project directory, then start Codex:
-
-```bash
-cd /rider-projects/MyProject
-codex
-```
-
-Local Codex data is stored in the Docker volume `codex_data` under `/home/adedev/.codex`. This volume is not part of the Git repository. Credentials and private session data must not be copied into project folders or committed.
-
 ### Configuration
 
 `opencode.jsonc` uses the `chat-ai` provider with this base URL:
@@ -3375,6 +3633,8 @@ CONTAINER_NAME=$(podman ps --filter name=ade-dev-sandbox --format '{{.Names}}' |
 podman cp opencode.jsonc "${CONTAINER_NAME}:/home/adedev/.config/opencode/opencode.jsonc"
 podman exec --user root "$CONTAINER_NAME" chown adedev:adedev /home/adedev/.config/opencode/opencode.jsonc
 ```
+
+With Docker instead of Podman, the same steps apply using `docker compose cp` and `docker compose exec --user root ade ...`.
 
 This updates the running container immediately. It does not change the already built image. For new containers, rebuild the image:
 
@@ -3439,6 +3699,8 @@ podman cp codex/requirements.toml "${CONTAINER_NAME}:/etc/codex/requirements.tom
 podman exec --user root "$CONTAINER_NAME" chmod 0644 /etc/codex/config.toml /etc/codex/managed_config.toml /etc/codex/requirements.toml
 ```
 
+With Docker instead of Podman, the same steps apply using `docker compose cp` and `docker compose exec --user root ade ...`.
+
 After a change, roughly check the effective sandbox:
 
 ```bash
@@ -3482,7 +3744,7 @@ The first variable affects general update notifications. The second variable dis
 
 The image inherits from the shared `agent-sandbox` image on Debian 13. The base image is pinned in the Dockerfile by `sha256` digest; the readable `latest` tag stays only as a comment with the observation date. A base-image update happens deliberately through a digest change in the Dockerfile, review, Git commit, and a new image build. .NET is installed through the Microsoft package feed for Debian 13. The build argument `DOTNET_SDK_PACKAGE` defaults to `dotnet-sdk-10.0`.
 
-The security approval is documented as a draft in `docs/security/sandbox-freigabe.md`. The related AI tool inventory lives in `docs/security/ai-tools-inventory.md`. Open `_TODO_` fields must be maintained by the owner, operations, or CISO/ISB and are not replaced with assumptions.
+The security approval is documented as a draft in `docs/security/sandbox-freigabe.md`. The MR/PR review guide for CISO/ISB or the AI officer (KIB) lives in `docs/security/sandbox-freigabe-review.md`. The related AI tool inventory lives in `docs/security/ai-tools-inventory.md`. Open `_TODO_` fields must be maintained by the owner, operations, CISO/ISB, or KIB and are not replaced with assumptions.
 
 #### Secret Scanning
 
@@ -3564,6 +3826,94 @@ An issue was encountered verifying workloads. For more information, run "dotnet 
 ```
 
 Other warnings, errors, and the `dotnet` exit code are preserved.
+
+### Generate an image SBOM
+
+An SBOM is a *Software Bill of Materials*, a machine-readable inventory for software. For this container image, it lists operating-system packages, libraries, installed tools, and versions. This supports supply-chain transparency: if a vulnerability is later disclosed for a specific component, the image can be checked for exposure.
+
+This repository generates a CycloneDX JSON SBOM. Before distributing or handing over a rebuilt Sandbox image, this step is required.
+
+Linux, macOS, or WSL2:
+
+```bash
+./scripts/build-and-sbom.sh
+```
+
+Windows PowerShell, for example with Podman:
+
+```powershell
+.\scripts\build-and-sbom.ps1 -Runtime podman
+```
+
+If the image is already built and only the SBOM should be regenerated:
+
+```bash
+./scripts/build-and-sbom.sh --skip-build
+```
+
+```powershell
+.\scripts\build-and-sbom.ps1 -Runtime podman -SkipBuild
+```
+
+The scripts use a locally installed `syft` when it is available. If `syft` is not in `PATH`, they fall back to the container image `docker.io/anchore/syft:latest`. Docker or Podman must then be able to pull public images.
+
+Generated files are written to `sboms/`, for example `sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json`. These files are build artifacts and are ignored by `.gitignore`. For releases, they can be attached separately as release artifacts.
+
+### Analyze an image SBOM
+
+The SBOM can be summarized and searched locally with the provided scripts. Without parameters, the newest file from `sboms/*.cdx.json` is used.
+
+Windows PowerShell:
+
+```powershell
+.\scripts\analyze-sbom.ps1
+```
+
+macOS, Linux, or WSL2:
+
+```bash
+./scripts/analyze-sbom.sh
+```
+
+The output shows the format, CycloneDX version, generation time, component count, component types, package ecosystems from `purl`, and detected licenses.
+
+Search for components:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -Search "openssl|dotnet|node|python|rust|go"
+.\scripts\analyze-sbom.ps1 -ComponentType library -Search "openssl|dotnet|node|python|rust|go"
+```
+
+```bash
+./scripts/analyze-sbom.sh --search 'openssl|dotnet|node|python|rust|go'
+./scripts/analyze-sbom.sh --type library --search 'openssl|dotnet|node|python|rust|go'
+```
+
+The `library` type filter hides raw file entries and is usually the most useful view for package and CVE questions.
+
+Analyze a specific SBOM file:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -SbomPath .\sboms\2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
+```
+
+```bash
+./scripts/analyze-sbom.sh --file sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
+```
+
+Optionally run a vulnerability scan against the SBOM when `grype` or `trivy` is installed:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -Scan
+.\scripts\analyze-sbom.ps1 -Scan -Scanner trivy
+```
+
+```bash
+./scripts/analyze-sbom.sh --scan
+./scripts/analyze-sbom.sh --scan --scanner trivy
+```
+
+The Bash script uses `jq` for local summaries when available and otherwise falls back to `python3` or `python`. The PowerShell script uses `ConvertFrom-Json` and needs no additional tool for the basic analysis. CVE analysis requires one of the scanner tools, `grype` or `trivy`.
 
 ### Clean up
 
@@ -3739,10 +4089,12 @@ rm /rider-projects/Directory.Build.props
 
 This procedure checks the setup in a useful order. It is a good choice after a fresh installation, after changes to `Dockerfile`, `compose.yml`, or `opencode.jsonc`, and as a first test on macOS with Docker Desktop.
 
+> **Docker or Podman:** The examples use Docker. With Podman, run the same steps and replace `docker compose` with `podman compose` or `podman-compose` (see [Docker and Podman: the same commands](#docker-and-podman-the-same-commands)).
+
 The test has two parts:
 
 1. On the host, Docker Compose is checked, the image is built, and the container is started.
-2. Inside the container, .NET, Java, Go, Rust, OpenCode, Spec Kit, and the mounted directories are checked.
+2. Inside the container, .NET, Java, Go, Rust, Python, OpenCode, Spec Kit, and the mounted directories are checked.
 
 Run this on the host. The first command changes into this repository; adjust the path if needed:
 
@@ -3767,6 +4119,7 @@ gopls version
 rustc --version
 cargo --version
 cargo clippy --version
+python --version
 node --version
 npm --version
 opencode --version
@@ -3791,6 +4144,7 @@ What the commands mean:
 - `java --version`, `javac --version`, and `mvn --version` check JDK and Maven.
 - `go version` and `gopls version` check Go and the Go language server.
 - `rustc --version`, `cargo --version`, and `cargo clippy --version` check the Rust toolchain and Clippy.
+- `python --version` checks the installed Python version.
 - `node --version` and `npm --version` check the Node.js tools required by OpenCode and Codex CLI.
 - `opencode --version` checks the installed OpenCode CLI.
 - `codex --version` checks the installed Codex CLI.
@@ -3805,7 +4159,7 @@ Expected result:
 - `docker compose ps` shows the `ade` service as running.
 - `dotnet --info` prints SDK information and exits without an error.
 - `java --version` and `mvn --version` print version information.
-- `go version`, `gopls version`, `rustc --version`, `cargo --version`, and `cargo clippy --version` print version information.
+- `go version`, `gopls version`, `rustc --version`, `cargo --version`, `cargo clippy --version`, and `python --version` print version information.
 - `opencode --version`, `codex --version`, and `specify version` print version information.
 - `ls /rider-projects` shows the projects from the host directory or stays empty if that directory does not contain projects yet.
 - `ls /java-projects` shows Java projects from the host directory or stays empty if that directory does not contain projects yet.
@@ -3825,6 +4179,8 @@ docker compose up -d --force-recreate
 ```
 
 ### Quick rules
+
+> **Docker or Podman:** The following `docker` commands apply to Podman in the same way (`podman compose` or `podman-compose`), see [Docker and Podman: the same commands](#docker-and-podman-the-same-commands).
 
 - After changes to the `Dockerfile`, always rebuild:
 
