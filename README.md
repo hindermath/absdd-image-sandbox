@@ -79,6 +79,8 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 - [Java und Maven im Container nutzen](#java-und-maven-im-container-nutzen)
 - [Go im Container nutzen](#go-im-container-nutzen)
 - [Rust im Container nutzen](#rust-im-container-nutzen)
+- [Python im Container nutzen](#python-im-container-nutzen)
+- [Skripte mit Bash und PowerShell](#skripte-mit-bash-und-powershell)
 - [ASP.NET-Web-App vom Host erreichen](#aspnet-web-app-vom-host-erreichen)
 - [Spec Kit verwenden](#spec-kit-verwenden)
 - [Opencode verwenden](#opencode-verwenden)
@@ -122,6 +124,8 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 - [Use Java and Maven inside the container](#use-java-and-maven-inside-the-container)
 - [Use Go inside the container](#use-go-inside-the-container)
 - [Use Rust inside the container](#use-rust-inside-the-container)
+- [Use Python inside the container](#use-python-inside-the-container)
+- [Scripting with Bash and PowerShell](#scripting-with-bash-and-powershell)
 - [Reach an ASP.NET web app from the host](#reach-an-aspnet-web-app-from-the-host)
 - [Use Spec Kit](#use-spec-kit)
 - [Use Opencode](#use-opencode)
@@ -243,7 +247,7 @@ Die README ist lang. Sie ist aber kein Buch, das du in einem Stück lesen musst.
 |---|---|---|
 | Phase 1: Verstehen | [Grundidee](#grundidee), [Begriffe und Ausführungsort](#begriffe-und-ausführungsort), [Projektstruktur](#projektstruktur) | Was ist ein Container? Was ist ein Image? Wo läuft welcher Befehl? |
 | Phase 2: Aufsetzen | [Voraussetzungen](#voraussetzungen), eine der Installationssektionen (Docker oder Podman), [API-Key einrichten](#api-key-einrichten), [Container bauen und starten](#container-bauen-und-starten) | Container läuft auf dem eigenen Rechner. |
-| Phase 3: Erste Übungen | [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen), [Java und Maven im Container nutzen](#java-und-maven-im-container-nutzen), [Go im Container nutzen](#go-im-container-nutzen), [Rust im Container nutzen](#rust-im-container-nutzen) | Ein eigenes Konsolenprojekt anlegen, bauen und starten. |
+| Phase 3: Erste Übungen | [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen), [Java und Maven im Container nutzen](#java-und-maven-im-container-nutzen), [Go im Container nutzen](#go-im-container-nutzen), [Rust im Container nutzen](#rust-im-container-nutzen), [Python im Container nutzen](#python-im-container-nutzen), [Skripte mit Bash und PowerShell](#skripte-mit-bash-und-powershell) | Ein eigenes Konsolen- oder Skriptprojekt anlegen, bauen und starten. |
 | Phase 4: Werkzeuge der Praxis | [Spec Kit verwenden](#spec-kit-verwenden), [Opencode verwenden](#opencode-verwenden), [Codex CLI verwenden](#codex-cli-verwenden) | KI-Werkzeuge für Spezifikation und Code richtig einsetzen. |
 | Phase 5: Qualität und Sicherheit | [Spec-Kit-Governance-Presets installieren](#spec-kit-governance-presets-installieren), [Pflichtablauf für ein SDD-Feature](#pflichtablauf-für-ein-sdd-feature), [Konfiguration](#konfiguration) | Regelwerk, sichere Entwicklung, Qualitätsprozess. |
 | Phase 6: Betrieb und Fehlerbehebung | [Aufräumen](#aufräumen), [Häufige Probleme](#häufige-probleme), [Kompakter Testablauf](#kompakter-testablauf) | Eigene Umgebung pflegen und Fehler verstehen. |
@@ -278,7 +282,7 @@ Ein vollständigeres Begriffsregister steht im Abschnitt [Glossar](#glossar).
 - `Dockerfile`: beschreibt das Container-Image. Es erbt vom gemeinsamen `agent-sandbox`-Image und installiert darauf .NET SDK, Java JDK 21, Maven, Go, Rust, Python, Opencode, Codex CLI, `uv`, Spec Kit und gängige CLI-Hilfswerkzeuge.
 - `compose.yml`: beschreibt den Service `ade`, Volumes und Build-Regeln.
 - `.dockerignore` und `.containerignore`: schließen lokale Secrets, Git-Daten und Arbeitsverzeichnisse aus dem Build-Kontext aus.
-- `.env.example`: Vorlage für die plattformabhängigen Mounts `RIDER_PROJECTS_DIR` und `JAVA_PROJECTS_DIR`.
+- `.env.example`: Vorlage für die plattformabhängigen Projekt-Mounts `RIDER_PROJECTS_DIR`, `JAVA_PROJECTS_DIR`, `GO_PROJECTS_DIR`, `RUST_PROJECTS_DIR` und `PYTHON_PROJECTS_DIR`.
 - `opencode.jsonc`: enthält Provider, Modelle und Agenten für Opencode. JSONC erlaubt Kommentare und ist deshalb für Lernzwecke besser lesbar.
 - `opencode.env.example`: Vorlage für die lokale Datei `opencode.env`.
 - `codex/config.toml`: systemweite Codex-Standardkonfiguration für den Container. Sie wird nach `/etc/codex/config.toml` und `/etc/codex/managed_config.toml` kopiert.
@@ -287,6 +291,12 @@ Ein vollständigeres Begriffsregister steht im Abschnitt [Glossar](#glossar).
 - `RIDER_PROJECTS_DIR`: Host-Verzeichnis für Rider-Projekte, im Container unter `/rider-projects`.
 - `JAVA_PROJECTS_DIR`: Host-Verzeichnis für Java-Projekte, im Container unter `/java-projects`.
 - `java-projects/`: lokales Fallback-Verzeichnis für Java-Projekte, wenn `JAVA_PROJECTS_DIR` nicht gesetzt ist.
+- `GO_PROJECTS_DIR`: Host-Verzeichnis für Go-Projekte, im Container unter `/go-projects`.
+- `go-projects/`: lokales Fallback-Verzeichnis für Go-Projekte, wenn `GO_PROJECTS_DIR` nicht gesetzt ist.
+- `RUST_PROJECTS_DIR`: Host-Verzeichnis für Rust-Projekte, im Container unter `/rust-projects`.
+- `rust-projects/`: lokales Fallback-Verzeichnis für Rust-Projekte, wenn `RUST_PROJECTS_DIR` nicht gesetzt ist.
+- `PYTHON_PROJECTS_DIR`: Host-Verzeichnis für Python-Projekte, im Container unter `/python-projects`.
+- `python-projects/`: lokales Fallback-Verzeichnis für Python-Projekte, wenn `PYTHON_PROJECTS_DIR` nicht gesetzt ist.
 - `dotnet/ContainerBuild.props`: leitet .NET-Build-Artefakte für Rider-Projekte in das Container-Volume `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: filtert eine bekannte .NET-Workload-Verifikationsmeldung aus der Ausgabe.
 - `spec-kit/patch-specify-cli.py`: passt Spec Kit für Windows- und WSL-Bind-Mounts an.
@@ -1037,6 +1047,8 @@ go run .
 
 Go-Webframeworks werden nicht global installiert. Für erste Webübungen reicht die Standardbibliothek `net/http`. Frameworks wie `gin`, `fiber` oder `chi` gehören projektlokal in `go.mod`.
 
+Für eigene Host-Projekte gibt es zusätzlich den konfigurierbaren Mount `/go-projects` (Variable `GO_PROJECTS_DIR`), analog zu `/java-projects`. `/workspace` ist der einfache Standard für schnelle Übungen.
+
 ### Rust im Container nutzen
 
 Rust-Version und Rust-Werkzeuge prüfen:
@@ -1061,6 +1073,132 @@ cargo run
 ```
 
 Rust-Webframeworks werden nicht global installiert. Frameworks und Laufzeiten wie `tokio`, `axum`, `actix-web` oder `serde` gehören projektlokal in `Cargo.toml`.
+
+Für eigene Host-Projekte gibt es zusätzlich den konfigurierbaren Mount `/rust-projects` (Variable `RUST_PROJECTS_DIR`), analog zu `/java-projects`. `/workspace` ist der einfache Standard für schnelle Übungen.
+
+### Python im Container nutzen
+
+Python-Version und Werkzeuge prüfen:
+
+```bash
+python --version
+python3 --version
+uv --version
+```
+
+Im Container sind `python` und `python3` dasselbe Python 3. Zusätzlich ist `uv` installiert, ein schnelles Werkzeug für virtuelle Umgebungen und Pakete.
+
+Beispiel für ein kleines Python-Programm mit Test:
+
+```bash
+cd /workspace
+mkdir -p demo-python
+cd demo-python
+cat > main.py <<'EOF'
+def greet(name: str) -> str:
+    return f"Hallo aus Python, {name}"
+
+
+if __name__ == "__main__":
+    print(greet("ADE"))
+EOF
+cat > test_main.py <<'EOF'
+import unittest
+
+from main import greet
+
+
+class TestGreet(unittest.TestCase):
+    def test_greet(self):
+        self.assertEqual(greet("ADE"), "Hallo aus Python, ADE")
+
+
+if __name__ == "__main__":
+    unittest.main()
+EOF
+python main.py
+python -m unittest
+```
+
+`unittest` ist Teil der Standardbibliothek und braucht keine Installation. Für zusätzliche Pakete sollte eine virtuelle Umgebung genutzt werden, damit nichts global installiert wird. Das Paket `python3-venv` ist im Image vorhanden:
+
+```bash
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install pytest
+pytest
+deactivate
+```
+
+`pip install` lädt aus dem Netz und funktioniert nur mit Internetzugang. Alternativ und moderner verwaltet `uv` Umgebung und Pakete in einem Schritt, zum Beispiel mit `uv init` und `uv run`.
+
+Python-Webframeworks werden nicht global installiert. Frameworks wie `flask`, `django` oder `fastapi` gehören projektlokal in die virtuelle Umgebung oder in `pyproject.toml`.
+
+Für eigene Host-Projekte gibt es zusätzlich den konfigurierbaren Mount `/python-projects` (Variable `PYTHON_PROJECTS_DIR`), analog zu `/java-projects`. `/workspace` ist der einfache Standard für schnelle Übungen.
+
+### Skripte mit Bash und PowerShell
+
+Bash ist die Standard-Shell **im Container**. PowerShell ist hier die Shell **auf dem Windows-Host**, mit der die Container-Befehle (`docker`/`podman`) ausgeführt werden. `pwsh` ist im Linux-Container standardmäßig nicht installiert. Deshalb laufen Bash-Skripte im Container und PowerShell-Skripte auf dem Host.
+
+Für Bash-Skripte sind `shellcheck` (Prüfung) und `shfmt` (Formatierung) installiert.
+
+Bash-Version und Werkzeuge prüfen:
+
+```bash
+bash --version
+shellcheck --version
+shfmt --version
+```
+
+Beispiel für ein kleines Bash-Skript im Container:
+
+```bash
+cd /workspace
+mkdir -p demo-bash
+cd demo-bash
+cat > hello.sh <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+
+greet() {
+  local name="$1"
+  echo "Hallo aus Bash, ${name}"
+}
+
+greet "ADE"
+EOF
+shfmt -w hello.sh
+shellcheck hello.sh
+chmod +x hello.sh
+./hello.sh
+```
+
+`shfmt -w` formatiert das Skript, `shellcheck` prüft es auf typische Fehler, danach wird es ausführbar gemacht und gestartet.
+
+PowerShell-Version auf dem Windows-Host prüfen:
+
+```powershell
+$PSVersionTable.PSVersion
+```
+
+Beispiel für ein kleines PowerShell-Skript auf dem Host:
+
+```powershell
+Set-Location $HOME
+New-Item -ItemType Directory -Force demo-powershell | Out-Null
+Set-Location demo-powershell
+@'
+function Get-Greeting {
+    param([string]$Name)
+    "Hallo aus PowerShell, $Name"
+}
+
+Get-Greeting -Name "ADE"
+'@ | Set-Content hello.ps1
+.\hello.ps1
+```
+
+Wenn das Ausführen blockiert wird, die Ausführungsrichtlinie prüfen: `Get-ExecutionPolicy` und bei Bedarf `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`. Im Container selbst werden Skripte mit Bash geschrieben.
 
 ### ASP.NET-Web-App vom Host erreichen
 
@@ -1533,7 +1671,7 @@ Die erste Variable betrifft allgemeine Update-Benachrichtigungen. Die zweite Var
 
 Das Image erbt vom gemeinsamen `agent-sandbox`-Image auf Debian 13. Das Basisimage ist im Dockerfile per `sha256`-Digest gepinnt; der lesbare `latest`-Tag bleibt nur als Kommentar mit Beobachtungsdatum erhalten. Ein Update des Basisimages erfolgt bewusst über Digest-Änderung im Dockerfile, Review, Git-Commit und neuen Image-Build. .NET wird über die Microsoft-Paketquelle für Debian 13 installiert. Der Build-Parameter `DOTNET_SDK_PACKAGE` steht standardmäßig auf `dotnet-sdk-10.0`.
 
-Die Sicherheitsfreigabe wird in `docs/security/sandbox-freigabe.md` als Entwurf dokumentiert. Das zugehörige KI-Werkzeug-Inventar liegt in `docs/security/ai-tools-inventory.md`. Offene `_TODO_`-Felder müssen durch Owner, Betrieb oder CISO/ISB gepflegt werden und werden nicht durch Annahmen ersetzt.
+Die Sicherheitsfreigabe wird in `docs/security/sandbox-freigabe.md` als Entwurf dokumentiert. Die MR/PR-Anleitung fuer CISO/ISB oder KI-Beauftragte:n (KIB) liegt in `docs/security/sandbox-freigabe-review.md`. Das zugehörige KI-Werkzeug-Inventar liegt in `docs/security/ai-tools-inventory.md`. Offene `_TODO_`-Felder müssen durch Owner, Betrieb, CISO/ISB oder KIB gepflegt werden und werden nicht durch Annahmen ersetzt.
 
 #### Secret-Scanning
 
@@ -1883,7 +2021,7 @@ Dieser Ablauf prüft das Setup in einer sinnvollen Reihenfolge. Er eignet sich g
 Der Test besteht aus zwei Teilen:
 
 1. Auf dem Host wird Docker Compose geprüft, das Image gebaut und der Container gestartet.
-2. Im Container wird geprüft, ob .NET, Java, Go, Rust, OpenCode, Spec Kit und die gemounteten Verzeichnisse funktionieren.
+2. Im Container wird geprüft, ob .NET, Java, Go, Rust, Python, OpenCode, Spec Kit und die gemounteten Verzeichnisse funktionieren.
 
 Auf dem Host ausführen. Der erste Befehl wechselt in dieses Repository; den Pfad bei Bedarf anpassen:
 
@@ -1908,6 +2046,7 @@ gopls version
 rustc --version
 cargo --version
 cargo clippy --version
+python --version
 node --version
 npm --version
 opencode --version
@@ -1932,6 +2071,7 @@ Was die Befehle bedeuten:
 - `java --version`, `javac --version` und `mvn --version` prüfen JDK und Maven.
 - `go version` und `gopls version` prüfen Go und den Go Language Server.
 - `rustc --version`, `cargo --version` und `cargo clippy --version` prüfen die Rust-Toolchain und Clippy.
+- `python --version` prüft die installierte Python-Version.
 - `node --version` und `npm --version` prüfen die Node.js-Werkzeuge, die OpenCode und Codex CLI brauchen.
 - `opencode --version` prüft die installierte OpenCode CLI.
 - `codex --version` prüft die installierte Codex CLI.
@@ -1946,7 +2086,7 @@ Erwartetes Ergebnis:
 - `docker compose ps` zeigt den Service `ade` als laufend.
 - `dotnet --info` gibt SDK-Informationen aus und endet ohne Fehler.
 - `java --version` und `mvn --version` geben Versionsinformationen aus.
-- `go version`, `gopls version`, `rustc --version`, `cargo --version` und `cargo clippy --version` geben Versionsinformationen aus.
+- `go version`, `gopls version`, `rustc --version`, `cargo --version`, `cargo clippy --version` und `python --version` geben Versionsinformationen aus.
 - `opencode --version`, `codex --version` und `specify version` geben Versionsinformationen aus.
 - `ls /rider-projects` zeigt die Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthält.
 - `ls /java-projects` zeigt Java-Projekte aus dem Host-Verzeichnis oder bleibt leer, wenn das Verzeichnis noch keine Projekte enthält.
@@ -2180,7 +2320,7 @@ The README is long. But it is not a book you must read in one sitting. This lear
 |---|---|---|
 | Phase 1: Understand | [Basic idea](#basic-idea), [Terms and command location](#terms-and-command-location), [Project structure](#project-structure) | What is a container? What is an image? Where does which command run? |
 | Phase 2: Set up | [Prerequisites](#prerequisites), one installation section (Docker or Podman), [Set up the API key](#set-up-the-api-key), [Build and start the container](#build-and-start-the-container) | The container runs on your own machine. |
-| Phase 3: First exercises | [Use .NET and C# inside the container](#use-net-and-c-inside-the-container), [Use Java and Maven inside the container](#use-java-and-maven-inside-the-container), [Use Go inside the container](#use-go-inside-the-container), [Use Rust inside the container](#use-rust-inside-the-container) | Create, build, and run your own console project. |
+| Phase 3: First exercises | [Use .NET and C# inside the container](#use-net-and-c-inside-the-container), [Use Java and Maven inside the container](#use-java-and-maven-inside-the-container), [Use Go inside the container](#use-go-inside-the-container), [Use Rust inside the container](#use-rust-inside-the-container), [Use Python inside the container](#use-python-inside-the-container), [Scripting with Bash and PowerShell](#scripting-with-bash-and-powershell) | Create, build, and run your own console or script project. |
 | Phase 4: Practice tools | [Use Spec Kit](#use-spec-kit), [Use Opencode](#use-opencode), [Use Codex CLI](#use-codex-cli) | Use AI tools for specification and code correctly. |
 | Phase 5: Quality and security | [Install Spec Kit governance presets](#install-spec-kit-governance-presets), [Required flow for an SDD feature](#required-flow-for-an-sdd-feature), [Configuration](#configuration) | Rules, secure development, quality process. |
 | Phase 6: Operation and troubleshooting | [Clean up](#clean-up), [Common problems](#common-problems), [Compact test procedure](#compact-test-procedure) | Keep your environment healthy and understand errors. |
@@ -2215,7 +2355,7 @@ A more complete term reference is in the section [Glossary](#glossary).
 - `Dockerfile`: describes the container image. It inherits from the shared `agent-sandbox` image and installs .NET SDK, Java JDK 21, Maven, Go, Rust, Python, Opencode, Codex CLI, `uv`, Spec Kit, and common CLI helper tools on top.
 - `compose.yml`: describes the `ade` service, volumes, and build rules.
 - `.dockerignore` and `.containerignore`: exclude local secrets, Git data, and working directories from the build context.
-- `.env.example`: template for the platform-specific mounts `RIDER_PROJECTS_DIR` and `JAVA_PROJECTS_DIR`.
+- `.env.example`: template for the platform-specific project mounts `RIDER_PROJECTS_DIR`, `JAVA_PROJECTS_DIR`, `GO_PROJECTS_DIR`, `RUST_PROJECTS_DIR`, and `PYTHON_PROJECTS_DIR`.
 - `opencode.jsonc`: contains provider, model, and agent settings for Opencode. JSONC allows comments and is easier to read for learning.
 - `opencode.env.example`: template for the local `opencode.env` file.
 - `codex/config.toml`: system-wide Codex default configuration for the container. It is copied to `/etc/codex/config.toml` and `/etc/codex/managed_config.toml`.
@@ -2224,6 +2364,12 @@ A more complete term reference is in the section [Glossary](#glossary).
 - `RIDER_PROJECTS_DIR`: host directory for Rider projects, mounted as `/rider-projects`.
 - `JAVA_PROJECTS_DIR`: host directory for Java projects, mounted as `/java-projects`.
 - `java-projects/`: local fallback directory for Java projects when `JAVA_PROJECTS_DIR` is not set.
+- `GO_PROJECTS_DIR`: host directory for Go projects, mounted as `/go-projects`.
+- `go-projects/`: local fallback directory for Go projects when `GO_PROJECTS_DIR` is not set.
+- `RUST_PROJECTS_DIR`: host directory for Rust projects, mounted as `/rust-projects`.
+- `rust-projects/`: local fallback directory for Rust projects when `RUST_PROJECTS_DIR` is not set.
+- `PYTHON_PROJECTS_DIR`: host directory for Python projects, mounted as `/python-projects`.
+- `python-projects/`: local fallback directory for Python projects when `PYTHON_PROJECTS_DIR` is not set.
 - `dotnet/ContainerBuild.props`: redirects .NET build artifacts for Rider projects to the container volume `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: filters a known .NET workload verification message from command output.
 - `spec-kit/patch-specify-cli.py`: adapts Spec Kit for Windows and WSL bind mounts.
@@ -2974,6 +3120,8 @@ go run .
 
 Go web frameworks are not installed globally. For first web exercises, the standard library package `net/http` is enough. Frameworks such as `gin`, `fiber`, or `chi` belong in the project's `go.mod`.
 
+For your own host projects, there is also the configurable mount `/go-projects` (variable `GO_PROJECTS_DIR`), analogous to `/java-projects`. `/workspace` is the simple default for quick exercises.
+
 ### Use Rust inside the container
 
 Check the Rust version and Rust tools:
@@ -2998,6 +3146,132 @@ cargo run
 ```
 
 Rust web frameworks are not installed globally. Frameworks and runtimes such as `tokio`, `axum`, `actix-web`, or `serde` belong in the project's `Cargo.toml`.
+
+For your own host projects, there is also the configurable mount `/rust-projects` (variable `RUST_PROJECTS_DIR`), analogous to `/java-projects`. `/workspace` is the simple default for quick exercises.
+
+### Use Python inside the container
+
+Check the Python version and tools:
+
+```bash
+python --version
+python3 --version
+uv --version
+```
+
+Inside the container, `python` and `python3` are the same Python 3. The fast environment and package tool `uv` is also installed.
+
+Example for a small Python program with a test:
+
+```bash
+cd /workspace
+mkdir -p demo-python
+cd demo-python
+cat > main.py <<'EOF'
+def greet(name: str) -> str:
+    return f"Hello from Python, {name}"
+
+
+if __name__ == "__main__":
+    print(greet("ADE"))
+EOF
+cat > test_main.py <<'EOF'
+import unittest
+
+from main import greet
+
+
+class TestGreet(unittest.TestCase):
+    def test_greet(self):
+        self.assertEqual(greet("ADE"), "Hello from Python, ADE")
+
+
+if __name__ == "__main__":
+    unittest.main()
+EOF
+python main.py
+python -m unittest
+```
+
+`unittest` is part of the standard library and needs no installation. For additional packages, use a virtual environment so nothing is installed globally. The `python3-venv` package is present in the image:
+
+```bash
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install pytest
+pytest
+deactivate
+```
+
+`pip install` downloads from the network and only works with internet access. As a modern alternative, `uv` manages the environment and packages in one step, for example with `uv init` and `uv run`.
+
+Python web frameworks are not installed globally. Frameworks such as `flask`, `django`, or `fastapi` belong in the project's virtual environment or in `pyproject.toml`.
+
+For your own host projects, there is also the configurable mount `/python-projects` (variable `PYTHON_PROJECTS_DIR`), analogous to `/java-projects`. `/workspace` is the simple default for quick exercises.
+
+### Scripting with Bash and PowerShell
+
+Bash is the default shell **inside the container**. PowerShell is the shell **on the Windows host** that runs the container commands (`docker`/`podman`). `pwsh` is not installed inside the Linux container by default. Therefore, Bash scripts run inside the container and PowerShell scripts run on the host.
+
+For Bash scripts, `shellcheck` (checking) and `shfmt` (formatting) are installed.
+
+Check the Bash version and tools:
+
+```bash
+bash --version
+shellcheck --version
+shfmt --version
+```
+
+Example for a small Bash script inside the container:
+
+```bash
+cd /workspace
+mkdir -p demo-bash
+cd demo-bash
+cat > hello.sh <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+
+greet() {
+  local name="$1"
+  echo "Hello from Bash, ${name}"
+}
+
+greet "ADE"
+EOF
+shfmt -w hello.sh
+shellcheck hello.sh
+chmod +x hello.sh
+./hello.sh
+```
+
+`shfmt -w` formats the script, `shellcheck` checks it for common mistakes, then it is made executable and started.
+
+Check the PowerShell version on the Windows host:
+
+```powershell
+$PSVersionTable.PSVersion
+```
+
+Example for a small PowerShell script on the host:
+
+```powershell
+Set-Location $HOME
+New-Item -ItemType Directory -Force demo-powershell | Out-Null
+Set-Location demo-powershell
+@'
+function Get-Greeting {
+    param([string]$Name)
+    "Hello from PowerShell, $Name"
+}
+
+Get-Greeting -Name "ADE"
+'@ | Set-Content hello.ps1
+.\hello.ps1
+```
+
+If running is blocked, check the execution policy: `Get-ExecutionPolicy` and, if needed, `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`. Inside the container, scripts are written with Bash.
 
 ### Reach an ASP.NET web app from the host
 
@@ -3470,7 +3744,7 @@ The first variable affects general update notifications. The second variable dis
 
 The image inherits from the shared `agent-sandbox` image on Debian 13. The base image is pinned in the Dockerfile by `sha256` digest; the readable `latest` tag stays only as a comment with the observation date. A base-image update happens deliberately through a digest change in the Dockerfile, review, Git commit, and a new image build. .NET is installed through the Microsoft package feed for Debian 13. The build argument `DOTNET_SDK_PACKAGE` defaults to `dotnet-sdk-10.0`.
 
-The security approval is documented as a draft in `docs/security/sandbox-freigabe.md`. The related AI tool inventory lives in `docs/security/ai-tools-inventory.md`. Open `_TODO_` fields must be maintained by the owner, operations, or CISO/ISB and are not replaced with assumptions.
+The security approval is documented as a draft in `docs/security/sandbox-freigabe.md`. The MR/PR review guide for CISO/ISB or the AI officer (KIB) lives in `docs/security/sandbox-freigabe-review.md`. The related AI tool inventory lives in `docs/security/ai-tools-inventory.md`. Open `_TODO_` fields must be maintained by the owner, operations, CISO/ISB, or KIB and are not replaced with assumptions.
 
 #### Secret Scanning
 
@@ -3820,7 +4094,7 @@ This procedure checks the setup in a useful order. It is a good choice after a f
 The test has two parts:
 
 1. On the host, Docker Compose is checked, the image is built, and the container is started.
-2. Inside the container, .NET, Java, Go, Rust, OpenCode, Spec Kit, and the mounted directories are checked.
+2. Inside the container, .NET, Java, Go, Rust, Python, OpenCode, Spec Kit, and the mounted directories are checked.
 
 Run this on the host. The first command changes into this repository; adjust the path if needed:
 
@@ -3845,6 +4119,7 @@ gopls version
 rustc --version
 cargo --version
 cargo clippy --version
+python --version
 node --version
 npm --version
 opencode --version
@@ -3869,6 +4144,7 @@ What the commands mean:
 - `java --version`, `javac --version`, and `mvn --version` check JDK and Maven.
 - `go version` and `gopls version` check Go and the Go language server.
 - `rustc --version`, `cargo --version`, and `cargo clippy --version` check the Rust toolchain and Clippy.
+- `python --version` checks the installed Python version.
 - `node --version` and `npm --version` check the Node.js tools required by OpenCode and Codex CLI.
 - `opencode --version` checks the installed OpenCode CLI.
 - `codex --version` checks the installed Codex CLI.
@@ -3883,7 +4159,7 @@ Expected result:
 - `docker compose ps` shows the `ade` service as running.
 - `dotnet --info` prints SDK information and exits without an error.
 - `java --version` and `mvn --version` print version information.
-- `go version`, `gopls version`, `rustc --version`, `cargo --version`, and `cargo clippy --version` print version information.
+- `go version`, `gopls version`, `rustc --version`, `cargo --version`, `cargo clippy --version`, and `python --version` print version information.
 - `opencode --version`, `codex --version`, and `specify version` print version information.
 - `ls /rider-projects` shows the projects from the host directory or stays empty if that directory does not contain projects yet.
 - `ls /java-projects` shows Java projects from the host directory or stays empty if that directory does not contain projects yet.
