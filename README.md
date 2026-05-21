@@ -750,6 +750,16 @@ Vor dem ersten Build bei der GitLab Container Registry anmelden. Als Passwort ei
 podman login docker.gitlab-ce.gwdg.de
 ```
 
+Windows-spezifisch: `podman compose` nutzt auf vielen Installationen einen externen Compose-Provider, oft `docker-compose.exe`. Dieser Provider liest nicht zwingend dieselbe Podman-Auth-Datei wie `podman pull`. Deshalb zusätzlich ein Docker-kompatibles Authfile anlegen und dort ebenfalls anmelden:
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.docker" | Out-Null
+podman login --compat-auth-file "$env:USERPROFILE\.docker\config.json" docker.gitlab-ce.gwdg.de
+podman login --get-login --compat-auth-file "$env:USERPROFILE\.docker\config.json" docker.gitlab-ce.gwdg.de
+```
+
+Der letzte Befehl muss den GitLab-Benutzernamen ausgeben. Wenn nur `podman login` funktioniert, aber das Docker-kompatible Authfile fehlt, kann `podman pull` erfolgreich sein und `podman compose build --pull` trotzdem beim gepinnten GitLab-Basisimage mit `Requesting bearer token` und `403 Forbidden` scheitern.
+
 Compose-Datei prüfen, ohne Variablenwerte und Secrets auszubreiten:
 
 ```powershell
@@ -762,15 +772,23 @@ Auf Windows zuerst das gepinnte Basisimage mit Podman ziehen. Dieser Schritt pr�
 podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox@sha256:a21e15872aed8b0e4b9e18e0ff1e678318968efb4b8367ddf9fa4a63fc1d294c
 ```
 
-Danach das Projektimage direkt mit Podman bauen. Der Tag `ade-dev-sandbox-ade` entspricht dem Image-Namen, den Compose für den Service `ade` erwartet:
+Danach das Projektimage regulär über Compose bauen. Durch das Docker-kompatible Authfile kann auch der externe `docker-compose.exe`-Provider das private GitLab-Basisimage ziehen:
 
 ```powershell
-podman build --pull -t ade-dev-sandbox-ade .
+podman compose build --pull
 ```
 
-Container im Hintergrund starten, ohne dass Compose noch einmal baut:
+Container im Hintergrund starten:
 
 ```powershell
+podman compose up -d --force-recreate
+```
+
+Fallback: Wenn `podman compose build --pull` trotz gesetztem Docker-kompatiblem Authfile weiter mit `403 Forbidden` scheitert, zuerst den Login und den direkten Pull erneut prüfen. Als kurzfristige Umgehung kann das Projektimage direkt mit Podman gebaut und Compose nur zum Starten verwendet werden:
+
+```powershell
+podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox@sha256:a21e15872aed8b0e4b9e18e0ff1e678318968efb4b8367ddf9fa4a63fc1d294c
+podman build --pull -t ade-dev-sandbox-ade .
 podman compose up -d --no-build --force-recreate
 ```
 
@@ -804,7 +822,7 @@ Container stoppen und persistente Container- und Volume-Daten aus diesem Compose
 podman compose down -v
 ```
 
-Wenn `podman compose ...` meldet, dass ein externer Compose-Provider wie `docker-compose.exe` verwendet wird, ist das nicht automatisch ein Fehler. Unter Windows sollte der Build trotzdem direkt mit `podman build` laufen, weil `docker-compose.exe` eigene Registry-Anmeldedaten verwenden kann und dann trotz erfolgreichem `podman login` mit `403 Forbidden` am GitLab-Basisimage scheitert. Compose wird in diesem Ablauf nur für `up --no-build`, `ps`, `exec` und `down` verwendet.
+Wenn `podman compose ...` meldet, dass ein externer Compose-Provider wie `docker-compose.exe` verwendet wird, ist das nicht automatisch ein Fehler. Wichtig ist der Auth-Kontext: `docker-compose.exe` braucht auf Windows ein Docker-kompatibles Authfile. Ohne `podman login --compat-auth-file "$env:USERPROFILE\.docker\config.json" docker.gitlab-ce.gwdg.de` kann `podman pull` funktionieren, während `podman compose build --pull` mit `403 Forbidden` am privaten GitLab-Basisimage scheitert.
 
 WSL2- und Windows-Hinweis: Wenn dieselbe Umgebung einmal mit Podman Desktop unter Windows und einmal mit Podman in WSL2 gestartet wird, dürfen nicht beide Container gleichzeitig laufen. Beide Varianten veröffentlichen dieselbe Port-Range `127.0.0.1:5100-5199`. Vor dem Start unter Windows den WSL2-Container stoppen:
 
@@ -2823,6 +2841,16 @@ Before the first build, log in to the GitLab container registry. Use a GitLab to
 podman login docker.gitlab-ce.gwdg.de
 ```
 
+Windows-specific note: on many installations, `podman compose` uses an external Compose provider, often `docker-compose.exe`. That provider does not necessarily read the same Podman auth file as `podman pull`. Create a Docker-compatible auth file and log in there as well:
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.docker" | Out-Null
+podman login --compat-auth-file "$env:USERPROFILE\.docker\config.json" docker.gitlab-ce.gwdg.de
+podman login --get-login --compat-auth-file "$env:USERPROFILE\.docker\config.json" docker.gitlab-ce.gwdg.de
+```
+
+The last command must print the GitLab username. If only `podman login` works but the Docker-compatible auth file is missing, `podman pull` can succeed while `podman compose build --pull` still fails on the pinned GitLab base image with `Requesting bearer token` and `403 Forbidden`.
+
 Check the Compose file without expanding variable values and secrets:
 
 ```powershell
@@ -2835,15 +2863,23 @@ On Windows, pull the pinned base image with Podman first. This step verifies tha
 podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox@sha256:a21e15872aed8b0e4b9e18e0ff1e678318968efb4b8367ddf9fa4a63fc1d294c
 ```
 
-Then build the project image directly with Podman. The tag `ade-dev-sandbox-ade` matches the image name Compose expects for the `ade` service:
+Then build the project image through Compose. With the Docker-compatible auth file in place, the external `docker-compose.exe` provider can pull the private GitLab base image:
 
 ```powershell
-podman build --pull -t ade-dev-sandbox-ade .
+podman compose build --pull
 ```
 
-Start the container in the background without letting Compose build again:
+Start the container in the background:
 
 ```powershell
+podman compose up -d --force-recreate
+```
+
+Fallback: if `podman compose build --pull` still fails with `403 Forbidden` even after the Docker-compatible auth file is configured, re-check the login and the direct pull first. As a short-term workaround, build the project image directly with Podman and use Compose only for startup:
+
+```powershell
+podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox@sha256:a21e15872aed8b0e4b9e18e0ff1e678318968efb4b8367ddf9fa4a63fc1d294c
+podman build --pull -t ade-dev-sandbox-ade .
 podman compose up -d --no-build --force-recreate
 ```
 
@@ -2877,7 +2913,7 @@ Stop the container and delete persistent container and volume data from this Com
 podman compose down -v
 ```
 
-If `podman compose ...` reports that it is using an external Compose provider such as `docker-compose.exe`, that is not automatically an error. On Windows, still run the build directly with `podman build`, because `docker-compose.exe` can use separate registry credentials and then fail on the GitLab base image with `403 Forbidden` even after a successful `podman login`. In this flow, Compose is only used for `up --no-build`, `ps`, `exec`, and `down`.
+If `podman compose ...` reports that it is using an external Compose provider such as `docker-compose.exe`, that is not automatically an error. The important part is the auth context: on Windows, `docker-compose.exe` needs a Docker-compatible auth file. Without `podman login --compat-auth-file "$env:USERPROFILE\.docker\config.json" docker.gitlab-ce.gwdg.de`, `podman pull` can work while `podman compose build --pull` still fails with `403 Forbidden` on the private GitLab base image.
 
 WSL2 and Windows note: If the same environment is started once with Podman Desktop on Windows and once with Podman in WSL2, both containers must not run at the same time. Both variants publish the same port range `127.0.0.1:5100-5199`. Before starting on Windows, stop the WSL2 container:
 
