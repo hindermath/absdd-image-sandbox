@@ -1,12 +1,16 @@
 # Opencode Docker-Umgebung / Opencode Docker Environment
 
-Eine vorbereitete Container-Lernumgebung für angehende Fachinformatiker:innen.
+Eine vorbereitete Container-Lern- und Entwicklungsumgebung für Fachinformatiker:innen.
 Sprachen und Werkzeuge: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, Opencode, Codex CLI, Spec Kit.
 
-*A ready-to-use container learning environment for IT-specialist apprentices.
+*A ready-to-use container learning and development environment for IT-specialist apprentices.
 Languages and tools: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, Opencode CLI/TUI, Codex CLI/TUI, Spec Kit*
 
 ---
+
+> **Dokumentationsstandard:** Diese Dokumentation ist so aufbereitet, dass sie für Auszubildende der Fachinformatik ab mindestens dem 1. Lehrjahr geeignet ist. Sie verwendet ein Sprachniveau nach CEFR B2, berücksichtigt Barrierefreiheit nach WCAG 2.2 Level AA und führt Inhalte zuerst auf Deutsch und danach auf Englisch auf.
+>
+> **Documentation standard:** This documentation is prepared for IT-specialist apprentices from at least the first year of training. It uses CEFR B2 language level, considers accessibility according to WCAG 2.2 Level AA, and presents content first in German and then in English.
 
 ## Kurzlebige Aufgabenumgebung / Short-Lived Task Environment
 
@@ -28,8 +32,9 @@ Empfohlener Ablauf:
 
 1. In GitLab über **Fork** eine eigene Kopie des Repositories erstellen.
 2. Den eigenen Fork lokal klonen.
-3. Änderungen in eigenen Branches vornehmen.
-4. Relevante Verbesserungen per Merge Request zurück an das Ursprungsrepo vorschlagen.
+3. Wenn etwas auffällt oder nicht so funktioniert wie beschrieben, bitte zuerst im eigenen Fork prüfen, ob es dort auch passiert. Wenn ja, dann gerne eine Verbesserung per Issue im Ursprungsrepo vorschlagen.
+4. Bei Änderungen diese in eigenen Branches vornehmen.
+5. Relevante Verbesserungen per Merge Request zurück an das Ursprungsrepo vorschlagen.
 
 Lokale Secret-Dateien wie `opencode.env` und `.env` werden nicht mitgeforkt und dürfen nicht committed werden.
 
@@ -39,8 +44,9 @@ Recommended flow:
 
 1. Use **Fork** in GitLab to create your own copy of the repository.
 2. Clone your own fork locally.
-3. Make changes in your own branches.
-4. Propose useful improvements back to the upstream repository through a merge request.
+3. If you notice any issues or something doesn't work as described, first check if it also happens in your own fork. If it does, feel free to propose an improvement via an issue in the upstream repository.
+4. Make changes in your own branches.
+5. Propose useful improvements back to the upstream repository through a merge request.
 
 Local secret files such as `opencode.env` and `.env` are not included in forks and must not be committed.
 
@@ -58,6 +64,7 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 - [Grundidee](#grundidee)
 - [Begriffe und Ausführungsort](#begriffe-und-ausführungsort)
 - [Projektstruktur](#projektstruktur)
+- [Docker und Podman: gleiche Befehle](#docker-und-podman-gleiche-befehle)
 - [Docker unter Ubuntu oder WSL2 installieren](#docker-unter-ubuntu-oder-wsl2-installieren)
 - [Docker-Desktop-Profile für macOS und Windows](#docker-desktop-profile-für-macos-und-windows)
 - [Podman unter Ubuntu 24.04 LTS verwenden](#podman-unter-ubuntu-2404-lts-verwenden)
@@ -100,6 +107,7 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 - [Basic idea](#basic-idea)
 - [Terms and command location](#terms-and-command-location)
 - [Project structure](#project-structure)
+- [Docker and Podman: the same commands](#docker-and-podman-the-same-commands)
 - [Install Docker on Ubuntu or WSL2](#install-docker-on-ubuntu-or-wsl2)
 - [Docker Desktop profiles for macOS and Windows](#docker-desktop-profiles-for-macos-and-windows)
 - [Use Podman on Ubuntu 24.04 LTS](#use-podman-on-ubuntu-2404-lts)
@@ -152,6 +160,8 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 ### Schnellstart in 10 Minuten
 
 Dieser Schnellstart richtet sich an alle, die das Setup zuerst nur ausprobieren wollen. Die Details folgen in den späteren Abschnitten.
+
+> **Docker oder Podman:** Dieser Schnellstart nutzt Docker. Mit Podman die Befehle sinngemäß ersetzen (`podman compose` oder `podman-compose`) und für die Erstanmeldung an der GitLab-Registry den passenden Podman-Abschnitt nutzen: [Ubuntu](#podman-unter-ubuntu-2404-lts-verwenden), [macOS](#podman-unter-macos-mit-homebrew-verwenden), [Windows](#podman-unter-windows-mit-podman-desktop-verwenden).
 
 Schritt 1: Voraussetzungen prüfen.
 
@@ -282,6 +292,24 @@ Ein vollständigeres Begriffsregister steht im Abschnitt [Glossar](#glossar).
 - `spec-kit/patch-specify-cli.py`: passt Spec Kit für Windows- und WSL-Bind-Mounts an.
 - `codex_data`: Docker-Volume für Codex-CLI-Daten unter `/home/adedev/.codex`.
 - `AGENTS.md`: Regeln für KI-Agenten wie Opencode oder Codex.
+
+### Docker und Podman: gleiche Befehle
+
+Diese Anleitung zeigt die meisten Beispiele mit `docker`. Podman ist weitgehend befehlskompatibel. Die allgemeinen Abschnitte wie [Container bauen und starten](#container-bauen-und-starten), [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen), [ASP.NET-Web-App vom Host erreichen](#aspnet-web-app-vom-host-erreichen) und [Kompakter Testablauf](#kompakter-testablauf) gelten deshalb für beide Werkzeuge. Ersetze die Befehle sinngemäß:
+
+| Docker | Podman |
+|---|---|
+| `docker compose build --pull` | `podman compose build --pull` oder `podman-compose build --pull` |
+| `docker compose up -d` | `podman compose up -d` oder `podman-compose up -d` |
+| `docker compose ps` | `podman compose ps` oder `podman-compose ps` |
+| `docker compose exec ade bash` | `podman compose exec ade bash` oder `podman-compose exec ade bash` |
+| `docker compose down` | `podman compose down` oder `podman-compose down` |
+| `docker compose down -v` | `podman compose down -v` oder `podman-compose down -v` |
+| `docker info` | `podman info` |
+
+Hinweis zur Schreibweise: Auf vielen Linux-Installationen heißt der Compose-Befehl `podman-compose` (mit Bindestrich). Auf macOS und Windows mit Podman Desktop funktioniert oft `podman compose` (mit Leerzeichen). Wenn eine Variante nicht vorhanden ist, die jeweils andere verwenden.
+
+Für eine vollständige Schritt-für-Schritt-Anleitung mit Podman gibt es eigene Abschnitte für [Ubuntu](#podman-unter-ubuntu-2404-lts-verwenden), [macOS](#podman-unter-macos-mit-homebrew-verwenden) und [Windows](#podman-unter-windows-mit-podman-desktop-verwenden). Ein wichtiger Unterschied bleibt: Beim Bauen des privaten GitLab-Basisimages verwenden externe Compose-Provider unter macOS und Windows manchmal andere Registry-Anmeldedaten. Deshalb bauen die Podman-Abschnitte das Image dort bewusst direkt mit `podman build`. Für den normalen Betrieb mit `up`, `ps`, `exec` und `down` sind die Befehle aber austauschbar.
 
 ### Docker unter Ubuntu oder WSL2 installieren
 
@@ -784,6 +812,8 @@ podman compose down
 
 Wenn `docker info` mit `permission denied` scheitert, darf der aktuelle Benutzer noch nicht auf Docker zugreifen.
 
+Hinweis für Podman: Podman läuft standardmäßig rootless. Eine Docker-Gruppe wird dann meist nicht gebraucht. Dieser Abschnitt gilt vor allem für Docker.
+
 Schneller Test mit `sudo`:
 
 ```bash
@@ -827,6 +857,8 @@ chmod 600 opencode.env
 
 ### Container bauen und starten
 
+> **Docker oder Podman:** Diese Befehle nutzen Docker. Mit Podman gelten sie sinngemäß — ersetze `docker compose` durch `podman compose` oder `podman-compose` (siehe [Docker und Podman: gleiche Befehle](#docker-und-podman-gleiche-befehle)). Eine vollständige Podman-Anleitung steht in den Abschnitten [Podman unter Ubuntu](#podman-unter-ubuntu-2404-lts-verwenden), [Podman unter macOS](#podman-unter-macos-mit-homebrew-verwenden) und [Podman unter Windows](#podman-unter-windows-mit-podman-desktop-verwenden).
+
 In das Repository wechseln:
 
 ```bash
@@ -860,6 +892,8 @@ docker compose ps
 Beim ersten Build werden das gepinnte Sandbox-Basisimage, das .NET-SDK-Paket und npm-Pakete geladen. Das kann einige Minuten dauern.
 
 ### Image-SBOM erzeugen
+
+> **Hinweis für Auszubildende:** Dieser Abschnitt und [Image-SBOM auswerten](#image-sbom-auswerten) gehören zu Sicherheit und Auslieferung (Phase 5/6 im [Lernpfad für Azubis](#lernpfad-für-azubis)). Beim ersten Durcharbeiten kannst du beide überspringen und direkt mit [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen) weitermachen. Vor dem Verteilen eines selbst gebauten Images ist der SBOM-Schritt aber Pflicht.
 
 Eine SBOM ist eine *Software Bill of Materials*, also eine maschinenlesbare Stückliste für Software. Für dieses Container-Image listet sie Betriebssystempakete, Bibliotheken, installierte Werkzeuge und Versionen auf. Das hilft bei Lieferkettentransparenz: Wenn später eine Schwachstelle in einer bestimmten Komponente bekannt wird, kann geprüft werden, ob das Image betroffen ist.
 
@@ -989,6 +1023,8 @@ Shell im Container öffnen:
 ```bash
 docker compose exec ade bash
 ```
+
+Mit Podman: `podman compose exec ade bash` oder `podman-compose exec ade bash`.
 
 .NET-Version prüfen:
 
@@ -1133,6 +1169,8 @@ docker compose up -d --force-recreate
 docker compose exec ade bash
 ```
 
+Mit Podman: `podman compose up -d --force-recreate` und `podman compose exec ade bash` (oder jeweils `podman-compose ...`).
+
 Eine ASP.NET-App muss im Container auf `0.0.0.0` lauschen. `localhost` reicht nicht, weil `localhost` im Container nur den Container selbst meint.
 
 Beispiel für eine Razor-Pages-Web-App:
@@ -1247,6 +1285,8 @@ Wichtig: `.specify/presets/` gehört dann zur Projekt-Policy. Lokale Caches wie 
 ### Beispiel: ConsoleApp2 mit Opencode und Spec Kit
 
 Dieses Beispiel zeigt den kompletten Einstieg für eine neue Konsolenanwendung. Es wird im Container ausgeführt.
+
+Wenn dir die Werkzeuge Opencode und Spec Kit noch nicht vertraut sind, lies vorab die Abschnitte [Spec Kit verwenden](#spec-kit-verwenden), [Opencode verwenden](#opencode-verwenden) und [Codex CLI verwenden](#codex-cli-verwenden).
 
 ```bash
 cd /rider-projects
@@ -1475,6 +1515,8 @@ podman cp opencode.jsonc "${CONTAINER_NAME}:/home/adedev/.config/opencode/openco
 podman exec --user root "$CONTAINER_NAME" chown adedev:adedev /home/adedev/.config/opencode/opencode.jsonc
 ```
 
+Mit Docker statt Podman gelten dieselben Schritte mit `docker compose cp` und `docker compose exec --user root ade ...`.
+
 Dieser Weg aktualisiert den laufenden Container sofort. Er ändert aber nicht das bereits gebaute Image. Für neue Container muss das Image neu gebaut werden:
 
 ```bash
@@ -1537,6 +1579,8 @@ podman cp codex/config.toml "${CONTAINER_NAME}:/etc/codex/managed_config.toml"
 podman cp codex/requirements.toml "${CONTAINER_NAME}:/etc/codex/requirements.toml"
 podman exec --user root "$CONTAINER_NAME" chmod 0644 /etc/codex/config.toml /etc/codex/managed_config.toml /etc/codex/requirements.toml
 ```
+
+Mit Docker statt Podman gelten dieselben Schritte mit `docker compose cp` und `docker compose exec --user root ade ...`.
 
 Nach einer Änderung kann die wirksame Sandbox grob geprüft werden:
 
@@ -1838,6 +1882,8 @@ rm /rider-projects/Directory.Build.props
 
 Dieser Ablauf prüft das Setup in einer sinnvollen Reihenfolge. Er eignet sich gut nach einer Neuinstallation, nach Änderungen an `Dockerfile`, `compose.yml` oder `opencode.jsonc` und als erster Test auf macOS mit Docker Desktop.
 
+> **Docker oder Podman:** Die Beispiele nutzen Docker. Mit Podman dieselben Schritte ausführen und `docker compose` durch `podman compose` oder `podman-compose` ersetzen (siehe [Docker und Podman: gleiche Befehle](#docker-und-podman-gleiche-befehle)).
+
 Der Test besteht aus zwei Teilen:
 
 1. Auf dem Host wird Docker Compose geprüft, das Image gebaut und der Container gestartet.
@@ -1924,6 +1970,8 @@ docker compose up -d --force-recreate
 ```
 
 ### Merksätze
+
+> **Docker oder Podman:** Die folgenden `docker`-Befehle gelten mit Podman sinngemäß (`podman compose` oder `podman-compose`), siehe [Docker und Podman: gleiche Befehle](#docker-und-podman-gleiche-befehle).
 
 - Nach Änderungen am `Dockerfile` immer neu bauen:
 
@@ -2054,6 +2102,8 @@ Tipps für Lernende mit Screenreader oder Braille-Display:
 
 This quick start is for anyone who wants to try the setup first. Details follow in the later sections.
 
+> **Docker or Podman:** This quick start uses Docker. With Podman, substitute the commands accordingly (`podman compose` or `podman-compose`) and use the matching Podman section for the first GitLab registry login: [Ubuntu](#use-podman-on-ubuntu-2404-lts), [macOS](#use-podman-on-macos-with-homebrew), [Windows](#use-podman-on-windows-with-podman-desktop).
+
 Step 1: Check prerequisites.
 
 - Docker Engine or Docker Desktop is installed.
@@ -2183,6 +2233,24 @@ A more complete term reference is in the section [Glossary](#glossary).
 - `spec-kit/patch-specify-cli.py`: adapts Spec Kit for Windows and WSL bind mounts.
 - `codex_data`: Docker volume for Codex CLI data under `/home/adedev/.codex`.
 - `AGENTS.md`: rules for AI agents such as Opencode or Codex.
+
+### Docker and Podman: the same commands
+
+This guide shows most examples with `docker`. Podman is largely command-compatible. The general sections such as [Build and start the container](#build-and-start-the-container), [Use .NET and C# inside the container](#use-net-and-c-inside-the-container), [Reach an ASP.NET web app from the host](#reach-an-aspnet-web-app-from-the-host), and [Compact test procedure](#compact-test-procedure) therefore apply to both tools. Substitute the commands accordingly:
+
+| Docker | Podman |
+|---|---|
+| `docker compose build --pull` | `podman compose build --pull` or `podman-compose build --pull` |
+| `docker compose up -d` | `podman compose up -d` or `podman-compose up -d` |
+| `docker compose ps` | `podman compose ps` or `podman-compose ps` |
+| `docker compose exec ade bash` | `podman compose exec ade bash` or `podman-compose exec ade bash` |
+| `docker compose down` | `podman compose down` or `podman-compose down` |
+| `docker compose down -v` | `podman compose down -v` or `podman-compose down -v` |
+| `docker info` | `podman info` |
+
+Note on spelling: On many Linux installations, the Compose command is `podman-compose` (with a hyphen). On macOS and Windows with Podman Desktop, `podman compose` (with a space) often works. If one variant is missing, use the other.
+
+For a full step-by-step guide with Podman, there are dedicated sections for [Ubuntu](#use-podman-on-ubuntu-2404-lts), [macOS](#use-podman-on-macos-with-homebrew), and [Windows](#use-podman-on-windows-with-podman-desktop). One important difference remains: when building the private GitLab base image, external Compose providers on macOS and Windows sometimes use different registry credentials. That is why the Podman sections build the image directly with `podman build` there. For normal operation with `up`, `ps`, `exec`, and `down`, the commands are interchangeable.
 
 ### Install Docker on Ubuntu or WSL2
 
@@ -2685,6 +2753,8 @@ podman compose down
 
 If `docker info` fails with `permission denied`, the current user is not allowed to access Docker yet.
 
+Note for Podman: Podman runs rootless by default, so a Docker group is usually not needed. This section mainly applies to Docker.
+
 Quick test with `sudo`:
 
 ```bash
@@ -2728,6 +2798,8 @@ chmod 600 opencode.env
 
 ### Build and start the container
 
+> **Docker or Podman:** These commands use Docker. With Podman they apply in the same way — replace `docker compose` with `podman compose` or `podman-compose` (see [Docker and Podman: the same commands](#docker-and-podman-the-same-commands)). A full Podman guide is in the sections [Use Podman on Ubuntu](#use-podman-on-ubuntu-2404-lts), [Use Podman on macOS](#use-podman-on-macos-with-homebrew), and [Use Podman on Windows](#use-podman-on-windows-with-podman-desktop).
+
 Change into the repository:
 
 ```bash
@@ -2761,6 +2833,8 @@ docker compose ps
 The first build downloads the pinned Sandbox base image, the .NET SDK package, and npm packages. This can take several minutes.
 
 ### Generate an image SBOM
+
+> **Note for apprentices:** This section and [Analyze an image SBOM](#analyze-an-image-sbom) belong to security and delivery (phases 5/6 in the [learning path for apprentices](#learning-path-for-apprentices)). On your first pass you can skip both and continue directly with [Use .NET and C# inside the container](#use-net-and-c-inside-the-container). Before distributing a self-built image, however, the SBOM step is required.
 
 An SBOM is a *Software Bill of Materials*, a machine-readable inventory for software. For this container image, it lists operating-system packages, libraries, installed tools, and versions. This supports supply-chain transparency: if a vulnerability is later disclosed for a specific component, the image can be checked for exposure.
 
@@ -2890,6 +2964,8 @@ Open a shell inside the container:
 ```bash
 docker compose exec ade bash
 ```
+
+With Podman: `podman compose exec ade bash` or `podman-compose exec ade bash`.
 
 Check the .NET version:
 
@@ -3034,6 +3110,8 @@ docker compose up -d --force-recreate
 docker compose exec ade bash
 ```
 
+With Podman: `podman compose up -d --force-recreate` and `podman compose exec ade bash` (or `podman-compose ...` respectively).
+
 An ASP.NET app must listen on `0.0.0.0` inside the container. `localhost` is not enough because `localhost` inside the container only means the container itself.
 
 Example for a Razor Pages web app:
@@ -3148,6 +3226,8 @@ Important: `.specify/presets/` then becomes part of the project policy. Local ca
 ### Example: ConsoleApp2 with Opencode and Spec Kit
 
 This example shows the complete start for a new console application. Run it inside the container.
+
+If you are not yet familiar with the Opencode and Spec Kit tools, first read the sections [Use Spec Kit](#use-spec-kit), [Use Opencode](#use-opencode), and [Use Codex CLI](#use-codex-cli).
 
 ```bash
 cd /rider-projects
@@ -3376,6 +3456,8 @@ podman cp opencode.jsonc "${CONTAINER_NAME}:/home/adedev/.config/opencode/openco
 podman exec --user root "$CONTAINER_NAME" chown adedev:adedev /home/adedev/.config/opencode/opencode.jsonc
 ```
 
+With Docker instead of Podman, the same steps apply using `docker compose cp` and `docker compose exec --user root ade ...`.
+
 This updates the running container immediately. It does not change the already built image. For new containers, rebuild the image:
 
 ```bash
@@ -3438,6 +3520,8 @@ podman cp codex/config.toml "${CONTAINER_NAME}:/etc/codex/managed_config.toml"
 podman cp codex/requirements.toml "${CONTAINER_NAME}:/etc/codex/requirements.toml"
 podman exec --user root "$CONTAINER_NAME" chmod 0644 /etc/codex/config.toml /etc/codex/managed_config.toml /etc/codex/requirements.toml
 ```
+
+With Docker instead of Podman, the same steps apply using `docker compose cp` and `docker compose exec --user root ade ...`.
 
 After a change, roughly check the effective sandbox:
 
@@ -3739,6 +3823,8 @@ rm /rider-projects/Directory.Build.props
 
 This procedure checks the setup in a useful order. It is a good choice after a fresh installation, after changes to `Dockerfile`, `compose.yml`, or `opencode.jsonc`, and as a first test on macOS with Docker Desktop.
 
+> **Docker or Podman:** The examples use Docker. With Podman, run the same steps and replace `docker compose` with `podman compose` or `podman-compose` (see [Docker and Podman: the same commands](#docker-and-podman-the-same-commands)).
+
 The test has two parts:
 
 1. On the host, Docker Compose is checked, the image is built, and the container is started.
@@ -3825,6 +3911,8 @@ docker compose up -d --force-recreate
 ```
 
 ### Quick rules
+
+> **Docker or Podman:** The following `docker` commands apply to Podman in the same way (`podman compose` or `podman-compose`), see [Docker and Podman: the same commands](#docker-and-podman-the-same-commands).
 
 - After changes to the `Dockerfile`, always rebuild:
 
