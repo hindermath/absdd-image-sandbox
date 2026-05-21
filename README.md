@@ -73,8 +73,6 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 - [Docker-Berechtigungen prüfen](#docker-berechtigungen-prüfen)
 - [API-Key einrichten](#api-key-einrichten)
 - [Container bauen und starten](#container-bauen-und-starten)
-- [Image-SBOM erzeugen](#image-sbom-erzeugen)
-- [Image-SBOM auswerten](#image-sbom-auswerten)
 - [Rider-Projekte aus Windows einbinden](#rider-projekte-aus-windows-einbinden)
 - [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen)
 - [Java-Projekte einbinden](#java-projekte-einbinden)
@@ -83,13 +81,15 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 - [Rust im Container nutzen](#rust-im-container-nutzen)
 - [ASP.NET-Web-App vom Host erreichen](#aspnet-web-app-vom-host-erreichen)
 - [Spec Kit verwenden](#spec-kit-verwenden)
+- [Opencode verwenden](#opencode-verwenden)
+- [Codex CLI verwenden](#codex-cli-verwenden)
 - [Spec-Kit-Governance-Presets installieren](#spec-kit-governance-presets-installieren)
 - [Beispiel: ConsoleApp2 mit Opencode und Spec Kit](#beispiel-consoleapp2-mit-opencode-und-spec-kit)
 - [Pilot: ASP.NET-Web-App mit Opencode und Spec Kit](#pilot-aspnet-web-app-mit-opencode-und-spec-kit)
 - [Pflichtablauf für ein SDD-Feature](#pflichtablauf-für-ein-sdd-feature)
-- [Opencode verwenden](#opencode-verwenden)
-- [Codex CLI verwenden](#codex-cli-verwenden)
 - [Konfiguration](#konfiguration)
+- [Image-SBOM erzeugen](#image-sbom-erzeugen)
+- [Image-SBOM auswerten](#image-sbom-auswerten)
 - [Aufräumen](#aufräumen)
 - [Häufige Probleme](#häufige-probleme)
 - [Kompakter Testablauf](#kompakter-testablauf)
@@ -116,8 +116,6 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 - [Check Docker permissions](#check-docker-permissions)
 - [Set up the API key](#set-up-the-api-key)
 - [Build and start the container](#build-and-start-the-container)
-- [Generate an image SBOM](#generate-an-image-sbom)
-- [Analyze an image SBOM](#analyze-an-image-sbom)
 - [Mount Rider projects from Windows](#mount-rider-projects-from-windows)
 - [Use .NET and C# inside the container](#use-net-and-c-inside-the-container)
 - [Mount Java projects](#mount-java-projects)
@@ -126,13 +124,15 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 - [Use Rust inside the container](#use-rust-inside-the-container)
 - [Reach an ASP.NET web app from the host](#reach-an-aspnet-web-app-from-the-host)
 - [Use Spec Kit](#use-spec-kit)
+- [Use Opencode](#use-opencode)
+- [Use Codex CLI](#use-codex-cli)
 - [Install Spec Kit governance presets](#install-spec-kit-governance-presets)
 - [Example: ConsoleApp2 with Opencode and Spec Kit](#example-consoleapp2-with-opencode-and-spec-kit)
 - [Pilot: ASP.NET web app with Opencode and Spec Kit](#pilot-aspnet-web-app-with-opencode-and-spec-kit)
 - [Required flow for an SDD feature](#required-flow-for-an-sdd-feature)
-- [Use Opencode](#use-opencode)
-- [Use Codex CLI](#use-codex-cli)
 - [Configuration](#configuration)
+- [Generate an image SBOM](#generate-an-image-sbom)
+- [Analyze an image SBOM](#analyze-an-image-sbom)
 - [Clean up](#clean-up)
 - [Common problems](#common-problems)
 - [Compact test procedure](#compact-test-procedure)
@@ -891,96 +891,6 @@ docker compose ps
 
 Beim ersten Build werden das gepinnte Sandbox-Basisimage, das .NET-SDK-Paket und npm-Pakete geladen. Das kann einige Minuten dauern.
 
-### Image-SBOM erzeugen
-
-> **Hinweis für Auszubildende:** Dieser Abschnitt und [Image-SBOM auswerten](#image-sbom-auswerten) gehören zu Sicherheit und Auslieferung (Phase 5/6 im [Lernpfad für Azubis](#lernpfad-für-azubis)). Beim ersten Durcharbeiten kannst du beide überspringen und direkt mit [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen) weitermachen. Vor dem Verteilen eines selbst gebauten Images ist der SBOM-Schritt aber Pflicht.
-
-Eine SBOM ist eine *Software Bill of Materials*, also eine maschinenlesbare Stückliste für Software. Für dieses Container-Image listet sie Betriebssystempakete, Bibliotheken, installierte Werkzeuge und Versionen auf. Das hilft bei Lieferkettentransparenz: Wenn später eine Schwachstelle in einer bestimmten Komponente bekannt wird, kann geprüft werden, ob das Image betroffen ist.
-
-Für dieses Repository wird eine CycloneDX-JSON-SBOM erzeugt. Vor der Verteilung oder Übergabe eines neu gebauten Sandbox-Images ist dieser Schritt Pflicht.
-
-Linux, macOS oder WSL2:
-
-```bash
-./scripts/build-and-sbom.sh
-```
-
-Windows PowerShell, zum Beispiel mit Podman:
-
-```powershell
-.\scripts\build-and-sbom.ps1 -Runtime podman
-```
-
-Wenn das Image bereits gebaut ist und nur die SBOM neu erzeugt werden soll:
-
-```bash
-./scripts/build-and-sbom.sh --skip-build
-```
-
-```powershell
-.\scripts\build-and-sbom.ps1 -Runtime podman -SkipBuild
-```
-
-Die Skripte verwenden lokal installiertes `syft`, wenn es vorhanden ist. Wenn `syft` nicht im `PATH` liegt, nutzen sie als Fallback das Container-Image `docker.io/anchore/syft:latest`. Dafür muss Docker oder Podman öffentliche Images ziehen können.
-
-Die erzeugten Dateien liegen unter `sboms/`, zum Beispiel `sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json`. Diese Dateien sind Build-Artefakte und werden durch `.gitignore` nicht committed. Für Releases können sie separat als Release-Artefakt abgelegt werden.
-
-### Image-SBOM auswerten
-
-Die SBOM kann mit den mitgelieferten Skripten lokal zusammengefasst und durchsucht werden. Ohne weitere Parameter wird die neueste Datei aus `sboms/*.cdx.json` verwendet.
-
-Windows PowerShell:
-
-```powershell
-.\scripts\analyze-sbom.ps1
-```
-
-macOS, Linux oder WSL2:
-
-```bash
-./scripts/analyze-sbom.sh
-```
-
-Die Ausgabe zeigt Format, CycloneDX-Version, Erzeugungszeit, Anzahl der Komponenten, Komponententypen, Paket-Ökosysteme aus `purl` und erkannte Lizenzen.
-
-Nach Komponenten suchen:
-
-```powershell
-.\scripts\analyze-sbom.ps1 -Search "openssl|dotnet|node|python|rust|go"
-.\scripts\analyze-sbom.ps1 -ComponentType library -Search "openssl|dotnet|node|python|rust|go"
-```
-
-```bash
-./scripts/analyze-sbom.sh --search 'openssl|dotnet|node|python|rust|go'
-./scripts/analyze-sbom.sh --type library --search 'openssl|dotnet|node|python|rust|go'
-```
-
-Der Typfilter `library` blendet reine Datei-Einträge aus und ist meist die sinnvollste Sicht für Paket- und CVE-Fragen.
-
-Eine bestimmte SBOM-Datei auswerten:
-
-```powershell
-.\scripts\analyze-sbom.ps1 -SbomPath .\sboms\2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
-```
-
-```bash
-./scripts/analyze-sbom.sh --file sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
-```
-
-Optional kann ein Schwachstellenscan gegen die SBOM laufen, wenn `grype` oder `trivy` installiert ist:
-
-```powershell
-.\scripts\analyze-sbom.ps1 -Scan
-.\scripts\analyze-sbom.ps1 -Scan -Scanner trivy
-```
-
-```bash
-./scripts/analyze-sbom.sh --scan
-./scripts/analyze-sbom.sh --scan --scanner trivy
-```
-
-Das Bash-Skript nutzt für die lokale Zusammenfassung `jq`, wenn verfügbar, und fällt sonst auf `python3` oder `python` zurück. Das PowerShell-Skript nutzt `ConvertFrom-Json` und benötigt für die Basis-Auswertung keine Zusatzwerkzeuge. Für CVE-Auswertungen ist eines der Scanner-Werkzeuge `grype` oder `trivy` erforderlich.
-
 ### Rider-Projekte aus Windows einbinden
 
 Das Host-Verzeichnis für Rider-Projekte wird über `RIDER_PROJECTS_DIR` gesetzt. Typische Werte sind:
@@ -1241,6 +1151,57 @@ Spec Kit weist darauf hin, dass Agentenordner private Daten enthalten können. F
 
 Spec Kit erzeugt Projektdateien für spec-driven development. Diese Dateien gehören normalerweise in das jeweilige Anwendungsrepo unter `/rider-projects`, nicht in dieses Docker-Setup-Repo.
 
+### Opencode verwenden
+
+Opencode im Container starten:
+
+```bash
+opencode
+```
+
+Der Container startet Opencode nicht automatisch. Das ist Absicht. So kann zuerst entschieden werden, in welchem Projektverzeichnis gearbeitet wird.
+
+Für Sicherheits- und Architekturprüfungen gibt es den read-only-Agenten `security-review`. Er ist für Reviews gedacht und darf keine Dateien ändern.
+
+Interaktiv im Projekt starten:
+
+```bash
+cd /rider-projects/MeinProjekt
+opencode --agent security-review
+```
+
+Dann im Prompt eine konkrete Prüffrage stellen, zum Beispiel:
+
+```text
+Prüfe dieses Projekt auf Sicherheitsrisiken, unsichere Konfiguration, Secret-Leaks und Architekturprobleme. Ändere keine Dateien, sondern liefere Findings mit Datei- und Zeilenhinweisen.
+```
+
+Als einmaligen nicht-interaktiven Review-Lauf:
+
+```bash
+cd /rider-projects/MeinProjekt
+opencode run --agent security-review "Prüfe dieses Projekt auf Sicherheitsrisiken, unsichere Konfiguration, Secret-Leaks und Architekturprobleme. Ändere keine Dateien, sondern liefere Findings mit Datei- und Zeilenhinweisen."
+```
+
+Wenn aus einem Finding eine Änderung entstehen soll, danach bewusst mit dem normalen `coding`-Agenten oder manuell umsetzen. `security-review` ist absichtlich auf Analyse begrenzt.
+
+### Codex CLI verwenden
+
+Codex CLI ist ebenfalls im Container installiert:
+
+```bash
+codex --version
+```
+
+Codex startet nicht automatisch. Für ein Projekt zuerst in das Projektverzeichnis wechseln und dann Codex starten:
+
+```bash
+cd /rider-projects/MeinProjekt
+codex
+```
+
+Lokale Codex-Daten liegen im Docker-Volume `codex_data` unter `/home/adedev/.codex`. Dieses Volume ist nicht Teil des Git-Repositories. Zugangsdaten und private Sitzungsdaten dürfen nicht in Projektordner kopiert oder committed werden.
+
 ### Spec-Kit-Governance-Presets installieren
 
 Nach `specify init` können die sechs Governance-Presets in einem Projekt installiert werden. Die Presets erweitern Spec Kit um verbindliche Regeln für sichere Entwicklung, Softwarearchitektur, iSAQB/arc42, Barrierefreiheit, Plattform-Parität und KI-Agenten-Parität.
@@ -1285,8 +1246,6 @@ Wichtig: `.specify/presets/` gehört dann zur Projekt-Policy. Lokale Caches wie 
 ### Beispiel: ConsoleApp2 mit Opencode und Spec Kit
 
 Dieses Beispiel zeigt den kompletten Einstieg für eine neue Konsolenanwendung. Es wird im Container ausgeführt.
-
-Wenn dir die Werkzeuge Opencode und Spec Kit noch nicht vertraut sind, lies vorab die Abschnitte [Spec Kit verwenden](#spec-kit-verwenden), [Opencode verwenden](#opencode-verwenden) und [Codex CLI verwenden](#codex-cli-verwenden).
 
 ```bash
 cd /rider-projects
@@ -1421,57 +1380,6 @@ dotnet run
 ```
 
 Wenn das Projekt keine Tests enthält, mindestens `dotnet build` ausführen und in der Dokumentation notieren, warum keine Tests vorhanden sind.
-
-### Opencode verwenden
-
-Opencode im Container starten:
-
-```bash
-opencode
-```
-
-Der Container startet Opencode nicht automatisch. Das ist Absicht. So kann zuerst entschieden werden, in welchem Projektverzeichnis gearbeitet wird.
-
-Für Sicherheits- und Architekturprüfungen gibt es den read-only-Agenten `security-review`. Er ist für Reviews gedacht und darf keine Dateien ändern.
-
-Interaktiv im Projekt starten:
-
-```bash
-cd /rider-projects/MeinProjekt
-opencode --agent security-review
-```
-
-Dann im Prompt eine konkrete Prüffrage stellen, zum Beispiel:
-
-```text
-Prüfe dieses Projekt auf Sicherheitsrisiken, unsichere Konfiguration, Secret-Leaks und Architekturprobleme. Ändere keine Dateien, sondern liefere Findings mit Datei- und Zeilenhinweisen.
-```
-
-Als einmaligen nicht-interaktiven Review-Lauf:
-
-```bash
-cd /rider-projects/MeinProjekt
-opencode run --agent security-review "Prüfe dieses Projekt auf Sicherheitsrisiken, unsichere Konfiguration, Secret-Leaks und Architekturprobleme. Ändere keine Dateien, sondern liefere Findings mit Datei- und Zeilenhinweisen."
-```
-
-Wenn aus einem Finding eine Änderung entstehen soll, danach bewusst mit dem normalen `coding`-Agenten oder manuell umsetzen. `security-review` ist absichtlich auf Analyse begrenzt.
-
-### Codex CLI verwenden
-
-Codex CLI ist ebenfalls im Container installiert:
-
-```bash
-codex --version
-```
-
-Codex startet nicht automatisch. Für ein Projekt zuerst in das Projektverzeichnis wechseln und dann Codex starten:
-
-```bash
-cd /rider-projects/MeinProjekt
-codex
-```
-
-Lokale Codex-Daten liegen im Docker-Volume `codex_data` unter `/home/adedev/.codex`. Dieses Volume ist nicht Teil des Git-Repositories. Zugangsdaten und private Sitzungsdaten dürfen nicht in Projektordner kopiert oder committed werden.
 
 ### Konfiguration
 
@@ -1707,6 +1615,94 @@ An issue was encountered verifying workloads. For more information, run "dotnet 
 ```
 
 Andere Warnungen, Fehler und der Exit-Code von `dotnet` bleiben erhalten.
+
+### Image-SBOM erzeugen
+
+Eine SBOM ist eine *Software Bill of Materials*, also eine maschinenlesbare Stückliste für Software. Für dieses Container-Image listet sie Betriebssystempakete, Bibliotheken, installierte Werkzeuge und Versionen auf. Das hilft bei Lieferkettentransparenz: Wenn später eine Schwachstelle in einer bestimmten Komponente bekannt wird, kann geprüft werden, ob das Image betroffen ist.
+
+Für dieses Repository wird eine CycloneDX-JSON-SBOM erzeugt. Vor der Verteilung oder Übergabe eines neu gebauten Sandbox-Images ist dieser Schritt Pflicht.
+
+Linux, macOS oder WSL2:
+
+```bash
+./scripts/build-and-sbom.sh
+```
+
+Windows PowerShell, zum Beispiel mit Podman:
+
+```powershell
+.\scripts\build-and-sbom.ps1 -Runtime podman
+```
+
+Wenn das Image bereits gebaut ist und nur die SBOM neu erzeugt werden soll:
+
+```bash
+./scripts/build-and-sbom.sh --skip-build
+```
+
+```powershell
+.\scripts\build-and-sbom.ps1 -Runtime podman -SkipBuild
+```
+
+Die Skripte verwenden lokal installiertes `syft`, wenn es vorhanden ist. Wenn `syft` nicht im `PATH` liegt, nutzen sie als Fallback das Container-Image `docker.io/anchore/syft:latest`. Dafür muss Docker oder Podman öffentliche Images ziehen können.
+
+Die erzeugten Dateien liegen unter `sboms/`, zum Beispiel `sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json`. Diese Dateien sind Build-Artefakte und werden durch `.gitignore` nicht committed. Für Releases können sie separat als Release-Artefakt abgelegt werden.
+
+### Image-SBOM auswerten
+
+Die SBOM kann mit den mitgelieferten Skripten lokal zusammengefasst und durchsucht werden. Ohne weitere Parameter wird die neueste Datei aus `sboms/*.cdx.json` verwendet.
+
+Windows PowerShell:
+
+```powershell
+.\scripts\analyze-sbom.ps1
+```
+
+macOS, Linux oder WSL2:
+
+```bash
+./scripts/analyze-sbom.sh
+```
+
+Die Ausgabe zeigt Format, CycloneDX-Version, Erzeugungszeit, Anzahl der Komponenten, Komponententypen, Paket-Ökosysteme aus `purl` und erkannte Lizenzen.
+
+Nach Komponenten suchen:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -Search "openssl|dotnet|node|python|rust|go"
+.\scripts\analyze-sbom.ps1 -ComponentType library -Search "openssl|dotnet|node|python|rust|go"
+```
+
+```bash
+./scripts/analyze-sbom.sh --search 'openssl|dotnet|node|python|rust|go'
+./scripts/analyze-sbom.sh --type library --search 'openssl|dotnet|node|python|rust|go'
+```
+
+Der Typfilter `library` blendet reine Datei-Einträge aus und ist meist die sinnvollste Sicht für Paket- und CVE-Fragen.
+
+Eine bestimmte SBOM-Datei auswerten:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -SbomPath .\sboms\2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
+```
+
+```bash
+./scripts/analyze-sbom.sh --file sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
+```
+
+Optional kann ein Schwachstellenscan gegen die SBOM laufen, wenn `grype` oder `trivy` installiert ist:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -Scan
+.\scripts\analyze-sbom.ps1 -Scan -Scanner trivy
+```
+
+```bash
+./scripts/analyze-sbom.sh --scan
+./scripts/analyze-sbom.sh --scan --scanner trivy
+```
+
+Das Bash-Skript nutzt für die lokale Zusammenfassung `jq`, wenn verfügbar, und fällt sonst auf `python3` oder `python` zurück. Das PowerShell-Skript nutzt `ConvertFrom-Json` und benötigt für die Basis-Auswertung keine Zusatzwerkzeuge. Für CVE-Auswertungen ist eines der Scanner-Werkzeuge `grype` oder `trivy` erforderlich.
 
 ### Aufräumen
 
@@ -2832,96 +2828,6 @@ docker compose ps
 
 The first build downloads the pinned Sandbox base image, the .NET SDK package, and npm packages. This can take several minutes.
 
-### Generate an image SBOM
-
-> **Note for apprentices:** This section and [Analyze an image SBOM](#analyze-an-image-sbom) belong to security and delivery (phases 5/6 in the [learning path for apprentices](#learning-path-for-apprentices)). On your first pass you can skip both and continue directly with [Use .NET and C# inside the container](#use-net-and-c-inside-the-container). Before distributing a self-built image, however, the SBOM step is required.
-
-An SBOM is a *Software Bill of Materials*, a machine-readable inventory for software. For this container image, it lists operating-system packages, libraries, installed tools, and versions. This supports supply-chain transparency: if a vulnerability is later disclosed for a specific component, the image can be checked for exposure.
-
-This repository generates a CycloneDX JSON SBOM. Before distributing or handing over a rebuilt Sandbox image, this step is required.
-
-Linux, macOS, or WSL2:
-
-```bash
-./scripts/build-and-sbom.sh
-```
-
-Windows PowerShell, for example with Podman:
-
-```powershell
-.\scripts\build-and-sbom.ps1 -Runtime podman
-```
-
-If the image is already built and only the SBOM should be regenerated:
-
-```bash
-./scripts/build-and-sbom.sh --skip-build
-```
-
-```powershell
-.\scripts\build-and-sbom.ps1 -Runtime podman -SkipBuild
-```
-
-The scripts use a locally installed `syft` when it is available. If `syft` is not in `PATH`, they fall back to the container image `docker.io/anchore/syft:latest`. Docker or Podman must then be able to pull public images.
-
-Generated files are written to `sboms/`, for example `sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json`. These files are build artifacts and are ignored by `.gitignore`. For releases, they can be attached separately as release artifacts.
-
-### Analyze an image SBOM
-
-The SBOM can be summarized and searched locally with the provided scripts. Without parameters, the newest file from `sboms/*.cdx.json` is used.
-
-Windows PowerShell:
-
-```powershell
-.\scripts\analyze-sbom.ps1
-```
-
-macOS, Linux, or WSL2:
-
-```bash
-./scripts/analyze-sbom.sh
-```
-
-The output shows the format, CycloneDX version, generation time, component count, component types, package ecosystems from `purl`, and detected licenses.
-
-Search for components:
-
-```powershell
-.\scripts\analyze-sbom.ps1 -Search "openssl|dotnet|node|python|rust|go"
-.\scripts\analyze-sbom.ps1 -ComponentType library -Search "openssl|dotnet|node|python|rust|go"
-```
-
-```bash
-./scripts/analyze-sbom.sh --search 'openssl|dotnet|node|python|rust|go'
-./scripts/analyze-sbom.sh --type library --search 'openssl|dotnet|node|python|rust|go'
-```
-
-The `library` type filter hides raw file entries and is usually the most useful view for package and CVE questions.
-
-Analyze a specific SBOM file:
-
-```powershell
-.\scripts\analyze-sbom.ps1 -SbomPath .\sboms\2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
-```
-
-```bash
-./scripts/analyze-sbom.sh --file sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
-```
-
-Optionally run a vulnerability scan against the SBOM when `grype` or `trivy` is installed:
-
-```powershell
-.\scripts\analyze-sbom.ps1 -Scan
-.\scripts\analyze-sbom.ps1 -Scan -Scanner trivy
-```
-
-```bash
-./scripts/analyze-sbom.sh --scan
-./scripts/analyze-sbom.sh --scan --scanner trivy
-```
-
-The Bash script uses `jq` for local summaries when available and otherwise falls back to `python3` or `python`. The PowerShell script uses `ConvertFrom-Json` and needs no additional tool for the basic analysis. CVE analysis requires one of the scanner tools, `grype` or `trivy`.
-
 ### Mount Rider projects from Windows
 
 The host directory for Rider projects is set through `RIDER_PROJECTS_DIR`. Typical values are:
@@ -3182,6 +3088,57 @@ Spec Kit warns that agent folders can contain private data. For projects under `
 
 Spec Kit creates project files for spec-driven development. These files normally belong in the application repository under `/rider-projects`, not in this Docker setup repository.
 
+### Use Opencode
+
+Start Opencode inside the container:
+
+```bash
+opencode
+```
+
+The container does not start Opencode automatically. This is intentional. It lets you choose the project directory first.
+
+For security and architecture checks, use the read-only `security-review` agent. It is meant for reviews and must not change files.
+
+Start it interactively inside a project:
+
+```bash
+cd /rider-projects/MyProject
+opencode --agent security-review
+```
+
+Then ask a concrete review question, for example:
+
+```text
+Check this project for security risks, unsafe configuration, secret leaks, and architecture issues. Do not change files; return findings with file and line references.
+```
+
+Run a one-off non-interactive review:
+
+```bash
+cd /rider-projects/MyProject
+opencode run --agent security-review "Check this project for security risks, unsafe configuration, secret leaks, and architecture issues. Do not change files; return findings with file and line references."
+```
+
+If a finding should become a change, implement it afterwards with the normal `coding` agent or manually. `security-review` is intentionally limited to analysis.
+
+### Use Codex CLI
+
+Codex CLI is also installed inside the container:
+
+```bash
+codex --version
+```
+
+Codex does not start automatically. First switch to the project directory, then start Codex:
+
+```bash
+cd /rider-projects/MyProject
+codex
+```
+
+Local Codex data is stored in the Docker volume `codex_data` under `/home/adedev/.codex`. This volume is not part of the Git repository. Credentials and private session data must not be copied into project folders or committed.
+
 ### Install Spec Kit governance presets
 
 After `specify init`, the six governance presets can be installed in a project. The presets extend Spec Kit with binding rules for secure development, software architecture, iSAQB/arc42, accessibility, platform parity, and AI-agent parity.
@@ -3226,8 +3183,6 @@ Important: `.specify/presets/` then becomes part of the project policy. Local ca
 ### Example: ConsoleApp2 with Opencode and Spec Kit
 
 This example shows the complete start for a new console application. Run it inside the container.
-
-If you are not yet familiar with the Opencode and Spec Kit tools, first read the sections [Use Spec Kit](#use-spec-kit), [Use Opencode](#use-opencode), and [Use Codex CLI](#use-codex-cli).
 
 ```bash
 cd /rider-projects
@@ -3362,57 +3317,6 @@ dotnet run
 ```
 
 If the project has no tests, run at least `dotnet build` and document why no tests exist.
-
-### Use Opencode
-
-Start Opencode inside the container:
-
-```bash
-opencode
-```
-
-The container does not start Opencode automatically. This is intentional. It lets you choose the project directory first.
-
-For security and architecture checks, use the read-only `security-review` agent. It is meant for reviews and must not change files.
-
-Start it interactively inside a project:
-
-```bash
-cd /rider-projects/MyProject
-opencode --agent security-review
-```
-
-Then ask a concrete review question, for example:
-
-```text
-Check this project for security risks, unsafe configuration, secret leaks, and architecture issues. Do not change files; return findings with file and line references.
-```
-
-Run a one-off non-interactive review:
-
-```bash
-cd /rider-projects/MyProject
-opencode run --agent security-review "Check this project for security risks, unsafe configuration, secret leaks, and architecture issues. Do not change files; return findings with file and line references."
-```
-
-If a finding should become a change, implement it afterwards with the normal `coding` agent or manually. `security-review` is intentionally limited to analysis.
-
-### Use Codex CLI
-
-Codex CLI is also installed inside the container:
-
-```bash
-codex --version
-```
-
-Codex does not start automatically. First switch to the project directory, then start Codex:
-
-```bash
-cd /rider-projects/MyProject
-codex
-```
-
-Local Codex data is stored in the Docker volume `codex_data` under `/home/adedev/.codex`. This volume is not part of the Git repository. Credentials and private session data must not be copied into project folders or committed.
 
 ### Configuration
 
@@ -3648,6 +3552,94 @@ An issue was encountered verifying workloads. For more information, run "dotnet 
 ```
 
 Other warnings, errors, and the `dotnet` exit code are preserved.
+
+### Generate an image SBOM
+
+An SBOM is a *Software Bill of Materials*, a machine-readable inventory for software. For this container image, it lists operating-system packages, libraries, installed tools, and versions. This supports supply-chain transparency: if a vulnerability is later disclosed for a specific component, the image can be checked for exposure.
+
+This repository generates a CycloneDX JSON SBOM. Before distributing or handing over a rebuilt Sandbox image, this step is required.
+
+Linux, macOS, or WSL2:
+
+```bash
+./scripts/build-and-sbom.sh
+```
+
+Windows PowerShell, for example with Podman:
+
+```powershell
+.\scripts\build-and-sbom.ps1 -Runtime podman
+```
+
+If the image is already built and only the SBOM should be regenerated:
+
+```bash
+./scripts/build-and-sbom.sh --skip-build
+```
+
+```powershell
+.\scripts\build-and-sbom.ps1 -Runtime podman -SkipBuild
+```
+
+The scripts use a locally installed `syft` when it is available. If `syft` is not in `PATH`, they fall back to the container image `docker.io/anchore/syft:latest`. Docker or Podman must then be able to pull public images.
+
+Generated files are written to `sboms/`, for example `sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json`. These files are build artifacts and are ignored by `.gitignore`. For releases, they can be attached separately as release artifacts.
+
+### Analyze an image SBOM
+
+The SBOM can be summarized and searched locally with the provided scripts. Without parameters, the newest file from `sboms/*.cdx.json` is used.
+
+Windows PowerShell:
+
+```powershell
+.\scripts\analyze-sbom.ps1
+```
+
+macOS, Linux, or WSL2:
+
+```bash
+./scripts/analyze-sbom.sh
+```
+
+The output shows the format, CycloneDX version, generation time, component count, component types, package ecosystems from `purl`, and detected licenses.
+
+Search for components:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -Search "openssl|dotnet|node|python|rust|go"
+.\scripts\analyze-sbom.ps1 -ComponentType library -Search "openssl|dotnet|node|python|rust|go"
+```
+
+```bash
+./scripts/analyze-sbom.sh --search 'openssl|dotnet|node|python|rust|go'
+./scripts/analyze-sbom.sh --type library --search 'openssl|dotnet|node|python|rust|go'
+```
+
+The `library` type filter hides raw file entries and is usually the most useful view for package and CVE questions.
+
+Analyze a specific SBOM file:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -SbomPath .\sboms\2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
+```
+
+```bash
+./scripts/analyze-sbom.sh --file sboms/2026-05-17-localhost-ade-dev-sandbox-ade-latest.cdx.json
+```
+
+Optionally run a vulnerability scan against the SBOM when `grype` or `trivy` is installed:
+
+```powershell
+.\scripts\analyze-sbom.ps1 -Scan
+.\scripts\analyze-sbom.ps1 -Scan -Scanner trivy
+```
+
+```bash
+./scripts/analyze-sbom.sh --scan
+./scripts/analyze-sbom.sh --scan --scanner trivy
+```
+
+The Bash script uses `jq` for local summaries when available and otherwise falls back to `python3` or `python`. The PowerShell script uses `ConvertFrom-Json` and needs no additional tool for the basic analysis. CVE analysis requires one of the scanner tools, `grype` or `trivy`.
 
 ### Clean up
 
