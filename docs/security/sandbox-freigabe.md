@@ -2,7 +2,7 @@
 
 Status: Entwurf, Freigabe ausstehend
 
-Dieses Dokument bereitet die formelle Freigabe der `ade-dev-sandbox` vor.  Verantwortliche Personen, Freigabestatus, Freigabedatum und rechtliche Bewertungen muessen durch die verantwortliche Stelle ergaenzt werden.
+Dieses Dokument bereitet die formelle Freigabe der `ade-dev-sandbox` vor.  Verantwortliche Personen, Freigabestatus, Freigabedatum und rechtliche Bewertungen muessen durch die verantwortliche Stelle ergaenzt werden. Der MR/PR-Ablauf fuer CISO/ISB oder KI-Beauftragte:n (KIB) ist in `docs/security/sandbox-freigabe-review.md` beschrieben.
 
 ## Deutsch
 
@@ -17,7 +17,8 @@ Dieses Dokument bereitet die formelle Freigabe der `ade-dev-sandbox` vor.  Veran
 | Genehmigte Modelle | Siehe `docs/security/ai-tools-inventory.md` |
 | Genehmigte Mount-Liste | Siehe `compose.yml`; Kurzliste unten |
 | Genehmigte Tool-Versionen | Siehe `Dockerfile`; Kurzliste unten |
-| Offener Freigabehinweis | Freigabe durch CISO/ISB ausstehend |
+| Offener Freigabehinweis | Freigabe durch CISO/ISB oder KI-Beauftragte:n (KIB) ausstehend |
+| Freigabe-Review | Siehe `docs/security/sandbox-freigabe-review.md` |
 
 ### Genehmigte Mount-Liste
 
@@ -59,6 +60,7 @@ Dieses Dokument bereitet die formelle Freigabe der `ade-dev-sandbox` vor.  Veran
 |---|---|---|---|
 | Verantwortliche Person | `_TODO_` | `_TODO_` | `_TODO_` |
 | CISO / ISB | `_TODO_` | `_TODO_` | `_TODO_` |
+| KI-Beauftragte:r (KIB) | `_TODO_` | `_TODO_` | `_TODO_` |
 | Betrieb / Plattform | `_TODO_` | `_TODO_` | `_TODO_` |
 
 ## English
@@ -74,6 +76,7 @@ Dieses Dokument bereitet die formelle Freigabe der `ade-dev-sandbox` vor.  Veran
 | Approved models | See `docs/security/ai-tools-inventory.md` |
 | Approved mount list | See `compose.yml`; short list above |
 | Approved tool versions | See `Dockerfile`; short list above |
-| Open approval note | Approval by CISO/ISB pending |
+| Open approval note | Approval by CISO/ISB or AI officer (KIB) pending |
+| Approval review | See `docs/security/sandbox-freigabe-review.md` |
 
-This file is a draft for review and signature by the responsible people.
+This file is a draft for review and signature by the responsible people. The MR/PR review flow is described in `docs/security/sandbox-freigabe-review.md`.
