@@ -67,6 +67,8 @@ podman compose up -d
 podman compose exec ade bash
 ```
 
+On macOS with Podman Desktop, do not assume Docker Desktop is required just because `podman info` or `podman build` fails from the terminal. If Podman Desktop is running but the CLI points at a stale `ssh://core@127.0.0.1:<port>` connection, check `/var/run/docker.sock`; Podman Desktop may expose a Docker-compatible socket there. In that case build with `docker --host unix:///var/run/docker.sock compose build --pull` and treat the resulting image as stored in the Podman machine, whose logical store is `/var/home/core/.local/share/containers/storage` and whose macOS disk is under `~/.local/share/containers/podman/machine/applehv/`.
+
 ```bash
 specify version
 specify check

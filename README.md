@@ -626,6 +626,24 @@ podman build --pull -t ade-dev-sandbox-ade .
 podman compose up -d --no-build --force-recreate
 ```
 
+Wenn Podman Desktop sichtbar läuft, die Terminal-CLI aber trotzdem mit einer Meldung wie `unable to connect to Podman socket`, `connection refused` oder einem veralteten `ssh://core@127.0.0.1:<port>` abbricht, zuerst die aktive Verbindung prüfen:
+
+```bash
+podman machine list
+podman system connection list
+ls -l /var/run/docker.sock
+docker --host unix:///var/run/docker.sock version
+```
+
+Unter macOS legt Podman Desktop häufig einen Docker-kompatiblen Socket an. Dann zeigt `/var/run/docker.sock` auf einen Podman-Socket unter `~/.local/share/containers/podman/machine/podman.sock`. In diesem Fall kann das Image mit der Docker-CLI gegen Podman gebaut werden, ohne Docker Desktop zu starten:
+
+```bash
+docker --host unix:///var/run/docker.sock compose build --pull
+docker --host unix:///var/run/docker.sock image inspect ade-dev-sandbox-ade --format '{{.Id}} {{.Architecture}} {{.Os}} {{.Size}}'
+```
+
+Der Image- und Container-Store liegt dabei logisch in der Podman-Machine unter `/var/home/core/.local/share/containers/storage` und verwendet in der Regel den Treiber `overlay`. Physisch liegt dieser Store auf macOS in der virtuellen Disk der Podman-Machine, zum Beispiel unter `~/.local/share/containers/podman/machine/applehv/podman-machine-default-arm64.raw`. Diese Datei ist keine einzelne Image-Datei, sondern die virtuelle Linux-Disk der Podman-Machine.
+
 Danach direkt mit der Statusprüfung fortfahren.
 
 Container im Hintergrund starten:
@@ -2716,6 +2734,24 @@ podman pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox@
 podman build --pull -t ade-dev-sandbox-ade .
 podman compose up -d --no-build --force-recreate
 ```
+
+If Podman Desktop is visibly running but the terminal CLI still fails with a message such as `unable to connect to Podman socket`, `connection refused`, or a stale `ssh://core@127.0.0.1:<port>`, check the active connection first:
+
+```bash
+podman machine list
+podman system connection list
+ls -l /var/run/docker.sock
+docker --host unix:///var/run/docker.sock version
+```
+
+On macOS, Podman Desktop often exposes a Docker-compatible socket. In that setup, `/var/run/docker.sock` points to a Podman socket under `~/.local/share/containers/podman/machine/podman.sock`. You can then build the image with the Docker CLI against Podman, without starting Docker Desktop:
+
+```bash
+docker --host unix:///var/run/docker.sock compose build --pull
+docker --host unix:///var/run/docker.sock image inspect ade-dev-sandbox-ade --format '{{.Id}} {{.Architecture}} {{.Os}} {{.Size}}'
+```
+
+The image and container store then lives logically inside the Podman machine at `/var/home/core/.local/share/containers/storage` and usually uses the `overlay` driver. Physically on macOS, that store is inside the Podman machine's virtual disk, for example `~/.local/share/containers/podman/machine/applehv/podman-machine-default-arm64.raw`. This file is not a single image file; it is the virtual Linux disk used by the Podman machine.
 
 Then continue directly with the status check.
 
