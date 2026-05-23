@@ -8,6 +8,7 @@ ARG STATICCHECK_VERSION=v0.7.0
 ARG GOVULNCHECK_VERSION=v1.3.0
 ARG DELVE_VERSION=v1.26.3
 ARG RUST_TOOLCHAIN=1.95.0
+ARG NODE_MAJOR=22
 ARG OPENCODE_VERSION=1.14.50
 ARG CODEX_VERSION=0.130.0
 
@@ -22,6 +23,7 @@ RUN apt-get -y update \
         fd-find \
         git \
         git-delta \
+        gnupg \
         jq \
         just \
         libssl-dev \
@@ -40,10 +42,20 @@ RUN apt-get -y update \
     && wget https://packages.microsoft.com/config/debian/13/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
     && dpkg -i packages-microsoft-prod.deb \
     && rm packages-microsoft-prod.deb \
+    && mkdir -p /usr/share/keyrings \
+    && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key -o /tmp/nodesource-repo.gpg.key \
+    && gpg --dearmor --yes -o /usr/share/keyrings/nodesource.gpg /tmp/nodesource-repo.gpg.key \
+    && chmod 0644 /usr/share/keyrings/nodesource.gpg \
+    && rm /tmp/nodesource-repo.gpg.key \
+    && arch="$(dpkg --print-architecture)" \
+    && case "${arch}" in \
+        amd64|arm64) ;; \
+        *) echo "Unsupported NodeSource architecture: ${arch}" >&2; exit 1 ;; \
+    esac \
+    && printf 'Types: deb\nURIs: https://deb.nodesource.com/node_%s.x\nSuites: nodistro\nComponents: main\nArchitectures: %s\nSigned-By: /usr/share/keyrings/nodesource.gpg\n' "${NODE_MAJOR}" "${arch}" > /etc/apt/sources.list.d/nodesource.sources \
+    && printf 'Package: nodejs\nPin: origin deb.nodesource.com\nPin-Priority: 600\n' > /etc/apt/preferences.d/nodejs \
     && apt-get -y update \
-    && apt-get -y install --no-install-recommends "${DOTNET_SDK_PACKAGE}" \
-    && curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
-    && apt-get -y install --no-install-recommends nodejs \
+    && apt-get -y install --no-install-recommends "${DOTNET_SDK_PACKAGE}" nodejs \
     && ln -sf /usr/bin/fdfind /usr/local/bin/fd \
     && rm -rf /var/lib/apt/lists/*
 RUN set -eux; \

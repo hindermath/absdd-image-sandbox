@@ -44,6 +44,7 @@ Dieses Dokument bereitet die formelle Freigabe der `ade-dev-sandbox` vor.  Veran
 | Java | OpenJDK 21 aus Debian-Paketquellen |
 | Maven | Debian-Paketquelle |
 | Python | Debian-Paketquelle (`python3`, `python3-venv`, `python-is-python3`) |
+| Node.js / npm | NodeSource-Apt-Quelle, `NODE_MAJOR=22`, signiert ueber `/usr/share/keyrings/nodesource.gpg` |
 | Go | `1.26.3` |
 | gopls | `v0.21.1` |
 | staticcheck | `v0.7.0` |
