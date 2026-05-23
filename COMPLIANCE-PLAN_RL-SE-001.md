@@ -652,12 +652,12 @@ Faktenlage auf und markiert das Urteil als `_TODO_`; es wird nicht erfunden.
 
 ### Akzeptanzkriterien
 
-- [ ] `docs/security/sandbox-isolation.md` existiert, Deutsch und Englisch.
-- [ ] Sandbox-Typ als Container-Sandbox gemäß RL-Typologie benannt.
-- [ ] Jeder Isolationsmechanismus mit konkreter Evidenzquelle belegt.
-- [ ] Schutzniveau-Begründung vorhanden; offene Owner-Bewertung als `_TODO_`
+- [x] `docs/security/sandbox-isolation.md` existiert, Deutsch und Englisch.
+- [x] Sandbox-Typ als Container-Sandbox gemäß RL-Typologie benannt.
+- [x] Jeder Isolationsmechanismus mit konkreter Evidenzquelle belegt.
+- [x] Schutzniveau-Begründung vorhanden; offene Owner-Bewertung als `_TODO_`
       markiert, nicht erfunden.
-- [ ] Verweis in `README.md` und in `sandbox-freigabe.md` ergänzt.
+- [x] Verweis in `README.md` und in `sandbox-freigabe.md` ergänzt.
 
 ### Eskalationspunkte
 
@@ -730,13 +730,13 @@ erfasst oder verlinkt. Fehlt eine Angabe, wird das ausdrücklich vermerkt.
 
 ### Akzeptanzkriterien
 
-- [ ] `ai-tools-inventory.md` enthält je Werkzeug, Dienst und Modell die
+- [x] `ai-tools-inventory.md` enthält je Werkzeug, Dienst und Modell die
       vier neuen Felder oder einen begründeten Fehlt-Vermerk.
-- [ ] Für jedes Modell ist eine Anbieter-Transparenzquelle (Model Card oder
+- [x] Für jedes Modell ist eine Anbieter-Transparenzquelle (Model Card oder
       AI-SBOM) verlinkt oder ihr Fehlen dokumentiert.
-- [ ] Keine erfundenen Trainings- oder Datenherkunfts-Angaben; offene
+- [x] Keine erfundenen Trainings- oder Datenherkunfts-Angaben; offene
       Punkte sind als `_TODO_` oder "nicht veröffentlicht" markiert.
-- [ ] Verweis auf die G7-Leitlinie "Software Bill of Materials for AI –
+- [x] Verweis auf die G7-Leitlinie "Software Bill of Materials for AI –
       Minimum Elements" (2026) und auf CL_09 Prüfpunkt 15 ergänzt.
 
 ### Eskalationspunkte
