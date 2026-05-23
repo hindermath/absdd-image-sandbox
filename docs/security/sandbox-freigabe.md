@@ -54,7 +54,7 @@ Dieses Dokument bereitet die formelle Freigabe der `ade-dev-sandbox` vor.  Veran
 | OpenCode | `opencode-ai` `1.14.50` |
 | Codex CLI | `@openai/codex` `0.130.0` |
 | Spec Kit | `specify-cli` `v0.8.3` aus `github.com/github/spec-kit.git` |
-| uv / uvx | Installiert aus `https://astral.sh/uv/install.sh` beim Image-Build |
+| uv / uvx | `0.11.16` aus GitHub-Release-Artefakt, SHA256-Pruefung im Image-Build |
 
 ### Unterschriftsblock
 

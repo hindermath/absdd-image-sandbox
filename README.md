@@ -1680,6 +1680,8 @@ Rust wird beim Image-Build mit `rustup` für den Linux-Benutzer `adedev` install
 
 Node.js wird aus der signierten NodeSource-Apt-Quelle installiert. Der Build-Parameter `NODE_MAJOR` steht standardmäßig auf `22`; das Dockerfile richtet die Deb822-Quelle mit `Signed-By`-Keyring ein und führt kein heruntergeladenes NodeSource-Setup-Skript mehr aus.
 
+uv und uvx werden aus einem festen GitHub-Release-Artefakt installiert. Der Build-Parameter `UV_VERSION` steht standardmäßig auf `0.11.16`; das Dockerfile wählt das Linux-Artefakt passend zur CPU-Architektur, lädt die zugehörige `.sha256`-Datei und prüft sie mit `sha256sum -c`, bevor `uv` und `uvx` nach `/usr/local/bin` installiert werden.
+
 OpenCode und Codex CLI werden beim Image-Build als konkret gepinnte npm-Pakete installiert. Die Versionen stehen im Dockerfile in `OPENCODE_VERSION` und `CODEX_VERSION`; Updates erfolgen bewusst über Dockerfile-Änderung, Git-Commit und neuen Image-Build:
 
 ```dockerfile
@@ -3790,6 +3792,8 @@ Go is installed during the image build as the official Go tarball under `/usr/lo
 Rust is installed during the image build with `rustup` for the Linux user `adedev`. The toolchain is pinned in the Dockerfile through `RUST_TOOLCHAIN`. The image also installs the components `rustfmt`, `clippy`, `rust-analyzer`, and `rust-src`.
 
 Node.js is installed from the signed NodeSource Apt source. The `NODE_MAJOR` build argument defaults to `22`; the Dockerfile configures the Deb822 source with a `Signed-By` keyring and no longer executes a downloaded NodeSource setup script.
+
+uv and uvx are installed from a fixed GitHub release artifact. The `UV_VERSION` build argument defaults to `0.11.16`; the Dockerfile selects the Linux artifact for the CPU architecture, downloads the matching `.sha256` file, verifies it with `sha256sum -c`, and only then installs `uv` and `uvx` into `/usr/local/bin`.
 
 OpenCode and Codex CLI are installed during the image build as explicitly pinned npm packages. The versions are declared in the Dockerfile through `OPENCODE_VERSION` and `CODEX_VERSION`; updates happen deliberately through a Dockerfile change, Git commit, and a new image build:
 

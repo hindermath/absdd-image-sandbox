@@ -9,6 +9,7 @@ ARG GOVULNCHECK_VERSION=v1.3.0
 ARG DELVE_VERSION=v1.26.3
 ARG RUST_TOOLCHAIN=1.95.0
 ARG NODE_MAJOR=22
+ARG UV_VERSION=0.11.16
 ARG OPENCODE_VERSION=1.14.50
 ARG CODEX_VERSION=0.130.0
 
@@ -75,9 +76,23 @@ RUN dotnet workload config --update-mode manifests \
     && dotnet workload update
 RUN npm i -g "opencode-ai@${OPENCODE_VERSION}" "@openai/codex@${CODEX_VERSION}" \
     && ln -sf "$(npm root -g)/@openai/codex/bin/codex.js" /usr/local/bin/codex
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
-    && install -m 0755 /root/.local/bin/uv /usr/local/bin/uv \
-    && install -m 0755 /root/.local/bin/uvx /usr/local/bin/uvx
+RUN set -eux; \
+    arch="$(dpkg --print-architecture)"; \
+    case "${arch}" in \
+        amd64) uv_target="x86_64-unknown-linux-gnu" ;; \
+        arm64) uv_target="aarch64-unknown-linux-gnu" ;; \
+        *) echo "Unsupported uv architecture: ${arch}" >&2; exit 1 ;; \
+    esac; \
+    uv_archive="uv-${uv_target}.tar.gz"; \
+    uv_base_url="https://github.com/astral-sh/uv/releases/download/${UV_VERSION}"; \
+    tmp_dir="$(mktemp -d)"; \
+    curl -fsSL "${uv_base_url}/${uv_archive}" -o "${tmp_dir}/${uv_archive}"; \
+    curl -fsSL "${uv_base_url}/${uv_archive}.sha256" -o "${tmp_dir}/${uv_archive}.sha256"; \
+    (cd "${tmp_dir}" && sha256sum -c "${uv_archive}.sha256"); \
+    tar -xzf "${tmp_dir}/${uv_archive}" -C "${tmp_dir}"; \
+    install -m 0755 "${tmp_dir}/uv-${uv_target}/uv" /usr/local/bin/uv; \
+    install -m 0755 "${tmp_dir}/uv-${uv_target}/uvx" /usr/local/bin/uvx; \
+    rm -rf "${tmp_dir}"
 COPY ./dotnet/dotnet-wrapper.sh /usr/local/bin/dotnet
 RUN sed -i 's/\r$//' /usr/local/bin/dotnet \
     && chmod 0755 /usr/local/bin/dotnet
