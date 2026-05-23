@@ -15,6 +15,7 @@ Dieses Dokument bereitet die formelle Freigabe der `ade-dev-sandbox` vor.  Veran
 | Freigabedatum | `_TODO_ (vom Owner einzutragen)` |
 | Ablaufdatum / Re-Review | `_TODO_ (Empfehlung: 12 Monate nach Freigabe)` |
 | Genehmigte Modelle | Siehe `docs/security/ai-tools-inventory.md` |
+| Isolationsnachweis | Siehe `docs/security/sandbox-isolation.md` |
 | Genehmigte Mount-Liste | Siehe `compose.yml`; Kurzliste unten |
 | Genehmigte Tool-Versionen | Siehe `Dockerfile`; Kurzliste unten |
 | Offener Freigabehinweis | Freigabe durch CISO/ISB oder KI-Beauftragte:n (KIB) ausstehend |
@@ -74,6 +75,7 @@ Dieses Dokument bereitet die formelle Freigabe der `ade-dev-sandbox` vor.  Veran
 | Approval date | `_TODO_ (to be entered by owner)` |
 | Expiration date / re-review | `_TODO_ (recommendation: 12 months after approval)` |
 | Approved models | See `docs/security/ai-tools-inventory.md` |
+| Isolation evidence | See `docs/security/sandbox-isolation.md` |
 | Approved mount list | See `compose.yml`; short list above |
 | Approved tool versions | See `Dockerfile`; short list above |
 | Open approval note | Approval by CISO/ISB or AI officer (KIB) pending |

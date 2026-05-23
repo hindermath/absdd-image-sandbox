@@ -1707,7 +1707,7 @@ Die erste Variable betrifft allgemeine Update-Benachrichtigungen. Die zweite Var
 
 Das Image erbt vom gemeinsamen `agent-sandbox`-Image auf Debian 13. Das Basisimage ist im Dockerfile per `sha256`-Digest gepinnt; der lesbare `latest`-Tag bleibt nur als Kommentar mit Beobachtungsdatum erhalten. Ein Update des Basisimages erfolgt bewusst über Digest-Änderung im Dockerfile, Review, Git-Commit und neuen Image-Build. .NET wird über die Microsoft-Paketquelle für Debian 13 installiert. Der Build-Parameter `DOTNET_SDK_PACKAGE` steht standardmäßig auf `dotnet-sdk-10.0`.
 
-Die Sicherheitsfreigabe wird in `docs/security/sandbox-freigabe.md` als Entwurf dokumentiert. Die MR/PR-Anleitung fuer CISO/ISB oder KI-Beauftragte:n (KIB) liegt in `docs/security/sandbox-freigabe-review.md`. Das zugehörige KI-Werkzeug-Inventar liegt in `docs/security/ai-tools-inventory.md`. Offene `_TODO_`-Felder müssen durch Owner, Betrieb, CISO/ISB oder KIB gepflegt werden und werden nicht durch Annahmen ersetzt.
+Die Sicherheitsfreigabe wird in `docs/security/sandbox-freigabe.md` als Entwurf dokumentiert. Die MR/PR-Anleitung fuer CISO/ISB oder KI-Beauftragte:n (KIB) liegt in `docs/security/sandbox-freigabe-review.md`. Der Isolationsnachweis liegt in `docs/security/sandbox-isolation.md`. Das zugehörige KI-Werkzeug-Inventar liegt in `docs/security/ai-tools-inventory.md`. Offene `_TODO_`-Felder müssen durch Owner, Betrieb, CISO/ISB oder KIB gepflegt werden und werden nicht durch Annahmen ersetzt.
 
 #### Secret-Scanning
 
@@ -3816,7 +3816,7 @@ The first variable affects general update notifications. The second variable dis
 
 The image inherits from the shared `agent-sandbox` image on Debian 13. The base image is pinned in the Dockerfile by `sha256` digest; the readable `latest` tag stays only as a comment with the observation date. A base-image update happens deliberately through a digest change in the Dockerfile, review, Git commit, and a new image build. .NET is installed through the Microsoft package feed for Debian 13. The build argument `DOTNET_SDK_PACKAGE` defaults to `dotnet-sdk-10.0`.
 
-The security approval is documented as a draft in `docs/security/sandbox-freigabe.md`. The MR/PR review guide for CISO/ISB or the AI officer (KIB) lives in `docs/security/sandbox-freigabe-review.md`. The related AI tool inventory lives in `docs/security/ai-tools-inventory.md`. Open `_TODO_` fields must be maintained by the owner, operations, CISO/ISB, or KIB and are not replaced with assumptions.
+The security approval is documented as a draft in `docs/security/sandbox-freigabe.md`. The MR/PR review guide for CISO/ISB or the AI officer (KIB) lives in `docs/security/sandbox-freigabe-review.md`. The isolation evidence lives in `docs/security/sandbox-isolation.md`. The related AI tool inventory lives in `docs/security/ai-tools-inventory.md`. Open `_TODO_` fields must be maintained by the owner, operations, CISO/ISB, or KIB and are not replaced with assumptions.
 
 #### Secret Scanning
 
