@@ -934,6 +934,30 @@ Ersetze stufenweise:
 
 Wegen mittleren Umsetzungsaufwands: in **mehreren** kleinen PRs.
 
+### Umsetzungsschnitt und Abnahme
+
+- MR 1: NodeSource-Setup-Skript ersetzen; TODO-Einträge für uv/uvx und
+  Rust/rustup in `docs/security/supply-chain-todo.md` anlegen.
+- MR 2: uv/uvx auf ein festes GitHub-Release-Artefakt mit
+  `sha256`-Prüfung umstellen.
+- MR 3: Rust/rustup auf `rustup-init` mit `sha256`-Prüfung umstellen.
+
+Wenn MR 2 auf dem lokalen macOS-/Podman-System wegen Storage-, Speicherplatz-
+oder Podman-VM-Problemen nicht vollständig abgenommen werden kann, darf der
+Branch für eine externe Abnahme auf ein stärkeres System gepusht werden. MR 2
+gilt dann aber erst als mergefähig, wenn dort mindestens folgende Prüfungen
+grün gelaufen sind:
+
+```bash
+docker compose config --no-interpolate
+docker compose build --pull
+uvx pre-commit run --all-files
+```
+
+Danach müssen zusätzlich die Tool-Checks im neu gebauten Image laufen. P3-1
+darf erst abgehakt werden, wenn MR 1 bis MR 3 gemergt sind und Build- sowie
+Tool-Checks sauber durchlaufen.
+
 ### Akzeptanzkriterien
 
 - [ ] Mindestens einer der drei Punkte umgestellt, dokumentiert, getestet.
