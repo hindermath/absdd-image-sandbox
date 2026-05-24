@@ -97,6 +97,7 @@ COPY ./dotnet/dotnet-wrapper.sh /usr/local/bin/dotnet
 RUN sed -i 's/\r$//' /usr/local/bin/dotnet \
     && chmod 0755 /usr/local/bin/dotnet
 COPY ./spec-kit/patch-specify-cli.py /usr/local/bin/patch-specify-cli.py
+RUN chmod 0644 /usr/local/bin/patch-specify-cli.py
 RUN mkdir -p /etc/codex
 COPY ./codex/config.toml /etc/codex/config.toml
 COPY ./codex/config.toml /etc/codex/managed_config.toml
