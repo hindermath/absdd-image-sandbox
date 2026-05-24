@@ -15,8 +15,7 @@ Begruendung: Die Sandbox ist eine Ausbildungs- und Entwicklungsumgebung. Mehrere
 - `deb.nodesource.com`
 - `go.dev`
 - `sh.rustup.rs`
-- `astral.sh`
-- GitHub fuer Spec Kit, Governance-Presets, Gitleaks und weitere Entwicklungswerkzeuge
+- GitHub fuer uv-Release-Artefakte, Spec Kit, Governance-Presets, Gitleaks und weitere Entwicklungswerkzeuge
 - Maven Central
 - NuGet
 - crates.io
@@ -41,8 +40,7 @@ Rationale: The sandbox is a training and development environment. Several intend
 - `deb.nodesource.com`
 - `go.dev`
 - `sh.rustup.rs`
-- `astral.sh`
-- GitHub for Spec Kit, governance presets, Gitleaks, and other development tools
+- GitHub for uv release artifacts, Spec Kit, governance presets, Gitleaks, and other development tools
 - Maven Central
 - NuGet
 - crates.io
