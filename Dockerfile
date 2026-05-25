@@ -1,17 +1,29 @@
 # Tag latest observed on 2026-05-14, pinned here by digest for reproducible builds.
 FROM docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox@sha256:a21e15872aed8b0e4b9e18e0ff1e678318968efb4b8367ddf9fa4a63fc1d294c
 
+# renovate-dotnet: datasource=dotnet-version depName=dotnet-sdk versioning=semver extractVersion=^(?<version>\d+\.\d+) argName=DOTNET_SDK_PACKAGE
 ARG DOTNET_SDK_PACKAGE=dotnet-sdk-10.0
+# renovate: datasource=golang-version depName=go versioning=semver argName=GO_VERSION
 ARG GO_VERSION=1.26.3
+# renovate: datasource=go depName=golang.org/x/tools/gopls versioning=semver argName=GOPLS_VERSION
 ARG GOPLS_VERSION=v0.21.1
+# renovate: datasource=go depName=honnef.co/go/tools versioning=semver argName=STATICCHECK_VERSION
 ARG STATICCHECK_VERSION=v0.7.0
+# renovate: datasource=go depName=golang.org/x/vuln versioning=semver argName=GOVULNCHECK_VERSION
 ARG GOVULNCHECK_VERSION=v1.3.0
+# renovate: datasource=go depName=github.com/go-delve/delve versioning=semver argName=DELVE_VERSION
 ARG DELVE_VERSION=v1.26.3
+# renovate: datasource=rust-version depName=rust versioning=rust-release-channel argName=RUST_TOOLCHAIN
 ARG RUST_TOOLCHAIN=1.95.0
+# renovate: datasource=github-releases depName=rust-lang/rustup versioning=semver argName=RUSTUP_VERSION
 ARG RUSTUP_VERSION=1.28.2
+# renovate: datasource=node-version depName=node versioning=node argName=NODE_MAJOR
 ARG NODE_MAJOR=22
+# renovate: datasource=github-releases depName=astral-sh/uv versioning=semver argName=UV_VERSION
 ARG UV_VERSION=0.11.16
+# renovate: datasource=npm depName=opencode-ai versioning=npm argName=OPENCODE_VERSION
 ARG OPENCODE_VERSION=1.14.50
+# renovate: datasource=npm depName=@openai/codex versioning=npm argName=CODEX_VERSION
 ARG CODEX_VERSION=0.130.0
 
 USER root

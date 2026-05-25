@@ -95,6 +95,8 @@ Use two-space indentation for JSON and YAML. Keep shell commands simple and copy
 
 Prefer explicit configuration over hidden behavior. Keep secrets out of tracked files.
 
+Every `ARG` in `Dockerfile` must have an immediately preceding Renovate metadata comment with a matching `argName`. Use the generic form `# renovate: datasource=<renovate-datasource> depName=<dependency-name> versioning=<versioning> argName=<ARG_NAME>` when the value is a simple version. Add or update a dedicated `renovate.json` custom manager when the value needs special parsing, and keep `docs/security/dependency-update-policy.md` in sync. The local pre-commit hook `dockerfile-arg-renovate-metadata` enforces this for current and future Dockerfile `ARG` lines.
+
 ## Testing Guidelines
 
 There is no test framework in this repository. Before committing, run:
