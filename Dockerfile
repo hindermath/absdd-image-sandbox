@@ -8,6 +8,7 @@ ARG STATICCHECK_VERSION=v0.7.0
 ARG GOVULNCHECK_VERSION=v1.3.0
 ARG DELVE_VERSION=v1.26.3
 ARG RUST_TOOLCHAIN=1.95.0
+ARG RUSTUP_VERSION=1.28.2
 ARG NODE_MAJOR=22
 ARG UV_VERSION=0.11.16
 ARG OPENCODE_VERSION=1.14.50
@@ -112,9 +113,22 @@ RUN go install "golang.org/x/tools/gopls@${GOPLS_VERSION}" \
     && go install "honnef.co/go/tools/cmd/staticcheck@${STATICCHECK_VERSION}" \
     && go install "golang.org/x/vuln/cmd/govulncheck@${GOVULNCHECK_VERSION}" \
     && go install "github.com/go-delve/delve/cmd/dlv@${DELVE_VERSION}"
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
-    | sh -s -- -y --no-modify-path --profile minimal --default-toolchain "${RUST_TOOLCHAIN}" \
-    && rustup component add rustfmt clippy rust-analyzer rust-src
+RUN set -eux; \
+    arch="$(dpkg --print-architecture)"; \
+    case "${arch}" in \
+        amd64) rust_host="x86_64-unknown-linux-gnu" ;; \
+        arm64) rust_host="aarch64-unknown-linux-gnu" ;; \
+        *) echo "Unsupported rustup architecture: ${arch}" >&2; exit 1 ;; \
+    esac; \
+    rustup_base_url="https://static.rust-lang.org/rustup/archive/${RUSTUP_VERSION}/${rust_host}"; \
+    tmp_dir="$(mktemp -d)"; \
+    curl -fsSL "${rustup_base_url}/rustup-init" -o "${tmp_dir}/rustup-init"; \
+    curl -fsSL "${rustup_base_url}/rustup-init.sha256" -o "${tmp_dir}/rustup-init.sha256"; \
+    (cd "${tmp_dir}" && sha256sum -c rustup-init.sha256); \
+    chmod 0755 "${tmp_dir}/rustup-init"; \
+    "${tmp_dir}/rustup-init" -y --no-modify-path --profile minimal --default-host "${rust_host}" --default-toolchain "${RUST_TOOLCHAIN}"; \
+    rm -rf "${tmp_dir}"; \
+    rustup component add rustfmt clippy rust-analyzer rust-src
 RUN uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.8.3 \
     && python3 /usr/local/bin/patch-specify-cli.py
 RUN mkdir -p /home/adedev/.local/share/opencode
