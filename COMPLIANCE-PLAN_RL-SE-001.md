@@ -1015,9 +1015,15 @@ Renovate) an, das `Dockerfile`-Pinning-Variablen und npm-Pakete überwacht.
 
 ### Akzeptanzkriterien
 
-- [ ] Konfigurationsdatei vorhanden.
-- [ ] Mindestens eine erfolgreiche Auswertung lokal simuliert oder als
+- [x] Konfigurationsdatei vorhanden.
+- [x] Mindestens eine erfolgreiche Auswertung lokal simuliert oder als
       "wird nach Aktivierung serverseitig laufen" notiert.
+
+Umsetzung: `renovate.json` ist vorhanden und wurde lokal mit
+`npx --yes --package renovate@latest renovate-config-validator renovate.json`
+validiert. Die operative MR-Erzeugung laeuft nach Aktivierung eines
+Renovate-Bots, GitLab-Runner-Jobs oder externen Renovate-Services fuer dieses
+GitLab-CE-Projekt.
 
 ---
 

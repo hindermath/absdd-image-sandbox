@@ -1711,7 +1711,13 @@ Die erste Variable betrifft allgemeine Update-Benachrichtigungen. Die zweite Var
 
 Das Image erbt vom gemeinsamen `agent-sandbox`-Image auf Debian 13. Das Basisimage ist im Dockerfile per `sha256`-Digest gepinnt; der lesbare `latest`-Tag bleibt nur als Kommentar mit Beobachtungsdatum erhalten. Ein Update des Basisimages erfolgt bewusst über Digest-Änderung im Dockerfile, Review, Git-Commit und neuen Image-Build. .NET wird über die Microsoft-Paketquelle für Debian 13 installiert. Der Build-Parameter `DOTNET_SDK_PACKAGE` steht standardmäßig auf `dotnet-sdk-10.0`.
 
-Die Sicherheitsfreigabe wird in `docs/security/sandbox-freigabe.md` als Entwurf dokumentiert. Die MR/PR-Anleitung fuer CISO/ISB oder KI-Beauftragte:n (KIB) liegt in `docs/security/sandbox-freigabe-review.md`. Der Isolationsnachweis liegt in `docs/security/sandbox-isolation.md`. Das zugehörige KI-Werkzeug-Inventar liegt in `docs/security/ai-tools-inventory.md`. Offene Supply-Chain-Haertungen aus P3-1 stehen in `docs/security/supply-chain-todo.md`. Offene `_TODO_`-Felder müssen durch Owner, Betrieb, CISO/ISB oder KIB gepflegt werden und werden nicht durch Annahmen ersetzt.
+Die Sicherheitsfreigabe wird in `docs/security/sandbox-freigabe.md` als Entwurf dokumentiert. Die MR/PR-Anleitung fuer CISO/ISB oder KI-Beauftragte:n (KIB) liegt in `docs/security/sandbox-freigabe-review.md`. Der Isolationsnachweis liegt in `docs/security/sandbox-isolation.md`. Das zugehörige KI-Werkzeug-Inventar liegt in `docs/security/ai-tools-inventory.md`. Supply-Chain-Haertungen und Dependency-Update-Regeln sind in `docs/security/supply-chain-todo.md` und `docs/security/dependency-update-policy.md` dokumentiert. Offene `_TODO_`-Felder müssen durch Owner, Betrieb, CISO/ISB oder KIB gepflegt werden und werden nicht durch Annahmen ersetzt.
+
+#### Automatisierte Dependency-Updates
+
+`renovate.json` bereitet Renovate-Merge-Requests fuer die im Dockerfile gepinnten Werkzeuge und Pakete vor. Alle aktuellen und künftigen Dockerfile-`ARG`-Zeilen müssen direkt oberhalb eine Renovate-Metadatenzeile mit passendem `argName` haben; der lokale Pre-commit-Hook `dockerfile-arg-renovate-metadata` prüft diese Regel. Die vollständige Konvention und die aktuell überwachten ARGs stehen in `docs/security/dependency-update-policy.md`.
+
+Auf dieser GitLab-CE-Instanz muss die Ausführung von Renovate separat durch Betrieb/Admin aktiviert werden, zum Beispiel als Renovate-Bot, GitLab-Runner-Job oder externer Renovate-Service. Bis dahin ist die Repository-Seite vorbereitet; automatische Merge Requests entstehen erst nach dieser Aktivierung.
 
 #### Secret-Scanning
 
@@ -3824,7 +3830,13 @@ The first variable affects general update notifications. The second variable dis
 
 The image inherits from the shared `agent-sandbox` image on Debian 13. The base image is pinned in the Dockerfile by `sha256` digest; the readable `latest` tag stays only as a comment with the observation date. A base-image update happens deliberately through a digest change in the Dockerfile, review, Git commit, and a new image build. .NET is installed through the Microsoft package feed for Debian 13. The build argument `DOTNET_SDK_PACKAGE` defaults to `dotnet-sdk-10.0`.
 
-The security approval is documented as a draft in `docs/security/sandbox-freigabe.md`. The MR/PR review guide for CISO/ISB or the AI officer (KIB) lives in `docs/security/sandbox-freigabe-review.md`. The isolation evidence lives in `docs/security/sandbox-isolation.md`. The related AI tool inventory lives in `docs/security/ai-tools-inventory.md`. Open P3-1 supply-chain hardening items are tracked in `docs/security/supply-chain-todo.md`. Open `_TODO_` fields must be maintained by the owner, operations, CISO/ISB, or KIB and are not replaced with assumptions.
+The security approval is documented as a draft in `docs/security/sandbox-freigabe.md`. The MR/PR review guide for CISO/ISB or the AI officer (KIB) lives in `docs/security/sandbox-freigabe-review.md`. The isolation evidence lives in `docs/security/sandbox-isolation.md`. The related AI tool inventory lives in `docs/security/ai-tools-inventory.md`. Supply-chain hardening and dependency-update rules are documented in `docs/security/supply-chain-todo.md` and `docs/security/dependency-update-policy.md`. Open `_TODO_` fields must be maintained by the owner, operations, CISO/ISB, or KIB and are not replaced with assumptions.
+
+#### Automated Dependency Updates
+
+`renovate.json` prepares Renovate merge requests for the pinned tools and packages in the Dockerfile. All current and future Dockerfile `ARG` lines must have a Renovate metadata line directly above them with a matching `argName`; the local pre-commit hook `dockerfile-arg-renovate-metadata` checks this rule. The full convention and the currently monitored ARGs are documented in `docs/security/dependency-update-policy.md`.
+
+On this GitLab CE instance, Renovate execution must be activated separately by operations or an admin, for example as a Renovate bot, GitLab Runner job, or external Renovate service. Until then, the repository side is prepared; automatic merge requests are only created after that activation.
 
 #### Secret Scanning
 

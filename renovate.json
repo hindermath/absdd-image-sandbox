@@ -1,0 +1,87 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "dependencyDashboard": true,
+  "automerge": false,
+  "platformAutomerge": false,
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "labels": [
+    "dependencies",
+    "security"
+  ],
+  "enabledManagers": [
+    "custom.regex"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^Dockerfile$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>[a-zA-Z0-9._-]+) depName=(?<depName>[^\\s]+)(?: packageName=(?<packageName>[^\\s]+))?(?: versioning=(?<versioning>[^\\s]+))? argName=(?<argName>[A-Z][A-Z0-9_]*)\\s+ARG [A-Z][A-Z0-9_]*=(?<currentValue>[^\\s]+)"
+      ],
+      "depTypeTemplate": "dockerfile-arg"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^Dockerfile$/"
+      ],
+      "matchStrings": [
+          "# renovate-dotnet: datasource=(?<datasource>dotnet-version) depName=(?<depName>dotnet-sdk) versioning=(?<versioning>[^\\s]+) extractVersion=(?<extractVersion>[^\\s]+) argName=DOTNET_SDK_PACKAGE\\s+ARG DOTNET_SDK_PACKAGE=dotnet-sdk-(?<currentValue>[^\\s]+)"
+      ],
+      "depTypeTemplate": "dockerfile-arg"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": [
+        "custom.regex"
+      ],
+      "matchDepTypes": [
+        "dockerfile-arg"
+      ],
+      "addLabels": [
+        "dockerfile-arg"
+      ],
+      "commitMessageTopic": "{{depName}} Dockerfile ARG"
+    },
+    {
+      "matchPackageNames": [
+        "golang.org/x/tools/gopls",
+        "honnef.co/go/tools",
+        "golang.org/x/vuln",
+        "github.com/go-delve/delve"
+      ],
+      "groupName": "Go tooling Dockerfile ARGs",
+      "addLabels": [
+        "go"
+      ]
+    },
+    {
+      "matchPackageNames": [
+        "opencode-ai",
+        "@openai/codex"
+      ],
+      "groupName": "agent CLI npm Dockerfile ARGs",
+      "addLabels": [
+        "npm",
+        "agent-tools"
+      ]
+    },
+    {
+      "matchPackageNames": [
+        "rust",
+        "rust-lang/rustup"
+      ],
+      "groupName": "Rust tooling Dockerfile ARGs",
+      "addLabels": [
+        "rust"
+      ]
+    }
+  ]
+}
