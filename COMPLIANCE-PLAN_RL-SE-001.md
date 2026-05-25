@@ -960,8 +960,8 @@ Tool-Checks sauber durchlaufen.
 
 ### Akzeptanzkriterien
 
-- [ ] Mindestens einer der drei Punkte umgestellt, dokumentiert, getestet.
-- [ ] Bei den anderen: TODO-Eintrag in `docs/security/supply-chain-todo.md`.
+- [x] Mindestens einer der drei Punkte umgestellt, dokumentiert, getestet.
+- [x] Bei den anderen: TODO-Eintrag in `docs/security/supply-chain-todo.md`.
 
 ---
 
@@ -984,7 +984,7 @@ Variante A — Lernumgebung bleibt offen, aber dokumentiert:
 
 1. In `docs/security/network-decision.md` festhalten: "Default-Bridge mit
    freiem Egress, weil Spec-Kit, OpenCode, Codex, Maven Central, NuGet,
-   crates.io, deb.nodesource.com, sh.rustup.rs, astral.sh, go.dev,
+   crates.io, deb.nodesource.com, static.rust-lang.org, go.dev,
    chat-ai.academiccloud.de erreichbar sein müssen. Risiko: lateral
    movement gering wegen Container-Isolation. Akzeptiert bis YYYY-MM-DD."
 2. In `compose.yml` Kommentar ergänzen, der auf diese Entscheidung

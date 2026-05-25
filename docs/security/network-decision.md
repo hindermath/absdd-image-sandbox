@@ -14,7 +14,7 @@ Begruendung: Die Sandbox ist eine Ausbildungs- und Entwicklungsumgebung. Mehrere
 - Debian- und Microsoft-Paketquellen
 - `deb.nodesource.com`
 - `go.dev`
-- `sh.rustup.rs`
+- `static.rust-lang.org` fuer gepinnte `rustup-init`-Artefakte und Rust-Toolchains
 - GitHub fuer uv-Release-Artefakte, Spec Kit, Governance-Presets, Gitleaks und weitere Entwicklungswerkzeuge
 - Maven Central
 - NuGet
@@ -39,7 +39,7 @@ Rationale: The sandbox is a training and development environment. Several intend
 - Debian and Microsoft package sources
 - `deb.nodesource.com`
 - `go.dev`
-- `sh.rustup.rs`
+- `static.rust-lang.org` for pinned `rustup-init` artifacts and Rust toolchains
 - GitHub for uv release artifacts, Spec Kit, governance presets, Gitleaks, and other development tools
 - Maven Central
 - NuGet

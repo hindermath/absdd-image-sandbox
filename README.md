@@ -1676,7 +1676,7 @@ Java JDK 21 und Maven werden beim Image-Build aus den Debian-Paketquellen instal
 
 Go wird beim Image-Build als offizielles Go-Tarball nach `/usr/local/go` installiert. Die Version ist im Dockerfile über `GO_VERSION` gepinnt, damit Updates bewusst über eine Dockerfile-Änderung, einen Git-Commit und einen neuen Image-Build erfolgen. Zusätzlich werden `gopls`, `staticcheck`, `govulncheck` und `dlv` in `/home/adedev/go/bin` installiert; auch diese Werkzeugversionen sind über Dockerfile-Build-Argumente gepinnt.
 
-Rust wird beim Image-Build mit `rustup` für den Linux-Benutzer `adedev` installiert. Die Toolchain ist im Dockerfile über `RUST_TOOLCHAIN` gepinnt. Installiert werden außerdem die Komponenten `rustfmt`, `clippy`, `rust-analyzer` und `rust-src`.
+Rust wird beim Image-Build mit `rustup` für den Linux-Benutzer `adedev` installiert. Die Toolchain ist im Dockerfile über `RUST_TOOLCHAIN` gepinnt; der Installer selbst ist über `RUSTUP_VERSION` gepinnt und wird als `rustup-init`-Artefakt von `static.rust-lang.org` mit SHA256-Pruefung geladen. Installiert werden außerdem die Komponenten `rustfmt`, `clippy`, `rust-analyzer` und `rust-src`.
 
 Node.js wird aus der signierten NodeSource-Apt-Quelle installiert. Der Build-Parameter `NODE_MAJOR` steht standardmäßig auf `22`; das Dockerfile richtet die Deb822-Quelle mit `Signed-By`-Keyring ein und führt kein heruntergeladenes NodeSource-Setup-Skript mehr aus.
 
@@ -3789,7 +3789,7 @@ Java JDK 21 and Maven are installed during the image build from the Debian packa
 
 Go is installed during the image build as the official Go tarball under `/usr/local/go`. The version is pinned in the Dockerfile through `GO_VERSION`, so updates happen deliberately through a Dockerfile change, a Git commit, and a new image build. The image also installs `gopls`, `staticcheck`, `govulncheck`, and `dlv` under `/home/adedev/go/bin`; these tool versions are pinned through Dockerfile build arguments as well.
 
-Rust is installed during the image build with `rustup` for the Linux user `adedev`. The toolchain is pinned in the Dockerfile through `RUST_TOOLCHAIN`. The image also installs the components `rustfmt`, `clippy`, `rust-analyzer`, and `rust-src`.
+Rust is installed during the image build with `rustup` for the Linux user `adedev`. The toolchain is pinned in the Dockerfile through `RUST_TOOLCHAIN`; the installer itself is pinned through `RUSTUP_VERSION` and downloaded as a `rustup-init` artifact from `static.rust-lang.org` with SHA256 verification. The image also installs the components `rustfmt`, `clippy`, `rust-analyzer`, and `rust-src`.
 
 Node.js is installed from the signed NodeSource Apt source. The `NODE_MAJOR` build argument defaults to `22`; the Dockerfile configures the Deb822 source with a `Signed-By` keyring and no longer executes a downloaded NodeSource setup script.
 
