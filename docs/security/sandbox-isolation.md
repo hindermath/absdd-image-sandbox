@@ -1,6 +1,6 @@
 # Sandbox-Isolationsnachweis
 
-Stand: 2026-05-22
+Stand: 2026-05-27
 
 Dieses Dokument konsolidiert die technischen Isolationsmechanismen der
 `ade-dev-sandbox`. Es beschreibt vorhandene Konfigurationen und aendert keine
@@ -27,7 +27,7 @@ Compose oder Podman Compose gebaut und gestartet.
 | Geheimnis-Trennung | `.gitignore`: `opencode.env`; `compose.yml`: `env_file: opencode.env`; `codex/config.toml`: `shell_environment_policy.exclude`; `codex/requirements.toml` und `opencode.jsonc`: Leseverbote fuer Secret-Pfade | Secrets werden nicht im Repository gespeichert. Der GWDG-API-Key wird zur Laufzeit ueber `opencode.env` eingebracht und darf nicht in Logs, Inventare oder Dokumentation uebernommen werden. |
 | Audit-Metadaten | `scripts/audit-export.sh`; `scripts/compose-down-with-audit.sh`; `scripts/compose-down-with-audit.ps1`; `compose.yml`: Mount `./audit-logs:/audit`, `ADE_AUDIT_ON_STOP: "true"` | Der dokumentierte Standardweg exportiert Metadaten vor `compose down`. Der Stop-Hook im Image ist eine zusaetzliche Best-Effort-Absicherung bei graceful shutdown. |
 | Supply-Chain-Kontrolle | `Dockerfile`: gepinntes Basisimage per `sha256`-Digest, signierte NodeSource-Apt-Quelle, uv-Release-Artefakt mit SHA256-Pruefung, gepinnte Tool-ARGs fuer OpenCode, Codex, Spec Kit, Go und Rust; `docs/security/ai-tools-inventory.md`; `docs/security/supply-chain-todo.md`; `scripts/build-and-sbom.*` | Das Basisimage ist reproduzierbar per Digest referenziert. Node.js wird ueber eine signierte Apt-Quelle statt ueber ein ausgefuehrtes Setup-Skript installiert. uv und uvx werden aus einem festen Release-Artefakt nach SHA256-Pruefung installiert. Fuer das finale Image kann eine CycloneDX-SBOM erzeugt werden. P3-1 bleibt fuer Rust offen, bis auch dieser Installerpfad durch ein verifizierteres Verfahren ersetzt ist. |
-| Runtime-Haertung | `compose.yml`: kein `privileged: true`; P3-4 im `COMPLIANCE-PLAN_RL-SE-001.md` | Das aktuelle Schutzniveau beruht auf Docker-/Podman-Standardisolation, non-root-Ausfuehrung und Agentenregeln. Zusaetzliche Compose-Haertungen wie `no-new-privileges` und `cap_drop` sind als P3-4 noch offen. |
+| Runtime-Haertung | `compose.yml`: kein `privileged: true`, `security_opt: no-new-privileges:true`, `cap_drop: ALL`; P3-4 im `COMPLIANCE-PLAN_RL-SE-001.md`; Testevidenz vom 2026-05-27: `NoNewPrivs: 1`, `CapEff: 0000000000000000` | Das aktuelle Schutzniveau kombiniert Docker-/Podman-Standardisolation, non-root-Ausfuehrung, Agentenregeln und Compose-Haertung. Prozesse koennen keine neuen Privilegien ueber setuid/setgid oder File-Capabilities erlangen. Alle Linux-Capabilities werden zur Laufzeit entzogen; die validierten Toolchains benoetigen keine `cap_add`-Ausnahme. |
 
 ### Schutzniveau-Begruendung
 
@@ -46,11 +46,14 @@ Schutzniveau-Bewertung eintragen)`
 
 ### Offene Verstaerkungen
 
-- P3-4: Compose-Haertung pruefen und gegebenenfalls `no-new-privileges`,
-  `cap_drop`/`cap_add`, Read-only-Filesystem oder vergleichbare Direktiven
-  konfigurieren.
 - P3-1: Verbleibenden Rust-Installerpfad weiter haerten und
   Curl-Pipe-Bash-Muster ersetzen.
+- Weitere optionale Compose-Verstaerkungen wie `read_only: true`,
+  `pids_limit` sowie Speicher- und CPU-Limits koennen spaeter separat
+  geprueft werden. Sie sind nicht Teil der aktuell validierten P3-4-
+  Mindesthaertung, weil ein schreibbares Root-Dateisystem und flexible
+  Ressourcenlimits fuer Lern-, Build- und Tooling-Workflows relevant sein
+  koennen.
 - Plattformseitige Governance wie Branch Protection, Push Rules und formelle
   Freigabe bleibt in GitLab beziehungsweise bei Owner/CISO/ISB/KIB.
 
@@ -87,7 +90,7 @@ Docker Compose or Podman Compose.
 | Secret separation | `.gitignore`: `opencode.env`; `compose.yml`: `env_file: opencode.env`; `codex/config.toml`: `shell_environment_policy.exclude`; `codex/requirements.toml` and `opencode.jsonc`: read denies for secret paths | Secrets are not stored in the repository. The GWDG API key is provided at runtime through `opencode.env` and must not be copied into logs, inventories, or documentation. |
 | Audit metadata | `scripts/audit-export.sh`; `scripts/compose-down-with-audit.sh`; `scripts/compose-down-with-audit.ps1`; `compose.yml`: mount `./audit-logs:/audit`, `ADE_AUDIT_ON_STOP: "true"` | The documented standard path exports metadata before `compose down`. The image stop hook is an additional best-effort safeguard on graceful shutdown. |
 | Supply-chain control | `Dockerfile`: base image pinned by `sha256` digest, signed NodeSource Apt source, uv release artifact with SHA256 verification, pinned tool ARGs for OpenCode, Codex, Spec Kit, Go, and Rust; `docs/security/ai-tools-inventory.md`; `docs/security/supply-chain-todo.md`; `scripts/build-and-sbom.*` | The base image is referenced reproducibly by digest. Node.js is installed through a signed Apt source instead of an executed setup script. uv and uvx are installed from a fixed release artifact after SHA256 verification. A CycloneDX SBOM can be generated for the final image. P3-1 remains open for Rust until that installer path is replaced by a more verified method as well. |
-| Runtime hardening | `compose.yml`: no `privileged: true`; P3-4 in `COMPLIANCE-PLAN_RL-SE-001.md` | The current protection level relies on Docker/Podman default isolation, non-root execution, and agent rules. Additional Compose hardening such as `no-new-privileges` and `cap_drop` remains open as P3-4. |
+| Runtime hardening | `compose.yml`: no `privileged: true`, `security_opt: no-new-privileges:true`, `cap_drop: ALL`; P3-4 in `COMPLIANCE-PLAN_RL-SE-001.md`; test evidence from 2026-05-27: `NoNewPrivs: 1`, `CapEff: 0000000000000000` | The current protection level combines Docker/Podman default isolation, non-root execution, agent rules, and Compose hardening. Processes cannot gain new privileges through setuid/setgid binaries or file capabilities. All Linux capabilities are dropped at runtime; the validated toolchains need no `cap_add` exception. |
 
 ### Protection-Level Rationale
 
@@ -105,11 +108,13 @@ protection-level assessment)`
 
 ### Open Reinforcements
 
-- P3-4: Review Compose hardening and, where feasible, configure
-  `no-new-privileges`, `cap_drop`/`cap_add`, a read-only filesystem, or
-  comparable directives.
 - P3-1: Further harden the remaining Rust installer path and replace
   curl-pipe-bash patterns.
+- Additional optional Compose reinforcements such as `read_only: true`,
+  `pids_limit`, and memory or CPU limits can be reviewed separately later.
+  They are not part of the currently validated P3-4 minimum hardening because
+  a writable root filesystem and flexible resource limits can be relevant for
+  learning, build, and tooling workflows.
 - Platform-side governance such as branch protection, push rules, and formal
   approval remains in GitLab or with owner/CISO/ISB/KIB.
 

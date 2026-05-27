@@ -31,6 +31,14 @@ services:
       - codex_data:/home/adedev/.codex
     ports:
       - "127.0.0.1:5100-5199:5100-5199"
+    # P3-4 defense-in-depth: prevent processes from gaining new privileges
+    # through setuid/setgid binaries or file capabilities at runtime.
+    security_opt:
+      - no-new-privileges:true
+    # P3-4 test hardening profile: start with all Linux capabilities dropped.
+    # If a required tool breaks, add back only the specific capability needed.
+    cap_drop:
+      - ALL
     working_dir: /rider-projects
     env_file:
       - opencode.env
