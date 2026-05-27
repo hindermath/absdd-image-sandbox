@@ -1068,13 +1068,13 @@ begründen, nicht erzwingen.
 
 ### Akzeptanzkriterien
 
-- [ ] Mindestens `no-new-privileges:true` ist gesetzt und getestet.
-- [ ] `cap_drop`/`cap_add` ist bewusst konfiguriert oder begründet
+- [x] Mindestens `no-new-privileges:true` ist gesetzt und getestet.
+- [x] `cap_drop`/`cap_add` ist bewusst konfiguriert oder begründet
       ausgelassen.
-- [ ] `docker compose config --no-interpolate` und
+- [x] `docker compose config --no-interpolate` und
       `docker compose build --pull` laufen fehlerfrei.
-- [ ] Die Tool-Checks im Container laufen unverändert erfolgreich.
-- [ ] Änderungen in `compose.yml` sind kommentiert und in
+- [x] Die Tool-Checks im Container laufen unverändert erfolgreich.
+- [x] Änderungen in `compose.yml` sind kommentiert und in
       `sandbox-isolation.md` dokumentiert.
 
 ### Eskalationspunkte

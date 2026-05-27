@@ -1713,6 +1713,10 @@ Das Image erbt vom gemeinsamen `agent-sandbox`-Image auf Debian 13. Das Basisima
 
 Die Sicherheitsfreigabe wird in `docs/security/sandbox-freigabe.md` als Entwurf dokumentiert. Die MR/PR-Anleitung fuer CISO/ISB oder KI-Beauftragte:n (KIB) liegt in `docs/security/sandbox-freigabe-review.md`. Der Isolationsnachweis liegt in `docs/security/sandbox-isolation.md`. Das zugehörige KI-Werkzeug-Inventar liegt in `docs/security/ai-tools-inventory.md`. Supply-Chain-Haertungen und Dependency-Update-Regeln sind in `docs/security/supply-chain-todo.md` und `docs/security/dependency-update-policy.md` dokumentiert. Offene `_TODO_`-Felder müssen durch Owner, Betrieb, CISO/ISB oder KIB gepflegt werden und werden nicht durch Annahmen ersetzt.
 
+#### Runtime-Haertung
+
+Der `ade`-Service ist auf Compose-Ebene basisgehaertet. `compose.yml` setzt `security_opt: no-new-privileges:true`, damit Prozesse im Container keine neuen Privilegien ueber setuid/setgid-Binaries oder File-Capabilities erlangen koennen. Zusaetzlich setzt `cap_drop: ALL` alle Linux-Capabilities ab. Die aktuelle Validierung zeigt `NoNewPrivs: 1` und `CapEff: 0000000000000000`; die Standard-Toolchains laufen ohne `cap_add`-Ausnahme. Die Evidenz und die verbleibenden optionalen Verstaerkungen sind in `docs/security/sandbox-isolation.md` dokumentiert.
+
 #### Automatisierte Dependency-Updates
 
 `renovate.json` bereitet Renovate-Merge-Requests fuer die im Dockerfile gepinnten Werkzeuge und Pakete vor. Alle aktuellen und künftigen Dockerfile-`ARG`-Zeilen müssen direkt oberhalb eine Renovate-Metadatenzeile mit passendem `argName` haben; der lokale Pre-commit-Hook `dockerfile-arg-renovate-metadata` prüft diese Regel. Die vollständige Konvention und die aktuell überwachten ARGs stehen in `docs/security/dependency-update-policy.md`.
@@ -3831,6 +3835,10 @@ The first variable affects general update notifications. The second variable dis
 The image inherits from the shared `agent-sandbox` image on Debian 13. The base image is pinned in the Dockerfile by `sha256` digest; the readable `latest` tag stays only as a comment with the observation date. A base-image update happens deliberately through a digest change in the Dockerfile, review, Git commit, and a new image build. .NET is installed through the Microsoft package feed for Debian 13. The build argument `DOTNET_SDK_PACKAGE` defaults to `dotnet-sdk-10.0`.
 
 The security approval is documented as a draft in `docs/security/sandbox-freigabe.md`. The MR/PR review guide for CISO/ISB or the AI officer (KIB) lives in `docs/security/sandbox-freigabe-review.md`. The isolation evidence lives in `docs/security/sandbox-isolation.md`. The related AI tool inventory lives in `docs/security/ai-tools-inventory.md`. Supply-chain hardening and dependency-update rules are documented in `docs/security/supply-chain-todo.md` and `docs/security/dependency-update-policy.md`. Open `_TODO_` fields must be maintained by the owner, operations, CISO/ISB, or KIB and are not replaced with assumptions.
+
+#### Runtime Hardening
+
+The `ade` service is baseline-hardened at Compose level. `compose.yml` sets `security_opt: no-new-privileges:true` so processes in the container cannot gain new privileges through setuid/setgid binaries or file capabilities. It also sets `cap_drop: ALL` to drop all Linux capabilities. The current validation shows `NoNewPrivs: 1` and `CapEff: 0000000000000000`; the standard toolchains run without a `cap_add` exception. Evidence and remaining optional reinforcements are documented in `docs/security/sandbox-isolation.md`.
 
 #### Automated Dependency Updates
 
