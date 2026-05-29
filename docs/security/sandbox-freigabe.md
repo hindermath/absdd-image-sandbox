@@ -26,6 +26,7 @@ Dieses Dokument bereitet die formelle Freigabe der `ade-dev-sandbox` vor.  Veran
 | Quelle | Ziel | Zweck |
 |---|---|---|
 | `./workspace` | `/workspace` | Allgemeiner Arbeitsbereich |
+| `${ADE_DEV_SANDBOX_DIR:-.}` | `/ade-dev-sandbox` | Checkout dieses Setup-Repositories fuer kontrollierte Wartungsaufgaben aus dem Container |
 | `${RIDER_PROJECTS_DIR:-./workspace}` | `/rider-projects` | Rider- und .NET-Projekte |
 | `${JAVA_PROJECTS_DIR:-./java-projects}` | `/java-projects` | Java-, Maven- und Spring-Boot-Projekte |
 | `${GO_PROJECTS_DIR:-./go-projects}` | `/go-projects` | Go-Projekte |
