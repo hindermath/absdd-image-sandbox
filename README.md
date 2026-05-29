@@ -282,12 +282,13 @@ Ein vollständigeres Begriffsregister steht im Abschnitt [Glossar](#glossar).
 - `Dockerfile`: beschreibt das Container-Image. Es erbt vom gemeinsamen `agent-sandbox`-Image und installiert darauf .NET SDK, Java JDK 21, Maven, Go, Rust, Python, Opencode, Codex CLI, `uv`, Spec Kit und gängige CLI-Hilfswerkzeuge.
 - `compose.yml`: beschreibt den Service `ade`, Volumes und Build-Regeln.
 - `.dockerignore` und `.containerignore`: schließen lokale Secrets, Git-Daten und Arbeitsverzeichnisse aus dem Build-Kontext aus.
-- `.env.example`: Vorlage für die plattformabhängigen Projekt-Mounts `RIDER_PROJECTS_DIR`, `JAVA_PROJECTS_DIR`, `GO_PROJECTS_DIR`, `RUST_PROJECTS_DIR` und `PYTHON_PROJECTS_DIR`.
+- `.env.example`: Vorlage für die plattformabhängigen Projekt-Mounts `ADE_DEV_SANDBOX_DIR`, `RIDER_PROJECTS_DIR`, `JAVA_PROJECTS_DIR`, `GO_PROJECTS_DIR`, `RUST_PROJECTS_DIR` und `PYTHON_PROJECTS_DIR`.
 - `opencode.jsonc`: enthält Provider, Modelle und Agenten für Opencode. JSONC erlaubt Kommentare und ist deshalb für Lernzwecke besser lesbar.
 - `opencode.env.example`: Vorlage für die lokale Datei `opencode.env`.
 - `codex/config.toml`: systemweite Codex-Standardkonfiguration für den Container. Sie wird nach `/etc/codex/config.toml` und `/etc/codex/managed_config.toml` kopiert.
 - `codex/requirements.toml`: admin-erzwingende Codex-Sicherheitsanforderungen. Sie wird nach `/etc/codex/requirements.toml` kopiert.
 - `workspace/`: lokales Arbeitsverzeichnis, im Container unter `/workspace`.
+- `ADE_DEV_SANDBOX_DIR`: Host-Checkout dieses Repositories, im Container unter `/ade-dev-sandbox`.
 - `RIDER_PROJECTS_DIR`: Host-Verzeichnis für Rider-Projekte, im Container unter `/rider-projects`.
 - `JAVA_PROJECTS_DIR`: Host-Verzeichnis für Java-Projekte, im Container unter `/java-projects`.
 - `java-projects/`: lokales Fallback-Verzeichnis für Java-Projekte, wenn `JAVA_PROJECTS_DIR` nicht gesetzt ist.
@@ -398,6 +399,7 @@ macOS:
 
 ```text
 RIDER_PROJECTS_DIR=/Users/<benutzer>/RiderProjects
+ADE_DEV_SANDBOX_DIR=/Users/<benutzer>/ade-dev-sandbox
 JAVA_PROJECTS_DIR=/Users/<benutzer>/JavaProjects
 ```
 
@@ -405,6 +407,7 @@ Windows mit Docker Desktop aus PowerShell:
 
 ```text
 RIDER_PROJECTS_DIR=C:\Users\<benutzer>\RiderProjects
+ADE_DEV_SANDBOX_DIR=C:\Users\<benutzer>\ade-dev-sandbox
 JAVA_PROJECTS_DIR=C:\Users\<benutzer>\JavaProjects
 ```
 
@@ -412,10 +415,11 @@ Windows mit Docker Desktop aus Ubuntu/WSL2:
 
 ```text
 RIDER_PROJECTS_DIR=/mnt/c/Users/<benutzer>/RiderProjects
+ADE_DEV_SANDBOX_DIR=/mnt/c/Users/<benutzer>/ade-dev-sandbox
 JAVA_PROJECTS_DIR=/mnt/c/Users/<benutzer>/JavaProjects
 ```
 
-Wenn kein separates Rider- oder Java-Projektverzeichnis gebraucht wird, kann der Standard aus `.env.example` bleiben. Dann zeigt `/rider-projects` auf `workspace/` und `/java-projects` auf `java-projects/`.
+Wenn kein separates Rider- oder Java-Projektverzeichnis gebraucht wird, kann der Standard aus `.env.example` bleiben. Dann zeigt `/rider-projects` auf `workspace/` und `/java-projects` auf `java-projects/`. `ADE_DEV_SANDBOX_DIR=.` mountet den aktuellen Checkout dieses Setup-Repositories nach `/ade-dev-sandbox`; dadurch koennen kontrollierte Wartungsskripte im Container Dateien wie `opencode.jsonc` im Host-Repository pruefen oder nach expliziter Freigabe aendern.
 
 Die Datei `.env` enthält keine Secrets, ist aber lokal und plattformabhängig. Sie wird nicht committed. Der API-Key bleibt getrennt in `opencode.env`.
 
@@ -747,14 +751,15 @@ Copy-Item opencode.env.example opencode.env
 
 Danach in `opencode.env` den echten `GWDG_API_KEY` eintragen. Den Key nicht im Terminal ausgeben und nicht committen.
 
-In `.env` Windows-Pfade setzen, wenn Rider- oder Java-Projekte außerhalb dieses Repositorys liegen:
+In `.env` Windows-Pfade setzen, wenn der Repository-Checkout, Rider- oder Java-Projekte außerhalb der Standards liegen:
 
 ```text
+ADE_DEV_SANDBOX_DIR=C:\Users\<benutzer>\ade-dev-sandbox
 RIDER_PROJECTS_DIR=C:\Users\<benutzer>\RiderProjects
 JAVA_PROJECTS_DIR=C:\Users\<benutzer>\JavaProjects
 ```
 
-Wenn kein separates Rider- oder Java-Projektverzeichnis gebraucht wird, kann der Standard aus `.env.example` bleiben. Dann zeigt `/rider-projects` auf `workspace/` und `/java-projects` auf `java-projects/`.
+Wenn kein separates Rider- oder Java-Projektverzeichnis gebraucht wird, kann der Standard aus `.env.example` bleiben. Dann zeigt `/ade-dev-sandbox` auf den aktuellen Repository-Checkout, `/rider-projects` auf `workspace/` und `/java-projects` auf `java-projects/`.
 
 In das Repository wechseln:
 
@@ -1571,6 +1576,30 @@ chat-ai/qwen3-coder-30b-a3b-instruct
 
 Der Standard-Agent `coding` nutzt dieses Modell mit fokussierten Coding-Parametern. `glm-4.7` bleibt als kleineres Modell für Nebenaufgaben und als Alternative für Analyse und Brainstorming konfiguriert.
 
+#### Chat-AI-Modellliste abgleichen
+
+Das Skript `scripts/chat-ai-model-report.py` fragt die aktuelle Chat-AI-Modellliste ueber `/v1/models` ab und vergleicht sie mit `opencode.jsonc`. Es arbeitet standardmaessig nur lesend, liest den API-Key aus `GWDG_API_KEY` und gibt den Key nicht aus.
+
+Im laufenden Container kann das Skript gegen den Repository-Mount ausgefuehrt werden:
+
+```bash
+cd /ade-dev-sandbox
+python3 scripts/chat-ai-model-report.py
+```
+
+Der Standardpfad ist `/ade-dev-sandbox/opencode.jsonc`, wenn dieser Mount vorhanden ist. Das Skript erzeugt einen Bericht ueber neue, unveraenderte und nicht mehr angebotene Modelle. Ohne `--write` nimmt es keine Aenderung an `opencode.jsonc` vor; Modell-, Agenten-, Default- und Tool-Call-Entscheidungen bleiben Review-Punkte.
+
+Fuer bewusst freigegebene Schreiblaeufe gibt es zwei Stufen:
+
+```bash
+python3 scripts/chat-ai-model-report.py --write --stage mark
+python3 scripts/chat-ai-model-report.py --write --stage prune
+```
+
+`--stage mark` ist nicht-destruktiv. Es ergaenzt neue Chat-AI-Modelle als Review-Kandidaten mit konservativem `tool_call: false` und markiert konfigurierte Modelle, die nicht mehr in `/v1/models` gesehen wurden, nur mit einem Warnkommentar. Agenten, `model`, `small_model`, Tool-Call-Entscheidungen und Parameter werden nicht automatisch umgestellt.
+
+`--stage prune` entfernt konfigurierte Modelle wirklich, aber nur wenn sie nicht mehr in `/v1/models` gesehen wurden und nirgendwo in `model`, `small_model` oder einem Agenten referenziert sind. Sobald eine Referenz existiert, bricht das Skript ohne Dateianderung ab und nennt die betroffenen Stellen.
+
 #### OpenCode-Härtung
 
 Die Datei `opencode.jsonc` enthält Sicherheitsregeln für OpenCode. Das ist wichtig, weil OpenCode ohne eigene `permission`-Regeln viele Aktionen standardmäßig erlaubt. In einer Umgebung mit ISO-9001- und ISO-27001-Anforderungen sollen riskante Aktionen deshalb nicht ohne bewusste Freigabe laufen.
@@ -1628,7 +1657,7 @@ Die wichtigsten Einstellungen in `codex/config.toml`:
 - `otel.exporter = "none"` und `log_user_prompt = false`: Es wird keine Telemetrie exportiert und Prompts werden nicht geloggt.
 - `sandbox_workspace_write.network_access = false`: Shell-Kommandos in der Sandbox haben keinen direkten Netzwerkzugriff.
 - `sandbox_workspace_write.exclude_slash_tmp = true`: `/tmp` wird nicht automatisch beschreibbar.
-- `sandbox_workspace_write.writable_roots`: Schreibrechte sind auf `/workspace`, `/rider-projects`, `/java-projects`, `/go-projects`, `/rust-projects` und `/python-projects` begrenzt.
+- `sandbox_workspace_write.writable_roots`: Schreibrechte sind auf `/ade-dev-sandbox`, `/workspace`, `/rider-projects`, `/java-projects`, `/go-projects`, `/rust-projects` und `/python-projects` begrenzt.
 - `shell_environment_policy.inherit = "core"`: Subprozesse erben nur eine reduzierte Umgebung.
 - Secret-Variablen mit Namen wie `*KEY*`, `*SECRET*`, `*TOKEN*`, `*PASSWORD*` und `*CREDENTIAL*` werden aus Subprozessen entfernt.
 - App-, Browser- und Computer-Use-Flächen sind deaktiviert.
@@ -1670,7 +1699,7 @@ Nach einer Änderung kann die wirksame Sandbox grob geprüft werden:
 codex debug prompt-input "Test"
 ```
 
-In der Ausgabe sollten `sandbox_mode` als `workspace-write`, Netzwerkzugriff als eingeschränkt und die Writable-Roots `/workspace`, `/rider-projects`, `/java-projects`, `/go-projects`, `/rust-projects` und `/python-projects` sichtbar sein.
+In der Ausgabe sollten `sandbox_mode` als `workspace-write`, Netzwerkzugriff als eingeschränkt und die Writable-Roots `/ade-dev-sandbox`, `/workspace`, `/rider-projects`, `/java-projects`, `/go-projects`, `/rust-projects` und `/python-projects` sichtbar sein.
 
 Java JDK 21 und Maven werden beim Image-Build aus den Debian-Paketquellen installiert. Sie sind für Java-Grundlagen, Maven-Projekte und Spring-Boot-Projekte vorbereitet.
 
@@ -2405,12 +2434,13 @@ A more complete term reference is in the section [Glossary](#glossary).
 - `Dockerfile`: describes the container image. It inherits from the shared `agent-sandbox` image and installs .NET SDK, Java JDK 21, Maven, Go, Rust, Python, Opencode, Codex CLI, `uv`, Spec Kit, and common CLI helper tools on top.
 - `compose.yml`: describes the `ade` service, volumes, and build rules.
 - `.dockerignore` and `.containerignore`: exclude local secrets, Git data, and working directories from the build context.
-- `.env.example`: template for the platform-specific project mounts `RIDER_PROJECTS_DIR`, `JAVA_PROJECTS_DIR`, `GO_PROJECTS_DIR`, `RUST_PROJECTS_DIR`, and `PYTHON_PROJECTS_DIR`.
+- `.env.example`: template for the platform-specific project mounts `ADE_DEV_SANDBOX_DIR`, `RIDER_PROJECTS_DIR`, `JAVA_PROJECTS_DIR`, `GO_PROJECTS_DIR`, `RUST_PROJECTS_DIR`, and `PYTHON_PROJECTS_DIR`.
 - `opencode.jsonc`: contains provider, model, and agent settings for Opencode. JSONC allows comments and is easier to read for learning.
 - `opencode.env.example`: template for the local `opencode.env` file.
 - `codex/config.toml`: system-wide Codex default configuration for the container. It is copied to `/etc/codex/config.toml` and `/etc/codex/managed_config.toml`.
 - `codex/requirements.toml`: admin-enforced Codex security requirements. It is copied to `/etc/codex/requirements.toml`.
 - `workspace/`: local working directory, mounted as `/workspace`.
+- `ADE_DEV_SANDBOX_DIR`: host checkout of this repository, mounted as `/ade-dev-sandbox`.
 - `RIDER_PROJECTS_DIR`: host directory for Rider projects, mounted as `/rider-projects`.
 - `JAVA_PROJECTS_DIR`: host directory for Java projects, mounted as `/java-projects`.
 - `java-projects/`: local fallback directory for Java projects when `JAVA_PROJECTS_DIR` is not set.
@@ -2521,6 +2551,7 @@ macOS:
 
 ```text
 RIDER_PROJECTS_DIR=/Users/<user>/RiderProjects
+ADE_DEV_SANDBOX_DIR=/Users/<user>/ade-dev-sandbox
 JAVA_PROJECTS_DIR=/Users/<user>/JavaProjects
 ```
 
@@ -2528,6 +2559,7 @@ Windows with Docker Desktop from PowerShell:
 
 ```text
 RIDER_PROJECTS_DIR=C:\Users\<user>\RiderProjects
+ADE_DEV_SANDBOX_DIR=C:\Users\<user>\ade-dev-sandbox
 JAVA_PROJECTS_DIR=C:\Users\<user>\JavaProjects
 ```
 
@@ -2535,10 +2567,11 @@ Windows with Docker Desktop from Ubuntu/WSL2:
 
 ```text
 RIDER_PROJECTS_DIR=/mnt/c/Users/<user>/RiderProjects
+ADE_DEV_SANDBOX_DIR=/mnt/c/Users/<user>/ade-dev-sandbox
 JAVA_PROJECTS_DIR=/mnt/c/Users/<user>/JavaProjects
 ```
 
-If no separate Rider or Java project directory is needed, keep the default from `.env.example`. Then `/rider-projects` points to `workspace/` and `/java-projects` points to `java-projects/`.
+If no separate Rider or Java project directory is needed, keep the default from `.env.example`. Then `/rider-projects` points to `workspace/` and `/java-projects` points to `java-projects/`. `ADE_DEV_SANDBOX_DIR=.` mounts the current checkout of this setup repository to `/ade-dev-sandbox`; this lets controlled maintenance scripts inside the container inspect or, after explicit approval, update files such as `opencode.jsonc` in the host repository.
 
 The `.env` file contains no secrets, but it is local and platform-specific. It is not committed. The API key stays separate in `opencode.env`.
 
@@ -2870,14 +2903,15 @@ Copy-Item opencode.env.example opencode.env
 
 Then enter the real `GWDG_API_KEY` in `opencode.env`. Do not print the key in the terminal and do not commit it.
 
-Set Windows paths in `.env` if Rider or Java projects are outside this repository:
+Set Windows paths in `.env` if the repository checkout, Rider projects, or Java projects are outside the defaults:
 
 ```text
+ADE_DEV_SANDBOX_DIR=C:\Users\<user>\ade-dev-sandbox
 RIDER_PROJECTS_DIR=C:\Users\<user>\RiderProjects
 JAVA_PROJECTS_DIR=C:\Users\<user>\JavaProjects
 ```
 
-If no separate Rider or Java project directory is needed, keep the defaults from `.env.example`. Then `/rider-projects` points to `workspace/` and `/java-projects` points to `java-projects/`.
+If no separate Rider or Java project directory is needed, keep the defaults from `.env.example`. Then `/ade-dev-sandbox` points to the current repository checkout, `/rider-projects` points to `workspace/`, and `/java-projects` points to `java-projects/`.
 
 Change into the repository:
 
@@ -3694,6 +3728,30 @@ chat-ai/qwen3-coder-30b-a3b-instruct
 
 The default agent `coding` uses this model with focused coding parameters. `glm-4.7` remains configured as the smaller model for side tasks and as an alternative for analysis and brainstorming.
 
+#### Compare Chat AI Model List
+
+The script `scripts/chat-ai-model-report.py` queries the current Chat AI model list through `/v1/models` and compares it with `opencode.jsonc`. It is read-only by default, reads the API key from `GWDG_API_KEY`, and does not print the key.
+
+Inside the running container, run it against the repository mount:
+
+```bash
+cd /ade-dev-sandbox
+python3 scripts/chat-ai-model-report.py
+```
+
+The default path is `/ade-dev-sandbox/opencode.jsonc` when that mount exists. The script reports new, unchanged, and no longer offered models. Without `--write`, it does not modify `opencode.jsonc`; model, agent, default, and tool-call decisions remain review items.
+
+For explicitly approved write runs, two stages are available:
+
+```bash
+python3 scripts/chat-ai-model-report.py --write --stage mark
+python3 scripts/chat-ai-model-report.py --write --stage prune
+```
+
+`--stage mark` is non-destructive. It adds new Chat AI models as review candidates with conservative `tool_call: false` and only marks configured models that are no longer seen in `/v1/models` with a warning comment. Agents, `model`, `small_model`, tool-call decisions, and parameters are not changed automatically.
+
+`--stage prune` really removes configured models, but only when they are no longer seen in `/v1/models` and are not referenced by `model`, `small_model`, or any agent. If a reference exists, the script aborts without changing the file and reports the affected locations.
+
 #### OpenCode hardening
 
 The file `opencode.jsonc` contains security rules for OpenCode. This matters because OpenCode allows many actions by default when no custom `permission` rules are set. In an environment with ISO 9001 and ISO 27001 requirements, risky actions should not run without explicit approval.
@@ -3751,7 +3809,7 @@ The most important settings in `codex/config.toml`:
 - `otel.exporter = "none"` and `log_user_prompt = false`: Telemetry is not exported and prompts are not logged.
 - `sandbox_workspace_write.network_access = false`: Shell commands inside the sandbox have no direct network access.
 - `sandbox_workspace_write.exclude_slash_tmp = true`: `/tmp` is not writable automatically.
-- `sandbox_workspace_write.writable_roots`: write access is limited to `/workspace`, `/rider-projects`, `/java-projects`, `/go-projects`, `/rust-projects`, and `/python-projects`.
+- `sandbox_workspace_write.writable_roots`: write access is limited to `/ade-dev-sandbox`, `/workspace`, `/rider-projects`, `/java-projects`, `/go-projects`, `/rust-projects`, and `/python-projects`.
 - `shell_environment_policy.inherit = "core"`: subprocesses inherit only a reduced environment.
 - Secret variables with names such as `*KEY*`, `*SECRET*`, `*TOKEN*`, `*PASSWORD*`, and `*CREDENTIAL*` are removed from subprocesses.
 - App, browser, and computer-use surfaces are disabled.
@@ -3793,7 +3851,7 @@ After a change, roughly check the effective sandbox:
 codex debug prompt-input "Test"
 ```
 
-The output should show `sandbox_mode` as `workspace-write`, restricted network access, and the writable roots `/workspace`, `/rider-projects`, `/java-projects`, `/go-projects`, `/rust-projects`, and `/python-projects`.
+The output should show `sandbox_mode` as `workspace-write`, restricted network access, and the writable roots `/ade-dev-sandbox`, `/workspace`, `/rider-projects`, `/java-projects`, `/go-projects`, `/rust-projects`, and `/python-projects`.
 
 Java JDK 21 and Maven are installed during the image build from the Debian package sources. They prepare the container for Java basics, Maven projects, and Spring Boot projects.
 

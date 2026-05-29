@@ -25,6 +25,7 @@ This repository contains a small Docker-based Opencode, .NET, and Spec Kit envir
 - Codex CLI state is stored in the `codex_data` Docker volume mounted at `/home/adedev/.codex`; do not replace this with a bind mount to a committed directory.
 - `opencode.env.example`: documents the required `GWDG_API_KEY` variable.
 - `workspace/`: mounted into the container as `/workspace`; place working project files there.
+- `ADE_DEV_SANDBOX_DIR`: host checkout of this repository mounted into the container as `/ade-dev-sandbox` for controlled repository maintenance tasks from inside the container.
 - `RIDER_PROJECTS_DIR`: host directory mounted into the container as `/rider-projects` for Rider projects.
 - `JAVA_PROJECTS_DIR`: host directory mounted into the container as `/java-projects` for Java, Maven, and Spring Boot projects.
 - `java-projects/`: local fallback mount for `/java-projects` when `JAVA_PROJECTS_DIR` is not set.

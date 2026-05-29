@@ -7,6 +7,11 @@ services:
       pull: true
     volumes:
       - ./workspace:/workspace
+      # Repository self-mount for controlled maintenance tasks from inside the
+      # container, for example scripts that inspect or patch opencode.jsonc.
+      - type: bind
+        source: ${ADE_DEV_SANDBOX_DIR:-.}
+        target: /ade-dev-sandbox
       - type: bind
         source: ${RIDER_PROJECTS_DIR:-./workspace}
         target: /rider-projects

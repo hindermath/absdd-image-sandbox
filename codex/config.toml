@@ -80,6 +80,7 @@ exclude_tmpdir_env_var = true
 # DE: Diese Projektpfade sind die beabsichtigten Arbeitsbereiche im Container.
 # EN: These project paths are the intended work areas inside the container.
 writable_roots = [
+  "/ade-dev-sandbox",
   "/workspace",
   "/rider-projects",
   "/java-projects",

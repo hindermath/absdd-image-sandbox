@@ -171,6 +171,7 @@
     // EN: OpenCode internal work directories are allowed only narrowly.
     "external_directory": {
       "*": "ask",
+      "/ade-dev-sandbox/**": "allow",
       "/tmp/opencode/*": "allow",
       "/home/adedev/.local/share/opencode/tool-output/*": "allow"
     },
@@ -241,6 +242,18 @@
       // EN: Model IDs offered by this provider.
       // DE: Die Keys werden als Teil von "chat-ai/<key>" verwendet.
       // EN: The keys are used as part of "chat-ai/<key>".
+      // DE: Vorbereitung auf Chat-AI-Wartung am 2026-06-04:
+      // DE: Nicht mehr neu konfigurieren: gemma-3-27b-it,
+      // DE: qwen3.5-27b, qwen3.5-35b-a3b, llama-3.3-70b-instruct
+      // DE: sowie die externen GPT-5/5.1/5.2/5.3-Chat-Varianten.
+      // DE: Austauschmodelle aus /v1/models am 2026-05-28:
+      // DE: gemma-4-31b-it und qwen3.6-35b-a3b.
+      // EN: Preparation for Chat AI maintenance on 2026-06-04:
+      // EN: Do not add new config for gemma-3-27b-it,
+      // EN: qwen3.5-27b, qwen3.5-35b-a3b, llama-3.3-70b-instruct,
+      // EN: or the external GPT-5/5.1/5.2/5.3 chat variants.
+      // EN: Replacement models from /v1/models on 2026-05-28:
+      // EN: gemma-4-31b-it and qwen3.6-35b-a3b.
       "models": {
         // DE: Standard fuer fokussierte Programmierung und genaue Aenderungen.
         // EN: Default for focused programming and precise edits.
@@ -286,10 +299,40 @@
           }
         },
 
+        // DE: Austauschmodell fuer Qwen 3.5 27B und Qwen 3.5 35B A3B.
+        // EN: Replacement model for Qwen 3.5 27B and Qwen 3.5 35B A3B.
+        "qwen3.6-35b-a3b": {
+          "name": "Qwen 3.6 35B A3B",
+          "temperature": true,
+          "tool_call": true,
+          "options": {
+            // DE: Gleiche konservative Coding-Parameter wie bei Qwen 3.
+            // EN: Same conservative coding parameters as for Qwen 3.
+            "top_k": 20,
+            "repetition_penalty": 1.05
+          }
+        },
+
+        // DE: Austauschmodell fuer Gemma 3 27B Instruct.
+        // EN: Replacement model for Gemma 3 27B Instruct.
+        "gemma-4-31b-it": {
+          "name": "Gemma 4 31B Instruct",
+          "temperature": true,
+          "tool_call": false
+        },
+
         // DE: Alternative fuer sehr komplexe Programmier- und Architekturfragen.
         // EN: Alternative for very complex programming and architecture questions.
         "OpenAI gpt-5.4": {
           "name": "openai-gpt5.4",
+          "temperature": true,
+          "tool_call": true
+        },
+
+        // DE: Nachfolger im verfuegbaren GPT-5-Zweig.
+        // EN: Successor in the available GPT-5 line.
+        "OpenAI gpt-5.5": {
+          "name": "openai-gpt5.5",
           "temperature": true,
           "tool_call": true
         },
@@ -347,9 +390,30 @@
       "top_p": 0.9
     },
 
+    "coding-qwen-3-6": {
+      "description": "Coding-Agent mit Qwen 3.6 35B A3B als Austauschmodell fuer abgekündigte Qwen-3.5-Modelle. / Coding agent using Qwen 3.6 35B A3B as replacement for discontinued Qwen 3.5 models.",
+      "model": "chat-ai/qwen3.6-35b-a3b",
+      "temperature": 0.2,
+      "top_p": 0.9
+    },
+
+    "analysis-gemma": {
+      "description": "Analyse-Agent mit Gemma 4 31B Instruct als Austauschmodell fuer Gemma 3 27B. Ohne Tool-Aufrufe konfiguriert. / Analysis agent using Gemma 4 31B Instruct as replacement for Gemma 3 27B. Configured without tool calls.",
+      "model": "chat-ai/gemma-4-31b-it",
+      "temperature": 0.3,
+      "top_p": 0.9
+    },
+
     "coding-gpt-5-4": {
       "description": "Coding-Agent mit OpenAI GPT-5.4 fuer komplexe Implementierung und Refactoring. / Coding agent using OpenAI GPT-5.4 for complex implementation and refactoring.",
       "model": "chat-ai/OpenAI gpt-5.4",
+      "temperature": 0.2,
+      "top_p": 0.9
+    },
+
+    "coding-gpt-5-5": {
+      "description": "Coding-Agent mit OpenAI GPT-5.5 fuer komplexe Implementierung und Refactoring. / Coding agent using OpenAI GPT-5.5 for complex implementation and refactoring.",
+      "model": "chat-ai/OpenAI gpt-5.5",
       "temperature": 0.2,
       "top_p": 0.9
     },
