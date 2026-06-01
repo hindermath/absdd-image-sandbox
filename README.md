@@ -2053,6 +2053,36 @@ Mit Docker Compose:
 docker compose exec --user root ade bash -lc 'chown -R adedev:adedev /dotnet-build'
 ```
 
+Wenn auch dieser Befehl viele Meldungen wie `Operation not permitted` ausgibt,
+greift die Container-Härtung: Der Compose-Service startet mit
+`cap_drop: [ALL]`, deshalb darf selbst `root` im laufenden Container keine
+Besitzrechte ändern. In diesem Fall nicht `docker compose down -v` verwenden,
+weil das auch `opencode_data` und `codex_data` löschen würde. Stattdessen nur
+das .NET-Build-Volume entfernen; dort liegen ausschließlich Build-Artefakte:
+
+```bash
+bash scripts/compose-down-with-audit.sh --docker
+docker volume rm ade-dev-sandbox_dotnet_build
+docker compose up -d
+docker compose exec ade bash
+```
+
+Mit Podman:
+
+```bash
+bash scripts/compose-down-with-audit.sh --podman
+podman volume rm ade-dev-sandbox_dotnet_build
+podman compose up -d
+podman compose exec ade bash
+```
+
+Danach im Container wieder in dein Projektverzeichnis wechseln und erneut starten:
+
+```bash
+cd /rider-projects/<dein-projekt>
+dotnet run
+```
+
 Danach im Container prüfen, ob die allgemeine MSBuild-Konfiguration und das Build-Volume vorhanden sind:
 
 ```bash
@@ -4203,6 +4233,36 @@ With Docker Compose:
 
 ```bash
 docker compose exec --user root ade bash -lc 'chown -R adedev:adedev /dotnet-build'
+```
+
+If that command also prints many `Operation not permitted` messages, the
+container hardening is doing its job: the Compose service starts with
+`cap_drop: [ALL]`, so even `root` inside the running container cannot change
+file ownership. In this case, do not use `docker compose down -v`, because that
+would also delete `opencode_data` and `codex_data`. Remove only the .NET build
+volume instead; it contains build artifacts only:
+
+```bash
+bash scripts/compose-down-with-audit.sh --docker
+docker volume rm ade-dev-sandbox_dotnet_build
+docker compose up -d
+docker compose exec ade bash
+```
+
+With Podman:
+
+```bash
+bash scripts/compose-down-with-audit.sh --podman
+podman volume rm ade-dev-sandbox_dotnet_build
+podman compose up -d
+podman compose exec ade bash
+```
+
+Then go back to your project directory inside the container and run it again:
+
+```bash
+cd /rider-projects/<your-project>
+dotnet run
 ```
 
 Then check inside the container that the general MSBuild configuration and build volume exist:
