@@ -1029,18 +1029,88 @@ Mit Docker: `docker compose exec ade bash`.
 dotnet --info
 ```
 
+Mit dem .NET SDK im Image können diese C#-Projekttypen erstellt und
+übersetzt werden:
+
+- Konsolenanwendung mit `dotnet new console`
+- Razor-Pages-Web-App mit `dotnet new webapp`
+- minimale ASP.NET-App mit `dotnet new web`
+- Avalonia-UI-App mit den Avalonia-Templates
+
+Im Container sinnvoll starten lassen sich Konsolenanwendungen sowie die
+Razor-Pages- und minimalen ASP.NET-Web-Apps. Avalonia-UI-Apps können im Image
+erstellt und gebaut werden, aber nicht als Desktop-GUI laufen, weil der
+Container keine Desktop-Sitzung bereitstellt. Der GUI-Start erfolgt auf dem
+Host oder in einer anderen GUI-fähigen Umgebung.
+
 Beispiel für ein neues Konsolenprojekt:
 
 ```bash
 cd /rider-projects
 dotnet new console -n DemoApp
 cd DemoApp
+dotnet build
 dotnet run
 ```
 
-`dotnet new console` erstellt eine einfache Konsolenanwendung. `dotnet run` baut und startet das Projekt. Die Dateien liegen auf dem Host im `RIDER_PROJECTS_DIR`-Verzeichnis und können dort mit Rider geöffnet werden.
+`dotnet new console` erstellt eine einfache Konsolenanwendung. `dotnet build`
+übersetzt das Projekt. `dotnet run` startet es danach im Container. Die Dateien
+liegen auf dem Host im `RIDER_PROJECTS_DIR`-Verzeichnis und können dort mit
+Rider geöffnet werden.
+
+Beispiel für eine Avalonia-UI-App:
+
+```bash
+cd /rider-projects
+dotnet --version
+dotnet new install Avalonia.Templates
+dotnet new avalonia.mvvm -o MyAvaloniaApp
+cd MyAvaloniaApp
+```
+
+Wenn das Template nicht automatisch `net10.0` nutzt, im `.csproj` die
+Target-Framework-Zeile in der ersten `PropertyGroup` auf `net10.0` setzen:
+
+```xml
+<TargetFramework>net10.0</TargetFramework>
+```
+
+Danach im Container bauen:
+
+```bash
+dotnet build
+```
+
+Der Desktop-Start einer Avalonia-App gehört nicht in dieses Image. In einer
+GUI-fähigen Umgebung, zum Beispiel auf dem Host, wird die App danach mit
+`dotnet run` gestartet.
 
 Wenn ein Projekt bereits fehlerhafte `bin`- oder `obj`-Ordner auf dem Windows-Mount hat, können diese in Rider oder im Terminal gelöscht werden. Danach erneut im Container bauen.
+
+#### Java, Go, Rust und Python: Console und WebApps
+
+Für die vier weiteren MSL-Sprachen im Image gilt:
+
+| Sprache | Console-Programme | WebApps im Container |
+|---|---|---|
+| Java | Ja | Ja, z. B. Spring Boot über Maven oder einen Projekt-Wrapper |
+| Go | Ja | Ja, direkt mit `net/http`; Frameworks projektlokal |
+| Rust | Ja | Ja, mit projektlokalen Frameworks wie `axum` oder `actix-web` |
+| Python | Ja | Ja, mit projektlokalen Frameworks wie `flask`, `fastapi` oder `django` |
+
+Bei Go, Rust und Python sind Webframeworks nicht global im Image installiert.
+Das ist bewusst so: sie gehören in `go.mod`, `Cargo.toml` oder
+`pyproject.toml` beziehungsweise in eine virtuelle Umgebung. Java hat JDK 21
+und Maven; Spring Boot CLI und Gradle sind aber nicht global installiert.
+
+WebApps können im Container laufen, wenn sie auf `0.0.0.0` lauschen und einen
+freigegebenen Port nutzen. Für Übungen ist die Port-Range `5100-5199`
+vorgesehen.
+
+Kurz gesagt: Console-Programme gehen in allen vier Sprachen. WebApps gehen
+ebenfalls in allen vier Sprachen, aber Java, Go, Rust und Python nutzen dafür
+projektlokale Abhängigkeiten oder die Standardbibliothek, nicht global
+vorinstallierte Web-App-Templates wie bei .NET.
 
 ### Java-Projekte einbinden
 
@@ -1072,19 +1142,96 @@ javac --version
 mvn --version
 ```
 
-Beispiel für ein neues Maven-Projekt:
+Console-Schnelleinstieg:
 
 ```bash
 cd /java-projects
-mvn archetype:generate -DgroupId=de.example -DartifactId=demo-java -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
-cd demo-java
+mvn archetype:generate \
+  -DgroupId=de.example \
+  -DartifactId=demo-java-console \
+  -DarchetypeArtifactId=maven-archetype-quickstart \
+  -DarchetypeVersion=1.5 \
+  -DinteractiveMode=false
+cd demo-java-console
 mvn test
+mvn package
+java -cp target/classes de.example.App
 ```
 
-Spring-Boot-Projekte werden normalerweise über Maven oder einen Projekt-Wrapper gestartet, zum Beispiel:
+WebApp-Schnelleinstieg mit Spring Boot:
 
 ```bash
-mvn spring-boot:run
+cd /java-projects
+mkdir -p demo-java-web/src/main/java/de/example/web
+cd demo-java-web
+cat > pom.xml <<'EOF'
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.5.0</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>de.example</groupId>
+  <artifactId>demo-java-web</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <properties>
+    <java.version>21</java.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+EOF
+cat > src/main/java/de/example/web/DemoJavaWebApplication.java <<'EOF'
+package de.example.web;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@SpringBootApplication
+@RestController
+public class DemoJavaWebApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(DemoJavaWebApplication.class, args);
+    }
+
+    @GetMapping("/")
+    public String hello() {
+        return "Hello from Java Spring Boot";
+    }
+}
+EOF
+mvn test
+mvn package
+mvn spring-boot:run -Dspring-boot.run.arguments="--server.address=0.0.0.0 --server.port=5104"
+```
+
+Danach auf dem Host im Browser öffnen:
+
+```text
+http://localhost:5104
 ```
 
 Gradle und Spring Boot CLI sind absichtlich nicht global installiert. Viele Unternehmensprojekte bringen ihren eigenen Maven- oder Gradle-Wrapper mit. Das ist reproduzierbarer als globale Werkzeugversionen.
@@ -1101,13 +1248,13 @@ govulncheck -version
 dlv version
 ```
 
-Beispiel für ein kleines Go-Projekt:
+Console-Schnelleinstieg:
 
 ```bash
 cd /workspace
-mkdir -p demo-go
-cd demo-go
-go mod init example.com/demo-go
+mkdir -p demo-go-console
+cd demo-go-console
+go mod init example.com/demo-go-console
 cat > main.go <<'EOF'
 package main
 
@@ -1120,6 +1267,43 @@ EOF
 gofmt -w main.go
 go test ./...
 go run .
+```
+
+WebApp-Schnelleinstieg mit `net/http`:
+
+```bash
+cd /workspace
+mkdir -p demo-go-web
+cd demo-go-web
+go mod init example.com/demo-go-web
+cat > main.go <<'EOF'
+package main
+
+import (
+    "fmt"
+    "log"
+    "net/http"
+)
+
+func main() {
+    mux := http.NewServeMux()
+    mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprintln(w, "Hello from Go net/http")
+    })
+
+    log.Println("listening on http://0.0.0.0:5105")
+    log.Fatal(http.ListenAndServe("0.0.0.0:5105", mux))
+}
+EOF
+gofmt -w main.go
+go test ./...
+go run .
+```
+
+Danach auf dem Host im Browser öffnen:
+
+```text
+http://localhost:5105
 ```
 
 Go-Webframeworks werden nicht global installiert. Für erste Webübungen reicht die Standardbibliothek `net/http`. Frameworks wie `gin`, `fiber` oder `chi` gehören projektlokal in `go.mod`.
@@ -1138,15 +1322,54 @@ cargo clippy --version
 rust-analyzer --version
 ```
 
-Beispiel für ein kleines Rust-Projekt:
+Console-Schnelleinstieg:
 
 ```bash
 cd /workspace
-cargo new demo-rust
-cd demo-rust
+cargo new demo-rust-console
+cd demo-rust-console
 cargo fmt
+cargo build
 cargo clippy -- -D warnings
 cargo run
+```
+
+WebApp-Schnelleinstieg mit `axum`:
+
+```bash
+cd /workspace
+cargo new demo-rust-web
+cd demo-rust-web
+cargo add axum
+cargo add tokio --features full
+cat > src/main.rs <<'EOF'
+use axum::{routing::get, Router};
+use std::net::SocketAddr;
+
+async fn hello() -> &'static str {
+    "Hello from Rust axum"
+}
+
+#[tokio::main]
+async fn main() {
+    let app = Router::new().route("/", get(hello));
+    let addr = SocketAddr::from(([0, 0, 0, 0], 5106));
+    let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
+
+    println!("listening on http://{addr}");
+    axum::serve(listener, app).await.unwrap();
+}
+EOF
+cargo fmt
+cargo build
+cargo clippy -- -D warnings
+cargo run
+```
+
+Danach auf dem Host im Browser öffnen:
+
+```text
+http://localhost:5106
 ```
 
 Rust-Webframeworks werden nicht global installiert. Frameworks und Laufzeiten wie `tokio`, `axum`, `actix-web` oder `serde` gehören projektlokal in `Cargo.toml`.
@@ -1165,12 +1388,12 @@ uv --version
 
 Im Container sind `python` und `python3` dasselbe Python 3. Zusätzlich ist `uv` installiert, ein schnelles Werkzeug für virtuelle Umgebungen und Pakete.
 
-Beispiel für ein kleines Python-Programm mit Test:
+Console-Schnelleinstieg:
 
 ```bash
 cd /workspace
-mkdir -p demo-python
-cd demo-python
+mkdir -p demo-python-console
+cd demo-python-console
 cat > main.py <<'EOF'
 def greet(name: str) -> str:
     return f"Hallo aus Python, {name}"
@@ -1195,6 +1418,34 @@ if __name__ == "__main__":
 EOF
 python main.py
 python -m unittest
+```
+
+WebApp-Schnelleinstieg mit FastAPI:
+
+```bash
+cd /workspace
+mkdir -p demo-python-web
+cd demo-python-web
+uv init --bare
+uv add fastapi uvicorn
+cat > main.py <<'EOF'
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/")
+def read_root() -> dict[str, str]:
+    return {"message": "Hello from Python FastAPI"}
+EOF
+uv run python -m py_compile main.py
+uv run uvicorn main:app --host 0.0.0.0 --port 5107
+```
+
+Danach auf dem Host im Browser öffnen:
+
+```text
+http://localhost:5107
 ```
 
 `unittest` ist Teil der Standardbibliothek und braucht keine Installation. Für zusätzliche Pakete sollte eine virtuelle Umgebung genutzt werden, damit nichts global installiert wird. Das Paket `python3-venv` ist im Image vorhanden:
@@ -1304,6 +1555,7 @@ Beispiel für eine Razor-Pages-Web-App:
 cd /rider-projects
 dotnet new webapp -n WebApp1
 cd WebApp1
+dotnet build
 dotnet run --urls http://0.0.0.0:5102
 ```
 
@@ -1319,6 +1571,7 @@ Beispiel für eine minimale ASP.NET-App:
 cd /rider-projects
 dotnet new web -n MinimalWebApp1
 cd MinimalWebApp1
+dotnet build
 dotnet run --urls http://0.0.0.0:5103
 ```
 
@@ -2162,6 +2415,13 @@ rm /rider-projects/Directory.Build.props
 Dieser Ablauf prüft das Setup in einer sinnvollen Reihenfolge. Er eignet sich gut nach einer Neuinstallation, nach Änderungen an `Dockerfile`, `compose.yml` oder `opencode.jsonc` und als erster Test auf Windows, WSL/Ubuntu oder macOS mit Podman.
 
 > **Podman ist der Standardweg:** Die Beispiele nutzen `podman compose`. Mit Docker können dieselben Schritte sinngemäß mit `docker compose` ausgeführt werden, wenn Docker lokal vorgesehen ist.
+
+Für Änderungen an dokumentierten Copy-and-paste-Befehlen ist `git diff --check`
+der verpflichtende Mindestcheck. Praktische Container-Checks der beschriebenen
+Befehle gehören zur Abnahme, sofern Podman oder eine kompatible Engine läuft und
+Netzwerkzugang für Paketmanager-Downloads verfügbar ist. Wenn eine dieser
+Voraussetzungen fehlt, muss die ausgelassene praktische Prüfung mit Grund im
+PR-Text oder im Agent-Session-Log dokumentiert werden.
 
 Der Test besteht aus zwei Teilen:
 
@@ -3239,18 +3499,85 @@ Check the .NET version:
 dotnet --info
 ```
 
+The .NET SDK in this image can create and build these C# project types:
+
+- console applications with `dotnet new console`
+- Razor Pages web apps with `dotnet new webapp`
+- minimal ASP.NET apps with `dotnet new web`
+- Avalonia UI apps with the Avalonia templates
+
+Inside the container, console applications and the Razor Pages or minimal
+ASP.NET web apps can be run usefully. Avalonia UI apps can be created and built
+inside the image, but not run as a desktop GUI because the container does not
+provide a desktop session. Run the GUI on the host or in another GUI-capable
+environment.
+
 Example for a new console project:
 
 ```bash
 cd /rider-projects
 dotnet new console -n DemoApp
 cd DemoApp
+dotnet build
 dotnet run
 ```
 
-`dotnet new console` creates a simple console application. `dotnet run` builds and starts the project. The files are stored on the host in the `RIDER_PROJECTS_DIR` directory and can be opened there with Rider.
+`dotnet new console` creates a simple console application. `dotnet build`
+compiles the project. `dotnet run` then starts it inside the container. The
+files are stored on the host in the `RIDER_PROJECTS_DIR` directory and can be
+opened there with Rider.
+
+Example for an Avalonia UI app:
+
+```bash
+cd /rider-projects
+dotnet --version
+dotnet new install Avalonia.Templates
+dotnet new avalonia.mvvm -o MyAvaloniaApp
+cd MyAvaloniaApp
+```
+
+If the template does not use `net10.0` automatically, set the target framework
+line in the first `PropertyGroup` of the `.csproj` file to `net10.0`:
+
+```xml
+<TargetFramework>net10.0</TargetFramework>
+```
+
+Then build inside the container:
+
+```bash
+dotnet build
+```
+
+Do not start the Avalonia desktop app inside this image. In a GUI-capable
+environment, for example on the host, start it afterwards with `dotnet run`.
 
 If a project already has broken `bin` or `obj` folders on the Windows mount, delete them in Rider or in the terminal. Then build again inside the container.
+
+#### Java, Go, Rust, and Python: Console and Web Apps
+
+For the other four MSL languages in the image:
+
+| Language | Console programs | Web apps inside the container |
+|---|---|---|
+| Java | Yes | Yes, for example Spring Boot through Maven or a project wrapper |
+| Go | Yes | Yes, directly with `net/http`; frameworks stay project-local |
+| Rust | Yes | Yes, with project-local frameworks such as `axum` or `actix-web` |
+| Python | Yes | Yes, with project-local frameworks such as `flask`, `fastapi`, or `django` |
+
+Go, Rust, and Python web frameworks are not installed globally in the image.
+This is intentional: they belong in `go.mod`, `Cargo.toml`, or
+`pyproject.toml`, or in a virtual environment. Java has JDK 21 and Maven;
+Spring Boot CLI and Gradle are not installed globally.
+
+Web apps can run inside the container when they listen on `0.0.0.0` and use a
+published port. For exercises, use the port range `5100-5199`.
+
+In short: console programs work in all four languages. Web apps also work in
+all four languages, but Java, Go, Rust, and Python use project-local
+dependencies or the standard library, not globally installed web-app templates
+like .NET.
 
 ### Mount Java projects
 
@@ -3282,19 +3609,96 @@ javac --version
 mvn --version
 ```
 
-Example for a new Maven project:
+Console quick start:
 
 ```bash
 cd /java-projects
-mvn archetype:generate -DgroupId=com.example -DartifactId=demo-java -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
-cd demo-java
+mvn archetype:generate \
+  -DgroupId=com.example \
+  -DartifactId=demo-java-console \
+  -DarchetypeArtifactId=maven-archetype-quickstart \
+  -DarchetypeVersion=1.5 \
+  -DinteractiveMode=false
+cd demo-java-console
 mvn test
+mvn package
+java -cp target/classes com.example.App
 ```
 
-Spring Boot projects are normally started through Maven or a project wrapper, for example:
+Web app quick start with Spring Boot:
 
 ```bash
-mvn spring-boot:run
+cd /java-projects
+mkdir -p demo-java-web/src/main/java/com/example/web
+cd demo-java-web
+cat > pom.xml <<'EOF'
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.5.0</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>com.example</groupId>
+  <artifactId>demo-java-web</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <properties>
+    <java.version>21</java.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+EOF
+cat > src/main/java/com/example/web/DemoJavaWebApplication.java <<'EOF'
+package com.example.web;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@SpringBootApplication
+@RestController
+public class DemoJavaWebApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(DemoJavaWebApplication.class, args);
+    }
+
+    @GetMapping("/")
+    public String hello() {
+        return "Hello from Java Spring Boot";
+    }
+}
+EOF
+mvn test
+mvn package
+mvn spring-boot:run -Dspring-boot.run.arguments="--server.address=0.0.0.0 --server.port=5104"
+```
+
+Then open this in a browser on the host:
+
+```text
+http://localhost:5104
 ```
 
 Gradle and Spring Boot CLI are intentionally not installed globally. Many company projects include their own Maven or Gradle wrapper. This is more reproducible than global tool versions.
@@ -3311,13 +3715,13 @@ govulncheck -version
 dlv version
 ```
 
-Example for a small Go project:
+Console quick start:
 
 ```bash
 cd /workspace
-mkdir -p demo-go
-cd demo-go
-go mod init example.com/demo-go
+mkdir -p demo-go-console
+cd demo-go-console
+go mod init example.com/demo-go-console
 cat > main.go <<'EOF'
 package main
 
@@ -3330,6 +3734,43 @@ EOF
 gofmt -w main.go
 go test ./...
 go run .
+```
+
+Web app quick start with `net/http`:
+
+```bash
+cd /workspace
+mkdir -p demo-go-web
+cd demo-go-web
+go mod init example.com/demo-go-web
+cat > main.go <<'EOF'
+package main
+
+import (
+    "fmt"
+    "log"
+    "net/http"
+)
+
+func main() {
+    mux := http.NewServeMux()
+    mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        fmt.Fprintln(w, "Hello from Go net/http")
+    })
+
+    log.Println("listening on http://0.0.0.0:5105")
+    log.Fatal(http.ListenAndServe("0.0.0.0:5105", mux))
+}
+EOF
+gofmt -w main.go
+go test ./...
+go run .
+```
+
+Then open this in a browser on the host:
+
+```text
+http://localhost:5105
 ```
 
 Go web frameworks are not installed globally. For first web exercises, the standard library package `net/http` is enough. Frameworks such as `gin`, `fiber`, or `chi` belong in the project's `go.mod`.
@@ -3348,15 +3789,54 @@ cargo clippy --version
 rust-analyzer --version
 ```
 
-Example for a small Rust project:
+Console quick start:
 
 ```bash
 cd /workspace
-cargo new demo-rust
-cd demo-rust
+cargo new demo-rust-console
+cd demo-rust-console
 cargo fmt
+cargo build
 cargo clippy -- -D warnings
 cargo run
+```
+
+Web app quick start with `axum`:
+
+```bash
+cd /workspace
+cargo new demo-rust-web
+cd demo-rust-web
+cargo add axum
+cargo add tokio --features full
+cat > src/main.rs <<'EOF'
+use axum::{routing::get, Router};
+use std::net::SocketAddr;
+
+async fn hello() -> &'static str {
+    "Hello from Rust axum"
+}
+
+#[tokio::main]
+async fn main() {
+    let app = Router::new().route("/", get(hello));
+    let addr = SocketAddr::from(([0, 0, 0, 0], 5106));
+    let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
+
+    println!("listening on http://{addr}");
+    axum::serve(listener, app).await.unwrap();
+}
+EOF
+cargo fmt
+cargo build
+cargo clippy -- -D warnings
+cargo run
+```
+
+Then open this in a browser on the host:
+
+```text
+http://localhost:5106
 ```
 
 Rust web frameworks are not installed globally. Frameworks and runtimes such as `tokio`, `axum`, `actix-web`, or `serde` belong in the project's `Cargo.toml`.
@@ -3375,12 +3855,12 @@ uv --version
 
 Inside the container, `python` and `python3` are the same Python 3. The fast environment and package tool `uv` is also installed.
 
-Example for a small Python program with a test:
+Console quick start:
 
 ```bash
 cd /workspace
-mkdir -p demo-python
-cd demo-python
+mkdir -p demo-python-console
+cd demo-python-console
 cat > main.py <<'EOF'
 def greet(name: str) -> str:
     return f"Hello from Python, {name}"
@@ -3405,6 +3885,34 @@ if __name__ == "__main__":
 EOF
 python main.py
 python -m unittest
+```
+
+Web app quick start with FastAPI:
+
+```bash
+cd /workspace
+mkdir -p demo-python-web
+cd demo-python-web
+uv init --bare
+uv add fastapi uvicorn
+cat > main.py <<'EOF'
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/")
+def read_root() -> dict[str, str]:
+    return {"message": "Hello from Python FastAPI"}
+EOF
+uv run python -m py_compile main.py
+uv run uvicorn main:app --host 0.0.0.0 --port 5107
+```
+
+Then open this in a browser on the host:
+
+```text
+http://localhost:5107
 ```
 
 `unittest` is part of the standard library and needs no installation. For additional packages, use a virtual environment so nothing is installed globally. The `python3-venv` package is present in the image:
@@ -3514,6 +4022,7 @@ Example for a Razor Pages web app:
 cd /rider-projects
 dotnet new webapp -n WebApp1
 cd WebApp1
+dotnet build
 dotnet run --urls http://0.0.0.0:5102
 ```
 
@@ -3529,6 +4038,7 @@ Example for a minimal ASP.NET app:
 cd /rider-projects
 dotnet new web -n MinimalWebApp1
 cd MinimalWebApp1
+dotnet build
 dotnet run --urls http://0.0.0.0:5103
 ```
 
@@ -4372,6 +4882,13 @@ rm /rider-projects/Directory.Build.props
 This procedure checks the setup in a useful order. It is a good choice after a fresh installation, after changes to `Dockerfile`, `compose.yml`, or `opencode.jsonc`, and as a first test on Windows, WSL/Ubuntu, or macOS with Podman.
 
 > **Podman is the default path:** The examples use `podman compose`. With Docker, run the same steps with `docker compose` when Docker is intended locally.
+
+For changes to documented copy-and-paste commands, `git diff --check` is the
+required minimum check. Practical container checks of the documented commands
+are part of acceptance when Podman or a compatible engine is running and network
+access is available for package-manager downloads. If one of these prerequisites
+is missing, document which practical check was skipped and why in the PR text or
+in the agent session log.
 
 The test has two parts:
 
