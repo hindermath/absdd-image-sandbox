@@ -155,6 +155,28 @@ podman compose build --pull
 
 If `podman compose` is not available on the local installation, use `podman-compose` with the same arguments.
 
+For README or `AGENTS.md` changes that add or change documented copy-and-paste
+commands, always run `git diff --check` as the minimum repository-side
+plausibility check. If Podman, Docker, or a compatible Compose engine is
+available, also run the documented commands practically inside the container.
+Use temporary directories under `/tmp` for these checks unless the documentation
+explicitly describes a host-mounted project directory; this keeps sample
+projects out of `/workspace`, `/rider-projects`, and the repository.
+
+Treat platform coverage explicitly. A successful run on only one host platform
+is a local plausibility check, not full cross-platform acceptance. When a change
+claims or affects macOS, Windows/WSL2, and Linux/Ubuntu behavior, verify the
+commands on each affected platform when those systems are available. Use the
+platform's actual Compose command (`podman compose`, `podman-compose`, or
+`docker compose`) rather than assuming one spelling. If a platform, engine, or
+network access for package downloads is unavailable, record the skipped check
+and the reason in the pull request text or in the agent session log.
+
+For documented web-app examples, bind the app to `0.0.0.0` inside the container
+and use a port from the published `5100-5199` range. During practical checks,
+verify that the app responds over HTTP and stop any background test process
+before ending the session.
+
 Do not require a real API key for validation unless the change explicitly affects live Opencode usage.
 
 For .NET projects under `/rider-projects`, keep `bin`, `obj`, and AppHost output off the Windows bind mount. The mounted `ContainerBuild.props` sends build output to the `dotnet_build` volume at `/dotnet-build` and imports repository-specific `Directory.Build.props` files when present.
