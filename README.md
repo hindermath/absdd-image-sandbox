@@ -3,8 +3,18 @@
 Eine vorbereitete Container-Lern- und Entwicklungsumgebung für Fachinformatiker:innen.
 Sprachen und Werkzeuge: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, Opencode, Codex CLI, Spec Kit.
 
+Mit diesem Dev-Container können für die fünf MSL-Sprachen C#/.NET, Java, Go,
+Rust und Python Konsolenanwendungen, CLI-/TUI-Programme und Web-Apps gebaut,
+getestet und im Container ausgeführt werden. GUI-Entwicklung und
+Desktop-GUI-Ausführung sind nicht Teil des Scopes dieses Containers.
+
 *A ready-to-use container learning and development environment for IT-specialist apprentices.
 Languages and tools: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, Opencode CLI/TUI, Codex CLI/TUI, Spec Kit*
+
+With this dev container, console applications, CLI/TUI programs, and web apps
+for the five MSL languages C#/.NET, Java, Go, Rust, and Python can be built,
+tested, and run inside the container. GUI development and desktop GUI execution
+are outside the scope of this container.
 
 ---
 
