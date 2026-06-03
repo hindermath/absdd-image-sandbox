@@ -3,18 +3,18 @@
 Eine vorbereitete Container-Lern- und Entwicklungsumgebung für Fachinformatiker:innen.
 Sprachen und Werkzeuge: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, [Opencode](#glossar), [Codex](#glossar) CLI, [Spec Kit](#glossar).
 
-Mit diesem Dev-Container können für die fünf MSL-Sprachen C#/.NET, Java, Go,
-Rust und Python Konsolenanwendungen, CLI-/TUI-Programme und Web-Apps gebaut,
-getestet und im Container ausgeführt werden. GUI-Entwicklung und
-Desktop-GUI-Ausführung sind nicht Teil des Scopes dieses Containers.
+Der Dev-Container deckt fünf Sprachen ab: C#/.NET, Java, Go, Rust und Python.
+Damit kannst du Konsolenanwendungen, CLI- und TUI-Programme sowie Web-Apps
+bauen, testen und im Container ausführen. GUI-Entwicklung und Desktop-GUIs
+liegen außerhalb des Container-Scopes.
 
 *A ready-to-use container learning and development environment for IT-specialist apprentices.
 Languages and tools: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, [Opencode](#glossary) CLI/TUI, [Codex](#glossary) CLI/TUI, [Spec Kit](#glossary)*
 
-With this dev container, console applications, CLI/TUI programs, and web apps
-for the five MSL languages C#/.NET, Java, Go, Rust, and Python can be built,
-tested, and run inside the container. GUI development and desktop GUI execution
-are outside the scope of this container.
+The dev container covers five languages: C#/.NET, Java, Go, Rust, and Python.
+You can build, test, and run console applications, CLI and TUI programs, and
+web apps inside the container. GUI development and desktop GUIs are outside
+the container scope.
 
 ---
 
@@ -279,7 +279,7 @@ Wichtig für Compose: `podman compose` und `podman-compose` meinen denselben Zwe
 
 Dieser Schnellstart richtet sich an alle, die das Setup zuerst nur ausprobieren wollen. Die Details folgen in den späteren Abschnitten.
 
-> **Primäres Container-Werkzeug: Podman.** Dieser Schnellstart nutzt Podman mit Podman Compose. Das ist der empfohlene Weg für Ausbildung und Übungen, weil in den bisherigen Tests Windows, WSL/Ubuntu und macOS funktionieren und keine Docker-Desktop-Lizenzkosten anfallen. Docker bleibt als kompatible Alternative dokumentiert.
+> **Primäres Container-Werkzeug: Podman.** Dieser Schnellstart nutzt Podman mit Podman Compose. Das ist der empfohlene Weg für Ausbildung und Übungen. Tests laufen auf Windows, WSL/Ubuntu und macOS, und es fallen keine Docker-Desktop-Lizenzkosten an. Docker bleibt als kompatible Alternative dokumentiert.
 
 Schritt 1: Voraussetzungen prüfen.
 
@@ -442,7 +442,7 @@ podman-compose down -v
 
 Hinweis: Auf manchen Installationen funktioniert auch `podman compose ...`. Wenn dieser Befehl aber Docker Compose als Provider startet oder den Docker-Daemon sucht, für dieses Repository `podman-compose ...` verwenden.
 
-WSL2- und Windows-Hinweis: Wenn dieselbe Umgebung einmal mit Podman Desktop unter Windows und einmal mit Podman in WSL2 gestartet wird, dürfen nicht beide Container gleichzeitig laufen. Beide Varianten veröffentlichen dieselbe Port-Range `127.0.0.1:5100-5199`. Vor dem Start in WSL2 den Windows-Container in Podman Desktop oder PowerShell stoppen:
+WSL2- und Windows-Hinweis: Starte die Umgebung nicht gleichzeitig mit Podman Desktop unter Windows und mit Podman in WSL2. Beide Container belegen dieselbe Port-Range `127.0.0.1:5100-5199`. Vor dem Start in WSL2 den Windows-Container in Podman Desktop oder PowerShell stoppen:
 
 ```powershell
 podman compose down
@@ -531,7 +531,7 @@ podman build --pull -t ade-dev-sandbox-ade .
 podman compose up -d --no-build --force-recreate
 ```
 
-Wenn Podman Desktop sichtbar läuft, die Terminal-CLI aber trotzdem mit einer Meldung wie `unable to connect to Podman socket`, `connection refused` oder einem veralteten `ssh://core@127.0.0.1:<port>` abbricht, zuerst die aktive Verbindung prüfen:
+Podman Desktop läuft sichtbar, aber die Terminal-CLI bricht trotzdem ab. Typische Meldungen sind `unable to connect to Podman socket`, `connection refused` oder ein veraltetes `ssh://core@127.0.0.1:<port>`. In diesem Fall zuerst die aktive Verbindung prüfen:
 
 ```bash
 podman machine list
@@ -748,7 +748,7 @@ podman compose down -v
 
 Wenn `podman compose ...` meldet, dass ein externer Compose-Provider wie `docker-compose.exe` verwendet wird, ist das nicht automatisch ein Fehler. Wichtig ist der Auth-Kontext: `docker-compose.exe` braucht auf Windows ein Docker-kompatibles Authfile. Ohne `podman login --compat-auth-file "$env:USERPROFILE\.docker\config.json" docker.gitlab-ce.gwdg.de` kann `podman pull` funktionieren, während `podman compose build --pull` mit `403 Forbidden` am privaten GitLab-Basisimage scheitert.
 
-WSL2- und Windows-Hinweis: Wenn dieselbe Umgebung einmal mit Podman Desktop unter Windows und einmal mit Podman in WSL2 gestartet wird, dürfen nicht beide Container gleichzeitig laufen. Beide Varianten veröffentlichen dieselbe Port-Range `127.0.0.1:5100-5199`. Vor dem Start unter Windows den WSL2-Container stoppen:
+WSL2- und Windows-Hinweis: Starte die Umgebung nicht gleichzeitig mit Podman Desktop unter Windows und mit Podman in WSL2. Beide Container belegen dieselbe Port-Range `127.0.0.1:5100-5199`. Vor dem Start unter Windows den WSL2-Container stoppen:
 
 ```bash
 podman-compose down
@@ -843,7 +843,7 @@ ls
 
 Änderungen im Container wirken direkt auf die Host-Dateien. Rider auf dem Host sieht dieselben Dateien. Builds auf Windows- oder macOS-Bind-Mounts können langsamer sein als Builds im Linux-Dateisystem.
 
-Damit .NET auf Host-Dateien keine Probleme mit `bin`, `obj`, AppHost-Dateien oder Dateizeitstempeln bekommt, wird eine MSBuild-Konfiguration in den Container eingebunden:
+Auf Host-Dateien führt .NET manchmal zu Problemen mit `bin`-, `obj`-, AppHost-Dateien oder Dateizeitstempeln. Dagegen bindet Compose eine MSBuild-Konfiguration in den Container ein:
 
 ```text
 dotnet/ContainerBuild.props -> /dotnet-config/ContainerBuild.props
@@ -877,11 +877,11 @@ Mit dem .NET SDK im Image können diese C#-Projekttypen erstellt und
 - minimale ASP.NET-App mit `dotnet new web`
 - Avalonia-UI-App mit den Avalonia-Templates
 
-Im Container sinnvoll starten lassen sich Konsolenanwendungen sowie die
-Razor-Pages- und minimalen ASP.NET-Web-Apps. Avalonia-UI-Apps können im Image
-erstellt und gebaut werden, aber nicht als Desktop-GUI laufen, weil der
-Container keine Desktop-Sitzung bereitstellt. Der GUI-Start erfolgt auf dem
-Host oder in einer anderen GUI-fähigen Umgebung.
+Im Container starten sinnvoll: Konsolenanwendungen, Razor-Pages- und minimale
+ASP.NET-Web-Apps. Avalonia-UI-Apps kannst du im Image erstellen und bauen.
+Eine Desktop-GUI läuft im Container aber nicht, weil keine Desktop-Sitzung
+vorhanden ist. Starte die GUI deshalb auf dem Host oder in einer anderen
+GUI-fähigen Umgebung.
 
 Beispiel für ein neues Konsolenprojekt:
 
@@ -947,10 +947,10 @@ WebApps können im Container laufen, wenn sie auf `0.0.0.0` lauschen und einen
 freigegebenen Port nutzen. Für Übungen ist die Port-Range `5100-5199`
 vorgesehen.
 
-Kurz gesagt: Console-Programme gehen in allen vier Sprachen. WebApps gehen
-ebenfalls in allen vier Sprachen, aber Java, Go, Rust und Python nutzen dafür
-projektlokale Abhängigkeiten oder die Standardbibliothek, nicht global
-vorinstallierte Web-App-Templates wie bei .NET.
+Kurz gesagt: Console-Programme funktionieren in allen vier Sprachen. WebApps
+auch. Java, Go, Rust und Python nutzen dafür aber projektlokale Abhängigkeiten
+oder die Standardbibliothek. Global vorinstallierte Web-App-Templates wie bei
+.NET gibt es nicht.
 
 ### Java-Projekte einbinden
 
@@ -1695,7 +1695,7 @@ Wenn das Projekt keine Tests enthält, mindestens `dotnet build` ausführen und 
 
 ### Podman und Docker: Compose-kompatible Befehle
 
-Diese Anleitung nutzt Podman als primären Weg. Podman ist weitgehend Docker- und Compose-kompatibel; deshalb können die meisten Abläufe auch mit Docker ausgeführt werden, wenn Docker in der jeweiligen Organisation erlaubt und lizenziert ist. Die allgemeinen Abschnitte wie [Container bauen und starten](#container-bauen-und-starten), [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen), [ASP.NET-Web-App vom Host erreichen](#aspnet-web-app-vom-host-erreichen) und [Kompakter Testablauf](#kompakter-testablauf) gelten für beide Werkzeuge. Ersetze die Befehle sinngemäß:
+Diese Anleitung nutzt Podman als primären Weg. Podman ist weitgehend Docker- und Compose-kompatibel. Deshalb funktionieren die meisten Abläufe auch mit Docker, sofern Docker in deiner Organisation erlaubt und lizenziert ist. Die allgemeinen Abschnitte gelten für beide Werkzeuge: [Container bauen und starten](#container-bauen-und-starten), [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen), [ASP.NET-Web-App vom Host erreichen](#aspnet-web-app-vom-host-erreichen) und [Kompakter Testablauf](#kompakter-testablauf). Ersetze die Befehle sinngemäß:
 
 | Podman | Docker |
 |---|---|
@@ -1996,7 +1996,7 @@ Rust wird beim Image-Build mit `rustup` für den Linux-Benutzer `adedev` install
 
 Node.js wird aus der signierten NodeSource-Apt-Quelle installiert. Der Build-Parameter `NODE_MAJOR` steht standardmäßig auf `22`; das Dockerfile richtet die Deb822-Quelle mit `Signed-By`-Keyring ein und führt kein heruntergeladenes NodeSource-Setup-Skript mehr aus.
 
-uv und uvx werden aus einem festen GitHub-Release-Artefakt installiert. Der Build-Parameter `UV_VERSION` steht standardmäßig auf `0.11.16`; das Dockerfile wählt das Linux-Artefakt passend zur CPU-Architektur, lädt die zugehörige `.sha256`-Datei und prüft sie mit `sha256sum -c`, bevor `uv` und `uvx` nach `/usr/local/bin` installiert werden.
+uv und uvx werden aus einem festen GitHub-Release-Artefakt installiert. Der Build-Parameter `UV_VERSION` steht standardmäßig auf `0.11.16`. Das Dockerfile wählt das Linux-Artefakt passend zur CPU-Architektur und lädt die zugehörige `.sha256`-Datei. Erst nach `sha256sum -c` werden `uv` und `uvx` nach `/usr/local/bin` installiert.
 
 OpenCode und Codex CLI werden beim Image-Build als konkret gepinnte npm-Pakete installiert. Die Versionen stehen im Dockerfile in `OPENCODE_VERSION` und `CODEX_VERSION`; Updates erfolgen bewusst über Dockerfile-Änderung, Git-Commit und neuen Image-Build:
 
@@ -2023,9 +2023,9 @@ DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE=true
 MSBuildEnableWorkloadResolver=false
 ```
 
-Die erste Variable betrifft allgemeine Update-Benachrichtigungen. Die zweite Variable deaktiviert den MSBuild-Workload-Resolver. Das ist für normale Konsolen-, Library-, Test- und Web-Projekte sinnvoll, weil dort keine optionalen SDK-Workloads wie MAUI gebraucht werden.
+Die erste Variable betrifft allgemeine Update-Benachrichtigungen. Die zweite Variable deaktiviert den MSBuild-Workload-Resolver. Für normale Konsolen-, Library-, Test- und Web-Projekte ist das sinnvoll. Optionale SDK-Workloads wie MAUI werden dort nicht gebraucht.
 
-Das Image erbt vom gemeinsamen `agent-sandbox`-Image auf Debian 13. Das Basisimage ist im Dockerfile per `sha256`-Digest gepinnt; der lesbare `latest`-Tag bleibt nur als Kommentar mit Beobachtungsdatum erhalten. Ein Update des Basisimages erfolgt bewusst über Digest-Änderung im Dockerfile, Review, Git-Commit und neuen Image-Build. .NET wird über die Microsoft-Paketquelle für Debian 13 installiert. Der Build-Parameter `DOTNET_SDK_PACKAGE` steht standardmäßig auf `dotnet-sdk-10.0`.
+Das Image erbt vom gemeinsamen `agent-sandbox`-Image auf Debian 13. Das Basisimage ist im Dockerfile per `sha256`-Digest gepinnt. Der lesbare `latest`-Tag bleibt nur als Kommentar mit Beobachtungsdatum erhalten. Ein Update des Basisimages läuft bewusst in mehreren Schritten: Digest-Änderung im Dockerfile, Review, Git-Commit, neuer Image-Build. .NET wird über die Microsoft-Paketquelle für Debian 13 installiert. Der Build-Parameter `DOTNET_SDK_PACKAGE` steht standardmäßig auf `dotnet-sdk-10.0`.
 
 Die Sicherheitsfreigabe wird in `docs/security/sandbox-freigabe.md` als Entwurf dokumentiert. Die MR/PR-Anleitung für CISO/ISB oder KI-Beauftragte:n (KIB) liegt in `docs/security/sandbox-freigabe-review.md`. Der Isolationsnachweis liegt in `docs/security/sandbox-isolation.md`. Das zugehörige KI-Werkzeug-Inventar liegt in `docs/security/ai-tools-inventory.md`. Supply-Chain-Härtungen und Dependency-Update-Regeln sind in `docs/security/supply-chain-todo.md` und `docs/security/dependency-update-policy.md` dokumentiert. Offene `_TODO_`-Felder müssen durch Owner, Betrieb, CISO/ISB oder KIB gepflegt werden und werden nicht durch Annahmen ersetzt.
 
@@ -2283,7 +2283,7 @@ Wenn Docker keine Berechtigung hat, entweder `sudo docker ...` verwenden oder de
 
 Wenn der API-Key nicht funktioniert, `opencode.env` prüfen. Den Key nicht im Terminalverlauf, in Screenshots oder in Git-Ausgaben zeigen.
 
-Wenn `codex` oder `opencode` im Container mit `Permission denied` oder `EACCES` unter `/home/adedev/.codex` oder `/home/adedev/.local/share/opencode` abbrechen, gehören wahrscheinlich alte persistente Volumes noch einem früheren Container-Benutzer. Das kann nach einem Image- oder Basisimage-Wechsel passieren. Die Verzeichnisse im Image sind bereits für `adedev` angelegt; vorhandene Volumes überdecken diese Verzeichnisse aber und müssen einmalig korrigiert werden.
+`codex` oder `opencode` brechen im Container mit `Permission denied` oder `EACCES` ab? Betroffen sind meist `/home/adedev/.codex` oder `/home/adedev/.local/share/opencode`. Wahrscheinliche Ursache: Alte persistente Volumes gehören noch einem früheren Container-Benutzer. Das passiert nach einem Image- oder Basisimage-Wechsel. Die Verzeichnisse im Image sind bereits für `adedev` angelegt. Vorhandene Volumes überdecken sie aber und müssen einmalig korrigiert werden.
 
 Für Podman auf macOS, Windows oder WSL2 zuerst den tatsächlichen Container-Namen ermitteln. Je nach Compose-Provider kann er zum Beispiel `ade-dev-sandbox-ade-1` oder `ade-dev-sandbox_ade_1` heißen:
 
@@ -2410,7 +2410,7 @@ rm /rider-projects/Directory.Build.props
 
 ### Kompakter Testablauf
 
-Dieser Ablauf prüft das Setup in einer sinnvollen Reihenfolge. Er eignet sich gut nach einer Neuinstallation, nach Änderungen an `Dockerfile`, `compose.yml` oder `opencode.jsonc` und als erster Test auf Windows, WSL/Ubuntu oder macOS mit Podman.
+Dieser Ablauf prüft das Setup in einer sinnvollen Reihenfolge. Er eignet sich nach einer Neuinstallation oder nach Änderungen an `Dockerfile`, `compose.yml` oder `opencode.jsonc`. Auch als erster Test auf Windows, WSL/Ubuntu oder macOS mit Podman ist er passend.
 
 > **Podman ist der Standardweg:** Die Beispiele nutzen `podman compose`. Mit Docker können dieselben Schritte sinngemäß mit `docker compose` ausgeführt werden, wenn Docker lokal vorgesehen ist.
 
@@ -2783,7 +2783,7 @@ Important for Compose: `podman compose` and `podman-compose` serve the same purp
 
 This quick start is for anyone who wants to try the setup first. Details follow in the later sections.
 
-> **Primary container tool: Podman.** This quick start uses Podman with Podman Compose. This is the recommended path for training and exercises because the setup has been tested on Windows, WSL/Ubuntu, and macOS, and it avoids Docker Desktop license costs. Docker remains documented as a compatible alternative.
+> **Primary container tool: Podman.** This quick start uses Podman with Podman Compose. This is the recommended path for training and exercises. The setup is tested on Windows, WSL/Ubuntu, and macOS, and it avoids Docker Desktop license costs. Docker remains documented as a compatible alternative.
 
 Step 1: Check prerequisites.
 
@@ -2946,7 +2946,7 @@ podman-compose down -v
 
 Note: On some installations, `podman compose ...` also works. If that command starts Docker Compose as a provider or searches for the Docker daemon, use `podman-compose ...` for this repository.
 
-WSL2 and Windows note: If the same environment is started once with Podman Desktop on Windows and once with Podman in WSL2, both containers must not run at the same time. Both variants publish the same port range `127.0.0.1:5100-5199`. Before starting in WSL2, stop the Windows container in Podman Desktop or PowerShell:
+WSL2 and Windows note: Do not start the environment at the same time with Podman Desktop on Windows and with Podman in WSL2. Both containers use the same port range `127.0.0.1:5100-5199`. Before starting in WSL2, stop the Windows container in Podman Desktop or PowerShell:
 
 ```powershell
 podman compose down
@@ -3035,7 +3035,7 @@ podman build --pull -t ade-dev-sandbox-ade .
 podman compose up -d --no-build --force-recreate
 ```
 
-If Podman Desktop is visibly running but the terminal CLI still fails with a message such as `unable to connect to Podman socket`, `connection refused`, or a stale `ssh://core@127.0.0.1:<port>`, check the active connection first:
+Podman Desktop is visibly running, but the terminal CLI still fails. Typical messages are `unable to connect to Podman socket`, `connection refused`, or a stale `ssh://core@127.0.0.1:<port>`. In that case, check the active connection first:
 
 ```bash
 podman machine list
@@ -3252,7 +3252,7 @@ podman compose down -v
 
 If `podman compose ...` reports that it is using an external Compose provider such as `docker-compose.exe`, that is not automatically an error. The important part is the auth context: on Windows, `docker-compose.exe` needs a Docker-compatible auth file. Without `podman login --compat-auth-file "$env:USERPROFILE\.docker\config.json" docker.gitlab-ce.gwdg.de`, `podman pull` can work while `podman compose build --pull` still fails with `403 Forbidden` on the private GitLab base image.
 
-WSL2 and Windows note: If the same environment is started once with Podman Desktop on Windows and once with Podman in WSL2, both containers must not run at the same time. Both variants publish the same port range `127.0.0.1:5100-5199`. Before starting on Windows, stop the WSL2 container:
+WSL2 and Windows note: Do not start the environment at the same time with Podman Desktop on Windows and with Podman in WSL2. Both containers use the same port range `127.0.0.1:5100-5199`. Before starting on Windows, stop the WSL2 container:
 
 ```bash
 podman-compose down
@@ -3347,7 +3347,7 @@ ls
 
 Changes inside the container are written directly to the host files. Rider on the host sees the same files. Builds on Windows or macOS bind mounts can be slower than builds inside the Linux file system.
 
-To avoid .NET problems with `bin`, `obj`, AppHost files, or file timestamps on host files, an MSBuild configuration file is mounted into the container:
+On host files, .NET sometimes runs into problems with `bin`, `obj`, AppHost files, or file timestamps. To prevent this, Compose mounts an MSBuild configuration file into the container:
 
 ```text
 dotnet/ContainerBuild.props -> /dotnet-config/ContainerBuild.props
@@ -3380,11 +3380,11 @@ The .NET SDK in this image can create and build these C# project types:
 - minimal ASP.NET apps with `dotnet new web`
 - Avalonia UI apps with the Avalonia templates
 
-Inside the container, console applications and the Razor Pages or minimal
-ASP.NET web apps can be run usefully. Avalonia UI apps can be created and built
-inside the image, but not run as a desktop GUI because the container does not
-provide a desktop session. Run the GUI on the host or in another GUI-capable
-environment.
+These apps run well inside the container: console applications, Razor Pages
+web apps, and minimal ASP.NET web apps. You can also create and build Avalonia
+UI apps in the image. A desktop GUI, however, does not run inside the
+container because there is no desktop session. Run the GUI on the host or in
+another GUI-capable environment.
 
 Example for a new console project:
 
@@ -3448,10 +3448,10 @@ Spring Boot CLI and Gradle are not installed globally.
 Web apps can run inside the container when they listen on `0.0.0.0` and use a
 published port. For exercises, use the port range `5100-5199`.
 
-In short: console programs work in all four languages. Web apps also work in
-all four languages, but Java, Go, Rust, and Python use project-local
-dependencies or the standard library, not globally installed web-app templates
-like .NET.
+In short: console programs work in all four languages. Web apps also work.
+Java, Go, Rust, and Python use project-local dependencies or the standard
+library for this. There are no globally installed web-app templates like
+in .NET.
 
 ### Mount Java projects
 
@@ -4196,7 +4196,7 @@ If the project has no tests, run at least `dotnet build` and document why no tes
 
 ### Podman and Docker: Compose-compatible commands
 
-This guide uses Podman as the primary path. Podman is largely Docker- and Compose-compatible, so most workflows can also be run with Docker when Docker is allowed and licensed in the organization. General sections such as [Build and start the container](#build-and-start-the-container), [Use .NET and C# inside the container](#use-net-and-c-inside-the-container), [Reach an ASP.NET web app from the host](#reach-an-aspnet-web-app-from-the-host), and [Compact test procedure](#compact-test-procedure) apply to both tools. Substitute the commands accordingly:
+This guide uses Podman as the primary path. Podman is largely Docker- and Compose-compatible. So most workflows also run with Docker, provided Docker is allowed and licensed in your organization. The general sections apply to both tools: [Build and start the container](#build-and-start-the-container), [Use .NET and C# inside the container](#use-net-and-c-inside-the-container), [Reach an ASP.NET web app from the host](#reach-an-aspnet-web-app-from-the-host), and [Compact test procedure](#compact-test-procedure). Substitute the commands accordingly:
 
 | Podman | Docker |
 |---|---|
@@ -4497,7 +4497,7 @@ Rust is installed during the image build with `rustup` for the Linux user `adede
 
 Node.js is installed from the signed NodeSource Apt source. The `NODE_MAJOR` build argument defaults to `22`; the Dockerfile configures the Deb822 source with a `Signed-By` keyring and no longer executes a downloaded NodeSource setup script.
 
-uv and uvx are installed from a fixed GitHub release artifact. The `UV_VERSION` build argument defaults to `0.11.16`; the Dockerfile selects the Linux artifact for the CPU architecture, downloads the matching `.sha256` file, verifies it with `sha256sum -c`, and only then installs `uv` and `uvx` into `/usr/local/bin`.
+uv and uvx are installed from a fixed GitHub release artifact. The `UV_VERSION` build argument defaults to `0.11.16`. The Dockerfile selects the Linux artifact for the CPU architecture and downloads the matching `.sha256` file. Only after `sha256sum -c` succeeds are `uv` and `uvx` installed into `/usr/local/bin`.
 
 OpenCode and Codex CLI are installed during the image build as explicitly pinned npm packages. The versions are declared in the Dockerfile through `OPENCODE_VERSION` and `CODEX_VERSION`; updates happen deliberately through a Dockerfile change, Git commit, and a new image build:
 
@@ -4524,9 +4524,9 @@ DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE=true
 MSBuildEnableWorkloadResolver=false
 ```
 
-The first variable affects general update notifications. The second variable disables the MSBuild workload resolver. This is useful for normal console, library, test, and web projects because they do not need optional SDK workloads such as MAUI.
+The first variable affects general update notifications. The second variable disables the MSBuild workload resolver. This is useful for normal console, library, test, and web projects. Such projects do not need optional SDK workloads like MAUI.
 
-The image inherits from the shared `agent-sandbox` image on Debian 13. The base image is pinned in the Dockerfile by `sha256` digest; the readable `latest` tag stays only as a comment with the observation date. A base-image update happens deliberately through a digest change in the Dockerfile, review, Git commit, and a new image build. .NET is installed through the Microsoft package feed for Debian 13. The build argument `DOTNET_SDK_PACKAGE` defaults to `dotnet-sdk-10.0`.
+The image inherits from the shared `agent-sandbox` image on Debian 13. The base image is pinned in the Dockerfile by `sha256` digest. The readable `latest` tag stays only as a comment with the observation date. A base-image update runs deliberately in several steps: digest change in the Dockerfile, review, Git commit, and a new image build. .NET is installed through the Microsoft package feed for Debian 13. The build argument `DOTNET_SDK_PACKAGE` defaults to `dotnet-sdk-10.0`.
 
 The security approval is documented as a draft in `docs/security/sandbox-freigabe.md`. The MR/PR review guide for CISO/ISB or the AI officer (KIB) lives in `docs/security/sandbox-freigabe-review.md`. The isolation evidence lives in `docs/security/sandbox-isolation.md`. The related AI tool inventory lives in `docs/security/ai-tools-inventory.md`. Supply-chain hardening and dependency-update rules are documented in `docs/security/supply-chain-todo.md` and `docs/security/dependency-update-policy.md`. Open `_TODO_` fields must be maintained by the owner, operations, CISO/ISB, or KIB and are not replaced with assumptions.
 
@@ -4784,7 +4784,7 @@ If Docker has no permission, use `sudo docker ...` or add the user to the `docke
 
 If the API key does not work, check `opencode.env`. Do not show the key in terminal history, screenshots, or Git output.
 
-If `codex` or `opencode` exits inside the container with `Permission denied` or `EACCES` below `/home/adedev/.codex` or `/home/adedev/.local/share/opencode`, old persistent volumes probably still belong to an earlier container user. This can happen after an image or base-image change. The image already creates these directories for `adedev`, but existing volumes hide the image directories and need a one-time ownership fix.
+`codex` or `opencode` exits inside the container with `Permission denied` or `EACCES`? Affected paths are usually `/home/adedev/.codex` or `/home/adedev/.local/share/opencode`. Likely cause: old persistent volumes still belong to an earlier container user. This happens after an image or base-image change. The image already creates these directories for `adedev`. Existing volumes hide them, however, and need a one-time ownership fix.
 
 For Podman on macOS, Windows, or WSL2, first resolve the actual container name. Depending on the Compose provider, it can be named for example `ade-dev-sandbox-ade-1` or `ade-dev-sandbox_ade_1`:
 
@@ -4911,7 +4911,7 @@ rm /rider-projects/Directory.Build.props
 
 ### Compact test procedure
 
-This procedure checks the setup in a useful order. It is a good choice after a fresh installation, after changes to `Dockerfile`, `compose.yml`, or `opencode.jsonc`, and as a first test on Windows, WSL/Ubuntu, or macOS with Podman.
+This procedure checks the setup in a useful order. Use it after a fresh installation or after changes to `Dockerfile`, `compose.yml`, or `opencode.jsonc`. It also works as a first test on Windows, WSL/Ubuntu, or macOS with Podman.
 
 > **Podman is the default path:** The examples use `podman compose`. With Docker, run the same steps with `docker compose` when Docker is intended locally.
 
