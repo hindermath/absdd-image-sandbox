@@ -77,21 +77,17 @@ Die Tabelle zeigt jede Sektion zweisprachig nebeneinander. Links führt zur deut
 | Deutsch | English |
 |---|---|
 | [Auf einen Blick](#auf-einen-blick) | [At a glance](#at-a-glance) |
-| [Repository klonen und Podman installieren](#repository-klonen-und-podman-installieren) | [Clone the repository and install Podman](#clone-the-repository-and-install-podman) |
-| [Schnellstart in 10 Minuten](#schnellstart-in-10-minuten) | [Quick start in 10 minutes](#quick-start-in-10-minutes) |
-| [Voraussetzungen](#voraussetzungen) | [Prerequisites](#prerequisites) |
 | [Zielgruppe und Zweck](#zielgruppe-und-zweck) | [Target group and purpose](#target-group-and-purpose) |
+| [Voraussetzungen](#voraussetzungen) | [Prerequisites](#prerequisites) |
 | [Lernpfad für Azubis](#lernpfad-für-azubis) | [Learning path for apprentices](#learning-path-for-apprentices) |
 | [Grundidee](#grundidee) | [Basic idea](#basic-idea) |
 | [Begriffe und Ausführungsort](#begriffe-und-ausführungsort) | [Terms and command location](#terms-and-command-location) |
 | [Projektstruktur](#projektstruktur) | [Project structure](#project-structure) |
-| [Podman und Docker: Compose-kompatible Befehle](#podman-und-docker-compose-kompatible-befehle) | [Podman and Docker: Compose-compatible commands](#podman-and-docker-compose-compatible-commands) |
+| [Repository klonen und Podman installieren](#repository-klonen-und-podman-installieren) | [Clone the repository and install Podman](#clone-the-repository-and-install-podman) |
+| [Schnellstart in 10 Minuten](#schnellstart-in-10-minuten) | [Quick start in 10 minutes](#quick-start-in-10-minutes) |
 | [Podman unter Ubuntu 24.04 LTS verwenden](#podman-unter-ubuntu-2404-lts-verwenden) | [Use Podman on Ubuntu 24.04 LTS](#use-podman-on-ubuntu-2404-lts) |
 | [Podman unter macOS mit Homebrew verwenden](#podman-unter-macos-mit-homebrew-verwenden) | [Use Podman on macOS with Homebrew](#use-podman-on-macos-with-homebrew) |
 | [Podman unter Windows mit Podman Desktop verwenden](#podman-unter-windows-mit-podman-desktop-verwenden) | [Use Podman on Windows with Podman Desktop](#use-podman-on-windows-with-podman-desktop) |
-| [Docker unter Ubuntu oder WSL2 installieren](#docker-unter-ubuntu-oder-wsl2-installieren) | [Install Docker on Ubuntu or WSL2](#install-docker-on-ubuntu-or-wsl2) |
-| [Docker-Desktop-Profile für macOS und Windows](#docker-desktop-profile-für-macos-und-windows) | [Docker Desktop profiles for macOS and Windows](#docker-desktop-profiles-for-macos-and-windows) |
-| [Docker-Berechtigungen prüfen](#docker-berechtigungen-prüfen) | [Check Docker permissions](#check-docker-permissions) |
 | [API-Key einrichten](#api-key-einrichten) | [Set up the API key](#set-up-the-api-key) |
 | [Container bauen und starten](#container-bauen-und-starten) | [Build and start the container](#build-and-start-the-container) |
 | [Rider-Projekte aus Windows einbinden](#rider-projekte-aus-windows-einbinden) | [Mount Rider projects from Windows](#mount-rider-projects-from-windows) |
@@ -110,6 +106,10 @@ Die Tabelle zeigt jede Sektion zweisprachig nebeneinander. Links führt zur deut
 | [Beispiel: ConsoleApp2 mit Opencode und Spec Kit](#beispiel-consoleapp2-mit-opencode-und-spec-kit) | [Example: ConsoleApp2 with Opencode and Spec Kit](#example-consoleapp2-with-opencode-and-spec-kit) |
 | [Pilot: ASP.NET-Web-App mit Opencode und Spec Kit](#pilot-aspnet-web-app-mit-opencode-und-spec-kit) | [Pilot: ASP.NET web app with Opencode and Spec Kit](#pilot-aspnet-web-app-with-opencode-and-spec-kit) |
 | [Pflichtablauf für ein SDD-Feature](#pflichtablauf-für-ein-sdd-feature) | [Required flow for an SDD feature](#required-flow-for-an-sdd-feature) |
+| [Podman und Docker: Compose-kompatible Befehle](#podman-und-docker-compose-kompatible-befehle) | [Podman and Docker: Compose-compatible commands](#podman-and-docker-compose-compatible-commands) |
+| [Docker unter Ubuntu oder WSL2 installieren](#docker-unter-ubuntu-oder-wsl2-installieren) | [Install Docker on Ubuntu or WSL2](#install-docker-on-ubuntu-or-wsl2) |
+| [Docker-Desktop-Profile für macOS und Windows](#docker-desktop-profile-für-macos-und-windows) | [Docker Desktop profiles for macOS and Windows](#docker-desktop-profiles-for-macos-and-windows) |
+| [Docker-Berechtigungen prüfen](#docker-berechtigungen-prüfen) | [Check Docker permissions](#check-docker-permissions) |
 | [Konfiguration](#konfiguration) | [Configuration](#configuration) |
 | [Image-SBOM erzeugen](#image-sbom-erzeugen) | [Generate an image SBOM](#generate-an-image-sbom) |
 | [Image-SBOM auswerten](#image-sbom-auswerten) | [Analyze an image SBOM](#analyze-an-image-sbom) |
@@ -137,90 +137,11 @@ Die Tabelle zeigt jede Sektion zweisprachig nebeneinander. Links führt zur deut
 | Vorwissen | Grundlagen Shell, grobes Verständnis von Git |
 | Barrierefreiheit | WCAG 2.2 Level AA, siehe Abschnitt [Barrierefreiheit](#barrierefreiheit) |
 
-### Repository klonen und Podman installieren
+### Zielgruppe und Zweck
 
-Das Ursprungsrepo liegt hier:
-<https://gitlab-ce.gwdg.de/agentic-coding/ade-dev-sandbox>.
+Diese Anleitung richtet sich an angehende Fachinformatiker:innen ab dem 1. Lehrjahr. Sie erklärt nicht nur die Befehle, sondern auch kurz, warum sie gebraucht werden.
 
-Für Übungen und eigene Anpassungen zuerst in GitLab einen persönlichen Fork erstellen und dann den eigenen Fork klonen. Die URL im folgenden Beispiel ist deshalb nur ein Platzhalter:
-
-```bash
-git clone https://gitlab-ce.gwdg.de/<dein-namespace>/ade-dev-sandbox.git
-cd ade-dev-sandbox
-```
-
-Podman ist in dieser Anleitung das primäre Container-Werkzeug. Docker bleibt eine kompatible Alternative, wenn Docker in der jeweiligen Organisation erlaubt und lizenziert ist.
-
-| Betriebssystem | Empfohlener Einstieg | Was wird installiert? | Danach prüfen |
-|---|---|---|---|
-| Windows | Podman Desktop über `winget install --id RedHat.Podman-Desktop -e` oder den offiziellen Installer installieren. Podman Desktop richtet Podman, die Podman-Machine und Compose-Unterstützung ein. | Podman Engine in einer WSL2-basierten Podman-Machine, Podman CLI, Podman Desktop, Compose-Unterstützung | `wsl --status`, `podman --version`, `podman machine list`, `podman compose version` |
-| Ubuntu / WSL2 | Pakete aus den Ubuntu-Repositories installieren: `sudo apt install -y podman podman-compose`. Podman Desktop ist unter Linux optional. | Podman Engine direkt im Linux-System, Podman CLI, `podman-compose` | `podman --version`, `podman-compose --version`, `podman run --rm quay.io/podman/hello` |
-| macOS | Offiziellen Podman-Installer oder Podman Desktop verwenden. Homebrew ist möglich: `brew install podman podman-compose`. Danach die Podman-Machine starten. | Podman Engine in einer Podman-Machine, Podman CLI, optional Podman Desktop, Compose-Unterstützung | `podman --version`, `podman machine init`, `podman machine start`, `podman info` |
-
-Offizielle Quellen:
-
-- Podman Installation: <https://podman.io/docs/installation>
-- Podman Desktop Downloads: <https://podman-desktop.io/downloads>
-- Podman Compose Referenz: <https://docs.podman.io/en/stable/markdown/podman-compose.1.html>
-
-Wichtig für Compose: `podman compose` und `podman-compose` meinen denselben Zweck, können aber je nach Betriebssystem unterschiedlich bereitgestellt sein. Unter Windows und macOS funktioniert häufig `podman compose`; unter Ubuntu ist oft `podman-compose` installiert. Die Detailanleitungen folgen in den Abschnitten [Podman unter Ubuntu 24.04 LTS verwenden](#podman-unter-ubuntu-2404-lts-verwenden), [Podman unter macOS mit Homebrew verwenden](#podman-unter-macos-mit-homebrew-verwenden) und [Podman unter Windows mit Podman Desktop verwenden](#podman-unter-windows-mit-podman-desktop-verwenden).
-
-### Schnellstart in 10 Minuten
-
-Dieser Schnellstart richtet sich an alle, die das Setup zuerst nur ausprobieren wollen. Die Details folgen in den späteren Abschnitten.
-
-> **Primäres Container-Werkzeug: Podman.** Dieser Schnellstart nutzt Podman mit Podman Compose. Das ist der empfohlene Weg für Ausbildung und Übungen, weil in den bisherigen Tests Windows, WSL/Ubuntu und macOS funktionieren und keine Docker-Desktop-Lizenzkosten anfallen. Docker bleibt als kompatible Alternative dokumentiert.
-
-Schritt 1: Voraussetzungen prüfen.
-
-- Podman und Podman Compose sind installiert. Unter macOS und Windows läuft die Podman-Machine.
-- Eine Shell ist offen (Bash unter Linux/macOS, PowerShell unter Windows).
-- Du kennst den Pfad zu diesem Repository auf deinem Rechner.
-
-Schritt 2: In das Repository wechseln. Ersetze `<benutzer>` durch deinen Anmeldenamen.
-
-```bash
-cd /home/<benutzer>/ade-dev-sandbox     # Linux / WSL2
-cd /Users/<benutzer>/ade-dev-sandbox    # macOS
-```
-
-```powershell
-cd C:\Users\<benutzer>\ade-dev-sandbox  # Windows
-```
-
-Schritt 3: Lokale Konfigurationsdateien anlegen. `.env` enthält nur Pfade, `opencode.env` enthält den geheimen API-Key.
-
-```bash
-cp .env.example .env
-cp opencode.env.example opencode.env
-chmod 600 opencode.env
-```
-
-Schritt 4: In `opencode.env` den echten `GWDG_API_KEY` eintragen. Den Key nicht in das Terminal ausgeben und nicht committen.
-
-Schritt 5: Container bauen und starten.
-
-```bash
-podman compose build --pull
-podman compose up -d
-podman compose ps
-```
-
-Schritt 6: Eine Shell im Container öffnen.
-
-```bash
-podman compose exec ade bash
-```
-
-Schritt 7: Im Container prüfen, ob alles bereit ist.
-
-```bash
-dotnet --info
-opencode --version
-specify version
-```
-
-Wenn diese drei Befehle Versionsinformationen ausgeben, ist der Schnellstart erfolgreich abgeschlossen. Für die ersten echten Übungen geht es weiter im Abschnitt [Lernpfad für Azubis](#lernpfad-für-azubis).
+Dieses Repository stellt eine Podman-basierte Container-Umgebung für Opencode, .NET, C#, Java, Go, Rust und Python bereit. Podman ist der primäre Container-Weg, auch aus Lizenzgründen für Ausbildung und interne Übungen. In Tests läuft die Umgebung mit Podman unter Windows, WSL/Ubuntu und macOS. Docker bleibt wegen der Compose-Kompatibilität als Alternative möglich.
 
 ### Voraussetzungen
 
@@ -236,12 +157,6 @@ Diese Anleitung geht von folgenden Mindestvoraussetzungen aus. Die Werte sind gr
 | Vorkenntnisse | Shell-Grundlagen, Git-Grundlagen | dazu Editor-Erfahrung | Editor: Visual Studio Code oder JetBrains Rider. |
 
 Wenn ein Punkt nicht erfüllt ist, geht der Schnellstart trotzdem oft. Das Setup wird aber langsamer oder weniger stabil.
-
-### Zielgruppe und Zweck
-
-Diese Anleitung richtet sich an angehende Fachinformatiker:innen ab dem 1. Lehrjahr. Sie erklärt nicht nur die Befehle, sondern auch kurz, warum sie gebraucht werden.
-
-Dieses Repository stellt eine Podman-basierte Container-Umgebung für Opencode, .NET, C#, Java, Go, Rust und Python bereit. Podman ist der primäre Container-Weg, auch aus Lizenzgründen für Ausbildung und interne Übungen. In Tests läuft die Umgebung mit Podman unter Windows, WSL/Ubuntu und macOS. Docker bleibt wegen der Compose-Kompatibilität als Alternative möglich.
 
 ### Lernpfad für Azubis
 
@@ -332,132 +247,90 @@ Ein vollständigeres Begriffsregister steht im Abschnitt [Glossar](#glossar).
 - `codex_data`: Podman-/Docker-Volume für Codex-CLI-Daten unter `/home/adedev/.codex`.
 - `AGENTS.md`: Regeln für KI-Agenten wie Opencode oder Codex.
 
-### Podman und Docker: Compose-kompatible Befehle
+### Repository klonen und Podman installieren
 
-Diese Anleitung nutzt Podman als primären Weg. Podman ist weitgehend Docker- und Compose-kompatibel; deshalb können die meisten Abläufe auch mit Docker ausgeführt werden, wenn Docker in der jeweiligen Organisation erlaubt und lizenziert ist. Die allgemeinen Abschnitte wie [Container bauen und starten](#container-bauen-und-starten), [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen), [ASP.NET-Web-App vom Host erreichen](#aspnet-web-app-vom-host-erreichen) und [Kompakter Testablauf](#kompakter-testablauf) gelten für beide Werkzeuge. Ersetze die Befehle sinngemäß:
+Das Ursprungsrepo liegt hier:
+<https://gitlab-ce.gwdg.de/agentic-coding/ade-dev-sandbox>.
 
-| Podman | Docker |
-|---|---|
-| `podman compose build --pull` oder `podman-compose build --pull` | `docker compose build --pull` |
-| `podman compose up -d` oder `podman-compose up -d` | `docker compose up -d` |
-| `podman compose ps` oder `podman-compose ps` | `docker compose ps` |
-| `podman compose exec ade bash` oder `podman-compose exec ade bash` | `docker compose exec ade bash` |
-| `podman compose down` oder `podman-compose down` | `docker compose down` |
-| `podman compose down -v` oder `podman-compose down -v` | `docker compose down -v` |
-| `podman info` | `docker info` |
-
-Hinweis zur Schreibweise: Auf vielen Linux-Installationen heißt der Compose-Befehl `podman-compose` (mit Bindestrich). Auf macOS und Windows mit Podman Desktop funktioniert oft `podman compose` (mit Leerzeichen). Wenn eine Variante nicht vorhanden ist, die jeweils andere verwenden.
-
-Für eine vollständige Schritt-für-Schritt-Anleitung mit Podman gibt es eigene Abschnitte für [Ubuntu](#podman-unter-ubuntu-2404-lts-verwenden), [macOS](#podman-unter-macos-mit-homebrew-verwenden) und [Windows](#podman-unter-windows-mit-podman-desktop-verwenden). Ein wichtiger Unterschied bleibt: Beim Bauen des privaten GitLab-Basisimages verwenden externe Compose-Provider unter macOS und Windows manchmal andere Registry-Anmeldedaten. Deshalb enthalten die Podman-Abschnitte passende Login- und Fallback-Hinweise. Für den normalen Betrieb mit `up`, `ps`, `exec` und `down` sind die Befehle aber austauschbar.
-
-### Docker unter Ubuntu oder WSL2 installieren
-
-Zuerst die Paketlisten aktualisieren:
+Für Übungen und eigene Anpassungen zuerst in GitLab einen persönlichen Fork erstellen und dann den eigenen Fork klonen. Die URL im folgenden Beispiel ist deshalb nur ein Platzhalter:
 
 ```bash
-sudo apt update
+git clone https://gitlab-ce.gwdg.de/<dein-namespace>/ade-dev-sandbox.git
+cd ade-dev-sandbox
 ```
 
-Docker Engine und Docker Compose installieren:
+Podman ist in dieser Anleitung das primäre Container-Werkzeug. Docker bleibt eine kompatible Alternative, wenn Docker in der jeweiligen Organisation erlaubt und lizenziert ist.
+
+| Betriebssystem | Empfohlener Einstieg | Was wird installiert? | Danach prüfen |
+|---|---|---|---|
+| Windows | Podman Desktop über `winget install --id RedHat.Podman-Desktop -e` oder den offiziellen Installer installieren. Podman Desktop richtet Podman, die Podman-Machine und Compose-Unterstützung ein. | Podman Engine in einer WSL2-basierten Podman-Machine, Podman CLI, Podman Desktop, Compose-Unterstützung | `wsl --status`, `podman --version`, `podman machine list`, `podman compose version` |
+| Ubuntu / WSL2 | Pakete aus den Ubuntu-Repositories installieren: `sudo apt install -y podman podman-compose`. Podman Desktop ist unter Linux optional. | Podman Engine direkt im Linux-System, Podman CLI, `podman-compose` | `podman --version`, `podman-compose --version`, `podman run --rm quay.io/podman/hello` |
+| macOS | Offiziellen Podman-Installer oder Podman Desktop verwenden. Homebrew ist möglich: `brew install podman podman-compose`. Danach die Podman-Machine starten. | Podman Engine in einer Podman-Machine, Podman CLI, optional Podman Desktop, Compose-Unterstützung | `podman --version`, `podman machine init`, `podman machine start`, `podman info` |
+
+Offizielle Quellen:
+
+- Podman Installation: <https://podman.io/docs/installation>
+- Podman Desktop Downloads: <https://podman-desktop.io/downloads>
+- Podman Compose Referenz: <https://docs.podman.io/en/stable/markdown/podman-compose.1.html>
+
+Wichtig für Compose: `podman compose` und `podman-compose` meinen denselben Zweck, können aber je nach Betriebssystem unterschiedlich bereitgestellt sein. Unter Windows und macOS funktioniert häufig `podman compose`; unter Ubuntu ist oft `podman-compose` installiert. Die Detailanleitungen folgen in den Abschnitten [Podman unter Ubuntu 24.04 LTS verwenden](#podman-unter-ubuntu-2404-lts-verwenden), [Podman unter macOS mit Homebrew verwenden](#podman-unter-macos-mit-homebrew-verwenden) und [Podman unter Windows mit Podman Desktop verwenden](#podman-unter-windows-mit-podman-desktop-verwenden).
+
+### Schnellstart in 10 Minuten
+
+Dieser Schnellstart richtet sich an alle, die das Setup zuerst nur ausprobieren wollen. Die Details folgen in den späteren Abschnitten.
+
+> **Primäres Container-Werkzeug: Podman.** Dieser Schnellstart nutzt Podman mit Podman Compose. Das ist der empfohlene Weg für Ausbildung und Übungen, weil in den bisherigen Tests Windows, WSL/Ubuntu und macOS funktionieren und keine Docker-Desktop-Lizenzkosten anfallen. Docker bleibt als kompatible Alternative dokumentiert.
+
+Schritt 1: Voraussetzungen prüfen.
+
+- Podman und Podman Compose sind installiert. Unter macOS und Windows läuft die Podman-Machine.
+- Eine Shell ist offen (Bash unter Linux/macOS, PowerShell unter Windows).
+- Du kennst den Pfad zu diesem Repository auf deinem Rechner.
+
+Schritt 2: In das Repository wechseln. Ersetze `<benutzer>` durch deinen Anmeldenamen.
 
 ```bash
-sudo apt install -y docker.io docker-compose-v2
+cd /home/<benutzer>/ade-dev-sandbox     # Linux / WSL2
+cd /Users/<benutzer>/ade-dev-sandbox    # macOS
 ```
-
-Docker-Dienst starten:
-
-```bash
-sudo systemctl enable --now docker
-```
-
-Unter WSL2 funktioniert `systemctl` nur, wenn systemd aktiv ist. Falls der Befehl scheitert, kann Docker auch über Docker Desktop für Windows bereitgestellt werden. In diesem Fall muss die WSL-Integration für die verwendete Distribution aktiviert sein.
-
-Installation prüfen:
-
-```bash
-docker --version
-docker compose version
-docker info
-```
-
-Die Compose-Datei kann ohne Secret-Ausgabe geprüft werden:
-
-```bash
-docker compose config --no-interpolate
-```
-
-### Docker-Desktop-Profile für macOS und Windows
-
-Wenn Docker Desktop verwendet wird, bleibt der Container ein Linux-Container. Der Unterschied liegt nur in den Host-Pfaden, die nach `/rider-projects` und `/java-projects` eingebunden werden.
-
-Docker Desktop kann für private Nutzung, Ausbildung, Lernen, kleine Unternehmen und nicht-kommerzielle Open-Source-Projekte kostenlos genutzt werden. Kommerzielle Nutzung in größeren Unternehmen mit mehr als 250 Mitarbeitenden oder mehr als 10 Mio. USD Jahresumsatz benötigt ein bezahltes Docker-Abo. Im Zweifel gelten die aktuellen Bedingungen des Docker Subscription Service Agreement.
-
-macOS mit Homebrew:
-
-```bash
-brew install --cask docker
-open -a Docker
-```
-
-Danach im Terminal prüfen:
-
-```bash
-docker --version
-docker compose version
-docker info
-```
-
-Windows mit Winget:
 
 ```powershell
-winget install --id Docker.DockerDesktop -e
+cd C:\Users\<benutzer>\ade-dev-sandbox  # Windows
 ```
 
-Danach Docker Desktop aus dem Startmenü starten, die Lizenzbedingungen akzeptieren und sicherstellen, dass das WSL2-Backend aktiviert ist. Alternativ kann der Installer von der offiziellen Docker-Webseite verwendet werden.
-
-Zuerst die Compose-Umgebungsdatei anlegen:
+Schritt 3: Lokale Konfigurationsdateien anlegen. `.env` enthält nur Pfade, `opencode.env` enthält den geheimen API-Key.
 
 ```bash
 cp .env.example .env
+cp opencode.env.example opencode.env
+chmod 600 opencode.env
 ```
 
-Danach `RIDER_PROJECTS_DIR` und `JAVA_PROJECTS_DIR` passend zur Plattform setzen.
+Schritt 4: In `opencode.env` den echten `GWDG_API_KEY` eintragen. Den Key nicht in das Terminal ausgeben und nicht committen.
 
-macOS:
-
-```text
-RIDER_PROJECTS_DIR=/Users/<benutzer>/RiderProjects
-ADE_DEV_SANDBOX_DIR=/Users/<benutzer>/ade-dev-sandbox
-JAVA_PROJECTS_DIR=/Users/<benutzer>/JavaProjects
-```
-
-Windows mit Docker Desktop aus PowerShell:
-
-```text
-RIDER_PROJECTS_DIR=C:\Users\<benutzer>\RiderProjects
-ADE_DEV_SANDBOX_DIR=C:\Users\<benutzer>\ade-dev-sandbox
-JAVA_PROJECTS_DIR=C:\Users\<benutzer>\JavaProjects
-```
-
-Windows mit Docker Desktop aus Ubuntu/WSL2:
-
-```text
-RIDER_PROJECTS_DIR=/mnt/c/Users/<benutzer>/RiderProjects
-ADE_DEV_SANDBOX_DIR=/mnt/c/Users/<benutzer>/ade-dev-sandbox
-JAVA_PROJECTS_DIR=/mnt/c/Users/<benutzer>/JavaProjects
-```
-
-Wenn kein separates Rider- oder Java-Projektverzeichnis gebraucht wird, kann der Standard aus `.env.example` bleiben. Dann zeigt `/rider-projects` auf `workspace/` und `/java-projects` auf `java-projects/`. `ADE_DEV_SANDBOX_DIR=.` mountet den aktuellen Checkout dieses Setup-Repositories nach `/ade-dev-sandbox`; dadurch können kontrollierte Wartungsskripte im Container Dateien wie `opencode.jsonc` im Host-Repository prüfen oder nach expliziter Freigabe ändern.
-
-Die Datei `.env` enthält keine Secrets, ist aber lokal und plattformabhängig. Sie wird nicht committed. Der API-Key bleibt getrennt in `opencode.env`.
-
-Hinweis für Auszubildende: In `.env` stehen nur Pfade. In `opencode.env` steht ein Secret. Diese Trennung ist wichtig, damit ein API-Key nicht versehentlich in Git landet.
-
-Konfiguration prüfen:
+Schritt 5: Container bauen und starten.
 
 ```bash
-docker compose config --no-interpolate
+podman compose build --pull
+podman compose up -d
+podman compose ps
 ```
+
+Schritt 6: Eine Shell im Container öffnen.
+
+```bash
+podman compose exec ade bash
+```
+
+Schritt 7: Im Container prüfen, ob alles bereit ist.
+
+```bash
+dotnet --info
+opencode --version
+specify version
+```
+
+Wenn diese drei Befehle Versionsinformationen ausgeben, ist der Schnellstart erfolgreich abgeschlossen. Für die ersten echten Übungen geht es weiter im Abschnitt [Lernpfad für Azubis](#lernpfad-für-azubis).
 
 ### Podman unter Ubuntu 24.04 LTS verwenden
 
@@ -885,31 +758,6 @@ Vor dem Start in WSL2 den Windows-Container in Podman Desktop oder PowerShell st
 
 ```powershell
 podman compose down
-```
-
-### Docker-Berechtigungen prüfen
-
-Wenn `docker info` mit `permission denied` scheitert, darf der aktuelle Benutzer noch nicht auf Docker zugreifen.
-
-Hinweis für Podman: Podman läuft standardmäßig rootless. Eine Docker-Gruppe wird dann meist nicht gebraucht. Dieser Abschnitt gilt vor allem für Docker.
-
-Schneller Test mit `sudo`:
-
-```bash
-sudo docker info
-```
-
-Dauerhafte Freigabe für den aktuellen Benutzer:
-
-```bash
-sudo usermod -aG docker "$USER"
-```
-
-Danach komplett neu anmelden. Erst danach wird die neue Gruppenzugehörigkeit aktiv. Prüfen:
-
-```bash
-id
-docker info
 ```
 
 ### API-Key einrichten
@@ -1843,6 +1691,160 @@ dotnet run
 
 Wenn das Projekt keine Tests enthält, mindestens `dotnet build` ausführen und in der Dokumentation notieren, warum keine Tests vorhanden sind.
 
+> **Hinweis — alternatives Container-Werkzeug:** Die folgenden vier Abschnitte beschreiben Docker als Alternative zu Podman. Sie sind nur relevant, wenn Docker in der Organisation erlaubt und lizenziert ist. Für reine Podman-Nutzung können diese Abschnitte übersprungen werden.
+
+### Podman und Docker: Compose-kompatible Befehle
+
+Diese Anleitung nutzt Podman als primären Weg. Podman ist weitgehend Docker- und Compose-kompatibel; deshalb können die meisten Abläufe auch mit Docker ausgeführt werden, wenn Docker in der jeweiligen Organisation erlaubt und lizenziert ist. Die allgemeinen Abschnitte wie [Container bauen und starten](#container-bauen-und-starten), [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen), [ASP.NET-Web-App vom Host erreichen](#aspnet-web-app-vom-host-erreichen) und [Kompakter Testablauf](#kompakter-testablauf) gelten für beide Werkzeuge. Ersetze die Befehle sinngemäß:
+
+| Podman | Docker |
+|---|---|
+| `podman compose build --pull` oder `podman-compose build --pull` | `docker compose build --pull` |
+| `podman compose up -d` oder `podman-compose up -d` | `docker compose up -d` |
+| `podman compose ps` oder `podman-compose ps` | `docker compose ps` |
+| `podman compose exec ade bash` oder `podman-compose exec ade bash` | `docker compose exec ade bash` |
+| `podman compose down` oder `podman-compose down` | `docker compose down` |
+| `podman compose down -v` oder `podman-compose down -v` | `docker compose down -v` |
+| `podman info` | `docker info` |
+
+Hinweis zur Schreibweise: Auf vielen Linux-Installationen heißt der Compose-Befehl `podman-compose` (mit Bindestrich). Auf macOS und Windows mit Podman Desktop funktioniert oft `podman compose` (mit Leerzeichen). Wenn eine Variante nicht vorhanden ist, die jeweils andere verwenden.
+
+Für eine vollständige Schritt-für-Schritt-Anleitung mit Podman gibt es eigene Abschnitte für [Ubuntu](#podman-unter-ubuntu-2404-lts-verwenden), [macOS](#podman-unter-macos-mit-homebrew-verwenden) und [Windows](#podman-unter-windows-mit-podman-desktop-verwenden). Ein wichtiger Unterschied bleibt: Beim Bauen des privaten GitLab-Basisimages verwenden externe Compose-Provider unter macOS und Windows manchmal andere Registry-Anmeldedaten. Deshalb enthalten die Podman-Abschnitte passende Login- und Fallback-Hinweise. Für den normalen Betrieb mit `up`, `ps`, `exec` und `down` sind die Befehle aber austauschbar.
+
+### Docker unter Ubuntu oder WSL2 installieren
+
+Zuerst die Paketlisten aktualisieren:
+
+```bash
+sudo apt update
+```
+
+Docker Engine und Docker Compose installieren:
+
+```bash
+sudo apt install -y docker.io docker-compose-v2
+```
+
+Docker-Dienst starten:
+
+```bash
+sudo systemctl enable --now docker
+```
+
+Unter WSL2 funktioniert `systemctl` nur, wenn systemd aktiv ist. Falls der Befehl scheitert, kann Docker auch über Docker Desktop für Windows bereitgestellt werden. In diesem Fall muss die WSL-Integration für die verwendete Distribution aktiviert sein.
+
+Installation prüfen:
+
+```bash
+docker --version
+docker compose version
+docker info
+```
+
+Die Compose-Datei kann ohne Secret-Ausgabe geprüft werden:
+
+```bash
+docker compose config --no-interpolate
+```
+
+### Docker-Desktop-Profile für macOS und Windows
+
+Wenn Docker Desktop verwendet wird, bleibt der Container ein Linux-Container. Der Unterschied liegt nur in den Host-Pfaden, die nach `/rider-projects` und `/java-projects` eingebunden werden.
+
+Docker Desktop kann für private Nutzung, Ausbildung, Lernen, kleine Unternehmen und nicht-kommerzielle Open-Source-Projekte kostenlos genutzt werden. Kommerzielle Nutzung in größeren Unternehmen mit mehr als 250 Mitarbeitenden oder mehr als 10 Mio. USD Jahresumsatz benötigt ein bezahltes Docker-Abo. Im Zweifel gelten die aktuellen Bedingungen des Docker Subscription Service Agreement.
+
+macOS mit Homebrew:
+
+```bash
+brew install --cask docker
+open -a Docker
+```
+
+Danach im Terminal prüfen:
+
+```bash
+docker --version
+docker compose version
+docker info
+```
+
+Windows mit Winget:
+
+```powershell
+winget install --id Docker.DockerDesktop -e
+```
+
+Danach Docker Desktop aus dem Startmenü starten, die Lizenzbedingungen akzeptieren und sicherstellen, dass das WSL2-Backend aktiviert ist. Alternativ kann der Installer von der offiziellen Docker-Webseite verwendet werden.
+
+Zuerst die Compose-Umgebungsdatei anlegen:
+
+```bash
+cp .env.example .env
+```
+
+Danach `RIDER_PROJECTS_DIR` und `JAVA_PROJECTS_DIR` passend zur Plattform setzen.
+
+macOS:
+
+```text
+RIDER_PROJECTS_DIR=/Users/<benutzer>/RiderProjects
+ADE_DEV_SANDBOX_DIR=/Users/<benutzer>/ade-dev-sandbox
+JAVA_PROJECTS_DIR=/Users/<benutzer>/JavaProjects
+```
+
+Windows mit Docker Desktop aus PowerShell:
+
+```text
+RIDER_PROJECTS_DIR=C:\Users\<benutzer>\RiderProjects
+ADE_DEV_SANDBOX_DIR=C:\Users\<benutzer>\ade-dev-sandbox
+JAVA_PROJECTS_DIR=C:\Users\<benutzer>\JavaProjects
+```
+
+Windows mit Docker Desktop aus Ubuntu/WSL2:
+
+```text
+RIDER_PROJECTS_DIR=/mnt/c/Users/<benutzer>/RiderProjects
+ADE_DEV_SANDBOX_DIR=/mnt/c/Users/<benutzer>/ade-dev-sandbox
+JAVA_PROJECTS_DIR=/mnt/c/Users/<benutzer>/JavaProjects
+```
+
+Wenn kein separates Rider- oder Java-Projektverzeichnis gebraucht wird, kann der Standard aus `.env.example` bleiben. Dann zeigt `/rider-projects` auf `workspace/` und `/java-projects` auf `java-projects/`. `ADE_DEV_SANDBOX_DIR=.` mountet den aktuellen Checkout dieses Setup-Repositories nach `/ade-dev-sandbox`; dadurch können kontrollierte Wartungsskripte im Container Dateien wie `opencode.jsonc` im Host-Repository prüfen oder nach expliziter Freigabe ändern.
+
+Die Datei `.env` enthält keine Secrets, ist aber lokal und plattformabhängig. Sie wird nicht committed. Der API-Key bleibt getrennt in `opencode.env`.
+
+Hinweis für Auszubildende: In `.env` stehen nur Pfade. In `opencode.env` steht ein Secret. Diese Trennung ist wichtig, damit ein API-Key nicht versehentlich in Git landet.
+
+Konfiguration prüfen:
+
+```bash
+docker compose config --no-interpolate
+```
+
+### Docker-Berechtigungen prüfen
+
+Wenn `docker info` mit `permission denied` scheitert, darf der aktuelle Benutzer noch nicht auf Docker zugreifen.
+
+Hinweis für Podman: Podman läuft standardmäßig rootless. Eine Docker-Gruppe wird dann meist nicht gebraucht. Dieser Abschnitt gilt vor allem für Docker.
+
+Schneller Test mit `sudo`:
+
+```bash
+sudo docker info
+```
+
+Dauerhafte Freigabe für den aktuellen Benutzer:
+
+```bash
+sudo usermod -aG docker "$USER"
+```
+
+Danach komplett neu anmelden. Erst danach wird die neue Gruppenzugehörigkeit aktiv. Prüfen:
+
+```bash
+id
+docker info
+```
+
 > **Stoppmarke — Phase 4 abgeschlossen:** Die folgenden Abschnitte (Konfiguration, Härtung von OpenCode und Codex, Runtime-Härtung, Secret-Scanning, Audit-Export, Image-SBOM) gehören zu den Phasen 5 und 6 des [Lernpfads](#lernpfad-für-azubis). Sie sind für Senior-Entwickler:innen, CISO/ISB-Reviews und für vertiefende Übungen ab dem 3. Lehrjahr gedacht. Für reine Anwendung der Container-Umgebung sind sie nicht erforderlich.
 
 ### Konfiguration
@@ -2639,90 +2641,11 @@ Tipps für Lernende mit Screenreader oder Braille-Display:
 | Prerequisite knowledge | Shell basics, rough understanding of Git |
 | Accessibility | WCAG 2.2 Level AA, see section [Accessibility](#accessibility) |
 
-### Clone the repository and install Podman
+### Target group and purpose
 
-The upstream repository is here:
-<https://gitlab-ce.gwdg.de/agentic-coding/ade-dev-sandbox>.
+This guide is written for first-year IT specialist apprentices and later. It explains the commands and also why they are needed.
 
-For exercises and your own changes, first create a personal fork in GitLab and then clone your own fork. The URL in this example is therefore only a placeholder:
-
-```bash
-git clone https://gitlab-ce.gwdg.de/<your-namespace>/ade-dev-sandbox.git
-cd ade-dev-sandbox
-```
-
-Podman is the primary container tool in this guide. Docker remains a compatible alternative when Docker is allowed and licensed in the organization.
-
-| Operating system | Recommended start | What gets installed? | Then check |
-|---|---|---|---|
-| Windows | Install Podman Desktop with `winget install --id RedHat.Podman-Desktop -e` or with the official installer. Podman Desktop sets up Podman, the Podman machine, and Compose support. | Podman Engine in a WSL2-based Podman machine, Podman CLI, Podman Desktop, Compose support | `wsl --status`, `podman --version`, `podman machine list`, `podman compose version` |
-| Ubuntu / WSL2 | Install packages from the Ubuntu repositories: `sudo apt install -y podman podman-compose`. Podman Desktop is optional on Linux. | Podman Engine directly in Linux, Podman CLI, `podman-compose` | `podman --version`, `podman-compose --version`, `podman run --rm quay.io/podman/hello` |
-| macOS | Use the official Podman installer or Podman Desktop. Homebrew is possible: `brew install podman podman-compose`. Then start the Podman machine. | Podman Engine in a Podman machine, Podman CLI, optional Podman Desktop, Compose support | `podman --version`, `podman machine init`, `podman machine start`, `podman info` |
-
-Official sources:
-
-- Podman installation: <https://podman.io/docs/installation>
-- Podman Desktop downloads: <https://podman-desktop.io/downloads>
-- Podman Compose reference: <https://docs.podman.io/en/stable/markdown/podman-compose.1.html>
-
-Important for Compose: `podman compose` and `podman-compose` serve the same purpose, but they can be provided differently depending on the operating system. On Windows and macOS, `podman compose` often works; on Ubuntu, `podman-compose` is often installed. The detailed instructions follow in [Use Podman on Ubuntu 24.04 LTS](#use-podman-on-ubuntu-2404-lts), [Use Podman on macOS with Homebrew](#use-podman-on-macos-with-homebrew), and [Use Podman on Windows with Podman Desktop](#use-podman-on-windows-with-podman-desktop).
-
-### Quick start in 10 minutes
-
-This quick start is for anyone who wants to try the setup first. Details follow in the later sections.
-
-> **Primary container tool: Podman.** This quick start uses Podman with Podman Compose. This is the recommended path for training and exercises because the setup has been tested on Windows, WSL/Ubuntu, and macOS, and it avoids Docker Desktop license costs. Docker remains documented as a compatible alternative.
-
-Step 1: Check prerequisites.
-
-- Podman and Podman Compose are installed. On macOS and Windows, the Podman machine is running.
-- A shell is open (Bash on Linux/macOS, PowerShell on Windows).
-- You know the path to this repository on your machine.
-
-Step 2: Change into the repository. Replace `<user>` with your login name.
-
-```bash
-cd /home/<user>/ade-dev-sandbox     # Linux / WSL2
-cd /Users/<user>/ade-dev-sandbox    # macOS
-```
-
-```powershell
-cd C:\Users\<user>\ade-dev-sandbox  # Windows
-```
-
-Step 3: Create local configuration files. `.env` only contains paths; `opencode.env` contains the secret API key.
-
-```bash
-cp .env.example .env
-cp opencode.env.example opencode.env
-chmod 600 opencode.env
-```
-
-Step 4: Enter the real `GWDG_API_KEY` in `opencode.env`. Do not print the key in the terminal and do not commit it.
-
-Step 5: Build and start the container.
-
-```bash
-podman compose build --pull
-podman compose up -d
-podman compose ps
-```
-
-Step 6: Open a shell inside the container.
-
-```bash
-podman compose exec ade bash
-```
-
-Step 7: Inside the container, check that everything is ready.
-
-```bash
-dotnet --info
-opencode --version
-specify version
-```
-
-If these three commands print version information, the quick start is complete. For your first real exercises, continue with the section [Learning path for apprentices](#learning-path-for-apprentices).
+This repository provides a Podman-based container environment for Opencode, .NET, C#, Java, Go, Rust, and Python. Podman is the primary container path, including for license reasons in training and internal exercises. In tests, the environment runs with Podman on Windows, WSL/Ubuntu, and macOS. Docker remains possible because of Compose compatibility.
 
 ### Prerequisites
 
@@ -2738,12 +2661,6 @@ This guide assumes the following minimum requirements. The values are generous s
 | Prior knowledge | Shell basics, Git basics | Plus editor experience | Editor: Visual Studio Code or JetBrains Rider. |
 
 If one item is missing, the quick start usually still works. The setup will be slower or less stable, though.
-
-### Target group and purpose
-
-This guide is written for first-year IT specialist apprentices and later. It explains the commands and also why they are needed.
-
-This repository provides a Podman-based container environment for Opencode, .NET, C#, Java, Go, Rust, and Python. Podman is the primary container path, including for license reasons in training and internal exercises. In tests, the environment runs with Podman on Windows, WSL/Ubuntu, and macOS. Docker remains possible because of Compose compatibility.
 
 ### Learning path for apprentices
 
@@ -2834,132 +2751,90 @@ A more complete term reference is in the section [Glossary](#glossary).
 - `codex_data`: Podman/Docker volume for Codex CLI data under `/home/adedev/.codex`.
 - `AGENTS.md`: rules for AI agents such as Opencode or Codex.
 
-### Podman and Docker: Compose-compatible commands
+### Clone the repository and install Podman
 
-This guide uses Podman as the primary path. Podman is largely Docker- and Compose-compatible, so most workflows can also be run with Docker when Docker is allowed and licensed in the organization. General sections such as [Build and start the container](#build-and-start-the-container), [Use .NET and C# inside the container](#use-net-and-c-inside-the-container), [Reach an ASP.NET web app from the host](#reach-an-aspnet-web-app-from-the-host), and [Compact test procedure](#compact-test-procedure) apply to both tools. Substitute the commands accordingly:
+The upstream repository is here:
+<https://gitlab-ce.gwdg.de/agentic-coding/ade-dev-sandbox>.
 
-| Podman | Docker |
-|---|---|
-| `podman compose build --pull` or `podman-compose build --pull` | `docker compose build --pull` |
-| `podman compose up -d` or `podman-compose up -d` | `docker compose up -d` |
-| `podman compose ps` or `podman-compose ps` | `docker compose ps` |
-| `podman compose exec ade bash` or `podman-compose exec ade bash` | `docker compose exec ade bash` |
-| `podman compose down` or `podman-compose down` | `docker compose down` |
-| `podman compose down -v` or `podman-compose down -v` | `docker compose down -v` |
-| `podman info` | `docker info` |
-
-Note on spelling: On many Linux installations, the Compose command is `podman-compose` (with a hyphen). On macOS and Windows with Podman Desktop, `podman compose` (with a space) often works. If one variant is missing, use the other.
-
-For a full step-by-step guide with Podman, there are dedicated sections for [Ubuntu](#use-podman-on-ubuntu-2404-lts), [macOS](#use-podman-on-macos-with-homebrew), and [Windows](#use-podman-on-windows-with-podman-desktop). One important difference remains: when building the private GitLab base image, external Compose providers on macOS and Windows sometimes use different registry credentials. The Podman sections therefore include matching login and fallback notes. For normal operation with `up`, `ps`, `exec`, and `down`, the commands are interchangeable.
-
-### Install Docker on Ubuntu or WSL2
-
-First update the package lists:
+For exercises and your own changes, first create a personal fork in GitLab and then clone your own fork. The URL in this example is therefore only a placeholder:
 
 ```bash
-sudo apt update
+git clone https://gitlab-ce.gwdg.de/<your-namespace>/ade-dev-sandbox.git
+cd ade-dev-sandbox
 ```
 
-Install Docker Engine and Docker Compose:
+Podman is the primary container tool in this guide. Docker remains a compatible alternative when Docker is allowed and licensed in the organization.
+
+| Operating system | Recommended start | What gets installed? | Then check |
+|---|---|---|---|
+| Windows | Install Podman Desktop with `winget install --id RedHat.Podman-Desktop -e` or with the official installer. Podman Desktop sets up Podman, the Podman machine, and Compose support. | Podman Engine in a WSL2-based Podman machine, Podman CLI, Podman Desktop, Compose support | `wsl --status`, `podman --version`, `podman machine list`, `podman compose version` |
+| Ubuntu / WSL2 | Install packages from the Ubuntu repositories: `sudo apt install -y podman podman-compose`. Podman Desktop is optional on Linux. | Podman Engine directly in Linux, Podman CLI, `podman-compose` | `podman --version`, `podman-compose --version`, `podman run --rm quay.io/podman/hello` |
+| macOS | Use the official Podman installer or Podman Desktop. Homebrew is possible: `brew install podman podman-compose`. Then start the Podman machine. | Podman Engine in a Podman machine, Podman CLI, optional Podman Desktop, Compose support | `podman --version`, `podman machine init`, `podman machine start`, `podman info` |
+
+Official sources:
+
+- Podman installation: <https://podman.io/docs/installation>
+- Podman Desktop downloads: <https://podman-desktop.io/downloads>
+- Podman Compose reference: <https://docs.podman.io/en/stable/markdown/podman-compose.1.html>
+
+Important for Compose: `podman compose` and `podman-compose` serve the same purpose, but they can be provided differently depending on the operating system. On Windows and macOS, `podman compose` often works; on Ubuntu, `podman-compose` is often installed. The detailed instructions follow in [Use Podman on Ubuntu 24.04 LTS](#use-podman-on-ubuntu-2404-lts), [Use Podman on macOS with Homebrew](#use-podman-on-macos-with-homebrew), and [Use Podman on Windows with Podman Desktop](#use-podman-on-windows-with-podman-desktop).
+
+### Quick start in 10 minutes
+
+This quick start is for anyone who wants to try the setup first. Details follow in the later sections.
+
+> **Primary container tool: Podman.** This quick start uses Podman with Podman Compose. This is the recommended path for training and exercises because the setup has been tested on Windows, WSL/Ubuntu, and macOS, and it avoids Docker Desktop license costs. Docker remains documented as a compatible alternative.
+
+Step 1: Check prerequisites.
+
+- Podman and Podman Compose are installed. On macOS and Windows, the Podman machine is running.
+- A shell is open (Bash on Linux/macOS, PowerShell on Windows).
+- You know the path to this repository on your machine.
+
+Step 2: Change into the repository. Replace `<user>` with your login name.
 
 ```bash
-sudo apt install -y docker.io docker-compose-v2
+cd /home/<user>/ade-dev-sandbox     # Linux / WSL2
+cd /Users/<user>/ade-dev-sandbox    # macOS
 ```
-
-Start the Docker service:
-
-```bash
-sudo systemctl enable --now docker
-```
-
-On WSL2, `systemctl` only works if systemd is enabled. If the command fails, Docker can also be provided by Docker Desktop for Windows. In that case, enable WSL integration for the used distribution.
-
-Check the installation:
-
-```bash
-docker --version
-docker compose version
-docker info
-```
-
-Check the Compose file without printing secret values:
-
-```bash
-docker compose config --no-interpolate
-```
-
-### Docker Desktop profiles for macOS and Windows
-
-When Docker Desktop is used, the container is still a Linux container. Only the host paths mounted into `/rider-projects` and `/java-projects` change.
-
-Docker Desktop can be used free of charge for personal use, education, learning, small businesses, and non-commercial open source projects. Commercial use in larger companies with more than 250 employees or more than USD 10 million in annual revenue requires a paid Docker subscription. When in doubt, the current Docker Subscription Service Agreement terms apply.
-
-macOS with Homebrew:
-
-```bash
-brew install --cask docker
-open -a Docker
-```
-
-Then check in the terminal:
-
-```bash
-docker --version
-docker compose version
-docker info
-```
-
-Windows with Winget:
 
 ```powershell
-winget install --id Docker.DockerDesktop -e
+cd C:\Users\<user>\ade-dev-sandbox  # Windows
 ```
 
-Then start Docker Desktop from the Start menu, accept the license terms, and make sure the WSL2 backend is enabled. Alternatively, use the installer from the official Docker website.
-
-First create the Compose environment file:
+Step 3: Create local configuration files. `.env` only contains paths; `opencode.env` contains the secret API key.
 
 ```bash
 cp .env.example .env
+cp opencode.env.example opencode.env
+chmod 600 opencode.env
 ```
 
-Then set `RIDER_PROJECTS_DIR` and `JAVA_PROJECTS_DIR` for the current platform.
+Step 4: Enter the real `GWDG_API_KEY` in `opencode.env`. Do not print the key in the terminal and do not commit it.
 
-macOS:
-
-```text
-RIDER_PROJECTS_DIR=/Users/<user>/RiderProjects
-ADE_DEV_SANDBOX_DIR=/Users/<user>/ade-dev-sandbox
-JAVA_PROJECTS_DIR=/Users/<user>/JavaProjects
-```
-
-Windows with Docker Desktop from PowerShell:
-
-```text
-RIDER_PROJECTS_DIR=C:\Users\<user>\RiderProjects
-ADE_DEV_SANDBOX_DIR=C:\Users\<user>\ade-dev-sandbox
-JAVA_PROJECTS_DIR=C:\Users\<user>\JavaProjects
-```
-
-Windows with Docker Desktop from Ubuntu/WSL2:
-
-```text
-RIDER_PROJECTS_DIR=/mnt/c/Users/<user>/RiderProjects
-ADE_DEV_SANDBOX_DIR=/mnt/c/Users/<user>/ade-dev-sandbox
-JAVA_PROJECTS_DIR=/mnt/c/Users/<user>/JavaProjects
-```
-
-If no separate Rider or Java project directory is needed, keep the default from `.env.example`. Then `/rider-projects` points to `workspace/` and `/java-projects` points to `java-projects/`. `ADE_DEV_SANDBOX_DIR=.` mounts the current checkout of this setup repository to `/ade-dev-sandbox`; this lets controlled maintenance scripts inside the container inspect or, after explicit approval, update files such as `opencode.jsonc` in the host repository.
-
-The `.env` file contains no secrets, but it is local and platform-specific. It is not committed. The API key stays separate in `opencode.env`.
-
-Note for apprentices: `.env` only contains paths. `opencode.env` contains a secret. This separation is important so an API key is not accidentally committed to Git.
-
-Check the configuration:
+Step 5: Build and start the container.
 
 ```bash
-docker compose config --no-interpolate
+podman compose build --pull
+podman compose up -d
+podman compose ps
 ```
+
+Step 6: Open a shell inside the container.
+
+```bash
+podman compose exec ade bash
+```
+
+Step 7: Inside the container, check that everything is ready.
+
+```bash
+dotnet --info
+opencode --version
+specify version
+```
+
+If these three commands print version information, the quick start is complete. For your first real exercises, continue with the section [Learning path for apprentices](#learning-path-for-apprentices).
 
 ### Use Podman on Ubuntu 24.04 LTS
 
@@ -3387,31 +3262,6 @@ Before starting in WSL2, stop the Windows container in Podman Desktop or PowerSh
 
 ```powershell
 podman compose down
-```
-
-### Check Docker permissions
-
-If `docker info` fails with `permission denied`, the current user is not allowed to access Docker yet.
-
-Note for Podman: Podman runs rootless by default, so a Docker group is usually not needed. This section mainly applies to Docker.
-
-Quick test with `sudo`:
-
-```bash
-sudo docker info
-```
-
-Permanent access for the current user:
-
-```bash
-sudo usermod -aG docker "$USER"
-```
-
-Log out completely and log in again. Only then is the new group membership active. Check it:
-
-```bash
-id
-docker info
 ```
 
 ### Set up the API key
@@ -4341,6 +4191,160 @@ dotnet run
 ```
 
 If the project has no tests, run at least `dotnet build` and document why no tests exist.
+
+> **Note — alternative container tool:** The following four sections describe Docker as an alternative to Podman. They are only relevant if Docker is allowed and licensed in the organization. For pure Podman use, these sections can be skipped.
+
+### Podman and Docker: Compose-compatible commands
+
+This guide uses Podman as the primary path. Podman is largely Docker- and Compose-compatible, so most workflows can also be run with Docker when Docker is allowed and licensed in the organization. General sections such as [Build and start the container](#build-and-start-the-container), [Use .NET and C# inside the container](#use-net-and-c-inside-the-container), [Reach an ASP.NET web app from the host](#reach-an-aspnet-web-app-from-the-host), and [Compact test procedure](#compact-test-procedure) apply to both tools. Substitute the commands accordingly:
+
+| Podman | Docker |
+|---|---|
+| `podman compose build --pull` or `podman-compose build --pull` | `docker compose build --pull` |
+| `podman compose up -d` or `podman-compose up -d` | `docker compose up -d` |
+| `podman compose ps` or `podman-compose ps` | `docker compose ps` |
+| `podman compose exec ade bash` or `podman-compose exec ade bash` | `docker compose exec ade bash` |
+| `podman compose down` or `podman-compose down` | `docker compose down` |
+| `podman compose down -v` or `podman-compose down -v` | `docker compose down -v` |
+| `podman info` | `docker info` |
+
+Note on spelling: On many Linux installations, the Compose command is `podman-compose` (with a hyphen). On macOS and Windows with Podman Desktop, `podman compose` (with a space) often works. If one variant is missing, use the other.
+
+For a full step-by-step guide with Podman, there are dedicated sections for [Ubuntu](#use-podman-on-ubuntu-2404-lts), [macOS](#use-podman-on-macos-with-homebrew), and [Windows](#use-podman-on-windows-with-podman-desktop). One important difference remains: when building the private GitLab base image, external Compose providers on macOS and Windows sometimes use different registry credentials. The Podman sections therefore include matching login and fallback notes. For normal operation with `up`, `ps`, `exec`, and `down`, the commands are interchangeable.
+
+### Install Docker on Ubuntu or WSL2
+
+First update the package lists:
+
+```bash
+sudo apt update
+```
+
+Install Docker Engine and Docker Compose:
+
+```bash
+sudo apt install -y docker.io docker-compose-v2
+```
+
+Start the Docker service:
+
+```bash
+sudo systemctl enable --now docker
+```
+
+On WSL2, `systemctl` only works if systemd is enabled. If the command fails, Docker can also be provided by Docker Desktop for Windows. In that case, enable WSL integration for the used distribution.
+
+Check the installation:
+
+```bash
+docker --version
+docker compose version
+docker info
+```
+
+Check the Compose file without printing secret values:
+
+```bash
+docker compose config --no-interpolate
+```
+
+### Docker Desktop profiles for macOS and Windows
+
+When Docker Desktop is used, the container is still a Linux container. Only the host paths mounted into `/rider-projects` and `/java-projects` change.
+
+Docker Desktop can be used free of charge for personal use, education, learning, small businesses, and non-commercial open source projects. Commercial use in larger companies with more than 250 employees or more than USD 10 million in annual revenue requires a paid Docker subscription. When in doubt, the current Docker Subscription Service Agreement terms apply.
+
+macOS with Homebrew:
+
+```bash
+brew install --cask docker
+open -a Docker
+```
+
+Then check in the terminal:
+
+```bash
+docker --version
+docker compose version
+docker info
+```
+
+Windows with Winget:
+
+```powershell
+winget install --id Docker.DockerDesktop -e
+```
+
+Then start Docker Desktop from the Start menu, accept the license terms, and make sure the WSL2 backend is enabled. Alternatively, use the installer from the official Docker website.
+
+First create the Compose environment file:
+
+```bash
+cp .env.example .env
+```
+
+Then set `RIDER_PROJECTS_DIR` and `JAVA_PROJECTS_DIR` for the current platform.
+
+macOS:
+
+```text
+RIDER_PROJECTS_DIR=/Users/<user>/RiderProjects
+ADE_DEV_SANDBOX_DIR=/Users/<user>/ade-dev-sandbox
+JAVA_PROJECTS_DIR=/Users/<user>/JavaProjects
+```
+
+Windows with Docker Desktop from PowerShell:
+
+```text
+RIDER_PROJECTS_DIR=C:\Users\<user>\RiderProjects
+ADE_DEV_SANDBOX_DIR=C:\Users\<user>\ade-dev-sandbox
+JAVA_PROJECTS_DIR=C:\Users\<user>\JavaProjects
+```
+
+Windows with Docker Desktop from Ubuntu/WSL2:
+
+```text
+RIDER_PROJECTS_DIR=/mnt/c/Users/<user>/RiderProjects
+ADE_DEV_SANDBOX_DIR=/mnt/c/Users/<user>/ade-dev-sandbox
+JAVA_PROJECTS_DIR=/mnt/c/Users/<user>/JavaProjects
+```
+
+If no separate Rider or Java project directory is needed, keep the default from `.env.example`. Then `/rider-projects` points to `workspace/` and `/java-projects` points to `java-projects/`. `ADE_DEV_SANDBOX_DIR=.` mounts the current checkout of this setup repository to `/ade-dev-sandbox`; this lets controlled maintenance scripts inside the container inspect or, after explicit approval, update files such as `opencode.jsonc` in the host repository.
+
+The `.env` file contains no secrets, but it is local and platform-specific. It is not committed. The API key stays separate in `opencode.env`.
+
+Note for apprentices: `.env` only contains paths. `opencode.env` contains a secret. This separation is important so an API key is not accidentally committed to Git.
+
+Check the configuration:
+
+```bash
+docker compose config --no-interpolate
+```
+
+### Check Docker permissions
+
+If `docker info` fails with `permission denied`, the current user is not allowed to access Docker yet.
+
+Note for Podman: Podman runs rootless by default, so a Docker group is usually not needed. This section mainly applies to Docker.
+
+Quick test with `sudo`:
+
+```bash
+sudo docker info
+```
+
+Permanent access for the current user:
+
+```bash
+sudo usermod -aG docker "$USER"
+```
+
+Log out completely and log in again. Only then is the new group membership active. Check it:
+
+```bash
+id
+docker info
+```
 
 > **Stop marker — end of phase 4:** The following sections (configuration, OpenCode and Codex hardening, runtime hardening, secret scanning, audit export, image SBOM) belong to phases 5 and 6 of the [learning path](#learning-path-for-apprentices). They are intended for senior developers, CISO/ISB reviews, and advanced exercises from the third year on. They are not required for using the container environment.
 
