@@ -1,7 +1,7 @@
 # Opencode Podman-Umgebung / Opencode Podman Environment
 
 Eine vorbereitete Container-Lern- und Entwicklungsumgebung für Fachinformatiker:innen.
-Sprachen und Werkzeuge: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, Opencode, Codex CLI, Spec Kit.
+Sprachen und Werkzeuge: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, [Opencode](#glossar), [Codex](#glossar) CLI, [Spec Kit](#glossar).
 
 Mit diesem Dev-Container können für die fünf MSL-Sprachen C#/.NET, Java, Go,
 Rust und Python Konsolenanwendungen, CLI-/TUI-Programme und Web-Apps gebaut,
@@ -9,7 +9,7 @@ getestet und im Container ausgeführt werden. GUI-Entwicklung und
 Desktop-GUI-Ausführung sind nicht Teil des Scopes dieses Containers.
 
 *A ready-to-use container learning and development environment for IT-specialist apprentices.
-Languages and tools: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, Opencode CLI/TUI, Codex CLI/TUI, Spec Kit*
+Languages and tools: .NET, C#, Java, Go, Rust, Python, Maven, Node.js, [Opencode](#glossary) CLI/TUI, [Codex](#glossary) CLI/TUI, [Spec Kit](#glossary)*
 
 With this dev container, console applications, CLI/TUI programs, and web apps
 for the five MSL languages C#/.NET, Java, Go, Rust, and Python can be built,
@@ -24,13 +24,13 @@ are outside the scope of this container.
 
 ## Kurzlebige Aufgabenumgebung / Short-Lived Task Environment
 
-Dieses Image ist für agentische KI-Aufgaben gedacht, die bewusst kurzlebig bearbeitet werden: Image bauen, Container starten, Aufgabe erledigen, relevante Ergebnisse sichern und die laufende Umgebung danach wieder stoppen oder löschen. Es ist keine dauerhaft gepflegte VM und sollte nicht als langlebiger Arbeitsplatz mit dauerhaftem Zustand verstanden werden.
+Diese Umgebung ist für **kurze Aufgaben** gedacht: starten, Aufgabe erledigen, Ergebnisse sichern, danach stoppen oder löschen. Sie ist **kein dauerhafter Arbeitsplatz** und keine virtuelle Maschine, die du wochenlang pflegst.
 
-Persistente Daten liegen nur dort, wo sie bewusst gemountet oder in Volumes abgelegt werden, zum Beispiel in Projektverzeichnissen, `/workspace`, `opencode_data`, `codex_data` oder `dotnet_build`. Vor dem Löschen von Volumes prüfen, ob dort noch benötigte Daten liegen.
+Wichtige Begriffe wie *Container*, *Image*, *Volume* und *Bind-Mount* erklärt der spätere Abschnitt [Begriffe und Ausführungsort](#begriffe-und-ausführungsort). Bei Fragen lohnt sich auch ein Blick in das [Glossar](#glossar). Was beim Beenden zu beachten ist, steht im Abschnitt [Aufräumen](#aufräumen).
 
-This image is intended for short-lived agentic AI tasks: build the image, start the container, complete the task, save the relevant results, then stop or remove the running environment. It is not a long-lived VM and should not be treated as a permanent workstation with permanent state.
+This environment is meant for **short tasks**: start it, do the work, save the results, then stop or remove it. It is **not a permanent workstation** and not a virtual machine you maintain for weeks.
 
-Persistent data exists only where it is intentionally mounted or stored in volumes, for example in project directories, `/workspace`, `opencode_data`, `codex_data`, or `dotnet_build`. Check volumes before deleting them.
+Important terms such as *container*, *image*, *volume*, and *bind mount* are explained later in [Terms and command location](#terms-and-command-location). The [Glossary](#glossary) is also a good place to look. What to do when you finish is described in [Clean up](#clean-up).
 
 ---
 
@@ -70,97 +70,55 @@ Local secret files such as `opencode.env` and `.env` are not included in forks a
 
 ## Inhaltsverzeichnis / Table of Contents
 
-### Deutsch
+Die Tabelle zeigt jede Sektion zweisprachig nebeneinander. Links führt zur deutschen, rechts zur englischen Fassung.
 
-- [Auf einen Blick](#auf-einen-blick)
-- [Repository klonen und Podman installieren](#repository-klonen-und-podman-installieren)
-- [Schnellstart in 10 Minuten](#schnellstart-in-10-minuten)
-- [Voraussetzungen](#voraussetzungen)
-- [Zielgruppe und Zweck](#zielgruppe-und-zweck)
-- [Lernpfad für Azubis](#lernpfad-für-azubis)
-- [Grundidee](#grundidee)
-- [Begriffe und Ausführungsort](#begriffe-und-ausführungsort)
-- [Projektstruktur](#projektstruktur)
-- [Podman und Docker: Compose-kompatible Befehle](#podman-und-docker-compose-kompatible-befehle)
-- [Podman unter Ubuntu 24.04 LTS verwenden](#podman-unter-ubuntu-2404-lts-verwenden)
-- [Podman unter macOS mit Homebrew verwenden](#podman-unter-macos-mit-homebrew-verwenden)
-- [Podman unter Windows mit Podman Desktop verwenden](#podman-unter-windows-mit-podman-desktop-verwenden)
-- [Docker unter Ubuntu oder WSL2 installieren](#docker-unter-ubuntu-oder-wsl2-installieren)
-- [Docker-Desktop-Profile für macOS und Windows](#docker-desktop-profile-für-macos-und-windows)
-- [Docker-Berechtigungen prüfen](#docker-berechtigungen-prüfen)
-- [API-Key einrichten](#api-key-einrichten)
-- [Container bauen und starten](#container-bauen-und-starten)
-- [Rider-Projekte aus Windows einbinden](#rider-projekte-aus-windows-einbinden)
-- [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen)
-- [Java-Projekte einbinden](#java-projekte-einbinden)
-- [Java und Maven im Container nutzen](#java-und-maven-im-container-nutzen)
-- [Go im Container nutzen](#go-im-container-nutzen)
-- [Rust im Container nutzen](#rust-im-container-nutzen)
-- [Python im Container nutzen](#python-im-container-nutzen)
-- [Skripte mit Bash und PowerShell](#skripte-mit-bash-und-powershell)
-- [ASP.NET-Web-App vom Host erreichen](#aspnet-web-app-vom-host-erreichen)
-- [Spec Kit verwenden](#spec-kit-verwenden)
-- [Opencode verwenden](#opencode-verwenden)
-- [Codex CLI verwenden](#codex-cli-verwenden)
-- [Spec-Kit-Governance-Presets installieren](#spec-kit-governance-presets-installieren)
-- [Beispiel: ConsoleApp2 mit Opencode und Spec Kit](#beispiel-consoleapp2-mit-opencode-und-spec-kit)
-- [Pilot: ASP.NET-Web-App mit Opencode und Spec Kit](#pilot-aspnet-web-app-mit-opencode-und-spec-kit)
-- [Pflichtablauf für ein SDD-Feature](#pflichtablauf-für-ein-sdd-feature)
-- [Konfiguration](#konfiguration)
-- [Image-SBOM erzeugen](#image-sbom-erzeugen)
-- [Image-SBOM auswerten](#image-sbom-auswerten)
-- [Aufräumen](#aufräumen)
-- [Häufige Probleme](#häufige-probleme)
-- [Kompakter Testablauf](#kompakter-testablauf)
-- [Merksätze](#merksätze)
-- [Glossar](#glossar)
-- [Barrierefreiheit](#barrierefreiheit)
+*The table lists every section bilingually side by side. The left link goes to the German version, the right link to the English version.*
 
-### English
-
-- [At a glance](#at-a-glance)
-- [Clone the repository and install Podman](#clone-the-repository-and-install-podman)
-- [Quick start in 10 minutes](#quick-start-in-10-minutes)
-- [Prerequisites](#prerequisites)
-- [Target group and purpose](#target-group-and-purpose)
-- [Learning path for apprentices](#learning-path-for-apprentices)
-- [Basic idea](#basic-idea)
-- [Terms and command location](#terms-and-command-location)
-- [Project structure](#project-structure)
-- [Podman and Docker: Compose-compatible commands](#podman-and-docker-compose-compatible-commands)
-- [Use Podman on Ubuntu 24.04 LTS](#use-podman-on-ubuntu-2404-lts)
-- [Use Podman on macOS with Homebrew](#use-podman-on-macos-with-homebrew)
-- [Use Podman on Windows with Podman Desktop](#use-podman-on-windows-with-podman-desktop)
-- [Install Docker on Ubuntu or WSL2](#install-docker-on-ubuntu-or-wsl2)
-- [Docker Desktop profiles for macOS and Windows](#docker-desktop-profiles-for-macos-and-windows)
-- [Check Docker permissions](#check-docker-permissions)
-- [Set up the API key](#set-up-the-api-key)
-- [Build and start the container](#build-and-start-the-container)
-- [Mount Rider projects from Windows](#mount-rider-projects-from-windows)
-- [Use .NET and C# inside the container](#use-net-and-c-inside-the-container)
-- [Mount Java projects](#mount-java-projects)
-- [Use Java and Maven inside the container](#use-java-and-maven-inside-the-container)
-- [Use Go inside the container](#use-go-inside-the-container)
-- [Use Rust inside the container](#use-rust-inside-the-container)
-- [Use Python inside the container](#use-python-inside-the-container)
-- [Scripting with Bash and PowerShell](#scripting-with-bash-and-powershell)
-- [Reach an ASP.NET web app from the host](#reach-an-aspnet-web-app-from-the-host)
-- [Use Spec Kit](#use-spec-kit)
-- [Use Opencode](#use-opencode)
-- [Use Codex CLI](#use-codex-cli)
-- [Install Spec Kit governance presets](#install-spec-kit-governance-presets)
-- [Example: ConsoleApp2 with Opencode and Spec Kit](#example-consoleapp2-with-opencode-and-spec-kit)
-- [Pilot: ASP.NET web app with Opencode and Spec Kit](#pilot-aspnet-web-app-with-opencode-and-spec-kit)
-- [Required flow for an SDD feature](#required-flow-for-an-sdd-feature)
-- [Configuration](#configuration)
-- [Generate an image SBOM](#generate-an-image-sbom)
-- [Analyze an image SBOM](#analyze-an-image-sbom)
-- [Clean up](#clean-up)
-- [Common problems](#common-problems)
-- [Compact test procedure](#compact-test-procedure)
-- [Quick rules](#quick-rules)
-- [Glossary](#glossary)
-- [Accessibility](#accessibility)
+| Deutsch | English |
+|---|---|
+| [Auf einen Blick](#auf-einen-blick) | [At a glance](#at-a-glance) |
+| [Repository klonen und Podman installieren](#repository-klonen-und-podman-installieren) | [Clone the repository and install Podman](#clone-the-repository-and-install-podman) |
+| [Schnellstart in 10 Minuten](#schnellstart-in-10-minuten) | [Quick start in 10 minutes](#quick-start-in-10-minutes) |
+| [Voraussetzungen](#voraussetzungen) | [Prerequisites](#prerequisites) |
+| [Zielgruppe und Zweck](#zielgruppe-und-zweck) | [Target group and purpose](#target-group-and-purpose) |
+| [Lernpfad für Azubis](#lernpfad-für-azubis) | [Learning path for apprentices](#learning-path-for-apprentices) |
+| [Grundidee](#grundidee) | [Basic idea](#basic-idea) |
+| [Begriffe und Ausführungsort](#begriffe-und-ausführungsort) | [Terms and command location](#terms-and-command-location) |
+| [Projektstruktur](#projektstruktur) | [Project structure](#project-structure) |
+| [Podman und Docker: Compose-kompatible Befehle](#podman-und-docker-compose-kompatible-befehle) | [Podman and Docker: Compose-compatible commands](#podman-and-docker-compose-compatible-commands) |
+| [Podman unter Ubuntu 24.04 LTS verwenden](#podman-unter-ubuntu-2404-lts-verwenden) | [Use Podman on Ubuntu 24.04 LTS](#use-podman-on-ubuntu-2404-lts) |
+| [Podman unter macOS mit Homebrew verwenden](#podman-unter-macos-mit-homebrew-verwenden) | [Use Podman on macOS with Homebrew](#use-podman-on-macos-with-homebrew) |
+| [Podman unter Windows mit Podman Desktop verwenden](#podman-unter-windows-mit-podman-desktop-verwenden) | [Use Podman on Windows with Podman Desktop](#use-podman-on-windows-with-podman-desktop) |
+| [Docker unter Ubuntu oder WSL2 installieren](#docker-unter-ubuntu-oder-wsl2-installieren) | [Install Docker on Ubuntu or WSL2](#install-docker-on-ubuntu-or-wsl2) |
+| [Docker-Desktop-Profile für macOS und Windows](#docker-desktop-profile-für-macos-und-windows) | [Docker Desktop profiles for macOS and Windows](#docker-desktop-profiles-for-macos-and-windows) |
+| [Docker-Berechtigungen prüfen](#docker-berechtigungen-prüfen) | [Check Docker permissions](#check-docker-permissions) |
+| [API-Key einrichten](#api-key-einrichten) | [Set up the API key](#set-up-the-api-key) |
+| [Container bauen und starten](#container-bauen-und-starten) | [Build and start the container](#build-and-start-the-container) |
+| [Rider-Projekte aus Windows einbinden](#rider-projekte-aus-windows-einbinden) | [Mount Rider projects from Windows](#mount-rider-projects-from-windows) |
+| [.NET und C# im Container nutzen](#net-und-c-im-container-nutzen) | [Use .NET and C# inside the container](#use-net-and-c-inside-the-container) |
+| [Java-Projekte einbinden](#java-projekte-einbinden) | [Mount Java projects](#mount-java-projects) |
+| [Java und Maven im Container nutzen](#java-und-maven-im-container-nutzen) | [Use Java and Maven inside the container](#use-java-and-maven-inside-the-container) |
+| [Go im Container nutzen](#go-im-container-nutzen) | [Use Go inside the container](#use-go-inside-the-container) |
+| [Rust im Container nutzen](#rust-im-container-nutzen) | [Use Rust inside the container](#use-rust-inside-the-container) |
+| [Python im Container nutzen](#python-im-container-nutzen) | [Use Python inside the container](#use-python-inside-the-container) |
+| [Skripte mit Bash und PowerShell](#skripte-mit-bash-und-powershell) | [Scripting with Bash and PowerShell](#scripting-with-bash-and-powershell) |
+| [ASP.NET-Web-App vom Host erreichen](#aspnet-web-app-vom-host-erreichen) | [Reach an ASP.NET web app from the host](#reach-an-aspnet-web-app-from-the-host) |
+| [Spec Kit verwenden](#spec-kit-verwenden) | [Use Spec Kit](#use-spec-kit) |
+| [Opencode verwenden](#opencode-verwenden) | [Use Opencode](#use-opencode) |
+| [Codex CLI verwenden](#codex-cli-verwenden) | [Use Codex CLI](#use-codex-cli) |
+| [Spec-Kit-Governance-Presets installieren](#spec-kit-governance-presets-installieren) | [Install Spec Kit governance presets](#install-spec-kit-governance-presets) |
+| [Beispiel: ConsoleApp2 mit Opencode und Spec Kit](#beispiel-consoleapp2-mit-opencode-und-spec-kit) | [Example: ConsoleApp2 with Opencode and Spec Kit](#example-consoleapp2-with-opencode-and-spec-kit) |
+| [Pilot: ASP.NET-Web-App mit Opencode und Spec Kit](#pilot-aspnet-web-app-mit-opencode-und-spec-kit) | [Pilot: ASP.NET web app with Opencode and Spec Kit](#pilot-aspnet-web-app-with-opencode-and-spec-kit) |
+| [Pflichtablauf für ein SDD-Feature](#pflichtablauf-für-ein-sdd-feature) | [Required flow for an SDD feature](#required-flow-for-an-sdd-feature) |
+| [Konfiguration](#konfiguration) | [Configuration](#configuration) |
+| [Image-SBOM erzeugen](#image-sbom-erzeugen) | [Generate an image SBOM](#generate-an-image-sbom) |
+| [Image-SBOM auswerten](#image-sbom-auswerten) | [Analyze an image SBOM](#analyze-an-image-sbom) |
+| [Aufräumen](#aufräumen) | [Clean up](#clean-up) |
+| [Häufige Probleme](#häufige-probleme) | [Common problems](#common-problems) |
+| [Kompakter Testablauf](#kompakter-testablauf) | [Compact test procedure](#compact-test-procedure) |
+| [Merksätze](#merksätze) | [Quick rules](#quick-rules) |
+| [Glossar](#glossar) | [Glossary](#glossary) |
+| [Barrierefreiheit](#barrierefreiheit) | [Accessibility](#accessibility) |
 
 ---
 
@@ -307,6 +265,30 @@ Podman erstellt aus dem `Dockerfile` ein Image. Aus diesem Image startet Podman 
 Der Container bleibt im Hintergrund aktiv. Danach kann eine Shell im Container geöffnet werden. Dort können Befehle wie `dotnet`, `opencode`, `codex` oder `ls` ausgeführt werden.
 
 Die Shell läuft im Container als Linux-Benutzer `adedev`. Deshalb beginnt die Promptzeile nach dem Einstieg zum Beispiel mit `adedev@...`. Der Compose-Service heißt `ade`; das OpenCode-Programm heißt weiterhin `opencode`.
+
+Eine kurze Übersicht als Textskizze:
+
+```text
+   Host (dein Rechner)
+   |
+   |-- Quellcode in RiderProjects/, JavaProjects/, ...
+   |        |  (Bind-Mount)
+   |        v
+   |-- Podman / Docker
+   |        |   baut aus Dockerfile ein
+   |        v
+   |    Image (Vorlage)
+   |        |   startet
+   |        v
+   |    Container "ade"
+   |        |-- /rider-projects    <- Bind-Mount zum Host
+   |        |-- /java-projects     <- Bind-Mount zum Host
+   |        |-- /dotnet-build      <- Volume (von Podman verwaltet)
+   |        |-- /workspace         <- Bind-Mount zum Host
+   |        '-- /home/adedev/...   <- innen liegende Werkzeuge
+```
+
+Kurz erklärt: Dein Rechner ist der *Host*. Aus dem `Dockerfile` baut Podman ein *Image*. Aus dem Image startet Podman einen *Container* mit dem Namen `ade`. Quellcode-Ordner werden vom Host **direkt** als *Bind-Mount* in den Container eingehängt; Build-Ausgaben liegen in einem von Podman verwalteten *Volume*. Änderungen in eingehängten Ordnern wirken in beide Richtungen.
 
 ### Begriffe und Ausführungsort
 
@@ -465,7 +447,7 @@ ADE_DEV_SANDBOX_DIR=/mnt/c/Users/<benutzer>/ade-dev-sandbox
 JAVA_PROJECTS_DIR=/mnt/c/Users/<benutzer>/JavaProjects
 ```
 
-Wenn kein separates Rider- oder Java-Projektverzeichnis gebraucht wird, kann der Standard aus `.env.example` bleiben. Dann zeigt `/rider-projects` auf `workspace/` und `/java-projects` auf `java-projects/`. `ADE_DEV_SANDBOX_DIR=.` mountet den aktuellen Checkout dieses Setup-Repositories nach `/ade-dev-sandbox`; dadurch koennen kontrollierte Wartungsskripte im Container Dateien wie `opencode.jsonc` im Host-Repository pruefen oder nach expliziter Freigabe aendern.
+Wenn kein separates Rider- oder Java-Projektverzeichnis gebraucht wird, kann der Standard aus `.env.example` bleiben. Dann zeigt `/rider-projects` auf `workspace/` und `/java-projects` auf `java-projects/`. `ADE_DEV_SANDBOX_DIR=.` mountet den aktuellen Checkout dieses Setup-Repositories nach `/ade-dev-sandbox`; dadurch können kontrollierte Wartungsskripte im Container Dateien wie `opencode.jsonc` im Host-Repository prüfen oder nach expliziter Freigabe ändern.
 
 Die Datei `.env` enthält keine Secrets, ist aber lokal und plattformabhängig. Sie wird nicht committed. Der API-Key bleibt getrennt in `opencode.env`.
 
@@ -1595,6 +1577,8 @@ Der Unterschied: `dotnet new webapp` erstellt eine Web-App mit Razor Pages und m
 
 Wenn eine App einen anderen Port nutzt, muss dieser in der freigegebenen Range `5100-5199` liegen oder in `compose.yml` zusätzlich eingetragen werden.
 
+> **Stoppmarke — 1. Lehrjahr:** Wenn du bis hierher gekommen bist und die Übungen aus den Phasen 1–3 des [Lernpfads für Azubis](#lernpfad-für-azubis) gemacht hast, ist das Lernziel des 1. Lehrjahrs erreicht. Die folgenden Abschnitte (Spec Kit, OpenCode, Codex, Governance-Presets, SDD-Pflichtablauf) gehören zu Phase 4 des Lernpfads und sind ab dem 2. Lehrjahr sowie für Junior- und Senior-Entwickler:innen vorgesehen.
+
 ### Spec Kit verwenden
 
 Spec Kit ist im Container als `specify` installiert. Die Installation erfolgt im Dockerfile mit der offiziellen GitHub-Quelle und ist auf Version `v0.8.3` gepinnt:
@@ -1859,6 +1843,8 @@ dotnet run
 
 Wenn das Projekt keine Tests enthält, mindestens `dotnet build` ausführen und in der Dokumentation notieren, warum keine Tests vorhanden sind.
 
+> **Stoppmarke — Phase 4 abgeschlossen:** Die folgenden Abschnitte (Konfiguration, Härtung von OpenCode und Codex, Runtime-Härtung, Secret-Scanning, Audit-Export, Image-SBOM) gehören zu den Phasen 5 und 6 des [Lernpfads](#lernpfad-für-azubis). Sie sind für Senior-Entwickler:innen, CISO/ISB-Reviews und für vertiefende Übungen ab dem 3. Lehrjahr gedacht. Für reine Anwendung der Container-Umgebung sind sie nicht erforderlich.
+
 ### Konfiguration
 
 `opencode.jsonc` nutzt den Provider `chat-ai` mit dieser Basis-URL:
@@ -1877,7 +1863,7 @@ Der Standard-Agent `coding` nutzt dieses Modell mit fokussierten Coding-Paramete
 
 #### Chat-AI-Modellliste abgleichen
 
-Das Skript `scripts/chat-ai-model-report.py` fragt die aktuelle Chat-AI-Modellliste ueber `/v1/models` ab und vergleicht sie mit `opencode.jsonc`. Es arbeitet standardmaessig nur lesend, liest den API-Key aus `GWDG_API_KEY` und gibt den Key nicht aus.
+Das Skript `scripts/chat-ai-model-report.py` fragt die aktuelle Chat-AI-Modellliste über `/v1/models` ab und vergleicht sie mit `opencode.jsonc`. Es arbeitet standardmäßig nur lesend, liest den API-Key aus `GWDG_API_KEY` und gibt den Key nicht aus.
 
 Im laufenden Container kann das Skript gegen den Repository-Mount ausgefuehrt werden:
 
@@ -1886,7 +1872,7 @@ cd /ade-dev-sandbox
 python3 scripts/chat-ai-model-report.py
 ```
 
-Der Standardpfad ist `/ade-dev-sandbox/opencode.jsonc`, wenn dieser Mount vorhanden ist. Das Skript erzeugt einen Bericht ueber neue, unveraenderte und nicht mehr angebotene Modelle. Ohne `--write` nimmt es keine Aenderung an `opencode.jsonc` vor; Modell-, Agenten-, Default- und Tool-Call-Entscheidungen bleiben Review-Punkte.
+Der Standardpfad ist `/ade-dev-sandbox/opencode.jsonc`, wenn dieser Mount vorhanden ist. Das Skript erzeugt einen Bericht über neue, unveränderte und nicht mehr angebotene Modelle. Ohne `--write` nimmt es keine Änderung an `opencode.jsonc` vor; Modell-, Agenten-, Default- und Tool-Call-Entscheidungen bleiben Review-Punkte.
 
 Fuer bewusst freigegebene Schreiblaeufe gibt es zwei Stufen:
 
@@ -2004,7 +1990,7 @@ Java JDK 21 und Maven werden beim Image-Build aus den Debian-Paketquellen instal
 
 Go wird beim Image-Build als offizielles Go-Tarball nach `/usr/local/go` installiert. Die Version ist im Dockerfile über `GO_VERSION` gepinnt, damit Updates bewusst über eine Dockerfile-Änderung, einen Git-Commit und einen neuen Image-Build erfolgen. Zusätzlich werden `gopls`, `staticcheck`, `govulncheck` und `dlv` in `/home/adedev/go/bin` installiert; auch diese Werkzeugversionen sind über Dockerfile-Build-Argumente gepinnt.
 
-Rust wird beim Image-Build mit `rustup` für den Linux-Benutzer `adedev` installiert. Die Toolchain ist im Dockerfile über `RUST_TOOLCHAIN` gepinnt; der Installer selbst ist über `RUSTUP_VERSION` gepinnt und wird als `rustup-init`-Artefakt von `static.rust-lang.org` mit SHA256-Pruefung geladen. Installiert werden außerdem die Komponenten `rustfmt`, `clippy`, `rust-analyzer` und `rust-src`.
+Rust wird beim Image-Build mit `rustup` für den Linux-Benutzer `adedev` installiert. Die Toolchain ist im Dockerfile über `RUST_TOOLCHAIN` gepinnt; der Installer selbst ist über `RUSTUP_VERSION` gepinnt und wird als `rustup-init`-Artefakt von `static.rust-lang.org` mit SHA256-Prüfung geladen. Installiert werden außerdem die Komponenten `rustfmt`, `clippy`, `rust-analyzer` und `rust-src`.
 
 Node.js wird aus der signierten NodeSource-Apt-Quelle installiert. Der Build-Parameter `NODE_MAJOR` steht standardmäßig auf `22`; das Dockerfile richtet die Deb822-Quelle mit `Signed-By`-Keyring ein und führt kein heruntergeladenes NodeSource-Setup-Skript mehr aus.
 
@@ -2039,15 +2025,15 @@ Die erste Variable betrifft allgemeine Update-Benachrichtigungen. Die zweite Var
 
 Das Image erbt vom gemeinsamen `agent-sandbox`-Image auf Debian 13. Das Basisimage ist im Dockerfile per `sha256`-Digest gepinnt; der lesbare `latest`-Tag bleibt nur als Kommentar mit Beobachtungsdatum erhalten. Ein Update des Basisimages erfolgt bewusst über Digest-Änderung im Dockerfile, Review, Git-Commit und neuen Image-Build. .NET wird über die Microsoft-Paketquelle für Debian 13 installiert. Der Build-Parameter `DOTNET_SDK_PACKAGE` steht standardmäßig auf `dotnet-sdk-10.0`.
 
-Die Sicherheitsfreigabe wird in `docs/security/sandbox-freigabe.md` als Entwurf dokumentiert. Die MR/PR-Anleitung fuer CISO/ISB oder KI-Beauftragte:n (KIB) liegt in `docs/security/sandbox-freigabe-review.md`. Der Isolationsnachweis liegt in `docs/security/sandbox-isolation.md`. Das zugehörige KI-Werkzeug-Inventar liegt in `docs/security/ai-tools-inventory.md`. Supply-Chain-Haertungen und Dependency-Update-Regeln sind in `docs/security/supply-chain-todo.md` und `docs/security/dependency-update-policy.md` dokumentiert. Offene `_TODO_`-Felder müssen durch Owner, Betrieb, CISO/ISB oder KIB gepflegt werden und werden nicht durch Annahmen ersetzt.
+Die Sicherheitsfreigabe wird in `docs/security/sandbox-freigabe.md` als Entwurf dokumentiert. Die MR/PR-Anleitung für CISO/ISB oder KI-Beauftragte:n (KIB) liegt in `docs/security/sandbox-freigabe-review.md`. Der Isolationsnachweis liegt in `docs/security/sandbox-isolation.md`. Das zugehörige KI-Werkzeug-Inventar liegt in `docs/security/ai-tools-inventory.md`. Supply-Chain-Härtungen und Dependency-Update-Regeln sind in `docs/security/supply-chain-todo.md` und `docs/security/dependency-update-policy.md` dokumentiert. Offene `_TODO_`-Felder müssen durch Owner, Betrieb, CISO/ISB oder KIB gepflegt werden und werden nicht durch Annahmen ersetzt.
 
-#### Runtime-Haertung
+#### Runtime-Härtung
 
-Der `ade`-Service ist auf Compose-Ebene basisgehaertet. `compose.yml` setzt `security_opt: no-new-privileges:true`, damit Prozesse im Container keine neuen Privilegien ueber setuid/setgid-Binaries oder File-Capabilities erlangen koennen. Zusaetzlich setzt `cap_drop: ALL` alle Linux-Capabilities ab. Die aktuelle Validierung zeigt `NoNewPrivs: 1` und `CapEff: 0000000000000000`; die Standard-Toolchains laufen ohne `cap_add`-Ausnahme. Die Evidenz und die verbleibenden optionalen Verstaerkungen sind in `docs/security/sandbox-isolation.md` dokumentiert.
+Der `ade`-Service ist auf Compose-Ebene basisgehärtet. `compose.yml` setzt `security_opt: no-new-privileges:true`, damit Prozesse im Container keine neuen Privilegien über setuid/setgid-Binaries oder File-Capabilities erlangen können. Zusätzlich setzt `cap_drop: ALL` alle Linux-Capabilities ab. Die aktuelle Validierung zeigt `NoNewPrivs: 1` und `CapEff: 0000000000000000`; die Standard-Toolchains laufen ohne `cap_add`-Ausnahme. Die Evidenz und die verbleibenden optionalen Verstärkungen sind in `docs/security/sandbox-isolation.md` dokumentiert.
 
 #### Automatisierte Dependency-Updates
 
-`renovate.json` bereitet Renovate-Merge-Requests fuer die im Dockerfile gepinnten Werkzeuge und Pakete vor. Alle aktuellen und künftigen Dockerfile-`ARG`-Zeilen müssen direkt oberhalb eine Renovate-Metadatenzeile mit passendem `argName` haben; der lokale Pre-commit-Hook `dockerfile-arg-renovate-metadata` prüft diese Regel. Die vollständige Konvention und die aktuell überwachten ARGs stehen in `docs/security/dependency-update-policy.md`.
+`renovate.json` bereitet Renovate-Merge-Requests für die im Dockerfile gepinnten Werkzeuge und Pakete vor. Alle aktuellen und künftigen Dockerfile-`ARG`-Zeilen müssen direkt oberhalb eine Renovate-Metadatenzeile mit passendem `argName` haben; der lokale Pre-commit-Hook `dockerfile-arg-renovate-metadata` prüft diese Regel. Die vollständige Konvention und die aktuell überwachten ARGs stehen in `docs/security/dependency-update-policy.md`.
 
 Auf dieser GitLab-CE-Instanz muss die Ausführung von Renovate separat durch Betrieb/Admin aktiviert werden, zum Beispiel als Renovate-Bot, GitLab-Runner-Job oder externer Renovate-Service. Bis dahin ist die Repository-Seite vorbereitet; automatische Merge Requests entstehen erst nach dieser Aktivierung.
 
@@ -2575,11 +2561,14 @@ Dieses Glossar erklärt die wichtigsten Begriffe in einfacher Form. Wer den Begr
 | Agent | Ein KI-Programm wie OpenCode oder Codex, das im Container Aufgaben ausführen kann. |
 | API-Key | Ein geheimer Schlüssel, mit dem ein Programm einen Online-Dienst nutzen darf. Wie ein Passwort, aber für Maschinen. |
 | ASP.NET | Web-Framework von Microsoft für serverseitige Webanwendungen in C#. |
+| Bearer Token | Ein Zugriffstoken, das eine Container-Registry einem Client für kurze Zeit ausstellt. Im Fehlertext „Requesting bearer token … 403 Forbidden" bedeutet das: die Anmeldung an der Registry ist abgelaufen oder fehlt. |
 | Bind-Mount | Ein Verzeichnis vom Host, das direkt in den Container eingebunden wird. Änderungen wirken in beide Richtungen. |
 | Build | Der Bauschritt, der aus Quellcode ein ausführbares Programm macht. |
 | Cargo | Build- und Paketwerkzeug für Rust-Projekte. |
+| Codex | KI-Coding-Werkzeug. Im Container als `codex`-CLI installiert. Siehe auch *Agent*. |
 | Compose | Werkzeug, das Container über eine Datei `compose.yml` startet und stoppt. |
 | Container | Ein gekapselter Linux-Prozess, der aus einem Image gestartet wird. Wie eine kleine virtuelle Umgebung, aber leichter als eine virtuelle Maschine. |
+| Daemon | Ein Hintergrunddienst, der ständig läuft. Docker braucht einen Daemon; Podman läuft ohne Daemon. |
 | Dockerfile | Eine Textdatei, die beschreibt, wie ein Image gebaut wird. |
 | Engine | Der laufende Hintergrunddienst von Docker oder Podman. Ohne Engine kein Container. |
 | Host | Dein eigener Rechner. Im Gegensatz dazu der Container. |
@@ -2590,6 +2579,7 @@ Dieses Glossar erklärt die wichtigsten Begriffe in einfacher Form. Wer den Begr
 | MSBuild | Bauwerkzeug von Microsoft für .NET-Projekte. |
 | Mount | Allgemein: ein Verzeichnis irgendwo einhängen. Hier meist Bind-Mount oder Volume. |
 | .NET SDK | Software Development Kit für die Programmiersprachen C#, F# und VB.NET. |
+| OpenCode | KI-Coding-Werkzeug. Im Container als `opencode`-CLI installiert. Siehe auch *Agent*. |
 | Podman | Docker-kompatibles Container-Werkzeug. In dieser README ist Podman der Standardweg. Läuft ohne Daemon und braucht meistens keine Root-Rechte. |
 | Port | Eine nummerierte Tür auf einem Rechner, über die Netzwerkdienste erreicht werden. |
 | Provider | Hier: der Anbieter eines KI-Modells, zum Beispiel `chat-ai`. |
@@ -2777,6 +2767,30 @@ Podman builds an image from the `Dockerfile`. Podman Compose starts a container 
 The container stays active in the background. You can then open a shell inside it and run commands such as `dotnet`, `opencode`, `codex`, or `ls`.
 
 The shell runs as the Linux user `adedev` inside the container. That is why the prompt starts with something like `adedev@...` after entering the container. The Compose service is named `ade`; the OpenCode command is still named `opencode`.
+
+A short overview as a text sketch:
+
+```text
+   Host (your machine)
+   |
+   |-- Source code in RiderProjects/, JavaProjects/, ...
+   |        |  (bind mount)
+   |        v
+   |-- Podman / Docker
+   |        |   builds an image from Dockerfile
+   |        v
+   |    Image (template)
+   |        |   starts
+   |        v
+   |    Container "ade"
+   |        |-- /rider-projects    <- bind mount from host
+   |        |-- /java-projects     <- bind mount from host
+   |        |-- /dotnet-build      <- volume (managed by Podman)
+   |        |-- /workspace         <- bind mount from host
+   |        '-- /home/adedev/...   <- in-container tools
+```
+
+In short: your machine is the *host*. Podman builds an *image* from the `Dockerfile`. From that image, Podman starts a *container* named `ade`. Source-code folders are mounted from the host **directly** into the container as *bind mounts*; build output lives in a Podman-managed *volume*. Changes in mounted folders flow both ways.
 
 ### Terms and command location
 
@@ -4062,6 +4076,8 @@ The difference: `dotnet new webapp` creates a web app with Razor Pages and more 
 
 If an app uses another port, it must be inside the published range `5100-5199` or be added to `compose.yml`.
 
+> **Stop marker — first year:** If you have reached this point and completed the exercises from phases 1–3 of the [learning path for apprentices](#learning-path-for-apprentices), you have met the first-year learning goal. The following sections (Spec Kit, OpenCode, Codex, governance presets, SDD required flow) belong to phase 4 of the learning path and are intended from the second year on, as well as for junior and senior developers.
+
 ### Use Spec Kit
 
 Spec Kit is installed in the container as `specify`. The Dockerfile installs it from the official GitHub source and pins version `v0.8.3`:
@@ -4325,6 +4341,8 @@ dotnet run
 ```
 
 If the project has no tests, run at least `dotnet build` and document why no tests exist.
+
+> **Stop marker — end of phase 4:** The following sections (configuration, OpenCode and Codex hardening, runtime hardening, secret scanning, audit export, image SBOM) belong to phases 5 and 6 of the [learning path](#learning-path-for-apprentices). They are intended for senior developers, CISO/ISB reviews, and advanced exercises from the third year on. They are not required for using the container environment.
 
 ### Configuration
 
@@ -5042,11 +5060,14 @@ This glossary explains the most important terms in simple form. If you do not kn
 | Agent | An AI program such as OpenCode or Codex that can run tasks inside the container. |
 | API key | A secret value that lets a program use an online service. Like a password, but for machines. |
 | ASP.NET | Microsoft's web framework for server-side web applications in C#. |
+| Bearer token | A short-lived access token issued by a container registry to a client. In the error message "Requesting bearer token … 403 Forbidden" it means: the registry login has expired or is missing. |
 | Bind mount | A directory from the host mounted directly into the container. Changes propagate in both directions. |
 | Build | The step that turns source code into a runnable program. |
 | Cargo | Build and package tool for Rust projects. |
+| Codex | An AI coding tool. Installed in the container as the `codex` CLI. See also *Agent*. |
 | Compose | A tool that starts and stops containers based on a `compose.yml` file. |
 | Container | An isolated Linux process started from an image. Like a small virtual environment, but lighter than a virtual machine. |
+| Daemon | A background service that runs continuously. Docker needs a daemon; Podman runs without one. |
 | Dockerfile | A text file that describes how an image is built. |
 | Engine | The background daemon for Docker or Podman. Without an engine, no container. |
 | Host | Your own computer. The opposite of the container. |
@@ -5057,6 +5078,7 @@ This glossary explains the most important terms in simple form. If you do not kn
 | MSBuild | Microsoft's build tool for .NET projects. |
 | Mount | In general: attach a directory somewhere. Here usually a bind mount or a volume. |
 | .NET SDK | Software Development Kit for the programming languages C#, F#, and VB.NET. |
+| OpenCode | An AI coding tool. Installed in the container as the `opencode` CLI. See also *Agent*. |
 | Podman | Docker-compatible container tool. In this README, Podman is the default path. Runs without a daemon and usually needs no root rights. |
 | Port | A numbered door on a computer through which network services are reached. |
 | Provider | Here: the supplier of an AI model, for example `chat-ai`. |
