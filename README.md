@@ -1696,7 +1696,7 @@ specify preset add --from https://github.com/hindermath/spec-kit-preset-architec
 specify preset add --from https://github.com/hindermath/spec-kit-preset-isaqb-architecture-governance/archive/refs/tags/v0.1.0.zip --priority 30
 specify preset add --from https://github.com/hindermath/spec-kit-preset-a11y-governance/archive/refs/tags/v0.2.0.zip --priority 40
 specify preset add --from https://github.com/hindermath/spec-kit-preset-cross-platform-governance/archive/refs/tags/v0.1.0.zip --priority 50
-specify preset add --from https://github.com/hindermath/spec-kit-preset-agent-parity-governance/archive/refs/tags/v0.1.0.zip --priority 60
+specify preset add --from https://github.com/hindermath/spec-kit-preset-agent-parity-governance/archive/refs/tags/v0.2.0.zip --priority 60
 ```
 
 Die Priorität steuert, welches Preset bei gleichen Template-Bausteinen zuerst wirkt. Kleinere Zahl bedeutet höhere Priorität. Deshalb steht `security-governance` auf `10`.
@@ -4163,7 +4163,7 @@ specify preset add --from https://github.com/hindermath/spec-kit-preset-architec
 specify preset add --from https://github.com/hindermath/spec-kit-preset-isaqb-architecture-governance/archive/refs/tags/v0.1.0.zip --priority 30
 specify preset add --from https://github.com/hindermath/spec-kit-preset-a11y-governance/archive/refs/tags/v0.2.0.zip --priority 40
 specify preset add --from https://github.com/hindermath/spec-kit-preset-cross-platform-governance/archive/refs/tags/v0.1.0.zip --priority 50
-specify preset add --from https://github.com/hindermath/spec-kit-preset-agent-parity-governance/archive/refs/tags/v0.1.0.zip --priority 60
+specify preset add --from https://github.com/hindermath/spec-kit-preset-agent-parity-governance/archive/refs/tags/v0.2.0.zip --priority 60
 ```
 
 Priority controls which preset is applied first when template building blocks overlap. Lower number means higher priority. That is why `security-governance` uses priority `10`.
