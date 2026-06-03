@@ -5124,3 +5124,187 @@ Tips for learners using a screen reader or Braille display:
 - Use the table of contents to jump quickly into the right section.
 - Inside a section, the steps are organized as numbered or unordered lists.
 - A code block is always introduced by a sentence that explains what comes next.
+
+## Barrierefreiheit / Accessibility (A11Y)
+
+Dieses Projekt folgt grundlegenden Barrierefreiheitsstandards für alle
+dokumentierten Inhalte und Benutzeroberflächen.
+
+Richtlinien für Markdown-Dokumentation:
+
+- Überschriften folgen einer klaren Hierarchie (h1 → h2 → h3 — keine Ebene überspringen)
+- Alle Bilder haben aussagekräftige Alt-Texte (`![Beschreibung](bild.png)`)
+- Linkbeschriftungen sind beschreibend (`[Installationsanleitung](...)` statt `[hier](...)`)
+- Code-Blöcke geben die Sprache an (` ```bash `, ` ```powershell `)
+- Tabellen haben Kopfzeilen für alle Spalten
+- Keine Informationen werden ausschließlich über Farbe vermittelt
+
+---
+
+This project follows basic accessibility standards for all documented
+content and user interfaces.
+
+Guidelines for Markdown documentation:
+
+- Headings follow a clear hierarchy (h1 → h2 → h3 — no level skipped)
+- All images have meaningful alt texts (`![Description](image.png)`)
+- Link labels are descriptive (`[Installation guide](...)` instead of `[here](...)`)
+- Code blocks specify the language (` ```bash `, ` ```powershell `)
+- Tables have header rows for all columns
+- No information is conveyed through colour alone
+
+## Spec-kit-Workflow
+
+Neue Features in diesem Workspace werden nach dem **Specification-Driven Development (SDD)**-Workflow entwickelt.
+Der Workflow verwendet das `speckit`-CLI-Tool (GitHub Copilot Skill).
+
+Schritte für ein neues Feature:
+
+1. **Spezifikation erstellen** — `speckit specify "Feature-Name"` → `specs/{branch}/spec.md`
+2. **Klärungsfragen** — `speckit clarify` → offene Fragen in `spec.md` beantworten
+3. **Implementierungsplan** — `speckit plan` → `specs/{branch}/plan.md`
+4. **Aufgabenliste** — `speckit tasks` → `specs/{branch}/tasks.md`
+5. **Implementieren** — `speckit implement` → Aufgaben aus `tasks.md` abarbeiten
+6. **Validieren** — `bash scripts/check-homogeneity.sh` → Compliance-Score prüfen
+
+Alle Spec-Artefakte werden im Branch-Verzeichnis `specs/{branch}/` gespeichert und versioniert.
+
+### Governance-Presets
+
+Für Level-2-Projekte können Spec-Kit-Governance-Presets installiert werden.
+Das Standard-Set dieser Workspace-Familie ist:
+
+| Preset-ID | Name | Version | Priorität |
+|---|---|---:|---:|
+| `security-governance` | Security Governance | `v0.4.0` | `10` |
+| `architecture-governance` | Architecture Governance | `v0.2.0` | `20` |
+| `isaqb-architecture-governance` | iSAQB Architecture Governance | `v0.1.0` | `30` |
+| `a11y-governance` | A11Y Governance | `v0.2.0` | `40` |
+| `cross-platform-governance` | Cross-Platform Governance | `v0.1.0` | `50` |
+| `agent-parity-governance` | Agent Parity Governance | `v0.2.0` | `60` |
+
+Alle sechs Presets sind seit 2026-05-04 im `github/spec-kit`
+Community-Katalog enthalten. C#/.NET-Level-2-Projekte verwenden
+standardmäßig alle sechs Presets, sofern keine begründete Ausnahme dokumentiert
+ist. Nach Installation oder Update prüfen: `specify preset list`,
+`specify preset info <id>` und bei Template-Fragen `specify preset resolve
+<template>`. `.specify/presets/` wird committed, `.specify/presets/.cache/`
+nicht.
+Bei jeder Preset-Version oder Prioritätsänderung müssen die Preset-Tabelle,
+Installationsbefehle, Constitution, Agenten-Dateien und Templates gemeinsam
+aktualisiert werden.
+
+---
+
+## Spec-kit Workflow
+
+New features in this workspace are developed following the **Specification-Driven Development (SDD)** workflow.
+The workflow uses the `speckit` CLI tool (GitHub Copilot Skill).
+
+Steps for a new feature:
+
+1. **Create specification** — `speckit specify "Feature Name"` → `specs/{branch}/spec.md`
+2. **Clarification questions** — `speckit clarify` → answer open questions in `spec.md`
+3. **Implementation plan** — `speckit plan` → `specs/{branch}/plan.md`
+4. **Task list** — `speckit tasks` → `specs/{branch}/tasks.md`
+5. **Implement** — `speckit implement` → work through tasks in `tasks.md`
+6. **Validate** — `bash scripts/check-homogeneity.sh` → check compliance score
+
+All spec artefacts are stored and versioned in the branch directory `specs/{branch}/`.
+
+### Governance Presets
+
+Level-2 projects can install Spec-Kit governance presets. The standard set for
+this workspace family is:
+
+| Preset ID | Name | Version | Priority |
+|---|---|---:|---:|
+| `security-governance` | Security Governance | `v0.4.0` | `10` |
+| `architecture-governance` | Architecture Governance | `v0.2.0` | `20` |
+| `isaqb-architecture-governance` | iSAQB Architecture Governance | `v0.1.0` | `30` |
+| `a11y-governance` | A11Y Governance | `v0.2.0` | `40` |
+| `cross-platform-governance` | Cross-Platform Governance | `v0.1.0` | `50` |
+| `agent-parity-governance` | Agent Parity Governance | `v0.2.0` | `60` |
+
+All six presets are included in the `github/spec-kit` community catalog as of
+2026-05-04. C#/.NET Level-2 projects default to all six presets unless a
+justified exception is documented. After install or update, verify with
+`specify preset list`, `specify preset info <id>`, and for template questions
+`specify preset resolve <template>`. Commit `.specify/presets/`, but not
+`.specify/presets/.cache/`.
+For every preset version or priority change, update the preset table,
+installation commands, constitution, agent guidance files, and templates
+together.
+
+## Für Azubis / For Apprentices
+
+Willkommen! Diese Sektion beschreibt den Einstieg in die Entwicklungsumgebung
+für Fachinformatiker-Azubis und andere Einsteiger.
+
+**Voraussetzungen:**
+
+- Git (macOS: `brew install git` / Windows: `winget install Git.Git`)
+- PowerShell 7+ (Windows: `winget install Microsoft.PowerShell`)
+- ripgrep (macOS: `brew install ripgrep` / Windows: `winget install BurntSushi.ripgrep.MSVC`)
+- GitHub CLI (macOS: `brew install gh` / Windows: `winget install GitHub.cli`)
+
+**Ersten Schritt ausführen:**
+
+```bash
+# Repository klonen
+git clone <repo-url>
+cd <projekt-verzeichnis>
+
+# Hooks installieren
+bash scripts/install-hooks.sh
+
+# Compliance prüfen
+bash scripts/check-homogeneity.sh
+```
+
+**Hilfreiche Befehle:**
+
+| Befehl | Beschreibung |
+|--------|--------------|
+| `bash scripts/check-homogeneity.sh` | Compliance-Bericht anzeigen |
+| `bash scripts/init-stats.sh` | Compliance-Baseline in STATS.md schreiben |
+| `git log --oneline -10` | Letzte 10 Commits anzeigen |
+
+Bei Fragen: Issue im GitHub-Repository erstellen oder Mentor ansprechen.
+
+---
+
+Welcome! This section describes how to get started with the development
+environment for apprentice software developers (Fachinformatiker-Azubis) and
+other beginners.
+
+**Prerequisites:**
+
+- Git (macOS: `brew install git` / Windows: `winget install Git.Git`)
+- PowerShell 7+ (Windows: `winget install Microsoft.PowerShell`)
+- ripgrep (macOS: `brew install ripgrep` / Windows: `winget install BurntSushi.ripgrep.MSVC`)
+- GitHub CLI (macOS: `brew install gh` / Windows: `winget install GitHub.cli`)
+
+**First steps:**
+
+```bash
+# Clone the repository
+git clone <repo-url>
+cd <project-directory>
+
+# Install hooks
+bash scripts/install-hooks.sh
+
+# Check compliance
+bash scripts/check-homogeneity.sh
+```
+
+**Useful commands:**
+
+| Command | Description |
+|---------|-------------|
+| `bash scripts/check-homogeneity.sh` | Show compliance report |
+| `bash scripts/init-stats.sh` | Write compliance baseline to STATS.md |
+| `git log --oneline -10` | Show last 10 commits |
+
+For questions: open an issue in the GitHub repository or ask your mentor.
