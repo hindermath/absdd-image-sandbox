@@ -1,6 +1,6 @@
 # Dependency-Update-Policy
 
-Stand: 2026-05-25
+Stand: 2026-06-03
 
 Dieses Dokument beschreibt die Repository-seitige Renovate-Konfiguration fuer
 P3-3 aus `COMPLIANCE-PLAN_RL-SE-001.md`.
@@ -24,10 +24,6 @@ steht direkt oberhalb des `ARG` eine Metadatenzeile:
 ARG <ARG_NAME>=<version>
 ```
 
-Fuer Werte, die nicht nur eine reine Version enthalten, wird eine eigene
-Regex-Regel verwendet. Das gilt aktuell fuer `DOTNET_SDK_PACKAGE`, weil der
-Wert ein Debian-Paketname wie `dotnet-sdk-10.0` ist.
-
 Wenn kuenftig ein weiteres `ARG` ergaenzt wird, muss es nach dieser Konvention
 eine Renovate-Metadatenzeile bekommen. Wenn der Wert nicht als einfache Version
 aktualisierbar ist, muss `renovate.json` um eine passende Sonderregel
@@ -39,7 +35,6 @@ vorangestellte Metadatenzeile mit passendem `argName` hat.
 
 | ARG | Renovate datasource | Dependency |
 |---|---|---|
-| `DOTNET_SDK_PACKAGE` | `dotnet-version` | `dotnet-sdk` |
 | `GO_VERSION` | `golang-version` | `go` |
 | `GOPLS_VERSION` | `go` | `golang.org/x/tools/gopls` |
 | `STATICCHECK_VERSION` | `go` | `honnef.co/go/tools` |
@@ -65,8 +60,8 @@ Ausfuehrung ist ein Betriebs-/Admin-Schritt.
 Jeder Renovate-MR muss mindestens diese Pruefungen bestehen:
 
 ```bash
-docker compose config --no-interpolate
-docker compose build --pull
+podman compose config
+podman compose build --pull
 uvx pre-commit run --all-files
 ```
 
@@ -92,10 +87,6 @@ line must be placed directly above the `ARG`:
 ARG <ARG_NAME>=<version>
 ```
 
-Values that are not simple versions need a dedicated regex rule. This currently
-applies to `DOTNET_SDK_PACKAGE`, because the value is a Debian package name
-such as `dotnet-sdk-10.0`.
-
 When a new `ARG` is added later, it must follow this convention. If the value
 cannot be updated as a simple version, `renovate.json` must receive a dedicated
 rule for that argument. The local pre-commit hook
@@ -106,7 +97,6 @@ preceding metadata line with a matching `argName`.
 
 | ARG | Renovate datasource | Dependency |
 |---|---|---|
-| `DOTNET_SDK_PACKAGE` | `dotnet-version` | `dotnet-sdk` |
 | `GO_VERSION` | `golang-version` | `go` |
 | `GOPLS_VERSION` | `go` | `golang.org/x/tools/gopls` |
 | `STATICCHECK_VERSION` | `go` | `honnef.co/go/tools` |
@@ -132,8 +122,8 @@ admin step.
 Every Renovate MR must pass at least these checks:
 
 ```bash
-docker compose config --no-interpolate
-docker compose build --pull
+podman compose config
+podman compose build --pull
 uvx pre-commit run --all-files
 ```
 

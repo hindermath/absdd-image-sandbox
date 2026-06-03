@@ -3,14 +3,14 @@ set -euo pipefail
 
 usage() {
   cat <<'USAGE'
-Usage: scripts/compose-down-with-audit.sh [--podman|--docker|--podman-compose] [compose down args...]
+Usage: scripts/compose-down-with-audit.sh [--podman|--podman-compose] [compose down args...]
 
 Runs audit-export inside the ade container, then runs compose down with the
 remaining arguments. Examples:
 
   scripts/compose-down-with-audit.sh --podman
   scripts/compose-down-with-audit.sh --podman -v
-  scripts/compose-down-with-audit.sh --docker --remove-orphans
+  scripts/compose-down-with-audit.sh --podman --remove-orphans
 USAGE
 }
 
@@ -25,10 +25,6 @@ case "${1:-}" in
     compose_cmd=(podman compose)
     shift
     ;;
-  --docker)
-    compose_cmd=(docker compose)
-    shift
-    ;;
   --podman-compose)
     compose_cmd=(podman-compose)
     shift
@@ -36,12 +32,10 @@ case "${1:-}" in
   *)
     if command -v podman >/dev/null 2>&1; then
       compose_cmd=(podman compose)
-    elif command -v docker >/dev/null 2>&1; then
-      compose_cmd=(docker compose)
     elif command -v podman-compose >/dev/null 2>&1; then
       compose_cmd=(podman-compose)
     else
-      printf 'Neither podman, docker, nor podman-compose was found in PATH\n' >&2
+      printf 'Neither podman nor podman-compose was found in PATH\n' >&2
       exit 1
     fi
     ;;

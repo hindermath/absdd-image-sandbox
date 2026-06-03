@@ -27,7 +27,7 @@ KI-Agent direkt umsetzen kann.
 - **Ausführender Agent:** Codex CLI mit Modell **gpt-5.5**, Reasoning-Stufe
   **high**.
 - **Sandbox:** Diese ade-dev-sandbox selbst, gestartet über
-  `docker compose up -d` oder `podman compose up -d`.
+  `podman compose up -d` oder `podman compose up -d`.
 - **Schreibrechte des Agenten:** ausschließlich innerhalb der gemounteten
   Host-Verzeichnisse, primär das Repository-Wurzelverzeichnis dieses
   Sandbox-Repos und gegebenenfalls Spec-Kit-Pilotprojekt unter
@@ -88,8 +88,8 @@ Der Agent zitiert sie inhaltlich aus den Hinweisen in diesem Dokument; er
 2. **Commit-Stil:** kurz, imperativ, mit Präfix `docs:`, `chore:`, `build:`
    oder `ci:`. Beispiel: `build: pin codex sandbox defaults`.
 3. **Vor jedem Commit:**
-   - `docker compose config --no-interpolate` muss ohne Fehler durchlaufen.
-   - Wenn das `Dockerfile` geändert wurde: `docker compose build --pull`
+   - `podman compose config` muss ohne Fehler durchlaufen.
+   - Wenn das `Dockerfile` geändert wurde: `podman compose build --pull`
      muss erfolgreich durchlaufen.
 4. **Keine Secrets im Klartext.** Wenn Codex auf einen API-Key, ein Token
    oder einen Endpoint stößt, wird der Wert über eine Umgebungsvariable aus
@@ -131,7 +131,7 @@ liegt nur `codex.config.toml.example` als loses Vorlagen-Schnipsel.
 
 **Folgen:**
 
-- `docker compose build --pull` und `podman compose build --pull` schlagen
+- `podman compose build --pull` und `podman compose build --pull` schlagen
   reproduzierbar fehl. Die Sandbox ist in der jetzigen Form nicht baubar.
 - Die in `README.md` Zeilen 1300 bis 1307 dokumentierten Codex-Sicherheits-
   Defaults sind nicht durchgesetzt, sondern nur beschrieben.
@@ -168,10 +168,19 @@ network_access = false
 # /tmp ist nicht automatisch beschreibbar; jede Schreiboperation muss
 # auf einem expliziten Mount landen.
 exclude_slash_tmp = true
-# Schreibrechte beschraenken sich auf die drei vom Compose-Stack
+# Schreibrechte beschraenken sich auf die vom Compose-Stack
 # gemounteten Arbeitsverzeichnisse. Aenderungen an dieser Liste
 # erfordern ein neues Container-Image, nicht nur einen Restart.
-writable_roots = ["/workspace", "/rider-projects", "/java-projects"]
+writable_roots = [
+  "/ade-dev-sandbox",
+  "/home/adedev/home-baseline-tmp",
+  "/workspace",
+  "/rider-projects",
+  "/java-projects",
+  "/go-projects",
+  "/rust-projects",
+  "/python-projects",
+]
 
 [model_providers.azure]
 name = "Azure OpenAI"
@@ -194,8 +203,8 @@ Requirements Layer harte Untergrenzen ziehen.
 CLI ist projektspezifisch. Bevor du diese Datei schreibst, prüfe:
 
 1. Aktuelle Dokumentation der Codex CLI im npm-Paket `@openai/codex`. Im
-   Container: `docker compose exec ade sh -lc 'codex --help'` und
-   `docker compose exec ade sh -lc 'find $(npm root -g)/@openai/codex
+   Container: `podman compose exec ade sh -lc 'codex --help'` und
+   `podman compose exec ade sh -lc 'find $(npm root -g)/@openai/codex
    -name "*.md" -o -name "schema*.json"'`.
 2. Wenn das Schema dort nicht eindeutig dokumentiert ist, **erzeuge nur eine
    minimale, syntaktisch valide Datei** mit denselben Sicherheits-Schlüsseln
@@ -217,7 +226,16 @@ sandbox_mode = "workspace-write"
 [sandbox_workspace_write]
 network_access = false
 exclude_slash_tmp = true
-writable_roots = ["/workspace", "/rider-projects", "/java-projects"]
+writable_roots = [
+  "/ade-dev-sandbox",
+  "/home/adedev/home-baseline-tmp",
+  "/workspace",
+  "/rider-projects",
+  "/java-projects",
+  "/go-projects",
+  "/rust-projects",
+  "/python-projects",
+]
 ```
 
 Wenn nach der Schema-Recherche klar wird, dass `requirements.toml` ein
@@ -229,24 +247,24 @@ deiner Anpassung im Commit-Body**.
 - [x] Verzeichnis `codex/` existiert.
 - [x] `codex/config.toml` existiert und enthält `sandbox_mode =
       "workspace-write"`, `network_access = false`,
-      `exclude_slash_tmp = true` und die drei `writable_roots`.
+      `exclude_slash_tmp = true` und die definierten `writable_roots`.
 - [x] `codex/requirements.toml` existiert und ist gültiges TOML.
-- [x] `docker compose build --pull` läuft ohne Fehler durch.
-- [x] `docker compose exec ade cat /etc/codex/config.toml` zeigt die
+- [x] `podman compose build --pull` läuft ohne Fehler durch.
+- [x] `podman compose exec ade cat /etc/codex/config.toml` zeigt die
       erwarteten Defaults.
-- [x] `docker compose exec ade cat /etc/codex/requirements.toml` zeigt die
+- [x] `podman compose exec ade cat /etc/codex/requirements.toml` zeigt die
       erwarteten Defaults.
 
 ### Verifikation (Skript)
 
 ```bash
-docker compose config --no-interpolate >/dev/null
-docker compose build --pull
-docker compose up -d
-docker compose exec ade cat /etc/codex/config.toml | grep -E 'sandbox_mode|network_access|exclude_slash_tmp|writable_roots'
-docker compose exec ade cat /etc/codex/requirements.toml
-docker compose exec ade codex --version
-docker compose down
+podman compose config >/dev/null
+podman compose build --pull
+podman compose up -d
+podman compose exec ade cat /etc/codex/config.toml | grep -E 'sandbox_mode|network_access|exclude_slash_tmp|writable_roots'
+podman compose exec ade cat /etc/codex/requirements.toml
+podman compose exec ade codex --version
+podman compose down
 ```
 
 ### Commit-Vorschlag
@@ -278,10 +296,11 @@ checklist items 2 and 5.
 
 ### Befund
 
-Zeile 1 des `Dockerfile`:
+Zeile 1 des `Dockerfile` muss ein digest-gepinntes Basisimage enthalten. Der
+aktuelle Zielzustand ist das Microsoft-.NET-SDK-Basisimage aus MCR:
 
 ```dockerfile
-FROM docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox:latest
+FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:<DIGEST>
 ```
 
 Der `latest`-Tag ist nicht reproduzierbar. Zwei Builds an unterschiedlichen
@@ -297,15 +316,15 @@ menschlicher Reviewer die ungefähre Generation erkennt.
 
 ### Vorgehen
 
-1. Aktuellen Digest abfragen:
+1. Aktuellen MCR-Digest abfragen:
    ```bash
-   docker pull docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox:latest
-   docker inspect --format='{{index .RepoDigests 0}}' docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox:latest
+   podman pull mcr.microsoft.com/dotnet/sdk:10.0
+   podman image inspect mcr.microsoft.com/dotnet/sdk:10.0 --format '{{index .RepoDigests 0}}'
    ```
 2. Im `Dockerfile` ersetzen:
    ```dockerfile
-   # Tag latest beobachtet am YYYY-MM-DD, hier auf Digest gepinnt.
-   FROM docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox@sha256:<HIER_DIGEST>
+   # Tag 10.0 beobachtet am YYYY-MM-DD, hier auf Digest gepinnt.
+   FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:<HIER_DIGEST>
    ```
 3. Image neu bauen und prüfen, dass alle nachfolgenden Schritte des
    Dockerfiles wie zuvor laufen.
@@ -314,14 +333,14 @@ menschlicher Reviewer die ungefähre Generation erkennt.
 
 - [x] `Dockerfile` Zeile 1 enthält `@sha256:` und keinen `:latest`-Tag.
 - [x] Kommentar mit Beobachtungsdatum direkt darüber.
-- [x] `docker compose build --pull` läuft erfolgreich.
+- [x] `podman compose build --pull` läuft erfolgreich.
 - [x] `README.md` Abschnitt "Konfiguration" enthält einen Hinweis, dass das
       Basisimage gepinnt ist und über `Dockerfile`-Änderung plus Commit
       aktualisiert wird.
 
 ### Eskalationspunkte
 
-- Wenn das Basisimage nicht erreichbar ist (Registry-Auth fehlt): melden,
+- Wenn das Basisimage nicht erreichbar ist (Registry- oder Netzwerkproblem): melden,
   nicht raten.
 - Wenn die Registry keine Digests ausliefert: ältere Tag-Variante mit
   Datums-Suffix als Zwischenlösung dokumentieren, dann eskalieren.
@@ -352,7 +371,7 @@ hartcodiert verstreut, sondern als `ARG` am Kopf des `Dockerfiles` analog zu
 
 1. Aktuell installierte Versionen im laufenden Container ermitteln:
    ```bash
-   docker compose exec ade sh -lc 'opencode --version; codex --version'
+   podman compose exec ade sh -lc 'opencode --version; codex --version'
    ```
 2. Diese Versionen als ARGs am Dockerfile-Kopf ergänzen:
    ```dockerfile
@@ -370,8 +389,8 @@ hartcodiert verstreut, sondern als `ARG` am Kopf des `Dockerfiles` analog zu
 
 - [x] Keine Vorkommen von `@latest` mehr im `Dockerfile`.
 - [x] Pinning per `ARG` am Kopf des Dockerfiles deklariert.
-- [x] `docker compose build --pull` läuft erfolgreich.
-- [x] `docker compose exec ade sh -lc 'opencode --version; codex --version'`
+- [x] `podman compose build --pull` läuft erfolgreich.
+- [x] `podman compose exec ade sh -lc 'opencode --version; codex --version'`
       gibt genau die im `ARG` gesetzten Versionen aus.
 - [x] `README.md` Abschnitt "Konfiguration" nennt diese ARGs als
       Update-Hebel.
@@ -388,8 +407,8 @@ CL_12 Prüfpunkt 8 verlangt: Werkzeug, Sandbox-Typ, Projektpfad, Zeitraum,
 verantwortliche Person, Review-Ergebnis und relevante Spec-Kit-Artefakte
 müssen je Agentennutzung nachvollziehbar sein.
 
-OpenCode- und Codex-Sitzungen liegen heute in den flüchtigen Docker-Volumes
-`opencode_data` und `codex_data`. Beim `docker compose down -v` sind sie
+OpenCode- und Codex-Sitzungen liegen heute in den flüchtigen Podman-Volumes
+`opencode_data` und `codex_data`. Beim `podman compose down -v` sind sie
 weg. Es gibt keinen periodischen Export, kein zentrales Log.
 
 ### Aufgabe
@@ -427,7 +446,7 @@ vollständigen Prompt- oder Antwort-Texte.
    `.gitkeep`) im Repo bleibt, die echten Audit-Daten nicht.
 4. In `AGENTS.md` Abschnitt "Security & Configuration Tips" einen Hinweis
    ergänzen: "Audit-Log-Export per `scripts/audit-export.sh` mindestens
-   einmal pro Arbeitstag und zwingend vor `docker compose down -v`."
+   einmal pro Arbeitstag und zwingend vor `podman compose down -v`."
 
 ### Akzeptanzkriterien
 
@@ -476,19 +495,13 @@ Tabelle mit Spalten:
 
 Einträge initial:
 
-1. **OpenCode** (CLI im Container) — Provider `chat-ai` über
-   `https://chat-ai.academiccloud.de/v1`, Vendor GWDG/AcademicCloud,
-   Datenresidenz EU/DE. DPA-Datum, ZDR-Status, freigegeben-bis-Datum vom
-   Owner einzutragen.
+1. **OpenCode** (CLI im Container) — kein vorkonfigurierter Modellanbieter.
+   DPA-Datum, ZDR-Status, freigegeben-bis-Datum und etwaige lokal
+   genehmigte Provider vom Owner einzutragen.
 2. **Codex CLI** (im Container) — Provider Azure OpenAI, Region einzutragen
    (EU bevorzugt). DPA-Datum, ZDR-Status, freigegeben-bis-Datum vom Owner
    einzutragen.
-3. **Provider/Modelle aus `opencode.jsonc`:**
-   `qwen3-coder-30b-a3b-instruct`, `glm-4.7`, `devstral-2-123b-instruct-2512`,
-   `qwen3-30b-a3b-instruct-2507`, `OpenAI gpt-5.4`, `claude-opus-4-6`. Je
-   Modell: Anbieter im Hintergrund, Datenresidenz, Trainings-Opt-out-Status,
-   bekannte Einschränkungen.
-4. **Spec Kit** — Version `v0.8.3`, Bezug aus GitHub
+3. **Spec Kit** — Version `v0.8.3`, Bezug aus GitHub
    `github.com/github/spec-kit.git`, Lizenz beachten.
 
 Felder, die der Agent nicht selbst kennt (DPA-Datum, ZDR-Status,
@@ -498,7 +511,7 @@ stehen. Der Agent erfindet sie nicht.
 ### Akzeptanzkriterien
 
 - [x] Datei `docs/security/ai-tools-inventory.md` existiert.
-- [x] Tabelle mit allen oben genannten Werkzeugen und Modellen.
+- [x] Tabelle mit allen oben genannten Werkzeugen.
 - [x] Keine erfundenen Felder; offene Felder als `_TODO_` markiert.
 - [x] Hinweis am Ende der Datei: "Re-Evaluation: jedes Quartal, nächste
       Prüfung YYYY-MM-DD".
@@ -531,8 +544,8 @@ Konfiguriere `pre-commit` mit `gitleaks` als Mindestabsicherung.
    (`gitleaks --version` der aktuellen stabilen Release), nicht `main`
    verwenden.
 2. Datei `.gitleaks.toml` mit Custom-Allowlist nur für die `*.example`-
-   Dateien anlegen, damit Beispielwerte (`changeme`,
-   `GWDG_API_KEY=changeme`) keinen Treffer erzeugen.
+   Dateien anlegen, damit neutrale Beispielwerte wie `changeme` keinen
+   Treffer erzeugen.
 3. In `AGENTS.md` und `README.md` einen Installations-Hinweis ergänzen:
    ```bash
    pre-commit install
@@ -571,7 +584,7 @@ Dokumentenrumpf vor und legt ihn als Entwurf ab.
 
 1. Datei `docs/security/sandbox-freigabe.md` anlegen mit folgenden Pflicht-
    Feldern als Vorlage:
-   - Sandbox-Typ: Container (Docker / Podman)
+   - Sandbox-Typ: Container (Podman)
    - Sandbox-Identifikator: Image-Digest aus P0-2
    - Verantwortliche Person: `_TODO_`
    - Freigabestatus: `_Entwurf, Freigabe ausstehend_`
@@ -621,7 +634,7 @@ Dokument fasst vorhandene Fakten zusammen; es ändert keine Konfiguration.
 
 ### Mindestinhalt
 
-- **Sandbox-Typ:** Container-Sandbox (Docker / Podman) gemäß der
+- **Sandbox-Typ:** Container-Sandbox (Podman) gemäß der
   Sandbox-Typologie der RL-SE-001, Abschnitt "Agentische KI in
   Sandbox-Umgebungen".
 - **Isolationsmechanismen, je mit konkreter Evidenzquelle (Datei und Stelle):**
@@ -640,7 +653,7 @@ Dokument fasst vorhandene Fakten zusammen; es ändert keine Konfiguration.
   - Geheimnis-Trennung: `deny_read`/`permission`-Regeln auf `*.env`,
     `.gitignore`, Einbringung per `env_file`.
 - **Schutzniveau-Begründung:** ehrliche Einordnung, dass die Isolation
-  derzeit auf Docker-Standardkonfiguration plus non-root-Benutzer beruht;
+  derzeit auf Podman-Standardkonfiguration plus non-root-Benutzer beruht;
   Verweis auf die optionale Härtung P3-4 als Verstärkung; Aussage, für
   welche Datenklassifikation das Schutzniveau als ausreichend bewertet wird.
 - **Verweise** auf die übrigen `docs/security/`-Dokumente, `compose.yml`,
@@ -719,20 +732,20 @@ erfasst oder verlinkt. Fehlt eine Angabe, wird das ausdrücklich vermerkt.
    - Herkunft und Sensitivität der Trainingsdaten, soweit veröffentlicht.
    - KI-spezifische Sicherheitseigenschaften (zum Beispiel Eingabe-/
      Ausgabefilter, Robustheitsmaßnahmen), soweit veröffentlicht.
-2. Für die OpenCode-Modelle der GWDG-Chat-AI und für Codex je Modell die
-   Model Card bzw. den AI-SBOM-Verweis eintragen. Wo eine Quelle fehlt,
-   "vom Anbieter nicht veröffentlicht" mit Datum vermerken. Für
-   GWDG-betriebene Modelle ist die zuständige GWDG-Stelle (Chat-AI-Betrieb)
-   als interne Bezugsquelle zu nennen.
+2. Für vorkonfigurierte Modellanbieter je Modell die Model Card bzw. den
+   AI-SBOM-Verweis eintragen. OpenCode hat in diesem Image keinen
+   vorkonfigurierten Modellanbieter; dort ist nur die CLI als Werkzeug zu
+   bewerten. Wo eine Quelle fehlt, "vom Anbieter nicht veröffentlicht" mit
+   Datum vermerken.
 3. Felder, die nur der Owner kennt, als `_TODO_` belassen; nichts erfinden.
 4. Den Hinweisblock am Dateiende um einen Verweis auf die G7-Leitlinie und
    auf CL_09 Prüfpunkt 15 ergänzen.
 
 ### Akzeptanzkriterien
 
-- [x] `ai-tools-inventory.md` enthält je Werkzeug, Dienst und Modell die
+- [x] `ai-tools-inventory.md` enthält je Werkzeug, Dienst und vorkonfiguriertem Modell die
       vier neuen Felder oder einen begründeten Fehlt-Vermerk.
-- [x] Für jedes Modell ist eine Anbieter-Transparenzquelle (Model Card oder
+- [x] Für jedes vorkonfigurierte Modell ist eine Anbieter-Transparenzquelle (Model Card oder
       AI-SBOM) verlinkt oder ihr Fehlen dokumentiert.
 - [x] Keine erfundenen Trainings- oder Datenherkunfts-Angaben; offene
       Punkte sind als `_TODO_` oder "nicht veröffentlicht" markiert.
@@ -846,7 +859,7 @@ für `main`. Im Sandbox-Repo selbst nicht durchgesetzt.
    (oder `.gitlab/merge_request_templates/Default.md`) mit Mindestabschnitt:
    - "Sicherheitsrelevante Änderung? Ja/Nein"
    - "Vier-Augen-Review erforderlich? Ja/Nein, falls ja: Name"
-   - "Audit-Log-Export vor `docker compose down -v` durchgeführt? Ja/Nein"
+   - "Audit-Log-Export vor `podman compose down -v` durchgeführt? Ja/Nein"
    - "KI-Anteil? Werkzeug, Umfang, Reviewer"
 3. In `AGENTS.md` Hinweis ergänzen, dass diese Vorlagen im Repo liegen,
    aber **plattformseitige Branch-Protection-Regeln separat von einem
@@ -881,8 +894,8 @@ eine CycloneDX-SBOM erzeugt.
    ```bash
    #!/usr/bin/env bash
    set -euo pipefail
-   docker compose build --pull
-   IMAGE="$(docker compose config --format json | jq -r '.services.ade.image // empty')"
+   podman compose build --pull
+   IMAGE="$(podman compose config --format json | jq -r '.services.ade.image // empty')"
    if [[ -z "${IMAGE}" ]]; then
      IMAGE="ade-dev-sandbox-ade:latest"
    fi
@@ -949,8 +962,8 @@ gilt dann aber erst als mergefähig, wenn dort mindestens folgende Prüfungen
 grün gelaufen sind:
 
 ```bash
-docker compose config --no-interpolate
-docker compose build --pull
+podman compose config
+podman compose build --pull
 uvx pre-commit run --all-files
 ```
 
@@ -983,9 +996,9 @@ warum freier Egress in der Lernumgebung beabsichtigt ist.
 Variante A — Lernumgebung bleibt offen, aber dokumentiert:
 
 1. In `docs/security/network-decision.md` festhalten: "Default-Bridge mit
-   freiem Egress, weil Spec-Kit, OpenCode, Codex, Maven Central, NuGet,
-   crates.io, deb.nodesource.com, static.rust-lang.org, go.dev,
-   chat-ai.academiccloud.de erreichbar sein müssen. Risiko: lateral
+   freiem Egress, weil Spec-Kit, Codex, Maven Central, NuGet, crates.io,
+   deb.nodesource.com, static.rust-lang.org, go.dev und MCR erreichbar sein
+   müssen. Risiko: lateral
    movement gering wegen Container-Isolation. Akzeptiert bis YYYY-MM-DD."
 2. In `compose.yml` Kommentar ergänzen, der auf diese Entscheidung
    verweist.
@@ -1031,7 +1044,7 @@ GitLab-CE-Projekt.
 
 ### Befund
 
-`compose.yml` startet den `ade`-Container auf Docker-Standardwerten: alle
+`compose.yml` startet den `ade`-Container auf Podman-Standardwerten: alle
 Standard-Linux-Capabilities sind vorhanden, `no-new-privileges` ist nicht
 gesetzt, das Root-Dateisystem ist schreibbar. Die einzige harte
 Isolationskontrolle auf Container-Ebene ist der non-root-Benutzer `adedev`.
@@ -1049,7 +1062,7 @@ getestet.
 ### Vorgehen
 
 1. `security_opt: ["no-new-privileges:true"]` ergänzen. Danach
-   `docker compose build --pull`, `docker compose up -d` und die
+   `podman compose build --pull`, `podman compose up -d` und die
    Tool-Checks (`dotnet --info`, `java --version`, `go version`,
    `rustc --version`, `python --version`, `opencode --version`,
    `codex --version`) durchlaufen.
@@ -1071,8 +1084,8 @@ begründen, nicht erzwingen.
 - [x] Mindestens `no-new-privileges:true` ist gesetzt und getestet.
 - [x] `cap_drop`/`cap_add` ist bewusst konfiguriert oder begründet
       ausgelassen.
-- [x] `docker compose config --no-interpolate` und
-      `docker compose build --pull` laufen fehlerfrei.
+- [x] `podman compose config` und
+      `podman compose build --pull` laufen fehlerfrei.
 - [x] Die Tool-Checks im Container laufen unverändert erfolgreich.
 - [x] Änderungen in `compose.yml` sind kommentiert und in
       `sandbox-isolation.md` dokumentiert.

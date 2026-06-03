@@ -1,8 +1,6 @@
-# Tag latest observed on 2026-05-14, pinned here by digest for reproducible builds.
-FROM docker.gitlab-ce.gwdg.de/agentic-coding/agent-sandbox/agent-sandbox@sha256:a21e15872aed8b0e4b9e18e0ff1e678318968efb4b8367ddf9fa4a63fc1d294c
+# Tag 10.0 observed on 2026-06-03, pinned here by digest for reproducible builds.
+FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:1f48db91b4f27fdb4409b7b4253ce1fd4f78f69d34efd9edb788c03a337f5ab8
 
-# renovate-dotnet: datasource=dotnet-version depName=dotnet-sdk versioning=semver extractVersion=^(?<version>\d+\.\d+) argName=DOTNET_SDK_PACKAGE
-ARG DOTNET_SDK_PACKAGE=dotnet-sdk-10.0
 # renovate: datasource=golang-version depName=go versioning=semver argName=GO_VERSION
 ARG GO_VERSION=1.26.3
 # renovate: datasource=go depName=golang.org/x/tools/gopls versioning=semver argName=GOPLS_VERSION
@@ -53,9 +51,6 @@ RUN apt-get -y update \
         tree \
         wget \
         yq \
-    && wget https://packages.microsoft.com/config/debian/13/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
-    && dpkg -i packages-microsoft-prod.deb \
-    && rm packages-microsoft-prod.deb \
     && mkdir -p /usr/share/keyrings \
     && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key -o /tmp/nodesource-repo.gpg.key \
     && gpg --dearmor --yes -o /usr/share/keyrings/nodesource.gpg /tmp/nodesource-repo.gpg.key \
@@ -69,7 +64,7 @@ RUN apt-get -y update \
     && printf 'Types: deb\nURIs: https://deb.nodesource.com/node_%s.x\nSuites: nodistro\nComponents: main\nArchitectures: %s\nSigned-By: /usr/share/keyrings/nodesource.gpg\n' "${NODE_MAJOR}" "${arch}" > /etc/apt/sources.list.d/nodesource.sources \
     && printf 'Package: nodejs\nPin: origin deb.nodesource.com\nPin-Priority: 600\n' > /etc/apt/preferences.d/nodejs \
     && apt-get -y update \
-    && apt-get -y install --no-install-recommends "${DOTNET_SDK_PACKAGE}" nodejs \
+    && apt-get -y install --no-install-recommends nodejs \
     && ln -sf /usr/bin/fdfind /usr/local/bin/fd \
     && rm -rf /var/lib/apt/lists/*
 RUN set -eux; \
@@ -85,8 +80,6 @@ RUN set -eux; \
     rm /tmp/go.tgz
 RUN printf '%s\n' 'export PATH="/usr/local/go/bin:/home/adedev/go/bin:/home/adedev/.cargo/bin:${PATH}"' \
     > /etc/profile.d/ade-toolchains.sh
-RUN dotnet workload config --update-mode manifests \
-    && dotnet workload update
 RUN npm i -g "opencode-ai@${OPENCODE_VERSION}" "@openai/codex@${CODEX_VERSION}" \
     && ln -sf "$(npm root -g)/@openai/codex/bin/codex.js" /usr/local/bin/codex
 RUN set -eux; \

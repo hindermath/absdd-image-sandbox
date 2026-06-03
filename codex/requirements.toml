@@ -44,7 +44,6 @@ deny_read = [
   "**/codex.env",
   "/home/adedev/.ssh/**",
   "/home/adedev/.gnupg/**",
-  "/home/adedev/.docker/**",
   "/home/adedev/.config/gh/**",
   "/home/adedev/.config/glab-cli/**",
   "/home/adedev/.config/containers/**",
@@ -67,7 +66,7 @@ prefix_rules = [
   { pattern = [{ token = "mount" }], decision = "forbidden", justification = "Mount-Operationen duerfen nicht automatisiert aus Codex heraus laufen." },
   { pattern = [{ token = "umount" }], decision = "forbidden", justification = "Unmount-Operationen duerfen nicht automatisiert aus Codex heraus laufen." },
   { pattern = [{ token = "git" }, { any_of = ["commit", "push", "tag"] }], decision = "prompt", justification = "Repository-aendernde Git-Aktionen brauchen bewusste Freigabe." },
-  { pattern = [{ any_of = ["docker", "podman", "podman-compose"] }], decision = "prompt", justification = "Container-Aktionen koennen Netzwerk, Volumes, Images oder Ports betreffen." },
+  { pattern = [{ any_of = ["podman", "podman-compose"] }], decision = "prompt", justification = "Container-Aktionen koennen Netzwerk, Volumes, Images oder Ports betreffen." },
   { pattern = [{ any_of = ["curl", "wget"] }], decision = "prompt", justification = "Explizite Netzwerkabrufe brauchen Freigabe." },
   { pattern = [{ any_of = ["npm", "npx", "mvn", "dotnet"] }], decision = "prompt", justification = "Build- und Paketmanager-Befehle koennen Code ausfuehren oder Abhaengigkeiten nachladen." },
 ]

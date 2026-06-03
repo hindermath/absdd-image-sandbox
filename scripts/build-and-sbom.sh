@@ -3,7 +3,7 @@ set -euo pipefail
 
 IMAGE_NAME="${IMAGE_NAME:-localhost/ade-dev-sandbox-ade:latest}"
 SBOM_DIR="${SBOM_DIR:-sboms}"
-CONTAINER_RUNTIME="${CONTAINER_RUNTIME:-auto}"
+CONTAINER_RUNTIME="${CONTAINER_RUNTIME:-podman}"
 SYFT_IMAGE="${SYFT_IMAGE:-docker.io/anchore/syft:latest}"
 SKIP_BUILD="${SKIP_BUILD:-false}"
 
@@ -16,7 +16,7 @@ Build the ADE sandbox image and create a CycloneDX JSON SBOM.
 Options:
   --image NAME         Image tag to build and scan.
   --sbom-dir DIR      Directory for generated SBOM files.
-  --runtime NAME      Container runtime: auto, docker, or podman.
+  --runtime NAME      Container runtime: podman.
   --syft-image NAME   Container image used when local syft is not installed.
   --skip-build        Scan the existing image without rebuilding it.
   -h, --help          Show this help.
@@ -61,27 +61,17 @@ while [[ $# -gt 0 ]]; do
 done
 
 detect_runtime() {
-  if [[ "${CONTAINER_RUNTIME}" != "auto" ]]; then
-    command -v "${CONTAINER_RUNTIME}" >/dev/null 2>&1 || {
-      echo "Container runtime not found: ${CONTAINER_RUNTIME}" >&2
-      exit 1
-    }
-    printf '%s\n' "${CONTAINER_RUNTIME}"
-    return
+  if [[ "${CONTAINER_RUNTIME}" != "podman" ]]; then
+    echo "Unsupported container runtime: ${CONTAINER_RUNTIME}. This repository uses Podman only." >&2
+    exit 1
   fi
 
-  if command -v podman >/dev/null 2>&1; then
-    printf '%s\n' "podman"
-    return
-  fi
-
-  if command -v docker >/dev/null 2>&1; then
-    printf '%s\n' "docker"
-    return
-  fi
-
-  echo "Neither podman nor docker was found in PATH." >&2
-  exit 1
+  command -v podman >/dev/null 2>&1 || {
+    echo "podman was not found in PATH." >&2
+    exit 1
+  }
+  printf '%s\n' "podman"
+  return
 }
 
 runtime="$(detect_runtime)"

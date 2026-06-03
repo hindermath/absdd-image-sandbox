@@ -1,6 +1,6 @@
 # Sandbox-Isolationsnachweis
 
-Stand: 2026-05-27
+Stand: 2026-06-03
 
 Dieses Dokument konsolidiert die technischen Isolationsmechanismen der
 `ade-dev-sandbox`. Es beschreibt vorhandene Konfigurationen und aendert keine
@@ -11,23 +11,23 @@ Sandbox-Einstellung.
 ### Sandbox-Typ
 
 Die `ade-dev-sandbox` ist eine Container-Sandbox gemaess der RL-SE-001-
-Typologie fuer agentische KI in Sandbox-Umgebungen. Sie wird ueber Docker
-Compose oder Podman Compose gebaut und gestartet.
+Typologie fuer agentische KI in Sandbox-Umgebungen. Sie wird ueber Podman
+Compose gebaut und gestartet.
 
 ### Isolationsmechanismen und Evidenz
 
 | Mechanismus | Evidenzquelle | Bewertung |
 |---|---|---|
 | Nicht-privilegierte Laufzeit | `Dockerfile`: `useradd -m -s /bin/bash adedev`, `USER adedev`; `compose.yml`: Service `ade` startet das gebaute Image ohne `privileged: true` | Der Container laeuft nach dem Image-Build als Benutzer `adedev`, nicht als `root`. Root-Rechte werden nur waehrend des Image-Builds fuer Paketinstallation und Systempfade genutzt. |
-| Dateisystem-Grenzen | `compose.yml`: Service `ade`, Abschnitt `volumes`; `docs/security/sandbox-freigabe.md`: "Genehmigte Mount-Liste" | Host-Dateien sind nur ueber explizit konfigurierte Bind-Mounts sichtbar: `/ade-dev-sandbox`, `/workspace`, `/rider-projects`, `/java-projects`, `/go-projects`, `/rust-projects`, `/python-projects` und `/audit`. `/ade-dev-sandbox` ist der Checkout dieses Setup-Repositories fuer kontrollierte Wartungsaufgaben aus dem Container. Die .NET-Konfiguration `./dotnet/ContainerBuild.props` ist mit `:ro` read-only gemountet. |
+| Dateisystem-Grenzen | `compose.yml`: Service `ade`, Abschnitt `volumes`; optional `compose.home-baseline.yml`; `docs/security/sandbox-freigabe.md`: "Genehmigte Mount-Liste" | Host-Dateien sind nur ueber explizit konfigurierte Bind-Mounts sichtbar: `/ade-dev-sandbox`, `/workspace`, `/rider-projects`, `/java-projects`, `/go-projects`, `/rust-projects`, `/python-projects`, `/audit` und optional `/home/adedev/home-baseline-tmp`. `/ade-dev-sandbox` ist der Checkout dieses Setup-Repositories fuer kontrollierte Wartungsaufgaben aus dem Container. Der optionale Home-Baseline-Mount ist ein nutzereigener Template-Checkout, kein Bestandteil des Images. Die .NET-Konfiguration `./dotnet/ContainerBuild.props` ist mit `:ro` read-only gemountet. |
 | Trennung von Build- und Agentendaten | `compose.yml`: benannte Volumes `dotnet_build`, `opencode_data`, `codex_data`; Mounts nach `/dotnet-build`, `/home/adedev/.local/share/opencode`, `/home/adedev/.codex` | Persistente Tool- und Build-Daten werden in benannten Volumes gehalten und nicht als Repository-Dateien committet. |
-| Codex-Schreibgrenzen | `codex/config.toml`: `sandbox_mode = "workspace-write"`, `[sandbox_workspace_write].writable_roots`; `codex/requirements.toml`: `allowed_sandbox_modes`, `permissions.filesystem.deny_read` | Codex darf nur in definierten Arbeitsverzeichnissen schreiben, einschliesslich `/ade-dev-sandbox` fuer dieses Setup-Repository. Sensitive Pfade wie `.ssh`, `.gnupg`, `.docker`, `.codex`, OpenCode-Daten und Secret-Dateien sind als Leseverbote dokumentiert. |
-| OpenCode-Schreib- und Leseregeln | `opencode.jsonc`: `permission.edit`, `permission.bash`, `permission.webfetch`, `permission.read` | OpenCode fragt fuer Shell-Kommandos nach Freigabe, verbietet Webfetch und blockiert das Lesen typischer Secret- und Tool-State-Pfade. |
+| Codex-Schreibgrenzen | `codex/config.toml`: `sandbox_mode = "workspace-write"`, `[sandbox_workspace_write].writable_roots`; `codex/requirements.toml`: `allowed_sandbox_modes`, `permissions.filesystem.deny_read` | Codex darf nur in definierten Arbeitsverzeichnissen schreiben, einschliesslich `/ade-dev-sandbox` fuer dieses Setup-Repository und `/home/adedev/home-baseline-tmp` fuer den optionalen Home-Baseline-Checkout. Sensitive Pfade wie `.ssh`, `.gnupg`, `.codex`, OpenCode-Daten und Secret-Dateien sind als Leseverbote dokumentiert. |
+| OpenCode-Schreib- und Leseregeln | `opencode.jsonc`: `permission.edit`, `permission.bash`, `permission.webfetch`, `permission.read` | OpenCode fragt fuer Shell-Kommandos und Webfetch nach Freigabe und blockiert das Lesen typischer Secret- und Tool-State-Pfade. |
 | Netzwerkentscheidung | `docs/security/network-decision.md`: freier Egress bewusst dokumentiert; `codex/config.toml`: `[sandbox_workspace_write].network_access = false` | Die Containerumgebung nutzt weiterhin den normalen Compose-Netzwerkpfad mit freiem Egress, weil die Lernumgebung externe Quellen braucht. Innerhalb von Codex ist Netzwerkzugriff im Workspace-Write-Sandboxmodus deaktiviert. Die Egress-Entscheidung ist eine dokumentierte Risikoentscheidung, keine technische Netzwerkblockade. |
-| Geheimnis-Trennung | `.gitignore`: `opencode.env`; `compose.yml`: `env_file: opencode.env`; `codex/config.toml`: `shell_environment_policy.exclude`; `codex/requirements.toml` und `opencode.jsonc`: Leseverbote fuer Secret-Pfade | Secrets werden nicht im Repository gespeichert. Der GWDG-API-Key wird zur Laufzeit ueber `opencode.env` eingebracht und darf nicht in Logs, Inventare oder Dokumentation uebernommen werden. |
+| Geheimnis-Trennung | `.gitignore`: `opencode.env`; `compose.yml`: `env_file: opencode.env`; `codex/config.toml`: `shell_environment_policy.exclude`; `codex/requirements.toml` und `opencode.jsonc`: Leseverbote fuer Secret-Pfade | Secrets werden nicht im Repository gespeichert. Lokale Provider-Schluessel duerfen nur bei Bedarf ueber `opencode.env` eingebracht werden und duerfen nicht in Logs, Inventare oder Dokumentation uebernommen werden. |
 | Audit-Metadaten | `scripts/audit-export.sh`; `scripts/compose-down-with-audit.sh`; `scripts/compose-down-with-audit.ps1`; `compose.yml`: Mount `./audit-logs:/audit`, `ADE_AUDIT_ON_STOP: "true"` | Der dokumentierte Standardweg exportiert Metadaten vor `compose down`. Der Stop-Hook im Image ist eine zusaetzliche Best-Effort-Absicherung bei graceful shutdown. |
-| Supply-Chain-Kontrolle | `Dockerfile`: gepinntes Basisimage per `sha256`-Digest, signierte NodeSource-Apt-Quelle, uv-Release-Artefakt mit SHA256-Pruefung, gepinnte Tool-ARGs fuer OpenCode, Codex, Spec Kit, Go und Rust; `docs/security/ai-tools-inventory.md`; `docs/security/supply-chain-todo.md`; `scripts/build-and-sbom.*` | Das Basisimage ist reproduzierbar per Digest referenziert. Node.js wird ueber eine signierte Apt-Quelle statt ueber ein ausgefuehrtes Setup-Skript installiert. uv und uvx werden aus einem festen Release-Artefakt nach SHA256-Pruefung installiert. Fuer das finale Image kann eine CycloneDX-SBOM erzeugt werden. P3-1 bleibt fuer Rust offen, bis auch dieser Installerpfad durch ein verifizierteres Verfahren ersetzt ist. |
-| Runtime-Haertung | `compose.yml`: kein `privileged: true`, `security_opt: no-new-privileges:true`, `cap_drop: ALL`; P3-4 im `COMPLIANCE-PLAN_RL-SE-001.md`; Testevidenz vom 2026-05-27: `NoNewPrivs: 1`, `CapEff: 0000000000000000` | Das aktuelle Schutzniveau kombiniert Docker-/Podman-Standardisolation, non-root-Ausfuehrung, Agentenregeln und Compose-Haertung. Prozesse koennen keine neuen Privilegien ueber setuid/setgid oder File-Capabilities erlangen. Alle Linux-Capabilities werden zur Laufzeit entzogen; die validierten Toolchains benoetigen keine `cap_add`-Ausnahme. |
+| Supply-Chain-Kontrolle | `Dockerfile`: MCR-.NET-SDK-Basisimage per `sha256`-Digest, signierte NodeSource-Apt-Quelle, uv-Release-Artefakt mit SHA256-Pruefung, gepinnte Tool-ARGs fuer OpenCode, Codex, Spec Kit, Go und Rust; `docs/security/ai-tools-inventory.md`; `docs/security/supply-chain-todo.md`; `scripts/build-and-sbom.*` | Das Basisimage ist reproduzierbar per Digest referenziert. Node.js wird ueber eine signierte Apt-Quelle statt ueber ein ausgefuehrtes Setup-Skript installiert. uv und uvx werden aus einem festen Release-Artefakt nach SHA256-Pruefung installiert. Fuer das finale Image kann eine CycloneDX-SBOM erzeugt werden. P3-1 bleibt fuer Rust offen, bis auch dieser Installerpfad durch ein verifizierteres Verfahren ersetzt ist. |
+| Runtime-Haertung | `compose.yml`: kein `privileged: true`, `security_opt: no-new-privileges:true`, `cap_drop: ALL`; P3-4 im `COMPLIANCE-PLAN_RL-SE-001.md`; Testevidenz vom 2026-05-27: `NoNewPrivs: 1`, `CapEff: 0000000000000000` | Das aktuelle Schutzniveau kombiniert Podman-Standardisolation, non-root-Ausfuehrung, Agentenregeln und Compose-Haertung. Prozesse koennen keine neuen Privilegien ueber setuid/setgid oder File-Capabilities erlangen. Alle Linux-Capabilities werden zur Laufzeit entzogen; die validierten Toolchains benoetigen keine `cap_add`-Ausnahme. |
 
 ### Schutzniveau-Begruendung
 
@@ -61,6 +61,7 @@ Schutzniveau-Bewertung eintragen)`
 
 - `Dockerfile`
 - `compose.yml`
+- `compose.home-baseline.yml`
 - `codex/config.toml`
 - `codex/requirements.toml`
 - `opencode.jsonc`
@@ -75,22 +76,22 @@ Schutzniveau-Bewertung eintragen)`
 
 The `ade-dev-sandbox` is a container sandbox according to the RL-SE-001
 typology for agentic AI in sandbox environments. It is built and started with
-Docker Compose or Podman Compose.
+Podman Compose.
 
 ### Isolation Mechanisms and Evidence
 
 | Mechanism | Evidence source | Assessment |
 |---|---|---|
 | Non-privileged runtime | `Dockerfile`: `useradd -m -s /bin/bash adedev`, `USER adedev`; `compose.yml`: service `ade` starts the built image without `privileged: true` | After the image build, the container runs as user `adedev`, not as `root`. Root privileges are used only during image build for package installation and system paths. |
-| Filesystem boundaries | `compose.yml`: service `ade`, `volumes` section; `docs/security/sandbox-freigabe.md`: approved mount list | Host files are visible only through explicitly configured bind mounts: `/ade-dev-sandbox`, `/workspace`, `/rider-projects`, `/java-projects`, `/go-projects`, `/rust-projects`, `/python-projects`, and `/audit`. `/ade-dev-sandbox` is the checkout of this setup repository for controlled maintenance tasks from inside the container. The .NET configuration `./dotnet/ContainerBuild.props` is mounted read-only with `:ro`. |
+| Filesystem boundaries | `compose.yml`: service `ade`, `volumes` section; optional `compose.home-baseline.yml`; `docs/security/sandbox-freigabe.md`: approved mount list | Host files are visible only through explicitly configured bind mounts: `/ade-dev-sandbox`, `/workspace`, `/rider-projects`, `/java-projects`, `/go-projects`, `/rust-projects`, `/python-projects`, `/audit`, and optionally `/home/adedev/home-baseline-tmp`. `/ade-dev-sandbox` is the checkout of this setup repository for controlled maintenance tasks from inside the container. The optional home-baseline mount is a user-owned template checkout, not part of the image. The .NET configuration `./dotnet/ContainerBuild.props` is mounted read-only with `:ro`. |
 | Separation of build and agent data | `compose.yml`: named volumes `dotnet_build`, `opencode_data`, `codex_data`; mounts to `/dotnet-build`, `/home/adedev/.local/share/opencode`, `/home/adedev/.codex` | Persistent tool and build data is kept in named volumes and is not committed as repository content. |
-| Codex write boundaries | `codex/config.toml`: `sandbox_mode = "workspace-write"`, `[sandbox_workspace_write].writable_roots`; `codex/requirements.toml`: `allowed_sandbox_modes`, `permissions.filesystem.deny_read` | Codex may write only to defined work directories, including `/ade-dev-sandbox` for this setup repository. Sensitive paths such as `.ssh`, `.gnupg`, `.docker`, `.codex`, OpenCode data, and secret files are documented as read-denied paths. |
-| OpenCode write and read rules | `opencode.jsonc`: `permission.edit`, `permission.bash`, `permission.webfetch`, `permission.read` | OpenCode asks before shell commands, denies webfetch, and blocks reads from typical secret and tool-state paths. |
+| Codex write boundaries | `codex/config.toml`: `sandbox_mode = "workspace-write"`, `[sandbox_workspace_write].writable_roots`; `codex/requirements.toml`: `allowed_sandbox_modes`, `permissions.filesystem.deny_read` | Codex may write only to defined work directories, including `/ade-dev-sandbox` for this setup repository and `/home/adedev/home-baseline-tmp` for the optional home-baseline checkout. Sensitive paths such as `.ssh`, `.gnupg`, `.codex`, OpenCode data, and secret files are documented as read-denied paths. |
+| OpenCode write and read rules | `opencode.jsonc`: `permission.edit`, `permission.bash`, `permission.webfetch`, `permission.read` | OpenCode asks before shell commands and webfetch and blocks reads from typical secret and tool-state paths. |
 | Network decision | `docs/security/network-decision.md`: free egress intentionally documented; `codex/config.toml`: `[sandbox_workspace_write].network_access = false` | The container environment still uses the normal Compose network path with free egress because the learning environment needs external sources. Within Codex, network access is disabled in workspace-write sandbox mode. The egress decision is a documented risk decision, not a technical network block. |
-| Secret separation | `.gitignore`: `opencode.env`; `compose.yml`: `env_file: opencode.env`; `codex/config.toml`: `shell_environment_policy.exclude`; `codex/requirements.toml` and `opencode.jsonc`: read denies for secret paths | Secrets are not stored in the repository. The GWDG API key is provided at runtime through `opencode.env` and must not be copied into logs, inventories, or documentation. |
+| Secret separation | `.gitignore`: `opencode.env`; `compose.yml`: `env_file: opencode.env`; `codex/config.toml`: `shell_environment_policy.exclude`; `codex/requirements.toml` and `opencode.jsonc`: read denies for secret paths | Secrets are not stored in the repository. Local provider keys may be provided through `opencode.env` when needed and must not be copied into logs, inventories, or documentation. |
 | Audit metadata | `scripts/audit-export.sh`; `scripts/compose-down-with-audit.sh`; `scripts/compose-down-with-audit.ps1`; `compose.yml`: mount `./audit-logs:/audit`, `ADE_AUDIT_ON_STOP: "true"` | The documented standard path exports metadata before `compose down`. The image stop hook is an additional best-effort safeguard on graceful shutdown. |
-| Supply-chain control | `Dockerfile`: base image pinned by `sha256` digest, signed NodeSource Apt source, uv release artifact with SHA256 verification, pinned tool ARGs for OpenCode, Codex, Spec Kit, Go, and Rust; `docs/security/ai-tools-inventory.md`; `docs/security/supply-chain-todo.md`; `scripts/build-and-sbom.*` | The base image is referenced reproducibly by digest. Node.js is installed through a signed Apt source instead of an executed setup script. uv and uvx are installed from a fixed release artifact after SHA256 verification. A CycloneDX SBOM can be generated for the final image. P3-1 remains open for Rust until that installer path is replaced by a more verified method as well. |
-| Runtime hardening | `compose.yml`: no `privileged: true`, `security_opt: no-new-privileges:true`, `cap_drop: ALL`; P3-4 in `COMPLIANCE-PLAN_RL-SE-001.md`; test evidence from 2026-05-27: `NoNewPrivs: 1`, `CapEff: 0000000000000000` | The current protection level combines Docker/Podman default isolation, non-root execution, agent rules, and Compose hardening. Processes cannot gain new privileges through setuid/setgid binaries or file capabilities. All Linux capabilities are dropped at runtime; the validated toolchains need no `cap_add` exception. |
+| Supply-chain control | `Dockerfile`: MCR .NET SDK base image pinned by `sha256` digest, signed NodeSource Apt source, uv release artifact with SHA256 verification, pinned tool ARGs for OpenCode, Codex, Spec Kit, Go, and Rust; `docs/security/ai-tools-inventory.md`; `docs/security/supply-chain-todo.md`; `scripts/build-and-sbom.*` | The base image is referenced reproducibly by digest. Node.js is installed through a signed Apt source instead of an executed setup script. uv and uvx are installed from a fixed release artifact after SHA256 verification. A CycloneDX SBOM can be generated for the final image. P3-1 remains open for Rust until that installer path is replaced by a more verified method as well. |
+| Runtime hardening | `compose.yml`: no `privileged: true`, `security_opt: no-new-privileges:true`, `cap_drop: ALL`; P3-4 in `COMPLIANCE-PLAN_RL-SE-001.md`; test evidence from 2026-05-27: `NoNewPrivs: 1`, `CapEff: 0000000000000000` | The current protection level combines Podman default isolation, non-root execution, agent rules, and Compose hardening. Processes cannot gain new privileges through setuid/setgid binaries or file capabilities. All Linux capabilities are dropped at runtime; the validated toolchains need no `cap_add` exception. |
 
 ### Protection-Level Rationale
 
@@ -122,6 +123,7 @@ protection-level assessment)`
 
 - `Dockerfile`
 - `compose.yml`
+- `compose.home-baseline.yml`
 - `codex/config.toml`
 - `codex/requirements.toml`
 - `opencode.jsonc`

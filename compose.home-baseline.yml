@@ -1,0 +1,6 @@
+services:
+  ade:
+    volumes:
+      - type: bind
+        source: ${HOME_BASELINE_DIR:?Set HOME_BASELINE_DIR to your local home-baseline checkout}
+        target: /home/adedev/home-baseline-tmp

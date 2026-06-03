@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidateSet("auto", "podman", "docker", "podman-compose")]
+    [ValidateSet("auto", "podman", "podman-compose")]
     [string]$Engine = "auto",
 
     [switch]$Volumes,
@@ -26,10 +26,6 @@ switch ($Engine) {
         $command = "podman"
         $baseArgs = @("compose")
     }
-    "docker" {
-        $command = "docker"
-        $baseArgs = @("compose")
-    }
     "podman-compose" {
         $command = "podman-compose"
         $baseArgs = @()
@@ -38,14 +34,11 @@ switch ($Engine) {
         if (Test-CommandAvailable "podman") {
             $command = "podman"
             $baseArgs = @("compose")
-        } elseif (Test-CommandAvailable "docker") {
-            $command = "docker"
-            $baseArgs = @("compose")
         } elseif (Test-CommandAvailable "podman-compose") {
             $command = "podman-compose"
             $baseArgs = @()
         } else {
-            throw "Neither podman, docker, nor podman-compose was found in PATH."
+            throw "Neither podman nor podman-compose was found in PATH."
         }
     }
 }

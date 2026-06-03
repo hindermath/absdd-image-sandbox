@@ -6,7 +6,7 @@ Stand: 2026-05-16
 
 P2-1 wurde mit einem Pilotprojekt unter `/rider-projects/specify-pilot/`
 validiert. Das Projekt liegt im gemounteten Host-Pfad fuer Rider-Projekte und
-ist kein Bestandteil dieses Docker-Setup-Repositories.
+ist kein Bestandteil dieses Podman-Setup-Repositories.
 
 Durchgefuehrter Ablauf:
 
@@ -53,7 +53,7 @@ Verzeichnis-Metadatenoperationen auf Bind-Mounts unterbleiben.
 
 P2-1 was validated with a pilot project under `/rider-projects/specify-pilot/`.
 The project is located in the mounted host path for Rider projects and is not
-part of this Docker setup repository.
+part of this Podman setup repository.
 
 Executed flow:
 

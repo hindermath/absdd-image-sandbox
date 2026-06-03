@@ -25,16 +25,6 @@
         "# renovate: datasource=(?<datasource>[a-zA-Z0-9._-]+) depName=(?<depName>[^\\s]+)(?: packageName=(?<packageName>[^\\s]+))?(?: versioning=(?<versioning>[^\\s]+))? argName=(?<argName>[A-Z][A-Z0-9_]*)\\s+ARG [A-Z][A-Z0-9_]*=(?<currentValue>[^\\s]+)"
       ],
       "depTypeTemplate": "dockerfile-arg"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": [
-        "/^Dockerfile$/"
-      ],
-      "matchStrings": [
-          "# renovate-dotnet: datasource=(?<datasource>dotnet-version) depName=(?<depName>dotnet-sdk) versioning=(?<versioning>[^\\s]+) extractVersion=(?<extractVersion>[^\\s]+) argName=DOTNET_SDK_PACKAGE\\s+ARG DOTNET_SDK_PACKAGE=dotnet-sdk-(?<currentValue>[^\\s]+)"
-      ],
-      "depTypeTemplate": "dockerfile-arg"
     }
   ],
   "packageRules": [

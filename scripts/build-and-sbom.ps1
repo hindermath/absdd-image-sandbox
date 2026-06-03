@@ -2,8 +2,8 @@
 param(
     [string]$ImageName = "",
     [string]$SbomDir = "",
-    [ValidateSet("auto", "docker", "podman")]
-    [string]$Runtime = "auto",
+    [ValidateSet("podman")]
+    [string]$Runtime = "podman",
     [string]$SyftImage = "",
     [switch]$SkipBuild
 )
@@ -35,26 +35,15 @@ if ([string]::IsNullOrWhiteSpace($SyftImage)) {
     }
 }
 
-if ($Runtime -eq "auto" -and $env:CONTAINER_RUNTIME) {
-    $Runtime = $env:CONTAINER_RUNTIME
-}
-
 function Resolve-ContainerRuntime {
     param([string]$Name)
 
-    if ($Name -ne "auto") {
-        $cmd = Get-Command $Name -ErrorAction Stop
-        return $cmd.Source
+    if ($Name -ne "podman") {
+        throw "Unsupported container runtime: $Name. This repository uses Podman only."
     }
 
-    foreach ($candidate in @("podman", "docker")) {
-        $cmd = Get-Command $candidate -ErrorAction SilentlyContinue
-        if ($cmd) {
-            return $cmd.Source
-        }
-    }
-
-    throw "Neither podman nor docker was found in PATH."
+    $cmd = Get-Command "podman" -ErrorAction Stop
+    return $cmd.Source
 }
 
 function Invoke-Native {

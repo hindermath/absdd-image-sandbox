@@ -6,8 +6,8 @@
 #
 # DE: Wichtig: Nicht nach /home/adedev/.codex/config.toml kopieren.
 # EN: Important: Do not copy this to /home/adedev/.codex/config.toml.
-# DE: /home/adedev/.codex wird durch das Docker-/Podman-Volume codex_data ueberlagert.
-# EN: /home/adedev/.codex is overlaid by the Docker/Podman volume codex_data.
+# DE: /home/adedev/.codex wird durch das Podman-Volume codex_data ueberlagert.
+# EN: /home/adedev/.codex is overlaid by the Podman volume codex_data.
 
 # DE: "untrusted" erlaubt nur Codex' vertrauenswuerdige Basisbefehle ohne Nachfrage.
 # EN: "untrusted" allows only Codex's trusted basic commands without approval.
@@ -81,6 +81,7 @@ exclude_tmpdir_env_var = true
 # EN: These project paths are the intended work areas inside the container.
 writable_roots = [
   "/ade-dev-sandbox",
+  "/home/adedev/home-baseline-tmp",
   "/workspace",
   "/rider-projects",
   "/java-projects",
@@ -96,8 +97,8 @@ inherit = "core"
 
 # DE: Typische Secret-Variablen werden aus Shell-Kommandos entfernt.
 # EN: Typical secret variables are removed from shell commands.
-# DE: GWDG_API_KEY bleibt damit nicht automatisch in jedem Subprozess sichtbar.
-# EN: This keeps GWDG_API_KEY from being automatically visible in every subprocess.
+# DE: Lokale Provider-Schluessel bleiben damit nicht automatisch in jedem Subprozess sichtbar.
+# EN: This keeps local provider keys from being automatically visible in every subprocess.
 exclude = [
   "*KEY*",
   "*SECRET*",

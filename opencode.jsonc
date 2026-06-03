@@ -3,20 +3,6 @@
   // EN: Schema for editor help, autocomplete, and validation.
   "$schema": "https://opencode.ai/config.json",
 
-  // DE: Standardmodell, wenn kein spezieller Agent gewaehlt wird.
-  // EN: Default model when no special agent is selected.
-  // DE: Qwen Coder ist auf Programmieraufgaben ausgerichtet.
-  // EN: Qwen Coder is focused on programming tasks.
-  "model": "chat-ai/qwen3-coder-30b-a3b-instruct",
-
-  // DE: Kleineres Modell fuer Nebenaufgaben wie Sitzungstitel.
-  // EN: Smaller model for side tasks such as session titles.
-  "small_model": "chat-ai/glm-4.7",
-
-  // DE: Standard-Agent fuer normale Arbeit in OpenCode.
-  // EN: Default agent for normal work in OpenCode.
-  "default_agent": "coding",
-
   // DE: OpenCode darf keine Sitzungen teilen.
   // EN: OpenCode must not share sessions.
   // DE: Das verhindert versehentliche oeffentliche Links zu Chat-Verlaeufen.
@@ -29,11 +15,13 @@
   // EN: OpenCode must not update itself during startup.
   "autoupdate": false,
 
-  // DE: Nur der GWDG/AcademicCloud-Provider wird in diesem Setup genutzt.
-  // EN: Only the GWDG/AcademicCloud provider is used in this setup.
-  // DE: Andere automatisch erkannte Provider bleiben damit deaktiviert.
-  // EN: Other automatically detected providers stay disabled.
-  "enabled_providers": ["chat-ai"],
+  // DE: Dieses Image installiert OpenCode, konfiguriert aber keinen Modellanbieter.
+  // EN: This image installs OpenCode but does not configure a model provider.
+  // DE: Nutzer koennen bei Bedarf lokal einen Provider in ihrer eigenen
+  // DE: OpenCode-Konfiguration ergaenzen.
+  // EN: Users can add a provider locally in their own OpenCode configuration
+  // EN: when needed.
+  "enabled_providers": [],
 
   // DE: Globale Sicherheitsregeln fuer OpenCode-Werkzeuge.
   // EN: Global security rules for OpenCode tools.
@@ -68,7 +56,6 @@
       "**/codex.env": "deny",
       "$HOME/.ssh/**": "deny",
       "$HOME/.gnupg/**": "deny",
-      "$HOME/.docker/**": "deny",
       "$HOME/.config/gh/**": "deny",
       "$HOME/.config/glab-cli/**": "deny",
       "$HOME/.config/containers/**": "deny",
@@ -103,7 +90,6 @@
       "**/codex.env": "deny",
       "$HOME/.ssh/**": "deny",
       "$HOME/.gnupg/**": "deny",
-      "$HOME/.docker/**": "deny",
       "$HOME/.config/gh/**": "deny",
       "$HOME/.config/glab-cli/**": "deny",
       "$HOME/.config/containers/**": "deny",
@@ -139,10 +125,8 @@
       "git remote *": "allow",
       "git commit *": "ask",
       "git push *": "ask",
-      "docker *": "ask",
       "podman *": "ask",
       "podman-compose *": "ask",
-      "docker compose *": "ask",
       "dotnet *": "ask",
       "mvn *": "ask",
       "npm *": "ask",
@@ -172,6 +156,7 @@
     "external_directory": {
       "*": "ask",
       "/ade-dev-sandbox/**": "allow",
+      "/home/adedev/home-baseline-tmp/**": "allow",
       "/tmp/opencode/*": "allow",
       "/home/adedev/.local/share/opencode/tool-output/*": "allow"
     },
@@ -204,275 +189,5 @@
     // EN: Repository clones and repository overviews are blocked on purpose.
     "repo_clone": "deny",
     "repo_overview": "deny"
-  },
-
-  // DE: Provider-Konfiguration fuer die GWDG Chat-AI-Schnittstelle.
-  // EN: Provider configuration for the GWDG Chat AI interface.
-  "provider": {
-    "chat-ai": {
-      // DE: OpenAI-kompatibler Adapter aus dem AI SDK.
-      // EN: OpenAI-compatible adapter from the AI SDK.
-      "npm": "@ai-sdk/openai-compatible",
-
-      // DE: Anzeigename in OpenCode.
-      // EN: Display name in OpenCode.
-      "name": "chat-ai",
-
-      "options": {
-        // DE: API-Endpunkt der AcademicCloud/GWDG Chat AI.
-        // EN: API endpoint of AcademicCloud/GWDG Chat AI.
-        "baseURL": "https://chat-ai.academiccloud.de/v1",
-
-        // DE: Der echte API-Key steht nicht in Git.
-        // EN: The real API key is not stored in Git.
-        // DE: Er wird aus opencode.env als Umgebungsvariable gelesen.
-        // EN: It is read from opencode.env as an environment variable.
-        "apiKey": "{env:GWDG_API_KEY}",
-
-        // DE: Lange Coding-Aufgaben duerfen laenger laufen.
-        // EN: Long coding tasks may run longer.
-        "timeout": 600000,
-
-        // DE: Streaming darf bei langsamen Antworten nicht zu frueh abbrechen.
-        // EN: Streaming should not stop too early on slow responses.
-        "chunkTimeout": 120000
-      },
-
-      // DE: Modell-IDs, die dieser Provider anbietet.
-      // EN: Model IDs offered by this provider.
-      // DE: Die Keys werden als Teil von "chat-ai/<key>" verwendet.
-      // EN: The keys are used as part of "chat-ai/<key>".
-      // DE: Vorbereitung auf Chat-AI-Wartung am 2026-06-04:
-      // DE: Nicht mehr neu konfigurieren: gemma-3-27b-it,
-      // DE: qwen3.5-27b, qwen3.5-35b-a3b, llama-3.3-70b-instruct
-      // DE: sowie die externen GPT-5/5.1/5.2/5.3-Chat-Varianten.
-      // DE: Austauschmodelle aus /v1/models am 2026-05-28:
-      // DE: gemma-4-31b-it und qwen3.6-35b-a3b.
-      // EN: Preparation for Chat AI maintenance on 2026-06-04:
-      // EN: Do not add new config for gemma-3-27b-it,
-      // EN: qwen3.5-27b, qwen3.5-35b-a3b, llama-3.3-70b-instruct,
-      // EN: or the external GPT-5/5.1/5.2/5.3 chat variants.
-      // EN: Replacement models from /v1/models on 2026-05-28:
-      // EN: gemma-4-31b-it and qwen3.6-35b-a3b.
-      "models": {
-        // DE: Standard fuer fokussierte Programmierung und genaue Aenderungen.
-        // EN: Default for focused programming and precise edits.
-        "qwen3-coder-30b-a3b-instruct": {
-          "name": "Qwen 3 Coder 30B A3B Instruct",
-          "temperature": true,
-          "tool_call": true,
-          "options": {
-            // DE: Qwen bleibt mit diesen Werten fokussiert und wiederholt weniger.
-            // EN: These values keep Qwen focused and reduce repetition.
-            "top_k": 20,
-            "repetition_penalty": 1.05
-          }
-        },
-
-        // DE: Solides allgemeines Modell fuer Analyse und Erklaerungen.
-        // EN: Solid general model for analysis and explanations.
-        "glm-4.7": {
-          "name": "GLM-4.7",
-          "temperature": true,
-          "tool_call": true
-        },
-
-        // DE: Stark fuer Coding, Refactoring und laengere Code-Kontexte.
-        // EN: Strong for coding, refactoring, and longer code contexts.
-        "devstral-2-123b-instruct-2512": {
-          "name": "devstral-2-123b-instruct-2512",
-          "temperature": true,
-          "tool_call": true
-        },
-
-        // DE: Alternative zu Qwen Coder fuer allgemeine Entwicklungsaufgaben.
-        // EN: Alternative to Qwen Coder for general development tasks.
-        "qwen3-30b-a3b-instruct-2507": {
-          "name": "qwen3-30b-a3b-instruct-2507",
-          "temperature": true,
-          "tool_call": true,
-          "options": {
-            // DE: Diese Werte halten das Modell bei Code-Aufgaben stabil.
-            // EN: These values keep the model stable for coding tasks.
-            "top_k": 20,
-            "repetition_penalty": 1.05
-          }
-        },
-
-        // DE: Austauschmodell fuer Qwen 3.5 27B und Qwen 3.5 35B A3B.
-        // EN: Replacement model for Qwen 3.5 27B and Qwen 3.5 35B A3B.
-        "qwen3.6-35b-a3b": {
-          "name": "Qwen 3.6 35B A3B",
-          "temperature": true,
-          "tool_call": true,
-          "options": {
-            // DE: Gleiche konservative Coding-Parameter wie bei Qwen 3.
-            // EN: Same conservative coding parameters as for Qwen 3.
-            "top_k": 20,
-            "repetition_penalty": 1.05
-          }
-        },
-
-        // DE: Austauschmodell fuer Gemma 3 27B Instruct.
-        // EN: Replacement model for Gemma 3 27B Instruct.
-        "gemma-4-31b-it": {
-          "name": "Gemma 4 31B Instruct",
-          "temperature": true,
-          "tool_call": false
-        },
-
-        // DE: Alternative fuer sehr komplexe Programmier- und Architekturfragen.
-        // EN: Alternative for very complex programming and architecture questions.
-        "OpenAI gpt-5.4": {
-          "name": "openai-gpt5.4",
-          "temperature": true,
-          "tool_call": true
-        },
-
-        // DE: Nachfolger im verfuegbaren GPT-5-Zweig.
-        // EN: Successor in the available GPT-5 line.
-        "OpenAI gpt-5.5": {
-          "name": "openai-gpt5.5",
-          "temperature": true,
-          "tool_call": true
-        },
-
-        // DE: Alternative fuer tiefe Analyse, Architektur und Refactoring.
-        // EN: Alternative for deep analysis, architecture, and refactoring.
-        "claude-opus-4-6": {
-          "name": "claude-opus-4-6",
-          "temperature": true,
-          "tool_call": true
-        }
-      }
-    }
-  },
-
-  // DE: Agenten sind vordefinierte Arbeitsmodi.
-  // EN: Agents are predefined work modes.
-  // DE: temperature steuert, wie frei das Modell formuliert.
-  // EN: temperature controls how freely the model writes.
-  // DE: top_p steuert die Auswahl der naechsten Tokens.
-  // EN: top_p controls the choice of the next tokens.
-  "agent": {
-    "coding": {
-      "description": "Standard-Agent fuer Coding mit Qwen 3 Coder. Er ist fuer Implementierung, Debugging und Refactoring gedacht. / Default coding agent using Qwen 3 Coder. It is meant for implementation, debugging, and refactoring.",
-      "model": "chat-ai/qwen3-coder-30b-a3b-instruct",
-      "temperature": 0.2,
-      "top_p": 0.9
-    },
-
-    "coding-qwen": {
-      "description": "Alias fuer den Standard-Coding-Agenten mit Qwen 3 Coder. / Alias for the default coding agent using Qwen 3 Coder.",
-      "model": "chat-ai/qwen3-coder-30b-a3b-instruct",
-      "temperature": 0.2,
-      "top_p": 0.9
-    },
-
-    "coding-glm": {
-      "description": "Coding-Agent mit GLM-4.7 fuer Analyse, Erklaerungen und allgemeine Entwicklung. / Coding agent using GLM-4.7 for analysis, explanations, and general development.",
-      "model": "chat-ai/glm-4.7",
-      "temperature": 0.2,
-      "top_p": 0.9
-    },
-
-    "coding-devstral": {
-      "description": "Coding-Agent mit Devstral fuer Implementierung, Debugging und Refactoring. / Coding agent using Devstral for implementation, debugging, and refactoring.",
-      "model": "chat-ai/devstral-2-123b-instruct-2512",
-      "temperature": 0.2,
-      "top_p": 0.9
-    },
-
-    "coding-qwen-general": {
-      "description": "Coding-Agent mit Qwen 3 30B fuer allgemeine Entwicklungsaufgaben. / Coding agent using Qwen 3 30B for general development tasks.",
-      "model": "chat-ai/qwen3-30b-a3b-instruct-2507",
-      "temperature": 0.2,
-      "top_p": 0.9
-    },
-
-    "coding-qwen-3-6": {
-      "description": "Coding-Agent mit Qwen 3.6 35B A3B als Austauschmodell fuer abgekündigte Qwen-3.5-Modelle. / Coding agent using Qwen 3.6 35B A3B as replacement for discontinued Qwen 3.5 models.",
-      "model": "chat-ai/qwen3.6-35b-a3b",
-      "temperature": 0.2,
-      "top_p": 0.9
-    },
-
-    "analysis-gemma": {
-      "description": "Analyse-Agent mit Gemma 4 31B Instruct als Austauschmodell fuer Gemma 3 27B. Ohne Tool-Aufrufe konfiguriert. / Analysis agent using Gemma 4 31B Instruct as replacement for Gemma 3 27B. Configured without tool calls.",
-      "model": "chat-ai/gemma-4-31b-it",
-      "temperature": 0.3,
-      "top_p": 0.9
-    },
-
-    "coding-gpt-5-4": {
-      "description": "Coding-Agent mit OpenAI GPT-5.4 fuer komplexe Implementierung und Refactoring. / Coding agent using OpenAI GPT-5.4 for complex implementation and refactoring.",
-      "model": "chat-ai/OpenAI gpt-5.4",
-      "temperature": 0.2,
-      "top_p": 0.9
-    },
-
-    "coding-gpt-5-5": {
-      "description": "Coding-Agent mit OpenAI GPT-5.5 fuer komplexe Implementierung und Refactoring. / Coding agent using OpenAI GPT-5.5 for complex implementation and refactoring.",
-      "model": "chat-ai/OpenAI gpt-5.5",
-      "temperature": 0.2,
-      "top_p": 0.9
-    },
-
-    "coding-claude-opus": {
-      "description": "Coding-Agent mit Claude Opus 4.6 fuer komplexe Analyse, Architektur und Refactoring. / Coding agent using Claude Opus 4.6 for complex analysis, architecture, and refactoring.",
-      "model": "chat-ai/claude-opus-4-6",
-      "temperature": 0.2,
-      "top_p": 0.9
-    },
-
-    "brainstorm": {
-      "description": "Kreativerer Agent mit GLM-4.7 fuer Ideen, Namen und Design-Optionen. / More creative agent using GLM-4.7 for ideas, names, and design options.",
-      "model": "chat-ai/glm-4.7",
-      "temperature": 0.7,
-      "top_p": 0.9
-    },
-
-    "security-review": {
-      "description": "Read-only-Agent fuer Sicherheits- und Architekturpruefung. Er darf analysieren, aber keine Dateien aendern. / Read-only agent for security and architecture review. It may analyze, but it must not change files.",
-      "mode": "primary",
-      "model": "chat-ai/qwen3-coder-30b-a3b-instruct",
-      "temperature": 0.2,
-      "top_p": 0.9,
-      "permission": {
-        // DE: Dieser Agent ist fuer Pruefung gedacht, nicht fuer Umsetzung.
-        // EN: This agent is meant for review, not for implementation.
-        "edit": "deny",
-
-        // DE: Shell bleibt stark eingeschraenkt und fragt bei fast allem nach.
-        // EN: Shell access stays restricted and asks for almost everything.
-        "bash": {
-          "*": "ask",
-          "pwd": "allow",
-          "ls": "allow",
-          "ls *": "allow",
-          "git status": "allow",
-          "git status *": "allow",
-          "git diff": "allow",
-          "git diff *": "allow",
-          "git log": "allow",
-          "git log *": "allow",
-          "git show": "allow",
-          "git show *": "allow",
-          "rm *": "deny",
-          "sudo *": "deny",
-          "su *": "deny"
-        },
-
-        // DE: Keine Subagenten aus dem Review-Agenten heraus.
-        // EN: No subagents from inside the review agent.
-        "task": "deny",
-
-        // DE: Externe Quellen muessen bewusst freigegeben werden.
-        // EN: External sources must be approved on purpose.
-        "webfetch": "ask",
-        "websearch": "ask",
-        "codesearch": "ask"
-      }
-    }
   }
 }

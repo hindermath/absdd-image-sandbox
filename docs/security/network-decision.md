@@ -1,17 +1,16 @@
 # Netzwerkentscheidung: Compose-Egress
 
-Stand: 2026-05-15
+Stand: 2026-06-03
 
 ## Deutsch
 
 Entscheidung: Die `ade`-Lernumgebung bleibt vorerst am Compose-Default-Bridge-Netz mit freiem ausgehendem Netzwerkzugriff.
 
-Begruendung: Die Sandbox ist eine Ausbildungs- und Entwicklungsumgebung. Mehrere vorgesehene Workflows benoetigen ausgehenden Zugriff auf externe Paketregister, Modell-Endpunkte und Installationsquellen:
+Begruendung: Die Sandbox ist eine Ausbildungs- und Entwicklungsumgebung. Mehrere vorgesehene Workflows benoetigen ausgehenden Zugriff auf externe Paketregister und Installationsquellen:
 
-- `chat-ai.academiccloud.de` fuer OpenCode-Modellzugriff
 - Azure/OpenAI-Endpunkte fuer Codex CLI, sofern durch die Betriebsumgebung konfiguriert
-- GitLab CE / Container Registry der GWDG
-- Debian- und Microsoft-Paketquellen
+- MCR (`mcr.microsoft.com`) fuer das gepinnte .NET-SDK-Basisimage beim Podman-Build
+- Ubuntu-Paketquellen
 - `deb.nodesource.com`
 - `go.dev`
 - `static.rust-lang.org` fuer gepinnte `rustup-init`-Artefakte und Rust-Toolchains
@@ -31,12 +30,11 @@ Offener Punkt: Variante B mit echter Egress-Allow-List soll erneut bewertet werd
 
 Decision: The `ade` learning environment remains on the Compose default bridge network with unrestricted outbound network access for now.
 
-Rationale: The sandbox is a training and development environment. Several intended workflows need outbound access to external package registries, model endpoints, and installation sources:
+Rationale: The sandbox is a training and development environment. Several intended workflows need outbound access to external package registries and installation sources:
 
-- `chat-ai.academiccloud.de` for OpenCode model access
 - Azure/OpenAI endpoints for Codex CLI when configured by operations
-- GWDG GitLab CE / container registry
-- Debian and Microsoft package sources
+- MCR (`mcr.microsoft.com`) for the pinned .NET SDK base image during Podman builds
+- Ubuntu package sources
 - `deb.nodesource.com`
 - `go.dev`
 - `static.rust-lang.org` for pinned `rustup-init` artifacts and Rust toolchains
