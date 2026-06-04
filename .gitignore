@@ -12,3 +12,20 @@ workspace/audit-evidence/
 __pycache__/
 sboms/*
 !sboms/.gitkeep
+
+# AI agent local state: keep generated Spec-Kit commands/skills trackable only.
+.agents/*
+!.agents/skills/
+!.agents/skills/**
+.claude/*
+!.claude/skills/
+!.claude/skills/**
+!.claude/commands/
+!.claude/commands/**
+.gemini/*
+!.gemini/commands/
+!.gemini/commands/**
+.opencode/*
+!.opencode/command/
+!.opencode/command/**
+.codex/
