@@ -202,6 +202,28 @@ specify init . --integration opencode --force
 
 Falls nach dem Skripttyp gefragt wird, im Linux-Container `sh` auswaehlen.
 
+## Secure-Development-Container-Hardening-Intake
+
+Dieses Repository ist der passende Level-2-Ort fuer einen spaeteren
+Spec-Kit-Lauf zum sicheren Softwareentwicklungscontainer. Der Intake
+`Lastenheft_Secure-Development-Container-Hardening.md` beschreibt die
+Pruefpunkte fuer Podman/Docker-Runtime, digest-gepinnte Basisimages,
+SBOM/VEX/SLSA, Container-Scanning, Signatur- oder Attestation-Entscheidung,
+Secrets, Host-Mounts, Agenten-Daten, Modell-/Tool-Inventar und
+C3A/C5-/Regulatory-`N/A`-Begruendungen.
+
+Das Lastenheft ist nur Vorbereitung. Es baut kein Image, startet keinen
+Container und migriert keine Projekte. Die aktive Reihenfolge fuer spaetere
+Spec-Kit-Laeufe steht in `Lastenheft_Abarbeitungsreihenfolge.md`.
+
+*This repository is the right Level-2 place for a later Spec Kit run about a
+secure software development container. The intake
+`Lastenheft_Secure-Development-Container-Hardening.md` covers Podman/Docker
+runtime, digest-pinned base images, SBOM/VEX/SLSA, container scanning,
+signature or attestation decisions, secrets, host mounts, agent data,
+model/tool inventory, and C3A/C5/regulatory `N/A` rationales. It is preparation
+only; it does not build an image, start a container, or migrate projects.*
+
 ## SBOM
 
 Vor Weitergabe eines neu gebauten Images eine CycloneDX-SBOM erzeugen:

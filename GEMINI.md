@@ -110,6 +110,29 @@ Prefer explicit configuration over hidden behavior. Keep secrets out of tracked 
 
 Every `ARG` in `Dockerfile` must have an immediately preceding Renovate metadata comment with a matching `argName`. Use the generic form `# renovate: datasource=<renovate-datasource> depName=<dependency-name> versioning=<versioning> argName=<ARG_NAME>` when the value is a simple version. Add or update a dedicated `renovate.json` custom manager when the value needs special parsing, and keep `docs/security/dependency-update-policy.md` in sync. The local pre-commit hook `dockerfile-arg-renovate-metadata` enforces this for current and future Dockerfile `ARG` lines.
 
+## Agentische Skriptausfuehrung / Agentic Script Execution
+
+Vor lokaler Automation zuerst das Betriebssystem erkennen. Wenn `pwsh`
+verfuegbar ist, vorhandene PowerShell-7-Skripte oder Cmdlets bevorzugen und
+auf diesem macOS-Host wegen Profil-Nebenwirkungen `pwsh -NoProfile` nutzen.
+Fuer strukturierte lokale Automation ist C# ueber `.NET` oder `mono` ein
+zulaessiger zweiter Weg, wenn Typisierung, Dateiformate oder
+Wiederverwendbarkeit davon profitieren. Erst wenn PowerShell oder C# nicht
+sinnvoll passen, die OS-nahe vorhandene Repo-Variante nutzen, in diesem
+Repository typischerweise Bash, Podman-Compose-Befehle oder vorhandene
+`scripts/`-Wrapper. Keine neue Sprache nur aus Bequemlichkeit einfuehren, wenn
+ein bestehendes Repo-Skript denselben Zweck erfuellt.
+
+*Before local automation, detect the operating system. If `pwsh` is available,
+prefer existing PowerShell 7 scripts or Cmdlets and use `pwsh -NoProfile` on
+this macOS host because the profile has side effects. For structured local
+automation, C# via `.NET` or `mono` is an acceptable second option when typing,
+file formats, or reuse benefit from it. Only use the OS-native existing
+repository variant when PowerShell or C# does not fit, typically Bash, Podman
+Compose commands, or existing `scripts/` wrappers in this repository. Do not
+introduce a new language for convenience when an existing repository script
+already solves the task.*
+
 ## Testing Guidelines
 
 There is no test framework in this repository. Before committing, run:
