@@ -13,8 +13,9 @@ training environment, not an application.
 | Bereich | Standard |
 |---|---|
 | Container-Laufzeit | Podman |
-| Compose-Befehl | `podman compose` |
-| Fallback | `podman-compose`, falls `podman compose` lokal nicht verfuegbar ist |
+| Compose-Lifecycle-Befehl | `podman compose` |
+| Compose-Config-Validierung | `podman-compose config` |
+| Lifecycle-Fallback | `podman-compose`, falls `podman compose` lokal nicht verfuegbar ist |
 | Basisimage | Microsoft .NET SDK aus MCR, im `Dockerfile` per Digest gepinnt |
 | OpenCode | Installiert, aber ohne vorkonfigurierten Modellanbieter |
 | Codex | Systemweite Defaults aus `codex/config.toml` und `codex/requirements.toml` |
@@ -72,8 +73,11 @@ podman machine list
 podman compose version
 ```
 
-Wenn `podman compose` auf einem System nicht verfuegbar ist, verwende
-`podman-compose` mit denselben Argumenten.
+Fuer reine Compose-Config-Validierung ist `podman-compose config` der
+Standard, weil dieser Check die Compose-Datei ohne laufende Podman-Machine
+parsen kann. Fuer Build-, Start-, Exec- und Stop-Aktionen wird weiterhin
+`podman compose` verwendet; wenn `podman compose` auf einem System nicht
+verfuegbar ist, verwende `podman-compose` mit denselben Argumenten.
 
 ## Lokale Konfiguration
 
@@ -114,7 +118,7 @@ Der lokale Checkout kann danach optional in die Sandbox gemountet werden:
 
 ```bash
 HOME_BASELINE_DIR=/pfad/zu/home-baseline-tmp
-podman compose -f compose.yml -f compose.home-baseline.yml config
+podman-compose -f compose.yml -f compose.home-baseline.yml config
 podman compose -f compose.yml -f compose.home-baseline.yml up -d
 podman compose exec ade sh -lc 'cd ~/home-baseline-tmp && git status --short --branch'
 ```
@@ -129,7 +133,7 @@ das bewusst manuell geschehen.
 ## Bauen und Starten
 
 ```bash
-podman compose config
+podman-compose config
 podman compose build --pull
 podman compose up -d
 podman compose ps
@@ -247,9 +251,14 @@ wird das Syft-Containerimage mit Podman ausgefuehrt. Generierte
 Mindestens:
 
 ```bash
-podman compose config
+podman-compose config
 git diff --check
 ```
+
+`podman compose config` kann als zusaetzliche lokale Plausibilitaetspruefung
+laufen, wenn die Podman-Machine beziehungsweise der Podman-Socket funktioniert.
+Ein lokaler Socket- oder Machine-Fehler ist kein Repo-Fehler, solange
+`podman-compose config` erfolgreich ist.
 
 Bei Dockerfile-Aenderungen:
 
@@ -303,7 +312,7 @@ chmod 600 opencode.env
 3. Build and start:
 
 ```bash
-podman compose config
+podman-compose config
 podman compose build --pull
 podman compose up -d
 podman compose exec ade bash

@@ -60,7 +60,7 @@ Ausfuehrung ist ein Betriebs-/Admin-Schritt.
 Jeder Renovate-MR muss mindestens diese Pruefungen bestehen:
 
 ```bash
-podman compose config
+podman-compose config
 podman compose build --pull
 uvx pre-commit run --all-files
 ```
@@ -122,7 +122,7 @@ admin step.
 Every Renovate MR must pass at least these checks:
 
 ```bash
-podman compose config
+podman-compose config
 podman compose build --pull
 uvx pre-commit run --all-files
 ```

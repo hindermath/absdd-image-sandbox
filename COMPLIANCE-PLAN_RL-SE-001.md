@@ -88,7 +88,12 @@ Der Agent zitiert sie inhaltlich aus den Hinweisen in diesem Dokument; er
 2. **Commit-Stil:** kurz, imperativ, mit Präfix `docs:`, `chore:`, `build:`
    oder `ci:`. Beispiel: `build: pin codex sandbox defaults`.
 3. **Vor jedem Commit:**
-   - `podman compose config` muss ohne Fehler durchlaufen.
+   - `podman-compose config` muss als Standardpruefung fuer die statische
+     Compose-Konfiguration ohne Fehler durchlaufen.
+   - `podman compose config` ist eine zusaetzliche lokale Plausibilitaets-
+     pruefung, wenn die Podman-Machine beziehungsweise der Podman-Socket
+     funktioniert; Socket- oder Machine-Fehler gelten nicht als Repo-Fehler,
+     solange `podman-compose config` erfolgreich ist.
    - Wenn das `Dockerfile` geändert wurde: `podman compose build --pull`
      muss erfolgreich durchlaufen.
 4. **Keine Secrets im Klartext.** Wenn Codex auf einen API-Key, ein Token
@@ -258,7 +263,7 @@ deiner Anpassung im Commit-Body**.
 ### Verifikation (Skript)
 
 ```bash
-podman compose config >/dev/null
+podman-compose config >/dev/null
 podman compose build --pull
 podman compose up -d
 podman compose exec ade cat /etc/codex/config.toml | grep -E 'sandbox_mode|network_access|exclude_slash_tmp|writable_roots'
@@ -895,10 +900,7 @@ eine CycloneDX-SBOM erzeugt.
    #!/usr/bin/env bash
    set -euo pipefail
    podman compose build --pull
-   IMAGE="$(podman compose config --format json | jq -r '.services.ade.image // empty')"
-   if [[ -z "${IMAGE}" ]]; then
-     IMAGE="ade-dev-sandbox-ade:latest"
-   fi
+   IMAGE="${IMAGE_NAME:-localhost/ade-dev-sandbox-ade:latest}"
    mkdir -p sboms
    syft "${IMAGE}" -o cyclonedx-json="sboms/$(date +%Y-%m-%d)-ade-sandbox.cdx.json"
    ```
@@ -962,7 +964,7 @@ gilt dann aber erst als mergefähig, wenn dort mindestens folgende Prüfungen
 grün gelaufen sind:
 
 ```bash
-podman compose config
+podman-compose config
 podman compose build --pull
 uvx pre-commit run --all-files
 ```
@@ -1084,7 +1086,7 @@ begründen, nicht erzwingen.
 - [x] Mindestens `no-new-privileges:true` ist gesetzt und getestet.
 - [x] `cap_drop`/`cap_add` ist bewusst konfiguriert oder begründet
       ausgelassen.
-- [x] `podman compose config` und
+- [x] `podman-compose config` und
       `podman compose build --pull` laufen fehlerfrei.
 - [x] Die Tool-Checks im Container laufen unverändert erfolgreich.
 - [x] Änderungen in `compose.yml` sind kommentiert und in

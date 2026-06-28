@@ -43,10 +43,11 @@ There is currently no `src/`, `tests/`, or asset directory.
 Run commands from the repository root:
 
 ```bash
-podman compose config
+podman-compose config
 ```
 
-Validates the Compose file without printing values from `opencode.env`.
+Validates the Compose file without printing values from `opencode.env` and
+without requiring a running Podman machine.
 
 ```bash
 podman compose up -d
@@ -70,7 +71,9 @@ podman compose up -d
 podman compose exec ade bash
 ```
 
-If `podman compose` is not available on the local installation, use `podman-compose` with the same arguments.
+Use `podman-compose config` for config-only validation. If `podman compose`
+is not available for lifecycle actions on the local installation, use
+`podman-compose` with the same arguments.
 
 ```bash
 specify version
@@ -138,14 +141,14 @@ already solves the task.*
 There is no test framework in this repository. Before committing, run:
 
 ```bash
-podman compose config
+podman-compose config
 ```
 
 If `compose.home-baseline.yml` or the optional `HOME_BASELINE_DIR` workflow
 changed, also run with a local checkout:
 
 ```bash
-HOME_BASELINE_DIR=/path/to/home-baseline-tmp podman compose -f compose.yml -f compose.home-baseline.yml config
+HOME_BASELINE_DIR=/path/to/home-baseline-tmp podman-compose -f compose.yml -f compose.home-baseline.yml config
 ```
 
 For Dockerfile changes, also run:
@@ -188,7 +191,11 @@ cargo clippy --version
 python --version
 ```
 
-If `podman compose` is not available on the local installation, use `podman-compose` with the same arguments.
+Use `podman-compose config` for config-only validation. `podman compose config`
+is only an additional local plausibility check when the Podman machine
+or socket is healthy. If `podman compose` is not available for lifecycle
+actions on the local installation, use `podman-compose` with the same
+arguments.
 
 For README or `AGENTS.md` changes that add or change documented copy-and-paste
 commands, always run `git diff --check` as the minimum repository-side
@@ -201,11 +208,13 @@ projects out of `/workspace`, `/rider-projects`, and the repository.
 Treat platform coverage explicitly. A successful run on only one host platform
 is a local plausibility check, not full cross-platform acceptance. When a change
 claims or affects macOS, Windows/WSL2, and Linux/Ubuntu behavior, verify the
-commands on each affected platform when those systems are available. Use the
-platform's actual Podman Compose command (`podman compose` or
-`podman-compose`) rather than assuming one spelling. If a platform, engine, or
-network access for package downloads is unavailable, record the skipped check
-and the reason in the pull request text or in the agent session log.
+commands on each affected platform when those systems are available. For
+config-only validation, prefer `podman-compose config`; for lifecycle commands,
+use the platform's actual Podman Compose command (`podman compose` or
+`podman-compose`) rather than assuming one spelling. If a platform, engine,
+Podman socket, or network access for package downloads is unavailable, record
+the skipped check and the reason in the pull request text or in the agent
+session log.
 
 For documented web-app examples, bind the app to `0.0.0.0` inside the container
 and use a port from the published `5100-5199` range. During practical checks,
