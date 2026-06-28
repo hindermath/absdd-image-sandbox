@@ -5,6 +5,16 @@
 **Status**: Draft
 **Input**: User description: "Nutze Lastenheft_Sandbox-Public-Readiness.md als verbindliche Eingabedatei. Erstelle die Feature-Spezifikation fuer die Public-Readiness von absdd-image-sandbox als Ausbildungs-Sandbox. Ziel: Interne oder organisationsspezifische Formulierungen in generische Sprache ueberfuehren, ohne Sicherheitsanforderungen zu verwaessern. Das Repo soll perspektivisch fuer Fachinformatik-Auszubildende oeffentlich nutzbar werden. Beruecksichtige README, AGENTS.md, CLAUDE.md, GEMINI.md, .github/copilot-instructions.md, COMPLIANCE-PLAN_RL-SE-001.md, docs/security/ und bestehende Lastenhefte. Starte keinen Container-Build und schalte das Repo nicht auf Public."
 
+## Clarifications
+
+### Session 2026-06-28
+
+- Q: How should organization-specific audit references be handled across
+  public-readiness surfaces? → A: User-facing and agent-guidance surfaces use
+  generic wording; security and audit evidence may retain organization-specific
+  origin when it is explicitly marked as context, example, or not
+  public-release-relevant evidence.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Public Training Reader Understands the Sandbox (Priority: P1)
@@ -51,8 +61,10 @@ generalized, or explicitly documented as examples or open decisions.
 
 1. **Given** a repository document mentions a private path, private service, or
    organization-specific approval role, **When** the public-readiness review is
-   applied, **Then** the text is generalized or marked as a non-public example
-   with a clear reason.
+   applied, **Then** user-facing and agent-guidance text is generalized, while
+   security or audit evidence either generalizes the wording or marks the
+   organization-specific origin as context, example, or not public-release-
+   relevant evidence.
 2. **Given** a security requirement is organization-specific in origin, **When**
    it is rewritten, **Then** the resulting text still preserves the control
    objective and does not weaken the requirement.
@@ -105,26 +117,29 @@ legal review unless an evidence path exists.
 - **FR-002**: User-facing documentation MUST use generic language for public
   readers and MUST remove or neutralize private host paths, private URLs,
   organization-bound assumptions, and account-specific defaults.
-- **FR-003**: Security and compliance documentation MUST preserve control
+- **FR-003**: Maintained agent guidance surfaces MUST follow the same generic
+  wording rule as user-facing documentation.
+- **FR-004**: Security and compliance documentation MUST preserve control
   objectives while replacing organization-specific phrasing with reusable
-  wording.
-- **FR-004**: Open approval, provider, model, data-residency, licensing, legal,
+  wording or marking organization-specific audit origin as context, example, or
+  not public-release-relevant evidence.
+- **FR-005**: Open approval, provider, model, data-residency, licensing, legal,
   or platform decisions MUST be marked as `Open`, `N/A`, or `_TODO_` with a
   short rationale instead of being inferred.
-- **FR-005**: Documentation MUST describe `home-baseline` as an optional
+- **FR-006**: Documentation MUST describe `home-baseline` as an optional
   governance and template basis, not as a private mandatory path or account.
-- **FR-006**: The public-readiness feature MUST NOT build the container image,
+- **FR-007**: The public-readiness feature MUST NOT build the container image,
   change the repository visibility, rotate secrets, configure provider access,
   or change model access.
-- **FR-007**: Maintained agent guidance surfaces MUST stay consistent when
+- **FR-008**: Maintained agent guidance surfaces MUST stay consistent when
   shared public-readiness wording changes; intentional deviations MUST be
   documented.
-- **FR-008**: Documentation intended for apprentices MUST remain bilingual where
+- **FR-009**: Documentation intended for apprentices MUST remain bilingual where
   the surrounding content is bilingual, use clear CEFR-B2-friendly wording, and
   stay friendly to text-oriented assistive technologies.
-- **FR-009**: Evidence-style documents MUST distinguish active evidence,
+- **FR-010**: Evidence-style documents MUST distinguish active evidence,
   example evidence, unresolved follow-up, and non-applicable controls.
-- **FR-010**: The feature MUST preserve auditability by retaining concrete
+- **FR-011**: The feature MUST preserve auditability by retaining concrete
   evidence paths or explicit follow-up owners/triggers for open checkpoints.
 
 ### Governance Applicability
@@ -181,14 +196,17 @@ legal review unless an evidence path exists.
 - **SC-001**: A reviewer can inspect all public-readiness surfaces and find no
   mandatory private host path, private URL, private account, or non-public
   provider requirement in reusable setup instructions.
-- **SC-002**: 100% of unresolved approval, provider, legal, data-residency, or
+- **SC-002**: 100% of remaining organization-specific audit references in
+  security evidence are explicitly classified as context, example, or not
+  public-release-relevant evidence.
+- **SC-003**: 100% of unresolved approval, provider, legal, data-residency, or
   platform decisions in reviewed security documents are marked as `Open`,
   `N/A`, or `_TODO_` with a short rationale.
-- **SC-003**: A new reader can identify the sandbox purpose, non-goals, and
+- **SC-004**: A new reader can identify the sandbox purpose, non-goals, and
   public-readiness status from the primary documentation in under 10 minutes.
-- **SC-004**: All shared agent guidance surfaces affected by the change either
+- **SC-005**: All shared agent guidance surfaces affected by the change either
   contain aligned wording or document an intentional deviation.
-- **SC-005**: No acceptance evidence claims that the repository has been made
+- **SC-006**: No acceptance evidence claims that the repository has been made
   public, the container has been rebuilt, or formal approval has been granted
   unless a separate evidence path proves that action.
 
