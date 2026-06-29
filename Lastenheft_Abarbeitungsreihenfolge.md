@@ -2,7 +2,7 @@
 
 **Dokumenttyp:** Reihenfolge fuer spaetere Spec-Kit-Laeufe
 **Status:** aktiv
-**Stand:** 2026-06-26
+**Stand:** 2026-06-29
 
 ## Zweck
 
@@ -15,8 +15,9 @@ einsortiert.
 ## Aktive Reihenfolge fuer spaetere Laeufe
 
 1. `Lastenheft_Sandbox-Public-Readiness.md`
-2. `Lastenheft_Secure-Development-Container-Hardening.md`
-3. `Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md`
+2. `Lastenheft_RL-SE-Checklist-Selbstpruefung.md`
+3. `Lastenheft_Secure-Development-Container-Hardening.md`
+4. `Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md`
 
 ## Hinweise fuer Agenten
 
@@ -24,4 +25,5 @@ einsortiert.
 - Bereits branch-spezifische Lastenhefte nicht erneut ausfuehren.
 - Vor einem Lauf den aktuellen Repo-Stand, Branch und offene Diffs pruefen.
 - Erst nach ausdruecklicher Freigabe einen Spec-Kit-Lauf starten.
-- Public-Readiness, Container-Hardening und Selbstpruefung sind getrennte Laeufe.
+- Public-Readiness, RL-SE-/Checklist-Selbstpruefung, Container-Hardening
+  und Sandbox-Selbstpruefung sind getrennte Laeufe.
