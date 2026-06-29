@@ -69,8 +69,9 @@ or governance statement.
 **Fields**:
 
 - `statement`: Short description of the evidence item.
-- `classification`: `active-evidence`, `example-evidence`, `open`, `na`,
-  `todo`, or `not-public-release-relevant`.
+- `classification`: `active-evidence`, `context-evidence`,
+  `example-evidence`, `open`, `na`, `todo`, or
+  `not-public-release-relevant`.
 - `rationale`: Why this classification is correct.
 - `evidence_path`: Existing or planned Markdown evidence path.
 - `owner`: Required for `open` and `todo`.
@@ -82,6 +83,9 @@ or governance statement.
 
 - `open` and `todo` require owner, follow-up, and re-evaluation trigger.
 - `na` requires a short rationale.
+- `context-evidence` and `not-public-release-relevant` require a rationale
+  explaining why the statement remains useful for audit or history without
+  becoming a reusable public release claim.
 - `active-evidence` must point to an existing evidence path or a task that will
   create one.
 
@@ -142,6 +146,7 @@ found -> classified -> open-follow-up
 
 Evidence Classification:
 unclassified -> active-evidence
+unclassified -> context-evidence
 unclassified -> example-evidence
 unclassified -> open
 unclassified -> na

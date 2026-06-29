@@ -15,6 +15,25 @@
   origin when it is explicitly marked as context, example, or not
   public-release-relevant evidence.
 
+## Public-Readiness Review Scope
+
+The public-readiness review surface for this feature is limited to reusable
+documentation and evidence wording in:
+
+- primary user-facing setup and operation guidance: `README.md`,
+  `opencode.env.example`, `compose.yml`, `compose.home-baseline.yml`, and
+  `Lastenheft_*.md`;
+- maintained agent guidance: `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and
+  `.github/copilot-instructions.md`;
+- security and audit evidence: `COMPLIANCE-PLAN_RL-SE-001.md`,
+  `docs/security/`, and `docs/security/agent-session-log/`;
+- Spec-Kit artefacts for this feature: `specs/001-public-readiness/`.
+
+The primary reader for the ten-minute success criterion is a public
+Fachinformatik apprentice or trainer with no access to private organizational
+systems. The primary documentation surface is `README.md` plus directly linked
+setup, security, Lastenheft, and agent-guidance entry points.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Public Training Reader Understands the Sandbox (Priority: P1)
@@ -138,9 +157,12 @@ legal review unless an evidence path exists.
   the surrounding content is bilingual, use clear CEFR-B2-friendly wording, and
   stay friendly to text-oriented assistive technologies.
 - **FR-010**: Evidence-style documents MUST distinguish active evidence,
-  example evidence, unresolved follow-up, and non-applicable controls.
+  context evidence, example evidence, not-public-release-relevant evidence,
+  unresolved follow-up, `_TODO_`, and non-applicable controls.
 - **FR-011**: The feature MUST preserve auditability by retaining concrete
-  evidence paths or explicit follow-up owners/triggers for open checkpoints.
+  evidence paths or explicit follow-up owners, next actions, and
+  re-evaluation triggers for `Open` and `_TODO_` checkpoints. `N/A` and
+  not-public-release-relevant classifications MUST include a short rationale.
 
 ### Governance Applicability
 
@@ -153,7 +175,9 @@ legal review unless an evidence path exists.
 - **CWE Top 25**: `N/A` for this specify run because no application code or
   vulnerability remediation is implemented.
 - **OWASP ASVS**: `N/A` for this specify run because no web application,
-  authentication flow, or service behavior is implemented.
+  authentication flow, or service behavior is implemented. It becomes
+  applicable if later scope introduces a web application, authentication flow,
+  HTTP service, API, or comparable runtime interface.
 - **SBOM**: Applicable as an existing evidence topic; public-readiness wording
   must not claim a generated SBOM unless evidence exists.
 - **VEX**: Applicable as a planned or evidence-classified topic for later image
@@ -163,7 +187,8 @@ legal review unless an evidence path exists.
 - **SLSA**: Applicable as supply-chain evidence terminology for build integrity;
   this run must classify it without creating new build attestations.
 - **BSI C3A / C5**: `N/A` for this specify run unless documentation claims a
-  cloud-service deployment or provider-dependent production operation.
+  cloud-service deployment, managed provider operation, production operation,
+  or provider assurance status.
 - **Threat modeling / Zero Trust**: Limited applicability. Public-readiness
   affects documentation trust boundaries and disclosure risk, but does not add
   runtime behavior.
@@ -171,7 +196,9 @@ legal review unless an evidence path exists.
   wording updates; new runtime ADRs are not required unless a later plan changes
   deployment or trust boundaries.
 - **Cross-platform scripts**: `N/A` for this specify run because no
-  script-shaped tool is added, changed, or removed.
+  script-shaped tool is added, changed, or removed. It becomes applicable if a
+  later change adds or modifies scripts, command wrappers, or platform-parity
+  claims for documented commands.
 - **Accessibility evidence**: Applicable for user-facing documentation; updates
   should preserve readable Markdown structure and bilingual accessibility where
   already established.
@@ -185,7 +212,13 @@ legal review unless an evidence path exists.
   role, non-public service, or context-bound statement that cannot be required
   of public readers.
 - **Evidence Classification**: The status assigned to a security or compliance
-  statement: active evidence, example evidence, `Open`, `N/A`, or `_TODO_`.
+  statement: active evidence, context evidence, example evidence,
+  not-public-release-relevant evidence, `Open`, `N/A`, or `_TODO_`. Active
+  evidence is current repository evidence for a claim; context evidence explains
+  origin or history; example evidence is illustrative and non-binding;
+  not-public-release-relevant evidence may support audit history but not a
+  public release claim; `Open` and `_TODO_` require owner, next action, and
+  re-evaluation trigger; `N/A` requires a rationale.
 - **Maintained Agent Surface**: Shared guidance files that must remain aligned
   when public-readiness wording changes.
 
@@ -202,8 +235,10 @@ legal review unless an evidence path exists.
 - **SC-003**: 100% of unresolved approval, provider, legal, data-residency, or
   platform decisions in reviewed security documents are marked as `Open`,
   `N/A`, or `_TODO_` with a short rationale.
-- **SC-004**: A new reader can identify the sandbox purpose, non-goals, and
-  public-readiness status from the primary documentation in under 10 minutes.
+- **SC-004**: A new public Fachinformatik apprentice or trainer can identify
+  the sandbox purpose, non-goals, and public-readiness status from `README.md`
+  and its directly linked setup, security, Lastenheft, and agent-guidance entry
+  points in under 10 minutes.
 - **SC-005**: All shared agent guidance surfaces affected by the change either
   contain aligned wording or document an intentional deviation.
 - **SC-006**: No acceptance evidence claims that the repository has been made
@@ -220,6 +255,12 @@ legal review unless an evidence path exists.
   organization-specific wording is generalized.
 - Existing bilingual and accessibility-oriented documentation practices remain
   in force where surrounding files already use them.
+- A public reader is assumed to have normal repository access only, not access
+  to private organizational systems, provider portals, or local maintainer
+  paths.
+- Evidence classified as not public-release-relevant may remain useful for
+  audit history, but it must not be presented as a reusable public release
+  claim.
 - Later planning may decide exact file edits, but this specification treats
   README, agent guidance, compliance/security documents, and existing
   Lastenhefte as the review surface.

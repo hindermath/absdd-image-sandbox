@@ -11,39 +11,39 @@ implementation.
 
 ## Requirement Completeness
 
-- [ ] CHK001 Are all public-readiness surfaces that require generic public
+- [x] CHK001 Are all public-readiness surfaces that require generic public
   wording explicitly covered by the requirements? [Completeness, Spec
   §FR-002, Spec §FR-003]
   - Durchfuehrungshinweis: Lies die Requirements zu user-facing und
     agent-guidance surfaces und bewerte, ob alle relevanten Flaechen als
     Anforderungsklasse erkennbar sind. Ausreichend ist der Punkt nur, wenn
     keine wichtige Oberflaeche stillschweigend ausserhalb des Scopes bleibt.
-- [ ] CHK002 Are maintained agent guidance surfaces named with enough
+- [x] CHK002 Are maintained agent guidance surfaces named with enough
   precision to support parity review? [Completeness, Spec §FR-008]
   - Durchfuehrungshinweis: Vergleiche FR-008 mit den genannten Agent-Dateien
     im Input und im Plan. Ausreichend ist der Punkt, wenn klar ist, welche
     Dateien gemeinsam betrachtet werden muessen und wann eine Abweichung
     dokumentiert werden muss.
-- [ ] CHK003 Are requirements present for preserving security control
+- [x] CHK003 Are requirements present for preserving security control
   objectives while genericizing organization-specific wording? [Completeness,
   Spec §FR-004]
   - Durchfuehrungshinweis: Bewerte, ob die Spezifikation nicht nur das
     Entfernen interner Sprache fordert, sondern auch den Erhalt des
     Sicherheitszwecks beschreibt. Ausreichend ist der Punkt, wenn Abschwaechung
     der Controls durch die Requirements ausgeschlossen wird.
-- [ ] CHK004 Are non-goals for build, public release, secrets, provider/model
+- [x] CHK004 Are non-goals for build, public release, secrets, provider/model
   setup, and formal approval fully specified? [Completeness, Spec §FR-007]
   - Durchfuehrungshinweis: Lies FR-007 und die Success Criteria und bewerte,
     ob alle vom Nutzer ausgeschlossenen Aktionen als explizite Grenzen
     vorkommen. Ausreichend ist der Punkt, wenn spaetere Tasks daraus keine
     Build-, Release- oder Provider-Aktion ableiten koennen.
-- [ ] CHK005 Are evidence classifications complete enough to distinguish
+- [x] CHK005 Are evidence classifications complete enough to distinguish
   active evidence, example evidence, unresolved follow-up, and non-applicable
   controls? [Completeness, Spec §FR-010, Spec §SC-002]
   - Durchfuehrungshinweis: Vergleiche FR-010, SC-002 und die Key Entity
     "Evidence Classification". Ausreichend ist der Punkt, wenn alle relevanten
     Statusarten fuer Audit- und Public-Readiness-Aussagen abgedeckt sind.
-- [ ] CHK006 Are ownership, follow-up, and re-evaluation requirements defined
+- [x] CHK006 Are ownership, follow-up, and re-evaluation requirements defined
   for unresolved checkpoints? [Completeness, Spec §FR-011]
   - Durchfuehrungshinweis: Lies FR-011 und die offenen Statusregeln. Ausreichend
     ist der Punkt, wenn `Open`, `_TODO_` oder vergleichbare Zustaende nicht
@@ -52,32 +52,32 @@ implementation.
 
 ## Requirement Clarity
 
-- [ ] CHK007 Is "public-ready training and work environment" clear enough to
+- [x] CHK007 Is "public-ready training and work environment" clear enough to
   avoid implying production use or completed public release? [Clarity, Spec
   §FR-001]
   - Durchfuehrungshinweis: Bewerte FR-001 zusammen mit SC-006 und den
     Nicht-Zielen. Ausreichend ist der Punkt, wenn "public-ready" als
     vorbereitender Dokumentationszustand verstanden werden kann und keine
     Produktiv- oder Release-Behauptung entsteht.
-- [ ] CHK008 Is "generic language" defined through concrete forbidden or
+- [x] CHK008 Is "generic language" defined through concrete forbidden or
   replaceable private assumptions? [Clarity, Spec §FR-002]
   - Durchfuehrungshinweis: Lies FR-002 und die Key Entity "Private
     Assumption". Ausreichend ist der Punkt, wenn private Pfade, URLs, Accounts,
     Rollen und nicht-oeffentliche Dienste als klare Textklassen erkennbar sind.
-- [ ] CHK009 Is the allowed treatment of organization-specific audit origin
+- [x] CHK009 Is the allowed treatment of organization-specific audit origin
   unambiguous for security evidence? [Clarity, Spec §FR-004, Clarification
   2026-06-28]
   - Durchfuehrungshinweis: Vergleiche FR-004 mit der Clarification. Ausreichend
     ist der Punkt, wenn klar bleibt, wann Herkunft als Kontext, Beispiel oder
     nicht-public-release-relevante Evidenz erhalten bleiben darf.
-- [ ] CHK010 Are the meanings of `Open`, `N/A`, and `_TODO_` sufficiently
+- [x] CHK010 Are the meanings of `Open`, `N/A`, and `_TODO_` sufficiently
   clear for reviewers to classify unresolved decisions consistently?
   [Clarity, Spec §FR-005]
   - Durchfuehrungshinweis: Lies FR-005, FR-010 und die Success Criteria.
     Ausreichend ist der Punkt, wenn Reviewer aus dem Text ableiten koennen,
     wann welcher Status zu verwenden ist und wann eine kurze Begruendung
     noetig ist.
-- [ ] CHK011 Is `home-baseline` described clearly as optional governance and
+- [x] CHK011 Is `home-baseline` described clearly as optional governance and
   template basis rather than a mandatory private path? [Clarity, Spec §FR-006]
   - Durchfuehrungshinweis: Bewerte FR-006 und die Assumptions. Ausreichend ist
     der Punkt, wenn die Requirements keine lokale Benutzerpfad-Pflicht und
@@ -85,26 +85,26 @@ implementation.
 
 ## Requirement Consistency
 
-- [ ] CHK012 Are the public-reader requirements consistent with the
+- [x] CHK012 Are the public-reader requirements consistent with the
   agent-guidance parity requirements? [Consistency, Spec §FR-002, Spec
   §FR-003, Spec §FR-008]
   - Durchfuehrungshinweis: Vergleiche die Requirements fuer public-facing docs
     und Maintained Agent Surfaces. Ausreichend ist der Punkt, wenn dieselben
     Grundregeln fuer generische Sprache gelten oder Abweichungen explizit
     begruendet werden.
-- [ ] CHK013 Are auditability requirements consistent with the requirement to
+- [x] CHK013 Are auditability requirements consistent with the requirement to
   neutralize private assumptions? [Consistency, Spec §FR-004, Spec §FR-011]
   - Durchfuehrungshinweis: Bewerte, ob FR-004 und FR-011 gemeinsam erlauben,
     Evidenz nachvollziehbar zu halten, ohne private Annahmen als
     Public-Requirement zu uebernehmen. Ausreichend ist der Punkt, wenn kein
     Ziel das andere logisch aushebelt.
-- [ ] CHK014 Are AI-SBOM and provider/model transparency requirements
+- [x] CHK014 Are AI-SBOM and provider/model transparency requirements
   consistent with the non-goal of configuring provider or model access?
   [Consistency, Governance Applicability]
   - Durchfuehrungshinweis: Lies Governance Applicability zu AI-SBOM und FR-007.
     Ausreichend ist der Punkt, wenn die Spec nur Wording- und Evidenzstatus
     verlangt und keine echte Provider- oder Modellkonfiguration impliziert.
-- [ ] CHK015 Are SBOM, VEX, SLSA, and build-integrity references consistent
+- [x] CHK015 Are SBOM, VEX, SLSA, and build-integrity references consistent
   with the non-goal of creating new build evidence? [Consistency, Governance
   Applicability, Spec §SC-006]
   - Durchfuehrungshinweis: Vergleiche die Governance-Tabelle mit SC-006.
@@ -113,30 +113,30 @@ implementation.
 
 ## Acceptance Criteria Quality
 
-- [ ] CHK016 Is SC-001 measurable enough to identify mandatory private host
+- [x] CHK016 Is SC-001 measurable enough to identify mandatory private host
   paths, URLs, accounts, or provider requirements in reusable setup text?
   [Acceptance Criteria, Spec §SC-001]
   - Durchfuehrungshinweis: Bewerte, ob SC-001 ein klares Pass/Fail-Kriterium
     fuer reusable setup instructions enthaelt. Ausreichend ist der Punkt, wenn
     Reviewer daraus erkennen koennen, welche Textfunde eine Korrektur
     erfordern.
-- [ ] CHK017 Is SC-002 measurable for all remaining organization-specific
+- [x] CHK017 Is SC-002 measurable for all remaining organization-specific
   audit references? [Acceptance Criteria, Spec §SC-002]
   - Durchfuehrungshinweis: Lies SC-002 zusammen mit FR-004. Ausreichend ist der
     Punkt, wenn "100%" auf eine klar erkennbare Menge von Audit-Referenzen
     angewendet werden kann und die erlaubten Klassifikationen genannt sind.
-- [ ] CHK018 Is SC-003 specific enough for approval, provider, legal,
+- [x] CHK018 Is SC-003 specific enough for approval, provider, legal,
   data-residency, and platform decisions? [Acceptance Criteria, Spec §SC-003]
   - Durchfuehrungshinweis: Bewerte, ob SC-003 alle relevanten offenen
     Entscheidungsarten mit Status- und Begruendungspflicht abdeckt.
     Ausreichend ist der Punkt, wenn keine dieser Entscheidungen implizit als
     erledigt gelten kann.
-- [ ] CHK019 Is the "under 10 minutes" reader outcome anchored to a clear
+- [x] CHK019 Is the "under 10 minutes" reader outcome anchored to a clear
   documentation surface and reader profile? [Measurability, Spec §SC-004]
   - Durchfuehrungshinweis: Lies SC-004 und User Story 1. Ausreichend ist der
     Punkt, wenn klar ist, welche primaere Dokumentation ein neuer Leser nutzt
     und welches Verstaendnis nach zehn Minuten erwartet wird.
-- [ ] CHK020 Does SC-006 define enough evidence boundaries to prevent claims of
+- [x] CHK020 Does SC-006 define enough evidence boundaries to prevent claims of
   public release, image rebuild, or formal approval? [Acceptance Criteria,
   Spec §SC-006]
   - Durchfuehrungshinweis: Bewerte, ob SC-006 die verbotenen Ueberbehauptungen
@@ -146,31 +146,31 @@ implementation.
 
 ## Scenario And Edge Case Coverage
 
-- [ ] CHK021 Are the three user stories sufficient to cover public readers,
+- [x] CHK021 Are the three user stories sufficient to cover public readers,
   maintainers, and reviewers without mixing their responsibilities?
   [Coverage, User Stories 1-3]
   - Durchfuehrungshinweis: Vergleiche die Rollen in den User Stories.
     Ausreichend ist der Punkt, wenn jede Rolle einen eigenstaendigen
     Bewertungszweck hat und keine Rolle fuer fremde Entscheidungen
     verantwortlich gemacht wird.
-- [ ] CHK022 Are requirements defined for historical evidence that still
+- [x] CHK022 Are requirements defined for historical evidence that still
   contains private URLs or host paths? [Edge Case, Spec Edge Cases]
   - Durchfuehrungshinweis: Lies den ersten Edge Case und FR-004. Ausreichend
     ist der Punkt, wenn historische Evidenz entweder generisch umformuliert
     oder klar als nicht-public-facing beziehungsweise nicht-public-release-
     relevant eingeordnet werden kann.
-- [ ] CHK023 Are requirements defined for internal guideline references whose
+- [x] CHK023 Are requirements defined for internal guideline references whose
   control objectives must remain public-readable? [Edge Case, Spec Edge Cases]
   - Durchfuehrungshinweis: Bewerte den Edge Case zu internen Guidelines.
     Ausreichend ist der Punkt, wenn der Sicherheitszweck ohne Zugriff auf die
     interne Quelle nachvollziehbar bleibt.
-- [ ] CHK024 Are unresolved approval, provider, legal, and licensing questions
+- [x] CHK024 Are unresolved approval, provider, legal, and licensing questions
   covered as explicit requirement states rather than implementation blockers?
   [Coverage, Spec §FR-005, Spec Edge Cases]
   - Durchfuehrungshinweis: Vergleiche FR-005 mit den Edge Cases. Ausreichend
     ist der Punkt, wenn Unklarheiten als Status- und Follow-up-Anforderungen
     modelliert sind, nicht als Anlass fuer erfundene Freigaben.
-- [ ] CHK025 Are multi-agent-surface consistency requirements complete for
+- [x] CHK025 Are multi-agent-surface consistency requirements complete for
   aligned wording and intentional deviation documentation? [Coverage, Spec
   §FR-008, Spec Edge Cases]
   - Durchfuehrungshinweis: Lies FR-008 und den Edge Case zu mehreren
@@ -180,26 +180,26 @@ implementation.
 
 ## Non-Functional And Governance Requirements
 
-- [ ] CHK026 Are accessibility and apprentice-readability requirements
+- [x] CHK026 Are accessibility and apprentice-readability requirements
   specified for documentation affected by public readiness? [Coverage, Spec
   §FR-009]
   - Durchfuehrungshinweis: Bewerte FR-009 und die Governance Applicability zu
     Accessibility. Ausreichend ist der Punkt, wenn CEFR-B2-freundliche,
     textorientierte und bilinguale Anforderungen fuer betroffene Inhalte
     erkennbar sind.
-- [ ] CHK027 Are cross-platform implications clearly limited when no scripts
+- [x] CHK027 Are cross-platform implications clearly limited when no scripts
   are changed? [Clarity, Governance Applicability]
   - Durchfuehrungshinweis: Lies Governance Applicability zu Cross-platform
     scripts und den Plan. Ausreichend ist der Punkt, wenn klar ist, warum
     Script-Paritaet fuer diesen Checklist-Lauf `N/A` ist und keine
     versteckte Script-Aenderung verlangt wird.
-- [ ] CHK028 Are architecture, threat modeling, and Zero Trust requirements
+- [x] CHK028 Are architecture, threat modeling, and Zero Trust requirements
   scoped as documentation disclosure risk rather than runtime architecture
   work? [Clarity, Governance Applicability]
   - Durchfuehrungshinweis: Bewerte die Governance-Eintraege zu Architecture,
     Threat modeling und Zero Trust. Ausreichend ist der Punkt, wenn die Spec
     keine neue Runtime-ADR, Schnittstelle oder Trust Boundary verlangt.
-- [ ] CHK029 Are BSI C3A/C5 and OWASP ASVS exclusions justified with clear
+- [x] CHK029 Are BSI C3A/C5 and OWASP ASVS exclusions justified with clear
   conditions for future applicability? [N/A Quality, Governance Applicability]
   - Durchfuehrungshinweis: Lies die `N/A`-Eintraege fuer C3A/C5 und ASVS.
     Ausreichend ist der Punkt, wenn die Nichtanwendbarkeit begruendet ist und
@@ -207,19 +207,19 @@ implementation.
 
 ## Dependencies And Assumptions
 
-- [ ] CHK030 Are assumptions about repository visibility and training-sandbox
+- [x] CHK030 Are assumptions about repository visibility and training-sandbox
   purpose documented strongly enough to prevent accidental scope expansion?
   [Assumption, Spec Assumptions]
   - Durchfuehrungshinweis: Bewerte die Assumptions am Ende der Spec.
     Ausreichend ist der Punkt, wenn "private bleibt private" und
     "Training/Development statt Production" als tragende Scope-Grenzen
     sichtbar sind.
-- [ ] CHK031 Are dependencies on existing evidence paths or planned follow-ups
+- [x] CHK031 Are dependencies on existing evidence paths or planned follow-ups
   explicit enough for later task generation? [Dependency, Spec §FR-011]
   - Durchfuehrungshinweis: Lies FR-011 und die Key Entities. Ausreichend ist
     der Punkt, wenn spaetere Tasks erkennen koennen, welche Evidenz existiert,
     welche geplant ist und welche offen bleibt.
-- [ ] CHK032 Are assumptions about security-control preservation documented
+- [x] CHK032 Are assumptions about security-control preservation documented
   separately from assumptions about public wording? [Assumption, Spec
   Assumptions]
   - Durchfuehrungshinweis: Vergleiche die Assumptions mit FR-002 und FR-004.
@@ -228,19 +228,19 @@ implementation.
 
 ## Ambiguities And Conflicts
 
-- [ ] CHK033 Is there any conflict between "public-ready" wording and the
+- [x] CHK033 Is there any conflict between "public-ready" wording and the
   requirement not to switch repository visibility? [Conflict, Spec §FR-001,
   Spec §FR-007, Spec §SC-006]
   - Durchfuehrungshinweis: Lies FR-001, FR-007 und SC-006 gemeinsam.
     Ausreichend ist der Punkt, wenn die Spec public-readiness als Vorbereitung
     beschreibt und keine tatsaechliche Public-Schaltung verlangt.
-- [ ] CHK034 Is "active evidence" distinguishable from "example evidence" and
+- [x] CHK034 Is "active evidence" distinguishable from "example evidence" and
   "not-public-release-relevant evidence" in all relevant requirements?
   [Ambiguity, Spec §FR-010]
   - Durchfuehrungshinweis: Bewerte FR-010 und die Key Entity "Evidence
     Classification". Ausreichend ist der Punkt, wenn ein Reviewer die drei
     Evidenzarten ohne Rueckfrage voneinander trennen kann.
-- [ ] CHK035 Are potential conflicts between local audit terminology and
+- [x] CHK035 Are potential conflicts between local audit terminology and
   generic public wording resolved by requirements rather than deferred to
   implementation judgement? [Conflict, Spec §FR-004, Clarification
   2026-06-28]
@@ -248,7 +248,7 @@ implementation.
     Ausreichend ist der Punkt, wenn der spaetere Implementierer nicht selbst
     entscheiden muss, ob Audit-Herkunft entfernt, generalisiert oder als
     Kontext markiert wird.
-- [ ] CHK036 Are terms like "provider readiness", "formal approval", "legal
+- [x] CHK036 Are terms like "provider readiness", "formal approval", "legal
   review", and "public release" treated as evidence-dependent statuses rather
   than assumed outcomes? [Ambiguity, Spec §FR-005, Spec §SC-003]
   - Durchfuehrungshinweis: Lies FR-005 und SC-003. Ausreichend ist der Punkt,
