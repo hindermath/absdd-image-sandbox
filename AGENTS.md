@@ -2,17 +2,17 @@
 
 ## Active Compliance Work Queue
 
-This repository has open audit findings against GWDG guideline `RL-SE-001` v2.1.0 ("Sichere Softwareentwicklung") and checklist `CL_12` v1.0 ("Agentische KI in Sandbox-Umgebungen"). The complete work list with concrete tasks, acceptance criteria, verification steps, and escalation rules is in `COMPLIANCE-PLAN_RL-SE-001.md`.
+This repository maintains open sandbox-governance findings against the generic Secure Development Guideline and checklist `CL_12` ("Agentic AI in Sandbox Environments") from `docs/secure-development`. The complete work list with concrete tasks, acceptance criteria, verification steps, and escalation rules is in `COMPLIANCE-PLAN_RL-SE-001.md`.
 
 **Read `COMPLIANCE-PLAN_RL-SE-001.md` at the start of every Codex session.** That file is the single source of truth for:
 
 - the priority order of open work (P0 must run first, then P1, P2, P3);
 - the per-task commit and pull request conventions used for these changes;
-- the items that must NOT be handled by an agent and have to be escalated to a human (API key rotation, formal sandbox approval, platform-side branch protection rules, QISMS register entries).
+- the items that must NOT be handled by an agent and have to be escalated to a human (API key rotation, formal sandbox approval, platform-side branch protection rules, external management-system register entries).
 
 At the end of every Codex session, append a short session log under `docs/security/agent-session-log/<YYYY-MM-DD-HHMM>.md` as required by the plan. The log records which plan IDs were completed, partially completed, or escalated.
 
-The plan and these guidelines work together: this `AGENTS.md` file describes the repository conventions; `COMPLIANCE-PLAN_RL-SE-001.md` describes the audit-driven work to bring those conventions into provable conformance.
+The plan and these guidelines work together: this `AGENTS.md` file describes the repository conventions; `COMPLIANCE-PLAN_RL-SE-001.md` describes the generic secure-development and sandbox-governance work that brings those conventions into provable conformance.
 
 ## Project Structure & Module Organization
 

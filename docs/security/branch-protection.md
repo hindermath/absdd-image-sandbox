@@ -64,7 +64,7 @@ Hinweis zu CODEOWNERS:
 
 GitLab CE kann die Datei als Code-Ownership-Hinweis verwenden. Ob Code-Owner-
 Approval fuer Merge Requests erzwungen werden kann, haengt von der konkreten
-GitLab-Edition und Instanzkonfiguration ab. Dedizierte GWDG-Teamhandles sollten
+GitLab-Edition und Instanzkonfiguration ab. Dedizierte Organisations- oder Ausbildungsteam-Handles sollten
 spaeter in `.gitlab/CODEOWNERS` nachgetragen werden.
 
 ### Signierte Commits
@@ -185,7 +185,7 @@ Note about CODEOWNERS:
 
 GitLab CE can use the file as a code ownership signal. Whether Code Owner
 approval can be enforced for merge requests depends on the concrete GitLab
-edition and instance configuration. Dedicated GWDG team handles should be added
+edition and instance configuration. Dedicated organization or training-team handles should be added
 to `.gitlab/CODEOWNERS` later.
 
 ### Signed commits

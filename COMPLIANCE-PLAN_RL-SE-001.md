@@ -1,24 +1,14 @@
-# Compliance-Plan RL-SE-001 / CL_12 — `ade-dev-sandbox`
+# Compliance-Plan Sichere Entwicklungs-Sandbox / CL_12 — `absdd-image-sandbox`
 
 ## Zweck dieses Dokuments
 
-Der fachliche Bezugspunkt dieses Plans ist das separate Repository zur
-Überarbeitung der Richtlinie **"RL_Sichere-Entwicklung"** einschließlich der
-zugehörigen Checklisten (CLs):
-<https://gitlab-ce.gwdg.de/ausbildung/thorsten/RL_Sichere-Entwicklung>.
-Die in diesem Dokument genannten RL- und CL-Kürzel beziehen sich auf die dort
-gepflegten Arbeitsstände.
+Der fachliche Bezugspunkt dieses Plans ist die generische Secure-Development-Basis in `docs/secure-development/`. Sie enthält die Richtlinie Sichere Entwicklung, die zugehörigen Checklisten und den Checklistensammelband als organisationsneutrale Ausbildungs- und Prüfgrundlage. Die in diesem Dokument genannten Richtlinien- und CL-Kürzel beziehen sich auf diese lokale, generische Dokumentationsbasis.
 
 Diese Datei ist die Arbeits- und Auftragsdatei für die agentische Behebung der
-Befunde aus dem internen Audit dieses Repositories gegen die Richtlinie
-**RL-SE-001 v2.4.0** ("Sichere Softwareentwicklung") und die Checkliste
-**CL_12 v1.3** ("Agentische KI in Sandbox-Umgebungen") der GWDG. Das Audit
-wurde ursprünglich gegen RL-SE-001 v2.1.0 / CL_12 v1.0 erstellt und mit den
-Plan-Versionen 1.1.0 bis 1.3.0 auf die geltenden Fassungen v2.4.0 / v1.3
-nachgeführt.
+Befunde aus der Sandbox-Governance-Prüfung dieses Repositories gegen die Richtlinie Sichere Entwicklung und die Checkliste `CL_12` ("Agentische KI in Sandbox-Umgebungen"). Frühere Planfassungen wurden aus einem organisationsspezifischen Auditkontext in diese generische Ausbildungs- und Prüfgrundlage überführt.
 
 Sie ist nicht das Audit-Protokoll selbst. Das Audit-Protokoll bleibt in der
-QISMS-Ablage. Dieses Dokument beschreibt, **was zu tun ist**, **wie es zu tun
+separaten Managementsystem- oder Audit-Ablage. Dieses Dokument beschreibt, **was zu tun ist**, **wie es zu tun
 ist**, **wie es abzunehmen ist**, in einer Form, die ein ausführender
 KI-Agent direkt umsetzen kann.
 
@@ -26,8 +16,8 @@ KI-Agent direkt umsetzen kann.
 
 - **Ausführender Agent:** Codex CLI mit Modell **gpt-5.5**, Reasoning-Stufe
   **high**.
-- **Sandbox:** Diese ade-dev-sandbox selbst, gestartet über
-  `podman compose up -d` oder `podman compose up -d`.
+- **Sandbox:** Diese absdd-image-sandbox selbst, gestartet über
+  `podman compose up -d`.
 - **Schreibrechte des Agenten:** ausschließlich innerhalb der gemounteten
   Host-Verzeichnisse, primär das Repository-Wurzelverzeichnis dieses
   Sandbox-Repos und gegebenenfalls Spec-Kit-Pilotprojekt unter
@@ -40,17 +30,17 @@ KI-Agent direkt umsetzen kann.
 
 **Eingeschlossen:**
 
-- Inhalt und Struktur dieses Repositories `ade-dev-sandbox`.
+- Inhalt und Struktur dieses Repositories `absdd-image-sandbox`.
 - Image-Build, Compose-Konfiguration, Werkzeugkonfiguration für OpenCode und
   Codex, Spec-Kit-Initialisierung.
 - Dokumentations-Artefakte unter `docs/security/` (neu anzulegen).
 
-**Ausgeschlossen** (gehört in das QISMS oder die Plattform-Administration):
+**Ausgeschlossen** (gehört in ein externes Managementsystem oder in die Plattform-Administration):
 
-- Rotation von API-Keys auf Anbieter-Seite (z. B. GWDG-AcademicCloud-Portal).
+- Rotation von API-Keys auf Anbieter- oder Plattformseite.
 - Aktivierung von Branch-Protection-Regeln in GitLab oder GitHub.
-- Eintragung von Freigabe-Entscheidungen im DMS der GWDG.
-- Aufnahme eines Werkzeugs in die "Liste der genehmigten Software" der GWDG.
+- Eintragung von Freigabe-Entscheidungen in externe Dokumentenmanagement- oder Audit-Systeme.
+- Aufnahme eines Werkzeugs in eine externe Liste genehmigter Software.
 - Anlage von Risiko-Register-Einträgen oder SoA-Einträgen.
 
 Wo der Agent an eine dieser Grenzen stößt, **bricht er ab und meldet
@@ -58,9 +48,9 @@ Eskalation**.
 
 ## Normative Bezüge
 
-- `RL Sichere-Entwicklung.md` (RL-SE-001), Abschnitt "Agentische KI in
+- `docs/secure-development/Richtlinie_Sichere-Entwicklung.md`, Abschnitt "Agentische KI in
   Sandbox-Umgebungen" und Abschnitt "KI-gestützte Codeerzeugung".
-- `checklisten/CL_12_Agentische-KI-Sandbox.md` (CL_12 v1.2, Prüfpunkte 1
+- `docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md` (CL_12 v1.2, Prüfpunkte 1
   bis 11). CL_12 v1.1 ergänzte gegenüber v1.0 drei Prüfpunkte: §9
   Sandbox-Typologie und Isolationsnachweis (Aufgabe P1-5), §10
   Netzwerkrestriktion (Aufgabe P3-2) und §11 Re-Validierungsstand und
@@ -68,18 +58,15 @@ Eskalation**.
   Initialfreigabe der Sandbox kann von der oder dem CISO/ISB oder von der
   oder dem KI-Beauftragten (KIB) erteilt werden (Aufgabe P1-4). CL_12 v1.3
   erweiterte §5 um einen Querverweis auf die KI-Lieferkettentransparenz.
-- `checklisten/CL_09_KI-Codeerzeugung.md` (CL_09 v1.3, Prüfpunkte 1, 11,
+- `docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md` (CL_09 v1.3, Prüfpunkte 1, 11,
   13, 15). CL_09 v1.3 ergänzte Prüfpunkt 15 „KI-Lieferkettentransparenz"
   (Aufgabe P1-6).
-- `checklisten/CL_10_Sichere-Entwicklungsumgebung.md` (CL_10, Prüfpunkte 4,
+- `docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md` (CL_10, Prüfpunkte 4,
   5, 6, 9).
-- `checklisten/CL_05_Lieferkette-Build-Integritaet.md` (CL_05, Pinning,
+- `docs/secure-development/checklisten/CL_05_Lieferkette-Build-Integritaet.md` (CL_05, Pinning,
   SBOM, Malware-Scan).
 
-Diese Dokumente liegen in einem getrennten Repository
-(`RL_Sichere-Entwicklung`) und sind nicht in diesen Build-Kontext gemountet.
-Der Agent zitiert sie inhaltlich aus den Hinweisen in diesem Dokument; er
-ändert sie nicht.
+Diese Dokumente liegen lokal unter `docs/secure-development/` und werden als mitgeltende Ausbildungs- und Prüfgrundlage behandelt. Der Agent nutzt diese lokale Fassung als Quelle und ändert sie nur, wenn ein ausdrücklicher Auftrag zur Richtlinienpflege vorliegt.
 
 ## Arbeitsweise
 
@@ -177,7 +164,7 @@ exclude_slash_tmp = true
 # gemounteten Arbeitsverzeichnisse. Aenderungen an dieser Liste
 # erfordern ein neues Container-Image, nicht nur einen Restart.
 writable_roots = [
-  "/ade-dev-sandbox",
+  "/absdd-image-sandbox",
   "/home/adedev/home-baseline-tmp",
   "/workspace",
   "/rider-projects",
@@ -190,7 +177,7 @@ writable_roots = [
 [model_providers.azure]
 name = "Azure OpenAI"
 # Der Platzhalter <changeme> wird beim Betrieb ueber den Endpoint des
-# zustaendigen GWDG-/AcademicCloud-Subscriptions ersetzt.
+# zustaendigen Provider- oder Ausbildungs-Subscriptions ersetzt.
 # Der konkrete Endpoint gehoert in die Betriebsdokumentation,
 # nicht in dieses Image.
 base_url = "https://<changeme>.openai.azure.com/openai/v1"
@@ -232,7 +219,7 @@ sandbox_mode = "workspace-write"
 network_access = false
 exclude_slash_tmp = true
 writable_roots = [
-  "/ade-dev-sandbox",
+  "/absdd-image-sandbox",
   "/home/adedev/home-baseline-tmp",
   "/workspace",
   "/rider-projects",
@@ -573,7 +560,7 @@ Konfiguriere `pre-commit` mit `gitleaks` als Mindestabsicherung.
 ### Befund
 
 CL_12 Prüfpunkt 1 verlangt: Sandbox-Typ, verantwortliche Person und
-Freigabestatus dokumentiert. CL_12 selbst bezeichnet `ade-dev-sandbox` als
+Freigabestatus dokumentiert. CL_12 selbst bezeichnet `absdd-image-sandbox` als
 "in Feinabstimmung". Es gibt keine formelle Freigabe-Notiz.
 
 Nach CL_12 v1.2 kann die Initialfreigabe der Sandbox von der oder dem
@@ -724,7 +711,7 @@ sowie Herkunft und Sensitivität der Trainingsdaten noch nicht ab.
 ### Aufgabe
 
 Erweitere `docs/security/ai-tools-inventory.md` um die fehlenden Felder aus
-CL_09 Prüfpunkt 15. Die GWDG nutzt die Modelle nur und erzeugt keine eigene
+CL_09 Prüfpunkt 15. Die Organisation nutzt die Modelle nur und erzeugt keine eigene
 AI-SBOM; die Angaben werden, soweit der Anbieter sie veröffentlicht,
 erfasst oder verlinkt. Fehlt eine Angabe, wird das ausdrücklich vermerkt.
 
@@ -759,7 +746,7 @@ erfasst oder verlinkt. Fehlt eine Angabe, wird das ausdrücklich vermerkt.
 
 ### Eskalationspunkte
 
-- Die GWDG erzeugt für fremdbezogene Modelle keine eigene AI-SBOM. Diese
+- Die Organisation erzeugt für fremdbezogene Modelle keine eigene AI-SBOM. Diese
   Aufgabe beschränkt sich auf das Erfassen und Verlinken von
   Anbieterangaben; eine eigene Modell- oder Trainingsdaten-Erhebung ist
   nicht Gegenstand des Plans.
@@ -816,7 +803,7 @@ list` als Evidenz.
    specify preset list > /workspace/audit-evidence/specify-preset-list.txt
    specify preset info security-governance >> /workspace/audit-evidence/specify-preset-list.txt
    ```
-4. In diesem `ade-dev-sandbox`-Repo eine kurze Notiz unter
+4. In diesem `absdd-image-sandbox`-Repo eine kurze Notiz unter
    `docs/security/spec-kit-pilot.md` ablegen, die das Pilotprojekt referenziert
    und die Evidenz-Datei nennt.
 
@@ -852,7 +839,7 @@ für `main`. Im Sandbox-Repo selbst nicht durchgesetzt.
 1. Datei `.github/CODEOWNERS` oder `.gitlab/CODEOWNERS` anlegen mit
    Mindesteinträgen:
    ```
-   *               @<gwdg-team-handle>
+   *               @<organisation-team-handle>
    /Dockerfile     @<security-team-handle>
    /compose.yml    @<security-team-handle>
    /codex/         @<security-team-handle>
@@ -900,7 +887,7 @@ eine CycloneDX-SBOM erzeugt.
    #!/usr/bin/env bash
    set -euo pipefail
    podman compose build --pull
-   IMAGE="${IMAGE_NAME:-localhost/ade-dev-sandbox-ade:latest}"
+   IMAGE="${IMAGE_NAME:-localhost/absdd-image-sandbox-ade:latest}"
    mkdir -p sboms
    syft "${IMAGE}" -o cyclonedx-json="sboms/$(date +%Y-%m-%d)-ade-sandbox.cdx.json"
    ```

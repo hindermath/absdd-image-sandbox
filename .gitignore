@@ -29,3 +29,6 @@ sboms/*
 !.opencode/command/
 !.opencode/command/**
 .codex/
+
+# macOS Finder metadata
+.DS_Store

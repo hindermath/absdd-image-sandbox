@@ -124,7 +124,7 @@ Merge muss klar sein, ob der MR/PR nur die Freigabe vorbereitet oder eine
 erteilte Freigabe dokumentiert.
 
 Nach dem Merge ist `docs/security/sandbox-freigabe.md` der gueltige
-Repository-Nachweis. Formale DMS-, QISMS- oder Registereintraege bleiben
+Repository-Nachweis. Formale Managementsystem-, Dokumentenlenkungs- oder Registereintraege bleiben
 ausserhalb dieses Repositories.
 
 ## English

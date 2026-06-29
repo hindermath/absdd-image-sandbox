@@ -60,7 +60,7 @@ werden.
 - Keine formale Sandbox-Freigabe, Rechtsfreigabe, Providerfreigabe oder
   Public-Release-Freigabe erfinden.
 - Keine Secrets, Provider, Modelle oder Endpunkte konfigurieren.
-- Keine Plattformregeln wie Branch Protection, Push Rules oder QISMS-Eintraege
+- Keine Plattformregeln wie Branch Protection, Push Rules oder externe Managementsystem-Eintraege
   als agentisch erledigt markieren.
 - Keine vollstaendige Kopie der Level-0-Secure-Development-Basis ohne
   Provenienz-, Lizenz- und Public-Readiness-Pruefung uebernehmen.
@@ -120,7 +120,7 @@ Nutze Lastenheft_RL-SE-Checklist-Selbstpruefung.md als verbindliche Eingabedatei
 
 Ziel: Pruefe absdd-image-sandbox als Ausbildungs-Sandbox gegen die generische Secure-Development-Basis aus ~/home-baseline-tmp/docs/secure-development/. Beruecksichtige Richtlinie_Sichere-Entwicklung.md, Checklistensammelband_Sichere-Entwicklung.md, CL_01 bis CL_12, mitgeltende Dokumente, Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md und die sechs Governance-Presets.
 
-Erzeuge eine projektspezifische Evidenz- und Anwendbarkeitslogik mit `Applicable`, `N/A` und `Open`. Jeder relevante Pruefpunkt braucht Begruendung, Evidenzpfad oder Open-Markierung, Owner, Follow-up und Re-Evaluation-Trigger. Human-only-Punkte wie formale Freigabe, QISMS-Eintraege, Plattform-Branch-Protection, Secrets, Provider und Modellfreigaben duerfen nicht als erledigt behauptet werden.
+Erzeuge eine projektspezifische Evidenz- und Anwendbarkeitslogik mit `Applicable`, `N/A` und `Open`. Jeder relevante Pruefpunkt braucht Begruendung, Evidenzpfad oder Open-Markierung, Owner, Follow-up und Re-Evaluation-Trigger. Human-only-Punkte wie formale Freigabe, externe Managementsystem-Eintraege, Plattform-Branch-Protection, Secrets, Provider und Modellfreigaben duerfen nicht als erledigt behauptet werden.
 
 Beruecksichtige README, AGENTS.md, CLAUDE.md, GEMINI.md, .github/copilot-instructions.md, COMPLIANCE-PLAN_RL-SE-001.md, docs/security/, Dockerfile, compose.yml, compose.home-baseline.yml, bestehende Lastenhefte und bestehende Spec-Kit-Artefakte.
 
