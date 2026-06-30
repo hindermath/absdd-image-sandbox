@@ -9,6 +9,37 @@
 
 **EN:** This folder provides a generic, audit-ready baseline for secure software development. It deliberately avoids concrete organization, company, system, or document-management references. The ISO/IEC 27001/27002-oriented secure-development rigor is preserved.
 
+## Neutralitaetsregeln / Neutrality Rules
+
+**DE:** Diese Basis wird als generische Secure-Development-Basis genutzt, nicht
+als Firmenrichtlinie oder internes Managementsystem-Artefakt. Begriffe wie
+Organisation, Projektverantwortliche, Security-Review, CISO/ISB/KIB,
+Dokumentenablage, Risikoregister, RoPA, Provider oder Plattform sind nur als
+generische Rollen, Systeme oder Platzhalter zu verstehen. Konkrete Firmen,
+private URLs, lokale Hostpfade, Provider-Portale, accountgebundene Defaults,
+externe DMS-/QISMS-Systeme oder Plattformregeln duerfen in wiederverwendbaren
+Anweisungen nicht als Pflichtvoraussetzung erscheinen.
+
+**EN:** This baseline is used as a generic Secure Development Baseline, not as
+a company policy or internal management-system artefact. Terms such as
+organization, project owner, security review, CISO/ISB/KIB, document
+repository, risk register, RoPA, provider, or platform are generic roles,
+systems, or placeholders only. Concrete companies, private URLs, local host
+paths, provider portals, account-bound defaults, external DMS/QISMS systems, or
+platform rules must not appear as mandatory prerequisites in reusable guidance.
+
+**DE:** Bei Reviews und Spec-Kit-Laeufen werden konkrete Treffer entfernt,
+generalisiert oder als Beispiel, Kontext, `N/A`, `Open` oder projektspezifische
+Evidenz klassifiziert. Formale Freigaben, externe Registereintraege,
+Secret-Rotation, Provider-/Modellfreigaben und Plattform-Branch-Protection
+bleiben Human-only oder projektspezifische Nachweise.
+
+**EN:** During reviews and Spec Kit runs, concrete findings are removed,
+generalized, or classified as example, context, `N/A`, `Open`, or
+project-specific evidence. Formal approvals, external register entries, secret
+rotation, provider/model approvals, and platform branch protection remain
+human-only or project-specific evidence.
+
 ## Nutzung / Usage
 
 - **DE:** Nutze die Richtlinie als verbindliche fachliche Orientierung fuer Level-2-Haertungen, Spec-Kit-Laeufe, Code-Reviews und Ausbildungsaufgaben. Nutze die Einzelchecklisten fuer gezielte Pruefungen und den Sammelband fuer eine vollstaendige Projektdurchsicht.

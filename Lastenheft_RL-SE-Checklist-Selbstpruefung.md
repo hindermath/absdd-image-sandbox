@@ -37,6 +37,16 @@ Agent-Guidance-Dateien und Spec-Kit-Artefakte. Diese projektspezifischen
 Nachweise muessen gegen die zentrale Secure-Development-Basis eingeordnet
 werden.
 
+Die Basis ist als generische Ausbildungs-, Review- und Pruefgrundlage zu
+behandeln. Sie ist keine Firmenrichtlinie und kein konkretes
+Managementsystem-Artefakt. Generische Rollen wie Organisation,
+Projektverantwortliche, Security-Review, CISO/ISB/KIB, Dokumentenablage,
+Risikoregister, RoPA, Provider oder Plattform sind Platzhalter. Konkrete
+Firmen, private URLs, lokale Hostpfade, Provider-Portale, accountgebundene
+Defaults, externe DMS-/QISMS-Systeme oder Plattformregeln muessen im spaeteren
+Lauf entfernt, generalisiert oder als Beispiel, Kontext, `N/A`, `Open` oder
+projektspezifische Evidenz klassifiziert werden.
+
 ## Scope
 
 - Anwendbarkeit von RL Sichere Entwicklung, CL_01 bis CL_12,
@@ -48,6 +58,8 @@ werden.
   Compose-Dateien, Dockerfile, Spec-Kit-Artefakten und Lastenheften auswerten.
 - Fuer jeden relevanten Pruefpunkt einen Status `Applicable`, `N/A` oder
   `Open` dokumentieren.
+- Firmen-, system- und managementsystem-spezifische Treffer neutralisieren
+  oder nachvollziehbar klassifizieren.
 - Offene Punkte mit Owner, Follow-up, Evidenzpfad und Re-Evaluation-Trigger
   planen.
 - Human-only-Entscheidungen klar markieren und nicht als erledigt behaupten.
@@ -81,6 +93,10 @@ werden.
    Secure-Development-Basis im Sandbox-Repo sinnvoll ist, und welche Dateien
    aus Lizenz-, Public-Readiness- oder Binaerartefakt-Gruenden ausgeschlossen
    bleiben sollen.
+8. Die Pruefung verwendet die Bezeichnung "generische Secure-Development-Basis"
+   und vermeidet Begriffe wie Firmenrichtlinie, interne Richtlinie oder
+   konkretes QISMS-Artefakt, sofern sie nicht als historischer Kontext oder
+   projektspezifische Evidenz markiert sind.
 
 ## Erwartete Artefakte / Expected Artefacts
 
@@ -119,6 +135,8 @@ werden.
 Nutze Lastenheft_RL-SE-Checklist-Selbstpruefung.md als verbindliche Eingabedatei. Erstelle die Feature-Spezifikation fuer eine RL-SE-/Checklist-Selbstpruefung von absdd-image-sandbox.
 
 Ziel: Pruefe absdd-image-sandbox als Ausbildungs-Sandbox gegen die generische Secure-Development-Basis aus ~/home-baseline-tmp/docs/secure-development/. Beruecksichtige Richtlinie_Sichere-Entwicklung.md, Checklistensammelband_Sichere-Entwicklung.md, CL_01 bis CL_12, mitgeltende Dokumente, Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md und die sechs Governance-Presets.
+
+Neutralitaet: Behandle die Richtlinie, Checklisten, den Sammelband und die mitgeltenden Dokumente als generische Ausbildungs-, Review- und Pruefgrundlage, nicht als Firmenrichtlinie oder konkretes Managementsystem-Artefakt. Konkrete Firmen, private URLs, lokale Hostpfade, Provider-Portale, accountgebundene Defaults, externe DMS-/QISMS-Systeme oder Plattformregeln muessen entfernt, generalisiert oder als Beispiel, Kontext, `N/A`, `Open` oder projektspezifische Evidenz klassifiziert werden.
 
 Erzeuge eine projektspezifische Evidenz- und Anwendbarkeitslogik mit `Applicable`, `N/A` und `Open`. Jeder relevante Pruefpunkt braucht Begruendung, Evidenzpfad oder Open-Markierung, Owner, Follow-up und Re-Evaluation-Trigger. Human-only-Punkte wie formale Freigabe, externe Managementsystem-Eintraege, Plattform-Branch-Protection, Secrets, Provider und Modellfreigaben duerfen nicht als erledigt behauptet werden.
 

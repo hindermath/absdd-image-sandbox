@@ -2,17 +2,35 @@
 
 ## Active Compliance Work Queue
 
-This repository has open audit findings against GWDG guideline `RL-SE-001` v2.1.0 ("Sichere Softwareentwicklung") and checklist `CL_12` v1.0 ("Agentische KI in Sandbox-Umgebungen"). The complete work list with concrete tasks, acceptance criteria, verification steps, and escalation rules is in `COMPLIANCE-PLAN_RL-SE-001.md`.
+This repository maintains open sandbox-governance findings against the generic Secure Development Guideline and checklist `CL_12` ("Agentic AI in Sandbox Environments") from `docs/secure-development`. The complete work list with concrete tasks, acceptance criteria, verification steps, and escalation rules is in `COMPLIANCE-PLAN_RL-SE-001.md`.
 
 **Read `COMPLIANCE-PLAN_RL-SE-001.md` at the start of every GitHub Copilot session.** That file is the single source of truth for:
 
 - the priority order of open work (P0 must run first, then P1, P2, P3);
 - the per-task commit and pull request conventions used for these changes;
-- the items that must NOT be handled by an agent and have to be escalated to a human (API key rotation, formal sandbox approval, platform-side branch protection rules, QISMS register entries).
+- the items that must NOT be handled by an agent and have to be escalated to a human (API key rotation, formal sandbox approval, platform-side branch protection rules, external management-system register entries).
 
 At the end of every GitHub Copilot session, append a short session log under `docs/security/agent-session-log/<YYYY-MM-DD-HHMM>.md` as required by the plan. The log records which plan IDs were completed, partially completed, or escalated.
 
-The plan and these guidelines work together: this `.github/copilot-instructions.md` file describes the repository conventions; `COMPLIANCE-PLAN_RL-SE-001.md` describes the audit-driven work to bring those conventions into provable conformance.
+The plan and these guidelines work together: this `.github/copilot-instructions.md` file describes the repository conventions; `COMPLIANCE-PLAN_RL-SE-001.md` describes the generic secure-development and sandbox-governance work that brings those conventions into provable conformance.
+
+## Secure-Development Neutralitaet / Secure Development Neutrality
+
+Treat `docs/secure-development/` as the generic Secure-Development-Basis for
+training, review, and hardening work. Do not describe it as a company policy,
+internal guideline, or concrete management-system requirement.
+
+Generic roles and placeholders such as organization, project owner, security
+review, CISO/ISB/KIB, document repository, risk register, RoPA, provider, or
+platform are allowed when they remain generic. Concrete organizations, private
+URLs, local host paths, provider portals, account-specific defaults, external
+DMS/QISMS systems, or platform rules must be removed, generalized, or marked as
+example, context, `N/A`, `Open`, or project-specific evidence.
+
+Spec-Kit runs against this baseline must create project-specific evidence.
+Human-only items such as formal approval, external registers, secret rotation,
+provider/model approvals, and platform branch protection must not be claimed as
+completed by an agent.
 
 ## Project Structure & Module Organization
 

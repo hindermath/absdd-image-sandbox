@@ -14,6 +14,24 @@ At the end of every Claude session, append a short session log under `docs/secur
 
 The plan and these guidelines work together: this `CLAUDE.md` file describes the repository conventions; `COMPLIANCE-PLAN_RL-SE-001.md` describes the generic secure-development and sandbox-governance work that brings those conventions into provable conformance.
 
+## Secure-Development Neutralitaet / Secure Development Neutrality
+
+Treat `docs/secure-development/` as the generic Secure-Development-Basis for
+training, review, and hardening work. Do not describe it as a company policy,
+internal guideline, or concrete management-system requirement.
+
+Generic roles and placeholders such as organization, project owner, security
+review, CISO/ISB/KIB, document repository, risk register, RoPA, provider, or
+platform are allowed when they remain generic. Concrete organizations, private
+URLs, local host paths, provider portals, account-specific defaults, external
+DMS/QISMS systems, or platform rules must be removed, generalized, or marked as
+example, context, `N/A`, `Open`, or project-specific evidence.
+
+Spec-Kit runs against this baseline must create project-specific evidence.
+Human-only items such as formal approval, external registers, secret rotation,
+provider/model approvals, and platform branch protection must not be claimed as
+completed by an agent.
+
 ## Project Structure & Module Organization
 
 This repository contains a small Podman-based Opencode, .NET, and Spec Kit environment, not an application codebase.
