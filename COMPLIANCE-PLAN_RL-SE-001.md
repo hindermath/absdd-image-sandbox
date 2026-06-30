@@ -96,7 +96,8 @@ Diese Dokumente liegen lokal unter `docs/secure-development/` und werden als mit
    `docs/secure-development/` sind als generische Secure-Development-Basis zu
    behandeln, nicht als Firmenrichtlinie oder internes Managementsystem-
    Artefakt. Konkrete Organisationen, private URLs, lokale Hostpfade,
-   Provider-Portale, externe DMS-/QISMS-Systeme oder Plattformregeln werden in
+   Provider-Portale, externe Dokumentenmanagement- oder
+   Sicherheitsmanagementsysteme oder Plattformregeln werden in
    wiederverwendbarer Anleitung entfernt, generalisiert oder als Beispiel,
    Kontext, `N/A`, `Open` oder projektspezifische Evidenz klassifiziert.
    Human-only-Punkte wie formale Freigaben, externe Register, Secret-Rotation,

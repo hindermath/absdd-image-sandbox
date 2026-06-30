@@ -24,8 +24,9 @@ Generic roles and placeholders such as organization, project owner, security
 review, CISO/ISB/KIB, document repository, risk register, RoPA, provider, or
 platform are allowed when they remain generic. Concrete organizations, private
 URLs, local host paths, provider portals, account-specific defaults, external
-DMS/QISMS systems, or platform rules must be removed, generalized, or marked as
-example, context, `N/A`, `Open`, or project-specific evidence.
+document-management or security-management systems, or platform rules must be
+removed, generalized, or marked as example, context, `N/A`, `Open`, or
+project-specific evidence.
 
 Spec-Kit runs against this baseline must create project-specific evidence.
 Human-only items such as formal approval, external registers, secret rotation,
