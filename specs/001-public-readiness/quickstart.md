@@ -25,14 +25,16 @@ Expected:
 ```bash
 printf '%s\n' \
   README.md \
+  opencode.env.example \
+  compose.yml \
+  compose.home-baseline.yml \
   AGENTS.md \
   CLAUDE.md \
   GEMINI.md \
   .github/copilot-instructions.md \
   COMPLIANCE-PLAN_RL-SE-001.md \
   docs/security/ \
-  Lastenheft_Abarbeitungsreihenfolge.md \
-  Lastenheft_Sandbox-Public-Readiness.md \
+  Lastenheft_*.md \
   specs/001-public-readiness/
 ```
 
@@ -48,8 +50,8 @@ Use these searches as review aids. They are intentionally broad and require
 human interpretation.
 
 ```bash
-rg -n "(/Users/|C:\\\\|/home/[^ ]+|gitlab-ce|localhost:[0-9]+)" README.md AGENTS.md CLAUDE.md GEMINI.md .github/copilot-instructions.md COMPLIANCE-PLAN_RL-SE-001.md docs/security Lastenheft*.md specs/001-public-readiness
-rg -n "(private|internal|approval|Freigabe|provider|model|legal|license|data-residency|_TODO_|Open|N/A)" README.md AGENTS.md CLAUDE.md GEMINI.md .github/copilot-instructions.md COMPLIANCE-PLAN_RL-SE-001.md docs/security Lastenheft*.md specs/001-public-readiness
+rg -n "(/Users/|C:\\\\|/home/[^ ]+|gitlab-ce|localhost:[0-9]+|provider portal|DMS|QISMS)" README.md opencode.env.example compose.yml compose.home-baseline.yml AGENTS.md CLAUDE.md GEMINI.md .github/copilot-instructions.md COMPLIANCE-PLAN_RL-SE-001.md docs/security Lastenheft*.md specs/001-public-readiness
+rg -n "(private|internal|approval|Freigabe|provider|model|legal|license|data-residency|public release|SBOM|VEX|SLSA|AI-SBOM|_TODO_|Open|N/A)" README.md opencode.env.example compose.yml compose.home-baseline.yml AGENTS.md CLAUDE.md GEMINI.md .github/copilot-instructions.md COMPLIANCE-PLAN_RL-SE-001.md docs/security Lastenheft*.md specs/001-public-readiness
 ```
 
 Expected:
@@ -58,6 +60,7 @@ Expected:
 - Findings in security/audit evidence are classified as context, example,
   not-public-release-relevant, `Open`, `N/A`, or `_TODO_`.
 - No finding is silently ignored.
+- Findings must not start or imply RL-SE-/Checklist self-assessment work.
 
 ## 4. Validate Documentation Edits
 

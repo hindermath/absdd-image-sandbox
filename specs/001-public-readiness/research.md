@@ -4,8 +4,10 @@
 
 **Rationale**: The feature specification explicitly limits the work to public
 readiness wording, evidence classification, and reader guidance. It forbids
-container builds, repository visibility changes, secret rotation, provider
-configuration, and model access changes.
+container builds, container starts, repository visibility changes, secret
+rotation, provider configuration, model access changes, formal approval claims,
+platform branch-protection configuration, and external register completion
+claims.
 
 **Alternatives considered**:
 
@@ -14,6 +16,22 @@ configuration, and model access changes.
   claim.
 - Change runtime configuration: rejected because public readiness is a
   documentation and governance concern here.
+
+## Decision: Keep RL-SE-/Checklist self-assessment out of scope
+
+**Rationale**: The user request for this plan explicitly targets
+`specs/001-public-readiness/spec.md` and says not to plan RL-SE-/Checklist
+self-assessment. Public-Readiness work may reference existing security and
+audit evidence for wording and classification, but it must not become the
+separate full self-assessment feature.
+
+**Alternatives considered**:
+
+- Fold the later RL-SE-/Checklist self-assessment intake into this plan:
+  rejected because it would mix two separate Spec-Kit runs and expand the
+  acceptance surface.
+- Ignore security and audit evidence entirely: rejected because
+  Public-Readiness requires evidence-status preservation and overclaim checks.
 
 ## Decision: Split public wording from audit-evidence origin
 
@@ -34,9 +52,10 @@ context.
 ## Decision: Use explicit evidence classifications
 
 **Rationale**: The specification requires unresolved approval, provider, model,
-data-residency, licensing, legal, and platform decisions to remain visible as
-`Open`, `N/A`, or `_TODO_` with rationale. Security evidence also needs clear
-classification as active evidence, example evidence, unresolved follow-up, or
+data-residency, licensing, legal, public-release, and platform decisions to
+remain visible as `Open`, `N/A`, or `_TODO_` with rationale. Security evidence
+also needs clear classification as active evidence, context evidence, example
+evidence, not-public-release-relevant evidence, unresolved follow-up, or
 non-applicable control.
 
 **Alternatives considered**:
@@ -107,8 +126,11 @@ content failures.
 ## Decision: Validate with text scans and Markdown checks
 
 **Rationale**: The feature's risk is wording drift, hidden private assumptions,
-and overclaiming. `rg` scans, `git diff --check`, and review against the data
-model directly target those risks.
+and overclaiming. `rg` scans for private paths, private URLs, concrete
+organization names, account-bound defaults, provider portals, and unsupported
+release/evidence claims, plus `git diff --check` and review against the data
+model, directly target those risks. `podman-compose config` remains the
+standard static Compose validation.
 
 **Alternatives considered**:
 

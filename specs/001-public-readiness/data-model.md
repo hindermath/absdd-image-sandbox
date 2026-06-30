@@ -13,7 +13,8 @@ training workflow.
 
 - `path`: Repository-relative path or document group.
 - `surface_type`: One of `user-facing`, `agent-guidance`, `security-evidence`,
-  `lastenheft`, `spec-kit-artifact`, or `operational-policy`.
+  `lastenheft`, `configuration-guidance`, `compose-guidance`,
+  `spec-kit-artifact`, or `operational-policy`.
 - `audience`: Public reader, apprentice, trainer, maintainer, reviewer, or
   operator.
 - `language_mode`: German only, English only, bilingual, or surrounding-context
@@ -42,8 +43,9 @@ readers without explanation or replacement.
 - `source_path`: Repository-relative file path.
 - `source_reference`: Heading, line reference, or search term used by review.
 - `assumption_type`: `private-path`, `private-url`, `organization-role`,
-  `non-public-service`, `account-default`, `provider-status`, `legal-status`,
-  or `approval-status`.
+  `non-public-service`, `account-default`, `provider-portal`,
+  `provider-status`, `legal-status`, `release-status`, or
+  `approval-status`.
 - `visibility_risk`: `public-confusion`, `oversharing`, `overclaiming`,
   `audit-loss`, or `none`.
 - `resolution`: `remove`, `genericize`, `mark-context`, `mark-example`,
