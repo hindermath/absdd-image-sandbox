@@ -41,5 +41,7 @@ Diese Tabelle wird aus `Lastenheft*.md` im Repository-Root erzeugt. Sie ist eine
 | 1 | `Lastenheft_Sandbox-Public-Readiness.md` | Kernlogik/Runtime | aktiv / active |
 | 2 | `Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md` | Kernlogik/Runtime | aktiv / active |
 | 3 | `Lastenheft_RL-SE-Checklist-Selbstpruefung.md` | RL-SE-/Checklist-Selbstpruefung | aktiv / active |
-| 4 | `Lastenheft_Secure-Development-Container-Hardening.md` | Weitere Anforderungen | aktiv / active |
+| 4 | `Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md` | GSDB-Spec-Kit-Intensivpruefung | aktiv / active |
+| 5 | `Lastenheft_Secure-Development-Hardening.md` | Secure-Development-Hardening | aktiv / active |
+| 6 | `Lastenheft_Secure-Development-Container-Hardening.md` | Weitere Anforderungen | aktiv / active |
 <!-- secure-development-hardening-order:end -->
