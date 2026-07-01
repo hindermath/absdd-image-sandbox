@@ -104,7 +104,7 @@ Do not:
 
 ## 6. Completion Signal For Later Implementation
 
-Implementation is ready for `/speckit-tasks` acceptance when:
+Implementation is ready for `/speckit-implement` handoff when:
 
 - all public-readiness surfaces have been reviewed,
 - private assumptions are removed, generalized, or classified,

@@ -41,7 +41,8 @@ evidence-status categories, and governance applicability have initial entries.
 - [ ] T008 [P] Record initial private-assumption findings for maintained agent guidance in `specs/001-public-readiness/agent-parity-review.md`
 - [ ] T009 [P] Record initial security and audit evidence classifications in `docs/security/public-readiness-evidence.md`
 - [ ] T010 Record governance applicability for Security, Architecture, iSAQB, A11Y, Cross-Platform, and Agent Parity checkpoints in `specs/001-public-readiness/public-readiness-checkpoints.md`
-- [ ] T011 Add `Open`, `N/A`, `_TODO_`, context, example, and not-public-release-relevant evidence handling rules to `docs/security/public-readiness-evidence.md`
+- [ ] T011 Record NIST SSDF and CWE Top 25 applicability as secure-development review lenses in `specs/001-public-readiness/public-readiness-checkpoints.md`
+- [ ] T012 Add `Open`, `N/A`, `_TODO_`, context, example, and not-public-release-relevant evidence handling rules to `docs/security/public-readiness-evidence.md`
 
 ---
 
@@ -56,13 +57,14 @@ security, Lastenheft, and agent-guidance entry points to identify purpose,
 non-goals, optional home-baseline usage, and public-readiness status in under
 10 minutes.
 
-- [ ] T012 [US1] Update the public-facing sandbox purpose, audience, and non-production boundaries in `README.md`
-- [ ] T013 [US1] Update the optional `home-baseline` setup explanation and public-template flow in `README.md`
-- [ ] T014 [P] [US1] Update public provider and secret-handling wording in `opencode.env.example`
-- [ ] T015 [P] [US1] Update reusable setup and comment wording in `compose.yml`
-- [ ] T016 [P] [US1] Update optional home-baseline override wording in `compose.home-baseline.yml`
-- [ ] T017 [US1] Review learner-facing `Lastenheft_*.md` wording for public-reader clarity and record required edits in `specs/001-public-readiness/public-readiness-surface-inventory.md`
-- [ ] T018 [US1] Record the SC-004 clean-reader review result in `specs/001-public-readiness/public-readiness-checkpoints.md`
+- [ ] T013 [US1] Update the public-facing sandbox purpose, audience, and non-production boundaries in `README.md`
+- [ ] T014 [US1] Update the optional `home-baseline` setup explanation and public-template flow in `README.md`
+- [ ] T015 [P] [US1] Update public provider and secret-handling wording in `opencode.env.example`
+- [ ] T016 [P] [US1] Update reusable setup and comment wording in `compose.yml`
+- [ ] T017 [P] [US1] Update optional home-baseline override wording in `compose.home-baseline.yml`
+- [ ] T018 [US1] Review learner-facing `Lastenheft_*.md` wording for public-reader clarity and record required edits in `specs/001-public-readiness/public-readiness-surface-inventory.md`
+- [ ] T019 [US1] Review `README.md`, learner-facing `Lastenheft_*.md`, affected agent guidance, and `docs/security/` updates for CEFR-B2 wording, text-oriented accessibility, and bilingual continuity in `specs/001-public-readiness/public-readiness-checkpoints.md`
+- [ ] T020 [US1] Record the SC-004 clean-reader review result in `specs/001-public-readiness/public-readiness-checkpoints.md`
 
 ---
 
@@ -76,15 +78,15 @@ host path, private URL, private account, organization-only service, or
 account-bound default unless the item is explicitly classified as context,
 example, not-public-release-relevant evidence, `Open`, `N/A`, or `_TODO_`.
 
-- [ ] T019 [US2] Neutralize private paths, private URLs, account-specific defaults, and non-public provider assumptions in `README.md`
-- [ ] T020 [P] [US2] Neutralize private or account-specific defaults in `opencode.env.example`
-- [ ] T021 [P] [US2] Neutralize private host-path and account-specific assumptions in `compose.yml` and `compose.home-baseline.yml`
-- [ ] T022 [US2] Update shared public-readiness wording atomically across `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and `.github/copilot-instructions.md`
-- [ ] T023 [US2] Generalize user-facing organization-specific language in `Lastenheft_*.md`
-- [ ] T024 [US2] Update `COMPLIANCE-PLAN_RL-SE-001.md` so reusable guidance is generic while security control objectives remain unchanged
-- [ ] T025 [P] [US2] Update `docs/security/` evidence wording so organization-specific origin is classified instead of required from public readers
-- [ ] T026 [US2] Update `specs/001-public-readiness/spec.md`, `specs/001-public-readiness/plan.md`, `specs/001-public-readiness/research.md`, `specs/001-public-readiness/data-model.md`, and `specs/001-public-readiness/quickstart.md` if public-readiness wording has drifted
-- [ ] T027 [US2] Record each resolved private assumption and rationale in `specs/001-public-readiness/public-readiness-surface-inventory.md`
+- [ ] T021 [US2] Neutralize private paths, private URLs, account-specific defaults, and non-public provider assumptions in `README.md`
+- [ ] T022 [P] [US2] Neutralize private or account-specific defaults in `opencode.env.example`
+- [ ] T023 [P] [US2] Neutralize private host-path and account-specific assumptions in `compose.yml` and `compose.home-baseline.yml`
+- [ ] T024 [US2] Update shared public-readiness wording atomically across `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and `.github/copilot-instructions.md`
+- [ ] T025 [US2] Generalize user-facing organization-specific language in `Lastenheft_*.md`
+- [ ] T026 [US2] Update `COMPLIANCE-PLAN_RL-SE-001.md` so reusable guidance is generic while security control objectives remain unchanged
+- [ ] T027 [P] [US2] Update `docs/security/` evidence wording so organization-specific origin is classified instead of required from public readers
+- [ ] T028 [US2] Update `specs/001-public-readiness/spec.md`, `specs/001-public-readiness/plan.md`, `specs/001-public-readiness/research.md`, `specs/001-public-readiness/data-model.md`, and `specs/001-public-readiness/quickstart.md` if public-readiness wording has drifted
+- [ ] T029 [US2] Record each resolved private assumption and rationale in `specs/001-public-readiness/public-readiness-surface-inventory.md`
 
 ---
 
@@ -98,12 +100,12 @@ licensing, data-residency, platform, release, SBOM, VEX, SLSA, or AI-SBOM item
 is marked as `Open`, `N/A`, or `_TODO_` with rationale and follow-up data where
 applicable.
 
-- [ ] T028 [US3] Classify active evidence, context evidence, example evidence, not-public-release-relevant evidence, `Open`, `N/A`, and `_TODO_` entries in `docs/security/public-readiness-evidence.md`
-- [ ] T029 [US3] Add owner, follow-up, and re-evaluation trigger fields for each `Open` or `_TODO_` item in `docs/security/public-readiness-evidence.md`
-- [ ] T030 [US3] Add short rationales for each `N/A` and not-public-release-relevant item in `docs/security/public-readiness-evidence.md`
-- [ ] T031 [US3] Record no-overclaim review results for `COMPLIANCE-PLAN_RL-SE-001.md` and `docs/security/` in `specs/001-public-readiness/public-readiness-checkpoints.md`
-- [ ] T032 [US3] Record agent guidance parity results and any intentional deviations in `specs/001-public-readiness/agent-parity-review.md`
-- [ ] T033 [US3] Map SC-001 through SC-006 to concrete evidence paths in `specs/001-public-readiness/public-readiness-checkpoints.md`
+- [ ] T030 [US3] Classify active evidence, context evidence, example evidence, not-public-release-relevant evidence, `Open`, `N/A`, and `_TODO_` entries in `docs/security/public-readiness-evidence.md`
+- [ ] T031 [US3] Add owner, follow-up, and re-evaluation trigger fields for each `Open` or `_TODO_` item in `docs/security/public-readiness-evidence.md`
+- [ ] T032 [US3] Add short rationales for each `N/A` and not-public-release-relevant item in `docs/security/public-readiness-evidence.md`
+- [ ] T033 [US3] Record no-overclaim review results for `COMPLIANCE-PLAN_RL-SE-001.md` and `docs/security/` in `specs/001-public-readiness/public-readiness-checkpoints.md`
+- [ ] T034 [US3] Record agent guidance parity results and any intentional deviations in `specs/001-public-readiness/agent-parity-review.md`
+- [ ] T035 [US3] Map SC-001 through SC-006 to concrete evidence paths in `specs/001-public-readiness/public-readiness-checkpoints.md`
 
 ---
 
@@ -112,13 +114,14 @@ applicable.
 **Purpose**: Validate documentation quality, Compose syntax, scope boundaries,
 and later implementation-session evidence.
 
-- [ ] T034 Run `git diff --check` and record the result in `specs/001-public-readiness/public-readiness-checkpoints.md`
-- [ ] T035 Run the private-path and private-URL `rg` searches from `specs/001-public-readiness/quickstart.md` and record findings or clean result in `specs/001-public-readiness/public-readiness-checkpoints.md`
-- [ ] T036 Run the status-overclaim `rg` searches from `specs/001-public-readiness/quickstart.md` and record findings or clean result in `specs/001-public-readiness/public-readiness-checkpoints.md`
-- [ ] T037 Run `podman-compose config` and record the result in `specs/001-public-readiness/public-readiness-checkpoints.md`
-- [ ] T038 Run `HOME_BASELINE_DIR=/path/to/home-baseline-tmp podman-compose -f compose.yml -f compose.home-baseline.yml config` only if `compose.home-baseline.yml` or the home-baseline workflow changed, then record pass, skip, or failure reason in `specs/001-public-readiness/public-readiness-checkpoints.md`
-- [ ] T039 Confirm that no container build, container start, repository visibility change, secret rotation, provider/model configuration, formal approval, platform branch-protection configuration, external register entry, or RL-SE-/Checklist self-assessment was performed, and record the result in `specs/001-public-readiness/public-readiness-checkpoints.md`
-- [ ] T040 Add the implementation-session summary for completed, partial, skipped, and escalated Public-Readiness tasks in `docs/security/agent-session-log/<YYYY-MM-DD-HHMM>.md`
+- [ ] T036 Run `git diff --check` and record the result in `specs/001-public-readiness/public-readiness-checkpoints.md`
+- [ ] T037 Run the private-path and private-URL `rg` searches from `specs/001-public-readiness/quickstart.md` and record findings or clean result in `specs/001-public-readiness/public-readiness-checkpoints.md`
+- [ ] T038 Run the status-overclaim `rg` searches from `specs/001-public-readiness/quickstart.md` and record findings or clean result in `specs/001-public-readiness/public-readiness-checkpoints.md`
+- [ ] T039 Run `podman-compose config` and record the result in `specs/001-public-readiness/public-readiness-checkpoints.md`
+- [ ] T040 Run `HOME_BASELINE_DIR=/path/to/home-baseline-tmp podman-compose -f compose.yml -f compose.home-baseline.yml config` only if `compose.home-baseline.yml` or the home-baseline workflow changed, then record pass, skip, or failure reason in `specs/001-public-readiness/public-readiness-checkpoints.md`
+- [ ] T041 Confirm that no container build, container start, repository visibility change, secret rotation, provider/model configuration, formal approval, platform branch-protection configuration, external register entry, or RL-SE-/Checklist self-assessment was performed, and record the result in `specs/001-public-readiness/public-readiness-checkpoints.md`
+- [ ] T042 Add the implementation-session summary for completed, partial, skipped, and escalated Public-Readiness tasks in `docs/security/agent-session-log/<YYYY-MM-DD-HHMM>.md`
+- [ ] T043 Record the `Open` Lastenheft completion follow-up for `Lastenheft_Sandbox-Public-Readiness.md` in `specs/001-public-readiness/public-readiness-checkpoints.md`, including owner, follow-up to provide or identify `scripts/rename-lastenheft.sh` and `scripts/rename-lastenheft.ps1`, and re-evaluation trigger after merge readiness
 
 ---
 
@@ -143,16 +146,16 @@ and later implementation-session evidence.
 
 - T003, T004, and T005 can run in parallel after T001.
 - T008 and T009 can run in parallel with T007 after T006.
-- T014, T015, and T016 can run in parallel in US1.
-- T020, T021, and T025 can run in parallel in US2 because they touch different surfaces.
+- T015, T016, and T017 can run in parallel in US1.
+- T022, T023, and T027 can run in parallel in US2 because they touch different surfaces.
 
 ## Implementation Strategy
 
 ### MVP First
 
 1. Complete Phase 1 and Phase 2.
-2. Complete US1 tasks T012 through T018.
-3. Run the relevant validation tasks T034 through T037.
+2. Complete US1 tasks T013 through T020.
+3. Run the relevant validation tasks T036 through T039.
 4. Stop before broader neutralization if the MVP needs review.
 
 ### Incremental Delivery

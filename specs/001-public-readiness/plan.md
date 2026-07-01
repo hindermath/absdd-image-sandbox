@@ -60,7 +60,7 @@ external register completion claim.
 | Security-first | PASS | No secrets are added; validation plans text scans for private paths, private URLs, account defaults, provider portals, and overclaims. |
 | Memory-safe language | N/A | No runtime code or primary implementation language is introduced; MSL remains a later training/evidence topic only where referenced by existing docs. |
 | NIST SSDF | Applicable | Public-readiness work must preserve secure-development intent and explicit evidence status. |
-| CWE Top 25 | N/A for implementation | No code defects or vulnerability remediation are implemented; no CWE acceptance claim is created. |
+| CWE Top 25 | Applicable as review lens | No code defects or vulnerability remediation are implemented; tasks must record CWE applicability without creating a remediation or acceptance claim. |
 | OWASP ASVS | N/A | No web application, authentication flow, HTTP service, API, or runtime interface is introduced. |
 | SBOM | Applicable as evidence wording | Public-readiness edits must not claim generated SBOM evidence unless an existing evidence path proves it. |
 | VEX | Applicable as evidence wording | Vulnerability-status wording remains explicit as active evidence, `Open`, `N/A`, or `_TODO_`. |
@@ -187,7 +187,8 @@ implementation phase.
 |---|---|---|
 | Security-first | PASS | `plan.md`, `research.md`, `quickstart.md` validation commands |
 | NIST SSDF | PASS | Planned secure-development wording and evidence-status review |
-| CWE / OWASP ASVS | N/A/PASS | No code, web, API, authentication, or vulnerability remediation implementation |
+| CWE Top 25 | PASS | Applicable as a secure-development review lens; no code remediation or vulnerability-fix claim is introduced |
+| OWASP ASVS | N/A/PASS | No web, API, authentication, or runtime service implementation |
 | SBOM / VEX / SLSA / AI-SBOM | PASS | Planned wording/evidence-status review; no new build evidence claimed |
 | Architecture/iSAQB | PASS | Documentation trust-boundary risk captured; no runtime ADR required |
 | Accessibility | PASS | CEFR-B2, bilingual-context, text-oriented documentation checks planned |

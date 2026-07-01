@@ -172,8 +172,10 @@ legal review unless an evidence path exists.
   relevant for documented training scope and later sandbox self-checks.
 - **NIST SSDF**: Applicable as secure-development guidance for repository
   documentation and evidence classification.
-- **CWE Top 25**: `N/A` for this specify run because no application code or
-  vulnerability remediation is implemented.
+- **CWE Top 25**: Applicable as a secure-development review lens for Level-2
+  work. This public-readiness run does not implement application code or
+  vulnerability remediation, so CWE evidence is limited to applicability,
+  wording, and overclaim review.
 - **OWASP ASVS**: `N/A` for this specify run because no web application,
   authentication flow, or service behavior is implemented. It becomes
   applicable if later scope introduces a web application, authentication flow,
