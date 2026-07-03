@@ -39,7 +39,8 @@ KI-Agent direkt umsetzen kann.
 **Ausgeschlossen** (gehört in ein externes Managementsystem oder in die Plattform-Administration):
 
 - Rotation von API-Keys auf Anbieter- oder Plattformseite.
-- Aktivierung von Branch-Protection-Regeln in GitLab oder GitHub.
+- Aktivierung von Branch-Protection- oder Repository-Ruleset-Regeln auf der
+  aktiven Hosting-Plattform.
 - Eintragung von Freigabe-Entscheidungen in externe Dokumentenmanagement- oder Audit-Systeme.
 - Aufnahme eines Werkzeugs in eine externe Liste genehmigter Software.
 - Anlage von Risiko-Register-Einträgen oder SoA-Einträgen.
@@ -840,31 +841,35 @@ für `main`. Im Sandbox-Repo selbst nicht durchgesetzt.
 
 **Repo-seitige Vorbereitung durch Codex:**
 
-1. Datei `.github/CODEOWNERS` oder `.gitlab/CODEOWNERS` anlegen mit
+1. Datei `.github/CODEOWNERS` anlegen mit
    Mindesteinträgen:
    ```
-   *               @<organisation-team-handle>
-   /Dockerfile     @<security-team-handle>
-   /compose.yml    @<security-team-handle>
-   /codex/         @<security-team-handle>
-   /opencode.jsonc @<security-team-handle>
-   /docs/security/ @<security-team-handle>
+   *                    @<repository-owner-or-team>
+   /Dockerfile          @<repository-owner-or-team>
+   /compose.yml         @<repository-owner-or-team>
+   /codex/              @<repository-owner-or-team>
+   /opencode.jsonc      @<repository-owner-or-team>
+   /docs/security/      @<repository-owner-or-team>
+   /.github/workflows/  @<repository-owner-or-team>
    ```
    Team-Handles als `_TODO_` markieren, wenn unbekannt.
-2. Pull-Request-Template anlegen unter `.github/pull_request_template.md`
-   (oder `.gitlab/merge_request_templates/Default.md`) mit Mindestabschnitt:
+2. Pull-Request-Template anlegen unter `.github/pull_request_template.md` mit
+   Mindestabschnitt:
    - "Sicherheitsrelevante Änderung? Ja/Nein"
    - "Vier-Augen-Review erforderlich? Ja/Nein, falls ja: Name"
    - "Audit-Log-Export vor `podman compose down -v` durchgeführt? Ja/Nein"
    - "KI-Anteil? Werkzeug, Umfang, Reviewer"
 3. In `AGENTS.md` Hinweis ergänzen, dass diese Vorlagen im Repo liegen,
-   aber **plattformseitige Branch-Protection-Regeln separat von einem
-   Admin gesetzt werden**.
+   aber **plattformseitige GitHub-Repository-Rulesets separat von einem
+   Owner oder Admin gesetzt werden**. Der dokumentierte Zielzustand fuer
+   `main` umfasst Pull Request, mindestens ein Review, Code-Owner-Review,
+   Loesch-/Non-Fast-Forward-Schutz, die relevanten Required Checks und einen
+   bewusst dokumentierten Admin-Bypass fuer Notfaelle.
 
 ### Akzeptanzkriterien
 
 - [x] CODEOWNERS-Datei vorhanden.
-- [x] PR-/MR-Template vorhanden.
+- [x] PR-Template vorhanden.
 - [x] `AGENTS.md`-Hinweis ergänzt.
 - [x] Eskalations-Item für Branch-Protection an Admin notiert.
 
@@ -942,15 +947,15 @@ Wegen mittleren Umsetzungsaufwands: in **mehreren** kleinen PRs.
 
 ### Umsetzungsschnitt und Abnahme
 
-- MR 1: NodeSource-Setup-Skript ersetzen; TODO-Einträge für uv/uvx und
+- PR 1: NodeSource-Setup-Skript ersetzen; TODO-Einträge für uv/uvx und
   Rust/rustup in `docs/security/supply-chain-todo.md` anlegen.
-- MR 2: uv/uvx auf ein festes GitHub-Release-Artefakt mit
+- PR 2: uv/uvx auf ein festes GitHub-Release-Artefakt mit
   `sha256`-Prüfung umstellen.
-- MR 3: Rust/rustup auf `rustup-init` mit `sha256`-Prüfung umstellen.
+- PR 3: Rust/rustup auf `rustup-init` mit `sha256`-Prüfung umstellen.
 
-Wenn MR 2 auf dem lokalen macOS-/Podman-System wegen Storage-, Speicherplatz-
+Wenn PR 2 auf dem lokalen macOS-/Podman-System wegen Storage-, Speicherplatz-
 oder Podman-VM-Problemen nicht vollständig abgenommen werden kann, darf der
-Branch für eine externe Abnahme auf ein stärkeres System gepusht werden. MR 2
+Branch für eine externe Abnahme auf ein stärkeres System gepusht werden. PR 2
 gilt dann aber erst als mergefähig, wenn dort mindestens folgende Prüfungen
 grün gelaufen sind:
 
@@ -961,7 +966,7 @@ uvx pre-commit run --all-files
 ```
 
 Danach müssen zusätzlich die Tool-Checks im neu gebauten Image laufen. P3-1
-darf erst abgehakt werden, wenn MR 1 bis MR 3 gemergt sind und Build- sowie
+darf erst abgehakt werden, wenn PR 1 bis PR 3 gemergt sind und Build- sowie
 Tool-Checks sauber durchlaufen.
 
 ### Akzeptanzkriterien
@@ -1027,9 +1032,9 @@ Renovate) an, das `Dockerfile`-Pinning-Variablen und npm-Pakete überwacht.
 
 Umsetzung: `renovate.json` ist vorhanden und wurde lokal mit
 `npx --yes --package renovate@latest renovate-config-validator renovate.json`
-validiert. Die operative MR-Erzeugung laeuft nach Aktivierung eines
-Renovate-Bots, GitLab-Runner-Jobs oder externen Renovate-Services fuer dieses
-GitLab-CE-Projekt.
+validiert. Die operative PR-Erzeugung laeuft nach Aktivierung eines
+Renovate-Bots, einer passenden CI-Ausfuehrung oder eines externen
+Renovate-Services fuer die aktive GitHub-Hosting-Plattform.
 
 ---
 

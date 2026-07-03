@@ -25,11 +25,11 @@ This review covers the maintained agent surfaces required by the feature:
 The Commit & Pull Request and Security guidance sections were updated
 atomically in all four files:
 
-- hosting-platform enforcement is described generically;
-- `.gitlab/` files remain repository-side evidence from the current evidence
-  set, not a mandatory public-hosting assumption;
-- the P1-3 audit text no longer states a concrete GitLab CE edition as a
-  reusable public requirement;
+- GitHub hosting-platform enforcement is described as an Owner/Admin action;
+- `.github/CODEOWNERS` and `.github/pull_request_template.md` are the
+  repository-side governance surfaces;
+- old private hosting evidence is not treated as a reusable public
+  requirement;
 - no agent surface claims provider approval, formal approval, public release,
   or branch-protection completion beyond the evidence path.
 

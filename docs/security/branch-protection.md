@@ -1,80 +1,62 @@
-# Branch Protection und signierte Commits
+# Branch Protection and Signed Commits
 
-Stand: 2026-05-17
+Stand: 2026-07-03
 
 ## Deutsch
 
-Dieses Dokument erfasst die GitLab-CE-Evidenz aus dem bisherigen Hosting-
-Kontext. Wenn `absdd-image-sandbox` auf einer anderen Plattform oder als
-oeffentliches Repository betrieben wird, muessen die Plattformregeln dort neu
-bewertet und dokumentiert werden. P2-2 wurde in diesem Kontext pragmatisch
-umgesetzt:
+Dieses Dokument beschreibt den GitHub-Zielzustand fuer `absdd-image-sandbox`
+als Public-Readiness-Sandbox. Es dokumentiert Repository-seitige Vorbereitung
+und Owner-/Admin-Aufgaben. Es schaltet das Repository nicht auf Public und
+setzt keine Plattformregel.
 
-- `main` ist serverseitig als Protected Branch konfiguriert.
-- Direkte Pushes auf `main` sind deaktiviert.
-- Merges nach `main` sind fuer Maintainer ueber Merge Requests erlaubt.
-- Force Push ist deaktiviert.
-- CODEOWNERS und Merge-Request-Template liegen im Repository.
-- Signierte Commits werden dokumentiert und koennen in GitLab als verified
-  angezeigt werden.
-- Serverseitige Erzwingung signierter Commits ist in dieser CE-Instanz aktuell
-  nicht per Projekt-Push-Rule verfuegbar.
+### Aktueller Status
 
-Aktueller Plattformzustand, geprueft mit `glab`:
+- Repository-seitig vorhanden: `.github/CODEOWNERS`.
+- Repository-seitig vorhanden: `.github/pull_request_template.md`.
+- Repository-seitig vorhanden: `.github/workflows/homogeneity-check.yml` mit
+  Agent-Secret-Scan-Jobs fuer Linux, macOS und Windows.
+- Plattformseitige GitHub-Rulesets oder Branch-Protection-Regeln sind
+  Human-/Admin-only und bleiben `Open`, bis sie auf GitHub gesetzt und erneut
+  dokumentiert wurden.
+- Auf dem aktuellen privaten Repository kann der Ruleset-API-Zugriff je nach
+  GitHub-Plan mit dem Hinweis blockiert sein, dass Repository Rulesets erst mit
+  GitHub Pro oder nach Public-Schaltung nutzbar sind. Das ist kein Repo-Fehler.
 
-```bash
-glab api projects/:id/protected_branches
-```
+### Zielzustand fuer `main`
 
-Erwarteter Zustand fuer `main`:
+Der empfohlene GitHub-Ruleset fuer `refs/heads/main`:
 
-```text
-Allowed to push: No one
-Allowed to merge: Maintainers
-Allow force push: false
-```
+| Regel | Zielwert |
+|---|---|
+| Ruleset status | `active` |
+| Target | branch `refs/heads/main` |
+| Deletion protection | enabled |
+| Non-fast-forward protection | enabled |
+| Pull request required | enabled |
+| Required approving reviews | `1` |
+| Code Owner review | required |
+| Required status checks | Agent Secret Scan auf Linux, macOS und Windows |
+| Allowed merge methods | merge, squash, rebase |
+| Admin bypass | allowed only for documented Owner/Admin emergency use |
 
-Die Einstellung wurde am 2026-05-17 per `glab api` gesetzt. Die direkte
-PATCH-Aktualisierung des bestehenden Access-Level-Eintrags wurde von dieser
-Instanz nicht wirksam uebernommen. Deshalb wurde die Protected-Branch-Regel
-kurz entfernt und direkt mit strengerer Konfiguration neu angelegt:
+Der Admin-Bypass ist bewusst vorgesehen, damit ein Owner oder Admin bei
+dringenden Governance- oder Infrastrukturkorrekturen handlungsfaehig bleibt.
+Jede Nutzung muss in PR-Beschreibung, Review-Kommentar oder Session-/Admin-Log
+begruendet werden.
 
-```bash
-glab api --method DELETE projects/:id/protected_branches/main
-glab api --method POST projects/:id/protected_branches \
-  --field "name=main" \
-  --field "push_access_level=0" \
-  --field "merge_access_level=40" \
-  --field "allow_force_push=false"
-```
-
-Das ist kein regulaerer Arbeitsablauf fuer Entwickler:innen, sondern eine
-einmalige Owner-/Admin-Konfiguration. Normaler Aenderungsfluss:
+### Normaler Aenderungsfluss
 
 1. Feature-Branch erstellen.
 2. Aenderung committen.
 3. Branch pushen.
-4. Merge Request gegen `main` erstellen.
-5. Review, Validierung und Merge ueber GitLab.
-
-Repo-seitige Vorbereitung:
-
-- `.gitlab/CODEOWNERS` weist zunaechst `@thinder` als Owner zu.
-- `.gitlab/merge_request_templates/Default.md` enthaelt Sicherheits-,
-  Review-, Audit- und KI-Anteil-Fragen.
-
-Hinweis zu CODEOWNERS:
-
-GitLab CE kann die Datei als Code-Ownership-Hinweis verwenden. Ob Code-Owner-
-Approval fuer Merge Requests erzwungen werden kann, haengt von der konkreten
-GitLab-Edition und Instanzkonfiguration ab. Dedizierte Organisations- oder Ausbildungsteam-Handles sollten
-spaeter in `.gitlab/CODEOWNERS` nachgetragen werden.
+4. Pull Request gegen `main` erstellen.
+5. Review, Required Checks und Merge ueber GitHub durchfuehren.
 
 ### Signierte Commits
 
-GitLab kann GPG-, SSH- und X.509-signierte Commits als verified anzeigen, wenn
-der oeffentliche Schluessel im GitLab-Profil hinterlegt ist und zur Committer-
-Identitaet passt.
+GitHub kann GPG-, SSH- und S/MIME-signierte Commits als verified anzeigen,
+wenn der passende oeffentliche Schluessel im GitHub-Profil hinterlegt ist und
+zur Committer-Identitaet passt.
 
 SSH-Signing, Beispiel:
 
@@ -95,109 +77,69 @@ git config --global commit.gpgsign true
 git commit -S -m "docs: update branch protection notes"
 ```
 
-Der passende Public Key muss im GitLab-Profil hinterlegt werden:
+Der passende Public Key muss im GitHub-Profil hinterlegt werden:
 
-- User Settings > SSH Keys: fuer SSH-Signing mit Usage Type `Signing` oder
-  `Authentication & Signing`.
-- User Settings > GPG Keys: fuer GPG-Signing.
+- Settings > SSH and GPG keys: fuer SSH-Signing mit Signing-Key.
+- Settings > SSH and GPG keys: fuer GPG-Signing.
 
-### Nicht per GitLab CE/API erfuellt
-
-Der API-Aufruf
-
-```bash
-glab api projects/:id/push_rule
-```
-
-liefert auf dieser Instanz `404 Not Found`. Die serverseitige Push-Rule
-`Reject unsigned commits` ist daher aktuell nicht als Projektregel verfuegbar.
-Fuer harte Erzwingung signierter Commits braucht es eine der folgenden Optionen:
-
-- GitLab Push Rules mit `Reject unsigned commits`, falls die Instanz/Edition
-  diese Funktion bereitstellt.
-- Admin-betriebener Git-Server-Hook.
-- Upgrade beziehungsweise Freischaltung einer GitLab-Edition/Funktion, die
-  diese Regel unterstuetzt.
-
-Quellen:
-
-- GitLab Protected Branches: https://docs.gitlab.com/user/project/repository/branches/protected/
-- GitLab Protected Branches API: https://docs.gitlab.com/api/protected_branches/
-- GitLab Push Rules: https://docs.gitlab.com/user/project/repository/push_rules/
-- GitLab Signed Commits: https://docs.gitlab.com/user/project/repository/signed_commits/
-- GitLab Code Owners: https://docs.gitlab.com/user/project/codeowners/
+Harte serverseitige Erzwingung signierter Commits ist eine
+Plattform-/Admin-Entscheidung. Sie darf in diesem Repository erst als erledigt
+markiert werden, wenn die Regel auf GitHub aktiv ist und durch Owner/Admin
+nachgewiesen wurde.
 
 ## English
 
-This document records GitLab CE evidence from the previous hosting context. If
-`absdd-image-sandbox` is operated on another platform or as a public
-repository, the platform rules must be reassessed and documented there. P2-2
-was therefore implemented pragmatically in this context:
+This document describes the GitHub target state for `absdd-image-sandbox` as a
+public-readiness sandbox. It records repository-side preparation and
+owner/admin tasks. It does not make the repository public and does not configure
+platform rules.
 
-- `main` is configured as a protected branch on the GitLab server.
-- Direct pushes to `main` are disabled.
-- Maintainers can merge into `main` through merge requests.
-- Force push is disabled.
-- CODEOWNERS and a merge request template are stored in the repository.
-- Signed commits are documented and can be shown as verified in GitLab.
-- Server-side enforcement of signed commits is not currently available through
-  a project push rule on this CE instance.
+### Current Status
 
-Current platform state, checked with `glab`:
+- Repository-side file present: `.github/CODEOWNERS`.
+- Repository-side file present: `.github/pull_request_template.md`.
+- Repository-side workflow present: `.github/workflows/homogeneity-check.yml`
+  with agent secret scan jobs for Linux, macOS, and Windows.
+- Platform-side GitHub rulesets or branch-protection rules are human/admin-only
+  and remain `Open` until configured on GitHub and documented again.
+- On the current private repository, GitHub Rulesets API access may be blocked
+  depending on the GitHub plan with a message that rulesets require GitHub Pro
+  or public visibility. That is not a repository defect.
 
-```bash
-glab api projects/:id/protected_branches
-```
+### Target State For `main`
 
-Expected state for `main`:
+Recommended GitHub ruleset for `refs/heads/main`:
 
-```text
-Allowed to push: No one
-Allowed to merge: Maintainers
-Allow force push: false
-```
+| Rule | Target value |
+|---|---|
+| Ruleset status | `active` |
+| Target | branch `refs/heads/main` |
+| Deletion protection | enabled |
+| Non-fast-forward protection | enabled |
+| Pull request required | enabled |
+| Required approving reviews | `1` |
+| Code Owner review | required |
+| Required status checks | Agent Secret Scan on Linux, macOS, and Windows |
+| Allowed merge methods | merge, squash, rebase |
+| Admin bypass | allowed only for documented owner/admin emergency use |
 
-The setting was applied with `glab api` on 2026-05-17. A direct PATCH update of
-the existing access-level entry was not applied by this instance. The protected
-branch rule was therefore briefly removed and immediately recreated with the
-stricter configuration:
+The admin bypass is intentional so that an owner or admin can still handle
+urgent governance or infrastructure fixes. Each use must be justified in the
+PR description, a review comment, or a session/admin log.
 
-```bash
-glab api --method DELETE projects/:id/protected_branches/main
-glab api --method POST projects/:id/protected_branches \
-  --field "name=main" \
-  --field "push_access_level=0" \
-  --field "merge_access_level=40" \
-  --field "allow_force_push=false"
-```
-
-This is not a regular developer workflow, but a one-time owner/admin
-configuration. Normal change flow:
+### Normal Change Flow
 
 1. Create a feature branch.
 2. Commit the change.
 3. Push the branch.
-4. Create a merge request targeting `main`.
-5. Review, validate, and merge through GitLab.
+4. Create a pull request targeting `main`.
+5. Review, required checks, and merge through GitHub.
 
-Repository-side preparation:
+### Signed Commits
 
-- `.gitlab/CODEOWNERS` currently assigns `@thinder` as owner.
-- `.gitlab/merge_request_templates/Default.md` contains questions for security,
-  review, audit, and AI involvement.
-
-Note about CODEOWNERS:
-
-GitLab CE can use the file as a code ownership signal. Whether Code Owner
-approval can be enforced for merge requests depends on the concrete GitLab
-edition and instance configuration. Dedicated organization or training-team handles should be added
-to `.gitlab/CODEOWNERS` later.
-
-### Signed commits
-
-GitLab can display GPG-, SSH-, and X.509-signed commits as verified when the
-public key is registered in the GitLab profile and matches the committer
-identity.
+GitHub can display GPG-, SSH-, and S/MIME-signed commits as verified when the
+matching public key is registered in the GitHub profile and matches the
+committer identity.
 
 SSH signing example:
 
@@ -218,25 +160,11 @@ git config --global commit.gpgsign true
 git commit -S -m "docs: update branch protection notes"
 ```
 
-The matching public key must be registered in the GitLab profile:
+The matching public key must be registered in the GitHub profile:
 
-- User Settings > SSH Keys: for SSH signing with usage type `Signing` or
-  `Authentication & Signing`.
-- User Settings > GPG Keys: for GPG signing.
+- Settings > SSH and GPG keys: for SSH signing with a signing key.
+- Settings > SSH and GPG keys: for GPG signing.
 
-### Not fulfilled through GitLab CE/API
-
-The API call
-
-```bash
-glab api projects/:id/push_rule
-```
-
-returns `404 Not Found` on this instance. The server-side push rule
-`Reject unsigned commits` is therefore not currently available as a project
-rule. Hard enforcement of signed commits requires one of these options:
-
-- GitLab Push Rules with `Reject unsigned commits`, if the instance/edition
-  provides that feature.
-- Admin-operated Git server hook.
-- Upgrade or enablement of a GitLab edition/feature that supports this rule.
+Hard server-side enforcement of signed commits is a platform/admin decision.
+This repository may only mark it as complete after the rule is active on GitHub
+and evidenced by an owner/admin.

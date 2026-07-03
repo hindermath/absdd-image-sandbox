@@ -274,12 +274,12 @@ For pull requests, include:
 - screenshots only if documentation rendering or UI output is relevant
 
 Repository governance lives partly in this repository and partly in the active
-hosting platform. `.gitlab/CODEOWNERS` and
-`.gitlab/merge_request_templates/Default.md` are repository-side guidance from
-the current evidence set. Platform-side enforcement such as protected-branch
-rules, Code Owner approval, and push rules must be configured separately by an
-Owner or Admin on the hosting platform. For the recorded GitLab CE evidence
-context and signed-commit limitations, see `docs/security/branch-protection.md`.
+GitHub hosting platform. `.github/CODEOWNERS` and
+`.github/pull_request_template.md` are repository-side guidance for reviews.
+Platform-side enforcement such as repository rulesets, required checks, Code
+Owner review, signed-commit policy, and admin bypass must be configured
+separately by an Owner or Admin on GitHub. For the target public-readiness
+ruleset and signed-commit notes, see `docs/security/branch-protection.md`.
 
 ## Security & Configuration Tips
 

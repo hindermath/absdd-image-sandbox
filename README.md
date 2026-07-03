@@ -287,7 +287,7 @@ podman compose build --pull
 
 Bei Toolchain-Aenderungen zusaetzlich die Toolchecks aus diesem Dokument
 ausfuehren. Wenn eine Plattform, Podman-Machine oder Netzwerkzugriff nicht
-verfuegbar ist, die ausgelassene Pruefung mit Grund im Merge Request oder im
+verfuegbar ist, die ausgelassene Pruefung mit Grund im Pull Request oder im
 Session-Log dokumentieren.
 
 ## Troubleshooting
