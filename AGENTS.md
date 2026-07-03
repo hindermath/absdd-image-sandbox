@@ -273,13 +273,13 @@ For pull requests, include:
 - notes about configuration or secret handling
 - screenshots only if documentation rendering or UI output is relevant
 
-GitLab repository governance lives in this repository and in the GitLab project
-settings. `.gitlab/CODEOWNERS` and
-`.gitlab/merge_request_templates/Default.md` are repository-side guidance.
-Platform-side enforcement such as protected-branch rules, Code Owner approval,
-and push rules must be configured separately in GitLab by an Owner or Admin.
-For the current GitLab CE status and signed-commit limitations, see
-`docs/security/branch-protection.md`.
+Repository governance lives partly in this repository and partly in the active
+hosting platform. `.gitlab/CODEOWNERS` and
+`.gitlab/merge_request_templates/Default.md` are repository-side guidance from
+the current evidence set. Platform-side enforcement such as protected-branch
+rules, Code Owner approval, and push rules must be configured separately by an
+Owner or Admin on the hosting platform. For the recorded GitLab CE evidence
+context and signed-commit limitations, see `docs/security/branch-protection.md`.
 
 ## Security & Configuration Tips
 
@@ -300,7 +300,8 @@ pre-commit run --all-files
 
 If `pre-commit` is not installed in the current environment, install it first with `uv tool install pre-commit` or run it via `uvx pre-commit run --all-files`.
 
-Audit text for P1-3: "Client-side Control, in GitLab CE nicht vollständig serverseitig erzwingbar; zentrale Push-Blockade nur mit GitLab Ultimate Secret Push Protection oder Admin-Server-Hook."
+Audit text for P1-3: "Client-side Control; central secret push blocking
+depends on the active hosting platform, edition, and admin-operated hooks."
 
 Run the agent-session audit export at least once per workday and always before removing Compose volumes. The standard stop path is the wrapper, because it exports metadata before running `compose down`:
 

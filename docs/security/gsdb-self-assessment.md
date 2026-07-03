@@ -2,7 +2,7 @@
 
 **Projekt / Project:** absdd-image-sandbox
 **Datum / Date:** 2026-07-01
-**Repository:** `/Users/thorstenhindermann/container-images/absdd-image-sandbox`
+**Repository:** lokaler Checkout dieses Repositories
 **Primaersprache / Primary language:** Python/Bash/PowerShell
 
 Dieses Dokument ist ein Preflight-Bericht. Es startet keinen Spec-Kit-Lauf und

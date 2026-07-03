@@ -2,7 +2,7 @@
 
 Status: Review-Anleitung fuer P1-4
 
-Dieses Dokument beschreibt, wie die formelle Freigabe der `ade-dev-sandbox`
+Dieses Dokument beschreibt, wie die formelle Freigabe von `absdd-image-sandbox`
 durch CISO/ISB oder eine:n KI-Beauftragte:n (KIB) vorbereitet, geprueft und
 per Merge Request beziehungsweise Pull Request dokumentiert wird.
 
@@ -75,7 +75,7 @@ Freigabe durch CISO/ISB oder KI-Beauftragte:n (KIB) ausstehend.
 
 ### MR/PR erstellen
 
-Der Standardweg in diesem GitLab-Repo ist ein Feature-Branch mit Merge Request
+Der Standardweg ist ein Feature-Branch mit Merge Request oder Pull Request
 gegen `main`:
 
 ```bash
@@ -131,7 +131,7 @@ ausserhalb dieses Repositories.
 
 ### Purpose
 
-This document describes how formal approval of `ade-dev-sandbox` is prepared,
+This document describes how formal approval of `absdd-image-sandbox` is prepared,
 reviewed, and documented through a merge request or pull request by CISO/ISB
 or an AI officer (KIB).
 

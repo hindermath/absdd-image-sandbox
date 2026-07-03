@@ -1,14 +1,15 @@
 services:
   ade:
-    # Network decision: keep Compose default bridge with free egress for the
-    # learning environment. See docs/security/network-decision.md.
+    # Public training sandbox: keep Compose default bridge with free egress for
+    # the learning environment. See docs/security/network-decision.md.
     build:
       context: .
       pull: true
     volumes:
       - ./workspace:/workspace
       # Repository self-mount for controlled maintenance tasks from inside the
-      # container, for example scripts that inspect or patch opencode.jsonc.
+      # container. The default is this checkout; public users may override it
+      # with another local checkout path.
       - type: bind
         source: ${ADE_DEV_SANDBOX_DIR:-.}
         target: /ade-dev-sandbox

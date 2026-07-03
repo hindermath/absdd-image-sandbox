@@ -14,8 +14,9 @@ KI-Agent direkt umsetzen kann.
 
 ## Auftragnehmer
 
-- **Ausführender Agent:** Codex CLI mit Modell **gpt-5.5**, Reasoning-Stufe
-  **high**.
+- **Ausführender Agent:** ein freigegebener Coding-/Reasoning-Agent, dessen
+  konkrete Modellwahl operative Routing-Guidance bleibt und nicht als
+  Feature-Anforderung in diesem Plan festgeschrieben wird.
 - **Sandbox:** Diese absdd-image-sandbox selbst, gestartet über
   `podman compose up -d`.
 - **Schreibrechte des Agenten:** ausschließlich innerhalb der gemounteten
@@ -145,8 +146,9 @@ liegt nur `codex.config.toml.example` als loses Vorlagen-Schnipsel.
 
 Lege das Verzeichnis `codex/` mit zwei Dateien an: `config.toml` und
 `requirements.toml`. Inhalt entspricht den dokumentierten Sicherheits-
-Defaults aus `README.md` Zeilen 1300 bis 1307 plus dem Provider-Block aus
-`codex.config.toml.example`.
+Defaults aus `README.md`. Die systemweite Konfiguration enthaelt keine
+vorkonfigurierte Modell- oder Providerbindung; konkrete Provider werden nur
+lokal und untracked durch den Owner eingerichtet.
 
 ### Vorlage `codex/config.toml`
 
@@ -155,10 +157,6 @@ Defaults aus `README.md` Zeilen 1300 bis 1307 plus dem Provider-Block aus
 # Wird im Image-Build nach /etc/codex/config.toml kopiert.
 # Diese Werte sind die ergonomischen Defaults, die ein Endnutzer
 # innerhalb der zulässigen Grenzen anpassen darf.
-
-model = "gpt-5.4"
-model_provider = "azure"
-model_reasoning_effort = "medium"
 
 # Sandbox-Modus: Codex darf in den deklarierten Wurzeln schreiben,
 # aber nicht beliebig auf das Host-Dateisystem zugreifen.
@@ -185,15 +183,9 @@ writable_roots = [
   "/python-projects",
 ]
 
-[model_providers.azure]
-name = "Azure OpenAI"
-# Der Platzhalter <changeme> wird beim Betrieb ueber den Endpoint des
-# zustaendigen Provider- oder Ausbildungs-Subscriptions ersetzt.
-# Der konkrete Endpoint gehoert in die Betriebsdokumentation,
-# nicht in dieses Image.
-base_url = "https://<changeme>.openai.azure.com/openai/v1"
-env_key = "AZURE_OPENAI_API_KEY"
-wire_api = "responses"
+# Kein Modellanbieter ist in dieser Image-Konfiguration voreingestellt.
+# Falls ein Betreiber einen Provider nutzt, gehoeren Endpoint und API-Key in
+# lokale, untracked Konfiguration und nicht in dieses Repository.
 ```
 
 ### Vorlage `codex/requirements.toml`
@@ -289,9 +281,9 @@ checklist items 2 and 5.
 - Wenn das `requirements.toml`-Schema nicht eindeutig recherchierbar ist:
   stoppe und melde dies. Liefere die `config.toml` separat, ohne
   `requirements.toml` zu erfinden.
-- Der Azure-Endpoint-Platzhalter `<changeme>` bleibt im Image-Build
-  beabsichtigt unausgefüllt. Den echten Endpoint setzt der Betrieb über
-  Umgebungsvariablen.
+- Es wird kein Provider-Endpoint in das Image geschrieben. Einen echten
+  Endpoint setzt der Owner nur in lokaler, untracked Betriebs- oder
+  Benutzerkonfiguration.
 
 ---
 
@@ -501,9 +493,10 @@ Einträge initial:
 1. **OpenCode** (CLI im Container) — kein vorkonfigurierter Modellanbieter.
    DPA-Datum, ZDR-Status, freigegeben-bis-Datum und etwaige lokal
    genehmigte Provider vom Owner einzutragen.
-2. **Codex CLI** (im Container) — Provider Azure OpenAI, Region einzutragen
-   (EU bevorzugt). DPA-Datum, ZDR-Status, freigegeben-bis-Datum vom Owner
-   einzutragen.
+2. **Codex CLI** (im Container) — kein Provider im Repository
+   vorkonfiguriert. Falls ein Owner lokal einen Provider nutzt, sind
+   Betriebsvariante, Region, DPA-Datum, ZDR-Status und freigegeben-bis-Datum
+   vom Owner einzutragen.
 3. **Spec Kit** — Version `v0.8.3`, Bezug aus GitHub
    `github.com/github/spec-kit.git`, Lizenz beachten.
 

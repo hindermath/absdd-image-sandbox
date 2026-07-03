@@ -47,12 +47,14 @@ vorangestellte Metadatenzeile mit passendem `argName` hat.
 | `OPENCODE_VERSION` | `npm` | `opencode-ai` |
 | `CODEX_VERSION` | `npm` | `@openai/codex` |
 
-### GitLab-CE-Betrieb
+### GitLab-CE-Betriebskontext
 
 Dieses Repository enthaelt nur die Renovate-Konfiguration. Damit Renovate
-tatsaechlich Merge Requests erstellt, muss ein Renovate-Bot, ein GitLab Runner
-oder ein externer Renovate-Service fuer dieses GitLab-CE-Projekt aktiviert
-werden. Bis dahin gilt P3-3 repo-seitig als vorbereitet; die serverseitige
+tatsaechlich Merge Requests oder Pull Requests erstellt, muss ein Renovate-Bot,
+Runner oder externer Renovate-Service fuer die aktive Hosting-Plattform
+aktiviert werden. Der bisher dokumentierte GitLab-CE-Kontext ist
+Kontextevidenz, keine Public-Release-Anforderung. Bis zur Plattform-
+Einrichtung gilt P3-3 repo-seitig als vorbereitet; die serverseitige
 Ausfuehrung ist ein Betriebs-/Admin-Schritt.
 
 ### Validierung vor Merge
@@ -109,13 +111,14 @@ preceding metadata line with a matching `argName`.
 | `OPENCODE_VERSION` | `npm` | `opencode-ai` |
 | `CODEX_VERSION` | `npm` | `@openai/codex` |
 
-### GitLab CE Operation
+### GitLab CE Operation Context
 
 This repository only contains the Renovate configuration. For Renovate to
-actually create merge requests, a Renovate bot, GitLab Runner, or external
-Renovate service must be enabled for this GitLab CE project. Until then, P3-3
-is prepared on the repository side; server-side execution is an operations or
-admin step.
+actually create merge requests or pull requests, a Renovate bot, runner, or
+external Renovate service must be enabled for the active hosting platform. The
+previously documented GitLab CE context is context evidence, not a public
+release requirement. Until platform setup is complete, P3-3 is prepared on the
+repository side; server-side execution is an operations or admin step.
 
 ### Validation Before Merge
 

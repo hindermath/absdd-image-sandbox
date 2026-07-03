@@ -4,7 +4,7 @@ Stand: 2026-05-14
 
 ## Deutsch
 
-Dieses Repository nutzt `pre-commit` mit `gitleaks` `v8.30.1` als Mindestabsicherung gegen versehentlich committed Klartext-Geheimnisse.
+Dieses Repository nutzt `pre-commit` mit `gitleaks` `v8.30.1` als Mindestabsicherung gegen versehentlich committed Klartext-Geheimnisse. Hosting- oder CI-spezifische Angaben in diesem Dokument sind Kontextevidenz und muessen fuer die aktive Plattform erneut bewertet werden.
 
 Kontrollen:
 
@@ -34,7 +34,7 @@ gitleaks git --config .gitleaks.toml --redact --verbose .
 
 ## English
 
-This repository uses `pre-commit` with `gitleaks` `v8.30.1` as the minimum control against accidentally committed plaintext secrets.
+This repository uses `pre-commit` with `gitleaks` `v8.30.1` as the minimum control against accidentally committed plaintext secrets. Hosting- or CI-specific statements in this document are context evidence and must be reassessed for the active platform.
 
 Controls:
 

@@ -21,8 +21,10 @@ evidence.*
 
 ## Ausgangslage / Context
 
-Die Secure-Development-Basis liegt kanonisch im Level-0-Repository
-`~/home-baseline-tmp/docs/secure-development/`. Sie enthaelt:
+Die Secure-Development-Basis liegt fuer dieses Repository lokal unter
+`docs/secure-development/`. Eine uebergeordnete Template- oder Baseline-Quelle
+kann projektspezifisch existieren, ist aber fuer public-ready Leserinnen und
+Leser keine Voraussetzung. Die lokale Basis enthaelt:
 
 - `Richtlinie_Sichere-Entwicklung.md`
 - `Checklistensammelband_Sichere-Entwicklung.md`
@@ -134,7 +136,7 @@ projektspezifische Evidenz klassifiziert werden.
 ```text
 Nutze Lastenheft_RL-SE-Checklist-Selbstpruefung.md als verbindliche Eingabedatei. Erstelle die Feature-Spezifikation fuer eine RL-SE-/Checklist-Selbstpruefung von absdd-image-sandbox.
 
-Ziel: Pruefe absdd-image-sandbox als Ausbildungs-Sandbox gegen die generische Secure-Development-Basis aus ~/home-baseline-tmp/docs/secure-development/. Beruecksichtige Richtlinie_Sichere-Entwicklung.md, Checklistensammelband_Sichere-Entwicklung.md, CL_01 bis CL_12, mitgeltende Dokumente, Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md und die sechs Governance-Presets.
+Ziel: Pruefe absdd-image-sandbox als Ausbildungs-Sandbox gegen die generische Secure-Development-Basis aus docs/secure-development/. Beruecksichtige Richtlinie_Sichere-Entwicklung.md, Checklistensammelband_Sichere-Entwicklung.md, CL_01 bis CL_12, mitgeltende Dokumente, Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md und die sechs Governance-Presets.
 
 Neutralitaet: Behandle die Richtlinie, Checklisten, den Sammelband und die mitgeltenden Dokumente als generische Ausbildungs-, Review- und Pruefgrundlage, nicht als Firmenrichtlinie oder konkretes Managementsystem-Artefakt. Konkrete Firmen, private URLs, lokale Hostpfade, Provider-Portale, accountgebundene Defaults, externe DMS-/QISMS-Systeme oder Plattformregeln muessen entfernt, generalisiert oder als Beispiel, Kontext, `N/A`, `Open` oder projektspezifische Evidenz klassifiziert werden.
 
