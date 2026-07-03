@@ -5,9 +5,9 @@ Stand: 2026-07-03
 ## Deutsch
 
 Dieses Dokument beschreibt den GitHub-Zielzustand fuer `absdd-image-sandbox`
-als Public-Readiness-Sandbox. Es dokumentiert Repository-seitige Vorbereitung
-und Owner-/Admin-Aufgaben. Es schaltet das Repository nicht auf Public und
-setzt keine Plattformregel.
+als Public-Readiness-Sandbox. Es dokumentiert Repository-seitige Vorbereitung,
+Owner-/Admin-Aufgaben und den am 2026-07-03 aktivierten GitHub-Ruleset fuer
+`main`.
 
 ### Aktueller Status
 
@@ -15,12 +15,9 @@ setzt keine Plattformregel.
 - Repository-seitig vorhanden: `.github/pull_request_template.md`.
 - Repository-seitig vorhanden: `.github/workflows/homogeneity-check.yml` mit
   Agent-Secret-Scan-Jobs fuer Linux, macOS und Windows.
-- Plattformseitige GitHub-Rulesets oder Branch-Protection-Regeln sind
-  Human-/Admin-only und bleiben `Open`, bis sie auf GitHub gesetzt und erneut
-  dokumentiert wurden.
-- Auf dem aktuellen privaten Repository kann der Ruleset-API-Zugriff je nach
-  GitHub-Plan mit dem Hinweis blockiert sein, dass Repository Rulesets erst mit
-  GitHub Pro oder nach Public-Schaltung nutzbar sind. Das ist kein Repo-Fehler.
+- Repository-Sichtbarkeit: `PUBLIC`, gesetzt am 2026-07-03.
+- GitHub-Ruleset `main` ist aktiv: Ruleset-ID `18493733`.
+- `main` ist durch das Ruleset geschuetzt: `protected=true`.
 
 ### Zielzustand fuer `main`
 
@@ -38,6 +35,26 @@ Der empfohlene GitHub-Ruleset fuer `refs/heads/main`:
 | Required status checks | Agent Secret Scan auf Linux, macOS und Windows |
 | Allowed merge methods | merge, squash, rebase |
 | Admin bypass | allowed only for documented Owner/Admin emergency use |
+
+### Aktivierte Plattformregeln
+
+Gepruefter Live-Zustand am 2026-07-03:
+
+| Regel | Aktivierter Wert |
+|---|---|
+| Repository visibility | `PUBLIC` |
+| Ruleset ID | `18493733` |
+| Ruleset status | `active` |
+| Target | branch `refs/heads/main` |
+| Deletion protection | enabled |
+| Non-fast-forward protection | enabled |
+| Pull request required | enabled |
+| Required approving reviews | `1` |
+| Code Owner review | required |
+| Required status checks | `Agent Secret Scan (ubuntu-22.04)`, `Agent Secret Scan (macos-14)`, `Agent Secret Scan (windows-2022)` |
+| Required checks integration | GitHub Actions, `integration_id=15368` |
+| Allowed merge methods | merge, squash, rebase |
+| Admin bypass | `RepositoryRole`, `actor_id=5`, `bypass_mode=always` |
 
 Der Admin-Bypass ist bewusst vorgesehen, damit ein Owner oder Admin bei
 dringenden Governance- oder Infrastrukturkorrekturen handlungsfaehig bleibt.
@@ -91,8 +108,7 @@ nachgewiesen wurde.
 
 This document describes the GitHub target state for `absdd-image-sandbox` as a
 public-readiness sandbox. It records repository-side preparation and
-owner/admin tasks. It does not make the repository public and does not configure
-platform rules.
+owner/admin tasks and the GitHub ruleset for `main` activated on 2026-07-03.
 
 ### Current Status
 
@@ -100,11 +116,9 @@ platform rules.
 - Repository-side file present: `.github/pull_request_template.md`.
 - Repository-side workflow present: `.github/workflows/homogeneity-check.yml`
   with agent secret scan jobs for Linux, macOS, and Windows.
-- Platform-side GitHub rulesets or branch-protection rules are human/admin-only
-  and remain `Open` until configured on GitHub and documented again.
-- On the current private repository, GitHub Rulesets API access may be blocked
-  depending on the GitHub plan with a message that rulesets require GitHub Pro
-  or public visibility. That is not a repository defect.
+- Repository visibility: `PUBLIC`, set on 2026-07-03.
+- GitHub ruleset `main` is active: ruleset ID `18493733`.
+- `main` is protected by the ruleset: `protected=true`.
 
 ### Target State For `main`
 
@@ -122,6 +136,26 @@ Recommended GitHub ruleset for `refs/heads/main`:
 | Required status checks | Agent Secret Scan on Linux, macOS, and Windows |
 | Allowed merge methods | merge, squash, rebase |
 | Admin bypass | allowed only for documented owner/admin emergency use |
+
+### Active Platform Rules
+
+Verified live state on 2026-07-03:
+
+| Rule | Active value |
+|---|---|
+| Repository visibility | `PUBLIC` |
+| Ruleset ID | `18493733` |
+| Ruleset status | `active` |
+| Target | branch `refs/heads/main` |
+| Deletion protection | enabled |
+| Non-fast-forward protection | enabled |
+| Pull request required | enabled |
+| Required approving reviews | `1` |
+| Code Owner review | required |
+| Required status checks | `Agent Secret Scan (ubuntu-22.04)`, `Agent Secret Scan (macos-14)`, `Agent Secret Scan (windows-2022)` |
+| Required checks integration | GitHub Actions, `integration_id=15368` |
+| Allowed merge methods | merge, squash, rebase |
+| Admin bypass | `RepositoryRole`, `actor_id=5`, `bypass_mode=always` |
 
 The admin bypass is intentional so that an owner or admin can still handle
 urgent governance or infrastructure fixes. Each use must be justified in the
