@@ -2,7 +2,7 @@
 
 Status: Entwurf, Freigabe ausstehend
 
-Dieses Dokument bereitet die formelle Freigabe der `ade-dev-sandbox` vor.  Verantwortliche Personen, Freigabestatus, Freigabedatum und rechtliche Bewertungen muessen durch die verantwortliche Stelle ergaenzt werden. Der MR/PR-Ablauf fuer CISO/ISB oder KI-Beauftragte:n (KIB) ist in `docs/security/sandbox-freigabe-review.md` beschrieben.
+Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Verantwortliche Personen, Freigabestatus, Freigabedatum und rechtliche Bewertungen muessen durch die verantwortliche Stelle ergaenzt werden. Der MR/PR-Ablauf fuer CISO/ISB oder KI-Beauftragte:n (KIB) ist in `docs/security/sandbox-freigabe-review.md` beschrieben.
 
 ## Deutsch
 

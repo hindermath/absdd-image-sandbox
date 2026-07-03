@@ -3,16 +3,16 @@
 Stand: 2026-06-03
 
 Dieses Dokument konsolidiert die technischen Isolationsmechanismen der
-`ade-dev-sandbox`. Es beschreibt vorhandene Konfigurationen und aendert keine
+`absdd-image-sandbox`. Es beschreibt vorhandene Konfigurationen und aendert keine
 Sandbox-Einstellung.
 
 ## Deutsch
 
 ### Sandbox-Typ
 
-Die `ade-dev-sandbox` ist eine Container-Sandbox gemaess der RL-SE-001-
-Typologie fuer agentische KI in Sandbox-Umgebungen. Sie wird ueber Podman
-Compose gebaut und gestartet.
+Die `absdd-image-sandbox` ist eine Container-Sandbox gemaess der lokalen
+Secure-Development-Typologie fuer agentische KI in Sandbox-Umgebungen. Sie
+wird ueber Podman Compose gebaut und gestartet.
 
 ### Isolationsmechanismen und Evidenz
 
@@ -74,9 +74,9 @@ Schutzniveau-Bewertung eintragen)`
 
 ### Sandbox Type
 
-The `ade-dev-sandbox` is a container sandbox according to the RL-SE-001
-typology for agentic AI in sandbox environments. It is built and started with
-Podman Compose.
+The `absdd-image-sandbox` is a container sandbox according to the local
+secure-development typology for agentic AI in sandbox environments. It is
+built and started with Podman Compose.
 
 ### Isolation Mechanisms and Evidence
 

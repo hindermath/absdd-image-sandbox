@@ -2,17 +2,36 @@
 
 ## Active Compliance Work Queue
 
-This repository has open audit findings against GWDG guideline `RL-SE-001` v2.1.0 ("Sichere Softwareentwicklung") and checklist `CL_12` v1.0 ("Agentische KI in Sandbox-Umgebungen"). The complete work list with concrete tasks, acceptance criteria, verification steps, and escalation rules is in `COMPLIANCE-PLAN_RL-SE-001.md`.
+This repository maintains open sandbox-governance findings against the generic Secure Development Guideline and checklist `CL_12` ("Agentic AI in Sandbox Environments") from `docs/secure-development`. The complete work list with concrete tasks, acceptance criteria, verification steps, and escalation rules is in `COMPLIANCE-PLAN_RL-SE-001.md`.
 
 **Read `COMPLIANCE-PLAN_RL-SE-001.md` at the start of every Gemini session.** That file is the single source of truth for:
 
 - the priority order of open work (P0 must run first, then P1, P2, P3);
 - the per-task commit and pull request conventions used for these changes;
-- the items that must NOT be handled by an agent and have to be escalated to a human (API key rotation, formal sandbox approval, platform-side branch protection rules, QISMS register entries).
+- the items that must NOT be handled by an agent and have to be escalated to a human (API key rotation, formal sandbox approval, platform-side branch protection rules, external management-system register entries).
 
 At the end of every Gemini session, append a short session log under `docs/security/agent-session-log/<YYYY-MM-DD-HHMM>.md` as required by the plan. The log records which plan IDs were completed, partially completed, or escalated.
 
-The plan and these guidelines work together: this `GEMINI.md` file describes the repository conventions; `COMPLIANCE-PLAN_RL-SE-001.md` describes the audit-driven work to bring those conventions into provable conformance.
+The plan and these guidelines work together: this `GEMINI.md` file describes the repository conventions; `COMPLIANCE-PLAN_RL-SE-001.md` describes the generic secure-development and sandbox-governance work that brings those conventions into provable conformance.
+
+## Secure-Development Neutralitaet / Secure Development Neutrality
+
+Treat `docs/secure-development/` as the generic Secure-Development-Basis for
+training, review, and hardening work. Do not describe it as a company policy,
+internal guideline, or concrete management-system requirement.
+
+Generic roles and placeholders such as organization, project owner, security
+review, CISO/ISB/KIB, document repository, risk register, RoPA, provider, or
+platform are allowed when they remain generic. Concrete organizations, private
+URLs, local host paths, provider portals, account-specific defaults, external
+document-management or security-management systems, or platform rules must be
+removed, generalized, or marked as example, context, `N/A`, `Open`, or
+project-specific evidence.
+
+Spec-Kit runs against this baseline must create project-specific evidence.
+Human-only items such as formal approval, external registers, secret rotation,
+provider/model approvals, and platform branch protection must not be claimed as
+completed by an agent.
 
 ## Project Structure & Module Organization
 
@@ -43,10 +62,11 @@ There is currently no `src/`, `tests/`, or asset directory.
 Run commands from the repository root:
 
 ```bash
-podman compose config
+podman-compose config
 ```
 
-Validates the Compose file without printing values from `opencode.env`.
+Validates the Compose file without printing values from `opencode.env` and
+without requiring a running Podman machine.
 
 ```bash
 podman compose up -d
@@ -70,7 +90,9 @@ podman compose up -d
 podman compose exec ade bash
 ```
 
-If `podman compose` is not available on the local installation, use `podman-compose` with the same arguments.
+Use `podman-compose config` for config-only validation. If `podman compose`
+is not available for lifecycle actions on the local installation, use
+`podman-compose` with the same arguments.
 
 ```bash
 specify version
@@ -138,14 +160,14 @@ already solves the task.*
 There is no test framework in this repository. Before committing, run:
 
 ```bash
-podman compose config
+podman-compose config
 ```
 
 If `compose.home-baseline.yml` or the optional `HOME_BASELINE_DIR` workflow
 changed, also run with a local checkout:
 
 ```bash
-HOME_BASELINE_DIR=/path/to/home-baseline-tmp podman compose -f compose.yml -f compose.home-baseline.yml config
+HOME_BASELINE_DIR=/path/to/home-baseline-tmp podman-compose -f compose.yml -f compose.home-baseline.yml config
 ```
 
 For Dockerfile changes, also run:
@@ -188,7 +210,11 @@ cargo clippy --version
 python --version
 ```
 
-If `podman compose` is not available on the local installation, use `podman-compose` with the same arguments.
+Use `podman-compose config` for config-only validation. `podman compose config`
+is only an additional local plausibility check when the Podman machine
+or socket is healthy. If `podman compose` is not available for lifecycle
+actions on the local installation, use `podman-compose` with the same
+arguments.
 
 For README or `AGENTS.md` changes that add or change documented copy-and-paste
 commands, always run `git diff --check` as the minimum repository-side
@@ -201,11 +227,13 @@ projects out of `/workspace`, `/rider-projects`, and the repository.
 Treat platform coverage explicitly. A successful run on only one host platform
 is a local plausibility check, not full cross-platform acceptance. When a change
 claims or affects macOS, Windows/WSL2, and Linux/Ubuntu behavior, verify the
-commands on each affected platform when those systems are available. Use the
-platform's actual Podman Compose command (`podman compose` or
-`podman-compose`) rather than assuming one spelling. If a platform, engine, or
-network access for package downloads is unavailable, record the skipped check
-and the reason in the pull request text or in the agent session log.
+commands on each affected platform when those systems are available. For
+config-only validation, prefer `podman-compose config`; for lifecycle commands,
+use the platform's actual Podman Compose command (`podman compose` or
+`podman-compose`) rather than assuming one spelling. If a platform, engine,
+Podman socket, or network access for package downloads is unavailable, record
+the skipped check and the reason in the pull request text or in the agent
+session log.
 
 For documented web-app examples, bind the app to `0.0.0.0` inside the container
 and use a port from the published `5100-5199` range. During practical checks,
@@ -245,13 +273,13 @@ For pull requests, include:
 - notes about configuration or secret handling
 - screenshots only if documentation rendering or UI output is relevant
 
-GitLab repository governance lives in this repository and in the GitLab project
-settings. `.gitlab/CODEOWNERS` and
-`.gitlab/merge_request_templates/Default.md` are repository-side guidance.
-Platform-side enforcement such as protected-branch rules, Code Owner approval,
-and push rules must be configured separately in GitLab by an Owner or Admin.
-For the current GitLab CE status and signed-commit limitations, see
-`docs/security/branch-protection.md`.
+Repository governance lives partly in this repository and partly in the active
+hosting platform. `.gitlab/CODEOWNERS` and
+`.gitlab/merge_request_templates/Default.md` are repository-side guidance from
+the current evidence set. Platform-side enforcement such as protected-branch
+rules, Code Owner approval, and push rules must be configured separately by an
+Owner or Admin on the hosting platform. For the recorded GitLab CE evidence
+context and signed-commit limitations, see `docs/security/branch-protection.md`.
 
 ## Security & Configuration Tips
 
@@ -272,7 +300,8 @@ pre-commit run --all-files
 
 If `pre-commit` is not installed in the current environment, install it first with `uv tool install pre-commit` or run it via `uvx pre-commit run --all-files`.
 
-Audit text for P1-3: "Client-side Control, in GitLab CE nicht vollständig serverseitig erzwingbar; zentrale Push-Blockade nur mit GitLab Ultimate Secret Push Protection oder Admin-Server-Hook."
+Audit text for P1-3: "Client-side Control; central secret push blocking
+depends on the active hosting platform, edition, and admin-operated hooks."
 
 Run the agent-session audit export at least once per workday and always before removing Compose volumes. The standard stop path is the wrapper, because it exports metadata before running `compose down`:
 

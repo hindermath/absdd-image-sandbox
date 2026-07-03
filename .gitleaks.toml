@@ -13,3 +13,32 @@ paths = [
 regexes = [
   '''(?i)\b(changeme|example|dummy|placeholder|your[-_ ]?(api[-_ ]?)?key)\b''',
 ]
+
+[[allowlists]]
+description = "Allow historical Swift secure-coding guidance term in imported baseline documentation"
+condition = "AND"
+regexTarget = "line"
+commits = [
+  "5d4ee4f9ba569acf4eeda1ae16d7753ebfddf39c",
+]
+paths = [
+  '''^docs/secure-development/mitgeltende-dokumente/Leitlinie_Sichere-Programmierung\.md$''',
+]
+regexes = [
+  '''Keychain/CryptoKit (use|Nutzung)''',
+]
+
+[[allowlists]]
+description = "Allow historical documentation of forbidden private-key header markers"
+condition = "AND"
+regexTarget = "line"
+commits = [
+  "5d4ee4f9ba569acf4eeda1ae16d7753ebfddf39c",
+]
+paths = [
+  '''^docs/secure-development/checklisten/CL_09_KI-Codeerzeugung\.md$''',
+  '''^docs/secure-development/Checklistensammelband_Sichere-Entwicklung\.md$''',
+]
+regexes = [
+  '''private SSH-Keys \(`-----BEGIN OPENSSH PRIVATE KEY-----`''',
+]

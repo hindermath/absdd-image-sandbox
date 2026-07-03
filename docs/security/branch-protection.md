@@ -4,8 +4,11 @@ Stand: 2026-05-17
 
 ## Deutsch
 
-Dieses Repository liegt auf einer GitLab-CE-Instanz. P2-2 wird deshalb
-pragmatisch umgesetzt:
+Dieses Dokument erfasst die GitLab-CE-Evidenz aus dem bisherigen Hosting-
+Kontext. Wenn `absdd-image-sandbox` auf einer anderen Plattform oder als
+oeffentliches Repository betrieben wird, muessen die Plattformregeln dort neu
+bewertet und dokumentiert werden. P2-2 wurde in diesem Kontext pragmatisch
+umgesetzt:
 
 - `main` ist serverseitig als Protected Branch konfiguriert.
 - Direkte Pushes auf `main` sind deaktiviert.
@@ -64,7 +67,7 @@ Hinweis zu CODEOWNERS:
 
 GitLab CE kann die Datei als Code-Ownership-Hinweis verwenden. Ob Code-Owner-
 Approval fuer Merge Requests erzwungen werden kann, haengt von der konkreten
-GitLab-Edition und Instanzkonfiguration ab. Dedizierte GWDG-Teamhandles sollten
+GitLab-Edition und Instanzkonfiguration ab. Dedizierte Organisations- oder Ausbildungsteam-Handles sollten
 spaeter in `.gitlab/CODEOWNERS` nachgetragen werden.
 
 ### Signierte Commits
@@ -126,8 +129,10 @@ Quellen:
 
 ## English
 
-This repository is hosted on a GitLab CE instance. P2-2 is therefore implemented
-pragmatically:
+This document records GitLab CE evidence from the previous hosting context. If
+`absdd-image-sandbox` is operated on another platform or as a public
+repository, the platform rules must be reassessed and documented there. P2-2
+was therefore implemented pragmatically in this context:
 
 - `main` is configured as a protected branch on the GitLab server.
 - Direct pushes to `main` are disabled.
@@ -185,7 +190,7 @@ Note about CODEOWNERS:
 
 GitLab CE can use the file as a code ownership signal. Whether Code Owner
 approval can be enforced for merge requests depends on the concrete GitLab
-edition and instance configuration. Dedicated GWDG team handles should be added
+edition and instance configuration. Dedicated organization or training-team handles should be added
 to `.gitlab/CODEOWNERS` later.
 
 ### Signed commits
