@@ -1,10 +1,10 @@
-# Sandbox-Freigabe per MR/PR
+# Sandbox-Freigabe per PR
 
 Status: Review-Anleitung fuer P1-4
 
 Dieses Dokument beschreibt, wie die formelle Freigabe von `absdd-image-sandbox`
 durch CISO/ISB oder eine:n KI-Beauftragte:n (KIB) vorbereitet, geprueft und
-per Merge Request beziehungsweise Pull Request dokumentiert wird.
+per Pull Request dokumentiert wird.
 
 ## Deutsch
 
@@ -22,7 +22,7 @@ eine verantwortliche Person, CISO/ISB oder KIB.
 
 | Rolle | Aufgabe |
 |---|---|
-| Owner / verantwortliche Person | Freigabe-MR vorbereiten, offene `_TODO_`-Felder ausfuellen, Evidenz verlinken. |
+| Owner / verantwortliche Person | Freigabe-PR vorbereiten, offene `_TODO_`-Felder ausfuellen, Evidenz verlinken. |
 | CISO / ISB | Sicherheitsbewertung pruefen, Auflagen oder Freigabe dokumentieren. |
 | KI-Beauftragte:r (KIB) | KI-bezogene Bewertung pruefen, insbesondere Modelle, Datenfluesse und Nutzungsgrenzen. |
 | Betrieb / Plattform | Laufzeitumgebung, Registry-Zugriff, Image-Build und Compose-Betrieb bestaetigen. |
@@ -30,7 +30,7 @@ eine verantwortliche Person, CISO/ISB oder KIB.
 
 ### Pruefumfang
 
-Der MR/PR fuer die formelle Freigabe soll mindestens diese Punkte referenzieren
+Der PR fuer die formelle Freigabe soll mindestens diese Punkte referenzieren
 oder aktualisieren:
 
 | Pruefpunkt | Evidenz / Datei |
@@ -43,12 +43,12 @@ oder aktualisieren:
 | Netzwerkentscheidung | `docs/security/network-decision.md` |
 | Audit-Export fuer Agentensitzungen | `scripts/audit-export.sh`, `scripts/compose-down-with-audit.*`, `audit-logs/README.md` |
 | Secret-Scanning und Secret-Umgang | `.pre-commit-config.yaml`, `.gitleaks.toml`, `docs/security/secret-scanning.md` |
-| Branch-Protection und MR-Prozess | `docs/security/branch-protection.md`, `.gitlab/CODEOWNERS`, `.gitlab/merge_request_templates/Default.md` |
+| GitHub Ruleset und PR-Prozess | `docs/security/branch-protection.md`, `.github/CODEOWNERS`, `.github/pull_request_template.md` |
 | Offene Restrisiken und Folgeaufgaben | `COMPLIANCE-PLAN_RL-SE-001.md` |
 
 ### Entscheidung festhalten
 
-Der MR/PR muss eine eindeutige Entscheidung enthalten:
+Der PR muss eine eindeutige Entscheidung enthalten:
 
 - `Freigabe ausstehend`
 - `Freigegeben`
@@ -66,34 +66,30 @@ werden:
 - Ablaufdatum oder Re-Review-Datum
 - Auflagen, falls vorhanden
 
-Wenn die Entscheidung noch nicht getroffen wurde, muss der MR/PR den folgenden
+Wenn die Entscheidung noch nicht getroffen wurde, muss der PR den folgenden
 Hinweis enthalten:
 
 ```text
 Freigabe durch CISO/ISB oder KI-Beauftragte:n (KIB) ausstehend.
 ```
 
-### MR/PR erstellen
+### PR erstellen
 
-Der Standardweg ist ein Feature-Branch mit Merge Request oder Pull Request
-gegen `main`:
+Der Standardweg ist ein Feature-Branch mit Pull Request gegen `main`:
 
 ```bash
 git switch -c sandbox-freigabe-YYYY-MM-DD
 git add docs/security/sandbox-freigabe.md docs/security/sandbox-freigabe-review.md
 git commit -m "docs: prepare sandbox approval review"
 git push -u origin sandbox-freigabe-YYYY-MM-DD
-glab mr create \
-  --source-branch sandbox-freigabe-YYYY-MM-DD \
-  --target-branch main \
+gh pr create \
+  --base main \
+  --head sandbox-freigabe-YYYY-MM-DD \
   --title "Sandbox-Freigabe vorbereiten" \
-  --description "Freigabe durch CISO/ISB oder KI-Beauftragte:n (KIB) ausstehend."
+  --body "Freigabe durch CISO/ISB oder KI-Beauftragte:n (KIB) ausstehend."
 ```
 
-Falls GitHub statt GitLab verwendet wird, gilt derselbe fachliche Ablauf mit
-Pull Request statt Merge Request.
-
-### Inhalt der MR/PR-Beschreibung
+### Inhalt der PR-Beschreibung
 
 Die Beschreibung soll knapp, aber pruefbar sein:
 
@@ -118,9 +114,9 @@ Offene Punkte / Auflagen:
 
 ### Review und Merge
 
-Die freigebende Person kann die Entscheidung als MR/PR-Kommentar, Review oder
+Die freigebende Person kann die Entscheidung als PR-Kommentar, Review oder
 als Aenderung in `docs/security/sandbox-freigabe.md` dokumentieren. Vor dem
-Merge muss klar sein, ob der MR/PR nur die Freigabe vorbereitet oder eine
+Merge muss klar sein, ob der PR nur die Freigabe vorbereitet oder eine
 erteilte Freigabe dokumentiert.
 
 Nach dem Merge ist `docs/security/sandbox-freigabe.md` der gueltige
@@ -132,8 +128,8 @@ ausserhalb dieses Repositories.
 ### Purpose
 
 This document describes how formal approval of `absdd-image-sandbox` is prepared,
-reviewed, and documented through a merge request or pull request by CISO/ISB
-or an AI officer (KIB).
+reviewed, and documented through a pull request by CISO/ISB or an AI officer
+(KIB).
 
 Approval means that the documented sandbox state has been reviewed and accepted
 for the stated purpose, data classification, and review period. Codex may
@@ -141,7 +137,7 @@ prepare facts and drafts, but it must not grant approval.
 
 ### Review Scope
 
-The approval MR/PR should reference or update:
+The approval PR should reference or update:
 
 - `docs/security/sandbox-freigabe.md` for approval status, owner, dates, and
   scope.
@@ -152,13 +148,13 @@ The approval MR/PR should reference or update:
 - Audit-export scripts and `audit-logs/README.md` for agent-session metadata
   evidence.
 - Secret-scanning configuration and `docs/security/secret-scanning.md`.
-- `docs/security/branch-protection.md`, `.gitlab/CODEOWNERS`, and the MR
-  template for repository governance.
+- `docs/security/branch-protection.md`, `.github/CODEOWNERS`, and
+  `.github/pull_request_template.md` for repository governance.
 - `COMPLIANCE-PLAN_RL-SE-001.md` for open residual work.
 
-### Required MR/PR Note
+### Required PR Note
 
-If approval has not yet been granted, the MR/PR must include:
+If approval has not yet been granted, the PR must include:
 
 ```text
 Freigabe durch CISO/ISB oder KI-Beauftragte:n (KIB) ausstehend.
@@ -168,18 +164,16 @@ If approval is granted, the decision must name the approving role and person,
 approval date, scope, allowed data classification or explicit `_TODO_`,
 expiration or re-review date, and any conditions.
 
-### GitLab Flow
+### GitHub Flow
 
 ```bash
 git switch -c sandbox-freigabe-YYYY-MM-DD
 git add docs/security/sandbox-freigabe.md docs/security/sandbox-freigabe-review.md
 git commit -m "docs: prepare sandbox approval review"
 git push -u origin sandbox-freigabe-YYYY-MM-DD
-glab mr create \
-  --source-branch sandbox-freigabe-YYYY-MM-DD \
-  --target-branch main \
+gh pr create \
+  --base main \
+  --head sandbox-freigabe-YYYY-MM-DD \
   --title "Sandbox-Freigabe vorbereiten" \
-  --description "Freigabe durch CISO/ISB oder KI-Beauftragte:n (KIB) ausstehend."
+  --body "Freigabe durch CISO/ISB oder KI-Beauftragte:n (KIB) ausstehend."
 ```
-
-For GitHub, use the same content and review criteria in a pull request.

@@ -45,7 +45,6 @@ deny_read = [
   "/home/adedev/.ssh/**",
   "/home/adedev/.gnupg/**",
   "/home/adedev/.config/gh/**",
-  "/home/adedev/.config/glab-cli/**",
   "/home/adedev/.config/containers/**",
   "/home/adedev/.local/share/containers/**",
   "/home/adedev/.codex/**",

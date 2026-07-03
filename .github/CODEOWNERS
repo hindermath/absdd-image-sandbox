@@ -1,0 +1,13 @@
+# GitHub CODEOWNERS for absdd-image-sandbox.
+#
+# Public-readiness default: the repository owner reviews all changes.
+# Replace or extend this with a training-maintainer team when one exists.
+
+* @hindermath
+
+/Dockerfile @hindermath
+/compose.yml @hindermath
+/codex/ @hindermath
+/opencode.jsonc @hindermath
+/docs/security/ @hindermath
+/.github/workflows/ @hindermath

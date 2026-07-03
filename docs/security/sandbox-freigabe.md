@@ -2,7 +2,7 @@
 
 Status: Entwurf, Freigabe ausstehend
 
-Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Verantwortliche Personen, Freigabestatus, Freigabedatum und rechtliche Bewertungen muessen durch die verantwortliche Stelle ergaenzt werden. Der MR/PR-Ablauf fuer CISO/ISB oder KI-Beauftragte:n (KIB) ist in `docs/security/sandbox-freigabe-review.md` beschrieben.
+Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Verantwortliche Personen, Freigabestatus, Freigabedatum und rechtliche Bewertungen muessen durch die verantwortliche Stelle ergaenzt werden. Der PR-Ablauf fuer CISO/ISB oder KI-Beauftragte:n (KIB) ist in `docs/security/sandbox-freigabe-review.md` beschrieben.
 
 ## Deutsch
 
@@ -84,4 +84,4 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 | Open approval note | Approval by CISO/ISB or AI officer (KIB) pending |
 | Approval review | See `docs/security/sandbox-freigabe-review.md` |
 
-This file is a draft for review and signature by the responsible people. The MR/PR review flow is described in `docs/security/sandbox-freigabe-review.md`.
+This file is a draft for review and signature by the responsible people. The PR review flow is described in `docs/security/sandbox-freigabe-review.md`.

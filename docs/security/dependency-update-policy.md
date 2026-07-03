@@ -9,10 +9,10 @@ P3-3 aus `COMPLIANCE-PLAN_RL-SE-001.md`.
 
 ### Ziel
 
-`renovate.json` bereitet automatisierte Dependency-Merge-Requests fuer die im
+`renovate.json` bereitet automatisierte Dependency-Pull-Requests fuer die im
 `Dockerfile` gepinnten Build-Argumente vor. Renovate darf keine Aenderungen
 direkt auf `main` schreiben und kein Auto-Merge ausfuehren. Jede Aenderung
-bleibt ein normaler Merge Request mit Review, Build und Toolchecks.
+bleibt ein normaler Pull Request mit Review, Build und Toolchecks.
 
 ### Dockerfile-ARG-Konvention
 
@@ -47,19 +47,17 @@ vorangestellte Metadatenzeile mit passendem `argName` hat.
 | `OPENCODE_VERSION` | `npm` | `opencode-ai` |
 | `CODEX_VERSION` | `npm` | `@openai/codex` |
 
-### GitLab-CE-Betriebskontext
+### GitHub-Betriebskontext
 
 Dieses Repository enthaelt nur die Renovate-Konfiguration. Damit Renovate
-tatsaechlich Merge Requests oder Pull Requests erstellt, muss ein Renovate-Bot,
-Runner oder externer Renovate-Service fuer die aktive Hosting-Plattform
-aktiviert werden. Der bisher dokumentierte GitLab-CE-Kontext ist
-Kontextevidenz, keine Public-Release-Anforderung. Bis zur Plattform-
-Einrichtung gilt P3-3 repo-seitig als vorbereitet; die serverseitige
-Ausfuehrung ist ein Betriebs-/Admin-Schritt.
+tatsaechlich Pull Requests erstellt, muss ein Renovate-Bot, eine passende
+CI-Ausfuehrung oder ein externer Renovate-Service fuer GitHub aktiviert
+werden. Bis zur Plattform-Einrichtung gilt P3-3 repo-seitig als vorbereitet;
+die serverseitige Ausfuehrung ist ein Betriebs-/Admin-Schritt.
 
 ### Validierung vor Merge
 
-Jeder Renovate-MR muss mindestens diese Pruefungen bestehen:
+Jeder Renovate-PR muss mindestens diese Pruefungen bestehen:
 
 ```bash
 podman-compose config
@@ -74,9 +72,9 @@ auszufuehren.
 
 ### Goal
 
-`renovate.json` prepares automated dependency merge requests for pinned
+`renovate.json` prepares automated dependency pull requests for pinned
 Dockerfile build arguments. Renovate must not write directly to `main` and must
-not automerge. Every change remains a normal merge request with review, build,
+not automerge. Every change remains a normal pull request with review, build,
 and tool checks.
 
 ### Dockerfile ARG Convention
@@ -111,18 +109,17 @@ preceding metadata line with a matching `argName`.
 | `OPENCODE_VERSION` | `npm` | `opencode-ai` |
 | `CODEX_VERSION` | `npm` | `@openai/codex` |
 
-### GitLab CE Operation Context
+### GitHub Operation Context
 
 This repository only contains the Renovate configuration. For Renovate to
-actually create merge requests or pull requests, a Renovate bot, runner, or
-external Renovate service must be enabled for the active hosting platform. The
-previously documented GitLab CE context is context evidence, not a public
-release requirement. Until platform setup is complete, P3-3 is prepared on the
-repository side; server-side execution is an operations or admin step.
+actually create pull requests, a Renovate bot, suitable CI execution, or an
+external Renovate service must be enabled for GitHub. Until platform setup is
+complete, P3-3 is prepared on the repository side; server-side execution is an
+operations or admin step.
 
 ### Validation Before Merge
 
-Every Renovate MR must pass at least these checks:
+Every Renovate PR must pass at least these checks:
 
 ```bash
 podman-compose config

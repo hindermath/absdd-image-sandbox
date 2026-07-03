@@ -54,8 +54,9 @@ Schutzniveau-Bewertung eintragen)`
   Mindesthaertung, weil ein schreibbares Root-Dateisystem und flexible
   Ressourcenlimits fuer Lern-, Build- und Tooling-Workflows relevant sein
   koennen.
-- Plattformseitige Governance wie Branch Protection, Push Rules und formelle
-  Freigabe bleibt in GitLab beziehungsweise bei Owner/CISO/ISB/KIB.
+- Plattformseitige Governance wie Repository Rulesets, Required Checks,
+  Admin-Bypass und formelle Freigabe bleibt auf GitHub beziehungsweise bei
+  Owner/CISO/ISB/KIB.
 
 ### Verweise
 
@@ -116,8 +117,8 @@ protection-level assessment)`
   They are not part of the currently validated P3-4 minimum hardening because
   a writable root filesystem and flexible resource limits can be relevant for
   learning, build, and tooling workflows.
-- Platform-side governance such as branch protection, push rules, and formal
-  approval remains in GitLab or with owner/CISO/ISB/KIB.
+- Platform-side governance such as repository rulesets, required checks, admin
+  bypass, and formal approval remains on GitHub or with owner/CISO/ISB/KIB.
 
 ### References
 

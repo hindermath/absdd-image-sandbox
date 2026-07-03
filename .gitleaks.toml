@@ -20,6 +20,7 @@ condition = "AND"
 regexTarget = "line"
 commits = [
   "5d4ee4f9ba569acf4eeda1ae16d7753ebfddf39c",
+  "ac425efa20f83e1980e6fe1dd5ff2ba88e1188dc",
 ]
 paths = [
   '''^docs/secure-development/mitgeltende-dokumente/Leitlinie_Sichere-Programmierung\.md$''',
@@ -34,11 +35,12 @@ condition = "AND"
 regexTarget = "line"
 commits = [
   "5d4ee4f9ba569acf4eeda1ae16d7753ebfddf39c",
+  "ac425efa20f83e1980e6fe1dd5ff2ba88e1188dc",
 ]
 paths = [
   '''^docs/secure-development/checklisten/CL_09_KI-Codeerzeugung\.md$''',
   '''^docs/secure-development/Checklistensammelband_Sichere-Entwicklung\.md$''',
 ]
 regexes = [
-  '''private SSH-Keys \(`-----BEGIN OPENSSH PRIVATE KEY-----`''',
+  '''private SSH-Keys \(`[-]{5}BEGIN OPENSSH PRIVATE KEY[-]{5}`''',
 ]

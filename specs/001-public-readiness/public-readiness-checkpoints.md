@@ -46,7 +46,7 @@
 | Check | Command | Result | Notes |
 |---|---|---|---|
 | Whitespace | `git diff --check` | PASS | No whitespace errors reported on 2026-07-02 |
-| Private path / private URL scan | `rg -n "(/Users/|C:\\\\|/home/[^ ]+|gitlab-ce|localhost:[0-9]+|provider portal|DMS|QISMS)" ...` | REVIEWED | 15 hits; remaining hits are generic policy text, Spec-Kit search patterns, historical log placeholders, or classified context evidence |
+| Private path / private URL scan | `rg -n "(/Users/|C:\\\\|/home/[^ ]+|localhost:[0-9]+|provider portal|DMS|QISMS)" ...` | REVIEWED | Remaining hits are generic policy text, Spec-Kit search patterns, historical log placeholders, or classified context evidence |
 | Status / overclaim scan | `rg -n "(private|internal|approval|Freigabe|provider|model|legal|license|data-residency|public release|SBOM|VEX|SLSA|AI-SBOM|_TODO_|Open|N/A)" ...` | REVIEWED | 650 hits; terms are expected evidence/status language and are classified in `docs/security/public-readiness-evidence.md` |
 | Compose static parse | `podman-compose config` | PASS | Static Compose validation succeeded on 2026-07-02 |
 | Optional home-baseline override | `HOME_BASELINE_DIR=/Users/thorstenhindermann/home-baseline-tmp podman-compose -f compose.yml -f compose.home-baseline.yml config` | PASS | Override validation succeeded because `compose.home-baseline.yml` comments changed and the local checkout exists |

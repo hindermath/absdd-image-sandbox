@@ -50,7 +50,7 @@ Use these searches as review aids. They are intentionally broad and require
 human interpretation.
 
 ```bash
-rg -n "(/Users/|C:\\\\|/home/[^ ]+|gitlab-ce|localhost:[0-9]+|provider portal|DMS|QISMS)" README.md opencode.env.example compose.yml compose.home-baseline.yml AGENTS.md CLAUDE.md GEMINI.md .github/copilot-instructions.md COMPLIANCE-PLAN_RL-SE-001.md docs/security Lastenheft*.md specs/001-public-readiness
+rg -n "(/Users/|C:\\\\|/home/[^ ]+|localhost:[0-9]+|provider portal|DMS|QISMS)" README.md opencode.env.example compose.yml compose.home-baseline.yml AGENTS.md CLAUDE.md GEMINI.md .github/copilot-instructions.md COMPLIANCE-PLAN_RL-SE-001.md docs/security Lastenheft*.md specs/001-public-readiness
 rg -n "(private|internal|approval|Freigabe|provider|model|legal|license|data-residency|public release|SBOM|VEX|SLSA|AI-SBOM|_TODO_|Open|N/A)" README.md opencode.env.example compose.yml compose.home-baseline.yml AGENTS.md CLAUDE.md GEMINI.md .github/copilot-instructions.md COMPLIANCE-PLAN_RL-SE-001.md docs/security Lastenheft*.md specs/001-public-readiness
 ```
 
