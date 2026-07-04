@@ -32,6 +32,7 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 | `${GO_PROJECTS_DIR:-./go-projects}` | `/go-projects` | Go-Projekte |
 | `${RUST_PROJECTS_DIR:-./rust-projects}` | `/rust-projects` | Rust-Projekte |
 | `${PYTHON_PROJECTS_DIR:-./python-projects}` | `/python-projects` | Python-Projekte |
+| `${SWIFT_PROJECTS_DIR:-./swift-projects}` | `/swift-projects` | Swift-Projekte |
 | `${HOME_BASELINE_DIR}` | `/home/adedev/home-baseline-tmp` | Optionaler Checkout eines eigenen aus `home-baseline` erzeugten Template-Repositories; nur mit `compose.home-baseline.yml` |
 | `./dotnet/ContainerBuild.props` | `/dotnet-config/ContainerBuild.props` | Read-only .NET-Build-Konfiguration |
 | `dotnet_build` | `/dotnet-build` | Persistente .NET-Build-Artefakte ausserhalb von Host-Bind-Mounts |
@@ -53,10 +54,19 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 | govulncheck | `v1.3.0` |
 | Delve | `v1.26.3` |
 | Rust | `1.95.0` |
+| Swift | `6.3.3-noble` aus `download.swift.org`, PGP-Signaturpruefung im Image-Build |
 | OpenCode | `opencode-ai` `1.14.50` |
 | Codex CLI | `@openai/codex` `0.130.0` |
 | Spec Kit | `specify-cli` `v0.8.3` aus `github.com/github/spec-kit.git` |
 | uv / uvx | `0.11.16` aus GitHub-Release-Artefakt, SHA256-Pruefung im Image-Build |
+
+### Optionaler lokaler IDE-Zugang
+
+VS Code kann vom Host per Dev Containers an den laufenden `ade`-Container
+anhaengen. Diese Option startet keinen dauerhaften Browser-IDE- oder
+VS-Code-Server-Dienst im Image und veroeffentlicht keinen zusaetzlichen
+IDE-Port. VS Code installiert den benoetigten Remote-Server beim Verbinden
+selbst in den Container; die Anleitung steht in `README.md`.
 
 ### Unterschriftsblock
 
@@ -85,3 +95,9 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 | Approval review | See `docs/security/sandbox-freigabe-review.md` |
 
 This file is a draft for review and signature by the responsible people. The PR review flow is described in `docs/security/sandbox-freigabe-review.md`.
+
+Optional local IDE access: VS Code can attach from the host to the running
+`ade` container through Dev Containers. This option does not start a
+long-running browser IDE or VS Code Server service in the image and does not
+publish an additional IDE port. VS Code installs the required remote server
+into the container when it connects; the workflow is documented in `README.md`.

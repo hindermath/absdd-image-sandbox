@@ -35,9 +35,9 @@ completed by an agent.
 
 ## Project Structure & Module Organization
 
-This repository contains a small Podman-based Opencode, .NET, and Spec Kit environment, not an application codebase.
+This repository contains a small Podman-based Opencode, .NET, Swift, and Spec Kit environment, not an application codebase.
 
-- `Dockerfile`: builds from the Microsoft .NET SDK image in MCR pinned by digest and installs Java JDK 21, Maven, pinned Go and Rust toolchains, Python, pinned `opencode-ai` and `@openai/codex`, `uv`, `specify-cli`, and common CLI helper tools.
+- `Dockerfile`: builds from the Microsoft .NET SDK image in MCR pinned by digest and installs Java JDK 21, Maven, pinned Go, Rust, and Swift toolchains, Python, pinned `opencode-ai` and `@openai/codex`, `uv`, `specify-cli`, and common CLI helper tools.
 - `compose.yml`: defines the `ade` service, builds the local image, and mounts local state.
 - `compose.home-baseline.yml`: optional Compose override that bind-mounts a user's own repository created from the `home-baseline` template into `/home/adedev/home-baseline-tmp`.
 - The container runs commands as the Linux user `adedev`; keep home-directory paths under `/home/adedev`.
@@ -49,7 +49,15 @@ This repository contains a small Podman-based Opencode, .NET, and Spec Kit envir
 - `HOME_BASELINE_DIR`: optional host checkout of a user's own `home-baseline` template repository, used only with `compose.home-baseline.yml` and mounted into `/home/adedev/home-baseline-tmp`.
 - `RIDER_PROJECTS_DIR`: host directory mounted into the container as `/rider-projects` for Rider projects.
 - `JAVA_PROJECTS_DIR`: host directory mounted into the container as `/java-projects` for Java, Maven, and Spring Boot projects.
+- `GO_PROJECTS_DIR`: host directory mounted into the container as `/go-projects` for Go projects.
+- `RUST_PROJECTS_DIR`: host directory mounted into the container as `/rust-projects` for Rust projects.
+- `PYTHON_PROJECTS_DIR`: host directory mounted into the container as `/python-projects` for Python projects.
+- `SWIFT_PROJECTS_DIR`: host directory mounted into the container as `/swift-projects` for Swift projects.
 - `java-projects/`: local fallback mount for `/java-projects` when `JAVA_PROJECTS_DIR` is not set.
+- `go-projects/`: local fallback mount for `/go-projects` when `GO_PROJECTS_DIR` is not set.
+- `rust-projects/`: local fallback mount for `/rust-projects` when `RUST_PROJECTS_DIR` is not set.
+- `python-projects/`: local fallback mount for `/python-projects` when `PYTHON_PROJECTS_DIR` is not set.
+- `swift-projects/`: local fallback mount for `/swift-projects` when `SWIFT_PROJECTS_DIR` is not set.
 - `dotnet/ContainerBuild.props`: mounted into `/dotnet-config` and loaded through `DirectoryBuildPropsPath` to redirect .NET build artifacts to `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: installed as `/usr/local/bin/dotnet` to filter one known workload verification noise line while preserving real output and exit codes.
 - `spec-kit/patch-specify-cli.py`: patches Spec Kit copy behavior so initialization works better on Windows/WSL bind mounts.
@@ -208,6 +216,11 @@ rustc --version
 cargo --version
 cargo clippy --version
 python --version
+node --version
+npm --version
+swift --version
+swiftc --version
+command -v sourcekit-lsp
 ```
 
 Use `podman-compose config` for config-only validation. `podman compose config`
@@ -246,9 +259,13 @@ For .NET projects under `/rider-projects`, keep `bin`, `obj`, and AppHost output
 
 For Java projects, use `/java-projects` and prefer project-local Maven or Gradle wrappers when a repository provides them. The container includes JDK 21 and Maven for baseline Java and Spring Boot development. Gradle and Spring Boot CLI are not installed globally unless this repository is intentionally extended.
 
-For Go projects, use `/workspace` unless a project-specific mount is configured. Keep dependencies in `go.mod`, run `gofmt`/`go test ./...`, and add web frameworks such as `gin`, `fiber`, or `chi` per project instead of installing them globally.
+For Go projects, use `/go-projects` unless a project-specific mount is configured. Keep dependencies in `go.mod`, run `gofmt`/`go test ./...`, and add web frameworks such as `gin`, `fiber`, or `chi` per project instead of installing them globally.
 
-For Rust projects, use `/workspace` unless a project-specific mount is configured. Keep dependencies in `Cargo.toml`, run `cargo fmt`, `cargo clippy -- -D warnings`, and `cargo test`. Add frameworks such as `tokio`, `axum`, `actix-web`, or `serde` per project instead of installing them globally.
+For Rust projects, use `/rust-projects` unless a project-specific mount is configured. Keep dependencies in `Cargo.toml`, run `cargo fmt`, `cargo clippy -- -D warnings`, and `cargo test`. Add frameworks such as `tokio`, `axum`, `actix-web`, or `serde` per project instead of installing them globally.
+
+For Python projects, use `/python-projects` unless a project-specific mount is configured. Keep virtual environments project-local or under an explicitly chosen cache path, and do not rely on globally installed application dependencies.
+
+For Swift projects, use `/swift-projects` unless a project-specific mount is configured. Keep dependencies in `Package.swift`, run `swift build`, `swift test`, and `swift run` for executable smoke checks. The image includes SourceKit-LSP for editors that attach through VS Code Dev Containers or another LSP-capable client.
 
 ASP.NET apps must bind to `0.0.0.0` inside the container to be reachable from Windows. Compose publishes `127.0.0.1:5100-5199:5100-5199`; keep sample web app ports in that range unless the Compose file is updated.
 

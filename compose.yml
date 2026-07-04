@@ -29,6 +29,9 @@ services:
         source: ${PYTHON_PROJECTS_DIR:-./python-projects}
         target: /python-projects
       - type: bind
+        source: ${SWIFT_PROJECTS_DIR:-./swift-projects}
+        target: /swift-projects
+      - type: bind
         source: ${AUDIT_DIR:-./audit-logs}
         target: /audit
       - ./dotnet/ContainerBuild.props:/dotnet-config/ContainerBuild.props:ro

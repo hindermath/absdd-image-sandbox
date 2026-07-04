@@ -1,6 +1,6 @@
 # Dependency-Update-Policy
 
-Stand: 2026-06-03
+Stand: 2026-07-05
 
 Dieses Dokument beschreibt die Repository-seitige Renovate-Konfiguration fuer
 P3-3 aus `COMPLIANCE-PLAN_RL-SE-001.md`.
@@ -42,6 +42,7 @@ vorangestellte Metadatenzeile mit passendem `argName` hat.
 | `DELVE_VERSION` | `go` | `github.com/go-delve/delve` |
 | `RUST_TOOLCHAIN` | `rust-version` | `rust` |
 | `RUSTUP_VERSION` | `github-releases` | `rust-lang/rustup` |
+| `SWIFT_DOCKER_TAG` | `docker` | `swift` |
 | `NODE_MAJOR` | `node-version` | `node` |
 | `UV_VERSION` | `github-releases` | `astral-sh/uv` |
 | `OPENCODE_VERSION` | `npm` | `opencode-ai` |
@@ -104,6 +105,7 @@ preceding metadata line with a matching `argName`.
 | `DELVE_VERSION` | `go` | `github.com/go-delve/delve` |
 | `RUST_TOOLCHAIN` | `rust-version` | `rust` |
 | `RUSTUP_VERSION` | `github-releases` | `rust-lang/rustup` |
+| `SWIFT_DOCKER_TAG` | `docker` | `swift` |
 | `NODE_MAJOR` | `node-version` | `node` |
 | `UV_VERSION` | `github-releases` | `astral-sh/uv` |
 | `OPENCODE_VERSION` | `npm` | `opencode-ai` |

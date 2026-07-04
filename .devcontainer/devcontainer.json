@@ -1,0 +1,21 @@
+{
+  "name": "absdd-image-sandbox",
+  "dockerComposeFile": [
+    "../compose.yml"
+  ],
+  "service": "ade",
+  "workspaceFolder": "/rider-projects",
+  "remoteUser": "adedev",
+  "overrideCommand": false,
+  "shutdownAction": "none",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "swiftlang.swift-vscode"
+      ]
+    }
+  }
+}

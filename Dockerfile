@@ -15,6 +15,8 @@ ARG DELVE_VERSION=v1.26.3
 ARG RUST_TOOLCHAIN=1.95.0
 # renovate: datasource=github-releases depName=rust-lang/rustup versioning=semver argName=RUSTUP_VERSION
 ARG RUSTUP_VERSION=1.28.2
+# renovate: datasource=docker depName=swift versioning=docker argName=SWIFT_DOCKER_TAG
+ARG SWIFT_DOCKER_TAG=6.3.3-noble
 # renovate: datasource=node-version depName=node versioning=node argName=NODE_MAJOR
 ARG NODE_MAJOR=22
 # renovate: datasource=github-releases depName=astral-sh/uv versioning=semver argName=UV_VERSION
@@ -36,9 +38,19 @@ RUN apt-get -y update \
         git \
         git-delta \
         gnupg \
+        gnupg2 \
         jq \
         just \
+        libcurl4-openssl-dev \
+        libedit2 \
+        libgcc-13-dev \
+        libncurses-dev \
+        libpython3-dev \
+        libsqlite3-0 \
         libssl-dev \
+        libstdc++-13-dev \
+        libxml2-dev \
+        libz3-dev \
         maven \
         openjdk-21-jdk-headless \
         pkg-config \
@@ -67,6 +79,41 @@ RUN apt-get -y update \
     && apt-get -y install --no-install-recommends nodejs \
     && ln -sf /usr/bin/fdfind /usr/local/bin/fd \
     && rm -rf /var/lib/apt/lists/*
+RUN set -eux; \
+    case "${SWIFT_DOCKER_TAG}" in \
+        *-noble) ;; \
+        *) echo "Unsupported Swift Docker tag for Ubuntu 24.04 base image: ${SWIFT_DOCKER_TAG}" >&2; exit 1 ;; \
+    esac; \
+    swift_base_version="${SWIFT_DOCKER_TAG%%-*}"; \
+    case "${swift_base_version}" in \
+        [0-9]*.[0-9]*.[0-9]*) ;; \
+        *) echo "Unsupported Swift version in SWIFT_DOCKER_TAG: ${SWIFT_DOCKER_TAG}" >&2; exit 1 ;; \
+    esac; \
+    arch="$(dpkg --print-architecture)"; \
+    case "${arch}" in \
+        amd64) os_arch_suffix="" ;; \
+        arm64) os_arch_suffix="-aarch64" ;; \
+        *) echo "Unsupported Swift architecture: ${arch}" >&2; exit 1 ;; \
+    esac; \
+    swift_signing_key="52BB7E3DE28A71BE22EC05FFEF80A866B47A981F"; \
+    swift_platform="ubuntu24.04"; \
+    swift_branch="swift-${swift_base_version}-release"; \
+    swift_version="swift-${swift_base_version}-RELEASE"; \
+    swift_webdir="https://download.swift.org/${swift_branch}/$(printf '%s' "${swift_platform}" | tr -d .)${os_arch_suffix}"; \
+    swift_bin_url="${swift_webdir}/${swift_version}/${swift_version}-${swift_platform}${os_arch_suffix}.tar.gz"; \
+    tmp_dir="$(mktemp -d)"; \
+    export GNUPGHOME="${tmp_dir}/gnupg"; \
+    mkdir -p "${GNUPGHOME}"; \
+    curl -fsSL "${swift_bin_url}" -o "${tmp_dir}/swift.tar.gz"; \
+    curl -fsSL "${swift_bin_url}.sig" -o "${tmp_dir}/swift.tar.gz.sig"; \
+    gpg --batch --quiet --keyserver keyserver.ubuntu.com --recv-keys "${swift_signing_key}"; \
+    gpg --batch --verify "${tmp_dir}/swift.tar.gz.sig" "${tmp_dir}/swift.tar.gz"; \
+    tar -xzf "${tmp_dir}/swift.tar.gz" --directory / --strip-components=1; \
+    chmod -R o+r /usr/lib/swift; \
+    rm -rf "${tmp_dir}"
+RUN swift --version \
+    && swiftc --version \
+    && command -v sourcekit-lsp
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \

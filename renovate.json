@@ -72,6 +72,15 @@
       "addLabels": [
         "rust"
       ]
+    },
+    {
+      "matchPackageNames": [
+        "swift"
+      ],
+      "groupName": "Swift tooling Dockerfile ARGs",
+      "addLabels": [
+        "swift"
+      ]
     }
   ]
 }

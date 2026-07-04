@@ -1,12 +1,12 @@
 # Opencode Podman-Umgebung / Opencode Podman Environment
 
 Dieses Repository stellt eine Podman-basierte Container-Umgebung fuer
-Opencode, .NET, C#, Java, Go, Rust, Python, Codex CLI und Spec Kit bereit.
-Es ist eine Sandbox- und Lernumgebung, keine Anwendung.
+Opencode, .NET, C#, Java, Go, Rust, Python, Swift, Codex CLI und Spec Kit
+bereit. Es ist eine Sandbox- und Lernumgebung, keine Anwendung.
 
 The repository provides a Podman-based container environment for Opencode,
-.NET, C#, Java, Go, Rust, Python, Codex CLI, and Spec Kit. It is a sandbox and
-training environment, not an application.
+.NET, C#, Java, Go, Rust, Python, Swift, Codex CLI, and Spec Kit. It is a
+sandbox and training environment, not an application.
 
 ## Kurzueberblick
 
@@ -43,11 +43,13 @@ artifacts.*
 
 - `Dockerfile`: baut das Image aus dem digest-gepinnten MCR-.NET-SDK-Image
   und installiert Java JDK 21, Maven, Go, Rust, Python, Node.js, Opencode,
-  Codex CLI, `uv`, Spec Kit und Hilfswerkzeuge.
+  Swift, Codex CLI, `uv`, Spec Kit und Hilfswerkzeuge.
 - `compose.yml`: definiert den Service `ade`, die Podman-Volumes, die
   Host-Mounts und die Portfreigabe `127.0.0.1:5100-5199`.
 - `compose.home-baseline.yml`: optionale Compose-Erweiterung fuer ein eigenes
   `home-baseline`-Template-Repo im Container.
+- `.devcontainer/devcontainer.json`: VS-Code-Dev-Containers-Konfiguration,
+  damit VS Code von aussen an den laufenden `ade`-Container anhaengen kann.
 - `opencode.jsonc`: setzt OpenCode-Sicherheitsregeln, aber keinen Provider.
 - `opencode.env.example`: neutrale Vorlage fuer lokale Provider-Secrets,
   falls Nutzer eigene OpenCode-Provider konfigurieren.
@@ -120,6 +122,7 @@ JAVA_PROJECTS_DIR=/pfad/zu/java-projects
 GO_PROJECTS_DIR=/pfad/zu/go-projects
 RUST_PROJECTS_DIR=/pfad/zu/rust-projects
 PYTHON_PROJECTS_DIR=/pfad/zu/python-projects
+SWIFT_PROJECTS_DIR=/pfad/zu/swift-projects
 AUDIT_DIR=./audit-logs
 ```
 
@@ -162,6 +165,51 @@ podman compose exec ade bash
 Der Container startet im Arbeitsverzeichnis `/rider-projects`. Das Image
 laeuft nach dem Build als Linux-Benutzer `adedev`.
 
+## VS Code von aussen verbinden
+
+Die empfohlene VS-Code-Nutzung ist der offizielle Dev-Containers-Workflow:
+VS Code laeuft auf dem Host und verbindet sich in den laufenden Container.
+Es wird kein dauerhafter Browser-IDE- oder VS-Code-Server-Dienst im Image
+gestartet und kein zusaetzlicher IDE-Port veroeffentlicht. VS Code installiert
+den passenden Remote-Server beim Verbinden selbst in den Container.
+
+Voraussetzungen auf dem Host:
+
+- VS Code Desktop
+- VS Code Extension "Dev Containers"
+- Podman oder Podman Desktop mit einer Docker-kompatiblen Container-Sicht
+
+Container starten:
+
+```bash
+podman compose up -d ade
+```
+
+Danach in VS Code:
+
+1. Command Palette oeffnen: `F1`
+2. `Dev Containers: Attach to Running Container...` auswaehlen
+3. Den Container `ade` beziehungsweise `absdd-image-sandbox-ade-1`
+   auswaehlen
+4. Im verbundenen Fenster den Ordner `/rider-projects`, `/workspace` oder
+   `/swift-projects` oeffnen. Fuer Wartungsarbeiten an diesem Setup-Repo
+   `/ade-dev-sandbox` oeffnen.
+
+Zur Kontrolle im VS-Code-Terminal:
+
+```bash
+whoami
+pwd
+```
+
+`whoami` muss `adedev` ausgeben. Wenn ein Projekt Web-Ports braucht, weiter
+Ports aus dem bereits veroeffentlichten Bereich `5100-5199` verwenden oder
+temporaer ueber VS Code weiterleiten.
+
+Wenn `specify check` im Container `Visual Studio Code (not found)` meldet, ist
+das bei diesem Setup erwartbar: VS Code ist ein Host-Werkzeug und nicht als
+dauerhaft laufende IDE im Container installiert.
+
 Stoppen ohne Volume-Loeschung:
 
 ```bash
@@ -192,9 +240,27 @@ podman compose exec ade sh -lc 'java --version; javac --version; mvn --version'
 podman compose exec ade sh -lc 'go version; gopls version'
 podman compose exec ade sh -lc 'rustc --version; cargo --version; cargo clippy --version'
 podman compose exec ade sh -lc 'python --version'
+podman compose exec ade sh -lc 'node --version; npm --version'
+podman compose exec ade sh -lc 'swift --version; swiftc --version; command -v sourcekit-lsp'
 podman compose exec ade sh -lc 'opencode --version; codex --version'
 podman compose exec ade sh -lc 'specify version; specify check'
 ```
+
+Fuer eine praktische Pruefung der MSL-Toolchain-Familien
+(.NET/C#, Java/JVM, Go, Rust, Python und JavaScript/TypeScript ueber
+Node.js/npm sowie Swift) kann der wiederholbare Smoke-Test im Container
+ausgefuehrt werden:
+
+```bash
+podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh
+```
+
+Der Test legt temporaere Projekte unter `/home/adedev/smoke-tests` an und
+raeumt sie nach dem Lauf wieder auf. Der Swift-Teil erzeugt ein temporaeres
+SwiftPM-Projekt, baut es mit `swift build` und fuehrt es mit `swift run` aus.
+TypeScript- und Kotlin-Compiler werden nicht als global installierte Werkzeuge
+behauptet; sie gehoeren bei Bedarf als projektlokale Abhaengigkeiten in das
+jeweilige Projekt.
 
 Fuer dokumentierte Web-App-Beispiele im Container an `0.0.0.0` binden und
 Ports aus `5100-5199` verwenden. Praktische Checks sollen HTTP-Antworten
@@ -210,6 +276,15 @@ Podman-Volume `/dotnet-build`.
 ASP.NET-Anwendungen muessen im Container an `0.0.0.0` binden, damit sie vom
 Host erreichbar sind. Verwende Ports aus `5100-5199`, solange `compose.yml`
 nicht angepasst wird.
+
+## Swift-Projekte
+
+Swift-Projekte koennen ueber `SWIFT_PROJECTS_DIR` nach `/swift-projects`
+gemountet werden. Das Image enthaelt die native Swift-Toolchain fuer Ubuntu
+24.04, einschliesslich SwiftPM und SourceKit-LSP. Fuer VS Code wird die
+Extension `swiftlang.swift-vscode` empfohlen; sie arbeitet besonders gut mit
+SwiftPM-Projekten, die eine `Package.swift` im Projektwurzelverzeichnis
+enthalten.
 
 ## Spec Kit
 
