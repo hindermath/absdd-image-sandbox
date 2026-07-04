@@ -1,9 +1,9 @@
 # GSDB Self-Assessment / GSDB Preflight
 
 **Projekt / Project:** absdd-image-sandbox
-**Datum / Date:** 2026-07-01
-**Repository:** lokaler Checkout dieses Repositories
-**Primaersprache / Primary language:** Python/Bash/PowerShell
+**Datum / Date:** 2026-07-04
+**Repository:** `/Users/thorstenhindermann/container-images/absdd-image-sandbox`
+**Primaersprache / Primary language:** Python
 
 Dieses Dokument ist ein Preflight-Bericht. Es startet keinen Spec-Kit-Lauf und
 ist keine formale Freigabe.
@@ -19,7 +19,7 @@ not a formal approval.*
 | OK | GSDB mitgeltende Dokumente | `docs/secure-development/mitgeltende-dokumente/README.md` | vorhanden | - |
 | OK | GSDB Preset-Verzahnung | `docs/secure-development/mitgeltende-dokumente/Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md` | vorhanden | - |
 | OK | CL_01 bis CL_12 | `docs/secure-development/checklisten/` | alle 12 Checklisten vorhanden | - |
-| OK | MSL-Status | `scripts/config/level2-repository-registry.json` | Registry dokumentiert GSDB-relevanten MSL-/Tooling-Mix | - |
+| OK | MSL-Status | `constitution.md` | Primaersprache ist auf der MSL-Allowlist | - |
 | OK | Spec Kit initialisiert | `.specify/` | Spec-Kit-Verzeichnis vorhanden | - |
 | OK | Preset security-governance | `.specify/presets/` | per specify preset list nachweisbar | - |
 | OK | Preset architecture-governance | `.specify/presets/` | per specify preset list nachweisbar | - |
@@ -29,10 +29,10 @@ not a formal approval.*
 | OK | Preset agent-parity-governance | `.specify/presets/` | per specify preset list nachweisbar | - |
 | OK | Projektspezifischer Nachweisort | `docs/security/` | Nachweisordner vorhanden | - |
 | OK | RL-SE-/Checklist-Selbstpruefungs-Intake | `Lastenheft_RL-SE-Checklist-Selbstpruefung.md` | vorhanden | - |
-| Open | Secure-Development-Hardening-Intake | `Lastenheft_Secure-Development-Hardening.md` | fehlt | Intake vorbereiten |
-| Open | GSDB-Spec-Kit-Intensivpruefungs-Intake | `Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md` | Intake fehlt | durch diesen Checker erzeugen lassen |
+| OK | Secure-Development-Hardening-Intake | `Lastenheft_Secure-Development-Hardening.md` | vorhanden | - |
+| OK | GSDB-Spec-Kit-Intensivpruefungs-Intake | `Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md` | Intake vorhanden | - |
 
 ## Ergebnis / Result
 
-- Offene Punkte / Open findings: 2
+- Offene Punkte / Open findings: 0
 - Naechster Schritt / Next step: `Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md` spaeter manuell mit `/speckit-specify` starten, wenn die intensive Pruefung erfolgen soll.
