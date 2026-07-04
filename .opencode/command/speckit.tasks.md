@@ -1,71 +1,15 @@
 ---
-description: Generate an actionable, dependency-ordered tasks.md for the feature based
-  on available design artifacts.
+description: Generate an actionable, dependency-ordered tasks.md for the feature based on available design artifacts.
 handoffs:
-- label: Analyze For Consistency
-  agent: speckit.analyze
-  prompt: Run a project analysis for consistency
-  send: true
-- label: Implement Project
-  agent: speckit.implement
-  prompt: Start the implementation in phases
-  send: true
-scripts:
-  sh: .specify/scripts/bash/check-prerequisites.sh --json
-  ps: .specify/scripts/powershell/check-prerequisites.ps1 -Json
+  - label: Analyze For Consistency
+    agent: speckit.analyze
+    prompt: Run a project analysis for consistency
+    send: true
+  - label: Implement Project
+    agent: speckit.implement
+    prompt: Start the implementation in phases
+    send: true
 ---
-
-
-<!-- Source: security-governance -->
-Before continuing, apply the Security Governance preset:
-
-- convert MSL applicability and justification needs into explicit tasks
-- convert security obligations into explicit tasks
-- include evidence-production tasks under `docs/security/`
-- avoid leaving secure-development work as undocumented assumptions
-
-Before continuing, apply the Architecture Governance preset:
-
-- convert architecture obligations into explicit tasks
-- include `docs/security/` evidence updates
-- add BSI C3A cloud autonomy applicability tasks when cloud services or
-  provider-dependent deployments are in scope
-- do not leave threat-modeling or ADR work implicit
-
-Before continuing, apply the iSAQB Architecture Governance preset:
-
-- convert architecture goals, quality scenarios, views, ADRs, risks, and
-  technical debt into explicit tasks
-- include concrete evidence-production tasks under `docs/architecture/`
-- add architecture-review tasks for significant structure, interface,
-  runtime, or deployment changes
-- if security-relevant architecture is affected, include the corresponding
-  secure-architecture tasks from `architecture-governance`
-
-Before continuing, apply the A11Y Governance preset:
-
-- convert accessibility expectations into explicit tasks
-- convert bilingual delivery work into explicit tasks
-- do not leave A11Y or language review implicit
-
-Before continuing, apply the Cross-Platform Governance preset:
-
-- add explicit tasks for both `*.sh` and `*.ps1` variants in the same
-  change
-- add tasks for the Unix man-page and the bilingual PowerShell help
-  block
-- add a task to expose the PowerShell variant as a Cmdlet with an
-  approved `Verb-Noun` name
-- add a parity-verification task using the script-parity checklist
-
-Before continuing, apply the Agent Parity Governance preset:
-
-- add explicit tasks to update every maintained agent surface in the
-  same change
-- add tasks to propagate shared rules into project templates and the
-  local constitution mirror
-- add a parity-verification task using the agent-parity checklist
-
 
 ## User Input
 
@@ -254,45 +198,3 @@ Every task MUST strictly follow this format:
   - Within each story: Tests (if requested) → Models → Services → Endpoints → Integration
   - Each phase should be a complete, independently testable increment
 - **Final Phase**: Polish & Cross-Cutting Concerns
-
-
-Audit-ready evidence requirement:
-
-- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
-- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
-- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
-
-
-Audit-ready evidence requirement:
-
-- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
-- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
-- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
-
-
-Audit-ready evidence requirement:
-
-- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
-- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
-- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
-
-
-Audit-ready evidence requirement:
-
-- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
-- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
-- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
-
-
-Audit-ready evidence requirement:
-
-- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
-- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
-- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
-
-
-Audit-ready evidence requirement:
-
-- Ensure this tasks wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
-- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
-- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.

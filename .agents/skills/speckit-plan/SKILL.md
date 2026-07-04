@@ -1,64 +1,11 @@
 ---
-name: speckit-plan
-description: Generate technical implementation plans from feature specifications.
-compatibility: Requires spec-kit project structure with .specify/ directory
+name: "speckit-plan"
+description: "Execute the implementation planning workflow using the plan template to generate design artifacts."
+compatibility: "Requires spec-kit project structure with .specify/ directory"
 metadata:
-  author: github-spec-kit
-  source: preset:security-governance
+  author: "github-spec-kit"
+  source: "templates/commands/plan.md"
 ---
-
-# Speckit Plan Skill
-
-Before continuing, apply the Security Governance preset:
-
-- plan explicit MSL applicability or non-MSL justification work when relevant
-- plan explicit secure-development verification work
-- plan dependency and supply-chain evidence updates where relevant
-- surface security review checkpoints instead of leaving them implicit
-
-Before continuing, apply the Architecture Governance preset:
-
-- plan explicit architecture evidence work
-- plan threat-model and ADR updates when boundaries, integrations, or flows
-  change
-- surface Zero Trust and SAMM work explicitly when relevant
-- surface BSI C3A cloud autonomy work explicitly for cloud services and
-  provider-dependent deployments
-
-Before continuing, apply the iSAQB Architecture Governance preset:
-
-- plan explicit architecture work products where the feature changes
-  structure, interfaces, quality attributes, runtime behavior, or
-  deployment
-- plan updates to architecture views under `docs/architecture/`
-- plan ADRs for architecturally significant decisions
-- plan risk and technical-debt review for trade-offs or unresolved
-  constraints
-- if security-relevant architecture is affected, also plan the
-  secure-architecture evidence from `architecture-governance`
-
-Before continuing, apply the A11Y Governance preset:
-
-- plan accessibility review work explicitly
-- plan bilingual content work explicitly
-- include CLI accessibility checks where user-facing terminal output is changed
-
-Before continuing, apply the Cross-Platform Governance preset:
-
-- plan paired Bash + PowerShell script work as a single unit
-- plan the man-page, the bilingual PowerShell help block, and the
-  `Verb-Noun` Cmdlet alongside the script
-- plan manual verification on at least one target OS per variant
-- plan implementation discipline checks (Bash quoting, `set -euo
-  pipefail`, `Set-StrictMode -Version Latest`, `-NoProfile`) and the
-  parity-checklist artefact
-
-Before continuing, apply the Agent Parity Governance preset:
-
-- plan an atomic update across all maintained agent surfaces
-- plan synchronised updates to project templates and the local
-  `.specify/memory/constitution.md`
-- plan a parity-verification artefact for the change
 
 
 ## User Input
@@ -198,45 +145,3 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 - Use absolute paths for filesystem operations; use project-relative paths for references in documentation and agent context files
 - ERROR on gate failures or unresolved clarifications
-
-
-Audit-ready evidence requirement:
-
-- Ensure this plan wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
-- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
-- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
-
-
-Audit-ready evidence requirement:
-
-- Ensure this plan wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
-- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
-- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
-
-
-Audit-ready evidence requirement:
-
-- Ensure this plan wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
-- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
-- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
-
-
-Audit-ready evidence requirement:
-
-- Ensure this plan wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
-- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
-- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
-
-
-Audit-ready evidence requirement:
-
-- Ensure this plan wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
-- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
-- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
-
-
-Audit-ready evidence requirement:
-
-- Ensure this plan wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
-- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
-- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
