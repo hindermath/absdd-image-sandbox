@@ -1,5 +1,27 @@
 # Compliance-Plan Sichere Entwicklungs-Sandbox / CL_12 — `absdd-image-sandbox`
 
+## Kurzfassung
+
+Dieses Dokument beschreibt, was getan werden muss, damit die Sandbox-Umgebung
+`absdd-image-sandbox` die Anforderungen der Checkliste CL_12 ("Agentische KI
+in Sandbox-Umgebungen") nachweisbar erfüllt.
+
+**Struktur:** Die Aufgaben sind in vier Prioritätsstufen eingeteilt — P0
+(Blocker, muss zuerst erledigt werden), P1 (Pflichtbefunde), P2 (wichtige
+Verbesserungen), P3 (sinnvolle Ergänzungen). Jede Aufgabe hat eine Aufgaben-ID,
+einen Abnahme-Test und eine klare Grenze: Was ein Agent erledigen darf und was
+an einen Menschen eskaliert werden muss.
+
+**Was Agenten NICHT abschließen dürfen:** Formelle Sandbox-Freigabe,
+API-Key-Rotation, Branch-Schutz auf Plattformebene, Einträge in externe
+Risiko- oder Dokumentenmanagement-Systeme. Diese Punkte werden im Plan als
+Eskalation markiert.
+
+**Einstieg:** Die erste offene Aufgabe der niedrigsten Prioritätsstufe
+(P0 → P1 → P2 → P3) ist der nächste Schritt. Nach Abschluss aller Aufgaben
+einer Stufe den Abschnitt als erledigt markieren und zur nächsten Stufe
+wechseln.
+
 ## Zweck dieses Dokuments
 
 Der fachliche Bezugspunkt dieses Plans ist die generische Secure-Development-Basis in `docs/secure-development/`. Sie enthält die Richtlinie Sichere Entwicklung, die zugehörigen Checklisten und den Checklistensammelband als organisationsneutrale Ausbildungs- und Prüfgrundlage. Die in diesem Dokument genannten Richtlinien- und CL-Kürzel beziehen sich auf diese lokale, generische Dokumentationsbasis.
