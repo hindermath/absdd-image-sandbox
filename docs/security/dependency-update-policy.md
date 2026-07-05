@@ -1,11 +1,11 @@
-# Dependency-Update-Policy
+# Abhängigkeits-Update-Richtlinie / Dependency-Update-Policy
 
 Stand: 2026-07-05
 
+## Deutsch
+
 Dieses Dokument beschreibt die Repository-seitige Renovate-Konfiguration fuer
 P3-3 aus `COMPLIANCE-PLAN_RL-SE-001.md`.
-
-## Deutsch
 
 ### Ziel
 

@@ -1,4 +1,4 @@
-# Secret-Scanning
+# Geheimnis-Überprüfung / Secret Scanning
 
 Stand: 2026-07-03
 

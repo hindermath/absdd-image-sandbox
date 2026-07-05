@@ -182,10 +182,10 @@ environments across all devices.
 
 `home-baseline` uses a blended verification model: manual verification remains
 mandatory for script changes, and lightweight automated CI/CD guardrails on
-GitHub MAY complement it. GitLab release automation is also maintained in this
-repository as reusable baseline logic and MUST be validated through real
-project pipelines before it is treated as production-ready. Verification MUST
-follow the safe-mode-first rule:
+GitHub MAY complement it. Hosting release automation is maintained as reusable
+baseline logic and MUST be validated through real project pipelines before it
+is treated as production-ready. Verification MUST follow the safe-mode-first
+rule:
 
 - Bootstrap changes: always test with `--dry-run` (Bash) / `-WhatIf` (PowerShell)
   before running for real.
@@ -812,7 +812,7 @@ project context.
 | `RiderProjects/TuiVision` | .NET 10 / C# terminal UI framework and Turbo Vision port: framework libraries, managed console driver, compatibility, controls, serialization, examples | `dotnet restore/build/test`; MSTest suites; Coverlet coverage gates for core assemblies; `dotnet format` where configured | DocFX regeneration requires Playwright + axe and lynx-oriented A11Y smoke review for generated documentation | Manual conservative `80`; C#/.NET Thorsten-Solo `125` unless all agent files justify a deviation | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `.github/agents/copilot-instructions.md`, Spec-Kit surfaces |
 | `RiderProjects/WebApplication1` | .NET 10 / C# single-project ASP.NET Core MVC application | `dotnet build`; `dotnet build -c Release/Debug`; `dotnet run --project WebApplication1/WebApplication1.csproj` | HTML views, documentation, templates, and UI output follow WCAG 2.2 AA where applicable and stay keyboard/AT usable | Manual conservative `80`; C#/.NET Thorsten-Solo `125` unless all agent files justify a deviation | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, Spec-Kit surfaces |
 | `RiderProjects/inventarworkerservice2` | .NET 9.0 via `global.json`; cross-platform Worker Service; Windows/Systemd hosting; hardware inventory; PowerShell SDK; YAML/JSON status output | `dotnet build InventarWorkerService2.sln`; `dotnet run --project InventarWorkerService2/InventarWorkerService2.csproj`; CI includes Gitleaks and agent-secret-scan | CLI/service status output, generated templates, docs, JSON/YAML reports, and logs remain text-first and accessibility-aware | Manual conservative `80`; C#/.NET Thorsten-Solo `125` unless all agent files justify a deviation | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `.opencode/command/`, Spec-Kit surfaces; credentials/history/logs/SQLite state are forbidden |
-| `RiderProjects/sysinfotool` | .NET 10 / C# 14 cross-platform system-information CLI; Spectre.Console; Windows/macOS/Linux/FreeBSD services; DE/EN localization | `dotnet restore/build/test`; coverage collection; `docfx docfx.json`; GitLab CI stages `build/test/docs/scan` | Generated DocFX HTML targets WCAG 2.2 AA; DocFX regeneration requires Playwright + axe and lynx-oriented review where applicable | Manual conservative `80`; repo-specific Thorsten-Solo `100` lines/workday for this .NET CLI codebase | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `.opencode/command/`, Spec-Kit surfaces; credentials/history/logs/SQLite state are forbidden |
+| `RiderProjects/sysinfotool` | .NET 10 / C# 14 cross-platform system-information CLI; Spectre.Console; Windows/macOS/Linux/FreeBSD services; DE/EN localization | `dotnet restore/build/test`; coverage collection; `docfx docfx.json`; CI stages `build/test/docs/scan` | Generated DocFX HTML targets WCAG 2.2 AA; DocFX regeneration requires Playwright + axe and lynx-oriented review where applicable | Manual conservative `80`; repo-specific Thorsten-Solo `100` lines/workday for this .NET CLI codebase | `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `.opencode/command/`, Spec-Kit surfaces; credentials/history/logs/SQLite state are forbidden |
 
 ## Script & Code Conventions
 

@@ -1,4 +1,4 @@
-# Branch Protection and Signed Commits
+# Zweig-Schutz und signierte Commits / Branch Protection and Signed Commits
 
 Stand: 2026-07-03
 

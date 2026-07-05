@@ -10,11 +10,29 @@ Stelle gepflegt werden; sie werden nicht aus Annahmen abgeleitet.
 
 ## Deutsch
 
-| Werkzeug | Variante | Vendor | Endpoint | EU-Datenresidenz | ZDR-Status | DPA-Datum | Trainings-Opt-out | OpenSSF-Scorecard | freigegeben bis | Owner |
-|---|---|---|---|---|---|---|---|---|---|---|
-| OpenCode | CLI im Container, npm-Paket `opencode-ai` Version `1.14.50`; kein vorkonfigurierter API-Key und kein vorausgewaehltes Modell | OpenCode-Projekt / npm-Paket; Modellanbieter nur nach lokaler Verbindung durch den Nutzer | Nicht konfiguriert | Nicht anwendbar ohne lokale Provider-Verbindung | Nicht anwendbar ohne lokale Provider-Verbindung | `_TODO_ (Lizenz-/DPA-Bewertung fuer opencode-ai vom Owner einzutragen)` | Nicht anwendbar ohne lokale Provider-Verbindung | `_TODO_ (fuer opencode-ai zu pruefen)` | `_TODO_ (vom Owner einzutragen)` | `_TODO_ (vom Owner einzutragen)` |
-| Codex CLI | CLI im Container, npm-Paket `@openai/codex` Version `0.130.0`; kein Provider im Repository vorkonfiguriert | Konkrete Betriebsvariante vom Owner einzutragen | `_TODO_ (Endpoint/Region nur bei lokaler Provider-Nutzung vom Owner einzutragen)` | `_TODO_ (vom Owner einzutragen, falls Provider genutzt wird)` | `_TODO_ (vom Owner einzutragen, falls Provider genutzt wird)` | `_TODO_ (vom Owner einzutragen, falls Provider genutzt wird)` | `_TODO_ (vom Owner einzutragen, falls Provider genutzt wird)` | `_TODO_ (fuer @openai/codex zu pruefen)` | `_TODO_ (vom Owner einzutragen)` | `_TODO_ (vom Owner einzutragen)` |
-| Spec Kit | CLI `specify`, Version `v0.8.3` aus `github.com/github/spec-kit.git` | GitHub | GitHub-Quelle beim Image-Build; lokale CLI-Nutzung im Container | Nicht anwendbar fuer lokale CLI-Nutzung; GitHub-Zugriff beim Build vom Owner zu bewerten | Nicht anwendbar fuer lokale CLI-Nutzung; vom Owner zu bestaetigen | `_TODO_ (Lizenz-/DPA-Bewertung vom Owner einzutragen)` | Nicht anwendbar fuer lokale CLI-Nutzung; vom Owner zu bestaetigen | `_TODO_ (fuer github/spec-kit zu pruefen)` | `_TODO_ (vom Owner einzutragen)` | `_TODO_ (vom Owner einzutragen)` |
+### Tabelle 1 — Grunddaten / Basic Data
+
+| Werkzeug | Variante | Vendor | Endpoint |
+|---|---|---|---|
+| OpenCode | CLI im Container, npm-Paket `opencode-ai` Version `1.14.50`; kein vorkonfigurierter API-Key und kein vorausgewaehltes Modell | OpenCode-Projekt / npm-Paket; Modellanbieter nur nach lokaler Verbindung durch den Nutzer | Nicht konfiguriert |
+| Codex CLI | CLI im Container, npm-Paket `@openai/codex` Version `0.130.0`; kein Provider im Repository vorkonfiguriert | Konkrete Betriebsvariante vom Owner einzutragen | `_TODO_ (Endpoint/Region nur bei lokaler Provider-Nutzung vom Owner einzutragen)` |
+| Spec Kit | CLI `specify`, Version `v0.8.3` aus `github.com/github/spec-kit.git` | GitHub | GitHub-Quelle beim Image-Build; lokale CLI-Nutzung im Container |
+
+### Tabelle 2 — Datenschutz und Compliance / Privacy and Compliance
+
+| Werkzeug | EU-Datenresidenz | ZDR-Status | DPA-Datum | Trainings-Opt-out |
+|---|---|---|---|---|
+| OpenCode | Nicht anwendbar ohne lokale Provider-Verbindung | Nicht anwendbar ohne lokale Provider-Verbindung | `_TODO_ (Lizenz-/DPA-Bewertung fuer opencode-ai vom Owner einzutragen)` | Nicht anwendbar ohne lokale Provider-Verbindung |
+| Codex CLI | `_TODO_ (vom Owner einzutragen, falls Provider genutzt wird)` | `_TODO_ (vom Owner einzutragen, falls Provider genutzt wird)` | `_TODO_ (vom Owner einzutragen, falls Provider genutzt wird)` | `_TODO_ (vom Owner einzutragen, falls Provider genutzt wird)` |
+| Spec Kit | Nicht anwendbar fuer lokale CLI-Nutzung; GitHub-Zugriff beim Build vom Owner zu bewerten | Nicht anwendbar fuer lokale CLI-Nutzung; vom Owner zu bestaetigen | `_TODO_ (Lizenz-/DPA-Bewertung vom Owner einzutragen)` | Nicht anwendbar fuer lokale CLI-Nutzung; vom Owner zu bestaetigen |
+
+### Tabelle 3 — Governance
+
+| Werkzeug | OpenSSF-Scorecard | freigegeben bis | Owner |
+|---|---|---|---|
+| OpenCode | `_TODO_ (fuer opencode-ai zu pruefen)` | `_TODO_ (vom Owner einzutragen)` | `_TODO_ (vom Owner einzutragen)` |
+| Codex CLI | `_TODO_ (fuer @openai/codex zu pruefen)` | `_TODO_ (vom Owner einzutragen)` | `_TODO_ (vom Owner einzutragen)` |
+| Spec Kit | `_TODO_ (fuer github/spec-kit zu pruefen)` | `_TODO_ (vom Owner einzutragen)` | `_TODO_ (vom Owner einzutragen)` |
 
 ### AI-SBOM-Lieferantentransparenz (CL_09 Pruefpunkt 15)
 
@@ -50,11 +68,29 @@ model; the built-in provider picker remains available. Fields marked `_TODO_`
 must be maintained by the owner or responsible office; they are not inferred
 from assumptions.
 
-| Tool | Variant | Vendor | Endpoint | EU data residency | ZDR status | DPA date | Training opt-out | OpenSSF Scorecard | Approved until | Owner |
-|---|---|---|---|---|---|---|---|---|---|---|
-| OpenCode | CLI in the container, npm package `opencode-ai` version `1.14.50`; no preconfigured API key and no preselected model | OpenCode project / npm package; model provider only after local user connection | Not configured | Not applicable without local provider connection | Not applicable without local provider connection | `_TODO_ (license/DPA assessment for opencode-ai to be entered by owner)` | Not applicable without local provider connection | `_TODO_ (check for opencode-ai)` | `_TODO_ (to be entered by owner)` | `_TODO_ (to be entered by owner)` |
-| Codex CLI | CLI in the container, npm package `@openai/codex` version `0.130.0`; no provider preconfigured in the repository | Exact operating variant to be entered by owner | `_TODO_ (endpoint/region to be entered by owner only when a local provider is used)` | `_TODO_ (to be entered by owner if a provider is used)` | `_TODO_ (to be entered by owner if a provider is used)` | `_TODO_ (to be entered by owner if a provider is used)` | `_TODO_ (to be entered by owner if a provider is used)` | `_TODO_ (check for @openai/codex)` | `_TODO_ (to be entered by owner)` | `_TODO_ (to be entered by owner)` |
-| Spec Kit | CLI `specify`, version `v0.8.3` from `github.com/github/spec-kit.git` | GitHub | GitHub source during image build; local CLI use in the container | Not applicable for local CLI use; GitHub access during build to be assessed by owner | Not applicable for local CLI use; to be confirmed by owner | `_TODO_ (license/DPA assessment to be entered by owner)` | Not applicable for local CLI use; to be confirmed by owner | `_TODO_ (check for github/spec-kit)` | `_TODO_ (to be entered by owner)` | `_TODO_ (to be entered by owner)` |
+### Table 1 — Basic Data
+
+| Tool | Variant | Vendor | Endpoint |
+|---|---|---|---|
+| OpenCode | CLI in the container, npm package `opencode-ai` version `1.14.50`; no preconfigured API key and no preselected model | OpenCode project / npm package; model provider only after local user connection | Not configured |
+| Codex CLI | CLI in the container, npm package `@openai/codex` version `0.130.0`; no provider preconfigured in the repository | Exact operating variant to be entered by owner | `_TODO_ (endpoint/region to be entered by owner only when a local provider is used)` |
+| Spec Kit | CLI `specify`, version `v0.8.3` from `github.com/github/spec-kit.git` | GitHub | GitHub source during image build; local CLI use in the container |
+
+### Table 2 — Privacy and Compliance
+
+| Tool | EU data residency | ZDR status | DPA date | Training opt-out |
+|---|---|---|---|---|
+| OpenCode | Not applicable without local provider connection | Not applicable without local provider connection | `_TODO_ (license/DPA assessment for opencode-ai to be entered by owner)` | Not applicable without local provider connection |
+| Codex CLI | `_TODO_ (to be entered by owner if a provider is used)` | `_TODO_ (to be entered by owner if a provider is used)` | `_TODO_ (to be entered by owner if a provider is used)` | `_TODO_ (to be entered by owner if a provider is used)` |
+| Spec Kit | Not applicable for local CLI use; GitHub access during build to be assessed by owner | Not applicable for local CLI use; to be confirmed by owner | `_TODO_ (license/DPA assessment to be entered by owner)` | Not applicable for local CLI use; to be confirmed by owner |
+
+### Table 3 — Governance
+
+| Tool | OpenSSF Scorecard | Approved until | Owner |
+|---|---|---|---|
+| OpenCode | `_TODO_ (check for opencode-ai)` | `_TODO_ (to be entered by owner)` | `_TODO_ (to be entered by owner)` |
+| Codex CLI | `_TODO_ (check for @openai/codex)` | `_TODO_ (to be entered by owner)` | `_TODO_ (to be entered by owner)` |
+| Spec Kit | `_TODO_ (check for github/spec-kit)` | `_TODO_ (to be entered by owner)` | `_TODO_ (to be entered by owner)` |
 
 ### AI-SBOM Supplier Transparency (CL_09 Item 15)
 
