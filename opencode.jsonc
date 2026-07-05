@@ -15,13 +15,12 @@
   // EN: OpenCode must not update itself during startup.
   "autoupdate": false,
 
-  // DE: Dieses Image installiert OpenCode, konfiguriert aber keinen Modellanbieter.
-  // EN: This image installs OpenCode but does not configure a model provider.
-  // DE: Nutzer koennen bei Bedarf lokal einen Provider in ihrer eigenen
-  // DE: OpenCode-Konfiguration ergaenzen.
-  // EN: Users can add a provider locally in their own OpenCode configuration
-  // EN: when needed.
-  "enabled_providers": [],
+  // DE: Dieses Image installiert OpenCode ohne API-Key und ohne vorausgewaehltes Modell.
+  // EN: This image installs OpenCode without an API key and without a preselected model.
+  // DE: Die eingebaute Provider-Auswahl bleibt verfuegbar, damit Nutzer bei Bedarf
+  // DE: lokal ueber /connect einen eigenen Provider verbinden koennen.
+  // EN: The built-in provider picker remains available so users can connect
+  // EN: their own provider locally through /connect when needed.
 
   // DE: Globale Sicherheitsregeln fuer OpenCode-Werkzeuge.
   // EN: Global security rules for OpenCode tools.

@@ -41,7 +41,7 @@ This repository contains a small Podman-based Opencode, .NET, Swift, and Spec Ki
 - `compose.yml`: defines the `ade` service, builds the local image, and mounts local state.
 - `compose.home-baseline.yml`: optional Compose override that bind-mounts a user's own repository created from the `home-baseline` template into `/home/adedev/home-baseline-tmp`.
 - The container runs commands as the Linux user `adedev`; keep home-directory paths under `/home/adedev`.
-- `opencode.jsonc`: configures OpenCode safety defaults without a model provider. Keep comments useful for first-year IT specialist apprentices.
+- `opencode.jsonc`: configures OpenCode safety defaults without an API key or preselected model. Keep comments useful for first-year IT specialist apprentices.
 - Codex CLI state is stored in the `codex_data` Podman volume mounted at `/home/adedev/.codex`; do not replace this with a bind mount to a committed directory.
 - `opencode.env.example`: documents that no OpenCode provider environment variable is required by this image.
 - `workspace/`: mounted into the container as `/workspace`; place working project files there.

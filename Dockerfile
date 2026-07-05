@@ -155,6 +155,7 @@ RUN mkdir -p /etc/codex
 COPY ./codex/config.toml /etc/codex/config.toml
 COPY ./codex/config.toml /etc/codex/managed_config.toml
 COPY ./codex/requirements.toml /etc/codex/requirements.toml
+RUN chmod 0644 /etc/codex/config.toml /etc/codex/managed_config.toml /etc/codex/requirements.toml
 
 RUN useradd -m adedev
 RUN mkdir -p /dotnet-build && chown adedev:adedev /dotnet-build

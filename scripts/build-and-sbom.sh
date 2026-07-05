@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-IMAGE_NAME="${IMAGE_NAME:-localhost/ade-dev-sandbox-ade:latest}"
+IMAGE_NAME="${IMAGE_NAME:-absdd-image-sandbox-ade:latest}"
 SBOM_DIR="${SBOM_DIR:-sboms}"
 CONTAINER_RUNTIME="${CONTAINER_RUNTIME:-podman}"
 SYFT_IMAGE="${SYFT_IMAGE:-docker.io/anchore/syft:latest}"

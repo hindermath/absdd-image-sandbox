@@ -50,7 +50,8 @@ artifacts.*
   `home-baseline`-Template-Repo im Container.
 - `.devcontainer/devcontainer.json`: VS-Code-Dev-Containers-Konfiguration,
   damit VS Code von aussen an den laufenden `ade`-Container anhaengen kann.
-- `opencode.jsonc`: setzt OpenCode-Sicherheitsregeln, aber keinen Provider.
+- `opencode.jsonc`: setzt OpenCode-Sicherheitsregeln, aber keinen API-Key
+  und kein vorausgewaehltes Modell.
 - `opencode.env.example`: neutrale Vorlage fuer lokale Provider-Secrets,
   falls Nutzer eigene OpenCode-Provider konfigurieren.
 - `codex/`: systemweite Codex-Defaults und Anforderungen.
@@ -109,10 +110,11 @@ cp opencode.env.example opencode.env
 chmod 600 opencode.env
 ```
 
-Dieses Image konfiguriert keinen OpenCode-Modellanbieter. Wenn eine lokale
-OpenCode-Konfiguration eigene Provider nutzt, koennen die dafuer noetigen
-Secret-Variablen in `opencode.env` eingetragen werden. Secrets nie committen
-und nie in Logs ausgeben.
+Dieses Image konfiguriert keinen OpenCode-API-Key und kein vorausgewaehltes
+Modell. Die eingebaute OpenCode-Provider-Auswahl bleibt verfuegbar; wenn eine
+lokale OpenCode-Konfiguration eigene Provider nutzt, koennen die dafuer
+noetigen Secret-Variablen in `opencode.env` eingetragen werden. Secrets nie
+committen und nie in Logs ausgeben.
 
 Optionale Host-Mounts werden ueber `.env` oder die Shell gesetzt:
 
@@ -427,5 +429,6 @@ podman compose exec ade sh -lc 'cd ~/home-baseline-tmp && git status --short --b
 bash scripts/compose-down-with-audit.sh --podman
 ```
 
-OpenCode is installed without a preconfigured model provider. Add local
-provider settings only in local, untracked configuration when needed.
+OpenCode is installed without a preconfigured API key or preselected model.
+The built-in provider picker remains available; add local provider settings
+only in local, untracked configuration when needed.
