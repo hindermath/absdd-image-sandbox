@@ -235,6 +235,26 @@ or socket is healthy. If `podman compose` is not available for lifecycle
 actions on the local installation, use `podman-compose` with the same
 arguments.
 
+When a local Podman machine or Compose provider does not use the intended
+endpoint, do not treat a stored SSH connection such as `127.0.0.1:<port>` as
+the repository default. First use the platform's native Podman setup. If an
+explicit endpoint is needed, derive it from the local platform at runtime and
+keep the concrete path or pipe out of committed files:
+
+- macOS: read `.ConnectionInfo.PodmanSocket.Path` from
+  `podman machine inspect podman-machine-default`, verify that it is a socket,
+  and set `CONTAINER_HOST=unix://...` for Podman plus `DOCKER_HOST=unix://...`
+  only for Docker-compatible API clients.
+- Windows: use the `PodmanPipe` or socket reported by `podman machine inspect`
+  or Podman Desktop; do not hard-code a named pipe or machine port in repo
+  guidance.
+- Linux: prefer direct local Podman without an endpoint override; when an API
+  socket is needed for Docker-compatible tooling, use the active local Podman
+  socket such as `unix://${XDG_RUNTIME_DIR}/podman/podman.sock`.
+
+`DOCKER_HOST` in this repository means "Docker-compatible API endpoint for
+Podman-backed tooling"; it does not reintroduce Docker as the target runtime.
+
 For README or `AGENTS.md` changes that add or change documented copy-and-paste
 commands, always run `git diff --check` as the minimum repository-side
 plausibility check. If Podman or `podman-compose` is

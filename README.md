@@ -100,6 +100,42 @@ parsen kann. Fuer Build-, Start-, Exec- und Stop-Aktionen wird weiterhin
 `podman compose` verwendet; wenn `podman compose` auf einem System nicht
 verfuegbar ist, verwende `podman-compose` mit denselben Argumenten.
 
+### Podman-Endpunkt-Auswahl
+
+Dieses Repository nutzt Podman als Container-Laufzeit. Verwende fuer normale
+Podman-Befehle zuerst die lokale Standardkonfiguration der Plattform. Setze
+einen expliziten API-Endpunkt nur, wenn ein Podman-Machine-, Podman-Desktop-
+oder Compose-Provider-Problem dies erfordert.
+
+Auf macOS und Windows werden Podman-Machines typischerweise ueber
+plattformlokale Endpunkte erreichbar gemacht. Ermittle den aktiven Endpunkt
+aus Podman selbst, statt einen Hostpfad, eine Pipe oder einen SSH-Port fest zu
+dokumentieren:
+
+```bash
+podman machine inspect podman-machine-default
+```
+
+Auf macOS kann der Unix-Socket bei Bedarf so fuer Podman und
+Docker-kompatible API-Clients gesetzt werden:
+
+```bash
+PODMAN_SOCKET="$(podman machine inspect podman-machine-default --format '{{.ConnectionInfo.PodmanSocket.Path}}')"
+test -S "$PODMAN_SOCKET"
+CONTAINER_HOST="unix://${PODMAN_SOCKET}" DOCKER_HOST="unix://${PODMAN_SOCKET}" podman info
+```
+
+Auf Windows die von `podman machine inspect` gemeldete `PodmanPipe` oder den
+gemeldeten Socket nutzen und nicht als projektspezifischen Default
+festschreiben. Auf Linux ist fuer direkte `podman`-Befehle normalerweise kein
+Endpoint-Override noetig. Wenn Docker-kompatible API-Werkzeuge einen Socket
+brauchen, verwende den lokal aktivierten Podman-Socket, zum Beispiel
+`unix://${XDG_RUNTIME_DIR}/podman/podman.sock` fuer rootless Podman.
+
+`DOCKER_HOST` bezeichnet in diesem Kontext nur die Docker-kompatible
+Podman-API fuer entsprechende Clients. Docker selbst ist fuer dieses Repository
+weiterhin nicht die Ziel-Laufzeit.
+
 ## Lokale Konfiguration
 
 Kopiere die Beispielumgebungsdatei, damit `compose.yml` eine vorhandene
