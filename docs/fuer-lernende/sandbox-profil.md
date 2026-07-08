@@ -59,6 +59,9 @@ permissions apply. Anything not listed here is unreachable from the container.
 | `${RUST_PROJECTS_DIR:-./rust-projects}` | `/rust-projects` | Ja / Yes | Ja / Yes | Rust-Projekte |
 | `${PYTHON_PROJECTS_DIR:-./python-projects}` | `/python-projects` | Ja / Yes | Ja / Yes | Python-Projekte |
 | `${SWIFT_PROJECTS_DIR:-./swift-projects}` | `/swift-projects` | Ja / Yes | Ja / Yes | Swift-Projekte |
+| `${SECURE_CASE_TRACKER_PROJECTS_DIR:-./secure-case-tracker-projects}` | `/secure-case-tracker-projects` | Ja / Yes | Ja / Yes | Secure-CaseTracker-Lern- und Projektarbeiten |
+| `${SECURE_SERVICE_HARVESTER_PROJECTS_DIR:-./secure-service-harvester-projects}` | `/secure-service-harvester-projects` | Ja / Yes | Ja / Yes | Secure-Service-Harvester-Lern- und Projektarbeiten |
+| `${SECURE_ORDER_DESK_PROJECTS_DIR:-./secure-order-desk-projects}` | `/secure-order-desk-projects` | Ja / Yes | Ja / Yes | Secure-OrderDesk-Lern- und Projektarbeiten |
 | `${AUDIT_DIR:-./audit-logs}` | `/audit` | Ja / Yes | Ja / Yes | Audit-Metadaten (beim Container-Stopp exportiert) |
 | `./dotnet/ContainerBuild.props` | `/dotnet-config/ContainerBuild.props` | Ja / Yes | **Nein / No** (`:ro`) | Read-only .NET-Build-Konfiguration |
 | (benanntes Volume / named volume) `dotnet_build` | `/dotnet-build` | Ja / Yes | Ja / Yes | Persistente .NET-Build-Artefakte (kein Host-Bind-Mount) |

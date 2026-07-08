@@ -49,7 +49,13 @@ This repository contains a small Podman-based Opencode, .NET, and Spec Kit envir
 - `HOME_BASELINE_DIR`: optional host checkout of a user's own `home-baseline` template repository, used only with `compose.home-baseline.yml` and mounted into `/home/adedev/home-baseline-tmp`.
 - `RIDER_PROJECTS_DIR`: host directory mounted into the container as `/rider-projects` for Rider projects.
 - `JAVA_PROJECTS_DIR`: host directory mounted into the container as `/java-projects` for Java, Maven, and Spring Boot projects.
+- `SECURE_CASE_TRACKER_PROJECTS_DIR`: host directory mounted into the container as `/secure-case-tracker-projects` for Secure CaseTracker learning and project work.
+- `SECURE_SERVICE_HARVESTER_PROJECTS_DIR`: host directory mounted into the container as `/secure-service-harvester-projects` for Secure Service Harvester learning and project work.
+- `SECURE_ORDER_DESK_PROJECTS_DIR`: host directory mounted into the container as `/secure-order-desk-projects` for Secure OrderDesk learning and project work.
 - `java-projects/`: local fallback mount for `/java-projects` when `JAVA_PROJECTS_DIR` is not set.
+- `secure-case-tracker-projects/`: local fallback mount for `/secure-case-tracker-projects` when `SECURE_CASE_TRACKER_PROJECTS_DIR` is not set.
+- `secure-service-harvester-projects/`: local fallback mount for `/secure-service-harvester-projects` when `SECURE_SERVICE_HARVESTER_PROJECTS_DIR` is not set.
+- `secure-order-desk-projects/`: local fallback mount for `/secure-order-desk-projects` when `SECURE_ORDER_DESK_PROJECTS_DIR` is not set.
 - `dotnet/ContainerBuild.props`: mounted into `/dotnet-config` and loaded through `DirectoryBuildPropsPath` to redirect .NET build artifacts to `/dotnet-build`.
 - `dotnet/dotnet-wrapper.sh`: installed as `/usr/local/bin/dotnet` to filter one known workload verification noise line while preserving real output and exit codes.
 - `spec-kit/patch-specify-cli.py`: patches Spec Kit copy behavior so initialization works better on Windows/WSL bind mounts.

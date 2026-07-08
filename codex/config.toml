@@ -89,6 +89,9 @@ writable_roots = [
   "/rust-projects",
   "/python-projects",
   "/swift-projects",
+  "/secure-case-tracker-projects",
+  "/secure-service-harvester-projects",
+  "/secure-order-desk-projects",
 ]
 
 [shell_environment_policy]

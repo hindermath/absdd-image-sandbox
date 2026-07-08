@@ -125,6 +125,9 @@ GO_PROJECTS_DIR=/pfad/zu/go-projects
 RUST_PROJECTS_DIR=/pfad/zu/rust-projects
 PYTHON_PROJECTS_DIR=/pfad/zu/python-projects
 SWIFT_PROJECTS_DIR=/pfad/zu/swift-projects
+SECURE_CASE_TRACKER_PROJECTS_DIR=/pfad/zu/SecureCaseTrackerProjects
+SECURE_SERVICE_HARVESTER_PROJECTS_DIR=/pfad/zu/SecureServiceHarvesterProjects
+SECURE_ORDER_DESK_PROJECTS_DIR=/pfad/zu/SecureOrderDeskProjects
 AUDIT_DIR=./audit-logs
 ```
 

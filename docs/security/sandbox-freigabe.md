@@ -33,6 +33,9 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 | `${RUST_PROJECTS_DIR:-./rust-projects}` | `/rust-projects` | Rust-Projekte |
 | `${PYTHON_PROJECTS_DIR:-./python-projects}` | `/python-projects` | Python-Projekte |
 | `${SWIFT_PROJECTS_DIR:-./swift-projects}` | `/swift-projects` | Swift-Projekte |
+| `${SECURE_CASE_TRACKER_PROJECTS_DIR:-./secure-case-tracker-projects}` | `/secure-case-tracker-projects` | Secure-CaseTracker-Lern- und Projektarbeiten |
+| `${SECURE_SERVICE_HARVESTER_PROJECTS_DIR:-./secure-service-harvester-projects}` | `/secure-service-harvester-projects` | Secure-Service-Harvester-Lern- und Projektarbeiten |
+| `${SECURE_ORDER_DESK_PROJECTS_DIR:-./secure-order-desk-projects}` | `/secure-order-desk-projects` | Secure-OrderDesk-Lern- und Projektarbeiten |
 | `${HOME_BASELINE_DIR}` | `/home/adedev/home-baseline-tmp` | Optionaler Checkout eines eigenen aus `home-baseline` erzeugten Template-Repositories; nur mit `compose.home-baseline.yml` |
 | `./dotnet/ContainerBuild.props` | `/dotnet-config/ContainerBuild.props` | Read-only .NET-Build-Konfiguration |
 | `dotnet_build` | `/dotnet-build` | Persistente .NET-Build-Artefakte ausserhalb von Host-Bind-Mounts |

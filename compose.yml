@@ -32,6 +32,15 @@ services:
         source: ${SWIFT_PROJECTS_DIR:-./swift-projects}
         target: /swift-projects
       - type: bind
+        source: ${SECURE_CASE_TRACKER_PROJECTS_DIR:-./secure-case-tracker-projects}
+        target: /secure-case-tracker-projects
+      - type: bind
+        source: ${SECURE_SERVICE_HARVESTER_PROJECTS_DIR:-./secure-service-harvester-projects}
+        target: /secure-service-harvester-projects
+      - type: bind
+        source: ${SECURE_ORDER_DESK_PROJECTS_DIR:-./secure-order-desk-projects}
+        target: /secure-order-desk-projects
+      - type: bind
         source: ${AUDIT_DIR:-./audit-logs}
         target: /audit
       - ./dotnet/ContainerBuild.props:/dotnet-config/ContainerBuild.props:ro
