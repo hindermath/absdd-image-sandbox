@@ -135,8 +135,13 @@ Nicht gesetzte Variablen fallen auf lokale Repository-Verzeichnisse zurueck.
 `home-baseline` wird nicht in das Public Image geklont. Nutzerinnen und
 Nutzer erstellen zuerst ein eigenes Repository aus einem `home-baseline`-
 Template ueber die Template-Funktion ihres Git-Hostings und klonen dieses Repo
-lokal. Kurs- oder Projektunterlagen koennen eine konkrete Template-Quelle
-nennen; die Sandbox selbst verlangt keinen bestimmten GitHub-Account.
+lokal. Die oeffentliche Level-0- und Lernreihen-Referenz ist
+<https://github.com/hindermath/home-baseline>; eigene Template-Forks oder
+kursbezogene Quellen bleiben moeglich. Die Sandbox selbst verlangt keinen
+bestimmten GitHub-Account.
+
+Fuer die Verbindung zwischen diesem Sandbox-Image und den Lernreihen siehe
+auch [docs/fuer-lernende/README.md](docs/fuer-lernende/README.md).
 
 Der lokale Checkout kann danach optional in die Sandbox gemountet werden:
 
@@ -415,7 +420,11 @@ podman compose exec ade bash
 ```
 
 4. Optionally mount your own repository created from a `home-baseline`
-   template:
+   template. The public Level-0 and learning-series reference is
+   <https://github.com/hindermath/home-baseline>, but user-owned forks and
+   course-specific template sources remain supported. The sandbox image does
+   not clone `home-baseline` itself. For the learning-series bridge, see
+   [docs/fuer-lernende/README.md](docs/fuer-lernende/README.md).
 
 ```bash
 HOME_BASELINE_DIR=/path/to/home-baseline-tmp
