@@ -151,8 +151,8 @@ specify version
 | [GLOSSAR.md](GLOSSAR.md) | Erklärungen für Abkürzungen wie MSL, SBOM, CL_12, P0 |
 | [sandbox-readiness-template.md](sandbox-readiness-template.md) | Ausfüllbare Vorlage für die Jahr-2-Sandbox-Entscheidung |
 | [betriebsnachweise-template.md](betriebsnachweise-template.md) | Vorlage für Betriebsnachweise (Jahr 3, SI- und DV-Track) |
-| [../README.md](../README.md) | Ausführliche Anleitung für Entwickler und Administratoren |
-| [../docs/secure-development/](../secure-development/) | Richtlinie, 12 Checklisten und Leitlinien für sichere Entwicklung |
+| [../../README.md](../../README.md) | Ausführliche Anleitung für Entwickler und Administratoren |
+| [../secure-development/](../secure-development/) | Richtlinie, 12 Checklisten und Leitlinien für sichere Entwicklung |
 
 ---
 

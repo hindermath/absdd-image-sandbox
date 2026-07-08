@@ -88,10 +88,10 @@ intentional: what is not mounted cannot be damaged.
 | `/audit` | Ja / Yes | Audit-Metadaten — kein Prompt-Text, keine Secrets |
 | `/dotnet-config/ContainerBuild.props` | **Nein / No** | Read-only gemountet |
 | Host-Dateisystem außerhalb der Mounts / Host filesystem outside mounts | **Nicht erreichbar / Not reachable** | Isolation schützt den Host |
-| `.ssh`, `.gnupg`, Credential-Dateien | **Lesen verboten / Read denied** | Durch Codex-Konfiguration blockiert |
+| `.ssh`, `.gnupg`, Credential-Dateien | **Lesen verboten / Read denied** | Durch `codex/requirements.toml` blockiert |
 
 **EN:** The container cannot write to anything outside the listed mounts. Sensitive paths like `.ssh` and
-`.gnupg` are blocked from being read by the Codex agent.
+`.gnupg` are blocked from being read by the Codex agent through `codex/requirements.toml`.
 
 ---
 
