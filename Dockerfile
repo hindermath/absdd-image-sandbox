@@ -1,6 +1,8 @@
 # Tag 10.0 observed on 2026-06-03, pinned here by digest for reproducible builds.
 FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:1f48db91b4f27fdb4409b7b4253ce1fd4f78f69d34efd9edb788c03a337f5ab8
 
+# renovate: datasource=java-version depName=java packageName=java-jdk versioning=semver-coerced argName=JAVA_VERSION
+ARG JAVA_VERSION=21
 # renovate: datasource=golang-version depName=go versioning=semver argName=GO_VERSION
 ARG GO_VERSION=1.26.3
 # renovate: datasource=go depName=golang.org/x/tools/gopls versioning=semver argName=GOPLS_VERSION
@@ -52,7 +54,8 @@ RUN apt-get -y update \
         libxml2-dev \
         libz3-dev \
         maven \
-        openjdk-21-jdk-headless \
+        openjdk-${JAVA_VERSION}-jdk-headless \
+        pandoc \
         pkg-config \
         python-is-python3 \
         python3 \

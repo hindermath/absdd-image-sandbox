@@ -35,6 +35,7 @@ vorangestellte Metadatenzeile mit passendem `argName` hat.
 
 | ARG | Renovate datasource | Dependency |
 |---|---|---|
+| `JAVA_VERSION` | `java-version` | `java` |
 | `GO_VERSION` | `golang-version` | `go` |
 | `GOPLS_VERSION` | `go` | `golang.org/x/tools/gopls` |
 | `STATICCHECK_VERSION` | `go` | `honnef.co/go/tools` |
@@ -47,6 +48,10 @@ vorangestellte Metadatenzeile mit passendem `argName` hat.
 | `UV_VERSION` | `github-releases` | `astral-sh/uv` |
 | `OPENCODE_VERSION` | `npm` | `opencode-ai` |
 | `CODEX_VERSION` | `npm` | `@openai/codex` |
+
+`JAVA_VERSION` versioniert bewusst die Java-Major-Linie fuer das Ubuntu-APT-
+Paket `openjdk-${JAVA_VERSION}-jdk-headless`. Die konkrete Ubuntu-Patchversion
+wird nicht exakt gepinnt und muss bei Renovate-PRs im Build validiert werden.
 
 ### GitHub-Betriebskontext
 
@@ -98,6 +103,7 @@ preceding metadata line with a matching `argName`.
 
 | ARG | Renovate datasource | Dependency |
 |---|---|---|
+| `JAVA_VERSION` | `java-version` | `java` |
 | `GO_VERSION` | `golang-version` | `go` |
 | `GOPLS_VERSION` | `go` | `golang.org/x/tools/gopls` |
 | `STATICCHECK_VERSION` | `go` | `honnef.co/go/tools` |
@@ -110,6 +116,11 @@ preceding metadata line with a matching `argName`.
 | `UV_VERSION` | `github-releases` | `astral-sh/uv` |
 | `OPENCODE_VERSION` | `npm` | `opencode-ai` |
 | `CODEX_VERSION` | `npm` | `@openai/codex` |
+
+`JAVA_VERSION` deliberately versions the Java major line for the Ubuntu APT
+package `openjdk-${JAVA_VERSION}-jdk-headless`. The concrete Ubuntu patch
+package version is not pinned exactly and must be validated in Renovate PR
+builds.
 
 ### GitHub Operation Context
 
