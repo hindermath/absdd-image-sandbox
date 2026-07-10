@@ -48,14 +48,15 @@ This repository contains a Podman-based agentic learning sandbox with OpenCode, 
 
 - `Dockerfile`: builds from the Microsoft .NET SDK image in MCR pinned by digest and installs the six language toolchains, pinned OpenCode, Codex, Claude Code, Gemini CLI, GitHub Copilot CLI, Syft, `uv`, Spec Kit, and common CLI helper tools.
 - `compose.yml`: defines the `ade` service, builds the local image, and mounts separate persistent state volumes for OpenCode and all four required agents.
-- `compose.home-baseline.yml`: optional Compose override that bind-mounts the learner's persistent checkout of their personal `home-baseline` fork into `/home/adedev/home-baseline-tmp`.
+- `home-baseline.lock.json`: pins the public `home-baseline` release and exact commit embedded as a read-only shallow Git reference under `/opt/home-baseline`.
+- `compose.home-baseline.yml`: optional Compose override that replaces the embedded reference with the learner's writable personal `home-baseline` checkout. The stable user path remains `/home/adedev/home-baseline-tmp` through a symlink.
 - The container runs commands as the Linux user `adedev`; keep home-directory paths under `/home/adedev`.
 - `opencode.jsonc`: configures OpenCode safety defaults without an API key or preselected model. Keep comments useful for first-year IT specialist apprentices.
 - Agent state is isolated in `codex_data`, `claude_data`, `gemini_data`, and `copilot_data`; do not replace these with bind mounts to committed directories.
 - `opencode.env.example`: documents that no OpenCode provider environment variable is required by this image.
 - `workspace/`: mounted into the container as `/workspace`; place working project files there.
 - `ADE_DEV_SANDBOX_DIR`: host checkout of this repository mounted into the container as `/ade-dev-sandbox` for controlled repository maintenance tasks from inside the container.
-- `HOME_BASELINE_DIR`: optional persistent host checkout of the learner's personal `home-baseline` fork, used only with `compose.home-baseline.yml` and mounted into `/home/adedev/home-baseline-tmp`.
+- `HOME_BASELINE_DIR`: optional persistent host checkout of the learner's personal `home-baseline` fork, used only with `compose.home-baseline.yml` and mounted over `/opt/home-baseline`; `/home/adedev/home-baseline-tmp` remains the user-facing alias.
 - `RIDER_PROJECTS_DIR`: host directory mounted into the container as `/rider-projects` for Rider projects.
 - `JAVA_PROJECTS_DIR`: host directory mounted into the container as `/java-projects` for Java, Maven, and Spring Boot projects.
 - `SECURE_CASE_TRACKER_PROJECTS_DIR`: host directory mounted into the container as `/secure-case-tracker-projects` for Secure CaseTracker learning and project work.
@@ -126,12 +127,13 @@ Moves to the mounted Windows/Rider projects directory inside the container.
 cd /home/adedev/home-baseline-tmp
 ```
 
-Moves to the optional mounted `home-baseline` checkout when the container was
-started with `compose.home-baseline.yml`. Do not clone `home-baseline` into the
-image and do not hard-code a private host path; public users should create
-their personal fork or institution-provided repository and set
-`HOME_BASELINE_DIR` locally. Only the direct GitHub profile requires a GitHub
-account.
+Moves to the pinned read-only `home-baseline` reference included in the image.
+Its source, release, commit, and license are locked in
+`home-baseline.lock.json`; no script from the reference runs automatically.
+For writable Level-0 work, public users create their personal fork or
+institution-provided repository and set `HOME_BASELINE_DIR` locally. The
+Compose override replaces `/opt/home-baseline` while preserving this user-facing
+path. Only the direct GitHub profile requires a GitHub account.
 
 ```bash
 podman compose down

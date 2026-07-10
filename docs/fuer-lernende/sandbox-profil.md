@@ -70,13 +70,16 @@ permissions apply. Anything not listed here is unreachable from the container.
 | (benanntes Volume) `claude_data` | `/home/adedev/.claude` | Ja / Yes | Ja / Yes | Persistenter Claude-Code-Zustand |
 | (benanntes Volume) `gemini_data` | `/home/adedev/.gemini-home` | Ja / Yes | Ja / Yes | Persistenter Gemini-CLI-Zustand |
 | (benanntes Volume) `copilot_data` | `/home/adedev/.copilot` | Ja / Yes | Ja / Yes | Persistenter GitHub-Copilot-CLI-Zustand |
-| (optional) `${HOME_BASELINE_DIR}` | `/home/adedev/home-baseline-tmp` | Ja / Yes | Ja / Yes | Nur mit `compose.home-baseline.yml`; eigenes `home-baseline`-Repo |
+| Image-Inhalt / image content | `/opt/home-baseline` (`~/home-baseline-tmp`) | Ja / Yes | **Nein / No** | Gepinnte read-only Level-0-Referenz aus `home-baseline.lock.json` |
+| (optional) `${HOME_BASELINE_DIR}` | `/opt/home-baseline` (`~/home-baseline-tmp`) | Ja / Yes | Ja / Yes | Nur mit `compose.home-baseline.yml`; eigener beschreibbarer Checkout ueberdeckt die Referenz |
 
-**DE:** Alles außerhalb dieser Mounts ist **nicht sichtbar** und **nicht beschreibbar** aus dem Container.
-Das ist gewollt: Was nicht gemountet ist, kann nicht beschädigt werden.
+**DE:** Host-Verzeichnisse außerhalb dieser Mounts sind **nicht sichtbar** und
+**nicht beschreibbar** aus dem Container. Die eingebaute Referenz ist
+Image-Inhalt, kein Host-Mount, und bleibt im Standardmodus read-only.
 
-**EN:** Everything outside these mounts is **not visible** and **not writable** from the container. This is
-intentional: what is not mounted cannot be damaged.
+**EN:** Host directories outside these mounts are **not visible** and **not
+writable** from the container. The embedded reference is image content, not a
+host mount, and remains read-only in default mode.
 
 ---
 

@@ -57,6 +57,21 @@ vorangestellte Metadatenzeile mit passendem `argName` hat.
 Paket `openjdk-${JAVA_VERSION}-jdk-headless`. Die konkrete Ubuntu-Patchversion
 wird nicht exakt gepinnt und muss bei Renovate-PRs im Build validiert werden.
 
+### Eingebettete Home-Baseline-Referenz
+
+`home-baseline.lock.json` behandelt die Level-0-Referenz als eingebettete
+Inhaltsabhaengigkeit. Die Lock-Datei enthaelt ausschliesslich die oeffentliche
+HTTPS-Quelle, einen stabilen Release-Tag, den exakten 40-stelligen Commit und
+die MIT-Lizenz. Ein eigener Renovate-Regex-Manager erfasst Tag und Commit-Digest
+gemeinsam; Auto-Merge bleibt deaktiviert.
+
+Ein Update ist nur zulaessig, wenn der Release veroeffentlicht ist, der Tag auf
+den eingetragenen Commit aufloest und der Build die erwartete Lizenz sowie die
+zentrale Lernenden-Anleitung findet. `scripts/check-home-baseline-lock.py`
+prueft die statische Lock-Struktur. Der Image-Build prueft den Tag gegen den
+Commit vor dem Checkout. Die lokale Arbeitskopie eines Maintainers ist keine
+zulaessige Build-Quelle.
+
 ### GitHub-Betriebskontext
 
 Dieses Repository enthaelt nur die Renovate-Konfiguration. Damit Renovate
@@ -129,6 +144,19 @@ preceding metadata line with a matching `argName`.
 package `openjdk-${JAVA_VERSION}-jdk-headless`. The concrete Ubuntu patch
 package version is not pinned exactly and must be validated in Renovate PR
 builds.
+
+### Embedded Home-Baseline Reference
+
+`home-baseline.lock.json` treats the Level-0 reference as an embedded content
+dependency. It records only the public HTTPS source, a stable release tag, the
+exact 40-character commit, and the MIT license. A dedicated Renovate regex
+manager captures the tag and commit digest together; automerge stays disabled.
+
+An update is allowed only after the release is published, the tag resolves to
+the recorded commit, and the build finds the expected license and canonical
+learner guide. `scripts/check-home-baseline-lock.py` validates the static lock
+shape. The image build verifies tag against commit before checkout. A
+maintainer's local working tree is not an allowed build source.
 
 ### GitHub Operation Context
 

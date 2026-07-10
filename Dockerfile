@@ -231,8 +231,17 @@ COPY --chown=adedev:adedev ./opencode.jsonc /home/adedev/.config/opencode/openco
 USER root
 COPY ./scripts/audit-export.sh /usr/local/bin/audit-export
 COPY ./scripts/container-entrypoint.sh /usr/local/bin/ade-entrypoint
+COPY ./scripts/install-home-baseline-reference.sh /usr/local/bin/install-home-baseline-reference
+COPY ./home-baseline.lock.json /usr/local/share/absdd-image-sandbox/home-baseline.lock.json
 RUN sed -i 's/\r$//' /usr/local/bin/audit-export /usr/local/bin/ade-entrypoint \
-    && chmod 0755 /usr/local/bin/audit-export /usr/local/bin/ade-entrypoint
+        /usr/local/bin/install-home-baseline-reference \
+    && chmod 0755 /usr/local/bin/audit-export /usr/local/bin/ade-entrypoint \
+        /usr/local/bin/install-home-baseline-reference \
+    && install-home-baseline-reference \
+        /usr/local/share/absdd-image-sandbox/home-baseline.lock.json \
+        /opt/home-baseline \
+    && ln -s /opt/home-baseline /home/adedev/home-baseline-tmp \
+    && chown -h adedev:adedev /home/adedev/home-baseline-tmp
 USER adedev
 
 ENTRYPOINT ["/usr/local/bin/ade-entrypoint"]

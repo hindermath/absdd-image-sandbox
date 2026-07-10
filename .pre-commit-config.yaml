@@ -7,6 +7,12 @@ repos:
         language: python
         pass_filenames: false
         files: ^(Dockerfile|renovate\.json|scripts/check-dockerfile-arg-renovate\.py|scripts/smoke-test-toolchains\.sh)$
+      - id: home-baseline-lock
+        name: check pinned home-baseline reference
+        entry: python scripts/check-home-baseline-lock.py
+        language: python
+        pass_filenames: false
+        files: ^(home-baseline\.lock\.json|renovate\.json|scripts/check-home-baseline-lock\.py|scripts/install-home-baseline-reference\.sh)$
 
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.30.1

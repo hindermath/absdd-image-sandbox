@@ -197,6 +197,7 @@ exclude_slash_tmp = true
 # erfordern ein neues Container-Image, nicht nur einen Restart.
 writable_roots = [
   "/absdd-image-sandbox",
+  "/opt/home-baseline",
   "/home/adedev/home-baseline-tmp",
   "/workspace",
   "/rider-projects",
@@ -246,6 +247,7 @@ network_access = false
 exclude_slash_tmp = true
 writable_roots = [
   "/absdd-image-sandbox",
+  "/opt/home-baseline",
   "/home/adedev/home-baseline-tmp",
   "/workspace",
   "/rider-projects",

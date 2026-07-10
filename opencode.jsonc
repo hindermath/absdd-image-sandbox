@@ -155,6 +155,7 @@
     "external_directory": {
       "*": "ask",
       "/ade-dev-sandbox/**": "allow",
+      "/opt/home-baseline/**": "allow",
       "/home/adedev/home-baseline-tmp/**": "allow",
       "/tmp/opencode/*": "allow",
       "/home/adedev/.local/share/opencode/tool-output/*": "allow"
