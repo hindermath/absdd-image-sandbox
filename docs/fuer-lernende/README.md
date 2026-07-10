@@ -23,6 +23,33 @@ CaseTracker` training project.
 
 ---
 
+## Neu hier? Ohne Vorkenntnisse? / New Here? No Prior Knowledge?
+
+**DE:** Wenn du noch **nie mit Containern gearbeitet** hast, folge dieser
+Reihenfolge. Jedes Dokument baut auf dem vorherigen auf und setzt kein Vorwissen
+voraus.
+
+**EN:** If you have **never worked with containers**, follow this order. Each
+document builds on the previous one and assumes no prior knowledge.
+
+| Schritt / Step | Dokument / Document | Inhalt / Content |
+|---|---|---|
+| 1 | [container-grundlagen.md](container-grundlagen.md) | Was ist ein Container, Image, Volume, Mount? / What is a container, image, volume, mount? |
+| 2 | [warum-sandbox.md](warum-sandbox.md) | Warum eine Sandbox? Gate, Schutzziele, ISO 27001. / Why a sandbox? Gate, protection goals, ISO 27001. |
+| 3 | [installation.md](installation.md) | Podman installieren je Betriebssystem. / Install Podman per operating system. |
+| 4 | [erste-schritte.md](erste-schritte.md) | Container starten, erstes Programm, sauber stoppen. / Start the container, first program, stop cleanly. |
+| 5 | [troubleshooting.md](troubleshooting.md) | Hilfe bei typischen Fehlern. / Help with common errors. |
+
+**DE:** Die Kurzfassung des Starts steht weiter unten unter „Schnellstart". Die
+ausführliche, anfängernahe Variante findest du in
+[installation.md](installation.md) und [erste-schritte.md](erste-schritte.md).
+
+**EN:** The short version of the start is below under "Quick Start". The
+detailed, beginner-friendly variant is in [installation.md](installation.md) and
+[erste-schritte.md](erste-schritte.md).
+
+---
+
 ## Bin ich bereit? / Am I Ready?
 
 **DE:** Die Sandbox wird im Laufe der Ausbildung schrittweise wichtiger. Die Tabelle zeigt, was in welchem
@@ -33,7 +60,7 @@ each training year.
 
 | Lehrjahr / Year | Erwartung / Expectation | Sandbox Pflicht? / Mandatory? |
 |---|---|---|
-| 1. Lehrjahr / Year 1 | Verstehe, **warum** eine Sandbox existiert und was ihre Grenzen sind. Dokumentiere Mounts, Schreibgrenzen, Netzwerk und Secret-Regeln als Zielbild. | Nein — praktische Nutzung ist `N/A`, begründet. / No — practical use is `N/A`, justified. |
+| 1. Lehrjahr / Year 1 | Verstehe, **warum** eine Sandbox existiert und was ihre Grenzen sind. Dokumentiere Mounts, Schreibgrenzen, Netzwerk und Secret-Regeln als Zielbild. | Gate: **Ja** — ein KI-Agent läuft nur im Container. Praktische Schreib-Nutzung: `N/A`, begründet. / Gate: **yes** — an AI agent runs only in the container. Practical write use: `N/A`, justified. |
 | 2. Lehrjahr / Year 2 | Bereite ein **Betriebskonzept** vor: Konfiguration, Secrets, Schreibgrenzen, Laufzeitannahmen, KI-Agenten-Grenzen. Entscheide dokumentiert `Applicable`/`N/A`/`Open`. | Nein — Konzept vorbereiten, Nutzung darf begründet aufschieben. / No — prepare the concept; use may be deferred with a rationale. |
 | 3. Lehrjahr SI / Year 3 SI | Nutze die Sandbox **tatsächlich** für KI-gestützte Schreibarbeit und riskante Experimente. Betriebsnachweise liefern. | Ja (SI-Track und DV-Track). / Yes (SI track and DV track). |
 | 3. Lehrjahr DV / Year 3 DV | Nutze die Sandbox als Referenzprofil; dokumentiere Netzwerkzugriffe, Mounts und Abweichungen nachvollziehbar. | Ja (SI-Track und DV-Track). / Yes (SI track and DV track). |
@@ -49,97 +76,50 @@ toolchain checks.
 
 ---
 
-## Schnellstart (5 Schritte) / Quick Start (5 Steps)
+## Schnellstart (Kurzfassung) / Quick Start (Short Version)
 
-**DE:** Wenn du die Sandbox zum ersten Mal startest:
+**DE:** Diese Kurzfassung ist für alle, die Podman schon kennen. Wenn du **ohne
+Vorkenntnisse** startest, nutze die ausführliche Anleitung
+[installation.md](installation.md) und danach
+[erste-schritte.md](erste-schritte.md).
 
-**EN:** When you start the sandbox for the first time:
-
-### Schritt 1 / Step 1: Voraussetzungen prüfen / Check Prerequisites
-
-**DE:** Du brauchst: `git`, `podman` (oder Docker als Alternative) und `podman-compose`.
-
-**EN:** You need: `git`, `podman` (or Docker as an alternative), and `podman-compose`.
+**EN:** This short version is for those who already know Podman. If you start
+**without prior knowledge**, use the detailed guide
+[installation.md](installation.md) and then
+[erste-schritte.md](erste-schritte.md).
 
 ```bash
+# 1. Werkzeuge vorhanden? / Tools present?
 git --version
 podman --version
-podman-compose --version
-```
 
-**DE:** Auf macOS: `brew install podman podman-compose`
-Auf Ubuntu: `apt install podman` + `pip install podman-compose`
-Auf Windows: Podman Desktop installieren, dann `winget install podman-compose`
-
-**EN:** On macOS: `brew install podman podman-compose`
-On Ubuntu: `apt install podman` + `pip install podman-compose`
-On Windows: Install Podman Desktop, then `winget install podman-compose`
-
-### Schritt 2 / Step 2: Repository klonen / Clone the Repository
-
-```bash
+# 2. Repo holen / Get the repo
 git clone https://github.com/hindermath/absdd-image-sandbox.git
 cd absdd-image-sandbox
-```
-
-### Schritt 3 / Step 3: Konfiguration vorbereiten / Prepare Configuration
-
-**DE:** Erstelle die lokale Secrets-Datei. Du brauchst erst keinen echten API-Schlüssel — die Datei darf
-leer bleiben, wenn du keinen KI-Provider-Schlüssel verwendest.
-
-**EN:** Create the local secrets file. You do not need a real API key yet — the file may stay empty if you
-are not using a provider key.
-
-```bash
 cp opencode.env.example opencode.env
-# Keine Schluessel einzutragen, bis du sie benoenigst.
-# No keys to enter until you need them.
-```
 
-### Schritt 4 / Step 4: Podman starten / Start Podman
-
-**DE:** Auf macOS und Windows braucht Podman eine Maschine:
-
-**EN:** On macOS and Windows, Podman needs a machine:
-
-```bash
-# macOS / Windows
+# 3. Podman-Machine (nur macOS/Windows / only macOS/Windows)
 podman machine init
 podman machine start
-```
 
-**DE:** Auf Linux oder WSL2: `podman info` zum Prüfen reicht.
-
-**EN:** On Linux or WSL2: `podman info` to check is enough.
-
-### Schritt 5 / Step 5: Container bauen und starten / Build and Start the Container
-
-```bash
-# Konfiguration pruefen (ohne Start) / Validate config (without starting)
+# 4. Konfig prüfen, bauen, starten / Validate, build, start
 podman-compose config
-
-# Image bauen und Container starten / Build image and start container
 podman compose build --pull
 podman compose up -d
 
-# Shell im Container oeffnen / Open a shell in the container
+# 5. Shell im Container / Shell in the container
 podman compose exec ade bash
 ```
 
-**DE:** Wenn der Container läuft, siehst du die Eingabeaufforderung `adedev@...`. Jetzt kannst du die
-installierten Werkzeuge prüfen:
+**DE:** Läuft der Container, siehst du die Eingabeaufforderung `adedev@...`.
+Prüfe dann die Werkzeuge und stoppe sauber — beides erklärt
+[erste-schritte.md](erste-schritte.md) Schritt für Schritt (inklusive
+`scripts/compose-down-with-audit.sh --podman -v`).
 
-**EN:** When the container runs you see the prompt `adedev@...`. Now you can check the installed tools:
-
-```bash
-dotnet --version
-go version
-java --version
-python --version
-rustc --version
-swift --version
-specify version
-```
+**EN:** When the container runs you see the prompt `adedev@...`. Then check the
+tools and stop cleanly — both explained step by step in
+[erste-schritte.md](erste-schritte.md) (including
+`scripts/compose-down-with-audit.sh --podman -v`).
 
 ---
 
@@ -147,6 +127,11 @@ specify version
 
 | Dokument / Document | Inhalt / Content |
 |---|---|
+| [container-grundlagen.md](container-grundlagen.md) | Container-Grundbegriffe für Anfänger: Image, Container, Volume, Mount, Diagramm |
+| [warum-sandbox.md](warum-sandbox.md) | Container-First-Gate, vier Schutzziele, ISO 27001, Anfängerfehler |
+| [installation.md](installation.md) | Podman installieren je Betriebssystem, Schritt für Schritt |
+| [erste-schritte.md](erste-schritte.md) | Erster Tag: starten, erstes Programm, sauber stoppen |
+| [troubleshooting.md](troubleshooting.md) | Typische Anfängerfehler: Symptom, Ursache, Lösung |
 | [sandbox-profil.md](sandbox-profil.md) | Vollständiges Sandbox-Profil: Mounts, Schreibgrenzen, Netzwerk, MSL-Matrix, KI-Agenten |
 | [GLOSSAR.md](GLOSSAR.md) | Erklärungen für Abkürzungen wie MSL, SBOM, CL_12, P0 |
 | [sandbox-readiness-template.md](sandbox-readiness-template.md) | Ausfüllbare Vorlage für die Jahr-2-Sandbox-Entscheidung |
@@ -177,13 +162,17 @@ series. The matching study companions are in the `home-baseline-tmp` repository 
 ## Häufige Fragen / Frequently Asked Questions
 
 **DE:** **Ich starte im 1. Lehrjahr — muss ich die Sandbox wirklich nutzen?**
-Nein. Im 1. Lehrjahr geht es darum zu verstehen, warum eine Sandbox existiert. Praktische Nutzung ist noch
-`N/A` (nicht anwendbar), aber du solltest das begründen. Der Lernbegleiter erklärt genau, was du
+Unterscheide zwei Dinge. Das **Container-First-Gate** gilt ab dem 1. Lehrjahr verbindlich: Wenn du einen
+KI-Agenten nutzt, läuft er **im Container**, nie auf dem Arbeitsplatz-Rechner (siehe
+[warum-sandbox.md](warum-sandbox.md)). Die **praktische Schreib-Nutzung** der Sandbox ist im 1. Lehrjahr
+dagegen noch `N/A` (nicht anwendbar), solange du das begründest. Der Lernbegleiter erklärt genau, was du
 dokumentieren sollst.
 
 **EN:** **I am in year 1 — do I really have to use the sandbox?**
-No. In year 1 the goal is to understand why a sandbox exists. Practical use is still `N/A` (not applicable),
-but you should justify that. The study companion explains exactly what to document.
+Distinguish two things. The **Container-First Gate** applies from year 1 as binding: if you use an AI agent,
+it runs **inside the container**, never on the workstation (see [warum-sandbox.md](warum-sandbox.md)). The
+**practical write use** of the sandbox, by contrast, is still `N/A` (not applicable) in year 1 as long as you
+justify it. The study companion explains exactly what to document.
 
 ---
 

@@ -116,8 +116,15 @@ Verzeichnis `docs/secure-development/checklisten/`.
 | Begriff / Term | Erklärung / Explanation |
 |---|---|
 | **Container** | Abgeschlossene Software-Umgebung, die ein Programm und alle seine Abhängigkeiten enthält. Ähnlich wie eine Box, die auf jedem Computer gleich aussieht. / Enclosed software environment that contains a program and all its dependencies. Similar to a box that looks the same on every computer. |
+| **Image** | Die Bauvorlage für einen Container, ähnlich einem Rezept. Aus einem Image entstehen beliebig viele gleiche Container. / The build template for a container, similar to a recipe. From one image you can create any number of identical containers. |
+| **Registry** | Ein Online-Lager, aus dem Images heruntergeladen werden (hier `mcr.microsoft.com` für das .NET-Basis-Image). / An online store from which images are downloaded (here `mcr.microsoft.com` for the .NET base image). |
 | **Sandbox** | Besonders abgeschotteter Container oder Prozess, in dem Fehler und Angriffe nicht nach außen dringen können. / Particularly walled-off container or process in which errors and attacks cannot escape to the outside. |
+| **Host** | Dein eigener Rechner (Laptop oder PC), auf dem der Container läuft. / Your own machine (laptop or PC) on which the container runs. |
+| **Podman-Machine** | Kleine, versteckte Linux-VM, die Podman auf macOS und Windows braucht, weil Container Linux voraussetzen. Auf Linux entfällt sie. / Small, hidden Linux VM that Podman needs on macOS and Windows because containers require Linux. Not needed on Linux. |
 | **Mount** | Ein Verzeichnis, das von außen in den Container eingebunden wird, damit der Container darauf zugreifen kann. / A directory mounted from outside into the container so the container can access it. |
+| **Bind-Mount** | Ein Ordner von deinem Rechner (Host), der in den Container eingehängt wird; beide greifen auf dieselben Dateien zu. / A folder from your machine (host) mounted into the container; both access the same files. |
+| **Volume** | Ein von Podman verwalteter Speicherbereich, der Daten behält, auch wenn der Container neu startet — kein Ordner auf dem Host. / A storage area managed by Podman that keeps data even when the container restarts — not a folder on the host. |
+| **Bridge-Netz** | Standard-Netzwerk von Compose, über das der Container ins Internet erreichen kann. / The default Compose network through which the container can reach the internet. |
 | **Digest** | Eindeutige Prüfsumme (Hash) eines Container-Images — stellt sicher, dass immer genau dieselbe Version verwendet wird. / Unique checksum (hash) of a container image — ensures exactly the same version is always used. |
 | **Egress** | Ausgehender Netzwerkverkehr vom Container ins Internet. / Outbound network traffic from the container to the internet. |
 | **Ingress** | Eingehender Netzwerkverkehr von außen in den Container. / Inbound network traffic from outside into the container. |
