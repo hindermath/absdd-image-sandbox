@@ -1,6 +1,6 @@
 # Abhängigkeits-Update-Richtlinie / Dependency-Update-Policy
 
-Stand: 2026-07-05
+Stand: 2026-07-10
 
 ## Deutsch
 
@@ -48,6 +48,10 @@ vorangestellte Metadatenzeile mit passendem `argName` hat.
 | `UV_VERSION` | `github-releases` | `astral-sh/uv` |
 | `OPENCODE_VERSION` | `npm` | `opencode-ai` |
 | `CODEX_VERSION` | `npm` | `@openai/codex` |
+| `CLAUDE_CODE_VERSION` | `npm` | `@anthropic-ai/claude-code` |
+| `GEMINI_CLI_VERSION` | `npm` | `@google/gemini-cli` |
+| `COPILOT_CLI_VERSION` | `npm` | `@github/copilot` |
+| `SYFT_VERSION` | `github-releases` | `anchore/syft` |
 
 `JAVA_VERSION` versioniert bewusst die Java-Major-Linie fuer das Ubuntu-APT-
 Paket `openjdk-${JAVA_VERSION}-jdk-headless`. Die konkrete Ubuntu-Patchversion
@@ -116,6 +120,10 @@ preceding metadata line with a matching `argName`.
 | `UV_VERSION` | `github-releases` | `astral-sh/uv` |
 | `OPENCODE_VERSION` | `npm` | `opencode-ai` |
 | `CODEX_VERSION` | `npm` | `@openai/codex` |
+| `CLAUDE_CODE_VERSION` | `npm` | `@anthropic-ai/claude-code` |
+| `GEMINI_CLI_VERSION` | `npm` | `@google/gemini-cli` |
+| `COPILOT_CLI_VERSION` | `npm` | `@github/copilot` |
+| `SYFT_VERSION` | `github-releases` | `anchore/syft` |
 
 `JAVA_VERSION` deliberately versions the Java major line for the Ubuntu APT
 package `openjdk-${JAVA_VERSION}-jdk-headless`. The concrete Ubuntu patch

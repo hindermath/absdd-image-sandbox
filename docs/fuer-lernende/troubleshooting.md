@@ -217,6 +217,39 @@ möglich.
 
 ---
 
+## Ein Required-Agent fehlt oder die Anmeldung ist weg / A Required Agent Is Missing or Signed Out
+
+**DE:**
+
+- **Symptom:** `codex`, `claude`, `gemini` oder `copilot` meldet `command not
+  found`.
+- **Ursache:** Das Image wurde vor der Vier-Agenten-Erweiterung gebaut oder der
+  Build ist fehlgeschlagen.
+- **Lösung:** Fuehre auf dem Host `podman compose build --pull` und danach
+  `bash scripts/smoke-test-toolchains.sh` im Container aus. Alle vier Befehle
+  muessen eine Version ausgeben.
+- **Symptom:** Nach einem Neustart ist der Agent abgemeldet.
+- **Ursache:** Die Umgebung wurde mit `down -v` beendet; dadurch wurden die
+  Agenten-Volumes geloescht.
+- **Lösung:** Melde dich interaktiv erneut an. Nutze beim normalen Stoppen
+  `bash scripts/compose-down-with-audit.sh --podman` ohne `-v`.
+
+**EN:**
+
+- **Symptom:** `codex`, `claude`, `gemini`, or `copilot` reports `command not
+  found`.
+- **Cause:** The image predates the four-agent extension or its build failed.
+- **Solution:** Run `podman compose build --pull` on the host and then
+  `bash scripts/smoke-test-toolchains.sh` inside the container. All four
+  commands must print a version.
+- **Symptom:** An agent is signed out after restart.
+- **Cause:** The environment was stopped with `down -v`, which removed the
+  agent volumes.
+- **Solution:** Sign in interactively again. For normal stops, use
+  `bash scripts/compose-down-with-audit.sh --podman` without `-v`.
+
+---
+
 ## Nichts hilft — was dann? / Nothing Helps — What Then?
 
 **DE:** Prüfe der Reihe nach: Läuft die Podman-Machine (`podman machine list`)?

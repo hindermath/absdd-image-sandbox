@@ -70,10 +70,39 @@ $dateStamp = Get-Date -Format "yyyy-MM-dd"
 $safeImage = $ImageName -replace "[/:@\\]+", "-" -replace "[^A-Za-z0-9._-]", ""
 $outFile = "$dateStamp-$safeImage.cdx.json"
 $outPath = Join-Path $sbomDirPath $outFile
+$sourceVersion = ($ImageName -split ":")[-1]
 
-$syft = Get-Command syft -ErrorAction SilentlyContinue
-if ($syft) {
-    Invoke-Native -FilePath $syft.Source -Arguments @($ImageName, "-o", "cyclonedx-json=$outPath")
+$imageSyftAvailable = $false
+& $runtimeExe @("run", "--rm", "--entrypoint", "syft", $ImageName, "version") *> $null
+if ($LASTEXITCODE -eq 0) {
+    $imageSyftAvailable = $true
+}
+$hostSyft = Get-Command syft -ErrorAction SilentlyContinue
+
+if ($imageSyftAvailable) {
+    & $runtimeExe @(
+        "run",
+        "--rm",
+        "--user",
+        "0",
+        "--entrypoint",
+        "syft",
+        $ImageName,
+        "dir:/",
+        "--select-catalogers",
+        "+javascript-package-cataloger",
+        "--source-name",
+        $ImageName,
+        "--source-version",
+        $sourceVersion,
+        "-o",
+        "cyclonedx-json"
+    ) | Set-Content -LiteralPath $outPath -Encoding utf8
+    if ($LASTEXITCODE -ne 0) {
+        throw "Image-integrated Syft scan failed with exit code ${LASTEXITCODE}."
+    }
+} elseif ($hostSyft) {
+    Invoke-Native -FilePath $hostSyft.Source -Arguments @($ImageName, "-o", "cyclonedx-json=$outPath")
 } else {
     $tempDir = Join-Path ([System.IO.Path]::GetTempPath()) ("ade-sbom-" + [guid]::NewGuid().ToString())
     New-Item -ItemType Directory -Force -Path $tempDir | Out-Null

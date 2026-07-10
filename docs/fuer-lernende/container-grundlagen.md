@@ -88,17 +88,15 @@ Linux this step is not needed.
 
 ## Warum Podman und nicht Docker? / Why Podman and Not Docker?
 
-**DE:** Docker ist das bekannteste Container-Werkzeug, aber es läuft
-üblicherweise mit einem Dienst, der Root-Rechte hat. **Podman** kann Container
-ohne einen solchen privilegierten Hintergrunddienst und ohne Root starten
-(„rootless"). Das passt besser zu einer sicheren Lern- und Ausbildungsumgebung.
-Docker funktioniert als Alternative, aber diese Dokumentation nutzt Podman.
+**DE:** Docker ist ein bekanntes Container-Werkzeug, aber diese freigegebene
+Lernumgebung nutzt verbindlich **Podman**. Podman kann Container ohne einen
+privilegierten Hintergrunddienst und ohne Root starten („rootless"). Die
+Anleitungen, Tests und Audit-Wrapper werden nur fuer Podman gepflegt.
 
-**EN:** Docker is the best-known container tool, but it usually runs with a
-service that has root rights. **Podman** can start containers without such a
-privileged background service and without root ("rootless"). That fits a secure
-learning and training environment better. Docker works as an alternative, but
-this documentation uses Podman.
+**EN:** Docker is a well-known container tool, but this approved learning
+environment uses **Podman** as its binding runtime. Podman can start containers
+without a privileged background service and without root ("rootless"). The
+guides, tests, and audit wrappers are maintained for Podman only.
 
 ---
 

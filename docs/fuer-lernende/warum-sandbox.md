@@ -19,14 +19,16 @@ basics (container, image, mount), read
 
 **DE:** Es gibt eine einfache, verbindliche Regel:
 
-> **Jeder Aufruf eines KI-Agenten (Claude, Codex, Gemini, OpenCode) für die
+> **Jeder Aufruf eines KI-Agenten (Codex, Claude Code, Gemini CLI, GitHub
+> Copilot CLI oder OpenCode) für die
 > Projektarbeit läuft im Container bzw. in der freigegebenen Sandbox — niemals
 > direkt auf dem Arbeitsplatz-Rechner, auf gemeinsamen Servern oder in
 > produktionsnahen Umgebungen.**
 
 **EN:** There is one simple, binding rule:
 
-> **Every call of an AI agent (Claude, Codex, Gemini, OpenCode) for project work
+> **Every call of an AI agent (Codex, Claude Code, Gemini CLI, GitHub Copilot
+> CLI, or OpenCode) for project work
 > runs inside the container or the approved sandbox — never directly on the
 > workstation, on shared servers, or in production-near environments.**
 
@@ -126,17 +128,17 @@ gilt, sondern die **Tiefe deiner eigenen Nachweise**:
 
 | Lehrjahr / Year | Erwartung / Expectation |
 |---|---|
-| **1. Lehrjahr / Year 1** | Gate verstehen und einhalten; Agent nur im Container starten; Mounts, Schreib- und Secret-Regeln lesen und als Zielbild dokumentieren. Praktische Schreib-Nutzung darf begründet `N/A` sein. / Understand and follow the gate; start agents only in the container; read and document mounts, write, and secret rules as a target. Practical write use may be a justified `N/A`. |
-| **2. Lehrjahr / Year 2** | Vollständiges Betriebskonzept vorbereiten; `Applicable`/`N/A`/`Open` dokumentiert entscheiden. / Prepare a full operating concept; decide `Applicable`/`N/A`/`Open` in a documented way. |
+| **1. Lehrjahr / Year 1** | Gate verstehen und einhalten; den ersten kontrollierten Agentenlauf nur im Container starten. Ohne Agentenlauf ist praktische Nutzung `N/A`; mit Agentenlauf ist sie `Applicable`. / Understand and follow the gate; start the first controlled agent run only in the container. Without an agent call, practical use is `N/A`; with an agent call, it is `Applicable`. |
+| **2. Lehrjahr / Year 2** | Vollständiges Betriebskonzept vorbereiten und jeden Agentenlauf weiter in der Sandbox ausführen. / Prepare a full operating concept and continue to run every agent call inside the sandbox. |
 | **3. Lehrjahr / Year 3 (SI/DV)** | Sandbox tatsächlich nutzen und Betriebsnachweise liefern. / Actually use the sandbox and deliver operating evidence. |
 
-**DE:** Wichtig: **Lesen und Review dürfen immer außerhalb der Sandbox
-stattfinden** — auch mit VS Code, JetBrains oder Visual Studio. Das Gate gilt
-für KI-gestützte Schreibarbeit und riskante Experimente, nicht für reines Lesen.
+**DE:** Wichtig: **Agentenloses Lesen und menschliches Review dürfen außerhalb
+der Sandbox stattfinden** — auch mit VS Code, JetBrains oder Visual Studio.
+Sobald dabei ein Agent aufgerufen wird, gilt das Gate wieder.
 
-**EN:** Important: **reading and review may always happen outside the sandbox** —
-also with VS Code, JetBrains, or Visual Studio. The gate applies to AI-assisted
-write work and risky experiments, not to plain reading.
+**EN:** Important: **agent-free reading and human review may happen outside the
+sandbox** — also with VS Code, JetBrains, or Visual Studio. As soon as an agent
+is called, the gate applies again.
 
 ---
 

@@ -47,6 +47,9 @@ services:
       - dotnet_build:/dotnet-build
       - opencode_data:/home/adedev/.local/share/opencode
       - codex_data:/home/adedev/.codex
+      - claude_data:/home/adedev/.claude
+      - gemini_data:/home/adedev/.gemini-home
+      - copilot_data:/home/adedev/.copilot
     ports:
       - "127.0.0.1:5100-5199:5100-5199"
     # P3-4 defense-in-depth: prevent processes from gaining new privileges
@@ -68,9 +71,17 @@ services:
       # audit-export on graceful container termination. The documented
       # standard stop path remains scripts/compose-down-with-audit.*.
       ADE_AUDIT_ON_STOP: "true"
+      CODEX_HOME: /home/adedev/.codex
+      CLAUDE_CONFIG_DIR: /home/adedev/.claude
+      GEMINI_CLI_HOME: /home/adedev/.gemini-home
+      COPILOT_HOME: /home/adedev/.copilot
+      DISABLE_AUTOUPDATER: "1"
     restart: unless-stopped
 
 volumes:
   dotnet_build:
   opencode_data:
   codex_data:
+  claude_data:
+  gemini_data:
+  copilot_data:

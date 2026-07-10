@@ -35,18 +35,18 @@ completed by an agent.
 
 ## Project Structure & Module Organization
 
-This repository contains a small Podman-based Opencode, .NET, Swift, and Spec Kit environment, not an application codebase.
+This repository contains a Podman-based agentic learning sandbox with OpenCode, four required agent CLIs, six memory-safe language toolchains, Syft, and Spec Kit; it is not an application codebase.
 
-- `Dockerfile`: builds from the Microsoft .NET SDK image in MCR pinned by digest and installs Java JDK 21, Maven, pinned Go, Rust, and Swift toolchains, Python, pinned `opencode-ai` and `@openai/codex`, `uv`, `specify-cli`, and common CLI helper tools.
-- `compose.yml`: defines the `ade` service, builds the local image, and mounts local state.
-- `compose.home-baseline.yml`: optional Compose override that bind-mounts a user's own repository created from the `home-baseline` template into `/home/adedev/home-baseline-tmp`.
+- `Dockerfile`: builds from the Microsoft .NET SDK image in MCR pinned by digest and installs the six language toolchains, pinned OpenCode, Codex, Claude Code, Gemini CLI, GitHub Copilot CLI, Syft, `uv`, Spec Kit, and common CLI helper tools.
+- `compose.yml`: defines the `ade` service, builds the local image, and mounts separate persistent state volumes for OpenCode and all four required agents.
+- `compose.home-baseline.yml`: optional Compose override that bind-mounts the learner's persistent checkout of their personal `home-baseline` fork into `/home/adedev/home-baseline-tmp`.
 - The container runs commands as the Linux user `adedev`; keep home-directory paths under `/home/adedev`.
 - `opencode.jsonc`: configures OpenCode safety defaults without an API key or preselected model. Keep comments useful for first-year IT specialist apprentices.
-- Codex CLI state is stored in the `codex_data` Podman volume mounted at `/home/adedev/.codex`; do not replace this with a bind mount to a committed directory.
+- Agent state is isolated in `codex_data`, `claude_data`, `gemini_data`, and `copilot_data`; do not replace these with bind mounts to committed directories.
 - `opencode.env.example`: documents that no OpenCode provider environment variable is required by this image.
 - `workspace/`: mounted into the container as `/workspace`; place working project files there.
 - `ADE_DEV_SANDBOX_DIR`: host checkout of this repository mounted into the container as `/ade-dev-sandbox` for controlled repository maintenance tasks from inside the container.
-- `HOME_BASELINE_DIR`: optional host checkout of a user's own `home-baseline` template repository, used only with `compose.home-baseline.yml` and mounted into `/home/adedev/home-baseline-tmp`.
+- `HOME_BASELINE_DIR`: optional persistent host checkout of the learner's personal `home-baseline` fork, used only with `compose.home-baseline.yml` and mounted into `/home/adedev/home-baseline-tmp`.
 - `RIDER_PROJECTS_DIR`: host directory mounted into the container as `/rider-projects` for Rider projects.
 - `JAVA_PROJECTS_DIR`: host directory mounted into the container as `/java-projects` for Java, Maven, and Spring Boot projects.
 - `GO_PROJECTS_DIR`: host directory mounted into the container as `/go-projects` for Go projects.
@@ -136,7 +136,7 @@ podman compose down
 podman compose down -v
 ```
 
-Stops the environment. The `-v` variant also removes persistent Opencode data.
+Stops the environment. The `-v` variant also removes all persistent agent data and local sign-in state.
 
 ## Coding Style & Naming Conventions
 
@@ -227,6 +227,11 @@ npm --version
 swift --version
 swiftc --version
 command -v sourcekit-lsp
+codex --version
+claude --version
+gemini --version
+copilot --version
+syft version
 ```
 
 Use `podman-compose config` for config-only validation. `podman compose config`

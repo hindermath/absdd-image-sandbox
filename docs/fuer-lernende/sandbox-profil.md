@@ -1,6 +1,6 @@
 # Sandbox-Profil: absdd-image-sandbox / Sandbox Profile
 
-**Stand / Date:** 2026-07-05
+**Stand / Date:** 2026-07-10
 **Ausrichtung / Orientation:** DE-first, EN-second, CEFR B2, WCAG 2.2 AA
 
 **DE:** Dieses Dokument ist das konsolidierte Sandbox-Profil für Lernende. Es fasst alle Informationen
@@ -19,7 +19,7 @@ files are linked under `Verweise / References`.
 
 | Eigenschaft / Property | Wert / Value |
 |---|---|
-| Container-Engine | Podman (oder Docker als Alternative) |
+| Container-Engine | Podman |
 | Basis-Image | `mcr.microsoft.com/dotnet/sdk:10.0` (per SHA256-Digest gepinnt / pinned by SHA256 digest) |
 | Benutzer im Container / User inside | `adedev` (kein Root-Zugriff zur Laufzeit / no root access at runtime) |
 | Betriebssystem im Container / OS inside | Ubuntu (Linux) |
@@ -31,7 +31,7 @@ files are linked under `Verweise / References`.
 
 | Property | Value |
 |---|---|
-| Container engine | Podman (or Docker as an alternative) |
+| Container engine | Podman |
 | Base image | `mcr.microsoft.com/dotnet/sdk:10.0` (pinned by SHA256 digest) |
 | User inside | `adedev` (no root access at runtime) |
 | OS inside | Ubuntu (Linux) |
@@ -67,6 +67,9 @@ permissions apply. Anything not listed here is unreachable from the container.
 | (benanntes Volume / named volume) `dotnet_build` | `/dotnet-build` | Ja / Yes | Ja / Yes | Persistente .NET-Build-Artefakte (kein Host-Bind-Mount) |
 | (benanntes Volume) `opencode_data` | `/home/adedev/.local/share/opencode` | Ja / Yes | Ja / Yes | Persistente OpenCode-Daten (kein Host-Bind-Mount) |
 | (benanntes Volume) `codex_data` | `/home/adedev/.codex` | Ja / Yes | Ja / Yes | Persistente Codex-Daten (kein Host-Bind-Mount) |
+| (benanntes Volume) `claude_data` | `/home/adedev/.claude` | Ja / Yes | Ja / Yes | Persistenter Claude-Code-Zustand |
+| (benanntes Volume) `gemini_data` | `/home/adedev/.gemini-home` | Ja / Yes | Ja / Yes | Persistenter Gemini-CLI-Zustand |
+| (benanntes Volume) `copilot_data` | `/home/adedev/.copilot` | Ja / Yes | Ja / Yes | Persistenter GitHub-Copilot-CLI-Zustand |
 | (optional) `${HOME_BASELINE_DIR}` | `/home/adedev/home-baseline-tmp` | Ja / Yes | Ja / Yes | Nur mit `compose.home-baseline.yml`; eigenes `home-baseline`-Repo |
 
 **DE:** Alles außerhalb dieser Mounts ist **nicht sichtbar** und **nicht beschreibbar** aus dem Container.
@@ -110,7 +113,7 @@ sources.
 | Ausgehender Internetzugriff (Egress) / Outbound internet (egress) | Ja / Yes (dokumentiertes Risiko / documented risk) | Paketregister, MCR, GitHub, go.dev, crates.io, npm, PyPI |
 | Eingehender Zugriff (Ingress) / Inbound access (ingress) | Nur Ports 5100–5199 vom Host / Only ports 5100–5199 from host | Web-App-Tests lokal |
 | Codex-Shell-Netzwerkzugriff / Codex shell network access | **Nein / No** | In `codex/config.toml` deaktiviert (`network_access = false`) |
-| KI-Provider-Endpunkte / AI provider endpoints | Nur wenn lokal konfiguriert / Only when locally configured | Via `opencode.env` |
+| KI-Provider-Endpunkte / AI provider endpoints | Nur nach lokaler Anmeldung und Freigabe / Only after local sign-in and approval | OpenCode sowie Codex-, Anthropic-, Google- und GitHub-Dienste je gewaehltem Agenten |
 
 **DE:** Das freie Egress wird als Risikoentscheidung in `docs/security/network-decision.md` dokumentiert.
 Es ist keine technische Blockade: Es liegt in deiner Verantwortung, keine sensiblen Daten nach außen zu
@@ -134,7 +137,7 @@ nutzt oder nicht.
 | **Keine Secrets in Prompts** / No secrets in prompts | KI-Agenten-Prompts dürfen keine echten Credentials enthalten. |
 | **Keine Secrets in Logs** / No secrets in logs | Audit-Logs und Screenshots dürfen keine Secrets zeigen. |
 | **Keine echten Personendaten** / No real personal data | Testdaten bleiben fiktiv und datensparsam. |
-| **Secrets nur in `opencode.env`** / Secrets only in `opencode.env` | Diese Datei ist in `.gitignore` und wird nicht hochgeladen. |
+| **Offizielle Anmeldung verwenden** / Use official sign-in | Agenten-Anmeldedaten bleiben in den getrennten Podman-Volumes; `opencode.env` ist nur eine ungetrackte OpenCode-Option. |
 
 **DE:** Berechtigungen: `chmod 600 opencode.env` (nur für dich lesbar).
 
@@ -177,27 +180,32 @@ bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh
 
 ---
 
-## 7 KI-Agenten-Parität / AI Agent Parity
+## 7 KI-Agenten-Paritaet / AI Agent Parity
 
-**DE:** Die Sandbox enthält vier KI-Agenten. Sie folgen denselben Regeln (keine Secrets in Prompts, keine
-echten Daten, Schreibgrenzen einhalten). Die Tabelle zeigt, was gleich ist und was sich unterscheidet.
+**DE:** Die Sandbox enthaelt die vier Required-Agenten und OpenCode als
+zusaetzliches Werkzeug. Alle folgen denselben Secret-, Daten-, Schreib- und
+Review-Regeln. Unterschiedlich sind nur Kommando, Zustandsverzeichnis und
+agentenspezifische Konfiguration.
 
-**EN:** The sandbox contains four AI agents. They follow the same rules (no secrets in prompts, no real data,
-respect write boundaries). The table shows what is equal and what differs.
+**EN:** The sandbox contains the four required agents and OpenCode as an
+additional tool. All follow the same secret, data, write-boundary, and review
+rules. Only commands, state directories, and agent-specific configuration
+differ.
 
-| Eigenschaft / Property | OpenCode | Codex CLI | Claude (VS Code) | Gemini |
+| Werkzeug / Tool | Status | Kommando / Command | Persistenter Zustand / Persistent State | Guidance |
 |---|---|---|---|---|
-| Vorinstalliert im Container / Pre-installed | Ja / Yes | Ja / Yes | Nein (VS Code-Erweiterung) / No (VS Code extension) | Nein / No |
-| Schreibgrenzen konfiguriert / Write boundaries configured | Ja — `opencode.jsonc` | Ja — `codex/config.toml` | Indirekt über Repo-Regeln / Indirectly via repo rules | Indirekt / Indirectly |
-| Netzwerkzugriff (Shell-Ebene) / Network access (shell level) | Anfrage nötig / Requires approval | **Nein** (`network_access = false`) | Anfrage nötig / Requires approval | Anfrage nötig / Requires approval |
-| Secrets in Prompts / Secrets in prompts | **Verboten / Forbidden** | **Verboten / Forbidden** | **Verboten / Forbidden** | **Verboten / Forbidden** |
-| Darf Systemdateien ändern? / May modify system files? | Nein — blockiert / No — blocked | Nein — blockiert / No — blocked | Nein — Repo-Regeln / No — repo rules | Nein — Repo-Regeln / No — repo rules |
-| Agent-Caches im Repo committen / Commit agent caches | **Nicht erlaubt / Not allowed** | **Nicht erlaubt / Not allowed** | **Nicht erlaubt / Not allowed** | **Nicht erlaubt / Not allowed** |
-| Konfigurationsquelle / Config source | `opencode.jsonc` | `codex/config.toml`, `codex/requirements.toml` | CLAUDE.md, Repo-Regeln | GEMINI.md, Repo-Regeln |
+| Codex CLI | Required | `codex` | `codex_data` -> `/home/adedev/.codex` | `AGENTS.md`, `codex/` |
+| Claude Code | Required | `claude` | `claude_data` -> `/home/adedev/.claude` | `CLAUDE.md` |
+| Gemini CLI | Required | `gemini` | `gemini_data` -> `/home/adedev/.gemini-home` | `GEMINI.md` |
+| GitHub Copilot CLI | Required | `copilot` | `copilot_data` -> `/home/adedev/.copilot` | `.github/copilot-instructions.md` |
+| OpenCode | Additional | `opencode` | `opencode_data` -> `/home/adedev/.local/share/opencode` | `opencode.jsonc` |
 
-**DE:** Alle Agenten gelten als gleichwertig — die Sicherheitsregeln sind nicht agentenspezifisch.
+Fuer alle gilt: keine Secrets in Prompts, keine echten personenbezogenen
+Daten, keine Agenten-Caches im Projekt-Repository und keine Freigabe ohne
+menschliche Diff- und Testpruefung.
 
-**EN:** All agents are treated as equivalent — the security rules are not agent-specific.
+For every tool: no secrets in prompts, no real personal data, no agent caches
+in the project repository, and no approval without human diff and test review.
 
 ---
 
@@ -218,12 +226,16 @@ respect write boundaries). The table shows what is equal and what differs.
 
 ## 9 Abweichungen begründen / Justifying Deviations
 
-**DE:** Es ist erlaubt, außerhalb der Sandbox zu arbeiten — aber Abweichungen müssen begründet dokumentiert
-werden. Eine undokumentierte Abweichung ist ein verstecktes Risiko. Eine begründete Abweichung ist eine
-bewusste Entscheidung.
+**DE:** Agentenlose Taetigkeiten wie Lesen und menschliches Review duerfen auf
+dem Host stattfinden. Ein Agentenlauf fuer ein Secure-Trader-System findet
+immer in der freigegebenen Sandbox statt. Andere Abweichungen muessen bewertet
+und begruendet dokumentiert werden; sie heben dieses Gate nicht stillschweigend
+auf.
 
-**EN:** It is allowed to work outside the sandbox — but deviations must be documented with a rationale. An
-undocumented deviation is a hidden risk. A justified deviation is a conscious decision.
+**EN:** Agent-free reading and human review may happen on the host. An agent
+call for a Secure Trader system always runs in the approved sandbox. Other
+deviations require assessment and a documented rationale; they do not silently
+override this gate.
 
 **DE:** Format für eine Abweichung:
 

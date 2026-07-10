@@ -47,7 +47,7 @@ Entscheidung — `Applicable`, `N/A` oder `Open` mit Begründung — ist selbst 
 | Feld / Field | Wert / Value |
 |---|---|
 | Öffentliche Referenz / Public reference | `https://github.com/hindermath/absdd-image-sandbox` |
-| Container-Engine | `[Podman / Docker]` |
+| Container-Engine | `Podman` |
 | Basis-Image | `mcr.microsoft.com/dotnet/sdk:10.0`; der konkrete SHA256-Digest steht im `Dockerfile`. |
 | Benutzer im Container / User inside | `adedev` |
 
@@ -157,7 +157,7 @@ der optionalen Datei opencode.env. Laufzeitannahmen: Ubuntu-Linux, adedev-Benutz
 
 | Eigenschaft / Property | Wert / Value |
 |---|---|
-| Geplante Agenten / Planned agents | `[OpenCode / Codex / Claude / Gemini / keiner]` |
+| Geplante Agenten / Planned agents | `[Codex / Claude Code / Gemini CLI / GitHub Copilot CLI / OpenCode / keiner]` |
 | Dateien, die der Agent ändern darf / Files the agent may modify | `[Pfad/e]` |
 | Dateien, die der Agent **nicht** ändern darf | `[Pfad/e]` |
 | Secrets in Prompts / Secrets in prompts | **Verboten / Forbidden** |
@@ -186,10 +186,10 @@ oder `Open` ist. Eine Begründung ist Pflicht — stille Auslassung gilt nicht.
 
 ```text
 Entscheidung: N/A
-Begründung: Container-Mount- und Agent-Kenntnisse wurden im 2. Lehrjahr noch nicht vollständig behandelt.
-            Das Sandbox-Konzept ist vorbereitet; praktische Nutzung wird ab dem 3. Lehrjahr erwartet.
-IDE-Arbeit: JetBrains Rider / VS Code außerhalb der Sandbox erlaubt für alle Codearbeit.
-Folgeaufgabe: Sandbox-Nutzung im 3. Lehrjahr (SI-Track Lerneinheit 02).
+Begründung: In dieser Einheit findet kein Agentenlauf statt. Sobald ein Agent
+            gestartet wird, wechselt die Entscheidung zu Applicable und Podman ist Pflicht.
+IDE-Arbeit: Agentenloses Lesen und menschliches Review sind außerhalb erlaubt.
+Folgeaufgabe: Vor dem ersten Agentenlauf die Sandbox starten und prüfen.
 ```
 
 ---

@@ -41,6 +41,9 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 | `dotnet_build` | `/dotnet-build` | Persistente .NET-Build-Artefakte ausserhalb von Host-Bind-Mounts |
 | `opencode_data` | `/home/adedev/.local/share/opencode` | Persistente OpenCode-Daten |
 | `codex_data` | `/home/adedev/.codex` | Persistente Codex-Daten |
+| `claude_data` | `/home/adedev/.claude` | Persistenter Claude-Code-Zustand |
+| `gemini_data` | `/home/adedev/.gemini-home` | Persistenter Gemini-CLI-Zustand |
+| `copilot_data` | `/home/adedev/.copilot` | Persistenter GitHub-Copilot-CLI-Zustand |
 
 ### Genehmigte Tool-Versionen
 
@@ -59,8 +62,12 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 | Rust | `1.95.0` |
 | Swift | `6.3.3-noble` aus `download.swift.org`, PGP-Signaturpruefung im Image-Build |
 | OpenCode | `opencode-ai` `1.14.50` |
-| Codex CLI | `@openai/codex` `0.130.0` |
+| Codex CLI | `@openai/codex` `0.144.1` |
+| Claude Code | `@anthropic-ai/claude-code` `2.1.206` |
+| Gemini CLI | `@google/gemini-cli` `0.50.0` |
+| GitHub Copilot CLI | `@github/copilot` `1.0.70` |
 | Spec Kit | `specify-cli` `v0.8.3` aus `github.com/github/spec-kit.git` |
+| Syft | `anchore/syft` `1.46.0`, SHA256-Pruefung im Image-Build |
 | uv / uvx | `0.11.16` aus GitHub-Release-Artefakt, SHA256-Pruefung im Image-Build |
 
 ### Optionaler lokaler IDE-Zugang

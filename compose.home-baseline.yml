@@ -1,8 +1,8 @@
 services:
   ade:
     volumes:
-      # Optional user-owned repository created from a home-baseline template.
-      # This mount is not part of the image and is never cloned automatically.
+      # Optional personal fork of the canonical home-baseline repository.
+      # Clone the fork persistently as home-baseline-tmp before mounting it.
       - type: bind
         source: ${HOME_BASELINE_DIR:?Set HOME_BASELINE_DIR to your local home-baseline checkout}
         target: /home/adedev/home-baseline-tmp
