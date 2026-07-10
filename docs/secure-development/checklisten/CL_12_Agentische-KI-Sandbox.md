@@ -44,7 +44,7 @@ This document is organization-neutral and written as a generic training and revi
 
 - **Richtlinie Sichere Entwicklung / Secure Development Guideline:** [lokale Arbeitsfassung in diesem Repository / local working copy in this repository](../Richtlinie_Sichere-Entwicklung.md)
 - **Leitlinie Sichere Entwicklungs-Sandbox:** [mitgeltendes Dokument fuer Sandbox-Profile / related document for sandbox profiles](../mitgeltende-dokumente/Leitlinie_Sichere-Entwicklungs-Sandbox.md)
-- **Checklisten-Index / Checklist index:** [Übersicht aller Checklisten / overview of all checklists](README.md)
+- **Checklisten-Index / Checklist index:** [Übersicht aller Checklisten / overview of all checklists](../README.md)
 - **GitHub Spec Kit Presets:** [offizielle Spec-Kit-Preset-Referenz / official Spec Kit preset reference](https://github.github.com/spec-kit/reference/presets.html)
 - **Spec-Kit Community Presets:** [Community-Presets im GitHub-Spec-Kit-Repository / community presets in the GitHub Spec Kit repository](https://github.com/github/spec-kit/blob/main/docs/community/presets.md)
 - **Beispielhafte Sandbox-Referenz:** `absdd-image-sandbox` als oeffentlichkeitsfaehiges Ausbildungsprofil / as a public-ready training profile

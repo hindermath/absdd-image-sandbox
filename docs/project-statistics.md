@@ -58,6 +58,7 @@ tracked files; they are an artefact-volume measure, not a quality measure.
 | Datum / Date | Phase / Branch | Aktivtage ges. / Active days | Zeilen ges. / Lines | Commits ges. / Commits | Hauptarbeitspakete / Main Work Packages |
 |---|---|---:|---:|---:|---|
 | 2026-07-10 | docs/lernende-container-onboarding | 36 | 73.081 | 129 | Erst-Erfassung der Statistik. Anfänger-Onboarding: 5 neue Lernenden-Dokumente (`container-grundlagen`, `warum-sandbox`, `installation`, `erste-schritte`, `troubleshooting`), README-Hub-Umbau, Glossar-Erweiterung, Session-Log. Diff +1.136/−74. |
+| 2026-07-10 | feat/four-agent-learner-environment | 36 | 73.975 | 132 | Vier Required-Agenten und Syft im Podman-Image; getrennte Agenten-Volumes, Audit-Metadaten, image-interne SBOM, Anfängerpfad mit persönlichem Fork und erstem kontrollierten Agentenlauf, Lychee-/Static-CI. Diff +830/−379. |
 
 ---
 
@@ -72,11 +73,11 @@ no test framework; the focus is documentation, configuration, and scripts.
 
 | Kategorie / Category | Dateien / Files | Zeilen / Lines | Anteil / Share |
 |---|---:|---:|---:|
-| Dokumentation (.md) / Documentation | 344 | 59.306 | 81,2 % |
-| Sonstige / Other (LICENSE, man, dotfiles) | 22 | 5.294 | 7,2 % |
-| Konfiguration / Configuration | 48 | 4.277 | 5,9 % |
-| Skripte / Scripts (.sh, .ps1) | 26 | 4.204 | 5,8 % |
-| **Gesamt / Total** | **440** | **73.081** | **100 %** |
+| Dokumentation (.md) / Documentation | 348 | 59.973 | 81,1 % |
+| Sonstige / Other (LICENSE, man, dotfiles) | 24 | 5.471 | 7,4 % |
+| Konfiguration / Configuration | 47 | 4.242 | 5,7 % |
+| Skripte / Scripts (.sh, .ps1) | 26 | 4.289 | 5,8 % |
+| **Gesamt / Total** | **445** | **73.975** | **100 %** |
 
 ---
 
@@ -84,22 +85,22 @@ no test framework; the focus is documentation, configuration, and scripts.
 
 | Kennzahl / Metric | Verdichteter Gesamtblick / Condensed Overview |
 |---|---:|
-| Artefaktbasis gesamt / Total artefact base | 440 Dateien / 73.081 Zeilen |
+| Artefaktbasis gesamt / Total artefact base | 445 Dateien / 73.975 Zeilen |
 | Beobachtbarer Projektzeitraum / Observable period | 2026-04-29 – 2026-07-10 |
 | Sichtbare Git-Aktivtage / Visible git active days | 36 |
-| Commits gesamt / Total commits | 129 |
-| Manuelle Äquivalenz (80 Z./AT) / Manual equiv. | ~914 AT (~7.126 h) |
-| Manuelle Äquivalenz (100 Z./AT) / Manual equiv. | ~731 AT (~5.700 h) |
-| Repo-weiter Speedup gg. 80-Zeilen-Referenz | ~25,4x |
-| Repo-weiter Speedup gg. Thorsten-Referenz (100) | ~20,3x |
+| Commits gesamt / Total commits | 132 |
+| Manuelle Äquivalenz (80 Z./AT) / Manual equiv. | ~925 AT (~7.213 h) |
+| Manuelle Äquivalenz (100 Z./AT) / Manual equiv. | ~740 AT (~5.770 h) |
+| Repo-weiter Speedup gg. 80-Zeilen-Referenz | ~25,7x |
+| Repo-weiter Speedup gg. Thorsten-Referenz (100) | ~20,5x |
 
 ### Artefaktmix / Artefact Mix
 
 ```text
-Doku (.md)      | ############################################  59306  (81%)
-Sonstige/Other  | ####                                           5294  ( 7%)
-Konfiguration   | ###                                            4277  ( 6%)
-Skripte         | ###                                            4204  ( 6%)
+Doku (.md)      | ############################################  59973  (81%)
+Sonstige/Other  | ####                                           5471  ( 7%)
+Konfiguration   | ###                                            4242  ( 6%)
+Skripte         | ###                                            4289  ( 6%)
 ```
 
 **DE:** Das Diagramm zeigt, wie sich die Zeilen auf die Kategorien verteilen.
@@ -115,7 +116,7 @@ is documentation — fitting for a public reference and training repository.
 2026-04 | #                                         1
 2026-05 | #######################################  87
 2026-06 | ############                             27
-2026-07 | ######                                   14
+2026-07 | #######                                  17
 ```
 
 **DE:** Feste X-Slots je Monat. Der Aufbau-Schwerpunkt lag im Mai 2026 (87
@@ -127,17 +128,17 @@ Commits an 22 Aktivtagen); danach folgen kleinere Pflege- und Feature-Wellen.
 ### Aufwandsvergleich repo-weit / Repo-Wide Effort Comparison
 
 ```text
-Erfahren / 80 Z./AT   | ##########################################  914 AT
-Thorsten-Solo / 100   | ##################################         731 AT
+Erfahren / 80 Z./AT   | ##########################################  925 AT
+Thorsten-Solo / 100   | ##################################         740 AT
 KI-sichtbar (real)    | ##                                          36 AT
 ```
 
-**DE:** Der Balken vergleicht drei Sichtweisen auf denselben Umfang (73.081
+**DE:** Der Balken vergleicht drei Sichtweisen auf denselben Umfang (73.975
 Zeilen): erfahrene manuelle Referenz (80 Z./AT), Thorsten-Solo-Infrastruktur
 (100 Z./AT) und die real sichtbaren Git-Aktivtage. Es ist ein Lieferdichte-
 Vergleich, keine gemessene Arbeitszeit.
 
-**EN:** The bars compare three views of the same volume (73,081 lines):
+**EN:** The bars compare three views of the same volume (73,975 lines):
 experienced manual reference (80 l/wd), Thorsten-Solo infrastructure (100 l/wd),
 and the actually visible git active days. It is a delivery-density comparison,
 not measured working time.
@@ -145,8 +146,8 @@ not measured working time.
 ### Beschleunigungsfaktoren / Acceleration Factors
 
 ```text
-gg. 80 Z./AT (konservativ)  | #########################  25.4x
-gg. 100 Z./AT (Thorsten)    | ####################       20.3x
+gg. 80 Z./AT (konservativ)  | ##########################  25.7x
+gg. 100 Z./AT (Thorsten)    | #####################       20.5x
 ```
 
 **DE:** Der repo-weite Speedup ergibt sich aus manueller Äquivalenz geteilt

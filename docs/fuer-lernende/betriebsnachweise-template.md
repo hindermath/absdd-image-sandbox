@@ -48,7 +48,7 @@ evidence is readable with a screen reader and Braille display (WCAG 2.2 AA).
 |---|---|
 | Öffentliche Referenz / Public reference | `https://github.com/hindermath/absdd-image-sandbox` |
 | Sandbox-Profil-Datei / Sandbox profile file | `docs/fuer-lernende/sandbox-profil.md` (oder: Eigene Instanz) |
-| Container-Engine | `[Podman / Docker]` |
+| Container-Engine | `Podman` |
 | Image-Version (Digest oder Tag) / Image version | `[sha256:... / :latest@...]` |
 | Benutzer im Container / User inside | `adedev` |
 | Betriebsdatum / Operation date | `[YYYY-MM-DD]` |

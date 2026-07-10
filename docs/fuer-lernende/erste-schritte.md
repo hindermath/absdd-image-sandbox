@@ -69,6 +69,22 @@ container — see [troubleshooting.md](troubleshooting.md).
 bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh
 ```
 
+**DE:** Zu den geprueften Werkzeugen gehoeren auch die vier Required-Agenten
+und Syft. Jeder Befehl muss eine Version liefern; eine Anmeldung ist fuer
+diesen Installationsnachweis noch nicht erforderlich:
+
+**EN:** The checked tools also include the four required agents and Syft. Each
+command must print a version; sign-in is not required for this installation
+check:
+
+```bash
+codex --version
+claude --version
+gemini --version
+copilot --version
+syft version
+```
+
 **DE:** Die vollständige Übersicht mit Test- und Audit-Befehlen je Sprache steht
 in der MSL-Support-Matrix im [sandbox-profil.md](sandbox-profil.md), Abschnitt 6.
 
@@ -117,7 +133,69 @@ personal data, no secrets — not even in test files.
 
 ---
 
-## Schritt 4: Sauber und auditkonform stoppen / Step 4: Stop Cleanly and Audit-Compliant
+## Schritt 4: Erster kontrollierter Agentenlauf / Step 4: First Controlled Agent Run
+
+**DE:** Fuehre diesen Schritt nur in einem eigenen Level-2-Checkout innerhalb
+eines freigegebenen Projekt-Mounts aus. Pruefe zuerst den Ausgangszustand:
+
+**EN:** Run this step only in your own Level-2 checkout inside an approved
+project mount. Check the initial state first:
+
+```bash
+cd /secure-case-tracker-projects/DEIN-LEVEL-2-REPO
+git status --short --branch
+```
+
+**DE:** Starte genau einen der vier Agenten mit `codex`, `claude`, `gemini`
+oder `copilot`. Folge bei Bedarf der offiziellen interaktiven Anmeldung. Der
+erste Auftrag ist read-only:
+
+**EN:** Start exactly one of the four agents with `codex`, `claude`, `gemini`,
+or `copilot`. Follow its official interactive sign-in if needed. The first task
+is read-only:
+
+```text
+Erklaere mir die Repository-Struktur und nenne die vorhandenen Testbefehle.
+Veraendere keine Datei und fuehre keinen Befehl aus.
+```
+
+**DE:** Beende den Agenten und kontrolliere `git status`. Es darf keine
+Aenderung geben. Starte ihn danach erneut mit einem einzigen, begrenzten
+Schreibauftrag auf einem Lernzweig:
+
+**EN:** Exit the agent and inspect `git status`. There must be no change. Then
+start it again with one limited write task on a learning branch:
+
+```bash
+git switch -c learning/first-agent-run
+```
+
+```text
+Lege nur docs/agent-first-run-check.md an. Schreibe genau einen deutschen und
+einen englischen Satz darueber, dass der Lauf in der Sandbox erfolgte. Aendere
+keine andere Datei und fuehre keinen Commit aus.
+```
+
+**DE:** Die menschliche Pruefung bleibt verbindlich:
+
+**EN:** Human review remains mandatory:
+
+```bash
+git status --short
+git diff -- docs/agent-first-run-check.md
+# Danach den projektspezifischen Testbefehl aus Unit 00 ausfuehren.
+```
+
+Nur wenn Diff und Test passen, darfst du die Aenderung behalten. Andernfalls
+entfernst du die Uebungsdatei wieder. Der Agent darf nie selbst Freigabe oder
+Merge behaupten.
+
+Keep the change only if the diff and test are correct. Otherwise remove the
+exercise file. The agent must never claim human approval or merge completion.
+
+---
+
+## Schritt 5: Sauber und auditkonform stoppen / Step 5: Stop Cleanly and Audit-Compliant
 
 **DE:** Verlasse zuerst die Container-Shell:
 
@@ -136,14 +214,16 @@ herunter. Das ist die Repository-Konvention — nicht `podman compose down` alle
 is the repository convention — not `podman compose down` alone.
 
 ```bash
-bash scripts/compose-down-with-audit.sh --podman -v
+bash scripts/compose-down-with-audit.sh --podman
 ```
 
-**DE:** Das `-v` entfernt zusätzlich die persistenten Datenvolumes. Der
-Audit-Export schreibt **nur Metadaten** nach `audit-logs/` — niemals Prompt-Text,
-Antworten oder Secrets.
+**DE:** Ohne `-v` bleiben die getrennten Agenten-Volumes und lokale
+Anmeldezustaende erhalten. Nur fuer einen bewusst vollstaendigen Reset verwendest
+du `-v`; dabei werden diese Daten entfernt. Der Audit-Export schreibt **nur
+Metadaten** nach `audit-logs/` — niemals Prompt-Text, Antworten oder Secrets.
 
-**EN:** The `-v` additionally removes the persistent data volumes. The audit
+**EN:** Without `-v`, separate agent volumes and local sign-in state remain.
+Use `-v` only for an intentional full reset; it removes those data. The audit
 export writes **metadata only** to `audit-logs/` — never prompt text, responses,
 or secrets.
 
@@ -152,7 +232,7 @@ or secrets.
 **EN:** On Windows with PowerShell, use instead:
 
 ```powershell
-.\scripts\compose-down-with-audit.ps1 -Engine podman -Volumes
+.\scripts\compose-down-with-audit.ps1 -Engine podman
 ```
 
 ---

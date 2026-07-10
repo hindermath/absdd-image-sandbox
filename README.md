@@ -1,12 +1,14 @@
-# Opencode Podman-Umgebung / Opencode Podman Environment
+# Agentische Podman-Sandbox / Agentic Podman Sandbox
 
 Dieses Repository stellt eine Podman-basierte Container-Umgebung fuer
-Opencode, .NET, C#, Java, Go, Rust, Python, Swift, Codex CLI und Spec Kit
-bereit. Es ist eine Sandbox- und Lernumgebung, keine Anwendung.
+OpenCode, die vier Required-Agenten Codex, Claude Code, Gemini CLI und GitHub
+Copilot CLI, sechs speichersichere Sprachen, Syft und Spec Kit bereit. Es ist
+eine Sandbox- und Lernumgebung, keine Anwendung.
 
-The repository provides a Podman-based container environment for Opencode,
-.NET, C#, Java, Go, Rust, Python, Swift, Codex CLI, and Spec Kit. It is a
-sandbox and training environment, not an application.
+The repository provides a Podman-based container environment with OpenCode,
+the four required agents Codex, Claude Code, Gemini CLI, and GitHub Copilot
+CLI, six memory-safe languages, Syft, and Spec Kit. It is a sandbox and
+training environment, not an application.
 
 ## Kurzueberblick
 
@@ -19,6 +21,10 @@ sandbox and training environment, not an application.
 | Basisimage | Microsoft .NET SDK aus MCR, im `Dockerfile` per Digest gepinnt |
 | OpenCode | Installiert, aber ohne vorkonfigurierten Modellanbieter |
 | Codex | Systemweite Defaults aus `codex/config.toml` und `codex/requirements.toml` |
+| Claude Code | Installiert; persistenter Zustand in `claude_data` |
+| Gemini CLI | Installiert; persistenter Zustand in `gemini_data` |
+| GitHub Copilot CLI | Installiert; persistenter Zustand in `copilot_data` |
+| Software-Bill-of-Materials | Syft ist installiert; `scripts/build-and-sbom.*` erzeugt die Image-SBOM |
 | Arbeitsverzeichnis im Container | `/rider-projects` |
 
 ## Public-Readiness-Status
@@ -42,10 +48,11 @@ artifacts.*
 ## Repository-Struktur
 
 - `Dockerfile`: baut das Image aus dem digest-gepinnten MCR-.NET-SDK-Image
-  und installiert Java JDK 21, Maven, Go, Rust, Python, Node.js, Opencode,
-  Swift, Codex CLI, `uv`, Spec Kit und Hilfswerkzeuge.
-- `compose.yml`: definiert den Service `ade`, die Podman-Volumes, die
-  Host-Mounts und die Portfreigabe `127.0.0.1:5100-5199`.
+  und installiert Java JDK 21, Maven, Go, Rust, Python, Node.js, OpenCode,
+  Swift, die vier Required-Agenten, Syft, `uv`, Spec Kit und Hilfswerkzeuge.
+- `compose.yml`: definiert den Service `ade`, getrennte persistente
+  Podman-Volumes fuer die Agentenzustaende, die Host-Mounts und die
+  Portfreigabe `127.0.0.1:5100-5199`.
 - `compose.home-baseline.yml`: optionale Compose-Erweiterung fuer ein eigenes
   `home-baseline`-Template-Repo im Container.
 - `.devcontainer/devcontainer.json`: VS-Code-Dev-Containers-Konfiguration,
@@ -59,8 +66,10 @@ artifacts.*
   Artefakte in das Podman-Volume `/dotnet-build` umleitet.
 - `scripts/compose-down-with-audit.*`: exportiert Audit-Metadaten vor dem
   Stoppen der Umgebung.
-- `scripts/build-and-sbom.*`: erzeugt eine CycloneDX-SBOM fuer das gebaute
-  Image.
+- `scripts/build-and-sbom.*`: erzeugt eine CycloneDX-SBOM mit dem im finalen
+  Image gepinnten Syft, ohne das Image auf dem Host ein zweites Mal zu exportieren.
+  Nur dieser kurzlebige Lesescan nutzt Root, damit alle Image-Pfade erfasst
+  werden; der Sandbox-Service selbst bleibt der Non-Root-Benutzer `adedev`.
 - `docs/security/`: Compliance-, Freigabe-, Inventar- und Evidenzdokumente.
 
 ## Voraussetzungen
@@ -169,15 +178,30 @@ AUDIT_DIR=./audit-logs
 
 Nicht gesetzte Variablen fallen auf lokale Repository-Verzeichnisse zurueck.
 
-## Optional: Home-Baseline einbinden
+## Required-Agenten pruefen
 
-`home-baseline` wird nicht in das Public Image geklont. Nutzerinnen und
-Nutzer erstellen zuerst ein eigenes Repository aus einem `home-baseline`-
-Template ueber die Template-Funktion ihres Git-Hostings und klonen dieses Repo
-lokal. Die oeffentliche Level-0- und Lernreihen-Referenz ist
-<https://github.com/hindermath/home-baseline>; eigene Template-Forks oder
-kursbezogene Quellen bleiben moeglich. Die Sandbox selbst verlangt keinen
-bestimmten GitHub-Account.
+Nach dem Build muessen alle vier Required-Agenten und Syft eine Versionsausgabe
+liefern. Anmeldung und Providerfreigabe sind davon getrennte, menschlich
+verantwortete Schritte.
+
+```bash
+podman compose exec ade sh -lc 'codex --version && claude --version && gemini --version && copilot --version && syft version'
+```
+
+Die vollstaendige Toolchain prueft:
+
+```bash
+podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh
+```
+
+## Optional: persoenliche Home-Baseline einbinden
+
+`home-baseline` wird nicht in das Public Image geklont. Lernende forken zuerst
+<https://github.com/hindermath/home-baseline> in das eigene GitHub-Konto und
+klonen den persoenlichen Fork dauerhaft als `~/home-baseline-tmp`. Erst diese
+mit dem eigenen `origin` verbundene Arbeitskopie wird optional eingebunden.
+Die vollstaendige Reihenfolge steht in
+[START-HERE-FUER-LERNENDE.md](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md).
 
 Fuer die Verbindung zwischen diesem Sandbox-Image und den Lernreihen siehe
 auch [docs/fuer-lernende/README.md](docs/fuer-lernende/README.md).
@@ -436,8 +460,10 @@ podman volume rm absdd-image-sandbox_dotnet_build
 podman compose up -d
 ```
 
-OpenCode- und Codex-Zustand liegen in den Podman-Volumes `opencode_data` und
-`codex_data`. `podman compose down -v` entfernt diese Daten.
+OpenCode sowie die vier Required-Agenten verwenden getrennte Podman-Volumes:
+`opencode_data`, `codex_data`, `claude_data`, `gemini_data` und
+`copilot_data`. `podman compose down -v` entfernt diese Daten einschliesslich
+lokaler Anmeldezustaende. Vorher immer den Audit-Wrapper verwenden.
 
 ## English Quick Start
 
@@ -458,12 +484,11 @@ podman compose up -d
 podman compose exec ade bash
 ```
 
-4. Optionally mount your own repository created from a `home-baseline`
-   template. The public Level-0 and learning-series reference is
-   <https://github.com/hindermath/home-baseline>, but user-owned forks and
-   course-specific template sources remain supported. The sandbox image does
-   not clone `home-baseline` itself. For the learning-series bridge, see
-   [docs/fuer-lernende/README.md](docs/fuer-lernende/README.md).
+4. Optionally mount your personal `home-baseline` fork. First fork
+   <https://github.com/hindermath/home-baseline> into your own GitHub account,
+   then clone that fork persistently as `~/home-baseline-tmp`. The sandbox
+   image does not clone it. Follow the canonical
+   [learner start guide](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md).
 
 ```bash
 HOME_BASELINE_DIR=/path/to/home-baseline-tmp
@@ -480,3 +505,7 @@ bash scripts/compose-down-with-audit.sh --podman
 OpenCode is installed without a preconfigured API key or preselected model.
 The built-in provider picker remains available; add local provider settings
 only in local, untracked configuration when needed.
+
+Codex, Claude Code, Gemini CLI, and GitHub Copilot CLI are installed as the
+four required agents. Their presence does not imply account, provider, legal,
+or organizational approval.

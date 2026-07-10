@@ -6,12 +6,12 @@ mkdir -p "${base_dir}"
 work_dir="$(mktemp -d "${base_dir}/run.XXXXXX")"
 
 cleanup() {
-	rm -rf "${work_dir}"
+  rm -rf "${work_dir}"
 }
 trap cleanup EXIT
 
 section() {
-	printf '\n== %s ==\n' "$1"
+  printf '\n== %s ==\n' "$1"
 }
 
 section "identity"
@@ -36,6 +36,10 @@ swiftc --version
 command -v sourcekit-lsp
 opencode --version
 codex --version
+claude --version
+gemini --version
+copilot --version
+syft version
 specify version
 specify check
 
@@ -43,9 +47,9 @@ section ".NET"
 dotnet_dir="${work_dir}/dotnet"
 mkdir -p "${dotnet_dir}"
 (
-	cd "${dotnet_dir}"
-	dotnet new console --framework net10.0 --no-restore
-	dotnet run
+  cd "${dotnet_dir}"
+  dotnet new console --framework net10.0 --no-restore
+  dotnet run
 )
 
 section "Java"
@@ -65,9 +69,9 @@ section "Go"
 go_dir="${work_dir}/go"
 mkdir -p "${go_dir}"
 (
-	cd "${go_dir}"
-	go mod init example.com/ade-smoke
-	cat >smoke_test.go <<'GO'
+  cd "${go_dir}"
+  go mod init example.com/ade-smoke
+  cat >smoke_test.go <<'GO'
 package smoke
 
 import "testing"
@@ -78,16 +82,16 @@ func TestSmoke(t *testing.T) {
   }
 }
 GO
-	go test ./...
+  go test ./...
 )
 
 section "Rust"
 rust_dir="${work_dir}/rust"
 cargo new "${rust_dir}" --bin
 (
-	cd "${rust_dir}"
-	cargo test
-	cargo clippy -- -D warnings
+  cd "${rust_dir}"
+  cargo test
+  cargo clippy -- -D warnings
 )
 
 section "Python"
@@ -105,10 +109,10 @@ section "Swift"
 swift_dir="${work_dir}/swift"
 mkdir -p "${swift_dir}"
 (
-	cd "${swift_dir}"
-	swift package init --name SwiftSmoke --type executable
-	swift build
-	swift run SwiftSmoke
+  cd "${swift_dir}"
+  swift package init --name SwiftSmoke --type executable
+  swift build
+  swift run SwiftSmoke
 )
 
 section "done"

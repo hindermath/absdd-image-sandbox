@@ -6,7 +6,7 @@ repos:
         entry: python scripts/check-dockerfile-arg-renovate.py
         language: python
         pass_filenames: false
-        files: ^(Dockerfile|renovate\.json|scripts/check-dockerfile-arg-renovate\.py)$
+        files: ^(Dockerfile|renovate\.json|scripts/check-dockerfile-arg-renovate\.py|scripts/smoke-test-toolchains\.sh)$
 
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.30.1

@@ -28,35 +28,35 @@ USAGE
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --image)
-      IMAGE_NAME="$2"
-      shift 2
-      ;;
-    --sbom-dir)
-      SBOM_DIR="$2"
-      shift 2
-      ;;
-    --runtime)
-      CONTAINER_RUNTIME="$2"
-      shift 2
-      ;;
-    --syft-image)
-      SYFT_IMAGE="$2"
-      shift 2
-      ;;
-    --skip-build)
-      SKIP_BUILD="true"
-      shift
-      ;;
-    -h | --help)
-      usage
-      exit 0
-      ;;
-    *)
-      echo "Unknown option: $1" >&2
-      usage >&2
-      exit 2
-      ;;
+  --image)
+    IMAGE_NAME="$2"
+    shift 2
+    ;;
+  --sbom-dir)
+    SBOM_DIR="$2"
+    shift 2
+    ;;
+  --runtime)
+    CONTAINER_RUNTIME="$2"
+    shift 2
+    ;;
+  --syft-image)
+    SYFT_IMAGE="$2"
+    shift 2
+    ;;
+  --skip-build)
+    SKIP_BUILD="true"
+    shift
+    ;;
+  -h | --help)
+    usage
+    exit 0
+    ;;
+  *)
+    echo "Unknown option: $1" >&2
+    usage >&2
+    exit 2
+    ;;
   esac
 done
 
@@ -82,11 +82,21 @@ if [[ "${SKIP_BUILD}" != "true" ]]; then
 fi
 
 date_stamp="$(date +%Y-%m-%d)"
-safe_image="$(printf '%s' "${IMAGE_NAME}" | tr '/:@\\' '----' | tr -cd 'A-Za-z0-9._-')"
+safe_image="$(printf '%s' "${IMAGE_NAME}" | tr '/:@' '---' | tr -cd 'A-Za-z0-9._-')"
 out_file="${date_stamp}-${safe_image}.cdx.json"
 out_path="${SBOM_DIR}/${out_file}"
+source_version="${IMAGE_NAME##*:}"
 
-if command -v syft >/dev/null 2>&1; then
+if "${runtime}" run --rm --entrypoint syft "${IMAGE_NAME}" version >/dev/null 2>&1; then
+  # The one-shot scanner uses root only to read every image layer path; the
+  # actual sandbox service continues to run as the non-root adedev user.
+  "${runtime}" run --rm --user 0 --entrypoint syft "${IMAGE_NAME}" \
+    "dir:/" \
+    --select-catalogers "+javascript-package-cataloger" \
+    --source-name "${IMAGE_NAME}" \
+    --source-version "${source_version}" \
+    -o "cyclonedx-json" >"${out_path}"
+elif command -v syft >/dev/null 2>&1; then
   syft "${IMAGE_NAME}" -o "cyclonedx-json=${out_path}"
 else
   tmp_dir="$(mktemp -d)"

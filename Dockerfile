@@ -26,7 +26,15 @@ ARG UV_VERSION=0.11.16
 # renovate: datasource=npm depName=opencode-ai versioning=npm argName=OPENCODE_VERSION
 ARG OPENCODE_VERSION=1.14.50
 # renovate: datasource=npm depName=@openai/codex versioning=npm argName=CODEX_VERSION
-ARG CODEX_VERSION=0.130.0
+ARG CODEX_VERSION=0.144.1
+# renovate: datasource=npm depName=@anthropic-ai/claude-code versioning=npm argName=CLAUDE_CODE_VERSION
+ARG CLAUDE_CODE_VERSION=2.1.206
+# renovate: datasource=npm depName=@google/gemini-cli versioning=npm argName=GEMINI_CLI_VERSION
+ARG GEMINI_CLI_VERSION=0.50.0
+# renovate: datasource=npm depName=@github/copilot versioning=npm argName=COPILOT_CLI_VERSION
+ARG COPILOT_CLI_VERSION=1.0.70
+# renovate: datasource=github-releases depName=anchore/syft versioning=semver argName=SYFT_VERSION
+ARG SYFT_VERSION=1.46.0
 
 USER root
 RUN apt-get -y update \
@@ -130,8 +138,29 @@ RUN set -eux; \
     rm /tmp/go.tgz
 RUN printf '%s\n' 'export PATH="/usr/local/go/bin:/home/adedev/go/bin:/home/adedev/.cargo/bin:${PATH}"' \
     > /etc/profile.d/ade-toolchains.sh
-RUN npm i -g "opencode-ai@${OPENCODE_VERSION}" "@openai/codex@${CODEX_VERSION}" \
+RUN npm i -g \
+        "opencode-ai@${OPENCODE_VERSION}" \
+        "@openai/codex@${CODEX_VERSION}" \
+        "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}" \
+        "@google/gemini-cli@${GEMINI_CLI_VERSION}" \
+        "@github/copilot@${COPILOT_CLI_VERSION}" \
     && ln -sf "$(npm root -g)/@openai/codex/bin/codex.js" /usr/local/bin/codex
+RUN set -eux; \
+    arch="$(dpkg --print-architecture)"; \
+    case "${arch}" in \
+        amd64) syft_arch="amd64" ;; \
+        arm64) syft_arch="arm64" ;; \
+        *) echo "Unsupported Syft architecture: ${arch}" >&2; exit 1 ;; \
+    esac; \
+    archive="syft_${SYFT_VERSION}_linux_${syft_arch}.tar.gz"; \
+    base_url="https://github.com/anchore/syft/releases/download/v${SYFT_VERSION}"; \
+    tmp_dir="$(mktemp -d)"; \
+    curl -fsSL "${base_url}/${archive}" -o "${tmp_dir}/${archive}"; \
+    curl -fsSL "${base_url}/syft_${SYFT_VERSION}_checksums.txt" -o "${tmp_dir}/checksums.txt"; \
+    (cd "${tmp_dir}" && grep "  ${archive}$" checksums.txt | sha256sum -c -); \
+    tar -xzf "${tmp_dir}/${archive}" -C /usr/local/bin syft; \
+    chmod 0755 /usr/local/bin/syft; \
+    rm -rf "${tmp_dir}"
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
@@ -164,6 +193,11 @@ RUN useradd -m adedev
 RUN mkdir -p /dotnet-build && chown adedev:adedev /dotnet-build
 USER adedev
 ENV PATH="/usr/local/go/bin:/home/adedev/go/bin:/home/adedev/.cargo/bin:/home/adedev/.local/bin:${PATH}"
+ENV CODEX_HOME="/home/adedev/.codex" \
+    CLAUDE_CONFIG_DIR="/home/adedev/.claude" \
+    GEMINI_CLI_HOME="/home/adedev/.gemini-home" \
+    COPILOT_HOME="/home/adedev/.copilot" \
+    DISABLE_AUTOUPDATER="1"
 WORKDIR /home/adedev
 RUN go install "golang.org/x/tools/gopls@${GOPLS_VERSION}" \
     && go install "honnef.co/go/tools/cmd/staticcheck@${STATICCHECK_VERSION}" \
@@ -187,8 +221,12 @@ RUN set -eux; \
     rustup component add rustfmt clippy rust-analyzer rust-src
 RUN uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.8.3 \
     && python3 /usr/local/bin/patch-specify-cli.py
-RUN mkdir -p /home/adedev/.local/share/opencode
-RUN mkdir -p /home/adedev/.codex
+RUN mkdir -p \
+      /home/adedev/.local/share/opencode \
+      /home/adedev/.codex \
+      /home/adedev/.claude \
+      /home/adedev/.gemini-home \
+      /home/adedev/.copilot
 COPY --chown=adedev:adedev ./opencode.jsonc /home/adedev/.config/opencode/opencode.jsonc
 USER root
 COPY ./scripts/audit-export.sh /usr/local/bin/audit-export

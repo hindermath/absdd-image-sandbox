@@ -1,118 +1,101 @@
-# KI-Werkzeug-Inventar
+# KI-Werkzeug-Inventar / AI Tool Inventory
 
-Stand: 2026-06-03
+**Stand / Date:** 2026-07-10
 
-Dieses Inventar dokumentiert die in dieser Sandbox vorgesehenen KI- und
-agentischen Werkzeuge. OpenCode wird in diesem Image ohne API-Key und ohne
-vorausgewaehltes Modell ausgeliefert; die eingebaute Provider-Auswahl bleibt
-verfuegbar. Felder mit `_TODO_` muessen durch den Owner oder die verantwortliche
-Stelle gepflegt werden; sie werden nicht aus Annahmen abgeleitet.
+## Zweck und Grenze / Purpose and Boundary
 
-## Deutsch
+**DE:** Dieses Inventar dokumentiert die im Image installierten agentischen
+Entwicklungswerkzeuge. Das Image enthaelt keine KI-Modelle, keine Provider-
+Freigabe und keine vorgegebenen Konten. Anmeldung, Lizenz, Datenresidenz,
+Aufbewahrung und Anbieterfreigabe bleiben eine Entscheidung der verantwortlichen
+Person beziehungsweise Organisation.
 
-### Tabelle 1 — Grunddaten / Basic Data
+**EN:** This inventory documents the agentic development tools installed in the
+image. The image contains no AI models, provider approval, or predefined
+accounts. Sign-in, licensing, data residency, retention, and provider approval
+remain decisions of the responsible person or organization.
 
-| Werkzeug | Variante | Vendor | Endpoint |
+## Installierte Werkzeuge / Installed Tools
+
+| Werkzeug / Tool | Paket und Version / Package and Version | Kommando / Command | Persistenter Zustand / Persistent State |
 |---|---|---|---|
-| OpenCode | CLI im Container, npm-Paket `opencode-ai` Version `1.14.50`; kein vorkonfigurierter API-Key und kein vorausgewaehltes Modell | OpenCode-Projekt / npm-Paket; Modellanbieter nur nach lokaler Verbindung durch den Nutzer | Nicht konfiguriert |
-| Codex CLI | CLI im Container, npm-Paket `@openai/codex` Version `0.130.0`; kein Provider im Repository vorkonfiguriert | Konkrete Betriebsvariante vom Owner einzutragen | `_TODO_ (Endpoint/Region nur bei lokaler Provider-Nutzung vom Owner einzutragen)` |
-| Spec Kit | CLI `specify`, Version `v0.8.3` aus `github.com/github/spec-kit.git` | GitHub | GitHub-Quelle beim Image-Build; lokale CLI-Nutzung im Container |
+| OpenCode | `opencode-ai@1.14.50` | `opencode` | `/home/adedev/.local/share/opencode` (`opencode_data`) |
+| Codex CLI | `@openai/codex@0.144.1` | `codex` | `/home/adedev/.codex` (`codex_data`, `CODEX_HOME`) |
+| Claude Code | `@anthropic-ai/claude-code@2.1.206` | `claude` | `/home/adedev/.claude` (`claude_data`, `CLAUDE_CONFIG_DIR`) |
+| Gemini CLI | `@google/gemini-cli@0.50.0` | `gemini` | `/home/adedev/.gemini-home/.gemini` (`gemini_data`, `GEMINI_CLI_HOME=/home/adedev/.gemini-home`) |
+| GitHub Copilot CLI | `@github/copilot@1.0.70` | `copilot` | `/home/adedev/.copilot` (`copilot_data`, `COPILOT_HOME`) |
+| GitHub Spec Kit | `specify-cli` aus `github/spec-kit@v0.8.3` | `specify` | lokale Projektartefakte, kein Agentenkonto |
+| Syft | `anchore/syft@1.46.0` | `syft` | kein persistentes Agentenkonto |
 
-### Tabelle 2 — Datenschutz und Compliance / Privacy and Compliance
+OpenCode bleibt ein zusaetzliches Werkzeug. Die vier Required-Agenten dieser
+Lernumgebung sind Codex, Claude Code, Gemini CLI und GitHub Copilot CLI.
 
-| Werkzeug | EU-Datenresidenz | ZDR-Status | DPA-Datum | Trainings-Opt-out |
-|---|---|---|---|---|
-| OpenCode | Nicht anwendbar ohne lokale Provider-Verbindung | Nicht anwendbar ohne lokale Provider-Verbindung | `_TODO_ (Lizenz-/DPA-Bewertung fuer opencode-ai vom Owner einzutragen)` | Nicht anwendbar ohne lokale Provider-Verbindung |
-| Codex CLI | `_TODO_ (vom Owner einzutragen, falls Provider genutzt wird)` | `_TODO_ (vom Owner einzutragen, falls Provider genutzt wird)` | `_TODO_ (vom Owner einzutragen, falls Provider genutzt wird)` | `_TODO_ (vom Owner einzutragen, falls Provider genutzt wird)` |
-| Spec Kit | Nicht anwendbar fuer lokale CLI-Nutzung; GitHub-Zugriff beim Build vom Owner zu bewerten | Nicht anwendbar fuer lokale CLI-Nutzung; vom Owner zu bestaetigen | `_TODO_ (Lizenz-/DPA-Bewertung vom Owner einzutragen)` | Nicht anwendbar fuer lokale CLI-Nutzung; vom Owner zu bestaetigen |
+## Anmeldung und Netzwerk / Sign-In and Network
 
-### Tabelle 3 — Governance
+| Werkzeug / Tool | Anmeldung / Sign-In | Netzwerkziel auf Dokumentationsebene / Documented Network Category |
+|---|---|---|
+| OpenCode | erst nach lokaler Providerwahl | gewaehlter Modellanbieter; kein Provider im Repository vorkonfiguriert |
+| Codex CLI | interaktiver, kontobasierter CLI-Login oder freigegebene lokale Konfiguration | OpenAI-/kontobezogene Dienste gemaess lokal gewaehltem Betriebsmodell |
+| Claude Code | interaktiver Claude-/Anthropic-Login | Anthropic-Dienste gemaess Konto und Vertrag |
+| Gemini CLI | Google-Login oder freigegebene API-/Cloud-Konfiguration | Google-Gemini-/Google-Cloud-Dienste gemaess Anmeldeweg |
+| GitHub Copilot CLI | `copilot login` beziehungsweise freigegebene GitHub-Authentifizierung | GitHub- und GitHub-Copilot-Dienste |
 
-| Werkzeug | OpenSSF-Scorecard | freigegeben bis | Owner |
-|---|---|---|---|
-| OpenCode | `_TODO_ (fuer opencode-ai zu pruefen)` | `_TODO_ (vom Owner einzutragen)` | `_TODO_ (vom Owner einzutragen)` |
-| Codex CLI | `_TODO_ (fuer @openai/codex zu pruefen)` | `_TODO_ (vom Owner einzutragen)` | `_TODO_ (vom Owner einzutragen)` |
-| Spec Kit | `_TODO_ (fuer github/spec-kit zu pruefen)` | `_TODO_ (vom Owner einzutragen)` | `_TODO_ (vom Owner einzutragen)` |
+**DE:** Die Tabelle ist keine Egress-Allowlist. Konkrete Domains, Regionen und
+Aufbewahrungsregeln muessen vor realer Nutzung gegen die aktuelle offizielle
+Anbieterdokumentation und die organisatorische Freigabe geprueft werden.
 
-### AI-SBOM-Lieferantentransparenz (CL_09 Pruefpunkt 15)
+**EN:** The table is not an egress allow-list. Concrete domains, regions, and
+retention rules must be checked against current official provider documentation
+and organizational approval before real use.
 
-Diese Tabelle erfasst die vier zusaetzlichen Transparenzfelder aus CL_09
-Pruefpunkt 15. Sie ersetzt keine Anbieterbewertung und erzeugt keine eigene
-AI-SBOM fuer fremdbezogene Modelle. Fehlende Angaben sind ein dokumentierter
-Lieferketten-Befund und muessen durch Owner, CISO/ISB oder KIB bewertet
-werden.
+## Versions- und Update-Regel / Version and Update Rule
 
-| Eintrag | Model Card / AI-SBOM / Anbieterquelle | Trainings- und Feinabstimmungsverfahren | Herkunft und Sensitivitaet der Trainingsdaten | KI-spezifische Sicherheitseigenschaften |
-|---|---|---|---|---|
-| OpenCode CLI | Kein KI-Modell im Image; lokale Evidenz in `Dockerfile` und `opencode.jsonc` | Nicht anwendbar fuer CLI | Nicht anwendbar fuer CLI | Lokale Tool-Grenzen durch `opencode.jsonc`: Permission-Regeln, Webfetch-Genehmigung, Secret-Pfad-Blockliste, `share: "disabled"`, `autoupdate: false`, kein API-Key und kein vorausgewaehltes Modell |
-| Codex CLI | Kein Modell in diesem Repository; lokale Evidenz in `Dockerfile`, `codex/config.toml` und `codex/requirements.toml` | Nicht anwendbar fuer CLI; Modellbetrieb haengt von einer lokalen, durch den Owner konfigurierten Backend-Variante ab | Nicht anwendbar fuer CLI; Backend-Datenresidenz und Datenverwendung `_TODO_ (Owner einzutragen, falls Provider genutzt wird)` | Lokale Tool-Grenzen durch `codex/config.toml` und `codex/requirements.toml`: Workspace-Sandbox, Deny-Read-Pfade, Environment-Excludes, Websuche deaktiviert |
-| Spec Kit | Kein KI-Modell; lokale Evidenz in `Dockerfile`, Quelle `github.com/github/spec-kit.git` Version `v0.8.3` | Nicht anwendbar fuer CLI | Nicht anwendbar fuer CLI | Nicht anwendbar als Modell; Supply-Chain-Bewertung ueber Quellrepository, Version-Pinning und Image-SBOM |
+- Alle npm-Pakete sind ueber Dockerfile-ARGs fest gepinnt.
+- Renovate gruppiert die Agenten-ARGs und erstellt nur pruefbare
+  Aktualisierungsvorschlaege.
+- Claude Code erhaelt `DISABLE_AUTOUPDATER=1`; andere Agenten werden nicht durch
+  einen unkontrollierten Image-Lauf aktualisiert.
+- Jede Versionsaenderung erfordert Image-Build, vier Agenten-Versionschecks,
+  Toolchain-Smoke-Test, Secret-Scan und aktualisierte SBOM.
 
-### Hinweise
+## Audit-Metadaten / Audit Metadata
 
-- Quelle fuer OpenCode-Grenzen: `opencode.jsonc`.
-- Quelle fuer Tool-Versionen: `Dockerfile`.
-- OpenCode hat in diesem Image keinen voreingestellten API-Key und kein
-  vorausgewaehltes Modell; die eingebaute Provider-Auswahl bleibt verfuegbar.
-- Re-Evaluation: jedes Quartal, naechste Pruefung 2026-09-03.
-- Bezugsrahmen fuer AI-SBOM-Felder: G7-Leitlinie "Software Bill of Materials
-  (SBOM) for Artificial Intelligence - Minimum Elements" (2026), siehe
-  <https://cyber.gouv.fr/nous-connaitre/publications/publications-internationales/software-bill-of-materials-sbom-for-artificial-intelligence/>.
-- Normbezug: CL_09 Pruefpunkt 15 "KI-Lieferkettentransparenz".
+`audit-export` schreibt nur:
 
-## English
+- Werkzeugname und Versionszeile;
+- freigegebenes Zustandsverzeichnis;
+- Dateiname beziehungsweise Sitzungs-ID, Zeitstempel und Dateityp aus eng
+  erlaubten Sitzungsverzeichnissen;
+- Projektpfad, lokaler Actor und Exportzeitpunkt.
 
-This inventory documents the AI and agentic tools intended for this sandbox.
-OpenCode is shipped in this image without an API key and without a preselected
-model; the built-in provider picker remains available. Fields marked `_TODO_`
-must be maintained by the owner or responsible office; they are not inferred
-from assumptions.
+Der Export liest oder kopiert keine Prompt-, Antwort-, Token- oder
+Credential-Inhalte. Derzeit sind Sitzungsmetadaten nur fuer folgende stabile
+Pfade erlaubt:
 
-### Table 1 — Basic Data
+- OpenCode: `storage/session_diff/ses_*`;
+- Codex: `.codex/sessions/**`;
+- Claude Code: `.claude/projects/**/*.jsonl`.
 
-| Tool | Variant | Vendor | Endpoint |
-|---|---|---|---|
-| OpenCode | CLI in the container, npm package `opencode-ai` version `1.14.50`; no preconfigured API key and no preselected model | OpenCode project / npm package; model provider only after local user connection | Not configured |
-| Codex CLI | CLI in the container, npm package `@openai/codex` version `0.130.0`; no provider preconfigured in the repository | Exact operating variant to be entered by owner | `_TODO_ (endpoint/region to be entered by owner only when a local provider is used)` |
-| Spec Kit | CLI `specify`, version `v0.8.3` from `github.com/github/spec-kit.git` | GitHub | GitHub source during image build; local CLI use in the container |
+Fuer Gemini CLI und GitHub Copilot CLI werden Versions- und Zustandsmetadaten
+exportiert, aber keine Sitzungsdateien. Ihre Sitzungsablage bleibt `Open`, bis
+ein stabil dokumentiertes Format eine enge Allowlist erlaubt. Breites Kopieren
+der jeweiligen Home-Verzeichnisse ist untersagt.
 
-### Table 2 — Privacy and Compliance
+*The audit export records tool versions and narrowly allow-listed file metadata,
+never prompt, response, token, or credential content. Gemini and Copilot session
+collection remains open until a stable documented layout permits a narrow
+allow-list.*
 
-| Tool | EU data residency | ZDR status | DPA date | Training opt-out |
-|---|---|---|---|---|
-| OpenCode | Not applicable without local provider connection | Not applicable without local provider connection | `_TODO_ (license/DPA assessment for opencode-ai to be entered by owner)` | Not applicable without local provider connection |
-| Codex CLI | `_TODO_ (to be entered by owner if a provider is used)` | `_TODO_ (to be entered by owner if a provider is used)` | `_TODO_ (to be entered by owner if a provider is used)` | `_TODO_ (to be entered by owner if a provider is used)` |
-| Spec Kit | Not applicable for local CLI use; GitHub access during build to be assessed by owner | Not applicable for local CLI use; to be confirmed by owner | `_TODO_ (license/DPA assessment to be entered by owner)` | Not applicable for local CLI use; to be confirmed by owner |
+## Datenschutz- und Freigabefelder / Privacy and Approval Fields
 
-### Table 3 — Governance
+| Feld / Field | Status |
+|---|---|
+| Formelle Werkzeug-/Providerfreigabe | `_TODO_` durch Owner/KIB/CISO/ISB; nicht agentisch abschliessbar |
+| EU-Datenresidenz und Region | `_TODO_` je Anbieter, Konto und Vertrag |
+| Zero-Data-Retention / Aufbewahrung | `_TODO_` je Anbieter und Vertragsmodell |
+| DPA und Trainings-Opt-out | `_TODO_` je Anbieter und Vertrag |
+| OpenSSF-/Supply-Chain-Bewertung | `Open`; npm-Pinning, Renovate, Build und SBOM liefern technische Basisevidenz |
 
-| Tool | OpenSSF Scorecard | Approved until | Owner |
-|---|---|---|---|
-| OpenCode | `_TODO_ (check for opencode-ai)` | `_TODO_ (to be entered by owner)` | `_TODO_ (to be entered by owner)` |
-| Codex CLI | `_TODO_ (check for @openai/codex)` | `_TODO_ (to be entered by owner)` | `_TODO_ (to be entered by owner)` |
-| Spec Kit | `_TODO_ (check for github/spec-kit)` | `_TODO_ (to be entered by owner)` | `_TODO_ (to be entered by owner)` |
-
-### AI-SBOM Supplier Transparency (CL_09 Item 15)
-
-This table records the four additional transparency fields from CL_09 item 15.
-It does not replace supplier assessment and it does not create an own AI-SBOM
-for externally sourced models. Missing supplier data is a documented
-supply-chain finding and must be assessed by the owner, CISO/ISB, or KIB.
-
-| Entry | Model card / AI-SBOM / supplier source | Training and fine-tuning method | Training-data origin and sensitivity | AI-specific security properties |
-|---|---|---|---|---|
-| OpenCode CLI | No AI model in the image; local evidence in `Dockerfile` and `opencode.jsonc` | Not applicable for CLI | Not applicable for CLI | Local tool boundaries through `opencode.jsonc`: permission rules, webfetch approval, secret-path blocklist, `share: "disabled"`, `autoupdate: false`, no API key and no preselected model |
-| Codex CLI | No model in this repository; local evidence in `Dockerfile`, `codex/config.toml`, and `codex/requirements.toml` | Not applicable for CLI; model operation depends on a local backend variant configured by the owner | Not applicable for CLI; backend data residency and data use `_TODO_ (to be entered by owner if a provider is used)` | Local tool boundaries through `codex/config.toml` and `codex/requirements.toml`: workspace sandbox, deny-read paths, environment excludes, web search disabled |
-| Spec Kit | Not an AI model; local evidence in `Dockerfile`, source `github.com/github/spec-kit.git` version `v0.8.3` | Not applicable for CLI | Not applicable for CLI | Not applicable as a model; supply-chain assessment through source repository, version pinning, and image SBOM |
-
-### Notes
-
-- Source for OpenCode boundaries: `opencode.jsonc`.
-- Source for tool versions: `Dockerfile`.
-- OpenCode has no preset API key and no preselected model in this image; the
-  built-in provider picker remains available.
-- Re-evaluation: quarterly, next review 2026-09-03.
-- Reference frame for AI-SBOM fields: G7 guideline "Software Bill of Materials
-  (SBOM) for Artificial Intelligence - Minimum Elements" (2026), see
-  <https://cyber.gouv.fr/nous-connaitre/publications/publications-internationales/software-bill-of-materials-sbom-for-artificial-intelligence/>.
-- Policy reference: CL_09 item 15 "AI supply-chain transparency".
+Ein CLI-Eintrag ist keine AI-SBOM fuer das dahinter verwendete Modell. Bei
+freigegebener Provider-/Modellnutzung sind Model Card, Lieferanteninformationen
+und die AI-SBOM-Anwendbarkeit separat zu bewerten.

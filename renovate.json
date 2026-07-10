@@ -55,7 +55,10 @@
     {
       "matchPackageNames": [
         "opencode-ai",
-        "@openai/codex"
+        "@openai/codex",
+        "@anthropic-ai/claude-code",
+        "@google/gemini-cli",
+        "@github/copilot"
       ],
       "groupName": "agent CLI npm Dockerfile ARGs",
       "addLabels": [
@@ -80,6 +83,16 @@
       "groupName": "Swift tooling Dockerfile ARGs",
       "addLabels": [
         "swift"
+      ]
+    },
+    {
+      "matchPackageNames": [
+        "anchore/syft"
+      ],
+      "groupName": "supply-chain tooling Dockerfile ARGs",
+      "addLabels": [
+        "supply-chain",
+        "sbom"
       ]
     }
   ]

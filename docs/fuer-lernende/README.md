@@ -1,6 +1,6 @@
 # Für Lernende: Einstieg in die Sandbox-Umgebung / For Learners: Getting Started
 
-**Stand / Date:** 2026-07-05
+**Stand / Date:** 2026-07-10
 **Ausrichtung / Orientation:** DE-first, EN-second, CEFR B2, WCAG 2.2 AA
 
 ---
@@ -14,8 +14,8 @@ du im Ausbildungsprojekt `Secure CaseTracker` benötigst.
 
 **EN:** The `absdd-image-sandbox` is a **container environment** for secure software development with AI
 agents. It provides a walled-off space where you can make mistakes without damaging anything outside the
-container. It contains all tools (language runtimes, test tools, AI agents) you need for the `Secure
-CaseTracker` training project.
+container. It contains all tools (language runtimes, test tools, AI agents) you need for the three Secure
+Trader training projects: CaseTracker, OrderDesk, and ServiceHarvester.
 
 **DE:** Die öffentliche Referenzadresse lautet: `https://github.com/hindermath/absdd-image-sandbox`
 
@@ -31,6 +31,16 @@ voraus.
 
 **EN:** If you have **never worked with containers**, follow this order. Each
 document builds on the previous one and assumes no prior knowledge.
+
+**DE:** Beginne mit der zentralen, betriebssystemuebergreifenden Anleitung
+[START-HERE-FUER-LERNENDE.md](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md).
+Sie fuehrt vom persoenlichen `home-baseline`-Fork bis zum ersten kontrollierten
+Agentenlauf. Dieses Verzeichnis vertieft danach die Sandbox-Schritte.
+
+**EN:** Start with the canonical cross-platform
+[learner start guide](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md).
+It leads from the personal `home-baseline` fork to the first controlled agent
+run. This directory then explains the sandbox in more detail.
 
 | Schritt / Step | Dokument / Document | Inhalt / Content |
 |---|---|---|
@@ -61,8 +71,8 @@ each training year.
 
 | Lehrjahr / Year | Erwartung / Expectation | Sandbox Pflicht? / Mandatory? |
 |---|---|---|
-| 1. Lehrjahr / Year 1 | Verstehe, **warum** eine Sandbox existiert und was ihre Grenzen sind. Dokumentiere Mounts, Schreibgrenzen, Netzwerk und Secret-Regeln als Zielbild. | Gate: **Ja** — ein KI-Agent läuft nur im Container. Praktische Schreib-Nutzung: `N/A`, begründet. / Gate: **yes** — an AI agent runs only in the container. Practical write use: `N/A`, justified. |
-| 2. Lehrjahr / Year 2 | Bereite ein **Betriebskonzept** vor: Konfiguration, Secrets, Schreibgrenzen, Laufzeitannahmen, KI-Agenten-Grenzen. Entscheide dokumentiert `Applicable`/`N/A`/`Open`. | Nein — Konzept vorbereiten, Nutzung darf begründet aufschieben. / No — prepare the concept; use may be deferred with a rationale. |
+| 1. Lehrjahr / Year 1 | Verstehe die Grenzen und fuehre den ersten kontrollierten Agentenlauf nach Anleitung aus. | **Ja, sobald ein Agent genutzt wird.** Ohne Agentenlauf ist die praktische Nutzung `N/A`. / **Yes, as soon as an agent is used.** Without an agent call, practical use is `N/A`. |
+| 2. Lehrjahr / Year 2 | Bereite ein **Betriebskonzept** vor: Konfiguration, Secrets, Schreibgrenzen, Laufzeitannahmen, KI-Agenten-Grenzen. | **Ja fuer jeden Agentenlauf.** Die Nachweistiefe steigt. / **Yes for every agent call.** Evidence depth increases. |
 | 3. Lehrjahr SI / Year 3 SI | Nutze die Sandbox **tatsächlich** für KI-gestützte Schreibarbeit und riskante Experimente. Betriebsnachweise liefern. | Ja (SI-Track und DV-Track). / Yes (SI track and DV track). |
 | 3. Lehrjahr DV / Year 3 DV | Nutze die Sandbox als Referenzprofil; dokumentiere Netzwerkzugriffe, Mounts und Abweichungen nachvollziehbar. | Ja (SI-Track und DV-Track). / Yes (SI track and DV track). |
 | 3. Lehrjahr AE/DPA / Year 3 AE/DPA | Sandbox ist relevant, aber weniger zentral als für SI/DV. | Teils — je nach Aufgabe. / Partial — depends on the task. |
@@ -145,12 +155,14 @@ tools and stop cleanly — both explained step by step in
 
 ## Verbindung zur Lernreihe / Connection to the Learning Series
 
-**DE:** Die `absdd-image-sandbox` ist das öffentliche Referenz-Repository für die Lernreihe
-`Secure CaseTracker`. Die passenden Erklärungen (Lernbegleiter) findest du im Repository `home-baseline-tmp`
-deiner Ausbildungsstelle:
+**DE:** Die `absdd-image-sandbox` ist das oeffentliche Referenz-Repository fuer
+die drei Secure-Trader-Lernreihen. Die passenden Erklaerungen findest du in
+deinem persoenlichen `home-baseline-tmp`-Fork. Der Startpunkt ist die oben
+verlinkte zentrale Anleitung.
 
-**EN:** The `absdd-image-sandbox` is the public reference repository for the `Secure CaseTracker` learning
-series. The matching study companions are in the `home-baseline-tmp` repository of your training site:
+**EN:** The `absdd-image-sandbox` is the public reference repository for the
+three Secure Trader learning series. The matching study companions are in your
+personal `home-baseline-tmp` fork. Start with the canonical guide linked above.
 
 | Lehrjahr / Year | Lernbegleiter-Datei / Study Companion File |
 |---|---|
@@ -166,15 +178,15 @@ series. The matching study companions are in the `home-baseline-tmp` repository 
 **DE:** **Ich starte im 1. Lehrjahr — muss ich die Sandbox wirklich nutzen?**
 Unterscheide zwei Dinge. Das **Container-First-Gate** gilt ab dem 1. Lehrjahr verbindlich: Wenn du einen
 KI-Agenten nutzt, läuft er **im Container**, nie auf dem Arbeitsplatz-Rechner (siehe
-[warum-sandbox.md](warum-sandbox.md)). Die **praktische Schreib-Nutzung** der Sandbox ist im 1. Lehrjahr
-dagegen noch `N/A` (nicht anwendbar), solange du das begründest. Der Lernbegleiter erklärt genau, was du
-dokumentieren sollst.
+[warum-sandbox.md](warum-sandbox.md)). Ohne Agentenaufruf kann die praktische
+Nutzung `N/A` sein. Sobald du einen Agenten startest, ist die Sandbox anwendbar
+und verpflichtend; das gilt auch fuer den ersten kleinen Schreibversuch.
 
 **EN:** **I am in year 1 — do I really have to use the sandbox?**
 Distinguish two things. The **Container-First Gate** applies from year 1 as binding: if you use an AI agent,
-it runs **inside the container**, never on the workstation (see [warum-sandbox.md](warum-sandbox.md)). The
-**practical write use** of the sandbox, by contrast, is still `N/A` (not applicable) in year 1 as long as you
-justify it. The study companion explains exactly what to document.
+it runs **inside the container**, never on the workstation (see [warum-sandbox.md](warum-sandbox.md)). Without
+an agent call, practical use may be `N/A`. As soon as you start an agent, the
+sandbox is applicable and mandatory, including the first small write exercise.
 
 ---
 
@@ -199,12 +211,15 @@ with rationale; `Open` = still open, follow-up planned.
 ---
 
 **DE:** **Wo soll ich Secrets eintragen?**
-Niemals im Repository oder in Prompts. Nutze `opencode.env` für lokale Provider-Schlüssel. Die Datei ist
-bereits in `.gitignore` eingetragen und wird nicht in das Repository hochgeladen.
+Niemals im Repository oder in Prompts. Nutze die offizielle interaktive
+Anmeldung des gewaehlten Agenten. `opencode.env` ist nur fuer eine bewusst
+lokal konfigurierte OpenCode-Provider-Variable vorgesehen und bleibt
+ungetrackt.
 
 **EN:** **Where do I enter secrets?**
-Never in the repository or in prompts. Use `opencode.env` for local provider keys. The file is already in
-`.gitignore` and will not be uploaded to the repository.
+Never in the repository or in prompts. Use the selected agent's official
+interactive sign-in. `opencode.env` is only for a deliberately local OpenCode
+provider variable and remains untracked.
 
 ---
 
