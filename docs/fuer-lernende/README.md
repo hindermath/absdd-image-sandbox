@@ -21,6 +21,14 @@ Trader training projects: CaseTracker, OrderDesk, and ServiceHarvester.
 
 **EN:** The public reference address is: `https://github.com/hindermath/absdd-image-sandbox`
 
+**DE:** Deine Institution kann diese Referenz nach GitLab, Codeberg, Forgejo
+oder ein eigenes Git-System uebertragen. Dann verwendest du die dort
+bereitgestellte URL und brauchst kein GitHub-Konto.
+
+**EN:** Your institution may transfer this reference to GitLab, Codeberg,
+Forgejo, or its own Git system. In that case, use the provided URL and no
+GitHub account is required.
+
 ---
 
 ## Neu hier? Ohne Vorkenntnisse? / New Here? No Prior Knowledge?
@@ -32,15 +40,19 @@ voraus.
 **EN:** If you have **never worked with containers**, follow this order. Each
 document builds on the previous one and assumes no prior knowledge.
 
-**DE:** Beginne mit der zentralen, betriebssystemuebergreifenden Anleitung
-[START-HERE-FUER-LERNENDE.md](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md).
-Sie fuehrt vom persoenlichen `home-baseline`-Fork bis zum ersten kontrollierten
-Agentenlauf. Dieses Verzeichnis vertieft danach die Sandbox-Schritte.
+**DE:** Beginne mit der von deiner Institution bereitgestellten zentralen,
+betriebssystemuebergreifenden `START-HERE-FUER-LERNENDE.md`. Die
+[oeffentliche Referenz](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md)
+bleibt als Herkunftsnachweis verfuegbar. Die Anleitung fuehrt vom persoenlichen
+`home-baseline`-Repository bis zum ersten kontrollierten Agentenlauf. Dieses
+Verzeichnis vertieft danach die Sandbox-Schritte.
 
-**EN:** Start with the canonical cross-platform
-[learner start guide](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md).
-It leads from the personal `home-baseline` fork to the first controlled agent
-run. This directory then explains the sandbox in more detail.
+**EN:** Start with the cross-platform `START-HERE-FUER-LERNENDE.md` supplied by
+your institution. The
+[public reference](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md)
+remains available for provenance. It leads from the personal `home-baseline`
+repository to the first controlled agent run. This directory then explains the
+sandbox in more detail.
 
 | Schritt / Step | Dokument / Document | Inhalt / Content |
 |---|---|---|
@@ -105,7 +117,8 @@ git --version
 podman --version
 
 # 2. Repo holen / Get the repo
-git clone https://github.com/hindermath/absdd-image-sandbox.git
+SANDBOX_REPO_URL="<INSTITUTIONELLE-URL-ODER-HTTPS://GITHUB.COM/HINDERMATH/ABSDD-IMAGE-SANDBOX.GIT>"
+git clone "$SANDBOX_REPO_URL"
 cd absdd-image-sandbox
 cp opencode.env.example opencode.env
 

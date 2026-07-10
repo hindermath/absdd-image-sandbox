@@ -197,11 +197,14 @@ podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh
 ## Optional: persoenliche Home-Baseline einbinden
 
 `home-baseline` wird nicht in das Public Image geklont. Lernende forken zuerst
-<https://github.com/hindermath/home-baseline> in das eigene GitHub-Konto und
-klonen den persoenlichen Fork dauerhaft als `~/home-baseline-tmp`. Erst diese
-mit dem eigenen `origin` verbundene Arbeitskopie wird optional eingebunden.
-Die vollstaendige Reihenfolge steht in
-[START-HERE-FUER-LERNENDE.md](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md).
+die von ihrer Institution bereitgestellte Referenz in den persoenlichen
+Namensraum ihres Git-Systems und klonen dieses Repository dauerhaft als
+`~/home-baseline-tmp`. Nur im direkten GitHub-Profil ist die Referenz
+<https://github.com/hindermath/home-baseline>. Erst die mit dem eigenen `origin`
+verbundene Arbeitskopie wird optional eingebunden. Die vollstaendige Reihenfolge
+steht in der von der Institution mitgelieferten
+`START-HERE-FUER-LERNENDE.md`; die oeffentliche Referenz liegt unter
+<https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md>.
 
 Fuer die Verbindung zwischen diesem Sandbox-Image und den Lernreihen siehe
 auch [docs/fuer-lernende/README.md](docs/fuer-lernende/README.md).
@@ -217,7 +220,7 @@ podman compose exec ade sh -lc 'cd ~/home-baseline-tmp && git status --short --b
 
 Im Container liegt der Checkout unter `/home/adedev/home-baseline-tmp`.
 Das entspricht der Arbeitsort-Guidance von `home-baseline`, ohne einen
-privaten Hostpfad oder einen bestimmten GitHub-Account in das Image zu
+privaten Hostpfad oder einen bestimmten Hosting-Account in das Image zu
 verdrahten. `sync-home.sh` wird nicht automatisch ausgefuehrt; falls ein
 Nutzer die Home-Baseline in seinem Container-Home synchronisieren will, muss
 das bewusst manuell geschehen.
@@ -484,11 +487,13 @@ podman compose up -d
 podman compose exec ade bash
 ```
 
-4. Optionally mount your personal `home-baseline` fork. First fork
-   <https://github.com/hindermath/home-baseline> into your own GitHub account,
-   then clone that fork persistently as `~/home-baseline-tmp`. The sandbox
-   image does not clone it. Follow the canonical
-   [learner start guide](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md).
+4. Optionally mount your personal `home-baseline` repository. First fork the
+   reference provided by your institution into your personal namespace, then
+   clone it persistently as `~/home-baseline-tmp`. Only the direct GitHub
+   profile uses <https://github.com/hindermath/home-baseline>. The sandbox image
+   does not clone it. Follow the `START-HERE-FUER-LERNENDE.md` supplied by your
+   institution; the public reference is available
+   [on GitHub](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md).
 
 ```bash
 HOME_BASELINE_DIR=/path/to/home-baseline-tmp

@@ -148,13 +148,18 @@ pip install podman-compose
 ## Repository holen und starten / Get and Start the Repository
 
 **DE:** Ab hier sind die Schritte auf allen Systemen gleich. Zuerst holst du
-eine eigene Kopie des Repositories und wechselst hinein.
+eine eigene Kopie des Repositories und wechselst hinein. Verwende die von deiner
+Institution bereitgestellte GitLab-, Codeberg-, Forgejo- oder andere Git-URL.
+Nur im direkten GitHub-Profil verwendest du die oeffentliche Referenz.
 
 **EN:** From here the steps are the same on all systems. First you get your own
-copy of the repository and change into it.
+copy of the repository and change into it. Use the GitLab, Codeberg, Forgejo, or
+other Git URL provided by your institution. Only the direct GitHub profile uses
+the public reference.
 
 ```bash
-git clone https://github.com/hindermath/absdd-image-sandbox.git
+SANDBOX_REPO_URL="<INSTITUTIONELLE-URL-ODER-HTTPS://GITHUB.COM/HINDERMATH/ABSDD-IMAGE-SANDBOX.GIT>"
+git clone "$SANDBOX_REPO_URL"
 cd absdd-image-sandbox
 ```
 

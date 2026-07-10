@@ -33,6 +33,15 @@ Human-only items such as formal approval, external registers, secret rotation,
 provider/model approvals, and platform branch protection must not be claimed as
 completed by an agent.
 
+## Git Hosting for Learners
+
+Learner documentation must not require a GitHub account universally. The
+learner's personal fork or institution-provided repository is `origin`; the
+institution-maintained reference is `upstream`. GitHub is one profile alongside
+GitLab, Codeberg, Forgejo, and other Git-capable institutional systems. Require
+a GitHub account only for the direct GitHub route or optional GitHub Copilot
+sign-in. Keep the public GitHub URL as provenance, not as the only clone path.
+
 ## Project Structure & Module Organization
 
 This repository contains a Podman-based agentic learning sandbox with OpenCode, four required agent CLIs, six memory-safe language toolchains, Syft, and Spec Kit; it is not an application codebase.
@@ -120,8 +129,9 @@ cd /home/adedev/home-baseline-tmp
 Moves to the optional mounted `home-baseline` checkout when the container was
 started with `compose.home-baseline.yml`. Do not clone `home-baseline` into the
 image and do not hard-code a private host path; public users should create
-their own repository via GitHub's "Use this template" flow and set
-`HOME_BASELINE_DIR` locally.
+their personal fork or institution-provided repository and set
+`HOME_BASELINE_DIR` locally. Only the direct GitHub profile requires a GitHub
+account.
 
 ```bash
 podman compose down

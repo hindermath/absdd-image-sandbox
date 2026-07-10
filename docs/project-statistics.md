@@ -59,6 +59,7 @@ tracked files; they are an artefact-volume measure, not a quality measure.
 |---|---|---:|---:|---:|---|
 | 2026-07-10 | docs/lernende-container-onboarding | 36 | 73.081 | 129 | Erst-Erfassung der Statistik. Anfänger-Onboarding: 5 neue Lernenden-Dokumente (`container-grundlagen`, `warum-sandbox`, `installation`, `erste-schritte`, `troubleshooting`), README-Hub-Umbau, Glossar-Erweiterung, Session-Log. Diff +1.136/−74. |
 | 2026-07-10 | feat/four-agent-learner-environment | 36 | 73.975 | 132 | Vier Required-Agenten und Syft im Podman-Image; getrennte Agenten-Volumes, Audit-Metadaten, image-interne SBOM, Anfängerpfad mit persönlichem Fork und erstem kontrollierten Agentenlauf, Lychee-/Static-CI. Diff +830/−379. |
+| 2026-07-10 | docs/provider-neutral-learner-hosting | 36 | 74.073 | 133 | GitHub-unabhaengiger Lernendenpfad fuer institutionelles GitLab, Codeberg, Forgejo und weitere Git-Systeme; oeffentliche GitHub-Referenzen bleiben Herkunftsnachweis. Agenten-Guidance und Session-Log synchronisiert. Diff +141/−43. |
 
 ---
 
@@ -73,11 +74,11 @@ no test framework; the focus is documentation, configuration, and scripts.
 
 | Kategorie / Category | Dateien / Files | Zeilen / Lines | Anteil / Share |
 |---|---:|---:|---:|
-| Dokumentation (.md) / Documentation | 348 | 59.973 | 81,1 % |
+| Dokumentation (.md) / Documentation | 349 | 60.071 | 81,1 % |
 | Sonstige / Other (LICENSE, man, dotfiles) | 24 | 5.471 | 7,4 % |
 | Konfiguration / Configuration | 47 | 4.242 | 5,7 % |
 | Skripte / Scripts (.sh, .ps1) | 26 | 4.289 | 5,8 % |
-| **Gesamt / Total** | **445** | **73.975** | **100 %** |
+| **Gesamt / Total** | **446** | **74.073** | **100 %** |
 
 ---
 
@@ -85,19 +86,19 @@ no test framework; the focus is documentation, configuration, and scripts.
 
 | Kennzahl / Metric | Verdichteter Gesamtblick / Condensed Overview |
 |---|---:|
-| Artefaktbasis gesamt / Total artefact base | 445 Dateien / 73.975 Zeilen |
+| Artefaktbasis gesamt / Total artefact base | 446 Dateien / 74.073 Zeilen |
 | Beobachtbarer Projektzeitraum / Observable period | 2026-04-29 – 2026-07-10 |
 | Sichtbare Git-Aktivtage / Visible git active days | 36 |
-| Commits gesamt / Total commits | 132 |
-| Manuelle Äquivalenz (80 Z./AT) / Manual equiv. | ~925 AT (~7.213 h) |
-| Manuelle Äquivalenz (100 Z./AT) / Manual equiv. | ~740 AT (~5.770 h) |
+| Commits gesamt / Total commits | 133 |
+| Manuelle Äquivalenz (80 Z./AT) / Manual equiv. | ~925,9 AT (~7.222,1 h) |
+| Manuelle Äquivalenz (100 Z./AT) / Manual equiv. | ~740,7 AT (~5.777,7 h) |
 | Repo-weiter Speedup gg. 80-Zeilen-Referenz | ~25,7x |
-| Repo-weiter Speedup gg. Thorsten-Referenz (100) | ~20,5x |
+| Repo-weiter Speedup gg. Thorsten-Referenz (100) | ~20,6x |
 
 ### Artefaktmix / Artefact Mix
 
 ```text
-Doku (.md)      | ############################################  59973  (81%)
+Doku (.md)      | ############################################  60071  (81%)
 Sonstige/Other  | ####                                           5471  ( 7%)
 Konfiguration   | ###                                            4242  ( 6%)
 Skripte         | ###                                            4289  ( 6%)
@@ -128,12 +129,12 @@ Commits an 22 Aktivtagen); danach folgen kleinere Pflege- und Feature-Wellen.
 ### Aufwandsvergleich repo-weit / Repo-Wide Effort Comparison
 
 ```text
-Erfahren / 80 Z./AT   | ##########################################  925 AT
-Thorsten-Solo / 100   | ##################################         740 AT
+Erfahren / 80 Z./AT   | ##########################################  926 AT
+Thorsten-Solo / 100   | ##################################         741 AT
 KI-sichtbar (real)    | ##                                          36 AT
 ```
 
-**DE:** Der Balken vergleicht drei Sichtweisen auf denselben Umfang (73.975
+**DE:** Der Balken vergleicht drei Sichtweisen auf denselben Umfang (74.073
 Zeilen): erfahrene manuelle Referenz (80 Z./AT), Thorsten-Solo-Infrastruktur
 (100 Z./AT) und die real sichtbaren Git-Aktivtage. Es ist ein Lieferdichte-
 Vergleich, keine gemessene Arbeitszeit.
@@ -147,7 +148,7 @@ not measured working time.
 
 ```text
 gg. 80 Z./AT (konservativ)  | ##########################  25.7x
-gg. 100 Z./AT (Thorsten)    | #####################       20.5x
+gg. 100 Z./AT (Thorsten)    | #####################       20.6x
 ```
 
 **DE:** Der repo-weite Speedup ergibt sich aus manueller Äquivalenz geteilt
