@@ -53,8 +53,11 @@ artifacts.*
 - `compose.yml`: definiert den Service `ade`, getrennte persistente
   Podman-Volumes fuer die Agentenzustaende, die Host-Mounts und die
   Portfreigabe `127.0.0.1:5100-5199`.
-- `compose.home-baseline.yml`: optionale Compose-Erweiterung fuer ein eigenes
-  `home-baseline`-Template-Repo im Container.
+- `home-baseline.lock.json`: pinnt Release, Commit, Quelle und Lizenz der
+  read-only Level-0-Referenz unter `/opt/home-baseline`.
+- `compose.home-baseline.yml`: optionale Compose-Erweiterung, die die
+  eingebaute Referenz durch ein eigenes, beschreibbares `home-baseline`-Repo
+  ersetzt.
 - `.devcontainer/devcontainer.json`: VS-Code-Dev-Containers-Konfiguration,
   damit VS Code von aussen an den laufenden `ade`-Container anhaengen kann.
 - `opencode.jsonc`: setzt OpenCode-Sicherheitsregeln, aber keinen API-Key
@@ -194,22 +197,33 @@ Die vollstaendige Toolchain prueft:
 podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh
 ```
 
-## Optional: persoenliche Home-Baseline einbinden
+## Home-Baseline-Referenz und persoenlicher Override
 
-`home-baseline` wird nicht in das Public Image geklont. Lernende forken zuerst
-die von ihrer Institution bereitgestellte Referenz in den persoenlichen
-Namensraum ihres Git-Systems und klonen dieses Repository dauerhaft als
-`~/home-baseline-tmp`. Nur im direkten GitHub-Profil ist die Referenz
-<https://github.com/hindermath/home-baseline>. Erst die mit dem eigenen `origin`
-verbundene Arbeitskopie wird optional eingebunden. Die vollstaendige Reihenfolge
-steht in der von der Institution mitgelieferten
-`START-HERE-FUER-LERNENDE.md`; die oeffentliche Referenz liegt unter
+Das Image enthaelt `home-baseline` als read-only Shallow-Git-Referenz. Release,
+Commit, Quelle und MIT-Lizenz sind in `home-baseline.lock.json` festgehalten.
+Im Container liegt die Referenz technisch unter `/opt/home-baseline`; der
+gewohnte Pfad `~/home-baseline-tmp` zeigt darauf. Dadurch sind die Lernreihen
+direkt und nach dem Build auch offline lesbar. Es wird kein Baseline-Skript
+automatisch ausgefuehrt und es werden keine Zugangsdaten eingebaut.
+
+```bash
+podman compose exec ade sh -lc 'cd ~/home-baseline-tmp && git status --short --branch && git log -1 --oneline'
+```
+
+Fuer Aenderungen, Commits und Pushes forken Lernende weiterhin die von ihrer
+Institution bereitgestellte Referenz in den persoenlichen Namensraum ihres
+Git-Systems und klonen dieses Repository dauerhaft auf dem Host. Nur im
+direkten GitHub-Profil ist die Referenz
+<https://github.com/hindermath/home-baseline>. Der persoenliche Checkout hat
+`origin`; die institutionelle Referenz wird als `upstream` gefuehrt. Die
+vollstaendige Reihenfolge steht in der von der Institution mitgelieferten
+`START-HERE-FUER-LERNENDE.md`; die oeffentliche Provenienz liegt unter
 <https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md>.
 
 Fuer die Verbindung zwischen diesem Sandbox-Image und den Lernreihen siehe
 auch [docs/fuer-lernende/README.md](docs/fuer-lernende/README.md).
 
-Der lokale Checkout kann danach optional in die Sandbox gemountet werden:
+Der lokale Checkout kann danach die eingebaute read-only Referenz ersetzen:
 
 ```bash
 HOME_BASELINE_DIR=/pfad/zu/home-baseline-tmp
@@ -218,12 +232,10 @@ podman compose -f compose.yml -f compose.home-baseline.yml up -d
 podman compose exec ade sh -lc 'cd ~/home-baseline-tmp && git status --short --branch'
 ```
 
-Im Container liegt der Checkout unter `/home/adedev/home-baseline-tmp`.
-Das entspricht der Arbeitsort-Guidance von `home-baseline`, ohne einen
-privaten Hostpfad oder einen bestimmten Hosting-Account in das Image zu
-verdrahten. `sync-home.sh` wird nicht automatisch ausgefuehrt; falls ein
-Nutzer die Home-Baseline in seinem Container-Home synchronisieren will, muss
-das bewusst manuell geschehen.
+Der Benutzerpfad bleibt `/home/adedev/home-baseline-tmp`; der Override mountet
+den Host-Checkout ueber das reale Ziel `/opt/home-baseline`. Damit bleiben
+private Hostpfade und Hosting-Accounts ausserhalb des Images. `sync-home.sh`
+wird in beiden Modi nur bewusst manuell ausgefuehrt.
 
 ## Bauen und Starten
 
@@ -487,12 +499,16 @@ podman compose up -d
 podman compose exec ade bash
 ```
 
-4. Optionally mount your personal `home-baseline` repository. First fork the
-   reference provided by your institution into your personal namespace, then
-   clone it persistently as `~/home-baseline-tmp`. Only the direct GitHub
-   profile uses <https://github.com/hindermath/home-baseline>. The sandbox image
-   does not clone it. Follow the `START-HERE-FUER-LERNENDE.md` supplied by your
-   institution; the public reference is available
+4. The image includes a pinned, read-only shallow Git reference at
+   `~/home-baseline-tmp`. Its release, commit, source, and MIT license are
+   recorded in `home-baseline.lock.json`; no baseline script runs
+   automatically. To make changes, optionally replace it with your personal
+   `home-baseline` repository. First fork the reference provided by your
+   institution into your personal namespace, then clone it persistently on the
+   host. Only the direct GitHub profile uses
+   <https://github.com/hindermath/home-baseline>. Follow the
+   `START-HERE-FUER-LERNENDE.md` supplied by your institution; the public
+   provenance is available
    [on GitHub](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md).
 
 ```bash

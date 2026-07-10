@@ -25,6 +25,20 @@
         "# renovate: datasource=(?<datasource>[a-zA-Z0-9._-]+) depName=(?<depName>[^\\s]+)(?: packageName=(?<packageName>[^\\s]+))?(?: versioning=(?<versioning>[^\\s]+))? argName=(?<argName>[A-Z][A-Z0-9_]*)\\s+ARG [A-Z][A-Z0-9_]*=(?<currentValue>[^\\s]+)"
       ],
       "depTypeTemplate": "dockerfile-arg"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^home-baseline\\.lock\\.json$/"
+      ],
+      "matchStrings": [
+        "\\\"tag\\\": \\\"(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)\\\",\\s+\\\"commit\\\": \\\"(?<currentDigest>[0-9a-f]{40})\\\""
+      ],
+      "datasourceTemplate": "github-tags",
+      "depNameTemplate": "home-baseline",
+      "packageNameTemplate": "hindermath/home-baseline",
+      "versioningTemplate": "semver",
+      "depTypeTemplate": "embedded-content"
     }
   ],
   "packageRules": [
@@ -39,6 +53,19 @@
         "dockerfile-arg"
       ],
       "commitMessageTopic": "{{depName}} Dockerfile ARG"
+    },
+    {
+      "matchManagers": [
+        "custom.regex"
+      ],
+      "matchDepTypes": [
+        "embedded-content"
+      ],
+      "addLabels": [
+        "embedded-content",
+        "home-baseline"
+      ],
+      "commitMessageTopic": "{{depName}} embedded reference"
     },
     {
       "matchPackageNames": [

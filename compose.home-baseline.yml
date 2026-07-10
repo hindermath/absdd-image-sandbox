@@ -1,8 +1,8 @@
 services:
   ade:
     volumes:
-      # Optional personal fork of the canonical home-baseline repository.
-      # Clone the fork persistently as home-baseline-tmp before mounting it.
+      # Optional writable personal fork. It replaces the image's read-only
+      # /opt/home-baseline reference; ~/home-baseline-tmp remains its alias.
       - type: bind
         source: ${HOME_BASELINE_DIR:?Set HOME_BASELINE_DIR to your local home-baseline checkout}
-        target: /home/adedev/home-baseline-tmp
+        target: /opt/home-baseline

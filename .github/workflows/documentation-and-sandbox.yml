@@ -36,10 +36,13 @@ jobs:
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Validate Dockerfile pins and agent parity
-        run: python3 scripts/check-dockerfile-arg-renovate.py
+        run: |
+          python3 scripts/check-dockerfile-arg-renovate.py
+          python3 scripts/check-home-baseline-lock.py
 
       - name: Check shell syntax
         run: |
           bash -n scripts/audit-export.sh
           bash -n scripts/smoke-test-toolchains.sh
           bash -n scripts/compose-down-with-audit.sh
+          bash -n scripts/install-home-baseline-reference.sh

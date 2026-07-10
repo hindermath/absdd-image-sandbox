@@ -81,6 +81,7 @@ exclude_tmpdir_env_var = true
 # EN: These project paths are the intended work areas inside the container.
 writable_roots = [
   "/ade-dev-sandbox",
+  "/opt/home-baseline",
   "/home/adedev/home-baseline-tmp",
   "/workspace",
   "/rider-projects",

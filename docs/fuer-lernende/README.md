@@ -40,19 +40,21 @@ voraus.
 **EN:** If you have **never worked with containers**, follow this order. Each
 document builds on the previous one and assumes no prior knowledge.
 
-**DE:** Beginne mit der von deiner Institution bereitgestellten zentralen,
-betriebssystemuebergreifenden `START-HERE-FUER-LERNENDE.md`. Die
-[oeffentliche Referenz](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md)
-bleibt als Herkunftsnachweis verfuegbar. Die Anleitung fuehrt vom persoenlichen
-`home-baseline`-Repository bis zum ersten kontrollierten Agentenlauf. Dieses
-Verzeichnis vertieft danach die Sandbox-Schritte.
+**DE:** Beginne mit der zentralen, betriebssystemuebergreifenden
+`START-HERE-FUER-LERNENDE.md`. Das Image enthaelt einen gepinnten read-only
+Stand unter `~/home-baseline-tmp`; damit kannst du die Anleitung direkt lesen.
+Die [oeffentliche Referenz](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md)
+bleibt als Herkunftsnachweis verfuegbar. Fuer Aenderungen und Pushes ersetzt du
+den eingebauten Stand spaeter durch dein persoenliches oder institutionell
+bereitgestelltes `home-baseline`-Repository.
 
-**EN:** Start with the cross-platform `START-HERE-FUER-LERNENDE.md` supplied by
-your institution. The
+**EN:** Start with the cross-platform `START-HERE-FUER-LERNENDE.md`. The image
+contains a pinned read-only copy at `~/home-baseline-tmp`, so you can read the
+guide immediately. The
 [public reference](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md)
-remains available for provenance. It leads from the personal `home-baseline`
-repository to the first controlled agent run. This directory then explains the
-sandbox in more detail.
+remains available for provenance. For changes and pushes, replace the embedded
+reference later with your personal or institution-provided `home-baseline`
+repository.
 
 | Schritt / Step | Dokument / Document | Inhalt / Content |
 |---|---|---|
@@ -133,6 +135,10 @@ podman compose up -d
 
 # 5. Shell im Container / Shell in the container
 podman compose exec ade bash
+
+# 6. Eingebaute Lernreihen-Referenz / Embedded learning-series reference
+cd ~/home-baseline-tmp
+git log -1 --oneline
 ```
 
 **DE:** Läuft der Container, siehst du die Eingabeaufforderung `adedev@...`.
@@ -169,13 +175,16 @@ tools and stop cleanly — both explained step by step in
 ## Verbindung zur Lernreihe / Connection to the Learning Series
 
 **DE:** Die `absdd-image-sandbox` ist das oeffentliche Referenz-Repository fuer
-die drei Secure-Trader-Lernreihen. Die passenden Erklaerungen findest du in
-deinem persoenlichen `home-baseline-tmp`-Fork. Der Startpunkt ist die oben
-verlinkte zentrale Anleitung.
+die drei Secure-Trader-Lernreihen. Die passenden Erklaerungen findest du sofort
+in der eingebauten read-only Referenz unter `~/home-baseline-tmp`. Sobald du
+Inhalte aendern, committen oder pushen willst, bindest du dort deinen
+persoenlichen Checkout ein.
 
 **EN:** The `absdd-image-sandbox` is the public reference repository for the
-three Secure Trader learning series. The matching study companions are in your
-personal `home-baseline-tmp` fork. Start with the canonical guide linked above.
+three Secure Trader learning series. The matching study companions are
+immediately available in the embedded read-only reference at
+`~/home-baseline-tmp`. Mount your personal checkout there when you need to edit,
+commit, or push content.
 
 | Lehrjahr / Year | Lernbegleiter-Datei / Study Companion File |
 |---|---|

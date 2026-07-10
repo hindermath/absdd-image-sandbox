@@ -36,7 +36,7 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 | `${SECURE_CASE_TRACKER_PROJECTS_DIR:-./secure-case-tracker-projects}` | `/secure-case-tracker-projects` | Secure-CaseTracker-Lern- und Projektarbeiten |
 | `${SECURE_SERVICE_HARVESTER_PROJECTS_DIR:-./secure-service-harvester-projects}` | `/secure-service-harvester-projects` | Secure-Service-Harvester-Lern- und Projektarbeiten |
 | `${SECURE_ORDER_DESK_PROJECTS_DIR:-./secure-order-desk-projects}` | `/secure-order-desk-projects` | Secure-OrderDesk-Lern- und Projektarbeiten |
-| `${HOME_BASELINE_DIR}` | `/home/adedev/home-baseline-tmp` | Optionaler Checkout eines eigenen aus `home-baseline` erzeugten Template-Repositories; nur mit `compose.home-baseline.yml` |
+| `${HOME_BASELINE_DIR}` | `/opt/home-baseline` | Optionaler beschreibbarer persoenlicher Checkout; ueberdeckt mit `compose.home-baseline.yml` die eingebaute read-only Referenz, der Alias bleibt `~/home-baseline-tmp` |
 | `./dotnet/ContainerBuild.props` | `/dotnet-config/ContainerBuild.props` | Read-only .NET-Build-Konfiguration |
 | `dotnet_build` | `/dotnet-build` | Persistente .NET-Build-Artefakte ausserhalb von Host-Bind-Mounts |
 | `opencode_data` | `/home/adedev/.local/share/opencode` | Persistente OpenCode-Daten |
@@ -69,6 +69,7 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 | Spec Kit | `specify-cli` `v0.8.3` aus `github.com/github/spec-kit.git` |
 | Syft | `anchore/syft` `1.46.0`, SHA256-Pruefung im Image-Build |
 | uv / uvx | `0.11.16` aus GitHub-Release-Artefakt, SHA256-Pruefung im Image-Build |
+| home-baseline Level-0-Referenz | `v0.12.0`, Commit `6bb34cd24df3d9a460e187b7f145ea5bf36ddfa5`, MIT; Lock in `home-baseline.lock.json` |
 
 ### Optionaler lokaler IDE-Zugang
 
