@@ -38,7 +38,8 @@ document builds on the previous one and assumes no prior knowledge.
 | 2 | [warum-sandbox.md](warum-sandbox.md) | Warum eine Sandbox? Gate, Schutzziele, ISO 27001. / Why a sandbox? Gate, protection goals, ISO 27001. |
 | 3 | [installation.md](installation.md) | Podman installieren je Betriebssystem. / Install Podman per operating system. |
 | 4 | [erste-schritte.md](erste-schritte.md) | Container starten, erstes Programm, sauber stoppen. / Start the container, first program, stop cleanly. |
-| 5 | [troubleshooting.md](troubleshooting.md) | Hilfe bei typischen Fehlern. / Help with common errors. |
+| 5 (optional) | [vscode-dev-containers.md](vscode-dev-containers.md) | Mit VS Code direkt im Container arbeiten. / Work directly in the container with VS Code. |
+| 6 | [troubleshooting.md](troubleshooting.md) | Hilfe bei typischen Fehlern. / Help with common errors. |
 
 **DE:** Die Kurzfassung des Starts steht weiter unten unter „Schnellstart". Die
 ausführliche, anfängernahe Variante findest du in
@@ -131,6 +132,7 @@ tools and stop cleanly — both explained step by step in
 | [warum-sandbox.md](warum-sandbox.md) | Container-First-Gate, vier Schutzziele, ISO 27001, Anfängerfehler |
 | [installation.md](installation.md) | Podman installieren je Betriebssystem, Schritt für Schritt |
 | [erste-schritte.md](erste-schritte.md) | Erster Tag: starten, erstes Programm, sauber stoppen |
+| [vscode-dev-containers.md](vscode-dev-containers.md) | Host-VS-Code an den Container hängen; `code`-Befehl richtig verstehen |
 | [troubleshooting.md](troubleshooting.md) | Typische Anfängerfehler: Symptom, Ursache, Lösung |
 | [sandbox-profil.md](sandbox-profil.md) | Vollständiges Sandbox-Profil: Mounts, Schreibgrenzen, Netzwerk, MSL-Matrix, KI-Agenten |
 | [GLOSSAR.md](GLOSSAR.md) | Erklärungen für Abkürzungen wie MSL, SBOM, CL_12, P0 |
