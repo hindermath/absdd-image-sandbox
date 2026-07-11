@@ -22,7 +22,7 @@ remain decisions of the responsible person or organization.
 | OpenCode | `opencode-ai@1.14.50` | `opencode` | `/home/adedev/.local/share/opencode` (`opencode_data`) |
 | Codex CLI | `@openai/codex@0.144.1` | `codex` | `/home/adedev/.codex` (`codex_data`, `CODEX_HOME`) |
 | Claude Code | `@anthropic-ai/claude-code@2.1.206` | `claude` | `/home/adedev/.claude` (`claude_data`, `CLAUDE_CONFIG_DIR`) |
-| Antigravity CLI | `@google/gemini-cli@0.50.0` | `gemini` | `/home/adedev/.gemini-home/.gemini` (`gemini_data`, `GEMINI_CLI_HOME=/home/adedev/.gemini-home`) |
+| Antigravity CLI | `google-antigravity/antigravity-cli@1.1.1` | `agy` | `/home/adedev/.gemini-home/.gemini/antigravity-cli` (`gemini_data`) |
 | GitHub Copilot CLI | `@github/copilot@1.0.70` | `copilot` | `/home/adedev/.copilot` (`copilot_data`, `COPILOT_HOME`) |
 | GitHub Spec Kit | `specify-cli` aus `github/spec-kit@v0.8.3` | `specify` | lokale Projektartefakte, kein Agentenkonto |
 | Syft | `anchore/syft@1.46.0` | `syft` | kein persistentes Agentenkonto |
@@ -50,7 +50,8 @@ and organizational approval before real use.
 
 ## Versions- und Update-Regel / Version and Update Rule
 
-- Alle npm-Pakete sind ueber Dockerfile-ARGs fest gepinnt.
+- Alle Agentenpakete sind ueber Dockerfile-ARGs fest gepinnt; Antigravity CLI
+  wird aus einem GitHub-Release-Artefakt mit SHA-256-Pruefung installiert.
 - Renovate gruppiert die Agenten-ARGs und erstellt nur pruefbare
   Aktualisierungsvorschlaege.
 - Claude Code erhaelt `DISABLE_AUTOUPDATER=1`; andere Agenten werden nicht durch
@@ -82,9 +83,9 @@ ein stabil dokumentiertes Format eine enge Allowlist erlaubt. Breites Kopieren
 der jeweiligen Home-Verzeichnisse ist untersagt.
 
 *The audit export records tool versions and narrowly allow-listed file metadata,
-never prompt, response, token, or credential content. Gemini and Copilot session
-collection remains open until a stable documented layout permits a narrow
-allow-list.*
+never prompt, response, token, or credential content. Antigravity and Copilot
+session collection remains open until a stable documented layout permits a
+narrow allow-list.*
 
 ## Datenschutz- und Freigabefelder / Privacy and Approval Fields
 

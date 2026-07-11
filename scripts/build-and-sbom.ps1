@@ -15,7 +15,7 @@ if ([string]::IsNullOrWhiteSpace($ImageName)) {
     if ($env:IMAGE_NAME) {
         $ImageName = $env:IMAGE_NAME
     } else {
-        $ImageName = "absdd-image-sandbox-ade:latest"
+        $ImageName = "localhost/absdd-image-sandbox_ade:latest"
     }
 }
 

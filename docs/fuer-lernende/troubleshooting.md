@@ -221,7 +221,7 @@ möglich.
 
 **DE:**
 
-- **Symptom:** `codex`, `claude`, `gemini` oder `copilot` meldet `command not
+- **Symptom:** `codex`, `claude`, `agy` oder `copilot` meldet `command not
   found`.
 - **Ursache:** Das Image wurde vor der Vier-Agenten-Erweiterung gebaut oder der
   Build ist fehlgeschlagen.
@@ -236,7 +236,7 @@ möglich.
 
 **EN:**
 
-- **Symptom:** `codex`, `claude`, `gemini`, or `copilot` reports `command not
+- **Symptom:** `codex`, `claude`, `agy`, or `copilot` reports `command not
   found`.
 - **Cause:** The image predates the four-agent extension or its build failed.
 - **Solution:** Run `podman compose build --pull` on the host and then

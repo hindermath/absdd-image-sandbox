@@ -131,7 +131,7 @@ collect_claude() {
 emit_tool_version "opencode" "opencode" "$opencode_dir"
 emit_tool_version "codex" "codex" "$codex_dir"
 emit_tool_version "claude" "claude" "$claude_dir"
-emit_tool_version "gemini" "gemini" "${gemini_home}/.gemini"
+emit_tool_version "antigravity" "agy" "${gemini_home}/.gemini/antigravity-cli"
 emit_tool_version "copilot" "copilot" "$copilot_dir"
 collect_opencode
 collect_codex

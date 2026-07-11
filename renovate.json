@@ -85,11 +85,11 @@
         "@openai/codex",
         "@anthropic-ai/claude-code",
         "@google/gemini-cli",
+        "google-antigravity/antigravity-cli",
         "@github/copilot"
       ],
-      "groupName": "agent CLI npm Dockerfile ARGs",
+      "groupName": "agent CLI Dockerfile ARGs",
       "addLabels": [
-        "npm",
         "agent-tools"
       ]
     },

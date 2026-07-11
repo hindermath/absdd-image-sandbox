@@ -50,6 +50,7 @@ vorangestellte Metadatenzeile mit passendem `argName` hat.
 | `CODEX_VERSION` | `npm` | `@openai/codex` |
 | `CLAUDE_CODE_VERSION` | `npm` | `@anthropic-ai/claude-code` |
 | `GEMINI_CLI_VERSION` | `npm` | `@google/gemini-cli` |
+| `ANTIGRAVITY_CLI_VERSION` | `github-releases` | `google-antigravity/antigravity-cli` |
 | `COPILOT_CLI_VERSION` | `npm` | `@github/copilot` |
 | `SYFT_VERSION` | `github-releases` | `anchore/syft` |
 
@@ -137,6 +138,7 @@ preceding metadata line with a matching `argName`.
 | `CODEX_VERSION` | `npm` | `@openai/codex` |
 | `CLAUDE_CODE_VERSION` | `npm` | `@anthropic-ai/claude-code` |
 | `GEMINI_CLI_VERSION` | `npm` | `@google/gemini-cli` |
+| `ANTIGRAVITY_CLI_VERSION` | `github-releases` | `google-antigravity/antigravity-cli` |
 | `COPILOT_CLI_VERSION` | `npm` | `@github/copilot` |
 | `SYFT_VERSION` | `github-releases` | `anchore/syft` |
 

@@ -146,11 +146,11 @@ cd /secure-case-tracker-projects/DEIN-LEVEL-2-REPO
 git status --short --branch
 ```
 
-**DE:** Starte genau einen der vier Agenten mit `codex`, `claude`, `gemini`
+**DE:** Starte genau einen der vier Agenten mit `codex`, `claude`, `agy`
 oder `copilot`. Folge bei Bedarf der offiziellen interaktiven Anmeldung. Der
 erste Auftrag ist read-only:
 
-**EN:** Start exactly one of the four agents with `codex`, `claude`, `gemini`,
+**EN:** Start exactly one of the four agents with `codex`, `claude`, `agy`,
 or `copilot`. Follow its official interactive sign-in if needed. The first task
 is read-only:
 

@@ -31,6 +31,8 @@ ARG CODEX_VERSION=0.144.1
 ARG CLAUDE_CODE_VERSION=2.1.206
 # renovate: datasource=npm depName=@google/gemini-cli versioning=npm argName=GEMINI_CLI_VERSION
 ARG GEMINI_CLI_VERSION=0.50.0
+# renovate: datasource=github-releases depName=google-antigravity/antigravity-cli versioning=semver argName=ANTIGRAVITY_CLI_VERSION
+ARG ANTIGRAVITY_CLI_VERSION=1.1.1
 # renovate: datasource=npm depName=@github/copilot versioning=npm argName=COPILOT_CLI_VERSION
 ARG COPILOT_CLI_VERSION=1.0.70
 # renovate: datasource=github-releases depName=anchore/syft versioning=semver argName=SYFT_VERSION
@@ -233,6 +235,21 @@ COPY ./scripts/audit-export.sh /usr/local/bin/audit-export
 COPY ./scripts/container-entrypoint.sh /usr/local/bin/ade-entrypoint
 COPY ./scripts/install-home-baseline-reference.sh /usr/local/bin/install-home-baseline-reference
 COPY ./home-baseline.lock.json /usr/local/share/absdd-image-sandbox/home-baseline.lock.json
+RUN set -eux; \
+    arch="$(dpkg --print-architecture)"; \
+    case "${arch}" in \
+        amd64) agy_arch="x64"; agy_sha256="2ee167841cdc9a1d7dc5a624f1f15b84ee5dbb94b85af662a7299118cb4b1586" ;; \
+        arm64) agy_arch="arm64"; agy_sha256="3fc542686c5c82d7a01e3796a8bfcda5ed849c6e70f07d4d0c93e51368952784" ;; \
+        *) echo "Unsupported Antigravity CLI architecture: ${arch}" >&2; exit 1 ;; \
+    esac; \
+    archive="agy_cli_linux_${agy_arch}.tar.gz"; \
+    base_url="https://github.com/google-antigravity/antigravity-cli/releases/download/${ANTIGRAVITY_CLI_VERSION}"; \
+    tmp_dir="$(mktemp -d)"; \
+    curl -fsSL "${base_url}/${archive}" -o "${tmp_dir}/${archive}"; \
+    printf '%s  %s\n' "${agy_sha256}" "${tmp_dir}/${archive}" | sha256sum -c -; \
+    tar -xzf "${tmp_dir}/${archive}" -C "${tmp_dir}" antigravity; \
+    install -m 0755 "${tmp_dir}/antigravity" /usr/local/bin/agy; \
+    rm -rf "${tmp_dir}"
 RUN sed -i 's/\r$//' /usr/local/bin/audit-export /usr/local/bin/ade-entrypoint \
         /usr/local/bin/install-home-baseline-reference \
     && chmod 0755 /usr/local/bin/audit-export /usr/local/bin/ade-entrypoint \

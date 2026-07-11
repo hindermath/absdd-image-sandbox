@@ -13,10 +13,26 @@ RENOVATE_RE = re.compile(
 )
 
 REQUIRED_AGENT_CLIS = {
-    "CODEX_VERSION": ("@openai/codex", "codex --version"),
-    "CLAUDE_CODE_VERSION": ("@anthropic-ai/claude-code", "claude --version"),
-    "GEMINI_CLI_VERSION": ("@google/gemini-cli", "agy --version"),
-    "COPILOT_CLI_VERSION": ("@github/copilot", "copilot --version"),
+    "CODEX_VERSION": (
+        "@openai/codex",
+        '"@openai/codex@${CODEX_VERSION}"',
+        "codex --version",
+    ),
+    "CLAUDE_CODE_VERSION": (
+        "@anthropic-ai/claude-code",
+        '"@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}"',
+        "claude --version",
+    ),
+    "ANTIGRAVITY_CLI_VERSION": (
+        "google-antigravity/antigravity-cli",
+        "releases/download/${ANTIGRAVITY_CLI_VERSION}",
+        "agy --version",
+    ),
+    "COPILOT_CLI_VERSION": (
+        "@github/copilot",
+        '"@github/copilot@${COPILOT_CLI_VERSION}"',
+        "copilot --version",
+    ),
 }
 
 
@@ -57,10 +73,10 @@ def main() -> int:
         for rule in renovate.get("packageRules", [])
         for package in rule.get("matchPackageNames", [])
     }
-    for arg_name, (package, version_command) in REQUIRED_AGENT_CLIS.items():
+    for arg_name, (package, install_marker, version_command) in REQUIRED_AGENT_CLIS.items():
         if not re.search(rf"^ARG {re.escape(arg_name)}=\S+$", dockerfile_text, re.MULTILINE):
             failures.append(f"required agent ARG missing: {arg_name}")
-        if f'"{package}@${{{arg_name}}}"' not in dockerfile_text:
+        if install_marker not in dockerfile_text:
             failures.append(f"Dockerfile does not install {package} from {arg_name}")
         if package not in renovate_packages:
             failures.append(f"Renovate agent CLI group is missing {package}")
