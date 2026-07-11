@@ -80,7 +80,7 @@ check:
 ```bash
 codex --version
 claude --version
-gemini --version
+agy --version
 copilot --version
 syft version
 ```

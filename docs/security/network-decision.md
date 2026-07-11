@@ -8,7 +8,7 @@ Entscheidung: Die `ade`-Lernumgebung bleibt vorerst am Compose-Default-Bridge-Ne
 
 Begruendung: Die Sandbox ist eine Ausbildungs- und Entwicklungsumgebung. Mehrere vorgesehene Workflows benoetigen ausgehenden Zugriff auf externe Paketregister und Installationsquellen:
 
-- KI-Provider-Endpunkte fuer Codex, Claude Code, Gemini CLI, GitHub Copilot CLI
+- KI-Provider-Endpunkte fuer Codex, Claude Code, Antigravity CLI, GitHub Copilot CLI
   und optional OpenCode, sofern Anmeldung und Betriebsumgebung sie freigeben
 - MCR (`mcr.microsoft.com`) fuer das gepinnte .NET-SDK-Basisimage beim Podman-Build
 - Ubuntu-Paketquellen
@@ -33,7 +33,7 @@ Decision: The `ade` learning environment remains on the Compose default bridge n
 
 Rationale: The sandbox is a training and development environment. Several intended workflows need outbound access to external package registries and installation sources:
 
-- AI-provider endpoints for Codex, Claude Code, Gemini CLI, GitHub Copilot CLI,
+- AI-provider endpoints for Codex, Claude Code, Antigravity CLI, GitHub Copilot CLI,
   and optional OpenCode when approved by sign-in and operating policy
 - MCR (`mcr.microsoft.com`) for the pinned .NET SDK base image during Podman builds
 - Ubuntu package sources

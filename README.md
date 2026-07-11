@@ -1,12 +1,12 @@
 # Agentische Podman-Sandbox / Agentic Podman Sandbox
 
 Dieses Repository stellt eine Podman-basierte Container-Umgebung fuer
-OpenCode, die vier Required-Agenten Codex, Claude Code, Gemini CLI und GitHub
+OpenCode, die vier Required-Agenten Codex, Claude Code, Antigravity CLI und GitHub
 Copilot CLI, sechs speichersichere Sprachen, Syft und Spec Kit bereit. Es ist
 eine Sandbox- und Lernumgebung, keine Anwendung.
 
 The repository provides a Podman-based container environment with OpenCode,
-the four required agents Codex, Claude Code, Gemini CLI, and GitHub Copilot
+the four required agents Codex, Claude Code, Antigravity CLI, and GitHub Copilot
 CLI, six memory-safe languages, Syft, and Spec Kit. It is a sandbox and
 training environment, not an application.
 
@@ -22,7 +22,7 @@ training environment, not an application.
 | OpenCode | Installiert, aber ohne vorkonfigurierten Modellanbieter |
 | Codex | Systemweite Defaults aus `codex/config.toml` und `codex/requirements.toml` |
 | Claude Code | Installiert; persistenter Zustand in `claude_data` |
-| Gemini CLI | Installiert; persistenter Zustand in `gemini_data` |
+| Antigravity CLI | Installiert; persistenter Zustand in `gemini_data` |
 | GitHub Copilot CLI | Installiert; persistenter Zustand in `copilot_data` |
 | Software-Bill-of-Materials | Syft ist installiert; `scripts/build-and-sbom.*` erzeugt die Image-SBOM |
 | Arbeitsverzeichnis im Container | `/rider-projects` |
@@ -188,7 +188,7 @@ liefern. Anmeldung und Providerfreigabe sind davon getrennte, menschlich
 verantwortete Schritte.
 
 ```bash
-podman compose exec ade sh -lc 'codex --version && claude --version && gemini --version && copilot --version && syft version'
+podman compose exec ade sh -lc 'codex --version && claude --version && agy --version && copilot --version && syft version'
 ```
 
 Die vollstaendige Toolchain prueft:
@@ -527,6 +527,6 @@ OpenCode is installed without a preconfigured API key or preselected model.
 The built-in provider picker remains available; add local provider settings
 only in local, untracked configuration when needed.
 
-Codex, Claude Code, Gemini CLI, and GitHub Copilot CLI are installed as the
+Codex, Claude Code, Antigravity CLI, and GitHub Copilot CLI are installed as the
 four required agents. Their presence does not imply account, provider, legal,
 or organizational approval.

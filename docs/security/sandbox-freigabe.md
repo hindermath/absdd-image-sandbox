@@ -64,7 +64,7 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 | OpenCode | `opencode-ai` `1.14.50` |
 | Codex CLI | `@openai/codex` `0.144.1` |
 | Claude Code | `@anthropic-ai/claude-code` `2.1.206` |
-| Gemini CLI | `@google/gemini-cli` `0.50.0` |
+| Antigravity CLI | `@google/gemini-cli` `0.50.0` |
 | GitHub Copilot CLI | `@github/copilot` `1.0.70` |
 | Spec Kit | `specify-cli` `v0.8.3` aus `github.com/github/spec-kit.git` |
 | Syft | `anchore/syft` `1.46.0`, SHA256-Pruefung im Image-Build |

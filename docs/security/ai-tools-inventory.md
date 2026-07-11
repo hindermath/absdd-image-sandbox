@@ -22,13 +22,13 @@ remain decisions of the responsible person or organization.
 | OpenCode | `opencode-ai@1.14.50` | `opencode` | `/home/adedev/.local/share/opencode` (`opencode_data`) |
 | Codex CLI | `@openai/codex@0.144.1` | `codex` | `/home/adedev/.codex` (`codex_data`, `CODEX_HOME`) |
 | Claude Code | `@anthropic-ai/claude-code@2.1.206` | `claude` | `/home/adedev/.claude` (`claude_data`, `CLAUDE_CONFIG_DIR`) |
-| Gemini CLI | `@google/gemini-cli@0.50.0` | `gemini` | `/home/adedev/.gemini-home/.gemini` (`gemini_data`, `GEMINI_CLI_HOME=/home/adedev/.gemini-home`) |
+| Antigravity CLI | `@google/gemini-cli@0.50.0` | `gemini` | `/home/adedev/.gemini-home/.gemini` (`gemini_data`, `GEMINI_CLI_HOME=/home/adedev/.gemini-home`) |
 | GitHub Copilot CLI | `@github/copilot@1.0.70` | `copilot` | `/home/adedev/.copilot` (`copilot_data`, `COPILOT_HOME`) |
 | GitHub Spec Kit | `specify-cli` aus `github/spec-kit@v0.8.3` | `specify` | lokale Projektartefakte, kein Agentenkonto |
 | Syft | `anchore/syft@1.46.0` | `syft` | kein persistentes Agentenkonto |
 
 OpenCode bleibt ein zusaetzliches Werkzeug. Die vier Required-Agenten dieser
-Lernumgebung sind Codex, Claude Code, Gemini CLI und GitHub Copilot CLI.
+Lernumgebung sind Codex, Claude Code, Antigravity CLI und GitHub Copilot CLI.
 
 ## Anmeldung und Netzwerk / Sign-In and Network
 
@@ -37,7 +37,7 @@ Lernumgebung sind Codex, Claude Code, Gemini CLI und GitHub Copilot CLI.
 | OpenCode | erst nach lokaler Providerwahl | gewaehlter Modellanbieter; kein Provider im Repository vorkonfiguriert |
 | Codex CLI | interaktiver, kontobasierter CLI-Login oder freigegebene lokale Konfiguration | OpenAI-/kontobezogene Dienste gemaess lokal gewaehltem Betriebsmodell |
 | Claude Code | interaktiver Claude-/Anthropic-Login | Anthropic-Dienste gemaess Konto und Vertrag |
-| Gemini CLI | Google-Login oder freigegebene API-/Cloud-Konfiguration | Google-Gemini-/Google-Cloud-Dienste gemaess Anmeldeweg |
+| Antigravity CLI | Google-Login oder freigegebene API-/Cloud-Konfiguration | Google-Gemini-/Google-Cloud-Dienste gemaess Anmeldeweg |
 | GitHub Copilot CLI | `copilot login` beziehungsweise freigegebene GitHub-Authentifizierung | GitHub- und GitHub-Copilot-Dienste |
 
 **DE:** Die Tabelle ist keine Egress-Allowlist. Konkrete Domains, Regionen und
@@ -76,7 +76,7 @@ Pfade erlaubt:
 - Codex: `.codex/sessions/**`;
 - Claude Code: `.claude/projects/**/*.jsonl`.
 
-Fuer Gemini CLI und GitHub Copilot CLI werden Versions- und Zustandsmetadaten
+Fuer Antigravity CLI und GitHub Copilot CLI werden Versions- und Zustandsmetadaten
 exportiert, aber keine Sitzungsdateien. Ihre Sitzungsablage bleibt `Open`, bis
 ein stabil dokumentiertes Format eine enge Allowlist erlaubt. Breites Kopieren
 der jeweiligen Home-Verzeichnisse ist untersagt.

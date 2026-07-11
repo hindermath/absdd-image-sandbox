@@ -23,8 +23,8 @@ sboms/*
 !.claude/commands/
 !.claude/commands/**
 .gemini/*
-!.gemini/commands/
-!.gemini/commands/**
+!.agents/skills/
+!.agents/skills/**
 .opencode/*
 !.opencode/command/
 !.opencode/command/**

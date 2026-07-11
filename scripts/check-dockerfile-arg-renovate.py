@@ -15,7 +15,7 @@ RENOVATE_RE = re.compile(
 REQUIRED_AGENT_CLIS = {
     "CODEX_VERSION": ("@openai/codex", "codex --version"),
     "CLAUDE_CODE_VERSION": ("@anthropic-ai/claude-code", "claude --version"),
-    "GEMINI_CLI_VERSION": ("@google/gemini-cli", "gemini --version"),
+    "GEMINI_CLI_VERSION": ("@google/gemini-cli", "agy --version"),
     "COPILOT_CLI_VERSION": ("@github/copilot", "copilot --version"),
 }
 

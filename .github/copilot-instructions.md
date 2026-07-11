@@ -46,7 +46,7 @@ sign-in. Keep the public GitHub URL as provenance, not as the only clone path.
 
 This repository contains a Podman-based agentic learning sandbox with OpenCode, four required agent CLIs, six memory-safe language toolchains, Syft, and Spec Kit; it is not an application codebase.
 
-- `Dockerfile`: builds from the Microsoft .NET SDK image in MCR pinned by digest and installs the six language toolchains, pinned OpenCode, Codex, Claude Code, Gemini CLI, GitHub Copilot CLI, Syft, `uv`, Spec Kit, and common CLI helper tools.
+- `Dockerfile`: builds from the Microsoft .NET SDK image in MCR pinned by digest and installs the six language toolchains, pinned OpenCode, Codex, Claude Code, Antigravity CLI, GitHub Copilot CLI, Syft, `uv`, Spec Kit, and common CLI helper tools.
 - `compose.yml`: defines the `ade` service, builds the local image, and mounts separate persistent state volumes for OpenCode and all four required agents.
 - `home-baseline.lock.json`: pins the public `home-baseline` release and exact commit embedded as a read-only shallow Git reference under `/opt/home-baseline`.
 - `compose.home-baseline.yml`: optional Compose override that replaces the embedded reference with the learner's writable personal `home-baseline` checkout. The stable user path remains `/home/adedev/home-baseline-tmp` through a symlink.
@@ -233,7 +233,7 @@ swiftc --version
 command -v sourcekit-lsp
 codex --version
 claude --version
-gemini --version
+agy --version
 copilot --version
 syft version
 ```

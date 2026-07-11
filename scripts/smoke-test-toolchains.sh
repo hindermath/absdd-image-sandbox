@@ -37,7 +37,7 @@ command -v sourcekit-lsp
 opencode --version
 codex --version
 claude --version
-gemini --version
+agy --version
 copilot --version
 syft version
 specify version

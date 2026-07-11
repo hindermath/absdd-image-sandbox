@@ -199,7 +199,7 @@ differ.
 |---|---|---|---|---|
 | Codex CLI | Required | `codex` | `codex_data` -> `/home/adedev/.codex` | `AGENTS.md`, `codex/` |
 | Claude Code | Required | `claude` | `claude_data` -> `/home/adedev/.claude` | `CLAUDE.md` |
-| Gemini CLI | Required | `gemini` | `gemini_data` -> `/home/adedev/.gemini-home` | `GEMINI.md` |
+| Antigravity CLI | Required | `gemini` | `gemini_data` -> `/home/adedev/.gemini-home` | `GEMINI.md` |
 | GitHub Copilot CLI | Required | `copilot` | `copilot_data` -> `/home/adedev/.copilot` | `.github/copilot-instructions.md` |
 | OpenCode | Additional | `opencode` | `opencode_data` -> `/home/adedev/.local/share/opencode` | `opencode.jsonc` |
 

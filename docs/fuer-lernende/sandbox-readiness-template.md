@@ -157,7 +157,7 @@ der optionalen Datei opencode.env. Laufzeitannahmen: Ubuntu-Linux, adedev-Benutz
 
 | Eigenschaft / Property | Wert / Value |
 |---|---|
-| Geplante Agenten / Planned agents | `[Codex / Claude Code / Gemini CLI / GitHub Copilot CLI / OpenCode / keiner]` |
+| Geplante Agenten / Planned agents | `[Codex / Claude Code / Antigravity CLI / GitHub Copilot CLI / OpenCode / keiner]` |
 | Dateien, die der Agent ändern darf / Files the agent may modify | `[Pfad/e]` |
 | Dateien, die der Agent **nicht** ändern darf | `[Pfad/e]` |
 | Secrets in Prompts / Secrets in prompts | **Verboten / Forbidden** |

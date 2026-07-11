@@ -19,7 +19,7 @@ basics (container, image, mount), read
 
 **DE:** Es gibt eine einfache, verbindliche Regel:
 
-> **Jeder Aufruf eines KI-Agenten (Codex, Claude Code, Gemini CLI, GitHub
+> **Jeder Aufruf eines KI-Agenten (Codex, Claude Code, Antigravity CLI, GitHub
 > Copilot CLI oder OpenCode) für die
 > Projektarbeit läuft im Container bzw. in der freigegebenen Sandbox — niemals
 > direkt auf dem Arbeitsplatz-Rechner, auf gemeinsamen Servern oder in
@@ -27,7 +27,7 @@ basics (container, image, mount), read
 
 **EN:** There is one simple, binding rule:
 
-> **Every call of an AI agent (Codex, Claude Code, Gemini CLI, GitHub Copilot
+> **Every call of an AI agent (Codex, Claude Code, Antigravity CLI, GitHub Copilot
 > CLI, or OpenCode) for project work
 > runs inside the container or the approved sandbox — never directly on the
 > workstation, on shared servers, or in production-near environments.**
