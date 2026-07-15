@@ -60,6 +60,7 @@ tracked files; they are an artefact-volume measure, not a quality measure.
 | 2026-07-10 | docs/lernende-container-onboarding | 36 | 73.081 | 129 | Erst-Erfassung der Statistik. Anfänger-Onboarding: 5 neue Lernenden-Dokumente (`container-grundlagen`, `warum-sandbox`, `installation`, `erste-schritte`, `troubleshooting`), README-Hub-Umbau, Glossar-Erweiterung, Session-Log. Diff +1.136/−74. |
 | 2026-07-10 | feat/four-agent-learner-environment | 36 | 73.975 | 132 | Vier Required-Agenten und Syft im Podman-Image; getrennte Agenten-Volumes, Audit-Metadaten, image-interne SBOM, Anfängerpfad mit persönlichem Fork und erstem kontrollierten Agentenlauf, Lychee-/Static-CI. Diff +830/−379. |
 | 2026-07-10 | docs/provider-neutral-learner-hosting | 36 | 74.073 | 133 | GitHub-unabhaengiger Lernendenpfad fuer institutionelles GitLab, Codeberg, Forgejo und weitere Git-Systeme; oeffentliche GitHub-Referenzen bleiben Herkunftsnachweis. Agenten-Guidance und Session-Log synchronisiert. Diff +141/−43. |
+| 2026-07-15 | docs/home-sync-container-boundary | 40 | — | — | Eingebettete und per Override gemountete Level-0-Referenz als direkte Container-Lesequelle bestaetigt; README und vier Agenten-Dateien stellen klar, dass schreibende `sync-home.*`-Laeufe nach `/home/adedev` gesperrt sind und auf dem Host laufen. Read-only Check-/Vorschaumodi bleiben fuer Diagnosen erhalten; Compose-Mountmodell unveraendert. |
 
 ---
 

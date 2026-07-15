@@ -234,8 +234,18 @@ podman compose exec ade sh -lc 'cd ~/home-baseline-tmp && git status --short --b
 
 Der Benutzerpfad bleibt `/home/adedev/home-baseline-tmp`; der Override mountet
 den Host-Checkout ueber das reale Ziel `/opt/home-baseline`. Damit bleiben
-private Hostpfade und Hosting-Accounts ausserhalb des Images. `sync-home.sh`
-wird in beiden Modi nur bewusst manuell ausgefuehrt.
+private Hostpfade und Hosting-Accounts ausserhalb des Images. Die Level-0-
+Referenz wird im Container direkt gelesen. Schreibende `sync-home.*`-Laeufe
+nach `/home/adedev` sind gesperrt und werden ausschliesslich auf dem Host
+ausgefuehrt. `--check-only` / `-CheckOnly` und Vorschau-Modi bleiben im
+Container fuer eine schreibfreie Diagnose verfuegbar. Dadurch schreibt ein
+Home-Sync keine Spec-Kit-Agentendateien in persistente Agenten-Volumes.
+
+*The level-0 reference is read directly inside the container. Writing
+`sync-home.*` runs targeting `/home/adedev` are blocked and must run on the
+host. Read-only check and preview modes remain available for diagnostics. This
+prevents Home sync from writing Spec Kit agent files into persistent agent
+volumes.*
 
 ## Bauen und Starten
 
@@ -516,6 +526,9 @@ HOME_BASELINE_DIR=/path/to/home-baseline-tmp
 podman compose -f compose.yml -f compose.home-baseline.yml up -d
 podman compose exec ade sh -lc 'cd ~/home-baseline-tmp && git status --short --branch'
 ```
+
+Use this level-0 reference directly in the container. Writing `sync-home.*`
+runs belong on the host and are blocked when they target `/home/adedev`.
 
 5. Stop with audit export:
 

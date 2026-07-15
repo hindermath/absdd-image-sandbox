@@ -143,6 +143,12 @@ institution-provided repository and set `HOME_BASELINE_DIR` locally. The
 Compose override replaces `/opt/home-baseline` while preserving this user-facing
 path. Only the direct GitHub profile requires a GitHub account.
 
+The level-0 reference is used directly inside the container. Run
+`sync-home.*` only on the host; writing sync runs targeting `/home/adedev`
+are blocked. Read-only `--check-only` / `-CheckOnly` and preview modes remain
+available for diagnostics. This prevents a Home sync from writing Spec Kit
+agent files into persistent container agent volumes.
+
 ```bash
 podman compose down
 podman compose down -v
