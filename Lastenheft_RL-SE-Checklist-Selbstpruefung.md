@@ -16,7 +16,7 @@ Presets in eine konkrete, projektspezifische Evidenzmatrix ueberfuehren.
 *This intake describes a later Spec Kit run that reviews `absdd-image-sandbox`
 against the generic secure-development baseline. The run should turn the Secure
 Development Guideline, the twelve checklists, the checklist compendium, related
-documents, and the six governance presets into concrete project-specific
+documents, and the seven governance presets into concrete project-specific
 evidence.*
 
 ## Ausgangslage / Context
@@ -53,7 +53,7 @@ projektspezifische Evidenz klassifiziert werden.
 
 - Anwendbarkeit von RL Sichere Entwicklung, CL_01 bis CL_12,
   Checklistensammelband und mitgeltenden Dokumenten fuer dieses Repo bewerten.
-- Die sechs Governance-Presets als Spec-Kit-Nachweisflaeche gegen die
+- Die sieben Governance-Presets als Spec-Kit-Nachweisflaeche gegen die
   einschlaegigen RL-/CL-Pruefpunkte mappen.
 - Bestehende Projektnachweise in `docs/security/`,
   `COMPLIANCE-PLAN_RL-SE-001.md`, `README.md`, Agent-Guidance-Dateien,
@@ -136,7 +136,7 @@ projektspezifische Evidenz klassifiziert werden.
 ```text
 Nutze Lastenheft_RL-SE-Checklist-Selbstpruefung.md als verbindliche Eingabedatei. Erstelle die Feature-Spezifikation fuer eine RL-SE-/Checklist-Selbstpruefung von absdd-image-sandbox.
 
-Ziel: Pruefe absdd-image-sandbox als Ausbildungs-Sandbox gegen die generische Secure-Development-Basis aus docs/secure-development/. Beruecksichtige Richtlinie_Sichere-Entwicklung.md, Checklistensammelband_Sichere-Entwicklung.md, CL_01 bis CL_12, mitgeltende Dokumente, Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md und die sechs Governance-Presets.
+Ziel: Pruefe absdd-image-sandbox als Ausbildungs-Sandbox gegen die generische Secure-Development-Basis aus docs/secure-development/. Beruecksichtige Richtlinie_Sichere-Entwicklung.md, Checklistensammelband_Sichere-Entwicklung.md, CL_01 bis CL_12, mitgeltende Dokumente, Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md und die sieben Governance-Presets.
 
 Neutralitaet: Behandle die Richtlinie, Checklisten, den Sammelband und die mitgeltenden Dokumente als generische Ausbildungs-, Review- und Pruefgrundlage, nicht als Firmenrichtlinie oder konkretes Managementsystem-Artefakt. Konkrete Firmen, private URLs, lokale Hostpfade, Provider-Portale, accountgebundene Defaults, externe DMS-/QISMS-Systeme oder Plattformregeln muessen entfernt, generalisiert oder als Beispiel, Kontext, `N/A`, `Open` oder projektspezifische Evidenz klassifiziert werden.
 

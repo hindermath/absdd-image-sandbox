@@ -10,7 +10,7 @@
 Dieses Lastenheft beschreibt einen spaeteren Spec-Kit-Lauf fuer die sichere
 Softwareentwicklungs-Sandbox `absdd-image-sandbox`. Der Lauf soll aus der
 Secure-Development-Basis, den Checklisten, den mitgeltenden Dokumenten und den
-sechs Governance-Presets ableiten, welche technischen und dokumentarischen
+sieben Governance-Presets ableiten, welche technischen und dokumentarischen
 Anforderungen die Podman-basierte Entwicklungsumgebung erfuellen muss.
 
 Der Lauf baut kein Image und startet keine Umsetzung. Er erzeugt zuerst eine
@@ -20,7 +20,7 @@ Sandbox-Hardening-Lauf.
 *This requirements document describes a later Spec Kit run for the secure
 software development sandbox `absdd-image-sandbox`. The run derives technical
 and documentation requirements from the secure-development baseline,
-checklists, related documents, and the six governance presets. It does not
+checklists, related documents, and the seven governance presets. It does not
 build an image or start implementation; it first creates a reliable
 specification for a later container or sandbox hardening run.*
 
@@ -144,7 +144,7 @@ nicht stillschweigend ausgelassen werden.
 ```text
 /speckit-specify Nutze Lastenheft_Secure-Development-Container-Hardening.md als verbindliche Eingabedatei. Erstelle die Feature-Spezifikation fuer einen sicheren Softwareentwicklungscontainer bzw. eine Entwicklungs-Sandbox im Repository absdd-image-sandbox.
 
-Ziel: Aus der Secure-Development-Basis, den Checklisten, den mitgeltenden Dokumenten und den sechs Governance-Presets soll ein belastbares Zielbild fuer eine reproduzierbare, auditierbare Podman-basierte Entwicklungsumgebung entstehen.
+Ziel: Aus der Secure-Development-Basis, den Checklisten, den mitgeltenden Dokumenten und den sieben Governance-Presets soll ein belastbares Zielbild fuer eine reproduzierbare, auditierbare Podman-basierte Entwicklungsumgebung entstehen.
 
 Pflichtpunkte:
 - Container-/Sandbox-Typ, Schutzgrenzen und Nicht-Ziele klaeren.
