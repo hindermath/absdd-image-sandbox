@@ -805,7 +805,7 @@ Refs: RL-SE-001 "KI-gestützte Codeerzeugung", CL_09 checklist item 15.
 ### Befund
 
 CL_12 Prüfpunkt 6 verlangt: Spec Kit ist im Projekt initialisiert und die
-sechs Governance-Presets sind installiert oder eine begründete Ausnahme ist
+acht Governance-Presets sind installiert oder eine begründete Ausnahme ist
 dokumentiert. `README.md` Zeilen 1085 bis 1090 listet die Befehle. Es gibt
 aber kein Projekt, in dem das tatsächlich gelaufen ist.
 

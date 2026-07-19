@@ -1,148 +1,122 @@
-# Lastenheft: RL-SE-Checklist-Selbstpruefung
+# Lastenheft: RL-SE-/Checklist-Selbstpruefung
 
+**Repository:** home-baseline
 **Dokumenttyp:** Spec-Kit Intake / Lastenheft
-**Status:** Vorbereitung fuer spaeteren manuellen Spec-Kit-Lauf, kein gestarteter Lauf
-**Repository:** absdd-image-sandbox
-**Zielgruppe:** Fachinformatiker*innen in Ausbildung, Entwickler*innen, Reviewer und KI-Agenten
+**Status:** vorbereitet fuer separaten RL-SE-/CL-Selbstpruefungslauf
+**Stand:** 2026-06-29
 
-## Ziel / Goal
+## 1. Zweck
 
-Dieses Lastenheft beschreibt einen spaeteren Spec-Kit-Lauf, der
-`absdd-image-sandbox` gegen die generische Secure-Development-Basis prueft.
-Der Lauf soll die Richtlinie Sichere Entwicklung, die zwoelf Checklisten, den
-Checklistensammelband, die mitgeltenden Dokumente und die sechs Governance-
-Presets in eine konkrete, projektspezifische Evidenzmatrix ueberfuehren.
+Dieses Lastenheft beschreibt einen spaeteren Spec-Kit-Prueflauf gegen die
+generische Secure-Development-Basis. Ziel ist nicht sofortige Haertung, sondern
+eine nachvollziehbare Selbstpruefung, ob ein Zielrepository die Anforderungen
+aus Richtlinie Sichere Entwicklung, Checklisten, Sammelband, mitgeltenden
+Dokumenten und Governance-Presets behandelt, begruendet oder als offen markiert.
 
-*This intake describes a later Spec Kit run that reviews `absdd-image-sandbox`
-against the generic secure-development baseline. The run should turn the Secure
-Development Guideline, the twelve checklists, the checklist compendium, related
-documents, and the seven governance presets into concrete project-specific
-evidence.*
+Das Lastenheft ist die Level-0-Referenz fuer spaetere repo-spezifische
+`Lastenheft_RL-SE-Checklist-Selbstpruefung.md`-Dateien. Es startet keinen
+Spec-Kit-Lauf und erzeugt keine projektspezifischen `docs/security/`-Nachweise.
 
-## Ausgangslage / Context
+## 2. Ausgangslage
 
-Die Secure-Development-Basis liegt fuer dieses Repository lokal unter
-`docs/secure-development/`. Eine uebergeordnete Template- oder Baseline-Quelle
-kann projektspezifisch existieren, ist aber fuer public-ready Leserinnen und
-Leser keine Voraussetzung. Die lokale Basis enthaelt:
+Die Secure-Development-Basis unter `docs/secure-development/` ist als
+wiederverwendbare, auditfaehige Grundlage fuer Level-2-Repositories vorhanden.
+Sichere Entwicklung ist fuer heutige, geopolitisch angespannte
+Softwareentwicklung ein Muss. Deshalb wird die Selbstpruefung unabhaengig davon
+vorbereitet, ob eine Primaersprache als Memory-Safe Language (MSL) erkannt wird.
 
-- `Richtlinie_Sichere-Entwicklung.md`
-- `Checklistensammelband_Sichere-Entwicklung.md`
-- `checklisten/CL_01_Standards-Anwendbarkeit.md` bis
-  `checklisten/CL_12_Agentische-KI-Sandbox.md`
-- `mitgeltende-dokumente/`
-- `mitgeltende-dokumente/Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md`
+MSL-Status bleibt ein Pruefpunkt. Er ersetzt aber keine Pruefung von APIs,
+I/O, Authentifizierung, Autorisierung, Kryptografie, Logging,
+Abhaengigkeiten, Build-/Release-Pfaden oder agentischer Entwicklung.
 
-`absdd-image-sandbox` enthaelt bereits eigene Sicherheits- und Audit-
-Artefakte, unter anderem `COMPLIANCE-PLAN_RL-SE-001.md`, `docs/security/`,
-Agent-Guidance-Dateien und Spec-Kit-Artefakte. Diese projektspezifischen
-Nachweise muessen gegen die zentrale Secure-Development-Basis eingeordnet
-werden.
+## 3. Pruefgrundlagen
 
-Die Basis ist als generische Ausbildungs-, Review- und Pruefgrundlage zu
-behandeln. Sie ist keine Firmenrichtlinie und kein konkretes
-Managementsystem-Artefakt. Generische Rollen wie Organisation,
-Projektverantwortliche, Security-Review, CISO/ISB/KIB, Dokumentenablage,
-Risikoregister, RoPA, Provider oder Plattform sind Platzhalter. Konkrete
-Firmen, private URLs, lokale Hostpfade, Provider-Portale, accountgebundene
-Defaults, externe DMS-/QISMS-Systeme oder Plattformregeln muessen im spaeteren
-Lauf entfernt, generalisiert oder als Beispiel, Kontext, `N/A`, `Open` oder
-projektspezifische Evidenz klassifiziert werden.
+Der spaetere Spec-Kit-Lauf muss mindestens diese Grundlagen beruecksichtigen:
 
-## Scope
+- `docs/secure-development/Richtlinie_Sichere-Entwicklung.md`
+- `docs/secure-development/Checklistensammelband_Sichere-Entwicklung.md`
+- `docs/secure-development/checklisten/CL_01_*.md` bis `CL_12_*.md`
+- `docs/secure-development/mitgeltende-dokumente/`
+- `docs/secure-development/mitgeltende-dokumente/Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md`
+- `constitution.md` und `.specify/memory/constitution.md`, soweit vorhanden
+- installierte Governance-Presets, soweit sie Projekt-Policy sind
+- vorhandene Spec-Kit-Artefakte, `docs/security/`, Tests, CI und Review-Notizen
 
-- Anwendbarkeit von RL Sichere Entwicklung, CL_01 bis CL_12,
-  Checklistensammelband und mitgeltenden Dokumenten fuer dieses Repo bewerten.
-- Die sieben Governance-Presets als Spec-Kit-Nachweisflaeche gegen die
-  einschlaegigen RL-/CL-Pruefpunkte mappen.
-- Bestehende Projektnachweise in `docs/security/`,
-  `COMPLIANCE-PLAN_RL-SE-001.md`, `README.md`, Agent-Guidance-Dateien,
-  Compose-Dateien, Dockerfile, Spec-Kit-Artefakten und Lastenheften auswerten.
-- Fuer jeden relevanten Pruefpunkt einen Status `Applicable`, `N/A` oder
-  `Open` dokumentieren.
-- Firmen-, system- und managementsystem-spezifische Treffer neutralisieren
-  oder nachvollziehbar klassifizieren.
-- Offene Punkte mit Owner, Follow-up, Evidenzpfad und Re-Evaluation-Trigger
-  planen.
-- Human-only-Entscheidungen klar markieren und nicht als erledigt behaupten.
+## 4. Zielbild des spaeteren Prueflaufs
 
-## Nicht-Ziele / Non-Goals
+Der spaetere Lauf erzeugt eine Evidenz- und Anwendbarkeitsmatrix. Jeder
+relevante Pruefpunkt erhaelt einen Status:
 
-- Keinen Spec-Kit-Lauf durch dieses Lastenheft automatisch starten.
-- Keinen Container bauen und kein Image veroeffentlichen.
-- Repository-Sichtbarkeit nicht aendern.
-- Keine formale Sandbox-Freigabe, Rechtsfreigabe, Providerfreigabe oder
-  Public-Release-Freigabe erfinden.
-- Keine Secrets, Provider, Modelle oder Endpunkte konfigurieren.
-- Keine Plattformregeln wie Branch Protection, Push Rules oder externe Managementsystem-Eintraege
-  als agentisch erledigt markieren.
-- Keine vollstaendige Kopie der Level-0-Secure-Development-Basis ohne
-  Provenienz-, Lizenz- und Public-Readiness-Pruefung uebernehmen.
+- `Applicable`: gilt fuer das Zielrepository und braucht Evidenz oder Umsetzung.
+- `AlreadySatisfied`: ist im aktuellen Stand bereits nachweisbar erfuellt.
+- `N/A`: gilt fuer diesen Lauf nicht und braucht eine kurze Begruendung.
+- `Open`: gilt, ist aber noch nicht ausreichend geklaert oder belegt.
+- `FollowUp`: fachlich relevant, aber bewusst ausserhalb dieses Laufs.
 
-## Anforderungen / Requirements
+Jeder Pruefpunkt braucht mindestens Begruendung, Evidenzpfad oder Open-Markierung,
+Owner, Follow-up und Re-Evaluation-Trigger.
 
-1. Der spaetere Lauf erstellt oder plant eine RL-/CL-Evidenzmatrix fuer
-   `absdd-image-sandbox`.
-2. Jeder Pruefpunkt enthaelt mindestens Status, Begruendung, Evidenzpfad oder
-   `Open`-Markierung, Owner, Follow-up und Re-Evaluation-Trigger.
-3. `N/A` ist nur mit konkreter technischer oder fachlicher Begruendung erlaubt.
-4. `Open` enthaelt eine naechste Massnahme und darf nicht als Freigabe gelten.
-5. Bestehende Sicherheitsanforderungen werden nicht abgeschwaecht, sondern
-   oeffentlichkeitsfaehig, generisch und auditierbar eingeordnet.
-6. Die Pruefung trennt Entwicklungswerkzeug-KI von ausgelieferten oder
-   betriebenen KI-Komponenten; AI-SBOM bleibt konditional.
-7. Die Pruefung dokumentiert, ob eine lokale Snapshot-Kopie der
-   Secure-Development-Basis im Sandbox-Repo sinnvoll ist, und welche Dateien
-   aus Lizenz-, Public-Readiness- oder Binaerartefakt-Gruenden ausgeschlossen
-   bleiben sollen.
-8. Die Pruefung verwendet die Bezeichnung "generische Secure-Development-Basis"
-   und vermeidet Begriffe wie Firmenrichtlinie, interne Richtlinie oder
-   konkretes QISMS-Artefakt, sofern sie nicht als historischer Kontext oder
-   projektspezifische Evidenz markiert sind.
+## 5. Scope
 
-## Erwartete Artefakte / Expected Artefacts
+Im spaeteren Prueflauf werden insbesondere behandelt:
 
-- `specs/<feature>/spec.md` fuer die RL-SE-/CL-Selbstpruefung.
-- `specs/<feature>/plan.md` mit Governance-, Sicherheits-, A11Y-,
-  Cross-Platform- und Agent-Parity-Gates.
-- `specs/<feature>/data-model.md` fuer Evidenz- und Pruefobjekte, falls fuer
-  die Planung sinnvoll.
-- `specs/<feature>/quickstart.md` mit reinen Validierungsbefehlen.
-- Geplante oder erstellte Projektnachweise unter `docs/security/`, zum
-  Beispiel:
-  - `docs/security/rl-se-self-assessment.md`
-  - `docs/security/rl-se-checklist-matrix.md`
-  - `docs/security/rl-se-related-documents-mapping.md`
-  - `docs/security/spec-kit-preset-evidence-matrix.md`
+- Standards-Anwendbarkeit, MSL-Status und sprachspezifische Secure-Coding-Regeln
+- Eingabevalidierung, Trust Boundaries, Fehlerbehandlung und sichere Ausgabe
+- Authentifizierung, Autorisierung, Rollen, Secrets und Konfiguration
+- Datei-, Netzwerk-, Datenbank-, UI-, CLI-, API- oder Prozessgrenzen
+- Dependency-, Supply-Chain-, SBOM-, AI-SBOM-, VEX- und SLSA-Punkte
+- BSI C3A/C5, NIS2, CRA, EU AI Act und DORA nur bei fachlicher Anwendbarkeit
+- A11Y/WCAG 2.2 AA, DE-first/EN-second, CEFR B2 und didaktische Kommentare
+- Sandbox, agentische Entwicklung, Toolchain und Spec-Kit-Governance
 
-## Akzeptanzkriterien / Acceptance Criteria
+## 6. Abgrenzung
 
-- Die spaetere Spezifikation beschreibt die Pruefung als Dokumentations- und
-  Governance-Feature, nicht als Runtime-Feature.
-- CL_12, CL_10, CL_05 und CL_09 werden explizit bewertet.
-- CL_01, CL_02, CL_04 und CL_08 werden mindestens als Governance- oder
-  Review-Pruefflaechen eingeordnet.
-- CL_03, CL_06, CL_07 und CL_11 werden nicht geloescht, sondern als
-  `Applicable`, `N/A` oder `Open` begruendet.
-- Human-only-Punkte sind sichtbar eskaliert und nicht als erledigt markiert.
-- Keine Behauptung entsteht, dass die Sandbox formal freigegeben, rechtlich
-  geprueft, providerseitig genehmigt oder bereits oeffentlich veroeffentlicht
-  ist.
-- Die Validierung nutzt `podman-compose config` fuer statische Compose-
-  Pruefung; kein Container-Build ist Teil dieses Lastenhefts.
+- Keine automatische Haertung des Repositorys.
+- Kein Sammellauf ueber mehrere Repositories.
+- Keine Feature-Branch-Erzeugung durch dieses Lastenheft.
+- Keine erfundene formale Freigabe, kein QISMS-/Audit-Claim ohne Evidenz.
+- Keine Repo-Sichtbarkeit, Branch-Protection, Secrets, Provider oder Modelle konfigurieren.
+- Keine echten Kundendaten, produktiven Tokens oder privaten Pfade dokumentieren.
 
-## Optimaler Spec-Kit Specify Prompt
+## 7. Mindestanforderungen an den spaeteren Spec-Kit-Lauf
+
+1. Aktuellen Repository-Stand lesen und bereits erledigte Punkte nicht neu umsetzen.
+2. Die Verzahnungsdatei zuerst nutzen, um Richtlinie, CLs, Presets und Evidenzpfade zuzuordnen.
+3. Alle relevanten Pruefpunkte als `Applicable`, `AlreadySatisfied`, `N/A`, `Open` oder `FollowUp` klassifizieren.
+4. Fuer `Applicable` und `AlreadySatisfied` konkrete Evidenzpfade benennen.
+5. Fuer `N/A` und `FollowUp` kurze technische oder fachliche Begruendung erfassen.
+6. Fuer `Open` Owner, Follow-up, Prioritaet, Risiko und Re-Evaluation-Trigger festhalten.
+7. Positive Aussagen zur Einhaltung nur mit konkreter Evidenz treffen.
+8. Human-only-Punkte sichtbar abgrenzen und nicht als erledigt behaupten.
+9. Ergebnis als auditfaehige, fuer Auszubildende verstaendliche Markdown-Dokumentation ablegen.
+
+## 8. Erwartete Ergebnisartefakte
+
+| Artefakt | Erwartung |
+|---|---|
+| Spec-Kit `spec.md` | Ziel, Scope, Nicht-Ziele, Pruefgrundlagen und Statuslogik dokumentiert |
+| Spec-Kit `plan.md` | Pruefstrategie, Evidenzpfade, Standards und Presets nachvollziehbar |
+| Spec-Kit `tasks.md` | Konkrete Pruef-, Dokumentations- und Follow-up-Aufgaben ableitbar |
+| Evidenzmatrix | `Applicable`, `AlreadySatisfied`, `N/A`, `Open`, `FollowUp` mit Begruendung |
+| `docs/security/` | Projektspezifische Nachweise oder begruendete N/A-/Open-Eintraege |
+| Abschlussnotiz | Ergebnis, offene Risiken, Restrisiken und Re-Evaluation-Trigger |
+
+## 9. Akzeptanzkriterien
+
+- Alle relevanten Punkte aus Richtlinie, Sammelband, CL_01 bis CL_12 und mitgeltenden Dokumenten sind sichtbar behandelt.
+- Kein relevanter Governance-Preset-Pruefpunkt wurde stillschweigend ausgelassen.
+- Jeder ausgelassene Punkt ist als `N/A` oder `FollowUp` begruendet.
+- Jeder offene Punkt ist als `Open` mit Owner, Folgeaktion und Re-Evaluation-Trigger dokumentiert.
+- Jede positive Aussage verweist auf konkrete Evidenz.
+- Das Projekt bleibt nach der Pruefung baubar, testbar und fuer Lernende nachvollziehbar.
+
+## 10. Optimaler Specify-Prompt / Optimal Specify Prompt
 
 ```text
-Nutze Lastenheft_RL-SE-Checklist-Selbstpruefung.md als verbindliche Eingabedatei. Erstelle die Feature-Spezifikation fuer eine RL-SE-/Checklist-Selbstpruefung von absdd-image-sandbox.
-
-Ziel: Pruefe absdd-image-sandbox als Ausbildungs-Sandbox gegen die generische Secure-Development-Basis aus docs/secure-development/. Beruecksichtige Richtlinie_Sichere-Entwicklung.md, Checklistensammelband_Sichere-Entwicklung.md, CL_01 bis CL_12, mitgeltende Dokumente, Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md und die sieben Governance-Presets.
-
-Neutralitaet: Behandle die Richtlinie, Checklisten, den Sammelband und die mitgeltenden Dokumente als generische Ausbildungs-, Review- und Pruefgrundlage, nicht als Firmenrichtlinie oder konkretes Managementsystem-Artefakt. Konkrete Firmen, private URLs, lokale Hostpfade, Provider-Portale, accountgebundene Defaults, externe DMS-/QISMS-Systeme oder Plattformregeln muessen entfernt, generalisiert oder als Beispiel, Kontext, `N/A`, `Open` oder projektspezifische Evidenz klassifiziert werden.
-
-Erzeuge eine projektspezifische Evidenz- und Anwendbarkeitslogik mit `Applicable`, `N/A` und `Open`. Jeder relevante Pruefpunkt braucht Begruendung, Evidenzpfad oder Open-Markierung, Owner, Follow-up und Re-Evaluation-Trigger. Human-only-Punkte wie formale Freigabe, externe Managementsystem-Eintraege, Plattform-Branch-Protection, Secrets, Provider und Modellfreigaben duerfen nicht als erledigt behauptet werden.
-
-Beruecksichtige README, AGENTS.md, CLAUDE.md, GEMINI.md, .github/copilot-instructions.md, COMPLIANCE-PLAN_RL-SE-001.md, docs/security/, Dockerfile, compose.yml, compose.home-baseline.yml, bestehende Lastenhefte und bestehende Spec-Kit-Artefakte.
-
-Technische Einordnung: Dokumentations-/Governance-Feature, keine Anwendung, kein Runtime-Code, keine Datenbank, keine API. Falls eine lokale Snapshot-Kopie der Secure-Development-Basis im Sandbox-Repo geplant wird, dokumentiere Quelle, Lizenz, Commit-SHA, ausgeschlossene Dateien und Public-Readiness-Pruefung. Starte keinen Container-Build, schalte das Repo nicht auf Public und konfiguriere keine Secrets, Provider oder Modelle.
+/speckit-specify
+Nutze Lastenheft_RL-SE-Checklist-Selbstpruefung.md als verbindlichen Intake fuer einen separaten RL-SE-/Checklist-Selbstpruefungslauf.
+Starte keinen Sammellauf ueber mehrere Repositories, erzeuge keine automatische Haertung und befuelle keine docs/security/-Nachweise ohne konkrete Spec-Kit-Aufgabe.
+Erstelle eine fokussierte Feature-Spezifikation, die docs/secure-development/, Richtlinie_Sichere-Entwicklung.md, Checklistensammelband_Sichere-Entwicklung.md, CL_01 bis CL_12, mitgeltende Dokumente, Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md, constitution.md, .specify/memory/constitution.md und installierte Governance-Presets als Pruefgrundlagen beruecksichtigt.
+Dokumentiere jeden relevanten Pruefpunkt als Applicable, AlreadySatisfied, N/A, Open oder FollowUp mit Begruendung, Evidenzpfad, Owner, Follow-up, Re-Evaluation-Trigger und Restrisiko.
+Behandle sichere Entwicklung als Must-have. MSL-Status ist ein Pruefpunkt, aber keine Voraussetzung fuer diesen Selbstpruefungslauf.
 ```
