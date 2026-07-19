@@ -24,7 +24,7 @@ Nicht jede Toolchain muss sofort im Image enthalten sein. Der spaetere Lauf doku
 - Netzwerkentscheidung und Egress-Risiko gegen Arbeitsfaehigkeit abwaegen.
 - Secrets, Provider-Konfiguration, lokale Profile und Token-Speicher pruefen.
 - SBOM, Dependency-Audit, Image-Scan und Tool-Pinning als Evidence planen.
-- Spec-Kit-Nutzbarkeit und sieben Governance-Presets pruefen.
+- Spec-Kit-Nutzbarkeit und acht Governance-Presets pruefen.
 - MSL-Toolchain-Matrix fuer aktuelle und geplante Sprachen erstellen.
 - C#/.NET, Rust, Go, Python, JavaScript/TypeScript und Java/Kotlin als erste praktische Smoke-Check-Kandidaten betrachten, wenn sie im Image verfuegbar sind.
 

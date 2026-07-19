@@ -805,7 +805,7 @@ Refs: RL-SE-001 "KI-gestützte Codeerzeugung", CL_09 checklist item 15.
 ### Befund
 
 CL_12 Prüfpunkt 6 verlangt: Spec Kit ist im Projekt initialisiert und die
-sechs Governance-Presets sind installiert oder eine begründete Ausnahme ist
+acht Governance-Presets sind installiert oder eine begründete Ausnahme ist
 dokumentiert. `README.md` Zeilen 1085 bis 1090 listet die Befehle. Es gibt
 aber kein Projekt, in dem das tatsächlich gelaufen ist.
 
@@ -813,7 +813,7 @@ aber kein Projekt, in dem das tatsächlich gelaufen ist.
 
 Legen ein **dokumentiertes Pilotprojekt** unter
 `/rider-projects/specify-pilot/` an, initialisiere Spec Kit dort und
-installiere die sechs Presets. Sichere die Ausgabe von `specify preset
+installiere die acht Presets. Sichere die Ausgabe von `specify preset
 list` als Evidenz.
 
 ### Vorgehen
