@@ -813,7 +813,7 @@ aber kein Projekt, in dem das tatsächlich gelaufen ist.
 
 Legen ein **dokumentiertes Pilotprojekt** unter
 `/rider-projects/specify-pilot/` an, initialisiere Spec Kit dort und
-installiere die sechs Presets. Sichere die Ausgabe von `specify preset
+installiere die acht Presets. Sichere die Ausgabe von `specify preset
 list` als Evidenz.
 
 ### Vorgehen
