@@ -543,3 +543,11 @@ only in local, untracked configuration when needed.
 Codex, Claude Code, Antigravity CLI, and GitHub Copilot CLI are installed as the
 four required agents. Their presence does not imply account, provider, legal,
 or organizational approval.
+
+<!-- statistics-profile-2-readme:begin -->
+## Statistikprofil 2 / Statistics Profile 2
+
+Die lebende Projektstatistik steht in `docs/project-statistics.md`. Sie wird reproduzierbar aus `docs/project-statistics.config.json` mit `scripts/render-project-statistics.sh` oder `scripts/render-project-statistics.ps1` erzeugt. Alle Diagramme sind ASCII-only, hoechstens 100 Zeichen breit und durch genaue Werte sowie eine deutsche und englische Textalternative ergaenzt.
+
+*The living project statistics are stored in `docs/project-statistics.md`. They are rendered reproducibly from `docs/project-statistics.config.json` with the Bash or PowerShell renderer. Every chart is ASCII-only, at most 100 characters wide, and accompanied by exact values plus German and English text alternatives.*
+<!-- statistics-profile-2-readme:end -->
