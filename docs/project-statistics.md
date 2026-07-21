@@ -185,25 +185,25 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 94858 lines |
+| Textbasis / Text base | 94878 lines |
 | Textdateien / Text files | 638 |
 | Beobachtbarer Zeitraum / Observable period | 2025-07-27..2026-07-21 |
 | Aktivtage / Active days | 46 |
-| Relevante Commits / Relevant commits | 133 |
-| Zeilen je Aktivtag / Lines per active day | 2062.1 |
+| Relevante Commits / Relevant commits | 134 |
+| Zeilen je Aktivtag / Lines per active day | 2062.6 |
 | Peak-Tag im Fenster / Peak day in window | 2026-07-03 / 33733 |
 | Peak-Woche im Fenster / Peak week in window | 2026-06-28 / 35995 |
 | Laengste Serie / Longest streak | 8 days |
 | Speedup vs. 80 lines/day | 25.8x |
 | Speedup vs. 100 lines/day | 20.6x |
-| Methodik / Methodology | v2; source `eefb334ccb2a` |
+| Methodik / Methodology | v2; source `10fe4fa81ec6` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [#...................]   0.1% | 82
 Tests                           [#...................]   0.3% | 268
-Dokumentation / Documentation   [#################...]  87.2% | 82673
+Dokumentation / Documentation   [#################...]  87.2% | 82693
 Skripte / Scripts               [##..................]  11.2% | 10580
 Konfiguration / Configuration   [#...................]   0.9% | 884
 Daten und Medien / Data and media [....................]   0.0% | 0
@@ -321,7 +321,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..5000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 100
-Visible repository [########............] 2062.1
+Visible repository [########............] 2062.6
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -347,6 +347,6 @@ DE: Das Fenster beginnt am 2025-07-27 und endet am 2026-07-21. Es enthaelt 46 ak
 | 2026-04 | 67 |
 | 2026-05 | 12969 |
 | 2026-06 | 37448 |
-| 2026-07 | 81702 |
+| 2026-07 | 81726 |
 
 <!-- project-statistics-v2:end -->
