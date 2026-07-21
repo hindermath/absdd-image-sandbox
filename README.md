@@ -10,7 +10,7 @@ the four required agents Codex, Claude Code, Antigravity CLI, and GitHub Copilot
 CLI, six memory-safe languages, Syft, and Spec Kit. It is a sandbox and
 training environment, not an application.
 
-## Kurzueberblick
+## Ueberblick / Overview
 
 | Bereich | Standard |
 |---|---|
@@ -44,6 +44,26 @@ organization-specific rules, or concrete provider accounts. Public readiness is
 not a formal approval; open approval, provider, legal, SBOM, VEX, SLSA, or
 AI-SBOM items remain explicit in `docs/security/` and the active Spec Kit
 artifacts.*
+
+## Fuer Auszubildende / For Apprentices
+
+Die Sandbox stellt eine kontrollierte Lernumgebung bereit. Auszubildende sollen
+die dokumentierten Smoke- und Sicherheitspruefungen verwenden und keine echten
+Zugangsdaten in Images, Konfigurationen oder Protokolle uebernehmen.
+
+The sandbox provides a controlled learning environment. Apprentices should use
+the documented smoke and security checks and must not place real credentials in
+images, configuration files, or logs.
+
+## Barrierefreiheit / Accessibility
+
+Anleitungen und Nachweise bleiben textbasiert, semantisch gegliedert und ohne
+rein farbliche Bedeutung. Terminalausgaben muessen auch mit Screenreadern und
+Braille-Zeilen nachvollziehbar bleiben.
+
+Guidance and evidence remain text based, semantically structured, and do not
+encode essential meaning through color alone. Terminal output must remain
+understandable with screen readers and Braille displays.
 
 ## Repository-Struktur
 
@@ -381,7 +401,7 @@ Extension `swiftlang.swift-vscode` empfohlen; sie arbeitet besonders gut mit
 SwiftPM-Projekten, die eine `Package.swift` im Projektwurzelverzeichnis
 enthalten.
 
-## Spec Kit
+## Spec-kit-Workflow / Spec Kit Workflow
 
 Spec Kit ist per `uv tool install specify-cli --from
 git+https://github.com/github/spec-kit.git@v0.8.3` installiert und danach
