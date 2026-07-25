@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "2.0",
+  "documentType": "IntakeReceipt",
+  "receiptId": "45c3d95e-3349-48c4-9f33-760bdcdb46c1",
+  "intakeId": "5926e53e-39b7-475f-8a6b-e2ec08b0a803",
+  "generator": {
+    "preset": "intake-authoring-governance",
+    "version": "0.2.1"
+  },
+  "createdAt": "2026-07-25T21:52:10Z",
+  "operation": {
+    "operationId": "73abf3a1-1cd4-4072-9d72-17f6f2f33647",
+    "type": "Create",
+    "authorityEvidence": "Explicit user request to create one or more intake files for the stated learner fork and self-build requirement"
+  },
+  "status": "ReadyForReview",
+  "target": {
+    "path": "intakes/learner-fork-self-build-sandbox.md",
+    "normalizedSha256": "6e17c637283212954857e82b53b2eeb11fd44a3c3d9996bb677ad991064d8293"
+  },
+  "sources": [
+    {
+      "sourceId": "SRC001",
+      "order": 1,
+      "kind": "Inline",
+      "label": "User request for a forkable learner template with local image self-build",
+      "location": "SnapshotOnly",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "8fbe929fc4a68c43bdbec3e238c9de20e434756f5a0e11b8be7715c2a98ae1f9",
+      "gitBlob": "N/A",
+      "proofBoundary": "SnapshotOnly"
+    }
+  ],
+  "profile": "learner-a11y-bilingual",
+  "languagePolicy": "GermanFirstEnglishSecondCEFRB2",
+  "decisions": [
+    {
+      "id": "IAD001",
+      "status": "Answered",
+      "question": "Which repository acquisition model is the primary learner path?",
+      "answer": "A personal fork or institution-provided repository is origin, while the maintained reference is upstream.",
+      "evidence": "The user explicitly requested a Level-0-like fork model, and current repository guidance already defines origin and upstream this way."
+    },
+    {
+      "id": "IAD002",
+      "status": "Answered",
+      "question": "Should the project provide a ready-made sandbox image from GHCR or another project registry?",
+      "answer": "No. Learners and users build the image locally so that building and reading the documentation remain part of the learning path.",
+      "evidence": "The user explicitly decided against a ready-made container image in GitHub Container Registry."
+    },
+    {
+      "id": "IAD003",
+      "status": "Answered",
+      "question": "What delivery authority is granted by this authoring request?",
+      "answer": "Local intake authoring only. Review, implementation, commit, push, pull request, merge, and platform changes do not start automatically.",
+      "evidence": "The user requested intake files, not implementation or remote delivery."
+    }
+  ],
+  "openDecisionIds": [],
+  "questionCount": 0,
+  "agentSurface": {
+    "specifyCanonicalId": "speckit.specify",
+    "specifyInvocation": "$speckit-specify",
+    "autonomousCanonicalId": "speckit.autonomous",
+    "autonomousInvocation": "$speckit-autonomous"
+  },
+  "deliveryAuthority": "LocalImplementation",
+  "authorityEvidence": "Default local implementation boundary; no explicit remote delivery authority was granted",
+  "promptState": "Enabled",
+  "provenanceMode": "New",
+  "supersedes": {
+    "receiptPath": "N/A",
+    "targetNormalizedSha256": "N/A",
+    "archiveTargetPath": "N/A",
+    "archiveReceiptPath": "N/A"
+  },
+  "legacyAdoption": {
+    "evidenceType": "N/A",
+    "priorTargetNormalizedSha256": "N/A",
+    "priorGitBlob": "N/A"
+  },
+  "updateAuthorized": false,
+  "updateAuthorityEvidence": "N/A",
+  "series": {
+    "seriesId": "N/A",
+    "manifestPath": "N/A",
+    "order": "N/A",
+    "role": "N/A",
+    "supersedesIntakeIds": []
+  },
+  "nextAction": "$speckit-intake-review intakes/learner-fork-self-build-sandbox.md"
+}
