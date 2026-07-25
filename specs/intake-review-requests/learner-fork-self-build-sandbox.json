@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "cfbc8af4-48be-40e2-9a4b-5381d60d3dd5",
+  "mode": "Single",
+  "policy": "learner-a11y-bilingual",
+  "targets": [
+    {
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "role": "Primary"
+    }
+  ],
+  "series": {
+    "orderedTargetPaths": [],
+    "roots": [],
+    "dependencies": []
+  },
+  "campaign": {
+    "manifestPath": "N/A",
+    "workers": [],
+    "operatorExceptions": []
+  }
+}
