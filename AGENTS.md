@@ -396,6 +396,32 @@ The export writes metadata only to `/audit/YYYY-MM-DD.jsonl`. Do not extend it t
 
 *Model choice is operational agent-routing guidance, not a feature requirement. Do not pin model names in `spec.md`, `plan.md`, `tasks.md`, or individual feature specs; those artifacts must stay reproducible even when model names change or another AI agent is used. Each agent should map these recommendations to its currently available models; do not derive a fixed vendor or model requirement. For Spec-Kit specification, clarification, planning, task generation, and analysis (`/speckit-specify`, `/speckit-clarify`, `/speckit-plan`, `/speckit-tasks`, `/speckit-analyze`; or `/speckit.specify` etc. depending on the agent surface), prefer the strongest available frontier reasoning/coding model. For complete long-running `/speckit-implement` runs, prefer the strongest available long-running agent model; use the frontier model when maximum judgment quality is more important than runtime stability. For focused review or CI fixes, prefer a coding-optimized model. For trivial cleanup, formatting, or low-risk mechanical edits, a fast small coding model is acceptable.*
 
+<!-- learner-a11y-baseline:start -->
+## Hinweise zur Lernenden- und A11Y-Basis / Notes on the Learner and A11Y Baseline
+
+- Verbindliche Zielgruppen ab dem ersten Ausbildungsjahr sind
+  Fachinformatiker*innen, Kaufleute für IT-System-Management und Kaufleute für
+  Digitalisierungsmanagement.
+- Lern-, Bedien-, Governance- und Spec-Kit-Inhalte stehen auf Deutsch zuerst
+  und Englisch danach, verwenden ungefähr CEFR B2 und erklären Fachbegriffe
+  beim ersten Auftreten.
+- Spec-Kit-Erfahrung wird nicht vorausgesetzt. Befehle, Artefakte, Zustände und
+  Übergänge werden beim ersten Gebrauch verständlich eingeführt.
+- Abhängigkeiten, Zustände und Entscheidungen erhalten eine vollständige
+  textorientierte Erklärung; eine ausschließlich visuelle Darstellung genügt
+  nicht.
+- `Programmierung #include<everyone>` und WCAG 2.2 Level AA gelten als
+  verbindliche Prüfbasis, soweit die Kriterien auf das Artefakt anwendbar sind.
+
+*The binding audience starts in the first training year and includes IT
+specialist apprentices and both IT management occupations. Learner, usage,
+governance, and Spec Kit content is German-first/English-second at about CEFR
+B2, explains technical terms at first use, assumes no prior Spec Kit
+experience, and never relies on visual-only dependency, state, or decision
+information. `Programmierung #include<everyone>` and WCAG 2.2 Level AA are the
+review baseline wherever applicable.*
+<!-- learner-a11y-baseline:end -->
+
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
 shell commands, and other important information, read the current plan
