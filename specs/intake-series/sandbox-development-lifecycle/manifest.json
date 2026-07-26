@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesManifest",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "title": "Sichere Sandbox vom Befund bis zur Selbstbau-Vorlage / Secure Sandbox from Assessment to Self-Build Template",
+  "policy": "intake-sequencing-governance-v0.1.1",
+  "status": "Ready",
+  "orderedTargets": [
+    {
+      "path": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "role": "Primary",
+      "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a",
+      "status": "Eligible"
+    },
+    {
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "72c263db933ea5a10ca60f3a7cc41231b43e1aec5d0dd641129e1a523b3432dc",
+      "status": "Blocked"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "910b450f888b8a57e283e4067745a32535ec3edb84147c089d39bb9f446d3f6e",
+      "status": "Blocked"
+    },
+    {
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "6e17c637283212954857e82b53b2eeb11fd44a3c3d9996bb677ad991064d8293",
+      "status": "Blocked"
+    }
+  ],
+  "roots": [
+    "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+  ],
+  "dependencies": [
+    {
+      "from": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "to": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "kind": "AssessmentBaseline",
+      "binding": true
+    },
+    {
+      "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "kind": "SandboxBaseline",
+      "binding": true
+    },
+    {
+      "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "to": "intakes/learner-fork-self-build-sandbox.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    }
+  ],
+  "evidencePaths": [
+    "specs/intake-authoring-receipts/",
+    "specs/intake-authoring-archive/",
+    "specs/intake-authoring-tombstones/",
+    "specs/intake-review-reports/sandbox-development-lifecycle.md"
+  ]
+}

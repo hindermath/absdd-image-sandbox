@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "2.0",
+  "documentType": "IntakeReceipt",
+  "receiptId": "a96c5d15-411d-4a2b-8343-8b568e01afe1",
+  "intakeId": "72273084-61a1-4001-b5ad-e9bafe166ad4",
+  "generator": {
+    "preset": "intake-authoring-governance",
+    "version": "0.2.1"
+  },
+  "createdAt": "2026-07-26T18:59:07Z",
+  "operation": {
+    "operationId": "4c90331a-47b8-4a6f-be0b-15633b1f737b",
+    "type": "Update",
+    "authorityEvidence": "Explicit user request to implement the approved complete reordering and archive superseded requirements"
+  },
+  "status": "ReadyForReview",
+  "target": {
+    "path": "Lastenheft_RL-SE-Checklist-Selbstpruefung.md",
+    "normalizedSha256": "a6e4f024df73c286948894825eb3b57fc6afeb7aae6ba8088cdf52ef8fe22ce1"
+  },
+  "sources": [
+    {
+      "sourceId": "SRC001",
+      "order": 1,
+      "kind": "Pasted",
+      "label": "Legacy RL-SE and checklist self-assessment intake before preset adoption",
+      "location": "SnapshotOnly",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "5b884a46aeb5155838aae5f0e37052bb297595dc3184f7e430bde2f3f08ca43c",
+      "gitBlob": "90147f2535a1cab295fff7ded048a55ac1f18388",
+      "proofBoundary": "SnapshotOnly"
+    }
+  ],
+  "profile": "learner-a11y-bilingual",
+  "languagePolicy": "GermanFirstEnglishSecondCEFRB2",
+  "decisions": [],
+  "openDecisionIds": [],
+  "questionCount": 0,
+  "agentSurface": {
+    "specifyCanonicalId": "speckit.specify",
+    "specifyInvocation": "$speckit-specify",
+    "autonomousCanonicalId": "speckit.autonomous",
+    "autonomousInvocation": "$speckit-autonomous"
+  },
+  "deliveryAuthority": "LocalImplementation",
+  "authorityEvidence": "No remote delivery authority was granted for this implementation",
+  "promptState": "Enabled",
+  "provenanceMode": "LegacyAdoption",
+  "supersedes": {
+    "receiptPath": "N/A",
+    "targetNormalizedSha256": "N/A",
+    "archiveTargetPath": "N/A",
+    "archiveReceiptPath": "N/A"
+  },
+  "legacyAdoption": {
+    "evidenceType": "GitBlob",
+    "priorTargetNormalizedSha256": "5b884a46aeb5155838aae5f0e37052bb297595dc3184f7e430bde2f3f08ca43c",
+    "priorGitBlob": "90147f2535a1cab295fff7ded048a55ac1f18388"
+  },
+  "updateAuthorized": true,
+  "updateAuthorityEvidence": "Explicit user approval of complete reordering and verifiable archival on 2026-07-26",
+  "series": {
+    "seriesId": "N/A",
+    "manifestPath": "N/A",
+    "order": "N/A",
+    "role": "N/A",
+    "supersedesIntakeIds": []
+  },
+  "nextAction": "$speckit-intake-review Lastenheft_RL-SE-Checklist-Selbstpruefung.md"
+}

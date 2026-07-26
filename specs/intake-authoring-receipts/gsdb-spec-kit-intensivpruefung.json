@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "2.0",
+  "documentType": "IntakeReceipt",
+  "receiptId": "45ec1d16-8b48-4883-87a0-b57da62824d8",
+  "intakeId": "ec50344b-6a7b-45bf-b67c-a67f24f56c01",
+  "generator": {
+    "preset": "intake-authoring-governance",
+    "version": "0.2.1"
+  },
+  "createdAt": "2026-07-26T18:59:07Z",
+  "operation": {
+    "operationId": "4577c3a5-6606-4674-bf8c-f8a4567cb7ac",
+    "type": "Update",
+    "authorityEvidence": "Explicit user request to implement the approved complete reordering and archive superseded requirements"
+  },
+  "status": "ReadyForReview",
+  "target": {
+    "path": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+    "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a"
+  },
+  "sources": [
+    {
+      "sourceId": "SRC001",
+      "order": 1,
+      "kind": "Pasted",
+      "label": "Legacy GSDB intensive review intake before preset adoption",
+      "location": "SnapshotOnly",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "efc07a055915d4604e5eb8a69d5bf596cacbd631c16559e067d58bad94648c79",
+      "gitBlob": "c9e0c89629d3ef8b87746108f46a0ba9e6d398b4",
+      "proofBoundary": "SnapshotOnly"
+    },
+    {
+      "sourceId": "SRC002",
+      "order": 2,
+      "kind": "Pasted",
+      "label": "Legacy RL-SE and checklist self-assessment intake",
+      "location": "SnapshotOnly",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "5b884a46aeb5155838aae5f0e37052bb297595dc3184f7e430bde2f3f08ca43c",
+      "gitBlob": "90147f2535a1cab295fff7ded048a55ac1f18388",
+      "proofBoundary": "SnapshotOnly"
+    },
+    {
+      "sourceId": "SRC003",
+      "order": 3,
+      "kind": "Pasted",
+      "label": "Legacy general secure-development hardening intake",
+      "location": "SnapshotOnly",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "eb61129a2ee1ffa05a3dcbb23437c5ee0f056091ba2adb2277aacc0bb7460d37",
+      "gitBlob": "512579ce9857f4a00345ca8c32dd91443d70211d",
+      "proofBoundary": "SnapshotOnly"
+    }
+  ],
+  "profile": "learner-a11y-bilingual",
+  "languagePolicy": "GermanFirstEnglishSecondCEFRB2",
+  "decisions": [
+    {
+      "id": "IAD001",
+      "status": "Answered",
+      "question": "How should the three overlapping GSDB and hardening intakes be consolidated?",
+      "answer": "Merge them into one assessment-only series root and archive the replaced active intakes.",
+      "evidence": "The user selected the recommended four-stage chain and verifiable archival."
+    }
+  ],
+  "openDecisionIds": [],
+  "questionCount": 0,
+  "agentSurface": {
+    "specifyCanonicalId": "speckit.specify",
+    "specifyInvocation": "$speckit-specify",
+    "autonomousCanonicalId": "speckit.autonomous",
+    "autonomousInvocation": "$speckit-autonomous"
+  },
+  "deliveryAuthority": "LocalImplementation",
+  "authorityEvidence": "No remote delivery authority was granted for this implementation",
+  "promptState": "Enabled",
+  "provenanceMode": "LegacyAdoption",
+  "supersedes": {
+    "receiptPath": "N/A",
+    "targetNormalizedSha256": "N/A",
+    "archiveTargetPath": "N/A",
+    "archiveReceiptPath": "N/A"
+  },
+  "legacyAdoption": {
+    "evidenceType": "GitBlob",
+    "priorTargetNormalizedSha256": "efc07a055915d4604e5eb8a69d5bf596cacbd631c16559e067d58bad94648c79",
+    "priorGitBlob": "c9e0c89629d3ef8b87746108f46a0ba9e6d398b4"
+  },
+  "updateAuthorized": true,
+  "updateAuthorityEvidence": "Explicit user approval of complete reordering and verifiable archival on 2026-07-26",
+  "series": {
+    "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+    "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "order": 1,
+    "role": "Assessment root",
+    "supersedesIntakeIds": [
+      "72273084-61a1-4001-b5ad-e9bafe166ad4",
+      "fbc5153b-8f50-4fb5-bfb3-0427c7b26c27"
+    ]
+  },
+  "nextAction": "$speckit-intake-review Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+}

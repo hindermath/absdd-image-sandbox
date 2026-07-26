@@ -1,64 +1,113 @@
-<!-- gsdb-spec-kit-intensivpruefung:start -->
-# Lastenheft GSDB-Spec-Kit-Intensivpruefung fuer absdd-image-sandbox
+<!-- intake-authoring:begin -->
+# GSDB-Bestandspruefung der Sandbox / GSDB Sandbox Baseline Assessment
 
-**Stand / Date:** 2026-07-04
+**Status:** ReadyForReview
+
+**Zielgruppe / Audience:** Auszubildende ab dem ersten Ausbildungsjahr, Lernbegleitung, Entwicklung und Review
+
+**Lieferautoritaet / Delivery authority:** LocalImplementation
 
 ## Zweck / Purpose
 
-**DE:** Dieses Lastenheft bereitet einen spaeteren, manuell gestarteten
-Spec-Kit-Lauf vor. Ziel ist eine intensive Pruefung von absdd-image-sandbox gegen
-die Generische Secure-Development Basis (GSDB), die Projekt-Constitution, die
-installierten Governance-Presets und die projektspezifischen Nachweise.
+**DE:** Dieser Intake fuehrt die bisherigen Anforderungen aus
+RL-SE-/Checklist-Selbstpruefung, GSDB-Intensivpruefung und allgemeinem
+Secure-Development-Hardening in einer Bestandspruefung zusammen. Die
+Generische Secure-Development-Basis (GSDB) ist die wiederverwendbare
+Pruefgrundlage unter `docs/secure-development/`.
 
-**EN:** This requirements document prepares a later manually started Spec Kit
-run. The goal is an intensive review of absdd-image-sandbox against the Generic
-Secure Development Baseline (GSDB), the project constitution, installed
-governance presets, and project-specific evidence.
+**EN:** This intake combines the previous RL-SE/checklist self-assessment,
+GSDB intensive review, and general secure-development hardening requirements
+into one baseline assessment. The Generic Secure Development Baseline (GSDB)
+under `docs/secure-development/` is the reusable review basis.
 
-## Ausgangslage / Context
+## Ausgangslage und Zielbild / Current and Target State
 
-- Die GSDB liegt im Projekt unter `docs/secure-development/`.
-- Projektspezifische Nachweise liegen bevorzugt unter `docs/security/`.
-- Der GSDB-Preflight dient nur der Vorbereitung und ersetzt keinen
-  Spec-Kit-Lauf.
-- Human-only-Punkte duerfen nicht als erledigt behauptet werden.
+**DE:** Sicherheitsnachweise, Checklisten und Governance-Regeln sind vorhanden,
+aber noch nicht in einer aktuellen, vollstaendigen Anwendbarkeits- und
+Evidenzmatrix zusammengefuehrt. Der spaetere Lauf liefert diese Matrix und eine
+priorisierte Lueckenliste. Er setzt noch keine technische Haertung um.
+
+**EN:** Security evidence, checklists, and governance rules exist, but they
+have not yet been combined into one current applicability and evidence matrix.
+The later run produces this matrix and a prioritized gap list. It does not yet
+implement technical hardening.
 
 ## Scope
 
-- GSDB-Richtlinie, alle 12 Einzelchecklisten, Sammelband und mitgeltende
-  Dokumente pruefen.
-- MSL-Status und sprachspezifische Secure-Coding-Regeln pruefen.
-- Preset-Installation und Preset-zu-CL-Mapping pruefen.
-- Projektspezifische Evidenz unter `docs/security/` oder gleichwertigen
-  Nachweisorten pruefen.
-- Alle Ergebnisse mit `Applicable`, `N/A` oder `Open` dokumentieren.
+- Alle zwoelf GSDB-Checklisten und die mitgeltenden Dokumente pruefen.
+- Constitution, installierte Governance-Presets und vorhandene
+  `docs/security/`-Nachweise einbeziehen.
+- Jeden relevanten Pruefpunkt als `Applicable`, `AlreadySatisfied`, `N/A`,
+  `Open` oder `FollowUp` klassifizieren.
+- Toolchain-, Agenten-, Lieferketten-, A11Y-, Datenschutz- und
+  Plattformanforderungen pruefen.
+- Abweichende Angaben zur Zahl installierter Toolchain-Familien gegen
+  `Dockerfile` und `scripts/smoke-test-toolchains.sh` klaeren.
+- Fuer offene Punkte Prioritaet, Owner, Folgeaktion, Restrisiko und
+  Neubewertungs-Trigger festhalten.
 
 ## Nicht-Ziele / Non-Goals
 
-- Kein automatisches Starten eines Spec-Kit-Laufs.
-- Keine formale Freigabe, keine Secret-Rotation, keine Providerfreigabe und
-  keine Branch-Protection-Aenderung durch einen Agenten.
-- Keine pauschale Behauptung, dass das Projekt sicher ist.
+- Keine Aenderung an Dockerfile, Compose, Laufzeit oder Hosting-Plattform.
+- Keine formale Sandbox-, Provider-, Modell- oder Rechtsfreigabe.
+- Keine Secret-Rotation und keine Branch-Protection-Aenderung.
+- Keine pauschale Aussage, dass das Projekt sicher oder freigegeben sei.
 
-## Erwartete Artefakte / Expected Artefacts
+## Anforderungen / Requirements
 
-- Aktualisierte Spec-Kit-Artefakte fuer den GSDB-Prueflauf.
-- GSDB-Evidenzmatrix mit Status, Begruendung, Evidenzpfad, Owner,
-  Follow-up, Re-Evaluation-Trigger und Restrisiko.
-- Dokumentierte `N/A`-Entscheidungen mit kurzer Begruendung.
-- Liste offener Punkte fuer spaetere Haertung.
+1. Kein relevanter GSDB-Pruefpunkt darf stillschweigend fehlen.
+2. Positive Bewertungen muessen auf konkrete, repository-lokale Evidenz zeigen.
+3. `N/A` braucht eine technische oder fachliche Begruendung.
+4. `Open` und `FollowUp` brauchen Owner, Folgeaktion und Trigger.
+5. Human-only-Entscheidungen bleiben sichtbar offen.
+6. Status, Abhaengigkeiten und Entscheidungen werden textorientiert erklaert.
+7. Lernendeninhalte bleiben Deutsch zuerst, Englisch danach und etwa CEFR B2.
+
+## Abhaengigkeiten und Risiken / Dependencies and Risks
+
+**DE:** Dies ist die Wurzel der Sandbox-Intake-Serie. Technische Haertung darf
+ihre priorisierte Lueckenliste als Baseline verwenden. Veraltete oder
+widerspruechliche Nachweise koennen zu falschen positiven Bewertungen fuehren;
+deshalb gilt Evidenz ohne aktuellen Pfad oder reproduzierbaren Check als offen.
+
+**EN:** This is the root of the sandbox intake series. Technical hardening may
+use its prioritized gap list as the baseline. Stale or contradictory evidence
+can cause false positive assessments, so evidence without a current path or
+reproducible check remains open.
+
+## Erwartete Artefakte und Evidenz / Expected Artefacts and Evidence
+
+- Spec-Kit-Spezifikation, Plan und Aufgaben fuer die Bestandspruefung.
+- GSDB-Evidenzmatrix mit allen Status- und Verantwortungsfeldern.
+- Priorisierte Lueckenliste als Eingabe fuer die technische Haertung.
+- Nachweise unter `docs/security/` oder begruendete offene Eintraege.
 
 ## Akzeptanzkriterien / Acceptance Criteria
 
-- Jeder relevante GSDB-Pruefpunkt ist sichtbar behandelt.
-- Keine Checkliste wird stillschweigend ausgelassen.
-- Offene Punkte enthalten Owner, Follow-up und Re-Evaluation-Trigger.
-- Human-only-Punkte sind als Human-only, `Open` oder `N/A` dokumentiert.
-- Das Ergebnis verweist auf konkrete Evidenzpfade.
+- Alle zwoelf Checklisten sind sichtbar behandelt.
+- Jede Bewertung besitzt Begruendung und Evidenzpfad oder Open-Markierung.
+- Die tatsaechlich installierten Agenten und Toolchain-Familien sind gegen
+  Build- und Smoke-Test-Quellen abgeglichen.
+- Human-only-Punkte werden nicht als erledigt behauptet.
+- Der Abschluss nennt die freigegebene Eingabe fuer den Folge-Intake, startet
+  ihn aber nicht automatisch.
 
-## Kopierbarer Spec-Kit Specify Prompt
+## Annahmen und offene Fragen / Assumptions and Open Questions
 
+- Die GSDB im Repository ist die fachliche Basis; externe Managementsysteme
+  sind nicht Teil dieses Laufs.
+- Es bestehen keine offenen Intake-Authoring-Fragen.
+
+<!-- intake-authoring:prompts -->
+## Kopierbare Folgekommandos / Copy-Ready Follow-Up Commands
+
+<!-- spec-kit-command-id: speckit.specify -->
 ```text
-/speckit-specify Fuehre eine intensive GSDB-Pruefung fuer dieses Repository durch. Nutze docs/secure-development/, constitution.md, .specify/memory/constitution.md, docs/security/, Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md und die installierten Governance-Presets als Pruefgrundlagen. Starte keine formale Freigabe und behaupte keine Human-only-Punkte als erledigt. Erstelle eine Feature-Spezifikation, die alle relevanten GSDB-Pruefpunkte mit Applicable, N/A oder Open behandelt. Dokumentiere je Pruefpunkt Begruendung, Evidenzpfad, Owner, Follow-up, Re-Evaluation-Trigger und Restrisiko. Wenn ein Punkt nicht anwendbar ist, dokumentiere N/A mit kurzer Begruendung. Wenn Evidenz fehlt, dokumentiere Open mit konkreter Nacharbeit.
+$speckit-specify Erstelle eine Spezifikation ausschliesslich auf Grundlage von Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md. Erzeuge eine vollstaendige GSDB-Bestandspruefung mit Evidenzmatrix und priorisierter Lueckenliste. Beginne keine technische Haertung und fuehre keine Remote-Aktion aus.
 ```
-<!-- gsdb-spec-kit-intensivpruefung:end -->
+
+<!-- spec-kit-command-id: speckit.autonomous -->
+```text
+$speckit-autonomous Fuehre den vollstaendigen Spec-Kit-Lauf fuer Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md mit Delivery Authority LocalImplementation aus. Bearbeite nur die Bestandspruefung, bewahre alle Human-only-Grenzen und stoppe vor Commit, Push, Pull Request, Merge oder Hosting-Aenderungen.
+```
+<!-- intake-authoring:end -->

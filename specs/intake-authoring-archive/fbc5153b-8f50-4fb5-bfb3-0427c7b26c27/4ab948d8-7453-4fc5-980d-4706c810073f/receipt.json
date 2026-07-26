@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "2.0",
+  "documentType": "IntakeReceipt",
+  "receiptId": "bb54f9c4-609e-4283-b5be-d387e269cc30",
+  "intakeId": "fbc5153b-8f50-4fb5-bfb3-0427c7b26c27",
+  "generator": {
+    "preset": "intake-authoring-governance",
+    "version": "0.2.1"
+  },
+  "createdAt": "2026-07-26T18:59:07Z",
+  "operation": {
+    "operationId": "5a1c2b9b-6cce-47f3-a96b-b67620c93ee3",
+    "type": "Update",
+    "authorityEvidence": "Explicit user request to implement the approved complete reordering and archive superseded requirements"
+  },
+  "status": "ReadyForReview",
+  "target": {
+    "path": "Lastenheft_Secure-Development-Hardening.md",
+    "normalizedSha256": "8bff6dfeaaecccd9f7771d9ff859e7c8922ca7a71d324477eec8084169faf792"
+  },
+  "sources": [
+    {
+      "sourceId": "SRC001",
+      "order": 1,
+      "kind": "Pasted",
+      "label": "Legacy general secure-development hardening intake before preset adoption",
+      "location": "SnapshotOnly",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "eb61129a2ee1ffa05a3dcbb23437c5ee0f056091ba2adb2277aacc0bb7460d37",
+      "gitBlob": "512579ce9857f4a00345ca8c32dd91443d70211d",
+      "proofBoundary": "SnapshotOnly"
+    }
+  ],
+  "profile": "learner-a11y-bilingual",
+  "languagePolicy": "GermanFirstEnglishSecondCEFRB2",
+  "decisions": [],
+  "openDecisionIds": [],
+  "questionCount": 0,
+  "agentSurface": {
+    "specifyCanonicalId": "speckit.specify",
+    "specifyInvocation": "$speckit-specify",
+    "autonomousCanonicalId": "speckit.autonomous",
+    "autonomousInvocation": "$speckit-autonomous"
+  },
+  "deliveryAuthority": "LocalImplementation",
+  "authorityEvidence": "No remote delivery authority was granted for this implementation",
+  "promptState": "Enabled",
+  "provenanceMode": "LegacyAdoption",
+  "supersedes": {
+    "receiptPath": "N/A",
+    "targetNormalizedSha256": "N/A",
+    "archiveTargetPath": "N/A",
+    "archiveReceiptPath": "N/A"
+  },
+  "legacyAdoption": {
+    "evidenceType": "GitBlob",
+    "priorTargetNormalizedSha256": "eb61129a2ee1ffa05a3dcbb23437c5ee0f056091ba2adb2277aacc0bb7460d37",
+    "priorGitBlob": "512579ce9857f4a00345ca8c32dd91443d70211d"
+  },
+  "updateAuthorized": true,
+  "updateAuthorityEvidence": "Explicit user approval of complete reordering and verifiable archival on 2026-07-26",
+  "series": {
+    "seriesId": "N/A",
+    "manifestPath": "N/A",
+    "order": "N/A",
+    "role": "N/A",
+    "supersedesIntakeIds": []
+  },
+  "nextAction": "$speckit-intake-review Lastenheft_Secure-Development-Hardening.md"
+}

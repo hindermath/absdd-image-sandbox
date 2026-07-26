@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeTombstone",
+  "tombstoneId": "6ba5b14a-65eb-4c84-b6a7-86e783b5db75",
+  "intakeId": "72273084-61a1-4001-b5ad-e9bafe166ad4",
+  "operationId": "94139c15-d40f-482e-ae87-e84210f583f3",
+  "deletedAt": "2026-07-26T18:59:07Z",
+  "reason": "The RL-SE and checklist self-assessment scope was merged into the canonical GSDB baseline assessment.",
+  "deleteAuthorityEvidence": "Explicit user selection of complete reordering with verifiable archival on 2026-07-26",
+  "original": {
+    "targetPath": "Lastenheft_RL-SE-Checklist-Selbstpruefung.md",
+    "targetNormalizedSha256": "a6e4f024df73c286948894825eb3b57fc6afeb7aae6ba8088cdf52ef8fe22ce1",
+    "receiptPath": "specs/intake-authoring-receipts/rl-se-checklist-selbstpruefung.json",
+    "receiptNormalizedSha256": "f8b6b6dd81b9a32441c64d0a33fe5a444e6ce368f1982530394b087feceed18b"
+  },
+  "archive": {
+    "targetPath": "specs/intake-authoring-archive/72273084-61a1-4001-b5ad-e9bafe166ad4/94139c15-d40f-482e-ae87-e84210f583f3/target.md",
+    "targetNormalizedSha256": "a6e4f024df73c286948894825eb3b57fc6afeb7aae6ba8088cdf52ef8fe22ce1",
+    "receiptPath": "specs/intake-authoring-archive/72273084-61a1-4001-b5ad-e9bafe166ad4/94139c15-d40f-482e-ae87-e84210f583f3/receipt.json",
+    "receiptNormalizedSha256": "f8b6b6dd81b9a32441c64d0a33fe5a444e6ce368f1982530394b087feceed18b"
+  },
+  "seriesImpact": {
+    "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+    "migrationOperationId": "4577c3a5-6606-4674-bf8c-f8a4567cb7ac"
+  },
+  "reactivationBoundary": "Create a new explicitly authorized Update from archived evidence",
+  "nextAction": "N/A"
+}

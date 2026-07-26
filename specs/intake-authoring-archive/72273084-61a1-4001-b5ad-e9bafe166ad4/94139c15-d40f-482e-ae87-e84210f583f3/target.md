@@ -1,8 +1,10 @@
+<!-- intake-authoring:begin -->
 # Lastenheft: RL-SE-/Checklist-Selbstpruefung
 
 **Repository:** home-baseline
 **Dokumenttyp:** Spec-Kit Intake / Lastenheft
-**Status:** vorbereitet fuer separaten RL-SE-/CL-Selbstpruefungslauf
+**Status:** ReadyForReview
+**Lieferautoritaet / Delivery authority:** LocalImplementation
 **Stand:** 2026-06-29
 
 ## 1. Zweck
@@ -120,3 +122,17 @@ Erstelle eine fokussierte Feature-Spezifikation, die docs/secure-development/, R
 Dokumentiere jeden relevanten Pruefpunkt als Applicable, AlreadySatisfied, N/A, Open oder FollowUp mit Begruendung, Evidenzpfad, Owner, Follow-up, Re-Evaluation-Trigger und Restrisiko.
 Behandle sichere Entwicklung als Must-have. MSL-Status ist ein Pruefpunkt, aber keine Voraussetzung fuer diesen Selbstpruefungslauf.
 ```
+
+<!-- intake-authoring:prompts -->
+## Verwaltete Folgekommandos / Managed Follow-Up Commands
+
+<!-- spec-kit-command-id: speckit.specify -->
+```text
+$speckit-specify Erstelle eine Spezifikation ausschliesslich auf Grundlage von Lastenheft_RL-SE-Checklist-Selbstpruefung.md. Beginne keine Implementierung und fuehre keine Remote-Aktion aus.
+```
+
+<!-- spec-kit-command-id: speckit.autonomous -->
+```text
+$speckit-autonomous Fuehre den vollstaendigen Spec-Kit-Lauf fuer Lastenheft_RL-SE-Checklist-Selbstpruefung.md mit Delivery Authority LocalImplementation aus und stoppe vor Commit, Push, Pull Request, Merge oder Hosting-Aenderungen.
+```
+<!-- intake-authoring:end -->

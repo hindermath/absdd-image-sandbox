@@ -1,9 +1,16 @@
 # Lastenheft: Sandbox Public Readiness
 
-**Dokumenttyp:** Spec-Kit Intake / Lastenheft  
-**Status:** Vorbereitung fuer spaeteren Spec-Kit-Lauf, kein gestarteter Lauf  
-**Repository:** absdd-image-sandbox  
+**Dokumenttyp:** Spec-Kit Intake / Lastenheft
+
+**Status:** archiviert nach Abschluss von `001-public-readiness` / archived after completion of `001-public-readiness`
+
+**Repository:** absdd-image-sandbox
+
 **Zielgruppe:** Fachinformatiker*innen in Ausbildung, Entwickler*innen, Reviewer und KI-Agenten
+
+**Hinweis / Note:** Dieses Lastenheft ist historische Eingabe-Evidenz und darf
+nicht erneut als aktiver Intake gestartet werden. / This requirements document
+is historical input evidence and must not be started again as an active intake.
 
 ## Ziel / Goal
 

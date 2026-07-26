@@ -1,8 +1,10 @@
+<!-- intake-authoring:begin -->
 # Lastenheft: Secure-Development-Hardening
 
 **Repository:** absdd-image-sandbox
 **Dokumenttyp:** Spec-Kit Intake / Lastenheft
-**Status:** vorbereitet fuer separaten Spec-Kit-Haertungslauf
+**Status:** ReadyForReview
+**Lieferautoritaet / Delivery authority:** LocalImplementation
 **Stand:** 2026-07-01
 
 ## 1. Zweck
@@ -102,3 +104,17 @@ Erstelle eine fokussierte Feature-Spezifikation, die docs/secure-development/, c
 Dokumentiere jeden relevanten Pruefpunkt als Applicable, N/A oder Open mit Evidenzpfad, Begruendung, Risiko oder Folgeaktion und Bezug zum spaeteren Artefakt.
 Beruecksichtige sichere Entwicklung, MSL-Sprachprofil, A11Y/WCAG 2.2 AA, DE-first/EN-second, CEFR B2, Supply Chain/SBOM/AI-SBOM/VEX/SLSA, BSI C3A/C5 und regulatorische Anwendbarkeit nur dort, wo sie fachlich greifen.
 ```
+
+<!-- intake-authoring:prompts -->
+## Verwaltete Folgekommandos / Managed Follow-Up Commands
+
+<!-- spec-kit-command-id: speckit.specify -->
+```text
+$speckit-specify Erstelle eine Spezifikation ausschliesslich auf Grundlage von Lastenheft_Secure-Development-Hardening.md. Beginne keine Implementierung und fuehre keine Remote-Aktion aus.
+```
+
+<!-- spec-kit-command-id: speckit.autonomous -->
+```text
+$speckit-autonomous Fuehre den vollstaendigen Spec-Kit-Lauf fuer Lastenheft_Secure-Development-Hardening.md mit Delivery Authority LocalImplementation aus und stoppe vor Commit, Push, Pull Request, Merge oder Hosting-Aenderungen.
+```
+<!-- intake-authoring:end -->

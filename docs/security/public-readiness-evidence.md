@@ -45,8 +45,8 @@ vorbehalten sind.
 | AI-SBOM-Anbieter-Transparenz / AI-SBOM supplier transparency | `_TODO_` | `docs/security/ai-tools-inventory.md` | Entwicklungswerkzeug-Eintraege vorhanden; Owner-/Anbieter-Felder bewusst offen. | Owner / KIB | Anbieter-/Modell-Lieferantendaten einzutragen, wenn Nutzung genehmigt. | Anbieter-/Modell-Freigabe |
 | Historische Agent-Session-Logs / Historical agent-session logs | not-public-release-relevant | `docs/security/agent-session-log/` | Logs koennen alte Anbieter-, Image-, Hosting- oder Host-Kontext-Referenzen enthalten; Audit-Notizen, keine aktuellen Anleitungen. | Maintainer | Log nur neutralisieren, wenn als aktuelle Anleitung wiederverwendet. | Session-Log-Kuration |
 | GSDB-Preflight-Bericht / GSDB preflight report | context-evidence | `docs/security/gsdb-self-assessment.md` | Preflight bereitet spaetere GSDB-Lauf vor; keine formelle Freigabe. | Maintainer | Bei GSDB-Intensivpruefung auffrischen. | GSDB-Spec-Kit-Lauf |
-| RL-SE-/Checklisten-Selbstpruefung / RL-SE/checklist self-assessment | `Open` | `Lastenheft_RL-SE-Checklist-Selbstpruefung.md` | Separater Spec-Kit-Lauf; hier bewusst nicht gestartet. | Maintainer | Separat manuell starten, wenn angefordert. | Explizite Benutzeranforderung |
-| Container-Haertung / Container hardening | `Open` | `Lastenheft_Secure-Development-Container-Hardening.md`, `Lastenheft_Secure-Development-Hardening.md` | Separate Haertungs-Laeufe; hier bewusst nicht gestartet. | Maintainer | Separat manuell starten, wenn angefordert. | Explizite Benutzeranforderung |
+| GSDB-Bestandspruefung / GSDB baseline assessment | `Open` | `Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md`, `specs/intake-series/sandbox-development-lifecycle/manifest.json` | Erste Stufe der geprueften Intake-Serie; noch nicht gestartet. | Maintainer | Separat manuell starten, wenn angefordert. | Explizite Benutzeranforderung |
+| Container-Haertung / Container hardening | `Open` | `Lastenheft_Secure-Development-Container-Hardening.md` | Zweite, durch die Bestandspruefung blockierte Serienstufe. | Maintainer | Nach Abschluss der Bestandspruefung starten. | Abgeschlossene GSDB-Bestandspruefung |
 
 ### Kein-Ueberanspruch-Erklaerung / No-Overclaim Statement
 
@@ -99,8 +99,8 @@ providers, or close human-only decisions.
 | AI-SBOM supplier transparency | `_TODO_` | `docs/security/ai-tools-inventory.md` | Development-tool entries exist; owner/provider fields remain intentionally open | Owner / KIB | Fill provider/model supplier data when provider usage is approved | Provider/model approval |
 | Historical agent-session logs | not-public-release-relevant | `docs/security/agent-session-log/` | Logs may contain old provider, image, hosting, or host-context references; they are audit notes, not current public setup instructions | Maintainer | Neutralize a log only if it is reused as current guidance | Session-log curation review |
 | GSDB preflight report | context-evidence | `docs/security/gsdb-self-assessment.md` | Preflight prepares a later GSDB run and is not a formal approval | Maintainer | Refresh when the GSDB intensive review starts | GSDB Spec-Kit run |
-| RL-SE-/Checklist self-assessment | `Open` | `Lastenheft_RL-SE-Checklist-Selbstpruefung.md` | Separate Spec-Kit run; intentionally not executed here | Maintainer | Start separate run manually if requested | Explicit user request |
-| Container hardening | `Open` | `Lastenheft_Secure-Development-Container-Hardening.md`, `Lastenheft_Secure-Development-Hardening.md` | Separate hardening runs; intentionally not executed here | Maintainer | Start separate run manually if requested | Explicit user request |
+| GSDB baseline assessment | `Open` | `Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md`, `specs/intake-series/sandbox-development-lifecycle/manifest.json` | First stage of the reviewed intake series; not started | Maintainer | Start separately when explicitly requested | Explicit user request |
+| Container hardening | `Open` | `Lastenheft_Secure-Development-Container-Hardening.md` | Second series stage, blocked by the baseline assessment | Maintainer | Start after the baseline assessment completes | Completed GSDB baseline assessment |
 
 ### No-Overclaim Statement
 

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesOperation",
+  "operationId": "8dfcba7e-3bd6-4107-bb9f-53c0144370b0",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "type": "Create",
+  "status": "Completed",
+  "authorityEvidence": "Explicit user approval of the recommended four-stage chain and verifiable archival",
+  "proposalNormalizedSha256": "faa906c5acb7678265de75e28d80a337459d754ab53066f7a4f065ef24d1b3b2",
+  "preparedPaths": [
+    "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+    "Lastenheft_Abarbeitungsreihenfolge.md"
+  ],
+  "validation": {
+    "bash": "Passed",
+    "powerShell": "Passed"
+  },
+  "publication": {
+    "status": "Published",
+    "publishedPaths": [
+      "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+      "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+      "Lastenheft_Abarbeitungsreihenfolge.md"
+    ]
+  }
+}
