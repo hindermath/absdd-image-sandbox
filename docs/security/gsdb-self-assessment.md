@@ -28,8 +28,8 @@ not a formal approval.*
 | OK | Preset cross-platform-governance | `.specify/presets/` | per specify preset list nachweisbar | - |
 | OK | Preset agent-parity-governance | `.specify/presets/` | per specify preset list nachweisbar | - |
 | OK | Projektspezifischer Nachweisort | `docs/security/` | Nachweisordner vorhanden | - |
-| OK | RL-SE-/Checklist-Selbstpruefungs-Intake | `Lastenheft_RL-SE-Checklist-Selbstpruefung.md` | vorhanden | - |
-| OK | Secure-Development-Hardening-Intake | `Lastenheft_Secure-Development-Hardening.md` | vorhanden | - |
+| OK | Konsolidierter GSDB-Bestandspruefungs-Intake | `Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md` | als Serienwurzel vorhanden | - |
+| OK | Intake-Serie | `specs/intake-series/sandbox-development-lifecycle/manifest.json` | vier Stufen, eine Wurzel | - |
 | OK | GSDB-Spec-Kit-Intensivpruefungs-Intake | `Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md` | Intake vorhanden | - |
 
 ## Ergebnis / Result

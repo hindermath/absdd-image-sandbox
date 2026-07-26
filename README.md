@@ -435,27 +435,33 @@ specify init . --integration opencode --force
 
 Falls nach dem Skripttyp gefragt wird, im Linux-Container `sh` auswaehlen.
 
-## Secure-Development-Container-Hardening-Intake
+## Verwaltete Sandbox-Intake-Serie / Managed Sandbox Intake Series
 
-Dieses Repository ist der passende Level-2-Ort fuer einen spaeteren
-Spec-Kit-Lauf zum sicheren Softwareentwicklungscontainer. Der Intake
-`Lastenheft_Secure-Development-Container-Hardening.md` beschreibt die
-Pruefpunkte fuer Podman/Docker-Runtime, digest-gepinnte Basisimages,
-SBOM/VEX/SLSA, Container-Scanning, Signatur- oder Attestation-Entscheidung,
-Secrets, Host-Mounts, Agenten-Daten, Modell-/Tool-Inventar und
-C3A/C5-/Regulatory-`N/A`-Begruendungen.
+Die aktiven Anforderungen bilden eine gepruefte, vierstufige Spec-Kit-Serie:
 
-Das Lastenheft ist nur Vorbereitung. Es baut kein Image, startet keinen
-Container und migriert keine Projekte. Die aktive Reihenfolge fuer spaetere
-Spec-Kit-Laeufe steht in `Lastenheft_Abarbeitungsreihenfolge.md`.
+1. GSDB-Bestand und Sicherheitsluecken pruefen.
+2. Priorisierte technische Sandbox-Haertung umsetzen.
+3. Das finale lokale Image unabhaengig abnehmen.
+4. Die forkbare Selbstbau-Vorlage fuer Lernende bearbeiten.
 
-*This repository is the right Level-2 place for a later Spec Kit run about a
-secure software development container. The intake
-`Lastenheft_Secure-Development-Container-Hardening.md` covers Podman/Docker
-runtime, digest-pinned base images, SBOM/VEX/SLSA, container scanning,
-signature or attestation decisions, secrets, host mounts, agent data,
-model/tool inventory, and C3A/C5/regulatory `N/A` rationales. It is preparation
-only; it does not build an image, start a container, or migrate projects.*
+Nur die erste Stufe ist aktuell ausfuehrbar. Jede weitere Stufe ist durch den
+nachweisbaren Abschluss ihrer Vorgaengerin blockiert. Die lesbare Reihenfolge
+steht in `Lastenheft_Abarbeitungsreihenfolge.md`; die verbindliche
+maschinenlesbare Quelle ist
+`specs/intake-series/sandbox-development-lifecycle/manifest.json`.
+
+Die Intake-Dateien starten keinen Lauf automatisch. Ein Specify- oder
+Implementierungslauf braucht eine neue, ausdrueckliche Autoritaet. Formale
+Sandbox-, Provider-, Modell- und Rechtsfreigaben bleiben menschliche
+Entscheidungen.
+
+*The active requirements form a reviewed four-stage Spec Kit series: assess the
+GSDB baseline and gaps, implement prioritized technical hardening,
+independently accept the final local image, and then work on the forkable
+self-build template. Only the first stage is currently eligible. Every later
+stage is blocked by verified completion of its predecessor. The intake files
+do not start work automatically, and formal sandbox, provider, model, and legal
+approvals remain human decisions.*
 
 ## SBOM
 

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "6403c657-e508-4029-bfe8-319436f3fa7a",
+  "mode": "Series",
+  "policy": "learner-a11y-bilingual-series",
+  "targets": [
+    {
+      "path": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "role": "Primary"
+    },
+    {
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "role": "OrderedMember"
+    }
+  ],
+  "series": {
+    "orderedTargetPaths": [
+      "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "roots": [
+      "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+    ],
+    "dependencies": [
+      {
+        "from": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+        "to": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "kind": "AssessmentBaseline"
+      },
+      {
+        "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "kind": "SandboxBaseline"
+      },
+      {
+        "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "to": "intakes/learner-fork-self-build-sandbox.md",
+        "kind": "HardCompletionGate"
+      }
+    ]
+  },
+  "campaign": {
+    "manifestPath": "N/A",
+    "workers": [],
+    "operatorExceptions": []
+  }
+}

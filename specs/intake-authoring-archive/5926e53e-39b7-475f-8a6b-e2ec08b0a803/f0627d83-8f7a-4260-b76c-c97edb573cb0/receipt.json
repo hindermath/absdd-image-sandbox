@@ -1,17 +1,17 @@
 {
   "schemaVersion": "2.0",
   "documentType": "IntakeReceipt",
-  "receiptId": "480f8745-b525-472f-a432-8d0da0b6d498",
+  "receiptId": "45c3d95e-3349-48c4-9f33-760bdcdb46c1",
   "intakeId": "5926e53e-39b7-475f-8a6b-e2ec08b0a803",
   "generator": {
     "preset": "intake-authoring-governance",
     "version": "0.2.1"
   },
-  "createdAt": "2026-07-26T18:59:07Z",
+  "createdAt": "2026-07-25T21:52:10Z",
   "operation": {
-    "operationId": "f0627d83-8f7a-4260-b76c-c97edb573cb0",
-    "type": "Update",
-    "authorityEvidence": "Explicit user request to implement the approved four-stage intake series"
+    "operationId": "73abf3a1-1cd4-4072-9d72-17f6f2f33647",
+    "type": "Create",
+    "authorityEvidence": "Explicit user request to create one or more intake files for the stated learner fork and self-build requirement"
   },
   "status": "ReadyForReview",
   "target": {
@@ -22,8 +22,8 @@
     {
       "sourceId": "SRC001",
       "order": 1,
-      "kind": "Pasted",
-      "label": "Previously reviewed forkable self-build sandbox intake",
+      "kind": "Inline",
+      "label": "User request for a forkable learner template with local image self-build",
       "location": "SnapshotOnly",
       "path": "N/A",
       "requestedUrl": "N/A",
@@ -36,8 +36,8 @@
       "lastModified": "N/A",
       "redirectChain": [],
       "rawSha256": "N/A",
-      "normalizedSha256": "6e17c637283212954857e82b53b2eeb11fd44a3c3d9996bb677ad991064d8293",
-      "gitBlob": "6238b85d8c03338a0e67fa92a1de56f1e3dc6c4c",
+      "normalizedSha256": "8fbe929fc4a68c43bdbec3e238c9de20e434756f5a0e11b8be7715c2a98ae1f9",
+      "gitBlob": "N/A",
       "proofBoundary": "SnapshotOnly"
     }
   ],
@@ -64,13 +64,6 @@
       "question": "What delivery authority is granted by this authoring request?",
       "answer": "Local intake authoring only. Review, implementation, commit, push, pull request, merge, and platform changes do not start automatically.",
       "evidence": "The user requested intake files, not implementation or remote delivery."
-    },
-    {
-      "id": "IAD004",
-      "status": "Answered",
-      "question": "Where does this intake belong in the reordered sandbox lifecycle?",
-      "answer": "It is the fourth stage and remains blocked until the independent sandbox acceptance is complete.",
-      "evidence": "The user approved the recommended four-stage chain."
     }
   ],
   "openDecisionIds": [],
@@ -82,27 +75,27 @@
     "autonomousInvocation": "$speckit-autonomous"
   },
   "deliveryAuthority": "LocalImplementation",
-  "authorityEvidence": "No remote delivery authority was granted for this implementation",
+  "authorityEvidence": "Default local implementation boundary; no explicit remote delivery authority was granted",
   "promptState": "Enabled",
-  "provenanceMode": "Supersession",
+  "provenanceMode": "New",
   "supersedes": {
-    "receiptPath": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/f0627d83-8f7a-4260-b76c-c97edb573cb0/receipt.json",
-    "targetNormalizedSha256": "6e17c637283212954857e82b53b2eeb11fd44a3c3d9996bb677ad991064d8293",
-    "archiveTargetPath": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/f0627d83-8f7a-4260-b76c-c97edb573cb0/target.md",
-    "archiveReceiptPath": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/f0627d83-8f7a-4260-b76c-c97edb573cb0/receipt.json"
+    "receiptPath": "N/A",
+    "targetNormalizedSha256": "N/A",
+    "archiveTargetPath": "N/A",
+    "archiveReceiptPath": "N/A"
   },
   "legacyAdoption": {
     "evidenceType": "N/A",
     "priorTargetNormalizedSha256": "N/A",
     "priorGitBlob": "N/A"
   },
-  "updateAuthorized": true,
-  "updateAuthorityEvidence": "Explicit user approval of the four-stage intake series on 2026-07-26",
+  "updateAuthorized": false,
+  "updateAuthorityEvidence": "N/A",
   "series": {
-    "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
-    "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
-    "order": 4,
-    "role": "Learner self-build handoff",
+    "seriesId": "N/A",
+    "manifestPath": "N/A",
+    "order": "N/A",
+    "role": "N/A",
     "supersedesIntakeIds": []
   },
   "nextAction": "$speckit-intake-review intakes/learner-fork-self-build-sandbox.md"

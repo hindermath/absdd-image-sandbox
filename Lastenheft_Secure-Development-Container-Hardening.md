@@ -1,156 +1,106 @@
-# Lastenheft: Secure-Development-Container-Hardening
+<!-- intake-authoring:begin -->
+# Technische Sandbox-Haertung / Technical Sandbox Hardening
 
-**Dokumenttyp:** Spec-Kit Intake / Lastenheft
-**Status:** vorbereitet fuer separaten Spec-Kit-Lauf
-**Stand:** 2026-06-20
-**Zielgruppe:** Fachinformatiker*innen in Ausbildung, Entwickler*innen, Reviewer und KI-Agenten
+**Status:** ReadyForReview
 
-## 1. Zweck
+**Zielgruppe / Audience:** Auszubildende, Lernbegleitung, Entwicklung und Security Review
 
-Dieses Lastenheft beschreibt einen spaeteren Spec-Kit-Lauf fuer einen Container
-zur sicheren Softwareentwicklung. Der Lauf soll aus der bestehenden
-Secure-Development-Basis, den Checklisten, den mitgeltenden Dokumenten und den
-Governance-Presets ableiten, welche technischen und dokumentarischen
-Anforderungen ein reproduzierbarer Entwicklungscontainer erfuellen muss.
+**Lieferautoritaet / Delivery authority:** LocalImplementation
 
-Der Lauf baut keinen Container und startet keine Umsetzung. Er erzeugt zuerst
-eine belastbare Spezifikation fuer den spaeteren Container- oder
-Sandbox-Hardening-Lauf.
+## Zweck / Purpose
 
-*This requirements document describes a later Spec Kit run for a secure software
-development container. The run derives technical and documentation requirements
-from the secure-development baseline, checklists, related documents, and
-governance presets. It does not build a container or start implementation; it
-first creates a reliable specification for a later container or sandbox
-hardening run.*
+**DE:** Dieser Intake beschreibt die technische und dokumentarische Haertung
+der Podman-basierten Entwicklungs-Sandbox. Die priorisierte Lueckenliste der
+GSDB-Bestandspruefung ist die verbindliche fachliche Baseline.
 
-## 2. Ausgangslage
+**EN:** This intake defines technical and documentation hardening for the
+Podman-based development sandbox. The prioritized gap list from the GSDB
+baseline assessment is its binding baseline.
 
-Die Secure-Development-Basis beschreibt bereits Anforderungen an sichere
-Entwicklungsumgebungen, agentische KI-Sandboxen, Lieferkette, SBOM, Secrets,
-Container-Scanning, Digest-Pinning, Signaturen und Audit-Evidenz. Fuer einen
-kuenftigen Entwicklungscontainer muessen diese Punkte in ein konkretes
-Container-Zielbild ueberfuehrt werden.
+## Ausgangslage und Zielbild / Current and Target State
 
-Relevante Bezugspunkte sind insbesondere:
+**DE:** Das Image stellt Agenten, Entwicklungswerkzeuge und mehrere
+speichersichere Toolchain-Familien bereit. Nach dem Lauf sind anwendbare
+Sicherheitsluecken mit reproduzierbaren Aenderungen behoben oder mit
+begruendetem Restrisiko offen dokumentiert.
 
-- `docs/secure-development/Richtlinie_Sichere-Entwicklung.md`
-- `docs/secure-development/Checklistensammelband_Sichere-Entwicklung.md`
-- `docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md`
-- `docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md`
-- `docs/secure-development/mitgeltende-dokumente/Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md`
-- `constitution.md`, Prinzipien XII bis XIX
-- die acht Governance-Presets
+**EN:** The image provides agents, development tools, and several memory-safe
+toolchain families. After the run, applicable security gaps are fixed through
+reproducible changes or remain explicitly documented with justified residual
+risk.
 
-## 3. Zielbild
+## Scope
 
-Nach dem spaeteren Spec-Kit-Lauf soll klar sein:
+- Basisimage, Digest-Pinning, reproduzierbare Downloads und Versions-Pinning.
+- Rootless-Laufzeit, Linux-Capabilities, Mounts, Dateirechte und Schreibgrenzen.
+- Netzwerkentscheidung, Paketquellen und dokumentierte Egress-Grenzen.
+- OpenCode und alle erforderlichen Agenten-CLIs samt isoliertem Zustand.
+- Tatsachlich installierte Toolchains, LSP-Werkzeuge und Smoke-Tests.
+- SBOM, Schwachstellenbewertung, VEX/SLSA/Signatur-Anwendbarkeit.
+- VS-Code-Dev-Container-Zugriff und lokale Projekt-Mappings.
+- Lernenden-, A11Y- und Plattformdokumentation.
 
-- welche Container-Runtime als Referenz gilt, z. B. Podman oder Docker,
-- ob der Container als Entwicklungsinfrastruktur, Produktartefakt oder beides
-  zu behandeln ist,
-- welche Sicherheitsnachweise zwingend sind,
-- welche Punkte `Applicable`, `N/A` oder `Open` sind,
-- welche Evidenzpfade fuer Image, Build, Scan, Signatur, SBOM, Secrets,
-  Mounts, Netzwerk und Agenten-Konfiguration genutzt werden,
-- welche Anforderungen fuer Auszubildende in CEFR-B2-Sprache erklaert werden
-  muessen.
+## Nicht-Ziele / Non-Goals
 
-## 4. Scope
+- Kein fertiges Projekt-Image in GHCR oder einer anderen Projekt-Registry.
+- Keine produktive Cloud- oder Mehrmandantenplattform.
+- Keine echte Provider-, Modell-, Rechts- oder Sandbox-Freigabe.
+- Keine Secrets im Image, in Commits oder in Testprotokollen.
 
-In Scope:
+## Anforderungen / Requirements
 
-- unprivilegierte Container-Ausfuehrung und minimale Berechtigungen,
-- Image-Digest-Pinning statt nur mutable Tags,
-- reproduzierbarer Build und dokumentierte Basis-Images,
-- SBOM fuer Container und Toolchain,
-- VEX-Bewertung fuer bekannte Schwachstellen, falls relevant,
-- SLSA-/Provenance-Nachweise fuer Build-Artefakte,
-- Image-Signatur oder Attestation, z. B. Cosign, sofern anwendbar,
-- Trivy-/Grype-Scan oder gleichwertige Container-/Filesystem-Scans,
-- Secrets-Trennung, keine Secrets im Image, keine Tokens in Layern,
-- Mount-Policy fuer Host-Verzeichnisse,
-- Netzwerkgrenzen und Offline-/Minimalnetz-Modus,
-- Agenten-/Modell-Inventar, Tool-Versionen und deaktivierte Auto-Updates,
-- Dokumentation fuer Auszubildende und Reviewer.
+1. Jede Aenderung muss auf einen Befund der GSDB-Bestandspruefung zeigen.
+2. Build- und Laufzeitrechte bleiben minimal und begruendet.
+3. Downloads, Toolversionen und Basisimage bleiben reproduzierbar pruefbar.
+4. Agenten- und Providerzustand bleibt voneinander und vom Repository getrennt.
+5. Toolchain-Behauptungen muessen durch Versions- und Projekt-Smoke-Tests
+   belegt sein.
+6. Sicherheitsrestriktionen duerfen die dokumentierten Lern- und
+   Entwicklungsablaeufe nicht unbegruendet blockieren.
+7. Offene Human-only-Punkte bleiben als solche gekennzeichnet.
 
-Out of Scope:
+## Abhaengigkeiten und Risiken / Dependencies and Risks
 
-- sofortiger Container-Build,
-- Auswahl eines konkreten Registry-Betreibers,
-- Produktive Cloud-Betriebsarchitektur,
-- automatische Migration bestehender Projekte in den Container.
+**DE:** Dieser Intake ist durch die abgeschlossene GSDB-Bestandspruefung
+blockiert. Nicht reproduzierbare Downloads, ueberbreite Mounts, veraltete
+Agenten oder widerspruechliche Toolchain-Angaben sind zentrale Risiken.
 
-## 5. Governance- und Compliance-Bezug
+**EN:** Completion of the GSDB baseline assessment blocks this intake.
+Non-reproducible downloads, overly broad mounts, stale agents, or conflicting
+toolchain claims are key risks.
 
-- `security-governance`: Secure Coding, Dependency-Audit, AI-SBOM/N/A,
-  regulatorische Anwendbarkeit und Lieferkette.
-- `architecture-governance`: C3A/C5-Anwendbarkeit, Cloud-/Provider-Abhaengigkeit,
-  Container-/Artefakt-Hosting und Architekturentscheidungen.
-- `agent-parity-governance`: konsistente Agenten-Dateien, Tool- und
-  Modell-Routing.
-- `cross-platform-governance`: macOS/Linux/Windows- und Shell-Paritaet.
-- `a11y-governance`: textfreundliche Dokumentation und Lernbarkeit.
-- `isaqb-architecture-governance`: Architekturentscheidung, Qualitaetsszenarien
-  und nachvollziehbare Kompromisse.
+## Erwartete Artefakte und Evidenz / Expected Artefacts and Evidence
 
-Reine Entwicklungsinfrastruktur kann bei C3A/C5, NIS2, CRA, EU AI Act oder DORA
-`N/A` sein. Diese Nichtanwendbarkeit muss kurz begruendet werden; sie darf nicht
-stillschweigend ausgelassen werden.
+- Gezielte Aenderungen an Image, Compose, Konfiguration und Dokumentation.
+- Aktualisierte SBOM- und Scan-Nachweise.
+- Reproduzierbarer Toolchain- und Agenten-Smoke-Test.
+- Aktualisierte projektspezifische Evidenz unter `docs/security/`.
 
-## 6. Mindestanforderungen an den spaeteren Lauf
+## Akzeptanzkriterien / Acceptance Criteria
 
-1. Container-/Sandbox-Typ und Schutzgrenzen dokumentieren.
-2. Basis-Image, Runtime und Toolchain-Versionen reproduzierbar festlegen.
-3. Image-Digests, SBOM, Scan-Ergebnisse und Signatur-/Attestation-Entscheidung
-   als Evidenzpfade planen.
-4. Host-Mounts, Secrets, Caches, Agenten-Daten und Netzwerknutzung trennen.
-5. Agentische KI-Werkzeuge, Modelle und Konfigurationen inventarisieren.
-6. Auto-Update-Verhalten bewerten und fuer reproduzierbare Laeufe begrenzen.
-7. Alle Punkte als `Applicable`, `N/A` oder `Open` dokumentieren.
-8. Auszubildendenverstaendliche Kurzbegriffe fuer Container, Image, Digest,
-   SBOM, VEX, SLSA, Signatur, Mount und Sandbox aufnehmen.
+- Alle in Scope liegenden priorisierten Befunde sind behoben oder begruendet
+  offen.
+- Image und Compose-Konfiguration bauen beziehungsweise validieren erfolgreich.
+- Agenten, Toolchains, VS-Code-Zugriff und Mounts sind praktisch geprueft.
+- SBOM-Erzeugung funktioniert fuer das finale lokale Image.
+- Keine Freigabe oder Remote-Verteilung wird erfunden oder automatisch
+  ausgefuehrt.
 
-## 7. Erwartete Ergebnisartefakte
+## Annahmen und offene Fragen / Assumptions and Open Questions
 
-| Artefakt | Erwartung |
-|---|---|
-| Spec-Kit `spec.md` | Container-Ziel, Scope, Nicht-Ziele, Schutzgrenzen |
-| Spec-Kit `plan.md` | Runtime-/Image-Strategie, Evidenzpfade, Risiken |
-| Spec-Kit `tasks.md` | Pruef-, Dokumentations- und spaetere Implementierungsaufgaben |
-| Security-/Architecture-Evidence | SBOM, Scan, Signatur, S-ADR, C3A/C5/N/A-Entscheidung |
-| README/Guide | CEFR-B2-Erklaerung fuer Nutzung und Sicherheitsmodell |
+- Podman bleibt die Referenzlaufzeit.
+- Es bestehen keine offenen Intake-Authoring-Fragen.
 
-## 8. Akzeptanzkriterien
+<!-- intake-authoring:prompts -->
+## Kopierbare Folgekommandos / Copy-Ready Follow-Up Commands
 
-- Der spaetere Lauf startet keinen Container-Build ohne eigene Freigabe.
-- Alle Sicherheits- und Supply-Chain-Punkte sind klassifiziert.
-- Jede positive Sicherheitsbehauptung verweist auf konkrete Evidenz.
-- Jede Nichtanwendbarkeit ist als `N/A` begruendet.
-- Der Container-Scope ist fuer Auszubildende, Reviewer und KI-Agenten
-  nachvollziehbar.
-
-## 9. Kopierbarer `/speckit-specify`-Prompt
-
+<!-- spec-kit-command-id: speckit.specify -->
 ```text
-/speckit-specify Nutze Lastenheft_Secure-Development-Container-Hardening.md als verbindliche Eingabedatei. Erstelle die Feature-Spezifikation fuer einen sicheren Softwareentwicklungscontainer bzw. eine Entwicklungs-Sandbox.
-
-Ziel: Aus der Secure-Development-Basis, den Checklisten, den mitgeltenden Dokumenten und den acht Governance-Presets soll ein belastbares Zielbild fuer einen reproduzierbaren, auditierbaren Entwicklungscontainer entstehen.
-
-Pflichtpunkte:
-- Container-/Sandbox-Typ, Schutzgrenzen und Nicht-Ziele klaeren.
-- Podman/Docker- bzw. Runtime-Entscheidung als Architekturentscheidung vorbereiten.
-- Basis-Images per Digest pinnen; mutable Tags allein reichen nicht.
-- SBOM, VEX, SLSA/Provenance, Trivy/Grype-Scan, Cosign/Signatur oder begruendetes `N/A` einplanen.
-- Secrets, Caches, Agenten-Daten, Host-Mounts und Netzwerkzugriff getrennt betrachten.
-- Agenten-/Modell-Inventar, Tool-Versionen und Auto-Update-Verhalten dokumentieren.
-- C3A/C5, NIS2, CRA, EU AI Act und DORA als Anwendbarkeitsmatrix pruefen; reine Entwicklungsinfrastruktur darf `N/A` sein, aber nur mit Begruendung.
-- Inhalte muessen DE/EN, CEFR B2 und WCAG-2.2-AA-freundlich dokumentierbar sein.
-
-Nicht-Ziele:
-- Kein Container-Build in diesem Lauf.
-- Keine automatische Migration bestehender Repos in den Container.
-- Keine Produktiv-Cloud-Architektur ohne eigenes Lastenheft.
-
-Erzeuge eine Spezifikation mit Scope, Nicht-Zielen, Schutzmodell, Evidenzmatrix, Anforderungen, Akzeptanzkriterien, Risiken und Teststrategie.
+$speckit-specify Erstelle eine Spezifikation ausschliesslich auf Grundlage von Lastenheft_Secure-Development-Container-Hardening.md und der abgeschlossenen GSDB-Lueckenliste. Plane technische und dokumentarische Haertung, aber keine Registry-Verteilung oder formale Freigabe.
 ```
+
+<!-- spec-kit-command-id: speckit.autonomous -->
+```text
+$speckit-autonomous Fuehre den vollstaendigen Spec-Kit-Lauf fuer Lastenheft_Secure-Development-Container-Hardening.md mit Delivery Authority LocalImplementation aus. Implementiere und pruefe die priorisierten Haertungen lokal und stoppe vor Commit, Push, Pull Request, Merge oder Hosting-Aenderungen.
+```
+<!-- intake-authoring:end -->

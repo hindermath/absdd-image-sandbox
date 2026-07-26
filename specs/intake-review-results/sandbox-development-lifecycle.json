@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "6403c657-e508-4029-bfe8-319436f3fa7a",
+  "mode": "Series",
+  "status": "Ready",
+  "policy": "learner-a11y-bilingual-series",
+  "reviewedAt": "2026-07-26T18:59:07Z",
+  "repository": {
+    "root": ".",
+    "head": "e1d55748c8e8a080f1136a1f61bcf11193794b40"
+  },
+  "requestEvidence": {
+    "path": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "normalizedSha256": "dbca42e80160002c5dc5f5808a45d08782f89df7a84ebf071f79f7564fd51195"
+  },
+  "targets": [
+    {
+      "path": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "role": "Primary",
+      "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "72c263db933ea5a10ca60f3a7cc41231b43e1aec5d0dd641129e1a523b3432dc",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "910b450f888b8a57e283e4067745a32535ec3edb84147c089d39bb9f446d3f6e",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "6e17c637283212954857e82b53b2eeb11fd44a3c3d9996bb677ad991064d8293",
+      "gitBlob": "6238b85d8c03338a0e67fa92a1de56f1e3dc6c4c"
+    }
+  ],
+  "findings": [],
+  "questions": [],
+  "acceptedRisks": [],
+  "operatorExceptions": [],
+  "coverage": {
+    "individual": [
+      "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "series": [
+      "Four targets, one root, three binding edges, complete assessment-to-self-build handoff"
+    ],
+    "workers": []
+  },
+  "summary": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "supersedes": "N/A"
+}

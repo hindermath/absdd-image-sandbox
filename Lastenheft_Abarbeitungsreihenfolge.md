@@ -1,47 +1,53 @@
-# Lastenheft_Abarbeitungsreihenfolge
+# Abarbeitungsreihenfolge der Sandbox-Intakes / Sandbox Intake Order
 
-**Dokumenttyp:** Reihenfolge fuer spaetere Spec-Kit-Laeufe
-**Status:** aktiv
-**Stand:** 2026-06-29
+**Status:** aktiv / active
 
-## Zweck
+**Verbindliche Quelle / Binding source:** `specs/intake-series/sandbox-development-lifecycle/manifest.json`
 
-Diese Datei merkt die aktive Reihenfolge fuer spaetere Spec-Kit-Laeufe. Sie
-startet selbst keinen Lauf. Feature-Branch-spezifische Lastenhefte mit einem
-Branch-Namen im Dateinamen, zum Beispiel `001-workspace-homogeneity-guardian`,
-gelten als bereits einem Lauf zugeordnet und werden hier nicht erneut
-einsortiert.
+## Zweck / Purpose
 
-## Aktive Reihenfolge fuer spaetere Laeufe
+**DE:** Diese Datei erklaert die verbindliche Reihenfolge der aktiven
+Sandbox-Intakes. Ein Intake ist ein geprueftes Anforderungsdokument fuer einen
+spaeteren Spec-Kit-Lauf. Die Datei startet keinen Lauf. Der maschinenlesbare
+Graph im Serienmanifest ist bei Abweichungen massgeblich.
 
-1. `Lastenheft_Sandbox-Public-Readiness.md`
-2. `Lastenheft_RL-SE-Checklist-Selbstpruefung.md`
-3. `Lastenheft_Secure-Development-Container-Hardening.md`
-4. `Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md`
+**EN:** This file explains the binding order of the active sandbox intakes. An
+intake is a reviewed requirements document for a later Spec Kit run. This file
+does not start a run. If information differs, the machine-readable graph in the
+series manifest is authoritative.
 
-## Hinweise fuer Agenten
+## Aktive Reihenfolge / Active Order
 
-- Nur Dateien nach dem Muster `Lastenheft*.md` pruefen.
-- Bereits branch-spezifische Lastenhefte nicht erneut ausfuehren.
-- Vor einem Lauf den aktuellen Repo-Stand, Branch und offene Diffs pruefen.
-- Erst nach ausdruecklicher Freigabe einen Spec-Kit-Lauf starten.
-- Public-Readiness, RL-SE-/Checklist-Selbstpruefung, Container-Hardening
-  und Sandbox-Selbstpruefung sind getrennte Laeufe.
-
-
-<!-- secure-development-hardening-order:start -->
-## Automatisch ermittelte Lastenheft-Reihenfolge / Automatically Detected Requirements Order
-
-Diese Tabelle wird aus `Lastenheft*.md` im Repository-Root erzeugt. Sie ist eine Vorbereitung fuer spaetere Spec-Kit-Laeufe und startet selbst keinen Lauf. Manuelle Projektentscheidungen ausserhalb dieses markierten Abschnitts bleiben erhalten.
-
-*This table is generated from `Lastenheft*.md` in the repository root. It prepares later Spec Kit runs and does not start a run. Manual project decisions outside this marked section remain preserved.*
-
-| Rang | Lastenheft | Gruppe | Status |
+| Rang | Intake | Aufgabe | Status |
 |---:|---|---|---|
-| 1 | `Lastenheft_Sandbox-Public-Readiness.md` | Kernlogik/Runtime | aktiv / active |
-| 2 | `Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md` | Kernlogik/Runtime | aktiv / active |
-| 3 | `Lastenheft_RL-SE-Checklist-Selbstpruefung.md` | RL-SE-/Checklist-Selbstpruefung | aktiv / active |
-| 4 | `Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md` | GSDB-Spec-Kit-Intensivpruefung | aktiv / active |
-| 5 | `Lastenheft_Secure-Development-Hardening.md` | Secure-Development-Hardening | aktiv / active |
-| 6 | `Lastenheft_Secure-Development-Container-Hardening.md` | Weitere Anforderungen | aktiv / active |
-<!-- secure-development-hardening-order:end -->
+| 1 | `Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md` | GSDB-Bestand und Luecken pruefen | ausfuehrbar / eligible |
+| 2 | `Lastenheft_Secure-Development-Container-Hardening.md` | priorisierte technische Haertung umsetzen | blockiert / blocked |
+| 3 | `Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md` | gehaertete Sandbox unabhaengig abnehmen | blockiert / blocked |
+| 4 | `intakes/learner-fork-self-build-sandbox.md` | forkbare Selbstbau-Vorlage bereitstellen | blockiert / blocked |
+
+## Abhaengigkeiten / Dependencies
+
+1. Die GSDB-Bestandspruefung liefert die priorisierte Lueckenliste.
+2. Die technische Haertung verwendet diese Liste als verbindliche Baseline.
+3. Die Sandbox-Abnahme beginnt erst nach abgeschlossener Haertung.
+4. Die Selbstbau-Vorlage wird erst nach erfolgreicher Abnahme bearbeitet.
+
+*The GSDB assessment produces the prioritized gap list. Technical hardening
+uses it as its baseline. Acceptance starts only after hardening is complete,
+and the self-build template follows successful acceptance.*
+
+## Archivierte oder ersetzte Lastenhefte / Archived or Superseded Requirements
+
+- `Lastenheft_Sandbox-Public-Readiness.001-public-readiness.md` ist als
+  abgeschlossene Feature-Eingabe archiviert.
+- Die frueheren getrennten RL-SE-/Checklist- und allgemeinen
+  Secure-Development-Hardening-Intakes sind in die GSDB-Bestandspruefung
+  eingeflossen. Archive und Tombstones liegen unter `specs/`.
+
+## Naechste Aktion / Next Action
+
+Den Serienstatus schreibfrei pruefen:
+
+```text
+$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json
+```

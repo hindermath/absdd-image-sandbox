@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeTombstone",
+  "tombstoneId": "e791eae7-6e30-4d3f-93bd-93f09848d356",
+  "intakeId": "fbc5153b-8f50-4fb5-bfb3-0427c7b26c27",
+  "operationId": "4ab948d8-7453-4fc5-980d-4706c810073f",
+  "deletedAt": "2026-07-26T18:59:07Z",
+  "reason": "The general secure-development hardening scope was merged into the canonical GSDB baseline assessment.",
+  "deleteAuthorityEvidence": "Explicit user selection of complete reordering with verifiable archival on 2026-07-26",
+  "original": {
+    "targetPath": "Lastenheft_Secure-Development-Hardening.md",
+    "targetNormalizedSha256": "8bff6dfeaaecccd9f7771d9ff859e7c8922ca7a71d324477eec8084169faf792",
+    "receiptPath": "specs/intake-authoring-receipts/secure-development-hardening.json",
+    "receiptNormalizedSha256": "f03ab4a7fdd1f8b2f10598855483beff79130b0b98b6114ef48c536197c88230"
+  },
+  "archive": {
+    "targetPath": "specs/intake-authoring-archive/fbc5153b-8f50-4fb5-bfb3-0427c7b26c27/4ab948d8-7453-4fc5-980d-4706c810073f/target.md",
+    "targetNormalizedSha256": "8bff6dfeaaecccd9f7771d9ff859e7c8922ca7a71d324477eec8084169faf792",
+    "receiptPath": "specs/intake-authoring-archive/fbc5153b-8f50-4fb5-bfb3-0427c7b26c27/4ab948d8-7453-4fc5-980d-4706c810073f/receipt.json",
+    "receiptNormalizedSha256": "f03ab4a7fdd1f8b2f10598855483beff79130b0b98b6114ef48c536197c88230"
+  },
+  "seriesImpact": {
+    "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+    "migrationOperationId": "4577c3a5-6606-4674-bf8c-f8a4567cb7ac"
+  },
+  "reactivationBoundary": "Create a new explicitly authorized Update from archived evidence",
+  "nextAction": "N/A"
+}

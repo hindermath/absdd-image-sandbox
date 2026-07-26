@@ -1,69 +1,108 @@
-# Lastenheft: Sandbox Secure-Development-Selbstpruefung
+<!-- intake-authoring:begin -->
+# Sandbox-Abnahme / Sandbox Acceptance Review
 
-**Dokumenttyp:** Spec-Kit Intake / Lastenheft  
-**Status:** Vorbereitung fuer spaeteren Spec-Kit-Lauf, kein gestarteter Lauf  
-**Repository:** absdd-image-sandbox  
-**Zielgruppe:** Fachinformatiker*innen in Ausbildung, Entwickler*innen, Reviewer und KI-Agenten
+**Status:** ReadyForReview
 
-## Ziel / Goal
+**Zielgruppe / Audience:** Auszubildende, Lernbegleitung, Betrieb und unabhaengiges Review
 
-Dieses Lastenheft beschreibt einen spaeteren Spec-Kit-Lauf, der die Sandbox selbst gegen die sichere-Entwicklungsbasis prueft. Die Sandbox soll sicher genug gehaertet sein und gleichzeitig arbeitsfaehig bleiben. Sie darf nicht durch zu starke Restriktionen fuer Ausbildung, Spec Kit, KI-Agenten und MSL-basierte Entwicklung unbrauchbar werden.
+**Lieferautoritaet / Delivery authority:** LocalImplementation
 
-*This intake describes a later Spec Kit run that checks the sandbox itself against the secure-development baseline. The sandbox should be hardened enough while remaining usable. It must not become unusable for training, Spec Kit, AI agents, and MSL-based development through excessive restrictions.*
+## Zweck / Purpose
 
-## MSL-Zielbild / MSL Target Picture
+**DE:** Dieser Intake prueft die technisch gehaertete Sandbox unabhaengig auf
+Sicherheit, Reproduzierbarkeit und praktische Arbeitsfaehigkeit. Eine
+Abnahme bedeutet technische Evidenz, nicht die formale Freigabe durch eine
+Organisation.
 
-Die Selbstpruefung betrachtet Entwicklung mit KI-Agenten fuer folgende Memory-Safe Languages: Rust, Swift, C#, F#, Java, Kotlin, Scala, Go, Dart, Python, Ruby, JavaScript, TypeScript, Haskell, OCaml, Erlang, Elixir, Ada und SPARK.
+**EN:** This intake independently checks the technically hardened sandbox for
+security, reproducibility, and practical usability. Acceptance means technical
+evidence, not formal approval by an organization.
 
-Nicht jede Toolchain muss sofort im Image enthalten sein. Der spaetere Lauf dokumentiert pro Sprache `Supported`, `Open` oder `N/A` mit Begruendung.
+## Ausgangslage und Zielbild / Current and Target State
+
+**DE:** Die technische Haertung ist abgeschlossen und liefert ein finales
+lokales Image sowie aktualisierte Nachweise. Die Abnahme wiederholt statische
+und praktische Pruefungen aus Sicht von Lernenden und Reviewenden.
+
+**EN:** Technical hardening is complete and provides a final local image and
+updated evidence. Acceptance repeats static and practical checks from learner
+and reviewer perspectives.
 
 ## Scope
 
-- Nicht-privilegierte Container-Ausfuehrung und Build-/Runtime-Grenzen pruefen.
-- Host-Mounts, Schreibrechte, Agenten-Schreibgrenzen und Deny-Read-Pfade pruefen.
-- Netzwerkentscheidung und Egress-Risiko gegen Arbeitsfaehigkeit abwaegen.
-- Secrets, Provider-Konfiguration, lokale Profile und Token-Speicher pruefen.
-- SBOM, Dependency-Audit, Image-Scan und Tool-Pinning als Evidence planen.
-- Spec-Kit-Nutzbarkeit und acht Governance-Presets pruefen.
-- MSL-Toolchain-Matrix fuer aktuelle und geplante Sprachen erstellen.
-- C#/.NET, Rust, Go, Python, JavaScript/TypeScript und Java/Kotlin als erste praktische Smoke-Check-Kandidaten betrachten, wenn sie im Image verfuegbar sind.
+- Rootless-Isolation, Capabilities, Mounts, Schreib- und Netzwerkgrenzen.
+- OpenCode, Codex, Claude Code, Antigravity CLI und GitHub Copilot CLI.
+- Die im Dockerfile und Smoke-Test tatsaechlich installierten
+  Toolchain-Familien, einschliesslich Swift.
+- VS-Code-Verbindung, SourceKit-LSP und dokumentierte Projekt-Mappings.
+- Image-Build, Compose-Start, praktische Projekt-Smoke-Tests und HTTP-Zugriff.
+- SBOM-Erzeugung sowie Konsistenz der Security-Evidenz.
+- Lernbarkeit, DE-first/EN-second, CEFR B2 und WCAG 2.2 AA.
 
 ## Nicht-Ziele / Non-Goals
 
-- Kein sofortiger Umbau des Images.
-- Kein Entfernen benoetigter Entwicklungswerkzeuge ohne Ersatzentscheidung.
-- Kein Blockieren legitimer Paketregistries ohne dokumentierte Alternative.
-- Keine produktive Cloud-Architektur.
-- Keine automatische Freigabe der Sandbox.
+- Keine weitere Haertung waehrend der unabhaengigen Abnahme.
+- Keine Ausweitung auf nur geplante oder nicht installierte Sprachen.
+- Keine Anmeldung mit echten Provider-Secrets als Abnahmevoraussetzung.
+- Keine formale Sandbox-, Rechts-, Provider- oder Modellfreigabe.
 
 ## Anforderungen / Requirements
 
-1. Der spaetere Lauf bewertet jedes Sicherheitsziel mit `Applicable`, `N/A` oder `Open`.
-2. Jede Restriktion muss den Schutzgewinn und die Auswirkung auf Arbeitsfaehigkeit nennen.
-3. Die Sandbox muss Lern- und Entwicklungsfluesse fuer Auszubildende verstaendlich dokumentieren.
-4. MSL-Unterstuetzung wird als Matrix dokumentiert, nicht pauschal behauptet.
-5. Offene Risiken erhalten Folgeaufgaben mit Evidenzpfad.
+1. Jede Pruefung nennt Befehl, erwartetes Ergebnis und Evidenzpfad.
+2. Toolchain- und Agentenstatus werden aus Build- und Laufzeitquellen abgeleitet.
+3. Fehler werden als Befund an die technische Haertung zurueckgegeben.
+4. Plattformabdeckung wird ehrlich als geprueft, uebersprungen oder offen
+   dokumentiert.
+5. Sicherheitsrestriktionen und Lernablauf werden gemeinsam bewertet.
+6. Keine positive Bewertung darf allein auf Dokumentation ohne praktischen
+   Nachweis beruhen, wenn ein lokaler Check moeglich ist.
+
+## Abhaengigkeiten und Risiken / Dependencies and Risks
+
+**DE:** Die technische Sandbox-Haertung muss abgeschlossen sein. Lokale
+Podman-, Netzwerk- oder Plattformausfaelle werden von Repository-Fehlern
+getrennt dokumentiert. Nur auf macOS ausgefuehrte Checks belegen keine
+vollstaendige Windows- oder Linux-Abdeckung.
+
+**EN:** Technical sandbox hardening must be complete. Local Podman, network, or
+platform failures are recorded separately from repository failures. Checks run
+only on macOS do not prove full Windows or Linux coverage.
+
+## Erwartete Artefakte und Evidenz / Expected Artefacts and Evidence
+
+- Abnahmeprotokoll mit Pass, Fail, Open oder N/A je Pruefung.
+- Toolchain-, Agenten-, Mount- und VS-Code-Matrix.
+- Finale lokale SBOM und reproduzierbare Pruefbefehle.
+- Rueckgabe konkreter Befunde an die Haertungsstufe.
 
 ## Akzeptanzkriterien / Acceptance Criteria
 
-- `spec.md`, `plan.md` und `tasks.md` beschreiben die Balance zwischen Haertung und Nutzbarkeit.
-- `docs/security/` enthaelt oder plant Nachweise fuer Isolation, Mounts, Netzwerk, Toolchains, SBOM/Scan und KI-Werkzeuge.
-- Die MSL-Support-Matrix ist vorhanden oder als konkrete Aufgabe geplant.
-- Arbeitsfaehigkeit fuer Ausbildung, Spec Kit und KI-Agenten wird nicht pauschal geopfert.
+- Compose-Konfiguration, Image-Build und Containerstart sind nachweisbar.
+- Alle installierten Agenten und Toolchain-Familien bestehen die vorgesehenen
+  Versions- und Projekt-Smoke-Tests.
+- VS Code kann gemaess Dokumentation an den Container anbinden.
+- Mounts zeigen auf die dokumentierten Containerpfade.
+- SBOM-Erzeugung ist erfolgreich oder ein konkreter externer Blocker ist
+  dokumentiert.
+- Die Selbstbau-Vorlage wird erst nach erfolgreicher technischer Abnahme
+  freigegeben.
 
-## Optimaler Spec-Kit Specify Prompt
+## Annahmen und offene Fragen / Assumptions and Open Questions
 
+- Provider-Anmeldungen sind fuer Versions- und Konfigurationschecks nicht
+  erforderlich.
+- Es bestehen keine offenen Intake-Authoring-Fragen.
+
+<!-- intake-authoring:prompts -->
+## Kopierbare Folgekommandos / Copy-Ready Follow-Up Commands
+
+<!-- spec-kit-command-id: speckit.specify -->
 ```text
-/speckit-specify Nutze Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md als verbindliche Eingabedatei. Erstelle die Feature-Spezifikation fuer eine Secure-Development-Selbstpruefung von absdd-image-sandbox.
-
-Ziel: Pruefe, ob die Sandbox sicher genug gehaertet ist und gleichzeitig fuer Ausbildung, Spec Kit, KI-Agenten und MSL-basierte Entwicklung arbeitsfaehig bleibt.
-
-Beruecksichtige:
-- Richtlinie Sichere Entwicklung.
-- CL_10 Sichere Entwicklungsumgebung.
-- CL_12 Agentische KI in Sandbox-Umgebungen.
-- Leitlinie_Sichere-Entwicklungs-Sandbox.md.
-- MSL-Sprachen: Rust, Swift, C#, F#, Java, Kotlin, Scala, Go, Dart, Python, Ruby, JavaScript, TypeScript, Haskell, OCaml, Erlang, Elixir, Ada und SPARK.
-- docs/security/sandbox-freigabe.md, sandbox-isolation.md, network-decision.md, ai-tools-inventory.md, SBOM-/Scan-Skripte und Compose-Dateien.
-- Dokumentiere `Supported`, `Open` oder `N/A` pro Toolchain und Pruefpunkt.
+$speckit-specify Erstelle eine Spezifikation ausschliesslich auf Grundlage von Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md und den Ergebnissen der technischen Haertung. Plane eine unabhaengige technische Abnahme ohne weitere Haertung oder formale Freigabe.
 ```
+
+<!-- spec-kit-command-id: speckit.autonomous -->
+```text
+$speckit-autonomous Fuehre den vollstaendigen Spec-Kit-Lauf fuer Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md mit Delivery Authority LocalImplementation aus. Pruefe die Sandbox lokal, dokumentiere Plattformgrenzen ehrlich und stoppe vor Commit, Push, Pull Request, Merge oder Hosting-Aenderungen.
+```
+<!-- intake-authoring:end -->

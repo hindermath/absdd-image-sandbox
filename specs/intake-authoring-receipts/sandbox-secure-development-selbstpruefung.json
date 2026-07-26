@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "2.0",
+  "documentType": "IntakeReceipt",
+  "receiptId": "cb40aeef-be3e-4d67-b349-9c375169aeb9",
+  "intakeId": "51d24064-dfa6-4375-9bcd-58cccc545167",
+  "generator": {
+    "preset": "intake-authoring-governance",
+    "version": "0.2.1"
+  },
+  "createdAt": "2026-07-26T18:59:07Z",
+  "operation": {
+    "operationId": "869fba21-3e6a-4109-a2e1-d9aeac62273c",
+    "type": "Update",
+    "authorityEvidence": "Explicit user request to implement the approved complete reordering"
+  },
+  "status": "ReadyForReview",
+  "target": {
+    "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+    "normalizedSha256": "910b450f888b8a57e283e4067745a32535ec3edb84147c089d39bb9f446d3f6e"
+  },
+  "sources": [
+    {
+      "sourceId": "SRC001",
+      "order": 1,
+      "kind": "Pasted",
+      "label": "Legacy sandbox secure-development self-assessment before preset adoption",
+      "location": "SnapshotOnly",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "7e1c9b5801ed3093d7cc4cb5387cf386970b0d5446e60ff0ac5293e50d5ba4a3",
+      "gitBlob": "15374b0d225374e2b9062f88102ff8555317f7d0",
+      "proofBoundary": "SnapshotOnly"
+    }
+  ],
+  "profile": "learner-a11y-bilingual",
+  "languagePolicy": "GermanFirstEnglishSecondCEFRB2",
+  "decisions": [],
+  "openDecisionIds": [],
+  "questionCount": 0,
+  "agentSurface": {
+    "specifyCanonicalId": "speckit.specify",
+    "specifyInvocation": "$speckit-specify",
+    "autonomousCanonicalId": "speckit.autonomous",
+    "autonomousInvocation": "$speckit-autonomous"
+  },
+  "deliveryAuthority": "LocalImplementation",
+  "authorityEvidence": "No remote delivery authority was granted for this implementation",
+  "promptState": "Enabled",
+  "provenanceMode": "LegacyAdoption",
+  "supersedes": {
+    "receiptPath": "N/A",
+    "targetNormalizedSha256": "N/A",
+    "archiveTargetPath": "N/A",
+    "archiveReceiptPath": "N/A"
+  },
+  "legacyAdoption": {
+    "evidenceType": "GitBlob",
+    "priorTargetNormalizedSha256": "7e1c9b5801ed3093d7cc4cb5387cf386970b0d5446e60ff0ac5293e50d5ba4a3",
+    "priorGitBlob": "15374b0d225374e2b9062f88102ff8555317f7d0"
+  },
+  "updateAuthorized": true,
+  "updateAuthorityEvidence": "Explicit user approval of complete reordering on 2026-07-26",
+  "series": {
+    "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+    "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "order": 3,
+    "role": "Independent acceptance",
+    "supersedesIntakeIds": []
+  },
+  "nextAction": "$speckit-intake-review Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md"
+}
