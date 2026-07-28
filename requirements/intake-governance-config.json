@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "2.0",
+  "documentationLanguage": "de-DE",
+  "artifactNaming": {
+    "profile": "de",
+    "canonicalIndex": "Pflichtenheft.md",
+    "intakePattern": "Lastenheft_<slug>.md",
+    "orderView": "Lastenheft_Abarbeitungsreihenfolge.md"
+  },
+  "roles": {
+    "requirements-index": "Pflichtenheft.md",
+    "requirements-intake": ".",
+    "intake-order": "Lastenheft_Abarbeitungsreihenfolge.md",
+    "requirements-baseline": "requirements/baseline"
+  },
+  "collections": {
+    "baseline": "requirements/baseline",
+    "active": ".",
+    "archive": "specs/intake-authoring-archive",
+    "backlog": "requirements/intakes/backlog",
+    "history": "specs/intake-review-results",
+    "seriesManifest": "specs/intake-series/sandbox-development-lifecycle/manifest.json"
+  },
+  "legacyArtifactNames": [
+    "intakes/learner-fork-self-build-sandbox.md"
+  ],
+  "inventoryMode": "SeriesManifest"
+}
