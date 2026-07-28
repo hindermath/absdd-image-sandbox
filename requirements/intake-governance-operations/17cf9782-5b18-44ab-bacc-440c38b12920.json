@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "2.0",
+  "documentType": "IntakeGovernanceMigrationJournal",
+  "operationId": "17cf9782-5b18-44ab-bacc-440c38b12920",
+  "state": "Completed",
+  "authorityEvidence": "Feature 014 MergeAndSync pilot authority",
+  "beforeSha256": "N/A",
+  "afterSha256": "d7740f7ff839ca310607acd2e20dd9d58ffcc8ef9553ad73e00e353508a0c5be",
+  "moves": [],
+  "updatedReferences": [
+    "Added portable roles while preserving the existing four-target sandbox Series"
+  ],
+  "validation": [
+    "All intake and sandbox evidence bytes preserved",
+    "Bash and PowerShell schema-2.0 validators passed"
+  ],
+  "rollback": "Remove the new requirements-governance files; existing sandbox evidence remains unchanged.",
+  "repairBoundary": "N/A"
+}
