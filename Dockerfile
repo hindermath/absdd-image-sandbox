@@ -234,6 +234,7 @@ USER root
 COPY ./scripts/audit-export.sh /usr/local/bin/audit-export
 COPY ./scripts/container-entrypoint.sh /usr/local/bin/ade-entrypoint
 COPY ./scripts/install-home-baseline-reference.sh /usr/local/bin/install-home-baseline-reference
+COPY ./scripts/sync-home-baseline-runtime.sh /usr/local/bin/sync-home-baseline-runtime
 COPY ./home-baseline.lock.json /usr/local/share/absdd-image-sandbox/home-baseline.lock.json
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
@@ -251,14 +252,16 @@ RUN set -eux; \
     install -m 0755 "${tmp_dir}/antigravity" /usr/local/bin/agy; \
     rm -rf "${tmp_dir}"
 RUN sed -i 's/\r$//' /usr/local/bin/audit-export /usr/local/bin/ade-entrypoint \
-        /usr/local/bin/install-home-baseline-reference \
+        /usr/local/bin/install-home-baseline-reference /usr/local/bin/sync-home-baseline-runtime \
     && chmod 0755 /usr/local/bin/audit-export /usr/local/bin/ade-entrypoint \
-        /usr/local/bin/install-home-baseline-reference \
+        /usr/local/bin/install-home-baseline-reference /usr/local/bin/sync-home-baseline-runtime \
     && install-home-baseline-reference \
         /usr/local/share/absdd-image-sandbox/home-baseline.lock.json \
         /opt/home-baseline \
+    && ln -s /opt/home-baseline /home/adedev/home-baseline-source \
     && ln -s /opt/home-baseline /home/adedev/home-baseline-tmp \
-    && chown -h adedev:adedev /home/adedev/home-baseline-tmp
+    && chown -h adedev:adedev /home/adedev/home-baseline-source \
+        /home/adedev/home-baseline-tmp
 USER adedev
 
 ENTRYPOINT ["/usr/local/bin/ade-entrypoint"]

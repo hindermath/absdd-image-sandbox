@@ -241,13 +241,15 @@ podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh
 
 Das Image enthaelt `home-baseline` als read-only Shallow-Git-Referenz. Release,
 Commit, Quelle und MIT-Lizenz sind in `home-baseline.lock.json` festgehalten.
-Im Container liegt die Referenz technisch unter `/opt/home-baseline`; der
-gewohnte Pfad `~/home-baseline-tmp` zeigt darauf. Dadurch sind die Lernreihen
-direkt und nach dem Build auch offline lesbar. Es wird kein Baseline-Skript
-automatisch ausgefuehrt und es werden keine Zugangsdaten eingebaut.
+Im Container liegt die Referenz technisch unter `/opt/home-baseline`;
+`~/home-baseline-source` ist der kanonische Benutzerpfad. Der veraltete
+Uebergangspfad `~/home-baseline-tmp` zeigt vorerst auf dasselbe Ziel. Dadurch
+sind die Lernreihen direkt und nach dem Build auch offline lesbar. Es wird kein
+Baseline-Skript automatisch ausgefuehrt und es werden keine Zugangsdaten
+eingebaut.
 
 ```bash
-podman compose exec ade sh -lc 'cd ~/home-baseline-tmp && git status --short --branch && git log -1 --oneline'
+podman compose exec ade sh -lc 'cd ~/home-baseline-source && git status --short --branch && git log -1 --oneline'
 ```
 
 Fuer Aenderungen, Commits und Pushes forken Lernende weiterhin die von ihrer
@@ -266,26 +268,45 @@ auch [docs/fuer-lernende/README.md](docs/fuer-lernende/README.md).
 Der lokale Checkout kann danach die eingebaute read-only Referenz ersetzen:
 
 ```bash
-HOME_BASELINE_DIR=/pfad/zu/home-baseline-tmp
+HOME_BASELINE_DIR=/pfad/zu/home-baseline-source
 podman-compose -f compose.yml -f compose.home-baseline.yml config
 podman compose -f compose.yml -f compose.home-baseline.yml up -d
-podman compose exec ade sh -lc 'cd ~/home-baseline-tmp && git status --short --branch'
+podman compose exec ade sh -lc 'cd ~/home-baseline-source && git status --short --branch'
 ```
 
-Der Benutzerpfad bleibt `/home/adedev/home-baseline-tmp`; der Override mountet
-den Host-Checkout ueber das reale Ziel `/opt/home-baseline`. Damit bleiben
-private Hostpfade und Hosting-Accounts ausserhalb des Images. Die Level-0-
-Referenz wird im Container direkt gelesen. Schreibende `sync-home.*`-Laeufe
-nach `/home/adedev` sind gesperrt und werden ausschliesslich auf dem Host
-ausgefuehrt. `--check-only` / `-CheckOnly` und Vorschau-Modi bleiben im
-Container fuer eine schreibfreie Diagnose verfuegbar. Dadurch schreibt ein
-Home-Sync keine Spec-Kit-Agentendateien in persistente Agenten-Volumes.
+Der Override mountet den Host-Checkout ueber das reale Ziel
+`/opt/home-baseline`; beide Benutzerpfade bleiben erhalten. Normale schreibende
+`sync-home.*`-Laeufe nach `/home/adedev` sind weiterhin gesperrt. Nur der
+Wrapper `sync-home-baseline-runtime` darf die im Manifest als `homeRuntime`
+markierten Dateien synchronisieren:
 
-*The level-0 reference is read directly inside the container. Writing
-`sync-home.*` runs targeting `/home/adedev` are blocked and must run on the
-host. Read-only check and preview modes remain available for diagnostics. This
-prevents Home sync from writing Spec Kit agent files into persistent agent
-volumes.*
+```bash
+sync-home-baseline-runtime --dry-run
+sync-home-baseline-runtime --check-only
+sync-home-baseline-runtime --apply
+```
+
+Ohne Modus schreibt der Wrapper nichts; `--force` wird nicht angeboten.
+`--apply` fuehrt weder Pull, Push, Commit noch Git-Initialisierung aus und
+aendert weder `.gitconfig` noch die Git-Identitaet. `sourceOnly` und
+`machineLocal` bleiben ausgeschlossen. Lokale Konflikte brechen den Lauf ab.
+Nach einer Container-Neuerstellung stellt ein erneutes `--apply` die
+Runtime-Wurzeldateien wieder her. Manifestdefinierte Agentendateien koennen in
+persistente Volumes geschrieben werden; Anmeldedaten, Providerzustand und
+lokale Einstellungen bleiben unangetastet. `podman compose down -v` loescht
+diese Volumes weiterhin absichtlich. Es gibt keinen automatischen schreibenden
+Sync beim Imagebau oder Containerstart.
+
+*The override mounts the host checkout at `/opt/home-baseline`; both user paths
+remain available. Normal writing `sync-home.*` runs targeting `/home/adedev`
+remain blocked. Only `sync-home-baseline-runtime --apply` may synchronize the
+manifest-defined `homeRuntime`. It performs no pull, push, commit, Git
+initialization, Git configuration, or identity change; it excludes `sourceOnly`
+and `machineLocal` and stops on local conflicts. Preview and check modes are
+write-free. Reapply after recreating the container to restore runtime root
+files. Selected agent files may enter persistent volumes, while credentials,
+provider state, and local settings remain untouched. No writing sync runs
+automatically during build or startup.*
 
 ## Bauen und Starten
 
@@ -556,7 +577,8 @@ podman compose exec ade bash
 ```
 
 4. The image includes a pinned, read-only shallow Git reference at
-   `~/home-baseline-tmp`. Its release, commit, source, and MIT license are
+   `~/home-baseline-source`. The deprecated `~/home-baseline-tmp` path remains
+   as a compatibility link. Its release, commit, source, and MIT license are
    recorded in `home-baseline.lock.json`; no baseline script runs
    automatically. To make changes, optionally replace it with your personal
    `home-baseline` repository. First fork the reference provided by your
@@ -568,13 +590,16 @@ podman compose exec ade bash
    [on GitHub](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md).
 
 ```bash
-HOME_BASELINE_DIR=/path/to/home-baseline-tmp
+HOME_BASELINE_DIR=/path/to/home-baseline-source
 podman compose -f compose.yml -f compose.home-baseline.yml up -d
-podman compose exec ade sh -lc 'cd ~/home-baseline-tmp && git status --short --branch'
+podman compose exec ade sh -lc 'cd ~/home-baseline-source && git status --short --branch'
 ```
 
-Use this level-0 reference directly in the container. Writing `sync-home.*`
-runs belong on the host and are blocked when they target `/home/adedev`.
+Use this Level-0 source directly in the container. Normal writing
+`sync-home.*` runs remain blocked when they target `/home/adedev`. Use
+`sync-home-baseline-runtime --dry-run`, `--check-only`, or explicit `--apply`
+for the manifest-defined Home Runtime. No mode means no write, and no runtime
+sync runs automatically.
 
 5. Stop with audit export:
 

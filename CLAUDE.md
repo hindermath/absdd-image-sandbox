@@ -49,14 +49,15 @@ This repository contains a Podman-based agentic learning sandbox with OpenCode, 
 - `Dockerfile`: builds from the Microsoft .NET SDK image in MCR pinned by digest and installs the six language toolchains, pinned OpenCode, Codex, Claude Code, Antigravity CLI, GitHub Copilot CLI, Syft, `uv`, Spec Kit, and common CLI helper tools.
 - `compose.yml`: defines the `ade` service, builds the local image, and mounts separate persistent state volumes for OpenCode and all four required agents.
 - `home-baseline.lock.json`: pins the public `home-baseline` release and exact commit embedded as a read-only shallow Git reference under `/opt/home-baseline`.
-- `compose.home-baseline.yml`: optional Compose override that replaces the embedded reference with the learner's writable personal `home-baseline` checkout. The stable user path remains `/home/adedev/home-baseline-tmp` through a symlink.
+- `scripts/sync-home-baseline-runtime.sh`: installs the explicit three-mode wrapper that previews, checks, or applies manifest-defined Home Runtime content without Git side effects.
+- `compose.home-baseline.yml`: optional Compose override that replaces the embedded reference with the learner's writable personal `home-baseline-source` checkout. The canonical user path is `/home/adedev/home-baseline-source`; `/home/adedev/home-baseline-tmp` remains a deprecated compatibility symlink.
 - The container runs commands as the Linux user `adedev`; keep home-directory paths under `/home/adedev`.
 - `opencode.jsonc`: configures OpenCode safety defaults without an API key or preselected model. Keep comments useful for first-year IT specialist apprentices.
 - Agent state is isolated in `codex_data`, `claude_data`, `gemini_data`, and `copilot_data`; do not replace these with bind mounts to committed directories.
 - `opencode.env.example`: documents that no OpenCode provider environment variable is required by this image.
 - `workspace/`: mounted into the container as `/workspace`; place working project files there.
 - `ADE_DEV_SANDBOX_DIR`: host checkout of this repository mounted into the container as `/ade-dev-sandbox` for controlled repository maintenance tasks from inside the container.
-- `HOME_BASELINE_DIR`: optional persistent host checkout of the learner's personal `home-baseline` fork, used only with `compose.home-baseline.yml` and mounted over `/opt/home-baseline`; `/home/adedev/home-baseline-tmp` remains the user-facing alias.
+- `HOME_BASELINE_DIR`: optional persistent host checkout of the learner's personal `home-baseline-source` fork, used only with `compose.home-baseline.yml` and mounted over `/opt/home-baseline`; `/home/adedev/home-baseline-source` is canonical and `/home/adedev/home-baseline-tmp` is transitional.
 - `RIDER_PROJECTS_DIR`: host directory mounted into the container as `/rider-projects` for Rider projects.
 - `JAVA_PROJECTS_DIR`: host directory mounted into the container as `/java-projects` for Java, Maven, and Spring Boot projects.
 - `GO_PROJECTS_DIR`: host directory mounted into the container as `/go-projects` for Go projects.
@@ -132,7 +133,7 @@ cd /rider-projects
 Moves to the mounted Windows/Rider projects directory inside the container.
 
 ```bash
-cd /home/adedev/home-baseline-tmp
+cd /home/adedev/home-baseline-source
 ```
 
 Moves to the pinned read-only `home-baseline` reference included in the image.
@@ -143,11 +144,15 @@ institution-provided repository and set `HOME_BASELINE_DIR` locally. The
 Compose override replaces `/opt/home-baseline` while preserving this user-facing
 path. Only the direct GitHub profile requires a GitHub account.
 
-The level-0 reference is used directly inside the container. Run
-`sync-home.*` only on the host; writing sync runs targeting `/home/adedev`
-are blocked. Read-only `--check-only` / `-CheckOnly` and preview modes remain
-available for diagnostics. This prevents a Home sync from writing Spec Kit
-agent files into persistent container agent volumes.
+The Level-0 source is used directly inside the container. Normal writing
+`sync-home.*` runs targeting `/home/adedev` remain blocked. The explicit
+`sync-home-baseline-runtime --apply` wrapper may synchronize only manifest-defined
+`homeRuntime` content; `--dry-run` and `--check-only` are write-free, and no
+mode means no write. The wrapper offers no force mode and runs no pull, push,
+commit, Git initialization, Git configuration, or identity change. Selected
+runtime content may enter persistent agent volumes, but credentials, provider
+state, and local settings must remain untouched. No writing sync runs during
+image build or container startup.
 
 ```bash
 podman compose down
@@ -199,7 +204,7 @@ If `compose.home-baseline.yml` or the optional `HOME_BASELINE_DIR` workflow
 changed, also run with a local checkout:
 
 ```bash
-HOME_BASELINE_DIR=/path/to/home-baseline-tmp podman-compose -f compose.yml -f compose.home-baseline.yml config
+HOME_BASELINE_DIR=/path/to/home-baseline-source podman-compose -f compose.yml -f compose.home-baseline.yml config
 ```
 
 For Dockerfile changes, also run:

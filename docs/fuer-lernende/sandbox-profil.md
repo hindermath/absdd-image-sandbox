@@ -70,8 +70,8 @@ permissions apply. Anything not listed here is unreachable from the container.
 | (benanntes Volume) `claude_data` | `/home/adedev/.claude` | Ja / Yes | Ja / Yes | Persistenter Claude-Code-Zustand |
 | (benanntes Volume) `gemini_data` | `/home/adedev/.gemini-home` | Ja / Yes | Ja / Yes | Persistenter Gemini-CLI-Zustand |
 | (benanntes Volume) `copilot_data` | `/home/adedev/.copilot` | Ja / Yes | Ja / Yes | Persistenter GitHub-Copilot-CLI-Zustand |
-| Image-Inhalt / image content | `/opt/home-baseline` (`~/home-baseline-tmp`) | Ja / Yes | **Nein / No** | Gepinnte read-only Level-0-Referenz aus `home-baseline.lock.json` |
-| (optional) `${HOME_BASELINE_DIR}` | `/opt/home-baseline` (`~/home-baseline-tmp`) | Ja / Yes | Ja / Yes | Nur mit `compose.home-baseline.yml`; eigener beschreibbarer Checkout ueberdeckt die Referenz |
+| Image-Inhalt / image content | `/opt/home-baseline` (`~/home-baseline-source`; `~/home-baseline-tmp` veraltet / deprecated) | Ja / Yes | **Nein / No** | Gepinnte read-only Level-0-Quelle aus `home-baseline.lock.json` |
+| (optional) `${HOME_BASELINE_DIR}` | `/opt/home-baseline` (gleiche Links / same links) | Ja / Yes | Ja / Yes | Nur mit `compose.home-baseline.yml`; eigener beschreibbarer Checkout ueberdeckt die Referenz |
 
 **DE:** Host-Verzeichnisse außerhalb dieser Mounts sind **nicht sichtbar** und
 **nicht beschreibbar** aus dem Container. Die eingebaute Referenz ist
