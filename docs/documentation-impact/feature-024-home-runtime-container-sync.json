@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0",
+  "feature": "024-home-runtime-container-sync",
+  "entries": [
+    {
+      "changeId": "CHG024",
+      "scope": "Pinned Home Baseline source and explicit ADE Home Runtime sync",
+      "decision": "UpdateRequired",
+      "rationale": "The canonical container path, optional source override, explicit runtime command, persistence behavior, and security boundary change for learners and maintainers.",
+      "documents": [
+        ".env.example",
+        "README.md",
+        "docs/fuer-lernende/README.md",
+        "docs/fuer-lernende/sandbox-profil.md",
+        "docs/security/sandbox-freigabe.md",
+        "docs/security/sandbox-isolation.md",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "GEMINI.md",
+        ".github/copilot-instructions.md",
+        ".github/agents/copilot-instructions.md"
+      ],
+      "owner": "Repository Maintainer",
+      "audiences": [
+        "Learners",
+        "Repository users",
+        "Maintainers and AI agents",
+        "Security reviewers"
+      ],
+      "readerPaths": [
+        "Repository setup",
+        "Learning-series source access",
+        "Explicit Home Runtime synchronization",
+        "Persistence and destructive reset",
+        "Security review"
+      ],
+      "canonicalSource": "README.md",
+      "navigationImpact": "No new portal; existing setup, learner profile, and security paths document the new canonical source name and runtime command.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and English second in synchronized sections, at approximately CEFR B2.",
+      "languagePartners": [],
+      "platformAndExampleProof": "Compose commands were resolved on macOS with Podman; container runtime commands execute on Linux. Windows and native Linux host lifecycle checks remain platform-specific CI or maintainer coverage.",
+      "distributionClass": "imageRuntime",
+      "homeSyncRequired": false,
+      "evidence": "docs/documentation-impact/feature-024-home-runtime-container-sync.json",
+      "risk": "Medium; an explicit apply operation writes manifest-defined files to the container home and selected persistent agent volumes, while credentials and local settings must remain unchanged.",
+      "criticality": "Security",
+      "reevaluationTrigger": "The Level-0 manifest, runtime wrapper modes, Home links, persistence mounts, or container sync protection changes."
+    }
+  ]
+}

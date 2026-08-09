@@ -150,8 +150,8 @@ Rules:
 Spec-Kit lifecycle maintenance rules:
 - Repository-wide Spec-Kit refreshes MUST use the paired scripts
   `scripts/update-spec-kit.sh` and `scripts/update-spec-kit.ps1`, not ad-hoc
-  manual copying from `~/home-baseline-tmp`.
-- The scripts MUST dynamically discover Level-0 (`~/home-baseline-tmp`),
+  manual copying from `~/home-baseline-source`.
+- The scripts MUST dynamically discover Level-0 (`~/home-baseline-source`),
   Level-1 workspaces, and Level-2 projects by looking for `.git` plus
   `.specify/`; newly added repos are therefore included automatically.
 - Each refresh MUST run `specify init --here --force --integration <agent>` for
