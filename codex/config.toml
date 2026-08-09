@@ -82,6 +82,7 @@ exclude_tmpdir_env_var = true
 writable_roots = [
   "/ade-dev-sandbox",
   "/opt/home-baseline",
+  "/home/adedev/home-baseline-source",
   "/home/adedev/home-baseline-tmp",
   "/workspace",
   "/rider-projects",

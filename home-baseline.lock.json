@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "source": "https://github.com/hindermath/home-baseline.git",
-  "tag": "v0.14.0",
-  "commit": "a6a6ced3c2a7c3f4cfe73838167340eb501c1293",
+  "tag": "v0.17.0",
+  "commit": "7d7da767c3a83eb6ca54c752250122fc048b8318",
   "license": "MIT"
 }
