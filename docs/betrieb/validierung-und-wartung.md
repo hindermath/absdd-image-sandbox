@@ -39,6 +39,7 @@ podman-compose config
 git diff --check
 python3 scripts/check-dockerfile-arg-renovate.py
 python3 scripts/check-home-baseline-lock.py
+python3 scripts/tests/test_home_baseline_documentation_contract.py
 python3 scripts/tests/test_agent_prompt_dispatchers.py
 python3 scripts/tests/test_spec_kit_agent_surface_parity.py
 ```
@@ -49,6 +50,8 @@ Dokumentationsverträge / Documentation contracts:
 bash scripts/test-documentation-impact.sh
 bash scripts/validate-documentation-impact.sh \
   --evidence docs/documentation-impact/feature-025-image-documentation-expansion.json
+bash scripts/validate-documentation-impact.sh \
+  --evidence docs/documentation-impact/home-baseline-documentation-alignment.json
 bash scripts/check-homogeneity.sh --dry-run --no-patch "$PWD"
 ```
 
@@ -56,6 +59,8 @@ bash scripts/check-homogeneity.sh --dry-run --no-patch "$PWD"
 pwsh -NoProfile -File scripts/test-documentation-impact.ps1
 pwsh -NoProfile -File scripts/validate-documentation-impact.ps1 `
   -Evidence docs/documentation-impact/feature-025-image-documentation-expansion.json
+pwsh -NoProfile -File scripts/validate-documentation-impact.ps1 `
+  -Evidence docs/documentation-impact/home-baseline-documentation-alignment.json
 pwsh -NoProfile -File scripts/check-homogeneity.ps1 `
   -TargetDir $PWD -DryRun -NoPatch
 ```

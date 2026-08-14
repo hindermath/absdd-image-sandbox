@@ -44,9 +44,9 @@ sign-in. Keep the public GitHub URL as provenance, not as the only clone path.
 
 ## Project Structure & Module Organization
 
-This repository contains a Podman-based agentic learning sandbox with OpenCode, four required agent CLIs, six memory-safe language toolchains, Python and PowerShell 7 scripting, Syft, and Spec Kit; it is not an application codebase.
+This repository contains a Podman-based agentic learning sandbox with OpenCode, four required agent CLIs, six required memory-safe language toolchains (.NET/C#, Java, Go, Rust, Python, and Swift), PowerShell 7 as a second scripting foundation, Node.js/npm as supporting tooling, Syft, and Spec Kit; it is not an application codebase.
 
-- `Dockerfile`: builds from the Microsoft .NET SDK image in MCR pinned by digest and provides the six language toolchains, Python, a version-checked PowerShell 7 from the base image, pinned OpenCode, Codex, Claude Code, Antigravity CLI, GitHub Copilot CLI, Syft, `uv`, Spec Kit, and common CLI helper tools.
+- `Dockerfile`: builds from the Microsoft .NET SDK image in MCR pinned by digest and provides the six required language toolchains (.NET/C#, Java, Go, Rust, Python, and Swift), a version-checked PowerShell 7 from the base image as a second scripting foundation, Node.js/npm as supporting tooling, pinned OpenCode, Codex, Claude Code, Antigravity CLI, GitHub Copilot CLI, Syft, `uv`, Spec Kit, and common CLI helper tools.
 - `compose.yml`: defines the `ade` service, builds the local image, and mounts separate persistent state volumes for OpenCode and all four required agents.
 - `home-baseline.lock.json`: pins the public `home-baseline` release and exact commit embedded as a read-only shallow Git reference under `/opt/home-baseline`.
 - `scripts/sync-home-baseline-runtime.sh`: installs the explicit three-mode wrapper that previews, checks, or applies manifest-defined Home Runtime content without Git side effects.
@@ -437,8 +437,8 @@ The export writes metadata only to `/audit/YYYY-MM-DD.jsonl`. Do not extend it t
 ## Hinweise zur Lernenden- und A11Y-Basis / Notes on the Learner and A11Y Baseline
 
 - Verbindliche Zielgruppen ab dem ersten Ausbildungsjahr sind
-  Fachinformatiker*innen, Kaufleute für IT-System-Management und Kaufleute für
-  Digitalisierungsmanagement.
+  Fachinformatiker*innen, IT-System-Elektroniker*innen, Kaufleute für
+  IT-System-Management und Kaufleute für Digitalisierungsmanagement.
 - Lern-, Bedien-, Governance- und Spec-Kit-Inhalte stehen auf Deutsch zuerst
   und Englisch danach, verwenden ungefähr CEFR B2 und erklären Fachbegriffe
   beim ersten Auftreten.
@@ -451,7 +451,8 @@ The export writes metadata only to `/audit/YYYY-MM-DD.jsonl`. Do not extend it t
   verbindliche Prüfbasis, soweit die Kriterien auf das Artefakt anwendbar sind.
 
 *The binding audience starts in the first training year and includes IT
-specialist apprentices and both IT management occupations. Learner, usage,
+specialist and IT systems electronics technician apprentices plus both IT
+management occupations. Learner, usage,
 governance, and Spec Kit content is German-first/English-second at about CEFR
 B2, explains technical terms at first use, assumes no prior Spec Kit
 experience, and never relies on visual-only dependency, state, or decision

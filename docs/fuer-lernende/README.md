@@ -46,17 +46,24 @@ document builds on the previous one and assumes no prior knowledge.
 `START-HERE-FUER-LERNENDE.md`. Das Image enthaelt einen gepinnten read-only
 Stand unter `~/home-baseline-source`; damit kannst du die Anleitung direkt lesen.
 Die [oeffentliche Referenz](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md)
-bleibt als Herkunftsnachweis verfuegbar. Fuer Aenderungen und Pushes ersetzt du
+zeigt den aktuellen Upstream-Stand und kann neuer als das Image sein. Fuer den
+offline eingebauten Stand sind Release und Commit in
+`home-baseline.lock.json` massgeblich. Fuer Aenderungen und Pushes ersetzt du
 den eingebauten Stand spaeter durch dein persoenliches oder institutionell
-bereitgestelltes `home-baseline`-Repository.
+bereitgestelltes `home-baseline`-Repository. Die
+[Home-Baseline-Architektur](https://github.com/hindermath/home-baseline/blob/main/docs/architecture/source-and-home-runtime.md)
+erklaert die Grenze zwischen Quelle und Home Runtime.
 
 **EN:** Start with the cross-platform `START-HERE-FUER-LERNENDE.md`. The image
 contains a pinned read-only copy at `~/home-baseline-source`, so you can read the
 guide immediately. The
 [public reference](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md)
-remains available for provenance. For changes and pushes, replace the embedded
-reference later with your personal or institution-provided `home-baseline`
-repository.
+shows the current upstream state and may be newer than the image. The release
+and commit in `home-baseline.lock.json` define the embedded offline state. For
+changes and pushes, replace the embedded reference later with your personal or
+institution-provided `home-baseline` repository. The
+[Home Baseline architecture](https://github.com/hindermath/home-baseline/blob/main/docs/architecture/source-and-home-runtime.md)
+explains the boundary between source and Home Runtime.
 
 | Schritt / Step | Dokument / Document | Inhalt / Content |
 |---|---|---|
@@ -190,11 +197,19 @@ in der eingebauten read-only Referenz unter `~/home-baseline-source`. Sobald du
 Inhalte aendern, committen oder pushen willst, bindest du dort deinen
 persoenlichen Checkout ein.
 
+Diese drei eigenen Projekt-Mounts sind ein Image-Profil, kein vollstaendiges
+Verzeichnis aller Home-Baseline-Lernreihen. Weitere Reihen im Home-Baseline-
+Katalog bleiben dort kanonisch dokumentiert.
+
 **EN:** The `absdd-image-sandbox` is the public reference repository for the
 three Secure Trader learning series. The matching study companions are
 immediately available in the embedded read-only reference at
 `~/home-baseline-source`. Mount your personal checkout there when you need to edit,
 commit, or push content.
+
+These three dedicated project mounts are an image profile, not a complete
+directory of every Home Baseline learning series. Additional series remain
+canonically documented in the Home Baseline catalog.
 
 | Lehrjahr / Year | Lernbegleiter-Datei / Study Companion File |
 |---|---|

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0",
+  "feature": "home-baseline-documentation-alignment",
+  "entries": [
+    {
+      "changeId": "CHG026",
+      "scope": "Cross-repository documentation boundary between Home Baseline and the sandbox image",
+      "decision": "UpdateRequired",
+      "rationale": "Learners and maintainers need one consistent distinction between Home-owned learning and source/runtime guidance, image-owned build and mount behavior, the exact embedded lock state, the current upstream documentation, and the image's smaller three-series mount scope.",
+      "documents": [
+        "README.md",
+        "docs/fuer-lernende/README.md",
+        "docs/fuer-lernende/sandbox-profil.md",
+        "docs/fuer-lernende/toolchains/README.md",
+        "docs/betrieb/README.md",
+        "docs/betrieb/image-aufbau.md",
+        "docs/betrieb/validierung-und-wartung.md",
+        "docs/security/sandbox-freigabe.md",
+        "home-baseline.lock.json",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "GEMINI.md",
+        ".github/copilot-instructions.md",
+        ".github/agents/copilot-instructions.md"
+      ],
+      "owner": "Repository Maintainer",
+      "audiences": [
+        "Learners",
+        "Repository users",
+        "Maintainers and AI agents",
+        "Security reviewers"
+      ],
+      "readerPaths": [
+        "Repository entry and learner setup",
+        "Toolchain selection",
+        "Home Baseline source and runtime boundary",
+        "Image construction and mount scope",
+        "Cross-repository maintenance and validation"
+      ],
+      "canonicalSource": "Home Baseline for learner, Git-hosting, governance, and source/runtime guidance; this repository for image build, tool versions, mounts, commands, and the installed runtime wrapper",
+      "navigationImpact": "Learner and operations paths now link to the canonical Home Baseline architecture while retaining the exact image lock as the offline source of truth.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and English second in synchronized sections at approximately CEFR B2.",
+      "languagePartners": [],
+      "platformAndExampleProof": "A deterministic repository contract test checks audience, toolchain classification, current-versus-pinned wording, canonical links, and the exact three-series Compose mount subset. Compose configuration is validated separately on the available macOS host.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/documentation-impact/home-baseline-documentation-alignment.json",
+      "risk": "Medium; an unclear ownership or version boundary can make learners follow newer upstream instructions against an older embedded image or mistake the image's mount subset for the complete Home Baseline catalog.",
+      "criticality": "Normal",
+      "reevaluationTrigger": "The Home Baseline lock, learner audience, required MSL paths, project mounts, runtime wrapper, or cross-repository ownership changes."
+    }
+  ]
+}

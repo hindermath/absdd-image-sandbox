@@ -71,7 +71,7 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 | Spec Kit | `specify-cli` `v0.8.3` aus `github.com/github/spec-kit.git` |
 | Syft | `anchore/syft` `1.46.0`, SHA256-Pruefung im Image-Build |
 | uv / uvx | `0.11.16` aus GitHub-Release-Artefakt, SHA256-Pruefung im Image-Build |
-| home-baseline Level-0-Quelle | `v0.17.0`, Commit `7d7da767c3a83eb6ca54c752250122fc048b8318`, MIT; Lock in `home-baseline.lock.json` |
+| home-baseline Level-0-Quelle | `v0.18.0`, Commit `a0fc446cd04db2e52102a3b2be31c24e8ee6a022`, MIT; Lock in `home-baseline.lock.json` |
 
 Die Home Runtime wird nie automatisch angewendet. Der ausdrueckliche Wrapper
 `sync-home-baseline-runtime` kennt nur `--dry-run`, `--check-only` und

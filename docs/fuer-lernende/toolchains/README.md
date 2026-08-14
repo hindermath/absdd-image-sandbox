@@ -15,6 +15,17 @@ documentation tests belong in `/tmp` or `/home/adedev/smoke-tests`.
 
 ## Auswahl / Choose a Toolchain
 
+**DE:** Die sechs verbindlichen speichersicheren Sprachpfade (MSL) dieses
+Images sind .NET/C#, Java, Go, Rust, Python und Swift. PowerShell 7 ist die
+zweite Skriptbasis neben Python. Node.js/npm ist vor allem die unterstuetzende
+Laufzeit fuer Agenten- und Projektwerkzeuge; es ist in diesem Image kein
+siebter verbindlicher MSL-Lernpfad.
+
+**EN:** The six required memory-safe language (MSL) paths in this image are
+.NET/C#, Java, Go, Rust, Python, and Swift. PowerShell 7 is the second scripting
+foundation alongside Python. Node.js/npm mainly supports agent and project
+tooling; it is not a seventh required MSL learning path in this image.
+
 | Sprache oder Laufzeit / Language or runtime | Projektpfad / Project path | Anleitung / Guide |
 |---|---|---|
 | C# und .NET / C# and .NET | `/rider-projects` | [.NET](dotnet.md) |

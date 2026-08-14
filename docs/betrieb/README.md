@@ -53,6 +53,26 @@ is the correct starting point for the guided path from the first training year.
 | Host | betreibt Podman, hält Projektquellen und entscheidet über lokale Secrets / runs Podman, stores project sources, and decides on local secrets |
 | Hosting-Plattform | setzt Repository-Regeln, Reviews und Admin-Entscheidungen durch / enforces repository rules, reviews, and admin decisions |
 
+## Dokumentationsverantwortung / Documentation Responsibility
+
+| Thema / Topic | Kanonische Quelle / Canonical source |
+|---|---|
+| Lernpfad, institutionelles Git-Hosting, Governance und Home-Source-/Runtime-Vertrag / learner path, institutional Git hosting, governance, and Home source/runtime contract | [Home-Baseline-Architektur](https://github.com/hindermath/home-baseline/blob/main/docs/architecture/source-and-home-runtime.md) und die dort verlinkten Lernleitfaeden / Home Baseline architecture and its linked learner guides |
+| Image-Build, Toolversionen, Container-Mounts, Laufzeitbefehle und installierter Runtime-Wrapper / image build, tool versions, container mounts, runtime commands, and installed runtime wrapper | dieses Repository: `Dockerfile`, Compose-Dateien, Skripte und `docs/betrieb/` / this repository: `Dockerfile`, Compose files, scripts, and `docs/betrieb/` |
+
+**DE:** `home-baseline.lock.json` bestimmt den exakten eingebetteten und offline
+lesbaren Stand. Ein Link auf `home-baseline/main` zeigt den aktuellen Upstream
+und kann neuer sein. Das Image stellt eigene Mounts fuer genau drei
+Secure-Trader-Reihen bereit: CaseTracker, ServiceHarvester und OrderDesk. Dieser
+operative Ausschnitt erweitert oder beschraenkt den kanonischen Home-Baseline-
+Katalog nicht.
+
+**EN:** `home-baseline.lock.json` defines the exact embedded, offline-readable
+state. A link to `home-baseline/main` shows the current upstream and may be
+newer. The image provides dedicated mounts for exactly three Secure Trader
+series: CaseTracker, ServiceHarvester, and OrderDesk. This operational subset
+neither extends nor restricts the canonical Home Baseline catalog.
+
 **DE:** Das Repository beschreibt keine formelle Sandbox-, Provider-, Modell-
 oder Datenklassifikationsfreigabe als abgeschlossen. Offene menschliche
 Entscheidungen bleiben in den Sicherheitsnachweisen sichtbar.
