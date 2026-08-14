@@ -29,6 +29,9 @@ services:
         source: ${PYTHON_PROJECTS_DIR:-./python-projects}
         target: /python-projects
       - type: bind
+        source: ${POWERSHELL_PROJECTS_DIR:-./powershell-projects}
+        target: /powershell-projects
+      - type: bind
         source: ${SWIFT_PROJECTS_DIR:-./swift-projects}
         target: /swift-projects
       - type: bind
@@ -76,6 +79,7 @@ services:
       GEMINI_CLI_HOME: /home/adedev/.gemini-home
       COPILOT_HOME: /home/adedev/.copilot
       DISABLE_AUTOUPDATER: "1"
+      ADE_AGENT_PROMPT_TARGET: local
     restart: unless-stopped
 
 volumes:

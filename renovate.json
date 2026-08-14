@@ -121,6 +121,16 @@
         "supply-chain",
         "sbom"
       ]
+    },
+    {
+      "matchPackageNames": [
+        "PowerShell/PowerShell"
+      ],
+      "groupName": "PowerShell Dockerfile ARG",
+      "addLabels": [
+        "powershell",
+        "toolchain"
+      ]
     }
   ]
 }

@@ -43,6 +43,10 @@ jobs:
       - name: Check shell syntax
         run: |
           bash -n scripts/audit-export.sh
+          bash -n scripts/agent-prompt.sh
           bash -n scripts/smoke-test-toolchains.sh
           bash -n scripts/compose-down-with-audit.sh
           bash -n scripts/install-home-baseline-reference.sh
+
+      - name: Check agent prompt dispatcher parity
+        run: python3 scripts/tests/test_agent_prompt_dispatchers.py

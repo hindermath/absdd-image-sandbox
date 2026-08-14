@@ -50,6 +50,16 @@ rustc --version
 swift --version
 ```
 
+**DE:** PowerShell 7 ist die zweite Skriptgrundlage neben Python und wird
+separat geprueft:
+
+**EN:** PowerShell 7 is the second scripting foundation alongside Python and
+is checked separately:
+
+```bash
+pwsh --version
+```
+
 **DE:** Jeder Befehl gibt eine **Versionsnummer** aus, zum Beispiel `10.0.x`
 (für .NET) oder `go version go1.26.3 ...`. Eine Versionsnummer bedeutet: Das
 Werkzeug ist installiert und einsatzbereit. Erscheint `command not found`,

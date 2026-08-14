@@ -92,6 +92,15 @@ def main() -> int:
     if "syft_${SYFT_VERSION}_checksums.txt" not in dockerfile_text:
         failures.append("Syft installation does not retrieve its checksum manifest")
 
+    if not re.search(r"^ARG POWERSHELL_VERSION=\S+$", dockerfile_text, re.MULTILINE):
+        failures.append("required scripting tool ARG missing: POWERSHELL_VERSION")
+    if "PowerShell/PowerShell" not in renovate_packages:
+        failures.append("Renovate scripting tool group is missing PowerShell/PowerShell")
+    if 'pwsh -NoLogo -NoProfile' not in dockerfile_text:
+        failures.append("Dockerfile does not verify the bundled PowerShell version")
+    if "pwsh --version" not in smoke_text:
+        failures.append("smoke test is missing: pwsh --version")
+
     if failures:
         print("Every Dockerfile ARG must have matching Renovate metadata.")
         print("Use this form directly above the ARG:")

@@ -44,9 +44,9 @@ sign-in. Keep the public GitHub URL as provenance, not as the only clone path.
 
 ## Project Structure & Module Organization
 
-This repository contains a Podman-based agentic learning sandbox with OpenCode, four required agent CLIs, six memory-safe language toolchains, Syft, and Spec Kit; it is not an application codebase.
+This repository contains a Podman-based agentic learning sandbox with OpenCode, four required agent CLIs, six memory-safe language toolchains, Python and PowerShell 7 scripting, Syft, and Spec Kit; it is not an application codebase.
 
-- `Dockerfile`: builds from the Microsoft .NET SDK image in MCR pinned by digest and installs the six language toolchains, pinned OpenCode, Codex, Claude Code, Antigravity CLI, GitHub Copilot CLI, Syft, `uv`, Spec Kit, and common CLI helper tools.
+- `Dockerfile`: builds from the Microsoft .NET SDK image in MCR pinned by digest and provides the six language toolchains, Python, a version-checked PowerShell 7 from the base image, pinned OpenCode, Codex, Claude Code, Antigravity CLI, GitHub Copilot CLI, Syft, `uv`, Spec Kit, and common CLI helper tools.
 - `compose.yml`: defines the `ade` service, builds the local image, and mounts separate persistent state volumes for OpenCode and all four required agents.
 - `home-baseline.lock.json`: pins the public `home-baseline` release and exact commit embedded as a read-only shallow Git reference under `/opt/home-baseline`.
 - `scripts/sync-home-baseline-runtime.sh`: installs the explicit three-mode wrapper that previews, checks, or applies manifest-defined Home Runtime content without Git side effects.
@@ -60,6 +60,7 @@ This repository contains a Podman-based agentic learning sandbox with OpenCode, 
 - `HOME_BASELINE_DIR`: optional persistent host checkout of the learner's personal `home-baseline-source` fork, used only with `compose.home-baseline.yml` and mounted over `/opt/home-baseline`; `/home/adedev/home-baseline-source` is canonical and `/home/adedev/home-baseline-tmp` is transitional.
 - `RIDER_PROJECTS_DIR`: host directory mounted into the container as `/rider-projects` for Rider projects.
 - `JAVA_PROJECTS_DIR`: host directory mounted into the container as `/java-projects` for Java, Maven, and Spring Boot projects.
+- `POWERSHELL_PROJECTS_DIR`: host directory mounted into the container as `/powershell-projects` for PowerShell learning and project work.
 - `GO_PROJECTS_DIR`: host directory mounted into the container as `/go-projects` for Go projects.
 - `RUST_PROJECTS_DIR`: host directory mounted into the container as `/rust-projects` for Rust projects.
 - `PYTHON_PROJECTS_DIR`: host directory mounted into the container as `/python-projects` for Python projects.
@@ -68,6 +69,7 @@ This repository contains a Podman-based agentic learning sandbox with OpenCode, 
 - `SECURE_SERVICE_HARVESTER_PROJECTS_DIR`: host directory mounted into the container as `/secure-service-harvester-projects` for Secure Service Harvester learning and project work.
 - `SECURE_ORDER_DESK_PROJECTS_DIR`: host directory mounted into the container as `/secure-order-desk-projects` for Secure OrderDesk learning and project work.
 - `java-projects/`: local fallback mount for `/java-projects` when `JAVA_PROJECTS_DIR` is not set.
+- `powershell-projects/`: local fallback mount for `/powershell-projects` when `POWERSHELL_PROJECTS_DIR` is not set.
 - `go-projects/`: local fallback mount for `/go-projects` when `GO_PROJECTS_DIR` is not set.
 - `rust-projects/`: local fallback mount for `/rust-projects` when `RUST_PROJECTS_DIR` is not set.
 - `python-projects/`: local fallback mount for `/python-projects` when `PYTHON_PROJECTS_DIR` is not set.
@@ -192,6 +194,33 @@ Compose commands, or existing `scripts/` wrappers in this repository. Do not
 introduce a new language for convenience when an existing repository script
 already solves the task.*
 
+<!-- agent-prompt-dispatcher-guidance:start -->
+## Nicht-interaktive Agenten-Prompts / Non-Interactive Agent Prompts
+
+Die Repo-Einstiege `scripts/agent-prompt.sh` und
+`scripts/agent-prompt.ps1` zielen standardmaessig auf den laufenden
+Compose-Service `ade`. Im Image sind beide als `agent-prompt` und
+`/usr/local/bin/agent-prompt.ps1` installiert; dort setzt
+`ADE_AGENT_PROMPT_TARGET=local` die direkte CLI-Ausfuehrung. Unterstuetzt
+werden `codex`, `claude`, `opencode`, `copilot`, `gemini` und `agy`;
+Antigravity-Printmodus bleibt experimentell.
+
+Prompts mit vertraulichem Inhalt ueber stdin oder `--prompt-file` uebergeben.
+Der Dispatcher darf keine Anmeldung, Provider- oder Modellwahl,
+Berechtigungserweiterung oder Approval-Umgehung automatisieren. Gemeinsame
+Aenderungen an Mapping und Argumentsemantik muessen atomar in beiden Skripten,
+`scripts/tests/test_agent_prompt_dispatchers.py`, `README.md` und der
+Lernenden-Anleitung gepflegt werden.
+
+*The repository entrypoints target the running `ade` service by default. Both
+variants are installed in the image and run agent CLIs directly there through
+`ADE_AGENT_PROMPT_TARGET=local`. Use stdin or `--prompt-file` for
+confidential prompts. The dispatcher must not automate sign-in, provider or
+model selection, permission broadening, or approval bypasses. Keep both
+scripts, their parity tests, and user documentation synchronized.*
+<!-- agent-prompt-dispatcher-guidance:end -->
+
+
 ## Testing Guidelines
 
 There is no test framework in this repository. Before committing, run:
@@ -245,6 +274,7 @@ rustc --version
 cargo --version
 cargo clippy --version
 python --version
+pwsh --version
 node --version
 npm --version
 swift --version
@@ -318,6 +348,8 @@ For Go projects, use `/go-projects` unless a project-specific mount is configure
 For Rust projects, use `/rust-projects` unless a project-specific mount is configured. Keep dependencies in `Cargo.toml`, run `cargo fmt`, `cargo clippy -- -D warnings`, and `cargo test`. Add frameworks such as `tokio`, `axum`, `actix-web`, or `serde` per project instead of installing them globally.
 
 For Python projects, use `/python-projects` unless a project-specific mount is configured. Keep virtual environments project-local or under an explicitly chosen cache path, and do not rely on globally installed application dependencies.
+
+For PowerShell projects, use `/powershell-projects` unless a project-specific mount is configured. Run scripts with `pwsh -NoLogo -NoProfile`, keep modules project-local or explicitly versioned, and validate repository-owned scripts with PSScriptAnalyzer when that module is available.
 
 For Swift projects, use `/swift-projects` unless a project-specific mount is configured. Keep dependencies in `Package.swift`, run `swift build`, `swift test`, and `swift run` for executable smoke checks. The image includes SourceKit-LSP for editors that attach through VS Code Dev Containers or another LSP-capable client.
 

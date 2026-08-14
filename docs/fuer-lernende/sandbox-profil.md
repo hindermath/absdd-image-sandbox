@@ -58,6 +58,7 @@ permissions apply. Anything not listed here is unreachable from the container.
 | `${GO_PROJECTS_DIR:-./go-projects}` | `/go-projects` | Ja / Yes | Ja / Yes | Go-Projekte |
 | `${RUST_PROJECTS_DIR:-./rust-projects}` | `/rust-projects` | Ja / Yes | Ja / Yes | Rust-Projekte |
 | `${PYTHON_PROJECTS_DIR:-./python-projects}` | `/python-projects` | Ja / Yes | Ja / Yes | Python-Projekte |
+| `${POWERSHELL_PROJECTS_DIR:-./powershell-projects}` | `/powershell-projects` | Ja / Yes | Ja / Yes | PowerShell-Skriptprojekte |
 | `${SWIFT_PROJECTS_DIR:-./swift-projects}` | `/swift-projects` | Ja / Yes | Ja / Yes | Swift-Projekte |
 | `${SECURE_CASE_TRACKER_PROJECTS_DIR:-./secure-case-tracker-projects}` | `/secure-case-tracker-projects` | Ja / Yes | Ja / Yes | Secure-CaseTracker-Lern- und Projektarbeiten |
 | `${SECURE_SERVICE_HARVESTER_PROJECTS_DIR:-./secure-service-harvester-projects}` | `/secure-service-harvester-projects` | Ja / Yes | Ja / Yes | Secure-Service-Harvester-Lern- und Projektarbeiten |
@@ -166,6 +167,18 @@ The sandbox supports six MSL languages. The table shows version, test command, a
 | **Python** | 3.x (Ubuntu) | `Supported` | `python -m pytest` | `pip-audit` (via `uv`) |
 | **Rust** | 1.95.0 | `Supported` | `cargo test` | `cargo audit` |
 | **Swift** | 6.3.3 | `Open` | `swift test` | Kein globales Audit-Tool installiert / No global audit tool installed |
+
+**DE:** Zusaetzlich stellt die Sandbox Python und PowerShell 7 als die beiden
+Skriptgrundlagen der Ausbildung bereit. PowerShell wird nicht als siebte
+Sprache in dieser MSL-Matrix gezaehlt. Die Version des mit dem MCR-.NET-SDK-
+Image gelieferten `pwsh` wird beim Image-Build gegen `POWERSHELL_VERSION`
+geprueft; Skriptprojekte liegen unter `/powershell-projects`.
+
+**EN:** The sandbox additionally provides Python and PowerShell 7 as the two
+training scripting foundations. PowerShell is not counted as a seventh entry
+in this MSL matrix. The image build checks the `pwsh` version supplied by the
+MCR .NET SDK image against `POWERSHELL_VERSION`; script projects use
+`/powershell-projects`.
 
 **DE:** Swift läuft im Container, aber iOS-Build-Tools und vollständige Apple-Plattform-Unterstützung fehlen.
 Das ist als `Open` dokumentiert.

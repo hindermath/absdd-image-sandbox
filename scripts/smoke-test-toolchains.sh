@@ -29,6 +29,7 @@ rustc --version
 cargo --version
 cargo clippy --version
 python --version
+pwsh --version
 node --version
 npm --version
 swift --version
@@ -100,6 +101,10 @@ python -m venv "${python_dir}/.venv"
 "${python_dir}/.venv/bin/python" - <<'PY'
 print("hello from python")
 PY
+
+section "PowerShell"
+pwsh -NoLogo -NoProfile -Command \
+  '$result = 2 + 2; if ($result -ne 4) { throw "unexpected arithmetic" }; "hello from powershell"'
 
 section "Node.js"
 node -e 'console.log("hello from node")'

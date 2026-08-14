@@ -22,13 +22,15 @@ and WCAG 2.2 Level AA are the review baseline wherever applicable.*
 
 Dieses Repository stellt eine Podman-basierte Container-Umgebung fuer
 OpenCode, die vier Required-Agenten Codex, Claude Code, Antigravity CLI und GitHub
-Copilot CLI, sechs speichersichere Sprachen, Syft und Spec Kit bereit. Es ist
-eine Sandbox- und Lernumgebung, keine Anwendung.
+Copilot CLI, sechs speichersichere Sprachen, Python und PowerShell 7 als
+Skriptsprachen, Syft und Spec Kit bereit. Es ist eine Sandbox- und Lernumgebung,
+keine Anwendung.
 
 The repository provides a Podman-based container environment with OpenCode,
 the four required agents Codex, Claude Code, Antigravity CLI, and GitHub Copilot
 CLI, six memory-safe languages, Syft, and Spec Kit. It is a sandbox and
-training environment, not an application.
+training environment. Python and PowerShell 7 provide the two scripting
+foundations. This repository is not an application.
 
 ## Ueberblick / Overview
 
@@ -39,6 +41,7 @@ training environment, not an application.
 | Compose-Config-Validierung | `podman-compose config` |
 | Lifecycle-Fallback | `podman-compose`, falls `podman compose` lokal nicht verfuegbar ist |
 | Basisimage | Microsoft .NET SDK aus MCR, im `Dockerfile` per Digest gepinnt |
+| Skriptsprachen | Python und PowerShell 7; PowerShell-Version wird gegen das MCR-Basisimage geprueft |
 | OpenCode | Installiert, aber ohne vorkonfigurierten Modellanbieter |
 | Codex | Systemweite Defaults aus `codex/config.toml` und `codex/requirements.toml` |
 | Claude Code | Installiert; persistenter Zustand in `claude_data` |
@@ -88,8 +91,9 @@ understandable with screen readers and Braille displays.
 ## Repository-Struktur
 
 - `Dockerfile`: baut das Image aus dem digest-gepinnten MCR-.NET-SDK-Image
-  und installiert Java JDK 21, Maven, Go, Rust, Python, Node.js, OpenCode,
-  Swift, die vier Required-Agenten, Syft, `uv`, Spec Kit und Hilfswerkzeuge.
+  und stellt Java JDK 21, Maven, Go, Rust, Python, PowerShell 7, Node.js,
+  OpenCode, Swift, die vier Required-Agenten, Syft, `uv`, Spec Kit und
+  Hilfswerkzeuge bereit.
 - `compose.yml`: definiert den Service `ade`, getrennte persistente
   Podman-Volumes fuer die Agentenzustaende, die Host-Mounts und die
   Portfreigabe `127.0.0.1:5100-5199`.
@@ -113,6 +117,8 @@ understandable with screen readers and Braille displays.
   Image gepinnten Syft, ohne das Image auf dem Host ein zweites Mal zu exportieren.
   Nur dieser kurzlebige Lesescan nutzt Root, damit alle Image-Pfade erfasst
   werden; der Sandbox-Service selbst bleibt der Non-Root-Benutzer `adedev`.
+- `scripts/agent-prompt.*`: uebergibt einen einzelnen Prompt aus Bash oder
+  PowerShell an eine installierte Agenten-CLI im laufenden Container.
 - `docs/security/`: Compliance-, Freigabe-, Inventar- und Evidenzdokumente.
 
 ## Voraussetzungen
@@ -212,6 +218,7 @@ JAVA_PROJECTS_DIR=/pfad/zu/java-projects
 GO_PROJECTS_DIR=/pfad/zu/go-projects
 RUST_PROJECTS_DIR=/pfad/zu/rust-projects
 PYTHON_PROJECTS_DIR=/pfad/zu/python-projects
+POWERSHELL_PROJECTS_DIR=/pfad/zu/powershell-projects
 SWIFT_PROJECTS_DIR=/pfad/zu/swift-projects
 SECURE_CASE_TRACKER_PROJECTS_DIR=/pfad/zu/SecureCaseTrackerProjects
 SECURE_SERVICE_HARVESTER_PROJECTS_DIR=/pfad/zu/SecureServiceHarvesterProjects
@@ -236,6 +243,42 @@ Die vollstaendige Toolchain prueft:
 ```bash
 podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh
 ```
+
+## Agenten-Prompts ohne TUI / Agent Prompts Without a TUI
+
+Die Repo-Skripte uebergeben einen einzelnen Prompt standardmaessig mit
+`podman compose exec -T` an den laufenden Service `ade`. Dadurch werden die im
+Container installierten CLIs und ihre vorhandenen persistenten Zustaende
+verwendet. Die Bash- und PowerShell-Einstiege haben dieselbe Schnittstelle:
+
+```bash
+scripts/agent-prompt.sh codex -- "Pruefe die aktuellen Aenderungen."
+printf '%s\n' 'Fasse dieses Repository zusammen.' | scripts/agent-prompt.sh claude
+```
+
+```powershell
+pwsh -NoProfile -File scripts/agent-prompt.ps1 codex -- 'Pruefe die aktuellen Aenderungen.'
+Get-Content -Raw .\auftrag.txt | pwsh -NoProfile -File scripts/agent-prompt.ps1 opencode
+```
+
+Im Container stehen `agent-prompt` und
+`/usr/local/bin/agent-prompt.ps1` direkt bereit. Der Dispatcher unterstuetzt
+`codex`, `claude`, `opencode`, `copilot`, `gemini` und `agy`; der nicht-
+interaktive Antigravity-Aufruf bleibt experimentell. Der Wrapper meldet keinen
+Agenten an, waehlt keinen Provider oder Modellanbieter und erweitert keine
+Berechtigungen. Fuer Prompts mit vertraulichem Inhalt stdin oder
+`--prompt-file` statt eines Shell-Arguments verwenden.
+
+*The repository scripts send one prompt to the running `ade` service through
+`podman compose exec -T`, reusing the image-installed CLIs and their persistent
+state. Inside the container, use `agent-prompt` or the PowerShell entrypoint
+directly. The wrapper does not sign in, select a provider, or broaden agent
+permissions. Prefer standard input or `--prompt-file` for confidential prompt
+content. Antigravity print mode remains experimental.*
+
+Die vollstaendige Anleitung mit Arbeitsverzeichnis, Agentenargumenten und
+Fehlerbildern steht in
+[docs/fuer-lernende/agent-prompt.md](docs/fuer-lernende/agent-prompt.md).
 
 ## Home-Baseline-Referenz und persoenlicher Override
 
@@ -396,6 +439,7 @@ podman compose exec ade sh -lc 'java --version; javac --version; mvn --version'
 podman compose exec ade sh -lc 'go version; gopls version'
 podman compose exec ade sh -lc 'rustc --version; cargo --version; cargo clippy --version'
 podman compose exec ade sh -lc 'python --version'
+podman compose exec ade sh -lc 'pwsh --version'
 podman compose exec ade sh -lc 'node --version; npm --version'
 podman compose exec ade sh -lc 'swift --version; swiftc --version; command -v sourcekit-lsp'
 podman compose exec ade sh -lc 'opencode --version; codex --version'
@@ -405,7 +449,7 @@ podman compose exec ade sh -lc 'specify version; specify check'
 Fuer eine praktische Pruefung der MSL-Toolchain-Familien
 (.NET/C#, Java/JVM, Go, Rust, Python und JavaScript/TypeScript ueber
 Node.js/npm sowie Swift) kann der wiederholbare Smoke-Test im Container
-ausgefuehrt werden:
+ausgefuehrt werden. Er prueft ausserdem eine kleine PowerShell-Ausfuehrung:
 
 ```bash
 podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh
@@ -614,6 +658,12 @@ only in local, untracked configuration when needed.
 Codex, Claude Code, Antigravity CLI, and GitHub Copilot CLI are installed as the
 four required agents. Their presence does not imply account, provider, legal,
 or organizational approval.
+
+For a single non-interactive prompt from the host, use
+`scripts/agent-prompt.sh <agent> -- "<prompt>"` or the PowerShell counterpart
+`pwsh -NoProfile -File scripts/agent-prompt.ps1 <agent> -- '<prompt>'`. See
+[the learner guide](docs/fuer-lernende/agent-prompt.md) for stdin, prompt-file,
+working-directory, and permission guidance.
 
 <!-- statistics-profile-2-readme:begin -->
 ## Statistikprofil 2 / Statistics Profile 2

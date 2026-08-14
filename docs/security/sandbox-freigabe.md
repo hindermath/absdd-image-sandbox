@@ -32,6 +32,7 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 | `${GO_PROJECTS_DIR:-./go-projects}` | `/go-projects` | Go-Projekte |
 | `${RUST_PROJECTS_DIR:-./rust-projects}` | `/rust-projects` | Rust-Projekte |
 | `${PYTHON_PROJECTS_DIR:-./python-projects}` | `/python-projects` | Python-Projekte |
+| `${POWERSHELL_PROJECTS_DIR:-./powershell-projects}` | `/powershell-projects` | PowerShell-Skriptprojekte |
 | `${SWIFT_PROJECTS_DIR:-./swift-projects}` | `/swift-projects` | Swift-Projekte |
 | `${SECURE_CASE_TRACKER_PROJECTS_DIR:-./secure-case-tracker-projects}` | `/secure-case-tracker-projects` | Secure-CaseTracker-Lern- und Projektarbeiten |
 | `${SECURE_SERVICE_HARVESTER_PROJECTS_DIR:-./secure-service-harvester-projects}` | `/secure-service-harvester-projects` | Secure-Service-Harvester-Lern- und Projektarbeiten |
@@ -53,6 +54,7 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 | Java | OpenJDK 21 aus Ubuntu-Paketquellen |
 | Maven | Ubuntu-Paketquelle |
 | Python | Ubuntu-Paketquelle (`python3`, `python3-venv`, `python-is-python3`) |
+| PowerShell | `7.6.1`, vom digest-gepinnten Microsoft-.NET-SDK-Basisimage geliefert und im Build geprueft |
 | Node.js / npm | NodeSource-Apt-Quelle, `NODE_MAJOR=22`, signiert ueber `/usr/share/keyrings/nodesource.gpg` |
 | Go | `1.26.3` |
 | gopls | `v0.21.1` |
