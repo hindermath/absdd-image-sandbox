@@ -1,6 +1,6 @@
 # Glossar / Glossary
 
-**Stand / Date:** 2026-07-05
+**Stand / Date:** 2026-08-14
 **Ausrichtung / Orientation:** DE-first, EN-second, CEFR B2, WCAG 2.2 AA
 
 **DE:** Dieses Glossar erklärt Abkürzungen und Fachbegriffe, die im Repository und in den Lernmaterialien
@@ -131,7 +131,11 @@ Verzeichnis `docs/secure-development/checklisten/`.
 | **Least Privilege** | Prinzip der geringsten Rechte — jeder Prozess bekommt nur die Rechte, die er wirklich braucht. / Principle of minimal rights — every process gets only the rights it really needs. |
 | **Reproduzierbarkeit** | Gleiche Umgebung, gleiche Eingabe → immer gleiches Ergebnis. Wichtig für nachvollziehbare Nachweise. / Same environment, same input → always the same result. Important for traceable evidence. |
 | **Betriebsnachweis** | Nachvollziehbarer Beleg (z. B. Ausgabe eines Tool-Laufs mit Datum), dass ein Werkzeug oder Prozess wie erwartet funktioniert hat. / Traceable evidence (e.g. output of a tool run with date) that a tool or process worked as expected. |
-| **Agenten-Parität** | Gleichwertige Behandlung der vier Required-Agenten (Codex, Claude Code, Antigravity CLI, GitHub Copilot CLI) und des zusätzlichen OpenCode-Werkzeugs — Regeln gelten für alle. / Equal treatment of the four required agents and the additional OpenCode tool — rules apply to all. |
+| **Toolchain** | Zusammengehörige Werkzeuge zum Schreiben, Bauen, Prüfen und Ausführen von Programmen, zum Beispiel SDK, Compiler und Paketverwaltung. / A set of tools for writing, building, testing, and running programs, such as an SDK, compiler, and package manager. |
+| **`origin`** | Dein persönliches oder von deiner Bildungseinrichtung bereitgestelltes Git-Repository. Dorthin kannst du eigene Änderungen senden, wenn du Schreibrechte hast. / Your personal or institution-provided Git repository. You can send your own changes there when you have write access. |
+| **`upstream`** | Das von der Bildungseinrichtung gepflegte Referenz-Repository, aus dem du Aktualisierungen liest. / The institution-maintained reference repository from which you read updates. |
+| **Provider** | Technischer Anbieter eines KI-Modells oder Dienstes. Anmeldung, Modellwahl und Freigaben erfolgen bewusst durch den Menschen. / Technical provider of an AI model or service. Sign-in, model selection, and approvals are deliberate human actions. |
+| **Agenten-Parität** | Gleichwertige Behandlung der vier Required-Agenten (Codex, Claude Code, Antigravity CLI, GitHub Copilot CLI), von OpenCode und Gemini CLI — gemeinsame Regeln gelten für alle. / Equal treatment of the four required agents, OpenCode, and Gemini CLI — shared rules apply to all. |
 | **Dev Container** | Ein laufender Container, an den sich VS Code vom Host aus anhängt, um direkt darin zu arbeiten. VS Code installiert dafür beim Verbinden selbst einen Remote-Server im Container. / A running container that VS Code attaches to from the host to work inside it directly. VS Code installs a remote server into the container itself when connecting. |
 | **LSP** | Language Server Protocol — ein Standard, über den Editoren Sprachfunktionen wie Autovervollständigung und Fehlerprüfung von einem Sprachserver beziehen (z. B. `gopls`, `rust-analyzer`, `sourcekit-lsp`). / Language Server Protocol — a standard through which editors obtain language features like autocompletion and error checking from a language server (e.g. `gopls`, `rust-analyzer`, `sourcekit-lsp`). |
 | **IPC-Shim (`code`)** | Ein kleiner Helfer, den VS Code beim Verbinden in den Container legt; er leitet den `code`-Befehl über einen internen Kanal an das bereits geöffnete VS-Code-Fenster weiter. Ohne aktive Verbindung wirkungslos. / A small helper VS Code places into the container when connecting; it forwards the `code` command over an internal channel to the already open VS Code window. Ineffective without an active connection. |

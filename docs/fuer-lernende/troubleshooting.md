@@ -263,3 +263,11 @@ Does Podman respond (`podman info`)? Is the configuration valid (`podman-compose
 config`)? Write down the exact error message and the command that triggers it.
 When you ask for help, describe your operating system and the last step from
 [installation.md](installation.md) that still worked.
+
+**DE:** Maintainer finden die vollständige Prüf-, Audit-, SBOM- und
+Plattformmatrix unter
+[Validierung und Wartung](../betrieb/validierung-und-wartung.md).
+
+**EN:** Maintainers can find the complete validation, audit, SBOM, and
+platform matrix in
+[Validation and maintenance](../betrieb/validierung-und-wartung.md).

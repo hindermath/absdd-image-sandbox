@@ -45,10 +45,27 @@ foundations. This repository is not an application.
 | OpenCode | Installiert, aber ohne vorkonfigurierten Modellanbieter |
 | Codex | Systemweite Defaults aus `codex/config.toml` und `codex/requirements.toml` |
 | Claude Code | Installiert; persistenter Zustand in `claude_data` |
+| Gemini CLI | Installiert; persistenter Zustand in `gemini_data` |
 | Antigravity CLI | Installiert; persistenter Zustand in `gemini_data` |
 | GitHub Copilot CLI | Installiert; persistenter Zustand in `copilot_data` |
 | Software-Bill-of-Materials | Syft ist installiert; `scripts/build-and-sbom.*` erzeugt die Image-SBOM |
 | Arbeitsverzeichnis im Container | `/rider-projects` |
+
+### Dokumentationspfade / Documentation Paths
+
+| Zielgruppe / Audience | Einstieg / Entry point | Inhalt / Content |
+|---|---|---|
+| Lernende / Learners | [docs/fuer-lernende/README.md](docs/fuer-lernende/README.md) | geführter Einstieg, Toolchains, Agenten, Git und Fehlerhilfe / guided setup, toolchains, agents, Git, and troubleshooting |
+| Maintainer und Review / Maintainers and review | [docs/betrieb/README.md](docs/betrieb/README.md) | Image-Aufbau, Compose-Grenzen, Validierung, Audit, SBOM und Wartung / image construction, Compose boundaries, validation, audit, SBOM, and maintenance |
+| Security Review | [docs/security/](docs/security/) | Freigabe-, Inventar-, Isolations- und Evidenzstand / approval, inventory, isolation, and evidence state |
+
+Die Detailseiten beschreiben den aktuellen lokalen Image-Vertrag. `Dockerfile`,
+Compose-Dateien, Repository-Skripte und praktisch validiertes Verhalten bleiben
+die technische Wahrheit.
+
+*The detailed pages describe the current local image contract. The Dockerfile,
+Compose files, repository scripts, and practically validated behavior remain
+the technical source of truth.*
 
 ## Public-Readiness-Status
 
@@ -119,6 +136,10 @@ understandable with screen readers and Braille displays.
   werden; der Sandbox-Service selbst bleibt der Non-Root-Benutzer `adedev`.
 - `scripts/agent-prompt.*`: uebergibt einen einzelnen Prompt aus Bash oder
   PowerShell an eine installierte Agenten-CLI im laufenden Container.
+- `docs/fuer-lernende/`: gefuehrter Lernpfad mit Toolchain-, Agenten-, Git-
+  und Fehlerhilfen.
+- `docs/betrieb/`: technische Referenz fuer Image, Compose, Validierung und
+  Wartung.
 - `docs/security/`: Compliance-, Freigabe-, Inventar- und Evidenzdokumente.
 
 ## Voraussetzungen
@@ -228,14 +249,16 @@ AUDIT_DIR=./audit-logs
 
 Nicht gesetzte Variablen fallen auf lokale Repository-Verzeichnisse zurueck.
 
-## Required-Agenten pruefen
+## Installierte Agenten pruefen
 
-Nach dem Build muessen alle vier Required-Agenten und Syft eine Versionsausgabe
-liefern. Anmeldung und Providerfreigabe sind davon getrennte, menschlich
-verantwortete Schritte.
+Nach dem Build muessen OpenCode, alle installierten Agenten-CLIs und Syft eine
+Versionsausgabe liefern. Codex, Claude Code, Antigravity und Copilot sind die
+vier Required-Agenten; OpenCode und Gemini CLI sind zusaetzlich installiert.
+Anmeldung und Providerfreigabe sind davon getrennte, menschlich verantwortete
+Schritte.
 
 ```bash
-podman compose exec ade sh -lc 'codex --version && claude --version && agy --version && copilot --version && syft version'
+podman compose exec ade sh -lc 'opencode --version && codex --version && claude --version && gemini --version && agy --version && copilot --version && syft version'
 ```
 
 Die vollstaendige Toolchain prueft:
@@ -279,6 +302,9 @@ content. Antigravity print mode remains experimental.*
 Die vollstaendige Anleitung mit Arbeitsverzeichnis, Agentenargumenten und
 Fehlerbildern steht in
 [docs/fuer-lernende/agent-prompt.md](docs/fuer-lernende/agent-prompt.md).
+Eine Einordnung aller Agenten, Anmeldungs- und Autoritaetsgrenzen sowie Spec Kit
+steht in
+[docs/fuer-lernende/agenten-und-spec-kit.md](docs/fuer-lernende/agenten-und-spec-kit.md).
 
 ## Home-Baseline-Referenz und persoenlicher Override
 
@@ -442,7 +468,7 @@ podman compose exec ade sh -lc 'python --version'
 podman compose exec ade sh -lc 'pwsh --version'
 podman compose exec ade sh -lc 'node --version; npm --version'
 podman compose exec ade sh -lc 'swift --version; swiftc --version; command -v sourcekit-lsp'
-podman compose exec ade sh -lc 'opencode --version; codex --version'
+podman compose exec ade sh -lc 'opencode --version; codex --version; claude --version; gemini --version; agy --version; copilot --version'
 podman compose exec ade sh -lc 'specify version; specify check'
 ```
 
@@ -466,25 +492,11 @@ Fuer dokumentierte Web-App-Beispiele im Container an `0.0.0.0` binden und
 Ports aus `5100-5199` verwenden. Praktische Checks sollen HTTP-Antworten
 pruefen und Hintergrundprozesse am Ende stoppen.
 
-## .NET-Projekte
-
-`dotnet/ContainerBuild.props` wird in den Container als
-`/dotnet-config/ContainerBuild.props` gemountet. Dadurch landen `bin`, `obj`
-und AppHost-Ausgaben nicht auf Windows-/Host-Bind-Mounts, sondern im
-Podman-Volume `/dotnet-build`.
-
-ASP.NET-Anwendungen muessen im Container an `0.0.0.0` binden, damit sie vom
-Host erreichbar sind. Verwende Ports aus `5100-5199`, solange `compose.yml`
-nicht angepasst wird.
-
-## Swift-Projekte
-
-Swift-Projekte koennen ueber `SWIFT_PROJECTS_DIR` nach `/swift-projects`
-gemountet werden. Das Image enthaelt die native Swift-Toolchain fuer Ubuntu
-24.04, einschliesslich SwiftPM und SourceKit-LSP. Fuer VS Code wird die
-Extension `swiftlang.swift-vscode` empfohlen; sie arbeitet besonders gut mit
-SwiftPM-Projekten, die eine `Package.swift` im Projektwurzelverzeichnis
-enthalten.
+Ausfuehrliche, projektbezogene Anleitungen fuer .NET, Java, Go, Rust, Python,
+PowerShell, Swift und Node.js stehen im
+[Toolchain-Index](docs/fuer-lernende/toolchains/README.md). Die technische
+Installations- und Pruefreferenz steht unter
+[docs/betrieb/](docs/betrieb/README.md).
 
 ## Spec-kit-Workflow / Spec Kit Workflow
 
@@ -499,6 +511,8 @@ specify init . --integration opencode --force
 ```
 
 Falls nach dem Skripttyp gefragt wird, im Linux-Container `sh` auswaehlen.
+Begriffe, Artefakte, Agenten- und Autoritaetsgrenzen erklaert
+[KI-Agenten und Spec Kit](docs/fuer-lernende/agenten-und-spec-kit.md).
 
 ## Verwaltete Sandbox-Intake-Serie / Managed Sandbox Intake Series
 
@@ -533,7 +547,7 @@ approvals remain human decisions.*
 Vor Weitergabe eines neu gebauten Images eine CycloneDX-SBOM erzeugen:
 
 ```bash
-scripts/build-and-sbom.sh --skip-build
+bash scripts/build-and-sbom.sh --skip-build
 ```
 
 PowerShell:
@@ -545,6 +559,8 @@ PowerShell:
 Die Skripte nutzen eine lokal installierte `syft`, wenn vorhanden. Andernfalls
 wird das Syft-Containerimage mit Podman ausgefuehrt. Generierte
 `sboms/*.cdx.json` sind Build-Artefakte und werden nicht committet.
+Der vollstaendige Ablauf und seine Aussagegrenzen stehen in
+[Validierung und Wartung](docs/betrieb/validierung-und-wartung.md).
 
 ## Validierung vor Commit
 
@@ -570,6 +586,9 @@ Bei Toolchain-Aenderungen zusaetzlich die Toolchecks aus diesem Dokument
 ausfuehren. Wenn eine Plattform, Podman-Machine oder Netzwerkzugriff nicht
 verfuegbar ist, die ausgelassene Pruefung mit Grund im Pull Request oder im
 Session-Log dokumentieren.
+
+Die vollstaendige Maintainer-Pruefmatrix steht in
+[Validierung und Wartung](docs/betrieb/validierung-und-wartung.md).
 
 ## Troubleshooting
 
@@ -600,6 +619,10 @@ OpenCode sowie die vier Required-Agenten verwenden getrennte Podman-Volumes:
 `opencode_data`, `codex_data`, `claude_data`, `gemini_data` und
 `copilot_data`. `podman compose down -v` entfernt diese Daten einschliesslich
 lokaler Anmeldezustaende. Vorher immer den Audit-Wrapper verwenden.
+Weitere Fehlerbilder fuer Lernende stehen in
+[docs/fuer-lernende/troubleshooting.md](docs/fuer-lernende/troubleshooting.md);
+Mount-, Volume- und Haertungsdetails in
+[Compose und Speicher](docs/betrieb/compose-und-speicher.md).
 
 ## English Quick Start
 
@@ -664,6 +687,10 @@ For a single non-interactive prompt from the host, use
 `pwsh -NoProfile -File scripts/agent-prompt.ps1 <agent> -- '<prompt>'`. See
 [the learner guide](docs/fuer-lernende/agent-prompt.md) for stdin, prompt-file,
 working-directory, and permission guidance.
+
+Use [the learner documentation](docs/fuer-lernende/README.md) for the guided
+path and [the operations reference](docs/betrieb/README.md) for image,
+Compose, validation, audit, SBOM, and maintenance details.
 
 <!-- statistics-profile-2-readme:begin -->
 ## Statistikprofil 2 / Statistics Profile 2

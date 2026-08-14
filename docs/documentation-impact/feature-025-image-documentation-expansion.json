@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "feature": "025-image-documentation-expansion",
+  "entries": [
+    {
+      "changeId": "CHG025",
+      "scope": "Detailed learner and maintainer documentation for the current sandbox image",
+      "decision": "UpdateRequired",
+      "rationale": "The repository needs complete reader paths for every supported toolchain, agent entrypoint, image boundary, Compose mount, validation step, and maintenance action. Existing concise guidance remains correct but does not provide the requested operational depth.",
+      "documents": [
+        "AGENTS.md",
+        "README.md",
+        "docs/fuer-lernende/",
+        "docs/betrieb/"
+      ],
+      "owner": "Repository Maintainer",
+      "audiences": [
+        "Learners",
+        "Repository users",
+        "Maintainers and AI agents",
+        "Security reviewers"
+      ],
+      "readerPaths": [
+        "Repository entry and safe quick start",
+        "Learner setup and first controlled use",
+        "Toolchain and agent usage",
+        "Image and Compose reference",
+        "Validation, maintenance, and troubleshooting"
+      ],
+      "canonicalSource": "Dockerfile, compose.yml, repository-owned scripts, and validated container behavior",
+      "navigationImpact": "The README and learner index gain links to task-focused toolchain, agent, Git-hosting, image, Compose, and operations references.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and English second in synchronized, task-focused files at approximately CEFR B2.",
+      "languagePartners": [],
+      "platformAndExampleProof": "Static repository contracts are checked on the available host. Container commands are exercised with Podman on macOS. Linux and Windows or WSL2 are reported separately when those platforms are not available for practical execution.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/documentation-impact/feature-025-image-documentation-expansion.json",
+      "risk": "Medium; inaccurate setup, mount, agent, secret, or shutdown guidance could cause data loss, credential exposure, or false security expectations.",
+      "criticality": "Security",
+      "reevaluationTrigger": "The Dockerfile, Compose mounts or volumes, supported agent mappings, Home Baseline contract, validation scripts, or learner audience changes."
+    }
+  ]
+}

@@ -274,9 +274,19 @@ or secrets.
    deine Referenz für Mounts, Schreibgrenzen, Netzwerk und Secrets.
    **EN:** Read the full [sandbox-profil.md](sandbox-profil.md) — it is your
    reference for mounts, write boundaries, network, and secrets.
-2. **DE:** Arbeite den Lernbegleiter für dein Lehrjahr durch (verlinkt in der
+2. **DE:** Lerne den providerneutralen
+   [Git- und Hosting-Ablauf](git-und-hosting.md) kennen und waehle deine
+   [Toolchain](toolchains/README.md).
+   **EN:** Learn the provider-neutral
+   [Git and hosting workflow](git-und-hosting.md) and choose your
+   [toolchain](toolchains/README.md).
+3. **DE:** Lies vor einem weiteren Agentenlauf
+   [Agenten und Spec Kit](agenten-und-spec-kit.md).
+   **EN:** Before another agent run, read
+   [Agents and Spec Kit](agenten-und-spec-kit.md).
+4. **DE:** Arbeite den Lernbegleiter für dein Lehrjahr durch (verlinkt in der
    [README.md](README.md), Abschnitt „Verbindung zur Lernreihe").
    **EN:** Work through the study companion for your training year (linked in the
    [README.md](README.md), section "Connection to the Learning Series").
-3. **DE:** Bei Problemen: [troubleshooting.md](troubleshooting.md).
+5. **DE:** Bei Problemen: [troubleshooting.md](troubleshooting.md).
    **EN:** If you run into problems: [troubleshooting.md](troubleshooting.md).

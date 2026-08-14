@@ -248,7 +248,7 @@ Before distributing or handing over a rebuilt sandbox image, generate a
 CycloneDX JSON SBOM from the final image:
 
 ```bash
-scripts/build-and-sbom.sh --skip-build
+bash scripts/build-and-sbom.sh --skip-build
 ```
 
 On Windows, use the PowerShell variant:
