@@ -212,6 +212,7 @@ differ.
 |---|---|---|---|---|
 | Codex CLI | Required | `codex` | `codex_data` -> `/home/adedev/.codex` | `AGENTS.md`, `codex/` |
 | Claude Code | Required | `claude` | `claude_data` -> `/home/adedev/.claude` | `CLAUDE.md` |
+| Gemini CLI | Additional | `gemini` | `gemini_data` -> `/home/adedev/.gemini-home` | `GEMINI.md` |
 | Antigravity CLI | Required | `agy` | `gemini_data` -> `/home/adedev/.gemini-home` | `GEMINI.md` |
 | GitHub Copilot CLI | Required | `copilot` | `copilot_data` -> `/home/adedev/.copilot` | `.github/copilot-instructions.md` |
 | OpenCode | Additional | `opencode` | `opencode_data` -> `/home/adedev/.local/share/opencode` | `opencode.jsonc` |
@@ -281,3 +282,6 @@ Status:                  Open / N/A
 - `opencode.jsonc` — OpenCode-Sicherheitsregeln
 - `Dockerfile` — Tool-Versionen und Image-Build
 - `docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md` — Checkliste Sandbox-Governance
+- `docs/fuer-lernende/toolchains/README.md` — praktische Toolchain-Anleitungen
+- `docs/fuer-lernende/agenten-und-spec-kit.md` — Agenten- und Spec-Kit-Einstieg
+- `docs/betrieb/README.md` — technische Betriebs- und Maintainer-Referenz

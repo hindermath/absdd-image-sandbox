@@ -1,20 +1,22 @@
 # Für Lernende: Einstieg in die Sandbox-Umgebung / For Learners: Getting Started
 
-**Stand / Date:** 2026-07-10
+**Stand / Date:** 2026-08-14
 **Ausrichtung / Orientation:** DE-first, EN-second, CEFR B2, WCAG 2.2 AA
 
 ---
 
 ## Worum geht es hier? / What Is This?
 
-**DE:** Die `absdd-image-sandbox` ist eine **Container-Umgebung** für sichere Softwareentwicklung mit
-KI-Agenten. Sie bietet eine abgeschottete Umgebung, in der du Fehler machen kannst, ohne dass etwas außerhalb
-des Containers beschädigt wird. Du findest hier alle Werkzeuge (Sprachlaufzeiten, Testtools, KI-Agenten), die
-du im Ausbildungsprojekt `Secure CaseTracker` benötigst.
+**DE:** Die `absdd-image-sandbox` ist eine **Container-Umgebung** für sichere
+Softwareentwicklung mit KI-Agenten. Sie bietet eine abgeschottete Umgebung, in
+der du Fehler machen kannst, ohne dass etwas außerhalb des Containers
+beschädigt wird. Sie enthält die Basiswerkzeuge (Sprachlaufzeiten, Testtools,
+KI-Agenten) für die drei Secure-Trader-Lernprojekte CaseTracker, OrderDesk und
+ServiceHarvester.
 
 **EN:** The `absdd-image-sandbox` is a **container environment** for secure software development with AI
 agents. It provides a walled-off space where you can make mistakes without damaging anything outside the
-container. It contains all tools (language runtimes, test tools, AI agents) you need for the three Secure
+container. It contains the baseline tools (language runtimes, test tools, AI agents) for the three Secure
 Trader training projects: CaseTracker, OrderDesk, and ServiceHarvester.
 
 **DE:** Die öffentliche Referenzadresse lautet: `https://github.com/hindermath/absdd-image-sandbox`
@@ -62,8 +64,11 @@ repository.
 | 2 | [warum-sandbox.md](warum-sandbox.md) | Warum eine Sandbox? Gate, Schutzziele, ISO 27001. / Why a sandbox? Gate, protection goals, ISO 27001. |
 | 3 | [installation.md](installation.md) | Podman installieren je Betriebssystem. / Install Podman per operating system. |
 | 4 | [erste-schritte.md](erste-schritte.md) | Container starten, erstes Programm, sauber stoppen. / Start the container, first program, stop cleanly. |
-| 5 (optional) | [vscode-dev-containers.md](vscode-dev-containers.md) | Mit VS Code direkt im Container arbeiten. / Work directly in the container with VS Code. |
-| 6 | [troubleshooting.md](troubleshooting.md) | Hilfe bei typischen Fehlern. / Help with common errors. |
+| 5 | [git-und-hosting.md](git-und-hosting.md) | `origin`, `upstream`, Branch und Review providerneutral verstehen. / Understand `origin`, `upstream`, branches, and review without provider lock-in. |
+| 6 | [toolchains/README.md](toolchains/README.md) | Die passende Sprache im vorgesehenen Projekt-Mount verwenden. / Use the selected language in its intended project mount. |
+| 7 | [agenten-und-spec-kit.md](agenten-und-spec-kit.md) | Agenten, sichere Auftraege und Spec-Kit-Artefakte verstehen. / Understand agents, safe tasks, and Spec Kit artifacts. |
+| 8 (optional) | [vscode-dev-containers.md](vscode-dev-containers.md) | Mit VS Code direkt im Container arbeiten. / Work directly in the container with VS Code. |
+| 9 | [troubleshooting.md](troubleshooting.md) | Hilfe bei typischen Fehlern. / Help with common errors. |
 
 **DE:** Die Kurzfassung des Starts steht weiter unten unter „Schnellstart". Die
 ausführliche, anfängernahe Variante findest du in
@@ -163,12 +168,16 @@ tools and stop cleanly — both explained step by step in
 | [erste-schritte.md](erste-schritte.md) | Erster Tag: starten, erstes Programm, sauber stoppen |
 | [vscode-dev-containers.md](vscode-dev-containers.md) | Host-VS-Code an den Container hängen; `code`-Befehl richtig verstehen |
 | [agent-prompt.md](agent-prompt.md) | Einen einzelnen Agenten-Prompt aus Bash oder PowerShell sicher an den Container uebergeben |
+| [agenten-und-spec-kit.md](agenten-und-spec-kit.md) | Alle installierten Agenten, Anmeldungsgrenzen, sicherer Arbeitsablauf und Spec Kit |
+| [git-und-hosting.md](git-und-hosting.md) | Providerneutraler Fork-, `origin`-/`upstream`-, Branch- und Review-Ablauf |
+| [toolchains/README.md](toolchains/README.md) | Index fuer .NET, Java, Go, Rust, Python, PowerShell, Swift und Node.js |
 | [troubleshooting.md](troubleshooting.md) | Typische Anfängerfehler: Symptom, Ursache, Lösung |
 | [sandbox-profil.md](sandbox-profil.md) | Vollständiges Sandbox-Profil: Mounts, Schreibgrenzen, Netzwerk, MSL-Matrix, KI-Agenten |
 | [GLOSSAR.md](GLOSSAR.md) | Erklärungen für Abkürzungen wie MSL, SBOM, CL_12, P0 |
 | [sandbox-readiness-template.md](sandbox-readiness-template.md) | Ausfüllbare Vorlage für die Jahr-2-Sandbox-Entscheidung |
 | [betriebsnachweise-template.md](betriebsnachweise-template.md) | Vorlage für Betriebsnachweise (Jahr 3, SI- und DV-Track) |
 | [../../README.md](../../README.md) | Ausführliche Anleitung für Entwickler und Administratoren |
+| [../betrieb/README.md](../betrieb/README.md) | Technische Image-, Compose-, Validierungs- und Wartungsreferenz |
 | [../secure-development/](../secure-development/) | Richtlinie, 12 Checklisten und Leitlinien für sichere Entwicklung |
 
 ---
@@ -248,8 +257,16 @@ provider variable and remains untracked.
 
 ## Nächste Schritte / Next Steps
 
-**DE:** Lies das [sandbox-profil.md](sandbox-profil.md), um die Grenzen dieser Umgebung zu verstehen. Dann
-arbeite den Lernbegleiter für dein Lehrjahr durch und bearbeite das zugehörige Lastenheft.
+**DE:** Lies das [sandbox-profil.md](sandbox-profil.md), um die Grenzen dieser
+Umgebung zu verstehen. Prüfe danach den
+[Git- und Hosting-Ablauf](git-und-hosting.md), wähle deine
+[Toolchain](toolchains/README.md) und lies vor dem ersten KI-Auftrag
+[Agenten und Spec Kit](agenten-und-spec-kit.md). Arbeite anschließend den
+Lernbegleiter für dein Lehrjahr durch und bearbeite das zugehörige Lastenheft.
 
-**EN:** Read [sandbox-profil.md](sandbox-profil.md) to understand the boundaries of this environment. Then
-work through the study companion for your training year and complete the related intake document.
+**EN:** Read [sandbox-profil.md](sandbox-profil.md) to understand the boundaries
+of this environment. Then check the [Git and hosting workflow](git-und-hosting.md),
+choose your [toolchain](toolchains/README.md), and read
+[Agents and Spec Kit](agenten-und-spec-kit.md) before your first AI task.
+Afterwards, work through the study companion for your training year and
+complete the related intake document.

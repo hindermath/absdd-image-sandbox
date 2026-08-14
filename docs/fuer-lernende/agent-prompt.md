@@ -136,3 +136,12 @@ Ausbildungs-Sandbox ist der Container-Standard vorzuziehen.
 *Outside the container, `--local` is an explicit exception that uses a host
 agent CLI and its host-side state. The container default is preferred for the
 training sandbox.*
+
+## Verwandte Anleitungen / Related Guides
+
+- [KI-Agenten und Spec Kit](agenten-und-spec-kit.md) erklärt Werkzeugrollen,
+  Anmeldung, sicheren Arbeitsablauf und Autoritätsgrenzen. / explains tool
+  roles, sign-in, safe workflow, and authority boundaries.
+- [Git und Hosting](git-und-hosting.md) erklärt `origin`, `upstream`, Branches
+  und Reviews providerneutral. / explains `origin`, `upstream`, branches, and
+  reviews without provider lock-in.
