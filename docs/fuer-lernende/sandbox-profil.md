@@ -168,17 +168,18 @@ The sandbox supports six MSL languages. The table shows version, test command, a
 | **Rust** | 1.95.0 | `Supported` | `cargo test` | `cargo audit` |
 | **Swift** | 6.3.3 | `Open` | `swift test` | Kein globales Audit-Tool installiert / No global audit tool installed |
 
-**DE:** Zusaetzlich stellt die Sandbox Python und PowerShell 7 als die beiden
-Skriptgrundlagen der Ausbildung bereit. PowerShell wird nicht als siebte
-Sprache in dieser MSL-Matrix gezaehlt. Die Version des mit dem MCR-.NET-SDK-
-Image gelieferten `pwsh` wird beim Image-Build gegen `POWERSHELL_VERSION`
-geprueft; Skriptprojekte liegen unter `/powershell-projects`.
+**DE:** Python ist einer der sechs verbindlichen MSL-Pfade und zugleich die
+erste Skriptgrundlage. Zusaetzlich stellt die Sandbox PowerShell 7 als zweite
+Skriptgrundlage bereit; PowerShell wird nicht als siebte Sprache in dieser
+MSL-Matrix gezaehlt. Die Version des mit dem MCR-.NET-SDK-Image gelieferten
+`pwsh` wird beim Image-Build gegen `POWERSHELL_VERSION` geprueft;
+Skriptprojekte liegen unter `/powershell-projects`.
 
-**EN:** The sandbox additionally provides Python and PowerShell 7 as the two
-training scripting foundations. PowerShell is not counted as a seventh entry
-in this MSL matrix. The image build checks the `pwsh` version supplied by the
-MCR .NET SDK image against `POWERSHELL_VERSION`; script projects use
-`/powershell-projects`.
+**EN:** Python is one of the six required MSL paths and also the first scripting
+foundation. The sandbox additionally provides PowerShell 7 as the second
+scripting foundation; PowerShell is not counted as a seventh entry in this MSL
+matrix. The image build checks the `pwsh` version supplied by the MCR .NET SDK
+image against `POWERSHELL_VERSION`; script projects use `/powershell-projects`.
 
 **DE:** Swift läuft im Container, aber iOS-Build-Tools und vollständige Apple-Plattform-Unterstützung fehlen.
 Das ist als `Open` dokumentiert.

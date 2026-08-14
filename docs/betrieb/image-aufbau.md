@@ -127,6 +127,22 @@ checkout under `/opt/home-baseline`, and removes write permissions.
 `/home/adedev/home-baseline-tmp` remains only as a deprecated compatibility
 link.
 
+**DE:** Dieser Lock ist die exakte Wahrheit fuer den eingebetteten und offline
+lesbaren Stand. Die
+[Home-Baseline-Architektur auf `main`](https://github.com/hindermath/home-baseline/blob/main/docs/architecture/source-and-home-runtime.md)
+beschreibt den aktuellen Upstream-Vertrag und kann neuer als das Image sein.
+Home Baseline besitzt den Lernpfad, die Git-/Hosting-Governance sowie den
+Source-/Runtime-Vertrag. Dieses Repository besitzt Build, Werkzeugversionen,
+Mounts, Containerbefehle und den installierten Runtime-Wrapper.
+
+**EN:** This lock is the exact source of truth for the embedded,
+offline-readable state. The
+[Home Baseline architecture on `main`](https://github.com/hindermath/home-baseline/blob/main/docs/architecture/source-and-home-runtime.md)
+describes the current upstream contract and may be newer than the image. Home
+Baseline owns the learner path, Git and hosting governance, and the source and
+runtime contract. This repository owns the build, tool versions, mounts,
+container commands, and installed runtime wrapper.
+
 **DE:** Kein Baseline-Skript läuft beim Build oder Start automatisch. Nur der
 explizite Wrapper `sync-home-baseline-runtime` kennt die drei Modi
 `--dry-run`, `--check-only` und `--apply`. Ein Schreibmodus benötigt einen

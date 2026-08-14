@@ -50,3 +50,6 @@ jobs:
 
       - name: Check agent prompt dispatcher parity
         run: python3 scripts/tests/test_agent_prompt_dispatchers.py
+
+      - name: Check Home Baseline documentation boundary
+        run: python3 scripts/tests/test_home_baseline_documentation_contract.py

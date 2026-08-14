@@ -4,16 +4,18 @@
 ## Lernenden- und A11Y-Basis / Learner and A11Y Baseline
 
 Dieses Lern- und Referenzprojekt richtet sich ab dem ersten Ausbildungsjahr an
-Fachinformatiker*innen, Kaufleute für IT-System-Management und Kaufleute für
-Digitalisierungsmanagement. Inhalte stehen auf Deutsch zuerst und Englisch
-danach, verwenden ungefähr CEFR B2, erklären Fachbegriffe beim ersten Auftreten
+Fachinformatiker*innen, IT-System-Elektroniker*innen, Kaufleute für
+IT-System-Management und Kaufleute für Digitalisierungsmanagement. Inhalte
+stehen auf Deutsch zuerst und Englisch danach, verwenden ungefähr CEFR B2,
+erklären Fachbegriffe beim ersten Auftreten
 und setzen keine Spec-Kit-Erfahrung voraus. Abhängigkeiten, Zustände und
 Entscheidungen bleiben ohne ausschließlich visuelle Darstellung verständlich.
 `Programmierung #include<everyone>` und WCAG 2.2 Level AA sind die Prüfbasis,
 soweit die Kriterien anwendbar sind.
 
-*This learning and reference project targets IT specialist apprentices and both
-IT management occupations from their first training year. Content is
+*This learning and reference project targets IT specialist and IT systems
+electronics technician apprentices plus both IT management occupations from
+their first training year. Content is
 German-first/English-second at about CEFR B2, explains technical terms at first
 use, assumes no prior Spec Kit experience, and never relies on visual-only
 dependency, state, or decision information. `Programmierung #include<everyone>`
@@ -21,16 +23,18 @@ and WCAG 2.2 Level AA are the review baseline wherever applicable.*
 <!-- learner-a11y-baseline:end -->
 
 Dieses Repository stellt eine Podman-basierte Container-Umgebung fuer
-OpenCode, die vier Required-Agenten Codex, Claude Code, Antigravity CLI und GitHub
-Copilot CLI, sechs speichersichere Sprachen, Python und PowerShell 7 als
-Skriptsprachen, Syft und Spec Kit bereit. Es ist eine Sandbox- und Lernumgebung,
-keine Anwendung.
+OpenCode, die vier Required-Agenten Codex, Claude Code, Antigravity CLI und
+GitHub Copilot CLI, sechs verbindliche speichersichere Sprachpfade (.NET/C#,
+Java, Go, Rust, Python und Swift), PowerShell 7 als zweite Skriptbasis,
+Node.js/npm als unterstuetzendes Werkzeug, Syft und Spec Kit bereit. Es ist
+eine Sandbox- und Lernumgebung, keine Anwendung.
 
 The repository provides a Podman-based container environment with OpenCode,
-the four required agents Codex, Claude Code, Antigravity CLI, and GitHub Copilot
-CLI, six memory-safe languages, Syft, and Spec Kit. It is a sandbox and
-training environment. Python and PowerShell 7 provide the two scripting
-foundations. This repository is not an application.
+the four required agents Codex, Claude Code, Antigravity CLI, and GitHub
+Copilot CLI, six required memory-safe language paths (.NET/C#, Java, Go, Rust,
+Python, and Swift), PowerShell 7 as a second scripting foundation, Node.js/npm
+as supporting tooling, Syft, and Spec Kit. It is a sandbox and training
+environment, not an application.
 
 ## Ueberblick / Overview
 
@@ -41,7 +45,8 @@ foundations. This repository is not an application.
 | Compose-Config-Validierung | `podman-compose config` |
 | Lifecycle-Fallback | `podman-compose`, falls `podman compose` lokal nicht verfuegbar ist |
 | Basisimage | Microsoft .NET SDK aus MCR, im `Dockerfile` per Digest gepinnt |
-| Skriptsprachen | Python und PowerShell 7; PowerShell-Version wird gegen das MCR-Basisimage geprueft |
+| Verbindliche MSL-Pfade | .NET/C#, Java, Go, Rust, Python und Swift |
+| Zusaetzliche Skript- und Werkzeugbasis | PowerShell 7 als zweite Skriptbasis; Node.js/npm als unterstuetzendes Werkzeug |
 | OpenCode | Installiert, aber ohne vorkonfigurierten Modellanbieter |
 | Codex | Systemweite Defaults aus `codex/config.toml` und `codex/requirements.toml` |
 | Claude Code | Installiert; persistenter Zustand in `claude_data` |
@@ -317,6 +322,34 @@ sind die Lernreihen direkt und nach dem Build auch offline lesbar. Es wird kein
 Baseline-Skript automatisch ausgefuehrt und es werden keine Zugangsdaten
 eingebaut.
 
+Der eingebettete und offline lesbare Stand wird ausschliesslich durch Release
+und Commit in `home-baseline.lock.json` bestimmt. Links auf den Branch `main`
+zeigen dagegen den aktuellen Upstream-Stand und koennen neuer als das Image
+sein. Die kanonische Beschreibung der Home-Quell- und Runtime-Grenze steht in
+der
+[Home-Baseline-Architektur](https://github.com/hindermath/home-baseline/blob/main/docs/architecture/source-and-home-runtime.md).
+
+*The embedded, offline-readable state is defined exclusively by the release
+and commit in `home-baseline.lock.json`. Links to the `main` branch show the
+current upstream state and may be newer than the image. The canonical Home
+source and runtime boundary is described in the
+[Home Baseline architecture](https://github.com/hindermath/home-baseline/blob/main/docs/architecture/source-and-home-runtime.md).*
+
+| Bereich / Area | Kanonische Verantwortung / Canonical responsibility |
+|---|---|
+| Lernpfad, Git-/Hosting-Governance und Home-Source-/Runtime-Vertrag / learner path, Git and hosting governance, and Home source/runtime contract | `home-baseline` |
+| Image-Build, Toolversionen, Container-Mounts, Laufzeitbefehle und Runtime-Wrapper / image build, tool versions, container mounts, runtime commands, and runtime wrapper | `absdd-image-sandbox` |
+
+Das Image stellt eigene Mounts nur fuer Secure CaseTracker, Secure
+ServiceHarvester und Secure OrderDesk bereit. Dieser operative Ausschnitt ist
+kleiner als der Home-Baseline-Katalog und definiert dessen weitere Lernreihen
+nicht um.
+
+*The image provides dedicated mounts only for Secure CaseTracker, Secure
+ServiceHarvester, and Secure OrderDesk. This operational subset is smaller
+than the Home Baseline catalog and does not redefine its other learning
+series.*
+
 ```bash
 podman compose exec ade sh -lc 'cd ~/home-baseline-source && git status --short --branch && git log -1 --oneline'
 ```
@@ -472,10 +505,10 @@ podman compose exec ade sh -lc 'opencode --version; codex --version; claude --ve
 podman compose exec ade sh -lc 'specify version; specify check'
 ```
 
-Fuer eine praktische Pruefung der MSL-Toolchain-Familien
-(.NET/C#, Java/JVM, Go, Rust, Python und JavaScript/TypeScript ueber
-Node.js/npm sowie Swift) kann der wiederholbare Smoke-Test im Container
-ausgefuehrt werden. Er prueft ausserdem eine kleine PowerShell-Ausfuehrung:
+Fuer eine praktische Pruefung der sechs verbindlichen MSL-Toolchain-Familien
+(.NET/C#, Java/JVM, Go, Rust, Python und Swift) kann der wiederholbare
+Smoke-Test im Container ausgefuehrt werden. Er prueft ausserdem PowerShell 7
+sowie Node.js/npm als unterstuetzende Skript- und Werkzeugbasis:
 
 ```bash
 podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh
@@ -655,6 +688,10 @@ podman compose exec ade bash
    `START-HERE-FUER-LERNENDE.md` supplied by your institution; the public
    provenance is available
    [on GitHub](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md).
+   The lock file defines the exact offline state; `main` is the current
+   upstream documentation and may be newer. The responsibility boundary is
+   documented in the
+   [Home Baseline architecture](https://github.com/hindermath/home-baseline/blob/main/docs/architecture/source-and-home-runtime.md).
 
 ```bash
 HOME_BASELINE_DIR=/path/to/home-baseline-source
