@@ -36,6 +36,7 @@ vorangestellte Metadatenzeile mit passendem `argName` hat.
 | ARG | Renovate datasource | Dependency |
 |---|---|---|
 | `JAVA_VERSION` | `java-version` | `java` |
+| `POWERSHELL_VERSION` | `github-releases` | `PowerShell/PowerShell` |
 | `GO_VERSION` | `golang-version` | `go` |
 | `GOPLS_VERSION` | `go` | `golang.org/x/tools/gopls` |
 | `STATICCHECK_VERSION` | `go` | `honnef.co/go/tools` |
@@ -57,6 +58,11 @@ vorangestellte Metadatenzeile mit passendem `argName` hat.
 `JAVA_VERSION` versioniert bewusst die Java-Major-Linie fuer das Ubuntu-APT-
 Paket `openjdk-${JAVA_VERSION}-jdk-headless`. Die konkrete Ubuntu-Patchversion
 wird nicht exakt gepinnt und muss bei Renovate-PRs im Build validiert werden.
+
+`POWERSHELL_VERSION` beschreibt die PowerShell-Version, die das per Digest
+gepinnte Microsoft-.NET-SDK-Basisimage mitliefert. Der Build vergleicht diese
+Version mit `pwsh`; ein Renovate-Update ist deshalb erst zusammen mit einem
+geprueften Basisimage-Digest mergebar. PowerShell wird nicht doppelt installiert.
 
 ### Eingebettete Home-Baseline-Referenz
 
@@ -124,6 +130,7 @@ preceding metadata line with a matching `argName`.
 | ARG | Renovate datasource | Dependency |
 |---|---|---|
 | `JAVA_VERSION` | `java-version` | `java` |
+| `POWERSHELL_VERSION` | `github-releases` | `PowerShell/PowerShell` |
 | `GO_VERSION` | `golang-version` | `go` |
 | `GOPLS_VERSION` | `go` | `golang.org/x/tools/gopls` |
 | `STATICCHECK_VERSION` | `go` | `honnef.co/go/tools` |
@@ -146,6 +153,11 @@ preceding metadata line with a matching `argName`.
 package `openjdk-${JAVA_VERSION}-jdk-headless`. The concrete Ubuntu patch
 package version is not pinned exactly and must be validated in Renovate PR
 builds.
+
+`POWERSHELL_VERSION` records the PowerShell version supplied by the
+digest-pinned Microsoft .NET SDK base image. The build compares this value with
+`pwsh`, so a Renovate update can only merge together with a verified base-image
+digest. PowerShell is not installed twice.
 
 ### Embedded Home-Baseline Reference
 

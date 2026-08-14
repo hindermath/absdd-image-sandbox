@@ -3,6 +3,8 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:1f48db91b4f27fdb4409b7b4253ce1fd4f
 
 # renovate: datasource=java-version depName=java packageName=java-jdk versioning=semver-coerced argName=JAVA_VERSION
 ARG JAVA_VERSION=21
+# renovate: datasource=github-releases depName=PowerShell/PowerShell versioning=semver argName=POWERSHELL_VERSION
+ARG POWERSHELL_VERSION=7.6.1
 # renovate: datasource=golang-version depName=go versioning=semver argName=GO_VERSION
 ARG GO_VERSION=1.26.3
 # renovate: datasource=go depName=golang.org/x/tools/gopls versioning=semver argName=GOPLS_VERSION
@@ -39,6 +41,7 @@ ARG COPILOT_CLI_VERSION=1.0.70
 ARG SYFT_VERSION=1.46.0
 
 USER root
+ENV POWERSHELL_TELEMETRY_OPTOUT=1
 RUN apt-get -y update \
     && apt-get -y install --no-install-recommends \
         bubblewrap \
@@ -92,6 +95,11 @@ RUN apt-get -y update \
     && apt-get -y install --no-install-recommends nodejs \
     && ln -sf /usr/bin/fdfind /usr/local/bin/fd \
     && rm -rf /var/lib/apt/lists/*
+RUN actual_version="$(pwsh -NoLogo -NoProfile -Command '$PSVersionTable.PSVersion.ToString()')" \
+    && if [ "${actual_version}" != "${POWERSHELL_VERSION}" ]; then \
+        echo "Expected PowerShell ${POWERSHELL_VERSION}, found ${actual_version}" >&2; \
+        exit 1; \
+    fi
 RUN set -eux; \
     case "${SWIFT_DOCKER_TAG}" in \
         *-noble) ;; \
@@ -199,7 +207,8 @@ ENV CODEX_HOME="/home/adedev/.codex" \
     CLAUDE_CONFIG_DIR="/home/adedev/.claude" \
     GEMINI_CLI_HOME="/home/adedev/.gemini-home" \
     COPILOT_HOME="/home/adedev/.copilot" \
-    DISABLE_AUTOUPDATER="1"
+    DISABLE_AUTOUPDATER="1" \
+    ADE_AGENT_PROMPT_TARGET="local"
 WORKDIR /home/adedev
 RUN go install "golang.org/x/tools/gopls@${GOPLS_VERSION}" \
     && go install "honnef.co/go/tools/cmd/staticcheck@${STATICCHECK_VERSION}" \
@@ -235,6 +244,8 @@ COPY ./scripts/audit-export.sh /usr/local/bin/audit-export
 COPY ./scripts/container-entrypoint.sh /usr/local/bin/ade-entrypoint
 COPY ./scripts/install-home-baseline-reference.sh /usr/local/bin/install-home-baseline-reference
 COPY ./scripts/sync-home-baseline-runtime.sh /usr/local/bin/sync-home-baseline-runtime
+COPY ./scripts/agent-prompt.sh /usr/local/bin/agent-prompt
+COPY ./scripts/agent-prompt.ps1 /usr/local/bin/agent-prompt.ps1
 COPY ./home-baseline.lock.json /usr/local/share/absdd-image-sandbox/home-baseline.lock.json
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
@@ -253,8 +264,10 @@ RUN set -eux; \
     rm -rf "${tmp_dir}"
 RUN sed -i 's/\r$//' /usr/local/bin/audit-export /usr/local/bin/ade-entrypoint \
         /usr/local/bin/install-home-baseline-reference /usr/local/bin/sync-home-baseline-runtime \
+        /usr/local/bin/agent-prompt /usr/local/bin/agent-prompt.ps1 \
     && chmod 0755 /usr/local/bin/audit-export /usr/local/bin/ade-entrypoint \
         /usr/local/bin/install-home-baseline-reference /usr/local/bin/sync-home-baseline-runtime \
+        /usr/local/bin/agent-prompt /usr/local/bin/agent-prompt.ps1 \
     && install-home-baseline-reference \
         /usr/local/share/absdd-image-sandbox/home-baseline.lock.json \
         /opt/home-baseline \

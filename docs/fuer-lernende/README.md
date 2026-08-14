@@ -162,6 +162,7 @@ tools and stop cleanly — both explained step by step in
 | [installation.md](installation.md) | Podman installieren je Betriebssystem, Schritt für Schritt |
 | [erste-schritte.md](erste-schritte.md) | Erster Tag: starten, erstes Programm, sauber stoppen |
 | [vscode-dev-containers.md](vscode-dev-containers.md) | Host-VS-Code an den Container hängen; `code`-Befehl richtig verstehen |
+| [agent-prompt.md](agent-prompt.md) | Einen einzelnen Agenten-Prompt aus Bash oder PowerShell sicher an den Container uebergeben |
 | [troubleshooting.md](troubleshooting.md) | Typische Anfängerfehler: Symptom, Ursache, Lösung |
 | [sandbox-profil.md](sandbox-profil.md) | Vollständiges Sandbox-Profil: Mounts, Schreibgrenzen, Netzwerk, MSL-Matrix, KI-Agenten |
 | [GLOSSAR.md](GLOSSAR.md) | Erklärungen für Abkürzungen wie MSL, SBOM, CL_12, P0 |

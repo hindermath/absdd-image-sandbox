@@ -13,6 +13,12 @@ repos:
         language: python
         pass_filenames: false
         files: ^(home-baseline\.lock\.json|renovate\.json|scripts/check-home-baseline-lock\.py|scripts/install-home-baseline-reference\.sh)$
+      - id: agent-prompt-dispatcher-parity
+        name: check Bash and PowerShell agent prompt dispatcher parity
+        entry: python scripts/tests/test_agent_prompt_dispatchers.py
+        language: python
+        pass_filenames: false
+        files: ^(scripts/agent-prompt\.(sh|ps1)|scripts/tests/test_agent_prompt_dispatchers\.py)$
 
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.30.1

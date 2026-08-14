@@ -90,6 +90,7 @@ writable_roots = [
   "/go-projects",
   "/rust-projects",
   "/python-projects",
+  "/powershell-projects",
   "/swift-projects",
   "/secure-case-tracker-projects",
   "/secure-service-harvester-projects",
