@@ -103,8 +103,13 @@ print("hello from python")
 PY
 
 section "PowerShell"
+# PowerShell variables must remain literal until pwsh expands them.
+# shellcheck disable=SC2016
 pwsh -NoLogo -NoProfile -Command \
   '$result = 2 + 2; if ($result -ne 4) { throw "unexpected arithmetic" }; "hello from powershell"'
+# shellcheck disable=SC2016
+pwsh -NoLogo -NoProfile -Command \
+  '$result = & pwsh -NoLogo -NoProfile -Command "2 + 2"; if ($LASTEXITCODE -ne 0 -or $result -ne 4) { throw "nested PowerShell failed" }; "hello from nested powershell"'
 
 section "Node.js"
 node -e 'console.log("hello from node")'

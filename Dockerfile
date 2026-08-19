@@ -95,11 +95,14 @@ RUN apt-get -y update \
     && apt-get -y install --no-install-recommends nodejs \
     && ln -sf /usr/bin/fdfind /usr/local/bin/fd \
     && rm -rf /var/lib/apt/lists/*
+# The SDK image's tool apphost can target a different architecture and precedes /usr/bin in PATH.
 RUN actual_version="$(pwsh -NoLogo -NoProfile -Command '$PSVersionTable.PSVersion.ToString()')" \
+    && ps_home="$(pwsh -NoLogo -NoProfile -Command '$PSHOME')" \
     && if [ "${actual_version}" != "${POWERSHELL_VERSION}" ]; then \
         echo "Expected PowerShell ${POWERSHELL_VERSION}, found ${actual_version}" >&2; \
         exit 1; \
-    fi
+    fi \
+    && ln -sf /usr/share/powershell/pwsh "${ps_home}/pwsh"
 RUN set -eux; \
     case "${SWIFT_DOCKER_TAG}" in \
         *-noble) ;; \
