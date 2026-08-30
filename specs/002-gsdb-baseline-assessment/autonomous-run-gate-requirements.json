@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "gates": [
+    {
+      "gateId": "accepted-input-binding",
+      "applicability": "Applicable",
+      "requiredScope": "Verify the three accepted repository-relative input paths and SHA-256 values from spec.md before assessment authoring and again before delivery.",
+      "requiredCommandTokens": [
+        "Get-FileHash",
+        "SHA256",
+        "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+        "specs/intake-review-results/sandbox-development-lifecycle.json",
+        "specs/intake-series/sandbox-development-lifecycle/manifest.json"
+      ],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "",
+      "reevaluationTrigger": ""
+    },
+    {
+      "gateId": "gsdb-source-integrity",
+      "applicability": "Applicable",
+      "requiredScope": "Read the baseline manifest and canonical checklist headings; prove all 37 manifest-controlled paths, twelve checklist sources, and exactly 157 unique stable IDs while mapping every manifest, version, compendium, or generator drift to one open gap rather than silently repairing it.",
+      "requiredCommandTokens": [
+        "baseline-manifest.json",
+        "CL-[0-9]{2}-[0-9]{2}",
+        "157",
+        "expectedChecklistCounts",
+        "checklistCountMismatches",
+        "missingManifestSources",
+        "extraManifestSources",
+        "duplicateSourcePaths",
+        "invalidSourceIntegrity",
+        "invalidSourceGapMappings"
+      ],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "",
+      "reevaluationTrigger": ""
+    },
+    {
+      "gateId": "assessment-schema-contract",
+      "applicability": "Applicable",
+      "requiredScope": "Validate assessment-results.json and validation-results.json against their reviewed JSON Schemas; prove exactly 157 rows, resolved object references, current output hashes, all mandatory fields, and controlled vocabulary values.",
+      "requiredCommandTokens": [
+        "Test-Json",
+        "assessment-results.schema.json",
+        "assessment-results.json",
+        "validation-results.schema.json",
+        "validation-results.json"
+      ],
+      "requiredRunnerOrPlatformTokens": [
+        "PowerShell"
+      ],
+      "rationale": "",
+      "reevaluationTrigger": ""
+    },
+    {
+      "gateId": "coverage-status-and-gap-traceability",
+      "applicability": "Applicable",
+      "requiredScope": "Compare canonical and assessed CL-ID sets; require zero missing, duplicate, or extra IDs, valid FR-007 status combinations, current existing local evidence for positive assessments, reciprocal exact gap mappings, and a recorded sample of one row per checklist traceable within 1,800 seconds total.",
+      "requiredCommandTokens": [
+        "ConvertFrom-Json",
+        "missingIds",
+        "unassignedGapRows",
+        "traceabilitySample",
+        "1800"
+      ],
+      "requiredRunnerOrPlatformTokens": [
+        "PowerShell"
+      ],
+      "rationale": "",
+      "reevaluationTrigger": ""
+    },
+    {
+      "gateId": "inventory-reconciliation",
+      "applicability": "Applicable",
+      "requiredScope": "Reconcile six MSL families, two separate scripting/support foundations, four required agents, two additional agent surfaces, and twelve installed presets across declarations, runtime evidence, tests, dispatchers, registries, and documentation; map every mismatch to one gap.",
+      "requiredCommandTokens": [
+        "install-spec-kit-governance-presets.sh",
+        "--check-only",
+        "test_agent_prompt_dispatchers.py"
+      ],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "",
+      "reevaluationTrigger": ""
+    },
+    {
+      "gateId": "bilingual-a11y-and-documentation-impact",
+      "applicability": "Applicable",
+      "requiredScope": "Validate German-first and English-second learner documentation, text-first status communication, Markdown accessibility heuristics, and the structured UpdateRequired documentation-impact decision; record a complete manual CEFR-B2 and first-use-term review with all four editorial error counters at zero.",
+      "requiredCommandTokens": [
+        "validate-documentation-impact.sh",
+        "hg_check_bilingual",
+        "hg_check_a11y"
+      ],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "",
+      "reevaluationTrigger": ""
+    },
+    {
+      "gateId": "assessment-scope-and-static-repository-validation",
+      "applicability": "Applicable",
+      "requiredScope": "Prove that only intended Spec Kit, assessment, contract, and every explicitly inventoried sanitized session-evidence path from this feature run changed; prohibit unrelated session logs plus Dockerfile, Compose, runtime, secret, provider, ruleset, approval, register, hardening, and prompt/response-log changes; run repository static checks.",
+      "requiredCommandTokens": [
+        "validate-autonomous-delivery-set.sh",
+        "privatePathPatterns",
+        "git diff --check",
+        "podman-compose config",
+        "pre-commit run --all-files"
+      ],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "",
+      "reevaluationTrigger": ""
+    },
+    {
+      "gateId": "autonomous-delivery-integrity",
+      "applicability": "Applicable",
+      "requiredScope": "Require valid run state and the last completed routed phase result, one content commit, temporary schema-2.0 exact-head PreMerge evidence, current checks and review state, causal PostMerge evidence with no product delta, terminal closeout fields, and final validation; older phase results remain historical lineage evidence rather than current-payload gates.",
+      "requiredCommandTokens": [
+        "validate-autonomous-phase-result.sh",
+        "validate-autonomous-gate-evidence.sh",
+        "validate-autonomous-run-state.sh"
+      ],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "",
+      "reevaluationTrigger": ""
+    },
+    {
+      "gateId": "statistics-assessment-only-boundary",
+      "applicability": "Applicable",
+      "requiredScope": "Run Statistics Profile 2 in read-only check mode, record observed drift as assessment evidence or a gap, and prove that the assessment content commit does not modify statistics files; any later statistics commit requires a separate post-feature trigger and authority.",
+      "requiredCommandTokens": [
+        "render-project-statistics.sh",
+        "--check-only",
+        "--json"
+      ],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "",
+      "reevaluationTrigger": ""
+    },
+    {
+      "gateId": "accepted-baseline-human-decision",
+      "applicability": "N/A",
+      "requiredScope": "Formally accept the ReviewPending assessment as AcceptedBaseline.",
+      "requiredCommandTokens": [],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "AcceptedBaseline is a human-only decision requiring documented participation by Project Owner and Security Review; autonomous technical completion cannot supply it.",
+      "reevaluationTrigger": "Re-evaluate only after complete ReviewPending artefacts are delivered and both required human roles record their review decision."
+    },
+    {
+      "gateId": "intake-series-advancement",
+      "applicability": "N/A",
+      "requiredScope": "Advance the intake series from the GSDB assessment root to the Secure Development container-hardening candidate.",
+      "requiredCommandTokens": [],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "This assessment run may name the candidate but must not update or advance the series. Advancement requires AcceptedBaseline plus separately current authority for intake-series update.",
+      "reevaluationTrigger": "After documented AcceptedBaseline and separate authority, run intake-series-update, validate series status, and only then list the next candidate read-only."
+    },
+    {
+      "gateId": "technical-hardening-and-runtime-change",
+      "applicability": "N/A",
+      "requiredScope": "Implement Dockerfile, Compose, runtime, secret, provider, platform-ruleset, formal-approval, external-register, or technical-hardening changes.",
+      "requiredCommandTokens": [],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "The accepted feature is assessment-only and expressly prohibits technical remediation and human-only administration.",
+      "reevaluationTrigger": "Re-evaluate only in a later accepted remediation intake with explicit implementation and authority scope."
+    },
+    {
+      "gateId": "parallel-autonomous-campaign",
+      "applicability": "N/A",
+      "requiredScope": "Start or consolidate a parallel autonomous campaign for this single-feature assessment.",
+      "requiredCommandTokens": [],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "The current feature uses one bounded autonomous run; the installed parallel preset remains an inventory subject but no campaign is required or authorized.",
+      "reevaluationTrigger": "Re-evaluate only after an explicit user request for an isolated parallel campaign with its own validated campaign authority."
+    }
+  ]
+}

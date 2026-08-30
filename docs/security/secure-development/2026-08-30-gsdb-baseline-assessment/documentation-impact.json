@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.1",
+  "feature": "002-gsdb-baseline-assessment",
+  "entries": [
+    {
+      "changeId": "CHG001",
+      "scope": "Create the seven dated GSDB baseline assessment outputs and reader navigation.",
+      "decision": "UpdateRequired",
+      "criticality": "Security",
+      "rationale": "The accepted feature requires repository-local, bilingual assessment evidence without runtime or platform changes.",
+      "owner": "Project Owner with Security Review",
+      "documents": [
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/README.md",
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assessment-results.json",
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/evidence-matrix.md",
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/prioritized-gap-list.md",
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/inventory-reconciliation.md",
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/documentation-impact.json",
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/validation-results.json"
+      ],
+      "evidence": "specs/002-gsdb-baseline-assessment/spec.md",
+      "audiences": [
+        "First-year apprentices in all four binding IT occupations",
+        "Repository maintainers",
+        "Development",
+        "Security Review"
+      ],
+      "readerPaths": [
+        "specs/002-gsdb-baseline-assessment/spec.md",
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/README.md",
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/evidence-matrix.md",
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/prioritized-gap-list.md"
+      ],
+      "canonicalSource": "specs/002-gsdb-baseline-assessment/spec.md",
+      "navigationImpact": "The dated README links all six non-self outputs and the validation bundle; the feature specification remains the scope source.",
+      "documentClass": "Repository-local governance and assessment evidence",
+      "languageStrategy": "German first and English second in the same reader-facing Markdown artefact; controlled JSON field names remain English.",
+      "languagePartners": [
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/README.md",
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/evidence-matrix.md",
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/prioritized-gap-list.md",
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/inventory-reconciliation.md"
+      ],
+      "platformAndExampleProof": "macOS repository checks are recorded; unavailable Linux, Windows/WSL2, Podman runtime, network, and provider observations remain Open with triggers.",
+      "distributionClass": "sourceOnly",
+      "distributionDescriptor": "RepositoryDocumentation",
+      "homeSyncRequired": false,
+      "homeSyncDisposition": "NoUpdateRequired",
+      "risk": "Incorrect navigation, stale evidence, or a missing language partner could cause an unsupported security conclusion; validators and manual review reduce this risk.",
+      "reevaluationTrigger": "Re-evaluate when the GSDB manifest, checklist versions, inventory, preset profile, documentation validator, or assessment scope changes."
+    }
+  ]
+}
