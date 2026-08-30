@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "1.1",
+  "runId": "8330f54b-97d1-424c-ad1a-842a3fad7be3",
+  "featurePath": "specs/003-secure-development-container-hardening",
+  "branch": "003-secure-development-container-hardening",
+  "deliveryMode": "MergeAndSync",
+  "authorityRevalidationRequired": true,
+  "stage": "Validate",
+  "status": "Blocked",
+  "checkpointCommit": "N/A",
+  "acceptedArtifacts": [
+    {
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "sha256": "72c263db933ea5a10ca60f3a7cc41231b43e1aec5d0dd641129e1a523b3432dc"
+    },
+    {
+      "path": "specs/intake-review-results/sandbox-development-lifecycle.json",
+      "sha256": "0d08a1e90e25965c4b529d66be6996394b963abef4ddb3c3b75dd678f464004b"
+    },
+    {
+      "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+      "sha256": "8813d2135a092671ccb373cd9273f44fe8ec3ceabab3eaa35f44e617cf2d15c4"
+    },
+    {
+      "path": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assessment-results.json",
+      "sha256": "81a7ab5c5d8c6de449289de1dbf143e14933a3678a1160a25ed8ba5d671c8b39"
+    },
+    {
+      "path": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/prioritized-gap-list.md",
+      "sha256": "b7e631e9df5e37686ab1ff2c0a07552c5d59c23af28621c917e36d2a42f55542"
+    },
+    {
+      "path": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/acceptance-decision.md",
+      "sha256": "12fbac3263f31646e83e4d9b841a73c41d96dcc8ca259be68b40f356bd0354c7"
+    }
+  ],
+  "tasks": {
+    "path": "specs/003-secure-development-container-hardening/tasks.md",
+    "sha256": "bfbdeb5d2a73aa13738fc0dcf812cae3c1d15fdf378bb5a37c31afe71c0ac3e8",
+    "completed": 65,
+    "total": 85
+  },
+  "routing": {
+    "policy": "balanced-v1",
+    "fallbackPolicy": "fail-closed",
+    "phases": [
+      {
+        "phaseId": "specify",
+        "command": "speckit.specify",
+        "routingRole": "frontier-reasoning",
+        "status": "Completed",
+        "runnerProfile": "codex-frontier-auto",
+        "dependsOn": [],
+        "agentFamily": "Codex",
+        "model": "gpt-5.6-sol",
+        "reasoningEffort": "high",
+        "preflight": "Completed",
+        "exitCode": 0,
+        "updatedAt": "2026-08-30T11:41:10.111494Z",
+        "resultPath": ".specify/runtime/autonomous-routing/8330f54b-97d1-424c-ad1a-842a3fad7be3/specify.result.json",
+        "resultSha256": "f0998dc2d13310f05e5ecace14d8b6c3ccf30abd16d175409977b20cd30f102e"
+      },
+      {
+        "phaseId": "clarify",
+        "command": "speckit.clarify",
+        "routingRole": "frontier-reasoning",
+        "status": "Completed",
+        "runnerProfile": "codex-frontier-auto",
+        "dependsOn": [
+          "specify"
+        ],
+        "agentFamily": "Codex",
+        "model": "gpt-5.6-sol",
+        "reasoningEffort": "high",
+        "preflight": "Completed",
+        "exitCode": 0,
+        "updatedAt": "2026-08-30T11:48:35.179013Z",
+        "resultPath": ".specify/runtime/autonomous-routing/8330f54b-97d1-424c-ad1a-842a3fad7be3/clarify.result.json",
+        "resultSha256": "064b1bc8de7d397d8cde85fc08663d5a0731814eba4835e544f3f7714f9de7c9"
+      },
+      {
+        "phaseId": "checklist",
+        "command": "speckit.checklist",
+        "routingRole": "frontier-reasoning",
+        "status": "Completed",
+        "runnerProfile": "codex-frontier-auto",
+        "dependsOn": [
+          "clarify"
+        ],
+        "agentFamily": "Codex",
+        "model": "gpt-5.6-sol",
+        "reasoningEffort": "high",
+        "preflight": "Completed",
+        "exitCode": 0,
+        "updatedAt": "2026-08-30T11:58:31.210624Z",
+        "resultPath": ".specify/runtime/autonomous-routing/8330f54b-97d1-424c-ad1a-842a3fad7be3/checklist.result.json",
+        "resultSha256": "a683f22fdb8f8751c50edf53501e518a35391741aa15a10422ce774012992035"
+      },
+      {
+        "phaseId": "plan",
+        "command": "speckit.plan",
+        "routingRole": "frontier-reasoning",
+        "status": "Completed",
+        "runnerProfile": "codex-frontier-auto",
+        "dependsOn": [
+          "checklist"
+        ],
+        "agentFamily": "Codex",
+        "model": "gpt-5.6-sol",
+        "reasoningEffort": "high",
+        "preflight": "Completed",
+        "exitCode": 0,
+        "updatedAt": "2026-08-30T12:15:09.810341Z",
+        "resultPath": ".specify/runtime/autonomous-routing/8330f54b-97d1-424c-ad1a-842a3fad7be3/plan.result.json",
+        "resultSha256": "5506f2ce2646f564b35d2ba9010808fff290597daaeb945997577964818a462d"
+      },
+      {
+        "phaseId": "plan-review",
+        "command": "speckit.analyze",
+        "routingRole": "frontier-reasoning",
+        "status": "Completed",
+        "runnerProfile": "codex-frontier-auto",
+        "dependsOn": [
+          "plan"
+        ],
+        "agentFamily": "Codex",
+        "model": "gpt-5.6-sol",
+        "reasoningEffort": "high",
+        "preflight": "Completed",
+        "exitCode": 0,
+        "updatedAt": "2026-08-30T12:31:33.881688Z",
+        "resultPath": ".specify/runtime/autonomous-routing/8330f54b-97d1-424c-ad1a-842a3fad7be3/plan-review.result.json",
+        "resultSha256": "98c344b5f769f538294d87751f80d6ff1b5a5cb55ea29775091bd0cd90a797f6"
+      },
+      {
+        "phaseId": "tasks",
+        "command": "speckit.tasks",
+        "routingRole": "frontier-reasoning",
+        "status": "Completed",
+        "runnerProfile": "codex-frontier-auto",
+        "dependsOn": [
+          "plan-review"
+        ],
+        "agentFamily": "Codex",
+        "model": "gpt-5.6-sol",
+        "reasoningEffort": "high",
+        "preflight": "Completed",
+        "exitCode": 0,
+        "updatedAt": "2026-08-30T12:44:13.84849Z",
+        "resultPath": ".specify/runtime/autonomous-routing/8330f54b-97d1-424c-ad1a-842a3fad7be3/tasks.result.json",
+        "resultSha256": "156627adfaa23aaceb39cfefaad776d0e65f8215820cae155de30039374d8bd0"
+      },
+      {
+        "phaseId": "analyze",
+        "command": "speckit.analyze",
+        "routingRole": "frontier-reasoning",
+        "status": "Completed",
+        "runnerProfile": "codex-frontier-auto",
+        "dependsOn": [
+          "tasks"
+        ],
+        "agentFamily": "Codex",
+        "model": "gpt-5.6-sol",
+        "reasoningEffort": "high",
+        "preflight": "Completed",
+        "exitCode": 0,
+        "updatedAt": "2026-08-30T15:15:02.3513110Z",
+        "resultPath": ".specify/runtime/autonomous-routing/8330f54b-97d1-424c-ad1a-842a3fad7be3/analyze.result.json",
+        "resultSha256": "a2149f710127898d396b6f5f5031fcf8bcaac932e5d54e0c8e97f0db24811d57"
+      },
+      {
+        "phaseId": "implement",
+        "command": "speckit.implement",
+        "routingRole": "long-running-implementation",
+        "status": "Blocked",
+        "runnerProfile": "codex-implementation-auto",
+        "dependsOn": [
+          "analyze"
+        ],
+        "agentFamily": "Codex",
+        "model": "gpt-5.6-sol",
+        "reasoningEffort": "high",
+        "preflight": "Completed",
+        "exitCode": 0,
+        "updatedAt": "2026-08-30T14:24:44.139322Z"
+      }
+    ]
+  },
+  "lastPassingGate": "The resumed Analyze result is bound at a2149f710127898d396b6f5f5031fcf8bcaac932e5d54e0c8e97f0db24811d57 and GATE-PARITY-01 passed with both explicit twelve-preset checks plus 3/3 and 24/24 Python suites.",
+  "nextExactAction": "Provide dated Learning/A11Y Review first-use evidence and real Linux rootless-Podman plus Windows/WSL2 PowerShell7-Podman and VS Code Dev Containers evidence. Then explicitly resume this same run and execute the single prepared T066 candidate; do not start another run.",
+  "lastOperation": {
+    "kind": "ExternalEvidenceAvailability",
+    "state": "Failed",
+    "summary": "The local parity blocker was resolved, but no real Linux or Windows/WSL2 host, self-hosted runner, or dated Learning/A11Y Review result is available. The All mode would deterministically return exit 3 before T066 can pass."
+  },
+  "stop": {
+    "reason": "Applicable learner, Linux, Windows/WSL2 and VS Code attachment evidence remains unavailable and cannot be substituted or invented.",
+    "requestedAt": "2026-08-30T15:18:45Z",
+    "safeBoundary": "After successful resume Analyze and twelve-preset parity remediation; before the single prepared T066 candidate and every delivery action"
+  },
+  "closeout": {
+    "mergeOrPublication": "N/A",
+    "defaultBranchSync": "N/A",
+    "postMergeActions": "N/A",
+    "finalValidation": "Pending"
+  },
+  "updatedAt": "2026-08-30T15:18:45Z"
+}

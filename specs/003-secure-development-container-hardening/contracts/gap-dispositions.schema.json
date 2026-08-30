@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/specs/003-secure-development-container-hardening/contracts/gap-dispositions.schema.json",
+  "title": "Gap-Dispositionen / Gap Dispositions",
+  "description": "DE: Strukturvertrag fuer exakt 157 Gap-Dispositionen. EN: Structural contract for exactly 157 gap dispositions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "acceptedInputBindings",
+    "sourceAssessmentSha256",
+    "dispositions",
+    "summary"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "acceptedInputBindings": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/hashBinding" }
+    },
+    "sourceAssessmentSha256": { "$ref": "#/$defs/sha256" },
+    "dispositions": {
+      "type": "array",
+      "minItems": 157,
+      "maxItems": 157,
+      "items": { "$ref": "#/$defs/disposition" }
+    },
+    "summary": { "$ref": "#/$defs/summary" }
+  },
+  "$defs": {
+    "text": { "type": "string", "minLength": 1, "pattern": ".*\\S.*" },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "repositoryPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:[\\\\/])(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$)).+$"
+    },
+    "hashBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "role"],
+      "properties": {
+        "path": { "$ref": "#/$defs/repositoryPath" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "role": {
+          "enum": [
+            "FeatureIntake",
+            "IntakeReview",
+            "SeriesManifest",
+            "AssessmentResults",
+            "PrioritisedGapList",
+            "AcceptanceDecision"
+          ]
+        }
+      }
+    },
+    "role": {
+      "enum": [
+        "Repository Maintainer",
+        "Security Review",
+        "Privacy/Legal Review",
+        "Platform Owner/Admin",
+        "CISO/ISB/KIB",
+        "Project Owner",
+        "Learning/A11Y Review"
+      ]
+    },
+    "disposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gapId",
+        "affectedClIds",
+        "priority",
+        "humanOnly",
+        "humanOnlyRole",
+        "applicability",
+        "implementationStatus",
+        "consolidatedState",
+        "rationaleDe",
+        "rationaleEn",
+        "requirementIds",
+        "evidenceIds",
+        "owner",
+        "reviewer",
+        "residualRisk",
+        "missingEvidence",
+        "followUp",
+        "reevaluationTrigger",
+        "lastEvaluatedAt"
+      ],
+      "properties": {
+        "gapId": { "type": "string", "pattern": "^GAP-(00[1-9]|0[1-9][0-9]|1[0-4][0-9]|15[0-7])$" },
+        "affectedClIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^CL-(0[1-9]|1[0-2])-[0-9]{2}$" }
+        },
+        "priority": { "const": "P1" },
+        "humanOnly": { "type": "boolean" },
+        "humanOnlyRole": {
+          "enum": ["N/A", "Privacy/Legal Review", "Platform Owner/Admin", "CISO/ISB/KIB", "Project Owner"]
+        },
+        "applicability": { "enum": ["Applicable", "N/A", "Open"] },
+        "implementationStatus": { "enum": ["Fulfilled", "Partly Fulfilled", "Not Fulfilled", "Not Assessed"] },
+        "consolidatedState": { "enum": ["N/A", "Open", "AlreadySatisfied", "FollowUp", "Applicable"] },
+        "rationaleDe": { "$ref": "#/$defs/text" },
+        "rationaleEn": { "$ref": "#/$defs/text" },
+        "requirementIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^(FR|GR|AR|CP|AP|AU|GATE)-[A-Za-z0-9-]+$" }
+        },
+        "evidenceIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^EVD-[A-Z0-9-]+$" }
+        },
+        "owner": { "$ref": "#/$defs/role" },
+        "reviewer": { "$ref": "#/$defs/role" },
+        "residualRisk": { "enum": ["Unassessed", "None identified", "Low", "Medium", "High", "Critical"] },
+        "missingEvidence": { "$ref": "#/$defs/text" },
+        "followUp": { "$ref": "#/$defs/text" },
+        "reevaluationTrigger": { "$ref": "#/$defs/text" },
+        "lastEvaluatedAt": { "type": "string", "format": "date-time", "pattern": "Z$" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gapCount",
+        "agentActionableCount",
+        "humanOnlyCount",
+        "missingGapIds",
+        "duplicateGapIds",
+        "extraGapIds",
+        "unmappedChangedPaths"
+      ],
+      "properties": {
+        "gapCount": { "const": 157 },
+        "agentActionableCount": { "const": 108 },
+        "humanOnlyCount": { "const": 49 },
+        "missingGapIds": { "type": "array", "maxItems": 0 },
+        "duplicateGapIds": { "type": "array", "maxItems": 0 },
+        "extraGapIds": { "type": "array", "maxItems": 0 },
+        "unmappedChangedPaths": { "type": "array", "maxItems": 0 }
+      }
+    }
+  }
+}

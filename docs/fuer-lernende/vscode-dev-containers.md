@@ -225,3 +225,21 @@ host terminal. Attaching with VS Code ensures exactly that.
 - [sandbox-profil.md](sandbox-profil.md) — Mounts, Ports, Härtung
 - `docs/security/sandbox-isolation.md` — Isolationsmechanismen und die
   Entscheidung „kein IDE-Dienst im Image"
+
+## Aktueller Nachweisstatus / Current Evidence Status
+
+**DE:** Die Konfiguration und der textliche Attach-Weg sind geprueft. Auf dem
+aktuellen macOS-Runner war das `code`-CLI jedoch nicht verfuegbar; ein echter
+VS-Code-Dev-Containers-Attach wurde deshalb nicht beobachtet. Linux und
+Windows/WSL2 benoetigen ebenfalls jeweils einen echten Hostlauf. Dieser Status
+ist `Open`, nicht `N/A` oder `Pass`.
+
+**EN:** Configuration and the documented attach path were reviewed, but the
+`code` CLI was unavailable on the current macOS runner, so no real VS Code Dev
+Containers attachment was observed. Linux and Windows/WSL2 also need their own
+real host runs. This status is Open, not N/A or Pass.
+
+Retry-Trigger: erneut mit VS Code Desktop, Dev-Containers-Erweiterung und dem
+jeweils echten macOS-, Linux- oder Windows/WSL2-rootless-Podman-Host pruefen. /
+Retry with VS Code Desktop, the Dev Containers extension, and the respective
+real rootless-Podman host.

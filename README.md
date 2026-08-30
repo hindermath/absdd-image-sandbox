@@ -729,6 +729,48 @@ Use [the learner documentation](docs/fuer-lernende/README.md) for the guided
 path and [the operations reference](docs/betrieb/README.md) for image,
 Compose, validation, audit, SBOM, and maintenance details.
 
+## Aktueller Haertungsnachweis / Current Hardening Evidence
+
+**DE:** Der aktuelle lokale Nachweis ist an das unveraenderte Image
+`sha256:5bec1910211e61f60d140907a75689f9f6e31c2ec5baceaac7ff10b99d846eaf`
+gebunden. Auf einem nativen rootless-Podman-Host unter macOS bestanden
+Containerstart, Laufzeitgrenzen, sechs speichersichere Sprachfamilien, die
+beiden Skriptgrundlagen PowerShell und Node.js, sechs Agentenoberflaechen,
+Dispatcher-Dry-run ohne Provideraufruf und der Audit-Stopp. Eingehend bleiben
+nur die Loopback-Ports `5100-5199` veroeffentlicht; Agentenzustaende liegen in
+getrennten Volumes. Diese lokale Evidenz ist keine formelle Freigabe.
+
+**EN:** Current local evidence is bound to the unchanged image above. Native
+rootless Podman on macOS passed startup, runtime boundaries, six memory-safe
+language families, the PowerShell and Node.js scripting foundations, six agent
+surfaces, a dispatcher dry-run without provider access, and audit-aware stop.
+Only loopback ports `5100-5199` are published, and agent state remains in
+separate volumes. This local evidence is not formal approval.
+
+**DE:** Genau eine aktuelle CycloneDX-SBOM wurde mit Syft 1.46.0 erzeugt und
+mit dem digest-gepinnten Grype 0.117.0 ausgewertet. Alle 426 Advisory-IDs mit
+1.346 Matches besitzen eine offene `in_triage`-Disposition. Auf Match-Ebene
+bleiben 14 Critical- und 360 High-Treffer offen; weder Risikoakzeptanz noch
+`not affected` wurde behauptet. Echte Linux- und Windows/WSL2-Hostlaeufe, ein
+VS-Code-Dev-Containers-Attach sowie der moderierte Erstnutzungstest durch
+`Learning/A11Y Review` fehlen ebenfalls. Der zusammengefasste Status ist
+deshalb `Blocked`, nicht `Pass`.
+
+**EN:** One current CycloneDX SBOM was generated with Syft 1.46.0 and assessed
+with digest-pinned Grype 0.117.0. All 426 advisory IDs covering 1,346 matches
+remain `in_triage`; 14 Critical and 360 High matches are still open. No risk
+was accepted and no `not affected` result was invented. Real Linux and
+Windows/WSL2 host runs, VS Code Dev Containers attachment, and the moderated
+first-use review are also missing. The consolidated status is therefore
+`Blocked`, not `Pass`.
+
+Der textorientierte Nachweis und die naechsten Owner-Aktionen stehen im
+[Feature-Evidenzindex](docs/security/secure-development/2026-08-30-container-hardening/README.md),
+die Bedienwege in der [Betriebsreferenz](docs/betrieb/README.md) und im
+[Lernendenpfad](docs/fuer-lernende/README.md). / The text-first evidence and
+owner actions are in the feature evidence index; operating and learner routes
+remain in the linked guides.
+
 <!-- statistics-profile-2-readme:begin -->
 ## Statistikprofil 2 / Statistics Profile 2
 

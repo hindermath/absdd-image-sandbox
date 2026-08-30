@@ -7,20 +7,26 @@ COMPONENT_TYPE=""
 TOP=20
 SCAN="false"
 SCANNER="auto"
+SCAN_OUTPUT=""
+DRY_RUN="false"
+GRYPE_IMAGE="${GRYPE_IMAGE:-ghcr.io/anchore/grype:v0.117.0@sha256:ddf9e9f204049f3a4a0955ef70873cabab6a31432125ad4f20a490b54950a253}"
 
 usage() {
   cat <<'USAGE'
 Usage: scripts/analyze-sbom.sh [options]
 
-Summarize a CycloneDX JSON SBOM and optionally run a vulnerability scan.
+DE: CycloneDX-JSON-SBOM zusammenfassen und optional sicher scannen.
+EN: Summarize a CycloneDX JSON SBOM and optionally run a safe scan.
 
 Options:
   --file PATH      SBOM file to analyze. Defaults to newest sboms/*.cdx.json.
   --search REGEX   Search component name, version, and purl.
   --type TYPE      Restrict summary and search to a component type.
   --top N          Number of grouped rows to show. Default: 20.
-  --scan           Run grype or trivy against the SBOM when available.
-  --scanner NAME   Scanner: auto, grype, or trivy.
+  --scan           Run the repository-pinned Grype image against the SBOM.
+  --scanner NAME   Scanner: auto or grype. Both select the pinned image.
+  --scan-output PATH  Write Grype JSON output to this repository-local path.
+  --dry-run        Show the planned scan without executing it.
   -h, --help       Show this help.
 USAGE
 }
@@ -51,6 +57,14 @@ while [[ $# -gt 0 ]]; do
       SCANNER="$2"
       shift 2
       ;;
+    --scan-output)
+      SCAN_OUTPUT="$2"
+      shift 2
+      ;;
+    --dry-run)
+      DRY_RUN="true"
+      shift
+      ;;
     -h | --help)
       usage
       exit 0
@@ -62,6 +76,19 @@ while [[ $# -gt 0 ]]; do
       ;;
   esac
 done
+
+case "${SCANNER}" in
+  auto | grype) ;;
+  *) echo "Unknown or unpinned scanner: ${SCANNER}. Use grype." >&2; exit 2 ;;
+esac
+
+if [[ "${DRY_RUN}" == "true" ]]; then
+  printf '%s\n' "DRY-RUN: summarize CycloneDX input without writes"
+  if [[ "${SCAN}" == "true" ]]; then
+    printf '%s\n' "DRY-RUN: podman run --rm <read-only-sbom-mount> ${GRYPE_IMAGE} sbom:/work/<sbom>"
+  fi
+  exit 0
+fi
 
 if [[ -z "${SBOM_PATH}" ]]; then
   shopt -s nullglob
@@ -230,30 +257,15 @@ fi
 
 if [[ "${SCAN}" == "true" ]]; then
   echo
-  case "${SCANNER}" in
-    auto)
-      if command -v grype >/dev/null 2>&1; then
-        echo "Vulnerability scan with grype:"
-        grype "${SBOM_PATH}"
-      elif command -v trivy >/dev/null 2>&1; then
-        echo "Vulnerability scan with trivy:"
-        trivy sbom "${SBOM_PATH}"
-      else
-        echo "No vulnerability scanner found. Install grype or trivy, then rerun with --scan." >&2
-        exit 1
-      fi
-      ;;
-    grype)
-      echo "Vulnerability scan with grype:"
-      grype "${SBOM_PATH}"
-      ;;
-    trivy)
-      echo "Vulnerability scan with trivy:"
-      trivy sbom "${SBOM_PATH}"
-      ;;
-    *)
-      echo "Unknown scanner: ${SCANNER}" >&2
-      exit 2
-      ;;
-  esac
+  command -v podman >/dev/null 2>&1 || { echo "podman is required for the pinned Grype scanner." >&2; exit 1; }
+  sbom_abs="$(cd "$(dirname "${SBOM_PATH}")" && pwd)/$(basename "${SBOM_PATH}")"
+  sbom_dir="$(dirname "${sbom_abs}")"
+  sbom_name="$(basename "${sbom_abs}")"
+  echo "Vulnerability scan with pinned Grype image: ${GRYPE_IMAGE}"
+  if [[ -n "${SCAN_OUTPUT}" ]]; then
+    mkdir -p "$(dirname "${SCAN_OUTPUT}")"
+    podman run --rm -v "${sbom_dir}:/work:ro" "${GRYPE_IMAGE}" "sbom:/work/${sbom_name}" -o json >"${SCAN_OUTPUT}"
+  else
+    podman run --rm -v "${sbom_dir}:/work:ro" "${GRYPE_IMAGE}" "sbom:/work/${sbom_name}"
+  fi
 fi

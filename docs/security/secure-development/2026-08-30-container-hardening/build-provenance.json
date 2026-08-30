@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-08-30T14:01:59Z",
+  "sourceRevision": "WORKTREE",
+  "sourceBranch": "003-secure-development-container-hardening",
+  "buildCommand": "podman compose build --pull",
+  "buildResult": "Pass",
+  "imageName": "localhost/absdd-image-sandbox_ade:latest",
+  "imageIdentity": "sha256:5bec1910211e61f60d140907a75689f9f6e31c2ec5baceaac7ff10b99d846eaf",
+  "sbom": {
+    "path": "sboms/2026-08-30-localhost-absdd-image-sandbox_ade-latest.cdx.json",
+    "sha256": "2a226a5b37b4f562582c1fbca8e6b14d749d2b13bb9dd12bf45549879510daa4",
+    "serialNumber": "urn:uuid:9096b9c5-5b85-4946-bf0d-f5ae509ffcd4",
+    "generatedAt": "08/30/2026 13:56:34",
+    "format": "CycloneDX 1.7",
+    "componentCount": 23967,
+    "tool": "Syft 1.46.0"
+  },
+  "scanner": {
+    "image": "ghcr.io/anchore/grype:v0.117.0@sha256:ddf9e9f204049f3a4a0955ef70873cabab6a31432125ad4f20a490b54950a253",
+    "version": "0.117.0",
+    "databaseBuiltAt": "08/30/2026 06:27:52",
+    "rawResultSha256": "2cb3696ee6f27c4d4fa52be10b16d0743b68f8329bba97d447a591b512f1b431"
+  },
+  "distribution": "Local image only; no registry push.",
+  "signatureClaim": "None",
+  "slsaLevelClaim": "None",
+  "limitations": [
+    "DE: Der Quellstand ist ein validierter Worktree vor dem Inhaltscommit. EN: The source state is a validated worktree before the content commit.",
+    "DE: Go-Modulfunde koennen ohne Funktionssymbole zu breit sein und bleiben deshalb offen. EN: Go module matches can be broad without function symbols and therefore remain open."
+  ]
+}

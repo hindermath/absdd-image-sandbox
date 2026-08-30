@@ -290,3 +290,28 @@ or secrets.
    [README.md](README.md), section "Connection to the Learning Series").
 5. **DE:** Bei Problemen: [troubleshooting.md](troubleshooting.md).
    **EN:** If you run into problems: [troubleshooting.md](troubleshooting.md).
+
+## Status lesen, ohne ihn zu erraten / Read Status Without Guessing
+
+**DE:** Ein erfolgreicher Start bedeutet nur, dass dein lokaler technischer
+Pfad funktioniert. Er bedeutet nicht automatisch, dass alle Plattform-,
+Security- und Lernendengates bestanden sind. Der aktuelle Feature-Stand ist
+`Blocked`: Linux, Windows/WSL2, VS-Code-Attach, der moderierte Test durch
+`Learning/A11Y Review` sowie offene Critical-/High-Matches fehlen noch.
+
+**EN:** Successful startup proves only your local technical path. It does not
+mean that every platform, security, and learner gate passed. The current
+feature state is blocked because Linux, Windows/WSL2, VS Code attachment, the
+moderated Learning/A11Y Review test, and open Critical/High matches are still
+missing.
+
+**DE:** Deine sichere naechste Aktion ist deshalb: Ausgabe lesen, keine
+Freigabe behaupten, keine Treffer selbst auf `not affected` setzen und mit dem
+Audit-Wrapper stoppen. Der menschliche Erstnutzungstest wird erst wiederholt,
+wenn `Learning/A11Y Review` echte Teilnehmende aus allen vier Berufen ohne
+Spec-Kit-Vorerfahrung moderieren kann.
+
+**EN:** Your safe next action is to read the output, claim no approval, never
+set findings to `not affected` yourself, and stop through the audit wrapper.
+The human first-use test is retried only when Learning/A11Y Review can moderate
+real participants from all four occupations without prior Spec Kit experience.
