@@ -21,6 +21,11 @@
 
 **EN:** Draft means incomplete. ReviewPending means that 37 sources, 12 checklists, 157 rows, gaps, inventory, and local technical gates are complete, but human baseline acceptance is absent. AcceptedBaseline requires documented participation by the Project Owner and Security Review. Input, source, scope, or evidence drift returns the state to Draft.
 
+**Aktueller Stand / Current state:** `AcceptedBaseline`. Die begrenzte
+menschliche Entscheidung und ihre Reichweite stehen in
+[GSDB-Baseline-Abnahme](acceptance-decision.md). / The bounded human decision
+and its scope are recorded in [GSDB Baseline Acceptance](acceptance-decision.md).
+
 **DE:** Open ist kein Pass. Es zeigt fehlende, widerspruechliche, nicht reproduzierbare, plattformbegrenzte oder Human-only-Evidenz. Jeder offene Punkt besitzt genau einen Gap mit Owner, Zieltermin und Trigger. Ein Gap erteilt keine Implementierungs-, Git-, Remote-, Bypass- oder Risikoakzeptanz-Autoritaet.
 
 **EN:** Open is not a pass. It identifies missing, conflicting, non-reproducible, platform-limited, or human-only evidence. Every open item has exactly one gap with owner, target date, and trigger. A gap grants no implementation, Git, remote, bypass, or risk-acceptance authority.
@@ -33,9 +38,9 @@
 
 ## Plattform- und Authority-Grenzen / Platform and Authority Boundaries
 
-**DE:** macOS- und repository-lokale Pruefungen wurden ausgefuehrt. Der praktische Podman-Containercheck bleibt wegen des in dieser Sandbox nicht erreichbaren Maschinen-Locks und Endpunkts Open. Linux, Windows/WSL2, Provider, Hosting und externe Plattformdienste wurden nicht erfunden. Formale Freigaben, Secret-Aktionen, Plattformregeln, externe Register, Risikoakzeptanz und AcceptedBaseline bleiben Human-only.
+**DE:** macOS- und repository-lokale Pruefungen wurden ausgefuehrt. Der praktische Podman-Containercheck bleibt wegen des in dieser Sandbox nicht erreichbaren Maschinen-Locks und Endpunkts Open. Linux, Windows/WSL2, Provider, Hosting und externe Plattformdienste wurden nicht erfunden. Formale Freigaben, Secret-Aktionen, Plattformregeln, externe Register und Risikoakzeptanz bleiben Human-only. Die spaetere `AcceptedBaseline`-Entscheidung ist getrennt dokumentiert.
 
-**EN:** macOS and repository-local checks were executed. The practical Podman container check remains Open because this sandbox cannot access the machine lock and endpoint. Linux, Windows/WSL2, providers, hosting, and external platform services are not invented. Formal approvals, secret actions, platform rules, external registers, risk acceptance, and AcceptedBaseline remain human-only.
+**EN:** macOS and repository-local checks were executed. The practical Podman container check remains Open because this sandbox cannot access the machine lock and endpoint. Linux, Windows/WSL2, providers, hosting, and external platform services are not invented. Formal approvals, secret actions, platform rules, external registers, and risk acceptance remain human-only. The later `AcceptedBaseline` decision is documented separately.
 
 ## Verifikation und Folgeabhaengigkeit / Verification and Follow-Up Dependency
 
