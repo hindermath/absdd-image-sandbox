@@ -5,9 +5,9 @@
   "branch": "002-gsdb-baseline-assessment",
   "deliveryMode": "MergeAndSync",
   "authorityRevalidationRequired": false,
-  "stage": "Publish",
-  "status": "Active",
-  "checkpointCommit": "N/A",
+  "stage": "Retrospective",
+  "status": "Completed",
+  "checkpointCommit": "ac66cbaf5cfbab70cce1c5c505eaa196e4a3ad50",
   "acceptedArtifacts": [
     {
       "path": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
@@ -24,8 +24,8 @@
   ],
   "tasks": {
     "path": "specs/002-gsdb-baseline-assessment/tasks.md",
-    "sha256": "56276f41f9ff3dd99b6d6019a9259db72260e4e1aa8364e503d1da10f5383d4c",
-    "completed": 64,
+    "sha256": "06767c53b23ff9bf63095585837e3bc7f7058603915d34af13ddaedd65e6b5a7",
+    "completed": 68,
     "total": 68
   },
   "routing": {
@@ -176,12 +176,12 @@
       }
     ]
   },
-  "lastPassingGate": "Final local commit gates and exact staged delivery allowlist validated for T064",
-  "nextExactAction": "Push the single assessment content commit and create the feature pull request for T065.",
+  "lastPassingGate": "Schema-2.0 PostMerge evidence validated for merge commit 993b6c43f483fcc8f6310159bf8b2029f6d9e2fb",
+  "nextExactAction": "N/A",
   "lastOperation": {
-    "kind": "CommitPreparation",
+    "kind": "PostMergeCloseout",
     "state": "Completed",
-    "summary": "T064 prepared one assessment content commit after delivery-set, schema, Compose, documentation-impact, pre-commit, secret-scan, and diff gates passed."
+    "summary": "PR #49 merged after all exact-head technical gates passed; admin bypass covered only REVIEW_REQUIRED, local main fast-forwarded to merge commit 993b6c43f483fcc8f6310159bf8b2029f6d9e2fb, and causal PostMerge evidence validated."
   },
   "stop": {
     "reason": "N/A",
@@ -189,10 +189,10 @@
     "safeBoundary": "N/A"
   },
   "closeout": {
-    "mergeOrPublication": "Pending",
-    "defaultBranchSync": "Pending",
-    "postMergeActions": "Pending",
-    "finalValidation": "Pending"
+    "mergeOrPublication": "Completed",
+    "defaultBranchSync": "Completed",
+    "postMergeActions": "Completed",
+    "finalValidation": "Completed"
   },
-  "updatedAt": "2026-08-30T10:30:48Z"
+  "updatedAt": "2026-08-30T10:42:28Z"
 }
