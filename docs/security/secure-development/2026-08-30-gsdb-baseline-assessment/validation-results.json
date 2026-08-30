@@ -1,0 +1,481 @@
+{
+  "schemaVersion": "1.0",
+  "createdAt": "2026-08-30T10:17:01Z",
+  "reviewedRepositoryRevision": "7adaeac18ca259726468a2fe1d1fd028b895e09c",
+  "assessmentResultsSha256": "49a573f71ee6c5e8c3b3bc193414c6dd1fa31c902ba32ed7431086cc4168705b",
+  "acceptedInputBindings": [
+    {
+      "path": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "sha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a"
+    },
+    {
+      "path": "specs/intake-review-results/sandbox-development-lifecycle.json",
+      "sha256": "0d08a1e90e25965c4b529d66be6996394b963abef4ddb3c3b75dd678f464004b"
+    },
+    {
+      "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+      "sha256": "faa906c5acb7678265de75e28d80a337459d754ab53066f7a4f065ef24d1b3b2"
+    }
+  ],
+  "outputBindings": [
+    {
+      "path": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/README.md",
+      "sha256": "261d317ce7df90632b4844b17a1a7433c85b53ea6b182f02cdbc120c5f6b0144"
+    },
+    {
+      "path": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assessment-results.json",
+      "sha256": "49a573f71ee6c5e8c3b3bc193414c6dd1fa31c902ba32ed7431086cc4168705b"
+    },
+    {
+      "path": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/evidence-matrix.md",
+      "sha256": "1598948f37c148f980fcf89a6cd1c7d87d561045c2ba48820327bcb7e4ede51c"
+    },
+    {
+      "path": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/prioritized-gap-list.md",
+      "sha256": "b7e631e9df5e37686ab1ff2c0a07552c5d59c23af28621c917e36d2a42f55542"
+    },
+    {
+      "path": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/inventory-reconciliation.md",
+      "sha256": "03ba90d52f5474a02490d37a9f7f66f91540fb9d5b23a72a4c8265f16ebb74ee"
+    },
+    {
+      "path": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/documentation-impact.json",
+      "sha256": "594a7fbde2b12761faf5aa1a3c8c21233f21e5bb216fa7fa443f48cb5cf5f177"
+    }
+  ],
+  "validationResultsPath": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/validation-results.json",
+  "gateResults": [
+    {
+      "gateId": "accepted-input-binding",
+      "applicability": "Applicable",
+      "executedCommand": "Q02, Q03 and both Q04 blocks from specs/002-gsdb-baseline-assessment/quickstart.md were executed unchanged.",
+      "runnerOrPlatform": "macOS (Darwin), PowerShell 7.6.5",
+      "startedAt": "2026-08-30T10:17:01Z",
+      "finishedAt": "2026-08-30T10:17:01Z",
+      "exitCode": 0,
+      "result": "Pass",
+      "expectedResult": "Verify the three accepted repository-relative input paths and SHA-256 values from spec.md before assessment authoring and again before delivery.",
+      "observedResult": "Q02 confirmed run 20befce1-05ca-45ea-b145-1e23afaa1e31, feature 002-gsdb-baseline-assessment, stage Implement, Active state and the start baseline 0/68 tasks. Q03 matched all three accepted paths and hashes. Bash and PowerShell Q04 validators accepted the completed Analyze result.",
+      "evidencePath": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assessment-results.json",
+      "limitations": "This result covers T001-T062 local implementation. Staging, commit, remote review, merge, PostMerge, and final closeout T063-T068 are deliberately not claimed.",
+      "inputSha256": "81d2ba907976d69539046d43bd0bc0bd4f5309ee341b51d7d8ede100e9e67954",
+      "outputSha256": "49a573f71ee6c5e8c3b3bc193414c6dd1fa31c902ba32ed7431086cc4168705b",
+      "rationale": "N/A",
+      "reevaluationTrigger": "Re-run when an accepted input, source, output, validator, platform observation, or current task boundary changes."
+    },
+    {
+      "gateId": "gsdb-source-integrity",
+      "applicability": "Applicable",
+      "executedCommand": "Q08 from specs/002-gsdb-baseline-assessment/quickstart.md was executed unchanged.",
+      "runnerOrPlatform": "macOS (Darwin), PowerShell 7.6.5",
+      "startedAt": "2026-08-30T10:17:01Z",
+      "finishedAt": "2026-08-30T10:17:01Z",
+      "exitCode": 0,
+      "result": "Pass",
+      "expectedResult": "Read the baseline manifest and canonical checklist headings; prove all 37 manifest-controlled paths, twelve checklist sources, and exactly 157 unique stable IDs while mapping every manifest, version, compendium, or generator drift to one open gap rather than silently repairing it.",
+      "observedResult": "Q08 found exactly 37 source paths, 12 checklist documents with counts 12/13/15/10/13/11/12/13/17/17/12/12, 157 unique CL IDs and complete compendium parity. Version and missing-generator drift remain Open findings.",
+      "evidencePath": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assessment-results.json",
+      "limitations": "This result covers T001-T062 local implementation. Staging, commit, remote review, merge, PostMerge, and final closeout T063-T068 are deliberately not claimed.",
+      "inputSha256": "81d2ba907976d69539046d43bd0bc0bd4f5309ee341b51d7d8ede100e9e67954",
+      "outputSha256": "49a573f71ee6c5e8c3b3bc193414c6dd1fa31c902ba32ed7431086cc4168705b",
+      "rationale": "N/A",
+      "reevaluationTrigger": "Re-run when an accepted input, source, output, validator, platform observation, or current task boundary changes."
+    },
+    {
+      "gateId": "assessment-schema-contract",
+      "applicability": "Applicable",
+      "executedCommand": "Q06, Q07, Q09 and Q10 from specs/002-gsdb-baseline-assessment/quickstart.md were executed unchanged, including negative fixtures.",
+      "runnerOrPlatform": "macOS (Darwin), PowerShell 7.6.5",
+      "startedAt": "2026-08-30T10:17:01Z",
+      "finishedAt": "2026-08-30T10:17:01Z",
+      "exitCode": 0,
+      "result": "Pass",
+      "expectedResult": "Validate assessment-results.json and validation-results.json against their reviewed JSON Schemas; prove exactly 157 rows, resolved object references, current output hashes, all mandatory fields, and controlled vocabulary values.",
+      "observedResult": "Q06 rejected an empty object. Q07/Q09 rejected the missing CL-12-05 fixture; Q09 rejected the broken reciprocal-gap fixture; canonical Q07 and Q09 passed.",
+      "evidencePath": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assessment-results.json",
+      "limitations": "This result covers T001-T062 local implementation. Staging, commit, remote review, merge, PostMerge, and final closeout T063-T068 are deliberately not claimed.",
+      "inputSha256": "81d2ba907976d69539046d43bd0bc0bd4f5309ee341b51d7d8ede100e9e67954",
+      "outputSha256": "49a573f71ee6c5e8c3b3bc193414c6dd1fa31c902ba32ed7431086cc4168705b",
+      "rationale": "N/A",
+      "reevaluationTrigger": "Re-run when an accepted input, source, output, validator, platform observation, or current task boundary changes."
+    },
+    {
+      "gateId": "coverage-status-and-gap-traceability",
+      "applicability": "Applicable",
+      "executedCommand": "Q09, Q10 and Q11 from specs/002-gsdb-baseline-assessment/quickstart.md were executed unchanged.",
+      "runnerOrPlatform": "macOS (Darwin), PowerShell 7.6.5",
+      "startedAt": "2026-08-30T10:17:01Z",
+      "finishedAt": "2026-08-30T10:17:01Z",
+      "exitCode": 0,
+      "result": "Pass",
+      "expectedResult": "Compare canonical and assessed CL-ID sets; require zero missing, duplicate, or extra IDs, valid FR-007 status combinations, current existing local evidence for positive assessments, reciprocal exact gap mappings, and a recorded sample of one row per checklist traceable within 1,800 seconds total.",
+      "observedResult": "Q09 reported 157/157 with every error list empty. Q10 resolved all bindings and 12 samples in 60 seconds. Q11 proved 157 matrix rows, 157 gap sections and 29 inventory sections with no drift.",
+      "evidencePath": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assessment-results.json",
+      "limitations": "This result covers T001-T062 local implementation. Staging, commit, remote review, merge, PostMerge, and final closeout T063-T068 are deliberately not claimed.",
+      "inputSha256": "81d2ba907976d69539046d43bd0bc0bd4f5309ee341b51d7d8ede100e9e67954",
+      "outputSha256": "49a573f71ee6c5e8c3b3bc193414c6dd1fa31c902ba32ed7431086cc4168705b",
+      "rationale": "N/A",
+      "reevaluationTrigger": "Re-run when an accepted input, source, output, validator, platform observation, or current task boundary changes."
+    },
+    {
+      "gateId": "inventory-reconciliation",
+      "applicability": "Applicable",
+      "executedCommand": "Q12, Q13, Q14, Q15 and Q16 were executed; Q17 remained Open because its runtime precondition was unavailable.",
+      "runnerOrPlatform": "macOS (Darwin), PowerShell 7.6.5",
+      "startedAt": "2026-08-30T10:17:01Z",
+      "finishedAt": "2026-08-30T10:17:01Z",
+      "exitCode": 0,
+      "result": "Pass",
+      "expectedResult": "Reconcile six MSL families, two separate scripting/support foundations, four required agents, two additional agent surfaces, and twelve installed presets across declarations, runtime evidence, tests, dispatchers, registries, and documentation; map every mismatch to one gap.",
+      "observedResult": "Q12-Q16 passed the static 6/2/4/2/8/4 profile and dispatcher/preset checks. Q17 was not executed because the intended Podman endpoint and ade service were unavailable; runtime observations remain Open with owner and retry trigger.",
+      "evidencePath": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assessment-results.json",
+      "limitations": "macOS static evidence passed. Linux, Windows/WSL2, practical Podman runtime, provider and sign-in observations remain Open; retry when the relevant platform or approved environment is available.",
+      "inputSha256": "81d2ba907976d69539046d43bd0bc0bd4f5309ee341b51d7d8ede100e9e67954",
+      "outputSha256": "49a573f71ee6c5e8c3b3bc193414c6dd1fa31c902ba32ed7431086cc4168705b",
+      "rationale": "N/A",
+      "reevaluationTrigger": "Re-run when an accepted input, source, output, validator, platform observation, or current task boundary changes."
+    },
+    {
+      "gateId": "bilingual-a11y-and-documentation-impact",
+      "applicability": "Applicable",
+      "executedCommand": "Q18, Q19 and Q20 from specs/002-gsdb-baseline-assessment/quickstart.md were executed unchanged.",
+      "runnerOrPlatform": "macOS (Darwin), PowerShell 7.6.5",
+      "startedAt": "2026-08-30T10:17:01Z",
+      "finishedAt": "2026-08-30T10:17:01Z",
+      "exitCode": 0,
+      "result": "Pass",
+      "expectedResult": "Validate German-first and English-second learner documentation, text-first status communication, Markdown accessibility heuristics, and the structured UpdateRequired documentation-impact decision; record a complete manual CEFR-B2 and first-use-term review with all four editorial error counters at zero.",
+      "observedResult": "Q18 passed all four Markdown projections without warnings, Q19 validated one current UpdateRequired entry, and Q20 checked 1,442 offline links with zero errors. The complete editorial review records four zero defect counters.",
+      "evidencePath": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assessment-results.json",
+      "limitations": "This result covers T001-T062 local implementation. Staging, commit, remote review, merge, PostMerge, and final closeout T063-T068 are deliberately not claimed.",
+      "inputSha256": "81d2ba907976d69539046d43bd0bc0bd4f5309ee341b51d7d8ede100e9e67954",
+      "outputSha256": "49a573f71ee6c5e8c3b3bc193414c6dd1fa31c902ba32ed7431086cc4168705b",
+      "rationale": "N/A",
+      "reevaluationTrigger": "Re-run when an accepted input, source, output, validator, platform observation, or current task boundary changes."
+    },
+    {
+      "gateId": "assessment-scope-and-static-repository-validation",
+      "applicability": "Applicable",
+      "executedCommand": "Q12 and Q25 were executed; the outer closeout context then reran podman-compose config, git diff --check and uvx pre-commit run --all-files successfully.",
+      "runnerOrPlatform": "macOS (Darwin), PowerShell 7.6.5",
+      "startedAt": "2026-08-30T10:17:01Z",
+      "finishedAt": "2026-08-30T10:27:20Z",
+      "exitCode": 0,
+      "result": "Pass",
+      "expectedResult": "Prove that only intended Spec Kit, assessment, contract, and every explicitly inventoried sanitized session-evidence path from this feature run changed; prohibit unrelated session logs plus Dockerfile, Compose, runtime, secret, provider, ruleset, approval, register, hardening, and prompt/response-log changes; run repository static checks.",
+      "observedResult": "The intended change contains only the feature marker, feature/run artefacts, seven sanitized feature logs and seven dated assessment outputs. Prohibited runtime, hardening and statistics paths are excluded. git diff --check and podman-compose config passed. uvx pre-commit run --all-files bootstrapped successfully and all four repository hooks passed, including hardcoded-secret detection.",
+      "evidencePath": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assessment-results.json",
+      "limitations": "The practical running-container smoke check Q17 remains Open because no intended running service was available. This static delivery validation does not convert that platform observation into Pass or Fail.",
+      "inputSha256": "81d2ba907976d69539046d43bd0bc0bd4f5309ee341b51d7d8ede100e9e67954",
+      "outputSha256": "49a573f71ee6c5e8c3b3bc193414c6dd1fa31c902ba32ed7431086cc4168705b",
+      "rationale": "N/A",
+      "reevaluationTrigger": "Re-run when an accepted input, source, output, validator, platform observation, or current task boundary changes."
+    },
+    {
+      "gateId": "autonomous-delivery-integrity",
+      "applicability": "Applicable",
+      "executedCommand": "Q02, both Q04 phase-boundary validators and Q23 validate-autonomous-delivery-set.sh passed in the outer closeout context.",
+      "runnerOrPlatform": "macOS (Darwin), PowerShell 7.6.5",
+      "startedAt": "2026-08-30T10:17:01Z",
+      "finishedAt": "2026-08-30T10:27:20Z",
+      "exitCode": 0,
+      "result": "Pass",
+      "expectedResult": "Require valid run state and the last completed routed phase result, one content commit, temporary schema-2.0 exact-head PreMerge evidence, current checks and review state, causal PostMerge evidence with no product delta, terminal closeout fields, and final validation; older phase results remain historical lineage evidence rather than current-payload gates.",
+      "observedResult": "The last completed routed phase is Implement and its bound result passed validation with 62/62 local tasks. Q23 accepted exactly 29 intended paths and excluded all 16 .specify/runtime execution artefacts. T063 is complete; staging, commit and remote closeout remain pending.",
+      "evidencePath": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assessment-results.json",
+      "limitations": "This result covers local implementation and the intended delivery set through T063. Staging, commit, remote review, merge, PostMerge and final synchronization T064-T068 remain pending.",
+      "inputSha256": "81d2ba907976d69539046d43bd0bc0bd4f5309ee341b51d7d8ede100e9e67954",
+      "outputSha256": "49a573f71ee6c5e8c3b3bc193414c6dd1fa31c902ba32ed7431086cc4168705b",
+      "rationale": "N/A",
+      "reevaluationTrigger": "Re-run when an accepted input, source, output, validator, platform observation, or current task boundary changes."
+    },
+    {
+      "gateId": "statistics-assessment-only-boundary",
+      "applicability": "Applicable",
+      "executedCommand": "Both Q21 check-only commands were executed and reported matching DRIFT without writes.",
+      "runnerOrPlatform": "macOS (Darwin), PowerShell 7.6.5",
+      "startedAt": "2026-08-30T10:17:01Z",
+      "finishedAt": "2026-08-30T10:17:01Z",
+      "exitCode": 0,
+      "result": "Pass",
+      "expectedResult": "Run Statistics Profile 2 in read-only check mode, record observed drift as assessment evidence or a gap, and prove that the assessment content commit does not modify statistics files; any later statistics commit requires a separate post-feature trigger and authority.",
+      "observedResult": "Bash and PowerShell Q21 check-only commands both reported DRIFT for source db0f7c92984a, 132838 tracked text lines and 63 active days; no statistics file was rendered or changed.",
+      "evidencePath": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assessment-results.json",
+      "limitations": "This result covers T001-T062 local implementation. Staging, commit, remote review, merge, PostMerge, and final closeout T063-T068 are deliberately not claimed.",
+      "inputSha256": "81d2ba907976d69539046d43bd0bc0bd4f5309ee341b51d7d8ede100e9e67954",
+      "outputSha256": "49a573f71ee6c5e8c3b3bc193414c6dd1fa31c902ba32ed7431086cc4168705b",
+      "rationale": "N/A",
+      "reevaluationTrigger": "Re-run when an accepted input, source, output, validator, platform observation, or current task boundary changes."
+    },
+    {
+      "gateId": "accepted-baseline-human-decision",
+      "applicability": "N/A",
+      "executedCommand": "N/A",
+      "runnerOrPlatform": "macOS (Darwin), PowerShell 7.6.5",
+      "startedAt": "2026-08-30T10:17:01Z",
+      "finishedAt": "2026-08-30T10:17:01Z",
+      "exitCode": "N/A",
+      "result": "Skipped",
+      "expectedResult": "No action in the assessment-only implementation phase.",
+      "observedResult": "Skipped with the declared rationale; no Pass was invented.",
+      "evidencePath": "specs/002-gsdb-baseline-assessment/autonomous-run-gate-requirements.json",
+      "limitations": "Human-only or later-scope work remains outside current authority.",
+      "inputSha256": "81d2ba907976d69539046d43bd0bc0bd4f5309ee341b51d7d8ede100e9e67954",
+      "outputSha256": "N/A",
+      "rationale": "AcceptedBaseline is a human-only decision requiring documented participation by Project Owner and Security Review; autonomous technical completion cannot supply it.",
+      "reevaluationTrigger": "Re-evaluate only after complete ReviewPending artefacts are delivered and both required human roles record their review decision."
+    },
+    {
+      "gateId": "intake-series-advancement",
+      "applicability": "N/A",
+      "executedCommand": "N/A",
+      "runnerOrPlatform": "macOS (Darwin), PowerShell 7.6.5",
+      "startedAt": "2026-08-30T10:17:01Z",
+      "finishedAt": "2026-08-30T10:17:01Z",
+      "exitCode": "N/A",
+      "result": "Skipped",
+      "expectedResult": "No action in the assessment-only implementation phase.",
+      "observedResult": "Skipped with the declared rationale; no Pass was invented.",
+      "evidencePath": "specs/002-gsdb-baseline-assessment/autonomous-run-gate-requirements.json",
+      "limitations": "Human-only or later-scope work remains outside current authority.",
+      "inputSha256": "81d2ba907976d69539046d43bd0bc0bd4f5309ee341b51d7d8ede100e9e67954",
+      "outputSha256": "N/A",
+      "rationale": "This assessment run may name the candidate but must not update or advance the series. Advancement requires AcceptedBaseline plus separately current authority for intake-series update.",
+      "reevaluationTrigger": "After documented AcceptedBaseline and separate authority, run intake-series-update, validate series status, and only then list the next candidate read-only."
+    },
+    {
+      "gateId": "technical-hardening-and-runtime-change",
+      "applicability": "N/A",
+      "executedCommand": "N/A",
+      "runnerOrPlatform": "macOS (Darwin), PowerShell 7.6.5",
+      "startedAt": "2026-08-30T10:17:01Z",
+      "finishedAt": "2026-08-30T10:17:01Z",
+      "exitCode": "N/A",
+      "result": "Skipped",
+      "expectedResult": "No action in the assessment-only implementation phase.",
+      "observedResult": "Skipped with the declared rationale; no Pass was invented.",
+      "evidencePath": "specs/002-gsdb-baseline-assessment/autonomous-run-gate-requirements.json",
+      "limitations": "Human-only or later-scope work remains outside current authority.",
+      "inputSha256": "81d2ba907976d69539046d43bd0bc0bd4f5309ee341b51d7d8ede100e9e67954",
+      "outputSha256": "N/A",
+      "rationale": "The accepted feature is assessment-only and expressly prohibits technical remediation and human-only administration.",
+      "reevaluationTrigger": "Re-evaluate only in a later accepted remediation intake with explicit implementation and authority scope."
+    },
+    {
+      "gateId": "parallel-autonomous-campaign",
+      "applicability": "N/A",
+      "executedCommand": "N/A",
+      "runnerOrPlatform": "macOS (Darwin), PowerShell 7.6.5",
+      "startedAt": "2026-08-30T10:17:01Z",
+      "finishedAt": "2026-08-30T10:17:01Z",
+      "exitCode": "N/A",
+      "result": "Skipped",
+      "expectedResult": "No action in the assessment-only implementation phase.",
+      "observedResult": "Skipped with the declared rationale; no Pass was invented.",
+      "evidencePath": "specs/002-gsdb-baseline-assessment/autonomous-run-gate-requirements.json",
+      "limitations": "Human-only or later-scope work remains outside current authority.",
+      "inputSha256": "81d2ba907976d69539046d43bd0bc0bd4f5309ee341b51d7d8ede100e9e67954",
+      "outputSha256": "N/A",
+      "rationale": "The current feature uses one bounded autonomous run; the installed parallel preset remains an inventory subject but no campaign is required or authorized.",
+      "reevaluationTrigger": "Re-evaluate only after an explicit user request for an isolated parallel campaign with its own validated campaign authority."
+    }
+  ],
+  "traceabilitySample": [
+    {
+      "checklistId": "CL-01",
+      "clId": "CL-01-01",
+      "assessmentStatus": "Open",
+      "evidenceIds": [
+        "EVD-CL-01-01"
+      ],
+      "gapId": "GAP-001",
+      "startedAt": "2026-08-30T10:17:06Z",
+      "finishedAt": "2026-08-30T10:17:11Z",
+      "durationSeconds": 5,
+      "reviewerRole": "Security Review",
+      "result": "Pass"
+    },
+    {
+      "checklistId": "CL-02",
+      "clId": "CL-02-01",
+      "assessmentStatus": "Open",
+      "evidenceIds": [
+        "EVD-CL-02-01"
+      ],
+      "gapId": "GAP-013",
+      "startedAt": "2026-08-30T10:17:11Z",
+      "finishedAt": "2026-08-30T10:17:16Z",
+      "durationSeconds": 5,
+      "reviewerRole": "Security Review",
+      "result": "Pass"
+    },
+    {
+      "checklistId": "CL-03",
+      "clId": "CL-03-01",
+      "assessmentStatus": "Open",
+      "evidenceIds": [
+        "EVD-CL-03-01"
+      ],
+      "gapId": "GAP-026",
+      "startedAt": "2026-08-30T10:17:16Z",
+      "finishedAt": "2026-08-30T10:17:21Z",
+      "durationSeconds": 5,
+      "reviewerRole": "Security Review",
+      "result": "Pass"
+    },
+    {
+      "checklistId": "CL-04",
+      "clId": "CL-04-01",
+      "assessmentStatus": "Open",
+      "evidenceIds": [
+        "EVD-CL-04-01"
+      ],
+      "gapId": "GAP-041",
+      "startedAt": "2026-08-30T10:17:21Z",
+      "finishedAt": "2026-08-30T10:17:26Z",
+      "durationSeconds": 5,
+      "reviewerRole": "Security Review",
+      "result": "Pass"
+    },
+    {
+      "checklistId": "CL-05",
+      "clId": "CL-05-01",
+      "assessmentStatus": "Open",
+      "evidenceIds": [
+        "EVD-CL-05-01",
+        "EVD-SBOM-CATALOG"
+      ],
+      "gapId": "GAP-051",
+      "startedAt": "2026-08-30T10:17:26Z",
+      "finishedAt": "2026-08-30T10:17:31Z",
+      "durationSeconds": 5,
+      "reviewerRole": "Security Review",
+      "result": "Pass"
+    },
+    {
+      "checklistId": "CL-06",
+      "clId": "CL-06-01",
+      "assessmentStatus": "Open",
+      "evidenceIds": [
+        "EVD-CL-06-01"
+      ],
+      "gapId": "GAP-064",
+      "startedAt": "2026-08-30T10:17:31Z",
+      "finishedAt": "2026-08-30T10:17:36Z",
+      "durationSeconds": 5,
+      "reviewerRole": "Security Review",
+      "result": "Pass"
+    },
+    {
+      "checklistId": "CL-07",
+      "clId": "CL-07-01",
+      "assessmentStatus": "Open",
+      "evidenceIds": [
+        "EVD-CL-07-01"
+      ],
+      "gapId": "GAP-075",
+      "startedAt": "2026-08-30T10:17:36Z",
+      "finishedAt": "2026-08-30T10:17:41Z",
+      "durationSeconds": 5,
+      "reviewerRole": "Security Review",
+      "result": "Pass"
+    },
+    {
+      "checklistId": "CL-08",
+      "clId": "CL-08-01",
+      "assessmentStatus": "Open",
+      "evidenceIds": [
+        "EVD-CL-08-01"
+      ],
+      "gapId": "GAP-087",
+      "startedAt": "2026-08-30T10:17:41Z",
+      "finishedAt": "2026-08-30T10:17:46Z",
+      "durationSeconds": 5,
+      "reviewerRole": "Security Review",
+      "result": "Pass"
+    },
+    {
+      "checklistId": "CL-09",
+      "clId": "CL-09-01",
+      "assessmentStatus": "Open",
+      "evidenceIds": [
+        "EVD-CL-09-01"
+      ],
+      "gapId": "GAP-100",
+      "startedAt": "2026-08-30T10:17:46Z",
+      "finishedAt": "2026-08-30T10:17:51Z",
+      "durationSeconds": 5,
+      "reviewerRole": "Security Review",
+      "result": "Pass"
+    },
+    {
+      "checklistId": "CL-10",
+      "clId": "CL-10-01",
+      "assessmentStatus": "Open",
+      "evidenceIds": [
+        "EVD-CL-10-01"
+      ],
+      "gapId": "GAP-117",
+      "startedAt": "2026-08-30T10:17:51Z",
+      "finishedAt": "2026-08-30T10:17:56Z",
+      "durationSeconds": 5,
+      "reviewerRole": "Security Review",
+      "result": "Pass"
+    },
+    {
+      "checklistId": "CL-11",
+      "clId": "CL-11-01",
+      "assessmentStatus": "Open",
+      "evidenceIds": [
+        "EVD-CL-11-01"
+      ],
+      "gapId": "GAP-134",
+      "startedAt": "2026-08-30T10:17:56Z",
+      "finishedAt": "2026-08-30T10:18:01Z",
+      "durationSeconds": 5,
+      "reviewerRole": "Security Review",
+      "result": "Pass"
+    },
+    {
+      "checklistId": "CL-12",
+      "clId": "CL-12-01",
+      "assessmentStatus": "Open",
+      "evidenceIds": [
+        "EVD-CL-12-01"
+      ],
+      "gapId": "GAP-146",
+      "startedAt": "2026-08-30T10:18:01Z",
+      "finishedAt": "2026-08-30T10:18:06Z",
+      "durationSeconds": 5,
+      "reviewerRole": "Security Review",
+      "result": "Pass"
+    }
+  ],
+  "observedCounts": {
+    "checklists": 12,
+    "matrixRows": 157,
+    "uniqueClIds": 157,
+    "gaps": 157,
+    "inventoryItems": 29,
+    "errorCounts": {
+      "missingIds": 0,
+      "duplicateIds": 0,
+      "extraIds": 0,
+      "invalidStatusCombinations": 0,
+      "missingMandatoryFields": 0,
+      "unsupportedPositiveAssessments": 0,
+      "unassignedGapRows": 0,
+      "orphanGapMappings": 0,
+      "unassignedOwners": 0,
+      "indefiniteTriggers": 0,
+      "scopeViolations": 0,
+      "missingEnglishPartners": 0,
+      "unexplainedTerms": 0,
+      "visualOnlyInformation": 0,
+      "unexplainedCefrDeviations": 0
+    }
+  },
+  "traceabilityTotalSeconds": 60,
+  "overallResult": "Pass",
+  "assessmentStateResult": "ReviewPending"
+}

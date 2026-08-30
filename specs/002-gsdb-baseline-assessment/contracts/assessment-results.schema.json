@@ -1,0 +1,1647 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/specs/002-gsdb-baseline-assessment/contracts/assessment-results.schema.json",
+  "title": "GSDB-Bestandspruefung / GSDB Baseline Assessment",
+  "description": "DE: Strukturvertrag fuer die vollstaendige GSDB-Bestandspruefung. EN: Structural contract for the complete GSDB baseline assessment.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "assessment",
+    "sources",
+    "evidence",
+    "matrixRows",
+    "gaps",
+    "inventory",
+    "summary"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "assessment": {
+      "$ref": "#/$defs/assessmentSnapshot"
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 37,
+      "maxItems": 37,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/sourceSnapshot"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/evidenceRecord"
+      }
+    },
+    "matrixRows": {
+      "type": "array",
+      "minItems": 157,
+      "maxItems": 157,
+      "items": {
+        "$ref": "#/$defs/reviewItem"
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/gap"
+      }
+    },
+    "inventory": {
+      "$ref": "#/$defs/inventory"
+    },
+    "summary": {
+      "$ref": "#/$defs/summary"
+    }
+  },
+  "$defs": {
+    "nonEmptyText": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": ".*\\S.*"
+    },
+    "repositoryPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!N/A$)(?!/)(?![A-Za-z]:[\\\\/])(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$)).+$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "utcTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "dateOrNA": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "date"
+        },
+        {
+          "const": "N/A"
+        }
+      ]
+    },
+    "role": {
+      "enum": [
+        "Repository Maintainer",
+        "Project Owner",
+        "Security Review",
+        "Platform Owner/Admin",
+        "Privacy/Legal Review",
+        "CISO/ISB/KIB",
+        "Learning/A11Y Review"
+      ]
+    },
+    "risk": {
+      "enum": [
+        "None identified",
+        "Low",
+        "Medium",
+        "High",
+        "Critical",
+        "Unassessed"
+      ]
+    },
+    "inputBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/repositoryPath"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "assessmentSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assessmentId",
+        "scopePath",
+        "assessmentState",
+        "assessmentDate",
+        "reviewedRepositoryRevision",
+        "ownerRole",
+        "reviewerRole",
+        "acceptedInputBindings",
+        "baselineVersionObserved",
+        "outputPaths",
+        "scopeExclusions",
+        "nextIntakeDependency",
+        "humanAcceptance"
+      ],
+      "properties": {
+        "assessmentId": {
+          "type": "string",
+          "pattern": "^GSDB-[0-9]{4}-[0-9]{2}-[0-9]{2}-[A-Z0-9-]+$"
+        },
+        "scopePath": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "assessmentState": {
+          "enum": [
+            "Draft",
+            "ReviewPending",
+            "AcceptedBaseline"
+          ]
+        },
+        "assessmentDate": {
+          "$ref": "#/$defs/utcTimestamp"
+        },
+        "reviewedRepositoryRevision": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            },
+            {
+              "const": "WORKTREE"
+            }
+          ]
+        },
+        "ownerRole": {
+          "$ref": "#/$defs/role"
+        },
+        "reviewerRole": {
+          "$ref": "#/$defs/role"
+        },
+        "acceptedInputBindings": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/inputBinding"
+          }
+        },
+        "baselineVersionObserved": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "outputPaths": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/repositoryPath"
+          }
+        },
+        "scopeExclusions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/nonEmptyText"
+          }
+        },
+        "nextIntakeDependency": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "requiredAssessmentState",
+            "seriesUpdateAuthorityRequired",
+            "startedByThisRun"
+          ],
+          "properties": {
+            "path": {
+              "const": "Lastenheft_Secure-Development-Container-Hardening.md"
+            },
+            "requiredAssessmentState": {
+              "const": "AcceptedBaseline"
+            },
+            "seriesUpdateAuthorityRequired": {
+              "const": true
+            },
+            "startedByThisRun": {
+              "const": false
+            }
+          }
+        },
+        "humanAcceptance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "required",
+            "projectOwnerParticipated",
+            "securityReviewParticipated",
+            "evidencePath"
+          ],
+          "properties": {
+            "required": {
+              "const": true
+            },
+            "projectOwnerParticipated": {
+              "type": "boolean"
+            },
+            "securityReviewParticipated": {
+              "type": "boolean"
+            },
+            "evidencePath": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/repositoryPath"
+                },
+                {
+                  "const": "N/A"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "assessmentState": {
+                "const": "AcceptedBaseline"
+              }
+            },
+            "required": [
+              "assessmentState"
+            ]
+          },
+          "then": {
+            "properties": {
+              "humanAcceptance": {
+                "properties": {
+                  "projectOwnerParticipated": {
+                    "const": true
+                  },
+                  "securityReviewParticipated": {
+                    "const": true
+                  },
+                  "evidencePath": {
+                    "not": {
+                      "const": "N/A"
+                    }
+                  }
+                }
+              },
+              "reviewedRepositoryRevision": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{40}$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "sourceSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceId",
+        "sourceRole",
+        "path",
+        "manifestDeclaredVersion",
+        "observedVersion",
+        "sha256",
+        "generated",
+        "observedItemIds",
+        "observedItemCount",
+        "currencyStatus",
+        "gapId",
+        "verificationCommand",
+        "expectedResult",
+        "observedResult",
+        "verificationResult",
+        "checkedAt",
+        "platform",
+        "limitations"
+      ],
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "pattern": "^SRC-[A-Z0-9-]+$"
+        },
+        "sourceRole": {
+          "enum": [
+            "Manifest",
+            "Guideline",
+            "Checklist",
+            "Compendium",
+            "Related",
+            "Learning",
+            "Reference",
+            "ManagedBinary",
+            "RepositoryEvidence"
+          ]
+        },
+        "path": {
+          "$ref": "#/$defs/repositoryPath"
+        },
+        "manifestDeclaredVersion": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "observedVersion": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "sha256": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/sha256"
+            },
+            {
+              "const": "N/A"
+            }
+          ]
+        },
+        "generated": {
+          "type": "boolean"
+        },
+        "observedItemIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^CL-[0-9]{2}-[0-9]{2}$"
+          }
+        },
+        "observedItemCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 157
+        },
+        "currencyStatus": {
+          "enum": [
+            "Aligned",
+            "Missing",
+            "Conflicting",
+            "Stale",
+            "NotReproducible"
+          ]
+        },
+        "gapId": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^GAP-[0-9]{3,}$"
+            },
+            {
+              "const": "N/A"
+            }
+          ]
+        },
+        "verificationCommand": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "expectedResult": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "observedResult": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "verificationResult": {
+          "enum": ["Pass", "Fail", "Open", "Blocked", "Skipped"]
+        },
+        "checkedAt": {
+          "$ref": "#/$defs/utcTimestamp"
+        },
+        "platform": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "limitations": {
+          "$ref": "#/$defs/nonEmptyText"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "currencyStatus": { "const": "Aligned" }
+            },
+            "required": ["currencyStatus"]
+          },
+          "then": {
+            "properties": {
+              "gapId": { "const": "N/A" },
+              "verificationResult": { "const": "Pass" }
+            }
+          },
+          "else": {
+            "properties": {
+              "gapId": {
+                "type": "string",
+                "pattern": "^GAP-[0-9]{3,}$"
+              },
+              "verificationResult": { "not": { "const": "Pass" } }
+            }
+          }
+        }
+      ]
+    },
+    "evidenceRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceId",
+        "kind",
+        "path",
+        "sourceVersionOrSha256",
+        "command",
+        "expectedResult",
+        "observedResult",
+        "result",
+        "checkedAt",
+        "platform",
+        "limitations",
+        "freshness",
+        "containsSensitiveContent"
+      ],
+      "properties": {
+        "evidenceId": {
+          "type": "string",
+          "pattern": "^EVD-[A-Z0-9-]+$"
+        },
+        "kind": {
+          "enum": [
+            "RepositoryPath",
+            "ReadOnlyCheck",
+            "MissingEvidence",
+            "ExternalBoundary"
+          ]
+        },
+        "path": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/repositoryPath"
+            },
+            {
+              "const": "N/A"
+            }
+          ]
+        },
+        "sourceVersionOrSha256": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "command": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "expectedResult": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "observedResult": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "result": {
+          "enum": [
+            "Pass",
+            "Fail",
+            "Skipped",
+            "Open"
+          ]
+        },
+        "checkedAt": {
+          "$ref": "#/$defs/utcTimestamp"
+        },
+        "platform": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "limitations": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "freshness": {
+          "enum": [
+            "Current",
+            "Stale",
+            "Unknown"
+          ]
+        },
+        "containsSensitiveContent": {
+          "const": false
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "result": { "const": "Pass" }
+            },
+            "required": ["result"]
+          },
+          "then": {
+            "properties": {
+              "kind": {
+                "enum": ["RepositoryPath", "ReadOnlyCheck"]
+              },
+              "path": { "$ref": "#/$defs/repositoryPath" },
+              "freshness": { "const": "Current" },
+              "command": { "not": { "const": "N/A" } }
+            }
+          }
+        }
+      ]
+    },
+    "reviewItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clId",
+        "titleDe",
+        "titleEn",
+        "sourceSnapshotId",
+        "sourcePath",
+        "sourceVersion",
+        "applicability",
+        "implementationStatus",
+        "assessmentStatus",
+        "learningStage",
+        "responsibleRole",
+        "reviewerRole",
+        "followUpOwner",
+        "rationaleDe",
+        "rationaleEn",
+        "evidenceIds",
+        "verificationMethod",
+        "reviewDate",
+        "platformLimitation",
+        "residualRisk",
+        "residualRiskRationale",
+        "nextAction",
+        "targetDate",
+        "reevaluationTrigger",
+        "humanOnly",
+        "humanOnlyReason",
+        "mappedStandards",
+        "mappedPresets",
+        "gapId"
+      ],
+      "properties": {
+        "clId": {
+          "type": "string",
+          "pattern": "^CL-(0[1-9]|1[0-2])-[0-9]{2}$"
+        },
+        "titleDe": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "titleEn": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "sourceSnapshotId": {
+          "type": "string",
+          "pattern": "^SRC-[A-Z0-9-]+$"
+        },
+        "sourcePath": {
+          "$ref": "#/$defs/repositoryPath"
+        },
+        "sourceVersion": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "applicability": {
+          "enum": [
+            "Applicable",
+            "N/A",
+            "Open"
+          ]
+        },
+        "implementationStatus": {
+          "enum": [
+            "Fulfilled",
+            "Partly Fulfilled",
+            "Not Fulfilled",
+            "Not Assessed"
+          ]
+        },
+        "assessmentStatus": {
+          "enum": [
+            "Applicable",
+            "AlreadySatisfied",
+            "N/A",
+            "Open",
+            "FollowUp"
+          ]
+        },
+        "learningStage": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "Year1",
+              "Year2",
+              "Year3"
+            ]
+          }
+        },
+        "responsibleRole": {
+          "$ref": "#/$defs/role"
+        },
+        "reviewerRole": {
+          "$ref": "#/$defs/role"
+        },
+        "followUpOwner": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/role"
+            },
+            {
+              "const": "N/A"
+            }
+          ]
+        },
+        "rationaleDe": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "rationaleEn": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "evidenceIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^EVD-[A-Z0-9-]+$"
+          }
+        },
+        "verificationMethod": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "reviewDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "platformLimitation": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "residualRisk": {
+          "$ref": "#/$defs/risk"
+        },
+        "residualRiskRationale": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "nextAction": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "targetDate": {
+          "$ref": "#/$defs/dateOrNA"
+        },
+        "reevaluationTrigger": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "humanOnly": {
+          "type": "boolean"
+        },
+        "humanOnlyReason": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "mappedStandards": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/nonEmptyText"
+          }
+        },
+        "mappedPresets": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/nonEmptyText"
+          }
+        },
+        "gapId": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^GAP-[0-9]{3,}$"
+            },
+            {
+              "const": "N/A"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "assessmentStatus": {
+                "const": "N/A"
+              }
+            },
+            "required": [
+              "assessmentStatus"
+            ]
+          },
+          "then": {
+            "properties": {
+              "applicability": {
+                "const": "N/A"
+              },
+              "implementationStatus": {
+                "const": "Not Assessed"
+              },
+              "gapId": {
+                "const": "N/A"
+              },
+              "followUpOwner": {
+                "const": "N/A"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "assessmentStatus": {
+                "const": "AlreadySatisfied"
+              }
+            },
+            "required": [
+              "assessmentStatus"
+            ]
+          },
+          "then": {
+            "properties": {
+              "applicability": {
+                "const": "Applicable"
+              },
+              "implementationStatus": {
+                "const": "Fulfilled"
+              },
+              "gapId": {
+                "const": "N/A"
+              },
+              "followUpOwner": {
+                "const": "N/A"
+              },
+              "nextAction": {
+                "const": "N/A"
+              },
+              "targetDate": {
+                "const": "N/A"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "assessmentStatus": {
+                "const": "Open"
+              }
+            },
+            "required": [
+              "assessmentStatus"
+            ]
+          },
+          "then": {
+            "properties": {
+              "applicability": {
+                "enum": [
+                  "Open",
+                  "Applicable"
+                ]
+              },
+              "implementationStatus": {
+                "const": "Not Assessed"
+              },
+              "gapId": {
+                "type": "string",
+                "pattern": "^GAP-[0-9]{3,}$"
+              },
+              "followUpOwner": {
+                "$ref": "#/$defs/role"
+              },
+              "nextAction": {
+                "not": {
+                  "const": "N/A"
+                }
+              },
+              "targetDate": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "assessmentStatus": {
+                "const": "FollowUp"
+              }
+            },
+            "required": [
+              "assessmentStatus"
+            ]
+          },
+          "then": {
+            "properties": {
+              "applicability": {
+                "const": "Applicable"
+              },
+              "implementationStatus": {
+                "enum": [
+                  "Partly Fulfilled",
+                  "Not Fulfilled"
+                ]
+              },
+              "gapId": {
+                "type": "string",
+                "pattern": "^GAP-[0-9]{3,}$"
+              },
+              "followUpOwner": {
+                "$ref": "#/$defs/role"
+              },
+              "nextAction": {
+                "not": {
+                  "const": "N/A"
+                }
+              },
+              "targetDate": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "assessmentStatus": {
+                "const": "Applicable"
+              }
+            },
+            "required": [
+              "assessmentStatus"
+            ]
+          },
+          "then": {
+            "properties": {
+              "applicability": {
+                "const": "Applicable"
+              },
+              "implementationStatus": {
+                "const": "Not Assessed"
+              },
+              "gapId": {
+                "type": "string",
+                "pattern": "^GAP-[0-9]{3,}$"
+              },
+              "followUpOwner": {
+                "$ref": "#/$defs/role"
+              },
+              "nextAction": {
+                "not": {
+                  "const": "N/A"
+                }
+              },
+              "targetDate": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "residualRisk": {
+                "const": "Unassessed"
+              }
+            },
+            "required": [
+              "residualRisk"
+            ]
+          },
+          "then": {
+            "properties": {
+              "assessmentStatus": {
+                "const": "Open"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "humanOnly": {
+                "const": true
+              }
+            },
+            "required": [
+              "humanOnly"
+            ]
+          },
+          "then": {
+            "properties": {
+              "assessmentStatus": {
+                "const": "Open"
+              },
+              "humanOnlyReason": {
+                "not": {
+                  "const": "N/A"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gapId",
+        "state",
+        "priority",
+        "affectedClIds",
+        "summaryDe",
+        "summaryEn",
+        "rootCause",
+        "evidenceState",
+        "impact",
+        "likelihood",
+        "dependencies",
+        "owner",
+        "followUpAction",
+        "acceptanceCriterion",
+        "expectedEvidence",
+        "targetDate",
+        "residualRisk",
+        "reevaluationTrigger",
+        "humanOnly",
+        "humanOnlyRole",
+        "groupingRationale"
+      ],
+      "properties": {
+        "gapId": {
+          "type": "string",
+          "pattern": "^GAP-[0-9]{3,}$"
+        },
+        "state": {
+          "const": "Open"
+        },
+        "priority": {
+          "enum": [
+            "P0",
+            "P1",
+            "P2",
+            "P3"
+          ]
+        },
+        "affectedClIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^CL-(0[1-9]|1[0-2])-[0-9]{2}$"
+          }
+        },
+        "summaryDe": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "summaryEn": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "rootCause": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "evidenceState": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "impact": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "likelihood": {
+          "enum": [
+            "Low",
+            "Medium",
+            "High",
+            "Unassessed"
+          ]
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonEmptyText"
+          }
+        },
+        "owner": {
+          "$ref": "#/$defs/role"
+        },
+        "followUpAction": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "acceptanceCriterion": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "expectedEvidence": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "targetDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "residualRisk": {
+          "$ref": "#/$defs/risk"
+        },
+        "reevaluationTrigger": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "humanOnly": {
+          "type": "boolean"
+        },
+        "humanOnlyRole": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/role"
+            },
+            {
+              "const": "N/A"
+            }
+          ]
+        },
+        "groupingRationale": {
+          "$ref": "#/$defs/nonEmptyText"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "humanOnly": { "const": true }
+            },
+            "required": ["humanOnly"]
+          },
+          "then": {
+            "properties": {
+              "humanOnlyRole": { "$ref": "#/$defs/role" }
+            }
+          },
+          "else": {
+            "properties": {
+              "humanOnlyRole": { "const": "N/A" }
+            }
+          }
+        }
+      ]
+    },
+    "inventoryObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observationId",
+        "dimension",
+        "sourceKind",
+        "sourcePath",
+        "sourceReference",
+        "observedCategory",
+        "observedVersionOrValue",
+        "command",
+        "result",
+        "checkedAt",
+        "platform",
+        "limitations"
+      ],
+      "properties": {
+        "observationId": {
+          "type": "string",
+          "pattern": "^OBS-[A-Z0-9-]+$"
+        },
+        "dimension": {
+          "enum": [
+            "TargetClaim",
+            "Installation",
+            "VersionPin",
+            "VersionCheck",
+            "State",
+            "Dispatcher",
+            "ProviderSignIn",
+            "DocumentationCategory",
+            "PresetIdentity",
+            "PresetVersion",
+            "PresetPriority",
+            "PresetEnabled",
+            "PresetResolution",
+            "PresetCoverage"
+          ]
+        },
+        "sourceKind": {
+          "enum": [
+            "TargetClaim",
+            "Dockerfile",
+            "ComposeMount",
+            "StateVolume",
+            "Registry",
+            "VersionCheck",
+            "SmokeTest",
+            "Dispatcher",
+            "Documentation",
+            "InstalledPreset"
+          ]
+        },
+        "sourcePath": {
+          "$ref": "#/$defs/repositoryPath"
+        },
+        "sourceReference": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "observedCategory": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "observedVersionOrValue": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "command": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "result": {
+          "enum": [
+            "Pass",
+            "Fail",
+            "Skipped",
+            "Open"
+          ]
+        },
+        "checkedAt": {
+          "$ref": "#/$defs/utcTimestamp"
+        },
+        "platform": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "limitations": {
+          "$ref": "#/$defs/nonEmptyText"
+        }
+      }
+    },
+    "inventoryItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inventoryId",
+        "category",
+        "displayNameDe",
+        "displayNameEn",
+        "expectedClassification",
+        "expectedVersionOrPin",
+        "requiredCountGroup",
+        "reconciliationStatus",
+        "observations",
+        "gapId"
+      ],
+      "properties": {
+        "inventoryId": {
+          "type": "string",
+          "pattern": "^INV-[A-Z0-9-]+$"
+        },
+        "category": {
+          "enum": [
+            "MSLToolchain",
+            "ScriptingFoundation",
+            "AdditionalTool",
+            "RequiredAgent",
+            "AdditionalAgentSurface",
+            "BindingPreset",
+            "AdditionalPreset"
+          ]
+        },
+        "displayNameDe": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "displayNameEn": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "expectedClassification": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "expectedVersionOrPin": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "requiredCountGroup": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "reconciliationStatus": {
+          "enum": [
+            "Aligned",
+            "Mismatch",
+            "Missing",
+            "Open"
+          ]
+        },
+        "observations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/inventoryObservation"
+          }
+        },
+        "gapId": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^GAP-[0-9]{3,}$"
+            },
+            {
+              "const": "N/A"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "reconciliationStatus": { "const": "Aligned" }
+            },
+            "required": ["reconciliationStatus"]
+          },
+          "then": {
+            "properties": {
+              "gapId": { "const": "N/A" }
+            }
+          },
+          "else": {
+            "properties": {
+              "gapId": {
+                "type": "string",
+                "pattern": "^GAP-[0-9]{3,}$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "enum": [
+                  "RequiredAgent",
+                  "AdditionalAgentSurface"
+                ]
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "observations": {
+                "allOf": [
+                  { "contains": { "properties": { "dimension": { "const": "Installation" } }, "required": ["dimension"] } },
+                  { "contains": { "properties": { "dimension": { "const": "VersionPin" } }, "required": ["dimension"] } },
+                  { "contains": { "properties": { "dimension": { "const": "VersionCheck" } }, "required": ["dimension"] } },
+                  { "contains": { "properties": { "dimension": { "const": "State" } }, "required": ["dimension"] } },
+                  { "contains": { "properties": { "dimension": { "const": "Dispatcher" } }, "required": ["dimension"] } },
+                  { "contains": { "properties": { "dimension": { "const": "ProviderSignIn" } }, "required": ["dimension"] } },
+                  { "contains": { "properties": { "dimension": { "const": "DocumentationCategory" } }, "required": ["dimension"] } }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "enum": [
+                  "BindingPreset",
+                  "AdditionalPreset"
+                ]
+              }
+            },
+            "required": [
+              "category"
+            ]
+          },
+          "then": {
+            "properties": {
+              "observations": {
+                "allOf": [
+                  { "contains": { "properties": { "dimension": { "const": "PresetIdentity" } }, "required": ["dimension"] } },
+                  { "contains": { "properties": { "dimension": { "const": "PresetVersion" } }, "required": ["dimension"] } },
+                  { "contains": { "properties": { "dimension": { "const": "PresetPriority" } }, "required": ["dimension"] } },
+                  { "contains": { "properties": { "dimension": { "const": "PresetEnabled" } }, "required": ["dimension"] } },
+                  { "contains": { "properties": { "dimension": { "const": "PresetResolution" } }, "required": ["dimension"] } },
+                  { "contains": { "properties": { "dimension": { "const": "PresetCoverage" } }, "required": ["dimension"] } }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "toolchains",
+        "agents",
+        "presets",
+        "additionalTools"
+      ],
+      "properties": {
+        "toolchains": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "allOf": [
+            {
+              "contains": { "properties": { "category": { "const": "MSLToolchain" } }, "required": ["category"] },
+              "minContains": 6,
+              "maxContains": 6
+            },
+            {
+              "contains": { "properties": { "category": { "const": "ScriptingFoundation" } }, "required": ["category"] },
+              "minContains": 2,
+              "maxContains": 2
+            }
+          ],
+          "items": {
+            "allOf": [
+              { "$ref": "#/$defs/inventoryItem" },
+              { "properties": { "category": { "enum": ["MSLToolchain", "ScriptingFoundation"] } } }
+            ]
+          }
+        },
+        "agents": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "allOf": [
+            {
+              "contains": { "properties": { "category": { "const": "RequiredAgent" } }, "required": ["category"] },
+              "minContains": 4,
+              "maxContains": 4
+            },
+            {
+              "contains": { "properties": { "category": { "const": "AdditionalAgentSurface" } }, "required": ["category"] },
+              "minContains": 2,
+              "maxContains": 2
+            }
+          ],
+          "items": {
+            "allOf": [
+              { "$ref": "#/$defs/inventoryItem" },
+              { "properties": { "category": { "enum": ["RequiredAgent", "AdditionalAgentSurface"] } } }
+            ]
+          }
+        },
+        "presets": {
+          "type": "array",
+          "minItems": 12,
+          "maxItems": 12,
+          "allOf": [
+            {
+              "contains": { "properties": { "category": { "const": "BindingPreset" } }, "required": ["category"] },
+              "minContains": 8,
+              "maxContains": 8
+            },
+            {
+              "contains": { "properties": { "category": { "const": "AdditionalPreset" } }, "required": ["category"] },
+              "minContains": 4,
+              "maxContains": 4
+            }
+          ],
+          "items": {
+            "allOf": [
+              { "$ref": "#/$defs/inventoryItem" },
+              { "properties": { "category": { "enum": ["BindingPreset", "AdditionalPreset"] } } }
+            ]
+          }
+        },
+        "additionalTools": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "allOf": [
+              { "$ref": "#/$defs/inventoryItem" },
+              { "properties": { "category": { "const": "AdditionalTool" } } }
+            ]
+          }
+        }
+      }
+    },
+    "checklistCount": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "checklistId",
+        "expected",
+        "actual"
+      ],
+      "properties": {
+        "checklistId": {
+          "type": "string",
+          "pattern": "^CL-(0[1-9]|1[0-2])$"
+        },
+        "expected": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "actual": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "namedCount": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "count"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "errorCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "missingIds",
+        "duplicateIds",
+        "extraIds",
+        "invalidStatusCombinations",
+        "missingMandatoryFields",
+        "unsupportedPositiveAssessments",
+        "unassignedGapRows",
+        "orphanGapMappings",
+        "unassignedOwners",
+        "indefiniteTriggers",
+        "scopeViolations",
+        "missingEnglishPartners",
+        "unexplainedTerms",
+        "visualOnlyInformation",
+        "unexplainedCefrDeviations"
+      ],
+      "properties": {
+        "missingIds": { "type": "integer", "minimum": 0 },
+        "duplicateIds": { "type": "integer", "minimum": 0 },
+        "extraIds": { "type": "integer", "minimum": 0 },
+        "invalidStatusCombinations": { "type": "integer", "minimum": 0 },
+        "missingMandatoryFields": { "type": "integer", "minimum": 0 },
+        "unsupportedPositiveAssessments": { "type": "integer", "minimum": 0 },
+        "unassignedGapRows": { "type": "integer", "minimum": 0 },
+        "orphanGapMappings": { "type": "integer", "minimum": 0 },
+        "unassignedOwners": { "type": "integer", "minimum": 0 },
+        "indefiniteTriggers": { "type": "integer", "minimum": 0 },
+        "scopeViolations": { "type": "integer", "minimum": 0 },
+        "missingEnglishPartners": { "type": "integer", "minimum": 0 },
+        "unexplainedTerms": { "type": "integer", "minimum": 0 },
+        "visualOnlyInformation": { "type": "integer", "minimum": 0 },
+        "unexplainedCefrDeviations": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "checklistCounts",
+        "applicabilityCounts",
+        "implementationCounts",
+        "assessmentStatusCounts",
+        "gapPriorityCounts",
+        "humanOnlyCounts",
+        "inventoryCounts",
+        "errorCounts"
+      ],
+      "properties": {
+        "checklistCounts": {
+          "type": "array",
+          "minItems": 12,
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/checklistCount"
+          },
+          "allOf": [
+            { "contains": { "properties": { "checklistId": { "const": "CL-01" }, "expected": { "const": 12 }, "actual": { "const": 12 } }, "required": ["checklistId", "expected", "actual"] } },
+            { "contains": { "properties": { "checklistId": { "const": "CL-02" }, "expected": { "const": 13 }, "actual": { "const": 13 } }, "required": ["checklistId", "expected", "actual"] } },
+            { "contains": { "properties": { "checklistId": { "const": "CL-03" }, "expected": { "const": 15 }, "actual": { "const": 15 } }, "required": ["checklistId", "expected", "actual"] } },
+            { "contains": { "properties": { "checklistId": { "const": "CL-04" }, "expected": { "const": 10 }, "actual": { "const": 10 } }, "required": ["checklistId", "expected", "actual"] } },
+            { "contains": { "properties": { "checklistId": { "const": "CL-05" }, "expected": { "const": 13 }, "actual": { "const": 13 } }, "required": ["checklistId", "expected", "actual"] } },
+            { "contains": { "properties": { "checklistId": { "const": "CL-06" }, "expected": { "const": 11 }, "actual": { "const": 11 } }, "required": ["checklistId", "expected", "actual"] } },
+            { "contains": { "properties": { "checklistId": { "const": "CL-07" }, "expected": { "const": 12 }, "actual": { "const": 12 } }, "required": ["checklistId", "expected", "actual"] } },
+            { "contains": { "properties": { "checklistId": { "const": "CL-08" }, "expected": { "const": 13 }, "actual": { "const": 13 } }, "required": ["checklistId", "expected", "actual"] } },
+            { "contains": { "properties": { "checklistId": { "const": "CL-09" }, "expected": { "const": 17 }, "actual": { "const": 17 } }, "required": ["checklistId", "expected", "actual"] } },
+            { "contains": { "properties": { "checklistId": { "const": "CL-10" }, "expected": { "const": 17 }, "actual": { "const": 17 } }, "required": ["checklistId", "expected", "actual"] } },
+            { "contains": { "properties": { "checklistId": { "const": "CL-11" }, "expected": { "const": 12 }, "actual": { "const": 12 } }, "required": ["checklistId", "expected", "actual"] } },
+            { "contains": { "properties": { "checklistId": { "const": "CL-12" }, "expected": { "const": 12 }, "actual": { "const": 12 } }, "required": ["checklistId", "expected", "actual"] } }
+          ]
+        },
+        "applicabilityCounts": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/namedCount"
+          },
+          "allOf": [
+            { "contains": { "properties": { "name": { "const": "Applicable" } }, "required": ["name"] } },
+            { "contains": { "properties": { "name": { "const": "N/A" } }, "required": ["name"] } },
+            { "contains": { "properties": { "name": { "const": "Open" } }, "required": ["name"] } }
+          ]
+        },
+        "implementationCounts": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/namedCount"
+          },
+          "allOf": [
+            { "contains": { "properties": { "name": { "const": "Fulfilled" } }, "required": ["name"] } },
+            { "contains": { "properties": { "name": { "const": "Partly Fulfilled" } }, "required": ["name"] } },
+            { "contains": { "properties": { "name": { "const": "Not Fulfilled" } }, "required": ["name"] } },
+            { "contains": { "properties": { "name": { "const": "Not Assessed" } }, "required": ["name"] } }
+          ]
+        },
+        "assessmentStatusCounts": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/namedCount"
+          },
+          "allOf": [
+            { "contains": { "properties": { "name": { "const": "Applicable" } }, "required": ["name"] } },
+            { "contains": { "properties": { "name": { "const": "AlreadySatisfied" } }, "required": ["name"] } },
+            { "contains": { "properties": { "name": { "const": "N/A" } }, "required": ["name"] } },
+            { "contains": { "properties": { "name": { "const": "Open" } }, "required": ["name"] } },
+            { "contains": { "properties": { "name": { "const": "FollowUp" } }, "required": ["name"] } }
+          ]
+        },
+        "gapPriorityCounts": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/namedCount"
+          },
+          "allOf": [
+            { "contains": { "properties": { "name": { "const": "P0" } }, "required": ["name"] } },
+            { "contains": { "properties": { "name": { "const": "P1" } }, "required": ["name"] } },
+            { "contains": { "properties": { "name": { "const": "P2" } }, "required": ["name"] } },
+            { "contains": { "properties": { "name": { "const": "P3" } }, "required": ["name"] } }
+          ]
+        },
+        "humanOnlyCounts": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/namedCount"
+          },
+          "allOf": [
+            { "contains": { "properties": { "name": { "const": "HumanOnly" } }, "required": ["name"] } },
+            { "contains": { "properties": { "name": { "const": "NotHumanOnly" } }, "required": ["name"] } }
+          ]
+        },
+        "inventoryCounts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mslFamilies",
+            "separateFoundations",
+            "requiredAgents",
+            "additionalAgentSurfaces",
+            "installedPresets"
+          ],
+          "properties": {
+            "mslFamilies": { "const": 6 },
+            "separateFoundations": { "const": 2 },
+            "requiredAgents": { "const": 4 },
+            "additionalAgentSurfaces": { "const": 2 },
+            "installedPresets": { "const": 12 }
+          }
+        },
+        "errorCounts": {
+          "$ref": "#/$defs/errorCounts"
+        }
+      }
+    }
+  }
+}
