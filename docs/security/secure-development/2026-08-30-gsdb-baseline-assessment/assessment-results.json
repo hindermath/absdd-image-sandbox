@@ -3,10 +3,10 @@
   "assessment": {
     "assessmentId": "GSDB-2026-08-30-BASELINE-ASSESSMENT",
     "scopePath": ".",
-    "assessmentState": "ReviewPending",
+    "assessmentState": "AcceptedBaseline",
     "assessmentDate": "2026-08-30T10:17:01Z",
     "reviewedRepositoryRevision": "7adaeac18ca259726468a2fe1d1fd028b895e09c",
-    "ownerRole": "Repository Maintainer",
+    "ownerRole": "Project Owner",
     "reviewerRole": "Security Review",
     "acceptedInputBindings": [
       {
@@ -46,9 +46,9 @@
     },
     "humanAcceptance": {
       "required": true,
-      "projectOwnerParticipated": false,
-      "securityReviewParticipated": false,
-      "evidencePath": "N/A"
+      "projectOwnerParticipated": true,
+      "securityReviewParticipated": true,
+      "evidencePath": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/acceptance-decision.md"
     }
   },
   "sources": [

@@ -20,8 +20,8 @@ series manifest is authoritative.
 
 | Rang | Intake | Aufgabe | Status |
 |---:|---|---|---|
-| 1 | `Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md` | GSDB-Bestand und Luecken pruefen | ausfuehrbar / eligible |
-| 2 | `Lastenheft_Secure-Development-Container-Hardening.md` | priorisierte technische Haertung umsetzen | blockiert / blocked |
+| 1 | `Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md` | GSDB-Bestand und Luecken pruefen | abgeschlossen / completed |
+| 2 | `Lastenheft_Secure-Development-Container-Hardening.md` | priorisierte technische Haertung umsetzen | ausfuehrbar / eligible |
 | 3 | `Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md` | gehaertete Sandbox unabhaengig abnehmen | blockiert / blocked |
 | 4 | `intakes/learner-fork-self-build-sandbox.md` | forkbare Selbstbau-Vorlage bereitstellen | blockiert / blocked |
 
@@ -46,8 +46,10 @@ and the self-build template follows successful acceptance.*
 
 ## Naechste Aktion / Next Action
 
-Den Serienstatus schreibfrei pruefen:
+Den Serienstatus schreibfrei pruefen. Danach darf der naechste Kandidat
+ebenfalls schreibfrei angezeigt werden; keiner dieser Befehle startet Arbeit:
 
 ```text
 $speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json
+$speckit-intake-series-next specs/intake-series/sandbox-development-lifecycle/manifest.json
 ```
