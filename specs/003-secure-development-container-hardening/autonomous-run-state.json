@@ -7,7 +7,7 @@
   "authorityRevalidationRequired": true,
   "stage": "Validate",
   "status": "Blocked",
-  "checkpointCommit": "N/A",
+  "checkpointCommit": "91ad1f06fc93c75c98e3c6c7c2a8cf54777b1964",
   "acceptedArtifacts": [
     {
       "path": "Lastenheft_Secure-Development-Container-Hardening.md",
@@ -187,11 +187,11 @@
     ]
   },
   "lastPassingGate": "The resumed Analyze result is bound at a2149f710127898d396b6f5f5031fcf8bcaac932e5d54e0c8e97f0db24811d57 and GATE-PARITY-01 passed with both explicit twelve-preset checks plus 3/3 and 24/24 Python suites.",
-  "nextExactAction": "Provide dated Learning/A11Y Review first-use evidence and real Linux rootless-Podman plus Windows/WSL2 PowerShell7-Podman and VS Code Dev Containers evidence. Then explicitly resume this same run and execute the single prepared T066 candidate; do not start another run.",
+  "nextExactAction": "Follow GitHub issue #52 to provide dated Learning/A11Y Review first-use evidence and real Linux rootless-Podman plus Windows/WSL2 PowerShell7-Podman and observed VS Code Dev Containers evidence. Then explicitly resume only this same run and execute the single prepared T066 candidate; do not start another run.",
   "lastOperation": {
     "kind": "ExternalEvidenceAvailability",
     "state": "Failed",
-    "summary": "The local parity blocker was resolved, but no real Linux or Windows/WSL2 host, self-hosted runner, or dated Learning/A11Y Review result is available. The All mode would deterministically return exit 3 before T066 can pass."
+    "summary": "The local parity blocker was resolved, but no real Linux or Windows/WSL2 host, self-hosted runner, observed VS Code attachment, or dated Learning/A11Y Review result is available. GitHub issue #52 now provides the exact external-evidence handoff. The All mode would deterministically return exit 3 before T066 can pass."
   },
   "stop": {
     "reason": "Applicable learner, Linux, Windows/WSL2 and VS Code attachment evidence remains unavailable and cannot be substituted or invented.",
@@ -204,5 +204,5 @@
     "postMergeActions": "N/A",
     "finalValidation": "Pending"
   },
-  "updatedAt": "2026-08-30T15:18:45Z"
+  "updatedAt": "2026-08-30T16:06:39Z"
 }
