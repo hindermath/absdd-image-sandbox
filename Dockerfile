@@ -120,6 +120,7 @@ RUN set -eux; \
         *) echo "Unsupported Swift architecture: ${arch}" >&2; exit 1 ;; \
     esac; \
     swift_signing_key="52BB7E3DE28A71BE22EC05FFEF80A866B47A981F"; \
+    swift_signing_keys_url="https://www.swift.org/keys/all-keys.asc"; \
     swift_platform="ubuntu24.04"; \
     swift_branch="swift-${swift_base_version}-release"; \
     swift_version="swift-${swift_base_version}-RELEASE"; \
@@ -130,7 +131,9 @@ RUN set -eux; \
     mkdir -p "${GNUPGHOME}"; \
     curl -fsSL "${swift_bin_url}" -o "${tmp_dir}/swift.tar.gz"; \
     curl -fsSL "${swift_bin_url}.sig" -o "${tmp_dir}/swift.tar.gz.sig"; \
-    gpg --batch --quiet --keyserver keyserver.ubuntu.com --recv-keys "${swift_signing_key}"; \
+    curl -fsSL "${swift_signing_keys_url}" -o "${tmp_dir}/swift-keys.asc"; \
+    gpg --batch --quiet --import "${tmp_dir}/swift-keys.asc"; \
+    gpg --batch --list-keys "${swift_signing_key}" >/dev/null; \
     gpg --batch --verify "${tmp_dir}/swift.tar.gz.sig" "${tmp_dir}/swift.tar.gz"; \
     tar -xzf "${tmp_dir}/swift.tar.gz" --directory / --strip-components=1; \
     chmod -R o+r /usr/lib/swift; \
