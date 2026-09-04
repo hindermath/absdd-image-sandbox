@@ -275,17 +275,21 @@ platform matrix in
 ## Ein Validator meldet `Blocked` / A Validator Reports `Blocked`
 
 **DE:** `Blocked` ist nicht automatisch ein Defekt an deinem Rechner. Der
-aktuelle Feature-Stand bleibt absichtlich blockiert, solange echte Linux- und
-Windows/WSL2-Nachweise, der VS-Code-Attach, der moderierte Lernendentest oder
-gepruefte Dispositionen fuer offene Critical-/High-Matches fehlen. Verwende
-macOS oder einen Linux-Container niemals als Ersatzbeleg fuer eine andere
-Hostplattform.
+aktuelle Feature-Stand bleibt absichtlich blockiert, solange der getrennte
+Windows-Host- und Ubuntu/WSL2-Nachweis, die VS-Code-Attaches, der moderierte
+Lernendentest oder gepruefte Dispositionen fuer offene Critical-/High-Matches
+fehlen. Beide Plattformpfade duerfen dieselbe Windows-Hardware nutzen, brauchen
+aber eigene Podman-Laufzeiten und Evidenz. Verwende macOS, die
+Windows-Podman-Machine oder einen beliebigen Linux-Container niemals als
+Ersatzbeleg fuer den jeweils anderen Ausfuehrungspfad.
 
 **EN:** Blocked does not automatically mean your computer is broken. The
-current feature remains intentionally blocked while real Linux and
-Windows/WSL2 evidence, VS Code attachment, the moderated learner test, or
-reviewed dispositions for open Critical/High matches are missing. Never use
-macOS or a Linux container as substitute evidence for another host platform.
+current feature remains intentionally blocked while separate Windows-host and
+Ubuntu/WSL2 evidence, VS Code attachments, the moderated learner test, or
+reviewed dispositions for open Critical/High matches are missing. Both paths
+may share Windows hardware but require their own Podman runtimes and evidence.
+Never substitute macOS, the Windows Podman machine, or an arbitrary Linux
+container for the other execution path.
 
 **DE:** Notiere nur Befehl, Exitcode, Plattform und Zeitpunkt. Kopiere keine
 Secrets, Tokens, Prompttexte oder unverdeckte Scanner-Treffer in ein Ticket.

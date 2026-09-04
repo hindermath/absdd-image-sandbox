@@ -41,7 +41,7 @@
       "documentClass": "ActiveSemantic",
       "languageStrategy": "German first and English second in each synchronized file, approximately CEFR B2, with technical terms explained at first use.",
       "languagePartners": [],
-      "platformAndExampleProof": "Commands and native rootless-Podman runtime were observed on macOS. Linux-host, Windows/WSL2, and VS Code attachment remain Open with exact runner triggers and are not replaced by macOS or a Linux container.",
+      "platformAndExampleProof": "Commands and native rootless-Podman runtime were observed on macOS. Separate Windows-host and Ubuntu/WSL2-with-own-rootless-Podman evidence plus VS Code attachments remain Open. Decision DEC-XPLAT-WSL2-2026-09-04 permits shared physical Windows hardware but forbids runtime or evidence reuse and makes no native-Linux claim.",
       "distributionClass": "sourceOnly",
       "homeSyncRequired": false,
       "evidence": "docs/documentation-impact/feature-003-secure-development-container-hardening.json",

@@ -73,7 +73,8 @@ Je Gate-Eintrag / Per gate record:
 - `subjectPaths`: gepruefte Repository-Pfade oder lokaler Artefaktbezeichner.
 - `command`: exakt ausgefuehrter Befehl; keine Secrets.
 - `runnerOrPlatform`: z. B. `macOS-PowerShell7-PodmanMachine`,
-  `Linux-Bash-rootless-Podman` oder `Windows-WSL2-PowerShell7-Podman`.
+  `Ubuntu-WSL2-Bash-rootless-Podman` oder
+  `Windows-Host-PowerShell7-Podman`.
 - `startedAt`, `finishedAt`, `exitCode`.
 - `expectedResult`, `observedResult`, `result`: `Pass`, `Fail`, `Blocked` oder
   die unten eng begrenzte `N/A`-Form.
@@ -86,6 +87,25 @@ Je Gate-Eintrag / Per gate record:
 
 `Current` ist nur erlaubt, wenn die Evidenz nach der letzten Aenderung ihres
 Subjekts erzeugt und an Source-/Image-Identitaet gebunden wurde.
+
+### PlatformScopeDecision
+
+- `decisionId`: stabile ID, fuer diese Aenderung
+  `DEC-XPLAT-WSL2-2026-09-04`.
+- `decidedAt`: Datum der ausdruecklichen Genehmigung.
+- `approvedBy` und `approvedRoles`: nachvollziehbare genehmigende Identitaet
+  sowie `Repository Owner` und `Security Review`.
+- `featureScope`: auf Feature 003 begrenzter Geltungsbereich.
+- `acceptedEnvironments`: macOS, Windows-Host und Ubuntu unter WSL2.
+- `evidenceSeparation`: Windows-Host und Ubuntu/WSL2 duerfen dieselbe Hardware,
+  aber keine gemeinsame Laufzeit, Befehlszeile, Zeitmessung, Image-ID oder
+  VS-Code-Beobachtung als doppelten Nachweis nutzen.
+- `excludedClaims`: keine Abnahme oder Kompatibilitaetsaussage fuer native
+  Linux-Hardware.
+- `securityInvariants`: rootless Podman, normaler Benutzer, getrennte Evidenz,
+  keine Secrets und Fail-closed-Status.
+- `rationaleDe`, `rationaleEn`, `reevaluationTrigger`: vollstaendige
+  bilinguale Begruendung und ereignisbezogener Ausloeser.
 
 Fuer ein als `N/A` deklariertes Gate wird eine Bewertung, aber kein Lauf
 erfasst: `command`, `runnerOrPlatform` und `artifactSha256` sind `N/A`,

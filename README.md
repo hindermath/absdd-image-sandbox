@@ -751,17 +751,24 @@ separate volumes. This local evidence is not formal approval.
 mit dem digest-gepinnten Grype 0.117.0 ausgewertet. Alle 426 Advisory-IDs mit
 1.346 Matches besitzen eine offene `in_triage`-Disposition. Auf Match-Ebene
 bleiben 14 Critical- und 360 High-Treffer offen; weder Risikoakzeptanz noch
-`not affected` wurde behauptet. Echte Linux- und Windows/WSL2-Hostlaeufe, ein
-VS-Code-Dev-Containers-Attach sowie der moderierte Erstnutzungstest durch
-`Learning/A11Y Review` fehlen ebenfalls. Der zusammengefasste Status ist
-deshalb `Blocked`, nicht `Pass`.
+`not affected` wurde behauptet. Der Windows-Hostlauf und der getrennte
+Ubuntu/WSL2-Lauf mit eigener rootless-Podman-Laufzeit, beobachtete
+VS-Code-Dev-Containers-Attaches sowie der moderierte Erstnutzungstest durch
+`Learning/A11Y Review` fehlen ebenfalls. Beide Plattformlaeufe duerfen nach
+der [genehmigten Scope-Entscheidung](docs/security/secure-development/2026-08-30-container-hardening/platform-scope-decision.md)
+dieselbe Windows-Hardware nutzen, aber keine Laufzeit oder Evidenz
+wiederverwenden. Native Linux-Hardware ist kein Akzeptanzziel von Feature 003.
+Der zusammengefasste Status ist deshalb `Blocked`, nicht `Pass`.
 
 **EN:** One current CycloneDX SBOM was generated with Syft 1.46.0 and assessed
 with digest-pinned Grype 0.117.0. All 426 advisory IDs covering 1,346 matches
 remain `in_triage`; 14 Critical and 360 High matches are still open. No risk
-was accepted and no `not affected` result was invented. Real Linux and
-Windows/WSL2 host runs, VS Code Dev Containers attachment, and the moderated
-first-use review are also missing. The consolidated status is therefore
+was accepted and no `not affected` result was invented. The Windows-host run,
+the separate Ubuntu/WSL2 run with its own rootless Podman runtime, observed VS
+Code Dev Containers attachments, and the moderated first-use review are also
+missing. The approved scope decision permits both platform runs on the same
+Windows hardware but forbids runtime or evidence reuse. Native Linux hardware
+is not a Feature 003 acceptance target. The consolidated status is therefore
 `Blocked`, not `Pass`.
 
 Der textorientierte Nachweis und die naechsten Owner-Aktionen stehen im

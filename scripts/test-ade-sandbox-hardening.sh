@@ -57,7 +57,8 @@ done
 
 [[ -n "${MODE}" ]] || { echo "--mode is required" >&2; usage >&2; exit 2; }
 
-case "${MODE,,}" in
+mode_normalized="$(printf '%s' "${MODE}" | tr '[:upper:]' '[:lower:]')"
+case "${mode_normalized}" in
   input) MODE="Input" ;;
   static) MODE="Static" ;;
   runtime) MODE="Runtime" ;;

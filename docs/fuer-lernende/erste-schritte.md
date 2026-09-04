@@ -296,14 +296,17 @@ or secrets.
 **DE:** Ein erfolgreicher Start bedeutet nur, dass dein lokaler technischer
 Pfad funktioniert. Er bedeutet nicht automatisch, dass alle Plattform-,
 Security- und Lernendengates bestanden sind. Der aktuelle Feature-Stand ist
-`Blocked`: Linux, Windows/WSL2, VS-Code-Attach, der moderierte Test durch
-`Learning/A11Y Review` sowie offene Critical-/High-Matches fehlen noch.
+`Blocked`: getrennte Windows-Host- und Ubuntu/WSL2-Evidenz, die zugehoerigen
+VS-Code-Attaches, der moderierte Test durch `Learning/A11Y Review` sowie offene
+Critical-/High-Matches fehlen noch. Die beiden Plattformpfade duerfen denselben
+Windows-Rechner, aber keine gemeinsame Podman-Laufzeit oder Evidenz nutzen.
 
 **EN:** Successful startup proves only your local technical path. It does not
 mean that every platform, security, and learner gate passed. The current
-feature state is blocked because Linux, Windows/WSL2, VS Code attachment, the
-moderated Learning/A11Y Review test, and open Critical/High matches are still
-missing.
+feature state is blocked because separate Windows-host and Ubuntu/WSL2
+evidence, their VS Code attachments, the moderated Learning/A11Y Review test,
+and open Critical/High matches are still missing. Both platform paths may use
+the same Windows computer but not the same Podman runtime or evidence.
 
 **DE:** Deine sichere naechste Aktion ist deshalb: Ausgabe lesen, keine
 Freigabe behaupten, keine Treffer selbst auf `not affected` setzen und mit dem

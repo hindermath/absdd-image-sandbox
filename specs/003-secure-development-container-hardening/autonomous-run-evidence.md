@@ -279,3 +279,54 @@ Issue #52 is the exact external-evidence handoff. This is not a positive gate,
 statistics, pull-request, or merge completion. The existing run remains
 Blocked, T066 was not rerun for this handoff, and no new autonomous run was
 created.
+
+## Genehmigtes Plattform-Scope-Amendment / Approved Platform Scope Amendment
+
+**DE:** Am 2026-09-04 genehmigte `@hindermath` in den Rollen `Repository
+Owner` und `Security Review` die Entscheidung
+`DEC-XPLAT-WSL2-2026-09-04`. Fuer Feature 003 ersetzt Ubuntu unter WSL2 mit
+eigener rootless-Podman-Laufzeit den zuvor geforderten separaten nativen
+Linux-Rechner. `GATE-XPLAT-WIN-01` bleibt der Windows-Hostpfad;
+`GATE-XPLAT-LINUX-01` bleibt als Gate-ID erhalten und bezeichnet jetzt den
+getrennten Ubuntu/WSL2-Linux-Ausfuehrungspfad. Beide duerfen dieselbe physische
+Windows-Hardware nutzen, aber keine Laufzeit, Befehls-, Zeit-, Image- oder
+VS-Code-Evidenz wiederverwenden. Native Linux-Kompatibilitaet wurde nicht
+geprueft und wird nicht behauptet.
+
+Die Aenderung erteilt keinen Plattform-Pass und schliesst kein anderes Gate.
+Der bestehende Run bleibt nach T065 bei `65/85` und `Blocked`; T066 wurde nicht
+ausgefuehrt und es wurde kein neuer Lauf angelegt. Der erste neue
+Analyze-Kandidat wurde mit `AEI002` abgelehnt, weil die letzte Ausgabe kein
+striktes JSON war; er autorisierte keinen Folgeschritt. Der korrigierte
+Cross-Artefakt-Lauf analysierte `85/85` Tasks, band den neuen Tasks-Hash
+`0a3fdc078e83835a6dc7457c507998890b8c7ce4d959b01aff013fab3e16d9bf` und
+bestand mit Ergebnis-Hash
+`814c6e1d3e1cef93548dfe6b3104497cb854dded32613a48de564dbf8c34dbbd`.
+Der Run darf erst nach realer Windows-Host-, Ubuntu/WSL2-, VS-Code-,
+Learning/A11Y- und sonstiger offener Evidenz explizit fortgesetzt werden.
+
+**EN:** On 2026-09-04, `@hindermath`, acting as `Repository Owner` and
+`Security Review`, approved decision `DEC-XPLAT-WSL2-2026-09-04`. For Feature
+003, Ubuntu under WSL2 with its own rootless Podman runtime replaces the former
+separate native Linux machine requirement. The Windows-host and Ubuntu/WSL2
+paths retain separate gate IDs and must not reuse runtime or evidence. This
+does not claim native Linux compatibility, close a gate, execute T066, or
+create a new run. The first Analyze candidate was rejected as non-JSON. The
+corrected 85/85 result is bound at
+`814c6e1d3e1cef93548dfe6b3104497cb854dded32613a48de564dbf8c34dbbd`; the run
+remains blocked on real external evidence.
+
+Bei der anschliessenden Pflichtvalidierung wurde im Bash-Dispatcher eine
+bereits vorhandene Bash-4-Abhaengigkeit (`${MODE,,}`) sichtbar. Die eng
+begrenzte, semantisch gleiche Normalisierung mit `tr` stellt die Ausfuehrung
+unter dem macOS-System-Bash 3.2 wieder her. Danach bestanden die
+Hardening-Suite mit 24/24, die Agent-Surface-Paritaet mit 3/3 sowie die
+gleichwertigen Bash- und PowerShell-Dry-Runs. Diese lokale technische
+Korrektur ersetzt keinen der weiterhin fehlenden Windows-Host-,
+Ubuntu/WSL2-, VS-Code- oder Lernenden-Nachweise.
+
+The required validation exposed a pre-existing Bash-4-only lowercase
+expansion in the Bash dispatcher. Replacing it with equivalent `tr`-based
+normalization restores macOS Bash 3.2 compatibility. The 24/24 hardening
+suite, 3/3 agent-surface parity suite, and paired Bash/PowerShell dry runs then
+passed. This local correction does not substitute for any open external gate.

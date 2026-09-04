@@ -74,9 +74,15 @@ Dokumentations-/A11Y-/Agentenparitaet und Plattformmatrix. / Existing test and
 validation surfaces plus practical Podman evidence.
 
 **Zielplattform / Target platform**: Linux-Container auf rootless Podman;
-Hostablaeufe fuer macOS, Linux und Windows/WSL2. Der Planlauf ist macOS. Nicht
-verfuegbare Plattformen bleiben spaeter `Open` mit Owner und Trigger. / Linux
-container on rootless Podman; host workflows for macOS, Linux, and Windows/WSL2.
+Hostablaeufe fuer macOS, den Windows-Host und Ubuntu unter WSL2 mit eigener
+rootless-Podman-Laufzeit. Windows-Host und Ubuntu/WSL2 duerfen auf derselben
+physischen Hardware laufen, verwenden aber getrennte Evidenz. Der Planlauf ist
+macOS. Native Linux-Hardware ist kein Akzeptanzziel fuer Feature 003. Nicht
+verfuegbare Plattformpfade bleiben spaeter `Open` mit Owner und Trigger. /
+Linux container on rootless Podman; host workflows for macOS, the Windows host,
+and Ubuntu under WSL2 with its own rootless Podman runtime. Windows host and
+Ubuntu/WSL2 may share physical hardware but use separate evidence. Native Linux
+hardware is not a Feature 003 acceptance target.
 
 **Projekttyp / Project type**: Container-, CLI-, Automations-, Lern- und
 Governance-Repository; keine Webanwendung, API oder produktive Cloud. /
@@ -257,7 +263,7 @@ orchestrator-owned run state.
 | Quellen, Toolchains und Agenten | User Story 3; FR-005, FR-010–FR-013, FR-016–FR-017 | Static-, Build-, Smoke- und Paritaetsgates | Repository Maintainer | Security Review |
 | SBOM, Scan, VEX, Provenienz | User Story 4; FR-014–FR-018 | Supply-Chain-Gate und finale Image-Bindung | Repository Maintainer | Security Review |
 | Lernende, Dokumentation, A11Y | User Story 5; FR-019–FR-020; GR-001–GR-006; SC-008–SC-009 | Documentation-, Accessibility- und Learner-Gates | Learning/A11Y Review | Security Review |
-| Plattformparitaet | CP-001–CP-005 | gemeinsame und drei plattformspezifische Gates | Repository Maintainer je Plattform; Windows/WSL2 darf an geeignete Testperson uebergeben werden | Security Review |
+| Plattformparitaet | CP-001–CP-005 | gemeinsames Gate sowie getrennte Gates fuer macOS, Windows-Host und Ubuntu/WSL2 | Repository Maintainer je Plattformpfad; Windows-Host und Ubuntu/WSL2 duerfen dieselbe Hardware mit getrennten Laufzeiten nutzen | Security Review |
 | Agenten-/Template-Paritaet | AP-001–AP-004 | Paritaetsgate und Changed-Path-Mapping | Repository Maintainer | Security Review |
 | Begruendete N/A-Gates | ASVS, Produkt-AI-SBOM, Zero Trust, Cloud/C3A/C5, Registry/Hosting | exakt eine N/A-Primary-Zeile je Gate ohne Laufdaten, aber mit Sachgrund und Trigger | Repository Maintainer | Security Review; formale Rechts-/Providerentscheidung bleibt ausser Scope |
 | Autonomer Abschluss | AU-001–AU-006 | Delivery-Set, temporaeres PreMerge, kausales PostMerge, finaler State | Orchestrator unter aktuell revalidierter Autoritaet | erforderliche menschliche/Plattform-Reviews |
@@ -373,10 +379,11 @@ und besitzen vollstaendige Textalternativen.
 2. Einmal finale Config, Build, Runtime und Full-Smoke ausfuehren.
 3. Erst danach finale SBOM, Scan, VEX und lokale Provenienz erzeugen.
 4. Dokumentation, A11Y, Paritaet, Secret-Scan und 157/108/49-Abgleich finalisieren.
-5. Fehlende Linux- oder Windows/WSL2-Evidenz bleibt am Gap ehrlich `Open`,
-   blockiert aber das zugehoerige `Applicable`-Plattformgate und damit einen
-   positiven `MergeAndSync`-Abschluss. `N/A` oder ein macOS-Ersatzlauf sind
-   unzulaessig.
+5. Fehlende Ubuntu/WSL2- oder Windows-Host-Evidenz bleibt am Gap ehrlich
+   `Open`, blockiert aber das zugehoerige `Applicable`-Plattformgate und damit
+   einen positiven `MergeAndSync`-Abschluss. Beide Pfade duerfen dieselbe
+   Windows-Hardware nutzen, aber weder Laufzeit noch Evidenz wiederverwenden.
+   `N/A` oder ein macOS-Ersatzlauf sind unzulaessig.
 6. Modellarbeit endet am validierten Arbeitsbaum. Der Orchestrator revalidiert
    Autoritaet und prueft mit `validate-autonomous-delivery-set.sh --repo ...
    --intended ...` exakt alle vorgesehenen getrackten und ungetrackten Pfade,

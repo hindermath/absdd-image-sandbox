@@ -72,8 +72,13 @@ bash scripts/test-ade-sandbox-hardening.sh --mode static --dry-run
 pwsh -NoProfile -File scripts/test-ade-sandbox-hardening.ps1 -Mode Static -WhatIf
 .fi
 .SH LIMITATIONS
-Ein macOS-Lauf ersetzt keine Linux- oder Windows/WSL2-Evidenz. Ein
+Ein macOS-Lauf ersetzt weder die Windows-Host- noch die Ubuntu/WSL2-Evidenz.
+Windows-Host und Ubuntu/WSL2 duerfen dieselbe physische Hardware, aber keine
+gemeinsame Podman-Laufzeit oder wiederverwendete Evidenz nutzen. Ein
 uebersprungener oder nicht verfuegbarer Check bleibt Open oder Blocked und wird
-nie als N/A oder Pass behandelt. / A macOS run does not replace Linux or
-Windows/WSL2 evidence. A skipped or unavailable check remains Open or Blocked,
-never N/A or Pass.
+nie als N/A oder Pass behandelt. Native Linux-Hardware ist kein Akzeptanzziel
+von Feature 003. / A macOS run replaces neither Windows-host nor Ubuntu/WSL2
+evidence. Windows host and Ubuntu/WSL2 may share hardware but not a Podman
+runtime or reused evidence. A skipped or unavailable check remains Open or
+Blocked, never N/A or Pass. Native Linux hardware is not a Feature 003
+acceptance target.

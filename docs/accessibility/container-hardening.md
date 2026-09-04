@@ -35,16 +35,18 @@ that required evidence is still missing.
 macOS-rootless-Podman-Lauf, sechs Sprachfamilien, zwei Skriptgrundlagen, sechs
 Agentenoberflaechen, getrennten Agentenstate, Loopback-Ports `5100-5199`, den
 Audit-Stopp sowie genau eine SBOM-/Grype-Kette. Sie nennt ebenso deutlich die
-offenen Linux-, Windows/WSL2- und VS-Code-Nachweise sowie 14 Critical- und 360
-High-Matches. Kein Text setzt diese Grenzen auf `Pass`, `N/A`, `not affected`
-oder akzeptiertes Risiko.
+offenen, getrennten Windows-Host-, Ubuntu/WSL2- und VS-Code-Nachweise sowie 14
+Critical- und 360 High-Matches. Die beiden Windows-basierten Pfade duerfen
+dieselbe Hardware, aber keine Laufzeit oder Evidenz teilen. Kein Text setzt
+diese Grenzen auf `Pass`, `N/A`, `not affected` oder akzeptiertes Risiko.
 
 **EN:** Documentation names the unchanged image, evidenced macOS rootless
 Podman run, six language families, two scripting foundations, six agent
 surfaces, separate agent state, loopback ports, audit stop, and one SBOM/Grype
-chain. It also states the open Linux, Windows/WSL2, VS Code, 14 Critical, and
-360 High items. No text turns these limits into Pass, N/A, not affected, or
-accepted risk.
+chain. It also states the separate open Windows-host, Ubuntu/WSL2, VS Code, 14
+Critical, and 360 High items. The two Windows-based paths may share hardware
+but not a runtime or evidence. No text turns these limits into Pass, N/A, not
+affected, or accepted risk.
 
 ## Menschlicher Erstnutzungstest / Human First-Use Test
 
@@ -70,12 +72,14 @@ test protocol, participant coverage, or learner-facing documentation change.
 ## Grenzen / Limits
 
 **DE:** Diese Dateipruefung ersetzt weder einen Screenreader-/Braille-Test mit
-Menschen noch den moderierten SC-009-Test. Echte Linux-, Windows/WSL2- und
-VS-Code-Nachweise bleiben getrennte offene Plattformaufgaben.
+Menschen noch den moderierten SC-009-Test. Windows-Host-, Ubuntu/WSL2- und
+VS-Code-Nachweise bleiben getrennte offene Plattformaufgaben. Native
+Linux-Hardware ist kein Akzeptanzziel fuer Feature 003.
 
 **EN:** This file review does not replace a human screen-reader or Braille
-test or the moderated SC-009 test. Real Linux, Windows/WSL2, and VS Code
-evidence remain separate open platform tasks.
+test or the moderated SC-009 test. Windows-host, Ubuntu/WSL2, and VS Code
+evidence remain separate open platform tasks. Native Linux hardware is not a
+Feature 003 acceptance target.
 
 Der Homogenitaets-Dry-run erreichte 28/29 Pruefungen. Nur Statistikprofil 2
 wich nach den neuen Content-Aenderungen erwartbar ab; laut Plan wird es erst

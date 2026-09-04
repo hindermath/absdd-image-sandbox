@@ -153,7 +153,7 @@
     {
       "gateId": "GATE-XPLAT-01",
       "applicability": "Applicable",
-      "requiredScope": "Reconcile the paired Bash and PowerShell entry points, dry-run/WhatIf, man page, bilingual comment help, approved Verb-Noun Cmdlets, exit codes, and separate macOS, Linux, and Windows/WSL2 evidence records.",
+      "requiredScope": "Reconcile the paired Bash and PowerShell entry points, dry-run/WhatIf, man page, bilingual comment help, approved Verb-Noun Cmdlets, exit codes, and separate macOS, Windows-host, and Ubuntu/WSL2 evidence records. Windows host and Ubuntu/WSL2 may share physical hardware but must use separate runtimes and evidence.",
       "requiredCommandTokens": [
         "bash scripts/test-ade-sandbox-hardening.sh --mode static --dry-run",
         "pwsh -NoProfile -File scripts/test-ade-sandbox-hardening.ps1 -Mode Static -WhatIf"
@@ -176,24 +176,25 @@
     {
       "gateId": "GATE-XPLAT-LINUX-01",
       "applicability": "Applicable",
-      "requiredScope": "Run paired dry-run/static checks and available practical rootless Podman/VS Code evidence on Linux.",
+      "requiredScope": "Run paired dry-run/static checks plus practical rootless Podman and VS Code evidence in Ubuntu under WSL2. Use a normal Linux user, an Ubuntu-local checkout, and a Podman runtime inside Ubuntu; do not reuse Windows Podman-machine evidence.",
       "requiredCommandTokens": [
-        "bash scripts/test-ade-sandbox-hardening.sh --mode static --dry-run"
+        "bash scripts/test-ade-sandbox-hardening.sh --mode static --dry-run",
+        "pwsh -NoProfile -File scripts/test-ade-sandbox-hardening.ps1 -Mode Static -WhatIf"
       ],
-      "requiredRunnerOrPlatformTokens": ["Linux-Bash-rootless-Podman"],
-      "rationale": "Linux host behavior cannot be inferred solely from a Linux container on macOS.",
-      "reevaluationTrigger": "Any paired script, rootless Podman, VS Code, path, mount, or host-command change."
+      "requiredRunnerOrPlatformTokens": ["Ubuntu-WSL2-Bash-rootless-Podman"],
+      "rationale": "Decision DEC-XPLAT-WSL2-2026-09-04 defines Ubuntu under WSL2 with its own rootless Podman runtime as the Feature 003 Linux acceptance environment; native Linux hardware is not claimed.",
+      "reevaluationTrigger": "Any paired script, Ubuntu/WSL2, rootless Podman, VS Code, path, mount, or host-command change; re-evaluate the scope if native Linux becomes an explicit target or a kernel, systemd, network, file-system, or runtime difference becomes security-relevant."
     },
     {
       "gateId": "GATE-XPLAT-WIN-01",
       "applicability": "Applicable",
-      "requiredScope": "Run PowerShell WhatIf/static checks and available Podman/VS Code evidence on Windows or WSL2; unavailable execution remains Open rather than Pass.",
+      "requiredScope": "Run PowerShell WhatIf/static checks plus practical Windows Podman-machine and VS Code Desktop evidence on the Windows host; do not reuse the separate Ubuntu/WSL2 rootless-Podman evidence.",
       "requiredCommandTokens": [
         "pwsh -NoProfile -File scripts/test-ade-sandbox-hardening.ps1 -Mode Static -WhatIf"
       ],
-      "requiredRunnerOrPlatformTokens": ["Windows-WSL2-PowerShell7-Podman"],
-      "rationale": "Windows/WSL2 is a binding host path for paired PowerShell workflows.",
-      "reevaluationTrigger": "Any paired script, Podman Desktop/machine, VS Code, path, mount, or host-command change; retry when a Windows/WSL2 runner becomes available."
+      "requiredRunnerOrPlatformTokens": ["Windows-Host-PowerShell7-Podman"],
+      "rationale": "The Windows host is a binding path for Windows PowerShell 7, the Windows Podman machine, and VS Code Desktop; Ubuntu/WSL2 is evidenced separately.",
+      "reevaluationTrigger": "Any paired script, Windows Podman Desktop/machine, VS Code, path, mount, or host-command change; retry when a Windows-host runner becomes available."
     },
     {
       "gateId": "GATE-HUMAN-01",

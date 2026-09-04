@@ -36,7 +36,7 @@
   ],
   "tasks": {
     "path": "specs/003-secure-development-container-hardening/tasks.md",
-    "sha256": "bfbdeb5d2a73aa13738fc0dcf812cae3c1d15fdf378bb5a37c31afe71c0ac3e8",
+    "sha256": "0a3fdc078e83835a6dc7457c507998890b8c7ce4d959b01aff013fab3e16d9bf",
     "completed": 65,
     "total": 85
   },
@@ -164,9 +164,9 @@
         "reasoningEffort": "high",
         "preflight": "Completed",
         "exitCode": 0,
-        "updatedAt": "2026-08-30T15:15:02.3513110Z",
+        "updatedAt": "2026-09-04T06:38:38.4935070Z",
         "resultPath": ".specify/runtime/autonomous-routing/8330f54b-97d1-424c-ad1a-842a3fad7be3/analyze.result.json",
-        "resultSha256": "a2149f710127898d396b6f5f5031fcf8bcaac932e5d54e0c8e97f0db24811d57"
+        "resultSha256": "814c6e1d3e1cef93548dfe6b3104497cb854dded32613a48de564dbf8c34dbbd"
       },
       {
         "phaseId": "implement",
@@ -186,17 +186,17 @@
       }
     ]
   },
-  "lastPassingGate": "The resumed Analyze result is bound at a2149f710127898d396b6f5f5031fcf8bcaac932e5d54e0c8e97f0db24811d57 and GATE-PARITY-01 passed with both explicit twelve-preset checks plus 3/3 and 24/24 Python suites.",
-  "nextExactAction": "Follow GitHub issue #52 to provide dated Learning/A11Y Review first-use evidence and real Linux rootless-Podman plus Windows/WSL2 PowerShell7-Podman and observed VS Code Dev Containers evidence. Then explicitly resume only this same run and execute the single prepared T066 candidate; do not start another run.",
+  "lastPassingGate": "Analyze completed after DEC-XPLAT-WSL2-2026-09-04 with 85/85 analyzed tasks and result SHA-256 814c6e1d3e1cef93548dfe6b3104497cb854dded32613a48de564dbf8c34dbbd. GATE-PARITY-01 remains technically green after restoring macOS Bash 3.2 compatibility, with both twelve-preset checks plus 3/3 and 24/24 Python suites.",
+  "nextExactAction": "Follow GitHub issue #52 to provide separate Windows-Host-PowerShell7-Podman and Ubuntu-WSL2-Bash-rootless-Podman evidence, observed VS Code attachments, dated Learning/A11Y Review evidence, and every other open gate. Then explicitly resume only this same run; do not execute T066 until all prerequisites are current and green, and do not start another run.",
   "lastOperation": {
     "kind": "ExternalEvidenceAvailability",
     "state": "Failed",
-    "summary": "The local parity blocker was resolved, but no real Linux or Windows/WSL2 host, self-hosted runner, observed VS Code attachment, or dated Learning/A11Y Review result is available. GitHub issue #52 now provides the exact external-evidence handoff. The All mode would deterministically return exit 3 before T066 can pass."
+    "summary": "Analyze revalidation completed at 814c6e1d3e1cef93548dfe6b3104497cb854dded32613a48de564dbf8c34dbbd, but separate Windows-host, Ubuntu/WSL2 rootless-Podman, observed VS Code, dated Learning/A11Y Review, and other open gate evidence remains unavailable. T066 is not authorized."
   },
   "stop": {
-    "reason": "Applicable learner, Linux, Windows/WSL2 and VS Code attachment evidence remains unavailable and cannot be substituted or invented.",
-    "requestedAt": "2026-08-30T15:18:45Z",
-    "safeBoundary": "After successful resume Analyze and twelve-preset parity remediation; before the single prepared T066 candidate and every delivery action"
+    "reason": "Applicable Windows-host, Ubuntu/WSL2, VS Code, learner, and other open gate evidence remains unavailable and cannot be substituted or invented.",
+    "requestedAt": "2026-09-04T06:38:47Z",
+    "safeBoundary": "After successful Analyze revalidation for the approved scope amendment and before the single prepared T066 candidate and every delivery action"
   },
   "closeout": {
     "mergeOrPublication": "N/A",
@@ -204,5 +204,5 @@
     "postMergeActions": "N/A",
     "finalValidation": "Pending"
   },
-  "updatedAt": "2026-08-30T16:06:39Z"
+  "updatedAt": "2026-09-04T06:47:45Z"
 }

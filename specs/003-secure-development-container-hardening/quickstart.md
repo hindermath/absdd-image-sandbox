@@ -20,7 +20,9 @@ hardening.
 - Podman und fuer Lifecycle-Pruefungen eine gesunde rootless Podman-Laufzeit.
 - `podman-compose` fuer die kanonische config-only-Pruefung.
 - Keine echten Provider-Schluessel fuer die Validierung.
-- Windows/WSL2-, Linux- und macOS-Ergebnisse getrennt protokollieren.
+- macOS-, Windows-Host- und Ubuntu/WSL2-Ergebnisse getrennt protokollieren.
+  Windows-Host und Ubuntu/WSL2 duerfen dieselbe physische Hardware nutzen,
+  muessen aber getrennte Podman-Laufzeiten und Evidenz besitzen.
 
 ## 1. Planungs- und Eingangsgrenze / Planning and Input Boundary
 
@@ -118,13 +120,18 @@ podman compose exec ade agent-prompt --dry-run codex -- 'redacted validation pro
 ```
 
 Der bestehende Full-Smoke prueft sechs MSL-Familien und PowerShell/Node. Die
-Agentenpruefung darf keinen Provideraufruf ausloesen. VS Code wird auf jeder
-verfuegbaren Hostplattform manuell an Service `ade` angehaengt; Belegpunkte:
+Agentenpruefung darf keinen Provideraufruf ausloesen. VS Code wird in jedem
+verfuegbaren Akzeptanzpfad manuell an Service `ade` angehaengt; Belegpunkte:
 `remoteUser=adedev`, Workspace-Pfad, LSP-Verfuegbarkeit, kein zusaetzlicher
-Port und erwartete `code`-Shim-Grenze. Nicht verfuegbare Plattformen bleiben
-mit Owner und Trigger offen. Weil die drei Plattformgates als `Applicable`
-deklariert sind, blockiert eine fehlende Linux- oder Windows/WSL2-Evidenz einen
-positiven `MergeAndSync`-Abschluss; ein macOS-Lauf oder `N/A` ersetzt sie nicht.
+Port und erwartete `code`-Shim-Grenze. Der Windows-Hostpfad nutzt Windows
+PowerShell 7, Windows-Podman-Machine und VS Code Desktop. Der Linux-Pfad nutzt
+Ubuntu unter WSL2, einen eigenen rootless Podman und VS Code ueber Remote WSL
+plus Dev Containers. Nicht verfuegbare Plattformpfade bleiben mit Owner und
+Trigger offen. Weil die drei Plattformgates als `Applicable` deklariert sind,
+blockiert eine fehlende Ubuntu/WSL2- oder Windows-Host-Evidenz einen positiven
+`MergeAndSync`-Abschluss; ein macOS-Lauf, gemeinsam wiederverwendete Evidenz
+oder `N/A` ersetzt sie nicht. Native Linux-Hardware ist kein Akzeptanzziel von
+Feature 003.
 
 ## 6. Finale SBOM, Scan, VEX und lokale Provenienz / Final Supply-Chain Evidence
 

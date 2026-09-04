@@ -100,15 +100,19 @@ podman-compose config
 Image `sha256:5bec1910211e61f60d140907a75689f9f6e31c2ec5baceaac7ff10b99d846eaf`.
 Build, macOS-rootless-Podman-Runtime, Toolchain-Smoke, sechs Agenten-CLIs,
 Dispatcher-Dry-run, Audit-Stopp und genau eine SBOM-/Grype-Kette sind belegt.
-Linux- und Windows/WSL2-Hostparitaet, VS-Code-Attach, der menschliche
-Erstnutzungstest sowie 14 Critical- und 360 High-Matches bleiben offen. Darum
-bleibt der Feature-Abschluss blockiert.
+Getrennte Windows-Host- und Ubuntu/WSL2-Paritaet, die zugehoerigen
+VS-Code-Attaches, der menschliche Erstnutzungstest sowie 14 Critical- und 360
+High-Matches bleiben offen. Beide Plattformpfade duerfen dieselbe
+Windows-Hardware, aber keine gemeinsame Podman-Laufzeit oder Evidenz nutzen.
+Darum bleibt der Feature-Abschluss blockiert.
 
 **EN:** The technical reference state is the local image above. Build, native
 macOS rootless-Podman runtime, toolchain smoke, six agent CLIs, dispatcher
-dry-run, audit stop, and one SBOM/Grype chain are evidenced. Linux and
-Windows/WSL2 host parity, VS Code attachment, the human first-use test, and 14
-Critical plus 360 High matches remain open, so feature completion is blocked.
+dry-run, audit stop, and one SBOM/Grype chain are evidenced. Separate
+Windows-host and Ubuntu/WSL2 parity, their VS Code attachments, the human
+first-use test, and 14 Critical plus 360 High matches remain open. Both paths
+may share Windows hardware but not a Podman runtime or evidence, so feature
+completion is blocked.
 
 Die kanonischen Laufdaten stehen im
 [Feature-Evidenzindex](../security/secure-development/2026-08-30-container-hardening/README.md).

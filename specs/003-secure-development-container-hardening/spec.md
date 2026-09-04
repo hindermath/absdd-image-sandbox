@@ -19,6 +19,30 @@
   the agent/human boundary, priority, evidence freshness, `N/A`, residual risk,
   and delivery authority testable.
 
+### Session 2026-09-04
+
+- **DE:** `@hindermath` genehmigt in den Rollen `Repository Owner` und
+  `Security Review` fuer Feature 003 die folgende Plattform-Scope-Aenderung:
+  Der Windows-Hostpfad und der Linux-Ausfuehrungspfad werden auf derselben
+  physischen Windows-Hardware geprueft. Der Linux-Ausfuehrungspfad ist Ubuntu
+  unter WSL2 mit eigener rootless-Podman-Laufzeit. Beide Pfade benoetigen
+  getrennte Befehls-, Zeit-, Runner-, Image- und VS-Code-Evidenz. Ein separater
+  nativer Linux-Rechner ist fuer dieses Feature nicht erforderlich; native
+  Linux-Kompatibilitaet wird damit weder getestet noch behauptet. Die
+  Sicherheitsanforderungen und das Fail-closed-Verhalten bleiben unveraendert.
+  **EN:** For Feature 003, `@hindermath`, acting as both `Repository Owner` and
+  `Security Review`, approves the following platform-scope change: the Windows
+  host path and the Linux execution path may be tested on the same physical
+  Windows hardware. The Linux execution path is Ubuntu under WSL2 with its own
+  rootless Podman runtime. Both paths require separate command, time, runner,
+  image, and VS Code evidence. A separate native Linux machine is not required
+  for this feature, and native Linux compatibility is neither tested nor
+  claimed. Security requirements and fail-closed behaviour remain unchanged.
+- **DE:** Die bindende Entscheidungsakte ist
+  `docs/security/secure-development/2026-08-30-container-hardening/platform-scope-decision.md`
+  mit ID `DEC-XPLAT-WSL2-2026-09-04`. **EN:** The binding decision record is
+  the named evidence file with decision ID `DEC-XPLAT-WSL2-2026-09-04`.
+
 ## Nutzungsszenarien und Tests / User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Jeden offenen Befund nachvollziehbar bearbeiten / Disposition Every Open Finding (Priority: P1)
@@ -240,10 +264,11 @@ alternatives.
   restriction. The restriction is not silently weakened. The conflict is
   documented with the minimum needed exception, risk, owner, and test.
 - **DE:** Ein Plattformtest kann nur auf macOS ausgefuehrt werden. Dies ist
-  lokale Plausibilitaet, keine Windows-/WSL2- oder Linux-Abnahme. Fehlende
-  Plattformen bleiben mit genauer Begruendung offen. **EN:** A platform test
-  can be run only on macOS. This is local plausibility, not Windows/WSL2 or
-  Linux acceptance. Missing platforms remain open with a precise rationale.
+  lokale Plausibilitaet, keine Windows-Host- oder Ubuntu/WSL2-Abnahme. Fehlende
+  Plattformpfade bleiben mit genauer Begruendung offen. **EN:** A platform
+  test can be run only on macOS. This is local plausibility, not Windows-host
+  or Ubuntu/WSL2 acceptance. Missing platform paths remain open with a precise
+  rationale.
 - **DE:** Ein Scan findet ein moegliches Geheimnis. Wert und Fundinhalt werden
   nicht in Protokolle oder Spezifikationsartefakte kopiert; die Arbeit stoppt
   an der Secret-Grenze und wird menschlich eskaliert. **EN:** A scan finds a
@@ -759,13 +784,21 @@ API, or authentication service enters scope.
 ### Cross-Platform-Anwendbarkeit / Cross-Platform Applicability
 
 - **CP-001**: Das Feature aendert voraussichtlich skriptfoermige Build-,
-  Smoke-, Audit- oder SBOM-Ablaufe und ist daher fuer macOS, Linux und
-  Windows/WSL2 `Applicable`. Jede neue oder geaenderte kritische
+  Smoke-, Audit- oder SBOM-Ablaufe und ist daher fuer macOS, den Windows-Host
+  und Ubuntu unter WSL2 als Linux-Ausfuehrungsumgebung `Applicable`. Der
+  Windows-Host- und der Ubuntu/WSL2-Pfad duerfen dieselbe physische Hardware
+  verwenden, MUESSEN aber getrennte Laufzeiten und Evidenz besitzen. Native
+  Linux-Hardware ist fuer Feature 003 nicht Teil der Akzeptanzmatrix. Jede neue
+  oder geaenderte kritische
   Skriptschnittstelle MUSS gleichwertige Bash- (`*.sh`) und PowerShell-7-
   Varianten (`*.ps1`) besitzen. / The feature is expected to change
   script-shaped build, smoke, audit, or SBOM workflows and is therefore
-  `Applicable` to macOS, Linux, and Windows/WSL2. Every new or changed critical
-  script interface MUST have equivalent Bash and PowerShell 7 variants.
+  `Applicable` to macOS, the Windows host, and Ubuntu under WSL2 as the Linux
+  execution environment. The Windows-host and Ubuntu/WSL2 paths may use the
+  same physical hardware but MUST use separate runtimes and evidence. Native
+  Linux hardware is outside the Feature 003 acceptance matrix. Every new or
+  changed critical script interface MUST have equivalent Bash and PowerShell 7
+  variants.
 - **CP-002**: Bash bietet `--dry-run`; PowerShell bietet `-WhatIf`. Beide Modi
   MUESSEN dieselben geplanten Aenderungen ohne Schreibwirkung berichten.
   Exitcodes und fachliche Ergebnisse MUESSEN gleichwertig sein. / Bash provides
@@ -790,11 +823,14 @@ API, or authentication service enters scope.
   `--help`-Ausgabe MUSS fachlich synchron sein. / Every PowerShell variant MUST
   include complete comment-based help in German first and English second.
   Every Bash man page and `--help` output MUST remain functionally synchronized.
-- **CP-005**: Nicht verfuegbare Plattformtests werden mit Plattform, Grund,
-  Owner und Wiederholungsausloeser als `Open` dokumentiert. Ein Erfolg auf nur
-  einer Plattform ist keine plattformuebergreifende Abnahme. / Unavailable
-  platform tests are recorded as `Open` with platform, reason, owner, and retry
-  trigger. Success on one platform is not cross-platform acceptance.
+- **CP-005**: Nicht verfuegbare Plattformtests werden mit Plattformpfad, Grund,
+  Owner und Wiederholungsausloeser als `Open` dokumentiert. Ein Erfolg in nur
+  einem Ausfuehrungspfad ist keine plattformuebergreifende Abnahme. Ergebnisse
+  der Windows-Podman-Machine duerfen nicht als Ubuntu/WSL2-rootless-Podman-
+  Evidenz wiederverwendet werden. / Unavailable platform tests are recorded as
+  `Open` with platform path, reason, owner, and retry trigger. Success in only
+  one execution path is not cross-platform acceptance. Windows Podman-machine
+  results must not be reused as Ubuntu/WSL2 rootless-Podman evidence.
 
 ### Agent-Paritaet / Agent Parity Applicability
 
@@ -918,7 +954,7 @@ API, or authentication service enters scope.
 | `GATE-SMOKE-01` | Applicable | Toolchain-/Agenten-Smoke-Test, einschliesslich des akzeptierten Tokens `podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh` oder eines spaeter dokumentierten gleichwertigen Paars. / Toolchain/agent smoke test including the accepted command token or a later documented equivalent pair. | Belegt Inventar in der Laufzeit. Bei Toolversion-/Installationsaenderung. / Proves runtime inventory. Repeat on tool version/install changes. |
 | `GATE-SUPPLY-01` | Applicable | Finale lokale SBOM, Schwachstellenscan, VEX-Abgleich und lokale Provenienzpruefung; kein Registry-Push. / Final local SBOM, vulnerability scan, VEX reconciliation, and local provenance check; no registry push. | Belegt Lieferkettentransparenz. Fuer jedes finale Image. / Proves supply-chain transparency. Repeat for each final image. |
 | `GATE-SECRET-01` | Applicable | `uvx pre-commit run --all-files` oder gepinnte gleichwertige lokale Secret-/Qualitaetspruefung; Trefferinhalte nicht protokollieren. / Pinned local secret/quality scan; do not log match contents. | Verhindert Secret-Leakage. Vor jedem Commit-/Delivery-Gate. / Prevents secret leakage. Repeat before each commit/delivery gate. |
-| `GATE-XPLAT-01` | Applicable | Bash-/PowerShell-Paritaet, `--dry-run`/`-WhatIf`, Manpage, Hilfe und Plattformmatrix pruefen. / Verify Bash/PowerShell parity, dry-run/WhatIf, man page, help, and platform matrix. | Ein Host allein reicht nicht. Bei jeder Skriptaenderung. / One host is insufficient. Repeat for every script change. |
+| `GATE-XPLAT-01` | Applicable | Bash-/PowerShell-Paritaet, `--dry-run`/`-WhatIf`, Manpage, Hilfe sowie getrennte macOS-, Windows-Host- und Ubuntu/WSL2-Evidenz pruefen. / Verify Bash/PowerShell parity, dry-run/WhatIf, man page, help, and separate macOS, Windows-host, and Ubuntu/WSL2 evidence. | Ein Evidenzpfad allein reicht nicht. Windows-Host und Ubuntu/WSL2 duerfen dieselbe Hardware mit getrennten Laufzeiten nutzen. Bei jeder Skript- oder Scope-Aenderung neu pruefen. / One evidence path is insufficient. Windows host and Ubuntu/WSL2 may share hardware when runtimes are separate. Repeat for every script or scope change. |
 | `GATE-A11Y-01` | Applicable | Bilinguale, CEFR-B2-, Text-first- und WCAG-2.2-AA-Pruefung der betroffenen Artefakte. / Bilingual, CEFR B2, text-first, and WCAG 2.2 AA review of affected artefacts. | Bindende Lernendenbasis. Bei jeder nutzerbezogenen Aenderung. / Binding learner baseline. Repeat for every user-facing change. |
 | `GATE-HUMAN-01` | Applicable | 49 Human-only-Gaps bleiben offen, bis Rollenbeleg vorliegt; keine formale oder externe Aktion durch den Agenten. / 49 human-only gaps remain open until role evidence exists; no formal or external action by the agent. | Verhindert erfundene Freigaben. Erneut an jedem Phasenrand. / Prevents invented approvals. Repeat at every phase boundary. |
 | `GATE-DIFF-01` | Applicable | `git diff --check`; geaenderte Pfade muessen Scope und Gap-ID zugeordnet sein. / `git diff --check`; changed paths must map to scope and gap ID. | Verhindert Nebenrefactorings und Whitespace-Fehler. Vor Delivery. / Prevents unrelated refactors and whitespace errors. Repeat before delivery. |
@@ -935,7 +971,7 @@ API, or authentication service enters scope.
 | Navigation / Navigation impact | Bestehende Einstiegspfade MUESSEN neue oder aktualisierte Evidenz verlinken; keine verwaisten Sicherheitsdokumente. / Existing entry paths MUST link new or updated evidence; no orphaned security documents. |
 | Dokumentklasse / Document class | Lern-, Bedien-, Governance-, Sicherheits-, Architektur- und Auditdokumentation. / Learning, operations, governance, security, architecture, and audit documentation. |
 | Sprachstrategie und Partner / Language strategy and partner | Deutsch zuerst, Englisch danach inline; ein `.EN.md`-Partner nur bei begruendeter Lesbarkeitsverbesserung und synchroner Pflege. / German first, English second inline; `.EN.md` companion only with justified readability benefit and synchronized maintenance. |
-| Plattform-/Beispielnachweis / Platform/example proof | Praktische Nachweise fuer verfuegbare macOS-, Linux- und Windows/WSL2-Pfade; fehlende Plattformen als `Open`, niemals implizit bestanden. / Practical evidence for available platform paths; unavailable platforms remain `Open`, never implicitly passed. |
+| Plattform-/Beispielnachweis / Platform/example proof | Praktische Nachweise fuer macOS, den Windows-Host und Ubuntu/WSL2 mit eigener rootless-Podman-Laufzeit; fehlende Pfade als `Open`, niemals implizit bestanden. Native Linux-Hardware ist kein Akzeptanzziel dieses Features. / Practical evidence for macOS, the Windows host, and Ubuntu/WSL2 with its own rootless Podman runtime; missing paths remain `Open`, never implicitly passed. Native Linux hardware is not an acceptance target for this feature. |
 | Distributionsklasse / Distribution class | Repository-lokale Dokumentation und lokales Image-Artefakt; keine Registry-, Paket- oder Hosting-Verteilung. / Repository-local documentation and local image artefact; no registry, package, or hosting distribution. |
 | Home-Sync / Home sync need | `NoUpdateRequired` fuer rein projektspezifische Haertungsdetails; `UpdateRequired` nur, wenn eine gemeinsame Baseline-Regel geaendert wird. Owner: Repository Maintainer. Trigger: Aenderung an geteilter Guidance oder Vorlage. / `NoUpdateRequired` for project-specific hardening details; `UpdateRequired` only for a shared baseline-rule change. |
 | Evidenz / Evidence | `docs/accessibility/`, `docs/architecture/`, `docs/security/`, betroffene Hilfe-/Manpage-Dateien und Abschluss-Gap-Matrix. / Accessibility, architecture, security, help/man-page files, and final gap matrix. |
@@ -968,6 +1004,11 @@ API, or authentication service enters scope.
   bekannter Grenze, jedoch ohne Geheimnisse oder Sitzungsinhalte. / Dated result
   of a reproducible check with command, platform, scope, exit code, outcome, and
   known limitation, without secrets or session content.
+- **Plattform-Scope-Entscheidung / Platform Scope Decision**: Datiertes,
+  rollengebundenes Artefakt, das Akzeptanzumgebungen, getrennte Evidenzpfade,
+  ausgeschlossene Aussagen und Neubewertungsausloeser festlegt. / Dated,
+  role-bound artefact defining acceptance environments, separate evidence
+  paths, excluded claims, and re-evaluation triggers.
 - **Human-only-Uebergabe / Human-Only Handoff**: Offener Punkt mit Rolle,
   vorbereiteten Fakten, fehlender Entscheidung, Folgeaktion und
   Neubewertungsausloeser; niemals stellvertretende Freigabe. / Open item with
@@ -1059,10 +1100,13 @@ API, or authentication service enters scope.
   benannte menschliche Rolle darf eine formale Freigabe oder Risikoakzeptanz
   erteilen. / A documented open limitation is not risk acceptance. Only the
   named human role may grant formal approval or accept risk.
-- Plattformverfuegbarkeit kann waehrend der Implementierung variieren. Ein
-  uebersprungener Check bleibt offen und wird niemals als bestanden gezaehlt. /
-  Platform availability may vary during implementation. A skipped check remains
-  open and is never counted as passed.
+- Plattformverfuegbarkeit kann waehrend der Implementierung variieren. Fuer
+  Feature 003 ist Ubuntu unter WSL2 die Linux-Akzeptanzumgebung; ein separater
+  nativer Linux-Rechner ist nicht erforderlich. Ein uebersprungener Check
+  bleibt offen und wird niemals als bestanden gezaehlt. / Platform availability
+  may vary during implementation. For Feature 003, Ubuntu under WSL2 is the
+  Linux acceptance environment; a separate native Linux machine is not
+  required. A skipped check remains open and is never counted as passed.
 - Bestehende dokumentierte Lern- und Entwicklungsablaeufe bilden die
   Funktionsuntergrenze. Sicherheitskontrollen duerfen sie nur gemaess FR-020
   einschraenken. / Existing documented learning and development workflows form

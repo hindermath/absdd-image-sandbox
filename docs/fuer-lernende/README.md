@@ -300,20 +300,23 @@ assistants. No prior Spec Kit knowledge is required. A gate is a checkable
 condition that must be met before the next step.
 
 **DE:** Das aktuelle Image bestand den technischen Start- und Werkzeugtest auf
-macOS mit rootless Podman. Trotzdem ist die Gesamtfreigabe `Blocked`: echte
-Linux- und Windows/WSL2-Hosttests, ein VS-Code-Dev-Containers-Attach und ein
-moderierter Erstnutzungstest fehlen. Ausserdem bleiben 14 Critical- und 360
-High-Schwachstellenmatches offen. Wenn du nur lernst, folge weiter dem sicheren
-Start- und Stopppfad. Wenn du das Image freigeben oder weitergeben willst,
-warte auf die genannten Reviews und Dispositionen.
+macOS mit rootless Podman. Trotzdem ist die Gesamtfreigabe `Blocked`: getrennte
+Windows-Host- und Ubuntu/WSL2-Tests, die zugehoerigen
+VS-Code-Dev-Containers-Attaches und ein moderierter Erstnutzungstest fehlen.
+Beide Plattformtests duerfen auf demselben Windows-Rechner laufen, benoetigen
+aber eigene Podman-Laufzeiten und Evidenz. Ausserdem bleiben 14 Critical- und
+360 High-Schwachstellenmatches offen. Wenn du nur lernst, folge weiter dem
+sicheren Start- und Stopppfad. Wenn du das Image freigeben oder weitergeben
+willst, warte auf die genannten Reviews und Dispositionen.
 
 **EN:** The current image passed technical startup and tool checks on macOS
-rootless Podman. Overall approval is still blocked: real Linux and
-Windows/WSL2 host tests, VS Code Dev Containers attachment, and a moderated
-first-use test are missing, and 14 Critical plus 360 High vulnerability
-matches remain open. You may continue the controlled learning path, but do not
-claim approval or distribute the image until the named reviews and
-dispositions exist.
+rootless Podman. Overall approval is still blocked: separate Windows-host and
+Ubuntu/WSL2 tests, their VS Code Dev Containers attachments, and a moderated
+first-use test are missing. Both platform tests may use the same Windows
+computer but require their own Podman runtimes and evidence. Fourteen Critical
+and 360 High vulnerability matches also remain open. You may continue the
+controlled learning path, but do not claim approval or distribute the image
+until the named reviews and dispositions exist.
 
 Der genaue Status steht im
 [Feature-Evidenzindex](../security/secure-development/2026-08-30-container-hardening/README.md).

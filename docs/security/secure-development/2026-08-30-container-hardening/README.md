@@ -29,15 +29,18 @@ acceptance are excluded.
 
 1. `gap-dispositions.json` ordnet jeden Befund `GAP-001` bis `GAP-157` genau
    einmal zu. / It maps every finding exactly once.
-2. `verification-evidence.json` enthaelt nur beobachtete, nicht sensible
+2. `platform-scope-decision.md` dokumentiert die ausdruecklich genehmigte
+   Windows-Host-/Ubuntu-WSL2-Akzeptanzmatrix und ihre Evidenztrennung. / It
+   records the explicitly approved acceptance matrix and evidence separation.
+3. `verification-evidence.json` enthaelt nur beobachtete, nicht sensible
    Gate-Ergebnisse. / It records only observed, non-sensitive gate results.
-3. `work-packages/` erklaert die zwoelf fachlichen Pruefgruppen und ihre
+4. `work-packages/` erklaert die zwoelf fachlichen Pruefgruppen und ihre
    RED-, AlreadySatisfied-, N/A- oder Open-Bewertung. / It explains the twelve
    review packages and their dispositions.
-4. `human-only-handoffs.md` uebergibt exakt 49 offene Entscheidungen an die
+5. `human-only-handoffs.md` uebergibt exakt 49 offene Entscheidungen an die
    benannten menschlichen Rollen. / It hands exactly 49 open decisions to the
    named human roles.
-5. Build-, SBOM-, Scan-, VEX-, Plattform-, A11Y- und Abschlussartefakte werden
+6. Build-, SBOM-, Scan-, VEX-, Plattform-, A11Y- und Abschlussartefakte werden
    erst nach ihrer realen Pruefung ergaenzt. / Build, SBOM, scan, VEX,
    platform, accessibility, and closeout artefacts are added only after actual
    observation.
@@ -145,13 +148,18 @@ rejected. Bash dry-run and PowerShell WhatIf produced the same write-free plan.
 
 ## Bekannte Grenzen / Known Limits
 
-Die aktuelle Ausfuehrungsplattform ist macOS. Linux- und Windows/WSL2-Gates
-duerfen nur durch echte passende Runner belegt werden. Fehlende Plattform- oder
-menschliche Evidenz bleibt mit Owner, Folgeaktion und Trigger offen und
-blockiert die davon abhaengige positive Abschlussaussage. / The current runner
-is macOS. Linux and Windows/WSL2 gates require real matching runners. Missing
-platform or human evidence stays open with owner, follow-up, and trigger and
-blocks the dependent positive completion claim.
+Die aktuelle Ausfuehrungsplattform ist macOS. Der Windows-Host- und der
+Ubuntu/WSL2-Gatepfad duerfen nach
+[`DEC-XPLAT-WSL2-2026-09-04`](platform-scope-decision.md) dieselbe physische
+Windows-Hardware nutzen, benoetigen aber passende getrennte Runner,
+Podman-Laufzeiten und Evidenz. Fehlende Plattform- oder menschliche Evidenz
+bleibt mit Owner, Folgeaktion und Trigger offen und blockiert die davon
+abhaengige positive Abschlussaussage. / The current runner is macOS. The
+Windows-host and Ubuntu/WSL2 gate paths may share physical Windows hardware
+under the approved decision but require matching separate runners, Podman
+runtimes, and evidence. Missing platform or human evidence stays open with
+owner, follow-up, and trigger and blocks the dependent positive completion
+claim.
 
 ## Vertikaler Slice / Vertical Slice
 
@@ -203,15 +211,17 @@ digest-pinned Grype. All 426 advisory groups remain in triage; 14 Critical and
 360 High matches are open. No risk was accepted and no not-affected result was
 invented.
 
-Offen bleiben echte Linux- und Windows/WSL2-Hostevidenz, VS-Code-Attach,
-`GATE-LEARNER-01` durch `Learning/A11Y Review` und die technische oder
-reviewte Disposition der Critical-/High-Treffer. Die Datei
+Offen bleiben getrennte Windows-Host- und Ubuntu/WSL2-Evidenz, die zugehoerigen
+VS-Code-Attaches, `GATE-LEARNER-01` durch `Learning/A11Y Review` und die
+technische oder reviewte Disposition der Critical-/High-Treffer. Die Datei
 `learner-first-use-results.json` existiert absichtlich nicht. Ein Linux-
-Container auf macOS oder der macOS-Lauf ersetzt keine fehlende Hostplattform.
-/ Real Linux and Windows/WSL2 host evidence, VS Code attachment, the human
-learner gate, and reviewed Critical/High dispositions remain open. The learner
-result file intentionally does not exist, and no substitute platform evidence
-is used.
+Container auf macOS, die Windows-Podman-Machine oder der macOS-Lauf ersetzt
+keinen der fehlenden Ausfuehrungspfade. Native Linux-Hardware ist kein
+Akzeptanzziel von Feature 003. / Separate Windows-host and Ubuntu/WSL2
+evidence, their VS Code attachments, the human learner gate, and reviewed
+Critical/High dispositions remain open. The learner result file intentionally
+does not exist, and no substitute or reused platform evidence is used. Native
+Linux hardware is not a Feature 003 acceptance target.
 
 ## Stopp an T065 / Stop at T065
 

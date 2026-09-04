@@ -161,13 +161,15 @@ with [Validation and maintenance](validierung-und-wartung.md).
 rootless-Podman-Host unter macOS als `adedev`. Der Lauf bestaetigte die
 deklarierte Mountliste, getrennte Agenten-Volumes, `no-new-privileges`,
 entfernte Capabilities, Loopback-Ports `5100-5199` und den Audit-Wrapper beim
-Stoppen. Er belegt nicht die Hostwirkung auf Linux oder Windows/WSL2 und nicht
-den VS-Code-Attach. Freier ausgehender Netzwerkzugriff bleibt eine offene
-Owner-Entscheidung und wird nicht als akzeptiertes Risiko beschrieben.
+Stoppen. Er belegt weder den Windows-Hostpfad noch Ubuntu/WSL2 mit eigener
+rootless-Podman-Laufzeit und nicht den VS-Code-Attach. Freier ausgehender
+Netzwerkzugriff bleibt eine offene Owner-Entscheidung und wird nicht als
+akzeptiertes Risiko beschrieben.
 
 **EN:** The unchanged final image ran as `adedev` on native macOS rootless
 Podman and confirmed the declared mounts, separate agent volumes,
 `no-new-privileges`, dropped capabilities, loopback ports `5100-5199`, and
-audit-aware stop. It does not prove Linux or Windows/WSL2 host behavior or VS
-Code attachment. Unrestricted outbound networking remains an open owner
-decision, not accepted risk.
+audit-aware stop. It proves neither the Windows-host path nor Ubuntu/WSL2 with
+its own rootless Podman runtime, and it does not prove VS Code attachment.
+Unrestricted outbound networking remains an open owner decision, not accepted
+risk.
