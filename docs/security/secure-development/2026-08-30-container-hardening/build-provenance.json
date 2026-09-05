@@ -1,32 +1,32 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-08-30T14:01:59Z",
-  "sourceRevision": "WORKTREE",
+  "generatedAt": "2026-09-05T16:30:59.163297392Z",
+  "sourceRevision": "ad5cd8bc9a9a2c541416390aa4256bc1ffe1eee7",
   "sourceBranch": "003-secure-development-container-hardening",
-  "buildCommand": "podman compose build --pull",
+  "buildCommand": "COMPOSE_PROJECT_NAME=absdd-image-sandbox-issue52-wsl2 podman compose build --pull ade",
   "buildResult": "Pass",
-  "imageName": "localhost/absdd-image-sandbox_ade:latest",
-  "imageIdentity": "sha256:5bec1910211e61f60d140907a75689f9f6e31c2ec5baceaac7ff10b99d846eaf",
+  "imageName": "docker.io/library/absdd-image-sandbox-issue52-wsl2-ade:latest",
+  "imageIdentity": "sha256:bcdd1c8d4234ff8de8edbd1f3c52fe06c1a97d876d1c6a8996928bdff4376f2c",
   "sbom": {
-    "path": "sboms/2026-08-30-localhost-absdd-image-sandbox_ade-latest.cdx.json",
-    "sha256": "2a226a5b37b4f562582c1fbca8e6b14d749d2b13bb9dd12bf45549879510daa4",
-    "serialNumber": "urn:uuid:9096b9c5-5b85-4946-bf0d-f5ae509ffcd4",
-    "generatedAt": "08/30/2026 13:56:34",
+    "path": "sboms/2026-09-05-docker.io-library-absdd-image-sandbox-issue52-wsl2-ade-latest.cdx.json",
+    "sha256": "ae02cefda291a8e59826859c7427f9db96b4a1f76f7ae44ca538c89841a4de71",
+    "serialNumber": "urn:uuid:7498d5e5-9179-4314-a222-5bd9de91e990",
+    "generatedAt": "09/05/2026 16:29:00",
     "format": "CycloneDX 1.7",
-    "componentCount": 23967,
+    "componentCount": 23960,
     "tool": "Syft 1.46.0"
   },
   "scanner": {
     "image": "ghcr.io/anchore/grype:v0.117.0@sha256:ddf9e9f204049f3a4a0955ef70873cabab6a31432125ad4f20a490b54950a253",
     "version": "0.117.0",
-    "databaseBuiltAt": "08/30/2026 06:27:52",
-    "rawResultSha256": "2cb3696ee6f27c4d4fa52be10b16d0743b68f8329bba97d447a591b512f1b431"
+    "databaseBuiltAt": "09/05/2026 06:27:00",
+    "rawResultSha256": "6be0bef9713a403a9cde05ed88a8fdc2e7aab65b025d3725b8a4f69d06e7aa3f"
   },
-  "distribution": "Local image only; no registry push.",
+  "distribution": "Local WSL2 image only; no registry push.",
   "signatureClaim": "None",
   "slsaLevelClaim": "None",
   "limitations": [
-    "DE: Der Quellstand ist ein validierter Worktree vor dem Inhaltscommit. EN: The source state is a validated worktree before the content commit.",
+    "DE: Die Provenienz belegt einen lokalen AMD64-Build unter WSL2; Signatur und SLSA-Stufe werden nicht behauptet. EN: The provenance proves a local AMD64 build under WSL2; no signature or SLSA level is claimed.",
     "DE: Go-Modulfunde koennen ohne Funktionssymbole zu breit sein und bleiben deshalb offen. EN: Go module matches can be broad without function symbols and therefore remain open."
   ]
 }

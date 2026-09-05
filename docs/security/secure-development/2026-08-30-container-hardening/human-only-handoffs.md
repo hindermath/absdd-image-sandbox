@@ -133,15 +133,48 @@ learner test is a separate feature gate and does not change this partition.
 **DE:** `GATE-LEARNER-01` bleibt `Blocked`. Owner ist `Learning/A11Y Review`.
 Es liegt keine datierte, moderierte Beobachtung fuer alle vier Berufe ohne
 Spec-Kit-Vorerfahrung vor; deshalb wurde
-`learner-first-use-results.json` nicht erzeugt. Folgeaktion: Die Owner-Rolle
-moderiert den 30-Minuten-Test und liefert nur aggregierte, nicht-sensible
-Ergebnisse mit mindestens 90 Prozent Erfolg.
+`learner-first-use-results.json` nicht erzeugt. Der Repository Owner hat am
+04.09.2026 bestaetigt, dass im vorhandenen Ein-Personen-Setup weder reale
+Teilnehmende aus allen vier Ausbildungsberufen noch die geforderten
+Beobachtungen mit assistiven Technologien bereitgestellt werden koennen. Dies
+ist eine begruendete offene Abweichung, keine positive Testevidenz und keine
+Umklassifizierung zu `N/A`. Folgeaktion: Das Gate bleibt `Blocked`; erst wenn
+geeignete Teilnehmende und assistive Technologien tatsaechlich verfuegbar
+werden, darf `Learning/A11Y Review` den 30-Minuten-Test ausfuehren und nur
+aggregierte, nicht-sensible Ergebnisse mit mindestens 90 Prozent Erfolg
+liefern.
 
 **EN:** GATE-LEARNER-01 remains Blocked and is owned by Learning/A11Y Review.
 No dated moderated observation exists for all four occupations without prior
-Spec Kit experience, so learner-first-use-results.json was not created. The
-owner role must run the 30-minute test and provide aggregated non-sensitive
-results with at least 90 percent success.
+Spec Kit experience, so learner-first-use-results.json was not created. On
+2026-09-04, the Repository Owner confirmed that the available one-person setup
+cannot provide real participants from all four occupations or the required
+assistive-technology observations. This is a justified open deviation, not
+positive test evidence and not a reclassification to N/A. The gate remains
+Blocked. Learning/A11Y Review may run the 30-minute test and provide only
+aggregated non-sensitive results with at least 90 percent success if suitable
+participants and assistive technologies become available later.
+
+## Projektspezifische Review-Abweichung / Project-specific Review Deviation
+
+**DE:** Der Repository Owner ist zugleich alleiniger Ersteller, Ausfuehrender
+und menschlicher Pruefer dieses Feature-Patches. Die ausdrueckliche
+Patch-Pruefung vor Commit und Push bleibt moeglich und wurde fuer den bisherigen
+Evidenzstand am 04.09.2026 bestaetigt. Eine zweite unabhaengige Person fuer das
+Vier-Augen-Prinzip steht jedoch nicht zur Verfuegung. Diese Begrenzung bleibt
+als offene, nicht personell unabhaengige Review-Abweichung dokumentiert. Sie ist
+weder ein echtes Vier-Augen-Testat noch eine formale Risikoakzeptanz und darf
+kein fehlgeschlagenes oder blockiertes technisches, Security-, Plattform- oder
+Learner-Gate uebergehen.
+
+**EN:** The Repository Owner is also the sole creator, operator, and human
+reviewer of this feature patch. Explicit human patch review before commit and
+push remains possible and was confirmed for the previous evidence state on
+2026-09-04. No second independent person is available for a four-eyes review.
+This limitation remains documented as an open, non-person-independent review
+deviation. It is neither a genuine four-eyes attestation nor formal risk
+acceptance, and it cannot override a failed or blocked technical, security,
+platform, or learner gate.
 
 Exakter Trigger / Exact trigger: Any startup path, verification-status
 presentation, Human-only handoff, audience policy, test protocol, participant
