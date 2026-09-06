@@ -271,3 +271,32 @@ Plattformmatrix unter
 **EN:** Maintainers can find the complete validation, audit, SBOM, and
 platform matrix in
 [Validation and maintenance](../betrieb/validierung-und-wartung.md).
+
+## Ein Validator meldet `Blocked` / A Validator Reports `Blocked`
+
+**DE:** `Blocked` ist nicht automatisch ein Defekt an deinem Rechner. Der
+aktuelle Feature-Stand bleibt absichtlich blockiert, solange der getrennte
+Windows-Host- und Ubuntu/WSL2-Nachweis, die VS-Code-Attaches, der moderierte
+Lernendentest oder gepruefte Dispositionen fuer offene Critical-/High-Matches
+fehlen. Beide Plattformpfade duerfen dieselbe Windows-Hardware nutzen, brauchen
+aber eigene Podman-Laufzeiten und Evidenz. Verwende macOS, die
+Windows-Podman-Machine oder einen beliebigen Linux-Container niemals als
+Ersatzbeleg fuer den jeweils anderen Ausfuehrungspfad.
+
+**EN:** Blocked does not automatically mean your computer is broken. The
+current feature remains intentionally blocked while separate Windows-host and
+Ubuntu/WSL2 evidence, VS Code attachments, the moderated learner test, or
+reviewed dispositions for open Critical/High matches are missing. Both paths
+may share Windows hardware but require their own Podman runtimes and evidence.
+Never substitute macOS, the Windows Podman machine, or an arbitrary Linux
+container for the other execution path.
+
+**DE:** Notiere nur Befehl, Exitcode, Plattform und Zeitpunkt. Kopiere keine
+Secrets, Tokens, Prompttexte oder unverdeckte Scanner-Treffer in ein Ticket.
+Ein moeglicher echter Secret-Fund wird sofort an den Repository-Maintainer und
+Security Review uebergeben, ohne den Trefferinhalt zu protokollieren.
+
+**EN:** Record only the command, exit code, platform, and time. Do not copy
+secrets, tokens, prompt text, or unredacted scanner matches into an issue. A
+possible real secret finding is handed to the repository maintainer and
+Security Review immediately without logging its contents.

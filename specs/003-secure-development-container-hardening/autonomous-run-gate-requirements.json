@@ -1,0 +1,291 @@
+{
+  "schemaVersion": "1.0",
+  "gates": [
+    {
+      "gateId": "GATE-SPEC-01",
+      "applicability": "Applicable",
+      "requiredScope": "Verify the six accepted repository-relative input paths and normalized SHA-256 values and confirm the clarified requirements checklist has no incomplete item.",
+      "requiredCommandTokens": [
+        "bash scripts/test-ade-sandbox-hardening.sh --mode input --evidence docs/security/secure-development/2026-08-30-container-hardening/verification-evidence.json"
+      ],
+      "requiredRunnerOrPlatformTokens": ["repository-local"],
+      "rationale": "Input drift invalidates every later disposition and implementation decision.",
+      "reevaluationTrigger": "Any accepted path/hash, spec, checklist, branch, scope, or run-state change."
+    },
+    {
+      "gateId": "GATE-GAP-01",
+      "applicability": "Applicable",
+      "requiredScope": "Validate exactly GAP-001 through GAP-157 once, exact 108 agent-actionable and 49 Human-only partition, status invariants, reciprocal CL mappings, evidence freshness, and zero untraced changed paths.",
+      "requiredCommandTokens": [
+        "python3 -m unittest scripts.tests.test_secure_development_container_hardening",
+        "bash scripts/test-ade-sandbox-hardening.sh --mode all --evidence docs/security/secure-development/2026-08-30-container-hardening/verification-evidence.json"
+      ],
+      "requiredRunnerOrPlatformTokens": ["repository-local"],
+      "rationale": "One-to-one disposition and the unchanged Human-only boundary are the core acceptance contract.",
+      "reevaluationTrigger": "Any gap, CL mapping, disposition, evidence, changed path, or accepted baseline change."
+    },
+    {
+      "gateId": "GATE-STATIC-01",
+      "applicability": "Applicable",
+      "requiredScope": "Validate Dockerfile pins, Home Baseline lock, paired script contracts, agent surface parity, documentation impact, JSON contracts, and diff hygiene without starting a container.",
+      "requiredCommandTokens": [
+        "bash scripts/test-ade-sandbox-hardening.sh --mode static --evidence docs/security/secure-development/2026-08-30-container-hardening/verification-evidence.json",
+        "git diff --check"
+      ],
+      "requiredRunnerOrPlatformTokens": ["repository-local"],
+      "rationale": "Static failures must be resolved before expensive build/runtime checks.",
+      "reevaluationTrigger": "Any Dockerfile, Compose, script, test, contract, documentation, or guidance change."
+    },
+    {
+      "gateId": "GATE-CONFIG-01",
+      "applicability": "Applicable",
+      "requiredScope": "Validate the canonical static Compose configuration without relying on a running Podman socket; record optional native Podman Compose plausibility separately.",
+      "requiredCommandTokens": ["podman-compose config"],
+      "requiredRunnerOrPlatformTokens": ["repository-local"],
+      "rationale": "This is the repository's canonical config-only check.",
+      "reevaluationTrigger": "Any Compose, env-example, mount, port, network, security option, or service change."
+    },
+    {
+      "gateId": "GATE-BUILD-01",
+      "applicability": "Applicable",
+      "requiredScope": "Build the final local image from the final Dockerfile and dependency state, preserving failure exit codes and recording source and image identity.",
+      "requiredCommandTokens": ["podman compose build --pull"],
+      "requiredRunnerOrPlatformTokens": ["rootless-Podman"],
+      "rationale": "Dockerfile, source-integrity, toolchain, and agent claims require a practical final build.",
+      "reevaluationTrigger": "Any Dockerfile, build context, lock, downloaded artefact, package source, tool version, or base image change."
+    },
+    {
+      "gateId": "GATE-RUNTIME-01",
+      "applicability": "Applicable",
+      "requiredScope": "Start the final container and verify non-root identity, capabilities, no-new-privileges, processes, effective mounts and modes, allowed/denied writes, localhost ports, egress facts, and separated agent state before ordered shutdown.",
+      "requiredCommandTokens": [
+        "podman compose up -d",
+        "bash scripts/test-ade-sandbox-hardening.sh --mode runtime --evidence docs/security/secure-development/2026-08-30-container-hardening/verification-evidence.json",
+        "bash scripts/compose-down-with-audit.sh --podman"
+      ],
+      "requiredRunnerOrPlatformTokens": ["rootless-Podman"],
+      "rationale": "Static configuration alone does not prove isolation effectiveness.",
+      "reevaluationTrigger": "Any runtime image, Compose, user, capability, mount, port, network, entrypoint, state-volume, or permission change."
+    },
+    {
+      "gateId": "GATE-SMOKE-01",
+      "applicability": "Applicable",
+      "requiredScope": "Verify identity/version and minimal functional behavior for six memory-safe toolchain families, two scripting foundations, four required agent CLIs, two additional agent surfaces, and supporting governance tools without provider calls.",
+      "requiredCommandTokens": [
+        "podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh"
+      ],
+      "requiredRunnerOrPlatformTokens": ["Linux-container-adedev"],
+      "rationale": "Installed-version declarations are not runtime evidence.",
+      "reevaluationTrigger": "Any toolchain, agent, supporting tool, PATH, user, installation, or image identity change."
+    },
+    {
+      "gateId": "GATE-SUPPLY-01",
+      "applicability": "Applicable",
+      "requiredScope": "Generate exactly one current CycloneDX SBOM for the final local image, run a pinned vulnerability scan, reconcile every relevant finding with VEX or an open blocker, and verify local provenance without registry distribution.",
+      "requiredCommandTokens": [
+        "bash scripts/build-and-sbom.sh --skip-build",
+        "bash scripts/analyze-sbom.sh --scan --scanner grype",
+        "bash scripts/test-ade-sandbox-hardening.sh --mode supply-chain --evidence docs/security/secure-development/2026-08-30-container-hardening/verification-evidence.json"
+      ],
+      "requiredRunnerOrPlatformTokens": ["rootless-Podman"],
+      "rationale": "Final-image component, vulnerability, exploitability, and build-origin claims need one causally ordered evidence set.",
+      "reevaluationTrigger": "Any source revision, image, component, scanner/database, SBOM, VEX, provenance, or distribution-scope change."
+    },
+    {
+      "gateId": "GATE-SECRET-01",
+      "applicability": "Applicable",
+      "requiredScope": "Run the pinned pre-commit suite and repository agent-secret scanner without recording matching secret values.",
+      "requiredCommandTokens": [
+        "uvx pre-commit run --all-files",
+        "bash scripts/scan-agent-secrets.sh --fail-on-high ."
+      ],
+      "requiredRunnerOrPlatformTokens": ["repository-local"],
+      "rationale": "Changed configuration, evidence, scripts, and docs must contain zero real secrets or session content.",
+      "reevaluationTrigger": "Any changed/generated file, scanner rule, allowlist, credential pattern, or pre-commit configuration change."
+    },
+    {
+      "gateId": "GATE-DOC-01",
+      "applicability": "Applicable",
+      "requiredScope": "Validate the reader path, build/start/stop, mounts, ports, network, state, toolchains, smoke, supply-chain evidence, troubleshooting, VS Code flow, Human-only handoff, local links, and Documentation Impact decision.",
+      "requiredCommandTokens": [
+        "bash scripts/test-ade-sandbox-hardening.sh --mode documentation --evidence docs/security/secure-development/2026-08-30-container-hardening/verification-evidence.json",
+        "bash scripts/test-documentation-impact.sh"
+      ],
+      "requiredRunnerOrPlatformTokens": ["repository-local"],
+      "rationale": "Security controls are incomplete when learner and operator instructions do not match final behavior.",
+      "reevaluationTrigger": "Any user flow, command, mount, port, network, tool, status, limitation, navigation, or documentation-impact change."
+    },
+    {
+      "gateId": "GATE-A11Y-01",
+      "applicability": "Applicable",
+      "requiredScope": "Review every changed user-facing artefact for German-first/English-second CEFR-B2 content, four first-year training occupations, first-use terms, no assumed Spec Kit knowledge, text-first status/dependencies/decisions, and applicable WCAG 2.2 AA criteria.",
+      "requiredCommandTokens": [
+        "bash scripts/check-homogeneity.sh --dry-run --no-patch \"$PWD\"",
+        "bash scripts/test-ade-sandbox-hardening.sh --mode accessibility --evidence docs/security/secure-development/2026-08-30-container-hardening/verification-evidence.json"
+      ],
+      "requiredRunnerOrPlatformTokens": ["repository-local"],
+      "rationale": "The learner and accessibility baseline is binding for every user-facing change.",
+      "reevaluationTrigger": "Any learner-facing, operator-facing, CLI, Markdown, HTML, help, man-page, template, or status-output change."
+    },
+    {
+      "gateId": "GATE-LEARNER-01",
+      "applicability": "N/A",
+      "requiredScope": "Retain the moderated first-use protocol without inventing participants or outcomes; validate the time-bounded owner decision that excludes learner acceptance from this single-person, source-repository-only feasibility study.",
+      "requiredCommandTokens": [],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "The moderated learner study is outside the accepted completion scope of the time-bounded single-person, source-repository-only feasibility study; no participants or positive outcome are claimed.",
+      "reevaluationTrigger": "Before learner rollout, prebuilt image distribution, production use, or at or after 2026-12-31, restore Applicable and obtain real Learning/A11Y Review evidence."
+    },
+    {
+      "gateId": "GATE-PARITY-01",
+      "applicability": "Applicable",
+      "requiredScope": "Verify Bash/PowerShell behavior, dry-run/WhatIf, help/man page/Cmdlet contract, shared Python semantics, agent guidance surfaces, preset commands, templates, and constitution synchronization where shared rules changed.",
+      "requiredCommandTokens": [
+        "python3 scripts/tests/test_spec_kit_agent_surface_parity.py",
+        "python3 scripts/tests/test_secure_development_container_hardening.py"
+      ],
+      "requiredRunnerOrPlatformTokens": ["repository-local"],
+      "rationale": "Cross-platform and agent surfaces must not silently drift.",
+      "reevaluationTrigger": "Any paired script, help, man page, Cmdlet, shared rule, agent surface, preset, template, or constitution change."
+    },
+    {
+      "gateId": "GATE-XPLAT-01",
+      "applicability": "Applicable",
+      "requiredScope": "Reconcile the paired Bash and PowerShell entry points, dry-run/WhatIf, man page, bilingual comment help, approved Verb-Noun Cmdlets, exit codes, and separate macOS, Windows-host, and Ubuntu/WSL2 evidence records. Windows host and Ubuntu/WSL2 may share physical hardware but must use separate runtimes and evidence.",
+      "requiredCommandTokens": [
+        "bash scripts/test-ade-sandbox-hardening.sh --mode static --dry-run",
+        "pwsh -NoProfile -File scripts/test-ade-sandbox-hardening.ps1 -Mode Static -WhatIf"
+      ],
+      "requiredRunnerOrPlatformTokens": ["cross-platform-evidence-set"],
+      "rationale": "The stable feature gate requires one explicit parity decision in addition to the three platform-specific results.",
+      "reevaluationTrigger": "Any paired interface, help/man page/Cmdlet, exit-code, platform result, or platform availability change."
+    },
+    {
+      "gateId": "GATE-XPLAT-MAC-01",
+      "applicability": "Applicable",
+      "requiredScope": "Run paired dry-run/static checks and available practical Podman/VS Code evidence on macOS.",
+      "requiredCommandTokens": [
+        "pwsh -NoProfile -File scripts/test-ade-sandbox-hardening.ps1 -Mode Static -WhatIf"
+      ],
+      "requiredRunnerOrPlatformTokens": ["macOS-PowerShell7"],
+      "rationale": "macOS is an affected host path and the current planning host.",
+      "reevaluationTrigger": "Any paired script, Podman machine, VS Code, path, mount, or host-command change."
+    },
+    {
+      "gateId": "GATE-XPLAT-LINUX-01",
+      "applicability": "Applicable",
+      "requiredScope": "Run paired dry-run/static checks plus practical rootless Podman and VS Code evidence in Ubuntu under WSL2. Use a normal Linux user, an Ubuntu-local checkout, and a Podman runtime inside Ubuntu; do not reuse Windows Podman-machine evidence.",
+      "requiredCommandTokens": [
+        "bash scripts/test-ade-sandbox-hardening.sh --mode static --dry-run",
+        "pwsh -NoProfile -File scripts/test-ade-sandbox-hardening.ps1 -Mode Static -WhatIf"
+      ],
+      "requiredRunnerOrPlatformTokens": ["Ubuntu-WSL2-Bash-rootless-Podman"],
+      "rationale": "Decision DEC-XPLAT-WSL2-2026-09-04 defines Ubuntu under WSL2 with its own rootless Podman runtime as the Feature 003 Linux acceptance environment; native Linux hardware is not claimed.",
+      "reevaluationTrigger": "Any paired script, Ubuntu/WSL2, rootless Podman, VS Code, path, mount, or host-command change; re-evaluate the scope if native Linux becomes an explicit target or a kernel, systemd, network, file-system, or runtime difference becomes security-relevant."
+    },
+    {
+      "gateId": "GATE-XPLAT-WIN-01",
+      "applicability": "Applicable",
+      "requiredScope": "Run PowerShell WhatIf/static checks plus practical Windows Podman-machine and VS Code Desktop evidence on the Windows host; do not reuse the separate Ubuntu/WSL2 rootless-Podman evidence.",
+      "requiredCommandTokens": [
+        "pwsh -NoProfile -File scripts/test-ade-sandbox-hardening.ps1 -Mode Static -WhatIf"
+      ],
+      "requiredRunnerOrPlatformTokens": ["Windows-Host-PowerShell7-Podman"],
+      "rationale": "The Windows host is a binding path for Windows PowerShell 7, the Windows Podman machine, and VS Code Desktop; Ubuntu/WSL2 is evidenced separately.",
+      "reevaluationTrigger": "Any paired script, Windows Podman Desktop/machine, VS Code, path, mount, or host-command change; retry when a Windows-host runner becomes available."
+    },
+    {
+      "gateId": "GATE-HUMAN-01",
+      "applicability": "Applicable",
+      "requiredScope": "Verify all and only the 49 baseline Human-only gap IDs remain Open, Not Assessed, and Unassessed without dated role evidence and that no formal, secret, registry, platform, or risk action is claimed.",
+      "requiredCommandTokens": [
+        "bash scripts/test-ade-sandbox-hardening.sh --mode input --evidence docs/security/secure-development/2026-08-30-container-hardening/verification-evidence.json"
+      ],
+      "requiredRunnerOrPlatformTokens": ["repository-local"],
+      "rationale": "Prepared facts or templates cannot substitute for the named human role.",
+      "reevaluationTrigger": "Any Human-only mapping, role evidence, formal decision, residual-risk statement, or external-scope change."
+    },
+    {
+      "gateId": "GATE-DIFF-01",
+      "applicability": "Applicable",
+      "requiredScope": "Verify whitespace hygiene and prove every changed path is mapped to at least one accepted gap and feature requirement or mandatory phase evidence; report zero unrelated refactors.",
+      "requiredCommandTokens": [
+        "git diff --check",
+        "bash scripts/test-ade-sandbox-hardening.sh --mode all --evidence docs/security/secure-development/2026-08-30-container-hardening/verification-evidence.json"
+      ],
+      "requiredRunnerOrPlatformTokens": ["repository-local"],
+      "rationale": "The stable feature gate prevents unrelated or untraceable edits from entering delivery.",
+      "reevaluationTrigger": "Any worktree, staged set, delivery-set, gap mapping, requirement mapping, or mandatory phase-evidence change."
+    },
+    {
+      "gateId": "GATE-STATS-01",
+      "applicability": "Applicable",
+      "requiredScope": "After the orchestrator-created content commit, render Statistics Profile 2, validate it, and deliver only statistics changes in a separate post-content commit.",
+      "requiredCommandTokens": [
+        "pwsh -NoProfile -File scripts/render-project-statistics.ps1 -Repo .",
+        "pwsh -NoProfile -File scripts/render-project-statistics.ps1 -Repo . -CheckOnly",
+        "git diff --check"
+      ],
+      "requiredRunnerOrPlatformTokens": ["orchestrator-post-content"],
+      "rationale": "Statistics must measure final content and remain separately reviewable under Profile 2.",
+      "reevaluationTrigger": "Any content-commit, phase-slot, methodology, statistics config, renderer, ledger, or post-content diff change."
+    },
+    {
+      "gateId": "GATE-DELIVERY-01",
+      "applicability": "Applicable",
+      "requiredScope": "At the delivery boundary, the orchestrator revalidates current MergeAndSync authority, exact head, delivery set, all primary gates, no actionable review thread, valid schema-2 PreMerge evidence, no unrelated paths, and separate content, statistics, and causal PostMerge work. The already authorized Admin-Bypass may be used only through the provider merge operation when REVIEW_REQUIRED is the sole remaining policy blocker; it must never bypass a failed, pending, missing, stale, or contradictory technical/security gate or change repository rules.",
+      "requiredCommandTokens": [
+        "bash .specify/presets/autonomous-run-governance/scripts/validate-autonomous-delivery-set.sh",
+        "--repo"
+      ],
+      "requiredRunnerOrPlatformTokens": ["orchestrator-delivery"],
+      "rationale": "Model implementation tasks do not own commit, PR, merge, sync, or PostMerge authority. No additional authority request is required for this run's narrowly bounded provider-merge Admin-Bypass.",
+      "reevaluationTrigger": "Any authority, head, branch, delivery mode, gate, commit, PR, merge, default-branch, or PostMerge state change."
+    },
+    {
+      "gateId": "GATE-ASVS-NA-01",
+      "applicability": "N/A",
+      "requiredScope": "OWASP ASVS implementation evidence for a first-party web, API, HTTP, authentication, or authorization service.",
+      "requiredCommandTokens": [],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "The sandbox repository does not implement such a service; published learner ports are generic project mappings, not a first-party application endpoint.",
+      "reevaluationTrigger": "A first-party web/API/HTTP/authentication/authorization service enters feature scope."
+    },
+    {
+      "gateId": "GATE-AISBOM-NA-01",
+      "applicability": "N/A",
+      "requiredScope": "Product AI-SBOM covering models, datasets, inference infrastructure, security properties, and KPIs.",
+      "requiredCommandTokens": [],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "Agents and provider models are development tools; no model, dataset, or inference service is a released or operated sandbox runtime component.",
+      "reevaluationTrigger": "An AI model, dataset, inference service, embedding store, or AI runtime becomes part of the delivered or operated system."
+    },
+    {
+      "gateId": "GATE-ZT-NA-01",
+      "applicability": "N/A",
+      "requiredScope": "NIST SP 800-207 distributed Zero Trust architecture controls.",
+      "requiredCommandTokens": [],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "The target is a local single-container learning sandbox without remote management, multi-device policy plane, or service architecture; provider access remains documented as a trust boundary.",
+      "reevaluationTrigger": "Remote management, multi-device, distributed service, cloud identity, or service-to-service architecture enters scope."
+    },
+    {
+      "gateId": "GATE-CLOUD-NA-01",
+      "applicability": "N/A",
+      "requiredScope": "BSI C3A cloud-autonomy and BSI C5 cloud-compliance assurance evidence for a selected or operated cloud/managed service.",
+      "requiredCommandTokens": [],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "Registry distribution, hosting, SaaS/PaaS/IaaS, managed-service selection, and provider deployment are excluded.",
+      "reevaluationTrigger": "Cloud, hosting, managed-service, provider-deployment, or registry-distribution scope is authorized."
+    },
+    {
+      "gateId": "GATE-REGISTRY-NA-01",
+      "applicability": "N/A",
+      "requiredScope": "Registry push, publication signature, external release provenance, or hosted deployment.",
+      "requiredCommandTokens": [],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "The feature produces and evaluates a local image only; remote distribution is explicitly out of scope.",
+      "reevaluationTrigger": "A later explicitly authorized feature adds image publication, signing, registry, or hosting delivery."
+    }
+  ]
+}

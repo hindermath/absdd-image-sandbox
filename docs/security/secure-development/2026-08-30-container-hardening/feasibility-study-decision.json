@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0",
+  "decisionId": "DEC-FEASIBILITY-SINGLE-PERSON-2026-09-06",
+  "status": "AcceptedScopeLimitation",
+  "effectiveAt": "2026-09-06T10:00:00Z",
+  "expiresOn": "2026-12-31",
+  "ownerRole": "Repository Owner",
+  "studyType": "SinglePersonFeasibilityStudy",
+  "deliveryScope": "SourceRepositoryOnly",
+  "independentReview": "NotPerformed",
+  "moderatedLearnerTest": "NotPerformed",
+  "supplyChainDisposition": "TransparentOpenTriage",
+  "prohibitedClaims": [
+    "IndependentSecurityApproval",
+    "LearnerValidationCompleted",
+    "PrebuiltImageApprovedForDistribution",
+    "ProductionUseApproved"
+  ],
+  "reevaluationTriggers": [
+    "BeforeLearnerRollout",
+    "BeforePrebuiltImageDistribution",
+    "BeforeProductionUse",
+    "AtOrAfterExpiry"
+  ],
+  "containsSensitiveContent": false
+}

@@ -4,25 +4,32 @@ set -euo pipefail
 IMAGE_NAME="${IMAGE_NAME:-localhost/absdd-image-sandbox_ade:latest}"
 SBOM_DIR="${SBOM_DIR:-sboms}"
 CONTAINER_RUNTIME="${CONTAINER_RUNTIME:-podman}"
-SYFT_IMAGE="${SYFT_IMAGE:-docker.io/anchore/syft:latest}"
+SYFT_VERSION="${SYFT_VERSION:-1.46.0}"
 SKIP_BUILD="${SKIP_BUILD:-false}"
+DRY_RUN="false"
 
 usage() {
   cat <<'USAGE'
 Usage: scripts/build-and-sbom.sh [options]
 
-Build the ADE sandbox image and create a CycloneDX JSON SBOM.
+DE: ADE-Sandbox-Image bauen und eine CycloneDX-JSON-SBOM erzeugen.
+EN: Build the ADE sandbox image and create a CycloneDX JSON SBOM.
 
 Options:
   --image NAME         Image tag to build and scan.
   --sbom-dir DIR      Directory for generated SBOM files.
   --runtime NAME      Container runtime: podman.
-  --syft-image NAME   Container image used when local syft is not installed.
   --skip-build        Scan the existing image without rebuilding it.
+  --dry-run           Show the planned build and SBOM checks without writes.
   -h, --help          Show this help.
 
+Sicherheit / Security:
+  Syft muss im Image oder exakt in SYFT_VERSION vorhanden sein. Es gibt keinen
+  moving fallback. / Syft must be in the image or exactly match SYFT_VERSION;
+  no moving fallback is used.
+
 Environment variables with the same names are also supported:
-IMAGE_NAME, SBOM_DIR, CONTAINER_RUNTIME, SYFT_IMAGE, SKIP_BUILD.
+IMAGE_NAME, SBOM_DIR, CONTAINER_RUNTIME, SYFT_VERSION, SKIP_BUILD.
 USAGE
 }
 
@@ -40,12 +47,12 @@ while [[ $# -gt 0 ]]; do
     CONTAINER_RUNTIME="$2"
     shift 2
     ;;
-  --syft-image)
-    SYFT_IMAGE="$2"
-    shift 2
-    ;;
   --skip-build)
     SKIP_BUILD="true"
+    shift
+    ;;
+  --dry-run)
+    DRY_RUN="true"
     shift
     ;;
   -h | --help)
@@ -75,6 +82,14 @@ detect_runtime() {
 }
 
 runtime="$(detect_runtime)"
+
+if [[ "${DRY_RUN}" == "true" ]]; then
+  printf '%s\n' "DRY-RUN: ${runtime} build --pull -t <local-image> . (unless --skip-build)"
+  printf '%s\n' "DRY-RUN: require image-integrated Syft or host Syft exactly ${SYFT_VERSION}; no moving container fallback"
+  printf '%s\n' "DRY-RUN: write one CycloneDX JSON file below ${SBOM_DIR}"
+  exit 0
+fi
+
 mkdir -p "${SBOM_DIR}"
 
 if [[ "${SKIP_BUILD}" != "true" ]]; then
@@ -97,22 +112,15 @@ if "${runtime}" run --rm --entrypoint syft "${IMAGE_NAME}" version >/dev/null 2>
     --source-version "${source_version}" \
     -o "cyclonedx-json" >"${out_path}"
 elif command -v syft >/dev/null 2>&1; then
+  observed_syft="$(syft version 2>/dev/null | awk '/^Version:/ {print $2; exit}')"
+  if [[ "${observed_syft}" != "${SYFT_VERSION}" ]]; then
+    echo "Host Syft version mismatch: expected ${SYFT_VERSION}, observed ${observed_syft:-unknown}." >&2
+    exit 1
+  fi
   syft "${IMAGE_NAME}" -o "cyclonedx-json=${out_path}"
 else
-  tmp_dir="$(mktemp -d)"
-  cleanup() {
-    rm -rf "${tmp_dir}"
-  }
-  trap cleanup EXIT
-
-  "${runtime}" save "${IMAGE_NAME}" -o "${tmp_dir}/image.tar"
-  sbom_abs_dir="$(cd "${SBOM_DIR}" && pwd)"
-  "${runtime}" run --rm \
-    -v "${tmp_dir}:/work:ro" \
-    -v "${sbom_abs_dir}:/out" \
-    "${SYFT_IMAGE}" \
-    "docker-archive:/work/image.tar" \
-    -o "cyclonedx-json=/out/${out_file}"
+  echo "Syft is unavailable in the target image and no host Syft ${SYFT_VERSION} is available; refusing an unpinned fallback." >&2
+  exit 1
 fi
 
 if [[ ! -s "${out_path}" ]]; then

@@ -225,3 +225,28 @@ host terminal. Attaching with VS Code ensures exactly that.
 - [sandbox-profil.md](sandbox-profil.md) — Mounts, Ports, Härtung
 - `docs/security/sandbox-isolation.md` — Isolationsmechanismen und die
   Entscheidung „kein IDE-Dienst im Image"
+
+## Aktueller Nachweisstatus / Current Evidence Status
+
+**DE:** Die Konfiguration und der textliche Attach-Weg sind geprueft. Auf dem
+aktuellen macOS-Runner war das `code`-CLI jedoch nicht verfuegbar; ein echter
+VS-Code-Dev-Containers-Attach wurde deshalb nicht beobachtet. Der Windows-Host
+benoetigt einen Attach ueber VS Code Desktop und Windows-Podman-Machine. Ubuntu
+unter WSL2 benoetigt einen getrennten Attach ueber Remote WSL und Dev
+Containers gegen den eigenen rootless Podman in Ubuntu. Beide Pfade duerfen
+dieselbe Hardware, aber keine Beobachtung oder Laufzeit gemeinsam nutzen.
+Dieser Status ist `Open`, nicht `N/A` oder `Pass`.
+
+**EN:** Configuration and the documented attach path were reviewed, but the
+`code` CLI was unavailable on the current macOS runner, so no real VS Code Dev
+Containers attachment was observed. The Windows host requires an attachment
+through VS Code Desktop and the Windows Podman machine. Ubuntu under WSL2
+requires a separate attachment through Remote WSL and Dev Containers against
+its own rootless Podman runtime. Both paths may share hardware but not an
+observation or runtime. This status is Open, not N/A or Pass.
+
+Retry-Trigger: erneut auf macOS, dem Windows-Host sowie getrennt in Ubuntu/WSL2
+mit VS Code Desktop, Remote WSL soweit erforderlich und der
+Dev-Containers-Erweiterung pruefen. / Retry on macOS, on the Windows host, and
+separately in Ubuntu/WSL2 with VS Code Desktop, Remote WSL where needed, and
+the Dev Containers extension.

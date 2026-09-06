@@ -249,3 +249,38 @@ macOS check is not complete cross-platform acceptance.
 
 Zurück zum [Betriebsindex](README.md). / Return to the
 [operations index](README.md).
+
+## Feature-003-Abnahmestand / Feature 003 Acceptance State
+
+**DE:** Fuer den aktuellen technischen Stand wurden Build, Runtime, sechs
+Sprachen, zwei Skriptgrundlagen, sechs Agenten-CLIs, Dispatcher-Dry-run,
+Audit-Stopp und eine SBOM-/Scan-Kette bereits gegen das unveraenderte Image
+`sha256:5bec1910211e61f60d140907a75689f9f6e31c2ec5baceaac7ff10b99d846eaf`
+belegt. Diese teuren Schritte werden nicht zur Beruhigung wiederholt.
+
+**EN:** Build, runtime, six languages, two scripting foundations, six agent
+CLIs, dispatcher dry-run, audit stop, and one SBOM/scan chain are already
+evidenced against the unchanged image above. These expensive steps are not
+repeated merely for reassurance.
+
+Die verbleibende lokale Reihenfolge ist textlich vollstaendig: Dokumentation
+und A11Y pruefen, fehlende menschliche und Plattformnachweise offen erfassen,
+Agentenparitaet pruefen, Secret-Scans ausfuehren und danach genau einmal den
+Gesamtmodus starten. Ein `Blocked` wegen fehlender Learner-, Linux-/Windows-
+oder Critical/High-Dispositionen ist ein ehrliches Ergebnis. / The remaining
+local order is: validate docs and accessibility, record missing human and
+platform evidence as open, check agent parity, run secret scans, then invoke
+the all mode exactly once. A blocked result from learner, platform, or open
+Critical/High dispositions is honest.
+
+```bash
+bash scripts/test-ade-sandbox-hardening.sh --mode documentation \
+  --evidence docs/security/secure-development/2026-08-30-container-hardening/verification-evidence.json
+bash scripts/check-homogeneity.sh --dry-run --no-patch "$PWD"
+uvx pre-commit run --all-files
+bash scripts/scan-agent-secrets.sh --fail-on-high .
+```
+
+Moegliche echte Secret-Funde werden ohne Trefferinhalt an einen Menschen
+eskaliert. / Possible real secret findings are escalated without recording
+match contents.

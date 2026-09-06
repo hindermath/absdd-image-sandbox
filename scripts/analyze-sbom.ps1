@@ -1,16 +1,46 @@
-[CmdletBinding()]
+#Requires -Version 7
+<#
+.SYNOPSIS
+    Analysiert eine CycloneDX-SBOM. / Analyzes a CycloneDX SBOM.
+.DESCRIPTION
+    Fasst Komponenten zusammen und startet optional ausschliesslich das
+    version- und digest-gepinnte Grype-Image mit read-only SBOM-Mount. / Summarizes
+    components and optionally runs only the version- and digest-pinned Grype
+    image with a read-only SBOM mount.
+.PARAMETER SbomPath
+    SBOM-Datei; leer waehlt die neueste lokale Datei. / SBOM path; empty selects the latest local file.
+.PARAMETER Scan
+    Gepinnten Scan ausfuehren / run the pinned scan.
+.PARAMETER Scanner
+    `auto` und `grype` waehlen beide den gepinnten Pfad. / Both values select the pinned path.
+.PARAMETER ScanOutput
+    Optionaler JSON-Ausgabepfad / optional JSON output path.
+.EXAMPLE
+    pwsh -NoProfile -File scripts/analyze-sbom.ps1 -Scan -Scanner grype -WhatIf
+#>
+[CmdletBinding(SupportsShouldProcess)]
 param(
     [string]$SbomPath = "",
     [string]$Search = "",
     [string]$ComponentType = "",
     [int]$Top = 20,
     [switch]$Scan,
-    [ValidateSet("auto", "grype", "trivy")]
-    [string]$Scanner = "auto"
+    [ValidateSet("auto", "grype")]
+    [string]$Scanner = "auto",
+    [string]$ScanOutput = "",
+    [string]$GrypeImage = "ghcr.io/anchore/grype:v0.117.0@sha256:ddf9e9f204049f3a4a0955ef70873cabab6a31432125ad4f20a490b54950a253"
 )
 
-Set-StrictMode -Version 2.0
+Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
+
+if ($WhatIfPreference) {
+    Write-Output "WHATIF: summarize CycloneDX input without writes"
+    if ($Scan) {
+        Write-Output "WHATIF: podman run --rm <read-only-sbom-mount> $GrypeImage sbom:/work/<sbom>"
+    }
+    exit 0
+}
 
 if ([string]::IsNullOrWhiteSpace($SbomPath)) {
     $latest = Get-ChildItem -Path "sboms" -Filter "*.cdx.json" -File -ErrorAction SilentlyContinue |
@@ -150,24 +180,18 @@ if (-not [string]::IsNullOrWhiteSpace($Search)) {
 }
 
 if ($Scan) {
-    $scannerCommand = $null
-    if ($Scanner -eq "auto" -or $Scanner -eq "grype") {
-        $scannerCommand = Get-Command grype -ErrorAction SilentlyContinue
-    }
-    if (-not $scannerCommand -and ($Scanner -eq "auto" -or $Scanner -eq "trivy")) {
-        $scannerCommand = Get-Command trivy -ErrorAction SilentlyContinue
-    }
-
-    if (-not $scannerCommand) {
-        throw "No vulnerability scanner found. Install grype or trivy, then rerun with -Scan."
-    }
-
+    $podman = Get-Command podman -ErrorAction Stop
+    $sbomDirectory = Split-Path -Parent $resolvedSbom
+    $sbomName = Split-Path -Leaf $resolvedSbom
     Write-Output ""
-    Write-Output "Vulnerability scan with $($scannerCommand.Name):"
-    if ($scannerCommand.Name -eq "grype") {
-        & $scannerCommand.Source $resolvedSbom
+    Write-Output "Vulnerability scan with pinned Grype image: $GrypeImage"
+    $arguments = @("run", "--rm", "-v", "${sbomDirectory}:/work:ro", $GrypeImage, "sbom:/work/$sbomName")
+    if ($ScanOutput) {
+        $outputDirectory = Split-Path -Parent $ScanOutput
+        if ($outputDirectory) { New-Item -ItemType Directory -Force -Path $outputDirectory | Out-Null }
+        & $podman.Source @arguments -o json | Set-Content -LiteralPath $ScanOutput -Encoding utf8
     } else {
-        & $scannerCommand.Source sbom $resolvedSbom
+        & $podman.Source @arguments
     }
 
     if ($LASTEXITCODE -ne 0) {

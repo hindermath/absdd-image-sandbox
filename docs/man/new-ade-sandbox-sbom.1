@@ -1,0 +1,31 @@
+.TH NEW-ADE-SANDBOX-SBOM 1 "2026-08-30" "ADE Sandbox" "User Commands"
+.SH NAME
+New-AdeSandboxSbom \- sichere CycloneDX-SBOM erzeugen / create a safe CycloneDX SBOM
+.SH SYNOPSIS
+.B scripts/build-and-sbom.sh
+[--skip-build] [--dry-run]
+.br
+.B pwsh -NoProfile -File scripts/build-and-sbom.ps1
+[-SkipBuild] [-WhatIf]
+.SH DESCRIPTION
+DE: Erzeugt eine CycloneDX-JSON-SBOM fuer das lokale ADE-Image. Syft muss im
+Image oder exakt in der dokumentierten Version auf dem Host vorhanden sein;
+ein beweglicher Container-Fallback ist verboten.
+.PP
+EN: Creates a CycloneDX JSON SBOM for the local ADE image. Syft must be in the
+image or at the exact documented host version; moving container fallbacks are
+refused.
+.SH OPTIONS
+.TP
+.B --skip-build / -SkipBuild
+Vorhandenes Image verwenden / use the existing image.
+.TP
+.B --dry-run / -WhatIf
+Nur den Plan anzeigen; keine Datei und kein Image aendern / show the plan only.
+.SH EXIT STATUS
+0 Erfolg, ungleich 0 fuer Bedien-, Plattform-, Versions- oder Scanfehler. / 0
+success; non-zero for usage, platform, version, or scan failure.
+.SH SECURITY
+Keine Secrets ausgeben. Die finale SBOM muss an dieselbe lokale Image-ID wie
+Runtime und Scan gebunden werden. / Do not print secrets; bind final evidence
+to one local image identity.

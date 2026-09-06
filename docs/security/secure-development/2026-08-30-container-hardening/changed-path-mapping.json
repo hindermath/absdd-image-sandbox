@@ -1,0 +1,362 @@
+{
+  "schemaVersion": "1.0",
+  "mappings": [
+    {
+      "path": "specs/003-secure-development-container-hardening/",
+      "gapIds": [],
+      "requirementIds": [
+        "AU-001",
+        "GATE-SPEC-01",
+        "GATE-GAP-01"
+      ],
+      "reason": "Accepted feature artefacts, immutable run evidence, task tracking, and mandatory phase result scope."
+    },
+    {
+      "path": "docs/security/secure-development/2026-08-30-container-hardening/",
+      "gapIds": [
+        "GAP-001",
+        "GAP-157"
+      ],
+      "requirementIds": [
+        "FR-001",
+        "FR-004a",
+        "FR-018",
+        "FR-021",
+        "GATE-GAP-01"
+      ],
+      "reason": "Canonical evidence range; GAP-001 and GAP-157 denote the inclusive mapped baseline range."
+    },
+    {
+      "path": "scripts/lib/secure_development_hardening.py",
+      "gapIds": [
+        "GAP-087",
+        "GAP-099",
+        "GAP-117",
+        "GAP-133"
+      ],
+      "requirementIds": [
+        "FR-001",
+        "FR-004a",
+        "FR-008",
+        "FR-013",
+        "FR-021",
+        "CP-001",
+        "GATE-GAP-01"
+      ],
+      "reason": "Shared semantic validator for the inclusive security-review and development-environment gap ranges."
+    },
+    {
+      "path": "scripts/test-ade-sandbox-hardening.sh",
+      "gapIds": [
+        "GAP-087",
+        "GAP-099",
+        "GAP-117",
+        "GAP-133"
+      ],
+      "requirementIds": [
+        "FR-013",
+        "CP-001",
+        "CP-002",
+        "CP-004",
+        "GATE-PARITY-01"
+      ],
+      "reason": "Bash validation entry point for the inclusive mapped gap ranges."
+    },
+    {
+      "path": "scripts/test-ade-sandbox-hardening.ps1",
+      "gapIds": [
+        "GAP-087",
+        "GAP-099",
+        "GAP-117",
+        "GAP-133"
+      ],
+      "requirementIds": [
+        "FR-013",
+        "CP-001",
+        "CP-002",
+        "CP-004",
+        "GATE-PARITY-01"
+      ],
+      "reason": "PowerShell validation entry point paired with Bash."
+    },
+    {
+      "path": "scripts/tests/test_secure_development_container_hardening.py",
+      "gapIds": [
+        "GAP-001",
+        "GAP-157"
+      ],
+      "requirementIds": [
+        "FR-001",
+        "FR-004a",
+        "FR-021",
+        "GATE-GAP-01",
+        "GATE-PARITY-01"
+      ],
+      "reason": "Contract, negative-fixture, and paired-interface tests for the inclusive full gap range."
+    },
+    {
+      "path": "scripts/tests/fixtures/secure-development-container-hardening/",
+      "gapIds": [
+        "GAP-001",
+        "GAP-157"
+      ],
+      "requirementIds": [
+        "FR-001",
+        "FR-004a",
+        "GATE-GAP-01"
+      ],
+      "reason": "Negative contract fixtures including the GAP-147 RED slice."
+    },
+    {
+      "path": "docs/man/test-ade-sandbox-hardening.1",
+      "gapIds": [
+        "GAP-117",
+        "GAP-133"
+      ],
+      "requirementIds": [
+        "FR-019",
+        "GR-002",
+        "GR-003",
+        "CP-003",
+        "CP-004",
+        "GATE-XPLAT-01"
+      ],
+      "reason": "Bilingual, text-first command contract for the inclusive development-environment range."
+    },
+    {
+      "path": "docs/architecture/",
+      "gapIds": [
+        "GAP-013",
+        "GAP-050"
+      ],
+      "requirementIds": [
+        "FR-006",
+        "FR-009",
+        "AR-001",
+        "AR-005"
+      ],
+      "reason": "Container architecture, quality scenarios, threat boundaries, and text-first design evidence for the inclusive mapped range."
+    },
+    {
+      "path": "docs/security/",
+      "gapIds": [
+        "GAP-001",
+        "GAP-157"
+      ],
+      "requirementIds": [
+        "FR-003",
+        "FR-004",
+        "FR-018",
+        "FR-021",
+        "GATE-GAP-01"
+      ],
+      "reason": "Security, regulatory, work-package, platform, session, and evidence documentation across the inclusive accepted gap range."
+    },
+    {
+      "path": "SECURITY.md",
+      "gapIds": [
+        "GAP-064",
+        "GAP-074"
+      ],
+      "requirementIds": [
+        "FR-015",
+        "FR-019",
+        "GATE-DOC-01"
+      ],
+      "reason": "Bilingual repository vulnerability-reporting route for the inclusive disclosure range."
+    },
+    {
+      "path": ".well-known/security.txt",
+      "gapIds": [
+        "GAP-064",
+        "GAP-074"
+      ],
+      "requirementIds": [
+        "FR-015",
+        "FR-019"
+      ],
+      "reason": "RFC 9116 discovery metadata for the repository disclosure route."
+    },
+    {
+      "path": "scripts/build-and-sbom.sh",
+      "gapIds": [
+        "GAP-051",
+        "GAP-063"
+      ],
+      "requirementIds": [
+        "FR-014",
+        "FR-017",
+        "CP-001",
+        "CP-004"
+      ],
+      "reason": "Fail-closed Bash SBOM generation for the inclusive supply-chain range."
+    },
+    {
+      "path": "scripts/build-and-sbom.ps1",
+      "gapIds": [
+        "GAP-051",
+        "GAP-063"
+      ],
+      "requirementIds": [
+        "FR-014",
+        "FR-017",
+        "CP-001",
+        "CP-004"
+      ],
+      "reason": "PowerShell New-AdeSandboxSbom paired with the Bash supply-chain entry point."
+    },
+    {
+      "path": "scripts/analyze-sbom.sh",
+      "gapIds": [
+        "GAP-051",
+        "GAP-063"
+      ],
+      "requirementIds": [
+        "FR-015",
+        "FR-017",
+        "CP-001",
+        "CP-004"
+      ],
+      "reason": "Pinned Grype Bash scan path for the inclusive supply-chain range."
+    },
+    {
+      "path": "scripts/analyze-sbom.ps1",
+      "gapIds": [
+        "GAP-051",
+        "GAP-063"
+      ],
+      "requirementIds": [
+        "FR-015",
+        "FR-017",
+        "CP-001",
+        "CP-004"
+      ],
+      "reason": "Pinned Grype PowerShell scan path paired with Bash."
+    },
+    {
+      "path": "scripts/audit-export.ps1",
+      "gapIds": [
+        "GAP-100",
+        "GAP-116",
+        "GAP-146",
+        "GAP-157"
+      ],
+      "requirementIds": [
+        "FR-008",
+        "FR-013",
+        "FR-018",
+        "CP-001",
+        "CP-004"
+      ],
+      "reason": "PowerShell metadata-only audit parity for the inclusive AI and sandbox ranges."
+    },
+    {
+      "path": "docs/man/new-ade-sandbox-sbom.1",
+      "gapIds": [
+        "GAP-051",
+        "GAP-063"
+      ],
+      "requirementIds": [
+        "FR-019",
+        "CP-003",
+        "CP-004"
+      ],
+      "reason": "Bilingual text-first SBOM interface manual for the inclusive supply-chain range."
+    },
+    {
+      "path": "README.md",
+      "gapIds": [
+        "GAP-117",
+        "GAP-133",
+        "GAP-146",
+        "GAP-157"
+      ],
+      "requirementIds": [
+        "FR-019",
+        "FR-021",
+        "GR-001",
+        "GR-006",
+        "GATE-DOC-01"
+      ],
+      "reason": "Repository reader path and evidence-bound hardening status for the inclusive development-environment and sandbox ranges."
+    },
+    {
+      "path": "docs/betrieb/",
+      "gapIds": [
+        "GAP-117",
+        "GAP-133",
+        "GAP-146",
+        "GAP-157"
+      ],
+      "requirementIds": [
+        "FR-019",
+        "FR-021",
+        "GR-002",
+        "GR-006",
+        "GATE-DOC-01"
+      ],
+      "reason": "Operations reader path for image, Compose, state, validation, supply-chain blockers, and safe shutdown."
+    },
+    {
+      "path": "docs/fuer-lernende/",
+      "gapIds": [
+        "GAP-100",
+        "GAP-116",
+        "GAP-117",
+        "GAP-133"
+      ],
+      "requirementIds": [
+        "FR-019",
+        "FR-020",
+        "GR-001",
+        "GR-004",
+        "GATE-LEARNER-01"
+      ],
+      "reason": "German-first learner route for all four occupations, safe status reading, first use, troubleshooting, and VS Code limits."
+    },
+    {
+      "path": "docs/accessibility/",
+      "gapIds": [
+        "GAP-100",
+        "GAP-133"
+      ],
+      "requirementIds": [
+        "FR-019",
+        "FR-020",
+        "GR-001",
+        "GR-005",
+        "GATE-A11Y-01"
+      ],
+      "reason": "Artefact-specific WCAG 2.2 AA, bilingual, CEFR B2, text-alternative, and human learner-gate review."
+    },
+    {
+      "path": "docs/documentation-impact/feature-003-secure-development-container-hardening.json",
+      "gapIds": [
+        "GAP-117",
+        "GAP-133"
+      ],
+      "requirementIds": [
+        "FR-019",
+        "FR-021",
+        "GR-006",
+        "GATE-DOC-01"
+      ],
+      "reason": "Exact UpdateRequired decision, audience, reader-path, source, language, platform, distribution, evidence, follow-up, and trigger record."
+    },
+    {
+      "path": ".gitignore",
+      "gapIds": [
+        "GAP-100",
+        "GAP-116"
+      ],
+      "requirementIds": [
+        "FR-008",
+        "FR-018",
+        "AU-003",
+        "GATE-SECRET-01",
+        "GATE-DELIVERY-01"
+      ],
+      "reason": "Excludes local autonomous-run prompts, logs, and phase results from checkpoint and delivery commits while retaining durable non-sensitive feature evidence."
+    }
+  ]
+}

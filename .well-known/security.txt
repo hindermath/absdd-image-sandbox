@@ -1,0 +1,5 @@
+Contact: https://github.com/hindermath/absdd-image-sandbox/security/advisories/new
+Policy: https://github.com/hindermath/absdd-image-sandbox/security/policy
+Preferred-Languages: de, en
+Canonical: https://github.com/hindermath/absdd-image-sandbox/.well-known/security.txt
+Expires: 2027-08-30T00:00:00Z

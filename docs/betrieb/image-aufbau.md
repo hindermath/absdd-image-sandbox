@@ -180,3 +180,29 @@ multi-architecture evidence.
 
 Weiter zu [Compose und Speicher](compose-und-speicher.md). / Continue with
 [Compose and storage](compose-und-speicher.md).
+
+## Belegter Image- und Lieferkettenstand / Evidenced Image and Supply-Chain State
+
+**DE:** Der finale lokale Build erzeugte genau das Image
+`sha256:5bec1910211e61f60d140907a75689f9f6e31c2ec5baceaac7ff10b99d846eaf`.
+Ein erneuter Build ist fuer diesen Feature-Lauf nur erlaubt, wenn sich das
+technische Image-Subject aendert. Die Laufzeitpruefung bestaetigte sechs
+Sprachfamilien, PowerShell und Node.js sowie OpenCode, Codex, Claude Code,
+Gemini CLI, Antigravity CLI und GitHub Copilot CLI ohne Provideraufruf.
+
+**EN:** The final local build produced exactly the image above. This feature
+run may rebuild only if the technical image subject changes. Runtime checks
+confirmed six language families, PowerShell and Node.js, plus OpenCode,
+Codex, Claude Code, Gemini CLI, Antigravity CLI, and GitHub Copilot CLI without
+a provider call.
+
+**DE:** Syft 1.46.0 erzeugte genau eine aktuelle CycloneDX-SBOM. Der
+digest-gepinnte Grype-Scanner 0.117.0 meldete 1.346 Matches in 426
+Advisory-Gruppen. Alle bleiben `in_triage`; 14 Critical- und 360 High-Matches
+sind offen. Das ist ein sichtbarer Blocker, keine Risikoakzeptanz und kein
+technischer `not affected`-Nachweis.
+
+**EN:** Syft 1.46.0 generated one current CycloneDX SBOM. Digest-pinned Grype
+0.117.0 reported 1,346 matches across 426 advisory groups. All remain
+`in_triage`, including 14 Critical and 360 High matches. This is a visible
+blocker, not risk acceptance or a technical `not affected` decision.

@@ -4,7 +4,9 @@ Stand: 2026-07-10
 
 ## Deutsch
 
-Entscheidung: Die `ade`-Lernumgebung bleibt vorerst am Compose-Default-Bridge-Netz mit freiem ausgehendem Netzwerkzugriff.
+Technischer Iststand: Die `ade`-Lernumgebung nutzt das Compose-Default-Bridge-
+Netz mit freiem ausgehendem Netzwerkzugriff. Dies ist keine Freigabe oder
+Risikoakzeptanz.
 
 Begruendung: Die Sandbox ist eine Ausbildungs- und Entwicklungsumgebung. Mehrere vorgesehene Workflows benoetigen ausgehenden Zugriff auf externe Paketregister und Installationsquellen:
 
@@ -21,15 +23,21 @@ Begruendung: Die Sandbox ist eine Ausbildungs- und Entwicklungsumgebung. Mehrere
 - crates.io
 - npm Registry
 
-Risikobewertung: Freier Egress vergroessert die technische Angriffsoberflaeche. Das Risiko wird fuer diese Lernumgebung vorerst akzeptiert, weil der Container isoliert laeuft, Host-Mounts explizit begrenzt sind, Codex-Shell-Netzwerkzugriff in `codex/config.toml` deaktiviert ist und alle Agenten an Repository-Regeln, enge Arbeitsauftraege und menschliche Genehmigungen gebunden sind. Die vier CLI-Installationen sind keine Providerfreigabe.
+Risikostatus: Freier Egress vergroessert die technische Angriffsoberflaeche.
+Der Punkt bleibt `Open` fuer `Platform Owner/Admin`; die vorhandenen
+Container-, Mount- und Codex-Sandbox-Grenzen sind kompensierende Fakten, aber
+keine stellvertretende Risikoakzeptanz. Die CLI-Installationen sind keine
+Providerfreigabe.
 
-Akzeptiert bis: `_TODO_ (vom Owner einzutragen, Empfehlung: 2026-08-15)`
+Review-Termin: `_TODO_ (vom Platform Owner/Admin einzutragen)`
 
 Offener Punkt: Variante B mit echter Egress-Allow-List soll erneut bewertet werden, sobald klar ist, ob ein geeigneter Proxy, DNS-Filter oder eine vergleichbare RZ-Infrastruktur verfuegbar ist.
 
 ## English
 
-Decision: The `ade` learning environment remains on the Compose default bridge network with unrestricted outbound network access for now.
+Technical current state: the `ade` learning environment uses the Compose
+default bridge with unrestricted outbound access. This is not approval or risk
+acceptance.
 
 Rationale: The sandbox is a training and development environment. Several intended workflows need outbound access to external package registries and installation sources:
 
@@ -46,8 +54,11 @@ Rationale: The sandbox is a training and development environment. Several intend
 - crates.io
 - npm registry
 
-Risk assessment: Unrestricted egress increases the technical attack surface. This risk is accepted for the learning environment for now because the container is isolated, host mounts are explicitly limited, Codex shell network access is disabled in `codex/config.toml`, and every agent is bound by repository rules, narrow tasks, and human approval. Installing the four CLIs does not grant provider approval.
+Risk status: unrestricted egress increases the technical attack surface. It
+remains Open for Platform Owner/Admin. Existing container, mount, and Codex
+sandbox boundaries are compensating facts, not proxy risk acceptance. CLI
+installation does not grant provider approval.
 
-Accepted until: `_TODO_ (to be entered by owner, recommendation: 2026-08-15)`
+Review date: `_TODO_ (to be entered by Platform Owner/Admin)`
 
 Open item: Variant B with a real egress allow-list should be reassessed once it is clear whether a suitable proxy, DNS filter, or comparable data-center infrastructure is available.

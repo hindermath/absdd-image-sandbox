@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.1",
+  "feature": "003-secure-development-container-hardening",
+  "entries": [
+    {
+      "changeId": "CHG003",
+      "scope": "Evidence-bound reader paths for secure development container hardening",
+      "decision": "UpdateRequired",
+      "rationale": "The validated image identity, runtime boundaries, supply-chain blockers, platform limits, learner handoff, and safe next actions must be visible without implying approval.",
+      "documents": [
+        "README.md",
+        "docs/betrieb/README.md",
+        "docs/betrieb/compose-und-speicher.md",
+        "docs/betrieb/image-aufbau.md",
+        "docs/betrieb/validierung-und-wartung.md",
+        "docs/fuer-lernende/README.md",
+        "docs/fuer-lernende/erste-schritte.md",
+        "docs/fuer-lernende/troubleshooting.md",
+        "docs/fuer-lernende/vscode-dev-containers.md",
+        "docs/accessibility/container-hardening.md",
+        "docs/security/secure-development/2026-08-30-container-hardening/README.md",
+        "docs/security/secure-development/2026-08-30-container-hardening/platform-parity.md"
+      ],
+      "owner": "Repository Maintainer",
+      "audiences": [
+        "First-year learners in all four binding training occupations",
+        "Repository users",
+        "Maintainers and AI agents",
+        "Learning/A11Y Review",
+        "Security Review"
+      ],
+      "readerPaths": [
+        "Repository status and safe quick start",
+        "Learner start, verification status, and troubleshooting",
+        "Image, Compose, mounts, ports, network, state, and shutdown",
+        "Toolchain, smoke, SBOM, vulnerability, and secret validation",
+        "Accessibility, platform, and Human-only handoff"
+      ],
+      "canonicalSource": "docs/security/secure-development/2026-08-30-container-hardening/README.md",
+      "navigationImpact": "Existing repository, learner, and operations entry points link to the dated canonical feature evidence; no new portal or external distribution is introduced.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and English second in each synchronized file, approximately CEFR B2, with technical terms explained at first use.",
+      "languagePartners": [],
+      "platformAndExampleProof": "Commands and native rootless-Podman runtime were observed on macOS. Separate Windows-host and Ubuntu/WSL2-with-own-rootless-Podman evidence plus VS Code attachments remain Open. Decision DEC-XPLAT-WSL2-2026-09-04 permits shared physical Windows hardware but forbids runtime or evidence reuse and makes no native-Linux claim.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/documentation-impact/feature-003-secure-development-container-hardening.json",
+      "risk": "High; overstating platform, learner, vulnerability, secret, or approval status could turn incomplete evidence into unsafe release guidance.",
+      "criticality": "Security",
+      "reevaluationTrigger": "Any user flow, command, mount, port, network, tool, vulnerability disposition, platform result, learner handoff, navigation, or documentation-impact change."
+    }
+  ]
+}

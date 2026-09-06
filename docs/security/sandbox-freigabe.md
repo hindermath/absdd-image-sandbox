@@ -9,7 +9,7 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 | Feld | Wert |
 |---|---|
 | Sandbox-Typ | Container (Podman) |
-| Sandbox-Identifikator | `mcr.microsoft.com/dotnet/sdk:10.0@sha256:1f48db91b4f27fdb4409b7b4253ce1fd4f78f69d34efd9edb788c03a337f5ab8` |
+| Sandbox-Identifikator | `mcr.microsoft.com/dotnet/sdk:10.0@sha256:e1ffd2a92ae84c1291bc1b6887501f8af98e6331e7af6d4c8d37168c5e87a64c` |
 | Verantwortliche Person | `_TODO_ (vom Owner einzutragen)` |
 | Freigabestatus | `_Entwurf, Freigabe ausstehend_` |
 | Freigabedatum | `_TODO_ (vom Owner einzutragen)` |
@@ -54,7 +54,7 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 | Java | OpenJDK 21 aus Ubuntu-Paketquellen |
 | Maven | Ubuntu-Paketquelle |
 | Python | Ubuntu-Paketquelle (`python3`, `python3-venv`, `python-is-python3`) |
-| PowerShell | `7.6.1`, vom digest-gepinnten Microsoft-.NET-SDK-Basisimage geliefert und im Build geprueft |
+| PowerShell | `7.6.4`, vom digest-gepinnten Microsoft-.NET-SDK-Basisimage geliefert und im Build geprueft |
 | Node.js / npm | NodeSource-Apt-Quelle, `NODE_MAJOR=22`, signiert ueber `/usr/share/keyrings/nodesource.gpg` |
 | Go | `1.26.3` |
 | gopls | `v0.21.1` |
@@ -106,7 +106,7 @@ selbst in den Container; die Anleitung steht in `README.md`.
 | Field | Value |
 |---|---|
 | Sandbox type | Container (Podman) |
-| Sandbox identifier | `mcr.microsoft.com/dotnet/sdk:10.0@sha256:1f48db91b4f27fdb4409b7b4253ce1fd4f78f69d34efd9edb788c03a337f5ab8` |
+| Sandbox identifier | `mcr.microsoft.com/dotnet/sdk:10.0@sha256:e1ffd2a92ae84c1291bc1b6887501f8af98e6331e7af6d4c8d37168c5e87a64c` |
 | Responsible person | `_TODO_ (to be entered by owner)` |
 | Approval status | `_Draft, approval pending_` |
 | Approval date | `_TODO_ (to be entered by owner)` |

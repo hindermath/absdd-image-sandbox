@@ -285,3 +285,42 @@ choose your [toolchain](toolchains/README.md), and read
 [Agents and Spec Kit](agenten-und-spec-kit.md) before your first AI task.
 Afterwards, work through the study companion for your training year and
 complete the related intake document.
+
+## Aktueller Sicherheitsstatus / Current Security Status
+
+**DE:** Diese Anleitung richtet sich ab dem ersten Ausbildungsjahr an
+Fachinformatiker*innen, IT-System-Elektroniker*innen, Kaufleute fuer
+IT-System-Management und Kaufleute fuer Digitalisierungsmanagement. Du musst
+Spec Kit vorher nicht kennen. Ein **Gate** ist eine pruefbare Bedingung, die
+vor dem naechsten Schritt erfuellt sein muss.
+
+**EN:** This guide is for first-year IT specialists, IT systems electronics
+technicians, IT systems management assistants, and digitalisation management
+assistants. No prior Spec Kit knowledge is required. A gate is a checkable
+condition that must be met before the next step.
+
+**DE:** Das aktuelle Image bestand den technischen Start- und Werkzeugtest auf
+macOS mit rootless Podman. Trotzdem ist die Gesamtfreigabe `Blocked`: getrennte
+Windows-Host- und Ubuntu/WSL2-Tests, die zugehoerigen
+VS-Code-Dev-Containers-Attaches und ein moderierter Erstnutzungstest fehlen.
+Beide Plattformtests duerfen auf demselben Windows-Rechner laufen, benoetigen
+aber eigene Podman-Laufzeiten und Evidenz. Ausserdem bleiben 14 Critical- und
+360 High-Schwachstellenmatches offen. Wenn du nur lernst, folge weiter dem
+sicheren Start- und Stopppfad. Wenn du das Image freigeben oder weitergeben
+willst, warte auf die genannten Reviews und Dispositionen.
+
+**EN:** The current image passed technical startup and tool checks on macOS
+rootless Podman. Overall approval is still blocked: separate Windows-host and
+Ubuntu/WSL2 tests, their VS Code Dev Containers attachments, and a moderated
+first-use test are missing. Both platform tests may use the same Windows
+computer but require their own Podman runtimes and evidence. Fourteen Critical
+and 360 High vulnerability matches also remain open. You may continue the
+controlled learning path, but do not claim approval or distribute the image
+until the named reviews and dispositions exist.
+
+Der genaue Status steht im
+[Feature-Evidenzindex](../security/secure-development/2026-08-30-container-hardening/README.md).
+Der naechste Human-only-Schritt gehoert `Learning/A11Y Review`; Lernende und
+Agenten erzeugen keine Ersatzbeobachtungen. / The exact status is in the
+feature evidence index. Learning/A11Y Review owns the next human-only step;
+learners and agents do not create substitute observations.

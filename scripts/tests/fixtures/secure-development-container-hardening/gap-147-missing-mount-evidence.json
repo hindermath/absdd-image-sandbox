@@ -1,0 +1,6 @@
+{
+  "base": "docs/security/secure-development/2026-08-30-container-hardening/gap-dispositions.json",
+  "gapId": "GAP-147",
+  "mutation": "GAP-147 AlreadySatisfied without mount evidence",
+  "expected": "Reject with non-zero exit; GAP-147 must not become AlreadySatisfied or Fulfilled without current mount evidence."
+}

@@ -1,10 +1,10 @@
-# Tag 10.0 observed on 2026-06-03, pinned here by digest for reproducible builds.
-FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:1f48db91b4f27fdb4409b7b4253ce1fd4f78f69d34efd9edb788c03a337f5ab8
+# Tag 10.0 observed on 2026-09-04, pinned to its multi-architecture manifest digest.
+FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:e1ffd2a92ae84c1291bc1b6887501f8af98e6331e7af6d4c8d37168c5e87a64c
 
 # renovate: datasource=java-version depName=java packageName=java-jdk versioning=semver-coerced argName=JAVA_VERSION
 ARG JAVA_VERSION=21
 # renovate: datasource=github-releases depName=PowerShell/PowerShell versioning=semver argName=POWERSHELL_VERSION
-ARG POWERSHELL_VERSION=7.6.1
+ARG POWERSHELL_VERSION=7.6.4
 # renovate: datasource=golang-version depName=go versioning=semver argName=GO_VERSION
 ARG GO_VERSION=1.26.3
 # renovate: datasource=go depName=golang.org/x/tools/gopls versioning=semver argName=GOPLS_VERSION
@@ -120,6 +120,7 @@ RUN set -eux; \
         *) echo "Unsupported Swift architecture: ${arch}" >&2; exit 1 ;; \
     esac; \
     swift_signing_key="52BB7E3DE28A71BE22EC05FFEF80A866B47A981F"; \
+    swift_signing_keys_url="https://www.swift.org/keys/all-keys.asc"; \
     swift_platform="ubuntu24.04"; \
     swift_branch="swift-${swift_base_version}-release"; \
     swift_version="swift-${swift_base_version}-RELEASE"; \
@@ -130,7 +131,9 @@ RUN set -eux; \
     mkdir -p "${GNUPGHOME}"; \
     curl -fsSL "${swift_bin_url}" -o "${tmp_dir}/swift.tar.gz"; \
     curl -fsSL "${swift_bin_url}.sig" -o "${tmp_dir}/swift.tar.gz.sig"; \
-    gpg --batch --quiet --keyserver keyserver.ubuntu.com --recv-keys "${swift_signing_key}"; \
+    curl -fsSL "${swift_signing_keys_url}" -o "${tmp_dir}/swift-keys.asc"; \
+    gpg --batch --quiet --import "${tmp_dir}/swift-keys.asc"; \
+    gpg --batch --list-keys "${swift_signing_key}" >/dev/null; \
     gpg --batch --verify "${tmp_dir}/swift.tar.gz.sig" "${tmp_dir}/swift.tar.gz"; \
     tar -xzf "${tmp_dir}/swift.tar.gz" --directory / --strip-components=1; \
     chmod -R o+r /usr/lib/swift; \

@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/specs/003-secure-development-container-hardening/contracts/verification-evidence.schema.json",
+  "title": "Haertungs-Verifikation / Hardening Verification Evidence",
+  "description": "DE: Ausgefuehrte Gate-Evidenz ohne sensible Inhalte. EN: Executed gate evidence without sensitive content.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "sourceRevision", "imageIdentity", "gateResults", "overallResult"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "sourceRevision": { "oneOf": [{ "type": "string", "pattern": "^[a-f0-9]{40}$" }, { "const": "WORKTREE" }] },
+    "imageIdentity": { "type": "string", "minLength": 1 },
+    "gateResults": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/gateResult" }
+    },
+    "overallResult": { "enum": ["Pass", "Fail", "Blocked"] }
+  },
+  "$defs": {
+    "text": { "type": "string", "minLength": 1, "pattern": ".*\\S.*" },
+    "shaOrNA": { "oneOf": [{ "type": "string", "pattern": "^[a-f0-9]{64}$" }, { "const": "N/A" }] },
+    "gateResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceId", "gateId", "applicability", "subjectPaths",
+        "command", "runnerOrPlatform", "startedAt", "finishedAt",
+        "exitCode", "expectedResult", "observedResult", "result",
+        "freshness", "limitations", "artifactSha256",
+        "containsSensitiveContent", "rationale", "reevaluationTrigger"
+      ],
+      "properties": {
+        "evidenceId": { "type": "string", "pattern": "^EVD-[A-Z0-9-]+$" },
+        "gateId": { "type": "string", "pattern": "^GATE-[A-Z0-9-]+$" },
+        "applicability": { "enum": ["Applicable", "N/A"] },
+        "subjectPaths": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/text" } },
+        "command": { "$ref": "#/$defs/text" },
+        "runnerOrPlatform": { "$ref": "#/$defs/text" },
+        "startedAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
+        "finishedAt": { "type": "string", "format": "date-time", "pattern": "Z$" },
+        "exitCode": { "oneOf": [{ "type": "integer", "minimum": 0, "maximum": 255 }, { "type": "null" }] },
+        "expectedResult": { "$ref": "#/$defs/text" },
+        "observedResult": { "$ref": "#/$defs/text" },
+        "result": { "enum": ["Pass", "Fail", "Blocked", "N/A"] },
+        "freshness": { "enum": ["Current", "Stale", "N/A"] },
+        "limitations": { "$ref": "#/$defs/text" },
+        "artifactSha256": { "$ref": "#/$defs/shaOrNA" },
+        "containsSensitiveContent": { "const": false },
+        "rationale": { "$ref": "#/$defs/text" },
+        "reevaluationTrigger": { "$ref": "#/$defs/text" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "applicability": { "const": "N/A" } }, "required": ["applicability"] },
+          "then": {
+            "properties": {
+              "command": { "const": "N/A" },
+              "runnerOrPlatform": { "const": "N/A" },
+              "exitCode": { "type": "null" },
+              "result": { "const": "N/A" },
+              "freshness": { "const": "N/A" },
+              "artifactSha256": { "const": "N/A" }
+            }
+          },
+          "else": {
+            "properties": {
+              "command": { "type": "string", "minLength": 1, "pattern": "^(?!N/A$).*\\S.*$" },
+              "runnerOrPlatform": { "type": "string", "minLength": 1, "pattern": "^(?!N/A$).*\\S.*$" },
+              "exitCode": { "type": "integer", "minimum": 0, "maximum": 255 },
+              "result": { "enum": ["Pass", "Fail", "Blocked"] },
+              "freshness": { "enum": ["Current", "Stale"] }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

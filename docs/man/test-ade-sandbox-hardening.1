@@ -1,0 +1,84 @@
+.TH TEST-ADE-SANDBOX-HARDENING 1 "2026-08-30" "ADE Sandbox" "User Commands"
+.SH NAME
+test-ade-sandbox-hardening \- sichere Sandbox-Pruefung / secure sandbox validation
+.SH SYNOPSIS
+.B scripts/test-ade-sandbox-hardening.sh
+\fB--mode\fR MODE [\fB--evidence\fR PATH] [\fB--dry-run\fR]
+.PP
+.B pwsh -NoProfile -File scripts/test-ade-sandbox-hardening.ps1
+\fB-Mode\fR MODE [\fB-EvidencePath\fR PATH] [\fB-WhatIf\fR]
+.SH DESCRIPTION
+DE: Beide Einstiege verwenden denselben Python-Standardbibliothek-Kern. Ein
+Gate ist eine pruefbare Abnahmebedingung. RED bedeutet, dass ein Vertrag oder
+beobachteter Check fehlschlaegt; GREEN bedeutet, dass der angeforderte Scope
+aktuell belegt ist. Es werden keine Geheimnisse, Prompt- oder Antworttexte
+ausgegeben.
+.PP
+EN: Both entry points use the same Python standard-library core. A gate is a
+testable acceptance condition. RED is a failed contract or observed check;
+GREEN means the requested scope has current evidence. Secrets and prompt or
+response content are never printed.
+.SH MODES
+.TP
+.B Input
+Prueft sechs Eingabehashes und 157/108/49. / Checks six input hashes and exact
+gap partition.
+.TP
+.B Static
+Prueft Vertrage, Pins, Locks, Agentenparitaet, Dokumentationswirkung und Diff.
+/ Checks contracts, pins, locks, parity, documentation impact, and diff.
+.TP
+.B Runtime
+Prueft einen bereits gestarteten Podman-Service auf non-root und
+no-new-privileges. / Checks an already running Podman service.
+.TP
+.B SupplyChain
+Prueft finale lokale Provenienz-, SBOM-, Scan- und VEX-Evidenz. / Checks final
+local provenance, SBOM, scan, and VEX evidence.
+.TP
+.B Documentation
+Prueft Leserpfade und Documentation Impact. / Checks reader routes and
+Documentation Impact.
+.TP
+.B Accessibility
+Prueft A11Y-Dokumentation und den ausschliesslich menschlich erzeugten
+SC-009-Datensatz. Fehlende echte Beobachtung bleibt blockiert. / Checks A11Y
+documentation and the human-produced SC-009 record. Missing observation stays
+blocked.
+.TP
+.B All
+Fuehrt alle Modi in der dokumentierten Reihenfolge aus. / Runs every mode in
+the documented order.
+.SH OPTIONS
+.TP
+.B --dry-run, -WhatIf
+Berichtet geplante externe Befehle ohne Schreibwirkung. Vertragsdateien werden
+nur gelesen. / Reports planned external commands without writes. Contract
+files are read only.
+.TP
+.B --evidence PATH, -EvidencePath PATH
+Repository-relativer Pfad. Traversierung und absolute Pfade werden abgelehnt.
+/ Repository-relative path; traversal and absolute paths are rejected.
+.SH EXIT STATUS
+0 bedeutet belegt; 1 ist RED; 2 ist ein Bedien-, JSON- oder Pfadfehler; 3
+bedeutet fehlende Plattform, Runner-, Werkzeug- oder Human-Evidenz. Wrapper
+geben den Exitcode unveraendert weiter. / 0 evidenced; 1 RED; 2 usage, JSON, or
+path error; 3 missing platform, runner, tool, or human evidence. Wrappers
+preserve the exit code.
+.SH SAFE EXAMPLES
+.nf
+bash scripts/test-ade-sandbox-hardening.sh --mode input
+bash scripts/test-ade-sandbox-hardening.sh --mode static --dry-run
+pwsh -NoProfile -File scripts/test-ade-sandbox-hardening.ps1 -Mode Static -WhatIf
+.fi
+.SH LIMITATIONS
+Ein macOS-Lauf ersetzt weder die Windows-Host- noch die Ubuntu/WSL2-Evidenz.
+Windows-Host und Ubuntu/WSL2 duerfen dieselbe physische Hardware, aber keine
+gemeinsame Podman-Laufzeit oder wiederverwendete Evidenz nutzen. Ein
+uebersprungener oder nicht verfuegbarer Check bleibt Open oder Blocked und wird
+nie als N/A oder Pass behandelt. Native Linux-Hardware ist kein Akzeptanzziel
+von Feature 003. / A macOS run replaces neither Windows-host nor Ubuntu/WSL2
+evidence. Windows host and Ubuntu/WSL2 may share hardware but not a Podman
+runtime or reused evidence. A skipped or unavailable check remains Open or
+Blocked, never N/A or Pass. Native Linux hardware is not a Feature 003
+acceptance target.
