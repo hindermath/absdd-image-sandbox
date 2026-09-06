@@ -731,45 +731,59 @@ Compose, validation, audit, SBOM, and maintenance details.
 
 ## Aktueller Haertungsnachweis / Current Hardening Evidence
 
-**DE:** Der aktuelle lokale Nachweis ist an das unveraenderte Image
-`sha256:5bec1910211e61f60d140907a75689f9f6e31c2ec5baceaac7ff10b99d846eaf`
-gebunden. Auf einem nativen rootless-Podman-Host unter macOS bestanden
-Containerstart, Laufzeitgrenzen, sechs speichersichere Sprachfamilien, die
-beiden Skriptgrundlagen PowerShell und Node.js, sechs Agentenoberflaechen,
-Dispatcher-Dry-run ohne Provideraufruf und der Audit-Stopp. Eingehend bleiben
-nur die Loopback-Ports `5100-5199` veroeffentlicht; Agentenzustaende liegen in
-getrennten Volumes. Diese lokale Evidenz ist keine formelle Freigabe.
+**DE:** Der aktuelle Abschlussnachweis fuer Feature 003 umfasst getrennte
+Build-, Laufzeit-, Toolchain- und VS-Code-Nachweise auf Windows, Ubuntu/WSL2
+und macOS. Die dokumentweite Rootless- und Supply-Chain-Bindung verwendet das
+Ubuntu/WSL2-Image
+`sha256:bcdd1c8d4234ff8de8edbd1f3c52fe06c1a97d876d1c6a8996928bdff4376f2c`.
+Windows und macOS besitzen getrennte lokale Image-Identitaeten; die
+macOS-Podman-Machine meldet `Rootful=true`. Containerstart, Laufzeitgrenzen,
+sechs speichersichere Sprachfamilien, PowerShell und Node.js, sechs
+Agentenoberflaechen, Dispatcher-Dry-run ohne Provideraufruf und der Audit-Stopp
+bestanden. Eingehend bleiben nur die Loopback-Ports `5100-5199` veroeffentlicht;
+Agentenzustaende liegen in getrennten Volumes. Diese technische Evidenz ist
+keine formelle Freigabe.
 
-**EN:** Current local evidence is bound to the unchanged image above. Native
-rootless Podman on macOS passed startup, runtime boundaries, six memory-safe
-language families, the PowerShell and Node.js scripting foundations, six agent
-surfaces, a dispatcher dry-run without provider access, and audit-aware stop.
-Only loopback ports `5100-5199` are published, and agent state remains in
-separate volumes. This local evidence is not formal approval.
+**EN:** Current Feature 003 closeout evidence contains separate build, runtime,
+toolchain, and VS Code results for Windows, Ubuntu/WSL2, and macOS. The
+document-wide rootless and supply-chain binding uses the Ubuntu/WSL2 image
+above. Windows and macOS retain separate local image identities, and the macOS
+Podman machine reports `Rootful=true`. Startup, runtime boundaries, six
+memory-safe language families, PowerShell and Node.js, six agent surfaces, a
+dispatcher dry-run without provider access, and audit-aware stop passed. Only
+loopback ports `5100-5199` are published, and agent state remains in separate
+volumes. This technical evidence is not formal approval.
 
-**DE:** Genau eine aktuelle CycloneDX-SBOM wurde mit Syft 1.46.0 erzeugt und
-mit dem digest-gepinnten Grype 0.117.0 ausgewertet. Alle 426 Advisory-IDs mit
-1.346 Matches besitzen eine offene `in_triage`-Disposition. Auf Match-Ebene
-bleiben 14 Critical- und 360 High-Treffer offen; weder Risikoakzeptanz noch
-`not affected` wurde behauptet. Der Windows-Hostlauf und der getrennte
-Ubuntu/WSL2-Lauf mit eigener rootless-Podman-Laufzeit, beobachtete
-VS-Code-Dev-Containers-Attaches sowie der moderierte Erstnutzungstest durch
-`Learning/A11Y Review` fehlen ebenfalls. Beide Plattformlaeufe duerfen nach
-der [genehmigten Scope-Entscheidung](docs/security/secure-development/2026-08-30-container-hardening/platform-scope-decision.md)
-dieselbe Windows-Hardware nutzen, aber keine Laufzeit oder Evidenz
-wiederverwenden. Native Linux-Hardware ist kein Akzeptanzziel von Feature 003.
-Der zusammengefasste Status ist deshalb `Blocked`, nicht `Pass`.
+**DE:** Die aktuelle CycloneDX-SBOM mit 23.960 Komponenten wurde mit Syft
+1.46.0 erzeugt und mit dem digest-gepinnten Grype 0.117.0 ausgewertet. Der Scan
+meldet 1.286 Matches in 390 eindeutigen Advisory-Gruppen: 14 Critical, 326 High,
+787 Medium, 144 Low, 11 Negligible und 4 Unknown. Alle 390 Gruppen bleiben
+sichtbar `Open`/`in_triage`; weder Risikoakzeptanz noch `not affected` oder
+Behebung wird behauptet. `GATE-SUPPLY-01` besteht fuer die befristete,
+source-only Ein-Personen-Machbarkeitsstudie als Transparenzgate, nicht als
+Freigabe fuer ein vorgebautes Image, Verteilung oder Produktion.
 
-**EN:** One current CycloneDX SBOM was generated with Syft 1.46.0 and assessed
-with digest-pinned Grype 0.117.0. All 426 advisory IDs covering 1,346 matches
-remain `in_triage`; 14 Critical and 360 High matches are still open. No risk
-was accepted and no `not affected` result was invented. The Windows-host run,
-the separate Ubuntu/WSL2 run with its own rootless Podman runtime, observed VS
-Code Dev Containers attachments, and the moderated first-use review are also
-missing. The approved scope decision permits both platform runs on the same
-Windows hardware but forbids runtime or evidence reuse. Native Linux hardware
-is not a Feature 003 acceptance target. The consolidated status is therefore
-`Blocked`, not `Pass`.
+**EN:** The current 23,960-component CycloneDX SBOM was generated with Syft
+1.46.0 and assessed with digest-pinned Grype 0.117.0. The scan reports 1,286
+matches across 390 unique advisory groups: 14 Critical, 326 High, 787 Medium,
+144 Low, 11 Negligible, and 4 Unknown. All 390 groups remain visibly
+`Open`/`in_triage`; no risk acceptance, `not affected` decision, or remediation
+is claimed. For the time-bounded, source-only, single-person feasibility study,
+`GATE-SUPPLY-01` passes as a transparency gate, not as approval of a prebuilt
+image, distribution, or production use.
+
+**DE:** Der autonome Feature-003-Lauf ist mit 85 von 85 Aufgaben `Completed`.
+Der Abschluss gilt ausschliesslich fuer die bis 31.12.2026 befristete
+[Machbarkeitsentscheidung](docs/security/secure-development/2026-08-30-container-hardening/feasibility-study-decision.json).
+Unabhaengige Learning-/A11Y-Pruefung und moderierter Lernendentest sind
+`NotPerformed`; sie werden vor Lernenden-Rollout, vorgebauter Image-Verteilung,
+produktiver Nutzung oder bei Ablauf wieder verpflichtend.
+
+**EN:** The autonomous Feature 003 run is `Completed` with all 85 tasks done.
+Closeout applies only to the source-only feasibility decision through
+2026-12-31. Independent Learning/A11Y review and a moderated learner test are
+`NotPerformed`; they become mandatory again before learner rollout, prebuilt
+image distribution, production use, or expiry.
 
 Der textorientierte Nachweis und die naechsten Owner-Aktionen stehen im
 [Feature-Evidenzindex](docs/security/secure-development/2026-08-30-container-hardening/README.md),
