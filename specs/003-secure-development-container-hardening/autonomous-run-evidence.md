@@ -330,3 +330,125 @@ expansion in the Bash dispatcher. Replacing it with equivalent `tr`-based
 normalization restores macOS Bash 3.2 compatibility. The 24/24 hardening
 suite, 3/3 agent-surface parity suite, and paired Bash/PowerShell dry runs then
 passed. This local correction does not substitute for any open external gate.
+
+## Wiederaufnahme nach Plattformuebergabe / Resume After Platform Handoff
+
+**DE:** Am 06.09.2026 wurde ausschliesslich der bestehende Run
+`8330f54b-97d1-424c-ad1a-842a3fad7be3` erneut auditiert. Branch, Checkpoint,
+Tasks-Hash, sechs akzeptierte Artefakthashes und Intake-Review
+`6403c657-e508-4029-bfe8-319436f3fa7a` blieben gueltig. Das Codex-Routing
+wurde auf `Aligned` aktualisiert. Die erneut ausgefuehrte Analyze-Phase
+bestand mit 85/85 analysierten Tasks, 63/63 Requirement-/Policy-IDs, 26/26
+Gates, 157/157 Gaps, exakter 108/49-Aufteilung und rueckwaerts gerichteten
+Abhaengigkeiten. Das strukturierte Ergebnis ist unter SHA-256
+`a7282c684fb27ee7e3d2fdc7c0a5eb121a2e3a89d40fecbb759e3932ac70d4ac`
+gebunden.
+
+Auf macOS 26.6.2/arm64 wurde `podman compose build --pull` erfolgreich
+ausgefuehrt. Das neue lokale Image
+`sha256:978cb724a3cf33be6891ad99c261a0bfe441a813d90a6be9eb029b10ce4e2a72`
+und Container `49adefa68ec670a563c1b8c92255a3368a9e9595506012e3ef5c79f4aaa09afe`
+bestanden Runtime, den vollstaendigen Toolchain-/Agenten-Smoke, den
+providerfreien Dispatcher-Dry-run und die Bash-/PowerShell-Static-Plaene. VS
+Code 1.135.0 mit Dev Containers 0.466.0 haengte real an den Container an;
+UI-, Status- und Prozessnachweise bestaetigten `/rider-projects`,
+Remoteindikator, Terminal-Backend, `adedev` und aktiven JSON-LSP. Die lokale
+Podman-Machine meldet `Rootful=true` und wird nicht als rootless Evidenz
+ausgegeben; der kanonische rootless Nachweis bleibt Ubuntu/WSL2.
+
+`GATE-XPLAT-MAC-01` und `GATE-XPLAT-01` sind damit `Pass` und `Current`. Danach
+begrenzte der Repository Owner den Abschluss ausdruecklich auf eine bis
+31.12.2026 befristete, allein durchgefuehrte und source-only
+Machbarkeitsstudie. Die nicht verfuegbaren unabhaengigen Learning-/A11Y- und
+moderierten Lernendennachweise sind ehrlich `NotPerformed`; es werden keine
+Ersatzdaten erzeugt. `GATE-LEARNER-01` ist nur fuer diesen Studienabschluss
+`N/A`, waehrend `GATE-A11Y-01` ausschliesslich die tatsaechlich ausgefuehrte
+artefaktbezogene Pruefung belegt. Alle 390 Advisories bleiben `Open`/`in_triage`;
+das Supply-Chain-Pass-Ergebnis belegt Transparenz, nicht Risikoakzeptanz,
+Distribution oder Produktion.
+
+**EN:** Only the existing run was re-audited. Branch, checkpoint, task hash,
+all six accepted artifact hashes, intake review, and refreshed model routing
+validated. Analyze completed for all 85 tasks and is bound at
+`a7282c684fb27ee7e3d2fdc7c0a5eb121a2e3a89d40fecbb759e3932ac70d4ac`.
+The current macOS arm64 image built successfully and passed runtime, full
+toolchain and agent smoke, dispatcher dry run, paired static plans, and a real
+VS Code Dev Containers attachment. Both macOS and consolidated platform gates
+are now current Pass results. The owner then limited closeout to a
+single-person, source-only feasibility study through 2026-12-31. Independent
+Learning/A11Y review and moderated learner evidence are honestly NotPerformed;
+no substitute data is created. GATE-LEARNER-01 is N/A only for this study,
+while GATE-A11Y-01 proves only the executed artefact-level review. All 390
+advisories remain Open/in_triage; the supply-chain Pass proves transparency,
+not risk acceptance, distribution, or production approval. No new autonomous
+run was created.
+
+## T066-Kandidaten und erneuter Resume-Audit / T066 Candidates and New Resume Audit
+
+**DE:** Der erste Kandidat nach der Machbarkeitsentscheidung fuehrte T066 am
+06.09.2026 genau einmal aus. Seine statischen Teilpruefungen bestanden; der
+Runtime-Teil konnte im untergeordneten `codex exec --sandbox workspace-write`-
+Prozess den Podman-Socket nicht erreichen und endete mit Exitcode 125. Der
+Gesamtbefehl endete mit Exitcode 1. T067 bis T069 wurden nicht gestartet und
+der Kandidat bleibt als fehlgeschlagen belegt.
+
+Der aktuelle Auftrag autorisiert die ausdrueckliche Wiederaufnahme desselben
+Runs. Der neue Audit bestaetigte Branch und Remote-Ahead/Behind `0/0`, den
+Checkpoint, alle sechs akzeptierten Artefakthashes, den Tasks-Hash, das
+strukturierte Analyze-Ergebnis, unveraendertes Modell-Routing, fehlende
+repositorybezogene Locks sowie den vom Host erreichbaren laufenden Podman-
+Container. Ein anderer autonomer Lauf in einem anderen Repository wurde nur
+beobachtet und nicht veraendert. Der neue T066-Kandidat wird deshalb direkt
+durch den Orchestrator auf dem Host ausgefuehrt; dies korrigiert ausschliesslich
+die nachgewiesene Socket-Grenze des untergeordneten Prozesses.
+
+**EN:** The first candidate after the feasibility decision executed T066
+exactly once on 2026-09-06. Its static subchecks passed, but the nested
+`codex exec --sandbox workspace-write` process could not access the Podman
+socket; the runtime check exited 125 and the overall command exited 1. T067
+through T069 did not start, and this candidate remains recorded as failed.
+
+The current request explicitly resumes the same run. The new audit confirmed
+branch and remote ahead/behind 0/0, checkpoint, all six accepted-artifact
+hashes, task hash, structured Analyze result, unchanged model routing, no
+repository-specific locks, and a running Podman container reachable from the
+host. Another autonomous run in another repository was only observed and was
+not changed. The new T066 candidate is therefore executed directly by the host
+orchestrator, correcting only the proven nested-process socket boundary.
+
+## Sicherer Implementierungsrand T069 / Safe Implementation Boundary T069
+
+**DE:** Der neu revalidierte Host-Kandidat fuehrte T066 genau einmal aus und
+bestand mit Exitcode 0. Alle sechs Hardening-Modi meldeten `GREEN`; der
+T066-Befund bindet 157/108/49, exakt sechs begruendete N/A-Gates, 27
+Hardening-Tests, vier Dispatcher-Tests, drei Oberflaechen-Paritaetstests und den
+laufenden Podman-Container. T067 bestand anschliessend mit `git diff --check`,
+16 geaenderten getrackten Pfaden, vier beabsichtigten neuen Evidenzpfaden,
+null fremden ungetrackten Pfaden und unveraendertem Index. Es gibt null
+unabhaengige Refactorings. T068 ist durch die nicht sensiblen Sitzungsprotokolle
+belegt. T066 bis T069 sind damit am sicheren Modellrand abgeschlossen; Commit,
+Push, PR, Review, Merge, Bypass, Branchwechsel und Remote-Synchronisierung
+wurden bis zu diesem Rand nicht ausgefuehrt.
+
+Offen bleiben als ehrliche Grenzen 49 Human-only-Gaps, sechs begruendete
+N/A-Gates und 390 Advisories mit Status `Open`/`in_triage`. Die
+Machbarkeitsentscheidung ist keine formale Sandbox-, Risiko-, Distributions-
+oder Produktionsfreigabe. Ab T070 besitzt ausschliesslich der Orchestrator die
+aktuell bestaetigte `MergeAndSync`- und eng begrenzte Admin-Bypass-Autoritaet.
+
+**EN:** The newly revalidated host candidate executed T066 exactly once and
+passed with exit code 0. All six hardening modes reported GREEN, binding the
+157/108/49 partition, exactly six reasoned N/A gates, 27 hardening tests, four
+dispatcher tests, three surface-parity tests, and the running Podman
+container. T067 then passed git diff hygiene and the read-only delivery-set
+check with 16 changed tracked paths, four intended new evidence paths, zero
+unrelated untracked paths, and an unchanged index. No independent refactoring
+is present. T068 is covered by non-sensitive session logs. T066 through T069
+are complete at the safe model boundary; no commit, push, PR, review, merge,
+bypass, branch switch, or remote synchronization occurred before that point.
+
+The honest residual boundaries are 49 Human-only gaps, six reasoned N/A gates,
+and 390 Open/in_triage advisories. The feasibility decision is not formal
+sandbox, risk, distribution, or production approval. From T070 onward, only
+the orchestrator holds the currently confirmed MergeAndSync and narrowly
+scoped admin-bypass authority.

@@ -130,52 +130,46 @@ learner test is a separate feature gate and does not change this partition.
 
 ## Separates Learner-Gate / Separate Learner Gate
 
-**DE:** `GATE-LEARNER-01` bleibt `Blocked`. Owner ist `Learning/A11Y Review`.
-Es liegt keine datierte, moderierte Beobachtung fuer alle vier Berufe ohne
-Spec-Kit-Vorerfahrung vor; deshalb wurde
-`learner-first-use-results.json` nicht erzeugt. Der Repository Owner hat am
-04.09.2026 bestaetigt, dass im vorhandenen Ein-Personen-Setup weder reale
-Teilnehmende aus allen vier Ausbildungsberufen noch die geforderten
-Beobachtungen mit assistiven Technologien bereitgestellt werden koennen. Dies
-ist eine begruendete offene Abweichung, keine positive Testevidenz und keine
-Umklassifizierung zu `N/A`. Folgeaktion: Das Gate bleibt `Blocked`; erst wenn
-geeignete Teilnehmende und assistive Technologien tatsaechlich verfuegbar
-werden, darf `Learning/A11Y Review` den 30-Minuten-Test ausfuehren und nur
-aggregierte, nicht-sensible Ergebnisse mit mindestens 90 Prozent Erfolg
-liefern.
+**DE:** Der Repository Owner hat am 06.09.2026 ausdruecklich entschieden, dass
+dieses Feature zunaechst als allein durchgefuehrte Machbarkeitsstudie endet.
+Reale Teilnehmende und eine unabhaengige Learning-/A11Y-Review werden in diesem
+Studienlauf nicht verfuegbar sein. Deshalb bleibt
+`learner-first-use-results.json` absichtlich abwesend und
+`feasibility-study-decision.json` dokumentiert stattdessen `NotPerformed`.
+`GATE-LEARNER-01` ist nur fuer den bis 31.12.2026 befristeten,
+source-repository-only Studienabschluss `N/A`. Dies ist keine positive
+Lernendenevidenz und keine Behauptung einer unabhaengigen Pruefung.
 
-**EN:** GATE-LEARNER-01 remains Blocked and is owned by Learning/A11Y Review.
-No dated moderated observation exists for all four occupations without prior
-Spec Kit experience, so learner-first-use-results.json was not created. On
-2026-09-04, the Repository Owner confirmed that the available one-person setup
-cannot provide real participants from all four occupations or the required
-assistive-technology observations. This is a justified open deviation, not
-positive test evidence and not a reclassification to N/A. The gate remains
-Blocked. Learning/A11Y Review may run the 30-minute test and provide only
-aggregated non-sensitive results with at least 90 percent success if suitable
-participants and assistive technologies become available later.
+Vor einem Lernenden-Rollout, einer Verteilung eines vorgebauten Images,
+produktiver Nutzung oder bei Ablauf wird das Gate wieder `Applicable`. Dann
+darf ausschliesslich `Learning/A11Y Review` den realen 30-Minuten-Test
+ausfuehren und aggregierte, nicht-sensible Ergebnisse mit mindestens 90
+Prozent Erfolg liefern.
+
+**EN:** On 2026-09-06, the Repository Owner explicitly limited this closeout
+to a single-person feasibility study. Real participants and independent
+Learning/A11Y review will not be available in this study run. The learner
+result therefore remains absent and the feasibility decision records
+NotPerformed. GATE-LEARNER-01 is N/A only for the source-repository-only study
+through 2026-12-31. It becomes Applicable again before learner rollout,
+prebuilt image distribution, production use, or at expiry.
 
 ## Projektspezifische Review-Abweichung / Project-specific Review Deviation
 
 **DE:** Der Repository Owner ist zugleich alleiniger Ersteller, Ausfuehrender
-und menschlicher Pruefer dieses Feature-Patches. Die ausdrueckliche
-Patch-Pruefung vor Commit und Push bleibt moeglich und wurde fuer den bisherigen
-Evidenzstand am 04.09.2026 bestaetigt. Eine zweite unabhaengige Person fuer das
-Vier-Augen-Prinzip steht jedoch nicht zur Verfuegung. Diese Begrenzung bleibt
-als offene, nicht personell unabhaengige Review-Abweichung dokumentiert. Sie ist
-weder ein echtes Vier-Augen-Testat noch eine formale Risikoakzeptanz und darf
-kein fehlgeschlagenes oder blockiertes technisches, Security-, Plattform- oder
-Learner-Gate uebergehen.
+und menschlicher Pruefer dieses Feature-Patches. Am 06.09.2026 wurde dieser
+Umstand als bindende Eigenschaft der Machbarkeitsstudie bestaetigt und die
+autonome Fortsetzung des bestehenden Runs ausdruecklich angeordnet. Eine zweite
+unabhaengige Person fuer das Vier-Augen-Prinzip steht nicht zur Verfuegung.
+Diese Begrenzung bleibt sichtbar und ist weder ein echtes Vier-Augen-Testat
+noch eine produktive oder organisationsweite Freigabe.
 
 **EN:** The Repository Owner is also the sole creator, operator, and human
-reviewer of this feature patch. Explicit human patch review before commit and
-push remains possible and was confirmed for the previous evidence state on
-2026-09-04. No second independent person is available for a four-eyes review.
-This limitation remains documented as an open, non-person-independent review
-deviation. It is neither a genuine four-eyes attestation nor formal risk
-acceptance, and it cannot override a failed or blocked technical, security,
-platform, or learner gate.
+reviewer of this feature patch. On 2026-09-06, this was confirmed as a binding
+property of the feasibility study and autonomous continuation of the existing
+run was explicitly ordered. No second independent person is available. The
+limitation remains visible and is neither a genuine four-eyes attestation nor
+a production or organization-wide approval.
 
-Exakter Trigger / Exact trigger: Any startup path, verification-status
-presentation, Human-only handoff, audience policy, test protocol, participant
-coverage, or learner-facing documentation change.
+Exakter Trigger / Exact trigger: Before learner rollout, prebuilt image
+distribution, production use, or at or after 2026-12-31.

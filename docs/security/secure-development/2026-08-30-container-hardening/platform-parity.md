@@ -2,7 +2,7 @@
 
 ## Konsolidierter Status / Consolidated Status
 
-Status: `Blocked` (06.09.2026). Owner: Repository Maintainer. Reviewer:
+Status: `Pass` (06.09.2026). Owner: Repository Maintainer. Reviewer:
 Security Review. Technischer Quell-Head / technical source head:
 `ad5cd8bc9a9a2c541416390aa4256bc1ffe1eee7`.
 
@@ -25,7 +25,7 @@ codes carry the complete information without relying on color or symbols.
 
 | Plattform / Platform | Beobachtung / Observation | Status | Naechster Trigger / Next trigger |
 |---|---|---|---|
-| macOS | Der fruehere native Build-/Runtime-Nachweis gehoert zum vorherigen Image `sha256:5bec191...` und ist fuer den neuen Head/Image-Stand `Stale`. Ein VS-Code-Attach wurde auch dort nicht beobachtet. / The earlier native build/runtime evidence belongs to the previous image and is stale for the new source/image state; VS Code attachment was not observed. | Ergebnis `Blocked`, Frische `Stale`; VS Code offen / result Blocked, freshness Stale; VS Code open | Auf einem macOS-Runner gegen den neuen Head erneut bauen, pruefen und mit VS Code anhaengen. / Rebuild, verify, and attach with VS Code on macOS against the new head. |
+| macOS | Auf Repository-Head `7901cc71...` wurde das technisch unveraenderte Image neu gebaut. Runtime, vollstaendiger Toolchain-Smoke, Agent-Prompt-Dry-run und beide Static-Plaene bestanden. VS Code Desktop haengte real an Container `49adefa...` an; UI, `code --status` und `podman top` bestaetigten `/rider-projects`, Remoteindikator, Terminal-Backend, `adedev` und aktiven JSON-LSP. Die lokale Podman-Machine meldet `Rootful=true`; sie wird nicht als rootless Beleg ausgegeben. / The technically unchanged image was rebuilt at repository head `7901cc71...`. Runtime, full toolchain smoke, dispatcher dry run, and both static plans passed. VS Code Desktop attached to container `49adefa...`; UI, status, and process evidence confirmed workspace, remote indicator, terminal backend, `adedev`, and active JSON LSP. The local Podman machine reports rootful and is not presented as rootless evidence. | `Pass`, Frische `Current` / freshness Current | Bei Aenderung von macOS, Podman-Machine-Modus, Image, Mounts oder VS Code erneut pruefen. / Recheck after macOS, Podman machine mode, image, mount, or VS Code changes. |
 | Ubuntu/WSL2 Linux path | Eigener Linux-Checkout, rootless Podman, Build, freier publizierter Portbereich `5600-5699`, Isolation, vollstaendiger Runtime-Modus, Audit-Shutdown, Static/pre-commit/Secret/Diff, SBOM, aktueller Grype-Scan, VEX/Provenienz und Remote WSL wurden getrennt belegt. Nach Auswahl von Podman als Dev-Containers-Engine gelang auch der manuelle Anhang. Menschliche Terminalausgaben und der technische Status-/Prozessnachweis bestaetigten `adedev`, `/rider-projects`, Remote-Indikator, integriertes Terminal und den aktiven `rust-analyzer`. / The separate Linux checkout proved the build, free published port range, isolation, complete Runtime mode, audit shutdown, static/pre-commit/secret/diff, SBOM, current Grype scan, VEX/provenance, Remote WSL, and the manual Dev Containers attachment. Human terminal output and the technical status/process probe confirmed the remote user, workspace, indicator, terminal, and active LSP. | `Pass` (aktueller vollstaendiger Plattformnachweis / current complete platform evidence) | Bei Aenderung von WSL, Podman, Image, Mounts oder VS Code erneut pruefen. / Recheck after WSL, Podman, image, mount, or VS Code changes. |
 | Windows host | Eigene Podman-Machine, PowerShell-Plaene, Build, isolierte no-port Runtime, kompletter Toolchain-Smoke, Agent-Prompt-Dry-Run und aktuelle SBOM wurden belegt. Der reale VS-Code-Desktop-Anhang bestaetigte `adedev`, `/rider-projects`, Remote-Indikator, integriertes Terminal und aktiven JSON-LSP. Der Repository-Mount ist lesbar; allein Git im Container kann den Windows-absoluten `.git`-Verweis des Linked Worktrees nicht aufloesen. / Separate Podman machine, plans, build, isolated runtime, smoke, agent dry run, current SBOM, and real VS Code attachment passed. The repository mount is readable; only in-container Git cannot resolve the linked worktree's Windows-absolute `.git` pointer. | `Pass` (aktueller vollstaendiger Plattformnachweis mit dokumentierter Linked-Worktree-Grenze / current complete platform evidence with a documented linked-worktree limitation) | Bei Aenderung von Windows, Podman, Image, Mounts, Linked Worktree oder VS Code erneut pruefen. / Recheck after Windows, Podman, image, mount, linked-worktree, or VS Code changes. |
 
@@ -35,16 +35,18 @@ codes carry the complete information without relying on color or symbols.
 `verification-evidence.json` bindet das aktuelle, kanonisch mit rootless
 Podman nachgepruefte Ubuntu/WSL2-Image `sha256:bcdd1c8d...`. Der getrennte
 Windows-Plattformdatensatz nennt seine eigene lokale Image-ID `57736551...`,
-wie es die Scope-Entscheidung verlangt. Die beiden lokal erzeugten IDs werden
-nicht als identische Artefakte ausgegeben. Der alte macOS-Build bleibt
-historisch sichtbar, aber `Stale` und damit `Blocked`.
+wie es die Scope-Entscheidung verlangt. Der aktuelle macOS-Plattformdatensatz
+nennt das separat erzeugte arm64-Image `978cb724...`. Die drei lokal erzeugten
+IDs werden nicht als identische Artefakte ausgegeben. Nur das WSL2-Image bleibt
+die kanonische Bindung fuer SBOM, Scan, VEX und Provenienz.
 
 **EN:** The document-level `imageIdentity` in `verification-evidence.json`
 binds the current Ubuntu/WSL2 image canonically rechecked with rootless Podman,
 `sha256:bcdd1c8d...`. The separate Windows platform record states its own local
-image ID `57736551...`, as required by the scope decision. The two locally
-produced IDs are not presented as identical artifacts. The old macOS build
-remains visible historically but is marked `Stale` and therefore `Blocked`.
+image ID `57736551...`; the current macOS record states its separately built
+arm64 image `978cb724...`. The three local IDs are not presented as identical
+artifacts. Only the WSL2 image remains canonical for SBOM, scan, VEX, and
+provenance.
 
 ## Gemeinsamer Oberflaechenvertrag / Shared Surface Contract
 
@@ -62,45 +64,48 @@ installed managed twelve-preset profile. Both confirmed all 12 IDs, versions,
 priorities, and enabled states. The standard eight profile remains available
 for repositories that intentionally use it. GATE-PARITY-01 remains Pass.
 
-## Merge-Blocker / Merge Blocker
+## Verbleibende Abschlussgrenzen / Remaining Closeout Boundaries
 
-**DE:** `GATE-XPLAT-01` bleibt `Blocked`. Ubuntu/WSL2 besitzt nun einen
-aktuellen vollstaendigen Runtime-, Static-, Supply-Chain- und
-Dev-Containers-Plattformnachweis. Auch der getrennte Windows-Pfad ist mit
-Build, Runtime, Toolchain, SBOM und VS-Code-Anhang aktuell vollstaendig. Der
-macOS-Lauf ist fuer den neuen Head/Image-Stand veraltet. Learning/A11Y, der
-moderierte First-Use-Test und T066 bleiben unveraendert offen. Ein positiver
-`MergeAndSync`-Abschluss ist nicht erlaubt.
+**DE:** `GATE-XPLAT-01` ist nach dem getrennten aktuellen macOS-Nachlauf nun
+`Pass`. Alle 390 Advisories bleiben sichtbar `Open`/`in_triage` und werden
+nicht als akzeptiert oder behoben ausgegeben. Fuer die befristete source-only
+Machbarkeitsstudie ist `GATE-SUPPLY-01` deshalb ein Transparenzgate und keine
+Distributions- oder Produktionsfreigabe. Der moderierte First-Use-Test und eine
+unabhaengige Learning-/A11Y-Pruefung sind `NotPerformed`; nur
+`GATE-LEARNER-01` ist gemaess der befristeten Owner-Entscheidung fuer diesen
+Studienabschluss `N/A`. Die vorherigen Gap-/Diff-Fehler bleiben historische
+Kandidatenbefunde und muessen durch genau einen neu revalidierten T066-
+Kandidaten ersetzt werden.
 
-**EN:** GATE-XPLAT-01 remains Blocked. Ubuntu/WSL2 now has current complete
-Runtime, Static, supply-chain, and Dev Containers platform evidence. The
-separate Windows path is also complete with current build, runtime, toolchain,
-SBOM, and VS Code attachment evidence. The macOS run is stale for the new
-source/image state. Learning/A11Y, the moderated first-use test, and T066
-remain open. Positive MergeAndSync completion is not allowed.
+**EN:** GATE-XPLAT-01 is now Pass after the separate current macOS rerun. The
+390 advisories remain visibly Open/in_triage and are not presented as accepted
+or remediated. For this time-bounded source-only feasibility study,
+GATE-SUPPLY-01 is a transparency gate, not distribution or production
+approval. Moderated first use and independent Learning/A11Y review are
+NotPerformed; only GATE-LEARNER-01 is N/A for this study closeout under the
+time-bounded owner decision. The prior gap/diff failures remain historical
+candidate results and must be replaced by exactly one newly revalidated T066
+candidate.
 
 ## Dokumentierte menschliche Abweichungen / Documented Human Deviations
 
-**DE:** Der Repository Owner hat am 04.09.2026 bestaetigt, dass dieses Feature
-in einem Ein-Personen-Setup erstellt, ausgefuehrt und geprueft wird. Deshalb
-sind weder ein echtes Vier-Augen-Review noch ein realer moderierter
-Erstnutzungstest mit allen vier Ausbildungsberufen und assistiven Technologien
-durchfuehrbar. Die ausdrueckliche Selbstpruefung des Patches ersetzt keine
-personell unabhaengige Pruefung. Beide Punkte bleiben begruendete offene
-Abweichungen; `GATE-A11Y-01` und `GATE-LEARNER-01` bleiben `Blocked`. Es werden
-keine Teilnehmenden, Beobachtungen, Zeitwerte, Erfolgsquoten, Testate oder
-Risikoakzeptanzen erfunden.
+**DE:** Der Repository Owner hat am 06.09.2026 entschieden, dieses Feature als
+bis 31.12.2026 befristete, allein durchgefuehrte und source-only
+Machbarkeitsstudie abzuschliessen. Ein echtes Vier-Augen-Review und der
+moderierte Erstnutzungstest sind in diesem Scope `NotPerformed`.
+`GATE-A11Y-01` prueft weiterhin die tatsaechlich ausgefuehrte
+artefaktbezogene, text-first WCAG-2.2-AA-Pruefung. `GATE-LEARNER-01` ist nur
+fuer diesen Studienabschluss `N/A`. Es werden keine Teilnehmenden,
+Beobachtungen, Zeitwerte, Erfolgsquoten oder unabhaengigen Testate erfunden.
 
-**EN:** On 2026-09-04, the Repository Owner confirmed that this feature is
-created, operated, and reviewed in a one-person setup. Therefore neither a
-genuine four-eyes review nor a real moderated first-use test covering all four
-occupations and assistive technologies is feasible. Explicit self-review of
-the patch does not replace person-independent review. Both items remain
-justified open deviations; GATE-A11Y-01 and GATE-LEARNER-01 remain Blocked. No
-participants, observations, timings, success rates, attestations, or risk
-acceptances are invented.
+**EN:** On 2026-09-06, the Repository Owner limited completion to a
+single-person, source-only feasibility study through 2026-12-31. Four-eyes
+review and moderated first use are NotPerformed. GATE-A11Y-01 still validates
+the actual artefact-level text-first WCAG review; GATE-LEARNER-01 is N/A only
+for this study closeout. No participants, observations, timings, success
+rates, or independent attestations are invented.
 
 Neubewertungsausloeser / Re-evaluation trigger: Any paired interface,
 help/man page/Cmdlet, exit-code, platform result, source/image identity, or
-platform availability change, or availability of an independent reviewer,
-representative learners, or assistive technologies.
+platform availability change, learner rollout, prebuilt image distribution,
+production use, or arrival of 2026-12-31.

@@ -129,14 +129,12 @@
     },
     {
       "gateId": "GATE-LEARNER-01",
-      "applicability": "Applicable",
-      "requiredScope": "Validate a dated, non-sensitive moderated first-use result produced by Learning/A11Y Review: all four binding occupations represented, no prior Spec Kit experience, 30-minute limit, and at least 90 percent success for startup path, verification status, and next Human-only step.",
-      "requiredCommandTokens": [
-        "bash scripts/test-ade-sandbox-hardening.sh --mode accessibility --evidence docs/security/secure-development/2026-08-30-container-hardening/verification-evidence.json"
-      ],
-      "requiredRunnerOrPlatformTokens": ["Learning-A11Y-Review"],
-      "rationale": "SC-009 is a human-observation outcome and cannot be proven by repository linting or fabricated by an agent.",
-      "reevaluationTrigger": "Any startup path, verification-status presentation, Human-only handoff, audience policy, test protocol, participant coverage, or learner-facing documentation change."
+      "applicability": "N/A",
+      "requiredScope": "Retain the moderated first-use protocol without inventing participants or outcomes; validate the time-bounded owner decision that excludes learner acceptance from this single-person, source-repository-only feasibility study.",
+      "requiredCommandTokens": [],
+      "requiredRunnerOrPlatformTokens": [],
+      "rationale": "The moderated learner study is outside the accepted completion scope of the time-bounded single-person, source-repository-only feasibility study; no participants or positive outcome are claimed.",
+      "reevaluationTrigger": "Before learner rollout, prebuilt image distribution, production use, or at or after 2026-12-31, restore Applicable and obtain real Learning/A11Y Review evidence."
     },
     {
       "gateId": "GATE-PARITY-01",

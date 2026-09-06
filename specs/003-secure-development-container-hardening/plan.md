@@ -268,12 +268,17 @@ orchestrator-owned run state.
 | Begruendete N/A-Gates | ASVS, Produkt-AI-SBOM, Zero Trust, Cloud/C3A/C5, Registry/Hosting | exakt eine N/A-Primary-Zeile je Gate ohne Laufdaten, aber mit Sachgrund und Trigger | Repository Maintainer | Security Review; formale Rechts-/Providerentscheidung bleibt ausser Scope |
 | Autonomer Abschluss | AU-001–AU-006 | Delivery-Set, temporaeres PreMerge, kausales PostMerge, finaler State | Orchestrator unter aktuell revalidierter Autoritaet | erforderliche menschliche/Plattform-Reviews |
 
-Der moderierte Erstnutzungstest aus SC-009 ist feature-spezifische
-menschliche Evidenz, aber keine Umklassifizierung der 49 akzeptierten
-Human-only-Gaps und keine formale Freigabe. Ohne den datierten Datensatz der
-Rolle `Learning/A11Y Review` bleibt `GATE-LEARNER-01` offen und ein positiver
-Feature-Abschluss ist blockiert. / SC-009 requires dated human evidence; it
-does not reclassify the accepted 49 Human-only gaps or grant approval.
+Der moderierte Erstnutzungstest aus SC-009 ist weiterhin fuer einen spaeteren
+Lernenden-Rollout verpflichtend und keine Umklassifizierung der 49 akzeptierten
+Human-only-Gaps. Fuer die bis 31.12.2026 befristete, allein durchgefuehrte und
+source-only Machbarkeitsstudie dokumentiert
+`DEC-FEASIBILITY-SINGLE-PERSON-2026-09-06` jedoch ausdruecklich
+`NotPerformed`; `GATE-LEARNER-01` ist nur fuer diesen Studienabschluss `N/A`.
+Vor Lernenden-Rollout, vorgebauter Image-Verteilung, produktiver Nutzung oder
+bei Ablauf wird es wieder `Applicable`. / SC-009 remains mandatory before
+learner rollout and does not reclassify the 49 Human-only gaps. The time-bound
+single-person feasibility decision records NotPerformed and makes the learner
+gate N/A only for this source-only study closeout.
 
 ## Implementierungsstrategie / Implementation Strategy
 

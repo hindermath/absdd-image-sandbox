@@ -1067,14 +1067,20 @@ API, or authentication service enters scope.
   sections provide German-first/English-second content, CEFR-B2-oriented prose,
   first-use term explanations, and complete textual status, dependency, and
   decision information.
-- **SC-009**: In einem moderierten Erstnutzungs-Test koennen mindestens `90%`
-  der Teilnehmenden aus den vier Zielberufen ohne Spec-Kit-Vorerfahrung binnen
-  `30 Minuten` den sicheren Startpfad, den aktuellen Verifikationsstatus und
-  den naechsten offenen Human-only-Schritt korrekt bestimmen. / In a moderated
-  first-use test, at least `90%` of participants from the four target
-  occupations without prior Spec Kit experience can identify the safe startup
-  path, current verification state, and next open human-only step within
-  `30 minutes`.
+- **SC-009**: Vor einem Rollout an Lernende wird in einem moderierten
+  Erstnutzungs-Test belegt, dass mindestens `90%` der Teilnehmenden aus den
+  vier Zielberufen ohne Spec-Kit-Vorerfahrung binnen `30 Minuten` den sicheren
+  Startpfad, den aktuellen Verifikationsstatus und den naechsten offenen
+  Human-only-Schritt korrekt bestimmen. Fuer die bis 31.12.2026 befristete,
+  allein durchgefuehrte und auf das Quellrepository begrenzte
+  Machbarkeitsstudie ist dieser Rollout-Nachweis gemaess
+  `DEC-FEASIBILITY-SINGLE-PERSON-2026-09-06` nicht Teil des positiven
+  Studienabschlusses. Es werden keine Teilnehmenden oder Ergebnisse erfunden.
+  / Before learner rollout, a moderated first-use test demonstrates at least
+  90 percent success across the four target occupations within 30 minutes.
+  Under the time-bounded, single-person, source-repository-only feasibility
+  decision, that rollout evidence is outside the positive study closeout; no
+  participants or outcomes are invented.
 - **SC-010**: Jede geaenderte Datei ist mindestens einer Anforderung und einer
   Gap-ID oder einer zwingenden Phasen-Evidenz zugeordnet; die Abschlusspruefung
   meldet `0` unabhaengige Refactorings und `0` Registry-/Hosting-Aktionen. /
@@ -1084,6 +1090,15 @@ API, or authentication service enters scope.
 
 ## Annahmen / Assumptions
 
+- Diese Feature-Abnahme ist bis 31.12.2026 eine allein durchgefuehrte,
+  source-only Machbarkeitsstudie. Sie ist keine produktive Freigabe, keine
+  Freigabe eines vorgebauten Images, kein unabhaengiges Security-Testat und
+  kein Lernenden-Rollout. Vor einem dieser Schritte oder bei Ablauf wird
+  `GATE-LEARNER-01` wieder `Applicable`. / Until 2026-12-31, this feature
+  acceptance is a single-person, source-only feasibility study. It is not a
+  production approval, prebuilt-image approval, independent security
+  attestation, or learner rollout. The learner gate becomes Applicable again
+  before any such step or at expiry.
 - Podman bleibt die Referenzlaufzeit; Docker-kompatible Endpunkte dienen nur
   Podman-gestuetzter lokaler Werkzeugkompatibilitaet. / Podman remains the
   reference runtime; Docker-compatible endpoints serve only Podman-backed local

@@ -327,8 +327,13 @@ quality before and after clarification.
   Accessibility evidence is stronger than repository homogeneity alone.
 - [x] PRV007 SC-009 besitzt mit `GATE-LEARNER-01`, aggregiertem nicht sensiblem
   Datensatz und `Learning/A11Y Review` eine klare Human-Ownership-Grenze, ohne
-  die akzeptierten 49 Human-only-Gaps umzudeuten. / SC-009 has explicit human
-  ownership without reclassifying baseline gaps.
+  die akzeptierten 49 Human-only-Gaps umzudeuten. Fuer die befristete
+  Ein-Personen-Machbarkeitsstudie dokumentiert eine validierte Scope-
+  Entscheidung ehrlich `NotPerformed` und `N/A`, ohne Teilnehmende oder
+  Ergebnisse zu erfinden; vor Rollout oder Ablauf gilt wieder der reale Test.
+  / SC-009 has explicit human ownership without reclassifying baseline gaps.
+  A validated time-bounded feasibility decision records NotPerformed and N/A
+  without fabricating evidence; the real test returns before rollout or expiry.
 - [x] PRV008 Fehlende Linux- oder Windows/WSL2-Evidenz bleibt ehrlich `Open`
   und blockiert zugleich das Applicable-Gate und `MergeAndSync`; macOS und
   `N/A` sind kein Ersatz. / Platform evidence no longer overclaims coverage.

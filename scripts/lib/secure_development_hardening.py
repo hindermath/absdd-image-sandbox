@@ -28,6 +28,41 @@ EXIT_PLATFORM = 3
 FEATURE_DIR = "specs/003-secure-development-container-hardening"
 ASSESSMENT_PATH = "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assessment-results.json"
 GATE_REQUIREMENTS_PATH = f"{FEATURE_DIR}/autonomous-run-gate-requirements.json"
+FEASIBILITY_DECISION_PATH = (
+    "docs/security/secure-development/2026-08-30-container-hardening/"
+    "feasibility-study-decision.json"
+)
+
+EXPECTED_FEASIBILITY_DECISION_FIELDS = {
+    "schemaVersion",
+    "decisionId",
+    "status",
+    "effectiveAt",
+    "expiresOn",
+    "ownerRole",
+    "studyType",
+    "deliveryScope",
+    "independentReview",
+    "moderatedLearnerTest",
+    "supplyChainDisposition",
+    "prohibitedClaims",
+    "reevaluationTriggers",
+    "containsSensitiveContent",
+}
+
+EXPECTED_PROHIBITED_FEASIBILITY_CLAIMS = {
+    "IndependentSecurityApproval",
+    "LearnerValidationCompleted",
+    "PrebuiltImageApprovedForDistribution",
+    "ProductionUseApproved",
+}
+
+EXPECTED_FEASIBILITY_REEVALUATION_TRIGGERS = {
+    "BeforeLearnerRollout",
+    "BeforePrebuiltImageDistribution",
+    "BeforeProductionUse",
+    "AtOrAfterExpiry",
+}
 
 EXPECTED_BINDINGS = (
     (
@@ -557,6 +592,62 @@ def command_plan(repo: Path, mode: str) -> list[list[str]]:
     return plans[mode]
 
 
+def validate_feasibility_study_decision_document(
+    value: dict[str, Any], *, today: datetime | None = None
+) -> list[str]:
+    errors: list[str] = []
+    if set(value) != EXPECTED_FEASIBILITY_DECISION_FIELDS:
+        errors.append("feasibility study decision has unexpected or missing fields")
+    expected_values = {
+        "schemaVersion": "1.0",
+        "decisionId": "DEC-FEASIBILITY-SINGLE-PERSON-2026-09-06",
+        "status": "AcceptedScopeLimitation",
+        "ownerRole": "Repository Owner",
+        "studyType": "SinglePersonFeasibilityStudy",
+        "deliveryScope": "SourceRepositoryOnly",
+        "independentReview": "NotPerformed",
+        "moderatedLearnerTest": "NotPerformed",
+        "supplyChainDisposition": "TransparentOpenTriage",
+        "containsSensitiveContent": False,
+    }
+    for field, expected in expected_values.items():
+        if value.get(field) != expected:
+            errors.append(f"feasibility study decision {field} must be {expected!r}")
+    if set(value.get("prohibitedClaims", [])) != EXPECTED_PROHIBITED_FEASIBILITY_CLAIMS:
+        errors.append("feasibility study decision must prohibit every unsupported approval claim")
+    if set(value.get("reevaluationTriggers", [])) != EXPECTED_FEASIBILITY_REEVALUATION_TRIGGERS:
+        errors.append("feasibility study decision must retain every re-evaluation trigger")
+    parse_utc(value.get("effectiveAt"), "feasibilityStudyDecision.effectiveAt", errors)
+    try:
+        expires_on = datetime.strptime(value.get("expiresOn", ""), "%Y-%m-%d").date()
+        current_date = (today or datetime.now(timezone.utc)).date()
+        if expires_on < current_date:
+            errors.append("feasibility study decision has expired")
+    except (TypeError, ValueError):
+        errors.append("feasibilityStudyDecision.expiresOn must use YYYY-MM-DD")
+    return errors
+
+
+def validate_feasibility_study_decision(repo: Path) -> list[str]:
+    path = repo / FEASIBILITY_DECISION_PATH
+    if not path.is_file():
+        return ["single-person feasibility study decision is missing"]
+    try:
+        value = load_json(path)
+    except (OSError, UnicodeError, ValueError, json.JSONDecodeError) as exc:
+        return [f"feasibility study decision is invalid: {exc}"]
+    learner_result = repo / (
+        "docs/security/secure-development/2026-08-30-container-hardening/"
+        "learner-first-use-results.json"
+    )
+    errors = validate_feasibility_study_decision_document(value)
+    if learner_result.exists():
+        errors.append(
+            "learner evidence exists and requires GATE-LEARNER-01 applicability re-evaluation"
+        )
+    return errors
+
+
 def validate_learner_result(repo: Path) -> list[str]:
     path = repo / "docs/security/secure-development/2026-08-30-container-hardening/learner-first-use-results.json"
     if not path.is_file():
@@ -602,6 +693,7 @@ def execute_mode(
     errors: list[str] = []
     try:
         gaps = load_json(gaps_path)
+        requirements = load_json(requirements_path)
         evidence = None
         known = None
         if evidence_path:
@@ -615,7 +707,6 @@ def execute_mode(
                 }
         errors.extend(validate_gap_document(gaps, repo, known_evidence_ids=known))
         if evidence is not None:
-            requirements = load_json(requirements_path)
             errors.extend(
                 validate_evidence_document(
                     evidence,
@@ -658,7 +749,16 @@ def execute_mode(
                 print(f"RED: documentation paths are missing: {', '.join(missing)}", file=sys.stderr)
                 return EXIT_VALIDATION
         if selected == "Accessibility":
-            learner_errors = validate_learner_result(repo)
+            learner_gate = next(
+                item
+                for item in requirements.get("gates", [])
+                if item.get("gateId") == "GATE-LEARNER-01"
+            )
+            learner_errors = (
+                validate_feasibility_study_decision(repo)
+                if learner_gate.get("applicability") == "N/A"
+                else validate_learner_result(repo)
+            )
             if learner_errors:
                 for error in learner_errors:
                     print(f"- {error}", file=sys.stderr)

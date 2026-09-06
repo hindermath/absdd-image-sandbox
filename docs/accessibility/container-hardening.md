@@ -31,55 +31,57 @@ that required evidence is still missing.
 
 ## Gepruefte textorientierte Wahrheit / Reviewed Text-First Truth
 
-**DE:** Die Dokumentation nennt das unveraenderte Image, den belegten
-macOS-rootless-Podman-Lauf, sechs Sprachfamilien, zwei Skriptgrundlagen, sechs
+**DE:** Die Dokumentation nennt die getrennt belegten macOS-, Windows-Host-
+und Ubuntu/WSL2-Pfade, sechs Sprachfamilien, zwei Skriptgrundlagen, sechs
 Agentenoberflaechen, getrennten Agentenstate, Loopback-Ports `5100-5199`, den
-Audit-Stopp sowie genau eine SBOM-/Grype-Kette. Sie nennt ebenso deutlich die
-offenen, getrennten Windows-Host-, Ubuntu/WSL2- und VS-Code-Nachweise sowie 14
-Critical- und 360 High-Matches. Die beiden Windows-basierten Pfade duerfen
-dieselbe Hardware, aber keine Laufzeit oder Evidenz teilen. Kein Text setzt
-diese Grenzen auf `Pass`, `N/A`, `not affected` oder akzeptiertes Risiko.
+Audit-Stopp sowie die kanonische SBOM-/Grype-Kette. Sie nennt ebenso deutlich
+390 weiterhin `Open`/`in_triage` gefuehrte Advisories. Die lokale macOS-
+Podman-Machine ist rootful; nur Ubuntu/WSL2 liefert den kanonischen rootless
+Nachweis. Kein Text erklaert offene Advisories zu `not affected` oder das
+lokale Image fuer produktiv beziehungsweise distributionsbereit.
 
-**EN:** Documentation names the unchanged image, evidenced macOS rootless
-Podman run, six language families, two scripting foundations, six agent
-surfaces, separate agent state, loopback ports, audit stop, and one SBOM/Grype
-chain. It also states the separate open Windows-host, Ubuntu/WSL2, VS Code, 14
-Critical, and 360 High items. The two Windows-based paths may share hardware
-but not a runtime or evidence. No text turns these limits into Pass, N/A, not
-affected, or accepted risk.
+**EN:** Documentation identifies the separately evidenced macOS, Windows-host,
+and Ubuntu/WSL2 paths, six language families, two scripting foundations, six
+agent surfaces, separate agent state, loopback ports, audit stop, and the
+canonical SBOM/Grype chain. It also clearly retains 390 Open/in_triage
+advisories. The macOS Podman machine is rootful; only Ubuntu/WSL2 provides the
+canonical rootless evidence. No text turns open advisories into not-affected
+claims or approves the local image for production or distribution.
 
 ## Menschlicher Erstnutzungstest / Human First-Use Test
 
-**DE:** `GATE-LEARNER-01` bleibt `Blocked`. Owner ist `Learning/A11Y Review`.
-Die Datei `learner-first-use-results.json` wurde nicht erzeugt, weil keine
-echte moderierte Beobachtung fuer alle vier Berufe ohne Spec-Kit-Vorerfahrung
-vorliegt. Der spaetere Test misst sicheren Start, sichtbaren
-Verifikationsstatus und den naechsten Human-only-Schritt innerhalb von 30
-Minuten mit mindestens 90 Prozent Erfolg. Er speichert nur aggregierte,
-nicht-sensible Ergebnisse.
+**DE:** Der Repository Owner hat am 06.09.2026 festgelegt, dass in der allein
+durchgefuehrten Machbarkeitsstudie keine reale moderierte Beobachtung und keine
+unabhaengige Learning-/A11Y-Review stattfinden werden. Deshalb existiert kein
+`learner-first-use-results.json`; `feasibility-study-decision.json` erfasst
+stattdessen `NotPerformed`. `GATE-LEARNER-01` ist nur fuer diesen bis
+31.12.2026 befristeten, source-only Studienabschluss `N/A`. Vor
+Lernenden-Rollout, Image-Verteilung, produktiver Nutzung oder bei Ablauf wird
+der reale Test wieder verpflichtend.
 
-**EN:** GATE-LEARNER-01 remains Blocked and is owned by Learning/A11Y Review.
-No learner result file was created because no real moderated observation
-exists for all four occupations without prior Spec Kit experience. A later
-test measures safe startup, visible verification status, and the next
-Human-only step within 30 minutes at a success rate of at least 90 percent,
-using aggregated non-sensitive results only.
+**EN:** The Repository Owner decided on 2026-09-06 that this single-person
+feasibility study will not perform moderated learner observation or
+independent Learning/A11Y review. No learner result exists; the feasibility
+decision records NotPerformed. GATE-LEARNER-01 is N/A only for this
+source-only study through 2026-12-31 and becomes mandatory again before
+learner rollout, image distribution, production use, or expiry.
 
-**Exakter Neubewertungsausloeser / Exact re-evaluation trigger:** Any startup
-path, verification-status presentation, Human-only handoff, audience policy,
-test protocol, participant coverage, or learner-facing documentation change.
+**Exakter Neubewertungsausloeser / Exact re-evaluation trigger:** Before
+learner rollout, prebuilt image distribution, production use, or at or after
+2026-12-31.
 
 ## Grenzen / Limits
 
 **DE:** Diese Dateipruefung ersetzt weder einen Screenreader-/Braille-Test mit
-Menschen noch den moderierten SC-009-Test. Windows-Host-, Ubuntu/WSL2- und
-VS-Code-Nachweise bleiben getrennte offene Plattformaufgaben. Native
-Linux-Hardware ist kein Akzeptanzziel fuer Feature 003.
+Menschen noch den moderierten SC-009-Test. Sie belegt ausschliesslich die
+artefaktbezogene A11Y-Pruefung dieser Machbarkeitsstudie. Alle drei
+Plattformpfade sind getrennt aktuell belegt; native Linux-Hardware ist kein
+Akzeptanzziel fuer Feature 003.
 
 **EN:** This file review does not replace a human screen-reader or Braille
-test or the moderated SC-009 test. Windows-host, Ubuntu/WSL2, and VS Code
-evidence remain separate open platform tasks. Native Linux hardware is not a
-Feature 003 acceptance target.
+test or the moderated SC-009 test. It proves only the artefact-level A11Y
+review for this feasibility study. All three platform paths have separate
+current evidence; native Linux hardware is not a Feature 003 target.
 
 Der Homogenitaets-Dry-run erreichte 28/29 Pruefungen. Nur Statistikprofil 2
 wich nach den neuen Content-Aenderungen erwartbar ab; laut Plan wird es erst

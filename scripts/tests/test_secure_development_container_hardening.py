@@ -291,6 +291,39 @@ class EvidenceContractTests(unittest.TestCase):
         errors = self.library.validate_evidence_document(document, self.requirements, REPOSITORY)
         self.assertTrue(any("stale evidence cannot pass" in error for error in errors), errors)
 
+    def test_single_person_feasibility_decision_is_valid(self) -> None:
+        decision = load_json(
+            REPOSITORY
+            / "docs/security/secure-development/2026-08-30-container-hardening/feasibility-study-decision.json"
+        )
+        validation_date = self.library.datetime(2026, 9, 6, tzinfo=self.library.timezone.utc)
+        self.assertEqual(
+            self.library.validate_feasibility_study_decision_document(
+                decision, today=validation_date
+            ),
+            [],
+        )
+
+    def test_feasibility_decision_cannot_claim_learner_validation(self) -> None:
+        decision = load_json(
+            REPOSITORY
+            / "docs/security/secure-development/2026-08-30-container-hardening/feasibility-study-decision.json"
+        )
+        decision["moderatedLearnerTest"] = "Pass"
+        errors = self.library.validate_feasibility_study_decision_document(decision)
+        self.assertTrue(any("moderatedLearnerTest" in error for error in errors), errors)
+
+    def test_expired_feasibility_decision_is_rejected(self) -> None:
+        decision = load_json(
+            REPOSITORY
+            / "docs/security/secure-development/2026-08-30-container-hardening/feasibility-study-decision.json"
+        )
+        validation_date = self.library.datetime(2027, 1, 1, tzinfo=self.library.timezone.utc)
+        errors = self.library.validate_feasibility_study_decision_document(
+            decision, today=validation_date
+        )
+        self.assertTrue(any("expired" in error for error in errors), errors)
+
 
 class CommandLineContractTests(unittest.TestCase):
     def run_entry(self, kind: str, *arguments: str) -> subprocess.CompletedProcess[str]:

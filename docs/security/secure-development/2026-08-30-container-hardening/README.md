@@ -190,57 +190,51 @@ pinned Grype path.
 
 ## Aktueller Implementierungsstatus / Current Implementation Status
 
-T001 bis T055 sind mit zugehoeriger Evidenz abgeschlossen. Der exakt einmal
-ausgefuehrte finale Build erzeugte die lokale Image-ID
-`sha256:5bec1910211e61f60d140907a75689f9f6e31c2ec5baceaac7ff10b99d846eaf`.
-Die anschliessende Ausfuehrung auf dem nativen rootless-Podman-Host unter
-macOS bestand Runtime, 6/6 Sprachfamilien, 2/2 Skriptgrundlagen, sechs
-Agenten-CLIs, Dispatcher-Dry-run, Audit-Export und geordneten Stop. Das Image
-wurde nicht erneut gebaut. / T001 through T055 are evidenced. The one final
-build produced the stated image; native macOS rootless Podman then passed
-runtime, six language families, two scripting foundations, six agent CLIs,
-dispatcher dry-run, audit export, and ordered stop. The image was not rebuilt.
+T001 bis T065 sind mit zugehoeriger Evidenz abgeschlossen. Windows-Host,
+Ubuntu/WSL2 und macOS besitzen getrennte aktuelle Build-, Runtime-,
+Toolchain- und VS-Code-Nachweise. Der aktuelle macOS-Nachlauf erzeugte das
+lokale arm64-Image `sha256:978cb724a3cf33be6891ad99c261a0bfe441a813d90a6be9eb029b10ce4e2a72`.
+Die macOS-Podman-Machine meldet `Rootful=true`; der kanonische rootless Nachweis
+und die dokumentweite Supply-Chain-Bindung bleiben beim Ubuntu/WSL2-Image
+`sha256:bcdd1c8d4234ff8de8edbd1f3c52fe06c1a97d876d1c6a8996928bdff4376f2c`.
+/ T001 through T065 are evidenced. Windows host, Ubuntu/WSL2, and macOS have
+separate current build, runtime, toolchain, and VS Code evidence. The macOS
+machine is rootful; canonical rootless and supply-chain evidence remains bound
+to the WSL2 image.
 
-Genau eine aktuelle CycloneDX-SBOM mit 23.967 Komponenten wurde durch Syft
-1.46.0 erzeugt und mit dem digest-gepinnten Grype 0.117.0 gescannt. Der Scan
-meldete 1.346 Matches in 426 Advisory-Gruppen. Jede Gruppe besitzt einen
-offenen `in_triage`-Blocker; 14 Critical- und 360 High-Matches bleiben auf
-Match-Ebene offen. Kein Risiko wurde akzeptiert und kein `not affected`
-erfunden. / One current CycloneDX SBOM with 23,967 components was scanned by
-digest-pinned Grype. All 426 advisory groups remain in triage; 14 Critical and
-360 High matches are open. No risk was accepted and no not-affected result was
-invented.
+Die aktuelle CycloneDX-SBOM umfasst 23.960 Komponenten. Der digest-gepinnte
+Grype-Scan meldet 1.286 Matches in 390 Advisory-Gruppen: 14 Critical, 326 High,
+787 Medium, 144 Low, 11 Negligible und 4 Unknown. Jede Advisory-Gruppe bleibt
+sichtbar `Open`/`in_triage`; es wird kein `not affected` erfunden. Fuer die
+source-only Machbarkeitsstudie besteht `GATE-SUPPLY-01` als Transparenzgate,
+nicht als Aussage, das Image sei produktiv sicher oder distributionsbereit. /
+The current SBOM contains 23,960 components. All 390 advisory groups remain
+Open/in_triage. The supply gate proves transparency for the source-only study,
+not production safety or distribution approval.
 
-Offen bleiben getrennte Windows-Host- und Ubuntu/WSL2-Evidenz, die zugehoerigen
-VS-Code-Attaches, `GATE-LEARNER-01` durch `Learning/A11Y Review` und die
-technische oder reviewte Disposition der Critical-/High-Treffer. Die Datei
-`learner-first-use-results.json` existiert absichtlich nicht. Ein Linux-
-Container auf macOS, die Windows-Podman-Machine oder der macOS-Lauf ersetzt
-keinen der fehlenden Ausfuehrungspfade. Native Linux-Hardware ist kein
-Akzeptanzziel von Feature 003. / Separate Windows-host and Ubuntu/WSL2
-evidence, their VS Code attachments, the human learner gate, and reviewed
-Critical/High dispositions remain open. The learner result file intentionally
-does not exist, and no substitute or reused platform evidence is used. Native
-Linux hardware is not a Feature 003 acceptance target.
+Der Repository Owner hat am 06.09.2026 die bis 31.12.2026 befristete
+Ein-Personen-Machbarkeitsstudie festgelegt. Reale unabhaengige Learning-/A11Y-
+und moderierte Lernendennachweise werden in diesem Studienlauf nicht erzeugt.
+`feasibility-study-decision.json` dokumentiert `NotPerformed`;
+`GATE-LEARNER-01` ist nur fuer diesen Abschluss `N/A`. Vor Lernenden-Rollout,
+vorgebauter Image-Verteilung, produktiver Nutzung oder bei Ablauf wird der
+reale Test wieder verpflichtend. / The owner limited this run to a
+single-person feasibility study through 2026-12-31. Human learner evidence is
+NotPerformed and N/A only for this closeout; it becomes mandatory before any
+rollout, image distribution, production use, or expiry.
 
-## Stopp an T065 / Stop at T065
+## Historischer Stopp an T065 / Historical Stop at T065
 
-**DE:** T056 bis T064 wurden mit ehrlicher Pass-, Fail-, Open- oder
-Blocked-Evidenz abgeschlossen. T065 stoppte fail-closed: Der vollstaendig
-redigierte Aufruf `uvx pre-commit run --all-files` endete mit Exit 2. Weil ein
-moeglicher echter Fund ohne Einsicht in Trefferinhalte nicht sicher
-ausgeschlossen werden konnte, wurde `scan-agent-secrets` nicht mehr gestartet.
-T065 bleibt unchecked. T066 wurde wegen der unerfuellten Abhaengigkeit keinmal
-ausgefuehrt; T066 bis T085 bleiben unchecked.
+**DE:** Ein frueher T065-Versuch stoppte fail-closed nach Exit 2 von
+`pre-commit`. Der spaetere redigierte Wiederholungslauf bestand sowohl
+Pre-Commit als auch Secret-Scan; T065 ist abgeschlossen. Der damalige erste
+T066-Kandidat schlug wegen vier noch fehlender Gate-Zeilen fehl und bleibt als
+historische RED-Evidenz erhalten. Erst die explizite Wiederaufnahme nach
+vollstaendiger Plattform- und Scope-Evidenz autorisiert genau einen neuen
+T066-Kandidaten.
 
-**EN:** T056 through T064 completed with honest pass, fail, open, or blocked
-evidence. T065 stopped fail-closed when the fully redacted pre-commit command
-returned exit 2. Because a possible real finding could not be safely excluded
-without inspecting match content, scan-agent-secrets was not started. T065
-remains unchecked, T066 was not run, and T066 through T085 remain unchecked.
-
-Retry-Trigger: Eine autorisierte menschliche Security Review klassifiziert den
-redigierten Pre-commit-Fehler ohne Offenlegung von Secret-Inhalten; danach
-beide T065-Befehle erneut ausfuehren. / An authorized human Security Review
-classifies the redacted pre-commit failure without disclosing secret content;
-then rerun both T065 commands.
+**EN:** An earlier T065 attempt stopped fail closed. The later redacted retry
+passed pre-commit and secret scanning, completing T065. The first historical
+T066 candidate failed because four gate rows were missing. It remains RED
+evidence; only the explicit resume after complete platform and scope evidence
+authorizes one new T066 candidate.

@@ -205,9 +205,32 @@ Blocker sichtbar.
 
 Der Agent darf diesen Datensatz strukturell validieren, aber weder
 Teilnehmende, Beobachtungen noch ein positives Ergebnis erzeugen. Fehlt die
-menschliche Evidenz, bleibt `GATE-LEARNER-01` offen und blockiert einen
-positiven Feature-Abschluss. / The agent may validate but never fabricate this
-human evidence.
+menschliche Evidenz ausserhalb einer gueltigen Machbarkeitsentscheidung,
+bleibt `GATE-LEARNER-01` offen und blockiert einen positiven Feature-Abschluss.
+/ The agent may validate but never fabricate this human evidence. Without a
+valid feasibility decision, missing evidence keeps the learner gate open.
+
+## 10a. FeasibilityStudyDecision
+
+- `decisionId`, `effectiveAt`, `expiresOn`, `ownerRole` und
+  `status: AcceptedScopeLimitation`.
+- `studyType: SinglePersonFeasibilityStudy` und
+  `deliveryScope: SourceRepositoryOnly`.
+- `independentReview` und `moderatedLearnerTest`: immer `NotPerformed`; kein
+  Ersatz fuer reale menschliche Evidenz.
+- `supplyChainDisposition: TransparentOpenTriage`: SBOM, Scan, VEX und offene
+  Advisories bleiben sichtbar; keine Sicherheitsfreigabe wird behauptet.
+- `prohibitedClaims`: keine unabhaengige Security-Freigabe, keine bestandene
+  Lernendenvalidierung, keine Freigabe eines vorgebauten Images und keine
+  produktive Freigabe.
+- `reevaluationTriggers`: vor Lernenden-Rollout, vorgebauter Image-Verteilung,
+  produktiver Nutzung sowie bei oder nach Ablauf.
+- `containsSensitiveContent: false`.
+
+Der Validator akzeptiert diese Entscheidung nur bis zum Ablaufdatum und nur,
+solange kein echter Learner-Ergebnisdatensatz existiert. / The validator
+accepts this decision only until expiry and only while no real learner result
+exists.
 
 ## 11. ValidationSummary
 
