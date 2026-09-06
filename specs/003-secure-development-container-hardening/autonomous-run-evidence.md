@@ -452,3 +452,51 @@ and 390 Open/in_triage advisories. The feasibility decision is not formal
 sandbox, risk, distribution, or production approval. From T070 onward, only
 the orchestrator holds the currently confirmed MergeAndSync and narrowly
 scoped admin-bypass authority.
+
+## Delivery-Abschluss / Delivery Closeout
+
+**DE:** Der validierte Content-Satz wurde als Commit
+`3fb1b6d27396abbcec27e6e324ada1e60fdc188c` erstellt. Danach wurde
+Statistikprofil 2 aus genau diesem Inhaltsstand gerendert, mit `-CheckOnly`
+validiert und ausschliesslich als separater Commit
+`8b73d0a0e0b8680011876fcf906f3b08bcd36077` geliefert. PR #53 band diesen
+Head. Alle 14 beobachteten GitHub-Checks bestanden; Reviews, Kommentare und
+handlungsrelevante Review-Threads waren leer. `REVIEW_REQUIRED` war der einzige
+Policy-Blocker. Der bereits genehmigte Admin-Bypass wurde deshalb nur fuer die
+Provider-Merge-Operation eingesetzt. GitHub erzeugte Merge-Commit
+`1c67b226d5a2c7c565c8b9630376710100798894`.
+
+Die temporaere Schema-2.0-PreMerge-Evidenz bestand unter normalisiertem Hash
+`fa40edf8a2ee721a5aba64f1e3b9ebbe61e8aa4ce14f496ca99505acb102a78d`.
+Die kausale PostMerge-Evidenz band diesen Hash, den reviewten Head und den
+tatsaechlichen Merge-Commit bei leerem `changedPaths`; sie bestand unter
+`a1b07e58497b0b05b23fc73c5f7c79d8808e7bbe2d5f14010818b6a5f7e227df`.
+Der lokale `main` wurde ausschliesslich per Fast-forward synchronisiert. Vor
+dem Cleanup standen `main`/`origin/main` und lokaler/remoter Feature-Branch
+jeweils bei Ahead/Behind `0/0`. Danach wurden nur die bereits gemergten lokalen
+und remoten Feature-Refs entfernt; beide sind jetzt abwesend.
+
+**EN:** The validated content set was committed as `3fb1b6d...`. Statistics
+Profile 2 was then rendered from that exact content state, checked, and
+delivered only in separate commit `8b73d0a...`. PR #53 bound that head. All 14
+observed GitHub checks passed, with no review, comment, or actionable review
+thread. REVIEW_REQUIRED was the sole policy blocker, so the approved admin
+bypass was used only for the provider merge operation. GitHub produced merge
+commit `1c67b226...`. PreMerge `fa40edf8...` and causal PostMerge `a1b07e58...`
+both validated. Local main was fast-forwarded and was 0/0 with origin/main.
+The local and remote feature refs were also 0/0 before only those merged refs
+were removed; both are now absent.
+
+## Retrospektive / Retrospective
+
+| Entscheidung / Decision | Beobachtung und Grenze / Observation and boundary | Reproduzierbarer Test / Reproducible test |
+|---|---|---|
+| `ObserveAgain` | Ein verschachtelter `codex exec --sandbox workspace-write`-Prozess konnte den Host-Podman-Socket nicht erreichen, waehrend derselbe T066-Befehl im Host-Orchestrator bestand. Quelle: `docs/security/agent-session-log/2026-09-06-1419.md` und der erfolgreiche Kandidat in `2026-09-06-1427.md`. Portable Zielregel: Host-Runtime-Gates direkt orchestrieren oder Socket-Zugriff als explizite Runner-Voraussetzung pruefen. Die Beobachtung bleibt einmalig und aendert deshalb noch kein gemeinsames Preset. / A nested model runner could not reach the host Podman socket while the host orchestrator passed the same T066 command. Portable target rule: orchestrate host-runtime gates directly or preflight socket access explicitly. One occurrence does not yet alter a shared preset. | In einem temporaeren Repository denselben read-only `podman compose ps`-Preflight einmal im Runnerprofil und einmal im Host-Orchestrator ausfuehren; unterschiedliche Erreichbarkeit muss fail-closed vor dem einmaligen Abnahmekandidaten erkannt werden. / Run the same read-only Podman preflight in runner and host contexts; detect differing access before the one-shot candidate. |
+| `RejectProjectSpecific` | Die befristete Ein-Personen-Machbarkeitsentscheidung ist eine ausdrueckliche Feature-003-Scope-Grenze. Sie darf nicht als allgemeines Muster zum Herabsetzen von Learning-/A11Y-Gates in andere Repositories uebernommen werden. / The time-bounded single-person feasibility decision is specific to Feature 003 and must not become a generic learner-gate reduction. | Einen Fixture-Test mit fehlender Decision-ID, Ablauf oder verbotenem Pass-Claim ausfuehren; der Validator muss ablehnen. / Validate fixtures with missing identity, expiry, or a prohibited Pass claim and require failure. |
+| `ObserveAgain` | Push- und Pull-Request-Ereignis erzeugten zwei gleichwertige Check-Saetze. Beide wurden terminal abgewartet; ohne expliziten sicheren Concurrency-Vertrag wurde keiner abgebrochen. / Push and pull-request events created duplicate equivalent check sets; both were allowed to complete because no safe cancellation contract exists. | In einem temporaeren Workflow beide Trigger ausloesen und erst nach nachgewiesener Concurrency-/Cancellation-Semantik eine Optimierung vorschlagen. / Trigger both events in a temporary workflow and propose optimization only after proving safe cancellation semantics. |
+
+Es wurden keine Provider-/Accountdetails, Secrets, formalen Freigaben oder
+projektspezifischen Risikoakzeptanzen in gemeinsame Guidance uebernommen. Es
+wird kein weiterer Spec-Kit-Lauf oder Intake gestartet. / No provider/account
+details, secrets, formal approvals, or project-specific risk acceptance were
+promoted into shared guidance. No additional Spec Kit run or intake is started.

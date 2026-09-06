@@ -576,7 +576,7 @@
       "reevaluationTrigger": "Any worktree, staged set, delivery set, gap mapping, requirement mapping, mandatory phase evidence, or explicit resumed validation attempt."
     },
     {
-      "evidenceId": "EVD-STATS-BLOCKED-001",
+      "evidenceId": "EVD-STATS-PROFILE2-001",
       "gateId": "GATE-STATS-01",
       "applicability": "Applicable",
       "subjectPaths": [
@@ -584,19 +584,19 @@
         "scripts/render-project-statistics.ps1"
       ],
       "command": "pwsh -NoProfile -File scripts/render-project-statistics.ps1 -Repo .; pwsh -NoProfile -File scripts/render-project-statistics.ps1 -Repo . -CheckOnly; git diff --check",
-      "runnerOrPlatform": "orchestrator-post-content blocked before content commit",
-      "startedAt": "2026-08-30T14:27:06Z",
-      "finishedAt": "2026-08-30T14:27:06Z",
-      "exitCode": 3,
+      "runnerOrPlatform": "orchestrator-post-content on repository-local macOS 26.6.2",
+      "startedAt": "2026-09-06T12:33:20Z",
+      "finishedAt": "2026-09-06T12:34:00Z",
+      "exitCode": 0,
       "expectedResult": "Render and validate Statistics Profile 2 only after a validated content commit, then commit statistics separately.",
-      "observedResult": "No content commit was authorized because T066 failed. The post-content statistics gate was therefore not executed.",
-      "result": "Blocked",
+      "observedResult": "After content commit 3fb1b6d27396abbcec27e6e324ada1e60fdc188c, the renderer updated Statistics Profile 2 and CheckOnly plus git diff --check passed. Only docs/project-statistics.md changed and was committed separately as 8b73d0a0e0b8680011876fcf906f3b08bcd36077.",
+      "result": "Pass",
       "freshness": "Current",
-      "limitations": "Running the renderer before a content commit would violate the two-stage statistics contract.",
-      "artifactSha256": "N/A",
+      "limitations": "The statistics source remains the separately reviewable content commit. Causal PostMerge evidence does not alter the measured product/content scope.",
+      "artifactSha256": "2f69e4635342d8585ce51e879f2f5af5740a8fb855067639098dd64f3b9d3dd1",
       "containsSensitiveContent": false,
       "rationale": "Statistics must measure final committed content and remain separately reviewable.",
-      "reevaluationTrigger": "A later explicit resume reaches a validated content-commit boundary."
+      "reevaluationTrigger": "Any content commit, statistics methodology, renderer, configuration, or measured-scope change."
     },
     {
       "evidenceId": "EVD-DELIVERY-SET-001",
@@ -612,15 +612,15 @@
       "finishedAt": "2026-09-06T12:27:21Z",
       "exitCode": 0,
       "expectedResult": "All technical and security gates pass before content commit, PR, merge, synchronization or any narrowly authorized provider merge bypass.",
-      "observedResult": "After successful T066, git diff --check returned exit 0 and the read-only delivery-set validator returned Pass. It reported 16 changed tracked paths, four explicitly intended untracked evidence paths, zero unrelated untracked paths, and an unchanged index. No independent refactoring was present.",
+      "observedResult": "After successful T066, the exact delivery set passed and PR #53 was opened at reviewed head 8b73d0a0e0b8680011876fcf906f3b08bcd36077. All 14 observed GitHub checks passed and no review thread existed. REVIEW_REQUIRED was the sole policy blocker, so the explicitly authorized admin bypass was used only for the provider merge operation. GitHub created merge commit 1c67b226d5a2c7c565c8b9630376710100798894; local main then fast-forwarded to matching origin/main at 0/0. PreMerge fa40edf8a2ee721a5aba64f1e3b9ebbe61e8aa4ce14f496ca99505acb102a78d and causal PostMerge a1b07e58497b0b05b23fc73c5f7c79d8808e7bbe2d5f14010818b6a5f7e227df both validated.",
       "result": "Pass",
       "freshness": "Current",
-      "limitations": "This result validates only the local delivery set. Commit, push, provider checks, review threads, schema-2 PreMerge evidence, merge, default-branch synchronization, and PostMerge evidence remain orchestrator-owned later tasks. Admin-Bypass remains limited to the provider merge operation if REVIEW_REQUIRED is the sole policy blocker.",
-      "artifactSha256": "c32867bc054db882c678245dbb156a28fc39ead30569f6d1bd54594ac4dc5576",
+      "limitations": "Admin bypass did not provide an independent review and did not approve the sandbox, open advisories, image distribution, production use, or any Human-only item. No repository rule was changed.",
+      "artifactSha256": "a1b07e58497b0b05b23fc73c5f7c79d8808e7bbe2d5f14010818b6a5f7e227df",
       "containsSensitiveContent": false,
       "rationale": "Model implementation does not own delivery, and failed gates prohibit remote changes.",
       "reevaluationTrigger": "Any authority, head, branch, delivery mode, gate, commit, PR, merge, default-branch, PostMerge state, or explicit resumed validation attempt."
     }
   ],
-  "overallResult": "Blocked"
+  "overallResult": "Pass"
 }
