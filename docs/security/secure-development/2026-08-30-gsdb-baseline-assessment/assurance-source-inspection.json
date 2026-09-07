@@ -1,0 +1,1388 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "AssuranceMigrationInspection",
+  "inspectedAt": "2026-09-07T21:04:58Z",
+  "scope": "DE: Lesende Prüfung von Quellenidentität, Versionen und Referenzen; keine fachliche Wirksamkeitsprüfung. EN: Read-only source identity, version and reference inspection; not a domain effectiveness review.",
+  "sourcePath": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assessment-results.json",
+  "sourceSha256": "81a7ab5c5d8c6de449289de1dbf143e14933a3678a1160a25ed8ba5d671c8b39",
+  "sourceControlCount": 157,
+  "baselineVersion": "3.1.0",
+  "documentDrift": [
+    {
+      "observedVersion": "3.2.0",
+      "path": "Richtlinie_Sichere-Entwicklung.md",
+      "kind": "VersionDrift",
+      "declaredVersion": "3.1.0"
+    },
+    {
+      "observedVersion": "2.2.0",
+      "path": "Checklistensammelband_Sichere-Entwicklung.md",
+      "kind": "VersionDrift",
+      "declaredVersion": "2.1.0"
+    },
+    {
+      "observedVersion": "2.2.0",
+      "path": "checklisten/CL_09_KI-Codeerzeugung.md",
+      "kind": "VersionDrift",
+      "declaredVersion": "2.1.0"
+    },
+    {
+      "observedVersion": "2.2.0",
+      "path": "checklisten/CL_12_Agentische-KI-Sandbox.md",
+      "kind": "VersionDrift",
+      "declaredVersion": "2.1.0"
+    },
+    {
+      "observedVersion": "1.2.0",
+      "path": "mitgeltende-dokumente/Richtlinie_Secure-Development-Life-Cycle.md",
+      "kind": "VersionDrift",
+      "declaredVersion": "1.1.0"
+    },
+    {
+      "observedVersion": "3.2.0",
+      "path": "Checklistensammelband_Sichere-Entwicklung.md",
+      "kind": "BaselineVersionDrift",
+      "declaredVersion": "3.1.0"
+    }
+  ],
+  "referenceChecks": [
+    {
+      "id": "EVD-CL-01-01",
+      "path": "docs/secure-development/checklisten/CL_01_Standards-Anwendbarkeit.md",
+      "expectedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "observedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-01-02",
+      "path": "docs/secure-development/checklisten/CL_01_Standards-Anwendbarkeit.md",
+      "expectedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "observedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-01-03",
+      "path": "docs/secure-development/checklisten/CL_01_Standards-Anwendbarkeit.md",
+      "expectedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "observedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-01-04",
+      "path": "docs/secure-development/checklisten/CL_01_Standards-Anwendbarkeit.md",
+      "expectedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "observedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-01-05",
+      "path": "docs/secure-development/checklisten/CL_01_Standards-Anwendbarkeit.md",
+      "expectedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "observedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-01-06",
+      "path": "docs/secure-development/checklisten/CL_01_Standards-Anwendbarkeit.md",
+      "expectedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "observedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-01-07",
+      "path": "docs/secure-development/checklisten/CL_01_Standards-Anwendbarkeit.md",
+      "expectedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "observedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-01-08",
+      "path": "docs/secure-development/checklisten/CL_01_Standards-Anwendbarkeit.md",
+      "expectedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "observedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-01-09",
+      "path": "docs/secure-development/checklisten/CL_01_Standards-Anwendbarkeit.md",
+      "expectedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "observedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-01-10",
+      "path": "docs/secure-development/checklisten/CL_01_Standards-Anwendbarkeit.md",
+      "expectedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "observedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-01-11",
+      "path": "docs/secure-development/checklisten/CL_01_Standards-Anwendbarkeit.md",
+      "expectedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "observedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-01-12",
+      "path": "docs/secure-development/checklisten/CL_01_Standards-Anwendbarkeit.md",
+      "expectedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "observedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-02-01",
+      "path": "docs/secure-development/checklisten/CL_02_Sichere-Softwarearchitektur.md",
+      "expectedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "observedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-02-02",
+      "path": "docs/secure-development/checklisten/CL_02_Sichere-Softwarearchitektur.md",
+      "expectedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "observedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-02-03",
+      "path": "docs/secure-development/checklisten/CL_02_Sichere-Softwarearchitektur.md",
+      "expectedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "observedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-02-04",
+      "path": "docs/secure-development/checklisten/CL_02_Sichere-Softwarearchitektur.md",
+      "expectedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "observedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-02-05",
+      "path": "docs/secure-development/checklisten/CL_02_Sichere-Softwarearchitektur.md",
+      "expectedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "observedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-02-06",
+      "path": "docs/secure-development/checklisten/CL_02_Sichere-Softwarearchitektur.md",
+      "expectedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "observedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-02-07",
+      "path": "docs/secure-development/checklisten/CL_02_Sichere-Softwarearchitektur.md",
+      "expectedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "observedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-02-08",
+      "path": "docs/secure-development/checklisten/CL_02_Sichere-Softwarearchitektur.md",
+      "expectedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "observedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-02-09",
+      "path": "docs/secure-development/checklisten/CL_02_Sichere-Softwarearchitektur.md",
+      "expectedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "observedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-02-10",
+      "path": "docs/secure-development/checklisten/CL_02_Sichere-Softwarearchitektur.md",
+      "expectedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "observedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-02-11",
+      "path": "docs/secure-development/checklisten/CL_02_Sichere-Softwarearchitektur.md",
+      "expectedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "observedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-02-12",
+      "path": "docs/secure-development/checklisten/CL_02_Sichere-Softwarearchitektur.md",
+      "expectedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "observedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-02-13",
+      "path": "docs/secure-development/checklisten/CL_02_Sichere-Softwarearchitektur.md",
+      "expectedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "observedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-03-01",
+      "path": "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md",
+      "expectedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "observedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-03-02",
+      "path": "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md",
+      "expectedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "observedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-03-03",
+      "path": "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md",
+      "expectedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "observedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-03-04",
+      "path": "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md",
+      "expectedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "observedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-03-05",
+      "path": "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md",
+      "expectedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "observedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-03-06",
+      "path": "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md",
+      "expectedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "observedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-03-07",
+      "path": "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md",
+      "expectedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "observedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-03-08",
+      "path": "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md",
+      "expectedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "observedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-03-09",
+      "path": "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md",
+      "expectedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "observedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-03-10",
+      "path": "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md",
+      "expectedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "observedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-03-11",
+      "path": "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md",
+      "expectedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "observedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-03-12",
+      "path": "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md",
+      "expectedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "observedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-03-13",
+      "path": "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md",
+      "expectedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "observedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-03-14",
+      "path": "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md",
+      "expectedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "observedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-03-15",
+      "path": "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md",
+      "expectedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "observedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-04-01",
+      "path": "docs/secure-development/checklisten/CL_04_Bedrohungsmodellierung.md",
+      "expectedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "observedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-04-02",
+      "path": "docs/secure-development/checklisten/CL_04_Bedrohungsmodellierung.md",
+      "expectedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "observedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-04-03",
+      "path": "docs/secure-development/checklisten/CL_04_Bedrohungsmodellierung.md",
+      "expectedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "observedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-04-04",
+      "path": "docs/secure-development/checklisten/CL_04_Bedrohungsmodellierung.md",
+      "expectedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "observedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-04-05",
+      "path": "docs/secure-development/checklisten/CL_04_Bedrohungsmodellierung.md",
+      "expectedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "observedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-04-06",
+      "path": "docs/secure-development/checklisten/CL_04_Bedrohungsmodellierung.md",
+      "expectedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "observedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-04-07",
+      "path": "docs/secure-development/checklisten/CL_04_Bedrohungsmodellierung.md",
+      "expectedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "observedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-04-08",
+      "path": "docs/secure-development/checklisten/CL_04_Bedrohungsmodellierung.md",
+      "expectedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "observedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-04-09",
+      "path": "docs/secure-development/checklisten/CL_04_Bedrohungsmodellierung.md",
+      "expectedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "observedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-04-10",
+      "path": "docs/secure-development/checklisten/CL_04_Bedrohungsmodellierung.md",
+      "expectedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "observedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-05-01",
+      "path": "docs/secure-development/checklisten/CL_05_Lieferkette-Build-Integritaet.md",
+      "expectedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "observedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-05-02",
+      "path": "docs/secure-development/checklisten/CL_05_Lieferkette-Build-Integritaet.md",
+      "expectedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "observedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-05-03",
+      "path": "docs/secure-development/checklisten/CL_05_Lieferkette-Build-Integritaet.md",
+      "expectedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "observedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-05-04",
+      "path": "docs/secure-development/checklisten/CL_05_Lieferkette-Build-Integritaet.md",
+      "expectedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "observedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-05-05",
+      "path": "docs/secure-development/checklisten/CL_05_Lieferkette-Build-Integritaet.md",
+      "expectedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "observedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-05-06",
+      "path": "docs/secure-development/checklisten/CL_05_Lieferkette-Build-Integritaet.md",
+      "expectedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "observedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-05-07",
+      "path": "docs/secure-development/checklisten/CL_05_Lieferkette-Build-Integritaet.md",
+      "expectedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "observedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-05-08",
+      "path": "docs/secure-development/checklisten/CL_05_Lieferkette-Build-Integritaet.md",
+      "expectedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "observedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-05-09",
+      "path": "docs/secure-development/checklisten/CL_05_Lieferkette-Build-Integritaet.md",
+      "expectedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "observedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-05-10",
+      "path": "docs/secure-development/checklisten/CL_05_Lieferkette-Build-Integritaet.md",
+      "expectedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "observedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-05-11",
+      "path": "docs/secure-development/checklisten/CL_05_Lieferkette-Build-Integritaet.md",
+      "expectedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "observedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-05-12",
+      "path": "docs/secure-development/checklisten/CL_05_Lieferkette-Build-Integritaet.md",
+      "expectedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "observedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-05-13",
+      "path": "docs/secure-development/checklisten/CL_05_Lieferkette-Build-Integritaet.md",
+      "expectedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "observedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-06-01",
+      "path": "docs/secure-development/checklisten/CL_06_Schwachstellenoffenlegung.md",
+      "expectedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "observedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-06-02",
+      "path": "docs/secure-development/checklisten/CL_06_Schwachstellenoffenlegung.md",
+      "expectedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "observedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-06-03",
+      "path": "docs/secure-development/checklisten/CL_06_Schwachstellenoffenlegung.md",
+      "expectedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "observedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-06-04",
+      "path": "docs/secure-development/checklisten/CL_06_Schwachstellenoffenlegung.md",
+      "expectedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "observedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-06-05",
+      "path": "docs/secure-development/checklisten/CL_06_Schwachstellenoffenlegung.md",
+      "expectedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "observedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-06-06",
+      "path": "docs/secure-development/checklisten/CL_06_Schwachstellenoffenlegung.md",
+      "expectedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "observedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-06-07",
+      "path": "docs/secure-development/checklisten/CL_06_Schwachstellenoffenlegung.md",
+      "expectedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "observedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-06-08",
+      "path": "docs/secure-development/checklisten/CL_06_Schwachstellenoffenlegung.md",
+      "expectedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "observedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-06-09",
+      "path": "docs/secure-development/checklisten/CL_06_Schwachstellenoffenlegung.md",
+      "expectedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "observedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-06-10",
+      "path": "docs/secure-development/checklisten/CL_06_Schwachstellenoffenlegung.md",
+      "expectedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "observedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-06-11",
+      "path": "docs/secure-development/checklisten/CL_06_Schwachstellenoffenlegung.md",
+      "expectedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "observedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-07-01",
+      "path": "docs/secure-development/checklisten/CL_07_CRA-Anwendbarkeit.md",
+      "expectedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "observedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-07-02",
+      "path": "docs/secure-development/checklisten/CL_07_CRA-Anwendbarkeit.md",
+      "expectedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "observedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-07-03",
+      "path": "docs/secure-development/checklisten/CL_07_CRA-Anwendbarkeit.md",
+      "expectedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "observedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-07-04",
+      "path": "docs/secure-development/checklisten/CL_07_CRA-Anwendbarkeit.md",
+      "expectedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "observedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-07-05",
+      "path": "docs/secure-development/checklisten/CL_07_CRA-Anwendbarkeit.md",
+      "expectedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "observedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-07-06",
+      "path": "docs/secure-development/checklisten/CL_07_CRA-Anwendbarkeit.md",
+      "expectedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "observedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-07-07",
+      "path": "docs/secure-development/checklisten/CL_07_CRA-Anwendbarkeit.md",
+      "expectedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "observedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-07-08",
+      "path": "docs/secure-development/checklisten/CL_07_CRA-Anwendbarkeit.md",
+      "expectedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "observedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-07-09",
+      "path": "docs/secure-development/checklisten/CL_07_CRA-Anwendbarkeit.md",
+      "expectedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "observedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-07-10",
+      "path": "docs/secure-development/checklisten/CL_07_CRA-Anwendbarkeit.md",
+      "expectedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "observedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-07-11",
+      "path": "docs/secure-development/checklisten/CL_07_CRA-Anwendbarkeit.md",
+      "expectedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "observedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-07-12",
+      "path": "docs/secure-development/checklisten/CL_07_CRA-Anwendbarkeit.md",
+      "expectedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "observedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-08-01",
+      "path": "docs/secure-development/checklisten/CL_08_Sicherheits-Code-Review.md",
+      "expectedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "observedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-08-02",
+      "path": "docs/secure-development/checklisten/CL_08_Sicherheits-Code-Review.md",
+      "expectedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "observedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-08-03",
+      "path": "docs/secure-development/checklisten/CL_08_Sicherheits-Code-Review.md",
+      "expectedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "observedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-08-04",
+      "path": "docs/secure-development/checklisten/CL_08_Sicherheits-Code-Review.md",
+      "expectedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "observedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-08-05",
+      "path": "docs/secure-development/checklisten/CL_08_Sicherheits-Code-Review.md",
+      "expectedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "observedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-08-06",
+      "path": "docs/secure-development/checklisten/CL_08_Sicherheits-Code-Review.md",
+      "expectedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "observedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-08-07",
+      "path": "docs/secure-development/checklisten/CL_08_Sicherheits-Code-Review.md",
+      "expectedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "observedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-08-08",
+      "path": "docs/secure-development/checklisten/CL_08_Sicherheits-Code-Review.md",
+      "expectedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "observedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-08-09",
+      "path": "docs/secure-development/checklisten/CL_08_Sicherheits-Code-Review.md",
+      "expectedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "observedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-08-10",
+      "path": "docs/secure-development/checklisten/CL_08_Sicherheits-Code-Review.md",
+      "expectedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "observedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-08-11",
+      "path": "docs/secure-development/checklisten/CL_08_Sicherheits-Code-Review.md",
+      "expectedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "observedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-08-12",
+      "path": "docs/secure-development/checklisten/CL_08_Sicherheits-Code-Review.md",
+      "expectedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "observedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-08-13",
+      "path": "docs/secure-development/checklisten/CL_08_Sicherheits-Code-Review.md",
+      "expectedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "observedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-01",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-02",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-03",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-04",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-05",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-06",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-07",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-08",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-09",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-10",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-11",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-12",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-13",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-14",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-15",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-16",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-09-17",
+      "path": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "expectedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "observedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-01",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-02",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-03",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-04",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-05",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-06",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-07",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-08",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-09",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-10",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-11",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-12",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-13",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-14",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-15",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-16",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-10-17",
+      "path": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "expectedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "observedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-11-01",
+      "path": "docs/secure-development/checklisten/CL_11_Datenschutz-Folgenabschaetzung.md",
+      "expectedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "observedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-11-02",
+      "path": "docs/secure-development/checklisten/CL_11_Datenschutz-Folgenabschaetzung.md",
+      "expectedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "observedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-11-03",
+      "path": "docs/secure-development/checklisten/CL_11_Datenschutz-Folgenabschaetzung.md",
+      "expectedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "observedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-11-04",
+      "path": "docs/secure-development/checklisten/CL_11_Datenschutz-Folgenabschaetzung.md",
+      "expectedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "observedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-11-05",
+      "path": "docs/secure-development/checklisten/CL_11_Datenschutz-Folgenabschaetzung.md",
+      "expectedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "observedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-11-06",
+      "path": "docs/secure-development/checklisten/CL_11_Datenschutz-Folgenabschaetzung.md",
+      "expectedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "observedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-11-07",
+      "path": "docs/secure-development/checklisten/CL_11_Datenschutz-Folgenabschaetzung.md",
+      "expectedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "observedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-11-08",
+      "path": "docs/secure-development/checklisten/CL_11_Datenschutz-Folgenabschaetzung.md",
+      "expectedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "observedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-11-09",
+      "path": "docs/secure-development/checklisten/CL_11_Datenschutz-Folgenabschaetzung.md",
+      "expectedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "observedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-11-10",
+      "path": "docs/secure-development/checklisten/CL_11_Datenschutz-Folgenabschaetzung.md",
+      "expectedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "observedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-11-11",
+      "path": "docs/secure-development/checklisten/CL_11_Datenschutz-Folgenabschaetzung.md",
+      "expectedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "observedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-11-12",
+      "path": "docs/secure-development/checklisten/CL_11_Datenschutz-Folgenabschaetzung.md",
+      "expectedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "observedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-12-01",
+      "path": "docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md",
+      "expectedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "observedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-12-02",
+      "path": "docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md",
+      "expectedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "observedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-12-03",
+      "path": "docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md",
+      "expectedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "observedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-12-04",
+      "path": "docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md",
+      "expectedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "observedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-12-05",
+      "path": "docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md",
+      "expectedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "observedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-12-06",
+      "path": "docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md",
+      "expectedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "observedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-12-07",
+      "path": "docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md",
+      "expectedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "observedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-12-08",
+      "path": "docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md",
+      "expectedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "observedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-12-09",
+      "path": "docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md",
+      "expectedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "observedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-12-10",
+      "path": "docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md",
+      "expectedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "observedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-12-11",
+      "path": "docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md",
+      "expectedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "observedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL-12-12",
+      "path": "docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md",
+      "expectedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "observedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-CL1205-PINS",
+      "path": "Dockerfile",
+      "expectedSha256": "93028759aed4b87cc8989cdf7dc0650515af33ff8b74bbfdcc90989964db57ef",
+      "observedSha256": "51f16ea28aeed980cf10a0f9a0ec9ff4656278f4fc29d8f1ceaaf78e1288fba2",
+      "result": "HashDrift",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-PRESETS",
+      "path": "scripts/config/spec-kit-model-routing-governance-presets.json",
+      "expectedSha256": "15773058422abe97333ec69f415e8d47292b671c09bcb09f955ff88eeda565fa",
+      "observedSha256": "15773058422abe97333ec69f415e8d47292b671c09bcb09f955ff88eeda565fa",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-RUNTIME-OPEN",
+      "path": "compose.yml",
+      "expectedSha256": "e54d5335d21b23fd8628ff9a6c184b17e8b9e70b47110c27ce2c75c74b878d3a",
+      "observedSha256": "e54d5335d21b23fd8628ff9a6c184b17e8b9e70b47110c27ce2c75c74b878d3a",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-DISPATCHER",
+      "path": "scripts/tests/test_agent_prompt_dispatchers.py",
+      "expectedSha256": "c4354df5b667bf637928018e89d60c472fdd01d50bdf36433af57e64ecbbc193",
+      "observedSha256": "c4354df5b667bf637928018e89d60c472fdd01d50bdf36433af57e64ecbbc193",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-SBOM-CATALOG",
+      "path": "sboms/.gitkeep",
+      "expectedSha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "observedSha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-STATS-DRIFT",
+      "path": "docs/project-statistics.config.json",
+      "expectedSha256": "382341022eb5b8a6a2aa296e37208620aaa6e7866d54ff6d64e885445a22a69a",
+      "observedSha256": "382341022eb5b8a6a2aa296e37208620aaa6e7866d54ff6d64e885445a22a69a",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-NEGATIVE-FIXTURES",
+      "path": "specs/002-gsdb-baseline-assessment/quickstart.md",
+      "expectedSha256": "da64711a5488aa6ea5b93571ff027bb61b49b92587ec46abec9b1588abeba47f",
+      "observedSha256": "da64711a5488aa6ea5b93571ff027bb61b49b92587ec46abec9b1588abeba47f",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-DOCUMENTATION-QA",
+      "path": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment",
+      "expectedSha256": "Four Markdown projections checked on 2026-08-30",
+      "observedSha256": null,
+      "result": "Missing",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-Q25-LOCAL",
+      "path": ".pre-commit-config.yaml",
+      "expectedSha256": "ee762af16c7858dd453da8958aff0b5ee25f93f70a3668d9e5db6917c05fd312",
+      "observedSha256": "ee762af16c7858dd453da8958aff0b5ee25f93f70a3668d9e5db6917c05fd312",
+      "result": "HashMatch",
+      "anchorChecked": false
+    },
+    {
+      "id": "EVD-EVIDENCE-CATALOG",
+      "path": "docs/security",
+      "expectedSha256": "Directory inventory on 2026-08-30",
+      "observedSha256": null,
+      "result": "Missing",
+      "anchorChecked": false
+    }
+  ],
+  "referenceBoundary": "DE: Nur Dateiexistenz/Hashes; Markdown-Anker und externe URLs nicht geprüft; keine Aussage zur Kontrollwirksamkeit. EN: File existence/hash only; Markdown anchors and external URLs not verified; no claim of control effectiveness.",
+  "humanDecisionBoundary": "DE: Keine historische Freigabe übertragen oder neue Freigabe erteilt. EN: No historical approval transferred or new approval granted."
+}
