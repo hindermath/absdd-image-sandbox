@@ -22,4 +22,4 @@ byte preservation, exact matrix, read-only status, isolated package/composition
 tests, secrets and existing CI. Missing evidence blocks assessment, not installation.*
 
 Documentation Impact: `UpdateRequired`.
-[Details und Nachweis / details and evidence](maintenance/secure-development-assurance-integration.md).
+[Details und Nachweis / details and evidence](https://github.com/hindermath/absdd-image-sandbox/blob/codex/assurance-preset-integration/docs/maintenance/secure-development-assurance-integration.md).
