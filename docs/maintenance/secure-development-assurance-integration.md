@@ -4,23 +4,23 @@
 
 absdd-image-sandbox verwendet ausdrücklich das Profil
 `secure-development-assurance-thirteen-governance-presets`: die bisherigen
-zwölf Presets unverändert plus Assurance v0.1.2, aktiviert mit Priorität 15.
+zwölf Presets unverändert plus Assurance v0.1.3, aktiviert mit Priorität 15.
 Die [13er-Matrix](../../scripts/config/spec-kit-secure-development-assurance-governance-presets.json)
 und der [Profilkatalog](../../scripts/config/spec-kit-preset-profiles.json)
 dokumentieren diese Entscheidung. Ältere Profile und globale Defaults bleiben
 erhalten; die lokale Level-2-Registrierung wird erst nach MergeAndSync umgestellt.
 
 *absdd-image-sandbox explicitly opts into the thirteen-preset profile. The original
-twelve presets remain unchanged; Assurance v0.1.2 is enabled at priority 15.
+twelve presets remain unchanged; Assurance v0.1.3 is enabled at priority 15.
 Older profiles and global defaults are retained. Local registry assignment
 follows successful merge and main synchronization.*
 
 ## Produktquelle und Paketbindung / Product Source and Package Binding
 
 - [Eigenständiges GitHub-Repository / Standalone GitHub repository](https://github.com/hindermath/spec-kit-preset-secure-development-assurance-governance).
-- Tag `v0.1.2`, Commit `02423602592ad0183454e259df628ab940436ba6`.
-- [Öffentliches Tag-ZIP / Public tag ZIP](https://github.com/hindermath/spec-kit-preset-secure-development-assurance-governance/archive/refs/tags/v0.1.2.zip).
-- SHA-256: `4eb30804bb3c329681e0b7d44187c8daeb3e9e4f250bb6003d5b746c0ad0b656`.
+- Tag `v0.1.3`, Commit `0d03aa9ebe8f74a26e331815bca5609fb48d7a14`.
+- [Öffentliches Tag-ZIP / Public tag ZIP](https://github.com/hindermath/spec-kit-preset-secure-development-assurance-governance/archive/refs/tags/v0.1.3.zip).
+- SHA-256: `9023b442b4d82e25bee5a7fe9b73efb7f591a4f265f54061ae6e4a56b9b5c75f`.
 - Voraussetzung / prerequisite: `security-governance >=0.6.1`; vorhanden / installed: `0.6.2`.
 
 Die explizite Versionsbindung gilt unabhängig von „Latest“. Veröffentlichte
@@ -60,6 +60,34 @@ GSDB or RL-SE assessments. See the installed package README for complete usage
 and troubleshooting. Never shorten the installed validator path.*
 
 ## Nachweis und Sicherheitsgrenzen / Evidence and Safety Boundaries
+
+### Wiederaufnahme am 2026-09-07 / Resumption on 2026-09-07
+
+Das öffentliche v0.1.3-Archiv wurde erneut geladen; SHA-256 und alle
+installierten Paketdateien stimmen exakt überein. Der Vergleich zum vorherigen
+PR-Head `da38035fc078e6781ded5a4b35ee0839954b9afc` schützt 1144 vorhandene
+Dateien außerhalb der autorisierten Paket-, Befehls- und Dokumentationspfade.
+Alle zwölf übrigen Registry-Einträge und älteren Profile sind unverändert.
+Die in PR #57 bestätigten Kontextbindungs- und Risikotypfehler sind durch
+das kanonische Release aus Produkt-PR #4 behoben; dessen finaler
+Linux-/macOS-/Windows-Vertragstest ist in Workflow-Lauf 34059234091 belegt.
+
+Im ausgewählten Kontext `2026-08-30-gsdb-baseline-assessment` existiert bereits
+eine `evidence-matrix.md`. Sie bleibt erhalten. Bash und PowerShell melden
+weiterhin `Blocked`, Exitcode 2, wegen der fehlenden `baseline.json`.
+Die vier Assurance-Gates und vier menschlichen Entscheidungsgrenzen sind
+dadurch nicht aus einem vollständigen Assurance-Vertrag auslesbar. Vor einer
+späteren Gate-Prüfung muss der Kontext fachlich in diesen Vertrag überführt
+werden. Das Hinzufügen weiterer Indexdateien würde diesen Befund nicht lösen.
+
+*The public v0.1.3 ZIP and installed files match exactly. Comparison with the
+previous PR head preserves 1144 existing files, all twelve other registry
+entries and older profiles. Canonical product PR #4 fixes the reported
+context/risk defects; final cross-platform contract CI is run 34059234091.
+The selected context already has an evidence matrix. Both read-only status
+commands still block with exit 2 because baseline.json is absent. Gate and
+human-decision results cannot be read from an incomplete Assurance contract;
+a later substantive migration is required before a gate review.*
 
 Am 2026-09-06 geprüft: öffentliches Archiv mit gebundenem SHA-256,
 bytegleich übernommenes Paket, exakte 13er-Matrix und 708 geschützte

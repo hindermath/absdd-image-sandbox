@@ -4,11 +4,11 @@
 
 Das freigegebene 13. Preset wird ergänzt; die zwölf bestehenden Presets bleiben
 unverändert. Profilkatalog, Matrix, README und fünf Agenten-Anleitungen werden
-additiv integriert. Nur das öffentliche v0.1.2-Paket ist Produktquelle.
+additiv integriert. Nur das öffentliche v0.1.3-Paket ist Produktquelle.
 
 *Add the approved thirteenth preset while preserving the existing twelve.
 Integrate its profile, matrix, README and five agent guides additively.
-The public v0.1.2 package is the product source.*
+The public v0.1.3 package is the product source.*
 
 ## Risiken und Testplan / Risks and Test Plan
 
