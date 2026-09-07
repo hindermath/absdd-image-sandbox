@@ -61,6 +61,8 @@ tracked files; they are an artefact-volume measure, not a quality measure.
 | 2026-07-10 | feat/four-agent-learner-environment | 36 | 73.975 | 132 | Vier Required-Agenten und Syft im Podman-Image; getrennte Agenten-Volumes, Audit-Metadaten, image-interne SBOM, Anfängerpfad mit persönlichem Fork und erstem kontrollierten Agentenlauf, Lychee-/Static-CI. Diff +830/−379. |
 | 2026-07-10 | docs/provider-neutral-learner-hosting | 36 | 74.073 | 133 | GitHub-unabhaengiger Lernendenpfad fuer institutionelles GitLab, Codeberg, Forgejo und weitere Git-Systeme; oeffentliche GitHub-Referenzen bleiben Herkunftsnachweis. Agenten-Guidance und Session-Log synchronisiert. Diff +141/−43. |
 | 2026-07-15 | docs/home-sync-container-boundary | 40 | — | — | Eingebettete und per Override gemountete Level-0-Referenz als direkte Container-Lesequelle bestaetigt; README und vier Agenten-Dateien stellen klar, dass schreibende `sync-home.*`-Laeufe nach `/home/adedev` gesperrt sind und auf dem Host laufen. Read-only Check-/Vorschaumodi bleiben fuer Diagnosen erhalten; Compose-Mountmodell unveraendert. |
+| 2026-09-06 | Assurance-Profil v0.1.2 integriert / Assurance profile v0.1.2 integrated | Arbeitsfenster: eine sichtbare Agentensitzung am 2026-09-06; Branch `codex/assurance-preset-integration`. Nur freigegebene Repository-Integration, keine Produktcode- oder Produkttest-Aenderung. Wiederverwendetes Paket und Dokumentations-/Konfigurationsdelta vor Statistik-Selbstnachweis: +4285 / -0 Zeilen; importiertes Paket ist keine neu entwickelte Produktlogik. Zwoelf bestehende Presets, alte Profile, projektgefuehrte Baseline und menschliche Entscheidungen bleiben unveraendert. Paketbindung, exakte 13er-Matrix, Byte-Erhalt, isolierte Vertrags-/Oberflaechentests und lesender Status sind im Integrationsnachweis dokumentiert; Lieferung folgt per fokussiertem PR mit CI und MergeAndSync. Keine Home-Verteilung oder fachlichen Reviews. Referenzen bleiben im unveraenderten Statistikprofil konfiguriert. / One visible session integrates only the approved repository profile. Imported package content is reuse, not new product logic. Product code/tests and the original twelve presets remain unchanged; see the integration record for tests and boundaries. |
+| 2026-09-07 | Assurance-Integration und Evidence-Navigation / Assurance integration and evidence navigation | Branch `codex/assurance-preset-integration`; sichtbare Sitzung 2026-09-07. Paket-, Profil- und Dokumentationsaenderungen: +493 / -38 Textzeilen vor Statistik-Selbstnachweis. Wiederverwendete Paketzeilen sind keine neu entwickelte Produktlogik; vorhandene Nachweise werden nur referenziert. Zwoelf Presets unveraendert, keine fachliche Freigabe, kein Home-Sync. Referenzen: 80 Zeilen/Arbeitstag konservativ, repo-spezifische Thorsten-Solo-Basis laut Profilkonfiguration; Speedup ist Lieferdichte. / One visible session; reused package and evidence-index volume, no new product logic or human approval. Twelve presets preserved; CI/review and MergeAndSync; no Home sync. Manual effort follows the repository statistics configuration. |
 
 ---
 
@@ -185,27 +187,27 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 209972 lines |
-| Textdateien / Text files | 1149 |
-| Beobachtbarer Zeitraum / Observable period | 2025-09-14..2026-09-06 |
-| Aktivtage / Active days | 66 |
-| Relevante Commits / Relevant commits | 193 |
-| Zeilen je Aktivtag / Lines per active day | 3181.4 |
+| Textbasis / Text base | 214712 lines |
+| Textdateien / Text files | 1181 |
+| Beobachtbarer Zeitraum / Observable period | 2025-09-14..2026-09-07 |
+| Aktivtage / Active days | 67 |
+| Relevante Commits / Relevant commits | 196 |
+| Zeilen je Aktivtag / Lines per active day | 3204.7 |
 | Peak-Tag im Fenster / Peak day in window | 2026-08-30 / 79770 |
 | Peak-Woche im Fenster / Peak week in window | 2026-08-30 / 80706 |
 | Laengste Serie / Longest streak | 8 days |
-| Speedup vs. 80 lines/day | 39.8x |
-| Speedup vs. 100 lines/day | 31.8x |
-| Methodik / Methodology | v2; source `ec5ac0da1570` |
+| Speedup vs. 80 lines/day | 40.1x |
+| Speedup vs. 100 lines/day | 32.0x |
+| Methodik / Methodology | v2; source `38163bfde10f` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [#...................]   0.0% | 82
-Tests                           [#...................]   3.2% | 6697
-Dokumentation / Documentation   [################....]  82.5% | 173217
-Skripte / Scripts               [##..................]  11.5% | 24165
-Konfiguration / Configuration   [#...................]   2.6% | 5410
+Tests                           [#...................]   3.1% | 6697
+Dokumentation / Documentation   [#################...]  82.9% | 177935
+Skripte / Scripts               [##..................]  11.3% | 24187
+Konfiguration / Configuration   [#...................]   2.5% | 5410
 Daten und Medien / Data and media [....................]   0.0% | 0
 Sonstiger Text / Other text     [#...................]   0.2% | 401
 ```
@@ -230,7 +232,7 @@ Sa/Sa  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 ```text
 Wochen / Weeks 27..52 | 2026-03-15..2026-09-12
 So/Su  0 0 0 0 0 0 0 2 0 3 2 1 0 4 0 0 4 2 4 4 1 4 4 0 4 4
-Mo/Mo  0 0 0 0 0 0 0 2 3 0 3 2 0 0 0 0 0 4 4 0 0 0 2 0 0 -
+Mo/Mo  0 0 0 0 0 0 0 2 3 0 3 2 0 0 0 0 0 4 4 0 0 0 2 0 0 3
 Di/Tu  0 0 0 0 0 0 0 2 3 3 2 3 0 0 0 0 0 3 4 4 0 0 0 0 0 -
 Mi/We  0 0 0 0 0 0 1 3 0 0 2 4 0 0 0 0 2 1 2 4 0 0 2 0 0 -
 Do/Th  0 0 0 0 0 0 0 1 3 3 0 4 3 0 0 0 0 1 3 0 0 4 0 0 0 -
@@ -307,8 +309,8 @@ Es liegen keine belastbaren Phasendaten vor. Deshalb zeigt dieses Diagramm Monat
 
 ```text
 Scale: 0..50x
-80 lines/day       [################....] 39.8x
-100 lines/day      [#############.......] 31.8x
+80 lines/day       [################....] 40.1x
+100 lines/day      [#############.......] 32.0x
 ```
 
 Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen Referenzen. Sie messen keine Arbeitszeit.
@@ -321,7 +323,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..5000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 100
-Visible repository [#############.......] 3181.4
+Visible repository [#############.......] 3204.7
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -330,9 +332,9 @@ Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schre
 
 ### Textalternative / Text Alternative
 
-DE: Das Fenster beginnt am 2025-09-14 und endet am 2026-09-06. Es enthaelt 66 aktive und 292 inaktive vergangene Tage. Peak-Tag: 2026-08-30 / 79770. Peak-Woche: 2026-08-30 / 80706. Laengste Serie: 8 Tage (2026-07-10..2026-07-17).
+DE: Das Fenster beginnt am 2025-09-14 und endet am 2026-09-07. Es enthaelt 67 aktive und 292 inaktive vergangene Tage. Peak-Tag: 2026-08-30 / 79770. Peak-Woche: 2026-08-30 / 80706. Laengste Serie: 8 Tage (2026-07-10..2026-07-17).
 
-*EN: The window starts on 2025-09-14 and ends on 2026-09-06. It contains 66 active and 292 inactive elapsed days. Peak day: 2026-08-30 / 79770. Peak week: 2026-08-30 / 80706. Longest streak: 8 days (2026-07-10..2026-07-17).*
+*EN: The window starts on 2025-09-14 and ends on 2026-09-07. It contains 67 active and 292 inactive elapsed days. Peak day: 2026-08-30 / 79770. Peak week: 2026-08-30 / 80706. Longest streak: 8 days (2026-07-10..2026-07-17).*
 
 | Monat / Month | Geaenderte Textzeilen / Changed text lines |
 |---|---:|
@@ -347,6 +349,6 @@ DE: Das Fenster beginnt am 2025-09-14 und endet am 2026-09-06. Es enthaelt 66 ak
 | 2026-06 | 37448 |
 | 2026-07 | 110442 |
 | 2026-08 | 96264 |
-| 2026-09 | 23340 |
+| 2026-09 | 28158 |
 
 <!-- project-statistics-v2:end -->
