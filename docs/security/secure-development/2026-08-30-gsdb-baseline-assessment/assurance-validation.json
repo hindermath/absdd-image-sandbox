@@ -1,12 +1,12 @@
 {
   "schemaVersion": "1.0",
   "checkedAt": "2026-09-07T21:15:50Z",
-  "platform": "Darwin; Bash first, PowerShell 7 cross-check; not native Windows",
+  "platform": "DE: Darwin; zuerst Bash, Gegenprüfung mit PowerShell 7; kein natives Windows. EN: Darwin; Bash first, PowerShell 7 cross-check; not native Windows.",
   "context": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment",
   "sourceSha256": "81a7ab5c5d8c6de449289de1dbf143e14933a3678a1160a25ed8ba5d671c8b39",
   "controlMappingsVerified": 157,
   "gateOutcomes": "Blocked",
-  "humanDecisions": "All four Open",
+  "humanDecisions": "DE: Alle vier Entscheidungen Open. EN: All four decisions Open.",
   "protectedFiles": {
     "inventorySha256": "be19ee47398886dbc19d5b5b00f420f04f8a282fd84998a11cbc50203ec84af7",
     "baselineHead": "1e80727f6fe4b8a82b7fd4956c723681c49661c1",
@@ -118,5 +118,5 @@
       "outcome": "Blocked"
     }
   ],
-  "interpretation": "Exit 0 may mean valid blocked evidence; never treat it as substantive Ready."
+  "interpretation": "DE: Exit 0 kann gültige gesperrte Evidence bedeuten; niemals als fachliches Ready werten. EN: Exit 0 may mean valid blocked evidence; never treat it as substantive Ready."
 }
