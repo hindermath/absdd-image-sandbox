@@ -6,15 +6,22 @@
 auf Version 3.2.0 synchronisiert und der technische Evidence-Vertrag des
 13. Presets erneut geprüft. Baseline, Delta, Closure und Image Impact sind
 Ready; der strengste technische Gesamtstatus ist Ready. Das ist keine
-fachliche Neubewertung der 157 Kontrollpunkte. Alle 157 fachlichen Kontrollen bleiben offen; die Revalidierung erteilt keine C5-, Konformitaets- oder Betriebsfreigabe.
-Pilotfreigabe, Projektabnahme und allgemeine Freigabe bleiben Open.
+fachliche Neubewertung der historischen 157 Kontrollpunkte. Diese
+Bewertungsquelle bleibt unveraendert; fuer den aktuellen nichtkommerziellen
+Ausbildungs- und Beispielscope sind C5, CRA und formale Produktkonformitaet
+`N/A`. Die Revalidierung erteilt keine C5-, Konformitaets- oder
+Betriebsfreigabe. Pilotfreigabe, Projektabnahme und allgemeine Freigabe bleiben
+Open.
 
 **EN:** On 2026-09-08, the repository-local secure-development baseline was
 synchronized to version 3.2.0 and the thirteenth preset's technical evidence
 contract was revalidated. Baseline, delta, closure, and image impact are
 Ready; the strictest technical overall status is Ready. This is not a new
-domain assessment of the 157 controls. All 157 domain controls remain open; revalidation grants no C5, conformity, or operational approval. Pilot
-authorization, project acceptance, and general release remain Open.
+domain assessment of the historical 157 controls. That assessment source stays
+unchanged; C5, CRA, and formal product conformity are `N/A` for the current
+non-commercial training and example scope. Revalidation grants no C5,
+conformity, or operational approval. Pilot authorization, project acceptance,
+and general release remain Open.
 
 **DE:** Aktuelle maschinenlesbare Gates sind baseline.json,
 deltas/2026-09-08-assurance-revalidation.json, closure.json und

@@ -167,3 +167,20 @@ changed-code coverage are N/A for package reuse/documentation and must be
 revisited for new product logic. SSDF/CWE apply; the other listed scopes add no
 new obligations in this delta, without waiving existing project obligations.
 Reevaluate at package, profile, baseline or runtime changes.*
+
+## Aktueller Feldteststatus / Current Field-Test Status
+
+Die oben datierten Blockierungsbefunde dokumentieren den jeweiligen
+historischen Integrationsstand. Der aktive Evidence-Vertrag wurde danach
+vollstaendig migriert und revalidiert. Den aktuellen Stand, alle ausgefuehrten
+Pruefungen, Wiedervorlagen und die eng begrenzte Empfehlung `ReleaseAccepted`
+fuer Preset v0.1.3 dokumentiert der
+[kanonische Feldbericht](secure-development-assurance-v013-field-test.md).
+Menschliche Pilot-, Projekt- und allgemeine Freigaben bleiben `Open`.
+
+*The dated blocked findings above preserve their historical integration state.
+The active evidence contract was subsequently migrated and revalidated. The
+[canonical field report](secure-development-assurance-v013-field-test.md)
+records current checks, review dates, and the narrowly scoped
+`ReleaseAccepted` recommendation for preset v0.1.3. Human pilot, project, and
+general-release decisions remain `Open`.*
