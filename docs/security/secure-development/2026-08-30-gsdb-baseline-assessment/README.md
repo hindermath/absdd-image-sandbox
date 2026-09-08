@@ -2,9 +2,9 @@
 
 ## Leserpfad und Zweck / Reader Path and Purpose
 
-**DE:** Diese datierte Ablage ist die vollstaendige, assessment-only Bestandspruefung der Sandbox gegen die Generische Secure-Development-Basis (GSDB). Die GSDB ist eine organisationsneutrale Ausbildungs- und Pruefgrundlage. Beginne mit dieser README, oeffne danach die Evidenzmatrix, die priorisierte Lueckenliste und den Inventarabgleich. ssessment-results.json ist die kanonische, maschinenlesbare Quelle; alidation-results.json dokumentiert die ausgefuehrten Pruefungen.
+**DE:** Diese datierte Ablage ist die vollstaendige, assessment-only Bestandspruefung der Sandbox gegen die Generische Secure-Development-Basis (GSDB). Die GSDB ist eine organisationsneutrale Ausbildungs- und Pruefgrundlage. Beginne mit dieser README, oeffne danach die Evidenzmatrix, die priorisierte Lueckenliste und den Inventarabgleich. assessment-results.json ist die kanonische, maschinenlesbare Quelle; validation-results.json dokumentiert die ausgefuehrten Pruefungen.
 
-**EN:** This dated directory is the complete assessment-only review of the sandbox against the Generic Secure Development Baseline (GSDB), an organisation-neutral training and review basis. Start here, then read the evidence matrix, prioritised gap list, and inventory reconciliation. ssessment-results.json is canonical; alidation-results.json records the executed checks.
+**EN:** This dated directory is the complete assessment-only review of the sandbox against the Generic Secure Development Baseline (GSDB), an organisation-neutral training and review basis. Start here, then read the evidence matrix, prioritised gap list, and inventory reconciliation. assessment-results.json is canonical; validation-results.json records the executed checks.
 
 ## Ausgaben / Outputs
 

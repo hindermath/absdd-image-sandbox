@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0",
+  "checkedAt": "2026-09-07T21:26:38Z",
+  "platform": "DE: Darwin; zuerst Bash, Gegenprüfung mit PowerShell 7; kein natives Windows. EN: Darwin; Bash first, PowerShell 7 cross-check; not native Windows.",
+  "context": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment",
+  "sourceSha256": "81a7ab5c5d8c6de449289de1dbf143e14933a3678a1160a25ed8ba5d671c8b39",
+  "controlMappingsVerified": 157,
+  "gateOutcomes": "Blocked",
+  "humanDecisions": "DE: Alle vier Entscheidungen Open. EN: All four decisions Open.",
+  "protectedFiles": {
+    "metadataException": null,
+    "baselineHead": "1e80727f6fe4b8a82b7fd4956c723681c49661c1",
+    "inventorySha256": "be19ee47398886dbc19d5b5b00f420f04f8a282fd84998a11cbc50203ec84af7",
+    "comparison": "DE: Vor Fingerprint-Vergleich nur die geprüfte Metadatenausnahme rechnerisch zurücknehmen; alle anderen geschützten Dateien bytegleich. EN: Restore only the validated metadata exception before comparing the original fingerprint; all other protected files byte-identical.",
+    "count": 1183
+  },
+  "gateFileHashes": {
+    "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/baseline.json": "42cc3a66554fa363872ccad7421ad675249af926b73f95af3c6cdc9fb337570e",
+    "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/deltas/2026-09-07-assurance-migration.json": "4d49c5e5577229dd21da71d1f788dcf2f047d8187ec432c22c762800234093f9",
+    "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/closure.json": "e6ccf25fbc1d6b7b019a48a9b5f267375f5efe02c655d635bc4094509a16235b",
+    "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/image-impact.json": "f6827ec692439d0bc92b9b641d014a5bbfe45b2e618e8271f204a52202f56b35"
+  },
+  "readOnlyPreservation": true,
+  "shellParity": true,
+  "calls": [
+    {
+      "operation": "status-before",
+      "shell": "Bash",
+      "command": "bash .specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.sh status docs/security/secure-development/2026-08-30-gsdb-baseline-assessment",
+      "exitCode": 2,
+      "output": "Blocked: Richtlinienversion stimmt nicht: Richtlinie_Sichere-Entwicklung.md",
+      "outcome": "Blocked"
+    },
+    {
+      "operation": "status-before",
+      "shell": "PowerShell",
+      "command": "pwsh -NoProfile -File .specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.ps1 -Action Status -EvidenceDirectory docs/security/secure-development/2026-08-30-gsdb-baseline-assessment",
+      "exitCode": 2,
+      "output": "Blocked: Dokumentversion stimmt nicht: Richtlinie_Sichere-Entwicklung.md",
+      "outcome": "Blocked"
+    },
+    {
+      "operation": "baseline",
+      "shell": "Bash",
+      "command": "bash .specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.sh review baseline gsdb-baseline-assessment development",
+      "exitCode": 2,
+      "output": "Blocked: Richtlinienversion stimmt nicht: Richtlinie_Sichere-Entwicklung.md",
+      "outcome": "Blocked"
+    },
+    {
+      "operation": "baseline",
+      "shell": "PowerShell",
+      "command": "pwsh -NoProfile -File .specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.ps1 -Action Review -Gate baseline -ContextId gsdb-baseline-assessment -Mode development",
+      "exitCode": 2,
+      "output": "Blocked: Dokumentversion stimmt nicht: Richtlinie_Sichere-Entwicklung.md",
+      "outcome": "Blocked"
+    },
+    {
+      "operation": "delta",
+      "shell": "Bash",
+      "command": "bash .specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.sh review delta gsdb-baseline-assessment development",
+      "exitCode": 0,
+      "output": "Reviewed: gate=delta context=gsdb-baseline-assessment mode=development outcome=Blocked",
+      "outcome": "Blocked"
+    },
+    {
+      "operation": "delta",
+      "shell": "PowerShell",
+      "command": "pwsh -NoProfile -File .specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.ps1 -Action Review -Gate delta -ContextId gsdb-baseline-assessment -Mode development",
+      "exitCode": 0,
+      "output": "Reviewed: gate=delta context=gsdb-baseline-assessment mode=development outcome=Blocked",
+      "outcome": "Blocked"
+    },
+    {
+      "operation": "closure",
+      "shell": "Bash",
+      "command": "bash .specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.sh review closure gsdb-baseline-assessment development",
+      "exitCode": 0,
+      "output": "Reviewed: gate=closure context=gsdb-baseline-assessment mode=development outcome=Blocked",
+      "outcome": "Blocked"
+    },
+    {
+      "operation": "closure",
+      "shell": "PowerShell",
+      "command": "pwsh -NoProfile -File .specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.ps1 -Action Review -Gate closure -ContextId gsdb-baseline-assessment -Mode development",
+      "exitCode": 0,
+      "output": "Reviewed: gate=closure context=gsdb-baseline-assessment mode=development outcome=Blocked",
+      "outcome": "Blocked"
+    },
+    {
+      "operation": "image-impact",
+      "shell": "Bash",
+      "command": "bash .specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.sh review image-impact gsdb-baseline-assessment development",
+      "exitCode": 0,
+      "output": "Reviewed: gate=image-impact context=gsdb-baseline-assessment mode=development outcome=Blocked",
+      "outcome": "Blocked"
+    },
+    {
+      "operation": "image-impact",
+      "shell": "PowerShell",
+      "command": "pwsh -NoProfile -File .specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.ps1 -Action Review -Gate image-impact -ContextId gsdb-baseline-assessment -Mode development",
+      "exitCode": 0,
+      "output": "Reviewed: gate=image-impact context=gsdb-baseline-assessment mode=development outcome=Blocked",
+      "outcome": "Blocked"
+    },
+    {
+      "operation": "status-after",
+      "shell": "Bash",
+      "command": "bash .specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.sh status docs/security/secure-development/2026-08-30-gsdb-baseline-assessment",
+      "exitCode": 2,
+      "output": "Blocked: Richtlinienversion stimmt nicht: Richtlinie_Sichere-Entwicklung.md",
+      "outcome": "Blocked"
+    },
+    {
+      "operation": "status-after",
+      "shell": "PowerShell",
+      "command": "pwsh -NoProfile -File .specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.ps1 -Action Status -EvidenceDirectory docs/security/secure-development/2026-08-30-gsdb-baseline-assessment",
+      "exitCode": 2,
+      "output": "Blocked: Dokumentversion stimmt nicht: Richtlinie_Sichere-Entwicklung.md",
+      "outcome": "Blocked"
+    }
+  ],
+  "interpretation": "DE: Exit 0 kann gültige gesperrte Evidence bedeuten; niemals als fachliches Ready werten. EN: Exit 0 may mean valid blocked evidence; never treat it as substantive Ready."
+}
