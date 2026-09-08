@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.1",
+  "feature": "secure-development-assurance-v013-field-test",
+  "entries": [
+    {
+      "changeId": "CHG001",
+      "scope": "Document the absdd-image-sandbox field-test closeout for Secure Development Assurance Governance v0.1.3.",
+      "decision": "UpdateRequired",
+      "criticality": "Security",
+      "rationale": "The preset-only recommendation, evidence results, scope exclusions, human approval boundaries, and review dates must be explicit and traceable.",
+      "owner": "Thorsten Hindermann",
+      "documents": [
+        "docs/maintenance/secure-development-assurance-v013-field-test.md",
+        "docs/maintenance/secure-development-assurance-integration.md",
+        "docs/security/cloud-compliance-assurance.md",
+        "docs/security/regulatory-applicability.md",
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assurance-revalidation.md",
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/evidence-matrix.md"
+      ],
+      "evidence": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assurance-validation.json",
+      "audiences": [
+        "Repository maintainers",
+        "Technical reviewers",
+        "Learners"
+      ],
+      "readerPaths": [
+        "docs/maintenance/secure-development-assurance-integration.md",
+        "docs/maintenance/secure-development-assurance-v013-field-test.md",
+        "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/evidence-matrix.md"
+      ],
+      "canonicalSource": "docs/maintenance/secure-development-assurance-v013-field-test.md",
+      "navigationImpact": "The existing integration record links the current canonical field report; no new public landing page is required.",
+      "documentClass": "Repository-local governance and field-test evidence",
+      "languageStrategy": "German first and English second in reader-facing Markdown; controlled JSON field names remain English.",
+      "languagePartners": [],
+      "platformAndExampleProof": "macOS Bash and PowerShell evidence, immutable package tests, static Compose validation, and GitHub delivery checks are recorded; no image or runtime change is claimed.",
+      "distributionClass": "sourceOnly",
+      "distributionDescriptor": "RepositoryDocumentation",
+      "homeSyncRequired": false,
+      "homeSyncDisposition": "NoUpdateRequired",
+      "risk": "A scope change or stale evidence could make the preset-only recommendation invalid; dated technical and regulatory reviews constrain that risk without accepting it.",
+      "reevaluationTrigger": "Re-evaluate on preset, baseline, evidence, image, runtime, delivery, cloud, commercial-use, market-placement, customer-handover, support-contract, or manufacturer/steward changes."
+    }
+  ]
+}

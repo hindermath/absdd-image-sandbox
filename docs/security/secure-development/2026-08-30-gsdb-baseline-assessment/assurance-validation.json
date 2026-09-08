@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "documentType": "SecureDevelopmentAssuranceValidationReceipt",
-  "checkedAt": "2026-09-08T09:53:32Z",
+  "checkedAt": "2026-09-08T13:20:00Z",
   "platform": "DE: macOS; Bash und PowerShell 7. EN: macOS; Bash and PowerShell 7.",
   "contextId": "gsdb-baseline-assessment",
   "evidenceDirectory": "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment",
@@ -21,27 +21,27 @@
   "gateFileHashes": [
     {
       "path": "baseline.json",
-      "rawSha256": "a785b2a5388f46b34947591483eab0253373d20ab1b040f8fc2da9abb8acfc48"
+      "rawSha256": "79c731d43bf8087eb702b909350dad284ce361517df09d725122763add62bef4"
     },
     {
       "path": "deltas/2026-09-08-assurance-revalidation.json",
-      "rawSha256": "87d435f0b17faf37a812f489da13e48f3dcbc0a496b790a28a8eef52b1fca464"
+      "rawSha256": "5541907c287e20b8e91fd65bfeccee5d08e6389930209029b814e4410204e8aa"
     },
     {
       "path": "closure.json",
-      "rawSha256": "98715880b7dd8ed4974882e793e2c4b710c080624185088fdfc1e87b11571429"
+      "rawSha256": "ea566112d24522dec9a191d9778f3619c1abf02c36658a9001741c920f8e3c7e"
     },
     {
       "path": "image-impact.json",
-      "rawSha256": "bfa05b43871e310ad3d90774041a389720095fabd700b196f2ac6f7ea05f5b87"
+      "rawSha256": "1490f6a22e4d4f3cc6f1d9023c9ae0b6138b66231970bc497b5ebaf8b415ae6d"
     },
     {
       "path": "evidence-matrix.md",
-      "rawSha256": "3c9bad74606bd728e1c290b7c43b7cbd7a4eef9bdb803d91f0babdbd861f7697"
+      "rawSha256": "807bd8d51acf0729b951b03ba2f98b64aae2ae490dcdc9e28f123ed0f8705389"
     },
     {
       "path": "assurance-revalidation.md",
-      "rawSha256": "194312299aa9ab136ee0c32e4d5b56e6ff35be7f9ee1c1a31fff77732df449ac"
+      "rawSha256": "c690b07184bc771752f38ea33b5697b02de58a032a516a489cfcddab15bd606e"
     },
     {
       "path": "assessment-results.json",
@@ -139,5 +139,5 @@
       "outcome": "Ready"
     }
   ],
-  "interpretation": "DE: Ausschließlich technische Validierung des Evidence-Vertrags. Fachlicher Kontrollstatus sowie menschliche Pilot-, Projekt-, Release-, Risiko-, Konformitäts-, Zertifizierungs- und C5-Entscheidungen bleiben getrennt. EN: Technical evidence-contract validation only. Domain-control status and human pilot, project, release, risk, conformity, certification, and C5 decisions remain separate."
+  "interpretation": "DE: Ausschließlich technische Validierung des Evidence-Vertrags. Die historische Fachbewertung bleibt unverändert; C5, CRA und formale Produktkonformität sind nur für den aktuellen nichtkommerziellen Ausbildungs- und Beispielscope N/A. Menschliche Pilot-, Projekt-, Release-, Risiko-, Konformitäts- und Zertifizierungsentscheidungen bleiben getrennt. EN: Technical evidence-contract validation only. The historical domain assessment stays unchanged; C5, CRA, and formal product conformity are N/A only for the current non-commercial training and example scope. Human pilot, project, release, risk, conformity, and certification decisions remain separate."
 }

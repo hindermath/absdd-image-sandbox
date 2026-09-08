@@ -65,6 +65,7 @@ tracked files; they are an artefact-volume measure, not a quality measure.
 | 2026-09-07 | Assurance-Integration und Evidence-Navigation / Assurance integration and evidence navigation | Branch `codex/assurance-preset-integration`; sichtbare Sitzung 2026-09-07. Paket-, Profil- und Dokumentationsaenderungen: +493 / -38 Textzeilen vor Statistik-Selbstnachweis. Wiederverwendete Paketzeilen sind keine neu entwickelte Produktlogik; vorhandene Nachweise werden nur referenziert. Zwoelf Presets unveraendert, keine fachliche Freigabe, kein Home-Sync. Referenzen: 80 Zeilen/Arbeitstag konservativ, repo-spezifische Thorsten-Solo-Basis laut Profilkonfiguration; Speedup ist Lieferdichte. / One visible session; reused package and evidence-index volume, no new product logic or human approval. Twelve presets preserved; CI/review and MergeAndSync; no Home sync. Manual effort follows the repository statistics configuration. |
 | 2026-09-07 | Assurance-Evidence-Vertrag / Assurance evidence contract | Branch `codex/assurance-evidence-migration`, sichtbare Sitzung 2026-09-07. 157 historische Kontrollen quellengebunden abgebildet, vier Gates Blocked, vier menschliche Entscheidungen Open; 4036 neue Evidence-/Dokumentationszeilen vor Ledger und Delivery-Metadaten, 0 neue Produkt-/Testlogikzeilen. Quellen- und Shell-Paritätsprüfung: docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/assurance-validation.json. Presets und Altbewertungen unverändert. / Source-bound migration and read-only parity verification; no approval inferred, no Home sync. Manual reference: 80 lines/workday and the repository-specific configuration; speedup is delivery density, not stopwatch time. |
 | 2026-09-08 | Assurance-Baseline und Gate-Revalidierung / Assurance baseline and gate revalidation | Branch `codex/assurance-evidence-ready`; sichtbare Sitzung 2026-09-08. Die verwaltete Baseline ist auf 3.2.0 synchronisiert, der fruehere blockierte Gate-Satz auditierbar archiviert und der aktive Evidence-Vertrag fuer Baseline, Delta, Closure und Image Impact in Bash und PowerShell mit Gesamtstatus `Ready` geprueft. Alle 157 fachlichen GSDB-Kontrollen und die menschlichen Freigaben bleiben `Open`; keine C5-, Konformitaets-, Betriebs- oder Risikoakzeptanz wird behauptet. Umfang vor Statistik- und Session-Log-Metadaten: `+2881 / -2270` Dokumentations-, Governance- und Evidence-Zeilen, `0` Produkt- und `0` Testcode-Zeilen. Dreizehn Presets bleiben unveraendert; keine Dockerfile-, Compose-, Image-, Netzwerk-, Secret- oder Home-Sync-Aenderung. / Synchronize baseline 3.2.0, archive the superseded blocked gate set, and validate the technical contract as `Ready` while all 157 GSDB controls and human approvals remain `Open`. No image, runtime, C5, conformity, or Home-sync claim; manual references remain defined by the repository statistics configuration. |
+| 2026-09-08 | Assurance-v0.1.3-Feldtest abgeschlossen / Assurance v0.1.3 field test completed | Branch `codex/assurance-v013-field-test-closeout`; eine sichtbare Agentensitzung. Das unveraenderliche Preset-Paket wurde im exakten 13-Preset-Profil unter Bash und PowerShell, mit Vertrags-, Negativ-, Zeilenendungs-, BOM-, Oberflaechen-, Kompositions- und Read-only-Pruefungen validiert. Alle vier aktiven Gates und der Gesamtstatus sind `Ready`; `technicalValidation` ist `Fulfilled`. C5, CRA und formale Produktkonformitaet sind im aktuellen nichtkommerziellen Ausbildungs- und Beispielscope `N/A`; die technische Wiedervorlage ist `2027-09-08`, die regulatorische Scope-Wiedervorlage `2026-12-31`. Die Empfehlung `ReleaseAccepted` gilt nur fuer Preset v0.1.3; Pilotfreigabe, Projektabnahme und allgemeine Freigabe bleiben `Open`. Evidence-Umfang vor Statistik-Selbstnachweis: `+287 / -53` Dokumentations-, Governance- und Evidence-Zeilen, `0` Produkt-, Image- und Testcode-Zeilen. Keine Dockerfile-, Compose-, Runtime-, Paket-, Mount-, Netzwerk-, Secret- oder Home-Sync-Aenderung. / The immutable preset package passed the exact 13-preset profile and the complete cross-shell evidence suite. ReleaseAccepted applies only to preset v0.1.3; human approvals remain Open. No image, runtime, or Home-sync change. |
 
 ---
 
@@ -189,25 +190,25 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 219501 lines |
-| Textdateien / Text files | 1196 |
+| Textbasis / Text base | 219735 lines |
+| Textdateien / Text files | 1199 |
 | Beobachtbarer Zeitraum / Observable period | 2025-09-14..2026-09-08 |
 | Aktivtage / Active days | 68 |
-| Relevante Commits / Relevant commits | 201 |
-| Zeilen je Aktivtag / Lines per active day | 3228.0 |
+| Relevante Commits / Relevant commits | 203 |
+| Zeilen je Aktivtag / Lines per active day | 3231.4 |
 | Peak-Tag im Fenster / Peak day in window | 2026-08-30 / 79770 |
 | Peak-Woche im Fenster / Peak week in window | 2026-08-30 / 80706 |
 | Laengste Serie / Longest streak | 8 days |
-| Speedup vs. 80 lines/day | 40.3x |
+| Speedup vs. 80 lines/day | 40.4x |
 | Speedup vs. 100 lines/day | 32.3x |
-| Methodik / Methodology | v2; source `36d12242c272` |
+| Methodik / Methodology | v2; source `c9388096dcf9` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [#...................]   0.0% | 82
-Tests                           [#...................]   3.1% | 6697
-Dokumentation / Documentation   [#################...]  83.2% | 182724
+Tests                           [#...................]   3.1% | 6840
+Dokumentation / Documentation   [#################...]  83.2% | 182815
 Skripte / Scripts               [##..................]  11.0% | 24187
 Konfiguration / Configuration   [#...................]   2.5% | 5410
 Daten und Medien / Data and media [....................]   0.0% | 0
@@ -311,7 +312,7 @@ Es liegen keine belastbaren Phasendaten vor. Deshalb zeigt dieses Diagramm Monat
 
 ```text
 Scale: 0..50x
-80 lines/day       [################....] 40.3x
+80 lines/day       [################....] 40.4x
 100 lines/day      [#############.......] 32.3x
 ```
 
@@ -325,7 +326,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..5000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 100
-Visible repository [#############.......] 3228.0
+Visible repository [#############.......] 3231.4
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -351,6 +352,6 @@ DE: Das Fenster beginnt am 2025-09-14 und endet am 2026-09-08. Es enthaelt 68 ak
 | 2026-06 | 37448 |
 | 2026-07 | 110442 |
 | 2026-08 | 96264 |
-| 2026-09 | 37621 |
+| 2026-09 | 37963 |
 
 <!-- project-statistics-v2:end -->

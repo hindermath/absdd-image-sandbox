@@ -6,16 +6,22 @@
 Baseline-Versionsabweichung und vervollstaendigt den Assurance-Evidence-Vertrag.
 Alle vier technischen Gates sowie der strengste Gesamtstatus sind Ready.
 Dieses Ergebnis bewertet die Integritaet des Gate-Satzes, nicht die Wirksamkeit
-aller fachlichen Kontrollen. Alle 157 fachlichen Kontrollen bleiben offen; die Revalidierung erteilt keine C5-, Konformitaets- oder Betriebsfreigabe. Es wird keine
-Risikoakzeptanz, Zertifizierung, Rechts-, C5-, Pilot-, Projekt- oder
+aller fachlichen Kontrollen. Die historische 157-Kontrollen-Bewertung bleibt
+unveraendert; fuer den aktuellen nichtkommerziellen Ausbildungs- und
+Beispielscope sind C5, CRA und formale Produktkonformitaet `N/A`. Die
+Revalidierung erteilt keine C5-, Konformitaets- oder Betriebsfreigabe. Es wird
+keine Risikoakzeptanz, Zertifizierung, Rechts-, C5-, Pilot-, Projekt- oder
 Releasefreigabe abgeleitet.
 
 **EN:** The technical revalidation dated 2026-09-08 resolves the recorded
 baseline version drift and completes the Assurance evidence contract. All four
 technical gates and the strictest overall status are Ready. This result
 assesses gate-set integrity, not the effectiveness of every domain control.
-All 157 domain controls remain open; revalidation grants no C5, conformity, or operational approval. No risk acceptance, certification, legal, C5,
-pilot, project, or release approval is inferred.
+The historical 157-control assessment remains unchanged; C5, CRA, and formal
+product conformity are `N/A` for the current non-commercial training and
+example scope. Revalidation grants no C5, conformity, or operational approval.
+No risk acceptance, certification, legal, C5, pilot, project, or release
+approval is inferred.
 
 ## Aenderung / Change
 
@@ -68,7 +74,9 @@ Revalidierungsbericht, Validierungsreceipt und Projektstatistik. Der Leserpfad
 führt von der Matrix über die Gates zur fachlichen Quelle. Die Evidence ist
 repository-lokal, DE-zuerst/EN-danach, textorientiert und benötigt keinen
 Home-Sync. Nach jeder relevanten Quellen-, Scope-, Produkt- oder
-Infrastrukturänderung, spätestens am 2026-09-15, ist neu zu bewerten.
+Infrastrukturänderung, spätestens am 2027-09-08, ist die technische Evidence
+neu zu bewerten. Die regulatorische Scope-Wiedervorlage ist am 2026-12-31;
+frueher nur bei den dokumentierten Scope-Triggern.
 
 **EN:**
 
@@ -91,14 +99,20 @@ Infrastrukturänderung, spätestens am 2026-09-15, ist neu zu bewerten.
   NoHomeSyncRequired.
 - Re-evaluation: immediately after any baseline, evidence, product,
   architecture, dependency, workflow, distribution, image, or scope change,
-  and no later than 2026-09-15.
+  and no later than 2027-09-08. The regulatory scope review is due on
+  2026-12-31, or earlier only after a documented scope trigger.
 
 ## Naechste Aktion / Next Action
 
 **DE:** pilotAuthorization, projectAcceptance und generalRelease bleiben
-Open, bis ausdrücklich befugte menschliche Evidence vorliegt. Nach jedem
-Re-Evaluation-Trigger sind alle Gates erneut zu prüfen.
+Open, bis ausdruecklich befugte menschliche Evidence vorliegt. Die Empfehlung
+`ReleaseAccepted` gilt nur fuer das Preset v0.1.3 in diesem Projektfeldtest.
+Die zentrale Preset-Entscheidung wartet auf alle fuenf Projektberichte und
+`github/spec-kit#4455`. Nach jedem Re-Evaluation-Trigger sind alle Gates erneut
+zu pruefen.
 
 **EN:** Keep pilotAuthorization, projectAcceptance, and generalRelease Open
-until explicitly authorised human evidence exists. Re-run all gates whenever a
-re-evaluation trigger occurs.
+until explicitly authorised human evidence exists. `ReleaseAccepted` applies
+only to preset v0.1.3 in this project field test. The central preset decision
+awaits all five project reports and `github/spec-kit#4455`. Re-run all gates
+whenever a re-evaluation trigger occurs.
