@@ -32,7 +32,7 @@ Netzwerk, Secrets und Deployment wurden nicht geaendert.
 | Assurance-Preset | `0.1.3`, Prioritaet 15 |
 | Profil | 13 Presets, exakt |
 | Host | macOS 26.6.2, Apple Silicon; Bash 3.2.57; PowerShell 7.6.5 |
-| Delivery | absdd-image-sandbox PR #60; Evidence-Commit wird nach der Git-Bindung ergaenzt |
+| Delivery | [absdd-image-sandbox PR #60](https://github.com/hindermath/absdd-image-sandbox/pull/60); gepruefter Evidence-Commit `2a2e0a3ecb10315140d258cb8477b31cf44314cd` |
 
 ## Technische Pruefung / Technical Validation
 
