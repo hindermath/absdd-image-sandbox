@@ -131,6 +131,17 @@
         "powershell",
         "toolchain"
       ]
+    },
+    {
+      "matchPackageNames": [
+        "rhysd/actionlint",
+        "dotnet-sdk"
+      ],
+      "groupName": "sandbox validation tooling Dockerfile ARGs",
+      "addLabels": [
+        "toolchain",
+        "validation"
+      ]
     }
   ]
 }

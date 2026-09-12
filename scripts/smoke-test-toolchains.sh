@@ -1,6 +1,92 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+json_mode=false
+repository=""
+while (($# > 0)); do
+  case "$1" in
+    --json) json_mode=true ;;
+    --repo)
+      (($# >= 2)) || { printf '%s\n' '--repo requires a path' >&2; exit 2; }
+      repository="$2"
+      shift
+      ;;
+    -h|--help)
+      printf '%s\n' 'Usage: smoke-test-toolchains.sh [--json] [--repo PATH]'
+      exit 0
+      ;;
+    *) printf 'Unknown option: %s\n' "$1" >&2; exit 2 ;;
+  esac
+  shift
+done
+
+if $json_mode; then
+  python3 - "$repository" <<'PY'
+import json
+import platform
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+repository = Path(sys.argv[1]).resolve() if sys.argv[1] else None
+commands = {
+    "actionlint": ["actionlint", "-version"],
+    "bash": ["bash", "--version"],
+    "codex": ["codex", "--version"],
+    "dotnet": ["dotnet", "--version"],
+    "git": ["git", "--version"],
+    "jq": ["jq", "--version"],
+    "pwsh": ["pwsh", "--version"],
+    "python": ["python3", "--version"],
+    "yq": ["yq", "--version"],
+}
+results = []
+for name, command in commands.items():
+    executable = shutil.which(command[0])
+    if executable is None:
+        results.append({"tool": name, "status": "Missing", "version": None})
+        continue
+    completed = subprocess.run(command, text=True, stdout=subprocess.PIPE,
+                               stderr=subprocess.STDOUT, check=False)
+    version = completed.stdout.splitlines()[0].strip() if completed.stdout else ""
+    results.append({"tool": name, "status": "Pass" if completed.returncode == 0 else "Fail",
+                    "version": version})
+
+# GitHub provider administration intentionally stays on the separate control plane.
+results.append({"tool": "gh", "status": "ControlPlane", "version": None})
+sdk = {"requested": None, "selected": None, "status": "NotApplicable"}
+if repository and (repository / "global.json").is_file():
+    try:
+        sdk["requested"] = json.loads(
+            (repository / "global.json").read_text(encoding="utf-8")
+        )["sdk"]["version"]
+        completed = subprocess.run(["dotnet", "--version"], cwd=repository, text=True,
+                                   stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=False)
+        sdk["selected"] = completed.stdout.strip().splitlines()[0] if completed.returncode == 0 else None
+        sdk["status"] = (
+            "Pass"
+            if completed.returncode == 0 and sdk["selected"] == sdk["requested"]
+            else "Fail"
+        )
+    except (KeyError, TypeError, json.JSONDecodeError, OSError, UnicodeError):
+        sdk["status"] = "Fail"
+
+document = {
+    "schemaVersion": "1.0",
+    "platform": platform.system().lower(),
+    "architecture": platform.machine().lower(),
+    "repository": str(repository) if repository else None,
+    "tools": results,
+    "dotnetSdk": sdk,
+}
+print(json.dumps(document, ensure_ascii=True, sort_keys=True))
+if any(item["status"] in {"Missing", "Fail"} for item in results) or sdk["status"] == "Fail":
+    raise SystemExit(1)
+PY
+  exit $?
+fi
+
 base_dir="${SMOKE_TEST_ROOT:-/home/adedev/smoke-tests}"
 mkdir -p "${base_dir}"
 work_dir="$(mktemp -d "${base_dir}/run.XXXXXX")"
@@ -20,6 +106,7 @@ pwd
 
 section "tool versions"
 dotnet --info
+dotnet --version
 java --version
 javac --version
 mvn --version
@@ -41,6 +128,7 @@ claude --version
 agy --version
 copilot --version
 syft version
+actionlint -version
 specify version
 specify check
 

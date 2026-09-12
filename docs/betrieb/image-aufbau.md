@@ -49,13 +49,35 @@ by the Dockerfile.
 
 | Familie / Family | Installation und Kontrolle / Installation and control |
 |---|---|
-| .NET und PowerShell | aus gepinntem Basisimage; Build prüft die erwartete PowerShell-Version / from pinned base image; build checks expected PowerShell version |
+| .NET und PowerShell | gepinntes Basisimage plus hashgeprüftes Kompatibilitäts-SDK `10.0.301`; Build prüft die erwartete PowerShell-Version / pinned base image plus hash-verified compatibility SDK `10.0.301`; build checks expected PowerShell version |
 | Java | Ubuntu OpenJDK und Maven / Ubuntu OpenJDK and Maven |
 | Go | Releasearchiv; zusätzliche Werkzeuge als Benutzer `adedev` / release archive; additional tools as user `adedev` |
 | Rust | festes `rustup-init` mit SHA256-Prüfung; Komponenten über gepinnte Toolchain / pinned `rustup-init` with SHA256 verification; components through pinned toolchain |
 | Python | Ubuntu Python plus verifiziertes `uv`/`uvx`-Release / Ubuntu Python plus verified `uv`/`uvx` release |
 | Swift | signiertes Ubuntu-Release, Architekturprüfung, SourceKit-LSP / signed Ubuntu release, architecture check, SourceKit-LSP |
 | Node.js | signierte APT-Quelle; npm für globale Agentenpakete / signed APT source; npm for global agent packages |
+| GitHub Actions | hashgeprüftes `actionlint`-Release für `amd64` und `arm64`; `gh` bleibt auf der Control Plane / hash-verified `actionlint` release for `amd64` and `arm64`; `gh` remains on the control plane |
+
+Das Swift-6-Archiv wird mit dem versionsspezifischen offiziellen
+Release-Schlüssel und dessen fest erwarteter Fingerprint-Identität geprüft.
+HTTP-komprimierte Schlüsselantworten werden vor dem GPG-Import dekomprimiert.
+
+*The Swift 6 archive is verified with the version-specific official release
+key and its fixed expected fingerprint identity. HTTP-compressed key responses
+are decompressed before GPG import.*
+
+Codex verwendet das paketierte Bubblewrap mit einem eng begrenzten,
+rootless-kompatiblen Adapter. Er bindet die bereits vom aeusseren Container
+isolierten `/dev`- und `/proc`-Dateisysteme ein und ersetzt nicht moegliche
+synthetische Read-only-Remounts durch vorab root-eigene Metadatenverzeichnisse.
+Der image-eigene Transaktionspfad `/home/adedev/codex-workspace` ist dafuer
+vorbereitet; Host-Bind-Mounts werden nicht als verschachtelte Codex-
+Schreibwurzel verwendet. / *Codex uses the packaged Bubblewrap through a
+narrow rootless-compatible adapter. It passes through the `/dev` and `/proc`
+filesystems already isolated by the outer container and replaces unsupported
+synthetic read-only remounts with pre-created root-owned metadata directories.
+The image-owned transaction path `/home/adedev/codex-workspace` is prepared for
+that purpose; host bind mounts are not used as nested Codex writable roots.*
 
 **DE:** Unterstützte Architekturen werden im Build explizit auf `amd64` und
 `arm64` abgebildet. Ein unbekannter Wert bricht den Build ab, statt ein
@@ -80,13 +102,20 @@ architecture-specific release with a fixed SHA256 value. Syft is downloaded
 from a release archive and checked against the published checksum. No
 installation preselects a provider, model, or user account.
 
-**DE:** Codex erhält systemweite Benutzer-, Managed- und Requirements-Layer.
-OpenCode erhält eine kommentierte Berechtigungskonfiguration. Benutzerzustand
-wird erst zur Laufzeit in getrennten Volumes geschrieben.
+**DE:** Codex erhält einen systemweiten Default-Layer und einen getrennten
+Requirements-Layer. Der Default-Layer setzt das interaktive Verhalten; nur der
+Requirements-Layer erzwingt die erlaubten Approval- und Sandbox-Mengen. Ein
+Legacy-Managed-Layer würde diese Mengen unbeabsichtigt auf einzelne Werte
+verengen und wird deshalb nicht erzeugt. OpenCode erhält eine kommentierte
+Berechtigungskonfiguration. Benutzerzustand wird erst zur Laufzeit in
+getrennten Volumes geschrieben.
 
-**EN:** Codex receives system-wide user, managed, and requirements layers.
-OpenCode receives a commented permission configuration. User state is written
-only at runtime into separate volumes.
+**EN:** Codex receives a system-wide default layer and a separate requirements
+layer. The default layer defines interactive behavior; only the requirements
+layer constrains the allowed approval and sandbox sets. A legacy managed layer
+would unintentionally narrow those sets to single values and is therefore not
+created. OpenCode receives a commented permission configuration. User state is
+written only at runtime into separate volumes.
 
 ## Spec Kit / Spec Kit
 

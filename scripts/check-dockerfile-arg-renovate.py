@@ -35,6 +35,11 @@ REQUIRED_AGENT_CLIS = {
     ),
 }
 
+REQUIRED_OPERATIONAL_TOOLS = {
+    "ACTIONLINT_VERSION": ("rhysd/actionlint", "actionlint_${ACTIONLINT_VERSION}", "actionlint -version"),
+    "DOTNET_COMPAT_SDK_VERSION": ("dotnet-sdk", "dotnet-sdk-${DOTNET_COMPAT_SDK_VERSION}", "dotnet --version"),
+}
+
 
 def main() -> int:
     dockerfile = Path("Dockerfile")
@@ -82,6 +87,47 @@ def main() -> int:
             failures.append(f"Renovate agent CLI group is missing {package}")
         if version_command not in smoke_text:
             failures.append(f"smoke test is missing: {version_command}")
+
+    for arg_name, (package, install_marker, version_command) in REQUIRED_OPERATIONAL_TOOLS.items():
+        if not re.search(rf"^ARG {re.escape(arg_name)}=\S+$", dockerfile_text, re.MULTILINE):
+            failures.append(f"required operational ARG missing: {arg_name}")
+        if install_marker not in dockerfile_text:
+            failures.append(f"Dockerfile does not install {package} from {arg_name}")
+        if version_command not in smoke_text:
+            failures.append(f"smoke test is missing: {version_command}")
+
+    architecture_contracts = {
+        "actionlint": (
+            r'amd64\) actionlint_arch="x86_64"; actionlint_sha256="[0-9a-f]{64}"',
+            r'arm64\) actionlint_arch="arm64"; actionlint_sha256="[0-9a-f]{64}"',
+        ),
+        ".NET compatibility SDK": (
+            r'amd64\) dotnet_rid="linux-x64"; dotnet_sha512="[0-9a-f]{128}"',
+            r'arm64\) dotnet_rid="linux-arm64"; dotnet_sha512="[0-9a-f]{128}"',
+        ),
+    }
+    for label, patterns in architecture_contracts.items():
+        if not all(re.search(pattern, dockerfile_text) for pattern in patterns):
+            failures.append(f"Dockerfile is missing complete amd64/arm64 hashes for {label}")
+
+    codex_config = Path("codex/config.toml").read_text(encoding="utf-8")
+    codex_requirements = Path("codex/requirements.toml").read_text(encoding="utf-8")
+    codex_contracts = {
+        "Codex rootless adapter is not installed": "scripts/codex-bwrap-wrapper.sh",
+        "Codex transaction workspace is not prepared": "/home/adedev/codex-workspace/.git",
+    }
+    for message, marker in codex_contracts.items():
+        if marker not in dockerfile_text:
+            failures.append(message)
+    if "/etc/codex/managed_config.toml" in dockerfile_text:
+        failures.append("legacy Codex managed_config would collapse allowed policy sets")
+    if 'approval_policy = "untrusted"' not in codex_config:
+        failures.append("Codex interactive default must remain untrusted")
+    if not re.search(
+        r'allowed_approval_policies\s*=\s*\[[^\]]*"untrusted"[^\]]*"on-request"[^\]]*"never"',
+        codex_requirements,
+    ):
+        failures.append("Codex requirements must support interactive and headless approval modes")
 
     if not re.search(r"^ARG SYFT_VERSION=\S+$", dockerfile_text, re.MULTILINE):
         failures.append("required SBOM tool ARG missing: SYFT_VERSION")

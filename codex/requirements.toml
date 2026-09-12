@@ -7,9 +7,13 @@
 # DE: Normale Benutzer- oder Projektkonfiguration darf diese Schranken nicht abschwaechen.
 # EN: Normal user or project configuration must not weaken these constraints.
 
-# DE: "never" ist nicht erlaubt, damit riskante Aktionen nicht ohne Rueckfrage laufen.
-# EN: "never" is not allowed, so risky actions cannot run without approval.
-allowed_approval_policies = ["untrusted", "on-request"]
+# DE: Interaktive Laeufe verwenden "untrusted" oder "on-request". Der
+# nicht-interaktive `codex exec`-Pfad erzwingt "never" selbst; er bleibt deshalb
+# innerhalb der unten fest vorgegebenen read-only/workspace-write-Sandbox erlaubt.
+# EN: Interactive runs use "untrusted" or "on-request". The non-interactive
+# `codex exec` path enforces "never" itself, so it remains allowed only inside
+# the read-only/workspace-write sandbox fixed below.
+allowed_approval_policies = ["untrusted", "on-request", "never"]
 
 # DE: Vollzugriff ist nicht erlaubt.
 # EN: Full access is not allowed.
@@ -27,29 +31,56 @@ computer_use = false
 in_app_browser = false
 
 [permissions.filesystem]
+# DE: Linux muss **-Muster vor dem Bubblewrap-Start auf konkrete Pfade
+# abbilden. Die begrenzte Tiefe verhindert eine unbeschraenkte Mount-Liste;
+# tiefere Secret-Pfade bleiben durch die expliziten Agent-State-Wurzeln und
+# die Container-/Repository-Grenzen abgedeckt.
+# EN: Linux expands ** patterns to concrete paths before Bubblewrap starts.
+# The bounded depth prevents an unbounded mount list; deeper secret paths stay
+# covered by the explicit agent-state roots and container/repository boundary.
+glob_scan_max_depth = 4
+
 # DE: Diese Pfade und Muster darf Codex nicht lesen.
 # EN: Codex must not read these paths and patterns.
 # DE: Das schuetzt lokale Secrets, Container-Authentifizierung und Agenten-Zustand.
 # EN: This protects local secrets, container authentication, and agent state.
 deny_read = [
+  ".env",
+  ".env.*",
   "*.env",
   "*.env.*",
-  "**/*.env",
-  "**/*.env.*",
-  ".env",
-  "**/.env",
+  "*/.env",
+  "*/.env.*",
+  "*/*.env",
+  "*/*.env.*",
+  "*/*/.env",
+  "*/*/.env.*",
+  "*/*/*.env",
+  "*/*/*.env.*",
+  "*/*/*/.env",
+  "*/*/*/.env.*",
+  "*/*/*/*.env",
+  "*/*/*/*.env.*",
   "opencode.env",
-  "**/opencode.env",
+  "*/opencode.env",
+  "*/*/opencode.env",
+  "*/*/*/opencode.env",
   "codex.env",
-  "**/codex.env",
-  "/home/adedev/.ssh/**",
-  "/home/adedev/.gnupg/**",
-  "/home/adedev/.config/gh/**",
-  "/home/adedev/.config/glab-cli/**",
-  "/home/adedev/.config/containers/**",
-  "/home/adedev/.local/share/containers/**",
-  "/home/adedev/.codex/**",
-  "/home/adedev/.local/share/opencode/**",
+  "*/codex.env",
+  "*/*/codex.env",
+  "*/*/*/codex.env",
+  "/home/adedev/.ssh",
+  "/home/adedev/.gnupg",
+  "/home/adedev/.config/gh",
+  "/home/adedev/.config/glab-cli",
+  "/home/adedev/.config/containers",
+  "/home/adedev/.local/share/containers",
+  "/home/adedev/.codex/auth.json",
+  "/home/adedev/.codex/config.toml",
+  "/home/adedev/.codex/history.jsonl",
+  "/home/adedev/.codex/log",
+  "/home/adedev/.codex/sessions",
+  "/home/adedev/.local/share/opencode",
 ]
 
 [rules]
