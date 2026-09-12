@@ -24,6 +24,7 @@ jobs:
             --include-fragments
             --no-progress
             --exclude-path docs/security/agent-session-log
+            --exclude-path scripts/tests/linked-intake-evidence
             './**/*.md'
           fail: true
 
