@@ -9,7 +9,15 @@
     "conservativeLinesPerDay": 80,
     "thorstenLinesPerDay": 100
   },
-  "phases": [],
+  "phases": [
+    {
+      "slot": 0,
+      "id": "linked-intake-evidence-032-slice",
+      "labelDe": "Verlinkte Intake-Nachweise",
+      "labelEn": "Linked intake evidence",
+      "netLines": 4562
+    }
+  ],
   "excludedPaths": [],
   "categoryOverrides": []
 }

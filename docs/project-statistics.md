@@ -190,27 +190,27 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 219735 lines |
-| Textdateien / Text files | 1199 |
-| Beobachtbarer Zeitraum / Observable period | 2025-09-14..2026-09-08 |
-| Aktivtage / Active days | 68 |
-| Relevante Commits / Relevant commits | 203 |
-| Zeilen je Aktivtag / Lines per active day | 3231.4 |
+| Textbasis / Text base | 224297 lines |
+| Textdateien / Text files | 1223 |
+| Beobachtbarer Zeitraum / Observable period | 2025-09-14..2026-09-12 |
+| Aktivtage / Active days | 69 |
+| Relevante Commits / Relevant commits | 205 |
+| Zeilen je Aktivtag / Lines per active day | 3250.7 |
 | Peak-Tag im Fenster / Peak day in window | 2026-08-30 / 79770 |
 | Peak-Woche im Fenster / Peak week in window | 2026-08-30 / 80706 |
 | Laengste Serie / Longest streak | 8 days |
-| Speedup vs. 80 lines/day | 40.4x |
-| Speedup vs. 100 lines/day | 32.3x |
-| Methodik / Methodology | v2; source `c9388096dcf9` |
+| Speedup vs. 80 lines/day | 40.6x |
+| Speedup vs. 100 lines/day | 32.5x |
+| Methodik / Methodology | v2; source `58e8b901fc10` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [#...................]   0.0% | 82
-Tests                           [#...................]   3.1% | 6840
-Dokumentation / Documentation   [#################...]  83.2% | 182815
-Skripte / Scripts               [##..................]  11.0% | 24187
-Konfiguration / Configuration   [#...................]   2.5% | 5410
+Tests                           [#...................]   3.1% | 6978
+Dokumentation / Documentation   [################....]  81.7% | 183198
+Skripte / Scripts               [###.................]  12.5% | 28125
+Konfiguration / Configuration   [#...................]   2.5% | 5513
 Daten und Medien / Data and media [....................]   0.0% | 0
 Sonstiger Text / Other text     [#...................]   0.2% | 401
 ```
@@ -237,10 +237,10 @@ Wochen / Weeks 27..52 | 2026-03-15..2026-09-12
 So/Su  0 0 0 0 0 0 0 2 0 3 2 1 0 4 0 0 4 2 4 4 1 4 4 0 4 4
 Mo/Mo  0 0 0 0 0 0 0 2 3 0 3 2 0 0 0 0 0 4 4 0 0 0 2 0 0 4
 Di/Tu  0 0 0 0 0 0 0 2 3 3 2 3 0 0 0 0 0 3 4 4 0 0 0 0 0 4
-Mi/We  0 0 0 0 0 0 1 3 0 0 2 4 0 0 0 0 2 1 2 4 0 0 2 0 0 -
-Do/Th  0 0 0 0 0 0 0 1 3 3 0 4 3 0 0 0 0 1 3 0 0 4 0 0 0 -
-Fr/Fr  0 0 0 0 0 0 4 0 2 1 3 0 0 0 2 4 4 4 4 1 0 4 0 0 3 -
-Sa/Sa  0 0 0 0 0 0 2 0 0 2 0 0 0 2 0 4 4 0 4 2 0 2 0 0 0 -
+Mi/We  0 0 0 0 0 0 1 3 0 0 2 4 0 0 0 0 2 1 2 4 0 0 2 0 0 0
+Do/Th  0 0 0 0 0 0 0 1 3 3 0 4 3 0 0 0 0 1 3 0 0 4 0 0 0 0
+Fr/Fr  0 0 0 0 0 0 4 0 2 1 3 0 0 0 2 4 4 4 4 1 0 4 0 0 3 0
+Sa/Sa  0 0 0 0 0 0 2 0 0 2 0 0 0 2 0 4 4 0 4 2 0 2 0 0 0 4
 ```
 
 DE: 0 = keine Aenderung; 1 = 1..79; 2 = 80..399; 3 = 400..1599; 4 = 1600+ geaenderte Textzeilen; - = noch nicht abgelaufen.
@@ -291,29 +291,34 @@ Die kumulative Kurve summiert nur das Brutto-Aenderungsvolumen im Fenster. Sie d
 
 *The cumulative curve sums gross change volume within the window only. It must not be read as the current code base.*
 
-### Monatsvolumen / Monthly Volume
+### Phasenvolumen / Phase Volume
 
 ```text
-Last 12 calendar months
-  cap 200000 | . . . . . . . . . . . .
-      166667 | . . . . . . . . . . . .
-      133333 | . . . . . . . . . . . .
-      100000 | . . . . . . . . . # . .
-       66667 | . . . . . . . . . # # .
-       33333 | . . . . . . . . # # # #
-           0 +-------------------------
+Slots 0..0
+    cap 5000 | .
+        4167 | #
+        3333 | #
+        2500 | #
+        1667 | #
+         833 | #
+           0 +---
+             00
 ```
 
-Es liegen keine belastbaren Phasendaten vor. Deshalb zeigt dieses Diagramm Monate und erfindet keine Projektphasen.
+| Slot | Phase | Nettozeilen / Net lines |
+|---:|---|---:|
+| 0 | Verlinkte Intake-Nachweise / Linked intake evidence | 4562 |
 
-*No reliable phase series is available. This chart therefore shows months and does not invent project phases.*
+Die festen Slots halten den Phasenvergleich auch bei fehlenden oder spaeter ergaenzten Werten stabil.
+
+*Stable slots keep the phase comparison consistent when values are missing or added later.*
 
 ### Beschleunigungsfaktoren / Acceleration Factors
 
 ```text
 Scale: 0..50x
-80 lines/day       [################....] 40.4x
-100 lines/day      [#############.......] 32.3x
+80 lines/day       [################....] 40.6x
+100 lines/day      [#############.......] 32.5x
 ```
 
 Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen Referenzen. Sie messen keine Arbeitszeit.
@@ -326,7 +331,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..5000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 100
-Visible repository [#############.......] 3231.4
+Visible repository [#############.......] 3250.7
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -335,9 +340,9 @@ Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schre
 
 ### Textalternative / Text Alternative
 
-DE: Das Fenster beginnt am 2025-09-14 und endet am 2026-09-08. Es enthaelt 68 aktive und 292 inaktive vergangene Tage. Peak-Tag: 2026-08-30 / 79770. Peak-Woche: 2026-08-30 / 80706. Laengste Serie: 8 Tage (2026-07-10..2026-07-17).
+DE: Das Fenster beginnt am 2025-09-14 und endet am 2026-09-12. Es enthaelt 69 aktive und 295 inaktive vergangene Tage. Peak-Tag: 2026-08-30 / 79770. Peak-Woche: 2026-08-30 / 80706. Laengste Serie: 8 Tage (2026-07-10..2026-07-17).
 
-*EN: The window starts on 2025-09-14 and ends on 2026-09-08. It contains 68 active and 292 inactive elapsed days. Peak day: 2026-08-30 / 79770. Peak week: 2026-08-30 / 80706. Longest streak: 8 days (2026-07-10..2026-07-17).*
+*EN: The window starts on 2025-09-14 and ends on 2026-09-12. It contains 69 active and 295 inactive elapsed days. Peak day: 2026-08-30 / 79770. Peak week: 2026-08-30 / 80706. Longest streak: 8 days (2026-07-10..2026-07-17).*
 
 | Monat / Month | Geaenderte Textzeilen / Changed text lines |
 |---|---:|
@@ -352,6 +357,6 @@ DE: Das Fenster beginnt am 2025-09-14 und endet am 2026-09-08. Es enthaelt 68 ak
 | 2026-06 | 37448 |
 | 2026-07 | 110442 |
 | 2026-08 | 96264 |
-| 2026-09 | 37963 |
+| 2026-09 | 42593 |
 
 <!-- project-statistics-v2:end -->
