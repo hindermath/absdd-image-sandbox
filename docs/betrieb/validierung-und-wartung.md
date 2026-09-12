@@ -102,6 +102,21 @@ repository failure.
 podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh
 ```
 
+```bash
+podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh \
+  --json --repo /pfad/zum/gemounteten/repository
+```
+
+**DE:** Der JSON-Modus liefert Schema `1.0`, Plattform, Architektur,
+Werkzeugstatus und die effektive `global.json`-SDK-Auswahl. `gh` erscheint als
+`ControlPlane`, weil Provider-Schreibaktionen und Credentials ausserhalb des
+Agentencontainers bleiben. `actionlint` prueft Workflows bereits vor dem Push.
+
+**EN:** JSON mode returns schema `1.0`, platform, architecture, tool status,
+and the effective `global.json` SDK selection. `gh` is reported as
+`ControlPlane` because provider writes and credentials remain outside the
+agent container. `actionlint` validates workflows before push.
+
 **DE:** Der Test prüft Identität, Versionen und kleine Programme. Für eine
 gezielte Agentenprüfung ohne Provideraufruf:
 

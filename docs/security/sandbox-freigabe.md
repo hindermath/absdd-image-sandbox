@@ -50,10 +50,34 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 
 | Tool | Version / Quelle |
 |---|---|
-| .NET SDK | Microsoft .NET SDK aus MCR-Basisimage `mcr.microsoft.com/dotnet/sdk:10.0` |
+| .NET SDK | Microsoft .NET SDK aus MCR-Basisimage `mcr.microsoft.com/dotnet/sdk:10.0` plus hashgeprueftes Kompatibilitaets-SDK `10.0.301` |
+| actionlint | `1.7.12`, architekturspezifisches GitHub-Release mit SHA-256-Pruefung |
+| GitHub CLI | Nicht im Agentencontainer; `gh` und Provider-Credentials bleiben auf der getrennten Control Plane |
 | Java | OpenJDK 21 aus Ubuntu-Paketquellen |
 | Maven | Ubuntu-Paketquelle |
 | Python | Ubuntu-Paketquelle (`python3`, `python3-venv`, `python-is-python3`) |
+
+Codex bindet die Schreibberechtigung an den je Aufruf gewaehlten internen
+Transaktionspfad `/home/adedev/codex-workspace`. Zusaetzliche Mounts benoetigen
+ein ausdrueckliches `--add-dir`; eine pauschale Schreibfreigabe aller
+Projektmounts ist nicht Teil des Sandboxprofils. Die Linux-Aufloesung von
+Secret-Globmustern ist auf vier Verzeichnisebenen begrenzt, damit Bubblewrap
+keine unbeschraenkte Argumentliste erhaelt. Im rootless Podman-Container bindet
+ein enger Adapter das bereits von Podman isolierte Minimal-`/dev` und
+Container-`/proc` ein. Nicht unterstuetzte synthetische Remounts werden nur fuer
+die vorab root-eigenen, nicht beschreibbaren Metadaten-Platzhalter `.git`,
+`.agents` und `.codex` durch Read-only-Binds ersetzt. Das im Profil
+ausgeschlossene `/tmp` bleibt read-only; unnoetige synthetische Metadaten-Mounts
+darunter werden verworfen. Direkte Host-Projektmounts sind fuer agentenlose
+Installation und Tests vorgesehen; Agentenaenderungen werden ueber den internen
+Transaktionspfad kontrolliert ein- und ausgefuehrt. Der Adapter benoetigt weder
+Capabilities noch einen privilegierten Containerstart.
+
+Interaktive Codex-Sitzungen verwenden weiterhin `untrusted` oder `on-request`.
+Der nicht-interaktive `codex exec`-Modus setzt technisch `never`; dieser Modus
+ist nur zusammen mit den erzwungenen `read-only`- oder `workspace-write`-
+Profilen zugelassen und kann die Dateisystem- oder Netzwerkgrenzen nicht
+erweitern.
 | PowerShell | `7.6.4`, vom digest-gepinnten Microsoft-.NET-SDK-Basisimage geliefert und im Build geprueft |
 | Node.js / npm | NodeSource-Apt-Quelle, `NODE_MAJOR=22`, signiert ueber `/usr/share/keyrings/nodesource.gpg` |
 | Go | `1.26.3` |

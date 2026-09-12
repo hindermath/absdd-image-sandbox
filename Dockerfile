@@ -39,6 +39,10 @@ ARG ANTIGRAVITY_CLI_VERSION=1.1.1
 ARG COPILOT_CLI_VERSION=1.0.70
 # renovate: datasource=github-releases depName=anchore/syft versioning=semver argName=SYFT_VERSION
 ARG SYFT_VERSION=1.46.0
+# renovate: datasource=github-releases depName=rhysd/actionlint versioning=semver argName=ACTIONLINT_VERSION
+ARG ACTIONLINT_VERSION=1.7.12
+# renovate: datasource=dotnet-version depName=dotnet-sdk versioning=semver argName=DOTNET_COMPAT_SDK_VERSION
+ARG DOTNET_COMPAT_SDK_VERSION=10.0.301
 
 USER root
 ENV POWERSHELL_TELEMETRY_OPTOUT=1
@@ -104,6 +108,37 @@ RUN actual_version="$(pwsh -NoLogo -NoProfile -Command '$PSVersionTable.PSVersio
     fi \
     && ln -sf /usr/share/powershell/pwsh "${ps_home}/pwsh"
 RUN set -eux; \
+    arch="$(dpkg --print-architecture)"; \
+    case "${arch}" in \
+        amd64) dotnet_rid="linux-x64"; dotnet_sha512="cfbeec3a3a1d3ad3e168e37a77c4cc26c23125acd84a86d014047da3ecffce4c368a9acac4d7c950a047fa3d98989ce8aea69f8e5842cb6d330e8911e1c335a7" ;; \
+        arm64) dotnet_rid="linux-arm64"; dotnet_sha512="4ee438b363cb8468930d50b6bdc738a375e2f33b25bfd0c8dcb55853dda7f0fb187693e0f49dfc31556e68320b961a50dcf3b74c1f25abe3a5bd916db607db99" ;; \
+        *) echo "Unsupported .NET compatibility SDK architecture: ${arch}" >&2; exit 1 ;; \
+    esac; \
+    archive="dotnet-sdk-${DOTNET_COMPAT_SDK_VERSION}-${dotnet_rid}.tar.gz"; \
+    url="https://builds.dotnet.microsoft.com/dotnet/Sdk/${DOTNET_COMPAT_SDK_VERSION}/${archive}"; \
+    tmp_dir="$(mktemp -d)"; \
+    curl -fsSL "${url}" -o "${tmp_dir}/${archive}"; \
+    printf '%s  %s\n' "${dotnet_sha512}" "${tmp_dir}/${archive}" | sha512sum -c -; \
+    tar -xzf "${tmp_dir}/${archive}" -C /usr/share/dotnet; \
+    rm -rf "${tmp_dir}"; \
+    /usr/bin/dotnet --list-sdks | grep -F "${DOTNET_COMPAT_SDK_VERSION} ["
+RUN set -eux; \
+    arch="$(dpkg --print-architecture)"; \
+    case "${arch}" in \
+        amd64) actionlint_arch="x86_64"; actionlint_sha256="8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8" ;; \
+        arm64) actionlint_arch="arm64"; actionlint_sha256="325e971b6ba9bfa504672e29be93c24981eeb1c07576d730e9f7c8805afff0c6" ;; \
+        *) echo "Unsupported actionlint architecture: ${arch}" >&2; exit 1 ;; \
+    esac; \
+    archive="actionlint_${ACTIONLINT_VERSION}_linux_${actionlint_arch}.tar.gz"; \
+    base_url="https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}"; \
+    tmp_dir="$(mktemp -d)"; \
+    curl -fsSL "${base_url}/${archive}" -o "${tmp_dir}/${archive}"; \
+    printf '%s  %s\n' "${actionlint_sha256}" "${tmp_dir}/${archive}" | sha256sum -c -; \
+    tar -xzf "${tmp_dir}/${archive}" -C "${tmp_dir}" actionlint; \
+    install -m 0755 "${tmp_dir}/actionlint" /usr/local/bin/actionlint; \
+    rm -rf "${tmp_dir}"; \
+    actionlint -version
+RUN set -eux; \
     case "${SWIFT_DOCKER_TAG}" in \
         *-noble) ;; \
         *) echo "Unsupported Swift Docker tag for Ubuntu 24.04 base image: ${SWIFT_DOCKER_TAG}" >&2; exit 1 ;; \
@@ -120,7 +155,7 @@ RUN set -eux; \
         *) echo "Unsupported Swift architecture: ${arch}" >&2; exit 1 ;; \
     esac; \
     swift_signing_key="52BB7E3DE28A71BE22EC05FFEF80A866B47A981F"; \
-    swift_signing_keys_url="https://www.swift.org/keys/all-keys.asc"; \
+    swift_signing_keys_url="https://www.swift.org/keys/release-key-swift-6.x.asc"; \
     swift_platform="ubuntu24.04"; \
     swift_branch="swift-${swift_base_version}-release"; \
     swift_version="swift-${swift_base_version}-RELEASE"; \
@@ -131,7 +166,7 @@ RUN set -eux; \
     mkdir -p "${GNUPGHOME}"; \
     curl -fsSL "${swift_bin_url}" -o "${tmp_dir}/swift.tar.gz"; \
     curl -fsSL "${swift_bin_url}.sig" -o "${tmp_dir}/swift.tar.gz.sig"; \
-    curl -fsSL "${swift_signing_keys_url}" -o "${tmp_dir}/swift-keys.asc"; \
+    curl --compressed -fsSL "${swift_signing_keys_url}" -o "${tmp_dir}/swift-keys.asc"; \
     gpg --batch --quiet --import "${tmp_dir}/swift-keys.asc"; \
     gpg --batch --list-keys "${swift_signing_key}" >/dev/null; \
     gpg --batch --verify "${tmp_dir}/swift.tar.gz.sig" "${tmp_dir}/swift.tar.gz"; \
@@ -201,9 +236,8 @@ COPY ./spec-kit/patch-specify-cli.py /usr/local/bin/patch-specify-cli.py
 RUN chmod 0644 /usr/local/bin/patch-specify-cli.py
 RUN mkdir -p /etc/codex
 COPY ./codex/config.toml /etc/codex/config.toml
-COPY ./codex/config.toml /etc/codex/managed_config.toml
 COPY ./codex/requirements.toml /etc/codex/requirements.toml
-RUN chmod 0644 /etc/codex/config.toml /etc/codex/managed_config.toml /etc/codex/requirements.toml
+RUN chmod 0644 /etc/codex/config.toml /etc/codex/requirements.toml
 
 RUN useradd -m adedev
 RUN mkdir -p /dotnet-build && chown adedev:adedev /dotnet-build
@@ -246,6 +280,21 @@ RUN mkdir -p \
       /home/adedev/.copilot
 COPY --chown=adedev:adedev ./opencode.jsonc /home/adedev/.config/opencode/opencode.jsonc
 USER root
+COPY ./scripts/codex-bwrap-wrapper.sh /usr/local/libexec/codex-bwrap-wrapper
+RUN mkdir -p /usr/libexec \
+    && mv /usr/bin/bwrap /usr/libexec/codex-bwrap.real \
+    && install -m 0755 /usr/local/libexec/codex-bwrap-wrapper /usr/bin/bwrap \
+    && mkdir -p /home/adedev/codex-workspace/.git \
+        /home/adedev/codex-workspace/.agents \
+        /home/adedev/codex-workspace/.codex \
+    && chown root:root /home/adedev/codex-workspace \
+        /home/adedev/codex-workspace/.git \
+        /home/adedev/codex-workspace/.agents \
+        /home/adedev/codex-workspace/.codex \
+    && chmod 1777 /home/adedev/codex-workspace \
+    && chmod 0755 /home/adedev/codex-workspace/.git \
+        /home/adedev/codex-workspace/.agents \
+        /home/adedev/codex-workspace/.codex
 COPY ./scripts/audit-export.sh /usr/local/bin/audit-export
 COPY ./scripts/container-entrypoint.sh /usr/local/bin/ade-entrypoint
 COPY ./scripts/install-home-baseline-reference.sh /usr/local/bin/install-home-baseline-reference

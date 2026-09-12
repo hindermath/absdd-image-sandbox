@@ -2,7 +2,13 @@ name: Documentation and Sandbox Static Checks
 
 on:
   push:
+    branches:
+      - main
   pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -45,12 +51,15 @@ jobs:
         run: |
           bash -n scripts/audit-export.sh
           bash -n scripts/agent-prompt.sh
+          bash -n scripts/codex-bwrap-wrapper.sh
           bash -n scripts/smoke-test-toolchains.sh
           bash -n scripts/compose-down-with-audit.sh
           bash -n scripts/install-home-baseline-reference.sh
 
       - name: Check agent prompt dispatcher parity
-        run: python3 scripts/tests/test_agent_prompt_dispatchers.py
+        run: |
+          python3 scripts/tests/test_agent_prompt_dispatchers.py
+          python3 scripts/tests/test_toolchain_preflight.py
 
       - name: Check Home Baseline documentation boundary
         run: python3 scripts/tests/test_home_baseline_documentation_contract.py

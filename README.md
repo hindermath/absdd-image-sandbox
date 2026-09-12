@@ -272,6 +272,29 @@ Die vollstaendige Toolchain prueft:
 podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh
 ```
 
+Der JSON-Preflight eignet sich fuer automatisierte Installations- und
+Repositorypruefungen. Mit `--repo` validiert er auch die durch `global.json`
+geforderte .NET-SDK-Auswahl:
+
+```bash
+podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh \
+  --json --repo /secure-case-tracker-projects/SecureCaseTracker-CSharp
+```
+
+`actionlint` ist im Image gepinnt. GitHub-Administration mit `gh` bleibt auf
+der getrennten Control Plane; GitHub-Credentials werden nicht in den
+Agentencontainer eingebunden.
+
+Codex erhaelt pro Aufruf nur das mit `--cwd` gewaehlte Arbeitsverzeichnis als
+Schreibwurzel. Agentenlaeufe verwenden dafuer den image-eigenen Pfad
+`/home/adedev/codex-workspace`; die Projekt-Bind-Mounts dienen der
+agentenlosen Installation, Pruefung und dem kontrollierten Import oder Export.
+Die geschuetzten Metadaten-Platzhalter `.git`, `.agents` und `.codex` sind dort
+bereits im Image read-only angelegt. Weitere Verzeichnisse werden bei Bedarf
+einzeln mit `--add-dir` gebunden. Das haelt die Bubblewrap-Argumentliste auch
+bei vielen gemounteten Repositories begrenzt und umgeht die Grenze
+verschachtelter Bubblewrap-Binds auf Host-Mounts.
+
 ## Agenten-Prompts ohne TUI / Agent Prompts Without a TUI
 
 Die Repo-Skripte uebergeben einen einzelnen Prompt standardmaessig mit
@@ -503,6 +526,7 @@ podman compose exec ade sh -lc 'node --version; npm --version'
 podman compose exec ade sh -lc 'swift --version; swiftc --version; command -v sourcekit-lsp'
 podman compose exec ade sh -lc 'opencode --version; codex --version; claude --version; gemini --version; agy --version; copilot --version'
 podman compose exec ade sh -lc 'specify version; specify check'
+podman compose exec ade sh -lc 'actionlint -version; actionlint .github/workflows/*.yml'
 ```
 
 Fuer eine praktische Pruefung der sechs verbindlichen MSL-Toolchain-Familien
