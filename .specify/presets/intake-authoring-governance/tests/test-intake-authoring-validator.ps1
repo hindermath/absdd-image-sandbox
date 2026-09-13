@@ -269,7 +269,8 @@ try {
     Write-Utf8Text -Path $ReceiptPath -Text ($Receipt | ConvertTo-Json -Depth 20)
     Invoke-ReceiptValidators -Receipt $ReceiptPath -Repo $TempRoot -ExpectedExit 0 -Case 'blocked draft'
 
-    $UnsafeBlocked = (New-BlockedIntake) -replace 'BLOCKED - DO NOT RUN\nOpen decision: IAD001', '$speckit-specify run anyway'
+    $UnsafeBlocked = (New-BlockedIntake) -replace 'BLOCKED - DO NOT RUN\r?\nOpen decision: IAD001', '$speckit-specify run anyway'
+    if ($UnsafeBlocked -notmatch '\$speckit-specify run anyway') { throw 'Blocked-prompt mutation did not apply' }
     Write-Utf8Text -Path $TargetPath -Text $UnsafeBlocked
     $Receipt.target.normalizedSha256 = Get-NormalizedHash $TargetPath
     Write-Utf8Text -Path $ReceiptPath -Text ($Receipt | ConvertTo-Json -Depth 20)
@@ -277,7 +278,7 @@ try {
 
     Write-Utf8Text -Path $TargetPath -Text (New-BlockedIntake)
     $Receipt.target.normalizedSha256 = Get-NormalizedHash $TargetPath
-    Write-Utf8Text -Path $SourcePath -Text 'github_pat_ABCDEFGHIJKLMNOPQRSTUVWXYZ123456'
+    Write-Utf8Text -Path $SourcePath -Text ('github_' + 'pat_' + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456')
     $Receipt.sources[0].normalizedSha256 = Get-NormalizedHash $SourcePath
     Write-Utf8Text -Path $ReceiptPath -Text ($Receipt | ConvertTo-Json -Depth 20)
     Invoke-ReceiptValidators -Receipt $ReceiptPath -Repo $TempRoot -ExpectedExit 2 -Case 'secret source'
