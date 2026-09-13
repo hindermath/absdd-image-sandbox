@@ -36,6 +36,31 @@ series manifest is authoritative.
 uses it as its baseline. Acceptance starts only after hardening is complete,
 and the self-build template follows successful acceptance.*
 
+## Textorientiertes Mermaid-Diagramm / Text-First Mermaid Diagram
+
+**DE:** Die Tabelle und die nummerierte Abhaengigkeitsliste oberhalb sind die
+vollstaendige Textalternative und bleiben auch ohne Diagrammdarstellung
+verstaendlich. Das folgende Mermaid-Diagramm wiederholt dieselben vier aktiven
+Intakes, Status und verbindlichen Kanten. Das Serienmanifest bleibt die
+massgebliche maschinenlesbare Quelle.
+
+**EN:** The table and numbered dependency list above are the complete text
+alternative and remain understandable without diagram rendering. The Mermaid
+diagram below repeats the same four active intakes, statuses, and binding
+edges. The series manifest remains the authoritative machine-readable source.
+
+```mermaid
+flowchart TD
+  GSDB["1. GSDB-Bestand pruefen / Assess GSDB baseline<br/>abgeschlossen / completed"]
+  HARDEN["2. Container haerten / Harden container<br/>ausfuehrbar / eligible"]
+  REVIEW["3. Sandbox abnehmen / Review sandbox<br/>blockiert / blocked"]
+  SELF_BUILD["4. Selbstbau-Vorlage / Self-build template<br/>blockiert / blocked"]
+
+  GSDB -->|AssessmentBaseline| HARDEN
+  HARDEN -->|SandboxBaseline| REVIEW
+  REVIEW -->|HardCompletionGate| SELF_BUILD
+```
+
 ## Archivierte oder ersetzte Lastenhefte / Archived or Superseded Requirements
 
 - `Lastenheft_Sandbox-Public-Readiness.001-public-readiness.md` ist als

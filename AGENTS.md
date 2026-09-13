@@ -460,6 +460,35 @@ information. `Programmierung #include<everyone>` and WCAG 2.2 Level AA are the
 review baseline wherever applicable.*
 <!-- learner-a11y-baseline:end -->
 
+<!-- intake-mermaid-guidance:start -->
+## Textorientierte Mermaid-Diagramme / Text-First Mermaid Diagrams
+
+- Kommende Lastenhefte und Intake-Reihenfolgen sollen bei nicht trivialen
+  Abhaengigkeiten, Ablaeufen oder Zustaenden ein Mermaid-Diagramm direkt im
+  versionierten Markdown enthalten.
+- Vor jedem Diagramm muss eine vollstaendige deutschsprachige und danach
+  englischsprachige Textalternative als geordnete Liste oder Tabelle stehen.
+  Sie nennt alle Knoten, Kanten, Status und Entscheidungen und bleibt die
+  verstaendliche Grundlage, wenn Mermaid nicht gerendert wird.
+- Mermaid ist eine ergaenzende Ansicht. Ein vorhandenes maschinenlesbares
+  Manifest bleibt massgeblich; Diagramm und Text duerfen keinen davon
+  unabhaengigen Zustand erfinden.
+- Der Mermaid-Quelltext verwendet stabile, sprechende Knoten-IDs, einfache
+  `flowchart TD`- oder `flowchart LR`-Strukturen und keine Information, die nur
+  durch Farbe, Form oder Position vermittelt wird. Externe Bilder oder
+  generierte Binaerdiagramme sind fuer diese Ergaenzung nicht erforderlich.
+- Bei Aenderungen an Abhaengigkeiten oder Status werden Textalternative und
+  Mermaid-Quelle gemeinsam aktualisiert.
+
+*Future requirements documents and intake order views should embed Mermaid
+for non-trivial dependencies, flows, or states. A complete German-first and
+English-second ordered text or table alternative must precede every diagram
+and carry every node, edge, status, and decision. Mermaid is supplementary;
+the machine-readable manifest remains authoritative. Use stable descriptive
+node IDs, simple flowcharts, and no color-, shape-, or position-only meaning.
+Update the text alternative and Mermaid source together.*
+<!-- intake-mermaid-guidance:end -->
+
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
 shell commands, and other important information, read the current plan
