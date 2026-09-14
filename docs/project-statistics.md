@@ -72,6 +72,8 @@ tracked files; they are an artefact-volume measure, not a quality measure.
 | 2026-09-13 | Intake-Lifecycle-Preset-Rollout / Intake lifecycle preset rollout | N/A | N/A | N/A | Vorhandene Authoring-/Review-/Sequencing-Presets auf 0.3.2/0.2.2/0.2.4 aktualisiert; optionale Profile und Dokumentation nachgefuehrt. Pruefnachweise in docs/maintenance/intake-lifecycle-fleet-rollout.json. / Update existing presets and profile references; preserve other presets and project extensions. |
 | 2026-09-13 | Mermaid und Abschlussberichte | N/A | N/A | N/A | Neue textbasierte Diagrammregel, Berichtsvorlage, Agent-Paritaet und versionierte Governance; kein Produktcode. / Text-first diagram and completion-report governance; no product code. |
 
+| 2026-09-14 | codex/sandbox-spec-kit-0128 | N/A | N/A | N/A | UpdateRequired: Spec Kit 0.12.8 auf Release-Commit gepinnt; vorhandenen Bind-Mount-Patch an modularisierte CLI angepasst; drei Regressionstests und lokale/CI-Einbindung. Image- und Laufzeitnachweise in docs/maintenance/spec-kit-0128-upgrade.md. Lieferung und Statistik-Rendering folgen erst nach menschlicher Diff-Pruefung. / Pinned CLI upgrade and compatibility tests; delivery and statistics rendering await human diff review. |
+
 ## Gesamtstand des Repositories / Repository Snapshot
 
 **DE:** Stand: 2026-07-10. Dieses Repository enthält keinen klassischen

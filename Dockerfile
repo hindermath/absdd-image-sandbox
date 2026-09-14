@@ -270,8 +270,12 @@ RUN set -eux; \
     "${tmp_dir}/rustup-init" -y --no-modify-path --profile minimal --default-host "${rust_host}" --default-toolchain "${RUST_TOOLCHAIN}"; \
     rm -rf "${tmp_dir}"; \
     rustup component add rustfmt clippy rust-analyzer rust-src
-RUN uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.8.3 \
-    && python3 /usr/local/bin/patch-specify-cli.py
+# Spec Kit v0.12.8: pin the peeled release commit, not a movable tag.
+# Keep the existing bind-mount patch and reject unexpected package metadata.
+RUN uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@464d57fe30c72e9a88d279cc49834539ec989c03 \
+    && python3 /usr/local/bin/patch-specify-cli.py \
+    && /home/adedev/.local/share/uv/tools/specify-cli/bin/python -c \
+        'from importlib.metadata import version; actual = version("specify-cli"); assert actual == "0.12.8", actual'
 RUN mkdir -p \
       /home/adedev/.local/share/opencode \
       /home/adedev/.codex \
