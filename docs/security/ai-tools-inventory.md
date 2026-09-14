@@ -24,7 +24,7 @@ remain decisions of the responsible person or organization.
 | Claude Code | `@anthropic-ai/claude-code@2.1.206` | `claude` | `/home/adedev/.claude` (`claude_data`, `CLAUDE_CONFIG_DIR`) |
 | Antigravity CLI | `google-antigravity/antigravity-cli@1.1.1` | `agy` | `/home/adedev/.gemini-home/.gemini/antigravity-cli` (`gemini_data`) |
 | GitHub Copilot CLI | `@github/copilot@1.0.70` | `copilot` | `/home/adedev/.copilot` (`copilot_data`, `COPILOT_HOME`) |
-| GitHub Spec Kit | `specify-cli` aus `github/spec-kit@v0.8.3` | `specify` | lokale Projektartefakte, kein Agentenkonto |
+| GitHub Spec Kit | `specify-cli` 0.12.8, Release-Commit `464d57fe30c72e9a88d279cc49834539ec989c03` im Dockerfile | `specify` | lokale Projektartefakte, kein Agentenkonto |
 | Syft | `anchore/syft@1.46.0` | `syft` | kein persistentes Agentenkonto |
 
 OpenCode bleibt ein zusaetzliches Werkzeug. Die vier Required-Agenten dieser

@@ -19,6 +19,12 @@ repos:
         language: python
         pass_filenames: false
         files: ^(scripts/agent-prompt\.(sh|ps1)|scripts/tests/test_agent_prompt_dispatchers\.py)$
+      - id: specify-container-patch
+        name: check Spec Kit container patch compatibility
+        entry: python scripts/tests/test_specify_container_patch.py
+        language: python
+        pass_filenames: false
+        files: ^(Dockerfile|spec-kit/patch-specify-cli\.py|scripts/tests/test_specify_container_patch\.py)$
 
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.30.1

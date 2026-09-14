@@ -73,7 +73,14 @@ def main() -> None:
 
     needle = "import shutil\n"
     if needle not in content:
-        raise SystemExit("import shutil not found")
+        # DE: 0.12.8 importiert Kopiermodule vor dem CLI-Start. Der Patch muss
+        # davor wirken, damit auch deren importierte shutil-Funktionen gelten.
+        # EN: Patch before 0.12.8 imports its split-out copying modules.
+        anchor = "import json\n"
+        if "from .shared_infra import (" not in content or content.count(anchor) != 1:
+            raise SystemExit("supported Spec Kit import anchor not found")
+        target.write_text(content.replace(anchor, needle + PATCH + anchor, 1))
+        return
 
     target.write_text(content.replace(needle, needle + PATCH, 1))
 

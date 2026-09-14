@@ -557,9 +557,18 @@ Installations- und Pruefreferenz steht unter
 
 ## Spec-kit-Workflow / Spec Kit Workflow
 
-Spec Kit ist per `uv tool install specify-cli --from
-git+https://github.com/github/spec-kit.git@v0.8.3` installiert und danach
-schmal gepatcht, damit Initialisierung auf Host-Bind-Mounts stabiler laeuft.
+Spec Kit **0.12.8** wird im Image auf den Release-Commit
+`464d57fe30c72e9a88d279cc49834539ec989c03` gepinnt. Der vorhandene
+Bind-Mount-Patch bleibt erhalten; der Build prueft die Paketversion.
+Bestehende Container erhalten die Version erst durch Neubau und Neuerstellung,
+nicht durch einen blossen Neustart. Ein Update startet keinen Spec-Kit-Lauf.
+
+*The image pins Spec Kit **0.12.8** to the release commit shown above,
+retains the bind-mount patch and checks package metadata during build.
+Existing containers need a rebuild and recreation, not just a restart.
+Updating the CLI does not start a Spec Kit feature.*
+
+[Upgrade-Nachweis / Upgrade evidence](docs/maintenance/spec-kit-0128-upgrade.md)
 
 Unter `/rider-projects` bevorzugt:
 

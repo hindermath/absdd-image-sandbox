@@ -72,6 +72,8 @@ tracked files; they are an artefact-volume measure, not a quality measure.
 | 2026-09-13 | Intake-Lifecycle-Preset-Rollout / Intake lifecycle preset rollout | N/A | N/A | N/A | Vorhandene Authoring-/Review-/Sequencing-Presets auf 0.3.2/0.2.2/0.2.4 aktualisiert; optionale Profile und Dokumentation nachgefuehrt. Pruefnachweise in docs/maintenance/intake-lifecycle-fleet-rollout.json. / Update existing presets and profile references; preserve other presets and project extensions. |
 | 2026-09-13 | Mermaid und Abschlussberichte | N/A | N/A | N/A | Neue textbasierte Diagrammregel, Berichtsvorlage, Agent-Paritaet und versionierte Governance; kein Produktcode. / Text-first diagram and completion-report governance; no product code. |
 
+| 2026-09-14 | codex/sandbox-spec-kit-0128 | N/A | N/A | N/A | UpdateRequired: Spec Kit 0.12.8 auf Release-Commit gepinnt; vorhandenen Bind-Mount-Patch an modularisierte CLI angepasst; drei Regressionstests und lokale/CI-Einbindung. Image- und Laufzeitnachweise in docs/maintenance/spec-kit-0128-upgrade.md. Lieferung und Statistik-Rendering folgen erst nach menschlicher Diff-Pruefung. / Pinned CLI upgrade and compatibility tests; delivery and statistics rendering await human diff review. |
+
 ## Gesamtstand des Repositories / Repository Snapshot
 
 **DE:** Stand: 2026-07-10. Dieses Repository enthält keinen klassischen
@@ -193,29 +195,29 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 229892 lines |
-| Textdateien / Text files | 1253 |
-| Beobachtbarer Zeitraum / Observable period | 2025-09-21..2026-09-13 |
-| Aktivtage / Active days | 70 |
-| Relevante Commits / Relevant commits | 217 |
-| Zeilen je Aktivtag / Lines per active day | 3284.2 |
+| Textbasis / Text base | 230258 lines |
+| Textdateien / Text files | 1258 |
+| Beobachtbarer Zeitraum / Observable period | 2025-09-21..2026-09-14 |
+| Aktivtage / Active days | 71 |
+| Relevante Commits / Relevant commits | 219 |
+| Zeilen je Aktivtag / Lines per active day | 3243.1 |
 | Peak-Tag im Fenster / Peak day in window | 2026-08-30 / 79770 |
 | Peak-Woche im Fenster / Peak week in window | 2026-08-30 / 80706 |
 | Laengste Serie / Longest streak | 8 days |
-| Speedup vs. 80 lines/day | 41.1x |
-| Speedup vs. 100 lines/day | 32.8x |
-| Methodik / Methodology | v2; source `04dc06c537ff` |
+| Speedup vs. 80 lines/day | 40.5x |
+| Speedup vs. 100 lines/day | 32.4x |
+| Methodik / Methodology | v2; source `9b5385b920ef` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
-Produktiv / Production          [#...................]   0.0% | 82
-Tests                           [#...................]   3.1% | 7098
-Dokumentation / Documentation   [################....]  81.7% | 187857
+Produktiv / Production          [#...................]   0.0% | 89
+Tests                           [#...................]   3.1% | 7173
+Dokumentation / Documentation   [################....]  81.7% | 188130
 Skripte / Scripts               [###.................]  12.5% | 28833
-Konfiguration / Configuration   [#...................]   2.4% | 5572
+Konfiguration / Configuration   [#...................]   2.4% | 5579
 Daten und Medien / Data and media [....................]   0.0% | 0
-Sonstiger Text / Other text     [#...................]   0.2% | 450
+Sonstiger Text / Other text     [#...................]   0.2% | 454
 ```
 
 Die Balken teilen die aktuelle getrackte Textbasis in stabile Kategorien. Prozent und Zeilenwert sind die genaue, textorientierte Aussage.
@@ -238,7 +240,7 @@ Sa/Sa  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 ```text
 Wochen / Weeks 27..52 | 2026-03-22..2026-09-19
 So/Su  0 0 0 0 0 0 2 0 3 2 1 0 4 0 0 4 2 4 4 1 4 4 0 4 4 4
-Mo/Mo  0 0 0 0 0 0 2 3 0 3 2 0 0 0 0 0 4 4 0 0 0 2 0 0 4 -
+Mo/Mo  0 0 0 0 0 0 2 3 0 3 2 0 0 0 0 0 4 4 0 0 0 2 0 0 4 2
 Di/Tu  0 0 0 0 0 0 2 3 3 2 3 0 0 0 0 0 3 4 4 0 0 0 0 0 4 -
 Mi/We  0 0 0 0 0 1 3 0 0 2 4 0 0 0 0 2 1 2 4 0 0 2 0 0 0 -
 Do/Th  0 0 0 0 0 0 1 3 3 0 4 3 0 0 0 0 1 3 0 0 4 0 0 0 0 -
@@ -320,8 +322,8 @@ Die festen Slots halten den Phasenvergleich auch bei fehlenden oder spaeter erga
 
 ```text
 Scale: 0..50x
-80 lines/day       [################....] 41.1x
-100 lines/day      [#############.......] 32.8x
+80 lines/day       [################....] 40.5x
+100 lines/day      [#############.......] 32.4x
 ```
 
 Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen Referenzen. Sie messen keine Arbeitszeit.
@@ -334,7 +336,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..5000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 100
-Visible repository [#############.......] 3284.2
+Visible repository [#############.......] 3243.1
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -343,9 +345,9 @@ Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schre
 
 ### Textalternative / Text Alternative
 
-DE: Das Fenster beginnt am 2025-09-21 und endet am 2026-09-13. Es enthaelt 70 aktive und 288 inaktive vergangene Tage. Peak-Tag: 2026-08-30 / 79770. Peak-Woche: 2026-08-30 / 80706. Laengste Serie: 8 Tage (2026-07-10..2026-07-17).
+DE: Das Fenster beginnt am 2025-09-21 und endet am 2026-09-14. Es enthaelt 71 aktive und 288 inaktive vergangene Tage. Peak-Tag: 2026-08-30 / 79770. Peak-Woche: 2026-08-30 / 80706. Laengste Serie: 8 Tage (2026-07-10..2026-07-17).
 
-*EN: The window starts on 2025-09-21 and ends on 2026-09-13. It contains 70 active and 288 inactive elapsed days. Peak day: 2026-08-30 / 79770. Peak week: 2026-08-30 / 80706. Longest streak: 8 days (2026-07-10..2026-07-17).*
+*EN: The window starts on 2025-09-21 and ends on 2026-09-14. It contains 71 active and 288 inactive elapsed days. Peak day: 2026-08-30 / 79770. Peak week: 2026-08-30 / 80706. Longest streak: 8 days (2026-07-10..2026-07-17).*
 
 | Monat / Month | Geaenderte Textzeilen / Changed text lines |
 |---|---:|
@@ -360,6 +362,6 @@ DE: Das Fenster beginnt am 2025-09-21 und endet am 2026-09-13. Es enthaelt 70 ak
 | 2026-06 | 37448 |
 | 2026-07 | 110442 |
 | 2026-08 | 96264 |
-| 2026-09 | 50370 |
+| 2026-09 | 50750 |
 
 <!-- project-statistics-v2:end -->

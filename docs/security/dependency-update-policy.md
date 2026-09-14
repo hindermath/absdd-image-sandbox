@@ -79,6 +79,15 @@ prueft die statische Lock-Struktur. Der Image-Build prueft den Tag gegen den
 Commit vor dem Checkout. Die lokale Arbeitskopie eines Maintainers ist keine
 zulaessige Build-Quelle.
 
+### Spec-Kit-Commitbindung
+
+Spec Kit 0.12.8 ist im Dockerfile direkt auf seinen Release-Commit gepinnt.
+Dieser Pin wird bewusst geprueft und nicht vom ARG-Manager automatisch
+aktualisiert. Der Image-Build prueft die installierte Paketversion; der lokale
+Hook `specify-container-patch` prueft den Bind-Mount-Patch fuer die alte und
+neue Modulstruktur, Idempotenz und die Blockierung unbekannter Strukturen.
+Ein Versionswechsel benoetigt Image-Build und CLI-/Installations-Smokes.
+
 ### GitHub-Betriebskontext
 
 Dieses Repository enthaelt nur die Renovate-Konfiguration. Damit Renovate
@@ -171,6 +180,14 @@ the recorded commit, and the build finds the expected license and canonical
 learner guide. `scripts/check-home-baseline-lock.py` validates the static lock
 shape. The image build verifies tag against commit before checkout. A
 maintainer's local working tree is not an allowed build source.
+
+### Spec Kit Commit Binding
+
+The Dockerfile pins Spec Kit 0.12.8 directly to its release commit. Review this
+pin deliberately; the ARG manager does not update it automatically. The image
+build checks installed package metadata. The `specify-container-patch` local
+hook tests old and new module layouts, idempotency and unknown-layout blocking.
+A version change requires an image build plus CLI and installation smoke tests.
 
 ### GitHub Operation Context
 
