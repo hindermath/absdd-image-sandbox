@@ -18,6 +18,6 @@
       "netLines": 4562
     }
   ],
-  "excludedPaths": [],
+  "excludedPaths": ["docs/project-statistics-pilot/*"],
   "categoryOverrides": []
 }

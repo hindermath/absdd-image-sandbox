@@ -74,6 +74,8 @@ tracked files; they are an artefact-volume measure, not a quality measure.
 
 | 2026-09-14 | codex/sandbox-spec-kit-0128 | N/A | N/A | N/A | UpdateRequired: Spec Kit 0.12.8 auf Release-Commit gepinnt; vorhandenen Bind-Mount-Patch an modularisierte CLI angepasst; drei Regressionstests und lokale/CI-Einbindung. Image- und Laufzeitnachweise in docs/maintenance/spec-kit-0128-upgrade.md. Lieferung und Statistik-Rendering folgen erst nach menschlicher Diff-Pruefung. / Pinned CLI upgrade and compatibility tests; delivery and statistics rendering await human diff review. |
 
+| 2026-09-14 | Statistik-Pilotinstallation / Statistics pilot installation | N/A | N/A | N/A | UpdateRequired: v0.1.0 als adedev im vorhandenen 0.12.8-Pilotcontainer installiert; 26 Paketdateien hashgleich, 15 generierte Command-Dateien, 13 alte Presets erhalten. Beide CheckOnly-Einstiege und Lifecycle-Fixtures bestanden. Keine Image-/Produktlogik geaendert; keine Messung, Freigabe oder Community-Einreichung. Menschliche Diff-Sichtung vor Commit/Push und danach Inhaltscommit/Statistik-Rendering bleiben offen. Nachweis: docs/maintenance/project-statistics-installation-v010.md. / Local non-root installation verified; no image build, human approval or remote delivery claimed. |
+
 ## Gesamtstand des Repositories / Repository Snapshot
 
 **DE:** Stand: 2026-07-10. Dieses Repository enthält keinen klassischen
