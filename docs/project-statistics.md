@@ -77,6 +77,7 @@ tracked files; they are an artefact-volume measure, not a quality measure.
 | 2026-09-14 | Statistik-Pilotinstallation / Statistics pilot installation | N/A | N/A | N/A | UpdateRequired: v0.1.0 als adedev im vorhandenen 0.12.8-Pilotcontainer installiert; 26 Paketdateien hashgleich, 15 generierte Command-Dateien, 13 alte Presets erhalten. Beide CheckOnly-Einstiege und Lifecycle-Fixtures bestanden. Keine Image-/Produktlogik geaendert; keine Messung, Freigabe oder Community-Einreichung. Menschliche Diff-Sichtung vor Commit/Push und danach Inhaltscommit/Statistik-Rendering bleiben offen. Nachweis: docs/maintenance/project-statistics-installation-v010.md. / Local non-root installation verified; no image build, human approval or remote delivery claimed. |
 
 | 2026-09-18 | Statistik-Pilot Zwischenmessung / Statistics pilot intermediate measurement | UTC 70 / Berlin 73 | 233454 | N/A | Nach Sichtung den ersten Fuenf-Dateien-Patch als 9f07e67 committet; reale getrennte Messung, 67 Fixture-Assertions, Shell-/Encoding-/Read-only-Pruefungen bestanden. Profil 2 aus sauberer Kopie derselben Revision fortgeschrieben. Neue Evidence und Session noch uncommittet; finaler Nachlauf nach gesichtetem Inhaltscommit erforderlich. Keine Fach-/Releasefreigabe, kein Push oder Merge. / Reviewed first content commit and reproducible intermediate evidence; final post-review refresh and acceptance remain open. |
+| 2026-09-18 | Gesichteter Statistik-Nachlauf / Reviewed statistics refresh | UTC 70 / Berlin 73 | 233614 | N/A | Sechs gesichtete Dateien als 291d50e committet; beide Statistiken auf dieser sauberen Revision aktualisiert. Eine Datei und 160 Zeilen hinzugekommen. Shell-Status, 67 Assertions und isolierter Installationszyklus bestanden. Neue Sichtung vor weiterer Lieferung erforderlich. / Reviewed evidence committed; both statistics refreshed from the clean revision, adding one file and 160 lines. New review and remote delivery remain open. |
 
 ## Gesamtstand des Repositories / Repository Snapshot
 
@@ -199,25 +200,25 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 233454 lines |
-| Textdateien / Text files | 1306 |
+| Textbasis / Text base | 233614 lines |
+| Textdateien / Text files | 1307 |
 | Beobachtbarer Zeitraum / Observable period | 2025-09-21..2026-09-18 |
 | Aktivtage / Active days | 73 |
-| Relevante Commits / Relevant commits | 222 |
-| Zeilen je Aktivtag / Lines per active day | 3198.0 |
+| Relevante Commits / Relevant commits | 223 |
+| Zeilen je Aktivtag / Lines per active day | 3200.2 |
 | Peak-Tag im Fenster / Peak day in window | 2026-08-30 / 79770 |
 | Peak-Woche im Fenster / Peak week in window | 2026-08-30 / 80706 |
 | Laengste Serie / Longest streak | 8 days |
 | Speedup vs. 80 lines/day | 40.0x |
 | Speedup vs. 100 lines/day | 32.0x |
-| Methodik / Methodology | v2; source `9f07e6795cb0` |
+| Methodik / Methodology | v2; source `291d50ef2378` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [#...................]   0.0% | 89
 Tests                           [#...................]   3.1% | 7173
-Dokumentation / Documentation   [################....]  81.8% | 191013
+Dokumentation / Documentation   [################....]  81.8% | 191173
 Skripte / Scripts               [##..................]  12.4% | 28940
 Konfiguration / Configuration   [#...................]   2.5% | 5785
 Daten und Medien / Data and media [....................]   0.0% | 0
@@ -248,7 +249,7 @@ Mo/Mo  0 0 0 0 0 0 2 3 0 3 2 0 0 0 0 0 4 4 0 0 0 2 0 0 4 2
 Di/Tu  0 0 0 0 0 0 2 3 3 2 3 0 0 0 0 0 3 4 4 0 0 0 0 0 4 4
 Mi/We  0 0 0 0 0 1 3 0 0 2 4 0 0 0 0 2 1 2 4 0 0 2 0 0 0 0
 Do/Th  0 0 0 0 0 0 1 3 3 0 4 3 0 0 0 0 1 3 0 0 4 0 0 0 0 0
-Fr/Fr  0 0 0 0 0 4 0 2 1 3 0 0 0 2 4 4 4 4 1 0 4 0 0 3 0 2
+Fr/Fr  0 0 0 0 0 4 0 2 1 3 0 0 0 2 4 4 4 4 1 0 4 0 0 3 0 3
 Sa/Sa  0 0 0 0 0 2 0 0 2 0 0 0 2 0 4 4 0 4 2 0 2 0 0 0 4 -
 ```
 
@@ -340,7 +341,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..5000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 100
-Visible repository [#############.......] 3198.0
+Visible repository [#############.......] 3200.2
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -366,6 +367,6 @@ DE: Das Fenster beginnt am 2025-09-21 und endet am 2026-09-18. Es enthaelt 73 ak
 | 2026-06 | 37448 |
 | 2026-07 | 110442 |
 | 2026-08 | 96264 |
-| 2026-09 | 53968 |
+| 2026-09 | 54128 |
 
 <!-- project-statistics-v2:end -->

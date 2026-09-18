@@ -2,6 +2,36 @@
 
 ## Stand / Status
 
+### Nachlauf nach Sichtung / Post-review refresh
+
+Die sechs Dateien der Zwischenmessung wurden vom Owner gesichtet und am
+2026-09-18 als `291d50ef23785c3e0a72728b6d29874bb25de717` committet.
+MergeAndSync mit Admin-Bypass ist beauftragt, jedoch nur nach gruenen
+technischen Checks und den weiterhin erforderlichen menschlichen Sichtungen.
+Der Nachlauf auf diesem sauberen Commit liefert 1307 Textdateien,
+233614 Textzeilen und 70 UTC-Aktivtage; Profil 2 bestaetigt denselben
+Textbestand mit 73 Europe/Berlin-Aktivtagen. Genau eine Datei mit 160 Zeilen
+kam hinzu: das zuvor gesichtete Sitzungsprotokoll.
+Bash und PowerShell melden fuer die Messrevision CURRENT und unveraenderte
+Dateihashes/Git-Zustaende. Die folgende historische Evidence bleibt erhalten.
+Neue Dokumentation und generierte Ausgaben warten auf Sichtung; native CI,
+Windows, Push, PR und Merge sind in dieser Etappe noch nicht erfolgt.
+Der neue [Sitzungsnachweis](../security/agent-session-log/2026-09-18-1300.md)
+wird nach seinem Inhaltscommit Teil der Messquelle und verlangt erneut einen
+sauberen, rein generierten Nachlauf. Die Zahlen hier sind revisionsgebunden,
+keine Behauptung eines bereits abgeschlossenen Lieferstands.
+
+The owner-reviewed six-file evidence patch was committed at the stated
+revision. Its clean-tree refresh adds exactly the earlier 160-line session
+record: 1307 files, 233614 lines, 70 UTC or 73 Berlin active days. Both shell
+entrypoints are reproducible and read-only for that revision. MergeAndSync
+with admin bypass is authorized subject to green technical checks and the
+repository's human review gates. New documentation and generated outputs
+await review; native CI, Windows and remote delivery remain open. The new
+session record requires a clean generated refresh after its content commit.
+
+### Historische Zwischenmessung / Historical intermediate measurement
+
 Am 2026-09-18 nach menschlicher Sichtung genau den ersten Inhaltspatch
 committet: `9f07e6795cb05ff7d3866972638349c8aded5b44`. Die reale UTC-Messung
 darauf liefert 1306 Textdateien, 233454 Textzeilen und 70 Aktivtage.
