@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "measurementRevision": "9f07e6795cb05ff7d3866972638349c8aded5b44",
+  "asOf": "2026-09-18",
+  "platform": "Linux/aarch64 (Podman)",
+  "powerShell": "7.6.4",
+  "fixtureHead": "bca2d2b21a7e4b79d34364c8113bece9256eb7a0",
+  "syntheticFixtureCommitOnly": true,
+  "idempotency": [
+    {
+      "shell": "Bash",
+      "exitCode": 0,
+      "changed": false,
+      "sourceRevision": "9f07e6795cb05ff7d3866972638349c8aded5b44"
+    },
+    {
+      "shell": "PowerShell",
+      "exitCode": 0,
+      "changed": false,
+      "sourceRevision": "9f07e6795cb05ff7d3866972638349c8aded5b44"
+    }
+  ],
+  "parity": [
+    {
+      "variant": "LF",
+      "shell": "Bash",
+      "exitCode": 0,
+      "decisionSha256": "abf0869a4518f623b0342c7ac57eafab7c3428b1b5575be08b535bb13794f524",
+      "checkedContentChanges": 0
+    },
+    {
+      "variant": "LF",
+      "shell": "PowerShell",
+      "exitCode": 0,
+      "decisionSha256": "abf0869a4518f623b0342c7ac57eafab7c3428b1b5575be08b535bb13794f524",
+      "checkedContentChanges": 0
+    },
+    {
+      "variant": "CRLF",
+      "shell": "Bash",
+      "exitCode": 0,
+      "decisionSha256": "abf0869a4518f623b0342c7ac57eafab7c3428b1b5575be08b535bb13794f524",
+      "checkedContentChanges": 0
+    },
+    {
+      "variant": "CRLF",
+      "shell": "PowerShell",
+      "exitCode": 0,
+      "decisionSha256": "abf0869a4518f623b0342c7ac57eafab7c3428b1b5575be08b535bb13794f524",
+      "checkedContentChanges": 0
+    },
+    {
+      "variant": "LF-BOM",
+      "shell": "Bash",
+      "exitCode": 0,
+      "decisionSha256": "abf0869a4518f623b0342c7ac57eafab7c3428b1b5575be08b535bb13794f524",
+      "checkedContentChanges": 0
+    },
+    {
+      "variant": "LF-BOM",
+      "shell": "PowerShell",
+      "exitCode": 0,
+      "decisionSha256": "abf0869a4518f623b0342c7ac57eafab7c3428b1b5575be08b535bb13794f524",
+      "checkedContentChanges": 0
+    },
+    {
+      "variant": "CRLF-BOM",
+      "shell": "Bash",
+      "exitCode": 0,
+      "decisionSha256": "abf0869a4518f623b0342c7ac57eafab7c3428b1b5575be08b535bb13794f524",
+      "checkedContentChanges": 0
+    },
+    {
+      "variant": "CRLF-BOM",
+      "shell": "PowerShell",
+      "exitCode": 0,
+      "decisionSha256": "abf0869a4518f623b0342c7ac57eafab7c3428b1b5575be08b535bb13794f524",
+      "checkedContentChanges": 0
+    }
+  ],
+  "reportTamperExitCode": 1,
+  "rawBlobChecks": 6,
+  "sourceHashes": {
+    "docs/project-statistics-pilot/config.json": "bb44cc715e7ec8e926ed7c0c49bd5da35f5b9502a3e1b20c4364d17b2dd63f2e",
+    "docs/project-statistics-pilot/report.md": "ddb8d1568849afcb41f8888f2fad40063482b0c86284b6fc268832e60d9da92c",
+    "docs/project-statistics-pilot/snapshot.json": "71019b7b1dc345cac3c4be4ca265d68695ac409e05ff051d5e9fe2c03bbbd3a6",
+    "docs/project-statistics.md": "4c6f3a40e206963fa4fefbe749ee7501fc95ab0ae1aea0678a8fd3e0531754b8",
+    "docs/project-statistics.config.json": "c45f400ba501bcf27c3c5f5aef9d6b421f71f8ffe40e98a7e11216293744ac60"
+  },
+  "sourceCheckedContentChanges": 0,
+  "sourceHashesScope": "Real status and isolated fixture checks before separate legacy rendering and documentation follow-up; not final review-file hashes. Final review binds the complete patch separately.",
+  "fullIoTrace": false,
+  "harnessSha256": "3122a76c5f2e2eb60f553e4777b8ff230bb2638c2d7b48909acca07270f9d974",
+  "harnessCommand": "pwsh -NoProfile -File /tmp/statistics-stage2-field-tests.ps1",
+  "installedFixtureSuite": {
+    "assertions": 67,
+    "exitCode": 0,
+    "platform": "Unix",
+    "powerShell": "7.6.4",
+    "logSha256": "e9c058d5d78502284c3971bae1be689a70ca805b705f0c879961f2627aa3a1a0",
+    "command": "pwsh -NoProfile -File .specify/presets/project-statistics-governance/tests/test-project-statistics.ps1"
+  },
+  "realWorktreeStatus": {
+    "shells": [
+      "Bash",
+      "PowerShell"
+    ],
+    "exitCodes": [
+      0,
+      0
+    ],
+    "status": "CURRENT",
+    "reproducible": true,
+    "current": true,
+    "changed": false,
+    "checkedFiles": 5,
+    "checkedContentChanges": 0,
+    "gitStateChanges": 0
+  },
+  "legacyFixture": {
+    "sourceRevision": "9f07e6795cb0",
+    "previewExitCode": 0,
+    "updateExitCode": 0,
+    "bashStatus": "CURRENT",
+    "powerShellStatus": "CURRENT",
+    "statusExitCodes": [
+      0,
+      0
+    ],
+    "totalTextLines": 233454,
+    "activeDays": 73,
+    "timeZone": "Europe/Berlin"
+  },
+  "acceptance": {
+    "humanFieldAcceptance": "Open",
+    "nativeWindows": "NotRun",
+    "nativeGitHubCI": "NotRun",
+    "releaseRecommendation": "NotAssessed",
+    "currentDeliveryCandidate": "Intermediate measurement; uncommitted follow-up session changes require post-review refresh"
+  }
+}

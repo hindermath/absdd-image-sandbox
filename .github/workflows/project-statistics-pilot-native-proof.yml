@@ -1,0 +1,206 @@
+name: Project statistics pilot native proof
+
+on:
+  push:
+    branches: [codex/project-statistics-sandbox-field-test]
+    paths:
+      - '.github/workflows/project-statistics-pilot-native-proof.yml'
+      - 'docs/project-statistics-pilot/**'
+  pull_request:
+    paths:
+      - '.github/workflows/project-statistics-pilot-native-proof.yml'
+      - 'docs/project-statistics-pilot/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: statistics-pilot-native-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  native-proof:
+    name: Statistics pilot (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2022]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - name: Configure byte-stable checkout
+        shell: pwsh
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Native proof of the exact candidate in an isolated worktree
+        shell: pwsh
+        env:
+          EXPECTED_WORKFLOW_SHA: ${{ github.sha }}
+          PROOF_RUNNER: ${{ matrix.os }}
+          PILOT_REF: ${{ github.sha }}
+        run: |
+          Set-StrictMode -Version Latest
+          $ErrorActionPreference = 'Stop'
+          $env:GIT_OPTIONAL_LOCKS = '0'
+          $source = (Get-Location).Path
+          $workflowHead = (& git rev-parse HEAD).Trim()
+          if ($LASTEXITCODE -ne 0 -or $workflowHead -cne $env:EXPECTED_WORKFLOW_SHA) { throw 'Workflow head mismatch.' }
+          if ($env:PROOF_RUNNER -like 'windows-*' -and -not $IsWindows) { throw 'Native Windows required.' }
+          if ($env:PROOF_RUNNER -like 'ubuntu-*' -and -not $IsLinux) { throw 'Native Linux required.' }
+          if (@(& git status --porcelain=v1 --untracked-files=all).Count) { throw 'Dirty workflow checkout.' }
+          $evidence = Join-Path $env:RUNNER_TEMP 'statistics-pilot-evidence'
+          if (Test-Path $evidence) { throw 'Evidence target already exists.' }
+          $null = New-Item -ItemType Directory -Path $evidence
+          $pilot = Join-Path $env:RUNNER_TEMP ('statistics-pilot-' + [guid]::NewGuid().ToString('N'))
+          # Isolate encoding writes; snapshot.sourceRevision binds the measured dataset.
+          # The candidate and measurement revision are recorded separately; neither grants human acceptance.
+          & git merge-base --is-ancestor $env:PILOT_REF HEAD
+          if ($LASTEXITCODE -ne 0) { throw 'Pilot candidate is not an ancestor.' }
+          & git worktree add --detach $pilot $env:PILOT_REF
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot create isolated pilot worktree.' }
+          $pilotHead = (& git -C $pilot rev-parse HEAD).Trim()
+          if ($pilotHead -cne $env:PILOT_REF) { throw 'Pilot head mismatch.' }
+          $config = 'docs/project-statistics-pilot/config.json'
+          $mutable = @($config, 'docs/project-statistics-pilot/report.md', 'docs/project-statistics-pilot/snapshot.json')
+          $protected = $mutable + @('docs/project-statistics-pilot/README.md', 'docs/project-statistics.md', 'docs/project-statistics.config.json')
+          function Get-ProofHashSet([string]$Root) {
+              $hashes = [ordered]@{}
+              foreach ($path in $protected) { $hashes[$path] = (Get-FileHash -LiteralPath (Join-Path $Root $path)).Hash.ToLowerInvariant() }
+              ConvertTo-Json -InputObject $hashes -Compress
+          }
+          $sourceBefore = Get-ProofHashSet $source
+          $pilotBefore = Get-ProofHashSet $pilot
+          $package = Join-Path $pilot '.specify/presets/project-statistics-governance'
+          $receipt = Get-Content (Join-Path $pilot 'docs/maintenance/project-statistics-installation-v010.json') -Raw | ConvertFrom-Json
+          foreach ($file in $receipt.installedPayloadFiles) {
+              foreach ($root in @($source,$pilot)) {
+                  $installed = Join-Path $root ('.specify/presets/project-statistics-governance/' + $file.path)
+                  if ((Get-FileHash -LiteralPath $installed).Hash.ToLowerInvariant() -cne $file.sha256) { throw 'Installed payload drift.' }
+              }
+          }
+          $snapshot = Get-Content (Join-Path $pilot $mutable[2]) -Raw | ConvertFrom-Json
+          & git -C $pilot merge-base --is-ancestor $snapshot.measurement.sourceRevision HEAD
+          if ($LASTEXITCODE -ne 0) { throw 'Measurement source is not an ancestor of candidate.' }
+          $suite = Join-Path $package 'tests/test-project-statistics.ps1'
+          & pwsh -NoProfile -File $suite 2>&1 | Tee-Object -FilePath (Join-Path $evidence 'fixtures.log')
+          $suiteExit = $LASTEXITCODE
+          if ($suiteExit -ne 0) { throw "Fixture suite failed: ${suiteExit}." }
+          $suiteLog = Get-Content (Join-Path $evidence 'fixtures.log') -Raw
+          $expectedAssertions = if ($IsWindows) { 61 } else { 67 }
+          if ($suiteLog -notmatch "PASS: ${expectedAssertions} assertions;") { throw 'Missing fixture assertion evidence.' }
+          $original = @{}
+          foreach ($path in $mutable) { $original[$path] = [IO.File]::ReadAllBytes((Join-Path $pilot $path)) }
+          $decisions = [Collections.Generic.List[object]]::new()
+          $wrapper = Join-Path $package 'scripts/project-statistics.sh'
+          $engine = Join-Path $package 'scripts/project-statistics.ps1'
+          foreach ($variant in @(
+              @{name='LF-no-BOM';crlf=$false;bom=$false}, @{name='CRLF-no-BOM';crlf=$true;bom=$false},
+              @{name='LF-BOM';crlf=$false;bom=$true}, @{name='CRLF-BOM';crlf=$true;bom=$true}
+          )) {
+              foreach ($path in $mutable) {
+                  $text = [Text.Encoding]::UTF8.GetString($original[$path]).TrimStart([char]0xfeff).Replace("`r`n", "`n")
+                  if ($variant.crlf) { $text = $text.Replace("`n", "`r`n") }
+                  [IO.File]::WriteAllText((Join-Path $pilot $path), $text, [Text.UTF8Encoding]::new($variant.bom))
+              }
+              $before = Get-ProofHashSet $pilot
+              $beforeStatus = @(& git -C $pilot status --porcelain=v1 --untracked-files=all) -join "`n"
+              $shells = if ($IsWindows) { @('PowerShell') } else { @('Bash','PowerShell') }
+              foreach ($shell in $shells) {
+                  if ($shell -eq 'Bash') { $output = @(& bash $wrapper status --repo $pilot --config $config --json) }
+                  else { $output = @(& pwsh -NoProfile -File $engine -Action Status -Repo $pilot -Config $config -Json) }
+                  $code = $LASTEXITCODE
+                  $output | Write-Output
+                  if ($code -ne 0) { throw "${shell} parity failed with exit ${code}." }
+                  $result = ($output -join "`n") | ConvertFrom-Json
+                  if ($result.status -ne 'CURRENT' -or -not $result.reproducible -or -not $result.current -or $result.changed -or
+                      $result.sourceRevision -cne $snapshot.measurement.sourceRevision -or $result.asOf -cne $snapshot.measurement.asOf) { throw 'Unexpected parity result.' }
+                  if ((Get-ProofHashSet $pilot) -cne $before -or
+                      (@(& git -C $pilot status --porcelain=v1 --untracked-files=all) -join "`n") -cne $beforeStatus) { throw 'Status changed checked content.' }
+                  $decisionPath = Join-Path $evidence "$($variant.name)-${shell}.json"
+                  $result | ConvertTo-Json | Set-Content -LiteralPath $decisionPath -Encoding utf8NoBOM
+                  $decisions.Add([ordered]@{variant=$variant.name;shell=$shell;exitCode=$code;
+                      decisionSha256=(Get-FileHash $decisionPath).Hash.ToLowerInvariant();checkedContentChanges=0})
+              }
+          }
+          foreach ($path in $mutable) { [IO.File]::WriteAllBytes((Join-Path $pilot $path), $original[$path]) }
+          # Raw blob fixtures bypass Git clean filters; otherwise CRLF may be normalized away.
+          $blobRepo = Join-Path $env:RUNNER_TEMP ('statistics-blobs-' + [guid]::NewGuid().ToString('N'))
+          $null = New-Item -ItemType Directory -Path $blobRepo
+          & git -C $blobRepo init --quiet
+          if ($LASTEXITCODE) { throw 'Cannot initialize blob fixture.' }
+          Add-Type -Path (Join-Path $package 'scripts/lib/GitBlobCounter.cs')
+          $cases = @(@{name='LF';text="one`ntwo`n";bom=$false;lines=2},@{name='CRLF';text="one`r`ntwo`r`n";bom=$false;lines=2},
+              @{name='LF-BOM';text="one`ntwo`n";bom=$true;lines=2},@{name='CRLF-BOM';text="one`r`ntwo`r`n";bom=$true;lines=2},
+              @{name='empty';text='';bom=$false;lines=0},@{name='BOM-only';text='';bom=$true;lines=0})
+          $ids = [Collections.Generic.List[string]]::new()
+          foreach ($case in $cases) {
+              $file = Join-Path $blobRepo ($case.name + '.txt')
+              [IO.File]::WriteAllText($file, $case.text, [Text.UTF8Encoding]::new($case.bom))
+              $id = & git -C $blobRepo hash-object -w --no-filters -- $file
+              if ($LASTEXITCODE) { throw 'Cannot create raw blob.' }
+              $ids.Add($id.Trim())
+          }
+          if (@($ids.ToArray()[0..3] | Select-Object -Unique).Count -ne 4) { throw 'Raw encodings collapsed.' }
+          $counts = [ProjectTransparency.GitBlobCounter]::Count($blobRepo, $ids.ToArray())
+          for ($i=0; $i -lt $cases.Count; $i++) { if ($counts[$i] -ne $cases[$i].lines) { throw 'Blob count mismatch.' } }
+          if ((Get-ProofHashSet $source) -cne $sourceBefore -or (Get-ProofHashSet $pilot) -cne $pilotBefore) { throw 'Checked payload changed.' }
+          foreach ($root in @($source,$pilot)) {
+              if (@(& git -C $root status --porcelain=v1 --untracked-files=all).Count) { throw 'Residual repository changes.' }
+          }
+          $record = [ordered]@{
+              workflowCommit=$workflowHead;pilotCommit=$pilotHead;measurementCommit=$snapshot.measurement.sourceRevision
+              runner=$env:PROOF_RUNNER;platform=[Runtime.InteropServices.RuntimeInformation]::OSDescription
+              powerShell=$PSVersionTable.PSVersion.ToString();suiteExitCode=$suiteExit;assertions=$expectedAssertions
+              suiteCommand='pwsh -NoProfile -File .specify/presets/project-statistics-governance/tests/test-project-statistics.ps1'
+              statusCommands=@('bash project-statistics.sh status --repo PILOT --config docs/project-statistics-pilot/config.json --json',
+                  'pwsh -NoProfile -File project-statistics.ps1 -Action Status -Repo PILOT -Config docs/project-statistics-pilot/config.json -Json')
+              suiteSha256=(Get-FileHash $suite).Hash.ToLowerInvariant()
+              suiteLogSha256=(Get-FileHash (Join-Path $evidence 'fixtures.log')).Hash.ToLowerInvariant()
+              workflowSha256=(Get-FileHash '.github/workflows/project-statistics-pilot-native-proof.yml').Hash.ToLowerInvariant()
+              payloadHashes=($pilotBefore | ConvertFrom-Json);decisions=$decisions.ToArray();rawBlobChecks=6
+              sourceAndRestoredPilotContentChanges=0;fixtureWritesExpected=$true;fullIoTrace=$false
+          }
+          $record | ConvertTo-Json -Depth 8 | Set-Content (Join-Path $evidence 'native-evidence.json') -Encoding utf8NoBOM
+          Write-Output "NATIVE_PILOT_PASS runner=$($env:PROOF_RUNNER) pilot=${pilotHead} checks=$($decisions.Count)"
+      - name: Verify current delivery snapshot without writes
+        shell: pwsh
+        run: |
+          Set-StrictMode -Version Latest
+          $ErrorActionPreference = 'Stop'
+          $paths = @('docs/project-statistics-pilot/config.json', 'docs/project-statistics-pilot/report.md',
+              'docs/project-statistics-pilot/snapshot.json', 'docs/project-statistics.md', 'docs/project-statistics.config.json')
+          $before = @{}
+          foreach ($path in $paths) { $before[$path] = (Get-FileHash $path).Hash }
+          $evidence = Join-Path $env:RUNNER_TEMP 'statistics-pilot-evidence'
+          $shells = if ($IsWindows) { @('PowerShell') } else { @('Bash', 'PowerShell') }
+          foreach ($shell in $shells) {
+              if ($shell -eq 'Bash') {
+                  $output = @(& bash .specify/presets/project-statistics-governance/scripts/project-statistics.sh status --repo . --config docs/project-statistics-pilot/config.json --json)
+              } else {
+                  $output = @(& pwsh -NoProfile -File .specify/presets/project-statistics-governance/scripts/project-statistics.ps1 -Action Status -Repo . -Config docs/project-statistics-pilot/config.json -Json)
+              }
+              $code = $LASTEXITCODE
+              $output | Write-Output
+              if ($code -ne 0) { throw 'Delivery snapshot status failed.' }
+              $decision = ($output -join "`n") | ConvertFrom-Json
+              if (-not $decision.reproducible -or -not $decision.current -or $decision.changed -or $decision.status -ne 'CURRENT') { throw 'Delivery snapshot is not current.' }
+              & git merge-base --is-ancestor $decision.sourceRevision HEAD
+              if ($LASTEXITCODE -ne 0) { throw 'Measurement source is not an ancestor of delivery head.' }
+              foreach ($path in $paths) { if ((Get-FileHash $path).Hash -cne $before[$path]) { throw 'Delivery status modified checked content.' } }
+              if (@(& git status --porcelain=v1 --untracked-files=all).Count) { throw 'Delivery status left repository changes.' }
+              $decisionPath = Join-Path $evidence "delivery-${shell}-decision.json"
+              $decision | ConvertTo-Json | Set-Content $decisionPath -Encoding utf8NoBOM
+              [ordered]@{head=(& git rev-parse HEAD).Trim();shell=$shell;exitCode=$code;
+                  decisionSha256=(Get-FileHash $decisionPath).Hash.ToLowerInvariant();
+                  snapshotSha256=(Get-FileHash $paths[2]).Hash.ToLowerInvariant();checkedContentChanges=0} |
+                  ConvertTo-Json | Set-Content (Join-Path $evidence "delivery-${shell}-evidence.json") -Encoding utf8NoBOM
+          }
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: always()
+        with:
+          name: statistics-pilot-${{ matrix.os }}
+          path: ${{ runner.temp }}/statistics-pilot-evidence/
+          if-no-files-found: error
