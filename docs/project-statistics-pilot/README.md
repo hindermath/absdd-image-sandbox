@@ -2,15 +2,26 @@
 
 ## Stand / Status
 
-Erste Review-Etappe am 2026-09-18: Konfiguration initialisiert, keine reale
-Projektmessung ausgefuehrt. Der technische Produkt-Fixturetest bestand im
-Linux-Pilotcontainer mit 67 Assertions. Das ist keine Feldtest-Abnahme.
-Vor dem ersten Commit sind die neuen Dateien menschlich zu sichten.
+Am 2026-09-18 nach menschlicher Sichtung genau den ersten Inhaltspatch
+committet: `9f07e6795cb05ff7d3866972638349c8aded5b44`. Die reale UTC-Messung
+darauf liefert 1306 Textdateien, 233454 Textzeilen und 70 Aktivtage.
+Bash-/PowerShell-Status, 67 Fixture-Assertions, zwei unveraenderte
+Wiederholungsupdates, acht Encoding-Statusfaelle und sechs Raw-Blob-Faelle
+bestanden. [Pruefwerte](field-evidence.json) und
+[Sitzungsnachweis](../security/agent-session-log/2026-09-18-1238.md).
 
-First review stage: configuration initialized; no real project measurement.
-The installed product fixture suite passed 67 assertions in the Linux pilot.
-That does not establish field acceptance. Human review is required before
-the first commit and before push.
+Dies ist eine reproduzierbare Zwischenmessung. Neue Ausgaben und Dokumente
+sind noch nicht committet; insbesondere das neue Sitzungsprotokoll muss nach
+seinem gesichteten Commit in einen erneuten Statistik-Nachlauf eingehen.
+Native CI, Windows-Nachweis und menschliche Feldabnahme bleiben offen.
+Kein Push oder Merge in dieser Etappe.
+
+The owner-reviewed first content patch is committed at the stated revision.
+Its real UTC measurement gives 1306 text files, 233454 lines and 70 active
+days. Local shell, fixture, repeatability, encoding and raw-blob checks passed.
+This is intermediate evidence: new outputs and documentation await review,
+and their content commit requires a fresh statistics pass. Native CI,
+Windows evidence and human field acceptance remain open; no push or merge.
 
 ## Quelle und Bedienung / Source and operation
 
