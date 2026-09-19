@@ -37,7 +37,7 @@ def main() -> int:
         failures.append(f"source must be {EXPECTED_SOURCE}")
     if schema == 1 and not re.fullmatch(r"v[0-9]+\.[0-9]+\.[0-9]+", str(data.get("tag", ""))):
         failures.append("tag must be a stable vMAJOR.MINOR.PATCH release")
-    if not re.fullmatch(r"[0-9a-f]{40}", str(data.get("commit", ""))):
+    if not isinstance(data.get("commit"), str) or not re.fullmatch(r"[0-9a-f]{40}", data["commit"]):
         failures.append("commit must be a lowercase 40-character Git SHA")
     if data.get("license") != "MIT":
         failures.append("license must be MIT")

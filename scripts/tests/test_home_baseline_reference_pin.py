@@ -21,6 +21,7 @@ class ReferencePinTests(unittest.TestCase):
                  (self.lock(schemaVersion=3), 1),
                  (self.lock(refType="branch"), 1),
                  (self.lock(commit="main"), 1),
+                 (self.lock(commit=int("1" * 40)), 1),
                  (self.lock(tag="v0.18.0"), 1)]
         for lock, code in cases:
             with self.subTest(lock=lock), tempfile.TemporaryDirectory() as directory:
