@@ -124,7 +124,19 @@ erweitern.
 | Spec Kit | `specify-cli` `v0.8.3` aus `github.com/github/spec-kit.git` |
 | Syft | `anchore/syft` `1.46.0`, SHA256-Pruefung im Image-Build |
 | uv / uvx | `0.11.16` aus GitHub-Release-Artefakt, SHA256-Pruefung im Image-Build |
-| home-baseline Level-0-Quelle | `v0.18.0`, Commit `a0fc446cd04db2e52102a3b2be31c24e8ee6a022`, MIT; Lock in `home-baseline.lock.json` |
+| home-baseline Level-0-Quelle | Commit-Pin (kein Release-Tag) `5b3096c244a6b08266916d2cb4ba5981ebafbd67`, MIT; Schema 2 in `home-baseline.lock.json` |
+
+Am 20.09.2026 genehmigte der Owner ausdruecklich das Sandbox-Image-Update
+als Erweiterung des Wartungsauftrags. Es aktualisiert die eingebettete
+Home-Baseline-Referenz, nicht Modelle, Provider, Mounts oder Rollenfreigaben.
+Alle bestehenden Volumes bleiben erhalten; die Wartungsfreigabe endet weiterhin
+am 31.12.2026. Build- und Wiederanlaufnachweise werden getrennt dokumentiert.
+
+*On 2026-09-20 the owner explicitly approved the sandbox image update as an
+extension of the maintenance task. It updates the embedded Home Baseline
+reference, not models, providers, mounts or role approvals. Existing volumes
+are retained and the maintenance approval still expires on 2026-12-31.
+Build and restart evidence is recorded separately.*
 
 Die Home Runtime wird nie automatisch angewendet. Der ausdrueckliche Wrapper
 `sync-home-baseline-runtime` kennt nur `--dry-run`, `--check-only` und

@@ -336,6 +336,19 @@ steht in
 
 ## Home-Baseline-Referenz und persoenlicher Override
 
+`home-baseline.lock.json` unterstuetzt zwei streng getrennte Modi: Schema 1
+bindet einen Release-Tag an dessen exakten Commit. Schema 2 verwendet
+`refType: "commit"` und einen vollstaendigen Commit-Hash ohne Release-Tag.
+Der aktuelle Wartungsstand verwendet Schema 2, weil die benoetigten Aenderungen
+noch nicht Bestandteil eines neueren Releases sind. Der Installer prueft in
+beiden Modi den geladenen Commit; er folgt niemals automatisch `main`.
+
+*The lock supports two separate modes: schema 1 binds a release tag to its
+exact commit; schema 2 uses `refType: "commit"` and a full commit hash without
+a release tag. The current maintenance state uses schema 2 because the needed
+changes are not part of a newer release yet. Both modes verify the fetched
+commit and never automatically follow `main`.*
+
 Das Image enthaelt `home-baseline` als read-only Shallow-Git-Referenz. Release,
 Commit, Quelle und MIT-Lizenz sind in `home-baseline.lock.json` festgehalten.
 Im Container liegt die Referenz technisch unter `/opt/home-baseline`;
