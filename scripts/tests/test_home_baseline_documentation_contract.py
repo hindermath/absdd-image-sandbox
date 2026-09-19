@@ -92,7 +92,12 @@ class HomeBaselineDocumentationContractTests(unittest.TestCase):
 
         lock = json.loads(read_text("home-baseline.lock.json"))
         security_inventory = read_text("docs/security/sandbox-freigabe.md")
-        self.assertIn(f"`{lock['tag']}`", security_inventory)
+        if lock["schemaVersion"] == 1:
+            self.assertIn(f"`{lock['tag']}`", security_inventory)
+        else:
+            self.assertEqual(lock["schemaVersion"], 2)
+            self.assertEqual(lock["refType"], "commit")
+            self.assertNotIn("tag", lock)
         self.assertIn(f"`{lock['commit']}`", security_inventory)
 
     def test_image_mount_scope_is_exactly_the_documented_subset(self) -> None:

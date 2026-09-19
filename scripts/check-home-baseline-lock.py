@@ -22,15 +22,22 @@ def main() -> int:
         return 1
 
     failures: list[str] = []
-    if set(data) != EXPECTED_KEYS:
-        failures.append(f"keys must be exactly: {', '.join(sorted(EXPECTED_KEYS))}")
-    if data.get("schemaVersion") != 1:
-        failures.append("schemaVersion must be 1")
+    if not isinstance(data, dict):
+        print("Home-baseline lock must be an object", file=sys.stderr)
+        return 1
+    schema = data.get("schemaVersion")
+    expected_keys = EXPECTED_KEYS if schema == 1 else (EXPECTED_KEYS - {"tag"}) | {"refType"}
+    if set(data) != expected_keys:
+        failures.append(f"keys must be exactly: {', '.join(sorted(expected_keys))}")
+    if type(schema) is not int or schema not in (1, 2):
+        failures.append("schemaVersion must be 1 or 2")
+    if schema == 2 and data.get("refType") != "commit":
+        failures.append("schema 2 refType must be commit")
     if data.get("source") != EXPECTED_SOURCE:
         failures.append(f"source must be {EXPECTED_SOURCE}")
-    if not re.fullmatch(r"v\d+\.\d+\.\d+", str(data.get("tag", ""))):
+    if schema == 1 and not re.fullmatch(r"v[0-9]+\.[0-9]+\.[0-9]+", str(data.get("tag", ""))):
         failures.append("tag must be a stable vMAJOR.MINOR.PATCH release")
-    if not re.fullmatch(r"[0-9a-f]{40}", str(data.get("commit", ""))):
+    if not isinstance(data.get("commit"), str) or not re.fullmatch(r"[0-9a-f]{40}", data["commit"]):
         failures.append("commit must be a lowercase 40-character Git SHA")
     if data.get("license") != "MIT":
         failures.append("license must be MIT")
@@ -41,7 +48,7 @@ def main() -> int:
             print(f"- {failure}", file=sys.stderr)
         return 1
 
-    print(f"Home-baseline lock OK: {data['tag']} @ {data['commit']}")
+    print(f"Home-baseline lock OK: {data.get('tag', 'commit-pin')} @ {data['commit']}")
     return 0
 
 
