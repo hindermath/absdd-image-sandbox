@@ -1,8 +1,8 @@
 # Sandbox-Freigabe
 
-Status: Entwurf, Freigabe ausstehend
+Status: Owner-Freigabe für Secure-Trader-Wartungsupdates erteilt; gesonderte Rollenfreigabe nach P1-4 nicht nachgewiesen.
 
-Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Verantwortliche Personen, Freigabestatus, Freigabedatum und rechtliche Bewertungen muessen durch die verantwortliche Stelle ergaenzt werden. Der PR-Ablauf fuer CISO/ISB oder KI-Beauftragte:n (KIB) ist in `docs/security/sandbox-freigabe-review.md` beschrieben.
+Dieses Dokument hält die ausdrückliche Owner-Entscheidung fest. Sie ist keine vom Agenten erteilte Freigabe und weist keine zusätzliche CISO-/ISB-/KIB-Rolle nach. Der gesonderte PR-Ablauf für diese Rollen ist in `docs/security/sandbox-freigabe-review.md` beschrieben.
 
 ## Deutsch
 
@@ -10,16 +10,45 @@ Dieses Dokument bereitet die formelle Freigabe von `absdd-image-sandbox` vor. Ve
 |---|---|
 | Sandbox-Typ | Container (Podman) |
 | Sandbox-Identifikator | `mcr.microsoft.com/dotnet/sdk:10.0@sha256:e1ffd2a92ae84c1291bc1b6887501f8af98e6331e7af6d4c8d37168c5e87a64c` |
-| Verantwortliche Person | `_TODO_ (vom Owner einzutragen)` |
-| Freigabestatus | `_Entwurf, Freigabe ausstehend_` |
-| Freigabedatum | `_TODO_ (vom Owner einzutragen)` |
-| Ablaufdatum / Re-Review | `_TODO_ (Empfehlung: 12 Monate nach Freigabe)` |
+| Verantwortliche Person | Thorsten Hindermann, Repository-/Workspace-Owner |
+| Freigabestatus | Owner-Freigabe für die unten abgegrenzten Wartungsupdates erteilt |
+| Freigabedatum | 2026-09-19; dokumentiert um 23:54 CEST |
+| Ablaufdatum / Re-Review | 31.12.2026, ausdrücklich vom Owner ergänzt |
 | Genehmigte Modelle | Siehe `docs/security/ai-tools-inventory.md` |
 | Isolationsnachweis | Siehe `docs/security/sandbox-isolation.md` |
 | Genehmigte Mount-Liste | Siehe `compose.yml` und optional `compose.home-baseline.yml`; Kurzliste unten |
 | Genehmigte Tool-Versionen | Siehe `Dockerfile`; Kurzliste unten |
 | Offener Freigabehinweis | Freigabe durch CISO/ISB oder KI-Beauftragte:n (KIB) ausstehend |
 | Freigabe-Review | Siehe `docs/security/sandbox-freigabe-review.md` |
+
+### Owner-Entscheidung vom 2026-09-19
+
+Quelle: ausdrückliche Nachricht von Thorsten Hindermann in der laufenden
+Wartungssitzung, nach Hinweis auf die ausstehende Sandbox-Freigabe:
+
+> Ich erteile hiermit durch meine Autorität als Owner die Freigabe. Bitte dokumentieren!
+
+Der Gesprächskontext begrenzt die Entscheidung auf Korrektur und Aktualisierung
+der 21 Secure-Trader-Flottenziele (drei Level-1-Workspaces und 18
+Level-2-Repositories) innerhalb der wiederhergestellten Sandbox. Bestehende
+Mounts, Sicherheitsgrenzen und der Schutz lokaler Änderungen bleiben erhalten.
+Keine pauschale Produktions-, Modell-, Provider-, Secret- oder Datenfreigabe;
+keine zusätzliche Commit-/Push-/Merge-Autorität aus dieser Entscheidung.
+Zulässige Datenklassifikation wurde nicht angegeben. Der Owner ergänzte
+ausdrücklich das Ablaufdatum 31.12.2026 und beauftragte anschließend den
+Rollout. Diese Freigabe gilt für den oben abgegrenzten Wartungsumfang.
+
+Zum Dokumentationszeitpunkt geprüft: Container `bdbf765955a4`, laufend,
+lokales Image `sha256:4c279f0c0f3a5abfc436deda18e87c9ca4ea966f502a7cae003fa03bd70ba84f`.
+Der oben aufgeführte Basisimage-Digest bleibt eine getrennte deklarierte
+Referenz und wird nicht mit der lokalen Image-ID gleichgesetzt.
+Technische Evidence: Sitzungsnachweis
+`agent-session-log/2026-09-19-2350-sandbox-container-recovery.md`.
+
+P1-4 wird durch diese Dokumentation nicht als vollständig abgeschlossen
+markiert: Der bestehende Rollen-/Review-Vertrag und die fehlenden Angaben
+bleiben sichtbar. Die Owner-Entscheidung wird unverfälscht dokumentiert,
+nicht stillschweigend in eine CISO-/ISB-/KIB-Freigabe umgedeutet.
 
 ### Genehmigte Mount-Liste
 
@@ -120,7 +149,7 @@ selbst in den Container; die Anleitung steht in `README.md`.
 
 | Rolle | Name | Datum | Unterschrift |
 |---|---|---|---|
-| Verantwortliche Person | `_TODO_` | `_TODO_` | `_TODO_` |
+| Verantwortliche Person / Owner | Thorsten Hindermann | 2026-09-19 | Explizite Chat-Entscheidung oben; keine Unterschrift simuliert |
 | CISO / ISB | `_TODO_` | `_TODO_` | `_TODO_` |
 | KI-Beauftragte:r (KIB) | `_TODO_` | `_TODO_` | `_TODO_` |
 | Betrieb / Plattform | `_TODO_` | `_TODO_` | `_TODO_` |
@@ -131,10 +160,10 @@ selbst in den Container; die Anleitung steht in `README.md`.
 |---|---|
 | Sandbox type | Container (Podman) |
 | Sandbox identifier | `mcr.microsoft.com/dotnet/sdk:10.0@sha256:e1ffd2a92ae84c1291bc1b6887501f8af98e6331e7af6d4c8d37168c5e87a64c` |
-| Responsible person | `_TODO_ (to be entered by owner)` |
-| Approval status | `_Draft, approval pending_` |
-| Approval date | `_TODO_ (to be entered by owner)` |
-| Expiration date / re-review | `_TODO_ (recommendation: 12 months after approval)` |
+| Responsible person | Thorsten Hindermann, repository/workspace owner |
+| Approval status | Owner approval granted for the bounded maintenance updates below |
+| Approval date | 2026-09-19; recorded at 23:54 CEST |
+| Expiration date / re-review | 2026-12-31, explicitly supplied by the owner |
 | Approved models | See `docs/security/ai-tools-inventory.md` |
 | Isolation evidence | See `docs/security/sandbox-isolation.md` |
 | Approved mount list | See `compose.yml` and optional `compose.home-baseline.yml`; short list above |
@@ -142,7 +171,27 @@ selbst in den Container; die Anleitung steht in `README.md`.
 | Open approval note | Approval by CISO/ISB or AI officer (KIB) pending |
 | Approval review | See `docs/security/sandbox-freigabe-review.md` |
 
-This file is a draft for review and signature by the responsible people. The PR review flow is described in `docs/security/sandbox-freigabe-review.md`.
+### Owner decision of 2026-09-19
+
+Thorsten Hindermann explicitly granted approval in his capacity as owner in
+the maintenance conversation and requested documentation. The conversation
+limits its scope to maintenance corrections and updates of 21 Secure Trader
+fleet targets (three Level-1 workspaces and 18 Level-2 repositories) inside
+the restored sandbox. Existing mounts, security boundaries and local changes
+remain protected. This is not a blanket production, model, provider, secret or
+data approval and grants no additional commit, push or merge authority.
+Data classification was not supplied. The owner subsequently specified
+2026-12-31 as the expiration date and explicitly requested starting the rollout
+within the bounded maintenance scope above.
+
+Verified when recorded: running container `bdbf765955a4`, local image
+`sha256:4c279f0c0f3a5abfc436deda18e87c9ca4ea966f502a7cae003fa03bd70ba84f`.
+This image ID is distinct from the declared base-image digest above.
+Technical evidence: `agent-session-log/2026-09-19-2350-sandbox-container-recovery.md`.
+The decision is human-provided, not granted by the agent. No CISO/ISB/KIB role
+or signature is inferred. P1-4 is not marked fully complete; its separate
+role/review requirements and missing fields remain open. The review workflow
+is documented in `docs/security/sandbox-freigabe-review.md`.
 
 Optional local IDE access: VS Code can attach from the host to the running
 `ade` container through Dev Containers. This option does not start a
