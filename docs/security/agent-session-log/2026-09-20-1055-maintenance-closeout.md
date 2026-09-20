@@ -54,6 +54,24 @@ Finale CycloneDX-1.7-SBOM: 28.970 Komponenten,
 SHA-256 `a95969b28399a57befb174cdd03003b482bc6c3d7fd354c2184f5119a280edee`.
 Aktivierung weiterhin erst nach technischer Abnahme; Freigabeumfang unveraendert.
 
+### Finaler Kandidat: Consumer-Discovery und Referenz
+
+Home-Baseline PR #308 ergaenzt die source-only-Kennzeichnung direkt in der
+Delegationssuite und regeneriert ihre Skriptreferenz. Der finale Lock ist
+`586c142dcbc183aecf2daf13c2726ce09faa19b2`; alle vorherigen Kandidaten blieben
+inaktiv. Image: `8521690738e64498d71bbd252fc617a968f8fa3884e713d3269814cd4b012229`.
+Erneut bestanden: 23 Wrapper-Tests, alle 22 zentralen Delegationstests ohne
+source-only-Skip, neun Pin-/Dokumentationstests, Pre-commit, komplette
+Paket-Hashbindung und Schreibschutz. Die vollstaendige TinyCalc-Consumer-
+Discovery bestand mit 75 Tests und zehn begruendeten Skips; zentrale
+Manifeste wurden nicht verteilt.
+
+Finale CycloneDX-1.7-SBOM: 28.970 Komponenten,
+`sboms/2026-09-20-localhost-absdd-image-sandbox_ade-closeout-586c142.cdx.json`,
+SHA-256 `f92cf1d1367de829e2730b7a706a2824e3a42e603a412dcc6febc41b7e3e0556`.
+Aktivierung und finaler Flottenbericht folgen weiterhin erst nach technischer
+Abnahme. Das Snapshot-Image bleibt privat; alle Volumes werden erhalten.
+
 ## English
 
 The Owner explicitly approved MergeAndSync with bounded admin bypass for
@@ -97,3 +115,16 @@ passed. Seven source-dependent integration cases belong to the complete
 central suite, not deliberately reduced consumer packages. The CycloneDX 1.7
 inventory contains 28,970 components. Activation still requires technical
 acceptance; existing authority remains unchanged.
+
+### Final candidate: consumer discovery and reference
+
+Home-Baseline PR #308 declares source-only integration cases in the suite
+itself and refreshes generated script documentation. The final lock binds
+`586c142dcbc183aecf2daf13c2726ce09faa19b2`; all previous candidates remained
+inactive. The final image and CycloneDX artifact/hash are recorded above.
+Its 23 wrapper tests, all 22 central delegation cases without source-only
+skips, nine pin/documentation tests, pre-commit and immutable package bindings
+passed again. Complete TinyCalc consumer discovery passed 75 tests with ten
+documented skips; no canonical manifests were distributed. The final inventory
+contains 28,970 components. Activation and fleet closeout follow technical
+acceptance; recovery images remain private and all named volumes are retained.
