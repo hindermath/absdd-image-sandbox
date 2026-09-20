@@ -41,6 +41,13 @@ und die dort gebundenen Wartungsmodule. Deutsch zuerst/Englisch danach,
 textorientierte Betriebsevidence; source-only, kein Home-Sync dieses Repos.
 Image-Neubau erforderlich. Re-Evaluation bei Pin-/Mount-/Freigabeänderung.
 
+Nachtrag: Der abschließende Pin `35e4350cba446db0f9a476f8a57720ac1052387e`
+enthält zusätzlich die native Windows-Testfixture. Die Wartungslogik bleibt
+gegenüber dem vorigen Pin unverändert; die Quellbindung umfasst auch Tests.
+
+*Follow-up: the final pin also includes the native Windows test fixture.
+Maintenance logic is unchanged; source bindings include tests as well.*
+
 *UpdateRequired; Owner: sandbox maintainer; audience: maintenance operators.
 Read the maintenance evidence and pinned Level 0 operating note at
 `docs/maintenance/container-git-trust.md`. Canonical sources are the lock and

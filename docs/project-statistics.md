@@ -207,6 +207,16 @@ No new global Git configuration, mounts or volumes. Documentation Impact:
 UpdateRequired; maintenance navigation and session evidence updated. Record
 image build, SBOM and activation separately in the delivery PR.
 
+### 2026-09-20 - Portable Vertrauensfixture / Portable trust fixture
+
+Image-Pin um die native Windows-Testfixture aus Level 0 ergänzt;
+Wartungslogik unverändert. Documentation Impact: UpdateRequired;
+Freigabeinventar und Sitzungsnachweis auf denselben Pin nachgeführt.
+
+Updated the image pin for the native Windows test fixture; maintenance logic
+is unchanged. Documentation Impact: UpdateRequired; approval inventory and
+session evidence aligned to the same pin.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
