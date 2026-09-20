@@ -124,7 +124,7 @@ erweitern.
 | Spec Kit | `specify-cli` `v0.8.3` aus `github.com/github/spec-kit.git` |
 | Syft | `anchore/syft` `1.46.0`, SHA256-Pruefung im Image-Build |
 | uv / uvx | `0.11.16` aus GitHub-Release-Artefakt, SHA256-Pruefung im Image-Build |
-| home-baseline Level-0-Quelle | Commit-Pin (kein Release-Tag) `5b3096c244a6b08266916d2cb4ba5981ebafbd67`, MIT; Schema 2 in `home-baseline.lock.json` |
+| home-baseline Level-0-Quelle | Commit-Pin (kein Release-Tag) `110ac82efb7504e177fdd5e934046d922a2d825c`, MIT; Schema 2 in `home-baseline.lock.json` |
 
 Am 20.09.2026 genehmigte der Owner ausdruecklich das Sandbox-Image-Update
 als Erweiterung des Wartungsauftrags. Es aktualisiert die eingebettete
@@ -137,6 +137,19 @@ extension of the maintenance task. It updates the embedded Home Baseline
 reference, not models, providers, mounts or role approvals. Existing volumes
 are retained and the maintenance approval still expires on 2026-12-31.
 Build and restart evidence is recorded separately.*
+
+Der Owner hat anschließend ausdrücklich die Lieferung des neuen
+Container-Delegationspakets aus `home-baseline` PR #305 und den zugehörigen
+Image-Pin in beiden Repositories per `MergeAndSync` genehmigt. Ein
+Admin-Bypass ersetzt keine technischen Prüfungen. Die Referenz bleibt ein
+vollständiger Commit-Pin; Provider, Modelle, Mounts, Volumes und das
+Ablaufdatum 31.12.2026 bleiben unverändert.
+
+*The Owner subsequently explicitly approved MergeAndSync delivery of the
+container-delegation package from home-baseline PR #305 and its image pin in
+both repositories. Admin bypass does not replace technical gates. The
+reference remains a full commit pin; providers, models, mounts, volumes and
+the 2026-12-31 expiry are unchanged.*
 
 Die Home Runtime wird nie automatisch angewendet. Der ausdrueckliche Wrapper
 `sync-home-baseline-runtime` kennt nur `--dry-run`, `--check-only` und
