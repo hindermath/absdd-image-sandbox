@@ -41,11 +41,15 @@ und die dort gebundenen Wartungsmodule. Deutsch zuerst/Englisch danach,
 textorientierte Betriebsevidence; source-only, kein Home-Sync dieses Repos.
 Image-Neubau erforderlich. Re-Evaluation bei Pin-/Mount-/Freigabeänderung.
 
-Nachtrag: Der abschließende Pin `35e4350cba446db0f9a476f8a57720ac1052387e`
-enthält zusätzlich die native Windows-Testfixture. Die Wartungslogik bleibt
-gegenüber dem vorigen Pin unverändert; die Quellbindung umfasst auch Tests.
+Nachtrag: Der abschließende Pin `19dc97ceb0c413c12284077a7249d726f7bcc1c7`
+begrenzt den Prozessumgebungstest auf die Linux-Worker-Plattform. Windows
+entfernt leere Umgebungswerte; auch Windows-Hosts delegieren diesen Worker
+an Linux. Host-Delegationstests bleiben plattformübergreifend aktiv.
+Die Wartungslogik bleibt unverändert; die Quellbindung umfasst auch Tests.
 
-*Follow-up: the final pin also includes the native Windows test fixture.
+*Follow-up: the final pin scopes the worker environment test to its Linux
+execution platform. Windows drops empty environment values; Windows hosts
+also delegate this worker to Linux. Host delegation tests remain cross-platform.
 Maintenance logic is unchanged; source bindings include tests as well.*
 
 *UpdateRequired; Owner: sandbox maintainer; audience: maintenance operators.
