@@ -72,6 +72,13 @@ SHA-256 `f92cf1d1367de829e2730b7a706a2824e3a42e603a412dcc6febc41b7e3e0556`.
 Aktivierung und finaler Flottenbericht folgen weiterhin erst nach technischer
 Abnahme. Das Snapshot-Image bleibt privat; alle Volumes werden erhalten.
 
+### Wartungskopie des Sandbox-Repositories
+
+Auch die zehn kanonischen Paketdateien dieses Repositories wurden per
+gepruefter Vorschau aktualisiert. Vollstaendige Consumer-Discovery: 75 Tests,
+zehn begruendete Skips, erfolgreich. Diese Dateien sind keine Dockerfile-
+COPY-Eingaben; das oben gepruefte Image und sein Pin bleiben unveraendert.
+
 ## English
 
 The Owner explicitly approved MergeAndSync with bounded admin bypass for
@@ -128,3 +135,10 @@ passed again. Complete TinyCalc consumer discovery passed 75 tests with ten
 documented skips; no canonical manifests were distributed. The final inventory
 contains 28,970 components. Activation and fleet closeout follow technical
 acceptance; recovery images remain private and all named volumes are retained.
+
+### Sandbox repository maintenance copy
+
+The ten canonical package files in this repository were also updated after
+preview. Complete consumer discovery passed 75 tests with ten documented
+skips. These files are not Dockerfile COPY inputs; the validated image and
+its pin above remain unchanged.
