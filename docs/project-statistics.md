@@ -81,6 +81,8 @@ tracked files; they are an artefact-volume measure, not a quality measure.
 | 2026-09-20 | codex/update-sandbox-baseline-reference | N/A | N/A | N/A | UpdateRequired: exakter Home-Baseline-Commit-Pin mit Schema-1-Kompatibilitaet, acht Pin-/Dokumentationstests auf macOS und Linux sowie drei Preflight-Fixtures bestanden. Image gebaut und ohne Netzwerk mit neun Werkzeugpruefungen validiert. Wiederanlauf-/SBOM-Evidence im Sitzungsprotokoll 2026-09-20-0118-baseline-image-update.md; kein neuer Spec-Kit-Lauf. / Exact commit pin, compatibility and native/container tests; lifecycle evidence in the session log, no Spec Kit run. |
 | 2026-09-20 | codex/pin-container-maintenance-delegation | N/A | N/A | N/A | UpdateRequired: gemergtes Level-0-Delegationspaket 110ac82e gepinnt; neun Pin-/Dokumentationstests, Pre-commit und 22 netzwerklose Image-Tests bestanden. Finale SBOM: 28.970 Komponenten. Service erneuert, 20 Mounts und sechs Volumes identisch; Evidence im Sitzungsprotokoll 2026-09-20-0910-container-delegation.md. Kein Spec-Kit-Lauf. / Pin merged Level-0 delegation, verify tests and image inventory, preserve mounts and volumes; no Spec Kit run. |
 
+| 2026-09-20 | codex/maintenance-closeout-image-pin | N/A | N/A | N/A | UpdateRequired: finalen Wartungskorrektur-Commit 586c142 einschliesslich Consumer-Testgrenze und erzeugter Referenz gepinnt; neun Pin-/Dokumentationstests, Pre-commit, 22 zentrale Delegations- und 23 Wrapper-Tests im finalen Image bestanden. Hashbindung und Schreibschutz geprueft, SBOM mit 28.970 Komponenten erstellt. Aktivierung und abschliessender Flottenlauf folgen nach technischer PR-Abnahme; Details im Sitzungsprotokoll 2026-09-20-1055-maintenance-closeout.md. / Pin final maintenance corrections including consumer discovery, verify image tests and inventory; activation and fleet closeout remain separate evidence. |
+
 ## Gesamtstand des Repositories / Repository Snapshot
 
 **DE:** Stand: 2026-07-10. Dieses Repository enthält keinen klassischen
@@ -202,26 +204,26 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 238389 lines |
-| Textdateien / Text files | 1318 |
+| Textbasis / Text base | 239783 lines |
+| Textdateien / Text files | 1324 |
 | Beobachtbarer Zeitraum / Observable period | 2025-09-28..2026-09-20 |
 | Aktivtage / Active days | 75 |
-| Relevante Commits / Relevant commits | 230 |
-| Zeilen je Aktivtag / Lines per active day | 3178.5 |
+| Relevante Commits / Relevant commits | 235 |
+| Zeilen je Aktivtag / Lines per active day | 3197.1 |
 | Peak-Tag im Fenster / Peak day in window | 2026-08-30 / 79770 |
 | Peak-Woche im Fenster / Peak week in window | 2026-08-30 / 80706 |
 | Laengste Serie / Longest streak | 8 days |
-| Speedup vs. 80 lines/day | 39.7x |
-| Speedup vs. 100 lines/day | 31.8x |
-| Methodik / Methodology | v2; source `d888b327773d` |
+| Speedup vs. 80 lines/day | 40.0x |
+| Speedup vs. 100 lines/day | 32.0x |
+| Methodik / Methodology | v2; source `b7d14a6c0ac7` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [#...................]   0.0% | 89
-Tests                           [#...................]   3.1% | 7273
-Dokumentation / Documentation   [################....]  80.5% | 191907
-Skripte / Scripts               [###.................]  13.8% | 32880
+Tests                           [#...................]   3.2% | 7728
+Dokumentation / Documentation   [################....]  80.1% | 192123
+Skripte / Scripts               [###.................]  14.0% | 33603
 Konfiguration / Configuration   [#...................]   2.4% | 5786
 Daten und Medien / Data and media [....................]   0.0% | 0
 Sonstiger Text / Other text     [#...................]   0.2% | 454
@@ -329,8 +331,8 @@ Die festen Slots halten den Phasenvergleich auch bei fehlenden oder spaeter erga
 
 ```text
 Scale: 0..50x
-80 lines/day       [################....] 39.7x
-100 lines/day      [#############.......] 31.8x
+80 lines/day       [################....] 40.0x
+100 lines/day      [#############.......] 32.0x
 ```
 
 Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen Referenzen. Sie messen keine Arbeitszeit.
@@ -343,7 +345,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..5000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 100
-Visible repository [#############.......] 3178.5
+Visible repository [#############.......] 3197.1
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -369,6 +371,6 @@ DE: Das Fenster beginnt am 2025-09-28 und endet am 2026-09-20. Es enthaelt 75 ak
 | 2026-06 | 37448 |
 | 2026-07 | 110442 |
 | 2026-08 | 96264 |
-| 2026-09 | 59155 |
+| 2026-09 | 60619 |
 
 <!-- project-statistics-v2:end -->
