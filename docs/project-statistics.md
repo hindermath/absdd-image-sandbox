@@ -194,6 +194,19 @@ Arbeitstagen (80 Z./AT) bzw. 11 Arbeitstagen (100 Z./AT).
 files on one visible active day. Manually this would roughly equal 14 workdays
 (80 l/wd) or 11 workdays (100 l/wd).
 
+### 2026-09-20 - Prozessgebundenes Wartungsvertrauen / Process-scoped maintenance trust
+
+Home-Baseline-Pin auf `4459e744d126d51b832986b09ac1a73cf88c1607` für
+exakte Git-Freigaben je Wartungsprozess aktualisiert. Keine neue globale
+Git-Konfiguration, keine neuen Mounts oder Volumes. Documentation Impact:
+UpdateRequired; Wartungsnavigation und Sitzungsnachweis aktualisiert.
+Image-Build, SBOM und Aktivierung werden separat im Liefer-PR belegt.
+
+Updated the Home Baseline pin for exact process-scoped maintenance Git trust.
+No new global Git configuration, mounts or volumes. Documentation Impact:
+UpdateRequired; maintenance navigation and session evidence updated. Record
+image build, SBOM and activation separately in the delivery PR.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
