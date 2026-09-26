@@ -96,9 +96,10 @@ def main() -> int:
         if version_command not in smoke_text:
             failures.append(f"smoke test is missing: {version_command}")
 
+    # Actionlint release assets use Go's "amd64" name, not "x86_64".
     architecture_contracts = {
         "actionlint": (
-            r'amd64\) actionlint_arch="x86_64"; actionlint_sha256="[0-9a-f]{64}"',
+            r'amd64\) actionlint_arch="amd64"; actionlint_sha256="[0-9a-f]{64}"',
             r'arm64\) actionlint_arch="arm64"; actionlint_sha256="[0-9a-f]{64}"',
         ),
         ".NET compatibility SDK": (
