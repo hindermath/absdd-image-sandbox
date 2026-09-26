@@ -46,7 +46,14 @@ ARG DOTNET_COMPAT_SDK_VERSION=10.0.301
 
 USER root
 ENV POWERSHELL_TELEMETRY_OPTOUT=1
-RUN apt-get -y update \
+# Some Windows/Podman networks reject plain HTTP from containers. Keep the
+# Ubuntu repositories and signature verification unchanged, using TLS transport.
+RUN sed -i \
+        -e 's|http://archive.ubuntu.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' \
+        -e 's|http://security.ubuntu.com/ubuntu|https://security.ubuntu.com/ubuntu|g' \
+        -e 's|http://ports.ubuntu.com/ubuntu-ports|https://ports.ubuntu.com/ubuntu-ports|g' \
+        /etc/apt/sources.list.d/ubuntu.sources \
+    && apt-get -y update \
     && apt-get -y install --no-install-recommends \
         bubblewrap \
         build-essential \
