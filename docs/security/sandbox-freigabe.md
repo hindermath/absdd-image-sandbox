@@ -124,7 +124,7 @@ erweitern.
 | Spec Kit | `specify-cli` `v0.8.3` aus `github.com/github/spec-kit.git` |
 | Syft | `anchore/syft` `1.46.0`, SHA256-Pruefung im Image-Build |
 | uv / uvx | `0.11.16` aus GitHub-Release-Artefakt, SHA256-Pruefung im Image-Build |
-| home-baseline Level-0-Quelle | Commit-Pin (kein Release-Tag) `19dc97ceb0c413c12284077a7249d726f7bcc1c7`, MIT; Schema 2 in `home-baseline.lock.json` |
+| home-baseline Level-0-Quelle | Commit-Pin (kein Release-Tag) `8d070c046a31cd2337e3e69072b273b0f1f1b5f8`, MIT; Schema 2 in `home-baseline.lock.json`; Aktivierungsnachweis noch ausstehend |
 
 Am 20.09.2026 genehmigte der Owner ausdruecklich das Sandbox-Image-Update
 als Erweiterung des Wartungsauftrags. Es aktualisiert die eingebettete
@@ -150,6 +150,23 @@ container-delegation package from home-baseline PR #305 and its image pin in
 both repositories. Admin bypass does not replace technical gates. The
 reference remains a full commit pin; providers, models, mounts, volumes and
 the 2026-12-31 expiry are unchanged.*
+
+Am 26.09.2026 beauftragte der Owner die Einrichtung der fehlenden Windows-
+Sandbox, die anschliessende Wartung der 21 Secure-Trader-Ziele und die
+UTF-8-Verteilung. Er genehmigte ausdruecklich die Veroeffentlichung der
+Korrektur und den neuen Image-Pin sowie `MergeAndSync` mit Admin-Bypass fuer
+alle PRs dieses Auftrags. Technische Tests und Sandbox-Pruefungen bleiben
+verbindlich. Diese Erweiterung aendert weder Rollenfreigaben noch Provider,
+Modelle, Secrets, Sicherheitsgrenzen oder das Ablaufdatum. Der neue Pin ist
+deklarierter Zielstand, kein Nachweis eines erfolgreich aktivierten Images.
+
+*On 2026-09-26 the Owner explicitly authorized Windows sandbox setup, the
+subsequent maintenance of the 21 Secure Trader targets, UTF-8 distribution,
+publication of the correction and an updated image pin, with MergeAndSync
+and admin bypass for this task's PRs. Technical tests and sandbox validation
+remain mandatory. Roles, providers, models, secrets, security boundaries and
+approval expiry remain unchanged. The new pin is the declared target, not
+evidence of successful image activation.*
 
 Die Home Runtime wird nie automatisch angewendet. Der ausdrueckliche Wrapper
 `sync-home-baseline-runtime` kennt nur `--dry-run`, `--check-only` und
