@@ -132,7 +132,7 @@ RUN set -eux; \
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
-        amd64) actionlint_arch="x86_64"; actionlint_sha256="8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8" ;; \
+        amd64) actionlint_arch="amd64"; actionlint_sha256="8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8" ;; \
         arm64) actionlint_arch="arm64"; actionlint_sha256="325e971b6ba9bfa504672e29be93c24981eeb1c07576d730e9f7c8805afff0c6" ;; \
         *) echo "Unsupported actionlint architecture: ${arch}" >&2; exit 1 ;; \
     esac; \
