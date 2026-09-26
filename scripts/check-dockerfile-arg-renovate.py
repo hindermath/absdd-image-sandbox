@@ -98,7 +98,7 @@ def main() -> int:
 
     architecture_contracts = {
         "actionlint": (
-            r'amd64\) actionlint_arch="x86_64"; actionlint_sha256="[0-9a-f]{64}"',
+            r'amd64\) actionlint_arch="amd64"; actionlint_sha256="[0-9a-f]{64}"',
             r'arm64\) actionlint_arch="arm64"; actionlint_sha256="[0-9a-f]{64}"',
         ),
         ".NET compatibility SDK": (
