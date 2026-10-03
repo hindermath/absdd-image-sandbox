@@ -44,6 +44,15 @@ ARG ACTIONLINT_VERSION=1.7.12
 # renovate: datasource=dotnet-version depName=dotnet-sdk versioning=semver argName=DOTNET_COMPAT_SDK_VERSION
 ARG DOTNET_COMPAT_SDK_VERSION=10.0.301
 
+# renovate: datasource=github-releases depName=jgm/pandoc versioning=semver-coerced argName=PANDOC_VERSION
+ARG PANDOC_VERSION=3.12
+# renovate: datasource=github-releases depName=lycheeverse/lychee versioning=semver argName=LYCHEE_VERSION
+ARG LYCHEE_VERSION=0.24.2
+# renovate: datasource=github-releases depName=typst/typst versioning=semver argName=TYPST_VERSION
+ARG TYPST_VERSION=0.15.1
+# renovate: datasource=github-releases depName=Myriad-Dreamin/tinymist versioning=semver argName=TINYMIST_VERSION
+ARG TINYMIST_VERSION=0.15.8
+
 USER root
 ENV POWERSHELL_TELEMETRY_OPTOUT=1
 # Some Windows/Podman networks reject plain HTTP from containers. Keep the
@@ -61,6 +70,7 @@ RUN sed -i \
         curl \
         direnv \
         fd-find \
+        fonts-dejavu-core \
         git \
         git-delta \
         gnupg \
@@ -79,8 +89,8 @@ RUN sed -i \
         libz3-dev \
         maven \
         openjdk-${JAVA_VERSION}-jdk-headless \
-        pandoc \
         pkg-config \
+        poppler-utils \
         python-is-python3 \
         python3 \
         python3-venv \
@@ -89,6 +99,7 @@ RUN sed -i \
         shfmt \
         tree \
         wget \
+        xz-utils \
         yq \
     && mkdir -p /usr/share/keyrings \
     && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key -o /tmp/nodesource-repo.gpg.key \
@@ -106,6 +117,66 @@ RUN sed -i \
     && apt-get -y install --no-install-recommends nodejs \
     && ln -sf /usr/bin/fdfind /usr/local/bin/fd \
     && rm -rf /var/lib/apt/lists/*
+RUN set -eux; \
+    arch="$(dpkg --print-architecture)"; \
+    case "${arch}" in \
+        amd64) target="amd64"; checksum="67d7d011fed8c8543306022b985b9b2499ab9b74818df91d8727c7e9ebc5ba06" ;; \
+        arm64) target="arm64"; checksum="6cefcf7100e23a99447c26f89d1ff5b253f3407fcef99a9e27ae06f3ed16cb82" ;; \
+        *) echo "Unsupported pandoc architecture: ${arch}" >&2; exit 1 ;; \
+    esac; \
+    archive="pandoc-${PANDOC_VERSION}-linux-${target}.tar.gz"; \
+    tmp_dir="$(mktemp -d)"; \
+    curl -fsSL "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/${archive}" -o "${tmp_dir}/${archive}"; \
+    printf '%s  %s\n' "${checksum}" "${tmp_dir}/${archive}" | sha256sum -c -; \
+    tar -xzf "${tmp_dir}/${archive}" -C "${tmp_dir}"; \
+    install -m 0755 "${tmp_dir}/pandoc-${PANDOC_VERSION}/bin/pandoc" /usr/local/bin/pandoc; \
+    rm -rf "${tmp_dir}"; \
+    pandoc --version
+RUN set -eux; \
+    arch="$(dpkg --print-architecture)"; \
+    case "${arch}" in \
+        amd64) target="x86_64"; checksum="1f4e0ef7f6554a6ed33dd7ac144fb2e1bbed98598e7af973042fc5cd43951c9a" ;; \
+        arm64) target="aarch64"; checksum="91a7bd65685da41b90ccb9bc867a3d649a7818042dae04ff405e55a25bddee4c" ;; \
+        *) echo "Unsupported lychee architecture: ${arch}" >&2; exit 1 ;; \
+    esac; \
+    archive="lychee-${target}-unknown-linux-gnu.tar.gz"; \
+    tmp_dir="$(mktemp -d)"; \
+    curl -fsSL "https://github.com/lycheeverse/lychee/releases/download/lychee-v${LYCHEE_VERSION}/${archive}" -o "${tmp_dir}/${archive}"; \
+    printf '%s  %s\n' "${checksum}" "${tmp_dir}/${archive}" | sha256sum -c -; \
+    tar -xzf "${tmp_dir}/${archive}" -C "${tmp_dir}"; \
+    install -m 0755 "${tmp_dir}/lychee-${target}-unknown-linux-gnu/lychee" /usr/local/bin/lychee; \
+    rm -rf "${tmp_dir}"; \
+    lychee --version
+RUN set -eux; \
+    arch="$(dpkg --print-architecture)"; \
+    case "${arch}" in \
+        amd64) target="x86_64"; checksum="a6d077d0a95eed5a2eba715b2dae06be954f624ccbf85758a03f389ded33118c" ;; \
+        arm64) target="aarch64"; checksum="5aa8d74a3d906e60ea12a66ac2f37f8eef1b14cbad7182a745e393a10c23dcee" ;; \
+        *) echo "Unsupported typst architecture: ${arch}" >&2; exit 1 ;; \
+    esac; \
+    archive="typst-${target}-unknown-linux-musl.tar.xz"; \
+    tmp_dir="$(mktemp -d)"; \
+    curl -fsSL "https://github.com/typst/typst/releases/download/v${TYPST_VERSION}/${archive}" -o "${tmp_dir}/${archive}"; \
+    printf '%s  %s\n' "${checksum}" "${tmp_dir}/${archive}" | sha256sum -c -; \
+    tar -xJf "${tmp_dir}/${archive}" -C "${tmp_dir}"; \
+    install -m 0755 "${tmp_dir}/typst-${target}-unknown-linux-musl/typst" /usr/local/bin/typst; \
+    rm -rf "${tmp_dir}"; \
+    typst --version
+RUN set -eux; \
+    arch="$(dpkg --print-architecture)"; \
+    case "${arch}" in \
+        amd64) target="x86_64"; checksum="2428932e8d8b593ebc1ac4eed41fb9d3584166e1044bbcdef740b7296c348295" ;; \
+        arm64) target="aarch64"; checksum="ec78300e89b34e0958b615b1d42c275fd11bf91d2d27401bbef07150e477f199" ;; \
+        *) echo "Unsupported tinymist architecture: ${arch}" >&2; exit 1 ;; \
+    esac; \
+    archive="tinymist-${target}-unknown-linux-gnu.tar.gz"; \
+    tmp_dir="$(mktemp -d)"; \
+    curl -fsSL "https://github.com/Myriad-Dreamin/tinymist/releases/download/v${TINYMIST_VERSION}/${archive}" -o "${tmp_dir}/${archive}"; \
+    printf '%s  %s\n' "${checksum}" "${tmp_dir}/${archive}" | sha256sum -c -; \
+    tar -xzf "${tmp_dir}/${archive}" -C "${tmp_dir}"; \
+    install -m 0755 "${tmp_dir}/tinymist-${target}-unknown-linux-gnu/tinymist" /usr/local/bin/tinymist; \
+    rm -rf "${tmp_dir}"; \
+    tinymist --version
 # The SDK image's tool apphost can target a different architecture and precedes /usr/bin in PATH.
 RUN actual_version="$(pwsh -NoLogo -NoProfile -Command '$PSVersionTable.PSVersion.ToString()')" \
     && ps_home="$(pwsh -NoLogo -NoProfile -Command '$PSHOME')" \

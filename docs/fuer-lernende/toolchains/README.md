@@ -88,3 +88,42 @@ anschließend [Agenten und Spec Kit](../agenten-und-spec-kit.md).
 
 **EN:** Choose the guide for your language. For AI-assisted work, continue
 with [Agents and Spec Kit](../agenten-und-spec-kit.md).
+## Dokumentation als PDF / Documentation as PDF
+
+**DE:** Pandoc wandelt Markdown in Typst-Quelltext um. Typst setzt daraus das
+PDF. Lychee prueft Links; Tinymist stellt den Typst-Sprachserver fuer Editoren
+bereit. Alle vier CLIs sind im Image enthalten. Apple Silicon verwendet
+`linux/arm64`; Intel-/AMD-Windows und dessen Ubuntu/WSL2 verwenden
+`linux/amd64`. Podman waehlt die native Architektur ohne Rosetta-Voraussetzung.
+
+**EN:** Pandoc converts Markdown to Typst source, and Typst creates the PDF.
+Lychee checks links; Tinymist provides the Typst language server for editors.
+All four CLIs are included in the image. Apple Silicon uses `linux/arm64`;
+Intel/AMD Windows and its Ubuntu/WSL2 use `linux/amd64`. Podman selects the
+native architecture without requiring Rosetta.
+
+Im Container / Inside the container:
+
+```bash
+pandoc documentation.md --standalone --to=typst -o documentation.typ
+typst compile documentation.typ documentation.pdf
+```
+
+Separater Funktionstest vom Host / Standalone functional test from the host:
+
+```bash
+podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-documentation.sh
+```
+
+**DE:** Der Test prueft Versionen, lokale Links (auch einen erwarteten Fehler),
+Markdown-zu-PDF-Konvertierung, Seitenzahl und extrahierten Text. Er verwendet
+temporaere Dateien und keine externen Downloads. Der vollstaendige
+Toolchain-Smoke-Test fuehrt ihn ebenfalls aus. Das Ergebnis ist kein Nachweis
+der PDF-Barrierefreiheit. Tinymist ist ein CLI-Sprachserver; eine Editor-
+Erweiterung wird dadurch nicht automatisch installiert.
+
+**EN:** The test checks versions, local links (including an expected failure),
+Markdown-to-PDF conversion, page count, and extracted text. It uses temporary
+files and no external downloads. The full toolchain smoke test also runs it.
+The result does not prove PDF accessibility. Tinymist is a CLI language
+server; installing it does not automatically install an editor extension.

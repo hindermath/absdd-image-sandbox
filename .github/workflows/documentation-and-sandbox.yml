@@ -55,6 +55,7 @@ jobs:
           bash -n scripts/agent-prompt.sh
           bash -n scripts/codex-bwrap-wrapper.sh
           bash -n scripts/smoke-test-toolchains.sh
+          bash -n scripts/smoke-test-documentation.sh
           bash -n scripts/compose-down-with-audit.sh
           bash -n scripts/install-home-baseline-reference.sh
 

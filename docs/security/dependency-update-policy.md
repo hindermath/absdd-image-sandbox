@@ -1,6 +1,17 @@
 # Abhängigkeits-Update-Richtlinie / Dependency-Update-Policy
 
-Stand: 2026-07-10
+Stand: 2026-10-04
+
+Dokumentationswerkzeuge / Documentation tools: Pandoc, Lychee, Typst und
+Tinymist verwenden native AMD64-/ARM64-Releases mit fest hinterlegten
+SHA-256-Pruefsummen. Versionsupdates muessen die jeweiligen Pruefsummen
+gemeinsam aktualisieren und den Dokumentations-Smoke-Test bestehen.
+Lychee-Tags tragen das Praefix `lychee-v`; Renovate entfernt dieses Praefix
+vor dem Versionsvergleich.
+
+Pandoc, Lychee, Typst, and Tinymist use native AMD64/ARM64 releases with
+committed SHA-256 checksums. Version updates must update the matching
+checksums and pass the documentation smoke test.
 
 ## Deutsch
 
@@ -54,6 +65,10 @@ vorangestellte Metadatenzeile mit passendem `argName` hat.
 | `ANTIGRAVITY_CLI_VERSION` | `github-releases` | `google-antigravity/antigravity-cli` |
 | `COPILOT_CLI_VERSION` | `npm` | `@github/copilot` |
 | `SYFT_VERSION` | `github-releases` | `anchore/syft` |
+| `PANDOC_VERSION` | `github-releases` | `jgm/pandoc` |
+| `LYCHEE_VERSION` | `github-releases` | `lycheeverse/lychee` |
+| `TYPST_VERSION` | `github-releases` | `typst/typst` |
+| `TINYMIST_VERSION` | `github-releases` | `Myriad-Dreamin/tinymist` |
 
 `JAVA_VERSION` versioniert bewusst die Java-Major-Linie fuer das Ubuntu-APT-
 Paket `openjdk-${JAVA_VERSION}-jdk-headless`. Die konkrete Ubuntu-Patchversion
@@ -157,6 +172,10 @@ preceding metadata line with a matching `argName`.
 | `ANTIGRAVITY_CLI_VERSION` | `github-releases` | `google-antigravity/antigravity-cli` |
 | `COPILOT_CLI_VERSION` | `npm` | `@github/copilot` |
 | `SYFT_VERSION` | `github-releases` | `anchore/syft` |
+| `PANDOC_VERSION` | `github-releases` | `jgm/pandoc` |
+| `LYCHEE_VERSION` | `github-releases` | `lycheeverse/lychee` |
+| `TYPST_VERSION` | `github-releases` | `typst/typst` |
+| `TINYMIST_VERSION` | `github-releases` | `Myriad-Dreamin/tinymist` |
 
 `JAVA_VERSION` deliberately versions the Java major line for the Ubuntu APT
 package `openjdk-${JAVA_VERSION}-jdk-headless`. The concrete Ubuntu patch

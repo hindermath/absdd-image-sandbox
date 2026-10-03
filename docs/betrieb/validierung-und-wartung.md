@@ -299,3 +299,53 @@ bash scripts/scan-agent-secrets.sh --fail-on-high .
 Moegliche echte Secret-Funde werden ohne Trefferinhalt an einen Menschen
 eskaliert. / Possible real secret findings are escalated without recording
 match contents.
+## Dokumentation als PDF / Documentation as PDF
+
+**DE:** Ubuntu `pdfinfo` kann bei einem gueltigen Typst-PDF die Meldung
+`Syntax Error: Suspects object is wrong type (boolean)` ausgeben. Der
+[Upstream-Bericht](https://github.com/typst/typst/issues/7140) beschreibt einen
+Poppler-Prueffehler fuer `Suspects=false`. Der Smoke-Test unterdrueckt die
+Meldung nicht und prueft weiterhin Exitcodes, Seitenzahl und Textinhalt.
+
+**EN:** Ubuntu `pdfinfo` can emit the diagnostic above for a valid Typst PDF.
+The linked upstream report describes a Poppler check bug for `Suspects=false`.
+The smoke test keeps the diagnostic visible and still checks exit codes,
+page count, and text content.
+
+**DE:** Pandoc wandelt Markdown in Typst-Quelltext um. Typst setzt daraus das
+PDF. Lychee prueft Links; Tinymist stellt den Typst-Sprachserver fuer Editoren
+bereit. Alle vier CLIs sind im Image enthalten. Apple Silicon verwendet
+`linux/arm64`; Intel-/AMD-Windows und dessen Ubuntu/WSL2 verwenden
+`linux/amd64`. Podman waehlt die native Architektur ohne Rosetta-Voraussetzung.
+
+**EN:** Pandoc converts Markdown to Typst source, and Typst creates the PDF.
+Lychee checks links; Tinymist provides the Typst language server for editors.
+All four CLIs are included in the image. Apple Silicon uses `linux/arm64`;
+Intel/AMD Windows and its Ubuntu/WSL2 use `linux/amd64`. Podman selects the
+native architecture without requiring Rosetta.
+
+Im Container / Inside the container:
+
+```bash
+pandoc documentation.md --standalone --to=typst -o documentation.typ
+typst compile documentation.typ documentation.pdf
+```
+
+Separater Funktionstest vom Host / Standalone functional test from the host:
+
+```bash
+podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-documentation.sh
+```
+
+**DE:** Der Test prueft Versionen, lokale Links (auch einen erwarteten Fehler),
+Markdown-zu-PDF-Konvertierung, Seitenzahl und extrahierten Text. Er verwendet
+temporaere Dateien und keine externen Downloads. Der vollstaendige
+Toolchain-Smoke-Test fuehrt ihn ebenfalls aus. Das Ergebnis ist kein Nachweis
+der PDF-Barrierefreiheit. Tinymist ist ein CLI-Sprachserver; eine Editor-
+Erweiterung wird dadurch nicht automatisch installiert.
+
+**EN:** The test checks versions, local links (including an expected failure),
+Markdown-to-PDF conversion, page count, and extracted text. It uses temporary
+files and no external downloads. The full toolchain smoke test also runs it.
+The result does not prove PDF accessibility. Tinymist is a CLI language
+server; installing it does not automatically install an editor extension.
