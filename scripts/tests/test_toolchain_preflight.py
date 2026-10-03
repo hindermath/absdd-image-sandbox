@@ -11,7 +11,8 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "scripts" / "smoke-test-toolchains.sh"
-TOOLS = ("actionlint", "codex", "dotnet", "git", "jq", "pwsh", "yq")
+TOOLS = ("actionlint", "codex", "dotnet", "git", "jq", "pwsh", "yq",
+         "pandoc", "lychee", "typst", "tinymist")
 
 
 class ToolchainPreflightTests(unittest.TestCase):
@@ -66,6 +67,25 @@ class ToolchainPreflightTests(unittest.TestCase):
             document = json.loads(result.stdout)
             actionlint = next(item for item in document["tools"] if item["tool"] == "actionlint")
             self.assertEqual(actionlint["status"], "Missing")
+
+    def test_missing_documentation_tools_fail(self) -> None:
+        for tool in ("pandoc", "lychee", "typst", "tinymist"):
+            with self.subTest(tool=tool), tempfile.TemporaryDirectory() as directory:
+                result = self.run_preflight(self.make_path(Path(directory), omit=tool))
+                self.assertEqual(result.returncode, 1)
+                document = json.loads(result.stdout)
+                item = next(item for item in document["tools"] if item["tool"] == tool)
+                self.assertEqual(item["status"], "Missing")
+
+    def test_failed_documentation_version_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            fake_path = self.make_path(Path(directory))
+            (fake_path / "typst").write_text("#!/bin/sh\nexit 7\n", encoding="utf-8")
+            result = self.run_preflight(fake_path)
+            self.assertEqual(result.returncode, 1)
+            document = json.loads(result.stdout)
+            item = next(item for item in document["tools"] if item["tool"] == "typst")
+            self.assertEqual(item["status"], "Fail")
 
     def test_different_selected_sdk_fails_exact_repository_contract(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

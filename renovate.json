@@ -43,6 +43,10 @@
   ],
   "packageRules": [
     {
+      "matchPackageNames": ["lycheeverse/lychee"],
+      "extractVersion": "^lychee-v(?<version>.*)$"
+    },
+    {
       "matchManagers": [
         "custom.regex"
       ],

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
 json_mode=false
 repository=""
@@ -31,6 +32,10 @@ from pathlib import Path
 
 repository = Path(sys.argv[1]).resolve() if sys.argv[1] else None
 commands = {
+    "pandoc": ["pandoc", "--version"],
+    "lychee": ["lychee", "--version"],
+    "typst": ["typst", "--version"],
+    "tinymist": ["tinymist", "--version"],
     "actionlint": ["actionlint", "-version"],
     "bash": ["bash", "--version"],
     "codex": ["codex", "--version"],
@@ -213,5 +218,7 @@ mkdir -p "${swift_dir}"
   swift run SwiftSmoke
 )
 
+section "Documentation"
+bash "${script_dir}/smoke-test-documentation.sh"
 section "done"
 printf 'Toolchain smoke tests passed.\n'

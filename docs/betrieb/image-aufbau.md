@@ -47,6 +47,20 @@ by the Dockerfile.
 
 ## Toolchain-Schichten / Toolchain Layers
 
+**DE:** Pandoc, Lychee, Typst und Tinymist werden aus offiziellen Linux-Releases
+mit fest hinterlegten SHA-256-Pruefsummen installiert. Der Build waehlt anhand
+der Zielarchitektur ausschliesslich ARM64- oder AMD64-Binaries. Apple Silicon
+benoetigt fuer dieses Image keine Rosetta-Uebersetzung. DejaVu-Schriften und
+Poppler-Werkzeuge stammen aus Ubuntu APT; sie ermoeglichen die PDF-Erzeugung
+und die Inhaltspruefung im Dokumentations-Smoke-Test.
+
+**EN:** Pandoc, Lychee, Typst, and Tinymist are installed from official Linux
+releases with committed SHA-256 checksums. The build selects only ARM64 or
+AMD64 binaries matching the target architecture. This image does not require
+Rosetta translation on Apple Silicon. DejaVu fonts and Poppler tools come
+from Ubuntu APT and support PDF generation and content checks in the
+documentation smoke test.
+
 | Familie / Family | Installation und Kontrolle / Installation and control |
 |---|---|
 | .NET und PowerShell | gepinntes Basisimage plus hashgeprüftes Kompatibilitäts-SDK `10.0.301`; Build prüft die erwartete PowerShell-Version / pinned base image plus hash-verified compatibility SDK `10.0.301`; build checks expected PowerShell version |

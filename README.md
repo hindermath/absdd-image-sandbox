@@ -54,6 +54,7 @@ environment, not an application.
 | Antigravity CLI | Installiert; persistenter Zustand in `gemini_data` |
 | GitHub Copilot CLI | Installiert; persistenter Zustand in `copilot_data` |
 | Software-Bill-of-Materials | Syft ist installiert; `scripts/build-and-sbom.*` erzeugt die Image-SBOM |
+| Dokumentation / Documentation | Pandoc, Typst, Tinymist und Lychee; [PDF-Funktionstest / PDF functional test](#dokumentation-als-pdf--documentation-as-pdf) |
 | Arbeitsverzeichnis im Container | `/rider-projects` |
 
 ### Dokumentationspfade / Documentation Paths
@@ -860,3 +861,43 @@ führen vom neuen Lastenheft zum belegten Feature-Ergebnisbericht. / The linked
 rules explain accessible intake diagrams and evidence-based feature reports.
 <!-- END spec-kit-diagrams-completion -->
 Statistik-Pilot / Statistics pilot: [Installationsstand und Grenzen](docs/maintenance/project-statistics-installation-v010.md).
+
+## Dokumentation als PDF / Documentation as PDF
+
+**DE:** Pandoc wandelt Markdown in Typst-Quelltext um. Typst setzt daraus das
+PDF. Lychee prueft Links; Tinymist stellt den Typst-Sprachserver fuer Editoren
+bereit. Alle vier CLIs sind im Image enthalten. Apple Silicon verwendet
+`linux/arm64`; Intel-/AMD-Windows und dessen Ubuntu/WSL2 verwenden
+`linux/amd64`. Podman waehlt die native Architektur ohne Rosetta-Voraussetzung.
+
+**EN:** Pandoc converts Markdown to Typst source, and Typst creates the PDF.
+Lychee checks links; Tinymist provides the Typst language server for editors.
+All four CLIs are included in the image. Apple Silicon uses `linux/arm64`;
+Intel/AMD Windows and its Ubuntu/WSL2 use `linux/amd64`. Podman selects the
+native architecture without requiring Rosetta.
+
+Im Container / Inside the container:
+
+```bash
+pandoc documentation.md --standalone --to=typst -o documentation.typ
+typst compile documentation.typ documentation.pdf
+```
+
+Separater Funktionstest vom Host / Standalone functional test from the host:
+
+```bash
+podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-documentation.sh
+```
+
+**DE:** Der Test prueft Versionen, lokale Links (auch einen erwarteten Fehler),
+Markdown-zu-PDF-Konvertierung, Seitenzahl und extrahierten Text. Er verwendet
+temporaere Dateien und keine externen Downloads. Der vollstaendige
+Toolchain-Smoke-Test fuehrt ihn ebenfalls aus. Das Ergebnis ist kein Nachweis
+der PDF-Barrierefreiheit. Tinymist ist ein CLI-Sprachserver; eine Editor-
+Erweiterung wird dadurch nicht automatisch installiert.
+
+**EN:** The test checks versions, local links (including an expected failure),
+Markdown-to-PDF conversion, page count, and extracted text. It uses temporary
+files and no external downloads. The full toolchain smoke test also runs it.
+The result does not prove PDF accessibility. Tinymist is a CLI language
+server; installing it does not automatically install an editor extension.
