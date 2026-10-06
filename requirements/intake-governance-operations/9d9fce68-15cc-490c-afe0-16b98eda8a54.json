@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "2.0",
+  "documentType": "IntakeGovernanceMigrationJournal",
+  "operationId": "9d9fce68-15cc-490c-afe0-16b98eda8a54",
+  "state": "Completed",
+  "authorityEvidence": "Explicit user request on 2026-10-06 to correct the identified archive/lifecycle repair and current SandboxBaseline handoff; local only, no execution or remote delivery.",
+  "beforeSha256": "8813d2135a092671ccb373cd9273f44fe8ec3ceabab3eaa35f44e617cf2d15c4",
+  "afterSha256": "66f190a12d3e602681dcc4bb255263a3932631c3c79112fed4f195dc07bc420e",
+  "moves": [
+    "Canonical completed target: Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md -> specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md; old bytes retained for historical feature input bindings"
+  ],
+  "updatedReferences": [
+    "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+    "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "specs/intake-review-results/sandbox-development-lifecycle.json",
+    "Pflichtenheft.md",
+    "Lastenheft_Abarbeitungsreihenfolge.md",
+    "specs/intake-series/sandbox-development-lifecycle/order.md",
+    "specs/intake-review-reports/sandbox-development-lifecycle.md"
+  ],
+  "validation": [
+    "Bash and PowerShell configuration Aligned; manifest/receipt/authoring validators Passed; renderers Current.",
+    "Independent review confirms bounded archive repair and technical handoff; full-series NeedsRemediation IR002-IR004."
+  ],
+  "rollback": "Restore manifest/receipt and authoring/review snapshots from the operation archive; remove only newly published paths; historical root intake remains untouched.",
+  "repairBoundary": "Bounded archive/handoff repair completed; existing content findings IR002-IR004 remain Open. No series advancement or execution."
+}

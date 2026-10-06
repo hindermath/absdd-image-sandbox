@@ -1,21 +1,21 @@
 {
   "schemaVersion": "1.1",
-  "reviewId": "6403c657-e508-4029-bfe8-319436f3fa7a",
+  "reviewId": "09c4714d-57da-4df5-99fb-a72bf0659847",
   "mode": "Series",
-  "status": "Ready",
+  "status": "NeedsRemediation",
   "policy": "learner-a11y-bilingual-series",
-  "reviewedAt": "2026-07-26T18:59:07Z",
+  "reviewedAt": "2026-10-06T12:54:57Z",
   "repository": {
     "root": ".",
-    "head": "e1d55748c8e8a080f1136a1f61bcf11193794b40"
+    "head": "5deacc910227bb19684c335030c26ac5a075f9a0"
   },
   "requestEvidence": {
     "path": "specs/intake-review-requests/sandbox-development-lifecycle.json",
-    "normalizedSha256": "dbca42e80160002c5dc5f5808a45d08782f89df7a84ebf071f79f7564fd51195"
+    "normalizedSha256": "68a58361219e722b683654466d54aea611f372196274349cc74072c2e5f0aded"
   },
   "targets": [
     {
-      "path": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
       "role": "Primary",
       "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a",
       "gitBlob": "N/A"
@@ -39,13 +39,44 @@
       "gitBlob": "6238b85d8c03338a0e67fa92a1de56f1e3dc6c4c"
     }
   ],
-  "findings": [],
+  "findings": [
+    {
+      "target": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "reevaluationTrigger": "After separately authorized content repair and before execution or series advancement.",
+      "disposition": "Open",
+      "id": "IR002",
+      "evidence": "Dependencies DE/EN describe completed GSDB as blocker rather than fulfilled prerequisite; independent review SBR-002.",
+      "owner": "Repository Maintainer",
+      "severity": "Medium",
+      "category": "DependencyConsistency"
+    },
+    {
+      "target": "Lastenheft_Secure-Development-Container-Hardening.md; Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "reevaluationTrigger": "After separately authorized content repair and before execution or series advancement.",
+      "disposition": "Open",
+      "id": "IR003",
+      "evidence": "Core scope/requirements/acceptance lists lack English counterparts and first-use terminology explanations; independent review SBR-003.",
+      "owner": "Repository Maintainer",
+      "severity": "Medium",
+      "category": "LearnerBilingualClarity"
+    },
+    {
+      "target": "intakes/learner-fork-self-build-sandbox.md",
+      "reevaluationTrigger": "After separately authorized content repair and before execution or series advancement.",
+      "disposition": "Open",
+      "id": "IR004",
+      "evidence": "Audience omits IT systems electronics technician apprentices; independent review SBR-004.",
+      "owner": "Repository Maintainer",
+      "severity": "Low",
+      "category": "AudienceCompleteness"
+    }
+  ],
   "questions": [],
   "acceptedRisks": [],
   "operatorExceptions": [],
   "coverage": {
     "individual": [
-      "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
       "Lastenheft_Secure-Development-Container-Hardening.md",
       "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
       "intakes/learner-fork-self-build-sandbox.md"
@@ -56,10 +87,10 @@
     "workers": []
   },
   "summary": {
-    "critical": 0,
+    "low": 1,
+    "medium": 2,
     "high": 0,
-    "medium": 0,
-    "low": 0
+    "critical": 0
   },
-  "supersedes": "N/A"
+  "supersedes": "specs/intake-review-archive/6403c657-e508-4029-bfe8-319436f3fa7a/9d9fce68-15cc-490c-afe0-16b98eda8a54/result.json"
 }

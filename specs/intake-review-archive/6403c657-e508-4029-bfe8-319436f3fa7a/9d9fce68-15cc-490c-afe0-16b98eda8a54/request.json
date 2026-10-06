@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.1",
-  "reviewId": "09c4714d-57da-4df5-99fb-a72bf0659847",
+  "reviewId": "6403c657-e508-4029-bfe8-319436f3fa7a",
   "mode": "Series",
   "policy": "learner-a11y-bilingual-series",
   "targets": [
     {
-      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "path": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
       "role": "Primary"
     },
     {
@@ -23,17 +23,17 @@
   ],
   "series": {
     "orderedTargetPaths": [
-      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
       "Lastenheft_Secure-Development-Container-Hardening.md",
       "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
       "intakes/learner-fork-self-build-sandbox.md"
     ],
     "roots": [
-      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+      "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
     ],
     "dependencies": [
       {
-        "from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+        "from": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
         "to": "Lastenheft_Secure-Development-Container-Hardening.md",
         "kind": "AssessmentBaseline"
       },

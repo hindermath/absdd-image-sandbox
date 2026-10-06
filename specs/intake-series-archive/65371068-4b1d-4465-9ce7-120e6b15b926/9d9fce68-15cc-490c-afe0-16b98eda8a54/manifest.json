@@ -7,7 +7,7 @@
   "status": "Active",
   "orderedTargets": [
     {
-      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "path": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
       "role": "Primary",
       "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a",
       "status": "Completed"
@@ -32,11 +32,11 @@
     }
   ],
   "roots": [
-    "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+    "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
   ],
   "dependencies": [
     {
-      "from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "from": "Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
       "to": "Lastenheft_Secure-Development-Container-Hardening.md",
       "kind": "AssessmentBaseline",
       "binding": true
