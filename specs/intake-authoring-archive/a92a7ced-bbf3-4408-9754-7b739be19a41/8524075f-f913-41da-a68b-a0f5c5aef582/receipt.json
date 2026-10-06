@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "2.0",
+  "documentType": "IntakeReceipt",
+  "receiptId": "1b911efb-4274-4a48-adb6-c93f615c5e59",
+  "intakeId": "a92a7ced-bbf3-4408-9754-7b739be19a41",
+  "generator": {
+    "preset": "intake-authoring-governance",
+    "version": "0.2.1"
+  },
+  "createdAt": "2026-07-26T18:59:07Z",
+  "operation": {
+    "operationId": "e92a22c4-010d-4123-845b-64fba52eac8a",
+    "type": "Update",
+    "authorityEvidence": "Explicit user request to implement the approved complete reordering"
+  },
+  "status": "ReadyForReview",
+  "target": {
+    "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+    "normalizedSha256": "72c263db933ea5a10ca60f3a7cc41231b43e1aec5d0dd641129e1a523b3432dc"
+  },
+  "sources": [
+    {
+      "sourceId": "SRC001",
+      "order": 1,
+      "kind": "Pasted",
+      "label": "Legacy secure-development container hardening intake before preset adoption",
+      "location": "SnapshotOnly",
+      "path": "N/A",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "69288c93155e29639376514529ad398b44490d4302418cee65c9ab7f16c3d741",
+      "gitBlob": "7dce8ad0fe32bee0f7d2fa3fb79a2f02eeed2849",
+      "proofBoundary": "SnapshotOnly"
+    }
+  ],
+  "profile": "learner-a11y-bilingual",
+  "languagePolicy": "GermanFirstEnglishSecondCEFRB2",
+  "decisions": [],
+  "openDecisionIds": [],
+  "questionCount": 0,
+  "agentSurface": {
+    "specifyCanonicalId": "speckit.specify",
+    "specifyInvocation": "$speckit-specify",
+    "autonomousCanonicalId": "speckit.autonomous",
+    "autonomousInvocation": "$speckit-autonomous"
+  },
+  "deliveryAuthority": "LocalImplementation",
+  "authorityEvidence": "No remote delivery authority was granted for this implementation",
+  "promptState": "Enabled",
+  "provenanceMode": "LegacyAdoption",
+  "supersedes": {
+    "receiptPath": "N/A",
+    "targetNormalizedSha256": "N/A",
+    "archiveTargetPath": "N/A",
+    "archiveReceiptPath": "N/A"
+  },
+  "legacyAdoption": {
+    "evidenceType": "GitBlob",
+    "priorTargetNormalizedSha256": "69288c93155e29639376514529ad398b44490d4302418cee65c9ab7f16c3d741",
+    "priorGitBlob": "7dce8ad0fe32bee0f7d2fa3fb79a2f02eeed2849"
+  },
+  "updateAuthorized": true,
+  "updateAuthorityEvidence": "Explicit user approval of complete reordering on 2026-07-26",
+  "series": {
+    "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+    "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "order": 2,
+    "role": "Technical hardening",
+    "supersedesIntakeIds": []
+  },
+  "nextAction": "$speckit-intake-review Lastenheft_Secure-Development-Container-Hardening.md"
+}

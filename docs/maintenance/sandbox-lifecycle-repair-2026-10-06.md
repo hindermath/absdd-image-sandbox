@@ -1,5 +1,13 @@
 # Lifecycle-Reparatur und Uebergabe / Lifecycle Repair and Handoff
 
+DE: Dieser Bericht bewahrt das Ergebnis der Archiv-/Uebergabe-Reparatur.
+Die danach beauftragte Korrektur von IR002 bis IR004 und ihr aktuelles
+Vollreview stehen im [Inhaltskorrekturbericht](intake-content-repair-2026-10-06.md).
+
+EN: This report preserves the archive/handoff repair outcome. The subsequently
+authorized correction of IR002-IR004 and its current full review are recorded
+in the linked content-repair report.
+
 ## Auftrag und Ergebnis / Request and Result
 
 DE: Der Owner beauftragte am 2026-10-06 ausdruecklich die Korrektur von

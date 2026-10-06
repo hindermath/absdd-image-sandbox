@@ -1,86 +1,44 @@
 {
   "schemaVersion": "2.0",
   "documentType": "IntakeReceipt",
-  "receiptId": "8a20065e-8e7b-49d9-861e-893a660a681a",
+  "receiptId": "480f8745-b525-472f-a432-8d0da0b6d498",
   "intakeId": "5926e53e-39b7-475f-8a6b-e2ec08b0a803",
   "generator": {
     "preset": "intake-authoring-governance",
     "version": "0.2.1"
   },
-  "createdAt": "2026-10-06T17:24:26Z",
+  "createdAt": "2026-07-26T18:59:07Z",
   "operation": {
+    "operationId": "f0627d83-8f7a-4260-b76c-c97edb573cb0",
     "type": "Update",
-    "authorityEvidence": "Explicit owner request on 2026-10-06, annotations 1 and 2: explain and correct IR002-IR004 and repeat full intake review. Local only; no execution, advancement or remote delivery.",
-    "operationId": "8524075f-f913-41da-a68b-a0f5c5aef582"
+    "authorityEvidence": "Explicit user request to implement the approved four-stage intake series"
   },
   "status": "ReadyForReview",
   "target": {
     "path": "intakes/learner-fork-self-build-sandbox.md",
-    "normalizedSha256": "51cb88654f99e2b1692e3086c23298f454f362b5872afb676d6594d5cc4c3eb0"
+    "normalizedSha256": "6e17c637283212954857e82b53b2eeb11fd44a3c3d9996bb677ad991064d8293"
   },
   "sources": [
     {
-      "contentLength": "N/A",
-      "location": "Repository",
-      "lastModified": "N/A",
       "sourceId": "SRC001",
-      "path": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/8524075f-f913-41da-a68b-a0f5c5aef582/target.md",
-      "etag": "N/A",
       "order": 1,
-      "label": "Previous intake; first binding source",
-      "gitBlob": "N/A",
-      "httpStatus": "N/A",
-      "proofBoundary": "RepositoryFile",
+      "kind": "Pasted",
+      "label": "Previously reviewed forkable self-build sandbox intake",
+      "location": "SnapshotOnly",
+      "path": "N/A",
       "requestedUrl": "N/A",
-      "kind": "File",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
       "normalizedSha256": "6e17c637283212954857e82b53b2eeb11fd44a3c3d9996bb677ad991064d8293",
-      "rawSha256": "N/A",
-      "contentType": "N/A",
-      "finalUrl": "N/A",
-      "retrievedAt": "N/A",
-      "redirectChain": []
-    },
-    {
-      "contentLength": "N/A",
-      "location": "Repository",
-      "lastModified": "N/A",
-      "sourceId": "SRC002",
-      "path": "specs/intake-review-archive/09c4714d-57da-4df5-99fb-a72bf0659847/8524075f-f913-41da-a68b-a0f5c5aef582/report.md",
-      "etag": "N/A",
-      "order": 2,
-      "label": "IR002-IR004 review findings; explicitly authorized correction",
-      "gitBlob": "N/A",
-      "httpStatus": "N/A",
-      "proofBoundary": "RepositoryFile",
-      "requestedUrl": "N/A",
-      "kind": "File",
-      "normalizedSha256": "97d2b717fad81499bc8421f7d85963bab492ed70274bcc5a39c481f033d1e7b0",
-      "rawSha256": "N/A",
-      "contentType": "N/A",
-      "finalUrl": "N/A",
-      "retrievedAt": "N/A",
-      "redirectChain": []
-    },
-    {
-      "contentLength": "N/A",
-      "location": "Repository",
-      "lastModified": "N/A",
-      "sourceId": "SRC003",
-      "path": "AGENTS.md",
-      "etag": "N/A",
-      "order": 3,
-      "label": "Binding learner and bilingual baseline; no new policy",
-      "gitBlob": "N/A",
-      "httpStatus": "N/A",
-      "proofBoundary": "RepositoryFile",
-      "requestedUrl": "N/A",
-      "kind": "File",
-      "normalizedSha256": "c9bc1634b4938748964c480b3259ed47d0649c9329a2947e344ba4ca968b1ec3",
-      "rawSha256": "N/A",
-      "contentType": "N/A",
-      "finalUrl": "N/A",
-      "retrievedAt": "N/A",
-      "redirectChain": []
+      "gitBlob": "6238b85d8c03338a0e67fa92a1de56f1e3dc6c4c",
+      "proofBoundary": "SnapshotOnly"
     }
   ],
   "profile": "learner-a11y-bilingual",
@@ -128,18 +86,18 @@
   "promptState": "Enabled",
   "provenanceMode": "Supersession",
   "supersedes": {
+    "receiptPath": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/f0627d83-8f7a-4260-b76c-c97edb573cb0/receipt.json",
     "targetNormalizedSha256": "6e17c637283212954857e82b53b2eeb11fd44a3c3d9996bb677ad991064d8293",
-    "archiveReceiptPath": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/8524075f-f913-41da-a68b-a0f5c5aef582/receipt.json",
-    "archiveTargetPath": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/8524075f-f913-41da-a68b-a0f5c5aef582/target.md",
-    "receiptPath": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/8524075f-f913-41da-a68b-a0f5c5aef582/receipt.json"
+    "archiveTargetPath": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/f0627d83-8f7a-4260-b76c-c97edb573cb0/target.md",
+    "archiveReceiptPath": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/f0627d83-8f7a-4260-b76c-c97edb573cb0/receipt.json"
   },
   "legacyAdoption": {
+    "evidenceType": "N/A",
     "priorTargetNormalizedSha256": "N/A",
-    "priorGitBlob": "N/A",
-    "evidenceType": "N/A"
+    "priorGitBlob": "N/A"
   },
   "updateAuthorized": true,
-  "updateAuthorityEvidence": "Explicit owner request on 2026-10-06, annotations 1 and 2: explain and correct IR002-IR004 and repeat full intake review. Local only; no execution, advancement or remote delivery.",
+  "updateAuthorityEvidence": "Explicit user approval of the four-stage intake series on 2026-07-26",
   "series": {
     "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
     "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json",

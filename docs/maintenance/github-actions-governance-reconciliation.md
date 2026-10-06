@@ -1,5 +1,14 @@
 # GitHub-Actions-Governance-Abgleich / GitHub Actions Governance Reconciliation
 
+DE: Die anschliessende [Inhaltskorrektur](intake-content-repair-2026-10-06.md)
+bearbeitet IR002 bis IR004; fuer den aktuellen Intake-Status ist ihr
+Nachfolgereview massgeblich, nicht das unten beschriebene fruehere Ergebnis.
+Keine Ausfuehrung oder Reihenfortschreibung wird dadurch autorisiert.
+
+EN: The subsequent content repair addresses IR002 through IR004. Its successor
+review governs current intake status, not the earlier outcome below. It does
+not authorize execution or series advancement.
+
 DE: Nachfolgereparatur vom 2026-10-06: `GOV-REV-001/RIG017` ist durch die
 kanonische Archivbindung behoben; `GOV-CI-001` durch die datierte technische
 [SandboxBaseline-Uebergabe](sandbox-baseline-handoff-2026-10-06.md) erfuellt.
@@ -155,16 +164,16 @@ DE: Das separate Agent-Review wird im
 [Reviewbericht](github-actions-governance-review.md) dokumentiert. Es ist ein
 semantischer Zusatzabgleich, kein Ersatz der bestehenden Intake-Review-Results
 und keine menschliche Abnahme. Das nachfolgende Reparatur-Review ist im
-Reparaturbericht gebunden. Das neue Vollreview bleibt wegen drei bestehenden
-Inhaltsbefunden NeedsRemediation. Naechster Aenderungsschritt ist ein
-gesonderter Inhaltskorrekturauftrag fuer IR002 bis IR004; Statuspruefungen
-bleiben read-only. Reihenfortschreibung und neuer Abnahmelauf sind nicht freigegeben.
+Reparaturbericht gebunden. Das damalige Vollreview meldete drei Inhaltsbefunde;
+ihre anschliessend autorisierte Korrektur und das aktuelle Nachfolgereview
+stehen im oben verlinkten Inhaltskorrekturbericht. Statuspruefungen bleiben
+read-only; Reihenfortschreibung und neuer Abnahmelauf sind nicht freigegeben.
 Kein Spec-Kit-Lauf startet hier.
 
 EN: The separate agent review is recorded in the linked report. It is a
 supplemental semantic reconciliation, not a replacement intake-review result
 or human acceptance. The follow-up repair review is bound in the repair report.
-The new full review remains NeedsRemediation due to three existing content
-findings. The next change requires a separate content-repair mandate for
-IR002 through IR004; status checks remain read-only. Advancement and a new
-acceptance run are not authorized. No execution starts here.
+That review identified three content findings; the authorized correction and
+current successor review are recorded in the content-repair report above.
+Status checks remain read-only. Advancement and a new acceptance run are not
+authorized. No execution starts here.

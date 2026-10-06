@@ -1,44 +1,86 @@
 {
   "schemaVersion": "2.0",
   "documentType": "IntakeReceipt",
-  "receiptId": "1b911efb-4274-4a48-adb6-c93f615c5e59",
+  "receiptId": "bfcb3f7c-26e0-4b9f-8e7d-98b21a1e4045",
   "intakeId": "a92a7ced-bbf3-4408-9754-7b739be19a41",
   "generator": {
     "preset": "intake-authoring-governance",
     "version": "0.2.1"
   },
-  "createdAt": "2026-07-26T18:59:07Z",
+  "createdAt": "2026-10-06T17:24:26Z",
   "operation": {
-    "operationId": "e92a22c4-010d-4123-845b-64fba52eac8a",
     "type": "Update",
-    "authorityEvidence": "Explicit user request to implement the approved complete reordering"
+    "authorityEvidence": "Explicit owner request on 2026-10-06, annotations 1 and 2: explain and correct IR002-IR004 and repeat full intake review. Local only; no execution, advancement or remote delivery.",
+    "operationId": "8524075f-f913-41da-a68b-a0f5c5aef582"
   },
   "status": "ReadyForReview",
   "target": {
     "path": "Lastenheft_Secure-Development-Container-Hardening.md",
-    "normalizedSha256": "72c263db933ea5a10ca60f3a7cc41231b43e1aec5d0dd641129e1a523b3432dc"
+    "normalizedSha256": "9daa986c18bc12607a8f98f9959c920563b584d6e150996472fabcfed80e961f"
   },
   "sources": [
     {
+      "contentLength": "N/A",
+      "location": "Repository",
+      "lastModified": "N/A",
       "sourceId": "SRC001",
+      "path": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/8524075f-f913-41da-a68b-a0f5c5aef582/target.md",
+      "etag": "N/A",
       "order": 1,
-      "kind": "Pasted",
-      "label": "Legacy secure-development container hardening intake before preset adoption",
-      "location": "SnapshotOnly",
-      "path": "N/A",
+      "label": "Previous intake; first binding source",
+      "gitBlob": "N/A",
+      "httpStatus": "N/A",
+      "proofBoundary": "RepositoryFile",
       "requestedUrl": "N/A",
+      "kind": "File",
+      "normalizedSha256": "72c263db933ea5a10ca60f3a7cc41231b43e1aec5d0dd641129e1a523b3432dc",
+      "rawSha256": "N/A",
+      "contentType": "N/A",
       "finalUrl": "N/A",
       "retrievedAt": "N/A",
-      "httpStatus": "N/A",
-      "contentType": "N/A",
+      "redirectChain": []
+    },
+    {
       "contentLength": "N/A",
-      "etag": "N/A",
+      "location": "Repository",
       "lastModified": "N/A",
-      "redirectChain": [],
+      "sourceId": "SRC002",
+      "path": "specs/intake-review-archive/09c4714d-57da-4df5-99fb-a72bf0659847/8524075f-f913-41da-a68b-a0f5c5aef582/report.md",
+      "etag": "N/A",
+      "order": 2,
+      "label": "IR002-IR004 review findings; explicitly authorized correction",
+      "gitBlob": "N/A",
+      "httpStatus": "N/A",
+      "proofBoundary": "RepositoryFile",
+      "requestedUrl": "N/A",
+      "kind": "File",
+      "normalizedSha256": "97d2b717fad81499bc8421f7d85963bab492ed70274bcc5a39c481f033d1e7b0",
       "rawSha256": "N/A",
-      "normalizedSha256": "69288c93155e29639376514529ad398b44490d4302418cee65c9ab7f16c3d741",
-      "gitBlob": "7dce8ad0fe32bee0f7d2fa3fb79a2f02eeed2849",
-      "proofBoundary": "SnapshotOnly"
+      "contentType": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "redirectChain": []
+    },
+    {
+      "contentLength": "N/A",
+      "location": "Repository",
+      "lastModified": "N/A",
+      "sourceId": "SRC003",
+      "path": "AGENTS.md",
+      "etag": "N/A",
+      "order": 3,
+      "label": "Binding learner and bilingual baseline; no new policy",
+      "gitBlob": "N/A",
+      "httpStatus": "N/A",
+      "proofBoundary": "RepositoryFile",
+      "requestedUrl": "N/A",
+      "kind": "File",
+      "normalizedSha256": "c9bc1634b4938748964c480b3259ed47d0649c9329a2947e344ba4ca968b1ec3",
+      "rawSha256": "N/A",
+      "contentType": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "redirectChain": []
     }
   ],
   "profile": "learner-a11y-bilingual",
@@ -55,20 +97,20 @@
   "deliveryAuthority": "LocalImplementation",
   "authorityEvidence": "No remote delivery authority was granted for this implementation",
   "promptState": "Enabled",
-  "provenanceMode": "LegacyAdoption",
+  "provenanceMode": "Supersession",
   "supersedes": {
-    "receiptPath": "N/A",
-    "targetNormalizedSha256": "N/A",
-    "archiveTargetPath": "N/A",
-    "archiveReceiptPath": "N/A"
+    "targetNormalizedSha256": "72c263db933ea5a10ca60f3a7cc41231b43e1aec5d0dd641129e1a523b3432dc",
+    "archiveReceiptPath": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/8524075f-f913-41da-a68b-a0f5c5aef582/receipt.json",
+    "archiveTargetPath": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/8524075f-f913-41da-a68b-a0f5c5aef582/target.md",
+    "receiptPath": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/8524075f-f913-41da-a68b-a0f5c5aef582/receipt.json"
   },
   "legacyAdoption": {
-    "evidenceType": "GitBlob",
-    "priorTargetNormalizedSha256": "69288c93155e29639376514529ad398b44490d4302418cee65c9ab7f16c3d741",
-    "priorGitBlob": "7dce8ad0fe32bee0f7d2fa3fb79a2f02eeed2849"
+    "priorTargetNormalizedSha256": "N/A",
+    "priorGitBlob": "N/A",
+    "evidenceType": "N/A"
   },
   "updateAuthorized": true,
-  "updateAuthorityEvidence": "Explicit user approval of complete reordering on 2026-07-26",
+  "updateAuthorityEvidence": "Explicit owner request on 2026-10-06, annotations 1 and 2: explain and correct IR002-IR004 and repeat full intake review. Local only; no execution, advancement or remote delivery.",
   "series": {
     "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
     "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
