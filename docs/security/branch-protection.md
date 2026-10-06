@@ -1,6 +1,7 @@
 # Zweig-Schutz und signierte Commits / Branch Protection and Signed Commits
 
-Stand: 2026-07-03
+Historischer Stand / Historical snapshot: 2026-07-03.
+Aktueller Required-Check-Abgleich / Current required-check reconciliation: 2026-10-06.
 
 ## Deutsch
 
@@ -18,6 +19,23 @@ Owner-/Admin-Aufgaben und den am 2026-07-03 aktivierten GitHub-Ruleset fuer
 - Repository-Sichtbarkeit: `PUBLIC`, gesetzt am 2026-07-03.
 - GitHub-Ruleset `main` ist aktiv: Ruleset-ID `18493733`.
 - `main` ist durch das Ruleset geschuetzt: `protected=true`.
+
+### Required Checks: Abgleich vom 2026-10-06
+
+Die read-only API-Pruefung von Ruleset `18493733` bestaetigt `active` und
+die verpflichtenden Checks `Agent Secret Scan (ubuntu-22.04)`,
+`Agent Secret Scan (macos-15)` und `Agent Secret Scan (windows-2022)` mit
+`integration_id=15368` und strikter Required-Check-Pruefung. Der bestehende
+Owner-/Admin-Bypass bleibt `RepositoryRole`, `actor_id=5`, `bypass_mode=always`.
+In dieser Sitzung wurde keine Plattformregel geaendert.
+
+[PR #90](https://github.com/hindermath/absdd-image-sandbox/pull/90) lieferte den
+Runnerwechsel mit neun erfolgreichen Checks auf Head
+`4521c9623a12b54ca984a0b7c47ad42bcc69148e`.
+Die nachfolgende Juli-Tabelle bleibt ein historischer Nachweis; ihr
+`macos-14`-Checkname ist nicht der aktuelle Sollwert.
+Der [Governance-Abgleich](../maintenance/github-actions-governance-reconciliation.md)
+trennt CI-Evidenz, Intake-Aktualitaet und Ausfuehrungsautoritaet.
 
 ### Zielzustand fuer `main`
 
@@ -119,6 +137,23 @@ owner/admin tasks and the GitHub ruleset for `main` activated on 2026-07-03.
 - Repository visibility: `PUBLIC`, set on 2026-07-03.
 - GitHub ruleset `main` is active: ruleset ID `18493733`.
 - `main` is protected by the ruleset: `protected=true`.
+
+### Required Checks: Reconciliation On 2026-10-06
+
+Read-only API inspection of ruleset `18493733` confirms `active` and required
+checks `Agent Secret Scan (ubuntu-22.04)`, `Agent Secret Scan (macos-15)` and
+`Agent Secret Scan (windows-2022)`, with `integration_id=15368` and strict
+required-check enforcement. The existing owner/admin bypass remains
+`RepositoryRole`, `actor_id=5`, `bypass_mode=always`. No platform rule was
+changed in this session.
+
+[PR #90](https://github.com/hindermath/absdd-image-sandbox/pull/90) delivered the
+runner migration with nine successful checks on head
+`4521c9623a12b54ca984a0b7c47ad42bcc69148e`.
+The July table below remains historical evidence; its `macos-14` check name
+is not the current target. The
+[governance reconciliation](../maintenance/github-actions-governance-reconciliation.md)
+separates CI evidence, intake currency and execution authority.
 
 ### Target State For `main`
 

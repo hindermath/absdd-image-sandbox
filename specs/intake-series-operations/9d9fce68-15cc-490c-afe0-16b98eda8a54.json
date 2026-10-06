@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesOperation",
+  "operationId": "9d9fce68-15cc-490c-afe0-16b98eda8a54",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "type": "Update",
+  "status": "Completed",
+  "authorityEvidence": "Explicit owner request on 2026-10-06 to correct archive/lifecycle bindings and current SandboxBaseline handoff. Local repair only; no advancement, execution or delivery.",
+  "proposalNormalizedSha256": "66f190a12d3e602681dcc4bb255263a3932631c3c79112fed4f195dc07bc420e",
+  "preparedPaths": [
+    "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+    "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "specs/intake-review-results/sandbox-development-lifecycle.json",
+    "Pflichtenheft.md",
+    "Lastenheft_Abarbeitungsreihenfolge.md",
+    "specs/intake-series/sandbox-development-lifecycle/order.md",
+    "docs/maintenance/sandbox-baseline-handoff-2026-10-06.md"
+  ],
+  "validation": {
+    "powerShell": "Passed",
+    "bash": "Passed"
+  },
+  "publication": {
+    "status": "Published",
+    "publishedPaths": [
+      "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+      "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+      "specs/intake-review-requests/sandbox-development-lifecycle.json",
+      "specs/intake-review-results/sandbox-development-lifecycle.json",
+      "Pflichtenheft.md",
+      "Lastenheft_Abarbeitungsreihenfolge.md",
+      "specs/intake-series/sandbox-development-lifecycle/order.md",
+      "docs/maintenance/sandbox-baseline-handoff-2026-10-06.md",
+      "specs/intake-review-reports/sandbox-development-lifecycle.md"
+    ]
+  },
+  "completionBoundary": "Only bounded archive/handoff repair completed. Full-series review NeedsRemediation; no advancement or execution."
+}
