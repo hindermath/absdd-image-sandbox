@@ -53,7 +53,7 @@
         "Agent guidance -> runner migration guide -> workflow -> PR checks"
       ],
       "canonicalSource": "docs/project-statistics.config.json",
-      "navigationImpact": "Adds a linked bilingual runner guide to existing agent surfaces.",
+      "navigationImpact": "Refreshes the existing generated statistics block; no navigation change.",
       "documentClass": "Generated",
       "languageStrategy": "German first, English second",
       "languagePartners": [],
