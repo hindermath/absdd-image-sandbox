@@ -249,6 +249,7 @@ def status_is_valid(item: dict[str, Any]) -> bool:
 # The completed Feature 003 retains accepted input hashes after lifecycle repair.
 # These fixed snapshots prove historical inputs, never current intake readiness.
 HISTORICAL_BINDING_PATHS = {
+    "FeatureIntake": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/8524075f-f913-41da-a68b-a0f5c5aef582/target.md",
     "IntakeReview": "specs/intake-review-archive/6403c657-e508-4029-bfe8-319436f3fa7a/9d9fce68-15cc-490c-afe0-16b98eda8a54/result.json",
     "SeriesManifest": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/9d9fce68-15cc-490c-afe0-16b98eda8a54/manifest.json",
 }

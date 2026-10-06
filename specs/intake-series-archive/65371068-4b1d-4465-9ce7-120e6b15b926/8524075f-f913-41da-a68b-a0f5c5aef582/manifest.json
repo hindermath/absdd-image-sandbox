@@ -15,19 +15,19 @@
     {
       "path": "Lastenheft_Secure-Development-Container-Hardening.md",
       "role": "OrderedMember",
-      "normalizedSha256": "9daa986c18bc12607a8f98f9959c920563b584d6e150996472fabcfed80e961f",
+      "normalizedSha256": "72c263db933ea5a10ca60f3a7cc41231b43e1aec5d0dd641129e1a523b3432dc",
       "status": "Eligible"
     },
     {
       "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
       "role": "OrderedMember",
-      "normalizedSha256": "fff705e5006769b6cecff65dfb6c39e8e1373e2c47f52618cf1df21d3c49458c",
+      "normalizedSha256": "910b450f888b8a57e283e4067745a32535ec3edb84147c089d39bb9f446d3f6e",
       "status": "Blocked"
     },
     {
       "path": "intakes/learner-fork-self-build-sandbox.md",
       "role": "OrderedMember",
-      "normalizedSha256": "51cb88654f99e2b1692e3086c23298f454f362b5872afb676d6594d5cc4c3eb0",
+      "normalizedSha256": "6e17c637283212954857e82b53b2eeb11fd44a3c3d9996bb677ad991064d8293",
       "status": "Blocked"
     }
   ],

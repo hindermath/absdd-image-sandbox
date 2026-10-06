@@ -1,91 +1,81 @@
 # Intake Review: Sandbox-Entwicklungszyklus / Sandbox Development Lifecycle
 
 **Modus / Mode:** Series
-
-**Ergebnis / Outcome:** NeedsRemediation
-
-**Review-ID:** `09c4714d-57da-4df5-99fb-a72bf0659847`
-
-**Reviewer:** Separate agent `01a11148-aff2-7c33-b756-31dee15cff6c`.
+**Ergebnis / Outcome:** Ready
+**Review-ID:** `3d519e73-1ac3-44e5-a250-0b9f87f5c504`
+**Reviewer:** Independent agent `01a11148-aff2-7c33-b756-31dee15cff6c`.
 
 ## Zusammenfassung / Summary
 
-**DE:** Die Archivbindung RIG017 und die technische SandboxBaseline-Uebergabe
-sind korrigiert. Das unabhaengige Vollreview erkennt drei bestehende
-Inhaltsmaengel. Daher bleibt das Ergebnis NeedsRemediation, nicht Ready.
-Der bisherige Ready-Bericht ist archiviert und ausdruecklich ersetzt.
+DE: Das unabhaengige Vollreview am 2026-10-06 bewertet alle vier Intakes
+nach autorisierter Inhaltskorrektur als Ready. IR002 bis IR004 sind behoben;
+keine neuen materiellen Befunde, akzeptierten Risiken oder offenen Fragen.
+Ready bedeutet aktuelle Anforderungs- und Review-Bereitschaft, nicht
+menschliche Sandbox-Abnahme, Lieferautoritaet oder Ausfuehrungserlaubnis.
 
-**EN:** Archive binding RIG017 and the technical SandboxBaseline handoff are
-corrected. Independent full review identifies three existing content issues.
-The outcome remains NeedsRemediation, not Ready. The prior Ready report is
-archived and explicitly superseded.
+EN: Independent full review on 2026-10-06 assesses all four intakes as Ready
+after authorized content repair. IR002 through IR004 are resolved; no new
+material findings, accepted risks or open questions. Ready denotes current
+requirements/review readiness, not human sandbox acceptance, delivery
+authority or permission to execute.
 
-## Gepruefte Reihenfolge / Reviewed Order
+## Abdeckung / Coverage
 
-1. Completed GSDB target in `specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md`
-2. `Lastenheft_Secure-Development-Container-Hardening.md`
-3. `Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md`
-4. `intakes/learner-fork-self-build-sandbox.md`
+1. Abgeschlossene GSDB-Wurzel im kanonischen Archiv / Completed GSDB root in the canonical archive.
+2. `Lastenheft_Secure-Development-Container-Hardening.md`.
+3. `Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md`.
+4. `intakes/learner-fork-self-build-sandbox.md`.
 
-Die erste Stufe ist die einzige Serienwurzel. Jede folgende Stufe besitzt eine
-bindende Abhaengigkeit von ihrer direkten Vorgaengerin.
+DE: Geprueft wurden Identitaet, Zielgruppe, Vorwissen, Zweck, Scope,
+Nicht-Ziele, Anforderungen, Akzeptanzkriterien, Begriffserklaerungen,
+Bilingualitaet, Sicherheit, Datenschutz, A11Y, Plattformgrenzen, Evidenz,
+Autoritaet, Risiken, Folgeprompts, Hash-/Receipt-Provenienz und historische
+Archive. Der Abhaengigkeitsgraph hat vier Ziele, eine Wurzel und drei
+bindende Kanten. Status bleiben Completed, Eligible, Blocked, Blocked.
 
-*The first stage is the only series root. Every later stage has a binding
-dependency on its direct predecessor.*
+EN: Review covers identity, audience, prior knowledge, purpose, scope,
+non-goals, requirements, acceptance criteria, terminology, bilingual content,
+security, privacy, accessibility, platform boundaries, evidence, authority,
+risks, follow-up prompts, hash/receipt provenance and historical archives.
+The dependency graph retains four targets, one root, three binding edges
+and states Completed, Eligible, Blocked, Blocked.
 
-## Review-Abdeckung / Review Coverage
+## Behobene Befunde / Resolved Findings
 
-- Identitaet, Zielgruppe, Zweck, Scope und Nicht-Ziele
-- Atomare Anforderungen und messbare Akzeptanzkriterien
-- Sicherheits-, Datenschutz-, A11Y-, Plattform- und Lieferkettengrenzen
-- DE-first/EN-second, CEFR B2 und textorientierte Statuserklaerung
-- Serienwurzel, Reihenfolge, Abhaengigkeiten, Uebergaben und Zukunftsscope
-- `LocalImplementation` ohne Commit-, Remote- oder Hosting-Autoritaet
-- Archive, Tombstones und Herkunftsnachweise der Legacy-Adoption
+| ID | Deutsch | English |
+| --- | --- | --- |
+| IR002 / SBR-002 | GSDB-Abschluss erfuellt die Voraussetzung statt zu blockieren. Aktuelles Review und Startauftrag bleiben getrennt. | GSDB completion fulfills the prerequisite rather than blocking it. Current review and execution authority remain separate. |
+| IR003 / SBR-003 | Englische Kernlisten, Vorwissen und Fachbegriffe ergaenzt, ohne Sicherheits- oder Akzeptanzanforderungen abzuschwaechen. | English core lists, prior knowledge and terminology added without weakening security or acceptance requirements. |
+| IR004 / SBR-004 | IT-System-Elektroniker*innen bilingual in der Zielgruppe ergaenzt. | IT systems electronics technician apprentices added in both audience languages. |
 
-## Befunde, Risiken und Fragen / Findings, Risks, and Questions
+Critical: 0; High: 0; Medium: 0; Low: 0.
+Akzeptierte Risiken / Accepted risks: 0.
+Offene Fragen / Open questions: 0.
 
-- Kritisch / Critical: 0
-- Hoch / High: 0
-- Mittel / Medium: 2
-- Niedrig / Low: 1
-- Akzeptierte Risiken / Accepted risks: 0
-- Offene Fragen / Open questions: 0
+## Herkunft und naechste Aktion / Provenance and Next Action
 
-| ID (review origin) | Severity | Target | Finding / Befund |
-| --- | --- | --- | --- |
-| IR002 (SBR-002) | Medium | Hardening intake, Dependencies DE/EN | Completed GSDB is incorrectly described as a blocker instead of a fulfilled prerequisite. / Abgeschlossene GSDB wird als Blocker statt erfuellte Voraussetzung beschrieben. |
-| IR003 (SBR-003) | Medium | Hardening and acceptance intakes | Core scope, requirements and acceptance lists lack English counterparts and first-use explanations for technical terms. / Kernlisten ohne englische Entsprechung und Erklaerung von Fachbegriffen. |
-| IR004 (SBR-004) | Low | Learner self-build intake | Audience omits IT systems electronics technician apprentices. / IT-System-Elektroniker*innen fehlen in der Zielgruppe. |
+DE: Der vorherige NeedsRemediation-Review `09c4714d-57da-4df5-99fb-a72bf0659847`
+ist mit Request, Result und Bericht byte-identisch unter
+`specs/intake-review-archive/09c4714d-57da-4df5-99fb-a72bf0659847/8524075f-f913-41da-a68b-a0f5c5aef582/`
+archiviert und ausdruecklich ersetzt. Intake-Identitaeten bleiben erhalten;
+Vorgaengertexte und Receipts sind erste gebundene Quellen. Historische
+Feature-003-Hashes und Run-State bleiben unveraendert.
 
-DE: Alle drei Befunde sind Open. Owner: Repository Maintainer. Follow-up:
-gesondert autorisierte Inhaltskorrektur mit neuen Hash-/Receipt-Bindungen und
-erneutem Vollreview. Re-Evaluation-Trigger: nach Korrektur und vor jeder
-Ausfuehrung oder Reihenfortschreibung. Kein Risiko wurde akzeptiert.
-SBR-001 (veralteter aktiver Bericht) ist durch Archivierung und diesen
-Nachfolgebericht behoben. Strukturelles Validator-PASS bedeutet nicht Ready
-und ersetzt keine menschliche Vier-Augen-Abnahme.
+EN: The prior NeedsRemediation review is byte-identically archived with its
+request, result and report under the path above and explicitly superseded.
+Intake identities remain; predecessor texts and receipts are the first bound
+sources. Historical Feature 003 hashes and run state remain unchanged.
 
-EN: All three findings are Open, owned by the Repository Maintainer. Follow-up:
-separately authorized content repair with refreshed hash/receipt bindings and
-full re-review. Re-evaluate after correction and before execution or series
-advancement. No risk is accepted. SBR-001 (stale active report) is resolved by
-archival and this successor. Structural validator PASS does not mean Ready
-and does not replace human four-eyes acceptance.
-
-## Naechste Aktion / Next Action
-
-Der Serienstatus kann schreibfrei geprueft werden:
+Naechste exakte Aktion / Exact next action (read-only):
 
 ```text
 $speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json
 ```
 
-DE: Naechster zulaessiger Aenderungsschritt ist ein begrenzter, ausdruecklicher
-Inhaltskorrekturauftrag fuer IR002 bis IR004. Kein abgeschlossener Root-Lauf
-wird neu gestartet und kein Folge-Intake freigegeben.
+DE: Kein abgeschlossener Root-Lauf wird neu gestartet. Reihenfortschreibung,
+Folge-Intake, Commit, Push und Plattformaktionen benoetigen neue ausdrueckliche
+Autoritaet. Menschliche und praktische Sandbox-Nachweise bleiben getrennt.
 
-EN: The next permitted change is a bounded, explicit content-repair mandate
-for IR002 through IR004. Do not restart the completed root or release a
-successor intake. Prior report and result are preserved under
-`specs/intake-review-archive/6403c657-e508-4029-bfe8-319436f3fa7a/9d9fce68-15cc-490c-afe0-16b98eda8a54/`.
+EN: Do not restart the completed root. Advancement, successor execution,
+commit, push and platform actions require new explicit authority. Human and
+practical sandbox evidence remain separate.

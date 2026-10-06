@@ -2,11 +2,9 @@
 # Forkbare Selbstbau-Sandbox fuer Lernende / Forkable Self-Build Sandbox for Learners
 
 **Status:** ReadyForReview
-**Audience:** Fachinformatiker*innen, IT-System-Elektroniker*innen,
-Kaufleute fuer IT-System-Management,
+**Audience:** Fachinformatiker*innen, Kaufleute fuer IT-System-Management,
 Kaufleute fuer Digitalisierungsmanagement ab dem ersten Ausbildungsjahr sowie
-weitere Nutzende der Sandbox / IT specialist apprentices, IT systems
-electronics technician apprentices, IT system management
+weitere Nutzende der Sandbox / IT specialist apprentices, IT system management
 apprentices, digitalization management apprentices from the first training
 year, and other sandbox users
 **Assumed prior knowledge:** Grundlegende Bedienung eines Computers und eines
