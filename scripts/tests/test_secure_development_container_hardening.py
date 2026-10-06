@@ -83,6 +83,35 @@ class GapContractTests(unittest.TestCase):
     def test_canonical_initial_register_is_valid(self) -> None:
         self.assertEqual(self.library.validate_gap_document(self.canonical, REPOSITORY), [])
 
+    def test_historical_bindings_fail_closed_without_exact_completed_snapshot(self) -> None:
+        from unittest.mock import patch
+
+        hash_original = self.library.normalized_sha256
+        for role, relative in self.library.HISTORICAL_BINDING_PATHS.items():
+            archive = REPOSITORY / relative
+            for invalid in (None, "0" * 64):
+                def changed_hash(path, archive=archive, invalid=invalid):
+                    if path == archive:
+                        if invalid is None:
+                            raise FileNotFoundError("missing historical snapshot")
+                        return invalid
+                    return hash_original(path)
+
+                with self.subTest(role=role, invalid=invalid):
+                    with patch.object(self.library, "normalized_sha256", side_effect=changed_hash):
+                        self.assert_rejected(self.canonical, "current hash mismatch")
+
+        load_original = self.library.load_json
+
+        def active_run(path):
+            result = load_original(path)
+            if path.name == "autonomous-run-state.json":
+                result = dict(result, status="Running")
+            return result
+
+        with patch.object(self.library, "load_json", side_effect=active_run):
+            self.assert_rejected(self.canonical, "current hash mismatch")
+
     def test_mutation_fixtures_are_all_declared(self) -> None:
         fixture_names = {
             path.stem for path in FIXTURE_DIR.glob("*.json") if path.name != "gap-147-missing-mount-evidence.json"
