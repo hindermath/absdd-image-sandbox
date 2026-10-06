@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.1",
+  "feature": "macos15-runner-migration",
+  "entries": [
+    {
+      "changeId": "CHG001",
+      "scope": "Pinned macOS runner labels, current guidance and required-check migration",
+      "decision": "UpdateRequired",
+      "rationale": "GitHub retires macOS 14 on 2026-11-02; current runner guidance must match executable workflows.",
+      "documents": [
+        "docs/maintenance/macos-runner-migration.md",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "GEMINI.md",
+        ".github/copilot-instructions.md",
+        ".github/agents/copilot-instructions.md"
+      ],
+      "owner": "Repository Maintainer",
+      "audiences": [
+        "Maintainers",
+        "AI agents"
+      ],
+      "readerPaths": [
+        "Agent guidance -> runner migration guide -> workflow -> PR checks"
+      ],
+      "canonicalSource": ".github/workflows",
+      "navigationImpact": "Adds a linked bilingual runner guide to existing agent surfaces.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first, English second",
+      "languagePartners": [],
+      "platformAndExampleProof": "Local syntax and isolated migration-template checks; exact-head hosted CI results are recorded in PR checks before merge.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/maintenance/macos-runner-migration.md",
+      "risk": "Runner images can change installed tool versions; CI is not native product acceptance.",
+      "criticality": "Usage",
+      "reevaluationTrigger": "Runner retirement, toolchain or required-check changes"
+    },
+    {
+      "changeId": "CHG002",
+      "scope": "Generated Profile 2 statistics",
+      "decision": "GeneratedUpdate",
+      "rationale": "Render statistics from the committed source history after updating the ledger.",
+      "documents": [
+        "docs/project-statistics.md"
+      ],
+      "owner": "Repository Maintainer",
+      "audiences": [
+        "Maintainers",
+        "AI agents"
+      ],
+      "readerPaths": [
+        "Agent guidance -> runner migration guide -> workflow -> PR checks"
+      ],
+      "canonicalSource": "docs/project-statistics.config.json",
+      "navigationImpact": "Adds a linked bilingual runner guide to existing agent surfaces.",
+      "documentClass": "Generated",
+      "languageStrategy": "German first, English second",
+      "languagePartners": [],
+      "platformAndExampleProof": "Local syntax and isolated migration-template checks; exact-head hosted CI results are recorded in PR checks before merge.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/maintenance/macos-runner-migration.md",
+      "risk": "Runner images can change installed tool versions; CI is not native product acceptance.",
+      "criticality": "Usage",
+      "reevaluationTrigger": "Runner retirement, toolchain or required-check changes",
+      "generatedSource": {
+        "path": "docs/project-statistics.config.json",
+        "renderer": "scripts/render-project-statistics.sh and .ps1"
+      }
+    }
+  ]
+}
