@@ -1,6 +1,29 @@
 # Intake Review Governance Preset
 
-Aktuelle Version / Current version: **0.2.3**. Dieser Patch schliesst physische
+Aktuelle Version / Current version: **0.2.4**. Laufende `Active`-Serien mit
+mindestens einem `Active`-Mitglied bleiben ohne weiteren `Eligible`-Kandidaten
+gueltig; `eligibleCandidate` ist dann `N/A`. `Ready` verlangt weiterhin genau
+einen Kandidaten. Mehrfachkandidaten, Hash-, Pfad- und Abhaengigkeitsfehler
+bleiben gesperrt. Schema, Commands und Prioritaet bleiben gleich.
+
+Running Active series with an Active member may have no additional Eligible
+candidate. The candidate remains N/A; this grants no execution authority.
+Ready still requires exactly one candidate, and all integrity checks remain.
+Coordinated versions: Authoring 0.3.6, Review 0.2.4, Sequencing 0.2.7.
+Each preset remains independently installable; historical evidence is preserved.
+
+Gemeinsame Konfigurationsvalidatoren akzeptieren auch die bereits etablierte,
+leere `Idle`-Serie. `Idle` darf keine Ziele, Wurzeln oder Abhaengigkeiten
+enthalten; DirectoryStrict verlangt zusaetzlich ein leeres aktives Inventar.
+Indizes eigenstaendiger verschachtelter Git-Repositories sind keine Duplikate
+des uebergeordneten Projekts. Gewoehnliche doppelte Indizes bleiben gesperrt.
+
+*The shared validators also accept established empty Idle series, without
+targets, roots or dependencies. DirectoryStrict additionally requires an
+empty active inventory. Nested Git checkouts own their index; ordinary
+duplicate indexes still fail. This aligns all three Intake presets.*
+
+Version **0.2.3** schliesst physische
 Collection-Aliase und unbekannte Lifecycle-Zustaende aus. Authoring prueft auch
 bestehende Receipt-Ziele und Quellen vor dem Lesen gegen die Repository-Grenze.
 
@@ -34,7 +57,7 @@ making those project choices itself.
 ## Install
 
 ```bash
-specify preset add --from https://github.com/hindermath/spec-kit-preset-intake-review-governance/archive/refs/tags/v0.2.3.zip --priority 65
+specify preset add --from https://github.com/hindermath/spec-kit-preset-intake-review-governance/archive/refs/tags/v0.2.4.zip --priority 65
 specify preset list
 specify preset resolve
 ```

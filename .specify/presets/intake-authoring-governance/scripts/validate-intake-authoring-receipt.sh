@@ -161,8 +161,16 @@ generator_version = required_text(generator, "version", "generator")
 accepted_generators = {
     "1.0": {"0.1.0"},
     "1.1": {"0.1.1"},
-    "2.0": {"0.2.0", "0.2.1", "0.3.0", "0.3.1", "0.3.2"},
+    "2.0": {"0.2.0", "0.2.1", "0.3.0", "0.3.1", "0.3.2", "0.3.3", "0.3.4", "0.3.5", "0.3.6"},
 }.get(schema_version, set())
+# DE: Das eigene Release muss seine Schema-2-Vorlage akzeptieren; keine fremden Versionen.
+# EN: Accept this release's schema-2 template without accepting arbitrary versions.
+preset_metadata = Path(sys.argv[3]).parent / "preset.yml"
+if schema_version == "2.0" and preset_metadata.is_file():
+    match = re.search(r'^\s+version:\s*"?([0-9]+\.[0-9]+\.[0-9]+)"?\s*$',
+                      preset_metadata.read_text(encoding="utf-8"), re.MULTILINE)
+    if match:
+        accepted_generators.add(match.group(1))
 if accepted_generators and generator_version not in accepted_generators:
     errors.append(
         f"generator.version must be one of {sorted(accepted_generators)} "

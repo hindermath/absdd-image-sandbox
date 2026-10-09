@@ -853,6 +853,13 @@ Das ausdrücklich freigegebene 13-Preset-Profil ergänzt die bisherigen zwölf P
 
 *The explicitly approved thirteen-preset profile preserves the existing twelve presets. See the linked usage and integration record.*
 
+Aktueller begrenzter Nachlauf: Security 0.7.1, Architecture 0.6.2 und Intake
+Authoring 0.3.7 / Review 0.2.4 / Sequencing 0.2.8 im optionalen 14er-Profil.
+[Quellen, Pruefungen und Freigabegrenzen](docs/maintenance/preset-alignment-2026-10-10.md).
+
+*Current bounded follow-up: the five named governance updates in the optional
+fourteen-preset profile. See the linked sources, checks and approval boundaries.*
+
 <!-- BEGIN spec-kit-diagrams-completion -->
 ## Diagramme und Ergebnisberichte / Diagrams and outcome reports
 

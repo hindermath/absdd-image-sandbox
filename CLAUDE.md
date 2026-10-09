@@ -591,3 +591,26 @@ Existing macOS 14 jobs explicitly use `macos-15`. Keep the existing repository
 selection for Linux-only maintenance jobs. Successful CI proves the executed
 checks, not product platform acceptance. Review required check names and
 migration templates whenever runner labels change. See the linked guide.
+
+## Governance-Zielstand 2026-10-10 / Governance target 2026-10-10
+
+DE: Das explizit genehmigte 14er-Profil bindet Security 0.7.1, Architecture
+0.6.2 und Intake Authoring 0.3.7 / Review 0.2.4 / Sequencing 0.2.8. Die neun
+anderen Presets und Prioritaeten bleiben erhalten. DS-GVO, KI-VO, CRA, NIS2
+und DORA werden fuer Beispielprodukt, Entwicklungswerkzeuge und Organisation
+getrennt auf Anwendbarkeit geprueft; Ausbildung ist keine pauschale Ausnahme.
+Ungeklaerte Rollen bleiben Open. C5 Typ 1 und Typ 2 sind getrennte Nachweise,
+keine Produktzertifizierung. Installation startet keinen Produktlauf, erneuert
+keine Intake-Receipts und ersetzt keine menschliche Sandbox-/Risikofreigabe.
+Vor einem Lauf Quellen-/Review-Frische, Serie, lokales Routing und aktuelle
+Delivery-Autoritaet erneut pruefen. Nachweis: docs/maintenance/preset-alignment-2026-10-10.md.
+
+EN: The explicitly approved fourteen-preset profile binds Security 0.7.1,
+Architecture 0.6.2 and Intake Authoring 0.3.7 / Review 0.2.4 / Sequencing 0.2.8.
+Preserve nine other packages and all priorities. Screen GDPR, AI Act, CRA,
+NIS2 and DORA separately for example product, development tools and organization;
+education is not a blanket exemption and unknown roles remain Open. Distinguish
+C5 Type 1 from Type 2 evidence, without claiming product certification.
+Installation starts no product run, refreshes no intake receipts and grants
+no human sandbox/risk acceptance. Before a run recheck source/review freshness,
+series, local routing and delivery authority; see the linked integration record.

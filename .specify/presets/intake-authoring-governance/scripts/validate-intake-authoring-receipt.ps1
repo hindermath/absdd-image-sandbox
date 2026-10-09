@@ -229,10 +229,17 @@ function Test-IntakeAuthoringReceipt {
     } elseif ($SchemaVersion -eq '1.1') {
         @('0.1.1')
     } elseif ($SchemaVersion -eq '2.0') {
-        @('0.2.0', '0.2.1', '0.3.0', '0.3.1', '0.3.2')
+        @('0.2.0', '0.2.1', '0.3.0', '0.3.1', '0.3.2', '0.3.3', '0.3.4', '0.3.5', '0.3.6')
     } else {
         @()
     })
+    # DE: Eigene Schema-2-Vorlagen bleiben nach Patch-Releases gueltig.
+    # EN: Keep this release's schema-2 templates valid after patch releases.
+    $PresetMetadata = Join-Path (Split-Path -Parent $PSScriptRoot) 'preset.yml'
+    if ($SchemaVersion -eq '2.0' -and (Test-Path -LiteralPath $PresetMetadata -PathType Leaf)) {
+        $VersionMatch = [regex]::Match((Get-Content -LiteralPath $PresetMetadata -Raw), '(?m)^\s+version:\s*"?([0-9]+\.[0-9]+\.[0-9]+)"?\s*$')
+        if ($VersionMatch.Success) { $AcceptedGenerators += $VersionMatch.Groups[1].Value }
+    }
     if ($AcceptedGenerators.Count -gt 0 -and $GeneratorVersion -notin $AcceptedGenerators) {
         $Errors.Add("generator.version is not accepted for schema $SchemaVersion")
     }

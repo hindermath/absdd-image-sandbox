@@ -1,96 +1,6 @@
 {
   "schema_version": "1.0",
   "presets": {
-    "security-governance": {
-      "version": "0.6.2",
-      "source": "local",
-      "manifest_hash": "sha256:356daaedfb3b0275c093d7e522b3e616091c1249a2622e071ae4ff690b5a239d",
-      "enabled": true,
-      "priority": 10,
-      "registered_commands": {
-        "agy": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "claude": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "codex": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "copilot": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "opencode": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "zed": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ]
-      },
-      "registered_skills": [
-        "speckit-specify",
-        "speckit-plan",
-        "speckit-tasks"
-      ],
-      "installed_at": "2026-08-09T00:11:09.562213+00:00"
-    },
-    "architecture-governance": {
-      "version": "0.5.2",
-      "source": "local",
-      "manifest_hash": "sha256:e2dc16bd0a566424dadbdb14a32cae5805d23d5f72e57a3bb3b5e47821882293",
-      "enabled": true,
-      "priority": 20,
-      "registered_commands": {
-        "agy": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "claude": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "codex": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "copilot": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "opencode": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "zed": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ]
-      },
-      "registered_skills": [
-        "speckit-specify",
-        "speckit-plan",
-        "speckit-tasks"
-      ],
-      "installed_at": "2026-08-09T00:11:11.335807+00:00"
-    },
     "isaqb-architecture-governance": {
       "version": "0.2.2",
       "source": "local",
@@ -465,55 +375,145 @@
       ],
       "installed_at": "2026-09-12T14:29:06.658757+00:00"
     },
-    "intake-review-governance": {
-      "version": "0.2.3",
+    "project-statistics-governance": {
+      "version": "0.1.0",
       "source": "local",
-      "manifest_hash": "sha256:0fe3aedc8ed9b27a9874eabe28b2f457e2de68610e80e72007871249d62327ce",
+      "manifest_hash": "sha256:5359a8ef0d576fd9afb3b34a70ec41adbb665abcc29394750d5d94689037ef4c",
       "enabled": true,
-      "priority": 65,
+      "priority": 90,
       "registered_commands": {
         "agy": [
-          "speckit.intake-review",
-          "speckit.intake-repair",
-          "speckit.intake-review-status"
+          "speckit.statistics-init",
+          "speckit.statistics-status",
+          "speckit.statistics-update"
         ],
         "claude": [
-          "speckit.intake-review",
-          "speckit.intake-repair",
-          "speckit.intake-review-status"
+          "speckit.statistics-init",
+          "speckit.statistics-status",
+          "speckit.statistics-update"
         ],
         "codex": [
-          "speckit.intake-review",
-          "speckit.intake-repair",
-          "speckit.intake-review-status"
+          "speckit.statistics-init",
+          "speckit.statistics-status",
+          "speckit.statistics-update"
         ],
         "copilot": [
-          "speckit.intake-review",
-          "speckit.intake-repair",
-          "speckit.intake-review-status"
+          "speckit.statistics-init",
+          "speckit.statistics-status",
+          "speckit.statistics-update"
         ],
         "opencode": [
-          "speckit.intake-review",
-          "speckit.intake-repair",
-          "speckit.intake-review-status"
+          "speckit.statistics-init",
+          "speckit.statistics-status",
+          "speckit.statistics-update"
         ],
         "zed": [
-          "speckit.intake-review",
-          "speckit.intake-repair",
-          "speckit.intake-review-status"
+          "speckit.statistics-init",
+          "speckit.statistics-status",
+          "speckit.statistics-update"
         ]
       },
       "registered_skills": [
-        "speckit-intake-review",
-        "speckit-intake-repair",
-        "speckit-intake-review-status"
+        "speckit-statistics-init",
+        "speckit-statistics-status",
+        "speckit-statistics-update"
       ],
-      "installed_at": "2026-09-13T11:07:29.415272+00:00"
+      "installed_at": "2026-09-14T21:14:50.225667+00:00"
+    },
+    "security-governance": {
+      "version": "0.7.1",
+      "source": "local",
+      "manifest_hash": "sha256:50a60321c5c94bd055c83fafb24b3e81edb2209f47b0f58d18d4cf0a416358cf",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {
+        "agy": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "claude": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "codex": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "copilot": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "opencode": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "zed": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ]
+      },
+      "registered_skills": [
+        "speckit-specify",
+        "speckit-plan",
+        "speckit-tasks"
+      ],
+      "installed_at": "2026-10-09T23:13:15.678779+00:00"
+    },
+    "architecture-governance": {
+      "version": "0.6.2",
+      "source": "local",
+      "manifest_hash": "sha256:36d56d00fb827997fec0b1cca6b6989207f458e6a4ad66b1572caa205b8a4d8a",
+      "enabled": true,
+      "priority": 20,
+      "registered_commands": {
+        "agy": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "claude": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "codex": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "copilot": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "opencode": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "zed": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ]
+      },
+      "registered_skills": [
+        "speckit-specify",
+        "speckit-plan",
+        "speckit-tasks"
+      ],
+      "installed_at": "2026-10-09T23:13:16.861542+00:00"
     },
     "intake-authoring-governance": {
-      "version": "0.3.4",
+      "version": "0.3.7",
       "source": "local",
-      "manifest_hash": "sha256:3c934d29268fd284aa8641b491d6725cda54480c19065482dc7d270bf27f0186",
+      "manifest_hash": "sha256:3ece036a3aa5921a70501f3ba846e38dfaa8ff3505e79aabc2f6db679c44bcaa",
       "enabled": true,
       "priority": 64,
       "registered_commands": {
@@ -567,12 +567,57 @@
         "speckit-intake-delete",
         "speckit-intake-create-status"
       ],
-      "installed_at": "2026-09-13T11:07:30.885382+00:00"
+      "installed_at": "2026-10-09T23:13:18.018986+00:00"
+    },
+    "intake-review-governance": {
+      "version": "0.2.4",
+      "source": "local",
+      "manifest_hash": "sha256:72c9e3967464db4b1ddd0aba9deedcd7a9772abf55bbc1fa0a7c7adefffde732",
+      "enabled": true,
+      "priority": 65,
+      "registered_commands": {
+        "agy": [
+          "speckit.intake-review",
+          "speckit.intake-repair",
+          "speckit.intake-review-status"
+        ],
+        "claude": [
+          "speckit.intake-review",
+          "speckit.intake-repair",
+          "speckit.intake-review-status"
+        ],
+        "codex": [
+          "speckit.intake-review",
+          "speckit.intake-repair",
+          "speckit.intake-review-status"
+        ],
+        "copilot": [
+          "speckit.intake-review",
+          "speckit.intake-repair",
+          "speckit.intake-review-status"
+        ],
+        "opencode": [
+          "speckit.intake-review",
+          "speckit.intake-repair",
+          "speckit.intake-review-status"
+        ],
+        "zed": [
+          "speckit.intake-review",
+          "speckit.intake-repair",
+          "speckit.intake-review-status"
+        ]
+      },
+      "registered_skills": [
+        "speckit-intake-review",
+        "speckit-intake-repair",
+        "speckit-intake-review-status"
+      ],
+      "installed_at": "2026-10-09T23:13:19.085617+00:00"
     },
     "intake-sequencing-governance": {
-      "version": "0.2.6",
+      "version": "0.2.8",
       "source": "local",
-      "manifest_hash": "sha256:8b517455df03fcb23f5e05e4a569a751fe72bedaa6932e669bbe368d00353e48",
+      "manifest_hash": "sha256:7b8beec23acf1b99d0fc0e628ebad50770cece065bff4f8594c527f3cfb9d11b",
       "enabled": true,
       "priority": 66,
       "registered_commands": {
@@ -633,52 +678,7 @@
         "speckit-intake-series-status",
         "speckit-intake-series-next"
       ],
-      "installed_at": "2026-09-13T11:07:32.597008+00:00"
-    },
-    "project-statistics-governance": {
-      "version": "0.1.0",
-      "source": "local",
-      "manifest_hash": "sha256:5359a8ef0d576fd9afb3b34a70ec41adbb665abcc29394750d5d94689037ef4c",
-      "enabled": true,
-      "priority": 90,
-      "registered_commands": {
-        "agy": [
-          "speckit.statistics-init",
-          "speckit.statistics-status",
-          "speckit.statistics-update"
-        ],
-        "claude": [
-          "speckit.statistics-init",
-          "speckit.statistics-status",
-          "speckit.statistics-update"
-        ],
-        "codex": [
-          "speckit.statistics-init",
-          "speckit.statistics-status",
-          "speckit.statistics-update"
-        ],
-        "copilot": [
-          "speckit.statistics-init",
-          "speckit.statistics-status",
-          "speckit.statistics-update"
-        ],
-        "opencode": [
-          "speckit.statistics-init",
-          "speckit.statistics-status",
-          "speckit.statistics-update"
-        ],
-        "zed": [
-          "speckit.statistics-init",
-          "speckit.statistics-status",
-          "speckit.statistics-update"
-        ]
-      },
-      "registered_skills": [
-        "speckit-statistics-init",
-        "speckit-statistics-status",
-        "speckit-statistics-update"
-      ],
-      "installed_at": "2026-09-14T21:14:50.225667+00:00"
+      "installed_at": "2026-10-09T23:13:20.123182+00:00"
     }
   }
 }
