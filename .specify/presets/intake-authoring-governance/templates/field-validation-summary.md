@@ -1,6 +1,19 @@
 # Field Validation Summary
 
-Version: `0.3.4`
+Version: `0.3.5`
+
+## Patch-Pruefgrenze / Patch Validation Boundary
+
+Die neue Regression prueft vollstaendige Receipts aus der ausgelieferten
+Vorlage, bekannte Generatoren einschliesslich 0.3.4 und die Ablehnung
+unbekannter Versionen sowie falscher Schema-Zuordnungen. Native Ergebnisse
+werden am exakten Release-PR-Head gebunden. Die untenstehenden Feld- und
+Kompositionsnachweise sind historisch und behaupten keinen neuen Flottenlauf.
+
+The new regression validates complete receipts from the shipped template,
+known generators including 0.3.4, unknown-version rejection, and invalid schema
+bindings. Native results bind the exact release PR head. Field and composition
+evidence below is historical and does not claim a new fleet run.
 
 ## Package Validation / Paketvalidierung
 

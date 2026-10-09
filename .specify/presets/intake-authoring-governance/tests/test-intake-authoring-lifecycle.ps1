@@ -22,15 +22,17 @@ function Get-HBHash([string]$Path) {
     $Text = $Utf8.GetString($Bytes, $Offset, $Bytes.Length - $Offset).Replace("`r`n", "`n").Replace("`r", "`n")
     return [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($Utf8.GetBytes($Text))).ToLowerInvariant()
 }
-function Invoke-HBPair([string]$Kind, [string]$Path, [string]$Repo, [int]$Expected, [string]$Case) {
+function Invoke-HBPair([string]$Kind, [string]$Path, [string]$Repo, [int]$Expected, [string]$Case, [string]$ExpectedError = '') {
     $Stem = if ($Kind -eq 'Receipt') { 'validate-intake-authoring-receipt' } else { 'validate-intake-authoring-artifact' }
     $PowerShellArgs = if ($Kind -eq 'Receipt') { @('-Receipt', $Path, '-Repo', $Repo) } else { @('-Artifact', $Path, '-Repo', $Repo) }
     $Output = & pwsh -NoProfile -File (Join-Path $PresetRoot "scripts/${Stem}.ps1") @PowerShellArgs 2>&1
     if ($LASTEXITCODE -ne $Expected) { throw "${Case}: PowerShell expected $Expected, got ${LASTEXITCODE}: $($Output -join ' | ')" }
+    if ($ExpectedError -and -not ($Output -join ' | ').Contains($ExpectedError)) { throw "${Case}: PowerShell missing expected diagnostic ${ExpectedError}" }
     if (Get-Command bash -ErrorAction SilentlyContinue) {
         $BashArgs = if ($Kind -eq 'Receipt') { @('--receipt', $Path, '--repo', $Repo) } else { @('--artifact', $Path, '--repo', $Repo) }
         $Output = & bash (Join-Path $PresetRoot "scripts/${Stem}.sh") @BashArgs 2>&1
         if ($LASTEXITCODE -ne $Expected) { throw "${Case}: Bash expected $Expected, got ${LASTEXITCODE}: $($Output -join ' | ')" }
+        if ($ExpectedError -and -not ($Output -join ' | ').Contains($ExpectedError)) { throw "${Case}: Bash missing expected diagnostic ${ExpectedError}" }
     }
 }
 function New-HBIntake([string]$Path) {
@@ -130,6 +132,50 @@ try {
     }
     Write-HBText $ReceiptPath ($Receipt | ConvertTo-Json -Depth 30)
     Invoke-HBPair Receipt $ReceiptPath $Root 0 'schema 2 URL receipt'
+    $CurrentVersion = [regex]::Match((Get-Content (Join-Path $PresetRoot 'preset.yml') -Raw), '(?m)^\s+version:\s*"?([^"\s]+)').Groups[1].Value
+    if (-not $CurrentVersion) { throw 'Missing current preset version' }
+    $OriginalVersion = $Receipt.generator.version
+    $Receipt.generator.version = $CurrentVersion
+    Write-HBText $ReceiptPath ($Receipt | ConvertTo-Json -Depth 20)
+    Invoke-HBPair Receipt $ReceiptPath $Root 0 'current release generator'
+    # DE: Die echte Paketvorlage verwenden; reine Versionsparitaet reicht nicht.
+    # EN: Exercise the shipped template; version equality alone is insufficient.
+    $ShippedReceipt = Get-Content (Join-Path $PresetRoot 'templates/intake-authoring-receipt-template.json') -Raw | ConvertFrom-Json -AsHashtable
+    foreach ($Key in $Receipt.Keys) {
+        if ($Key -notin @('generator', 'schemaVersion')) { $ShippedReceipt[$Key] = $Receipt[$Key] }
+    }
+    if ($ShippedReceipt.generator.version -ne $CurrentVersion -or $ShippedReceipt.schemaVersion -ne '2.0') {
+        throw 'Shipped receipt template does not bind the current schema-2 release'
+    }
+    foreach ($EncodingCase in @('LF', 'CRLF', 'BOM')) {
+        $TemplateJson = ($ShippedReceipt | ConvertTo-Json -Depth 30).Replace("`r`n", "`n").Replace("`r", "`n")
+        if ($EncodingCase -eq 'CRLF') { $TemplateJson = $TemplateJson.Replace("`n", "`r`n") }
+        [IO.File]::WriteAllText($ReceiptPath, $TemplateJson, [Text.UTF8Encoding]::new($EncodingCase -eq 'BOM'))
+        $BeforeReceipt = (Get-FileHash -LiteralPath $ReceiptPath -Algorithm SHA256).Hash
+        $BeforeTarget = (Get-FileHash -LiteralPath $Target -Algorithm SHA256).Hash
+        Invoke-HBPair Receipt $ReceiptPath $Root 0 "shipped template ${EncodingCase}"
+        if ((Get-FileHash -LiteralPath $ReceiptPath -Algorithm SHA256).Hash -ne $BeforeReceipt -or
+            (Get-FileHash -LiteralPath $Target -Algorithm SHA256).Hash -ne $BeforeTarget) {
+            throw 'Receipt validation changed input bytes'
+        }
+    }
+    foreach ($LegacyGenerator in @('0.3.3', '0.3.4', '0.3.5', '0.3.6')) {
+        $Receipt.generator.version = $LegacyGenerator
+        Write-HBText $ReceiptPath ($Receipt | ConvertTo-Json -Depth 20)
+        Invoke-HBPair Receipt $ReceiptPath $Root 0 "known schema-2 generator ${LegacyGenerator}"
+    }
+    $Receipt.generator.version = $CurrentVersion
+    foreach ($LegacySchema in @('1.0', '1.1')) {
+        $Receipt.schemaVersion = $LegacySchema
+        Write-HBText $ReceiptPath ($Receipt | ConvertTo-Json -Depth 20)
+        Invoke-HBPair Receipt $ReceiptPath $Root 2 "current generator with legacy schema ${LegacySchema}" 'generator.version'
+    }
+    $Receipt.schemaVersion = '2.0'
+    $Receipt.generator.version = '99.0.0'
+    Write-HBText $ReceiptPath ($Receipt | ConvertTo-Json -Depth 20)
+    Invoke-HBPair Receipt $ReceiptPath $Root 2 'unknown generator version' 'generator.version'
+    $Receipt.generator.version = $OriginalVersion
+    Write-HBText $ReceiptPath ($Receipt | ConvertTo-Json -Depth 20)
     $ArchiveRelative = 'requirements/archive/url-source.001-completed.md'
     $ConfigPath = Join-Path $Root 'requirements/intake-governance-config.json'
     $ManifestPath = Join-Path $Root 'requirements/series.json'

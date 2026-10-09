@@ -906,14 +906,14 @@ workspace family consists of:
 
 | Preset | Version | Priority | Scope |
 |---|---:|---:|---|
-| `security-governance` | `v0.6.1` | `10` | secure development, MSL, language-specific secure coding, SSDF, ASVS, SBOM/VEX/SLSA, AI-SBOM, CRA/regulatory applicability |
-| `architecture-governance` | `v0.5.1` | `20` | secure architecture, STRIDE/CAPEC, Zero Trust, SAMM, S-ADR, BSI C3A cloud autonomy, BSI C5 cloud assurance |
-| `isaqb-architecture-governance` | `v0.2.1` | `30` | general iSAQB/arc42 architecture governance |
-| `a11y-governance` | `v0.4.1` | `40` | WCAG 2.2 AA, bilingual DE/EN, CEFR B2, inclusive artefacts, didactic inline-code-comment review |
-| `cross-platform-governance` | `v0.2.1` | `50` | Bash/PowerShell parity, macOS/Linux/Windows script governance |
-| `agent-parity-governance` | `v0.4.0` | `60` | synchronized agent guidance, fleet-completion evidence, and agent-neutral Spec-Kit model routing |
+| `security-governance` | `v0.7.1` | `10` | secure development, MSL, language-specific secure coding, SSDF, ASVS, SBOM/VEX/SLSA, AI-SBOM, CRA/regulatory applicability |
+| `architecture-governance` | `v0.6.2` | `20` | secure architecture, STRIDE/CAPEC, Zero Trust, SAMM, S-ADR, BSI C3A cloud autonomy, BSI C5 cloud assurance |
+| `isaqb-architecture-governance` | `v0.2.2` | `30` | general iSAQB/arc42 architecture governance |
+| `a11y-governance` | `v0.4.3` | `40` | WCAG 2.2 AA, bilingual DE/EN, CEFR B2, inclusive artefacts, didactic inline-code-comment review |
+| `cross-platform-governance` | `v0.2.2` | `50` | Bash/PowerShell parity, macOS/Linux/Windows script governance |
+| `agent-parity-governance` | `v0.4.2` | `60` | synchronized agent guidance, fleet-completion evidence, and agent-neutral Spec-Kit model routing |
 | `autonomous-run-governance` | `v0.4.4` | `70` | permission-bounded, evidence-first governance with resumable, validated closeout |
-| `parallel-autonomous-run-governance` | `v0.2.1` | `80` | isolated bounded campaigns, mixed runner profiles, cooperative stop/resume, provider-gated resumable consolidation, and declared post-merge closeout |
+| `parallel-autonomous-run-governance` | `v0.2.6` | `80` | isolated bounded campaigns, mixed runner profiles, cooperative stop/resume, provider-gated resumable consolidation, and declared post-merge closeout |
 
 `autonomous-run-governance` is installed as part of the mandatory eight-preset
 governance matrix. Installation does not authorize an autonomous run.
