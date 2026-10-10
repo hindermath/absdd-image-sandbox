@@ -636,11 +636,84 @@ PowerShell:
 .\scripts\build-and-sbom.ps1 -SkipBuild
 ```
 
-Die Skripte nutzen eine lokal installierte `syft`, wenn vorhanden. Andernfalls
-wird das Syft-Containerimage mit Podman ausgefuehrt. Generierte
+Die Skripte pruefen zuerst die Architektur und nutzen bevorzugt Syft aus dem
+geprueften Image. Nur wenn es dort fehlt, ist die exakt vorgegebene lokale
+Syft-Version erlaubt; es gibt keinen beweglichen Container-Fallback. Generierte
 `sboms/*.cdx.json` sind Build-Artefakte und werden nicht committet.
+
+*The scripts first check architecture and prefer Syft from the verified image.
+Only the exact configured host Syft version is accepted as a fallback. Generated
+SBOM files remain untracked build artifacts.*
+
 Der vollstaendige Ablauf und seine Aussagegrenzen stehen in
 [Validierung und Wartung](docs/betrieb/validierung-und-wartung.md).
+
+## Architekturgesicherter Neubau / Architecture-Checked Rebuild
+
+Der Preflight (Pruefung vor dem Build) vergleicht die physische Host-Architektur
+mit Podman und der Zielplattform. Apple Silicon verwendet `linux/arm64`,
+Intel/AMD verwendet `linux/amd64`. Nach dem Build und vor dem Start wird auch
+das Image geprueft. Unbekannte Werte oder Abweichungen brechen den Ablauf ab.
+Die Apple-Hardware wird auch aus einer uebersetzten macOS-Shell erkannt.
+
+Vor dem Austausch eines Containers dessen nicht persistente Dateien sichern
+und Audit-Metadaten exportieren. Dazu gehoeren gegebenenfalls Agentendaten
+ausserhalb der benannten Volumes. Sicherungen koennen Geheimnisse enthalten:
+nur lokal, zugriffsgeschuetzt und niemals im Git-Repository ablegen. Keine alten
+Werkzeug-Binaries, `node_modules` oder Caches ueber neue Installationen kopieren.
+
+*The preflight compares physical host hardware, Podman, and target platform.
+Apple Silicon uses `linux/arm64`; Intel/AMD uses `linux/amd64`. Image checks run
+after build and before start. Unknown values and mismatches stop the workflow,
+including when the macOS shell is translated. Before replacement, back up
+non-persistent files and export audit metadata. Agent state outside named
+volumes may need a separate backup. Keep potentially secret backups local,
+access-restricted, and out of Git. Do not restore old binaries or caches over
+new installations.*
+
+PowerShell 7, vom Repository-Wurzelverzeichnis / from the repository root:
+
+```powershell
+pwsh -NoProfile -File scripts/sandbox-lifecycle.ps1 build
+pwsh -NoProfile -File scripts/build-and-sbom.ps1 -SkipBuild
+pwsh -NoProfile -File scripts/sandbox-lifecycle.ps1 up
+```
+
+Bash:
+
+```bash
+bash scripts/sandbox-lifecycle.sh build
+bash scripts/build-and-sbom.sh --skip-build
+bash scripts/sandbox-lifecycle.sh up
+```
+
+`up` behaelt vorhandene Container und meldet ein veraltetes Image als Fehler.
+Erst nach der Sicherung `recreate` statt `up` verwenden, um einen vorhandenen
+Container bewusst zu ersetzen. Volumes bleiben erhalten. Fuer den optionalen
+Home-Baseline-Override bei jedem Lifecycle-Aufruf `-HomeBaseline` beziehungsweise
+`--home-baseline` ergaenzen. Es erfolgt kein automatischer Home-Runtime-Sync.
+
+*`up` retains existing containers and reports an outdated image as an error.
+Only after backup, use `recreate` instead of `up` to deliberately replace a
+container. Volumes are retained. Add `-HomeBaseline` or `--home-baseline` to
+each lifecycle call when using the optional Home Baseline override. There is
+no automatic Home Runtime sync.*
+
+Cross-Build bedeutet Bauen fuer eine andere Architektur. Er ist nur mit
+expliziter Zielplattform und zusaetzlicher Freigabe erlaubt:
+`-Platform linux/amd64 -AllowCrossArchitecture` beziehungsweise
+`--platform linux/amd64 --allow-cross-architecture`. Das ist keine Zusicherung,
+dass die benoetigte Uebersetzung auf dem Host verfuegbar ist. Widersprechende
+`DOCKER_DEFAULT_PLATFORM`- oder `CONTAINER_DEFAULT_PLATFORM`-Werte muessen
+vorher entfernt oder angepasst werden. Direkte `podman compose`-Aufrufe
+umgehen die Wrapper-Pruefung; der Dockerfile prueft nur die Zielarchitektur.
+
+*A cross-build targets another architecture and requires both an explicit
+platform and the additional approval option. This does not guarantee host
+translation support. Remove or correct conflicting platform environment
+defaults first. Direct Compose calls bypass the wrapper guard; the Dockerfile
+only checks the target architecture. Native ARM64 operation needs neither
+macOS Intel-app translation nor Linux-VM Intel translation.*
 
 ## Validierung vor Commit
 

@@ -101,6 +101,52 @@ unpassendes Artefakt zu laden.
 during the build. An unknown value fails the build instead of downloading an
 incorrect artifact.
 
+## Host- und Image-Pruefung / Host and Image Guard
+
+**DE:** `scripts/check-container-architecture.*` prueft physische Hardware,
+Podman-Engine und optional ein Image. Die Standardplattform ist nativ:
+`linux/arm64` auf Apple Silicon, `linux/amd64` auf Intel/AMD. Eine uebersetzte
+macOS-Shell aendert diese Hardwareentscheidung nicht. Unbekannte Werte,
+widersprechende Plattform-Umgebungsvariablen und nicht freigegebene
+Abweichungen fuehren zum Fehlerstatus.
+
+**EN:** `scripts/check-container-architecture.*` checks physical hardware,
+the Podman engine, and optionally an image. The default target is native:
+`linux/arm64` on Apple Silicon and `linux/amd64` on Intel/AMD. A translated
+macOS shell does not change the hardware decision. Unknown values,
+conflicting platform environment variables, and unapproved mismatches fail.
+
+**DE:** `scripts/sandbox-lifecycle.*` bietet `build`, `up` und `recreate`.
+Ein temporaerer Compose-Override setzt Image und Plattform explizit; bestehende
+Mounts bleiben erhalten. Nach Build und vor Start wird das Image geprueft.
+`up` ersetzt keine vorhandenen Container. `recreate` ist bewusst destruktiv
+fuer deren beschreibbare Schicht: vorher Nutzerdaten sichern und Audit
+exportieren. Keine Volumes werden geloescht. `scripts/build-and-sbom.*`
+verwendet denselben Pruefvertrag, auch bei `SkipBuild`.
+
+**EN:** `scripts/sandbox-lifecycle.*` exposes `build`, `up`, and `recreate`.
+A temporary Compose override sets the image and platform explicitly without
+changing mounts. Images are checked after build and before start. `up` never
+replaces existing containers. `recreate` deliberately destroys their writable
+layer: back up user data and export the audit first. Volumes are never removed.
+The SBOM scripts use the same guard, including with `SkipBuild`.
+
+**DE:** Cross-Builds brauchen sowohl eine explizite Plattform als auch
+`-AllowCrossArchitecture` beziehungsweise `--allow-cross-architecture`.
+Direkte Compose-Aufrufe umgehen die Host-Pruefung. Die Dockerfile-Auswahl
+passender Binaries allein beweist keine native Host-Ausfuehrung. Die native
+ARM64-Sandbox benoetigt keine Intel-Uebersetzung. Aussagen zum Lebenszyklus
+von macOS-Intel-Apps gelten nicht automatisch fuer Linux-VM-Uebersetzung.
+Die Befehle und Sicherungshinweise stehen im
+[README](../../README.md#architekturgesicherter-neubau--architecture-checked-rebuild).
+
+**EN:** Cross-builds require an explicit platform and the additional approval
+option. Direct Compose calls bypass the host guard. Selecting correct target
+binaries in the Dockerfile alone does not prove native host execution. The
+native ARM64 sandbox needs no Intel translation. The lifecycle of Intel macOS
+apps does not automatically describe translation inside Linux VMs. See the
+README for commands and backup precautions.
+
 ## Agenten- und Sicherheitswerkzeuge / Agent and Security Tools
 
 **DE:** OpenCode, Codex, Claude Code, Gemini CLI und GitHub Copilot CLI werden

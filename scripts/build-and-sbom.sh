@@ -7,6 +7,9 @@ CONTAINER_RUNTIME="${CONTAINER_RUNTIME:-podman}"
 SYFT_VERSION="${SYFT_VERSION:-1.46.0}"
 SKIP_BUILD="${SKIP_BUILD:-false}"
 DRY_RUN="false"
+PLATFORM=""
+ALLOW_CROSS="false"
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
 usage() {
   cat <<'USAGE'
@@ -21,6 +24,8 @@ Options:
   --runtime NAME      Container runtime: podman.
   --skip-build        Scan the existing image without rebuilding it.
   --dry-run           Show the planned build and SBOM checks without writes.
+  --platform VALUE    Explicit linux/arm64 or linux/amd64 target.
+  --allow-cross-architecture  Approve a non-native target with --platform.
   -h, --help          Show this help.
 
 Sicherheit / Security:
@@ -55,6 +60,14 @@ while [[ $# -gt 0 ]]; do
     DRY_RUN="true"
     shift
     ;;
+  --platform)
+    PLATFORM="${2:?--platform requires a value}"
+    shift 2
+    ;;
+  --allow-cross-architecture)
+    ALLOW_CROSS="true"
+    shift
+    ;;
   -h | --help)
     usage
     exit 0
@@ -82,9 +95,14 @@ detect_runtime() {
 }
 
 runtime="$(detect_runtime)"
+architecture_args=()
+[[ -z "$PLATFORM" ]] || architecture_args+=(--platform "$PLATFORM")
+[[ "$ALLOW_CROSS" != true ]] || architecture_args+=(--allow-cross-architecture)
+if [[ "$SKIP_BUILD" == true ]]; then architecture_args+=(--image "$IMAGE_NAME"); fi
+PLATFORM="$(bash "${script_dir}/check-container-architecture.sh" ${architecture_args[@]+"${architecture_args[@]}"})"
 
 if [[ "${DRY_RUN}" == "true" ]]; then
-  printf '%s\n' "DRY-RUN: ${runtime} build --pull -t <local-image> . (unless --skip-build)"
+  printf '%s\n' "DRY-RUN: ${runtime} build --pull --platform ${PLATFORM} -t <local-image> . (unless --skip-build)"
   printf '%s\n' "DRY-RUN: require image-integrated Syft or host Syft exactly ${SYFT_VERSION}; no moving container fallback"
   printf '%s\n' "DRY-RUN: write one CycloneDX JSON file below ${SBOM_DIR}"
   exit 0
@@ -93,8 +111,10 @@ fi
 mkdir -p "${SBOM_DIR}"
 
 if [[ "${SKIP_BUILD}" != "true" ]]; then
-  "${runtime}" build --pull -t "${IMAGE_NAME}" .
+  "${runtime}" build --pull --platform "$PLATFORM" -t "${IMAGE_NAME}" .
 fi
+bash "${script_dir}/check-container-architecture.sh" --platform "$PLATFORM" \
+  ${architecture_args[@]+"${architecture_args[@]}"} --image "$IMAGE_NAME" >/dev/null
 
 date_stamp="$(date +%Y-%m-%d)"
 safe_image="$(printf '%s' "${IMAGE_NAME}" | tr '/:@' '---' | tr -cd 'A-Za-z0-9._-')"
