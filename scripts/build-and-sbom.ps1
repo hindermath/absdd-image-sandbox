@@ -18,6 +18,10 @@
     Exakt erlaubte Host-Version / exact allowed host version.
 .PARAMETER SkipBuild
     Vorhandenes Image verwenden / use the existing image.
+.PARAMETER Platform
+    Explizite Linux-Zielplattform / explicit Linux target platform.
+.PARAMETER AllowCrossArchitecture
+    Cross-Build mit expliziter Plattform erlauben / approve an explicit cross-build.
 .EXAMPLE
     pwsh -NoProfile -File scripts/build-and-sbom.ps1 -SkipBuild -WhatIf
 #>
@@ -27,7 +31,9 @@ param(
     [string] $SbomDir = '',
     [ValidateSet('podman')] [string] $Runtime = 'podman',
     [string] $SyftVersion = '1.46.0',
-    [switch] $SkipBuild
+    [switch] $SkipBuild,
+    [string] $Platform = '',
+    [switch] $AllowCrossArchitecture
 )
 
 Set-StrictMode -Version Latest
@@ -48,16 +54,21 @@ function New-AdeSandboxSbom {
         [Parameter(Mandatory)] [string] $OutputDirectory,
         [Parameter(Mandatory)] [string] $ContainerRuntime,
         [Parameter(Mandatory)] [string] $RequiredSyftVersion,
-        [switch] $UseExistingImage
+        [switch] $UseExistingImage,
+        [string] $TargetPlatform,
+        [switch] $PermitCrossArchitecture
     )
 
     if ($ContainerRuntime -ne 'podman') {
         throw "Unsupported container runtime: $ContainerRuntime. This repository uses Podman only."
     }
     $runtimeCommand = Get-Command podman -ErrorAction Stop
+    $architectureArguments = @{ Platform = $TargetPlatform; AllowCrossArchitecture = $PermitCrossArchitecture }
+    if ($UseExistingImage) { $architectureArguments.ImageName = $TargetImage }
+    $targetPlatform = & "$PSScriptRoot/check-container-architecture.ps1" @architectureArguments
 
     if (-not $PSCmdlet.ShouldProcess($TargetImage, 'Build image and create CycloneDX SBOM')) {
-        Write-Output "WHATIF: $($runtimeCommand.Source) build --pull -t <local-image> . (unless -SkipBuild)"
+        Write-Output "WHATIF: $($runtimeCommand.Source) build --pull --platform $targetPlatform -t <local-image> . (unless -SkipBuild)"
         Write-Output "WHATIF: require image-integrated Syft or host Syft exactly $RequiredSyftVersion; no moving container fallback"
         Write-Output "WHATIF: write one CycloneDX JSON file below $OutputDirectory"
         return
@@ -66,8 +77,11 @@ function New-AdeSandboxSbom {
     New-Item -ItemType Directory -Force -Path $OutputDirectory | Out-Null
     $resolvedOutput = (Resolve-Path -LiteralPath $OutputDirectory).ProviderPath
     if (-not $UseExistingImage) {
-        Invoke-AdeNativeCommand -FilePath $runtimeCommand.Source -Arguments @('build', '--pull', '-t', $TargetImage, '.')
+        Invoke-AdeNativeCommand -FilePath $runtimeCommand.Source -Arguments @('build', '--pull', '--platform', $targetPlatform, '-t', $TargetImage, '.')
     }
+    $architectureArguments.Platform = $targetPlatform
+    $architectureArguments.ImageName = $TargetImage
+    $null = & "$PSScriptRoot/check-container-architecture.ps1" @architectureArguments
 
     $safeImage = $TargetImage -replace '[/:@\\]+', '-' -replace '[^A-Za-z0-9._-]', ''
     $outPath = Join-Path $resolvedOutput "$(Get-Date -Format 'yyyy-MM-dd')-$safeImage.cdx.json"
@@ -103,4 +117,4 @@ function New-AdeSandboxSbom {
 
 if (-not $ImageName) { $ImageName = if ($env:IMAGE_NAME) { $env:IMAGE_NAME } else { 'localhost/absdd-image-sandbox_ade:latest' } }
 if (-not $SbomDir) { $SbomDir = if ($env:SBOM_DIR) { $env:SBOM_DIR } else { 'sboms' } }
-New-AdeSandboxSbom -TargetImage $ImageName -OutputDirectory $SbomDir -ContainerRuntime $Runtime -RequiredSyftVersion $SyftVersion -UseExistingImage:$SkipBuild -WhatIf:$WhatIfPreference
+New-AdeSandboxSbom -TargetImage $ImageName -OutputDirectory $SbomDir -ContainerRuntime $Runtime -RequiredSyftVersion $SyftVersion -UseExistingImage:$SkipBuild -TargetPlatform $Platform -PermitCrossArchitecture:$AllowCrossArchitecture -WhatIf:$WhatIfPreference
