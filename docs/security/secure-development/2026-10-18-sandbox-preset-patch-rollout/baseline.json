@@ -1,0 +1,388 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "SecureDevelopmentGateEvidence",
+  "contextId": "sandbox-preset-patch-rollout",
+  "gate": "baseline",
+  "mode": "training",
+  "createdAt": "2026-10-18T23:44:08.9162990+02:00",
+  "review": {
+    "owner": "@hindermath",
+    "reviewer": "Codex, explicitly delegated technical revalidation only",
+    "reviewedAt": "2026-10-18T23:44:08.9162990+02:00",
+    "reviewDue": "2027-10-18",
+    "residualRisk": "Document integrity and installed-contract verification do not establish full checklist implementation, product acceptance or regulatory certification.",
+    "reevaluationTrigger": "Preset, controlled-document, scope, authority or evidence change."
+  },
+  "assessments": [
+    {
+      "id": "DOC-001",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/Richtlinie_Sichere-Entwicklung.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-002",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/Checklistensammelband_Sichere-Entwicklung.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-003",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/checklisten/CL_01_Standards-Anwendbarkeit.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-004",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/checklisten/CL_02_Sichere-Softwarearchitektur.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-005",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-006",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/checklisten/CL_04_Bedrohungsmodellierung.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-007",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/checklisten/CL_05_Lieferkette-Build-Integritaet.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-008",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/checklisten/CL_06_Schwachstellenoffenlegung.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-009",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/checklisten/CL_07_CRA-Anwendbarkeit.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-010",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/checklisten/CL_08_Sicherheits-Code-Review.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-011",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-012",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-013",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/checklisten/CL_11_Datenschutz-Folgenabschaetzung.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-014",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-015",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/mitgeltende-dokumente/BCM-Notfallhandbuch.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-016",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/mitgeltende-dokumente/Checkliste_Secure-Development-Life-Cycle.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-017",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/mitgeltende-dokumente/Datenschutzleitlinie.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-018",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/mitgeltende-dokumente/Gebrauch_kryptografischer_Massnahmen.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-019",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/mitgeltende-dokumente/Kompetenzprofile_und_Schulungsplan_Sichere-Entwicklung.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-020",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/mitgeltende-dokumente/Leitlinie_Sichere-Entwicklungs-Sandbox.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-021",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/mitgeltende-dokumente/Leitlinie_Sichere-Programmierung.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-022",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/mitgeltende-dokumente/Leitlinie_Sicheres-Softwaredesign.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-023",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/mitgeltende-dokumente/Richtlinie_Changemanagement.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-024",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/mitgeltende-dokumente/Richtlinie_Dienstleister-und-Lieferantenbeziehungen.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-025",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/mitgeltende-dokumente/Richtlinie_Secure-Development-Life-Cycle.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-026",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/mitgeltende-dokumente/Richtlinie_Testmanagement.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-027",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/mitgeltende-dokumente/Richtlinie_Zugangssteuerung.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-028",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/mitgeltende-dokumente/Standardsregister_Sichere-Entwicklung.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-029",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/mitgeltende-dokumente/Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    },
+    {
+      "id": "DOC-030",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/Lernpfad_Sichere-Entwicklung_Lehrjahr-1-bis-3.md",
+      "scope": "Document identity/version/hash, not implementation of all controls."
+    }
+  ],
+  "outcome": "Ready",
+  "externalComparisonBoundary": "HOSK/GWDG: ExternalComparison only; never local evidence",
+  "verificationScope": "Technical installation and document identity/integrity only; no new product, risk, release or certification decision.",
+  "baselineBinding": {
+    "manifestPath": "docs/secure-development/baseline-manifest.json",
+    "baselineVersion": "3.2.0",
+    "manifestNormalizedSha256": "65d80a5cf4c93f23e81b3ec9453853c9856210f75136ab02baca0e80eb6683bb",
+    "documentBindings": [
+      {
+        "path": "Richtlinie_Sichere-Entwicklung.md",
+        "version": "3.2.0",
+        "normalizedSha256": "bd2947abf2c367a23c3461ea84de50ac5202436c3b15b5c6d9b6bb64318e132e"
+      },
+      {
+        "path": "Checklistensammelband_Sichere-Entwicklung.md",
+        "version": "2.2.0",
+        "normalizedSha256": "ac4ebb80a4954db060074762f99c211930a347bec965902dc08becf608aa0b69"
+      },
+      {
+        "path": "checklisten/CL_01_Standards-Anwendbarkeit.md",
+        "version": "2.0.0",
+        "normalizedSha256": "b0b3b15c1ad7d46a8f83f563583d9538d72332787f4468d63e691ec37fc4decf"
+      },
+      {
+        "path": "checklisten/CL_02_Sichere-Softwarearchitektur.md",
+        "version": "2.0.0",
+        "normalizedSha256": "1b387329009286ce7a0a67b7af1f4bd3f60d290413f57c2eab307ca4b257ec9d"
+      },
+      {
+        "path": "checklisten/CL_03_Krypto-Mindestvorgaben.md",
+        "version": "2.0.0",
+        "normalizedSha256": "031cc40fa44877e34cafc1b398f4ea582c1088647cae4659824e8ff7b5e6b5e9"
+      },
+      {
+        "path": "checklisten/CL_04_Bedrohungsmodellierung.md",
+        "version": "2.0.0",
+        "normalizedSha256": "12d26d0051f4b6de966c7c67c5f0004e25c3136a269fd586a4a3f0f9418d512e"
+      },
+      {
+        "path": "checklisten/CL_05_Lieferkette-Build-Integritaet.md",
+        "version": "2.0.0",
+        "normalizedSha256": "058f9118d955f710953c1ef352189aaad2dda2dd833f82f26d350c5ae54260ec"
+      },
+      {
+        "path": "checklisten/CL_06_Schwachstellenoffenlegung.md",
+        "version": "2.0.0",
+        "normalizedSha256": "b5392a2109a08770aa06d5c2a318653058b9687029cdb404ebb08c615b81b972"
+      },
+      {
+        "path": "checklisten/CL_07_CRA-Anwendbarkeit.md",
+        "version": "2.0.0",
+        "normalizedSha256": "b661bb1ab93a5d8a4105f39ab77e2738d80664ac0c1057be04dfa02069de9874"
+      },
+      {
+        "path": "checklisten/CL_08_Sicherheits-Code-Review.md",
+        "version": "2.0.0",
+        "normalizedSha256": "59e55eba03904d1a1e80f2ad4fd67c700b998006adda6a0be838f60d09a17207"
+      },
+      {
+        "path": "checklisten/CL_09_KI-Codeerzeugung.md",
+        "version": "2.2.0",
+        "normalizedSha256": "071ed93b5c2bcdfa585f54e7c5386db8cc265d92c6b0bc018ed77d0adfabb766"
+      },
+      {
+        "path": "checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+        "version": "2.0.0",
+        "normalizedSha256": "f99e707e4a4186c6ab4031cccdb796981b766ff3d4e09f43798d223e37715f25"
+      },
+      {
+        "path": "checklisten/CL_11_Datenschutz-Folgenabschaetzung.md",
+        "version": "2.0.0",
+        "normalizedSha256": "f04655647392351e1fd283d39c7ac874a5974eb597068e286d11508fc4c16381"
+      },
+      {
+        "path": "checklisten/CL_12_Agentische-KI-Sandbox.md",
+        "version": "2.2.0",
+        "normalizedSha256": "2ef55845c8d66e7cd1da1ef4a3cb36c7c29b79a3ec1bc6b3a7edb4b4a0505784"
+      },
+      {
+        "path": "mitgeltende-dokumente/BCM-Notfallhandbuch.md",
+        "version": "1.0.0",
+        "normalizedSha256": "215c3ce2663ac50929d05d42c853e6419d0b5df24b0261b04244fc4537520432"
+      },
+      {
+        "path": "mitgeltende-dokumente/Checkliste_Secure-Development-Life-Cycle.md",
+        "version": "1.0.0",
+        "normalizedSha256": "7f04bcf5fa25af9d7ef518d7198b87ac9e54db747445ee1b8aa42199421b0830"
+      },
+      {
+        "path": "mitgeltende-dokumente/Datenschutzleitlinie.md",
+        "version": "1.0.0",
+        "normalizedSha256": "867941dcb41cdfa870c514ed8906ba6cc39ac40116f86839ddba5da0daf4150f"
+      },
+      {
+        "path": "mitgeltende-dokumente/Gebrauch_kryptografischer_Massnahmen.md",
+        "version": "1.0.0",
+        "normalizedSha256": "d61943b4a3c1ba61f9524b6c1b30fee548c5a7c93afbf3219e80e323df59018a"
+      },
+      {
+        "path": "mitgeltende-dokumente/Kompetenzprofile_und_Schulungsplan_Sichere-Entwicklung.md",
+        "version": "1.0.0",
+        "normalizedSha256": "d48b8a49f1e2d28491b91e9c0b65bb1715e278ce79618647ea38aba32a6e70f0"
+      },
+      {
+        "path": "mitgeltende-dokumente/Leitlinie_Sichere-Entwicklungs-Sandbox.md",
+        "version": "1.0.0",
+        "normalizedSha256": "8b808faacad06e354d962bc3cfa6c93be1ca349603115f534cfaaecb40be2582"
+      },
+      {
+        "path": "mitgeltende-dokumente/Leitlinie_Sichere-Programmierung.md",
+        "version": "1.0.0",
+        "normalizedSha256": "37d095a65fa498e170cf6a0e21e303a5ad1d5cdd09b3275b8c8e8fff3cb3d805"
+      },
+      {
+        "path": "mitgeltende-dokumente/Leitlinie_Sicheres-Softwaredesign.md",
+        "version": "1.0.0",
+        "normalizedSha256": "ac9135ddeb4afbf66bc626988325817d22d9e3b1fadea27193b05858e455900b"
+      },
+      {
+        "path": "mitgeltende-dokumente/Richtlinie_Changemanagement.md",
+        "version": "1.0.0",
+        "normalizedSha256": "8db6c57dfb68d153cf32af5cdd9cf62549bc2d4817002ce3f2b08c6833313a55"
+      },
+      {
+        "path": "mitgeltende-dokumente/Richtlinie_Dienstleister-und-Lieferantenbeziehungen.md",
+        "version": "1.0.0",
+        "normalizedSha256": "07456bf83731b8fd9dbb6e40a685cf65066ff163928315dfd30cad942a9aad23"
+      },
+      {
+        "path": "mitgeltende-dokumente/Richtlinie_Secure-Development-Life-Cycle.md",
+        "version": "1.2.0",
+        "normalizedSha256": "52808b36e49db9a85f3f95866995ca7dacfd79e1a5a3622ecca324615584fd49"
+      },
+      {
+        "path": "mitgeltende-dokumente/Richtlinie_Testmanagement.md",
+        "version": "1.0.0",
+        "normalizedSha256": "7f45078247cf4776e0d14f3a89e3e5a7617d49ea475a9d04ed61c09267f84199"
+      },
+      {
+        "path": "mitgeltende-dokumente/Richtlinie_Zugangssteuerung.md",
+        "version": "1.0.0",
+        "normalizedSha256": "872541b8135315963b246c7678e6244a17dd44013ef5ad2bde30f41bcd0dfc41"
+      },
+      {
+        "path": "mitgeltende-dokumente/Standardsregister_Sichere-Entwicklung.md",
+        "version": "1.0.0",
+        "normalizedSha256": "f0aae0f1448d8bc800470804185974ef50b92be08de9f255f29864da6038709e"
+      },
+      {
+        "path": "mitgeltende-dokumente/Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md",
+        "version": "1.4.0",
+        "normalizedSha256": "65ea3815188c27acd000d14a908eb095ed53c782aee6556b6fcd6390cc2c4567"
+      },
+      {
+        "path": "Lernpfad_Sichere-Entwicklung_Lehrjahr-1-bis-3.md",
+        "version": "1.0.0",
+        "normalizedSha256": "ab1eb29b864b40f539d92e888684c2c485324ce72b747119d7e3b7ff46d1197b"
+      }
+    ]
+  }
+}

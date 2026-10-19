@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "contextId": "sandbox-preset-patch-rollout",
+  "platform": "macOS arm64",
+  "controlledSourceCommit": "1ee74c02a19de79518cea34db9a54e71b0178332",
+  "installationState": "Authorized working-tree candidate before delivery",
+  "python": "Python 3.15.0",
+  "commands": [
+    {
+      "command": "bash",
+      "arguments": [
+        ".specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.sh",
+        "status",
+        "docs/security/secure-development/2026-10-18-sandbox-preset-patch-rollout"
+      ],
+      "exitCode": 0,
+      "output": "Context: docs/security/secure-development/2026-10-18-sandbox-preset-patch-rollout\nGate baseline: Ready\nGate delta: Ready\nGate closure: Ready\nGate image-impact: Ready\nOverall: Ready\nDecision technicalValidation: Fulfilled\nDecision pilotAuthorization: Open\nDecision projectAcceptance: Open\nDecision generalRelease: Open\nNext action: Complete this repository exact-head technical gates and authorized MergeAndSync. Recheck intake, review freshness, routing and current authority before any later feature execution."
+    },
+    {
+      "command": "pwsh",
+      "arguments": [
+        "-NoProfile",
+        "-File",
+        ".specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.ps1",
+        "-Action",
+        "Status",
+        "-EvidenceDirectory",
+        "docs/security/secure-development/2026-10-18-sandbox-preset-patch-rollout"
+      ],
+      "exitCode": 0,
+      "output": "Context: docs/security/secure-development/2026-10-18-sandbox-preset-patch-rollout\nGate baseline: Ready\nGate delta: Ready\nGate closure: Ready\nGate image-impact: Ready\nOverall: Ready\nDecision technicalValidation: Fulfilled\nDecision pilotAuthorization: Open\nDecision projectAcceptance: Open\nDecision generalRelease: Open\nNext action: Complete this repository exact-head technical gates and authorized MergeAndSync. Recheck intake, review freshness, routing and current authority before any later feature execution."
+    },
+    {
+      "command": "bash",
+      "arguments": [
+        ".specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.sh",
+        "review",
+        "baseline",
+        "sandbox-preset-patch-rollout",
+        "training"
+      ],
+      "exitCode": 0,
+      "output": "Reviewed: gate=baseline context=sandbox-preset-patch-rollout mode=training outcome=Ready"
+    },
+    {
+      "command": "pwsh",
+      "arguments": [
+        "-NoProfile",
+        "-File",
+        ".specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.ps1",
+        "-Action",
+        "Review",
+        "-Gate",
+        "baseline",
+        "-ContextId",
+        "sandbox-preset-patch-rollout",
+        "-Mode",
+        "training"
+      ],
+      "exitCode": 0,
+      "output": "Reviewed: gate=baseline context=sandbox-preset-patch-rollout mode=training outcome=Ready"
+    },
+    {
+      "command": "bash",
+      "arguments": [
+        ".specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.sh",
+        "review",
+        "delta",
+        "sandbox-preset-patch-rollout",
+        "training"
+      ],
+      "exitCode": 0,
+      "output": "Reviewed: gate=delta context=sandbox-preset-patch-rollout mode=training outcome=Ready"
+    },
+    {
+      "command": "pwsh",
+      "arguments": [
+        "-NoProfile",
+        "-File",
+        ".specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.ps1",
+        "-Action",
+        "Review",
+        "-Gate",
+        "delta",
+        "-ContextId",
+        "sandbox-preset-patch-rollout",
+        "-Mode",
+        "training"
+      ],
+      "exitCode": 0,
+      "output": "Reviewed: gate=delta context=sandbox-preset-patch-rollout mode=training outcome=Ready"
+    },
+    {
+      "command": "bash",
+      "arguments": [
+        ".specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.sh",
+        "review",
+        "closure",
+        "sandbox-preset-patch-rollout",
+        "training"
+      ],
+      "exitCode": 0,
+      "output": "Reviewed: gate=closure context=sandbox-preset-patch-rollout mode=training outcome=Ready"
+    },
+    {
+      "command": "pwsh",
+      "arguments": [
+        "-NoProfile",
+        "-File",
+        ".specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.ps1",
+        "-Action",
+        "Review",
+        "-Gate",
+        "closure",
+        "-ContextId",
+        "sandbox-preset-patch-rollout",
+        "-Mode",
+        "training"
+      ],
+      "exitCode": 0,
+      "output": "Reviewed: gate=closure context=sandbox-preset-patch-rollout mode=training outcome=Ready"
+    },
+    {
+      "command": "bash",
+      "arguments": [
+        ".specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.sh",
+        "review",
+        "image-impact",
+        "sandbox-preset-patch-rollout",
+        "training"
+      ],
+      "exitCode": 0,
+      "output": "Reviewed: gate=image-impact context=sandbox-preset-patch-rollout mode=training outcome=Ready"
+    },
+    {
+      "command": "pwsh",
+      "arguments": [
+        "-NoProfile",
+        "-File",
+        ".specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.ps1",
+        "-Action",
+        "Review",
+        "-Gate",
+        "image-impact",
+        "-ContextId",
+        "sandbox-preset-patch-rollout",
+        "-Mode",
+        "training"
+      ],
+      "exitCode": 0,
+      "output": "Reviewed: gate=image-impact context=sandbox-preset-patch-rollout mode=training outcome=Ready"
+    }
+  ],
+  "before": [
+    {
+      "path": "baseline.json",
+      "sha256": "1ba492a434edbc35c8a639d853466c5e59a4443ee2d24c8b6525764ed37d6320"
+    },
+    {
+      "path": "closure.json",
+      "sha256": "bf93074aec6a01e73f6d9dbf3edab0986b24a92475dabbfe0f8fffaed148fc87"
+    },
+    {
+      "path": "deltas/fourteen-readme-patches.json",
+      "sha256": "5350c7091093eb627ade03d970173108b5ee5e5ae09317dd5d306e3ad02f2dc3"
+    },
+    {
+      "path": "evidence-matrix.md",
+      "sha256": "824a343ce7e4f1fef6c00acf9b002e6b62bbb17f2eb461a9f72ee3910c42b248"
+    },
+    {
+      "path": "image-impact.json",
+      "sha256": "27920be122aa73256f7b3bd91add2f99d28f8088d8c29dcd2821f3a557b79e8d"
+    }
+  ],
+  "after": [
+    {
+      "path": "baseline.json",
+      "sha256": "1ba492a434edbc35c8a639d853466c5e59a4443ee2d24c8b6525764ed37d6320"
+    },
+    {
+      "path": "closure.json",
+      "sha256": "bf93074aec6a01e73f6d9dbf3edab0986b24a92475dabbfe0f8fffaed148fc87"
+    },
+    {
+      "path": "deltas/fourteen-readme-patches.json",
+      "sha256": "5350c7091093eb627ade03d970173108b5ee5e5ae09317dd5d306e3ad02f2dc3"
+    },
+    {
+      "path": "evidence-matrix.md",
+      "sha256": "824a343ce7e4f1fef6c00acf9b002e6b62bbb17f2eb461a9f72ee3910c42b248"
+    },
+    {
+      "path": "image-impact.json",
+      "sha256": "27920be122aa73256f7b3bd91add2f99d28f8088d8c29dcd2821f3a557b79e8d"
+    }
+  ],
+  "readOnly": true
+}

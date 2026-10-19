@@ -1,6 +1,13 @@
 # Intake Review Governance Preset
 
-Aktuelle Version / Current version: **0.2.4**. Laufende `Active`-Serien mit
+Patch **0.2.5** liefert die verbesserte zweisprachige Einstiegs- und
+Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
+[Release-Nachweis / Release record](docs/release-0.2.5-validation.md).
+
+*Patch 0.2.5 packages the improved bilingual getting-started and composition
+guide. Behavior and authority boundaries remain unchanged.*
+
+Aktuelle Version / Current version: **0.2.5**. Laufende `Active`-Serien mit
 mindestens einem `Active`-Mitglied bleiben ohne weiteren `Eligible`-Kandidaten
 gueltig; `eligibleCandidate` ist dann `N/A`. `Ready` verlangt weiterhin genau
 einen Kandidaten. Mehrfachkandidaten, Hash-, Pfad- und Abhaengigkeitsfehler
@@ -9,7 +16,14 @@ bleiben gesperrt. Schema, Commands und Prioritaet bleiben gleich.
 Running Active series with an Active member may have no additional Eligible
 candidate. The candidate remains N/A; this grants no execution authority.
 Ready still requires exactly one candidate, and all integrity checks remain.
-Coordinated versions: Authoring 0.3.6, Review 0.2.4, Sequencing 0.2.7.
+Coordinated patch versions: Authoring 0.3.8, Review 0.2.5, Sequencing 0.2.9.
+
+Fuer die Python-basierten Pruefungen eine gepflegte Python-Version verwenden.
+macOS-System-Python 3.9 kann gueltige UTC-Zeitstempel mit sieben Nachkommastellen
+abweisen. Die Release-Pruefung verwendet lokal Python 3.14 und in Intake-CI 3.12.
+*Use a maintained Python runtime for Python-backed validation. macOS system
+Python 3.9 can reject valid UTC timestamps with seven fractional digits.
+Release validation uses Python 3.14 locally and 3.12 in Intake CI.*
 Each preset remains independently installable; historical evidence is preserved.
 
 Gemeinsame Konfigurationsvalidatoren akzeptieren auch die bereits etablierte,
@@ -48,6 +62,58 @@ making those project choices itself.
 
 ## Commands
 
+### Einstieg und Ergebnisdateien / Getting Started and Result Files
+
+Voraussetzung: initialisiertes Zielprojekt, Spec Kit `>=0.8.3`, eindeutige
+Intake-/Serien-/Kampagnenziele und relevante Policy. Das [Manifest](preset.yml)
+liefert eigene Commands und Policy-, Request-, Result-, Report-, Checklisten-
+und Runbook-Starter. Installation erstellt keinen fertigen Review und
+aktiviert keinen projektweiten Pflicht-Gate ohne dessen Policy.
+
+*Prerequisites: initialized target project, Spec Kit >=0.8.3, explicit
+single/series/campaign targets and policy. The [manifest](preset.yml) supplies
+standalone commands and policy, request, result, report, checklist/runbook
+starters. Installation creates no completed review or policy activation.*
+
+„Read-only Review“ schützt die Intake-Zieldateien: Die Review-Anweisungen
+verlangen Result und Report außerhalb dieser Ziele. Status und Validatoren
+prüfen lesend. Repair benötigt Änderungsautorität und vollständigen Re-Review.
+Ein Starter ist noch kein Review-Ergebnis.
+
+*Read-only review protects intake targets: review instructions require result
+and report outside those targets. Status/validators inspect without writes.
+Repair needs mutation authority and full re-review. A starter is not a result.*
+
+Beispiel in der Agentenoberfläche / Example agent invocation:
+
+```text
+DE: $speckit-intake-review Pruefe intakes/order-import-validation.md im
+Modus Single. Veraendere den Intake nicht; benenne Result-/Report-Pfade.
+EN: $speckit-intake-review Review intakes/order-import-validation.md in
+Single mode. Preserve the intake; report result and report paths.
+```
+
+Findings behandeln, notwendige Reparatur separat beauftragen, danach mit
+`$speckit-intake-review-status` die Frische prüfen. `ReadyWithAcceptedRisks`
+braucht menschliche Risikoannahme; auch `Ready` startet keine Folgephase.
+Drift klären, statt Result-Hashes zum Bestehen umzuschreiben.
+
+*Address findings, separately authorize repair, then check freshness with
+intake-review-status. ReadyWithAcceptedRisks needs human risk acceptance;
+even Ready starts no next phase. Resolve drift, never forge result hashes.*
+
+Priorität 65 startet keinen Review nach Authoring. Kleinere Zahlen haben
+höhere Auflösungspriorität; Presets/Overrides können gleichnamige Starter
+ersetzen. Eigene Reihenfolgen separat prüfen; Hashbindung, Frische und
+Policy-Gates bleiben fachliche Bedingungen.
+
+*Priority 65 does not execute review after authoring. Lower numbers have higher
+precedence; presets/overrides can replace same-name starters. Check custom
+orderings separately; hashes, freshness and policy gates remain requirements.*
+
+Leserpfad / Reader path: [Install](#install) → [Commands](#commands) →
+[Safety](#safety) → [Completed Series](#abgeschlossene-serien--completed-series).
+
 - `$speckit-intake-review`: read-only semantic review for a single intake,
   ordered series, or parallel campaign.
 - `$speckit-intake-repair`: explicitly authorized repair followed by mandatory
@@ -57,9 +123,9 @@ making those project choices itself.
 ## Install
 
 ```bash
-specify preset add --from https://github.com/hindermath/spec-kit-preset-intake-review-governance/archive/refs/tags/v0.2.4.zip --priority 65
+specify preset add --from https://github.com/hindermath/spec-kit-preset-intake-review-governance/archive/refs/tags/v0.2.5.zip --priority 65
 specify preset list
-specify preset resolve
+specify preset resolve intake-review-policy-template
 ```
 
 Installing the preset does not silently change the standard eight-preset

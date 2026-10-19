@@ -220,6 +220,8 @@ session evidence aligned to the same pin.
 
 | 2026-10-10 | Fuenf Governance-Updates / Five governance updates | UpdateRequired: Security 0.7.1, Architecture 0.6.2 und Intake Authoring 0.3.7 / Review 0.2.4 / Sequencing 0.2.8 mit unveraenderlichen ZIP-Hashes, zentraler 14er-Matrix und aktuellen Guidance-Versionen. Neun andere Pakete, Prioritaeten, historische Evidence und menschliche Freigaben erhalten. Statistik-Nachlauf nach freigegebenem Quell-Commit; Methodik unveraendert. / Bounded integration, no product run or approval promotion; statistics follow the authorized source commit. [Nachweis / Evidence](maintenance/preset-alignment-2026-10-10.md). |
 
+| 2026-10-18 | Vierzehn README-Patch-Pakete / Fourteen README patch packages | Begrenzte Integration aus Home Baseline #335 mit unveraenderlichen Quellenbindungen, kompletter Agentenkomposition und getrennten technischen Assurance-Gates. Keine Image-/Provider-/Netzwerkaenderung, Produkt- oder Zertifizierungsfreigabe. Statistik-Nachlauf erst nach gesichtetem Quell-Commit; Methodik bleibt unveraendert. / Bounded installation; generated measurement follows the approved clean source commit. [Nachweis / Evidence](maintenance/preset-readme-patch-rollout-2026-10-18.md). |
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->

@@ -42,6 +42,19 @@ def command_path(surface: str, command: str) -> Path:
 
 
 class SpecKitAgentSurfaceParityTests(unittest.TestCase):
+    def test_composed_governance_commands_retain_all_wrappers_on_every_surface(self) -> None:
+        # DE: Einzelbesitzer-Paritaet erkennt verlorene Wrapper nicht.
+        # EN: Single-owner parity cannot detect lost wrappers on shared commands.
+        wrappers = ("Security", "Architecture", "iSAQB Architecture", "A11Y", "Cross-Platform", "Agent Parity")
+        for command in ("speckit.specify", "speckit.plan", "speckit.tasks"):
+            for surface in ("agy", "codex", "claude", "copilot", "opencode"):
+                body = strip_frontmatter(command_path(surface, command).read_text(encoding="utf-8"))
+                self.assertNotIn("{CORE_TEMPLATE}", body, f"unexpanded core: {surface}/{command}")
+                for wrapper in wrappers:
+                    self.assertIn(f"apply the {wrapper} Governance preset:", body,
+                                  f"missing wrapper: {wrapper}/{surface}/{command}")
+                self.assertIn("C3A-/C5-Evidence-Vertrag", body, f"missing architecture contract: {surface}/{command}")
+
     @classmethod
     def setUpClass(cls) -> None:
         cls.registry = read_json(PRESETS / ".registry")["presets"]

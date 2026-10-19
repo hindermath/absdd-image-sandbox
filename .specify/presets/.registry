@@ -1,429 +1,10 @@
 {
   "schema_version": "1.0",
   "presets": {
-    "isaqb-architecture-governance": {
-      "version": "0.2.2",
-      "source": "local",
-      "manifest_hash": "sha256:9f349a98c20f5200ec2cb50f9b18c2bee2cbfa48e7b7b5e643cd6970ac865eb9",
-      "enabled": true,
-      "priority": 30,
-      "registered_commands": {
-        "agy": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "claude": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "codex": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "copilot": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "opencode": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "zed": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ]
-      },
-      "registered_skills": [
-        "speckit-specify",
-        "speckit-plan",
-        "speckit-tasks"
-      ],
-      "installed_at": "2026-08-09T00:11:12.929703+00:00"
-    },
-    "a11y-governance": {
-      "version": "0.4.3",
-      "source": "local",
-      "manifest_hash": "sha256:abed4e64a34853417674c8403a660daa8b97606b42782be404f0d5faa3347c10",
-      "enabled": true,
-      "priority": 40,
-      "registered_commands": {
-        "agy": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "claude": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "codex": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "copilot": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "opencode": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "zed": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ]
-      },
-      "registered_skills": [
-        "speckit-specify",
-        "speckit-plan",
-        "speckit-tasks"
-      ],
-      "installed_at": "2026-08-09T00:11:14.536329+00:00"
-    },
-    "cross-platform-governance": {
-      "version": "0.2.2",
-      "source": "local",
-      "manifest_hash": "sha256:9eff272453e338884da0c695fe79d56ec074e83661d95cccced8800b3337a64e",
-      "enabled": true,
-      "priority": 50,
-      "registered_commands": {
-        "agy": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "claude": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "codex": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "copilot": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "opencode": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "zed": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ]
-      },
-      "registered_skills": [
-        "speckit-specify",
-        "speckit-plan",
-        "speckit-tasks"
-      ],
-      "installed_at": "2026-08-09T00:11:16.121565+00:00"
-    },
-    "agent-parity-governance": {
-      "version": "0.4.2",
-      "source": "local",
-      "manifest_hash": "sha256:33ab3c1bd99a5069af5c0006899c26476d0cabd868bd7ac55659bdd4e4794952",
-      "enabled": true,
-      "priority": 60,
-      "registered_commands": {
-        "agy": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "claude": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "codex": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "copilot": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "opencode": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ],
-        "zed": [
-          "speckit.specify",
-          "speckit.plan",
-          "speckit.tasks"
-        ]
-      },
-      "registered_skills": [
-        "speckit-specify",
-        "speckit-plan",
-        "speckit-tasks"
-      ],
-      "installed_at": "2026-08-09T00:11:17.703023+00:00"
-    },
-    "model-routing-governance": {
-      "version": "0.1.4",
-      "source": "local",
-      "manifest_hash": "sha256:a06eee81c3988b9ef617e131370c2522f4d4f8847c6dcfed833f465ed479fd0e",
-      "enabled": true,
-      "priority": 61,
-      "registered_commands": {
-        "agy": [
-          "speckit.model-routing-status",
-          "speckit.model-routing-refresh"
-        ],
-        "claude": [
-          "speckit.model-routing-status",
-          "speckit.model-routing-refresh"
-        ],
-        "codex": [
-          "speckit.model-routing-status",
-          "speckit.model-routing-refresh"
-        ],
-        "copilot": [
-          "speckit.model-routing-status",
-          "speckit.model-routing-refresh"
-        ],
-        "opencode": [
-          "speckit.model-routing-status",
-          "speckit.model-routing-refresh"
-        ],
-        "zed": [
-          "speckit.model-routing-status",
-          "speckit.model-routing-refresh"
-        ]
-      },
-      "registered_skills": [
-        "speckit-model-routing-status",
-        "speckit-model-routing-refresh"
-      ],
-      "installed_at": "2026-08-09T02:19:12.394721+00:00"
-    },
-    "parallel-autonomous-run-governance": {
-      "version": "0.2.6",
-      "source": "local",
-      "manifest_hash": "sha256:70af07aa51506790ed99e2743ec7a51127936de0d9e82239e2b3f03716539b0d",
-      "enabled": true,
-      "priority": 80,
-      "registered_commands": {
-        "agy": [
-          "speckit.parallel-autonomous",
-          "speckit.parallel-autonomous-status",
-          "speckit.parallel-autonomous-stop",
-          "speckit.parallel-autonomous-resume",
-          "speckit.parallel-autonomous-consolidate"
-        ],
-        "claude": [
-          "speckit.parallel-autonomous",
-          "speckit.parallel-autonomous-status",
-          "speckit.parallel-autonomous-stop",
-          "speckit.parallel-autonomous-resume",
-          "speckit.parallel-autonomous-consolidate"
-        ],
-        "codex": [
-          "speckit.parallel-autonomous",
-          "speckit.parallel-autonomous-status",
-          "speckit.parallel-autonomous-stop",
-          "speckit.parallel-autonomous-resume",
-          "speckit.parallel-autonomous-consolidate"
-        ],
-        "copilot": [
-          "speckit.parallel-autonomous",
-          "speckit.parallel-autonomous-status",
-          "speckit.parallel-autonomous-stop",
-          "speckit.parallel-autonomous-resume",
-          "speckit.parallel-autonomous-consolidate"
-        ],
-        "opencode": [
-          "speckit.parallel-autonomous",
-          "speckit.parallel-autonomous-status",
-          "speckit.parallel-autonomous-stop",
-          "speckit.parallel-autonomous-resume",
-          "speckit.parallel-autonomous-consolidate"
-        ],
-        "zed": [
-          "speckit.parallel-autonomous",
-          "speckit.parallel-autonomous-status",
-          "speckit.parallel-autonomous-stop",
-          "speckit.parallel-autonomous-resume",
-          "speckit.parallel-autonomous-consolidate"
-        ]
-      },
-      "registered_skills": [
-        "speckit-parallel-autonomous",
-        "speckit-parallel-autonomous-status",
-        "speckit-parallel-autonomous-stop",
-        "speckit-parallel-autonomous-resume",
-        "speckit-parallel-autonomous-consolidate"
-      ],
-      "installed_at": "2026-08-09T02:19:14.849859+00:00"
-    },
-    "secure-development-assurance-governance": {
-      "version": "0.1.3",
-      "source": "local",
-      "manifest_hash": "sha256:8e17022fb60749a3db454239641592f125e727585c0312418fae538e2b3ca622",
-      "enabled": true,
-      "priority": 15,
-      "registered_commands": {
-        "agy": [
-          "speckit.secure-development-status",
-          "speckit.secure-development-review"
-        ],
-        "claude": [
-          "speckit.secure-development-status",
-          "speckit.secure-development-review"
-        ],
-        "codex": [
-          "speckit.secure-development-status",
-          "speckit.secure-development-review"
-        ],
-        "copilot": [
-          "speckit.secure-development-status",
-          "speckit.secure-development-review"
-        ],
-        "opencode": [
-          "speckit.secure-development-status",
-          "speckit.secure-development-review"
-        ],
-        "zed": [
-          "speckit.secure-development-status",
-          "speckit.secure-development-review"
-        ]
-      },
-      "registered_skills": [
-        "speckit-secure-development-status",
-        "speckit-secure-development-review"
-      ],
-      "installed_at": "2026-09-07T18:22:13.517306+00:00"
-    },
-    "autonomous-run-governance": {
-      "version": "0.4.4",
-      "source": "local",
-      "manifest_hash": "sha256:bee76630e08942fd07776e3c7c6fff0f7b370391f95398cb7e5e50a721c7c6a9",
-      "enabled": true,
-      "priority": 70,
-      "registered_commands": {
-        "agy": [
-          "speckit.autonomous",
-          "speckit.autonomous-retrospective",
-          "speckit.autonomous-status",
-          "speckit.autonomous-stop",
-          "speckit.autonomous-resume"
-        ],
-        "claude": [
-          "speckit.autonomous",
-          "speckit.autonomous-retrospective",
-          "speckit.autonomous-status",
-          "speckit.autonomous-stop",
-          "speckit.autonomous-resume"
-        ],
-        "codex": [
-          "speckit.autonomous",
-          "speckit.autonomous-retrospective",
-          "speckit.autonomous-status",
-          "speckit.autonomous-stop",
-          "speckit.autonomous-resume"
-        ],
-        "copilot": [
-          "speckit.autonomous",
-          "speckit.autonomous-retrospective",
-          "speckit.autonomous-status",
-          "speckit.autonomous-stop",
-          "speckit.autonomous-resume"
-        ],
-        "opencode": [
-          "speckit.autonomous",
-          "speckit.autonomous-retrospective",
-          "speckit.autonomous-status",
-          "speckit.autonomous-stop",
-          "speckit.autonomous-resume"
-        ],
-        "zed": [
-          "speckit.autonomous",
-          "speckit.autonomous-retrospective",
-          "speckit.autonomous-status",
-          "speckit.autonomous-stop",
-          "speckit.autonomous-resume"
-        ]
-      },
-      "registered_skills": [
-        "speckit-autonomous",
-        "speckit-autonomous-retrospective",
-        "speckit-autonomous-status",
-        "speckit-autonomous-stop",
-        "speckit-autonomous-resume"
-      ],
-      "installed_at": "2026-09-12T14:29:06.658757+00:00"
-    },
-    "project-statistics-governance": {
-      "version": "0.1.0",
-      "source": "local",
-      "manifest_hash": "sha256:5359a8ef0d576fd9afb3b34a70ec41adbb665abcc29394750d5d94689037ef4c",
-      "enabled": true,
-      "priority": 90,
-      "registered_commands": {
-        "agy": [
-          "speckit.statistics-init",
-          "speckit.statistics-status",
-          "speckit.statistics-update"
-        ],
-        "claude": [
-          "speckit.statistics-init",
-          "speckit.statistics-status",
-          "speckit.statistics-update"
-        ],
-        "codex": [
-          "speckit.statistics-init",
-          "speckit.statistics-status",
-          "speckit.statistics-update"
-        ],
-        "copilot": [
-          "speckit.statistics-init",
-          "speckit.statistics-status",
-          "speckit.statistics-update"
-        ],
-        "opencode": [
-          "speckit.statistics-init",
-          "speckit.statistics-status",
-          "speckit.statistics-update"
-        ],
-        "zed": [
-          "speckit.statistics-init",
-          "speckit.statistics-status",
-          "speckit.statistics-update"
-        ]
-      },
-      "registered_skills": [
-        "speckit-statistics-init",
-        "speckit-statistics-status",
-        "speckit-statistics-update"
-      ],
-      "installed_at": "2026-09-14T21:14:50.225667+00:00"
-    },
     "security-governance": {
-      "version": "0.7.1",
+      "version": "0.7.2",
       "source": "local",
-      "manifest_hash": "sha256:50a60321c5c94bd055c83fafb24b3e81edb2209f47b0f58d18d4cf0a416358cf",
+      "manifest_hash": "sha256:911d2779d99a457e3433f712542cd2b0e2f68fcff2529772b9938da6e11425fb",
       "enabled": true,
       "priority": 10,
       "registered_commands": {
@@ -463,12 +44,50 @@
         "speckit-plan",
         "speckit-tasks"
       ],
-      "installed_at": "2026-10-09T23:13:15.678779+00:00"
+      "installed_at": "2026-10-18T21:43:12.126014+00:00"
+    },
+    "secure-development-assurance-governance": {
+      "version": "0.1.4",
+      "source": "local",
+      "manifest_hash": "sha256:0463ab0e9f7e6dd20a6b170706a72e28bef9aee15f971a2380dddc108c99e1f0",
+      "enabled": true,
+      "priority": 15,
+      "registered_commands": {
+        "agy": [
+          "speckit.secure-development-status",
+          "speckit.secure-development-review"
+        ],
+        "claude": [
+          "speckit.secure-development-status",
+          "speckit.secure-development-review"
+        ],
+        "codex": [
+          "speckit.secure-development-status",
+          "speckit.secure-development-review"
+        ],
+        "copilot": [
+          "speckit.secure-development-status",
+          "speckit.secure-development-review"
+        ],
+        "opencode": [
+          "speckit.secure-development-status",
+          "speckit.secure-development-review"
+        ],
+        "zed": [
+          "speckit.secure-development-status",
+          "speckit.secure-development-review"
+        ]
+      },
+      "registered_skills": [
+        "speckit-secure-development-status",
+        "speckit-secure-development-review"
+      ],
+      "installed_at": "2026-10-18T21:43:13.525922+00:00"
     },
     "architecture-governance": {
-      "version": "0.6.2",
+      "version": "0.6.3",
       "source": "local",
-      "manifest_hash": "sha256:36d56d00fb827997fec0b1cca6b6989207f458e6a4ad66b1572caa205b8a4d8a",
+      "manifest_hash": "sha256:112898032d8a9d355969ff2fa5c06317c62afaffa7840c33668cfd4e89cfbd60",
       "enabled": true,
       "priority": 20,
       "registered_commands": {
@@ -508,12 +127,230 @@
         "speckit-plan",
         "speckit-tasks"
       ],
-      "installed_at": "2026-10-09T23:13:16.861542+00:00"
+      "installed_at": "2026-10-18T21:43:14.973070+00:00"
+    },
+    "isaqb-architecture-governance": {
+      "version": "0.2.3",
+      "source": "local",
+      "manifest_hash": "sha256:291629f00c99520b041b695cd18d923f79e143d9ab2794c7a57263cc5163f4cc",
+      "enabled": true,
+      "priority": 30,
+      "registered_commands": {
+        "agy": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "claude": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "codex": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "copilot": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "opencode": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "zed": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ]
+      },
+      "registered_skills": [
+        "speckit-specify",
+        "speckit-plan",
+        "speckit-tasks"
+      ],
+      "installed_at": "2026-10-18T21:43:16.370668+00:00"
+    },
+    "a11y-governance": {
+      "version": "0.4.4",
+      "source": "local",
+      "manifest_hash": "sha256:0db2a88252d66e1be151e7caa7c52059c281dd1a2c508ab78c08fda37b36dfdb",
+      "enabled": true,
+      "priority": 40,
+      "registered_commands": {
+        "agy": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "claude": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "codex": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "copilot": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "opencode": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "zed": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ]
+      },
+      "registered_skills": [
+        "speckit-specify",
+        "speckit-plan",
+        "speckit-tasks"
+      ],
+      "installed_at": "2026-10-18T21:43:17.761791+00:00"
+    },
+    "cross-platform-governance": {
+      "version": "0.2.3",
+      "source": "local",
+      "manifest_hash": "sha256:99bdc11457d0973f665747fe177e1cd555105a8a293f6a8cf8f2e54582aa0855",
+      "enabled": true,
+      "priority": 50,
+      "registered_commands": {
+        "agy": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "claude": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "codex": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "copilot": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "opencode": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "zed": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ]
+      },
+      "registered_skills": [
+        "speckit-specify",
+        "speckit-plan",
+        "speckit-tasks"
+      ],
+      "installed_at": "2026-10-18T21:43:19.182751+00:00"
+    },
+    "agent-parity-governance": {
+      "version": "0.4.3",
+      "source": "local",
+      "manifest_hash": "sha256:d28d185d43b97e77e9a305c06077c2d0a188d3d2690dcf9142dc75bc4530037d",
+      "enabled": true,
+      "priority": 60,
+      "registered_commands": {
+        "agy": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "claude": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "codex": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "copilot": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "opencode": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "zed": [
+          "speckit.specify",
+          "speckit.plan",
+          "speckit.tasks"
+        ]
+      },
+      "registered_skills": [
+        "speckit-specify",
+        "speckit-plan",
+        "speckit-tasks"
+      ],
+      "installed_at": "2026-10-18T21:43:20.531408+00:00"
+    },
+    "model-routing-governance": {
+      "version": "0.1.5",
+      "source": "local",
+      "manifest_hash": "sha256:30bde60c4822d548a4846f6a273af22b7426b9d37717633b06553a7ef2309d77",
+      "enabled": true,
+      "priority": 61,
+      "registered_commands": {
+        "agy": [
+          "speckit.model-routing-status",
+          "speckit.model-routing-refresh"
+        ],
+        "claude": [
+          "speckit.model-routing-status",
+          "speckit.model-routing-refresh"
+        ],
+        "codex": [
+          "speckit.model-routing-status",
+          "speckit.model-routing-refresh"
+        ],
+        "copilot": [
+          "speckit.model-routing-status",
+          "speckit.model-routing-refresh"
+        ],
+        "opencode": [
+          "speckit.model-routing-status",
+          "speckit.model-routing-refresh"
+        ],
+        "zed": [
+          "speckit.model-routing-status",
+          "speckit.model-routing-refresh"
+        ]
+      },
+      "registered_skills": [
+        "speckit-model-routing-status",
+        "speckit-model-routing-refresh"
+      ],
+      "installed_at": "2026-10-18T21:43:21.811456+00:00"
     },
     "intake-authoring-governance": {
-      "version": "0.3.7",
+      "version": "0.3.8",
       "source": "local",
-      "manifest_hash": "sha256:3ece036a3aa5921a70501f3ba846e38dfaa8ff3505e79aabc2f6db679c44bcaa",
+      "manifest_hash": "sha256:420ab9b5719dc09e1bd1eb72997ddec3e4928f92ca1ddfff432c3e06d245fd9a",
       "enabled": true,
       "priority": 64,
       "registered_commands": {
@@ -567,12 +404,12 @@
         "speckit-intake-delete",
         "speckit-intake-create-status"
       ],
-      "installed_at": "2026-10-09T23:13:18.018986+00:00"
+      "installed_at": "2026-10-18T21:43:23.195119+00:00"
     },
     "intake-review-governance": {
-      "version": "0.2.4",
+      "version": "0.2.5",
       "source": "local",
-      "manifest_hash": "sha256:72c9e3967464db4b1ddd0aba9deedcd7a9772abf55bbc1fa0a7c7adefffde732",
+      "manifest_hash": "sha256:bdac2fc991c96e39b70be971c88389eb8139775d32de1d7dc78b2a91e23a34e7",
       "enabled": true,
       "priority": 65,
       "registered_commands": {
@@ -612,12 +449,12 @@
         "speckit-intake-repair",
         "speckit-intake-review-status"
       ],
-      "installed_at": "2026-10-09T23:13:19.085617+00:00"
+      "installed_at": "2026-10-18T21:43:24.531678+00:00"
     },
     "intake-sequencing-governance": {
-      "version": "0.2.8",
+      "version": "0.2.9",
       "source": "local",
-      "manifest_hash": "sha256:7b8beec23acf1b99d0fc0e628ebad50770cece065bff4f8594c527f3cfb9d11b",
+      "manifest_hash": "sha256:72b8c723b81f3d5642f1911f4e26a7b775e56a44f3c0820a4db8362dccee2002",
       "enabled": true,
       "priority": 66,
       "registered_commands": {
@@ -678,7 +515,170 @@
         "speckit-intake-series-status",
         "speckit-intake-series-next"
       ],
-      "installed_at": "2026-10-09T23:13:20.123182+00:00"
+      "installed_at": "2026-10-18T21:43:25.931206+00:00"
+    },
+    "autonomous-run-governance": {
+      "version": "0.4.5",
+      "source": "local",
+      "manifest_hash": "sha256:fa7ce019ccef73f1ad6280bfe2c61fb6d6ad013a087fb0191ae8c18cccc46d7b",
+      "enabled": true,
+      "priority": 70,
+      "registered_commands": {
+        "agy": [
+          "speckit.autonomous",
+          "speckit.autonomous-retrospective",
+          "speckit.autonomous-status",
+          "speckit.autonomous-stop",
+          "speckit.autonomous-resume"
+        ],
+        "claude": [
+          "speckit.autonomous",
+          "speckit.autonomous-retrospective",
+          "speckit.autonomous-status",
+          "speckit.autonomous-stop",
+          "speckit.autonomous-resume"
+        ],
+        "codex": [
+          "speckit.autonomous",
+          "speckit.autonomous-retrospective",
+          "speckit.autonomous-status",
+          "speckit.autonomous-stop",
+          "speckit.autonomous-resume"
+        ],
+        "copilot": [
+          "speckit.autonomous",
+          "speckit.autonomous-retrospective",
+          "speckit.autonomous-status",
+          "speckit.autonomous-stop",
+          "speckit.autonomous-resume"
+        ],
+        "opencode": [
+          "speckit.autonomous",
+          "speckit.autonomous-retrospective",
+          "speckit.autonomous-status",
+          "speckit.autonomous-stop",
+          "speckit.autonomous-resume"
+        ],
+        "zed": [
+          "speckit.autonomous",
+          "speckit.autonomous-retrospective",
+          "speckit.autonomous-status",
+          "speckit.autonomous-stop",
+          "speckit.autonomous-resume"
+        ]
+      },
+      "registered_skills": [
+        "speckit-autonomous",
+        "speckit-autonomous-retrospective",
+        "speckit-autonomous-status",
+        "speckit-autonomous-stop",
+        "speckit-autonomous-resume"
+      ],
+      "installed_at": "2026-10-18T21:43:27.362365+00:00"
+    },
+    "parallel-autonomous-run-governance": {
+      "version": "0.2.7",
+      "source": "local",
+      "manifest_hash": "sha256:6b890a1df6ce330f476d9ec46cf9e7082b9cbb5b1e8875474d8bb039ddc7843b",
+      "enabled": true,
+      "priority": 80,
+      "registered_commands": {
+        "agy": [
+          "speckit.parallel-autonomous",
+          "speckit.parallel-autonomous-status",
+          "speckit.parallel-autonomous-stop",
+          "speckit.parallel-autonomous-resume",
+          "speckit.parallel-autonomous-consolidate"
+        ],
+        "claude": [
+          "speckit.parallel-autonomous",
+          "speckit.parallel-autonomous-status",
+          "speckit.parallel-autonomous-stop",
+          "speckit.parallel-autonomous-resume",
+          "speckit.parallel-autonomous-consolidate"
+        ],
+        "codex": [
+          "speckit.parallel-autonomous",
+          "speckit.parallel-autonomous-status",
+          "speckit.parallel-autonomous-stop",
+          "speckit.parallel-autonomous-resume",
+          "speckit.parallel-autonomous-consolidate"
+        ],
+        "copilot": [
+          "speckit.parallel-autonomous",
+          "speckit.parallel-autonomous-status",
+          "speckit.parallel-autonomous-stop",
+          "speckit.parallel-autonomous-resume",
+          "speckit.parallel-autonomous-consolidate"
+        ],
+        "opencode": [
+          "speckit.parallel-autonomous",
+          "speckit.parallel-autonomous-status",
+          "speckit.parallel-autonomous-stop",
+          "speckit.parallel-autonomous-resume",
+          "speckit.parallel-autonomous-consolidate"
+        ],
+        "zed": [
+          "speckit.parallel-autonomous",
+          "speckit.parallel-autonomous-status",
+          "speckit.parallel-autonomous-stop",
+          "speckit.parallel-autonomous-resume",
+          "speckit.parallel-autonomous-consolidate"
+        ]
+      },
+      "registered_skills": [
+        "speckit-parallel-autonomous",
+        "speckit-parallel-autonomous-status",
+        "speckit-parallel-autonomous-stop",
+        "speckit-parallel-autonomous-resume",
+        "speckit-parallel-autonomous-consolidate"
+      ],
+      "installed_at": "2026-10-18T21:43:28.981729+00:00"
+    },
+    "project-statistics-governance": {
+      "version": "0.1.1",
+      "source": "local",
+      "manifest_hash": "sha256:0b1e4c295c5d0c8ee50aa6efccc65014833d01b77d1e2ab365c77ac51cb40dee",
+      "enabled": true,
+      "priority": 90,
+      "registered_commands": {
+        "agy": [
+          "speckit.statistics-init",
+          "speckit.statistics-status",
+          "speckit.statistics-update"
+        ],
+        "claude": [
+          "speckit.statistics-init",
+          "speckit.statistics-status",
+          "speckit.statistics-update"
+        ],
+        "codex": [
+          "speckit.statistics-init",
+          "speckit.statistics-status",
+          "speckit.statistics-update"
+        ],
+        "copilot": [
+          "speckit.statistics-init",
+          "speckit.statistics-status",
+          "speckit.statistics-update"
+        ],
+        "opencode": [
+          "speckit.statistics-init",
+          "speckit.statistics-status",
+          "speckit.statistics-update"
+        ],
+        "zed": [
+          "speckit.statistics-init",
+          "speckit.statistics-status",
+          "speckit.statistics-update"
+        ]
+      },
+      "registered_skills": [
+        "speckit-statistics-init",
+        "speckit-statistics-status",
+        "speckit-statistics-update"
+      ],
+      "installed_at": "2026-10-18T21:43:30.402429+00:00"
     }
   }
 }

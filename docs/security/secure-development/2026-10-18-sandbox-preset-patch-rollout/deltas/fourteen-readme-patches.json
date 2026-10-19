@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "SecureDevelopmentGateEvidence",
+  "contextId": "sandbox-preset-patch-rollout",
+  "gate": "delta",
+  "mode": "training",
+  "createdAt": "2026-10-18T23:44:08.9162990+02:00",
+  "review": {
+    "owner": "@hindermath",
+    "reviewer": "Codex, explicitly delegated technical revalidation only",
+    "reviewedAt": "2026-10-18T23:44:08.9162990+02:00",
+    "reviewDue": "2027-10-18",
+    "residualRisk": "Document integrity and installed-contract verification do not establish full checklist implementation, product acceptance or regulatory certification.",
+    "reevaluationTrigger": "Preset, controlled-document, scope, authority or evidence change."
+  },
+  "assessments": [
+    {
+      "id": "INSTALL-14",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": ".specify/presets/.registry"
+    },
+    {
+      "id": "SOURCE-14",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/maintenance/preset-readme-patch-source-lock-2026-10-18.json"
+    },
+    {
+      "id": "AGENT-COMPOSITION",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "scripts/tests/test_spec_kit_agent_surface_parity.py"
+    }
+  ],
+  "outcome": "Ready",
+  "externalComparisonBoundary": "HOSK/GWDG: ExternalComparison only; never local evidence",
+  "verificationScope": "Technical installation and document identity/integrity only; no new product, risk, release or certification decision."
+}
