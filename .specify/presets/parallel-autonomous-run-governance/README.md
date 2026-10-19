@@ -1,8 +1,15 @@
 # Parallel Autonomous Run Governance
 
+Patch **0.2.7** liefert die verbesserte zweisprachige Einstiegs- und
+Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
+[Release-Nachweis / Release record](docs/release-0.2.7-validation.md).
+
+*Patch 0.2.7 packages the improved bilingual getting-started and composition
+guide. Behavior and authority boundaries remain unchanged.*
+
 Permission-bounded coordination for several isolated autonomous Spec Kit runs.
 
-Version `0.2.6` | Priority `80` | Spec Kit `>=0.8.3`
+Version `0.2.7` | Priority `80` | Spec Kit `>=0.8.3`
 
 Version 0.2.6 aligns current installation examples with Autonomous Run
 Governance 0.3.6. Campaign, authority, and `model-routing.json` contracts are
@@ -21,6 +28,41 @@ defaults cannot weaken audience, language, readability, terminology,
 prior-knowledge, or text-first requirements.
 
 ## Deutsch
+
+### Vorlagenwahl und Komposition / Template Choice and Composition
+
+Das [Manifest](preset.yml) liefert eigene Kampagnen-Commands und Starter.
+Installation erstellt kein Manifest, Worktrees oder Worker. Leite das
+Kampagnenmanifest bewusst aus `parallel-campaign-template` ab und validiere
+es mit lokalen Runner-Profilen. Ein Starter ist kein gültiger Startauftrag.
+
+*The [manifest](preset.yml) supplies standalone campaign commands/starters.
+Installation creates no manifest, worktrees or workers. Deliberately derive
+the manifest from parallel-campaign-template and validate it with local
+runner profiles. A starter is not a valid execution instruction.*
+
+Beispiel: Zwei unabhängig begründete Features als zwei Worker vorschlagen.
+Repositories, Intakes, Abhängigkeiten und Liefermodus deklarieren, `Validate`
+prüfen, danach `Start` ausdrücklich genehmigen. Gemeinsame Writer oder
+bindende Abhängigkeiten können Parallelität begrenzen. Platzhalter im Beispiel
+unten durch freigegebene echte Pfade ersetzen; kein Beispiel ist Feld-Evidence.
+
+*Example: propose two independently justified features as two workers.
+Declare repositories, intakes, dependencies and delivery mode, Validate, then
+explicitly approve Start. Shared writers/binding dependencies may limit
+parallelism. Replace placeholders below with authorized paths; examples are
+not field evidence.*
+
+Priorität 80 ersetzt nicht die aktivierte Preset-7-Abhängigkeit jedes Workers.
+Kleinere Zahlen haben höhere Auflösungspriorität; andere Presets oder
+Projekt-Overrides können gleichnamige Starter ersetzen. Eigene Kombinationen
+prüfen. Priorität erteilt weder Scheduling- noch Merge-Autorität. Fehlende
+Abhängigkeiten beheben, nicht den Schutzschalter deaktivieren.
+
+*Priority 80 does not replace each worker's enabled Preset 7 dependency.
+Lower numbers mean higher precedence; presets/overrides may replace same-name
+starters. Check custom combinations. Priority grants neither scheduling nor
+merge authority. Resolve missing dependencies instead of disabling protection.*
 
 ### Wofuer ist dieses Preset gedacht?
 
@@ -78,12 +120,8 @@ Fuer regulaere Kampagnen gilt:
 1. Preset 7, danach Preset 8 installieren:
 
    ```bash
-   specify preset add \
-     --from https://github.com/hindermath/spec-kit-preset-autonomous-run-governance/archive/refs/tags/v0.3.6.zip \
-     --priority 70
-   specify preset add \
-     --from https://github.com/hindermath/spec-kit-preset-parallel-autonomous-run-governance/archive/refs/tags/v0.2.6.zip \
-     --priority 80
+   specify preset add --from https://github.com/hindermath/spec-kit-preset-autonomous-run-governance/archive/refs/tags/v0.3.6.zip --priority 70
+   specify preset add --from https://github.com/hindermath/spec-kit-preset-parallel-autonomous-run-governance/archive/refs/tags/v0.2.7.zip --priority 80
    ```
 
 2. Beide Presets pruefen:

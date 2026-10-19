@@ -1,9 +1,16 @@
 # Intake Authoring Governance Preset
 
-Aktuelle Version / Current version: **0.3.7**. Der Installationsbefehl steht
+Patch **0.3.8** liefert die verbesserte zweisprachige Einstiegs- und
+Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
+[Release-Nachweis / Release record](docs/release-0.3.8-validation.md).
+
+*Patch 0.3.8 packages the improved bilingual getting-started and composition
+guide. Behavior and authority boundaries remain unchanged.*
+
+Aktuelle Version / Current version: **0.3.8**. Der Installationsbefehl steht
 auf einer Zeile und bindet das genaue Release-ZIP, damit die automatische
 Community-Prüfung ihn direkt auswerten kann. Die Generatorvorlage bindet
-0.3.7; bekannte Schema-2-Receipts von 0.3.6 bleiben gültig und unverändert.
+0.3.8; bekannte Schema-2-Receipts von 0.3.6 und 0.3.7 bleiben gültig und unverändert.
 Keine neue Command-, Schema-, Prioritäts- oder Ausführungsberechtigung.
 
 The installation command is a single line bound to the exact release ZIP for
@@ -21,7 +28,14 @@ bleiben gesperrt. Schema, Commands und Prioritaet bleiben gleich.
 Running Active series with an Active member may have no additional Eligible
 candidate. The candidate remains N/A; this grants no execution authority.
 Ready still requires exactly one candidate, and all integrity checks remain.
-Compatible published versions: Authoring 0.3.7, Review 0.2.4, Sequencing 0.2.7.
+Coordinated patch versions: Authoring 0.3.8, Review 0.2.5, Sequencing 0.2.9.
+
+Fuer die Python-basierten Pruefungen eine gepflegte Python-Version verwenden.
+macOS-System-Python 3.9 kann gueltige UTC-Zeitstempel mit sieben Nachkommastellen
+abweisen. Die Release-Pruefung verwendet lokal Python 3.14 und in Intake-CI 3.12.
+*Use a maintained Python runtime for Python-backed validation. macOS system
+Python 3.9 can reject valid UTC timestamps with seven fractional digits.
+Release validation uses Python 3.14 locally and 3.12 in Intake CI.*
 Each preset remains independently installable; historical evidence is preserved.
 
 Gemeinsame Konfigurationsvalidatoren akzeptieren auch die bereits etablierte,
@@ -67,6 +81,46 @@ Recommended priority: `64`, after Agent Parity (`60`) and before Intake Review
 
 ## Why This Preset Exists / Warum dieses Preset existiert
 
+### Einstieg und Phasengrenzen / Getting Started and Phase Boundaries
+
+Ein Intake ist ein begrenzter Arbeitsauftrag; sein Receipt enthält Herkunft
+und Hashbindungen. Das [Manifest](preset.yml) registriert eigene Commands und
+Starter, keine automatisch gestartete Authoring-Phase vor jedem Specify.
+Nach Installation Operation, Quellen, Policy und Ziel ausdrücklich wählen.
+Leere JSON-Starter sind keine gültigen Receipts oder abgeschlossenen Vorgänge.
+
+*An intake is a bounded work request; its receipt records provenance and
+hashes. The [manifest](preset.yml) registers standalone commands/starters,
+not automatic authoring before every Specify. Explicitly choose operation,
+sources, policy and target. Empty JSON starters are not valid receipts or
+completed operations.*
+
+Beispiel: Genau einen neuen Intake aus `planning/order-import-notes.md`
+erstellen lassen, materielle Fragen klären, Intake/Receipt sichten und Status
+prüfen. Erforderlichen Intake-Review gesondert beauftragen. `ReadyForReview`
+ist weder `Ready` noch Start-/Lieferfreigabe. Bestehende Ziele benötigen
+autorisiertes Update; historische Receipts nicht passend umschreiben.
+
+*Example: create exactly one new intake from planning/order-import-notes.md,
+resolve material questions, inspect intake/receipt and check status. Separately
+request any required Intake Review. ReadyForReview is not Ready or execution
+authority. Existing targets need authorized Update; preserve old receipts.*
+
+Priorität steuert die Auflösung, nicht die Abfolge Authoring → Review →
+freigegebener Feature-Lauf. Kleinere Zahlen haben höhere Priorität;
+gleichnamige Starter können durch andere Presets oder Overrides ersetzt
+werden. Eigene Kombinationen prüfen. Status/Read starten keine Folgephase;
+Installation migriert keine Sammlung.
+
+*Priority controls resolution, not authoring -> review -> authorized execution.
+Lower numbers have higher precedence; presets/overrides can replace same-name
+starters. Check custom combinations. Status/Read start no next phase;
+installation migrates no collection.*
+
+Leserpfad / Reader path: [Install](#install) →
+[Quick Start](#quick-start--schnellstart) → [Output](#output--ausgabe) →
+[Status](#status--statuspruefung) → [Review Handoff](#review-handoff--uebergabe-an-review).
+
 Planungen beginnen oft als Chattext, Notiz oder mehrere Dateien. Direktes
 Specify aus solchen Quellen kann Scope, Nicht-Ziele, Nachweise oder
 Berechtigungen vermischen. Dieses Preset erzeugt zuerst einen lesbaren,
@@ -101,10 +155,10 @@ and freshness without writing.*
 ## Install
 
 ```bash
-specify preset add --from https://github.com/hindermath/spec-kit-preset-intake-authoring-governance/archive/refs/tags/v0.3.7.zip --priority 64
+specify preset add --from https://github.com/hindermath/spec-kit-preset-intake-authoring-governance/archive/refs/tags/v0.3.8.zip --priority 64
 specify preset list
 specify preset info intake-authoring-governance
-specify preset resolve
+specify preset resolve intake-authoring-policy-template
 ```
 
 The preset is optional. Installation alone does not require authoring or make

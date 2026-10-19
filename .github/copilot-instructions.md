@@ -499,13 +499,13 @@ shell commands, and other important information, read the current plan
 
 ## Secure Development Assurance – freigegebenes Projektprofil / Approved Project Profile
 
-- Die unveraenderte Basis des optionalen 14er-Statistik-Piloten ist `secure-development-assurance-thirteen-governance-presets`: die bisherigen zwölf Presets plus `secure-development-assurance-governance` v0.1.3, aktiviert mit Priorität 15. Andere Profile und globale Defaults bleiben unverändert.
+- Die unveraenderte Basis des optionalen 14er-Statistik-Piloten ist `secure-development-assurance-thirteen-governance-presets`: die bisherigen zwölf Presets plus `secure-development-assurance-governance` v0.1.4, aktiviert mit Priorität 15. Andere Profile und globale Defaults bleiben unverändert.
 - Maßgebliche Produktquellen sind ausschließlich die veröffentlichten eigenständigen GitHub-Preset-Repositories. Lokale Installationen sind Integrationskopien, keine zusätzlichen Produktquellen; Änderungen entstehen im jeweiligen Preset-Repository, nicht in einem Home-Baseline-Scaffold.
 - `speckit.secure-development-status` prüft Evidence strikt lesend. `speckit.secure-development-review` benötigt einen ausdrücklich beauftragten Gate-/Kontext-Review; die Installation startet keine Reviews und erteilt keine menschlichen Freigaben.
 - Keine C5-Testat-, Zertifizierungs- oder vollständige Readiness-Prüfung; `Ready` gilt nur für den gebundenen Evidence-Kontext. Projektgeführte Baseline-Versionen werden nicht durch die Preset-Version ersetzt.
 - Bedienung, Paketbindung, Erhaltungsnachweis und Grenzen: [Integrationsnachweis](../docs/maintenance/secure-development-assurance-integration.md), relativ zur Repository-Wurzel.
 
-*The optional fourteen-preset statistics pilot retains this thirteen-preset base: its existing twelve presets plus Secure Development Assurance v0.1.3, enabled at priority 15. Other profiles and global defaults stay unchanged. Published standalone GitHub repositories are the only product sources; installed copies are integrations, not competing sources. Status is read-only; a gate review requires explicit context-specific authority. Installation starts no reviews and grants no human approvals. This is not a C5 attestation, certification, or full readiness check; `Ready` is evidence-context-specific. The project baseline retains its own version. See the integration record relative to the repository root.*
+*The optional fourteen-preset statistics pilot retains this thirteen-preset base: its existing twelve presets plus Secure Development Assurance v0.1.4, enabled at priority 15. Other profiles and global defaults stay unchanged. Published standalone GitHub repositories are the only product sources; installed copies are integrations, not competing sources. Status is read-only; a gate review requires explicit context-specific authority. Installation starts no reviews and grants no human approvals. This is not a C5 attestation, certification, or full readiness check; `Ready` is evidence-context-specific. The project baseline retains its own version. See the integration record relative to the repository root.*
 
 <!-- BEGIN spec-kit-diagrams-completion -->
 ## Mermaid und Spec-Kit-Abschlussbericht / Mermaid and Spec Kit completion report
@@ -546,7 +546,7 @@ across Spec Kit updates.*
 
 Dieses Projekt verwendet im genehmigten Pilotbranch das Profil
 `project-statistics-fourteen-governance-presets`: unveraenderte 13er-Basis plus
-`project-statistics-governance` v0.1.0, aktiviert mit Prioritaet 90.
+`project-statistics-governance` v0.1.1, aktiviert mit Prioritaet 90.
 Das Preset dient reproduzierbarer Projekttransparenz, nicht der Bewertung von
 Lernenden, Qualitaet oder KI-Zeitersparnis. Die bestehende Statistik bleibt
 kanonisch. Der kuenftige getrennte Kontext ist `docs/project-statistics-pilot/`;
@@ -557,7 +557,7 @@ relativ zur Repository-Wurzel. Kein Home-Runtime-Sync und keine globale
 Default-Aenderung. Operative Profilzuordnung erst nach gepruefter Lieferung.
 
 This project's approved pilot branch opts into fourteen presets: the unchanged
-thirteen-preset base plus Project Statistics Governance v0.1.0 at priority 90.
+thirteen-preset base plus Project Statistics Governance v0.1.1 at priority 90.
 It provides reproducible project transparency, not learner ratings, quality
 scores or AI time-savings measurements. Existing statistics remain canonical;
 the future pilot context is separate and reference estimates remain off.
@@ -583,7 +583,7 @@ migration templates whenever runner labels change. See the linked guide.
 ## Governance-Zielstand 2026-10-10 / Governance target 2026-10-10
 
 DE: Das explizit genehmigte 14er-Profil bindet Security 0.7.1, Architecture
-0.6.2 und Intake Authoring 0.3.7 / Review 0.2.4 / Sequencing 0.2.8. Die neun
+0.6.2 und Intake Authoring 0.3.8 / Review 0.2.5 / Sequencing 0.2.9. Die neun
 anderen Presets und Prioritaeten bleiben erhalten. DS-GVO, KI-VO, CRA, NIS2
 und DORA werden fuer Beispielprodukt, Entwicklungswerkzeuge und Organisation
 getrennt auf Anwendbarkeit geprueft; Ausbildung ist keine pauschale Ausnahme.
@@ -594,7 +594,7 @@ Vor einem Lauf Quellen-/Review-Frische, Serie, lokales Routing und aktuelle
 Delivery-Autoritaet erneut pruefen. Nachweis: docs/maintenance/preset-alignment-2026-10-10.md.
 
 EN: The explicitly approved fourteen-preset profile binds Security 0.7.1,
-Architecture 0.6.2 and Intake Authoring 0.3.7 / Review 0.2.4 / Sequencing 0.2.8.
+Architecture 0.6.2 and Intake Authoring 0.3.8 / Review 0.2.5 / Sequencing 0.2.9.
 Preserve nine other packages and all priorities. Screen GDPR, AI Act, CRA,
 NIS2 and DORA separately for example product, development tools and organization;
 education is not a blanket exemption and unknown roles remain Open. Distinguish

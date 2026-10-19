@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "SecureDevelopmentGateEvidence",
+  "contextId": "sandbox-preset-patch-rollout",
+  "gate": "image-impact",
+  "mode": "training",
+  "createdAt": "2026-10-18T23:44:08.9162990+02:00",
+  "review": {
+    "owner": "@hindermath",
+    "reviewer": "Codex, explicitly delegated technical revalidation only",
+    "reviewedAt": "2026-10-18T23:44:08.9162990+02:00",
+    "reviewDue": "2027-10-18",
+    "residualRisk": "Document integrity and installed-contract verification do not establish full checklist implementation, product acceptance or regulatory certification.",
+    "reevaluationTrigger": "Preset, controlled-document, scope, authority or evidence change."
+  },
+  "assessments": [
+    {
+      "id": "NO-IMAGE-CHANGE",
+      "applicability": "N/A",
+      "implementation": "Not Assessed",
+      "reason": "This repository-only preset installation creates or changes no image, container deployment, mount or network configuration.",
+      "reevaluationTrigger": "Image, deployment, runtime, mount or network change.",
+      "evidence": "docs/maintenance/preset-readme-patch-rollout-2026-10-18.md"
+    }
+  ],
+  "outcome": "Ready",
+  "externalComparisonBoundary": "HOSK/GWDG: ExternalComparison only; never local evidence",
+  "verificationScope": "Technical installation and document identity/integrity only; no new product, risk, release or certification decision.",
+  "imageChecks": {
+    "build": "N/A",
+    "compose": "N/A",
+    "toolchain": "N/A",
+    "ociDigest": "N/A",
+    "sbom": "N/A",
+    "secrets": "N/A",
+    "mounts": "N/A",
+    "network": "N/A",
+    "ci": "N/A"
+  }
+}
