@@ -21,7 +21,8 @@ jobs:
       matrix:
         os: [ubuntu-22.04, windows-2022]
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 20
+    # Windows Bash alone took 19.5 min; preserve time for PowerShell and zero-write proof.
+    timeout-minutes: 30
 
     steps:
       - name: Configure byte-stable checkout
