@@ -22,6 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
+      # The raw header is renderer input; its generated compendium remains checked.
       - name: Check local Markdown links and anchors with Lychee
         uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2
         with:
@@ -29,6 +30,7 @@ jobs:
             --offline
             --include-fragments
             --no-progress
+            --exclude-path scripts/templates/secure-development-compendium-header.md
             --exclude-path docs/security/agent-session-log
             --exclude-path scripts/tests/linked-intake-evidence
             './**/*.md'

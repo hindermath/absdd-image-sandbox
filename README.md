@@ -1,5 +1,7 @@
 # Agentische Podman-Sandbox / Agentic Podman Sandbox
 
+[GSDB 3.4.4: Pilotrollout / pilot rollout](docs/maintenance/gsdb-344-pilot-2026-10-20.md).
+
 <!-- learner-a11y-baseline:start -->
 ## Lernenden- und A11Y-Basis / Learner and A11Y Baseline
 

@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "sourceRepository": "hindermath/home-baseline",
+  "sourceCommit": "d98983568d6ac234dbecb50c2fee0873e83804a4",
+  "references": [
+    {
+      "path": "docs/maintenance/governance-review-and-rollout.md",
+      "sourceCommit": "d98983568d6ac234dbecb50c2fee0873e83804a4",
+      "sourceNormalizedSha256": "403ffea251792df7e9b3afab705e31f9db42a0db3b3109dfc96383c501b0e5ae",
+      "url": "https://github.com/hindermath/home-baseline/blob/d98983568d6ac234dbecb50c2fee0873e83804a4/docs/maintenance/governance-review-and-rollout.md"
+    },
+    {
+      "path": "docs/maintenance/gsdb-coverage-2026-10-20.md",
+      "sourceCommit": "d98983568d6ac234dbecb50c2fee0873e83804a4",
+      "sourceNormalizedSha256": "d7edf2d8eecf975a5bf8f84aff66dcda03ca4b5fdf9cee906866e457f8c9b5b7",
+      "url": "https://github.com/hindermath/home-baseline/blob/d98983568d6ac234dbecb50c2fee0873e83804a4/docs/maintenance/gsdb-coverage-2026-10-20.md"
+    },
+    {
+      "path": "docs/maintenance/gsdb-coverage-independent-fixes-2026-10-20.md",
+      "sourceCommit": "d98983568d6ac234dbecb50c2fee0873e83804a4",
+      "sourceNormalizedSha256": "a83e5a548a705b90c7e31e54fe89170fef098a037d17ebb9195dee676149d426",
+      "url": "https://github.com/hindermath/home-baseline/blob/d98983568d6ac234dbecb50c2fee0873e83804a4/docs/maintenance/gsdb-coverage-independent-fixes-2026-10-20.md"
+    },
+    {
+      "path": "docs/maintenance/gsdb-coverage-p3-followup-2026-10-20.md",
+      "sourceCommit": "d98983568d6ac234dbecb50c2fee0873e83804a4",
+      "sourceNormalizedSha256": "53e9e7083568dfff48943bde96158379627486775c31c1a9f94151ded4352bc7",
+      "url": "https://github.com/hindermath/home-baseline/blob/d98983568d6ac234dbecb50c2fee0873e83804a4/docs/maintenance/gsdb-coverage-p3-followup-2026-10-20.md"
+    },
+    {
+      "path": "docs/maintenance/gsdb-independent-fixes-2026-10-20.md",
+      "sourceCommit": "d98983568d6ac234dbecb50c2fee0873e83804a4",
+      "sourceNormalizedSha256": "2c093c7bfcf749fdef5ca8832347b733669ceb59fff2c8ee65ba4dda77858720",
+      "url": "https://github.com/hindermath/home-baseline/blob/d98983568d6ac234dbecb50c2fee0873e83804a4/docs/maintenance/gsdb-independent-fixes-2026-10-20.md"
+    },
+    {
+      "path": "docs/maintenance/gsdb-level0-review-2026-10-19.md",
+      "sourceCommit": "d98983568d6ac234dbecb50c2fee0873e83804a4",
+      "sourceNormalizedSha256": "8a483a27f1ebdf43439fea1f8470a370b2aadff212be30da9b70a68f0a058518",
+      "url": "https://github.com/hindermath/home-baseline/blob/d98983568d6ac234dbecb50c2fee0873e83804a4/docs/maintenance/gsdb-level0-review-2026-10-19.md"
+    },
+    {
+      "path": "docs/maintenance/gsdb-p3-followup-2026-10-20.md",
+      "sourceCommit": "d98983568d6ac234dbecb50c2fee0873e83804a4",
+      "sourceNormalizedSha256": "f10e4c8e5b9853ea04855f87ed193c14637f7286c73c8763f8f401a357a3dd43",
+      "url": "https://github.com/hindermath/home-baseline/blob/d98983568d6ac234dbecb50c2fee0873e83804a4/docs/maintenance/gsdb-p3-followup-2026-10-20.md"
+    },
+    {
+      "path": "docs/maintenance/gsdb-review-remediation-2026-10-20.md",
+      "sourceCommit": "d98983568d6ac234dbecb50c2fee0873e83804a4",
+      "sourceNormalizedSha256": "0e0436105e764ebe9f2acb5c3b9239538731ba4304a8cb5cd9d954b4ef1e8cf6",
+      "url": "https://github.com/hindermath/home-baseline/blob/d98983568d6ac234dbecb50c2fee0873e83804a4/docs/maintenance/gsdb-review-remediation-2026-10-20.md"
+    },
+    {
+      "path": "docs/maintenance/gsdb-source-closure-2026-10-20.md",
+      "sourceCommit": "d98983568d6ac234dbecb50c2fee0873e83804a4",
+      "sourceNormalizedSha256": "fcdb6f1c7ad5a7d16bfeddf4c864d11f2afa77c8315bf67ad1352943173b9e74",
+      "url": "https://github.com/hindermath/home-baseline/blob/d98983568d6ac234dbecb50c2fee0873e83804a4/docs/maintenance/gsdb-source-closure-2026-10-20.md"
+    },
+    {
+      "path": "docs/maintenance/gsdb-source-review-2026-10-20.json",
+      "sourceCommit": "d98983568d6ac234dbecb50c2fee0873e83804a4",
+      "sourceNormalizedSha256": "8a2c9cb8c298420dbd53ae05d5a8738a0ea84aff5592e59f7598b18b84af54ca",
+      "url": "https://github.com/hindermath/home-baseline/blob/d98983568d6ac234dbecb50c2fee0873e83804a4/docs/maintenance/gsdb-source-review-2026-10-20.json"
+    },
+    {
+      "path": "docs/maintenance/gsdb-source-review-independent-fixes-2026-10-20.json",
+      "sourceCommit": "d98983568d6ac234dbecb50c2fee0873e83804a4",
+      "sourceNormalizedSha256": "c1cae4ca18a13350d42bd90e5033fa5f11b26baf4ec962e5e274680066eaa613",
+      "url": "https://github.com/hindermath/home-baseline/blob/d98983568d6ac234dbecb50c2fee0873e83804a4/docs/maintenance/gsdb-source-review-independent-fixes-2026-10-20.json"
+    },
+    {
+      "path": "docs/maintenance/gsdb-source-review-p3-followup-2026-10-20.json",
+      "sourceCommit": "d98983568d6ac234dbecb50c2fee0873e83804a4",
+      "sourceNormalizedSha256": "720081074b264ac06b56f47d5e9a0eb8340b9df51d4b70971cdb0ad0a6731650",
+      "url": "https://github.com/hindermath/home-baseline/blob/d98983568d6ac234dbecb50c2fee0873e83804a4/docs/maintenance/gsdb-source-review-p3-followup-2026-10-20.json"
+    }
+  ]
+}

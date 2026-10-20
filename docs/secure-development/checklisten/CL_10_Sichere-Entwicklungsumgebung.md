@@ -12,8 +12,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 10 – Sichere Entwicklungsumgebung / Secure Development Environment
 
 **Dokument-ID / Document ID:** CL-10
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.2
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -970,70 +970,9 @@ change.
 
 #### CL-10-12: Audit-Logs der Plattform / Platform Audit Logs
 
-- **DE:** Quellcode-Plattform, Build-System und Cloud erzeugen Audit-
-  Logs für alle sicherheitsrelevanten Ereignisse: Anmeldungen, Repo-
-  Zugriffe, Permission-Änderungen, Branch-Schutz-Bypass, Secret-Zugriffe,
-  Pipeline-Ausführungen, Cloud-API-Calls, IAM-Änderungen.
-  Plattform-Quellen: GitHub Audit Log (Org Settings > Audit Log; per API
-  `gh api orgs/{org}/audit-log`); GitHub Enterprise Cloud `audit_log_api`
-  Streaming nach Splunk/Datadog/Azure Monitor/AWS S3; Git Audit
-  Events (`Admin > Monitoring > Audit Events`, API
-  `/api/v4/audit_events`); Bitbucket Cloud Audit Logs; Azure DevOps
-  Auditing (Project Settings > Auditing); AWS CloudTrail (Multi-Region
-  Trail mit S3-Zielort, KMS-Verschlüsselung, Log File Validation aktiv);
-  Azure Monitor / Log Analytics + Microsoft Sentinel; GCP Cloud Audit
-  Logs (Admin Activity, Data Access, System Event, Policy Denied).
-  Zentralisierung: SIEM-Integration (Splunk Enterprise Security,
-  Microsoft Sentinel, IBM QRadar, Elastic Security, Sumo Logic) mit
-  korrelations-Regeln für Anomalie-Erkennung. Schutz gegen Änderung:
-  Write-Once-Read-Many (WORM) Storage — AWS S3 Object Lock im
-  Compliance-Mode (kann auch Root nicht löschen) für ≥ 1 Jahr; Azure Blob
-  Immutable Storage; GCP Bucket Lock; Hash-Chain mit täglichem Anchoring
-  in TSA (Time-Stamping Authority); Kryptografische Signatur jedes Logs
-  mit Vault Transit Engine. Aufbewahrung: ≥ 1 Jahr operativ, 10 Jahre
-  für CRA-relevante Vorfälle (CRA Art. 14), 6 Jahre für DSGVO-relevante
-  Verarbeitungen, 10 Jahre für SOX-Pflichten falls anwendbar. Zugriff
-  per Need-to-Know; Audit-Log-Zugriff selbst geloggt
-  (Meta-Audit). Beispiel CloudTrail-Konfiguration: `{ "IsMultiRegionTrail":
-  true, "IncludeGlobalServiceEvents": true, "EnableLogFileValidation":
-  true, "KmsKeyId": "..." }`. Referenzen: NIST SP 800-92, ISO/IEC 27001
-  A.8.15, A.8.34, BSI IT-Grundschutz OPS.1.1.5, CRA Art. 14.
-- **EN:** Source platform, build system, and cloud produce audit logs
-  for all security-relevant events: logins, repo access, permission
-  changes, branch protection bypass, secret access, pipeline
-  executions, cloud API calls, IAM changes. Platform sources: GitHub
-  Audit Log (Org Settings > Audit Log; via API `gh api
-  orgs/{org}/audit-log`); GitHub Enterprise Cloud `audit_log_api`
-  streaming to Splunk/Datadog/Azure Monitor/AWS S3; Git Audit Events
-  (`Admin > Monitoring > Audit Events`, API `/api/v4/audit_events`);
-  Bitbucket Cloud audit logs; Azure DevOps auditing (Project Settings
-  > Auditing); AWS CloudTrail (multi-region trail with S3 target, KMS
-  encryption, log file validation active); Azure Monitor / Log
-  Analytics + Microsoft Sentinel; GCP Cloud Audit Logs (Admin Activity,
-  Data Access, System Event, Policy Denied). Centralisation: SIEM
-  integration (Splunk Enterprise Security, Microsoft Sentinel, IBM
-  QRadar, Elastic Security, Sumo Logic) with correlation rules for
-  anomaly detection. Protection against modification: Write-Once-Read-
-  Many (WORM) storage — AWS S3 Object Lock in compliance mode (cannot
-  even be deleted by root) for ≥ 1 year; Azure Blob Immutable Storage;
-  GCP Bucket Lock; hash chain with daily anchoring in TSA (Time-
-  Stamping Authority); cryptographic signature of every log with Vault
-  Transit engine. Retention: ≥ 1 year operational, 10 years for
-  CRA-relevant incidents (CRA Art. 14), 6 years for GDPR-relevant
-  processing, 10 years for SOX duties if applicable. Access on
-  need-to-know basis; access to audit log itself logged (meta-audit).
-  Example CloudTrail configuration: `{ "IsMultiRegionTrail": true,
-  "IncludeGlobalServiceEvents": true, "EnableLogFileValidation": true,
-  "KmsKeyId": "..." }`. References: NIST SP 800-92, ISO/IEC 27001
-  A.8.15, A.8.34, BSI IT-Grundschutz OPS.1.1.5, CRA Art. 14.
-- **Akzeptanz / Acceptance:** Aufbewahrungsfrist (≥ 1 Jahr operativ,
-  10 Jahre CRA) und Schutzmaßnahme (WORM, Object Lock, Hash-Chain)
-  in `docs/security/audit-log-retention.md` benannt; SIEM-Integration
-  aktiv; Zugriff geloggt; jährliche Integritätsprüfung. / Retention
-  period (≥ 1 year operational, 10 years CRA) and protection measure
-  (WORM, Object Lock, hash chain) named in
-  `docs/security/audit-log-retention.md`; SIEM integration active;
-  access logged; annual integrity check.
+- **DE:** Die Audit-Spur nennt Werkzeug, Version, Scope, verantwortliche Person und relevante Entscheidungen. Aufbewahrung je Datenkategorie aus Zweck, Rechtsgrundlage, Vertragslage und Schutzbedarf ableiten; DSGVO und CRA begründen keine pauschalen Fristen von sechs beziehungsweise zehn Jahren für sämtliche Agenten- oder Plattformlogs. Zugriff begrenzen, Integrität sichern und Löschung testen.
+- **EN:** Audit records identify tool, version, scope, responsible person, and relevant decisions. Derive retention per data category from purpose, legal basis, contracts, and risk; GDPR and CRA do not impose universal six- or ten-year periods for all agent or platform logs. Restrict access, protect integrity, and test deletion.
+- **Akzeptanz / Acceptance:** Dokumentierter Aufbewahrungs- und Löschplan mit Quelle, Owner und Integritätstest. / Retention and deletion plan with source, owner, and integrity test.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -1607,3 +1546,10 @@ platform-parity evidence or justified non-applicability.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+DE: Baseline-Bindung 3.4.3 (20.10.2026), redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.3 (2026-10-20), editorial; semantic document version unchanged.
+
+DE: Baseline-Bindung 3.4.4, redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.4 is editorial; semantic document version unchanged.

@@ -46,44 +46,6 @@
       ],
       "installed_at": "2026-10-18T21:43:12.126014+00:00"
     },
-    "secure-development-assurance-governance": {
-      "version": "0.1.4",
-      "source": "local",
-      "manifest_hash": "sha256:0463ab0e9f7e6dd20a6b170706a72e28bef9aee15f971a2380dddc108c99e1f0",
-      "enabled": true,
-      "priority": 15,
-      "registered_commands": {
-        "agy": [
-          "speckit.secure-development-status",
-          "speckit.secure-development-review"
-        ],
-        "claude": [
-          "speckit.secure-development-status",
-          "speckit.secure-development-review"
-        ],
-        "codex": [
-          "speckit.secure-development-status",
-          "speckit.secure-development-review"
-        ],
-        "copilot": [
-          "speckit.secure-development-status",
-          "speckit.secure-development-review"
-        ],
-        "opencode": [
-          "speckit.secure-development-status",
-          "speckit.secure-development-review"
-        ],
-        "zed": [
-          "speckit.secure-development-status",
-          "speckit.secure-development-review"
-        ]
-      },
-      "registered_skills": [
-        "speckit-secure-development-status",
-        "speckit-secure-development-review"
-      ],
-      "installed_at": "2026-10-18T21:43:13.525922+00:00"
-    },
     "architecture-governance": {
       "version": "0.6.3",
       "source": "local",
@@ -679,6 +641,44 @@
         "speckit-statistics-update"
       ],
       "installed_at": "2026-10-18T21:43:30.402429+00:00"
+    },
+    "secure-development-assurance-governance": {
+      "version": "0.1.5",
+      "source": "local",
+      "manifest_hash": "sha256:e1da9c3b3d3ed91da31d34129db390564d1a3004095aa374a104b5cdec2ce7c7",
+      "enabled": true,
+      "priority": 15,
+      "registered_commands": {
+        "agy": [
+          "speckit.secure-development-status",
+          "speckit.secure-development-review"
+        ],
+        "claude": [
+          "speckit.secure-development-status",
+          "speckit.secure-development-review"
+        ],
+        "codex": [
+          "speckit.secure-development-status",
+          "speckit.secure-development-review"
+        ],
+        "copilot": [
+          "speckit.secure-development-status",
+          "speckit.secure-development-review"
+        ],
+        "opencode": [
+          "speckit.secure-development-status",
+          "speckit.secure-development-review"
+        ],
+        "zed": [
+          "speckit.secure-development-status",
+          "speckit.secure-development-review"
+        ]
+      },
+      "registered_skills": [
+        "speckit-secure-development-status",
+        "speckit-secure-development-review"
+      ],
+      "installed_at": "2026-10-20T19:59:14.567729+00:00"
     }
   }
 }

@@ -2,9 +2,9 @@
 
 > **GENERATED FILE / GENERIERTE DATEI:** Nicht manuell bearbeiten. Der Sammelband wird aus den zwölf Dateien unter `checklisten/` erzeugt. / Do not edit manually. This compendium is generated from the twelve files under `checklisten/`.
 
-**Baseline-Version / Baseline version:** 3.2.0
-**Dokumentversion / Document version:** 2.2.0
-**Stand / Date:** 2026-07-19
+**Baseline-Version / Baseline version:** 3.4.4
+**Dokumentversion / Document version:** 2.4.4
+**Stand / Date:** 2026-10-20
 **Quelle / Source:** `baseline-manifest.json` und / and `checklisten/`
 
 ## Zweck / Purpose
@@ -61,8 +61,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 01 – Standards-Anwendbarkeit / Standards Applicability
 
 **Dokument-ID / Document ID:** CL-01
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.4
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -203,44 +203,9 @@ change in architecture or delivery model.
 
 #### CL-01-01: NIST SSDF und CWE Top 25 / NIST SSDF and CWE Top 25
 
-- **DE:** Dieser Punkt legt die Sicherheitsbasis für jedes Projekt fest.
-  NIST SSDF (NIST SP 800-218) beschreibt, wie sichere Software
-  geplant, gebaut und gepflegt wird. Die CWE Top 25 sind eine Liste
-  häufiger und gefährlicher Programmierfehler, zum Beispiel Cross-Site
-  Scripting, SQL Injection, unsichere Speicherzugriffe und Path
-  Traversal. Für das Projekt bedeutet das: Im Projektplan steht,
-  welche SSDF-Praktiken genutzt werden. In der Code-Review-Vorlage,
-  im Linter oder im Security-Scan steht, wie die CWE Top 25 geprüft
-  werden.
-- **EN:** This item defines the security baseline for every project.
-  NIST SSDF (NIST SP 800-218) describes how secure software is planned,
-  built, and maintained. The CWE Top 25 are a list of common and
-  dangerous programming mistakes, for example cross-site scripting,
-  SQL injection, unsafe memory access, and path traversal. For the
-  project this means: the project plan states which SSDF practices are
-  used. The code review template, linter, or security scan states how
-  the CWE Top 25 are checked.
-- **Mindestprüfung / Minimum check:** PO.1 dokumentiert
-  Sicherheitsanforderungen im Plan. PS.1 schützt die Integrität des
-  Quellcodes, zum Beispiel durch signierte Commits (`git commit -S`,
-  GPG oder Sigstore). PW.4 verankert sichere Codierungsregeln im
-  Style-Guide. PW.7 verlangt Code-Review mit Sicherheits-Fokus. PW.8
-  nutzt statische Analyse, zum Beispiel Semgrep, SonarQube oder
-  CodeQL. RV.1 verfolgt Schwachstellen in einem Issue-System mit
-  Reaktionsfrist. / PO.1 documents security requirements in the plan.
-  PS.1 protects source-code integrity, for example with signed commits
-  (`git commit -S`, GPG, or Sigstore). PW.4 places secure coding rules
-  in the style guide. PW.7 requires security-focused code review. PW.8
-  uses static analysis, for example Semgrep, SonarQube, or CodeQL.
-  RV.1 tracks vulnerabilities in an issue system with a response time.
-- **Akzeptanz / Acceptance:** Der Projektplan nennt die genutzten
-  SSDF-Praktiken mit ID und kurzer Alltagserklärung. Die Code-Review-
-  Vorlage, der Linter-Regelsatz oder der Scan-Bericht zeigt, wie die
-  CWE Top 25 geprüft werden. / The project plan lists the used SSDF
-  practices with ID and a short plain-language explanation. The code
-  review template, linter rule set, or scan report shows how the CWE
-  Top 25 are checked.
-- **Referenz / Reference:** ISO 27002 A.8.28; Verfassung XII, XIV.
+- **DE:** NIST SSDF 1.1 ist die veröffentlichte Basis; 1.2 ist als Entwurf getrennt zu bewerten. PO.1 betrifft Sicherheitsanforderungen, PS.1 den Schutz von Code gegen unberechtigte Änderung, PW.4 die Wiederverwendung gesicherter Komponenten, PW.5 sichere Codierung, PW.7 die Analyse menschenlesbaren Codes und PW.8 Tests ausführbaren Codes. Statische Analyse gehört zu PW.7. Signierte Commits sind ein mögliches Mittel, keine alleinige SSDF-Pflicht. CWE-Jahrgang und ausgewählte Prüfungen dokumentieren.
+- **EN:** NIST SSDF 1.1 is the published baseline; assess draft 1.2 separately. PO.1 concerns security requirements, PS.1 code protection, PW.4 reuse of secured components, PW.5 secure coding, PW.7 analysis of human-readable code, and PW.8 executable-code testing. Static analysis belongs to PW.7. Signed commits are one possible measure, not a standalone SSDF mandate. Record the CWE edition and chosen checks.
+- **Akzeptanz / Acceptance:** Versioniertes SSDF-/CWE-Mapping mit Nachweisen im Projektplan. / Versioned SSDF/CWE mapping with evidence in the project plan.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -312,7 +277,7 @@ change in architecture or delivery model.
   Generator, viele Sprachen), `cyclonedx-bom` (Python),
   `cyclonedx-dotnet` (.NET), `cyclonedx-maven-plugin` (Java),
   `@cyclonedx/cyclonedx-npm` (Node.js), `cyclonedx-gomod` (Go).
-  Container-SBOM mit `docker sbom` (Docker Desktop), `syft` oder
+  Container-SBOM mit `syft` oder
   `trivy sbom`. Pflichtfelder: Komponenten-Name, Version, Lizenz,
   Hash (SHA-256), Lieferant, Beziehungs-Typ. Die SBOM wird im
   CI/CD-Pipeline-Build erzeugt, signiert (z. B. Cosign) und zusammen
@@ -324,7 +289,7 @@ change in architecture or delivery model.
   (CycloneDX Generator, many languages), `cyclonedx-bom` (Python),
   `cyclonedx-dotnet` (.NET), `cyclonedx-maven-plugin` (Java),
   `@cyclonedx/cyclonedx-npm` (Node.js), `cyclonedx-gomod` (Go).
-  Container SBOM via `docker sbom` (Docker Desktop), `syft`, or
+  Container SBOM via `syft` or
   `trivy sbom`. Required fields: component name, version, licence,
   hash (SHA-256), supplier, relationship type. The SBOM is generated
   in the CI/CD pipeline build, signed (e.g. Cosign), and published
@@ -553,7 +518,7 @@ change in architecture or delivery model.
 
 #### CL-01-08: OWASP SAMM / OWASP SAMM
 
-- **DE:** OWASP SAMM (Software Assurance Maturity Model, derzeit Version 2.x)
+- **DE:** OWASP SAMM (Software Assurance Maturity Model, Version 2)
   bewertet die Sicherheitsreife eines Projekts oder einer Organisation in
   fünf Geschäftsfunktionen: **Governance** (Strategy & Metrics, Policy &
   Compliance, Education & Guidance), **Design** (Threat Assessment,
@@ -661,43 +626,9 @@ change in architecture or delivery model.
 
 #### CL-01-10: OWASP Cheat Sheets und Proactive Controls / OWASP Cheat Sheets and Proactive Controls
 
-- **DE:** **OWASP Cheat Sheet Series** liefert über 80 thematische
-  Anleitungen mit konkreten Empfehlungen, z. B. „Authentication Cheat
-  Sheet", „Cross-Site Scripting Prevention", „SQL Injection Prevention",
-  „Password Storage", „Input Validation", „Secure Headers", „REST
-  Security", „GraphQL Security", „File Upload", „Cryptographic
-  Storage", „Session Management". **OWASP Proactive Controls** (aktuell
-  v3.0) gibt zehn entwicklerorientierte Kontrollen vor: C1
-  Implementierungsstandards, C2 Bibliotheken und Frameworks, C3
-  Authentifizierung, C4 Sitzungsmanagement, C5 Zugriffskontrolle, C6
-  Verschlüsselung, C7 Validierung & Sanitization, C8 Logging & Audit,
-  C9 Sicherheitskonfigurationen, C10 Fehler- und Ausnahmebehandlung.
-  Im Review-Leitfaden werden die thematisch relevanten Cheat Sheets
-  pro Pull-Request-Typ (Auth-Änderung, neue Endpoint, Crypto-Code)
-  als Pflichtlektüre verlinkt; Proactive Controls erscheinen als
-  Definition-of-Done-Checkliste. PR-Templates verweisen direkt auf
-  die jeweils anzuwendenden Cheat-Sheet-URLs.
-- **EN:** **OWASP Cheat Sheet Series** offers over 80 topic guides with
-  concrete recommendations, e.g. "Authentication Cheat Sheet",
-  "Cross-Site Scripting Prevention", "SQL Injection Prevention",
-  "Password Storage", "Input Validation", "Secure Headers", "REST
-  Security", "GraphQL Security", "File Upload", "Cryptographic
-  Storage", "Session Management". **OWASP Proactive Controls**
-  (currently v3.0) defines ten developer-focused controls: C1
-  implementation standards, C2 libraries and frameworks, C3
-  authentication, C4 session management, C5 access control, C6
-  encryption, C7 validation & sanitization, C8 logging & audit, C9
-  security configuration, C10 error and exception handling. In the
-  review guide, the topical Cheat Sheets per pull request type (auth
-  change, new endpoint, crypto code) are linked as required reading;
-  Proactive Controls appear as a Definition-of-Done checklist. PR
-  templates link directly to the applicable Cheat Sheet URLs.
-- **Akzeptanz / Acceptance:** Code-Review-Leitfaden bzw. PR-Template
-  enthält direkte Links zu den thematisch relevanten Cheat Sheets
-  und Proactive Controls. / Code review guide or PR template
-  contains direct links to the topical Cheat Sheets and Proactive
-  Controls.
-- **Referenz / Reference:** Verfassung XII.
+- **DE:** Die OWASP Cheat Sheet Series dient als laufend gepflegte Implementierungshilfe. Proactive Controls wird als Ausgabe 2024 referenziert; Kontrollnummern dürfen nicht mit 2018 vermischt werden. Relevante Kontrollen mit Name, Ausgabe und direkter Quelle den Anforderungen und Tests zuordnen. Die Sammlung ist kein Beweis für eine sichere Implementierung.
+- **EN:** Use the continuously maintained OWASP Cheat Sheet Series for implementation guidance. Reference Proactive Controls edition 2024 and do not mix its identifiers with 2018. Map relevant controls by name, edition, and direct source to requirements and tests. Using guidance does not prove implementation security.
+- **Akzeptanz / Acceptance:** Verlinkte Kontrollauswahl und Tests; Quelle: https://top10proactive.owasp.org/the-top-10/ / Linked control selection and tests; same primary source.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -717,37 +648,9 @@ change in architecture or delivery model.
 
 #### CL-01-11: Nichtanwendbarkeit dokumentieren / Document Non-Applicability
 
-- **DE:** Jeder nicht angewandte Standard wird ausdrücklich als „N/A" mit
-  ein bis zwei Sätzen Begründung dokumentiert. Beispiele: „ASVS = N/A,
-  weil das Projekt eine reine CLI ohne HTTP- oder Auth-Komponenten ist";
-  „SBOM = N/A, weil dieses Repository nur Konfigurationsdateien
-  enthält und keine ausführbaren Artefakte erzeugt"; „Zero Trust = N/A,
-  weil das System ein lokal laufendes Single-User-Tool ohne
-  Netzwerk-Komponenten ist"; „Scorecard = N/A, weil keine externen
-  OSS-Abhängigkeiten genutzt werden". Die N/A-Einträge stehen im
-  selben Dokument wie die erfüllten Anforderungen
-  (`docs/security/standards-applicability.md` oder die jeweilige
-  Standard-Datei). Stille Auslassung würde im Audit als Lücke
-  bewertet. Bei Unsicherheit lieber „nicht erfüllt" als „N/A" wählen
-  und eine Folgeaufgabe anlegen.
-- **EN:** Every standard that does not apply is explicitly recorded as
-  "N/A" with a one- or two-sentence justification. Examples: "ASVS =
-  N/A because this project is a pure CLI with no HTTP or auth
-  components"; "SBOM = N/A because this repository only contains
-  configuration files and produces no executable artefacts"; "Zero
-  Trust = N/A because the system is a locally running single-user
-  tool without network components"; "Scorecard = N/A because no
-  external OSS dependencies are used". N/A entries live in the same
-  document as the fulfilled requirements
-  (`docs/security/standards-applicability.md` or the respective
-  standard file). Silent omission would be treated as a gap during
-  audit. When uncertain, prefer "not fulfilled" over "N/A" and
-  create a follow-up task.
-- **Akzeptanz / Acceptance:** Jeder Punkt der Anwendbarkeits-Checkliste
-  hat einen Status; N/A-Einträge tragen eine kurze Begründung. /
-  Every item of the applicability checklist has a status; N/A
-  entries carry a short justification.
-- **Referenz / Reference:** Verfassung XIV.
+- **DE:** Nichtanwendbarkeit erfordert eine projektspezifische Begründung. Anwendbarkeit und Umsetzung bleiben getrennt: Applicable, N/A oder Open sowie Fulfilled, Partly Fulfilled, Not Fulfilled oder Not Assessed. Unsicherheit wird als Open mit Folgeaufgabe dokumentiert; N/A bekommt Not Assessed. Ein CLI- oder Konfigurationsprojekt ist nicht allein wegen seiner Artefaktart von Lieferkettenprüfungen ausgenommen.
+- **EN:** Non-applicability needs a project-specific rationale. Keep applicability separate from implementation: Applicable, N/A, or Open and Fulfilled, Partly Fulfilled, Not Fulfilled, or Not Assessed. Record uncertainty as Open with follow-up; N/A uses Not Assessed. CLI or configuration artefacts do not automatically exempt a project from supply-chain review.
+- **Akzeptanz / Acceptance:** Begründung, Owner, Evidence, Restrisiko, Wiedervorlage und nächste Maßnahme. / Rationale, owner, evidence, residual risk, review trigger, and next action.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -767,32 +670,12 @@ change in architecture or delivery model.
 
 #### CL-01-12: Regulatorische Anwendbarkeit / Regulatory Applicability
 
-- **DE:** Für jedes Projekt wird zusätzlich zur technischen Standardauswahl
-  geprüft, ob NIS2, CRA, EU AI Act, DORA oder sektor- und
-  kundenspezifische Regeln anwendbar sind. Die Entscheidung wird als
-  `anwendbar`, `nicht anwendbar` oder `offen` dokumentiert. Für private
-  Lern-, Referenz- oder interne Tooling-Projekte darf `nicht anwendbar`
-  gewählt werden, wenn das Projekt nicht als regulierter Dienst betrieben
-  wird, nicht als reguliertes Produkt in Verkehr gebracht wird, nicht an
-  regulierte Kunden geliefert wird und nicht Teil einer regulierten
-  Lieferkette ist. Diese Begründung wird ausdrücklich festgehalten.
-- **EN:** Every project checks, in addition to the technical standards
-  selection, whether NIS2, CRA, the EU AI Act, DORA, or sector- and
-  customer-specific rules apply. The decision is documented as
-  `applicable`, `not applicable`, or `open`. For private learning,
-  reference, or internal tooling projects, `not applicable` may be used
-  when the project is not operated as a regulated service, not placed on
-  the market as a regulated product, not delivered to regulated customers,
-  and not part of a regulated supply chain. This rationale is recorded
-  explicitly.
-- **Akzeptanz / Acceptance:** `docs/security/regulatory-applicability.md`
-  oder ein gleichwertiges Spec-Kit-Artefakt enthält eine Matrix zu NIS2,
-  CRA, EU AI Act, DORA und kundenspezifischen Regeln mit Entscheidung,
-  Begründung, Evidenzpfad, verantwortlicher Person und Wiedervorlage. /
-  `docs/security/regulatory-applicability.md` or an equivalent Spec Kit
-  artefact contains a matrix for NIS2, CRA, EU AI Act, DORA, and
-  customer-specific rules with decision, rationale, evidence path, owner,
-  and re-review trigger.
+- **DE:** Quellenstand 20.10.2026: KI-VO konsolidiert am 27.07.2026 durch (EU) 2026/1744. Art. 113 unterscheidet allgemeine Geltung ab 02.08.2026, Kapitel I/II seit 02.02.2025 (neue Art.-5-Verbote ab 02.12.2026), GPAI-/Governance-Regeln seit 02.08.2025 sowie Hochrisiko Kapitel III Abschnitte 1–3 (außer Art. 6(5)) ab 02.12.2027 für Art. 6(2)/Anhang III und 02.08.2028 für Art. 6(1)/Anhang I. Produkt, KI-Werkzeugbetrieb (einschließlich Betreiberrolle) und Organisation getrennt bewerten; Art. 4 verlangt bei einschlägiger Anbieter-/Betreiberrolle Maßnahmen, die die Entwicklung von KI-Kompetenz unterstützen, unter Berücksichtigung von Vorkenntnissen, Ausbildung und Nutzungskontext; ein bestimmtes individuelles Kompetenzniveau muss nicht garantiert werden. Für Deutschland gilt BSIG seit 06.12.2025; §§ 28–30, 32/33 und 38 sowie Sonderregeln und Anlagen prüfen. DORA gilt seit 17.01.2025; unmittelbare Finanzunternehmenspflichten, Vertragsanforderungen an Zulieferer und Aufsicht über kritische IKT-Drittdienstleister unterscheiden. Andere Länder/Branchen benötigen eigene Primärprüfung.
+- **EN:** Source date 2026-10-20: AI Act consolidated on 2026-07-27 by (EU) 2026/1744. Article 113 separates general application from 2026-08-02, Chapters I/II since 2025-02-02 (new Article 5 prohibitions from 2026-12-02), GPAI/governance rules since 2025-08-02, and high-risk Chapter III Sections 1–3 (except Article 6(5)) from 2027-12-02 for Article 6(2)/Annex III and 2028-08-02 for Article 6(1)/Annex I. Assess product, AI tool operation (including the deployer role) and organisation separately; Article 4 requires measures supporting the development of AI literacy where the provider/deployer role applies, considering knowledge, training and use context; no specific individual literacy level must be guaranteed. German BSIG applies since 2025-12-06; review sections 28–30, 32/33, 38, special rules and annexes. DORA applies since 2025-01-17; distinguish direct financial-entity duties, supplier contracts and oversight of critical ICT third-party providers. Other jurisdictions/sectors require their own primary review.
+
+- **DE:** Für jedes Rechtsregime (NIS2/BSIG, CRA, KI-VO, DORA und sektor-/kundenspezifische Regeln) getrennt über Produkt, Werkzeugbetrieb und Organisation entscheiden. Je Ebene Land, Rechtsfassung, Rechtsträger, Rolle (etwa Anbieter, Betreiber oder Hersteller), Anwendungsdatum und direkte beziehungsweise vertragliche Pflichten prüfen. Interne Werkzeuge, Ausbildung oder fehlender Vertrieb rechtfertigen kein pauschales N/A: KI-VO Art. 4 kann beim Einsatz von KI-Werkzeugen einschlägig sein, auch ohne ein eigenes KI-Produkt anzubieten. N/A nur für die konkret geprüfte Ebene, Rolle und Rechtsgrundlage begründen. Unbekannte Sachverhalte bleiben `Open` mit Owner und Wiedervorlage.
+- **EN:** Decide separately for product, tool operation and organisation under each regime (NIS2/BSIG, CRA, AI Act, DORA and sector/customer rules). For each level assess jurisdiction, legal version, legal entity, role (such as provider, deployer or manufacturer), application date and direct or contractual duties. Internal tools, training or absence of sales do not justify blanket N/A: AI Act Article 4 may apply to AI tool use without offering an AI product. Justify N/A only for the assessed level, role and legal basis. Unknown facts remain `Open` with an owner and review date.
+- **Akzeptanz / Acceptance:** `docs/security/regulatory-applicability.md` oder gleichwertige Evidence enthält je Rechtsregime getrennte Zeilen für Produkt, Werkzeugbetrieb und Organisation mit Rolle, Land, Rechtsfassung/Datum, Entscheidung, konkreter Rechtsgrundlage, Begründung, Evidence, Owner/Reviewer und Wiedervorlage; Art.-4-Maßnahmen oder rollenbezogenes N/A sind belegt. / Equivalent evidence records separate product, tool-operation and organisation rows per regime, with role, jurisdiction, legal version/date, decision, exact legal basis, rationale, evidence, owner/reviewer and reevaluation; evidence Article 4 measures or role-specific N/A.
 - **Referenz / Reference:** Spec-Kit `security-governance`, Template
   `regulatory-applicability-template`.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
@@ -964,6 +847,13 @@ questions have an owner and re-review trigger.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+- **Version 2.0.3 (2026-10-20):** Unabhängige Reviewkorrekturen und Baseline 3.4.3; siehe [Prüfbericht](../maintenance/gsdb-independent-fixes-2026-10-20.md). / Independent review corrections and baseline 3.4.3; see review report.
+
+- **Version 2.0.4 (2026-10-20):** Acht P3-Nachbefunde korrigiert, Baseline 3.4.4. / Correct eight P3 follow-up findings, baseline 3.4.4.
 
 ---
 
@@ -981,8 +871,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 02 – Sichere Softwarearchitektur / Secure Software Architecture
 
 **Dokument-ID / Document ID:** CL-02
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.3
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -1169,7 +1059,7 @@ impact.
   Eingangsvalidierung im Application-Code (Bean Validation, Pydantic,
   FluentValidation); (3) parametrisierte SQL-Queries; (4) Datenbank-
   Berechtigungen mit Read-Only-Rollen je nach Anwendungsfall; (5)
-  Datenbank-Verschlüsselung at-rest (TDE in PostgreSQL/SQL Server,
+  Datenbank-Verschlüsselung at-rest (plattformgeeignete Speicherverschlüsselung,
   AWS RDS Encryption); (6) Audit-Logging mit unveränderlichem Speicher
   (Append-Only-Log, S3 Object Lock). Beispiel für ein API-Token:
   HTTPS + kurze TTL + Audience-Claim + Token-Revocation-Liste.
@@ -1185,7 +1075,7 @@ impact.
   application code (Bean Validation, Pydantic, FluentValidation);
   (3) parameterised SQL queries; (4) database privileges with
   read-only roles per use case; (5) database encryption at rest
-  (TDE in PostgreSQL/SQL Server, AWS RDS encryption); (6) audit
+  (platform-appropriate storage encryption, AWS RDS encryption); (6) audit
   logging with immutable storage (append-only log, S3 Object Lock).
   Example for an API token: HTTPS + short TTL + audience claim +
   token revocation list. Example for containers: signed image
@@ -1738,18 +1628,18 @@ impact.
 
 - **DE:** Wenn ein Projekt Cloud-Dienste, SaaS, PaaS, IaaS, verwaltete
   Dienste, Container-Registries, Artefakt-Hosting oder providergebundene
-  Deployments wesentlich nutzt oder bereitstellt, wird BSI C3A als
+  Deployments wesentlich nutzt oder bereitstellt, wird BSI C3A v1.0 (27.04.2026) als
   Bewertungsrahmen für selbstbestimmte Cloud-Nutzung geprüft. Die
   Architektur dokumentiert Provider-Abhängigkeiten, Lock-in-Risiken,
   Exit- oder Portabilitätsoptionen, Daten- und Betriebsstandorte sowie
-  betroffene S-ADRs. Reine Entwicklungsinfrastruktur darf mit kurzer
+  betroffene S-ADRs. C3A ist selbst nicht bindend, setzt C5 voraus und umfasst SOV-1 bis SOV-6; SOV-7/8 sind ausgenommen. Eine EU-Region allein belegt keine Autonomie; C3A ersetzt weder C5 noch Datenschutz-/Transferprüfung. Reine Entwicklungsinfrastruktur darf mit kurzer
   Toolchain-Begründung als `nicht anwendbar` dokumentiert werden.
 - **EN:** If a project materially uses or provides cloud services, SaaS,
   PaaS, IaaS, managed services, container registries, artefact hosting, or
-  provider-dependent deployments, BSI C3A is checked as an assessment
+  provider-dependent deployments, BSI C3A v1.0 (2026-04-27) is checked as an assessment
   framework for self-determined cloud use. The architecture documents
   provider dependencies, lock-in risks, exit or portability options, data
-  and operation locations, and affected S-ADRs. Generic development
+  and operation locations, and affected S-ADRs. C3A is not binding by itself, presupposes C5 and covers SOV-1 to SOV-6; SOV-7/8 are excluded. An EU region alone does not demonstrate autonomy; C3A replaces neither C5 nor privacy/transfer review. Generic development
   infrastructure may be documented as `not applicable` with a short
   toolchain rationale.
 - **Akzeptanz / Acceptance:** `docs/security/cloud-autonomy-applicability.md`
@@ -1781,18 +1671,18 @@ impact.
 #### CL-02-13: Cloud-Compliance-Assurance / Cloud Compliance Assurance
 
 - **DE:** Wenn ein Projekt Cloud-Dienste wesentlich nutzt oder bereitstellt,
-  wird BSI C5 als Assurance-Rahmen geprüft. Die Architektur dokumentiert,
+  wird BSI C5:2026 v1.1.0 (11.08.2026) als Assurance-Rahmen geprüft. Die Architektur dokumentiert,
   ob ein C5-Testat oder ein gleichwertiger Nachweis vorliegt, welchen
   Umfang dieser Nachweis abdeckt, welche Shared-Responsibility-Lücken
   bleiben, welche Subdienstleister betroffen sind und welche
   Kundenpflichten offen sind. Fehlt ein C5-Nachweis, werden Ersatznachweise
-  und Restrisiken dokumentiert.
-- **EN:** If a project materially uses or provides cloud services, BSI C5
-  is checked as an assurance framework. The architecture documents whether
+  und Restrisiken dokumentiert. Testattyp, geprüfter Zeitraum, Dienst/Region, Abweichungen und ergänzende Kundenkontrollen nachweisen. Ein C5-Testat ist keine pauschale Souveränitäts- oder Datenschutzfreigabe.
+- **EN:** If a project materially uses or provides cloud services, it
+  uses BSI C5:2026 v1.1.0 (2026-08-11) as an assurance framework. The architecture documents whether
   a C5 attestation or equivalent evidence exists, which scope it covers,
   which shared-responsibility gaps remain, which subprocessors are
   involved, and which customer-side duties remain open. If C5 evidence is
-  missing, substitute evidence and residual risks are documented.
+  missing, substitute evidence and residual risks are documented. Evidence report type, assessed period, service/region, exceptions and complementary customer controls. A C5 report is not blanket sovereignty or privacy approval.
 - **Akzeptanz / Acceptance:** `docs/security/cloud-compliance-assurance.md`
   oder ein gleichwertiges Spec-Kit-Artefakt nennt C5-/Assurance-Status,
   Scope, Provider/Subdienstleister, Shared-Responsibility-Gaps,
@@ -1928,6 +1818,13 @@ rationale.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+- **Version 2.0.3 (2026-10-20):** Unabhängige Reviewkorrekturen und Baseline 3.4.3; siehe [Prüfbericht](../maintenance/gsdb-independent-fixes-2026-10-20.md). / Independent review corrections and baseline 3.4.3; see review report.
+
+DE: Baseline-Bindung 3.4.4, redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.4 is editorial; semantic document version unchanged.
 
 ---
 
@@ -1945,8 +1842,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 03 – Kryptografische Mindestvorgaben / Cryptographic Minimum Requirements
 
 **Dokument-ID / Document ID:** CL-03
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.3
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -2117,7 +2014,7 @@ indirectly via libraries, frameworks, or external services.
 #### CL-03-02: Asymmetrische Verschlüsselung und Signatur / Asymmetric Encryption and Signature
 
 - **DE:** RSA mit mindestens 3072 Bit, ECDSA mit Kurve P-256 (secp256r1) oder höher,
-  oder Ed25519 (bevorzugt für neue Signaturen). Für Schlüsseltausch: ECDH (P-256
+  oder Ed25519 nach begründeter Profilentscheidung. Für Schlüsseltausch: ECDH (P-256
   oder höher) oder X25519. RSA-Verschlüsselung verwendet RSA-OAEP mit SHA-256
   (`Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding")` in Java,
   `RSA.encrypt(..., padding=OAEP(SHA256()))` in Python `cryptography`,
@@ -2126,7 +2023,7 @@ indirectly via libraries, frameworks, or external services.
   oder einen geprüften CSPRNG verwenden, um Nonce-Kollisionen zu vermeiden.
   Verbotene Kurven: P-192 (secp192r1), brainpoolP160 und kürzere.
 - **EN:** RSA with at least 3072 bit, ECDSA with curve P-256 (secp256r1) or
-  higher, or Ed25519 (preferred for new signatures). For key exchange: ECDH
+  higher, or Ed25519 under a justified profile decision. For key exchange: ECDH
   (P-256 or higher) or X25519. RSA encryption uses RSA-OAEP with SHA-256
   (`Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding")` in Java,
   `RSA.encrypt(..., padding=OAEP(SHA256()))` in Python `cryptography`,
@@ -2134,6 +2031,12 @@ indirectly via libraries, frameworks, or external services.
   for new applications. ECDSA signatures should use RFC 6979 (deterministic)
   or a vetted CSPRNG to avoid nonce collisions. Forbidden curves: P-192
   (secp192r1), brainpoolP160, and shorter.
+- **DE:** Diese Auswahl ist lokale Baseline-Policy, keine pauschale BSI-Freigabe.
+  Je Protokoll die konkrete TR-02102-Teilfassung, Parameter und Laufzeit prüfen;
+  generische Bibliotheksunterstützung beweist keine Profilkonformität.
+- **EN:** This selection is local baseline policy, not blanket BSI approval.
+  Check the relevant TR-02102 part, parameters and validity period per protocol;
+  library support does not establish profile conformity.
 - **Akzeptanz / Acceptance:** Algorithmus, Kurve, Padding und Bibliothek je
   Modul dokumentiert. / Algorithm, curve, padding, and library documented
   per module.
@@ -2334,40 +2237,9 @@ indirectly via libraries, frameworks, or external services.
 
 #### CL-03-07: TLS-Konfiguration / TLS Configuration
 
-- **DE:** TLS 1.2 ist das Mindestmaß, TLS 1.3 ist bevorzugt. SSLv2, SSLv3,
-  TLS 1.0 und TLS 1.1 sind deaktiviert. Empfohlene TLS 1.3 Cipher-Suites:
-  `TLS_AES_256_GCM_SHA384`, `TLS_CHACHA20_POLY1305_SHA256`,
-  `TLS_AES_128_GCM_SHA256`. Empfohlene TLS 1.2 Suites mit Forward Secrecy:
-  `ECDHE-ECDSA-AES256-GCM-SHA384`, `ECDHE-RSA-AES256-GCM-SHA384`,
-  `ECDHE-ECDSA-CHACHA20-POLY1305`, `ECDHE-RSA-CHACHA20-POLY1305`.
-  Konfigurationsbeispiele: in nginx `ssl_protocols TLSv1.2 TLSv1.3;
-  ssl_ciphers ECDHE+AESGCM:ECDHE+CHACHA20; ssl_prefer_server_ciphers on;`,
-  in Apache `SSLProtocol -all +TLSv1.2 +TLSv1.3`, in Spring Boot
-  `server.ssl.enabled-protocols=TLSv1.2,TLSv1.3`, in Kestrel
-  `SslProtocols = SslProtocols.Tls12 | SslProtocols.Tls13`. HSTS
-  (`Strict-Transport-Security: max-age=31536000; includeSubDomains`) ist
-  für öffentliche Endpunkte gesetzt. Zertifikate aus einer CA, die im
-  CT-Log (Certificate Transparency) erscheint; selbstsignierte Zertifikate
-  nur in geschlossenen Test-/Entwicklungsumgebungen.
-- **EN:** TLS 1.2 is the minimum, TLS 1.3 is preferred. SSLv2, SSLv3,
-  TLS 1.0, and TLS 1.1 are disabled. Recommended TLS 1.3 cipher suites:
-  `TLS_AES_256_GCM_SHA384`, `TLS_CHACHA20_POLY1305_SHA256`,
-  `TLS_AES_128_GCM_SHA256`. Recommended TLS 1.2 suites with forward
-  secrecy: `ECDHE-ECDSA-AES256-GCM-SHA384`, `ECDHE-RSA-AES256-GCM-SHA384`,
-  `ECDHE-ECDSA-CHACHA20-POLY1305`, `ECDHE-RSA-CHACHA20-POLY1305`.
-  Configuration examples: nginx `ssl_protocols TLSv1.2 TLSv1.3;
-  ssl_ciphers ECDHE+AESGCM:ECDHE+CHACHA20; ssl_prefer_server_ciphers on;`,
-  Apache `SSLProtocol -all +TLSv1.2 +TLSv1.3`, Spring Boot
-  `server.ssl.enabled-protocols=TLSv1.2,TLSv1.3`, Kestrel
-  `SslProtocols = SslProtocols.Tls12 | SslProtocols.Tls13`. HSTS
-  (`Strict-Transport-Security: max-age=31536000; includeSubDomains`) is
-  set for public endpoints. Certificates from a CA that appears in CT
-  logs (Certificate Transparency); self-signed certificates only in closed
-  test or development environments.
-- **Akzeptanz / Acceptance:** TLS-Scan-Bericht pro Endpunkt (z. B.
-  `testssl.sh`, Qualys SSL Labs, `sslyze`) mit Mindest-Note A oder
-  vergleichbar. / TLS scan report per endpoint (e.g. `testssl.sh`,
-  Qualys SSL Labs, `sslyze`) with at least an "A" rating or equivalent.
+- **DE:** TLS 1.3 bevorzugen; TLS 1.2 ist nach TR-02102-2 (2026-01), Kap. 3, nur bis Ende 2031 empfohlen. SSLv2/v3 und TLS 1.0/1.1 deaktivieren. Für das BSI-Profil TLS-1.3-Suites aus Tabelle 13 verwenden, etwa `TLS_AES_256_GCM_SHA384` oder `TLS_AES_128_GCM_SHA256`; TLS-1.2-Beispiele aus Tabelle 3 sind `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384` und `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`. Signaturverfahren, Gruppen und Schlüssellängen zusätzlich nach Tabellen 7–12 und Kap. 3.6 prüfen: bei RSA PSS verwenden; TLS-1.2-RSA mit PKCS#1-v1.5-Padding wurde nur bis 2025 empfohlen. ChaCha20-Suites stehen nicht in Tabellen 3/13 dieser Ausgabe; eine lokal gewählte Abweichung ist gesondert zu begründen und darf nicht als BSI-konform ausgegeben werden. Ein Cipher-String allein erzwingt weder PSS noch alle BSI-Parameter. Effektive Konfiguration und Handshake je Zielplattform prüfen; CL-03-14/15 steuern Migration und Quellenabgleich. HSTS für öffentliche Web-Endpunkte nach geprüfter Subdomain-Policy setzen. Öffentliche Web-Zertifikate über eine vertrauenswürdige CA mit anwendbarer CT-Policy; geschlossene Test-/Entwicklungsumgebungen dürfen dokumentierte eigene Vertrauensanker verwenden.
+- **EN:** Prefer TLS 1.3; TR-02102-2 (2026-01), Chapter 3 recommends TLS 1.2 only through 2031. Disable SSLv2/v3 and TLS 1.0/1.1. For the BSI profile use TLS 1.3 suites from Table 13, such as `TLS_AES_256_GCM_SHA384` or `TLS_AES_128_GCM_SHA256`; TLS 1.2 examples from Table 3 are `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384` and `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`. Also assess signature schemes, groups and key sizes under Tables 7–12 and Chapter 3.6: use PSS for RSA; TLS 1.2 RSA with PKCS#1 v1.5 padding was recommended only through 2025. ChaCha20 suites do not appear in Tables 3/13 of this edition; justify any locally chosen deviation separately and do not label it BSI-conformant. A cipher string alone enforces neither PSS nor all BSI parameters. Check effective configuration and handshakes per target platform; CL-03-14/15 govern migration and source review. Apply HSTS to public web endpoints with a reviewed subdomain policy. Use a trusted CA with applicable CT policy for public web certificates; closed test/development environments may use documented private trust anchors.
+- **Akzeptanz / Acceptance:** TLS-Scan und Handshake-Nachweis je Endpunkt, Protokoll/Suite/Gruppe/Signatur/Schlüssellänge gegen die datierte BSI-Ausgabe bewertet, Abweichungen begründet und Migration terminiert; ein Scanner-Rating allein genügt nicht. / Per-endpoint TLS scan and handshake evidence assess protocol, suite, group, signature and key size against the dated BSI edition, justify deviations and schedule migration; a scanner rating alone is insufficient.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -2460,34 +2332,9 @@ indirectly via libraries, frameworks, or external services.
 
 #### CL-03-10: Schlüsselrotation / Key Rotation
 
-- **DE:** Festgelegte Rotationsfristen je Schlüsseltyp: TLS-Server-Zertifikate
-  ≤ 397 Tage (Browser-Limit ab 2020), idealerweise per ACME (Let's Encrypt,
-  ZeroSSL) alle 60–90 Tage automatisiert; API- und Service-Tokens 90 Tage;
-  Datenbank-Verschlüsselungsschlüssel (DEK) jährlich oder häufiger;
-  Master-/Wrapping-Keys (KEK) im KMS jährlich mit Versionierung;
-  Signaturschlüssel projektabhängig (oft mehrere Jahre, aber mit
-  Migrationspfad). Rotation funktioniert mit überlappender Gültigkeit
-  (Old-Key + New-Key gleichzeitig akzeptieren), bis alle Verbraucher
-  umgestellt sind. Werkzeuge: AWS KMS Automatic Key Rotation, Azure Key
-  Vault Auto-Rotation, HashiCorp Vault `vault rotate`, cert-manager unter
-  Kubernetes. Bei Verdacht auf Kompromittierung wird sofort rotiert,
-  betroffene Sitzungen werden invalidiert, und der Vorfall geht in
-  Incident Response.
-- **EN:** Defined rotation periods per key type: TLS server certificates
-  ≤ 397 days (browser limit since 2020), ideally automated via ACME
-  (Let's Encrypt, ZeroSSL) every 60–90 days; API and service tokens 90
-  days; database encryption keys (DEK) yearly or more often; master /
-  wrapping keys (KEK) in the KMS yearly with versioning; signing keys
-  project-dependent (often multi-year, but with a migration path).
-  Rotation uses overlapping validity (old + new key both accepted) until
-  all consumers have switched. Tools: AWS KMS Automatic Key Rotation,
-  Azure Key Vault Auto-Rotation, HashiCorp Vault `vault rotate`,
-  cert-manager on Kubernetes. On suspected compromise, immediate
-  rotation, invalidate affected sessions, escalate to incident response.
-- **Akzeptanz / Acceptance:** Rotationsplan mit Frist je Schlüsseltyp,
-  Werkzeug, letztem Rotations-Datum und Verantwortlicher Person
-  dokumentiert. / Rotation plan with period per key type, tooling, last
-  rotation date, and owner documented.
+- **DE:** Rotationsfristen werden je Schlüsseltyp, Schutzbedarf und geltendem Standard festgelegt. Für öffentlich vertrauenswürdige TLS-Serverzertifikate gelten ausstellungsabhängige CA/Browser-Fristen: ab 15.03.2026 höchstens 200 Tage, ab 15.03.2027 100 Tage, ab 15.03.2029 47 Tage. Interne PKI getrennt bewerten. Erneuerung automatisieren und vor Ablauf testen; bei Kompromittierung sofort widerrufen beziehungsweise rotieren. Statische Tokenfristen sind lokale Risikopolicy, keine allgemeine Normvorgabe.
+- **EN:** Set rotation periods by key type, risk, and applicable standard. Publicly trusted TLS server certificates have issuance-dependent CA/Browser limits: at most 200 days from 2026-03-15, 100 days from 2027-03-15, and 47 days from 2029-03-15. Assess internal PKI separately. Automate renewal and test before expiry; revoke or rotate immediately after compromise. Static token periods are local risk policy, not universal standard requirements.
+- **Akzeptanz / Acceptance:** Rotations- und Wiederherstellungstest; Quelle: https://cabforum.org/working-groups/server/baseline-requirements/requirements/ Abschnitt / section 6.3.2.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -2654,33 +2501,9 @@ indirectly via libraries, frameworks, or external services.
 
 #### CL-03-14: Vorbereitung auf Post-Quanten-Krypto / Preparing for Post-Quantum Crypto
 
-- **DE:** Für langlebige Daten (Aufbewahrung > 5 Jahre) und langlebige
-  Signaturen wird die Migration auf quantensichere Verfahren beobachtet:
-  NIST PQC-Standards FIPS 203 (ML-KEM, vormals Kyber, für Schlüsseltausch),
-  FIPS 204 (ML-DSA, vormals Dilithium, für Signaturen) und FIPS 205
-  (SLH-DSA, vormals SPHINCS+, hash-basierte Signaturen). Verfügbare
-  Bibliotheken: liboqs (Open Quantum Safe) mit Bindings für C, Python,
-  Java und Go; BouncyCastle ab Version 1.78; AWS-LC und Cloudflare
-  CIRCL. Hybrid-Modi (klassisch + PQC, z. B. X25519+ML-KEM) werden für
-  Übergangsphase bevorzugt. Ein Übergangsplan benennt: betroffene
-  Datenklassen (z. B. archivierte Verträge, signierte Software-Releases),
-  Zeitfenster („harvest now, decrypt later"-Risiko), bevorzugte PQC-
-  Verfahren je Anwendungsfall, Pilotprojekt und Roll-out-Zeitplan.
-- **EN:** For long-lived data (retention > 5 years) and long-lived
-  signatures, the migration to quantum-safe schemes is tracked: NIST
-  PQC standards FIPS 203 (ML-KEM, formerly Kyber, for key exchange),
-  FIPS 204 (ML-DSA, formerly Dilithium, for signatures), and FIPS 205
-  (SLH-DSA, formerly SPHINCS+, hash-based signatures). Available
-  libraries: liboqs (Open Quantum Safe) with bindings for C, Python,
-  Java, and Go; BouncyCastle from version 1.78; AWS-LC and Cloudflare
-  CIRCL. Hybrid modes (classical + PQC, e.g. X25519+ML-KEM) are
-  preferred during the transition. A transition plan names: affected
-  data classes (e.g. archived contracts, signed software releases),
-  exposure window ("harvest now, decrypt later" risk), preferred PQC
-  schemes per use case, pilot project, and roll-out schedule.
-- **Akzeptanz / Acceptance:** S-ADR oder Notiz mit Migrationspfad,
-  Datenklassifikation und Zeitplan vorhanden. / S-ADR or note with
-  migration path, data classification, and schedule available.
+- **DE:** Krypto-Inventar und risikobasierten PQC-Migrationsplan führen, nicht nur Entwicklungen beobachten. TR-02102-1, 2026-01, Abschnitt 2.1 empfiehlt alleinige klassische Schlüsseleinigung nur bis Ende 2031, bei sehr hohem Schutzbedarf Umstellung bis Ende 2030; für klassische Signaturen wird derzeit Ende 2035 als Horizont genannt. Langfristig vertrauliche Daten wegen „Store Now, Decrypt Later“ schon heute prüfen. Teil 2 empfiehlt TLS 1.2 nur bis Ende 2031. Empfohlene PQ-Verfahren geeignet hybrid kombinieren; Standardsstatus, Sicherheitsparameter, Protokollprofil und Implementierungsreife getrennt bewerten. Der Plan nennt Owner, Datenklassen, Abhängigkeiten, Zieltermine, Tests und Wiedervorlage; Bibliotheksverfügbarkeit ist keine Freigabe.
+- **EN:** Maintain a crypto inventory and risk-based PQC migration plan rather than merely tracking developments. TR-02102-1, 2026-01, section 2.1 recommends standalone classical key agreement only until end-2031, with migration by end-2030 for very high protection needs; end-2035 is the current horizon for classical signatures. Assess long-term confidentiality now because of store-now-decrypt-later risk. Part 2 recommends TLS 1.2 only until end-2031. Combine recommended PQ mechanisms appropriately in hybrid form; assess standardisation, parameters, protocol profile and implementation maturity separately. Record owner, data classes, dependencies, dates, tests and reevaluation; library availability is not approval.
+- **Akzeptanz / Acceptance:** Inventar und S-ADR mit teilfassungsgebundenem Migrationsplan und Wiedervorlage vorhanden. / Inventory and S-ADR provide a part/version-bound migration plan and reevaluation.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -2882,6 +2705,13 @@ stored in the security evidence set.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+- **Version 2.0.3 (2026-10-20):** Unabhängige Reviewkorrekturen und Baseline 3.4.3; siehe [Prüfbericht](../maintenance/gsdb-independent-fixes-2026-10-20.md). / Independent review corrections and baseline 3.4.3; see review report.
+
+DE: Baseline-Bindung 3.4.4, redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.4 is editorial; semantic document version unchanged.
 
 ---
 
@@ -2899,8 +2729,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 04 – Bedrohungsmodellierung / Threat Modeling
 
 **Dokument-ID / Document ID:** CL-04
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.2
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -3746,6 +3576,13 @@ accepted risks are documented in writing.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+DE: Baseline-Bindung 3.4.3 (20.10.2026), redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.3 (2026-10-20), editorial; semantic document version unchanged.
+
+DE: Baseline-Bindung 3.4.4, redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.4 is editorial; semantic document version unchanged.
 
 ---
 
@@ -3763,8 +3600,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 05 – Lieferkette und Build-Integritaet / Supply Chain and Build Integrity
 
 **Dokument-ID / Document ID:** CL-05
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.2
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -4701,77 +4538,9 @@ for internal libraries as soon as more than one team uses them.
 
 #### CL-05-11: Lizenz-Compliance / Licence Compliance
 
-- **DE:** Die SBOM wird auf erlaubte Lizenzen geprüft. Verbotene oder
-  unklare Lizenzen werden vor Release ersetzt oder durch Rechtsabstimmung
-  freigegeben.
-  Werkzeuge zur Lizenzprüfung:
-  - **`license-checker`** (npm) – `license-checker --json --out licenses.json`.
-  - **`pip-licenses`** (Python) – `pip-licenses --format=json`.
-  - **`license-maven-plugin`** – `mvn license:aggregate-third-party-report`.
-  - **`cargo-deny`** (Rust) – Lizenz-Allowlist in `deny.toml`.
-  - **`dotnet list package --include-transitive`** + Skript für SPDX-Mapping.
-  - **`syft`** + **`grype`** – SBOM enthält SPDX-Lizenzen.
-  - **FOSSA**, **Black Duck**, **JFrog Xray** – kommerziell.
-  Empfohlene Lizenz-Klassifikation:
-  - **Erlaubt (Allowlist)** – permissive, kompatibel:
-    `MIT`, `Apache-2.0`, `BSD-2-Clause`, `BSD-3-Clause`, `ISC`, `Zlib`,
-    `Unlicense`, `CC0-1.0`.
-  - **Bedingt erlaubt (Review)** – Copyleft, prüfbar:
-    `LGPL-2.1`, `LGPL-3.0`, `MPL-2.0`, `EPL-2.0` (nur dynamisch gelinkt).
-  - **Verboten (Denylist)** – starkes Copyleft, kommerziell unverträglich:
-    `GPL-2.0`, `GPL-3.0`, `AGPL-3.0`, `SSPL-1.0`, `BUSL-1.1`, `Commons Clause`,
-    proprietäre Lizenzen ohne klare Nutzungsrechte.
-  - **Unklar** – `UNKNOWN`, fehlende SPDX-ID: zwingend manuell klären.
-  Allowlist-Konfiguration (Beispiel `cargo-deny`):
-  ```toml
-  [licenses]
-  unlicensed = "deny"
-  allow = ["MIT", "Apache-2.0", "BSD-3-Clause", "ISC", "Unicode-DFS-2016"]
-  copyleft = "deny"
-  confidence-threshold = 0.93
-  ```
-  Rechtsabstimmungs-Workflow:
-  - Bei Verstoß: Ticket „Legal Review" mit SPDX-ID, Komponentenname,
-    Verwendungskontext (statisch/dynamisch gelinkt, modifiziert/unmodifiziert).
-  - Freigabe-Dokument vom Rechtsteam mit Geltungsdauer (z. B. ein Jahr).
-  - Ablage in `docs/security/license-exceptions.md`.
-- **EN:** The SBOM is checked for permitted licences. Forbidden or unclear
-  licences are replaced before release or cleared with legal review.
-  Licence checking tools:
-  - **`license-checker`** (npm) – `license-checker --json --out licenses.json`.
-  - **`pip-licenses`** (Python) – `pip-licenses --format=json`.
-  - **`license-maven-plugin`** – `mvn license:aggregate-third-party-report`.
-  - **`cargo-deny`** (Rust) – licence allowlist in `deny.toml`.
-  - **`dotnet list package --include-transitive`** + script for SPDX mapping.
-  - **`syft`** + **`grype`** – SBOM contains SPDX licences.
-  - **FOSSA**, **Black Duck**, **JFrog Xray** – commercial.
-  Recommended licence classification:
-  - **Allowed (allowlist)** – permissive, compatible:
-    `MIT`, `Apache-2.0`, `BSD-2-Clause`, `BSD-3-Clause`, `ISC`, `Zlib`,
-    `Unlicense`, `CC0-1.0`.
-  - **Conditional (review)** – copyleft, reviewable:
-    `LGPL-2.1`, `LGPL-3.0`, `MPL-2.0`, `EPL-2.0` (dynamic linking only).
-  - **Forbidden (denylist)** – strong copyleft, commercially incompatible:
-    `GPL-2.0`, `GPL-3.0`, `AGPL-3.0`, `SSPL-1.0`, `BUSL-1.1`, `Commons Clause`,
-    proprietary licences without clear usage rights.
-  - **Unclear** – `UNKNOWN`, missing SPDX ID: must be clarified manually.
-  Allowlist configuration (example `cargo-deny`):
-  ```toml
-  [licenses]
-  unlicensed = "deny"
-  allow = ["MIT", "Apache-2.0", "BSD-3-Clause", "ISC", "Unicode-DFS-2016"]
-  copyleft = "deny"
-  confidence-threshold = 0.93
-  ```
-  Legal review workflow:
-  - On violation: ticket "Legal Review" with SPDX ID, component name,
-    usage context (statically/dynamically linked, modified/unmodified).
-  - Release document from legal team with validity period (e.g. one year).
-  - Storage in `docs/security/license-exceptions.md`.
-- **Akzeptanz / Acceptance:** Lizenz-Bericht je Release im SPDX/CycloneDX-Format
-  vorhanden, Allowlist/Denylist in `deny.toml` oder gleichwertiger
-  Konfiguration; alle Komponenten haben gültige SPDX-IDs; Ausnahmen mit
-  Rechtsfreigabe in `docs/security/license-exceptions.md` dokumentiert.
+- **DE:** Lizenzen werden anhand konkreter Lizenzfassung, Nutzungsart, Weitergabe und Kombination bewertet. Copyleft ist nicht pauschal kommerziell unvereinbar und dynamisches Linken ist keine allgemeine Ausnahme für alle Lizenzen. Fehlende oder unklare Rechte bleiben Open bis zur zuständigen Entscheidung. SBOM, Lizenztexte, Pflichten und Projekt-Allowlist nachvollziehbar halten; Rechtsfragen werden nicht durch Scanner entschieden.
+- **EN:** Assess exact licence versions, use, redistribution, and combination. Copyleft is not inherently incompatible with commercial use, and dynamic linking is not a universal exemption. Missing or unclear rights remain Open until the responsible decision. Maintain SBOM, licence texts, obligations, and project allow-list; scanners do not decide legal questions.
+- **Akzeptanz / Acceptance:** Lizenzentscheidung mit Quelle, Owner und Pflichten; ungeklärte Rechte blockieren die betroffene Weitergabe. / Licence decision with source, owner, and obligations; unresolved rights block affected redistribution.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -4898,18 +4667,19 @@ for internal libraries as soon as more than one team uses them.
 - **DE:** Bindet ein release- oder verteilbares Artefakt ein KI-Modell
   oder einen KI-Dienst ein, wird diese KI-Abhängigkeit in der SBOM bzw.
   im Lieferketten-Evidenz-Dokument geführt. CycloneDX bildet dies über
-  Komponenten des Typs `machine-learning-model` bzw. `service` ab
-  (ML-BOM). Erfasst werden Anbieter, Modell- oder Dienst-Identifikator,
+  Modell-Komponenten des Typs `machine-learning-model` und die eigene
+  `services`-Sammlung für Dienste ab (ML-BOM; eingesetzte Schemaversion prüfen). Erfasst werden Anbieter, Modell- oder Dienst-Identifikator,
   Version oder Endpunkt sowie ein Verweis auf Model Card oder AI-SBOM
   des Anbieters. Für fremdbezogene Modelle wird keine eigene Modell-
   oder Trainingsdaten-SBOM erzeugt; maßgeblich ist die
-  Anbieter-Transparenz (siehe CL_KI-Codeerzeugung, Prüfpunkt 15).
+  Anbieter-Transparenz (siehe CL-09-15).
   Bezugsrahmen ist die G7-Leitlinie „Software Bill of Materials for AI –
   Minimum Elements" (2026).
 - **EN:** If a release or distributable artefact embeds an AI model or
   AI service, this AI dependency is recorded in the SBOM or the
   supply-chain evidence document. CycloneDX represents this through
-  components of type `machine-learning-model` or `service` (ML-BOM).
+  model components of type `machine-learning-model` and the separate
+  `services` collection (ML-BOM; check the emitted schema version).
   Recorded are the provider, model or service identifier, version or
   endpoint, and a link to the provider's model card or AI-SBOM. For
   externally sourced models no own model or training-data SBOM is
@@ -5103,6 +4873,13 @@ document where applicable.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+DE: Baseline-Bindung 3.4.3 (20.10.2026), redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.3 (2026-10-20), editorial; semantic document version unchanged.
+
+DE: Baseline-Bindung 3.4.4, redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.4 is editorial; semantic document version unchanged.
 
 ---
 
@@ -5120,8 +4897,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 06 – Schwachstellenoffenlegung / Vulnerability Disclosure
 
 **Dokument-ID / Document ID:** CL-06
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.2
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -5736,101 +5513,9 @@ products. Recommended for internal tooling.
 
 #### CL-06-07: CRA-Pflichtmeldung 24 Stunden / CRA 24-Hour Notification
 
-- **DE:** Bei aktiv ausgenutzten Schwachstellen oder schweren Sicherheitsvorfällen
-  wird die zuständige CSIRT/ENISA innerhalb von 24 Stunden vorab informiert
-  (Frühwarnung), gefolgt von 72-Stunden-Meldung und Schlussbericht.
-  Cyber Resilience Act (CRA) Pflichtmeldungen (Art. 14 Verordnung (EU) 2024/2847):
-  - **Frühwarnung (24 h)**: Mitteilung an ENISA und nationale CSIRT, dass
-    eine aktiv ausgenutzte Schwachstelle bekannt ist.
-  - **Vulnerability Notification (72 h)**: detaillierte Beschreibung,
-    Schweregrad, betroffene Produkte, Mitigation, ggf. PoC.
-  - **Schlussbericht für aktiv ausgenutzte Schwachstellen**: spätestens
-    14 Tage nach Bereitstellung des Patches, mit Ursachenanalyse,
-    Auswirkungen, getroffenen Maßnahmen und Lessons Learned.
-  - **Schlussbericht für schwere Sicherheitsvorfälle**: spätestens einen
-    Monat nach der 72-Stunden-Meldung.
-  Meldewege:
-  - **ENISA** – Single Reporting Platform (geplant ab 2026).
-  - **CSIRT-Bund (BSI)** – `cert@bsi.bund.de`,
-    [BSI-Meldeformular](https://www.bsi.bund.de/DE/Service/Meldestelle).
-  - **Nationale CSIRT** je EU-Mitgliedstaat (CSIRT-Network).
-  - **CIRCL** (Luxemburg), **CERT-FR** (Frankreich), **CERT.at** (Österreich).
-  Pflichtinhalte der Meldung:
-  - Hersteller-Identifikation (Name, Anschrift, Kontakt).
-  - Produkt-Identifikation (Name, Version, betroffene Versionen).
-  - Schwachstellen-Beschreibung (Typ, CWE, CVSS, CVE, falls vergeben).
-  - Aktiv-Ausnutzungs-Indikatoren (IOCs, Quelle, Zeitpunkt).
-  - Geografische Reichweite, Anzahl betroffener Anwender.
-  - Mitigation und Patch-Verfügbarkeit.
-  - Ansprechperson für Rückfragen (Name, E-Mail, Telefon, ggf. PGP).
-  Krisen-Runbook:
-  - 24/7 Bereitschaft mit Eskalationskette: Engineer -> Lead -> Security Lead -> GF.
-  - Vorlagen-Texte für ENISA-Meldung in DE und EN bereit.
-  - Decision-Tree: aktiv ausgenutzt oder schwerer Sicherheitsvorfall?
-    Dann 24-h-Frühwarnung, 72-h-Meldung und Schlussbericht.
-  - Tabletop-Übung mindestens jährlich (siehe Item 11).
-  Synergien mit anderen Pflichten:
-  - **NIS2-Richtlinie** Art. 23: 24-h-Frühwarnung, 72-h-Lagebericht,
-    1 Monat Schlussbericht.
-  - **DORA**: für Finanzunternehmen und relevante IKT-Drittparteien
-    können zusätzliche Klassifizierungs-, Melde- und Testpflichten gelten.
-  - **DSGVO Art. 33**: 72-h-Meldung an Datenschutzbehörde bei
-    Datenpanne mit personenbezogenen Daten.
-  - **TKG/IT-Sicherheitsgesetz** für regulierte Branchen.
-- **EN:** For actively exploited vulnerabilities or severe incidents, the
-  responsible CSIRT/ENISA receives an early warning within 24 hours, followed
-  by a 72-hour report and a final report.
-  Cyber Resilience Act (CRA) mandatory notifications (Art. 14 Regulation (EU)
-  2024/2847):
-  - **Early warning (24 h)**: notify ENISA and national CSIRT that an
-    actively exploited vulnerability is known.
-  - **Vulnerability notification (72 h)**: detailed description, severity,
-    affected products, mitigation, possibly PoC.
-  - **Final report for actively exploited vulnerabilities**: no later than
-    14 days after patch availability, with root cause analysis, impact,
-    measures taken, and lessons learned.
-  - **Final report for severe incidents**: no later than one month after
-    the 72-hour notification.
-  Reporting channels:
-  - **ENISA** – Single Reporting Platform (planned from 2026).
-  - **CSIRT-Bund (BSI)** – `cert@bsi.bund.de`,
-    [BSI reporting form](https://www.bsi.bund.de/DE/Service/Meldestelle).
-  - **National CSIRTs** per EU member state (CSIRT Network).
-  - **CIRCL** (Luxembourg), **CERT-FR** (France), **CERT.at** (Austria).
-  Mandatory report contents:
-  - Manufacturer identification (name, address, contact).
-  - Product identification (name, version, affected versions).
-  - Vulnerability description (type, CWE, CVSS, CVE if assigned).
-  - Active-exploitation indicators (IOCs, source, time).
-  - Geographic scope, number of affected users.
-  - Mitigation and patch availability.
-  - Contact person for follow-up (name, email, phone, PGP if available).
-  Crisis runbook:
-  - 24/7 on-call with escalation chain: engineer -> lead -> Security Lead ->
-    management.
-  - Template texts for ENISA notification ready in DE and EN.
-  - Decision tree: actively exploited or severe incident? Then 24-hour
-    early warning, 72-hour notification, and final report.
-  - Tabletop drill at least annually (see item 11).
-  Synergies with other obligations:
-  - **NIS2 Directive** Art. 23: 24-h early warning, 72-h status report,
-    1-month final report.
-  - **DORA**: for financial entities and relevant ICT third-party
-    providers, additional classification, reporting, and testing duties may
-    apply.
-  - **GDPR Art. 33**: 72-h notification to data protection authority for
-    breaches involving personal data.
-  - **TKG/IT-Sicherheitsgesetz** for regulated industries.
-- **Akzeptanz / Acceptance:** Meldewege (ENISA, BSI CSIRT-Bund) in der
-  Krisenanleitung benannt; 24/72/14-Tage-Workflow als Decision-Tree;
-  Vorlagentext DE/EN; 24/7-Bereitschaft mit Eskalationskette; Tabletop-
-  Übung jährlich nachgewiesen; CL_01-Regulatory-Screening zeigt, ob NIS2,
-  DORA, DSGVO oder kundenspezifische Meldewege zusätzlich anwendbar sind. /
-  Reporting channels (ENISA, BSI CSIRT-Bund) are named in the crisis
-  procedure; 24/72/14-day workflow as a decision tree; DE/EN template text;
-  24/7 on-call with escalation chain; annual tabletop drill evidenced;
-  CL_01 regulatory screening shows whether NIS2, DORA, GDPR, or customer-
-  specific reporting paths additionally apply.
+- **DE:** CRA-Meldeketten aus CL-07-09 im Runbook umsetzen: 24-/72-Stunden-Fristen ab Kenntnis und getrennte Schlussfristen für Schwachstelle/Vorfall; gesetzliche Plattform und Pflichtinhalte verwenden. Zusätzlich Anwendbarkeit anderer Meldeketten prüfen: DSGVO Art. 33 mit Risikoschwelle und 72 Stunden ab Kenntnis des Verantwortlichen; Auftragsverarbeiter informiert nach Art. 33(2) ohne unangemessene Verzögerung. NIS2/BSIG und DORA haben eigene Rollen, Schwellen und Fristauslöser. Eine gemeinsame Incident-Akte darf mehrere Pflichten bedienen, ersetzt aber keine einzelne vorgeschriebene Meldung.
+- **EN:** Implement CL-07-09 CRA reporting chains in the runbook: awareness-based 24/72-hour clocks and separate vulnerability/incident final deadlines; use the statutory platform and content. Also screen other chains: GDPR Article 33 with its risk threshold and 72 hours from controller awareness; a processor informs without undue delay under Article 33(2). NIS2/BSIG and DORA have their own roles, thresholds and triggers. One incident file may support several duties but does not replace any required notification.
+- **Akzeptanz / Acceptance:** Runbook mit Rollen, Schwellen, Fristen, Vertretung und Übungsnachweis; Screening nach CL-01-12 verlinkt. / Runbook with roles, thresholds, clocks, deputies and exercise evidence; link CL-01-12 screening.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -5941,69 +5626,9 @@ products. Recommended for internal tooling.
 
 #### CL-06-09: Patch-Bereitstellung / Patch Availability
 
-- **DE:** Sicherheits-Patches werden für die unterstützten Versionen
-  bereitgestellt. Der unterstützte Lebenszyklus ist veröffentlicht.
-  Lifecycle-Modelle:
-  - **Semantic Versioning** (`MAJOR.MINOR.PATCH`) mit klaren Support-Fenstern.
-  - **LTS-Modell** (Long Term Support) – z. B. Ubuntu LTS 5+5 Jahre,
-    Node.js Active LTS 18 Monate + Maintenance LTS 12 Monate.
-  - **N/N-1-Modell**: aktuelle Major + vorletzte Major werden gepflegt.
-  - **Release-Train**: festgelegte Release-Kadenz (z. B. quartalsweise).
-  Lifecycle-Tabelle (Beispiel):
-  | Version | Erstrelease | Aktiv-Support bis | Security-Support bis | EOL |
-  |---|---|---|---|---|
-  | 3.x | 2025-10-01 | 2027-04-01 | 2028-10-01 | 2028-10-01 |
-  | 2.x | 2024-04-01 | 2025-10-01 | 2027-04-01 | 2027-04-01 |
-  | 1.x | 2023-01-01 | 2024-04-01 | 2025-10-01 | 2025-10-01 |
-  Patch-Bereitstellung:
-  - Patches als Backport in alle aktiv und security-supporteten Branches.
-  - Versionierung: Patch-Release `3.2.4` für Security-Fix in 3.x.
-  - Container-Images mit semantischen Tags (`3.2`, `3.2.4`, `3.2.4-202604`)
-    plus `latest`.
-  - Hash-pinned Releases (SHA-256) und Cosign-Signaturen.
-  Kommunikation:
-  - Lifecycle-Seite öffentlich: `/lifecycle` oder `SECURITY.md`.
-  - Deprecation-Hinweis in Software bei EOL-Approach (z. B. 6 Monate vorher).
-  - Migration-Guide für Major-Upgrades.
-  - LTS-Verlängerungen kommerziell anbieten, falls anwendbar.
-  CRA-Anforderungen:
-  - Mindestens 5 Jahre Security-Support nach dem Release oder über die
-    erwartete Produktlebenszeit (CRA Art. 13).
-  - Bei vorzeitigem EOL: schriftliche Begründung und Migrationspfad.
-- **EN:** Security patches are provided for supported versions. The
-  supported lifecycle is published.
-  Lifecycle models:
-  - **Semantic Versioning** (`MAJOR.MINOR.PATCH`) with clear support
-    windows.
-  - **LTS model** (long-term support) – e.g. Ubuntu LTS 5+5 years,
-    Node.js Active LTS 18 months + Maintenance LTS 12 months.
-  - **N/N-1 model**: current major + previous major are maintained.
-  - **Release train**: defined release cadence (e.g. quarterly).
-  Lifecycle table (example):
-  | Version | First release | Active support until | Security support until | EOL |
-  |---|---|---|---|---|
-  | 3.x | 2025-10-01 | 2027-04-01 | 2028-10-01 | 2028-10-01 |
-  | 2.x | 2024-04-01 | 2025-10-01 | 2027-04-01 | 2027-04-01 |
-  | 1.x | 2023-01-01 | 2024-04-01 | 2025-10-01 | 2025-10-01 |
-  Patch delivery:
-  - Patches as backports in all actively and security-supported branches.
-  - Versioning: patch release `3.2.4` for a security fix in 3.x.
-  - Container images with semantic tags (`3.2`, `3.2.4`, `3.2.4-202604`)
-    plus `latest`.
-  - Hash-pinned releases (SHA-256) and Cosign signatures.
-  Communication:
-  - Public lifecycle page: `/lifecycle` or `SECURITY.md`.
-  - Deprecation notice in software approaching EOL (e.g. 6 months prior).
-  - Migration guide for major upgrades.
-  - Offer commercial LTS extensions where applicable.
-  CRA requirements:
-  - At least 5 years of security support after release or for the expected
-    product lifetime (CRA Art. 13).
-  - On early EOL: written justification and migration path.
-- **Akzeptanz / Acceptance:** Lifecycle-Tabelle in `SECURITY.md` oder
-  `/lifecycle`-Seite; Patch-Plan mit Backport-Strategie dokumentiert;
-  Container-Tags + Cosign-Signatur; CRA-konformer Mindest-Support-Zeitraum
-  (≥ 5 Jahre) eingehalten oder begründet abweichend.
+- **DE:** Unterstützte Versionen, Supportende, Patch- und Backportstrategie veröffentlichen. Für CRA-Produkte CL-07-10 und Art. 13(8)–(10) anwenden: Support begründen, gesetzliche Ausnahme für erwartete Nutzung unter fünf Jahren gesondert prüfen und verfügbare Updates mindestens zehn Jahre nach Ausgabe oder bis Supportende bereithalten, je nachdem, was länger ist. Ersatz einer älteren Softwarefassung nur unter den Bedingungen aus Art. 13(10). Ein kurzer Beispiel-Lifecycle oder kommerzielle LTS-Zusatzleistung hebt diese Pflichten nicht auf. Releases mit Integritätsnachweis und verständlicher EOL-/Migrationsinformation bereitstellen.
+- **EN:** Publish supported versions, support end, patch and backport strategy. For CRA products apply CL-07-10 and Article 13(8)–(10): justify support, assess the expected-use-under-five-years exception separately, and retain issued updates for at least ten years after issue or until support end, whichever is longer. Replace an older software version only under Article 13(10) conditions. A short example lifecycle or commercial LTS add-on does not override these duties. Provide release integrity evidence and clear EOL/migration information.
+- **Akzeptanz / Acceptance:** Lifecycle-Tabelle, Patch-/Backportplan und drei getrennte CRA-Fristen konsistent nachgewiesen. / Consistent lifecycle table, patch/backport plan and three distinct CRA clocks.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -6346,6 +5971,13 @@ SLAs are defined, and the CRA reporting path has been rehearsed.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+DE: Baseline-Bindung 3.4.3 (20.10.2026), redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.3 (2026-10-20), editorial; semantic document version unchanged.
+
+DE: Baseline-Bindung 3.4.4, redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.4 is editorial; semantic document version unchanged.
 
 ---
 
@@ -6363,8 +5995,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 07 – EU Cyber Resilience Act – Anwendbarkeit / EU Cyber Resilience Act – Applicability
 
 **Dokument-ID / Document ID:** CL-07
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.5
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -6500,75 +6132,9 @@ checked if they are shared with external parties.
 
 #### CL-07-01: Produktart bestimmen / Determine Product Class
 
-- **DE:** Ist das Produkt ein „Produkt mit digitalen Elementen" gemäß CRA?
-  Reine SaaS-Dienste fallen nicht direkt darunter, eingebettete Komponenten
-  hingegen schon.
-  Definition nach CRA Art. 3 Nr. 1:
-  - „Produkt mit digitalen Elementen" = Software- oder Hardware-Produkt
-    und seine Daten-Fernverarbeitungslösungen, das/die in Verkehr gebracht
-    werden, mit direkter oder indirekter Daten- oder Funktionsverbindung
-    zu Geräten oder Netzen.
-  Typische CRA-relevante Kategorien:
-  - **Hardware mit eingebetteter Software**: Router, IoT-Geräte, Smart-Home-
-    Systeme, Industriesteuerungen, medizinische Geräte (im Kontext CRA).
-  - **Software-Produkte**: Betriebssysteme, Browser, Anwendungssoftware,
-    Mobile Apps, Kommando-Zeilen-Tools, Desktop-Anwendungen.
-  - **Standalone-Komponenten**: Bibliotheken, die separat verkauft werden,
-    SDKs, Firmware-Images.
-  Ausnahmen (CRA gilt nicht oder anders):
-  - **Reine SaaS** (Software as a Service ohne Endkunden-Installation)
-    fällt unter NIS2 statt CRA.
-  - **Open Source** ohne kommerzielle Tätigkeit (nicht-monetarisierte
-    Beiträge), aber mit Sonderrolle „Open Source Software Steward".
-  - **Medizinprodukte (MDR/IVDR)**, **Kfz-Typgenehmigung**, **Luftfahrt**,
-    **Marine-Equipment** – haben eigene Regulatorien.
-  - **Sicherheitskritische Verteidigungsprodukte** – nicht im CRA-Scope.
-  Klassifikations-Workflow:
-  1. Liefert die Organisation ein Produkt aus oder bietet es kommerziell an?
-  2. Hat das Produkt digitale Elemente (Software, Firmware, Daten-
-     verbindung)?
-  3. Wird es im EU-Binnenmarkt in Verkehr gebracht?
-  4. Falls ja: CRA gilt grundsätzlich → Klassifikation gemäß Anhang III/IV
-     prüfen.
-  Werkzeuge:
-  - **CRA Self-Assessment Toolkit** der EU-Kommission (geplant 2026).
-  - **CEN/CENELEC Harmonised Standards** als Konformitätsvermutung.
-  - Interne Klassifikations-Matrix in `docs/security/cra-applicability.md`.
-- **EN:** Is the product a "product with digital elements" per the CRA?
-  Pure SaaS services are not directly covered, but embedded components are.
-  Definition per CRA Art. 3(1):
-  - "Product with digital elements" = software or hardware product and its
-    remote data-processing solutions placed on the market, with direct or
-    indirect data or functional connection to devices or networks.
-  Typical CRA-relevant categories:
-  - **Hardware with embedded software**: routers, IoT devices, smart-home
-    systems, industrial controls, medical devices (in CRA context).
-  - **Software products**: operating systems, browsers, application
-    software, mobile apps, command-line tools, desktop applications.
-  - **Standalone components**: libraries sold separately, SDKs, firmware
-    images.
-  Exceptions (CRA does not apply or applies differently):
-  - **Pure SaaS** (no customer installation) falls under NIS2 instead of
-    CRA.
-  - **Open source** without commercial activity (non-monetised
-    contributions), with special role "open-source software steward".
-  - **Medical devices (MDR/IVDR)**, **vehicle type approval**, **aviation**,
-    **marine equipment** – have their own regulations.
-  - **Security-critical defence products** – outside CRA scope.
-  Classification workflow:
-  1. Does the organisation deliver or commercially offer a product?
-  2. Does the product have digital elements (software, firmware, data
-     connection)?
-  3. Is it placed on the EU internal market?
-  4. If yes: CRA applies in principle → check classification per Annex
-     III/IV.
-  Tools:
-  - **CRA Self-Assessment Toolkit** by the EU Commission (planned 2026).
-  - **CEN/CENELEC harmonised standards** as presumption of conformity.
-  - Internal classification matrix in `docs/security/cra-applicability.md`.
-- **Akzeptanz / Acceptance:** Klassifikation in `docs/security/cra-applicability.md`
-  mit Begründung; Mapping zu Art. 3 Nr. 1 CRA und Ausnahmen-Prüfung;
-  von Geschäftsleitung freigegeben (Datum + Unterschrift).
+- **DE:** Produkt, Rolle und Marktbereitstellung anhand Art. 2 und Art. 3 CRA prüfen. Erfasst sind Software/Hardware und erforderliche Daten-Fernverarbeitungslösungen; fehlende lokale Installation allein begründet keine Ausnahme. Eigenständige SaaS-Dienste außerhalb dieser Definition gesondert prüfen. NIS2-Anwendbarkeit folgt aus Einrichtung, Sektor, Größe und nationalem Recht, nicht automatisch aus SaaS. Nichtkommerzielle freie Open-Source-Software und die besondere Steward-Rolle nach Art. 24 unterscheiden. Sektorale Ausnahmen (u. a. MDR/IVDR, Fahrzeuge, Luftfahrt, Schiffsausrüstung) am konkreten Rechtsakt prüfen. Nach Art. 69(2) gelten die allgemeinen Anforderungen für vor dem 11.12.2027 in Verkehr gebrachte Produkte nur bei wesentlicher Änderung ab diesem Datum; Art. 69(3) lässt Art. 14 seit 11.09.2026 trotzdem auch für diese Bestandsprodukte gelten. Je Produkteinheit das Inverkehrbringen prüfen, nicht pauschal das erste Release einer Produktfamilie. (EU) 2025/1535 Art. 1 nimmt Produkte nach (EU) Nr. 168/2013 aus, jedoch nicht die L1e-Pedalfahrzeuge nach dessen Art. 3(94)(b). Anhang III/IV und die technischen Kategorienbeschreibungen aus Durchführungsverordnung (EU) 2025/2392 heranziehen.
+- **EN:** Assess product, role and market availability under CRA Articles 2 and 3. Software/hardware and necessary remote data-processing solutions are included; absence of local installation alone establishes no exemption. Assess standalone SaaS outside that definition separately. NIS2 scope depends on entity, sector, size and national law, not automatically on SaaS. Distinguish non-commercial free/open-source software from the steward role under Article 24. Check sector exemptions (including MDR/IVDR, vehicles, aviation and marine equipment) against the applicable act. Under Article 69(2), general requirements apply to products placed on the market before 2027-12-11 only if substantially modified from that date; Article 69(3) nevertheless applies Article 14 to these existing products since 2026-09-11. Assess placing on the market per product unit, not solely the first product-family release. Article 1 of (EU) 2025/1535 excludes products under (EU) No 168/2013, except its Article 3(94)(b) L1e vehicles designed to pedal. Use Annexes III/IV and Implementing Regulation (EU) 2025/2392 for technical category descriptions.
+- **Akzeptanz / Acceptance:** Produkt/Version, Rolle, Rechtsfassung, Markt, Ausnahmen und Entscheidungsgrund in `docs/security/cra-applicability.md`; zuständige Prüfung datiert. / Record product/version, role, legal version, market, exemptions and rationale; date the responsible review.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -6588,77 +6154,9 @@ checked if they are shared with external parties.
 
 #### CL-07-02: Kritikalität nach Anhang III / Criticality per Annex III
 
-- **DE:** Prüfen, ob das Produkt zu den „wichtigen" Klassen I oder II nach
-  Anhang III gehört (z. B. Identitätsmanagement, VPN, EDR, Boot-Manager).
-  Anhang III — Klasse I (wichtige Produkte mit höherem Risiko):
-  - **Identitätsmanagement-Systeme** (IAM, SSO, MFA, Authentifizierungs-
-    server).
-  - **Privileged Access Management (PAM)**, Single-Sign-On.
-  - **Standalone & Embedded Browser**.
-  - **Kennwortmanager**.
-  - **Antivirus-Software**.
-  - **VPN-Produkte** (auch Site-to-Site, Client).
-  - **Netzwerkmanagement-Systeme**.
-  - **SIEM** (Security Information & Event Management).
-  - **Boot-Manager**, Firmware-Loader.
-  - **Public Key Infrastructure (PKI)**, digitale Zertifikatsdienste.
-  - **Physikalische Netzwerk-Schnittstellen** (Router, Switches —
-    konsumentennah).
-  - **Operating Systems** für Unternehmens-Geräte.
-  - **Microcontroller mit sicherheitsrelevanten Funktionen**.
-  - **ASICs/FPGAs** für sicherheitsrelevante Verarbeitung.
-  - **Industrielle Automatisierung & Steuerungssysteme** (PLCs, DCS, HMI).
-  Anhang III — Klasse II (wichtige Produkte mit höherem Risiko):
-  - **Hypervisoren / Container-Runtime-Systeme**.
-  - **Firewalls, IPS, IDS**.
-  - **Manipulationssichere Microprozessoren** (Tamper-resistant).
-  - **Manipulationssichere Microcontroller**.
-  Konsequenzen der Klassifikation:
-  - **Klasse I**: Konformitätsbewertung über Modul A (interne
-    Produktionskontrolle) oder mit harmonisierten Normen.
-  - **Klasse II**: Modul B (EU-Baumusterprüfung) + Modul C oder Modul H
-    (volle Qualitätssicherung) — externe Notified Body erforderlich.
-  Werkzeuge:
-  - Aktuelle Anhang-III-Listen aus Verordnung (EU) 2024/2847.
-  - CEN/CENELEC harmonisierte Normen als Stand der Technik.
-  - [NANDO-Datenbank für Notified Bodies](https://ec.europa.eu/growth/tools-databases/nando/).
-- **EN:** Check whether the product belongs to "important" class I or II
-  per Annex III (e.g. identity management, VPN, EDR, boot managers).
-  Annex III — Class I (important products with higher risk):
-  - **Identity-management systems** (IAM, SSO, MFA, authentication
-    servers).
-  - **Privileged Access Management (PAM)**, single sign-on.
-  - **Standalone and embedded browsers**.
-  - **Password managers**.
-  - **Antivirus software**.
-  - **VPN products** (including site-to-site, client).
-  - **Network management systems**.
-  - **SIEM** (security information & event management).
-  - **Boot managers**, firmware loaders.
-  - **Public-key infrastructure (PKI)**, digital certificate services.
-  - **Physical network interfaces** (routers, switches — consumer-grade).
-  - **Operating systems** for enterprise devices.
-  - **Microcontrollers with security-relevant functions**.
-  - **ASICs/FPGAs** for security-relevant processing.
-  - **Industrial automation & control systems** (PLCs, DCS, HMI).
-  Annex III — Class II (important products with higher risk):
-  - **Hypervisors / container runtime systems**.
-  - **Firewalls, IPS, IDS**.
-  - **Tamper-resistant microprocessors**.
-  - **Tamper-resistant microcontrollers**.
-  Consequences of classification:
-  - **Class I**: conformity assessment via Module A (internal production
-    control) or with harmonised standards.
-  - **Class II**: Module B (EU type examination) + Module C, or Module H
-    (full quality assurance) — external notified body required.
-  Tools:
-  - Up-to-date Annex III lists from Regulation (EU) 2024/2847.
-  - CEN/CENELEC harmonised standards as state of the art.
-  - [NANDO database for notified bodies](https://ec.europa.eu/growth/tools-databases/nando/).
-- **Akzeptanz / Acceptance:** Anhang-III-Zuordnung schriftlich in
-  `docs/security/cra-applicability.md`; bei Klasse II: Notified Body
-  benannt; harmonisierte Normen referenziert; Begründung der gewählten
-  Konformitätsbewertungsmodul.
+- **DE:** Wichtige Produkte anhand ihrer Kernfunktion Anhang III Klasse I oder II zuordnen. Die Kategorienbeschreibung nach (EU) 2025/2392 und den gewählten Konformitätspfad aus Art. 32 dokumentieren. Klasse I erlaubt Modul A nur bei Erfüllung der Bedingungen aus Art. 32(2); sonst Modul B+C oder H. Klasse II benötigt einen Pfad nach Art. 32(3). Die besondere FOSS-Regel aus Art. 32(5) erlaubt für Klasse-I/II-Produkte interne Kontrolle nur bei öffentlich verfügbarer technischer Dokumentation und darf nicht auf alle Produkte übertragen werden.
+- **EN:** Map important products by core functionality to Annex III Class I or II. Record the category description under (EU) 2025/2392 and the selected Article 32 conformity path. Class I allows Module A subject to Article 32(2); otherwise use Module B+C or H. Class II requires an Article 32(3) path. The special FOSS rule in Article 32(5) permits internal control for Class I/II only when technical documentation is publicly available; it is not a blanket exception.
+- **Akzeptanz / Acceptance:** Klasse, Rechtsstelle, Bedingungen, Evidence und gegebenenfalls zuständige notifizierte Stelle begründet dokumentiert. / Record class, legal provision, conditions, evidence and any required notified body with rationale.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -6678,74 +6176,9 @@ checked if they are shared with external parties.
 
 #### CL-07-03: Kritisch nach Anhang IV / Critical per Annex IV
 
-- **DE:** Prüfen, ob das Produkt zu den „kritischen" Produkten nach
-  Anhang IV gehört (z. B. Hardware-Sicherheitsmodule, Smart Meter Gateways).
-  Diese Klasse erfordert eine externe Konformitätsbewertung.
-  Anhang IV — kritische Produkte mit digitalen Elementen:
-  - **Hardware-Sicherheitsmodule (HSM)** mit Schlüsselgenerierungs-Funktion.
-  - **Smart-Card-IC** und sichere Elemente für Authentifizierung.
-  - **Smart-Meter-Gateways** in intelligenten Messsystemen.
-  - **Andere Produkte**, die per delegiertem Rechtsakt der Kommission als
-    kritisch eingestuft werden (Liste kann sich erweitern).
-  Anforderungen für kritische Produkte:
-  - **Verpflichtende externe Konformitätsbewertung** durch Notified Body
-    (Modul B/C oder H, nicht Selbstbewertung).
-  - **Cybersecurity-Zertifikat** im Rahmen eines europäischen Zertifizierungs-
-    schemas (CSA, gem. Verordnung (EU) 2019/881).
-  - **Common Criteria EAL4+** oder gleichwertige Zertifizierung für HSMs.
-  - **Schutzprofile (Protection Profiles)** wie z. B. PP-SSCD (Secure
-    Signature Creation Device), PP-Smart Meter Gateway.
-  - Höhere Anforderungen an Penetrationstests, Side-Channel-Analyse,
-    Fault-Injection-Tests.
-  Notified-Body-Auswahl:
-  - **NIST-akkreditierte CC-Labs** für Common Criteria.
-  - **DEKRA**, **TÜV Süd**, **TÜV Rheinland**, **Bureau Veritas** mit
-    CRA-Notifikation.
-  - **CCRA Mutual Recognition** beachten für internationale Anerkennung.
-  Werkzeuge:
-  - **CC Tools**: AIS-Liste BSI, BSI Schutzprofile,
-    [Common Criteria Portal](https://www.commoncriteriaportal.org/).
-  - **EUCC** (European Cybersecurity Certification scheme on Common
-    Criteria) als CSA-Implementierung.
-  Falls nicht zutreffend:
-  - Explizit als „nicht in Anhang IV gelistet" begründen, mit Verweis auf
-    Anhang-III- oder Standard-Klassifikation.
-- **EN:** Check whether the product belongs to "critical" products per
-  Annex IV (e.g. hardware security modules, smart meter gateways). This
-  class requires an external conformity assessment.
-  Annex IV — critical products with digital elements:
-  - **Hardware security modules (HSM)** with key-generation function.
-  - **Smart-card ICs** and secure elements for authentication.
-  - **Smart-meter gateways** in smart metering systems.
-  - **Other products** classified as critical via delegated act by the
-    Commission (the list may expand).
-  Requirements for critical products:
-  - **Mandatory external conformity assessment** by a notified body
-    (Module B/C or H, not self-assessment).
-  - **Cybersecurity certificate** under a European certification scheme
-    (CSA, per Regulation (EU) 2019/881).
-  - **Common Criteria EAL4+** or equivalent for HSMs.
-  - **Protection profiles** like PP-SSCD (Secure Signature Creation
-    Device), PP-Smart Meter Gateway.
-  - Higher requirements for penetration testing, side-channel analysis,
-    fault-injection testing.
-  Notified-body selection:
-  - **NIST-accredited CC labs** for Common Criteria.
-  - **DEKRA**, **TÜV Süd**, **TÜV Rheinland**, **Bureau Veritas** with
-    CRA notification.
-  - **CCRA mutual recognition** for international acceptance.
-  Tools:
-  - **CC tools**: BSI AIS list, BSI protection profiles,
-    [Common Criteria Portal](https://www.commoncriteriaportal.org/).
-  - **EUCC** (European Cybersecurity Certification scheme on Common
-    Criteria) as CSA implementation.
-  If not applicable:
-  - Explicitly justify "not listed in Annex IV" referring to the Annex III
-    or standard classification.
-- **Akzeptanz / Acceptance:** Anhang-IV-Prüfung in
-  `docs/security/cra-applicability.md` dokumentiert; bei Treffer: Notified
-  Body, Schutzprofil, geplantes Zertifikat (z. B. EUCC EAL4+) benannt; bei
-  Nicht-Treffer: explizite Begründung mit Verweis auf gewählte Klasse.
+- **DE:** Anhang IV auf kritische Produkte prüfen: Hardware mit Sicherheitsboxen, Smart-Meter-Gateways und weitere Geräte für fortgeschrittene Sicherheitszwecke einschließlich sicherer Kryptoverarbeitung sowie Smartcards oder ähnliche Geräte einschließlich sicherer Elemente. Art. 8 und Art. 32(4) bestimmen den Pfad: einschlägige delegierte Rechtsakte und verfügbare europäische Zertifizierungsschemata prüfen; soweit die Bedingungen aus Art. 8(1) nicht vorliegen, ist nach Art. 32(4)(b) jeder Pfad aus Art. 32(3) zulaessig: Modul B+C, Modul H oder, soweit verfuegbar und anwendbar, ein europaeisches Cybersicherheitszertifizierungsschema nach Art. 27(9) mit mindestens Vertrauenswuerdigkeitsstufe „substanziell“. Aus dem CRA folgt kein allgemeines EAL4+-Gebot. Produktzertifizierung, Laborakkreditierung und CRA-Notifizierung sind verschiedene Nachweise; konkrete Stelle im offiziellen Notifizierungsregister prüfen.
+- **EN:** Check Annex IV for critical products: hardware devices with security boxes, smart-meter gateways and other devices for advanced security purposes including secure cryptoprocessing, and smartcards or similar devices including secure elements. Articles 8 and 32(4) determine the path: assess applicable delegated acts and available European certification schemes; where Article 8(1) conditions are not met, Article 32(4)(b) allows any Article 32(3) route: Module B+C, Module H, or, where available and applicable, a European cybersecurity certification scheme under Article 27(9) at assurance level at least substantial. The CRA does not impose a universal EAL4+ requirement. Product certification, laboratory accreditation and CRA notification are separate proofs; verify any selected body in the official notification register.
+- **Akzeptanz / Acceptance:** Anhang-IV-Treffer oder begründetes N/A, geprüfte Rechtsakte/Schemata und Konformitätspfad im CRA-Dossier. / Record Annex IV match or justified N/A, checked acts/schemes and conformity path in the CRA dossier.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -6765,87 +6198,9 @@ checked if they are shared with external parties.
 
 #### CL-07-04: Sicherheits-Anforderungen Anhang I Teil I / Annex I Part I Requirements
 
-- **DE:** Die wesentlichen Sicherheitsanforderungen werden umgesetzt:
-  Zugangskontrolle, Vertraulichkeit, Integrität, Verfügbarkeit, sichere
-  Voreinstellungen, Update-Fähigkeit, Datensparsamkeit.
-  CRA Anhang I, Teil I — wesentliche Cybersicherheitsanforderungen
-  (Auswahl):
-  - **Risikobasiertes Design** (Art. 1.1): Sicherheit auf Basis der
-    Risikobewertung (Art. 13 Abs. 2).
-  - **Keine bekannten Schwachstellen** beim Inverkehrbringen
-    (Art. 1.2 lit. a).
-  - **Sichere Standardkonfiguration** (Art. 1.2 lit. b): Default-Settings
-    sicher, Reset auf sicheren Zustand möglich.
-  - **Schutz vor unbefugtem Zugriff** (Art. 1.2 lit. c): Authentifizierung,
-    Identitätsmanagement.
-  - **Vertraulichkeitsschutz** (Art. 1.2 lit. d): Verschlüsselung in
-    Ruhe und im Transit.
-  - **Integritätsschutz** (Art. 1.2 lit. e): von Daten, Befehlen,
-    Konfigurationen, Code.
-  - **Datensparsamkeit** (Art. 1.2 lit. f): nur erforderliche personen-
-    bezogene Daten verarbeiten.
-  - **Verfügbarkeit** (Art. 1.2 lit. g): Schutz vor DoS-Angriffen.
-  - **Reduzierung der Angriffsfläche** (Art. 1.2 lit. h): minimaler
-    Funktionsumfang im Standard.
-  - **Logging und Monitoring** (Art. 1.2 lit. i): Aufzeichnung
-    sicherheitsrelevanter Ereignisse.
-  - **Update-Mechanismus** (Art. 1.2 lit. j): sichere automatische oder
-    manuelle Updates, signierte Updates.
-  - **Sichere Stilllegung / Datenlöschung** (Art. 1.2 lit. k).
-  Anforderungs-Mapping (Beispiel-Tabelle in `docs/security/cra-anhang-i-mapping.md`):
-  | CRA Anf. | Umsetzung | Evidenz |
-  |---|---|---|
-  | 1.2.a Keine bekannten Schwachstellen | OSV-Scan vor Release | `release/v1.2.3/scan-report.json` |
-  | 1.2.b Sichere Defaults | TLS 1.2+, MFA an, Telemetrie aus | `config/defaults.yaml` |
-  | 1.2.c Zugangskontrolle | OAuth 2.1 + RBAC | `arc42/section-08-security.md` |
-  | 1.2.d Vertraulichkeit | AES-GCM in Ruhe, TLS 1.3 in Transit | `security-quality-scenarios.md` |
-  | 1.2.j Update-Mechanismus | Signed Updates via Cosign | `update-mechanism.md` |
-  Harmonisierte Normen als Konformitätsvermutung:
-  - **EN 18031** (Cybersecurity for connected radio equipment).
-  - **ETSI EN 303 645** (IoT Consumer Cybersecurity).
-  - **IEC 62443** (Industrial Security).
-- **EN:** Essential cybersecurity requirements are implemented: access
-  control, confidentiality, integrity, availability, secure defaults,
-  updatability, data minimisation.
-  CRA Annex I, Part I — essential cybersecurity requirements (selection):
-  - **Risk-based design** (Art. 1.1): security based on the risk
-    assessment (Art. 13(2)).
-  - **No known vulnerabilities** when placed on the market
-    (Art. 1.2(a)).
-  - **Secure default configuration** (Art. 1.2(b)): default settings are
-    secure, reset to secure state possible.
-  - **Protection against unauthorised access** (Art. 1.2(c)): authentication,
-    identity management.
-  - **Confidentiality protection** (Art. 1.2(d)): encryption at rest and
-    in transit.
-  - **Integrity protection** (Art. 1.2(e)): of data, commands,
-    configurations, code.
-  - **Data minimisation** (Art. 1.2(f)): process only necessary personal
-    data.
-  - **Availability** (Art. 1.2(g)): protection against DoS attacks.
-  - **Attack-surface reduction** (Art. 1.2(h)): minimal functionality by
-    default.
-  - **Logging and monitoring** (Art. 1.2(i)): recording of security-
-    relevant events.
-  - **Update mechanism** (Art. 1.2(j)): secure automatic or manual
-    updates, signed updates.
-  - **Secure decommissioning / data deletion** (Art. 1.2(k)).
-  Requirement mapping (example table in `docs/security/cra-annex-i-mapping.md`):
-  | CRA req. | Implementation | Evidence |
-  |---|---|---|
-  | 1.2.a No known vulnerabilities | OSV scan before release | `release/v1.2.3/scan-report.json` |
-  | 1.2.b Secure defaults | TLS 1.2+, MFA on, telemetry off | `config/defaults.yaml` |
-  | 1.2.c Access control | OAuth 2.1 + RBAC | `arc42/section-08-security.md` |
-  | 1.2.d Confidentiality | AES-GCM at rest, TLS 1.3 in transit | `security-quality-scenarios.md` |
-  | 1.2.j Update mechanism | Signed updates via Cosign | `update-mechanism.md` |
-  Harmonised standards as presumption of conformity:
-  - **EN 18031** (cybersecurity for connected radio equipment).
-  - **ETSI EN 303 645** (IoT consumer cybersecurity).
-  - **IEC 62443** (industrial security).
-- **Akzeptanz / Acceptance:** Anforderungs-Mapping je Anhang-I-Punkt mit
-  Umsetzung und Evidenz in `docs/security/cra-annex-i-mapping.md`;
-  harmonisierte Normen referenziert; Risikobewertung in
-  `docs/security/risk-assessment.md` verlinkt.
+- **DE:** Anhang I Teil I vollständig und risikobasiert abbilden: Nr. 1 sicheres Design; Nr. 2(a) keine bekannten ausnutzbaren Schwachstellen, (b) sichere Defaults, (c) Sicherheitsupdates, (d) Zugriffsschutz, (e) Vertraulichkeit, (f) Integrität, (g) Datenminimierung für persönliche und andere Daten, (h) Verfügbarkeit, (i) Auswirkungen auf andere Systeme, (j) Angriffsfläche, (k) Exploit-Folgenbegrenzung, (l) Logging mit Opt-out, (m) sichere Löschung und Übertragung. Anwendbarkeit und gesetzliche Bedingungen je Punkt bewerten. Nr. 2(b) umfasst die Rücksetzung in den Originalzustand; eine abweichende Vereinbarung zu sicheren Defaults gilt nur zwischen Hersteller und gewerblichem Nutzer bei einem maßgeschneiderten Produkt, nicht pauschal für Anhang I. Eine Scan-Ausgabe allein beweist keine Erfüllung. Konformitätsvermutung nach Art. 27 nur für die tatsächlich im EU-Amtsblatt für den CRA referenzierten einschlägigen Teile einer Norm annehmen; verwandte RED-/IoT-/Industrienormen sind nicht automatisch CRA-harmonisiert.
+- **EN:** Map all of Annex I Part I on a risk basis: point 1 secure design; point 2(a) no known exploitable vulnerabilities, (b) secure defaults, (c) security updates, (d) access protection, (e) confidentiality, (f) integrity, (g) minimisation of personal and other data, (h) availability, (i) impact on other systems, (j) attack surface, (k) exploit mitigation, (l) logging with opt-out, (m) secure erasure and transfer. Assess applicability and statutory conditions per point. Point 2(b) includes resetting to the original state; a different agreement on secure defaults applies only between manufacturer and business user for a tailor-made product, not to Annex I as a whole. A scan alone does not prove fulfilment. Claim Article 27 presumption only for applicable standard parts actually referenced in the EU Official Journal for the CRA; related RED/IoT/industrial standards are not automatically CRA-harmonised.
+- **Akzeptanz / Acceptance:** Vollständiges Punkt-Mapping in `docs/security/cra-annex-i-mapping.md` mit Risiko, Umsetzung, Test/Evidence und geprüften Amtsblattreferenzen. / Complete point mapping with risk, implementation, tests/evidence and checked OJ references.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -6865,76 +6220,9 @@ checked if they are shared with external parties.
 
 #### CL-07-05: Schwachstellenbehandlung Anhang I Teil II / Annex I Part II Vulnerability Handling
 
-- **DE:** Es gibt eine SBOM, einen Meldeweg, einen Patch-Prozess, eine
-  Sicherheitsrichtlinie und Tests vor Auslieferung.
-  CRA Anhang I, Teil II — Schwachstellenbehandlungs-Anforderungen:
-  - **Schwachstellen identifizieren und dokumentieren** (Art. 2.1 lit. a):
-    SBOM mit allen Komponenten und Versionen.
-  - **Schwachstellen unverzüglich beheben** (Art. 2.1 lit. b): Patch-
-    Prozess mit definierten SLA.
-  - **Sicherheitsmaßnahmen regelmäßig testen** (Art. 2.1 lit. c):
-    Pentests, SAST, DAST, Fuzzing.
-  - **Patches kostenlos und unverzüglich bereitstellen** (Art. 2.1 lit. d):
-    keine Paywall für Sicherheits-Updates.
-  - **Sicherheits-Advisory veröffentlichen** (Art. 2.1 lit. e): CSAF/CVE-
-    Format.
-  - **Coordinated Vulnerability Disclosure Policy** (Art. 2.1 lit. f):
-    siehe Schwachstellenoffenlegung-Checkliste.
-  - **Maßnahmen zur Erleichterung der Meldung** (Art. 2.1 lit. g):
-    `security.txt`, `security@`-Postfach.
-  - **Sichere Update-Verteilung** (Art. 2.1 lit. h): signierte Updates,
-    Rollback-Möglichkeit.
-  Erforderliche Artefakte:
-  - **SBOM** (CycloneDX/SPDX) je Release — siehe Lieferkette-Checkliste.
-  - **Coordinated Vulnerability Disclosure Policy** —
-    `docs/security/cvd-policy.md` und `SECURITY.md`.
-  - **Security.txt** unter `/.well-known/security.txt`.
-  - **Patch-Prozess** in `docs/security/patch-management.md` mit SLA-
-    Tabelle.
-  - **Test-Evidenzen**: Pentest-Bericht (jährlich), SAST/DAST-Reports
-    (CI), Fuzzing-Logs (kontinuierlich).
-  - **Advisory-Vorlage** (CSAF 2.0).
-  Werkzeuge:
-  - **Dependency-Track** mit SBOM-Upload und CVE-Tracking.
-  - **GitHub Security Advisories** + **Dependabot Alerts**.
-  - **CSAF Provider Metadata** für maschinenlesbare Advisories.
-  - **SARIF**-Format für SAST-Ergebnisse.
-- **EN:** There is an SBOM, a reporting channel, a patch process, a
-  security policy, and tests before delivery.
-  CRA Annex I, Part II — vulnerability handling requirements:
-  - **Identify and document vulnerabilities** (Art. 2.1(a)): SBOM with
-    all components and versions.
-  - **Address vulnerabilities without delay** (Art. 2.1(b)): patch
-    process with defined SLAs.
-  - **Test security measures regularly** (Art. 2.1(c)): pentests, SAST,
-    DAST, fuzzing.
-  - **Provide patches free of charge and without delay** (Art. 2.1(d)):
-    no paywall for security updates.
-  - **Publish security advisories** (Art. 2.1(e)): CSAF/CVE format.
-  - **Coordinated vulnerability disclosure policy** (Art. 2.1(f)): see
-    vulnerability disclosure checklist.
-  - **Measures to facilitate reporting** (Art. 2.1(g)): `security.txt`,
-    `security@` mailbox.
-  - **Secure update distribution** (Art. 2.1(h)): signed updates,
-    rollback capability.
-  Required artefacts:
-  - **SBOM** (CycloneDX/SPDX) per release — see supply-chain checklist.
-  - **Coordinated vulnerability disclosure policy** —
-    `docs/security/cvd-policy.md` and `SECURITY.md`.
-  - **`security.txt`** at `/.well-known/security.txt`.
-  - **Patch process** in `docs/security/patch-management.md` with SLA
-    table.
-  - **Test evidence**: pentest report (annual), SAST/DAST reports (CI),
-    fuzzing logs (continuous).
-  - **Advisory template** (CSAF 2.0).
-  Tools:
-  - **Dependency-Track** with SBOM upload and CVE tracking.
-  - **GitHub Security Advisories** + **Dependabot alerts**.
-  - **CSAF provider metadata** for machine-readable advisories.
-  - **SARIF** format for SAST results.
-- **Akzeptanz / Acceptance:** SBOM, security.txt, CVD-Policy, Patch-Prozess
-  mit SLA, Test-Evidenzen, Advisory-Vorlage je Punkt mit Pfad zur Evidenz
-  in `docs/security/cra-annex-ii-mapping.md` dokumentiert.
+- **DE:** Anhang I Teil II Nr. 1–8 einzeln nachweisen: Komponenten-/Schwachstelleninventar und maschinenlesbare SBOM (rechtlich mindestens Top-Level-Abhängigkeiten; lokale Vollständigkeitsvorgaben gesondert), zügige Behebung und soweit technisch möglich getrennte Sicherheitsupdates, regelmäßige Tests/Reviews, Information über behobene Lücken mit begründeten Offenlegungs-Ausnahmen, CVD-Policy, erreichbarer Meldekontakt, sichere Updateverteilung sowie zügige grundsätzlich kostenlose Sicherheitsupdates. Die Sonderregel für maßgeschneiderte Produkte zwischen Hersteller und gewerblichem Nutzer aus Nr. 8 gesondert prüfen. Vorgegebene Jahresintervalle, konkrete Scanwerkzeuge und SBOM-Formate sind lokale Umsetzung, keine wörtlichen CRA-Pflichten.
+- **EN:** Evidence Annex I Part II points 1–8 individually: component/vulnerability inventory and machine-readable SBOM (statutory minimum top-level dependencies; separate local completeness rules), prompt remediation with separate security updates where technically feasible, regular tests/reviews, information on fixed issues with justified disclosure exceptions, CVD policy, reachable reporting contact, secure update delivery, and prompt generally free security updates. Assess the point 8 tailored-product agreement exception between manufacturer and business user separately. Fixed annual intervals, specific scanners and SBOM formats are local implementation choices rather than literal CRA duties.
+- **Akzeptanz / Acceptance:** Acht Punkte mit Evidence in `docs/security/cra-annex-i-part-ii-mapping.md`; alter Dateiname `cra-annex-ii-mapping.md` nur als dokumentierter Legacy-Verweis. / Evidence for eight points; document the old misleading filename as a legacy alias only.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -6954,83 +6242,9 @@ checked if they are shared with external parties.
 
 #### CL-07-06: Konformitätsbewertung / Conformity Assessment
 
-- **DE:** Der passende Bewertungspfad ist gewählt: Selbstbewertung,
-  EU-Baumusterprüfung oder vollständige Qualitätssicherung. Die Wahl ist
-  begründet.
-  Konformitätsbewertungsmodule (CRA Anhang VIII):
-  - **Modul A — Interne Produktionskontrolle (Selbstbewertung)**:
-    - Geeignet für Standard-Produkte (nicht Anhang III oder IV).
-    - Hersteller dokumentiert Konformität intern.
-    - Keine Notified Body erforderlich.
-  - **Modul B — EU-Baumusterprüfung + Modul C — Konformität mit Baumuster**:
-    - Pflicht für Anhang IV und Klasse II nach Anhang III ohne
-      harmonisierte Normen.
-    - Notified Body prüft Baumuster und Serienfertigung.
-  - **Modul H — Vollständige Qualitätssicherung**:
-    - Alternative für Klasse II und kritische Produkte.
-    - Notified Body zertifiziert das gesamte Qualitätsmanagementsystem.
-  - **Europäisches Cybersicherheitszertifikat (CSA, EUCC)**:
-    - Für kritische Produkte nach Anhang IV mit höchsten Anforderungen.
-  Auswahl-Workflow:
-  1. Klasse bestimmen (Anhang III/IV/Standard).
-  2. Harmonisierte Normen verfügbar?
-     - Ja → Modul A (mit Konformitätsvermutung) für Standard und
-       Klasse I möglich.
-     - Nein → externe Bewertung (Modul B+C oder H).
-  3. Klasse II oder Anhang IV → externe Bewertung verpflichtend.
-  4. Bei kritischen Funktionen: zusätzliches CSA/EUCC-Zertifikat.
-  Notified-Body-Auswahl:
-  - [NANDO-Datenbank für Notified and Designated Organisations](https://ec.europa.eu/growth/tools-databases/nando/).
-  - Bekannte CRA-notifizierte Bodies (Stand 2026): TÜV Rheinland,
-    DEKRA, Bureau Veritas, SGS, BSI Group.
-  - Auswahlkriterien: Akkreditierung, Sprache (DE), Branchenexpertise,
-    Lieferzeit, Kosten.
-  Begründungs-Dokument:
-  - Welche Klasse?
-  - Welches Modul?
-  - Welcher Notified Body? (falls anwendbar)
-  - Welche harmonisierten Normen?
-  - Geplanter Zeitplan für Erst-Zertifizierung und Re-Zertifizierung.
-- **EN:** The right assessment route is chosen: self-assessment, EU type-
-  examination, or full quality assurance. The choice is justified.
-  Conformity assessment modules (CRA Annex VIII):
-  - **Module A — internal production control (self-assessment)**:
-    - Suitable for standard products (not Annex III or IV).
-    - Manufacturer documents conformity internally.
-    - No notified body required.
-  - **Module B — EU type-examination + Module C — conformity to type**:
-    - Mandatory for Annex IV and Annex III Class II without harmonised
-      standards.
-    - Notified body assesses type and serial production.
-  - **Module H — full quality assurance**:
-    - Alternative for Class II and critical products.
-    - Notified body certifies the complete quality management system.
-  - **European Cybersecurity Certificate (CSA, EUCC)**:
-    - For critical products per Annex IV with highest requirements.
-  Selection workflow:
-  1. Determine class (Annex III/IV/standard).
-  2. Are harmonised standards available?
-     - Yes → Module A (with presumption of conformity) for standard and
-       Class I possible.
-     - No → external assessment (Module B+C or H).
-  3. Class II or Annex IV → external assessment mandatory.
-  4. For critical functions: additional CSA/EUCC certificate.
-  Notified-body selection:
-  - [NANDO database for Notified and Designated Organisations](https://ec.europa.eu/growth/tools-databases/nando/).
-  - Known CRA-notified bodies (status 2026): TÜV Rheinland, DEKRA,
-    Bureau Veritas, SGS, BSI Group.
-  - Selection criteria: accreditation, language (German), domain
-    expertise, lead time, cost.
-  Justification document:
-  - Which class?
-  - Which module?
-  - Which notified body? (if applicable)
-  - Which harmonised standards?
-  - Planned schedule for initial and re-certification.
-- **Akzeptanz / Acceptance:** Bewertungspfad und Notified Body (falls
-  anwendbar) in `docs/security/cra-conformity-assessment.md` mit
-  Begründung; harmonisierte Normen referenziert; Zeitplan für Zertifizierung
-  enthalten.
+- **DE:** Den Bewertungspfad anhand Produktkategorie, anwendbaren harmonisierten Standards und geltenden Sonderregeln bestimmen. Bei Klasse I kann Selbstbewertung an Bedingungen gebunden sein; Klasse II und kritische Produkte benötigen grundsätzlich externe Bewertung beziehungsweise ein zulässiges Zertifizierungsschema. Art. 32(5) erlaubt für FOSS-Produkte der Klasse I/II die interne Kontrolle nur bei öffentlich zugänglicher technischer Dokumentation. Keine pauschale Entscheidung aus einer Beispieltabelle ableiten.
+- **EN:** Choose the assessment path from product category, applicable harmonised standards, and current exceptions. Class I self-assessment may be conditional; class II and critical products generally require external assessment or an eligible certification scheme. Article 32(5) permits internal control for FOSS Class I/II products only with publicly available technical documentation. Do not decide from an example table alone.
+- **Akzeptanz / Acceptance:** Begründeter Pfad mit zuständiger Entscheidung; [CRA Art. 32](https://eur-lex.europa.eu/eli/reg/2024/2847/oj) / Justified route with responsible decision and primary institutional source.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -7050,93 +6264,9 @@ checked if they are shared with external parties.
 
 #### CL-07-07: CE-Kennzeichnung / CE Marking
 
-- **DE:** Vor Inverkehrbringen wird die CE-Kennzeichnung mit
-  Konformitätserklärung vorbereitet (sofern anwendbar).
-  CE-Kennzeichnungs-Anforderungen:
-  - **Anbringung der CE-Kennzeichnung** (CRA Art. 32):
-    - Auf dem Produkt selbst (sichtbar, lesbar, dauerhaft).
-    - Bei Software: in der Software (Splash-Screen, Settings, Help) und
-      auf der Verpackung / im Online-Shop.
-    - Mindestgröße: 5 mm Höhe; bei kleineren Geräten zulässig kleiner.
-  - **EU-Konformitätserklärung (DoC)** (CRA Art. 28, Anhang V):
-    - Pflichtfelder:
-      - Hersteller-Name und -Anschrift, ggf. Bevollmächtigter.
-      - Produktname, Modell-/Typennummer, Seriennummer / Charge.
-      - „Diese Konformitätserklärung wird unter alleiniger Verantwortung
-        des Herstellers ausgestellt."
-      - Verweis auf CRA: „Verordnung (EU) 2024/2847".
-      - Liste der angewandten harmonisierten Normen.
-      - Bei Notified Body: Name, Identifikationsnummer, Typ der
-        Bescheinigung.
-      - Ort, Datum, Unterschrift, Funktion.
-    - Sprache: in der/den Sprache(n) der Mitgliedstaaten, in denen
-      vermarktet wird.
-  - **Begleitende Informationen** (CRA Art. 13, Anhang II):
-    - Sicherheits-Hinweise, sichere Inbetriebnahme.
-    - Update-Mechanismen, Lifetime, Support-Zeitraum.
-    - Liste angeschlossener Dienste.
-    - Reset-Anleitung auf sicheren Zustand.
-    - Kontakt für Schwachstellenmeldungen.
-  Vorlage einer DoC:
-  ```text
-  EU-Konformitätserklärung
-
-  Hersteller: <Organisation>, <Adresse>, <PLZ Ort>, <Land>
-  Produkt: WidgetService 3.2.4
-  Erklärung: Wir erklären in alleiniger Verantwortung, dass das oben
-  bezeichnete Produkt allen einschlägigen Bestimmungen der Verordnung
-  (EU) 2024/2847 (Cyber Resilience Act) entspricht.
-  Angewandte harmonisierte Normen: EN 18031:2024, ETSI EN 303 645
-  Notified Body: TÜV Rheinland, ID 0197, Modul B+C
-  Zertifikat-Nr.: TR-CRA-2026-XXXX
-  Ort, Datum: <Ort>, <Datum>
-  Unterschrift: ____________________ Geschäftsführer
-  ```
-- **EN:** Before placing on the market, CE marking with declaration of
-  conformity is prepared (if applicable).
-  CE marking requirements:
-  - **Affixing CE marking** (CRA Art. 32):
-    - On the product itself (visible, legible, durable).
-    - For software: in the software (splash screen, settings, help) and
-      on the packaging / online shop.
-    - Minimum size: 5 mm height; smaller is permitted on small devices.
-  - **EU Declaration of Conformity (DoC)** (CRA Art. 28, Annex V):
-    - Mandatory fields:
-      - Manufacturer name and address, possibly authorised representative.
-      - Product name, model/type number, serial number / batch.
-      - "This declaration of conformity is issued under the sole
-        responsibility of the manufacturer."
-      - Reference to CRA: "Regulation (EU) 2024/2847".
-      - List of harmonised standards applied.
-      - For notified body: name, identification number, type of
-        certificate.
-      - Place, date, signature, role.
-    - Language: in the language(s) of the member states where marketed.
-  - **Accompanying information** (CRA Art. 13, Annex II):
-    - Safety advice, secure setup.
-    - Update mechanisms, lifetime, support period.
-    - List of connected services.
-    - Reset instructions to a secure state.
-    - Contact for vulnerability reports.
-  DoC template:
-  ```text
-  EU Declaration of Conformity
-
-  Manufacturer: <organization>, <address>, <postal code and city>, <country>
-  Product: WidgetService 3.2.4
-  Statement: We declare under our sole responsibility that the product
-  identified above complies with all relevant provisions of Regulation
-  (EU) 2024/2847 (Cyber Resilience Act).
-  Applied harmonised standards: EN 18031:2024, ETSI EN 303 645
-  Notified Body: TÜV Rheinland, ID 0197, Module B+C
-  Certificate No.: TR-CRA-2026-XXXX
-  Place, Date: <place>, <date>
-  Signature: ____________________ Managing Director
-  ```
-- **Akzeptanz / Acceptance:** EU-DoC im Release-Paket (PDF + Markdown);
-  CE-Kennzeichnung im Produkt sichtbar (Splash, Settings); Begleit-
-  informationen nach Anhang II vollständig; Sprache in DE und EN
-  (mindestens).
+- **DE:** EU-Konformitätserklärung nach Art. 28 und Anhang V (gegebenenfalls vereinfachte Erklärung nach Anhang VI) vor Inverkehrbringen nach Art. 13(12) erstellen. CE-Regeln stehen in Art. 29/30, nicht Art. 32. Für Software ist das CE-Zeichen auf der Erklärung oder der leicht direkt zugänglichen begleitenden Website zulässig; ein Splash-Screen ist keine allgemeine Pflicht. Begleitinformationen nach Anhang II und die erforderlichen Sprachen der Zielmitgliedstaaten prüfen. Nur tatsächlich angewandte, einschlägige Normen und reale Notifizierungs-/Zertifikatsdaten nennen; Beispielnormen oder erfundene Zertifikate sind kein Konformitätsnachweis.
+- **EN:** Prepare the EU declaration under Article 28 and Annex V (or simplified declaration under Annex VI where applicable) before placing on the market under Article 13(12). CE rules are in Articles 29/30, not Article 32. Software may carry CE marking on the declaration or an easily/directly accessible accompanying website; a splash screen is not universally required. Check Annex II information and languages required by target Member States. Name only standards actually applied and applicable, and real notification/certificate data; example standards or invented certificates do not establish conformity.
+- **Akzeptanz / Acceptance:** Datierte Erklärung, begründeter CE-Ort, Begleitinformationen und Sprachprüfung im Release-Dossier. / Dated declaration, justified CE location, accompanying information and language review in the release dossier.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -7156,118 +6286,9 @@ checked if they are shared with external parties.
 
 #### CL-07-08: Technische Dokumentation / Technical Documentation
 
-- **DE:** Die technische Dokumentation umfasst Risikobewertung,
-  Bedrohungsmodell, SBOM, Architekturbeschreibung, Test- und Patch-Belege.
-  Pflichtinhalte (CRA Anhang VII):
-  - **Allgemeine Beschreibung des Produkts**: Funktion, Komponenten, Schnitt-
-    stellen, Lebenszyklus.
-  - **Konzeption, Entwicklung, Herstellungsprozess**: Architekturdiagramm
-    (arc42), Datenflussdiagramm, Komponentendiagramm.
-  - **Risikobewertung** (Cybersecurity Risk Assessment) mit:
-    - Bedrohungsmodell (STRIDE + CAPEC).
-    - Schutzziele (CIA + Authentizität, Nicht-Abstreitbarkeit).
-    - Restrisiken mit Akzeptanz und Begründung.
-  - **Anwendung der wesentlichen Anforderungen** aus Anhang I:
-    Mapping-Tabelle je Anforderung mit Umsetzung.
-  - **Anwendbarkeit harmonisierter Normen**: Liste mit Versionen.
-  - **Konformitätsbewertungsbericht**: Ergebnis je Modul, ggf. Notified-
-    Body-Bescheinigung.
-  - **Test-Evidenz**: SAST, DAST, Pentest, Fuzzing, Vulnerability-Scan-
-    Reports.
-  - **SBOM** (CycloneDX/SPDX) je Release-Version.
-  - **Patch-Management-Plan** und Lifecycle-Tabelle.
-  - **Coordinated Vulnerability Disclosure Policy**.
-  - **Konformitätserklärung (DoC)** Kopie.
-  Empfohlene Ordnerstruktur:
-  ```text
-  docs/
-    cra-dossier/
-      00-overview.md
-      01-product-description.md
-      02-architecture/
-        arc42-section-08.md
-        dfd.drawio
-      03-risk-assessment/
-        threat-model.md
-        risk-register.md
-      04-annex-i-mapping/
-        annex-i-part-i.md
-        annex-i-part-ii.md
-      05-conformity/
-        module-a-self-assessment.md
-        notified-body-certificate.pdf
-      06-test-evidence/
-        sast-report-2026-04.sarif
-        pentest-2026-q1.pdf
-        sbom-v3.2.4.cdx.json
-      07-lifecycle/
-        patch-management.md
-        eol-policy.md
-      08-cvd-policy.md
-      09-doc-2026-04-27.pdf
-  ```
-  Aufbewahrungsfristen:
-  - **Mindestens 10 Jahre** nach Inverkehrbringen (CRA Art. 7).
-  - **Audit-fest**: WORM-Storage, Cloud-Storage mit Object-Lock,
-    qualifiziertes elektronisches Siegel.
-- **EN:** Technical documentation includes risk assessment, threat model,
-  SBOM, architecture description, test evidence, and patch evidence.
-  Mandatory contents (CRA Annex VII):
-  - **General description of the product**: function, components,
-    interfaces, lifecycle.
-  - **Design, development, manufacturing process**: architecture diagram
-    (arc42), data-flow diagram, component diagram.
-  - **Risk assessment** (cybersecurity risk assessment) with:
-    - Threat model (STRIDE + CAPEC).
-    - Security objectives (CIA + authenticity, non-repudiation).
-    - Residual risks with acceptance and justification.
-  - **Application of essential requirements** from Annex I: mapping
-    table per requirement with implementation.
-  - **Applicability of harmonised standards**: list with versions.
-  - **Conformity assessment report**: result per module, possibly
-    notified-body certificate.
-  - **Test evidence**: SAST, DAST, pentest, fuzzing, vulnerability scan
-    reports.
-  - **SBOM** (CycloneDX/SPDX) per release version.
-  - **Patch management plan** and lifecycle table.
-  - **Coordinated vulnerability disclosure policy**.
-  - **Declaration of Conformity (DoC)** copy.
-  Recommended folder structure:
-  ```text
-  docs/
-    cra-dossier/
-      00-overview.md
-      01-product-description.md
-      02-architecture/
-        arc42-section-08.md
-        dfd.drawio
-      03-risk-assessment/
-        threat-model.md
-        risk-register.md
-      04-annex-i-mapping/
-        annex-i-part-i.md
-        annex-i-part-ii.md
-      05-conformity/
-        module-a-self-assessment.md
-        notified-body-certificate.pdf
-      06-test-evidence/
-        sast-report-2026-04.sarif
-        pentest-2026-q1.pdf
-        sbom-v3.2.4.cdx.json
-      07-lifecycle/
-        patch-management.md
-        eol-policy.md
-      08-cvd-policy.md
-      09-doc-2026-04-27.pdf
-  ```
-  Retention periods:
-  - **At least 10 years** after placing on the market (CRA Art. 7).
-  - **Audit-proof**: WORM storage, cloud storage with Object Lock,
-    qualified electronic seal.
-- **Akzeptanz / Acceptance:** CRA-Dossier vollständig in
-  `docs/cra-dossier/` mit allen Anhang-VII-Inhalten; 10-Jahre-Retention
-  konfiguriert (z. B. S3 Object Lock); audit-feste Ablage; Index-Dokument
-  `00-overview.md` mit Verweisen.
+- **DE:** Technische Dokumentation gemäß Art. 31 und Anhang VII vor Inverkehrbringen erstellen und während des Supportzeitraums aktuell halten. Sie umfasst Produktbeschreibung, Entwurf/Entwicklung, Risikobewertung, Anhang-I-Mapping, angewandte Spezifikationen, Prüfungen, SBOM und nachvollziehbare Schwachstellenbehandlung. Nach Art. 13(13) technische Dokumentation und Konformitätserklärung mindestens zehn Jahre nach Inverkehrbringen oder für den Supportzeitraum aufbewahren, je nachdem, was länger ist. Dies ist keine pauschale Aufbewahrungsfrist für personenbezogene Agentenlogs. Zugriff, Integrität, Aktualisierung und Datenminimierung belegen.
+- **EN:** Prepare technical documentation under Article 31 and Annex VII before placing on the market and keep it current during support. Include product description, design/development, risk assessment, Annex I mapping, applied specifications, tests, SBOM and traceable vulnerability handling. Article 13(13) requires retaining technical documentation and the declaration for at least ten years after placing on the market or the support period, whichever is longer. This is not a blanket retention period for personal agent logs. Evidence access control, integrity, updates and data minimisation.
+- **Akzeptanz / Acceptance:** Indexiertes CRA-Dossier mit Anhang-VII-Mapping, Quellenstand und begründeter Aufbewahrungsentscheidung. / Indexed CRA dossier with Annex VII mapping, source version and justified retention decision.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -7287,97 +6308,9 @@ checked if they are shared with external parties.
 
 #### CL-07-09: Meldepflichten 24 / 72 Stunden / 24- and 72-hour Reports
 
-- **DE:** Verfahren für Frühwarnung (24 Stunden), Update-Meldung
-  (72 Stunden) und Schlussbericht an CSIRT/ENISA sind eingerichtet.
-  CRA Art. 14 — Meldepflichten:
-  - **24 Stunden** nach Bekanntwerden einer aktiv ausgenutzten
-    Schwachstelle: Frühwarnung (Early Warning) an ENISA + nationale
-    CSIRT.
-  - **72 Stunden**: Vulnerability Notification mit detaillierter
-    Beschreibung, Schwere, betroffene Versionen, Mitigation.
-  - **14 Tage** nach Patch-Bereitstellung: Schlussbericht zu aktiv
-    ausgenutzten Schwachstellen mit Root Cause, getroffenen Maßnahmen und
-    Lessons Learned.
-  - **Ein Monat** nach der 72-Stunden-Meldung: Schlussbericht zu schweren
-    Sicherheitsvorfällen.
-  - **24 Stunden** bei schwerwiegendem Sicherheitsvorfall (Incident
-    Notification) – separat von Vulnerability Notification.
-  Erforderliche Verfahren:
-  - **Krisen-Runbook** mit Eskalationskette: Engineer -> Lead -> Security Lead ->
-    Geschäftsleitung.
-  - **24/7-Bereitschaft** mit definiertem On-Call-Schedule (z. B.
-    PagerDuty, Opsgenie).
-  - **Kommunikationsmatrix**: wer benachrichtigt ENISA, BSI, Kunden,
-    Pressestelle, Recht.
-  - **Vorlagentexte** in DE und EN für ENISA- und BSI-Meldungen.
-  - **Decision-Tree** zur Klassifikation: aktiv ausgenutzt / potenziell
-    ausnutzbar / kein Risiko.
-  - **Übungen** mindestens halbjährlich (siehe Schwachstellen-Checkliste
-    Item 11).
-  Meldekanäle:
-  - **ENISA Single Reporting Platform** (geplant ab 2026).
-  - **BSI CSIRT-Bund**: `cert@bsi.bund.de`,
-    [BSI-Meldeformular](https://www.bsi.bund.de/DE/Service/Meldestelle).
-  - **Nationale CSIRT** je Mitgliedstaat (CSIRT-Network).
-  - **CSAF Document** für maschinenlesbare Meldungen.
-  Pflichtfelder einer Frühwarnung:
-  - Hersteller-Identifikation.
-  - Produkt-Identifikation (Name, Version).
-  - Kurzbeschreibung der Schwachstelle/des Vorfalls.
-  - Hinweise auf aktive Ausnutzung (IOCs, Quelle).
-  - Vorläufige CVSS-Bewertung.
-  - Bekannte Mitigationen oder Workaround.
-  - Ansprechperson + 24/7-Kontakt.
-  Werkzeuge:
-  - **TheHive / Cortex** für Incident-Response-Plattform.
-  - **MISP** für Threat-Intelligence-Sharing.
-  - **CSAF Provider Tools** für maschinenlesbare Veröffentlichung.
-- **EN:** Procedures for early warning (24 hours), update notification
-  (72 hours), and final report to CSIRT/ENISA are in place.
-  CRA Art. 14 — reporting obligations:
-  - **24 hours** after becoming aware of an actively exploited
-    vulnerability: early warning to ENISA + national CSIRT.
-  - **72 hours**: vulnerability notification with detailed description,
-    severity, affected versions, mitigation.
-  - **14 days** after patch availability: final report for actively exploited
-    vulnerabilities with root cause, measures taken, and lessons learned.
-  - **One month** after the 72-hour notification: final report for severe
-    incidents.
-  - **24 hours** for severe security incident (incident notification) –
-    separate from vulnerability notification.
-  Required procedures:
-  - **Crisis runbook** with escalation chain: engineer -> lead -> Security Lead ->
-    management.
-  - **24/7 on-call** with defined schedule (e.g. PagerDuty, Opsgenie).
-  - **Communication matrix**: who notifies ENISA, BSI, customers,
-    press, legal.
-  - **Template texts** in DE and EN for ENISA and BSI notifications.
-  - **Decision tree** for classification: actively exploited / potentially
-    exploitable / no risk.
-  - **Exercises** at least semi-annually (see vulnerability checklist
-    item 11).
-  Reporting channels:
-  - **ENISA Single Reporting Platform** (planned from 2026).
-  - **BSI CSIRT-Bund**: `cert@bsi.bund.de`,
-    [BSI reporting form](https://www.bsi.bund.de/DE/Service/Meldestelle).
-  - **National CSIRTs** per member state (CSIRT Network).
-  - **CSAF document** for machine-readable notifications.
-  Mandatory fields of an early warning:
-  - Manufacturer identification.
-  - Product identification (name, version).
-  - Short description of the vulnerability/incident.
-  - Indicators of active exploitation (IOCs, source).
-  - Preliminary CVSS score.
-  - Known mitigations or workaround.
-  - Contact person + 24/7 number.
-  Tools:
-  - **TheHive / Cortex** for incident-response platform.
-  - **MISP** for threat-intelligence sharing.
-  - **CSAF provider tools** for machine-readable publication.
-- **Akzeptanz / Acceptance:** Krisen-Runbook in
-  `docs/security/incident-response.md`; 24/7-On-Call-Schedule
-  konfiguriert; Vorlagentexte DE/EN; Decision-Tree für 24/72-h-Klassifikation;
-  letzte Übung ≤ 6 Monate.
+- **DE:** Hersteller melden aktiv ausgenutzte Schwachstellen und schwerwiegende Sicherheitsvorfälle nach Art. 14 über die Single Reporting Platform gleichzeitig an koordinierenden CSIRT und ENISA: Frühwarnung ohne unangemessene Verzögerung, spätestens 24 Stunden nach Kenntnis, Meldung spätestens nach 72 Stunden. Schwachstellen-Schlussbericht spätestens 14 Tage nach verfügbarer Abhilfe; Vorfall-Schlussbericht spätestens einen Monat nach Vorfallmeldung. Inhalt, Zuständigkeit und Nutzerinformation nach Art. 14 dokumentieren. CRA Art. 16(2), Art. 14(9) und (EU) 2026/881 betreffen eine begründete Verzögerung der CSIRT-Weiterleitung; sie verlängern keine Hersteller-Meldefrist. Art. 14 gilt nach Art. 69(3)/71(2) seit 11.09.2026 auch für zuvor in Verkehr gebrachte, in den CRA-Geltungsbereich fallende Bestandsprodukte. Keine gewöhnliche E-Mail-Adresse als gesetzlichen Plattformersatz ausgeben. Herstellerpflicht ab 11.09.2026, Steward-Pflichten nach Art. 24 ab 11.12.2027 separat behandeln; die [Kommissionsauslegung zu Meldepflichten](https://digital-strategy.ec.europa.eu/en/policies/cra-reporting) bestätigt diesen Beginn ausdrücklich für Art. 24(3). Eine zugleich bestehende Herstellerrolle bleibt ab 11.09.2026 gesondert meldepflichtig. Interne Übungen und Bereitschaft nach Risiko organisieren.
+- **EN:** Manufacturers report actively exploited vulnerabilities and severe incidents under Article 14 through the Single Reporting Platform simultaneously to the coordinating CSIRT and ENISA: early warning without undue delay, at most 24 hours after awareness, followed by notification within 72 hours. Vulnerability final reports are due within 14 days after a corrective/mitigating measure is available; incident final reports within one month after incident notification. Record content, responsibility and user information under Article 14. CRA Articles 16(2), 14(9) and (EU) 2026/881 concern a justified delay of CSIRT dissemination; they do not extend manufacturer reporting deadlines. Under Articles 69(3)/71(2), Article 14 applies since 2026-09-11 also to existing in-scope products placed on the market earlier. Do not present an ordinary email address as a statutory platform substitute. Distinguish manufacturer duties from 11 September 2026 and steward Article 24 duties from 11 December 2027; the [Commission reporting guidance](https://digital-strategy.ec.europa.eu/en/policies/cra-reporting) explicitly confirms that start for Article 24(3). A concurrent manufacturer role retains its separate reporting duties from 11 September 2026. Organise exercises and on-call arrangements according to risk.
+- **Akzeptanz / Acceptance:** Runbook mit beiden Meldeketten, Auslösern, Plattformzugang, Vertretung, Quellenstand und Übungsnachweis. / Runbook with both reporting chains, triggers, platform access, deputies, source version and exercise evidence.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -7397,43 +6330,9 @@ checked if they are shared with external parties.
 
 #### CL-07-10: Lebenszyklus und Support / Lifecycle and Support
 
-- **DE:** Die erwartete Nutzungsdauer (Expected Product Lifetime) und der
-  Support-Zeitraum sind festgelegt und öffentlich kommuniziert. Gemäß CRA
-  Art. 13(8) sind Sicherheits-Updates mindestens über den Support-Zeitraum
-  oder mindestens 5 Jahre (je nachdem, was länger ist) bereitzustellen.
-  Lifecycle-Modelle: Semantic Versioning (Major/Minor/Patch) mit klarer
-  Deprecation-Policy; Long-Term-Support (LTS) für stabile Versionen mit
-  definiertem Sicherheits-Patch-Zeitraum (z. B. Ubuntu LTS 5–10 Jahre, .NET
-  LTS 3 Jahre); N/N-1-Support (aktuelle und vorherige Major-Version).
-  Beispieltabelle: `v1.0` Released 2025-01, EOS (End of Sale) 2027-01, EOL
-  (End of Life) 2030-01, EOSS (End of Security Support) 2030-01. Mindestens
-  12 Monate vor EOL angekündigt (EOL-Notice). Kommunikationskanäle:
-  Produkt-Website unter `Lifecycle Policy`, Release Notes, Customer Portal,
-  E-Mail-Verteiler, Security Advisories. Migrationsleitfaden zur Nachfolge-
-  Version mitgeliefert. Einstellung der Sicherheits-Updates dokumentiert
-  in `docs/lifecycle-policy.md` mit Versionsmatrix.
-- **EN:** Expected product lifetime and support period are defined and
-  publicly communicated. Per CRA Art. 13(8), security updates must be
-  provided for at least the support period or at least 5 years (whichever
-  is longer). Lifecycle models: Semantic Versioning (Major/Minor/Patch)
-  with clear deprecation policy; Long-Term Support (LTS) for stable
-  versions with defined security patch window (e.g. Ubuntu LTS 5–10 years,
-  .NET LTS 3 years); N/N-1 support (current and previous major version).
-  Example table: `v1.0` Released 2025-01, EOS (End of Sale) 2027-01, EOL
-  (End of Life) 2030-01, EOSS (End of Security Support) 2030-01. Announced
-  at least 12 months before EOL (EOL notice). Communication channels:
-  product website under `Lifecycle Policy`, release notes, customer
-  portal, email distribution list, security advisories. Migration guide
-  to successor version provided. End of security updates documented in
-  `docs/lifecycle-policy.md` with version matrix.
-- **Akzeptanz / Acceptance:** `docs/lifecycle-policy.md` mit Versions-
-  Matrix (Released, EOS, EOL, EOSS); öffentliche Lifecycle-Seite mit
-  Mindestsupport ≥ 5 Jahre gemäß CRA Art. 13(8); EOL-Notice ≥ 12 Monate
-  vor Abschaltung; Migrationsleitfaden für Nachfolge-Version. /
-  `docs/lifecycle-policy.md` with version matrix (Released, EOS, EOL,
-  EOSS); public lifecycle page with minimum support ≥ 5 years per CRA
-  Art. 13(8); EOL notice ≥ 12 months before shutdown; migration guide
-  for successor version.
+- **DE:** Support nach Art. 13(8) an erwarteter Nutzungsdauer und Produktart ausrichten, grundsätzlich mindestens fünf Jahre; ist die erwartete Nutzung kürzer, entspricht der Support dieser Dauer. Begründung und berücksichtigte Faktoren in der technischen Dokumentation festhalten. Art. 13(9) verlangt, veröffentlichte Sicherheitsupdates mindestens zehn Jahre nach Ausgabe oder für den verbleibenden Supportzeitraum verfügbar zu halten, je nachdem, was länger ist. Supportdauer, Updateverfügbarkeit und Dokumentationsaufbewahrung sind verschiedene Fristen; EOL-Hinweis allein erlaubt keine Verkürzung gesetzlicher Pflichten. Art. 13(18) verlangt Anhang-II-Informationen mindestens zehn Jahre nach Inverkehrbringen oder für den längeren Supportzeitraum zugänglich zu halten; bei Online-Bereitstellung verständlich und nutzerfreundlich online. Nach Art. 13(19) Supportende bereits beim Kauf klar und leicht zugänglich mindestens mit Monat/Jahr nennen und, soweit technisch nach Produktart möglich, bei Supportende einen Nutzerhinweis anzeigen.
+- **EN:** Determine support under Article 13(8) from expected use and product type, generally at least five years; if expected use is shorter, support corresponds to that period. Record the rationale and considered factors in technical documentation. Article 13(9) requires issued security updates to remain available for at least ten years after issue or the remaining support period, whichever is longer. Support duration, update availability and document retention are distinct clocks; an EOL notice alone cannot shorten statutory duties. Article 13(18) requires Annex II information to remain available for at least ten years after placing on the market or the longer support period; online provision must remain accessible and user-friendly. Under Article 13(19), clearly state the support end at purchase in an easily accessible way with at least month/year and, where technically feasible for the product, display an end-of-support notification.
+- **Akzeptanz / Acceptance:** Begründete, zuständig geprüfte Supportentscheidung mit getrennten Support-, Update-, Dokumentations- und Anhang-II-Informationsfristen, Kauf-/EOL-Hinweisen und Wiedervorlage. / Justified, responsibly reviewed support decision with separate support, update, documentation and Annex II information clocks, purchase/EOL notices and reevaluation.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -7453,47 +6352,9 @@ checked if they are shared with external parties.
 
 #### CL-07-11: Hersteller-Pflichten und -Verträge / Manufacturer Duties and Contracts
 
-- **DE:** Verträge mit Zulieferern (Komponenten-Lieferanten, OSS-Wartungs-
-  vertragspartner, Dienstleister) und mit dem Vertrieb (Distributoren,
-  Importeure, Reseller) decken die CRA-Pflichten ab. Verbindliche
-  Vertragsklauseln für Zulieferer: (1) Schwachstellenmeldung an Hersteller
-  innerhalb von 24 h nach Kenntnis; (2) Bereitstellung von
-  Sicherheits-Updates mindestens über den Produkt-Lifecycle des
-  Endprodukts; (3) SBOM-Lieferung mit jeder Komponentenversion (CycloneDX
-  oder SPDX); (4) Audit-Recht für CRA-Konformitätsprüfung; (5) Haftung und
-  Gewährleistung für Sicherheitsmängel; (6) Coordinated Vulnerability
-  Disclosure (CVD) Policy; (7) Right to Repair / Source-Code-Hinterlegung
-  bei Insolvenz (Escrow). Klauseln für Distributoren/Importeure (CRA Art.
-  19, 20): Pflicht zur Konformitätsprüfung, Aufbewahrung der Konformitäts-
-  erklärung, Weiterleitung von Sicherheitsmeldungen, Nichtinverkehrbringen
-  bei Bedenken. Vertragsvorlagen verfügbar als `vendor-security-clauses.md`
-  und `distributor-cra-clauses.md`. Bestehende Verträge per Addendum oder
-  Vertragsänderung an CRA-Pflichten angepasst. Lieferantenmanagement-
-  Datenbank (z. B. SAP Ariba, Coupa) hält Compliance-Status pro Lieferant.
-- **EN:** Contracts with suppliers (component suppliers, OSS maintenance
-  partners, service providers) and with distributors (distributors,
-  importers, resellers) cover the CRA duties. Mandatory contractual
-  clauses for suppliers: (1) vulnerability notification to the manufacturer
-  within 24 h of knowledge; (2) security updates for at least the
-  end-product lifecycle; (3) SBOM delivery with every component version
-  (CycloneDX or SPDX); (4) audit right for CRA conformity; (5) liability
-  and warranty for security defects; (6) Coordinated Vulnerability
-  Disclosure (CVD) policy; (7) right to repair / source-code escrow on
-  insolvency. Clauses for distributors/importers (CRA Art. 19, 20):
-  conformity check duty, retention of declaration of conformity,
-  forwarding of security notifications, non-placement on concerns.
-  Contract templates available as `vendor-security-clauses.md` and
-  `distributor-cra-clauses.md`. Existing contracts adapted via addendum
-  or amendment to CRA duties. Vendor management database (e.g. SAP Ariba,
-  Coupa) holds compliance status per supplier.
-- **Akzeptanz / Acceptance:** Vertragsklauseln in `vendor-security-clauses.md`
-  und `distributor-cra-clauses.md`; alle bestehenden Verträge mit
-  CRA-relevantem Bezug aktualisiert oder per Addendum erweitert;
-  Lieferantenliste mit CRA-Compliance-Status gepflegt. /
-  Contractual clauses in `vendor-security-clauses.md` and
-  `distributor-cra-clauses.md`; all existing contracts with CRA-relevant
-  scope updated or extended via addendum; supplier list with CRA
-  compliance status maintained.
+- **DE:** Hersteller nach Art. 13, Bevollmächtigte nach Art. 18, Importeure nach Art. 19, Distributoren nach Art. 20 und Rollenwechsel nach Art. 21/22 getrennt prüfen. Lieferantenverträge risikobasiert auf Schwachstelleninformation, Support, SBOM, Auditrechte und Zuständigkeiten abstimmen. Eine interne 24-Stunden-Zulieferfrist, Haftungsregel oder Quellcode-Escrow kann eine begründete Vertragsanforderung sein; sie ist keine universelle CRA-Klausel. Vertragspflichten ersetzen nicht die verbleibende Herstellerverantwortung und dürfen nicht pauschal auf alle OSS-Beitragenden übertragen werden.
+- **EN:** Distinguish manufacturer Article 13, authorised representative Article 18, importer Article 19, distributor Article 20 and role changes under Articles 21/22. Align supplier contracts on a risk basis for vulnerability information, support, SBOM, audit rights and responsibilities. An internal 24-hour supplier deadline, liability term or source escrow may be a justified contractual requirement; it is not a universal CRA clause. Contracts do not replace remaining manufacturer responsibility and must not be imposed indiscriminately on all OSS contributors.
+- **Akzeptanz / Acceptance:** Rollen-/Pflichtenmatrix, geprüfte Verträge und begründete zusätzliche lokale Klauseln dokumentiert. / Record role/duty matrix, reviewed contracts and justified additional local terms.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -7513,54 +6374,9 @@ checked if they are shared with external parties.
 
 #### CL-07-12: Nichtanwendbarkeit dokumentieren / Document Non-Applicability
 
-- **DE:** Wenn der CRA für ein Produkt oder eine Komponente nicht anwendbar
-  ist, wird dies im Anwendbarkeitsbericht (`docs/cra-applicability.md`) mit
-  ausführlicher Begründung festgehalten. Die Entscheidung verweist auf das
-  regulatorische Screening nach CL_Standards-Anwendbarkeit. Pflichtfelder
-  pro Eintrag: (1)
-  Produktname und Version; (2) Begründung der Nichtanwendbarkeit mit
-  Verweis auf konkrete CRA-Ausnahmeklausel (z. B. Art. 2 Abs. 2: SaaS-
-  Dienste; Art. 2 Abs. 3: MDR/IVDR-Medizinprodukte; Art. 2 Abs. 4:
-  Verteidigungsprodukte; Art. 2 Abs. 5: Produkte rein für nationale
-  Sicherheit); (3) Datum der Bewertung; (4) Verantwortliche Person mit
-  Name und Funktion; (5) Vier-Augen-Prüfung (zweite Person); (6) Datum der
-  nächsten Überprüfung (mindestens jährlich oder bei Produktänderung); (7)
-  Rechtsbeistand oder Compliance-Officer hinzugezogen (ja/nein). Beispiel-
-  Eintrag: „Produkt: <interner oder externer Cloud-Storage-SaaS-Dienst> — Begründung: SaaS-Dienst
-  ohne Bereitstellung als Produkt mit digitalen Elementen, fällt unter
-  NIS2-Richtlinie (RL (EU) 2022/2555) Art. 21, nicht unter CRA Art. 1.
-  Bewertet am <Datum> durch <Rolle 1>, gegengeprüft durch
-  <Rolle 2>, nächste Überprüfung <Datum>.
-  Rechtsbeistand oder Compliance-Rolle konsultiert: ja/nein, Aktenzeichen <Referenz>." Stillschwei-
-  gende Auslassung (kein Eintrag) ist nicht zulässig.
-- **EN:** If the CRA is not applicable to a product or component, this is
-  recorded in the applicability report (`docs/cra-applicability.md`) with
-  detailed justification. The decision references the regulatory screening
-  under CL_Standards-Anwendbarkeit. Mandatory fields per entry: (1) product name
-  and version; (2) justification with reference to the specific CRA
-  exemption clause (e.g. Art. 2(2): SaaS services; Art. 2(3): MDR/IVDR
-  medical devices; Art. 2(4): defence products; Art. 2(5): national
-  security only); (3) date of assessment; (4) responsible person with
-  name and function; (5) four-eyes review (second person); (6) date of
-  next review (at least annually or on product change); (7) legal counsel
-  or compliance officer consulted (yes/no). Example entry: „Product: <cloud
-  storage SaaS service> — Justification: SaaS service without provision as a
-  product with digital elements, falls under NIS2 Directive (Dir. (EU)
-  2022/2555) Art. 21, not under CRA Art. 1. Assessed on <date> by
-  <responsible role>, countersigned by <second reviewer role>, next review
-  <date>. Legal department consulted: yes/no, reference <reference>." Silent
-  omission (no entry) is not permitted.
-- **Akzeptanz / Acceptance:** `docs/cra-applicability.md` enthält je
-  ausgenommenes Produkt einen Eintrag mit allen sieben Pflichtfeldern
-  (Produkt+Version, CRA-Ausnahmeklausel, Datum, verantwortliche Person,
-  Vier-Augen-Prüfer, nächste Überprüfung, Rechtsbeistand-Konsultation);
-  jährliche Wiedervorlage aktiv; CL_01-Regulatory-Screening ist verlinkt
-  oder inhaltlich gleichwertig enthalten. / `docs/cra-applicability.md` contains
-  one entry per exempted product with all seven mandatory fields
-  (product+version, CRA exemption clause, date, responsible person,
-  four-eyes reviewer, next review, legal counsel consultation); annual
-  re-review active; CL_01 regulatory screening is linked or included in an
-  equivalent way.
+- **DE:** N/A mit Produkt/Version, Rolle, konkreter Rechtsstelle oder Definition, Begründung, Datum, Owner, Gegenprüfung, nächstem Review und gegebenenfalls Fachberatung dokumentieren. Art. 2(2)(a)/(b) betrifft MDR/IVDR und (c) Fahrzeuge nach (EU) 2019/2144, Art. 2(3) zertifizierte Luftfahrt, 2(4) Schiffsausrüstung, 2(5) delegierte Ausschlüsse, 2(6) identische Ersatzteile, 2(7) ausschließlich nationale Sicherheit/Verteidigung beziehungsweise besondere Verschlusssachen-Verarbeitung; Art. 2(8) begrenzt gesondert Auskunftspflichten bei entgegenstehenden wesentlichen Interessen der nationalen/öffentlichen Sicherheit oder Verteidigung und ist kein N/A-Ausschluss des Produkts. Nichtkommerzielle FOSS anhand Art. 2(1)/3(22) und der kommerziellen Marktbereitstellung abgrenzen; Steward-Pflichten nach Art. 24 gesondert prüfen. Die Fahrzeugausnahme (EU) 2025/1535 mit L1e-Pedal-Rückausnahme und die getrennten Bestandsprodukt-/Meldeentscheidungen nach Art. 69(2)/(3) aus CL-07-01/09 übernehmen. SaaS anhand Art. 2(1), Art. 3(1)/(2) und Erwägungsgrund 12 abgrenzen, nicht über eine erfundene SaaS-Ausnahme. NIS2, DORA und Datenschutz getrennt bewerten. Unbekannte Anwendbarkeit bleibt Open; kein stillschweigendes Weglassen.
+- **EN:** Document N/A with product/version, role, exact provision or definition, rationale, date, owner, second review, next review and specialist advice where needed. Article 2(2)(a)/(b) covers MDR/IVDR and (c) vehicles under (EU) 2019/2144; Article 2(3) certified aviation, 2(4) marine equipment, 2(5) delegated exclusions, 2(6) identical spare parts, 2(7) exclusive national security/defence or specified classified-information processing; separately, Article 2(8) limits information-supply duties where disclosure would conflict with essential national/public security or defence interests; it is not a product-scope N/A exclusion. Assess non-commercial FOSS under Articles 2(1)/3(22) and commercial market availability; assess Article 24 steward duties separately. Apply the (EU) 2025/1535 vehicle exclusion with the L1e pedal exception and separate existing-product/reporting decisions under Article 69(2)/(3) from CL-07-01/09. Assess SaaS under Articles 2(1), 3(1)/(2) and recital 12 rather than an invented SaaS exemption. Assess NIS2, DORA and privacy separately. Unknown applicability remains Open; silent omission is not acceptable.
+- **Akzeptanz / Acceptance:** Anwendbarkeitsbericht nach CL-01-12 mit genauem Rechtsbezug und dokumentiertem Review. / Applicability report under CL-01-12 with precise legal reference and documented review.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -7676,6 +6492,15 @@ in an audit-ready way.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+- **Version 2.0.3 (2026-10-20):** Bedingten Zertifizierungspfad nach Art. 32(3)(c)/(4)(b) ergaenzt; Baseline 3.4.2. / Added conditional certification route under Article 32(3)(c)/(4)(b); baseline 3.4.2.
+
+
+- **Version 2.0.4 (2026-10-20):** Unabhängige Reviewkorrekturen und Baseline 3.4.3; siehe [Prüfbericht](../maintenance/gsdb-independent-fixes-2026-10-20.md). / Independent review corrections and baseline 3.4.3; see review report.
+
+- **Version 2.0.5 (2026-10-20):** Acht P3-Nachbefunde korrigiert, Baseline 3.4.4. / Correct eight P3 follow-up findings, baseline 3.4.4.
 
 ---
 
@@ -7693,8 +6518,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 08 – Sicherheits-Code-Review / Security Code Review
 
 **Dokument-ID / Document ID:** CL-08
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.4
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -7867,43 +6692,9 @@ configuration. Pure documentation changes are exempt.
 
 #### CL-08-02: Ausgabe-Codierung / Output Encoding
 
-- **DE:** Ausgaben werden kontextgerecht codiert (HTML-Body, HTML-Attribut,
-  JavaScript-String, URL-Parameter, CSS, SQL, LDAP, XML/XPath, Shell), um
-  Injektionen (XSS, SQLi, LDAPi, OS-Command-Injection) zu verhindern.
-  Konkrete Hilfsmittel: Java OWASP Encoder (`Encode.forHtml(...)`,
-  `Encode.forHtmlAttribute(...)`, `Encode.forJavaScript(...)`,
-  `Encode.forUriComponent(...)`); Spring `HtmlUtils.htmlEscape`; JSP/JSF
-  Auto-Escaping in Templates (`<c:out>`, `EL ${value}`); C#/.NET
-  `System.Web.HttpUtility.HtmlEncode`, `JavaScriptEncoder.Default.Encode`,
-  `UrlEncoder.Default`, Razor `@variable` Auto-Escaping; Python
-  `markupsafe.escape`, Jinja2 Auto-Escape (`autoescape=True`); Go
-  `html/template` (kontextsensitives Auto-Escaping) statt `text/template`;
-  JavaScript DOM-API (`textContent` statt `innerHTML`), Frameworks React/
-  Vue/Angular escapen per Default in JSX/Templates (Vorsicht bei
-  `dangerouslySetInnerHTML`, `v-html`, `[innerHTML]`). Content-Security-
-  Policy (CSP) als zweite Verteidigungsschicht: `Content-Security-Policy:
-  default-src 'self'; script-src 'self' 'nonce-{random}'`. SQL: ausschließ-
-  lich Prepared Statements / parametrisierte Queries (siehe Punkt SQL).
-  Referenzen: OWASP XSS Prevention Cheat Sheet, OWASP Output Encoding,
-  CWE-79, CWE-89.
-- **EN:** Outputs are encoded for the right context (HTML body, HTML
-  attribute, JavaScript string, URL parameter, CSS, SQL, LDAP, XML/XPath,
-  shell) to prevent injection (XSS, SQLi, LDAPi, OS command injection).
-  Concrete helpers: Java OWASP Encoder (`Encode.forHtml(...)`,
-  `Encode.forHtmlAttribute(...)`, `Encode.forJavaScript(...)`,
-  `Encode.forUriComponent(...)`); Spring `HtmlUtils.htmlEscape`; JSP/JSF
-  auto-escaping in templates (`<c:out>`, `EL ${value}`); C#/.NET
-  `System.Web.HttpUtility.HtmlEncode`, `JavaScriptEncoder.Default.Encode`,
-  `UrlEncoder.Default`, Razor `@variable` auto-escaping; Python
-  `markupsafe.escape`, Jinja2 auto-escape (`autoescape=True`); Go
-  `html/template` (context-aware auto-escaping) instead of `text/template`;
-  JavaScript DOM API (`textContent` instead of `innerHTML`), frameworks
-  React/Vue/Angular escape by default in JSX/templates (caution with
-  `dangerouslySetInnerHTML`, `v-html`, `[innerHTML]`). Content Security
-  Policy (CSP) as second defence layer: `Content-Security-Policy:
-  default-src 'self'; script-src 'self' 'nonce-{random}'`. SQL:
-  parameterised queries only (see SQL item). References: OWASP XSS
-  Prevention Cheat Sheet, OWASP Output Encoding, CWE-79, CWE-89.
+- **DE:** HTML-, Attribut-, JavaScript- und URL-Ausgaben kontextgerecht codieren; Rich Content nur mit geeigneter Sanitization. Für SQL parametrisierte Statements verwenden. Für Prozesse strukturierte Argumentlisten ohne Shell-Auswertung nutzen. Allgemeines Escaping ersetzt weder Parametrisierung noch sichere APIs. Positiv-, Negativ- und Kontextwechseltests ausführen.
+- **EN:** Encode HTML, attribute, JavaScript, and URL output for its context; sanitize rich content appropriately. Use parameterized SQL statements. Invoke processes with structured argument lists without shell evaluation. Generic escaping replaces neither parameterization nor safe APIs. Test valid, malicious, and cross-context input.
+- **Akzeptanz / Acceptance:** Tests belegen sichere Senken; keine SQL- oder Shell-Interpolation aus untrusted Input. / Tests cover safe sinks; no untrusted SQL or shell interpolation.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -7923,42 +6714,9 @@ configuration. Pure documentation changes are exempt.
 
 #### CL-08-03: Authentifizierung / Authentication
 
-- **DE:** Es wird ein etabliertes Authentifizierungsverfahren genutzt
-  (OAuth 2.1, OpenID Connect, SAML 2.0, WebAuthn/Passkeys, Kerberos für
-  interne Domänen). Eigene Krypto- oder Passwort-Implementierungen werden
-  vermieden. Konkrete Frameworks: Spring Security 6 (`SecurityFilterChain`
-  mit `oauth2Login`, `formLogin`); Keycloak / Authentik / Auth0 / Azure AD /
-  Entra ID als Identity Provider; ASP.NET Core Identity mit `Microsoft.
-  AspNetCore.Authentication.JwtBearer` und `OpenIdConnect`; Python `Authlib`,
-  `python-social-auth`, FastAPI `OAuth2PasswordBearer`; Node.js `passport.js`
-  mit Strategien (`passport-oauth2`, `passport-saml`, `passport-jwt`).
-  Passwort-Hashing nur mit modernen KDFs: Argon2id (RFC 9106) als bevorzugt
-  (z. B. `argon2-cffi` Python, `Argon2.NET`, `argon2-jvm`); alternativ
-  bcrypt mit cost ≥ 12 oder scrypt; PBKDF2-SHA256 mit ≥ 600 000 Iterationen
-  (OWASP-Empfehlung 2024). Multi-Faktor-Authentifizierung (MFA) für
-  privilegierte Zugänge Pflicht (TOTP per RFC 6238, FIDO2/WebAuthn). Brute-
-  Force-Schutz: Account-Lockout nach 5 Fehlversuchen, Delay-basiertes
-  Rate-Limiting (z. B. `bucket4j` Java, `slowapi` Python, `IpRateLimit`
-  ASP.NET). Referenzen: OWASP Authentication Cheat Sheet, NIST SP 800-63B,
-  OWASP ASVS V2, CWE-287, CWE-307.
-- **EN:** An established authentication method is used (OAuth 2.1, OpenID
-  Connect, SAML 2.0, WebAuthn/Passkeys, Kerberos for internal domains).
-  Custom crypto or password implementations are avoided. Concrete
-  frameworks: Spring Security 6 (`SecurityFilterChain` with `oauth2Login`,
-  `formLogin`); Keycloak / Authentik / Auth0 / Azure AD / Entra ID as
-  identity providers; ASP.NET Core Identity with
-  `Microsoft.AspNetCore.Authentication.JwtBearer` and `OpenIdConnect`;
-  Python `Authlib`, `python-social-auth`, FastAPI `OAuth2PasswordBearer`;
-  Node.js `passport.js` with strategies (`passport-oauth2`,
-  `passport-saml`, `passport-jwt`). Password hashing only with modern KDFs:
-  Argon2id (RFC 9106) as preferred (e.g. `argon2-cffi` Python, `Argon2.NET`,
-  `argon2-jvm`); alternatively bcrypt with cost ≥ 12 or scrypt;
-  PBKDF2-SHA256 with ≥ 600,000 iterations (OWASP recommendation 2024).
-  Multi-factor authentication (MFA) for privileged access mandatory (TOTP
-  per RFC 6238, FIDO2/WebAuthn). Brute-force protection: account lockout
-  after 5 failed attempts, delay-based rate limiting (e.g. `bucket4j` Java,
-  `slowapi` Python, `IpRateLimit` ASP.NET). References: OWASP Authentication
-  Cheat Sheet, NIST SP 800-63B, OWASP ASVS V2, CWE-287, CWE-307.
+- **DE:** Etablierte Authentifizierung verwenden, etwa OpenID Connect oder WebAuthn. OAuth 2.0 betrifft delegierte Autorisierung und ist allein kein Anmeldeprotokoll; aktuelle Sicherheitspraktiken nach RFC 9700 anwenden. Issuer, Audience, Signatur, Ablauf und Redirect-URI prüfen, PKCE einsetzen, wo erforderlich. Protokollfassungen und Framework-Defaults vor Umsetzung verifizieren; Entwürfe nicht als fertigen Standard bezeichnen.
+- **EN:** Use established authentication such as OpenID Connect or WebAuthn. OAuth 2.0 provides delegated authorization and alone is not a login protocol; apply RFC 9700 security practice. Validate issuer, audience, signature, expiry, and redirect URI, using PKCE where required. Verify protocol versions and framework defaults; do not describe drafts as final standards.
+- **Akzeptanz / Acceptance:** Positive und negative Authentifizierungstests; https://www.rfc-editor.org/rfc/rfc9700.html / Positive and negative authentication tests; primary source.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -8119,8 +6877,7 @@ configuration. Pure documentation changes are exempt.
   `ECDsaCng`, `ECDiffieHellman`); Python `cryptography` Bibliothek
   (`Fernet` für symmetrisch, `hazmat.primitives` für Low-Level); Go
   `crypto/aes`, `crypto/cipher` (`cipher.NewGCM`), `crypto/ed25519`,
-  `golang.org/x/crypto/chacha20poly1305`. TLS-Konfiguration: TLS 1.3 als
-  Minimum (Fallback TLS 1.2 nur mit AEAD-Ciphern), HSTS-Header
+  `golang.org/x/crypto/chacha20poly1305`. TLS-Konfiguration nach CL-03-07: TLS 1.3 bevorzugen, TLS 1.2 nur im dort geprüften Profil und bis zum dokumentierten Migrationshorizont; HSTS-Header
   (`Strict-Transport-Security: max-age=31536000; includeSubDomains;
   preload`), OCSP Stapling. Schlüsselverwaltung: Hardware Security Module
   (HSM) PKCS#11, Cloud-KMS (AWS KMS, Azure Key Vault, GCP Cloud KMS) oder
@@ -8142,14 +6899,15 @@ configuration. Pure documentation changes are exempt.
   `ECDsaCng`, `ECDiffieHellman`); Python `cryptography` library (`Fernet`
   for symmetric, `hazmat.primitives` for low-level); Go `crypto/aes`,
   `crypto/cipher` (`cipher.NewGCM`), `crypto/ed25519`,
-  `golang.org/x/crypto/chacha20poly1305`. TLS configuration: TLS 1.3 as
-  minimum (TLS 1.2 fallback only with AEAD ciphers), HSTS header
+  `golang.org/x/crypto/chacha20poly1305`. TLS configuration follows CL-03-07: prefer TLS 1.3, use TLS 1.2 only within its reviewed profile and documented migration horizon; HSTS header
   (`Strict-Transport-Security: max-age=31536000; includeSubDomains;
   preload`), OCSP Stapling. Key management: Hardware Security Module
   (HSM) PKCS#11, cloud KMS (AWS KMS, Azure Key Vault, GCP Cloud KMS), or
   HashiCorp Vault. Key rotation every 90 days for active keys. References:
   NIST SP 800-131A Rev. 2, BSI TR-02102-1, OWASP Cryptographic Storage
   Cheat Sheet, ENISA Cryptographic Guidelines.
+- **DE:** Die obige generische Algorithmusauswahl und 90-Tage-Rotation sind lokale Baseline-Policy, keine pauschale BSI-Empfehlung. ChaCha20, Ed25519 und X25519 nicht als Empfehlung der TR-02102-1 ausgeben. Für BSI-Profilkonformität die konkrete Teilfassung und Parameter prüfen; für TLS gilt ausschließlich CL-03-07 mit TR-02102-2. Abweichungen mit Risiko und Owner dokumentieren.
+- **EN:** The generic algorithm choices and 90-day rotation above are local baseline policy, not blanket BSI recommendations. Do not attribute ChaCha20, Ed25519 or X25519 to TR-02102-1. Assess the specific part and parameters for BSI conformity; TLS follows CL-03-07 and TR-02102-2. Record deviations with risk and owner.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -8358,57 +7116,9 @@ configuration. Pure documentation changes are exempt.
 
 #### CL-08-10: Datei- und Netzwerk-I/O / File and Network I/O
 
-- **DE:** Pfade werden gegen Path-Traversal (`../`-Sequenzen, absolute
-  Pfade, Unicode-Tricks, NULL-Bytes) geschützt: Eingaben kanonisieren
-  (`Path.toAbsolutePath().normalize()` Java, `Path.GetFullPath` C#,
-  `os.path.realpath` Python, `filepath.Clean` Go), gegen erlaubtes Basis-
-  Verzeichnis prüfen (`startsWith(BASE_DIR)`), Allowlist von
-  Dateinamen-Mustern, Container/Chroot oder seccomp für Hard-Limits.
-  URLs werden gegen Server-Side Request Forgery (SSRF) abgesichert:
-  Allowlist erlaubter Hosts, Verbot von privaten IP-Ranges
-  (RFC 1918: 10/8, 172.16/12, 192.168/16; Loopback 127/8; Link-Local
-  169.254/16; Cloud-Metadata 169.254.169.254 AWS/Azure, metadata.google.
-  internal GCP), DNS-Rebinding-Schutz (Resolved-IP nach DNS-Auflösung
-  validieren), keine Redirects ohne Re-Validation. Bibliotheken: Java
-  `java.net.http.HttpClient` mit Custom `Authenticator`, Python
-  `requests` mit `allowed_hosts`, Go `net/http` mit Custom `Transport`,
-  Node.js `ssrf-req-filter`. Up- und Downloads prüfen Größe (Maximum vor
-  Empfang über `Content-Length`-Header und Streaming-Limit), MIME-Typ
-  (Magic-Byte-Erkennung mit `Apache Tika`, `python-magic`, `file(1)`
-  statt nur Header-Vertrauen), Dateierweiterung-Allowlist, Antivirus-Scan
-  (ClamAV, VirusTotal API), Speicherung außerhalb des Webroots oder mit
-  zufälligen Dateinamen, Image-Stripping von Metadaten (EXIF) und
-  Re-Encoding (ImageMagick mit Policy gegen RCE-CVEs). XML/JSON Parser:
-  XXE-Schutz (`DocumentBuilderFactory.setFeature("http://apache.org/xml/
-  features/disallow-doctype-decl", true)` Java; `defusedxml` Python),
-  JSON-Bomben-Schutz (Tiefen- und Größenlimit). Referenzen: OWASP File
-  Upload Cheat Sheet, OWASP SSRF Cheat Sheet, CWE-22, CWE-918, CWE-434,
-  CWE-611.
-- **EN:** Paths are protected against path traversal (`../` sequences,
-  absolute paths, Unicode tricks, NULL bytes): canonicalise inputs
-  (`Path.toAbsolutePath().normalize()` Java, `Path.GetFullPath` C#,
-  `os.path.realpath` Python, `filepath.Clean` Go), check against allowed
-  base directory (`startsWith(BASE_DIR)`), allowlist of filename patterns,
-  container/chroot or seccomp for hard limits. URLs are protected against
-  Server-Side Request Forgery (SSRF): allowlist of allowed hosts,
-  prohibition of private IP ranges (RFC 1918: 10/8, 172.16/12, 192.168/16;
-  loopback 127/8; link-local 169.254/16; cloud metadata 169.254.169.254
-  AWS/Azure, metadata.google.internal GCP), DNS rebinding protection
-  (validate resolved IP after DNS resolution), no redirects without
-  re-validation. Libraries: Java `java.net.http.HttpClient` with custom
-  `Authenticator`, Python `requests` with `allowed_hosts`, Go `net/http`
-  with custom `Transport`, Node.js `ssrf-req-filter`. Uploads and
-  downloads check size (maximum before receiving via `Content-Length`
-  header and streaming limit), MIME type (magic-byte detection with
-  `Apache Tika`, `python-magic`, `file(1)` instead of trusting headers
-  only), file-extension allowlist, antivirus scan (ClamAV, VirusTotal
-  API), storage outside the webroot or with random filenames, image
-  metadata stripping (EXIF) and re-encoding (ImageMagick with policy
-  against RCE CVEs). XML/JSON parser: XXE protection
-  (`DocumentBuilderFactory.setFeature("http://apache.org/xml/features/
-  disallow-doctype-decl", true)` Java; `defusedxml` Python), JSON-bomb
-  protection (depth and size limits). References: OWASP File Upload Cheat
-  Sheet, OWASP SSRF Cheat Sheet, CWE-22, CWE-918, CWE-434, CWE-611.
+- **DE:** Dateipfade mit pfadkomponentenbewusstem Vergleich innerhalb eines erlaubten Basisverzeichnisses halten; ein einfacher Zeichenketten-Präfixvergleich genügt nicht. Symlinks, Reparse Points und Rennen zwischen Prüfung und Öffnung berücksichtigen und sichere Dateioperationen verwenden. Netzwerkziele einschließlich Redirects und aufgelöster IP-Adressen auf erlaubte Ziele begrenzen; Timeouts und Größenlimits setzen.
+- **EN:** Confine files with a path-component-aware check against an allowed base directory; a string-prefix check is insufficient. Account for symlinks, reparse points, and check/open races, and use safe file operations. Restrict network destinations including redirects and resolved IP addresses; set timeouts and size limits.
+- **Akzeptanz / Acceptance:** Negativtests für Geschwisterpräfix, Traversal, Symlink und Redirect/SSRF. / Negative tests for sibling prefixes, traversal, symlinks, redirects, and SSRF.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -8567,6 +7277,8 @@ configuration. Pure documentation changes are exempt.
   coverage of documented public interfaces and critical UI flows; every
   new or changed public interface has at least one positive and one
   negative integration test.
+- **DE:** An unsicheren Sprach-/FFI-Grenzen, nativen Abhängigkeiten und Nicht-MSL-Komponenten zusätzlich risikobasiert Fuzzing und geeignete Speicher-/Undefined-Behavior-Sanitizer einsetzen, soweit die Zielplattform dies unterstützt. Andernfalls Plattformgrenze, kompensierende Tests und Restrisiko dokumentieren. Diese lokale Testregel unterstützt die Memory-Safe-Roadmap nach CL-08-13; eine MSL allein beweist keine sichere native Grenze.
+- **EN:** At unsafe language/FFI boundaries, native dependencies and non-MSL components, additionally use risk-based fuzzing and suitable memory/undefined-behaviour sanitizers where the target platform supports them. Otherwise record the platform limit, compensating tests and residual risk. This local testing rule supports the memory-safe roadmap under CL-08-13; MSL alone does not prove native-boundary safety.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -9191,6 +7903,8 @@ configuration. Pure documentation changes are exempt.
   logging, dependency handling, or shell/script code. "Memory-safe
   language" status does not replace this review; it only reduces certain
   memory-error risks.
+- **DE:** Sprachwahl nach CISA „The Case for Memory Safe Roadmaps“ (Dezember 2023) im Sprachprofil begründen: MSL bevorzugen, Nicht-MSL-Ausnahmen mit Plattformzwang, kompensierenden Kontrollen und priorisierter Migrations-Roadmap dokumentieren. CL-08-12 prüft Tests für verbleibende unsichere Grenzen. Die Roadmap ist eine Empfehlung; MSL allein verhindert nicht alle Schwachstellen.
+- **EN:** Justify language selection in the language profile using CISA “The Case for Memory Safe Roadmaps” (December 2023): prefer MSL; document non-MSL exceptions with platform constraints, compensating controls and a prioritised migration roadmap. CL-08-12 tests remaining unsafe boundaries. The roadmap is guidance; MSL alone does not prevent all vulnerabilities.
 - **Akzeptanz / Acceptance:** Pull Request, Review-Dokument oder
   Spec-Kit-Artefakt verweist auf die ausgefüllten Profile für die
   betroffenen Sprachen (z. B. C/C89, C#/.NET, Rust, Go, Swift,
@@ -9382,6 +8096,13 @@ pull request.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+- **Version 2.0.3 (2026-10-20):** Unabhängige Reviewkorrekturen und Baseline 3.4.3; siehe [Prüfbericht](../maintenance/gsdb-independent-fixes-2026-10-20.md). / Independent review corrections and baseline 3.4.3; see review report.
+
+- **Version 2.0.4 (2026-10-20):** Acht P3-Nachbefunde korrigiert, Baseline 3.4.4. / Correct eight P3 follow-up findings, baseline 3.4.4.
 
 ---
 
@@ -9399,8 +8120,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 09 – KI-gestuetzte Codeerzeugung / AI-Assisted Code Generation
 
 **Dokument-ID / Document ID:** CL-09
-**Version / Version:** 2.2.0
-**Baseline-Version / Baseline version:** 3.2.0
+**Version / Version:** 2.2.4
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -9538,69 +8259,9 @@ whose output flows into production code or production-near scripts.
 
 #### CL-09-01: Genehmigte KI-Werkzeuge / Approved AI Tools
 
-- **DE:** Es kommen nur Werkzeuge zum Einsatz, die in der Liste der
-  genehmigten Software stehen. Cloud-basierte und lokale Werkzeuge sind
-  getrennt freigegeben, weil sie unterschiedliche Datenschutz-, Lizenz-
-  und Auftragsverarbeitungs-Profile haben. Genehmigte Cloud-Werkzeuge
-  (Beispielkatalog mit Auftragsverarbeitung gemäß DSGVO Art. 28):
-  GitHub Copilot Business und Enterprise (kein Training auf Kundendaten,
-  Indemnification, EU-Datenresidenz Enterprise), Microsoft 365 Copilot
-  (DPA, EU Data Boundary), Anthropic Claude (Enterprise-Plan mit Zero
-  Data Retention nach Verhandlung), OpenAI ChatGPT Enterprise/Team mit
-  ZDR, Google Gemini Code Assist (Enterprise-DPA), JetBrains AI Assistant
-  (Enterprise-Plan, Datenresidenz EU), AWS Bedrock/Q Developer in eigener
-  AWS-Region, Azure OpenAI Service in EU-Region. Genehmigte lokale
-  Werkzeuge ohne Cloud-Datenfluss: Continue.dev mit lokalem Ollama,
-  Tabby ML mit eigener GPU, Codeium Self-Hosted, llama.cpp mit Code Llama
-  70B/Qwen2.5-Coder/DeepSeek-Coder-V2/StarCoder2, LM Studio, vLLM, GPT4All.
-  Verboten ohne explizite Freigabe: kostenlose Web-Chat-Bots ohne DPA,
-  Browser-Plugins unbekannter Herkunft, Forks aus inoffiziellen Stores.
-  Software-Inventar (CMDB Snipe-IT, ServiceNow CMDB, Atlassian Insight)
-  pflegt pro Werkzeug: Hersteller, Lizenztyp (Pro/Business/Enterprise),
-  EU/US-Datenresidenz, ZDR-Status (Zero Data Retention), Trainings-Opt-out,
-  DPA-Datum, Vendor-Risk-Score. SBOM-Eintrag (CycloneDX) für jede lokale
-  Modell-Datei mit SHA-256-Hash. Beispiel für `docs/security/ai-tools-inventory.md`:
-  Tabelle mit Spalten: Werkzeug, Variante, Vendor, EU-DPA-Datum, ZDR,
-  `excludeFiles`-Profil, freigegeben-bis-Datum, Owner Security Champion.
-  Vierteljährliche Re-Evaluation, neue Werkzeuge nur nach
-  Vendor-Security-Assessment (CAIQ, SOC 2 Type II, ISO/IEC 27001-Zertifikat,
-  ISO/IEC 42001 AI-Management-System falls verfügbar). Referenzen:
-  ISO/IEC 27001 A.5.23 (Cloud-Services), DSGVO Art. 28, NIST AI RMF
-  GOVERN-1.1, OWASP Top 10 for LLM Applications LLM05:2025 (Improper Output Handling), EU AI
-  Act Verordnung (EU) 2024/1689.
-- **EN:** Only tools listed in the approved software inventory are used.
-  Cloud-based and local tools are approved separately because they have
-  different data protection, licensing, and data processing profiles.
-  Approved cloud tools (example catalogue with data processing under GDPR
-  Art. 28): GitHub Copilot Business and Enterprise (no training on
-  customer data, indemnification, EU data residency in Enterprise),
-  Microsoft 365 Copilot (DPA, EU Data Boundary), Anthropic Claude
-  (Enterprise plan with Zero Data Retention after negotiation), OpenAI
-  ChatGPT Enterprise/Team with ZDR, Google Gemini Code Assist (Enterprise
-  DPA), JetBrains AI Assistant (Enterprise plan, EU data residency), AWS
-  Bedrock/Q Developer in own AWS region, Azure OpenAI Service in EU
-  region. Approved local tools without cloud data flow: Continue.dev with
-  local Ollama, Tabby ML with own GPU, Codeium Self-Hosted, llama.cpp
-  with Code Llama 70B/Qwen2.5-Coder/DeepSeek-Coder-V2/StarCoder2, LM
-  Studio, vLLM, GPT4All. Forbidden without explicit approval: free web
-  chatbots without DPA, browser plugins of unknown origin, forks from
-  unofficial stores. Software inventory (CMDB Snipe-IT, ServiceNow CMDB,
-  Atlassian Insight) maintains per tool: vendor, licence type
-  (Pro/Business/Enterprise), EU/US data residency, ZDR (Zero Data
-  Retention) status, training opt-out, DPA date, vendor risk score. SBOM
-  entry (CycloneDX) for each local model file with SHA-256 hash. Example
-  for `docs/security/ai-tools-inventory.md`: table with columns: tool,
-  variant, vendor, EU DPA date, ZDR, `excludeFiles` profile, approved-
-  until date, security champion owner. Quarterly re-evaluation, new tools
-  only after vendor security assessment (CAIQ, SOC 2 Type II, ISO/IEC
-  27001 certificate, ISO/IEC 42001 AI management system if available).
-  References: ISO/IEC 27001 A.5.23 (cloud services), GDPR Art. 28, NIST
-  AI RMF GOVERN-1.1, OWASP Top 10 for LLM Applications LLM05:2025 (Improper Output Handling),
-  EU AI Act Regulation (EU) 2024/1689.
-- **Akzeptanz / Acceptance:** `docs/security/ai-tools-inventory.md`
-  vorhanden mit Vendor, Lizenztyp, EU-DPA-Datum, ZDR-Status, freigegeben-bis-Datum,
-  Owner; pro Werkzeug Datenschutzhinweis und SOC 2/ISO 27001-Nachweis;
-  vierteljährliche Re-Evaluation dokumentiert.
+- **DE:** KI-Werkzeuge werden vor Nutzung mit Betriebsart, Anbieter, Datenflüssen, Vertragslage, Telemetrie, Aufbewahrung und technischen Zugriffen bewertet und genehmigt. Produktnamen oder Tarifbezeichnungen beweisen weder Trainingsausschluss noch Zero Data Retention. Anbieterangaben und wirksame Kontoeinstellungen am Prüftag belegen; unbekannte Vertrags- oder Datenschutzeigenschaften bleiben offen.
+- **EN:** Approve AI tools only after reviewing operating mode, provider, data flows, contracts, telemetry, retention, and technical access. Product or plan names prove neither training exclusion nor zero data retention. Record current provider evidence and effective account settings; unknown contract or privacy properties remain open.
+- **Akzeptanz / Acceptance:** Datierter Inventareintrag mit Quelle, Owner, Scope und Ablauf. / Dated inventory with source, owner, scope, and expiry.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -9881,78 +8542,9 @@ whose output flows into production code or production-near scripts.
 
 #### CL-09-05: Schutz vor halluzinierten Paketen / Protection Against Hallucinated Packages
 
-- **DE:** KI-Modelle erfinden manchmal Bibliotheken
-  („Slopsquatting"-Risiko). Vorgeschlagene Paketnamen werden gegen die
-  offizielle Registry geprüft, weil Angreifer halluzinierte Paketnamen
-  als typosquatted Schadpakete registrieren können (Beispiel-Vorfälle:
-  `huggingface-cli` Halluzinationen führten 2024 zu Schadpaket-Anmeldungen
-  auf PyPI; gleicher Angriffsvektor auf npm mit `node-fetch-2`,
-  `aws-sdk-s3-helper` etc.). Prüfschritte: (1) Existenz auf offizieller
-  Registry verifizieren (siehe Item 4); (2) Veröffentlichungsdatum
-  prüfen — Pakete < 30 Tage alt mit verdächtigem Namen sind starkes
-  Red-Flag, automatische Sperrung via npm `minimumReleaseAge: "30
-  days"` für Lock-Dateien oder Renovate `minimumReleaseAge`-Regel; (3)
-  Maintainer-Profil prüfen — neue Account ohne andere Pakete oder
-  Verbindung zur erwarteten Organisation ist verdächtig (`npm owner ls
-  <package>`, `pip show <package> | grep Author`, GitHub-Profil-Alter
-  und -Aktivität); (4) Download-Statistik prüfen — < 100 Downloads/Woche
-  bei vermeintlich populärem Paketnamen ist Halluzinations-Indiz; (5)
-  Cross-Check Levenshtein-Distanz zu populären Paketen
-  (`packagename-typosquat-detector`, npm `package-name-similarity`,
-  `pip-audit --vulnerability-service all`); (6) GitHub-Repository-Link
-  und README aufrufen — fehlende oder generisch wirkende Inhalte sind
-  Red Flags. Bekannte Halluzinations-Muster: Bindestrich-Variationen
-  (`requests-http` statt `requests`), Singular/Plural-Wechsel (`eslint-plugin-react`
-  vs. `eslint-plugins-react`), Versions-Suffixe (`lodash3`, `react-dom2`),
-  scope-Verschiebungen (`@aws-sdk/s3` vs. `@aws-sdks/s3`). Automatisierte
-  Verteidigung: `socket.dev` (Supply-chain-Sicherheit, prüft neue
-  Pakete auf Anomalien wie obfuscated code, install scripts,
-  Telemetrie-Code, typosquatting), `phylum.io`,
-  `apiiro/dependency-combobulator`, GitHub Native (npm provenance,
-  PyPI Trusted Publishers via OIDC). CI-Gate: `npm install` mit
-  `--ignore-scripts` standardmäßig, danach manuelle Allowlist für
-  bekannte sichere `postinstall`-Skripte. Referenzen: OWASP LLM Top 10
-  LLM05 (Improper Output Handling), Lasso Security (Slopsquatting-
-  Forschung 2024), JFrog SecurityResearch (PyPI-Halluzinations-Studie),
-  CRA Anhang I Teil II 2.2 (Schwachstellenmanagement Lieferkette).
-- **EN:** AI models sometimes invent libraries ("slopsquatting" risk).
-  Suggested package names are verified against the official registry,
-  because attackers can register hallucinated package names as
-  typosquatted malicious packages (example incidents: `huggingface-cli`
-  hallucinations led to malicious package uploads on PyPI in 2024;
-  same attack vector on npm with `node-fetch-2`, `aws-sdk-s3-helper`,
-  etc.). Check steps: (1) Verify existence on the official registry
-  (see item 4); (2) Check publication date — packages < 30 days old
-  with suspicious names are a strong red flag, auto-block via npm
-  `minimumReleaseAge: "30 days"` for lock files or Renovate
-  `minimumReleaseAge` rule; (3) Check maintainer profile — new account
-  without other packages or connection to the expected organization is
-  suspicious (`npm owner ls <package>`, `pip show <package> | grep
-  Author`, GitHub profile age and activity); (4) Check download
-  statistics — < 100 downloads/week for an allegedly popular package
-  name is a hallucination indicator; (5) Cross-check Levenshtein
-  distance to popular packages
-  (`packagename-typosquat-detector`, npm `package-name-similarity`,
-  `pip-audit --vulnerability-service all`); (6) Open the GitHub
-  repository link and README — missing or generic content is a red
-  flag. Known hallucination patterns: hyphen variations
-  (`requests-http` instead of `requests`), singular/plural swaps
-  (`eslint-plugin-react` vs. `eslint-plugins-react`), version suffixes
-  (`lodash3`, `react-dom2`), scope shifts (`@aws-sdk/s3` vs.
-  `@aws-sdks/s3`). Automated defence: `socket.dev` (supply-chain
-  security, checks new packages for anomalies like obfuscated code,
-  install scripts, telemetry code, typosquatting), `phylum.io`,
-  `apiiro/dependency-combobulator`, GitHub Native (npm provenance, PyPI
-  Trusted Publishers via OIDC). CI gate: `npm install` with
-  `--ignore-scripts` by default, then a manual allowlist for known-safe
-  `postinstall` scripts. References: OWASP LLM Top 10 LLM05 (Improper
-  Output Handling), Lasso Security (slopsquatting research 2024),
-  JFrog Security Research (PyPI hallucination study), CRA Annex I Part
-  II 2.2 (supply chain vulnerability management).
-- **Akzeptanz / Acceptance:** Registry-Prüfung dokumentiert mit
-  Veröffentlichungsdatum, Maintainer-Profil, Download-Statistik,
-  Levenshtein-Cross-Check zu populären Paketen; CI-Gate `socket.dev`/
-  `phylum.io` aktiv; `--ignore-scripts` als Default mit Allowlist.
+- **DE:** Von KI vorgeschlagene Pakete vor Installation in der offiziellen Registry prüfen: Name, Maintainer, Quellrepository, veröffentlichte Version und Herkunft müssen zusammenpassen. Ähnliche Schreibweisen und unerwartete Installationsskripte prüfen. Downloads oder Paketalter allein beweisen keine Vertrauenswürdigkeit. Keine ungeprüften historischen Vorfallsbehauptungen als Begründung übernehmen.
+- **EN:** Verify AI-proposed packages in the official registry before installation: name, maintainer, source repository, release, and provenance must agree. Check similar spellings and unexpected installation scripts. Download counts or package age alone do not establish trust. Do not rely on unverified historical incident claims.
+- **Akzeptanz / Acceptance:** Registry- und Herkunftsnachweis sowie Dependency-/Secret-Scan nach Risiko. / Registry and provenance evidence plus risk-based dependency and secret checks.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -9972,84 +8564,9 @@ whose output flows into production code or production-near scripts.
 
 #### CL-09-06: Lizenz-Klärung / Licence Clearance
 
-- **DE:** KI-erzeugte Codeschnipsel können Lizenzfragen aufwerfen,
-  weil das Modell auf Trainingsdaten mit unterschiedlichen Lizenzen
-  (MIT, Apache-2.0, BSD, GPLv2, GPLv3, AGPL, proprietär ohne Lizenz)
-  trainiert wurde und längere wörtliche Zitate aus GPL-Code rechtlich
-  problematisch sein können (vgl. Doe v. GitHub Sammelklage 2022,
-  weiterhin offen). Zweifelhafte Schnipsel werden umgeschrieben oder
-  durch einen klar lizenzierten Block ersetzt. Konkrete Maßnahmen: (1)
-  Tools mit Code-Reference-Filter aktivieren — GitHub Copilot
-  „Suggestions matching public code: Block" (Settings → Copilot → Block
-  matching public code), AWS CodeWhisperer/Q Developer „Reference
-  Tracker", Tabnine „Restrict suggestions matching public code"; (2)
-  Bei längeren Code-Vorschlägen (≥ 5 Zeilen, nicht-trivial)
-  Plagiats-Suche durchführen — `grep` durch GitHub-Suche
-  (`https://github.com/search?type=code&q="<10-15 Token Schnipsel>"`),
-  CodeProbe, BlueOak, FOSSology, ScanCode Toolkit, Black Duck Code Sight,
-  Synopsys Code Insight; (3) Bei Treffer mit GPL/AGPL/CC-BY-SA: Block
-  umschreiben oder Lizenz beachten (eigenes Projekt muss kompatible
-  Lizenz haben; AGPL ist für SaaS besonders restriktiv); (4)
-  Lizenz-Verträglichkeit für gesamtes Projekt prüfen — Lizenz-Matrix in
-  `LICENSE-COMPATIBILITY.md` mit erlaubten Lizenzen (MIT, BSD-2/3-Clause,
-  Apache-2.0, ISC, MPL-2.0), bedingt erlaubt (LGPL bei dynamischer
-  Verlinkung), verboten (GPL/AGPL für proprietäre Produkte, WTFPL
-  unprofessionell, „Public Domain" rechtlich unklar in DE/EU); (5)
-  Vendor-Indemnification nutzen — GitHub Copilot Business/Enterprise
-  übernimmt Rechtsbeistand bei Lizenz-Streit, AWS Q Developer Pro mit
-  IP-Indemnification, Anthropic Claude Enterprise mit IP-Indemnity nach
-  Verhandlung. (6) Author-Trailer im Commit: `Co-developed-with: <Tool>
-  v<Version>` als nachvollziehbarer Hinweis. SBOM-Eintrag (CycloneDX
-  oder SPDX) für jede neue Abhängigkeit mit `licenseId` und SPDX-
-  Lizenz-Identifikator. Tooling: SCANCODE-TOOLKIT, REUSE-Tool für
-  SPDX-konforme Lizenzkennzeichnung in Quelldateien (SPDX-License-Identifier-
-  Header), `pip-licenses`, `license-checker` (npm), `cargo-deny`,
-  `go-licenses`. Referenzen: SPDX `spdx.org/licenses/`, OpenChain ISO/IEC
-  5230 (Open Source License Compliance Management), REUSE Software
-  `reuse.software/`, Linux Foundation TODO Group, ISO/IEC 27001 A.5.32
-  (intellectual property rights), CRA Anhang I Teil II 1.f (sichere
-  Standardkonfiguration und keine bekannten Schwachstellen).
-- **EN:** AI-generated code snippets can raise licence questions,
-  because the model was trained on data with different licences (MIT,
-  Apache-2.0, BSD, GPLv2, GPLv3, AGPL, proprietary without licence) and
-  longer verbatim quotes from GPL code can be legally problematic (cf.
-  Doe v. GitHub class action 2022, still open). Doubtful snippets are
-  rewritten or replaced by a clearly licensed block. Concrete measures:
-  (1) Enable code reference filters in tools — GitHub Copilot
-  "Suggestions matching public code: Block" (Settings → Copilot → Block
-  matching public code), AWS CodeWhisperer/Q Developer "Reference
-  Tracker", Tabnine "Restrict suggestions matching public code"; (2)
-  For longer code suggestions (≥ 5 lines, non-trivial) perform
-  plagiarism search — `grep` through GitHub search
-  (`https://github.com/search?type=code&q="<10-15 token snippet>"`),
-  CodeProbe, BlueOak, FOSSology, ScanCode Toolkit, Black Duck Code
-  Sight, Synopsys Code Insight; (3) On hit with GPL/AGPL/CC-BY-SA:
-  rewrite the block or honour the licence (your project needs a
-  compatible licence; AGPL is particularly restrictive for SaaS); (4)
-  Check licence compatibility for the entire project — licence matrix
-  in `LICENSE-COMPATIBILITY.md` with allowed licences (MIT, BSD-2/3-
-  Clause, Apache-2.0, ISC, MPL-2.0), conditionally allowed (LGPL for
-  dynamic linking), forbidden (GPL/AGPL for proprietary products, WTFPL
-  unprofessional, "Public Domain" legally unclear in DE/EU); (5) Use
-  vendor indemnification — GitHub Copilot Business/Enterprise covers
-  legal defence in licence disputes, AWS Q Developer Pro with IP
-  indemnification, Anthropic Claude Enterprise with IP indemnity after
-  negotiation. (6) Author trailer in commit: `Co-developed-with:
-  <tool> v<version>` as a traceable note. SBOM entry (CycloneDX or
-  SPDX) for each new dependency with `licenseId` and SPDX licence
-  identifier. Tooling: SCANCODE-TOOLKIT, REUSE Tool for SPDX-compliant
-  licence labelling in source files (SPDX-License-Identifier headers),
-  `pip-licenses`, `license-checker` (npm), `cargo-deny`,
-  `go-licenses`. References: SPDX `spdx.org/licenses/`, OpenChain ISO/IEC
-  5230 (Open Source License Compliance Management), REUSE Software
-  `reuse.software/`, Linux Foundation TODO Group, ISO/IEC 27001 A.5.32
-  (intellectual property rights), CRA Annex I Part II 1.f (secure
-  default configuration and no known vulnerabilities).
-- **Akzeptanz / Acceptance:** Hinweis im PR, wenn KI-Vorschlag
-  übernommen wurde, mit Lizenz-Check (Plagiats-Suche bei ≥ 5 Zeilen,
-  Tool-Reference-Filter aktiv); SPDX-License-Identifier in Quelldateien;
-  Lizenz-Matrix `LICENSE-COMPATIBILITY.md`; SBOM mit `licenseId` für
-  jede Abhängigkeit.
+- **DE:** Übernommene KI-Vorschläge auf Herkunft, Lizenzhinweise und erkennbare Übernahmen prüfen. Die Länge eines Snippets ist keine allgemeine rechtliche Freigabegrenze. Unklare Rechte werden durch zuständige Personen bewertet; fremde Lizenzhinweise erhalten und Pflichten dokumentieren. Aktuelle Rechtsfragen nicht aus pauschalen Aussagen über laufende Verfahren ableiten.
+- **EN:** Check adopted AI suggestions for origin, licence notices, and identifiable copying. Snippet length is not a universal legal clearance threshold. Responsible people resolve unclear rights; retain third-party notices and record obligations. Do not infer legal status from general claims about ongoing litigation.
+- **Akzeptanz / Acceptance:** Nachvollziehbare Lizenzentscheidung oder Open mit Owner und nächster Maßnahme. / Traceable licence decision or Open with owner and next action.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -10562,137 +9079,9 @@ whose output flows into production code or production-near scripts.
 
 #### CL-09-11: Werkzeug-Konfiguration und Telemetrie / Tool Configuration and Telemetry
 
-- **DE:** Telemetrie und Daten-Sharing der KI-Werkzeuge sind nach
-  Vorgabe konfiguriert. Sensible Code-Bereiche werden vom KI-Werkzeug
-  per Konfiguration ausgenommen, weil Cloud-Werkzeuge je nach Tier
-  Telemetrie an den Anbieter senden (Latenz-Metriken, Akzeptanz-Raten,
-  Fehler-Logs) und manche zusätzlich Code-Snippets für Modell-
-  Verbesserung. Konkrete Konfigurations-Profile je Werkzeug:
-
-  **GitHub Copilot Business/Enterprise** — Org-Admin-Settings:
-  - Suggestions matching public code: `Block`
-  - Allow GitHub to use my code snippets for product improvements:
-    `false` (default in Business/Enterprise, in Individual variabel)
-  - Content exclusions in `.copilotignore` oder via Org-Settings
-    (Repo-Pfade): `*.env*`, `**/secrets/**`, `**/.aws/**`, `**/.ssh/**`,
-    `**/*.pem`, `**/*.p12`, `**/*.pfx`, `**/credentials.json`,
-    `**/*.kdbx`, `**/.gnupg/**`, `**/security/**`, `**/private/**`,
-    `**/personal-data/**`
-  - VS-Code-Setting: `"github.copilot.advanced": { "secret_key": "..." }`
-    nicht einrichten; `"github.copilot.editor.enableAutoCompletions":
-    true` aktiviert lassen
-  - JetBrains Plugin: Settings → GitHub Copilot → Block public code:
-    enabled
-  - Audit Log via GitHub REST API
-    `/orgs/{org}/copilot/usage` und Compliance API
-
-  **JetBrains AI Assistant** — Settings → Tools → AI Assistant:
-  - „Allow detail data collection": disabled
-  - „Connect to local model only" wenn DSGVO-kritisch
-  - Codebase-Indexing-Ausschluss-Patterns analog `excludeFiles`
-
-  **Anthropic Claude (Code/Console)** — Workspace-Settings:
-  - Zero Data Retention (ZDR) aktiviert (Enterprise-Verhandlung
-    erforderlich)
-  - Trainings-Opt-out aktiviert
-  - System-Prompt: „Do not access files in /secrets, /.env, /.aws,
-    /.ssh"
-
-  **OpenAI ChatGPT Enterprise/Team** — Admin-Console:
-  - „Use my data for training": disabled
-  - SOC 2 Type II + ISO/IEC 27001-Nachweis vorhanden
-  - SSO/SAML mit IdP-Conditional-Access
-
-  **AWS Q Developer Pro** — IAM-Identity-Center-Setup:
-  - Customizations: blockierte Repos via Allowlist
-  - Reference tracker: enabled
-
-  **Continue.dev (lokal)** — `~/.continue/config.yaml`:
-  - Provider: `ollama` mit `localhost:11434`
-  - Telemetry: disabled (`allowAnonymousTelemetry: false`)
-  - System-Prompt mit Pfad-Ausschluss
-
-  **Tabnine** — Self-Hosted oder Enterprise mit zero retention.
-
-  Versioniertes Konfigurations-Profil in Repo: `.github/copilot.yml`
-  oder `.copilotignore`/`.aiderignore`/`.cursorignore` je Werkzeug,
-  zusätzlich Org-weit dokumentiert in `docs/security/ai-tool-config.md`
-  mit Owner, letztem Review-Datum und Drift-Detection-Skript (Vergleich
-  Org-API-Settings vs. Soll-Zustand). Audit: monatlicher Vergleich der
-  Live-Konfiguration gegen Soll mittels GitHub REST/JetBrains-Audit/
-  Anthropic-Console-API; Abweichung erzeugt Ticket. Referenzen: DSGVO
-  Art. 25 (Privacy by Design and by Default), Art. 32 (Sicherheit der
-  Verarbeitung), ISO/IEC 27001 A.5.23 (Cloud-Services), A.8.10
-  (Information deletion), NIST AI RMF MEASURE-2.10 (data privacy
-  measurement), EU AI Act Art. 10 (Data Governance).
-- **EN:** Telemetry and data sharing of AI tools are configured per
-  policy. Sensitive code areas are excluded from the AI tool by
-  configuration, because cloud tools send telemetry to the vendor
-  depending on tier (latency metrics, acceptance rates, error logs)
-  and some additionally send code snippets for model improvement.
-  Concrete configuration profiles per tool:
-
-  **GitHub Copilot Business/Enterprise** — org admin settings:
-  - Suggestions matching public code: `Block`
-  - Allow GitHub to use my code snippets for product improvements:
-    `false` (default in Business/Enterprise, variable in Individual)
-  - Content exclusions in `.copilotignore` or via org settings (repo
-    paths): `*.env*`, `**/secrets/**`, `**/.aws/**`, `**/.ssh/**`,
-    `**/*.pem`, `**/*.p12`, `**/*.pfx`, `**/credentials.json`,
-    `**/*.kdbx`, `**/.gnupg/**`, `**/security/**`, `**/private/**`,
-    `**/personal-data/**`
-  - VS Code setting: do not configure
-    `"github.copilot.advanced": { "secret_key": "..." }`; leave
-    `"github.copilot.editor.enableAutoCompletions": true`
-  - JetBrains plugin: Settings → GitHub Copilot → Block public code:
-    enabled
-  - Audit log via GitHub REST API
-    `/orgs/{org}/copilot/usage` and Compliance API
-
-  **JetBrains AI Assistant** — Settings → Tools → AI Assistant:
-  - "Allow detail data collection": disabled
-  - "Connect to local model only" when GDPR-critical
-  - Codebase indexing exclusion patterns analogous to `excludeFiles`
-
-  **Anthropic Claude (Code/Console)** — workspace settings:
-  - Zero Data Retention (ZDR) enabled (enterprise negotiation
-    required)
-  - Training opt-out enabled
-  - System prompt: "Do not access files in /secrets, /.env, /.aws,
-    /.ssh"
-
-  **OpenAI ChatGPT Enterprise/Team** — admin console:
-  - "Use my data for training": disabled
-  - SOC 2 Type II + ISO/IEC 27001 certificate available
-  - SSO/SAML with IdP conditional access
-
-  **AWS Q Developer Pro** — IAM Identity Center setup:
-  - Customizations: blocked repos via allowlist
-  - Reference tracker: enabled
-
-  **Continue.dev (local)** — `~/.continue/config.yaml`:
-  - Provider: `ollama` with `localhost:11434`
-  - Telemetry: disabled (`allowAnonymousTelemetry: false`)
-  - System prompt with path exclusion
-
-  **Tabnine** — self-hosted or enterprise with zero retention.
-
-  Versioned configuration profile in repo: `.github/copilot.yml` or
-  `.copilotignore`/`.aiderignore`/`.cursorignore` per tool,
-  additionally org-wide documented in `docs/security/ai-tool-config.md`
-  with owner, last review date, and drift detection script
-  (comparison of org API settings vs. target state). Audit: monthly
-  comparison of live configuration vs. target via GitHub REST/JetBrains
-  audit/Anthropic Console API; deviation creates a ticket. References:
-  GDPR Art. 25 (Privacy by Design and by Default), Art. 32 (Security
-  of Processing), ISO/IEC 27001 A.5.23 (cloud services), A.8.10
-  (information deletion), NIST AI RMF MEASURE-2.10 (data privacy
-  measurement), EU AI Act Art. 10 (Data Governance).
-- **Akzeptanz / Acceptance:** Konfigurations-Profil im Repository
-  (`.copilotignore`/`.github/copilot.yml`/`.continue/config.yaml`); Org-
-  Admin-Settings für Trainings-Opt-out und Public-Code-Block aktiv;
-  monatlicher Drift-Audit dokumentiert; Owner und Review-Datum in
-  `docs/security/ai-tool-config.md`.
+- **DE:** Werkzeugkonfiguration und Telemetrie anhand der aktuellen offiziellen Dokumentation und der tatsächlichen Version prüfen. Ignore-Dateien, Kontextausschlüsse und Kontoeinstellungen wirken produktspezifisch und sind keine allgemeine Zugriffssperre. Private Kontodaten, Sitzungen und Secrets nicht in die versionierte Konfiguration aufnehmen. Nicht nachgewiesene Ausschlussmechanismen als offen behandeln.
+- **EN:** Verify configuration and telemetry against current official documentation and the actual tool version. Ignore files, context exclusions, and account settings are product-specific and do not provide a universal access barrier. Keep private account data, sessions, and secrets out of tracked configuration. Treat unverified exclusion mechanisms as open.
+- **Akzeptanz / Acceptance:** Versionsgebundene Konfigurationsprüfung mit Negativtest für ausgeschlossene Daten. / Version-bound configuration review with a negative test for excluded data.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -10794,7 +9183,9 @@ whose output flows into production code or production-near scripts.
 - **Akzeptanz / Acceptance:** Schulungsnachweis pro Person in HR/LMS
   vorhanden; Onboarding vor erstem KI-Tool-Zugriff abgeschlossen;
   jährliche Auffrischung dokumentiert; CTF/Spot-the-Bug-Übungen
-  halbjährlich; Erfüllungsquote ≥ 95 % im Quartalsbericht.
+  halbjährlich; Erfüllungsquote ≥ 95 % im Quartalsbericht; als lokale Freigaberegel ausgewiesen. / Local release rule: evidence training per person, onboarding before first AI-tool access, annual refresher, semiannual CTF/spot-the-bug exercises and ≥95% completion in the quarterly report.
+- **DE:** Jahres-/Halbjahresintervalle, Stundenansätze, Zugriffssperre und ≥95-%-Quote sind zusätzliche lokale Baseline-Vorgaben, keine Zahlen- oder Zugangsvorgaben aus KI-VO Art. 4. Dessen geänderte Fassung verlangt Maßnahmen zur Unterstützung der Entwicklung von KI-Kompetenz unter Berücksichtigung der Personen und des Nutzungskontexts, jedoch keine Garantie eines bestimmten individuellen Kompetenzniveaus. Gesetzliche Anwendbarkeit und lokale Schulungsfreigabe getrennt dokumentieren.
+- **EN:** Annual/semiannual intervals, training hours, access suspension and the ≥95% quota are additional local baseline rules, not numerical or access requirements imposed by AI Act Article 4. Its amended wording requires measures supporting development of AI literacy in light of people and use context, without guaranteeing any specific individual literacy level. Record statutory applicability separately from local training clearance.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -10814,142 +9205,9 @@ whose output flows into production code or production-near scripts.
 
 #### CL-09-13: Audit-Spur der Werkzeugnutzung / Audit Trail of Tool Usage
 
-- **DE:** Die Nutzung der KI-Werkzeuge ist nachvollziehbar
-  (Werkzeugname, Zeitraum, beteiligte Personen). Zentrale Logs des
-  Werkzeugs werden für Audits aufbewahrt, soweit möglich. Konkrete
-  Audit-Quellen je Werkzeug:
-
-  **GitHub Copilot Business/Enterprise:** REST-API
-  `/orgs/{org}/copilot/usage` (täglich aggregierte Nutzungsmetriken),
-  `/enterprises/{enterprise}/copilot/usage`, Audit Log API
-  `/orgs/{org}/audit-log` mit Action-Patterns
-  `copilot.cfb_seat_*`/`copilot_user_*`, Compliance API für PR-bezogene
-  Suggestions-Akzeptanz, GitHub Webhook auf
-  `copilot_seat_management`-Events. Logs in eigenen S3-Bucket via
-  GitHub Actions oder direkt in SIEM (Splunk, Microsoft Sentinel,
-  Elastic) replizieren.
-
-  **JetBrains AI Assistant:** Audit-Events in JetBrains Toolbox
-  Enterprise Console; lokale Logs in `~/Library/Logs/JetBrains/...`
-  (macOS) bzw. `%APPDATA%/JetBrains/...` (Windows) bei Bedarf
-  per MDM einsammeln.
-
-  **Anthropic Claude Console (Workspaces):** Console → Settings →
-  Activity Logs (90-180 Tage Retention), Audit-Log-Export via API,
-  Webhooks für Workspace-Events; `claude code`-CLI lokal:
-  `.claude/projects/<repo-hash>/*.jsonl` lokal vorhanden, optional
-  zentralisierbar.
-
-  **OpenAI ChatGPT Enterprise/Team:** Compliance API für Conversations,
-  Workspace Activity Logs, SIEM-Integration via API-Polling.
-
-  **AWS Q Developer Pro:** AWS CloudTrail-Events, IAM Identity Center
-  Access Logs, Q Developer Customizations Audit.
-
-  **Git Duo:** Git Audit Events Stream (`Audit Streaming`-Feature
-  mit JSONL-Export an SIEM-Endpunkt), Project-Level-Events.
-
-  **Continue.dev/Tabby/Ollama lokal:** `~/.continue/sessions/*.json`,
-  Ollama-Logs in `journalctl -u ollama` oder
-  `~/Library/Logs/Ollama/server.log`.
-
-  Aufbewahrungsfristen-Pflicht: ≥ 1 Jahr für Standard-Audits, ≥ 6
-  Jahre für DSGVO-Compliance-Bezüge, ≥ 10 Jahre für CRA-Vorfall-
-  Verläufe (Verordnung (EU) 2024/2847 Art. 14). Speicherort: zentraler
-  SIEM (Splunk Enterprise Security mit `audit_logs`-Index, Microsoft
-  Sentinel Workspace mit DCR-Rules, Elastic Security mit dedicated
-  data stream, IBM QRadar AQL-Query-Repository), append-only mit WORM
-  (S3 Object Lock compliance mode, Azure Immutable Blob Storage with
-  Time-based Retention, Google Cloud Storage Bucket Lock). Zugriffs-
-  Modell: nur Security-Team und Compliance-Officer (RBAC), Vier-Augen
-  für Löschungen vor Ablauf der Retention. Korrelation: KI-Tool-Logs
-  mit Git-Commit-Logs (via `Co-developed-with`-Trailer aus Item 10)
-  und PR-Metadaten matchen, um KI-Anteil je Vorfall zu bestimmen.
-  Beispiel-SIEM-Query (Splunk):
-  ```text
-  index=audit_logs sourcetype=github_audit
-  action=copilot_user.* user=<dev>
-  | stats count by action _time
-  ```
-  Datenschutz-Konformität: Logs enthalten typischerweise Username/E-Mail
-  → in Verzeichnis von Verarbeitungstätigkeiten (DSGVO Art. 30) als
-  Verarbeitung „Audit-Logging KI-Tool-Nutzung" eintragen, technische
-  und organisatorische Maßnahmen Art. 32 dokumentieren, Betriebsrat-
-  Information bei Mitbestimmungsrecht (BetrVG § 87 Abs. 1 Nr. 6 in DE).
-  Referenzen: ISO/IEC 27001 A.8.15 (Logging) und A.5.34 (Privacy and
-  protection of PII), NIST SP 800-92 (Log Management), DSGVO Art. 30,
-  CRA Anhang I Teil II 2.1 lit. c (Logging), BSI IT-Grundschutz
-  OPS.1.1.5 (Protokollierung), EU AI Act Art. 12 (Record-keeping).
-- **EN:** AI tool use is traceable (tool name, time frame, people
-  involved). Where feasible, central tool logs are retained for
-  audits. Concrete audit sources per tool:
-
-  **GitHub Copilot Business/Enterprise:** REST API
-  `/orgs/{org}/copilot/usage` (daily aggregated usage metrics),
-  `/enterprises/{enterprise}/copilot/usage`, Audit Log API
-  `/orgs/{org}/audit-log` with action patterns
-  `copilot.cfb_seat_*`/`copilot_user_*`, Compliance API for PR-
-  related suggestions acceptance, GitHub webhook on
-  `copilot_seat_management` events. Replicate logs to your own S3
-  bucket via GitHub Actions or directly to SIEM (Splunk, Microsoft
-  Sentinel, Elastic).
-
-  **JetBrains AI Assistant:** audit events in JetBrains Toolbox
-  Enterprise console; local logs in `~/Library/Logs/JetBrains/...`
-  (macOS) or `%APPDATA%/JetBrains/...` (Windows) collected via MDM if
-  needed.
-
-  **Anthropic Claude Console (Workspaces):** Console → Settings →
-  Activity Logs (90–180 days retention), audit log export via API,
-  webhooks for workspace events; `claude code` CLI locally:
-  `.claude/projects/<repo-hash>/*.jsonl` available locally, optionally
-  centralizable.
-
-  **OpenAI ChatGPT Enterprise/Team:** Compliance API for conversations,
-  workspace activity logs, SIEM integration via API polling.
-
-  **AWS Q Developer Pro:** AWS CloudTrail events, IAM Identity Center
-  access logs, Q Developer Customizations audit.
-
-  **Git Duo:** Git Audit Events stream (`Audit Streaming` feature
-  with JSONL export to SIEM endpoint), project-level events.
-
-  **Continue.dev/Tabby/Ollama locally:** `~/.continue/sessions/*.json`,
-  Ollama logs in `journalctl -u ollama` or
-  `~/Library/Logs/Ollama/server.log`.
-
-  Retention period requirements: ≥ 1 year for standard audits, ≥ 6
-  years for GDPR compliance ties, ≥ 10 years for CRA incident histories
-  (Regulation (EU) 2024/2847 Art. 14). Storage location: central SIEM
-  (Splunk Enterprise Security with `audit_logs` index, Microsoft
-  Sentinel workspace with DCR rules, Elastic Security with dedicated
-  data stream, IBM QRadar AQL query repository), append-only with
-  WORM (S3 Object Lock compliance mode, Azure Immutable Blob Storage
-  with time-based retention, Google Cloud Storage Bucket Lock). Access
-  model: security team and compliance officer only (RBAC), four-eyes
-  for deletions before retention expiry. Correlation: match AI tool
-  logs with git commit logs (via `Co-developed-with` trailer from item
-  10) and PR metadata to determine AI share per incident. Example
-  SIEM query (Splunk):
-  ```text
-  index=audit_logs sourcetype=github_audit
-  action=copilot_user.* user=<dev>
-  | stats count by action _time
-  ```
-  Data protection compliance: logs typically contain usernames/email
-  → enter in record of processing activities (GDPR Art. 30) as
-  processing "audit logging AI tool usage", document technical and
-  organizational measures per Art. 32, works council notification on
-  co-determination right (BetrVG § 87(1) No. 6 in DE). References:
-  ISO/IEC 27001 A.8.15 (logging) and A.5.34 (privacy and protection of
-  PII), NIST SP 800-92 (Log Management), GDPR Art. 30, CRA Annex I
-  Part II 2.1 lit. c (logging), BSI IT-Grundschutz OPS.1.1.5
-  (Protokollierung), EU AI Act Art. 12 (record-keeping).
-- **Akzeptanz / Acceptance:** Aufbewahrungsfrist und Pfad festgelegt
-  (≥ 1 Jahr Standard, ≥ 6 Jahre DSGVO, ≥ 10 Jahre CRA);
-  Werkzeug-spezifische Audit-Quellen in SIEM angebunden; WORM-Speicher
-  aktiv; Verzeichnis von Verarbeitungstätigkeiten mit KI-Tool-Logging-
-  Eintrag.
+- **DE:** Die Audit-Spur nennt Werkzeug, Version, Scope, verantwortliche Person und relevante Entscheidungen. Aufbewahrung je Datenkategorie aus Zweck, Rechtsgrundlage, Vertragslage und Schutzbedarf ableiten; DSGVO und CRA begründen keine pauschalen Fristen von sechs beziehungsweise zehn Jahren für sämtliche Agenten- oder Plattformlogs. Zugriff begrenzen, Integrität sichern und Löschung testen.
+- **EN:** Audit records identify tool, version, scope, responsible person, and relevant decisions. Derive retention per data category from purpose, legal basis, contracts, and risk; GDPR and CRA do not impose universal six- or ten-year periods for all agent or platform logs. Restrict access, protect integrity, and test deletion.
+- **Akzeptanz / Acceptance:** Dokumentierter Aufbewahrungs- und Löschplan mit Quelle, Owner und Integritätstest. / Retention and deletion plan with source, owner, and integrity test.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -11120,25 +9378,28 @@ whose output flows into production code or production-near scripts.
 
 #### CL-09-16: KI-Regulierungs-Screening / AI Regulatory Screening
 
-- **DE:** Bei KI-Werkzeugen, KI-Diensten, Modellen oder KI-Komponenten wird
-  geprüft, ob neben dieser Checkliste auch regulatorische Anforderungen aus
-  CL_Standards-Anwendbarkeit anwendbar sind. Das betrifft insbesondere EU
-  AI Act, CRA, NIS2, DORA sowie Kunden- oder Sektorvorgaben. Reine Nutzung
-  von KI als Entwicklungswerkzeug kann als `nicht anwendbar` dokumentiert
-  werden, wenn kein KI-System, Modell oder Dienst Teil des ausgelieferten
-  oder betriebenen Systems ist.
-- **EN:** For AI tools, AI services, models, or AI components, check
-  whether regulatory requirements from CL_Standards-Anwendbarkeit also
-  apply. This covers in particular the EU AI Act, CRA, NIS2, DORA, and
-  customer or sector rules. Pure use of AI as a development tool may be
-  documented as `not applicable` when no AI system, model, or service is
-  part of the released or operated system.
-- **Akzeptanz / Acceptance:** KI-Inventar, Lieferkettennachweis oder
-  Spec-Kit-Artefakt verlinkt das CL_01-Regulatory-Screening und nennt, ob
-  die KI-Nutzung nur Werkzeugnutzung oder Bestandteil des Produkts bzw.
-  Dienstes ist. / AI inventory, supply-chain evidence, or Spec Kit artefact
-  links the CL_01 regulatory screening and states whether the AI use is
-  tool-only use or part of the product or service.
+- **DE:** Regulatorische Anwendbarkeit nach CL-01-12 fuer Produkt, KI-Werkzeugbetrieb
+  und Organisation getrennt pruefen. Je Rechtsregime (KI-VO, CRA, NIS2/BSIG,
+  DORA sowie Kunden-/Sektorvorgaben) Land, Rolle, Scope und Anwendungsdatum
+  dokumentieren. Auch reine KI-Werkzeugnutzung kann Betreiberpflichten ausloesen,
+  etwa Massnahmen zur KI-Kompetenz nach KI-VO Art. 4; das Fehlen einer
+  KI-Komponente im ausgelieferten Produkt begruendet kein pauschales N/A.
+  N/A nur fuer den einzeln begruendeten Rechts-/Rollenumfang; unbekannte
+  Anwendbarkeit bleibt Open.
+- **EN:** Assess regulatory applicability under CL-01-12 separately for the
+  product, AI tool operation and organisation. For each regime (AI Act, CRA,
+  NIS2/German BSIG, DORA and customer/sector rules), record jurisdiction, role,
+  scope and application date. Tool-only AI use can still trigger deployer duties,
+  such as measures supporting AI literacy under AI Act Article 4; absence of
+  AI in the released product establishes no blanket N/A. Use N/A only for an
+  individually justified legal/role scope; unknown applicability remains Open.
+- **Akzeptanz / Acceptance:** Verlinktes CL-01-12-Screening mit getrennten
+  Produkt-/Werkzeug-/Organisationsentscheidungen je Rechtsregime, Rolle,
+  Begruendung, Quellenfassung, Evidence, Owner/Reviewer und Wiedervorlage;
+  KI-Kompetenzmassnahmen soweit anwendbar nachgewiesen. / Link CL-01-12 screening
+  with separate product/tool/organisation decisions per regime, role, rationale,
+  source version, evidence, owner/reviewer and re-review date; evidence AI-literacy
+  measures where applicable.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -11354,6 +9615,15 @@ justified as not applicable.
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
 - **Version 2.1.0 (2026-07-17):** Nachweisrahmen auf das verbindliche Siebenerprofil einschließlich `autonomous-run-governance` erweitert; autonome Ausführung bleibt ausdrücklich delegationspflichtig; synchron mit sichere-Entwicklung-Basis 3.1.0. / Extended the evidence framework to the binding seven-preset profile including `autonomous-run-governance`; autonomous execution still requires explicit delegation; synchronized with secure-development baseline 3.1.0.
 - **Version 2.2.0 (2026-07-19):** Nachweisrahmen auf das verbindliche Achterprofil einschließlich `parallel-autonomous-run-governance` erweitert; parallele autonome Kampagnen bleiben ausdrücklich delegationspflichtig; synchron mit sichere-Entwicklung-Basis 3.2.0. / Extended the evidence framework to the binding eight-preset profile including `parallel-autonomous-run-governance`; parallel autonomous campaigns still require explicit delegation; synchronized with secure-development baseline 3.2.0.
+- **Version 2.2.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.2.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+- **Version 2.2.3 (2026-10-20):** KI-Werkzeugbetrieb getrennt vom Produkt auf regulatorische Rollen pruefen; Baseline 3.4.2. / Screen AI tool operation separately from product regulatory roles; baseline 3.4.2.
+
+
+DE: Baseline-Bindung 3.4.3 (20.10.2026), redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.3 (2026-10-20), editorial; semantic document version unchanged.
+
+- **Version 2.2.4 (2026-10-20):** Acht P3-Nachbefunde korrigiert, Baseline 3.4.4. / Correct eight P3 follow-up findings, baseline 3.4.4.
 
 ---
 
@@ -11371,8 +9641,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 10 – Sichere Entwicklungsumgebung / Secure Development Environment
 
 **Dokument-ID / Document ID:** CL-10
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.2
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -12329,70 +10599,9 @@ change.
 
 #### CL-10-12: Audit-Logs der Plattform / Platform Audit Logs
 
-- **DE:** Quellcode-Plattform, Build-System und Cloud erzeugen Audit-
-  Logs für alle sicherheitsrelevanten Ereignisse: Anmeldungen, Repo-
-  Zugriffe, Permission-Änderungen, Branch-Schutz-Bypass, Secret-Zugriffe,
-  Pipeline-Ausführungen, Cloud-API-Calls, IAM-Änderungen.
-  Plattform-Quellen: GitHub Audit Log (Org Settings > Audit Log; per API
-  `gh api orgs/{org}/audit-log`); GitHub Enterprise Cloud `audit_log_api`
-  Streaming nach Splunk/Datadog/Azure Monitor/AWS S3; Git Audit
-  Events (`Admin > Monitoring > Audit Events`, API
-  `/api/v4/audit_events`); Bitbucket Cloud Audit Logs; Azure DevOps
-  Auditing (Project Settings > Auditing); AWS CloudTrail (Multi-Region
-  Trail mit S3-Zielort, KMS-Verschlüsselung, Log File Validation aktiv);
-  Azure Monitor / Log Analytics + Microsoft Sentinel; GCP Cloud Audit
-  Logs (Admin Activity, Data Access, System Event, Policy Denied).
-  Zentralisierung: SIEM-Integration (Splunk Enterprise Security,
-  Microsoft Sentinel, IBM QRadar, Elastic Security, Sumo Logic) mit
-  korrelations-Regeln für Anomalie-Erkennung. Schutz gegen Änderung:
-  Write-Once-Read-Many (WORM) Storage — AWS S3 Object Lock im
-  Compliance-Mode (kann auch Root nicht löschen) für ≥ 1 Jahr; Azure Blob
-  Immutable Storage; GCP Bucket Lock; Hash-Chain mit täglichem Anchoring
-  in TSA (Time-Stamping Authority); Kryptografische Signatur jedes Logs
-  mit Vault Transit Engine. Aufbewahrung: ≥ 1 Jahr operativ, 10 Jahre
-  für CRA-relevante Vorfälle (CRA Art. 14), 6 Jahre für DSGVO-relevante
-  Verarbeitungen, 10 Jahre für SOX-Pflichten falls anwendbar. Zugriff
-  per Need-to-Know; Audit-Log-Zugriff selbst geloggt
-  (Meta-Audit). Beispiel CloudTrail-Konfiguration: `{ "IsMultiRegionTrail":
-  true, "IncludeGlobalServiceEvents": true, "EnableLogFileValidation":
-  true, "KmsKeyId": "..." }`. Referenzen: NIST SP 800-92, ISO/IEC 27001
-  A.8.15, A.8.34, BSI IT-Grundschutz OPS.1.1.5, CRA Art. 14.
-- **EN:** Source platform, build system, and cloud produce audit logs
-  for all security-relevant events: logins, repo access, permission
-  changes, branch protection bypass, secret access, pipeline
-  executions, cloud API calls, IAM changes. Platform sources: GitHub
-  Audit Log (Org Settings > Audit Log; via API `gh api
-  orgs/{org}/audit-log`); GitHub Enterprise Cloud `audit_log_api`
-  streaming to Splunk/Datadog/Azure Monitor/AWS S3; Git Audit Events
-  (`Admin > Monitoring > Audit Events`, API `/api/v4/audit_events`);
-  Bitbucket Cloud audit logs; Azure DevOps auditing (Project Settings
-  > Auditing); AWS CloudTrail (multi-region trail with S3 target, KMS
-  encryption, log file validation active); Azure Monitor / Log
-  Analytics + Microsoft Sentinel; GCP Cloud Audit Logs (Admin Activity,
-  Data Access, System Event, Policy Denied). Centralisation: SIEM
-  integration (Splunk Enterprise Security, Microsoft Sentinel, IBM
-  QRadar, Elastic Security, Sumo Logic) with correlation rules for
-  anomaly detection. Protection against modification: Write-Once-Read-
-  Many (WORM) storage — AWS S3 Object Lock in compliance mode (cannot
-  even be deleted by root) for ≥ 1 year; Azure Blob Immutable Storage;
-  GCP Bucket Lock; hash chain with daily anchoring in TSA (Time-
-  Stamping Authority); cryptographic signature of every log with Vault
-  Transit engine. Retention: ≥ 1 year operational, 10 years for
-  CRA-relevant incidents (CRA Art. 14), 6 years for GDPR-relevant
-  processing, 10 years for SOX duties if applicable. Access on
-  need-to-know basis; access to audit log itself logged (meta-audit).
-  Example CloudTrail configuration: `{ "IsMultiRegionTrail": true,
-  "IncludeGlobalServiceEvents": true, "EnableLogFileValidation": true,
-  "KmsKeyId": "..." }`. References: NIST SP 800-92, ISO/IEC 27001
-  A.8.15, A.8.34, BSI IT-Grundschutz OPS.1.1.5, CRA Art. 14.
-- **Akzeptanz / Acceptance:** Aufbewahrungsfrist (≥ 1 Jahr operativ,
-  10 Jahre CRA) und Schutzmaßnahme (WORM, Object Lock, Hash-Chain)
-  in `docs/security/audit-log-retention.md` benannt; SIEM-Integration
-  aktiv; Zugriff geloggt; jährliche Integritätsprüfung. / Retention
-  period (≥ 1 year operational, 10 years CRA) and protection measure
-  (WORM, Object Lock, hash chain) named in
-  `docs/security/audit-log-retention.md`; SIEM integration active;
-  access logged; annual integrity check.
+- **DE:** Die Audit-Spur nennt Werkzeug, Version, Scope, verantwortliche Person und relevante Entscheidungen. Aufbewahrung je Datenkategorie aus Zweck, Rechtsgrundlage, Vertragslage und Schutzbedarf ableiten; DSGVO und CRA begründen keine pauschalen Fristen von sechs beziehungsweise zehn Jahren für sämtliche Agenten- oder Plattformlogs. Zugriff begrenzen, Integrität sichern und Löschung testen.
+- **EN:** Audit records identify tool, version, scope, responsible person, and relevant decisions. Derive retention per data category from purpose, legal basis, contracts, and risk; GDPR and CRA do not impose universal six- or ten-year periods for all agent or platform logs. Restrict access, protect integrity, and test deletion.
+- **Akzeptanz / Acceptance:** Dokumentierter Aufbewahrungs- und Löschplan mit Quelle, Owner und Integritätstest. / Retention and deletion plan with source, owner, and integrity test.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -12966,6 +11175,13 @@ platform-parity evidence or justified non-applicability.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+DE: Baseline-Bindung 3.4.3 (20.10.2026), redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.3 (2026-10-20), editorial; semantic document version unchanged.
+
+DE: Baseline-Bindung 3.4.4, redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.4 is editorial; semantic document version unchanged.
 
 ---
 
@@ -12983,8 +11199,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 11 – Datenschutz-Folgenabschaetzung (DSGVO Art. 35) / Data Protection Impact Assessment (GDPR Art. 35)
 
 **Dokument-ID / Document ID:** CL-11
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.3
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -13435,7 +11651,7 @@ status must not be shown by color alone.
 #### CL-11-06: Konsultation der oder des Datenschutzbeauftragten / Consultation of the Data Protection Officer
 
 - **DE:** Die DPIA wird gemäß DSGVO Art. 35 Abs. 2 unter Beteiligung
-  der Datenschutzrolle erstellt. Die
+  einer oder eines benannten DSB, sofern benannt, erstellt. Die
   Stellungnahme der oder des DSB wird in die DPIA-Dokumentation
   aufgenommen. Sie enthält mindestens: Beurteilung der DPIA-Methodik,
   Beurteilung der Vollständigkeit, Empfehlungen zu Maßnahmen,
@@ -13445,7 +11661,7 @@ status must not be shown by color alone.
   nicht oder nicht vollständig umgesetzt wird, wird dies begründet
   dokumentiert.
 - **EN:** The DPIA is prepared with involvement of the Organisation data
-  protection officer (DPO) per GDPR Art. 35(2). The DPO opinion is
+  protection officer (DPO), where designated, per GDPR Art. 35(2). The DPO opinion is
   included in the DPIA documentation. It contains at least: assessment
   of DPIA methodology, completeness assessment, recommendations on
   measures, indication of any further advice or consultation needs,
@@ -13453,8 +11669,8 @@ status must not be shown by color alone.
   significant concerns). If the DPO recommendation is not or not fully
   implemented, the reasons are documented.
 - **Akzeptanz / Acceptance:** Datierte und unterschriebene Stellungnahme
-  der oder des DSB als Anlage zur DPIA; Antwortdokument bei
-  Abweichungen. / Dated and signed DPO opinion attached to the DPIA;
+  der oder des DSB, sofern benannt, als Anlage zur DPIA; Antwortdokument bei
+  Abweichungen. / Dated and signed DPO opinion, where designated, attached to the DPIA;
   response document where there are deviations.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
@@ -13468,7 +11684,7 @@ status must not be shown by color alone.
   - [ ] `Not Fulfilled`
   - [ ] `Not Assessed`
 - **Begründung / Explanation:** _Kurz erklären: Was wurde geprüft? Warum passt der Status? Welche Annahme gilt? Schreibe so, dass eine neue Entwicklerin, ein neuer Entwickler oder eine auszubildende Person den Entscheid ohne Spezialwissen versteht. / Briefly explain: What was checked? Why does the status fit? Which assumption applies? Write so that a new developer or apprentice can understand the decision without specialist security knowledge._
-- **Evidenz / Evidence:** _Pfad, Link, Ticket, DSB-Stellungnahme nennen. Wenn der Nachweis nicht selbsterklärend ist, kurz beschreiben, was er zeigt. / Name path, link, ticket, DPO opinion. If the evidence is not self-explanatory, briefly describe what it shows._
+- **Evidenz / Evidence:** _Pfad, Link, Ticket, DSB-Stellungnahme nennen. Wenn der Nachweis nicht selbsterklärend ist, kurz beschreiben, was er zeigt. / Name path, link, ticket, DPO opinion where a DPO is designated. If the evidence is not self-explanatory, briefly describe what it shows._
 - **Restrisiko / Residual risk:** _Verbleibendes Risiko oder `None` mit kurzer Begründung dokumentieren. / Record remaining risk or `None` with a short rationale._
 - **Neubewertungs-Trigger / Re-evaluation trigger:** _Aenderung, Termin oder Ereignis nennen, das eine erneute Prüfung auslöst. / Name the change, date, or event that triggers renewed review._
 - **Nächste Maßnahme / Next action:** _Bei `Open`, `Partly Fulfilled`, `Not Fulfilled` oder `Not Assessed` ausfüllen: konkrete Aufgabe, verantwortliche Person, Zieltermin und erwarteter Nachweis. / Fill for `Open`, `Partly Fulfilled`, `Not Fulfilled`, or `Not Assessed`: concrete task, owner, target date, and expected evidence._
@@ -13483,7 +11699,7 @@ status must not be shown by color alone.
   und Auftragsverarbeitern, geplante Schutzmaßnahmen und alle
   weiteren von der Behörde angeforderten Informationen. Die Antwort
   der Aufsichtsbehörde wird in der DPIA-Dokumentation abgelegt; die
-  Verarbeitung beginnt erst nach Klärung.
+  Verarbeitung beginnt als zusätzliche lokale Freigaberegel erst nach dokumentierter Klärung. Art. 36 verlangt die vorherige Konsultation bei verbleibendem hohen Risiko; er ist kein pauschales gesetzliches Genehmigungserfordernis für jede Verarbeitung.
 - **EN:** If the DPIA shows residual high risk despite planned measures,
   the competent supervisory authority is consulted before processing
   starts per GDPR Art. 36. For the organisation this is the competent data protection supervisory authority of the project or seat jurisdiction. The consultation
@@ -13491,11 +11707,11 @@ status must not be shown by color alone.
   responsibilities between controllers and processors, planned
   protective measures, and any further information requested by the
   authority. The authority's response is filed with the DPIA
-  documentation; processing only begins after the matter is settled.
+  documentation; as an additional local release rule, processing only begins after documented resolution. Article 36 requires prior consultation for residual high risk; it is not a blanket statutory authorisation requirement for every processing activity.
 - **Akzeptanz / Acceptance:** Konsultationsanfrage und Antwort der
-  Aufsichtsbehörde dokumentiert; Verarbeitung erst nach abgeschlossener
+  Aufsichtsbehörde dokumentiert; zusätzliche lokale Freigaberegel kenntlich gemacht; Verarbeitung erst nach abgeschlossener
   Konsultation aufgenommen. / Consultation request and authority
-  response documented; processing only started after the consultation
+  response documented; identify the additional local release rule; processing only started after the consultation
   is closed.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
@@ -13518,7 +11734,9 @@ status must not be shown by color alone.
 
 - **DE:** Jede Verarbeitung personenbezogener Daten wird im zentralen
   Verzeichnis der Verarbeitungstätigkeiten (Records of Processing
-  Activities, RoPA) der Organisation gemäß DSGVO Art. 30 geführt.
+  Activities, RoPA) der Organisation geführt. Dies ist die lokale
+  Baseline-Vorgabe; die eng begrenzte gesetzliche Ausnahme aus Art. 30(5)
+  und die Rollen aus Art. 30(1)/(2) werden gesondert bewertet.
   Mindestinhalte: Name und Kontaktdaten der verantwortlichen Stelle,
   Zwecke der Verarbeitung, Kategorien Betroffener, Kategorien
   personenbezogener Daten, Empfängerkategorien, Drittlandsübermittlungen
@@ -13528,7 +11746,9 @@ status must not be shown by color alone.
   internes RoPA-System; alternativ DSGVO-konforme Drittsysteme; in
   Spezialfällen tabellarische Vorlagen mit Versionierung im definierten Nachweisspeicher.
 - **EN:** Every processing of personal data is registered in the Organisation
-  central record of processing activities (RoPA) per GDPR Art. 30.
+  central record of processing activities (RoPA) under local baseline
+  policy. Assess the narrow Article 30(5) exemption and controller/processor
+  roles under Article 30(1)/(2) separately.
   Minimum content: name and contact details of the controller,
   purposes of processing, categories of data subjects, categories of
   personal data, categories of recipients, third-country transfers
@@ -13668,8 +11888,8 @@ status must not be shown by color alone.
   rechtlicher Wirkung ohne Schutzvorkehrungen (Art. 22).
   Implementierung: Selfservice-Portal für Auskunft und Export, klare
   Kontaktstelle für formlose Anfragen, dokumentierter Workflow zur
-  Bearbeitung mit Einhaltung der Frist (Monat, mit zweimonatiger
-  Verlängerungsoption gemäß Art. 12 Abs. 3), Identitätsprüfung der
+  Bearbeitung mit Einhaltung der Frist (Monat, mit begründeter Verlängerung um bis zu zwei Monate und Mitteilung
+  innerhalb des ersten Monats gemäß Art. 12 Abs. 3), Identitätsprüfung der
   Antragsstellenden, Lösch- und Sperrkonzept für jede Datenkategorie.
 - **EN:** The exercise of data-subject rights per GDPR Art. 12–22 is
   ensured technically and organisationally. Reviews: transparent
@@ -13680,8 +11900,8 @@ status must not be shown by color alone.
   decision with legal effect without safeguards (Art. 22).
   Implementation: self-service portal for access and export, clear
   contact point for informal requests, documented handling workflow
-  meeting the deadline (one month, with two-month extension per Art.
-  12(3)), identity verification of requesters, erasure and blocking
+  meeting the deadline (one month, with a justified extension of up to two months and notification
+  within the first month under Art. 12(3)), identity verification of requesters, erasure and blocking
   concept per data category.
 - **Akzeptanz / Acceptance:** Dokumentierte Prozesse und Schnittstellen
   für jedes Betroffenenrecht; Frist- und Identitätsprüfung im
@@ -13707,7 +11927,8 @@ status must not be shown by color alone.
 #### CL-11-12: Fortschreibung und Aktualisierung / Maintenance and Update
 
 - **DE:** Die DPIA ist ein lebendes Dokument. Sie wird mindestens
-  jährlich auf Aktualität geprüft und bei jeder wesentlichen Änderung
+  jährlich (lokale Review-Regel, keine feste DSGVO-Jahresfrist) auf Aktualität
+  geprüft und bei jeder wesentlichen Änderung
   der Verarbeitung außerplanmäßig aktualisiert. Wesentliche Änderungen
   sind insbesondere: neue Datenkategorien, neue Empfänger oder neue
   Drittlandsübermittlungen, neue Auftragsverarbeiter, Wechsel der
@@ -13717,9 +11938,9 @@ status must not be shown by color alone.
   Schwellwertanalyse-relevante Erkenntnisse aus Vorfällen, Audits oder
   Schwachstellen. Die Versionshistorie der DPIA wird in der
   Dokumentation geführt; jede Version wird mit Datum, Autor\*in und
-  Stellungnahme der oder des DSB versehen.
+  gegebenenfalls DSB-Stellungnahme versehen.
 - **EN:** The DPIA is a living document. It is reviewed at least
-  annually and updated outside the regular cycle on any material change
+  annually (local policy, not a fixed GDPR annual deadline) and updated outside the regular cycle on any material change
   of the processing. Material changes include new data categories, new
   recipients or third-country transfers, new processors, change of legal
   basis, new purposes, use of new technologies (for example AI/machine
@@ -13727,7 +11948,7 @@ status must not be shown by color alone.
   scope (scaling), new threshold-analysis-relevant findings from
   incidents, audits, or vulnerabilities. The DPIA version history is
   kept in the documentation; each version carries date, author, and
-  DPO opinion.
+  DPO opinion where a DPO is designated.
 - **Akzeptanz / Acceptance:** DPIA mit aktueller Versionsangabe;
   jährliche Überprüfung dokumentiert; Auslöser für außerplanmäßige
   Aktualisierungen festgelegt. / DPIA with current version; annual
@@ -13862,6 +12083,13 @@ status must not be shown by color alone.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+- **Version 2.0.3 (2026-10-20):** Unabhängige Reviewkorrekturen und Baseline 3.4.3; siehe [Prüfbericht](../maintenance/gsdb-independent-fixes-2026-10-20.md). / Independent review corrections and baseline 3.4.3; see review report.
+
+DE: Baseline-Bindung 3.4.4, redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.4 is editorial; semantic document version unchanged.
 
 ---
 
@@ -13879,8 +12107,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 12 – Agentische KI in Sandbox-Umgebungen / Agentic AI in Sandbox Environments
 
 **Dokument-ID / Document ID:** CL-12
-**Version / Version:** 2.2.0
-**Baseline-Version / Baseline version:** 3.2.0
+**Version / Version:** 2.2.2
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -14078,7 +12306,7 @@ Diese Datei ist eine wiederverwendbare Vorlage. Ausgefüllte Projektnachweise we
 
 - **DE:** Eingesetzte agentische KI-Werkzeuge (zum Beispiel OpenCode, Codex), Provider, Modelle und Konfigurationen sind im KI-Werkzeug-Inventar der Organisation geführt und freigegeben. Werkzeug-Versionen, Container-Image-Digests und Modell-Identifikatoren sind reproduzierbar gepinnt. Selbst-aktualisierende Mechanismen sind deaktiviert.
 - **EN:** Agentic AI tools in use (for example OpenCode, Codex), providers, models, and configurations are listed in the Organisation AI tool inventory and approved. Tool versions, container image digests, and model identifiers are reproducibly pinned. Self-updating mechanisms are disabled.
-- **Akzeptanz / Acceptance:** Inventar-Eintrag, Versionsausgabe (`tool --version`), Image-Digest und Modell-IDs sind dokumentiert; im Werkzeug ist kein Auto-Update aktiv; die KI-Lieferkettentransparenz nach CL_KI-Codeerzeugung Prüfpunkt 15 ist berücksichtigt. / Inventory entry, version output (`tool --version`), image digest, and model IDs are documented; auto-update is disabled in the tool; AI supply-chain transparency per CL_KI-Codeerzeugung item 15 is taken into account.
+- **Akzeptanz / Acceptance:** Inventar-Eintrag, Versionsausgabe (`tool --version`), Image-Digest und Modell-IDs sind dokumentiert; im Werkzeug ist kein Auto-Update aktiv; die KI-Lieferkettentransparenz nach CL-09-15 ist berücksichtigt. / Inventory entry, version output (`tool --version`), image digest, and model IDs are documented; auto-update is disabled in the tool; AI supply-chain transparency per CL-09-15 is taken into account.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -14230,10 +12458,9 @@ Diese Datei ist eine wiederverwendbare Vorlage. Ausgefüllte Projektnachweise we
 
 #### CL-12-12: Preset-Aktualisierung und Inhaltsabdeckung / Preset Updates and Content Coverage
 
-- **DE:** Die acht Spec-Kit-Governance-Presets werden mindestens quartalsweise und anlassbezogen auf Aktualität geprüft. Anlassbezogen ist die Prüfung nötig, wenn sich Preset-Kataloge, Preset-Inhalte, Prioritäten, projektlokale Overrides oder RL-/CL-Dokumentation zu Spec Kit ändern. Preset-Änderungen werden nicht automatisch übernommen, sondern mit Quelle, Version, Priorität, wirksamer Auflösung und Review-Ergebnis dokumentiert.
-- **EN:** The eight Spec Kit governance presets are checked for currency at least quarterly and when triggered by a relevant change. A triggered check is required when preset catalogs, preset contents, priorities, project-local overrides, or RL/CL documentation about Spec Kit change. Preset changes are not applied automatically; they are documented with source, version, priority, effective resolution, and review result.
-- **Preset-zu-CL-Mapping / Preset-to-CL mapping:** `security-governance` -> CL_01, CL_05, CL_06, CL_07, CL_08, CL_09; `architecture-governance` -> CL_02, CL_04; `isaqb-architecture-governance` -> CL_02; `a11y-governance` -> A11Y-Hinweise im Sammelband, CL_06 bei Advisories, CL_09 bei didaktischen Kommentaren, CL_10 bei CLI-/Tooling-Artefakten; `cross-platform-governance` -> CL_08 und CL_10; `agent-parity-governance` -> CL_12, AGENTS.md und Spec-Kit-Templates; `autonomous-run-governance` -> CL_09 und CL_12; `parallel-autonomous-run-governance` -> CL_09 und CL_12.
-- **Akzeptanz / Acceptance:** `specify preset list`, `specify preset info ...` und relevante `specify preset resolve ...`-Nachweise liegen vor; Preset-Quelle oder Katalogeintrag wurde vor Installation oder Aktualisierung geprüft; Update- oder Ausnahme-Ticket nennt Review-Datum, verantwortliche Person und betroffene RL-/CL-Prüfpunkte. Die Mapping-Prüfung nennt Preset-Versionen, Prioritäten, wirksame Auflösung, Evidence-Matrix, offene Mapping-Lücken und begründete N/A-Entscheidungen. Sie zeigt, ob die Spec-Kit-Dokumentation die separate Checklisten-Ausfüllung vollständig ersetzt oder welche Prüfpunkte separat nachzudokumentieren sind. / `specify preset list`, `specify preset info ...`, and relevant `specify preset resolve ...` evidence are available; the preset source or catalog entry was reviewed before installation or update; the update or exception ticket names the review date, responsible person, and affected RL/CL review points. The mapping check names preset versions, priorities, effective resolution, evidence matrix, open mapping gaps, and justified N/A decisions. It shows whether the Spec Kit documentation fully replaces separate checklist completion or which review points need separate follow-up documentation.
+- **DE:** Mindestens quartalsweise und anlassbezogen die GSDB und sämtliche im zugeordneten Profil aktiven Presets prüfen. Das Acht-Preset-Standardprofil und die verwalteten Profile 12, 13 und 14 bleiben unterscheidbar. Assurance ist ab Profil 13 enthalten, Project Statistics ab Profil 14. Versionspins, Prioritäten, Overrides und fachliche Abdeckung prüfen; Änderungen nur nach Auftrag übernehmen. Die jährliche vertiefte Preset-Prüfung am 3. Oktober bleibt zusätzlich bestehen.
+- **EN:** Review the GSDB and every preset active in the assigned profile at least quarterly and after relevant changes. Distinguish the eight-preset default and managed profiles 12, 13, and 14. Assurance is included from profile 13, Project Statistics from profile 14. Check pinned versions, priorities, overrides, and content coverage; apply changes only under authority. Annual in-depth preset review on 3 October remains additional.
+- **Akzeptanz / Acceptance:** Profilgebundene Installationsprüfung, Abdeckungsmatrix, Quellenreview und datierter Ergebnisbericht. / Profile-bound installation check, coverage matrix, source review, and dated outcome report.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -14401,7 +12628,7 @@ Diese Datei ist eine wiederverwendbare Vorlage. Ausgefüllte Projektnachweise we
 - **Version 1.0 (2026-05-07):** Erstfassung zur agentischen KI-Nutzung in Sandbox-Umgebungen / Initial version for agentic AI use in sandbox environments
 - **Version 1.1 (2026-05-14):** Prüfpunkte 1, 4, 5 und 8 mit Sandbox-Identifikator, Secret-Store-Pflicht und reproduzierbarem Pinning präzisiert; drei neue Prüfpunkte ergänzt: 9 Sandbox-Typologie und Isolationsnachweis, 10 Netzwerkrestriktion, 11 Re-Validierungsstand und Lebenszyklus; Mitgeltende Dokumente um ISO/IEC 27001:2022 Annex A, NIST AI RMF und OWASP LLM Top 10 ergänzt; synchron mit Richtlinie Sichere Entwicklung v2.2.0. / Refined checklist items 1, 4, 5, and 8 with sandbox identifier, secret-store requirement, and reproducible pinning; added three new checklist items: 9 sandbox typology and isolation evidence, 10 network restriction, 11 re-validation status and lifecycle; extended related documents with ISO/IEC 27001:2022 Annex A, NIST AI RMF, and OWASP LLM Top 10; synchronized with Richtlinie Sichere Entwicklung v2.2.0.
 - **Version 1.2 (2026-05-19):** Prüfpunkt 1 erweitert: Die Initialfreigabe der Sandbox kann neben der oder dem Security-Verantwortlichen (Security-Verantwortliche*r) auch durch die oder den KI-Verantwortlichen erteilt werden; synchron mit Richtlinie Sichere Entwicklung v2.3.0. / Extended checklist item 1: initial sandbox approval may be granted not only by the Information Security Officer (Security-Verantwortliche*r) but also by the AI Officer (KI-Verantwortliche*r); synchronized with Richtlinie Sichere Entwicklung v2.3.0.
-- **Version 1.3 (2026-05-19):** Prüfpunkt 5 um einen Querverweis auf die KI-Lieferkettentransparenz (CL_KI-Codeerzeugung Prüfpunkt 15) erweitert; synchron mit Richtlinie Sichere Entwicklung v2.4.0. / Extended checklist item 5 with a cross-reference to AI supply-chain transparency (CL_KI-Codeerzeugung item 15); synchronized with Richtlinie Sichere Entwicklung v2.4.0.
+- **Version 1.3 (2026-05-19):** Prüfpunkt 5 um einen Querverweis auf die KI-Lieferkettentransparenz (CL-09-15) erweitert; synchron mit Richtlinie Sichere Entwicklung v2.4.0. / Extended checklist item 5 with a cross-reference to AI supply-chain transparency (CL-09-15); synchronized with Richtlinie Sichere Entwicklung v2.4.0.
 - **Version 1.4 (2026-05-22):** Prüfpunkt 6 präzisiert: Feature-Implementierungen mit agentischer KI folgen dem Spec-Kit-SDD-Ablauf und weisen Spec-Kit-Artefakte, Analyse- oder Checklisten-Ergebnisse sowie die Governance-Presets nach; synchron mit Richtlinie Sichere Entwicklung v2.5.0. / Refined checklist item 6: feature implementations with agentic AI follow the Spec Kit SDD flow and evidence Spec Kit artefacts, analysis or checklist results, and the governance presets; synchronized with Richtlinie Sichere Entwicklung v2.5.0.
 - **Version 1.5 (2026-06-12):** Prüfpunkt 6 präzisiert: Preset-Liste, Preset-Versionen und Prioritäten sind als Nachweise zu führen; `.specify/presets/` ist bei dauerhafter Nutzung Projekt-Policy, lokale Preset-Caches werden nicht versioniert; synchron mit Richtlinie Sichere Entwicklung v2.6.0. / Refined checklist item 6: preset list, preset versions, and priorities must be evidenced; `.specify/presets/` is project policy for permanent use, local preset caches are not versioned; synchronized with Richtlinie Sichere Entwicklung v2.6.0.
 - **Version 1.6 (2026-06-14):** Prüfpunkt 12 ergänzt: Spec-Kit-Governance-Presets werden mindestens quartalsweise und anlassbezogen auf Aktualität, wirksame Auflösung und Abdeckung durch RL-/CL-Prüfpunkte geprüft; synchron mit Richtlinie Sichere Entwicklung v2.7.0. / Added checklist item 12: Spec Kit governance presets are checked at least quarterly and on relevant changes for currency, effective resolution, and coverage by RL/CL review points; synchronized with Richtlinie Sichere Entwicklung v2.7.0.
@@ -14417,6 +12644,13 @@ Diese Datei ist eine wiederverwendbare Vorlage. Ausgefüllte Projektnachweise we
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
 - **Version 2.1.0 (2026-07-17):** Verbindliches Siebenerprofil einschließlich `autonomous-run-governance` aufgenommen; Installation von autonomer Ausführung und Remote-Berechtigungen abgegrenzt; synchron mit sichere-Entwicklung-Basis 3.1.0. / Added the binding seven-preset profile including `autonomous-run-governance`; separated installation from autonomous execution and remote authority; synchronized with secure-development baseline 3.1.0.
 - **Version 2.2.0 (2026-07-19):** Verbindliches Achterprofil einschließlich `parallel-autonomous-run-governance` aufgenommen; Installation von Kampagnenstart und Remote-Berechtigungen abgegrenzt; synchron mit sichere-Entwicklung-Basis 3.2.0. / Added the binding eight-preset profile including `parallel-autonomous-run-governance`; separated installation from campaign start and remote authority; synchronized with secure-development baseline 3.2.0.
+- **Version 2.2.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.2.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+DE: Baseline-Bindung 3.4.3 (20.10.2026), redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.3 (2026-10-20), editorial; semantic document version unchanged.
+
+DE: Baseline-Bindung 3.4.4, redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.4 is editorial; semantic document version unchanged.
 
 ---
 
@@ -14424,4 +12658,4 @@ Diese Datei ist eine wiederverwendbare Vorlage. Ausgefüllte Projektnachweise we
 
 | Version | Datum / Date | Änderung / Change |
 |---|---|---|
-| 2.2.0 | 2026-07-19 | Aus den zwölf kanonischen Einzelchecklisten der sicheren-Entwicklung-Basis 3.2.0 erzeugt; einheitliches zweiachsiges Statusmodell und klare Trennung zwischen Vorlage und Projektnachweis. / Generated from the twelve canonical individual checklists of secure-development baseline 3.2.0; unified two-axis status model and clear separation between template and project evidence. |
+| 2.4.4 | 2026-10-20 | Aus den zwölf kanonischen Einzelchecklisten der sicheren-Entwicklung-Basis 3.4.4 erzeugt; einheitliches zweiachsiges Statusmodell und klare Trennung zwischen Vorlage und Projektnachweis. / Generated from the twelve canonical individual checklists of secure-development baseline 3.4.4; unified two-axis status model and clear separation between template and project evidence. |

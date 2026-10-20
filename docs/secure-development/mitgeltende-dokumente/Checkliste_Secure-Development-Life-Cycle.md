@@ -1,8 +1,8 @@
 # Checkliste Secure Development Life Cycle / Secure Development Life Cycle Checklist
 
-**Stand / Date:** 2026-07-10
-**Version / Version:** 1.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Stand / Date:** 2026-10-20
+**Version / Version:** 1.0.2
+**Baseline-Version / Baseline version:** 3.4.4
 **Verantwortliche Rolle / Responsible role:** Projekt- oder Ausbildungsverantwortung mit Security-Review / Project or training owner with security review
 **Review-Zyklus / Review cycle:** jährlich und bei wesentlichen Änderungen / annually and after material changes
 
@@ -64,3 +64,10 @@ Die Umsetzungsachse verwendet `Fulfilled`, `Partly Fulfilled`, `Not Fulfilled` o
 | Version | Datum / Date | Änderung / Change |
 |---|---|---|
 | 1.0.0 | 2026-07-10 | Erstes kontrolliertes Release als mitgeltendes Dokument der sichere-Entwicklung-Basis 3.0.0. / First controlled release as a related document of secure-development baseline 3.0.0. |
+| 1.0.1 | 2026-10-19 | Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report. |
+| 1.0.2 | 2026-10-20 | Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report. |
+
+
+DE: Baseline-Bindung 3.4.3 (20.10.2026), redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.3 (2026-10-20), editorial; semantic document version unchanged.
+
+DE: Baseline-Bindung 3.4.4, redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.4 is editorial; semantic document version unchanged.

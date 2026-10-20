@@ -11,10 +11,10 @@
     },
     {
       "id": "secure-development-assurance-governance",
-      "version": "v0.1.4",
+      "version": "v0.1.5",
       "priority": 15,
       "repository": "https://github.com/hindermath/spec-kit-preset-secure-development-assurance-governance",
-      "archiveUrl": "https://github.com/hindermath/spec-kit-preset-secure-development-assurance-governance/archive/refs/tags/v0.1.4.zip"
+      "archiveUrl": "https://github.com/hindermath/spec-kit-preset-secure-development-assurance-governance/archive/refs/tags/v0.1.5.zip"
     },
     {
       "id": "architecture-governance",

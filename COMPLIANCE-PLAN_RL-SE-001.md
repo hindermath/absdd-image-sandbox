@@ -70,7 +70,27 @@ KI-Agent direkt umsetzen kann.
 Wo der Agent an eine dieser Grenzen stößt, **bricht er ab und meldet
 Eskalation**.
 
-## Normative Bezüge
+## Normative Bezüge / Normative references
+
+### Aktueller Bezug / Current reference
+
+GSDB 3.4.4, freigegebene Level-0-Quelle d98983568d6ac234dbecb50c2fee0873e83804a4.
+Die aktuellen 157 stabilen IDs sind maßgeblich; Aufgabenstatus und historische
+Ownerentscheidungen werden durch diese Übernahme nicht geschlossen.
+EN: Current stable control IDs govern. Source adoption closes no task, owner
+decision, formal sandbox approval, secret rotation or external register entry.
+
+| Quelle / Source | Version | IDs |
+|---|---|---|
+| Richtlinie / Guideline | 3.4.4 | Manifestgebundene GSDB / manifest-bound GSDB |
+| CL-12 | 2.2.2 | CL-12-* |
+| CL-09 | 2.2.4 | CL-09-* |
+| CL-10 | 2.0.2 | CL-10-* |
+| CL-05 | 2.0.2 | CL-05-* |
+
+[Rollout und Kontroll-Delta / Rollout and control delta](docs/maintenance/gsdb-344-pilot-2026-10-20.md).
+
+### Historischer Ausgangsstand / Historical starting point
 
 - `docs/secure-development/Richtlinie_Sichere-Entwicklung.md`, Abschnitt "Agentische KI in
   Sandbox-Umgebungen" und Abschnitt "KI-gestützte Codeerzeugung".
@@ -1153,7 +1173,13 @@ unterstützt CL_12 Prüfpunkt 8.
 
 ---
 
-# Anhang A — Querverweise zur RL und zu den Checklisten
+# Anhang A — Historische Querverweise / Historical cross-references
+
+DE: Die folgende Zuordnung dokumentiert die ursprünglichen Aufgaben und
+Abschnittsnummern. Für neue Bewertungen gelten die aktuellen stabilen CL-IDs
+und der Normbezug oben; die Übernahme schließt keine historische Aufgabe.
+EN: Preserve the original task mapping. New assessments use current stable
+control IDs and the references above; no historical task is closed here.
 
 | Aufgabe | RL-SE-001 Bezug | Checkliste |
 |---|---|---|
@@ -1182,3 +1208,5 @@ unterstützt CL_12 Prüfpunkt 8.
 | 1.1.0 | 2026-05-19 | Normbezug auf RL-SE-001 v2.2.0 / CL_12 v1.1 nachgeführt; Geltungsbereich auf CL_12 §§9–11 erweitert; Aufgaben P1-5 (Isolations-/Architekturdokument, CL_12 §9) und P3-4 (compose.yml-Härtung, CL_12 §9) ergänzt; Querverweise P1-4 und P3-2 auf CL_12 §11 bzw. §10 aktualisiert |
 | 1.2.0 | 2026-05-19 | Normbezug auf RL-SE-001 v2.3.0 / CL_12 v1.2 nachgeführt; Aufgaben P1-4 und P1-5 um die KI-Beauftragten-Rolle (KIB) als gleichwertige Freigabe- bzw. Bewertungsinstanz neben CISO/ISB ergänzt |
 | 1.3.0 | 2026-05-19 | Normbezug auf RL-SE-001 v2.4.0 / CL_12 v1.3 nachgeführt; Aufgabe P1-6 (AI-SBOM-Lieferantentransparenz im KI-Werkzeug-Inventar, CL_09 §15) ergänzt |
+
+| 1.4.0 | 2026-10-20 | GSDB 3.4.4 als aktuellen Normbezug binden; historische Aufgaben und Referenzen erhalten, keine neue Betriebsfreigabe. / Bind current GSDB while preserving historical tasks and approval limits. |

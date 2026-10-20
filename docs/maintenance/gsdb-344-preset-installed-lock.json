@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "hashContract": "sha256-utf8-lf-bom-or-raw-v1",
+  "baselineCommit": "51af13d11e403ea7acdfc15bc928708df6f1f8a2",
+  "registrySha256": "5226fd0e113522d727701142e54c891f0039fbbd4b7e3754d5f3b891c7109409",
+  "presets": [
+    {
+      "id": "a11y-governance",
+      "version": "0.4.4",
+      "priority": 40,
+      "enabled": true,
+      "manifest_hash": "sha256:0db2a88252d66e1be151e7caa7c52059c281dd1a2c508ab78c08fda37b36dfdb",
+      "fileCount": 18,
+      "contentSha256": "2e9d3fabcbb9702508a25a37dba1bae151f7e42e85cb1b4fdcc45eca09ab7439"
+    },
+    {
+      "id": "agent-parity-governance",
+      "version": "0.4.3",
+      "priority": 60,
+      "enabled": true,
+      "manifest_hash": "sha256:d28d185d43b97e77e9a305c06077c2d0a188d3d2690dcf9142dc75bc4530037d",
+      "fileCount": 14,
+      "contentSha256": "e104de4ebaa3066d596bbda0c10625425a408ecdf323bdf7c7da7bfe5db9f8ae"
+    },
+    {
+      "id": "architecture-governance",
+      "version": "0.6.3",
+      "priority": 20,
+      "enabled": true,
+      "manifest_hash": "sha256:112898032d8a9d355969ff2fa5c06317c62afaffa7840c33668cfd4e89cfbd60",
+      "fileCount": 28,
+      "contentSha256": "9719ee1b58a8ee09510bada98dd5d01163780331ad28c419c9fa827b6ad494f7"
+    },
+    {
+      "id": "autonomous-run-governance",
+      "version": "0.4.5",
+      "priority": 70,
+      "enabled": true,
+      "manifest_hash": "sha256:fa7ce019ccef73f1ad6280bfe2c61fb6d6ad013a087fb0191ae8c18cccc46d7b",
+      "fileCount": 53,
+      "contentSha256": "77f5a9c87de7ea3021cbdae93d420c4651f1529aedff4229a2cc0d4cc1cc0350"
+    },
+    {
+      "id": "cross-platform-governance",
+      "version": "0.2.3",
+      "priority": 50,
+      "enabled": true,
+      "manifest_hash": "sha256:99bdc11457d0973f665747fe177e1cd555105a8a293f6a8cf8f2e54582aa0855",
+      "fileCount": 16,
+      "contentSha256": "87fc9386f761dc43f30cfeb4422ccac10c357e7743e7d5a3f55937f78ef98075"
+    },
+    {
+      "id": "intake-authoring-governance",
+      "version": "0.3.8",
+      "priority": 64,
+      "enabled": true,
+      "manifest_hash": "sha256:420ab9b5719dc09e1bd1eb72997ddec3e4928f92ca1ddfff432c3e06d245fd9a",
+      "fileCount": 45,
+      "contentSha256": "283080da38405115b411567bc72e5250dad2e224837aef382f0c85b658d72259"
+    },
+    {
+      "id": "intake-review-governance",
+      "version": "0.2.5",
+      "priority": 65,
+      "enabled": true,
+      "manifest_hash": "sha256:bdac2fc991c96e39b70be971c88389eb8139775d32de1d7dc78b2a91e23a34e7",
+      "fileCount": 32,
+      "contentSha256": "02b1a67429b42a89777d9bec62a213e49cf88831806936aa43143066ae4763c0"
+    },
+    {
+      "id": "intake-sequencing-governance",
+      "version": "0.2.9",
+      "priority": 66,
+      "enabled": true,
+      "manifest_hash": "sha256:72b8c723b81f3d5642f1911f4e26a7b775e56a44f3c0820a4db8362dccee2002",
+      "fileCount": 44,
+      "contentSha256": "31b0b3143bcfd46862c417ef712a77a7ee71f8e11c20a84dd6710fad30ebcd99"
+    },
+    {
+      "id": "isaqb-architecture-governance",
+      "version": "0.2.3",
+      "priority": 30,
+      "enabled": true,
+      "manifest_hash": "sha256:291629f00c99520b041b695cd18d923f79e143d9ab2794c7a57263cc5163f4cc",
+      "fileCount": 21,
+      "contentSha256": "f1f5e757cacc27a245e653ff8c112cd3a4bb2a08d03d3eafc3b66eabd4b76ed1"
+    },
+    {
+      "id": "model-routing-governance",
+      "version": "0.1.5",
+      "priority": 61,
+      "enabled": true,
+      "manifest_hash": "sha256:30bde60c4822d548a4846f6a273af22b7426b9d37717633b06553a7ef2309d77",
+      "fileCount": 17,
+      "contentSha256": "b635464f57f94694f5b7d5bde7f44eb0a89fc74e2fa1e5f1c0a3804d842f5fd4"
+    },
+    {
+      "id": "parallel-autonomous-run-governance",
+      "version": "0.2.7",
+      "priority": 80,
+      "enabled": true,
+      "manifest_hash": "sha256:6b890a1df6ce330f476d9ec46cf9e7082b9cbb5b1e8875474d8bb039ddc7843b",
+      "fileCount": 44,
+      "contentSha256": "a35f5dc36d415bf0316efd8ff27eea08605a97faf75971b7fd225df02b5a0bf7"
+    },
+    {
+      "id": "project-statistics-governance",
+      "version": "0.1.1",
+      "priority": 90,
+      "enabled": true,
+      "manifest_hash": "sha256:0b1e4c295c5d0c8ee50aa6efccc65014833d01b77d1e2ab365c77ac51cb40dee",
+      "fileCount": 96,
+      "contentSha256": "37f4ca8f4501f1610386d99fedc21941d16347d63696adb4d094e2d54198d46b"
+    },
+    {
+      "id": "secure-development-assurance-governance",
+      "version": "0.1.5",
+      "priority": 15,
+      "enabled": true,
+      "manifest_hash": "sha256:e1da9c3b3d3ed91da31d34129db390564d1a3004095aa374a104b5cdec2ce7c7",
+      "fileCount": 19,
+      "contentSha256": "3dc5b2b704aadafe6f0e45674ab74e1572d47fd0c24111d1f9a8f9786f9f8cd4"
+    },
+    {
+      "id": "security-governance",
+      "version": "0.7.2",
+      "priority": 10,
+      "enabled": true,
+      "manifest_hash": "sha256:911d2779d99a457e3433f712542cd2b0e2f68fcff2529772b9938da6e11425fb",
+      "fileCount": 34,
+      "contentSha256": "249cae0f420a02c7e3a3e9d283fdbb42feea83c73db3246226ed0fa786c6a042"
+    }
+  ]
+}

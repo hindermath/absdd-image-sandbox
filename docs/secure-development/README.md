@@ -1,7 +1,7 @@
 # Generischer Leitfaden Sichere Entwicklung / Generic Secure Development Guide
 
-**Stand / Date:** 2026-07-19
-**Baseline-Version / Baseline version:** 3.2.0
+**Stand / Date:** 2026-10-20
+**Baseline-Version / Baseline version:** 3.4.4
 **Zielgruppe / Audience:** Fachinformatik-Auszubildende, Entwickler*innen, Reviewer und KI-Agenten in Level-2-Projekten / IT specialist apprentices, developers, reviewers, and AI agents in level-2 projects
 
 ## Zweck / Purpose
@@ -72,3 +72,39 @@
 **DE:** Diese Dokumente ersetzen keine projektspezifischen Sicherheitsartefakte in `docs/security/`, sondern liefern die wiederverwendbare Pruefgrundlage. Projektspezifische Nachweise bleiben im jeweiligen Projektkontext zu fuehren.
 
 **EN:** These documents do not replace project-specific security artefacts in `docs/security/`; they provide the reusable review baseline. Project-specific evidence remains part of the respective project context.
+
+## Reviewstand / Review State
+
+DE: Der Level-0-Review vom 19. Oktober 2026 korrigiert strukturelle und fachliche Befunde. Die damaligen Quellenlücken sind im unten verlinkten Quellenabschluss vom 20. Oktober geklärt; der Erstreview bleibt als Historie erhalten. [Prüfbericht](../maintenance/gsdb-level0-review-2026-10-19.md).
+
+EN: The Level-0 review of 19 October 2026 corrects structural and technical findings. The initial gaps are resolved by the 20 October source closure below; the original report remains historical evidence. [Review report](../maintenance/gsdb-level0-review-2026-10-19.md).
+
+## Quellenabschluss / Source Closure
+
+**DE:** Baseline 3.4.1 schließt die sieben offenen und drei teilweisen Quellenprüfungen des Erstreviews. [Historischer Quellenabschluss](../maintenance/gsdb-source-closure-2026-10-20.md), [Quellenregister](../maintenance/gsdb-source-review-2026-10-20.json), [Abdeckungsmatrix](../maintenance/gsdb-coverage-2026-10-20.md). Die alten Nachweise dokumentieren den damaligen Stand. Menschliche PR-Prüfung und ISO-Volltextprüfung bleiben getrennt; kein Merge, Home-Sync oder Rollout.
+
+**EN:** Baseline 3.4.1 closes the initial seven Open and three Partial source checks. See the historical source closure, source record and coverage above. Historical evidence retains its original result. Human PR review and licensed ISO-text review remain separate; no merge, Home sync or rollout.
+
+## Reviewkorrektur / Review Remediation
+
+DE: Der vorherige Korrekturstand war Baseline 3.4.2 mit Sammelband 2.4.2. Die frueheren Berichte
+oben bleiben historische Nachweise. [Historische Korrektur und Validierung](../maintenance/gsdb-review-remediation-2026-10-20.md)
+mit neuer Quellenzuordnung, Abdeckungsmatrix und Assurance-Bindung.
+Menschliche Freigabe bleibt offen; kein Merge, Home-Sync oder Rollout.
+
+EN: The previous correction revision was baseline 3.4.2 with compendium 2.4.2. Earlier reports above
+remain historical evidence. The linked historical remediation report includes
+validation, corrected source mapping, coverage and new assurance binding.
+Human approval remains pending; no merge, Home sync or rollout.
+
+## Reviewkorrektur 3.4.3 (historisch) / Review Corrections 3.4.3 (Historical)
+
+DE: Historischer Stand 3.4.3; [damaliger Prüfbericht](../maintenance/gsdb-independent-fixes-2026-10-20.md), [Quellenstand](../maintenance/gsdb-source-review-independent-fixes-2026-10-20.json), [Abdeckungsmatrix](../maintenance/gsdb-coverage-independent-fixes-2026-10-20.md). Historische Berichte und Evidence bleiben erhalten. Menschliche Freigaben bleiben offen.
+
+EN: Historical revision 3.4.3; its review, source log and coverage matrix are linked above. Historical reports and evidence remain intact. Human approvals remain open.
+
+## Aktueller P3-Abschluss / Current P3 Closure
+
+DE: Baseline 3.4.4 / Sammelband 2.4.4; [aktueller Bericht](../maintenance/gsdb-p3-followup-2026-10-20.md), [Quellen](../maintenance/gsdb-source-review-p3-followup-2026-10-20.json), [Abdeckung](../maintenance/gsdb-coverage-p3-followup-2026-10-20.md). Alle bisherigen Nachweise bleiben historisch erhalten; menschliche Entscheidungen Open.
+
+EN: Baseline 3.4.4 / compendium 2.4.4; current report, sources and coverage linked above. Preserve earlier evidence; human decisions remain Open.

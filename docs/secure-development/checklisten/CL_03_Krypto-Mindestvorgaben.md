@@ -12,8 +12,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 03 – Kryptografische Mindestvorgaben / Cryptographic Minimum Requirements
 
 **Dokument-ID / Document ID:** CL-03
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.3
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -184,7 +184,7 @@ indirectly via libraries, frameworks, or external services.
 #### CL-03-02: Asymmetrische Verschlüsselung und Signatur / Asymmetric Encryption and Signature
 
 - **DE:** RSA mit mindestens 3072 Bit, ECDSA mit Kurve P-256 (secp256r1) oder höher,
-  oder Ed25519 (bevorzugt für neue Signaturen). Für Schlüsseltausch: ECDH (P-256
+  oder Ed25519 nach begründeter Profilentscheidung. Für Schlüsseltausch: ECDH (P-256
   oder höher) oder X25519. RSA-Verschlüsselung verwendet RSA-OAEP mit SHA-256
   (`Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding")` in Java,
   `RSA.encrypt(..., padding=OAEP(SHA256()))` in Python `cryptography`,
@@ -193,7 +193,7 @@ indirectly via libraries, frameworks, or external services.
   oder einen geprüften CSPRNG verwenden, um Nonce-Kollisionen zu vermeiden.
   Verbotene Kurven: P-192 (secp192r1), brainpoolP160 und kürzere.
 - **EN:** RSA with at least 3072 bit, ECDSA with curve P-256 (secp256r1) or
-  higher, or Ed25519 (preferred for new signatures). For key exchange: ECDH
+  higher, or Ed25519 under a justified profile decision. For key exchange: ECDH
   (P-256 or higher) or X25519. RSA encryption uses RSA-OAEP with SHA-256
   (`Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding")` in Java,
   `RSA.encrypt(..., padding=OAEP(SHA256()))` in Python `cryptography`,
@@ -201,6 +201,12 @@ indirectly via libraries, frameworks, or external services.
   for new applications. ECDSA signatures should use RFC 6979 (deterministic)
   or a vetted CSPRNG to avoid nonce collisions. Forbidden curves: P-192
   (secp192r1), brainpoolP160, and shorter.
+- **DE:** Diese Auswahl ist lokale Baseline-Policy, keine pauschale BSI-Freigabe.
+  Je Protokoll die konkrete TR-02102-Teilfassung, Parameter und Laufzeit prüfen;
+  generische Bibliotheksunterstützung beweist keine Profilkonformität.
+- **EN:** This selection is local baseline policy, not blanket BSI approval.
+  Check the relevant TR-02102 part, parameters and validity period per protocol;
+  library support does not establish profile conformity.
 - **Akzeptanz / Acceptance:** Algorithmus, Kurve, Padding und Bibliothek je
   Modul dokumentiert. / Algorithm, curve, padding, and library documented
   per module.
@@ -401,40 +407,9 @@ indirectly via libraries, frameworks, or external services.
 
 #### CL-03-07: TLS-Konfiguration / TLS Configuration
 
-- **DE:** TLS 1.2 ist das Mindestmaß, TLS 1.3 ist bevorzugt. SSLv2, SSLv3,
-  TLS 1.0 und TLS 1.1 sind deaktiviert. Empfohlene TLS 1.3 Cipher-Suites:
-  `TLS_AES_256_GCM_SHA384`, `TLS_CHACHA20_POLY1305_SHA256`,
-  `TLS_AES_128_GCM_SHA256`. Empfohlene TLS 1.2 Suites mit Forward Secrecy:
-  `ECDHE-ECDSA-AES256-GCM-SHA384`, `ECDHE-RSA-AES256-GCM-SHA384`,
-  `ECDHE-ECDSA-CHACHA20-POLY1305`, `ECDHE-RSA-CHACHA20-POLY1305`.
-  Konfigurationsbeispiele: in nginx `ssl_protocols TLSv1.2 TLSv1.3;
-  ssl_ciphers ECDHE+AESGCM:ECDHE+CHACHA20; ssl_prefer_server_ciphers on;`,
-  in Apache `SSLProtocol -all +TLSv1.2 +TLSv1.3`, in Spring Boot
-  `server.ssl.enabled-protocols=TLSv1.2,TLSv1.3`, in Kestrel
-  `SslProtocols = SslProtocols.Tls12 | SslProtocols.Tls13`. HSTS
-  (`Strict-Transport-Security: max-age=31536000; includeSubDomains`) ist
-  für öffentliche Endpunkte gesetzt. Zertifikate aus einer CA, die im
-  CT-Log (Certificate Transparency) erscheint; selbstsignierte Zertifikate
-  nur in geschlossenen Test-/Entwicklungsumgebungen.
-- **EN:** TLS 1.2 is the minimum, TLS 1.3 is preferred. SSLv2, SSLv3,
-  TLS 1.0, and TLS 1.1 are disabled. Recommended TLS 1.3 cipher suites:
-  `TLS_AES_256_GCM_SHA384`, `TLS_CHACHA20_POLY1305_SHA256`,
-  `TLS_AES_128_GCM_SHA256`. Recommended TLS 1.2 suites with forward
-  secrecy: `ECDHE-ECDSA-AES256-GCM-SHA384`, `ECDHE-RSA-AES256-GCM-SHA384`,
-  `ECDHE-ECDSA-CHACHA20-POLY1305`, `ECDHE-RSA-CHACHA20-POLY1305`.
-  Configuration examples: nginx `ssl_protocols TLSv1.2 TLSv1.3;
-  ssl_ciphers ECDHE+AESGCM:ECDHE+CHACHA20; ssl_prefer_server_ciphers on;`,
-  Apache `SSLProtocol -all +TLSv1.2 +TLSv1.3`, Spring Boot
-  `server.ssl.enabled-protocols=TLSv1.2,TLSv1.3`, Kestrel
-  `SslProtocols = SslProtocols.Tls12 | SslProtocols.Tls13`. HSTS
-  (`Strict-Transport-Security: max-age=31536000; includeSubDomains`) is
-  set for public endpoints. Certificates from a CA that appears in CT
-  logs (Certificate Transparency); self-signed certificates only in closed
-  test or development environments.
-- **Akzeptanz / Acceptance:** TLS-Scan-Bericht pro Endpunkt (z. B.
-  `testssl.sh`, Qualys SSL Labs, `sslyze`) mit Mindest-Note A oder
-  vergleichbar. / TLS scan report per endpoint (e.g. `testssl.sh`,
-  Qualys SSL Labs, `sslyze`) with at least an "A" rating or equivalent.
+- **DE:** TLS 1.3 bevorzugen; TLS 1.2 ist nach TR-02102-2 (2026-01), Kap. 3, nur bis Ende 2031 empfohlen. SSLv2/v3 und TLS 1.0/1.1 deaktivieren. Für das BSI-Profil TLS-1.3-Suites aus Tabelle 13 verwenden, etwa `TLS_AES_256_GCM_SHA384` oder `TLS_AES_128_GCM_SHA256`; TLS-1.2-Beispiele aus Tabelle 3 sind `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384` und `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`. Signaturverfahren, Gruppen und Schlüssellängen zusätzlich nach Tabellen 7–12 und Kap. 3.6 prüfen: bei RSA PSS verwenden; TLS-1.2-RSA mit PKCS#1-v1.5-Padding wurde nur bis 2025 empfohlen. ChaCha20-Suites stehen nicht in Tabellen 3/13 dieser Ausgabe; eine lokal gewählte Abweichung ist gesondert zu begründen und darf nicht als BSI-konform ausgegeben werden. Ein Cipher-String allein erzwingt weder PSS noch alle BSI-Parameter. Effektive Konfiguration und Handshake je Zielplattform prüfen; CL-03-14/15 steuern Migration und Quellenabgleich. HSTS für öffentliche Web-Endpunkte nach geprüfter Subdomain-Policy setzen. Öffentliche Web-Zertifikate über eine vertrauenswürdige CA mit anwendbarer CT-Policy; geschlossene Test-/Entwicklungsumgebungen dürfen dokumentierte eigene Vertrauensanker verwenden.
+- **EN:** Prefer TLS 1.3; TR-02102-2 (2026-01), Chapter 3 recommends TLS 1.2 only through 2031. Disable SSLv2/v3 and TLS 1.0/1.1. For the BSI profile use TLS 1.3 suites from Table 13, such as `TLS_AES_256_GCM_SHA384` or `TLS_AES_128_GCM_SHA256`; TLS 1.2 examples from Table 3 are `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384` and `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`. Also assess signature schemes, groups and key sizes under Tables 7–12 and Chapter 3.6: use PSS for RSA; TLS 1.2 RSA with PKCS#1 v1.5 padding was recommended only through 2025. ChaCha20 suites do not appear in Tables 3/13 of this edition; justify any locally chosen deviation separately and do not label it BSI-conformant. A cipher string alone enforces neither PSS nor all BSI parameters. Check effective configuration and handshakes per target platform; CL-03-14/15 govern migration and source review. Apply HSTS to public web endpoints with a reviewed subdomain policy. Use a trusted CA with applicable CT policy for public web certificates; closed test/development environments may use documented private trust anchors.
+- **Akzeptanz / Acceptance:** TLS-Scan und Handshake-Nachweis je Endpunkt, Protokoll/Suite/Gruppe/Signatur/Schlüssellänge gegen die datierte BSI-Ausgabe bewertet, Abweichungen begründet und Migration terminiert; ein Scanner-Rating allein genügt nicht. / Per-endpoint TLS scan and handshake evidence assess protocol, suite, group, signature and key size against the dated BSI edition, justify deviations and schedule migration; a scanner rating alone is insufficient.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -527,34 +502,9 @@ indirectly via libraries, frameworks, or external services.
 
 #### CL-03-10: Schlüsselrotation / Key Rotation
 
-- **DE:** Festgelegte Rotationsfristen je Schlüsseltyp: TLS-Server-Zertifikate
-  ≤ 397 Tage (Browser-Limit ab 2020), idealerweise per ACME (Let's Encrypt,
-  ZeroSSL) alle 60–90 Tage automatisiert; API- und Service-Tokens 90 Tage;
-  Datenbank-Verschlüsselungsschlüssel (DEK) jährlich oder häufiger;
-  Master-/Wrapping-Keys (KEK) im KMS jährlich mit Versionierung;
-  Signaturschlüssel projektabhängig (oft mehrere Jahre, aber mit
-  Migrationspfad). Rotation funktioniert mit überlappender Gültigkeit
-  (Old-Key + New-Key gleichzeitig akzeptieren), bis alle Verbraucher
-  umgestellt sind. Werkzeuge: AWS KMS Automatic Key Rotation, Azure Key
-  Vault Auto-Rotation, HashiCorp Vault `vault rotate`, cert-manager unter
-  Kubernetes. Bei Verdacht auf Kompromittierung wird sofort rotiert,
-  betroffene Sitzungen werden invalidiert, und der Vorfall geht in
-  Incident Response.
-- **EN:** Defined rotation periods per key type: TLS server certificates
-  ≤ 397 days (browser limit since 2020), ideally automated via ACME
-  (Let's Encrypt, ZeroSSL) every 60–90 days; API and service tokens 90
-  days; database encryption keys (DEK) yearly or more often; master /
-  wrapping keys (KEK) in the KMS yearly with versioning; signing keys
-  project-dependent (often multi-year, but with a migration path).
-  Rotation uses overlapping validity (old + new key both accepted) until
-  all consumers have switched. Tools: AWS KMS Automatic Key Rotation,
-  Azure Key Vault Auto-Rotation, HashiCorp Vault `vault rotate`,
-  cert-manager on Kubernetes. On suspected compromise, immediate
-  rotation, invalidate affected sessions, escalate to incident response.
-- **Akzeptanz / Acceptance:** Rotationsplan mit Frist je Schlüsseltyp,
-  Werkzeug, letztem Rotations-Datum und Verantwortlicher Person
-  dokumentiert. / Rotation plan with period per key type, tooling, last
-  rotation date, and owner documented.
+- **DE:** Rotationsfristen werden je Schlüsseltyp, Schutzbedarf und geltendem Standard festgelegt. Für öffentlich vertrauenswürdige TLS-Serverzertifikate gelten ausstellungsabhängige CA/Browser-Fristen: ab 15.03.2026 höchstens 200 Tage, ab 15.03.2027 100 Tage, ab 15.03.2029 47 Tage. Interne PKI getrennt bewerten. Erneuerung automatisieren und vor Ablauf testen; bei Kompromittierung sofort widerrufen beziehungsweise rotieren. Statische Tokenfristen sind lokale Risikopolicy, keine allgemeine Normvorgabe.
+- **EN:** Set rotation periods by key type, risk, and applicable standard. Publicly trusted TLS server certificates have issuance-dependent CA/Browser limits: at most 200 days from 2026-03-15, 100 days from 2027-03-15, and 47 days from 2029-03-15. Assess internal PKI separately. Automate renewal and test before expiry; revoke or rotate immediately after compromise. Static token periods are local risk policy, not universal standard requirements.
+- **Akzeptanz / Acceptance:** Rotations- und Wiederherstellungstest; Quelle: https://cabforum.org/working-groups/server/baseline-requirements/requirements/ Abschnitt / section 6.3.2.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -721,33 +671,9 @@ indirectly via libraries, frameworks, or external services.
 
 #### CL-03-14: Vorbereitung auf Post-Quanten-Krypto / Preparing for Post-Quantum Crypto
 
-- **DE:** Für langlebige Daten (Aufbewahrung > 5 Jahre) und langlebige
-  Signaturen wird die Migration auf quantensichere Verfahren beobachtet:
-  NIST PQC-Standards FIPS 203 (ML-KEM, vormals Kyber, für Schlüsseltausch),
-  FIPS 204 (ML-DSA, vormals Dilithium, für Signaturen) und FIPS 205
-  (SLH-DSA, vormals SPHINCS+, hash-basierte Signaturen). Verfügbare
-  Bibliotheken: liboqs (Open Quantum Safe) mit Bindings für C, Python,
-  Java und Go; BouncyCastle ab Version 1.78; AWS-LC und Cloudflare
-  CIRCL. Hybrid-Modi (klassisch + PQC, z. B. X25519+ML-KEM) werden für
-  Übergangsphase bevorzugt. Ein Übergangsplan benennt: betroffene
-  Datenklassen (z. B. archivierte Verträge, signierte Software-Releases),
-  Zeitfenster („harvest now, decrypt later"-Risiko), bevorzugte PQC-
-  Verfahren je Anwendungsfall, Pilotprojekt und Roll-out-Zeitplan.
-- **EN:** For long-lived data (retention > 5 years) and long-lived
-  signatures, the migration to quantum-safe schemes is tracked: NIST
-  PQC standards FIPS 203 (ML-KEM, formerly Kyber, for key exchange),
-  FIPS 204 (ML-DSA, formerly Dilithium, for signatures), and FIPS 205
-  (SLH-DSA, formerly SPHINCS+, hash-based signatures). Available
-  libraries: liboqs (Open Quantum Safe) with bindings for C, Python,
-  Java, and Go; BouncyCastle from version 1.78; AWS-LC and Cloudflare
-  CIRCL. Hybrid modes (classical + PQC, e.g. X25519+ML-KEM) are
-  preferred during the transition. A transition plan names: affected
-  data classes (e.g. archived contracts, signed software releases),
-  exposure window ("harvest now, decrypt later" risk), preferred PQC
-  schemes per use case, pilot project, and roll-out schedule.
-- **Akzeptanz / Acceptance:** S-ADR oder Notiz mit Migrationspfad,
-  Datenklassifikation und Zeitplan vorhanden. / S-ADR or note with
-  migration path, data classification, and schedule available.
+- **DE:** Krypto-Inventar und risikobasierten PQC-Migrationsplan führen, nicht nur Entwicklungen beobachten. TR-02102-1, 2026-01, Abschnitt 2.1 empfiehlt alleinige klassische Schlüsseleinigung nur bis Ende 2031, bei sehr hohem Schutzbedarf Umstellung bis Ende 2030; für klassische Signaturen wird derzeit Ende 2035 als Horizont genannt. Langfristig vertrauliche Daten wegen „Store Now, Decrypt Later“ schon heute prüfen. Teil 2 empfiehlt TLS 1.2 nur bis Ende 2031. Empfohlene PQ-Verfahren geeignet hybrid kombinieren; Standardsstatus, Sicherheitsparameter, Protokollprofil und Implementierungsreife getrennt bewerten. Der Plan nennt Owner, Datenklassen, Abhängigkeiten, Zieltermine, Tests und Wiedervorlage; Bibliotheksverfügbarkeit ist keine Freigabe.
+- **EN:** Maintain a crypto inventory and risk-based PQC migration plan rather than merely tracking developments. TR-02102-1, 2026-01, section 2.1 recommends standalone classical key agreement only until end-2031, with migration by end-2030 for very high protection needs; end-2035 is the current horizon for classical signatures. Assess long-term confidentiality now because of store-now-decrypt-later risk. Part 2 recommends TLS 1.2 only until end-2031. Combine recommended PQ mechanisms appropriately in hybrid form; assess standardisation, parameters, protocol profile and implementation maturity separately. Record owner, data classes, dependencies, dates, tests and reevaluation; library availability is not approval.
+- **Akzeptanz / Acceptance:** Inventar und S-ADR mit teilfassungsgebundenem Migrationsplan und Wiedervorlage vorhanden. / Inventory and S-ADR provide a part/version-bound migration plan and reevaluation.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -949,3 +875,10 @@ stored in the security evidence set.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+- **Version 2.0.3 (2026-10-20):** Unabhängige Reviewkorrekturen und Baseline 3.4.3; siehe [Prüfbericht](../../maintenance/gsdb-independent-fixes-2026-10-20.md). / Independent review corrections and baseline 3.4.3; see review report.
+
+DE: Baseline-Bindung 3.4.4, redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.4 is editorial; semantic document version unchanged.

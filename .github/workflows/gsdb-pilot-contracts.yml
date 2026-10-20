@@ -1,0 +1,58 @@
+name: GSDB Pilot Contracts
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  gsdb:
+    name: GSDB 3.4.4 (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, macos-15, windows-2022]
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Verify generator, exact installed profile and project evidence
+        shell: pwsh
+        run: |
+          if ($IsWindows) { python scripts/tests/test_spec_kit_agent_surface_parity.py } else { python3 scripts/tests/test_spec_kit_agent_surface_parity.py }
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          pwsh -NoProfile -File scripts/validate-documentation-impact.ps1 -Evidence docs/maintenance/gsdb-344-pilot-impact.json
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          pwsh -NoProfile -File scripts/build-secure-development-docs.ps1 -Check
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          pwsh -NoProfile -File scripts/install-spec-kit-governance-presets.ps1 -Repo . -PresetConfig scripts/config/spec-kit-project-statistics-governance-presets.json -CheckOnly
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          pwsh -NoProfile -File .specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.ps1 -Action Status -EvidenceDirectory docs/security/secure-development/2026-10-20-absdd-image-sandbox-gsdb344
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: GSDB negative fixtures and shell parity
+        shell: pwsh
+        run: |
+          pwsh -NoProfile -File scripts/tests/test-gsdb-consolidation.ps1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Assurance 0.1.5 strict regression
+        shell: pwsh
+        run: |
+          pwsh -NoProfile -File .specify/presets/secure-development-assurance-governance/tests/test-secure-development-assurance.ps1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          git diff --exit-code
+
+  navigation:
+    name: GSDB source navigation
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2
+        with:
+          args: >-
+            --offline
+            --include-fragments
+            --no-progress
+            './docs/secure-development/**/*.md'
+            'docs/maintenance/gsdb-344*.md'
+          fail: true

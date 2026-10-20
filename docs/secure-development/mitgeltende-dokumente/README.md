@@ -1,8 +1,8 @@
 # Mitgeltende Dokumente / Related Documents
 
-**Stand / Date:** 2026-08-02
+**Stand / Date:** 2026-10-20
 **Zielgruppe / Audience:** Alle vier IT-Ausbildungsberufe ab dem ersten Ausbildungsjahr, Entwickler*innen, Reviewer und KI-Agenten / All four IT training occupations from the first training year, developers, reviewers, and AI agents
-**Baseline-Version / Baseline version:** 3.2.0
+**Baseline-Version / Baseline version:** 3.4.1
 
 ## Zweck / Purpose
 

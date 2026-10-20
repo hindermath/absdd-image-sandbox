@@ -12,8 +12,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 08 – Sicherheits-Code-Review / Security Code Review
 
 **Dokument-ID / Document ID:** CL-08
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.4
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -186,43 +186,9 @@ configuration. Pure documentation changes are exempt.
 
 #### CL-08-02: Ausgabe-Codierung / Output Encoding
 
-- **DE:** Ausgaben werden kontextgerecht codiert (HTML-Body, HTML-Attribut,
-  JavaScript-String, URL-Parameter, CSS, SQL, LDAP, XML/XPath, Shell), um
-  Injektionen (XSS, SQLi, LDAPi, OS-Command-Injection) zu verhindern.
-  Konkrete Hilfsmittel: Java OWASP Encoder (`Encode.forHtml(...)`,
-  `Encode.forHtmlAttribute(...)`, `Encode.forJavaScript(...)`,
-  `Encode.forUriComponent(...)`); Spring `HtmlUtils.htmlEscape`; JSP/JSF
-  Auto-Escaping in Templates (`<c:out>`, `EL ${value}`); C#/.NET
-  `System.Web.HttpUtility.HtmlEncode`, `JavaScriptEncoder.Default.Encode`,
-  `UrlEncoder.Default`, Razor `@variable` Auto-Escaping; Python
-  `markupsafe.escape`, Jinja2 Auto-Escape (`autoescape=True`); Go
-  `html/template` (kontextsensitives Auto-Escaping) statt `text/template`;
-  JavaScript DOM-API (`textContent` statt `innerHTML`), Frameworks React/
-  Vue/Angular escapen per Default in JSX/Templates (Vorsicht bei
-  `dangerouslySetInnerHTML`, `v-html`, `[innerHTML]`). Content-Security-
-  Policy (CSP) als zweite Verteidigungsschicht: `Content-Security-Policy:
-  default-src 'self'; script-src 'self' 'nonce-{random}'`. SQL: ausschließ-
-  lich Prepared Statements / parametrisierte Queries (siehe Punkt SQL).
-  Referenzen: OWASP XSS Prevention Cheat Sheet, OWASP Output Encoding,
-  CWE-79, CWE-89.
-- **EN:** Outputs are encoded for the right context (HTML body, HTML
-  attribute, JavaScript string, URL parameter, CSS, SQL, LDAP, XML/XPath,
-  shell) to prevent injection (XSS, SQLi, LDAPi, OS command injection).
-  Concrete helpers: Java OWASP Encoder (`Encode.forHtml(...)`,
-  `Encode.forHtmlAttribute(...)`, `Encode.forJavaScript(...)`,
-  `Encode.forUriComponent(...)`); Spring `HtmlUtils.htmlEscape`; JSP/JSF
-  auto-escaping in templates (`<c:out>`, `EL ${value}`); C#/.NET
-  `System.Web.HttpUtility.HtmlEncode`, `JavaScriptEncoder.Default.Encode`,
-  `UrlEncoder.Default`, Razor `@variable` auto-escaping; Python
-  `markupsafe.escape`, Jinja2 auto-escape (`autoescape=True`); Go
-  `html/template` (context-aware auto-escaping) instead of `text/template`;
-  JavaScript DOM API (`textContent` instead of `innerHTML`), frameworks
-  React/Vue/Angular escape by default in JSX/templates (caution with
-  `dangerouslySetInnerHTML`, `v-html`, `[innerHTML]`). Content Security
-  Policy (CSP) as second defence layer: `Content-Security-Policy:
-  default-src 'self'; script-src 'self' 'nonce-{random}'`. SQL:
-  parameterised queries only (see SQL item). References: OWASP XSS
-  Prevention Cheat Sheet, OWASP Output Encoding, CWE-79, CWE-89.
+- **DE:** HTML-, Attribut-, JavaScript- und URL-Ausgaben kontextgerecht codieren; Rich Content nur mit geeigneter Sanitization. Für SQL parametrisierte Statements verwenden. Für Prozesse strukturierte Argumentlisten ohne Shell-Auswertung nutzen. Allgemeines Escaping ersetzt weder Parametrisierung noch sichere APIs. Positiv-, Negativ- und Kontextwechseltests ausführen.
+- **EN:** Encode HTML, attribute, JavaScript, and URL output for its context; sanitize rich content appropriately. Use parameterized SQL statements. Invoke processes with structured argument lists without shell evaluation. Generic escaping replaces neither parameterization nor safe APIs. Test valid, malicious, and cross-context input.
+- **Akzeptanz / Acceptance:** Tests belegen sichere Senken; keine SQL- oder Shell-Interpolation aus untrusted Input. / Tests cover safe sinks; no untrusted SQL or shell interpolation.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -242,42 +208,9 @@ configuration. Pure documentation changes are exempt.
 
 #### CL-08-03: Authentifizierung / Authentication
 
-- **DE:** Es wird ein etabliertes Authentifizierungsverfahren genutzt
-  (OAuth 2.1, OpenID Connect, SAML 2.0, WebAuthn/Passkeys, Kerberos für
-  interne Domänen). Eigene Krypto- oder Passwort-Implementierungen werden
-  vermieden. Konkrete Frameworks: Spring Security 6 (`SecurityFilterChain`
-  mit `oauth2Login`, `formLogin`); Keycloak / Authentik / Auth0 / Azure AD /
-  Entra ID als Identity Provider; ASP.NET Core Identity mit `Microsoft.
-  AspNetCore.Authentication.JwtBearer` und `OpenIdConnect`; Python `Authlib`,
-  `python-social-auth`, FastAPI `OAuth2PasswordBearer`; Node.js `passport.js`
-  mit Strategien (`passport-oauth2`, `passport-saml`, `passport-jwt`).
-  Passwort-Hashing nur mit modernen KDFs: Argon2id (RFC 9106) als bevorzugt
-  (z. B. `argon2-cffi` Python, `Argon2.NET`, `argon2-jvm`); alternativ
-  bcrypt mit cost ≥ 12 oder scrypt; PBKDF2-SHA256 mit ≥ 600 000 Iterationen
-  (OWASP-Empfehlung 2024). Multi-Faktor-Authentifizierung (MFA) für
-  privilegierte Zugänge Pflicht (TOTP per RFC 6238, FIDO2/WebAuthn). Brute-
-  Force-Schutz: Account-Lockout nach 5 Fehlversuchen, Delay-basiertes
-  Rate-Limiting (z. B. `bucket4j` Java, `slowapi` Python, `IpRateLimit`
-  ASP.NET). Referenzen: OWASP Authentication Cheat Sheet, NIST SP 800-63B,
-  OWASP ASVS V2, CWE-287, CWE-307.
-- **EN:** An established authentication method is used (OAuth 2.1, OpenID
-  Connect, SAML 2.0, WebAuthn/Passkeys, Kerberos for internal domains).
-  Custom crypto or password implementations are avoided. Concrete
-  frameworks: Spring Security 6 (`SecurityFilterChain` with `oauth2Login`,
-  `formLogin`); Keycloak / Authentik / Auth0 / Azure AD / Entra ID as
-  identity providers; ASP.NET Core Identity with
-  `Microsoft.AspNetCore.Authentication.JwtBearer` and `OpenIdConnect`;
-  Python `Authlib`, `python-social-auth`, FastAPI `OAuth2PasswordBearer`;
-  Node.js `passport.js` with strategies (`passport-oauth2`,
-  `passport-saml`, `passport-jwt`). Password hashing only with modern KDFs:
-  Argon2id (RFC 9106) as preferred (e.g. `argon2-cffi` Python, `Argon2.NET`,
-  `argon2-jvm`); alternatively bcrypt with cost ≥ 12 or scrypt;
-  PBKDF2-SHA256 with ≥ 600,000 iterations (OWASP recommendation 2024).
-  Multi-factor authentication (MFA) for privileged access mandatory (TOTP
-  per RFC 6238, FIDO2/WebAuthn). Brute-force protection: account lockout
-  after 5 failed attempts, delay-based rate limiting (e.g. `bucket4j` Java,
-  `slowapi` Python, `IpRateLimit` ASP.NET). References: OWASP Authentication
-  Cheat Sheet, NIST SP 800-63B, OWASP ASVS V2, CWE-287, CWE-307.
+- **DE:** Etablierte Authentifizierung verwenden, etwa OpenID Connect oder WebAuthn. OAuth 2.0 betrifft delegierte Autorisierung und ist allein kein Anmeldeprotokoll; aktuelle Sicherheitspraktiken nach RFC 9700 anwenden. Issuer, Audience, Signatur, Ablauf und Redirect-URI prüfen, PKCE einsetzen, wo erforderlich. Protokollfassungen und Framework-Defaults vor Umsetzung verifizieren; Entwürfe nicht als fertigen Standard bezeichnen.
+- **EN:** Use established authentication such as OpenID Connect or WebAuthn. OAuth 2.0 provides delegated authorization and alone is not a login protocol; apply RFC 9700 security practice. Validate issuer, audience, signature, expiry, and redirect URI, using PKCE where required. Verify protocol versions and framework defaults; do not describe drafts as final standards.
+- **Akzeptanz / Acceptance:** Positive und negative Authentifizierungstests; https://www.rfc-editor.org/rfc/rfc9700.html / Positive and negative authentication tests; primary source.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -438,8 +371,7 @@ configuration. Pure documentation changes are exempt.
   `ECDsaCng`, `ECDiffieHellman`); Python `cryptography` Bibliothek
   (`Fernet` für symmetrisch, `hazmat.primitives` für Low-Level); Go
   `crypto/aes`, `crypto/cipher` (`cipher.NewGCM`), `crypto/ed25519`,
-  `golang.org/x/crypto/chacha20poly1305`. TLS-Konfiguration: TLS 1.3 als
-  Minimum (Fallback TLS 1.2 nur mit AEAD-Ciphern), HSTS-Header
+  `golang.org/x/crypto/chacha20poly1305`. TLS-Konfiguration nach CL-03-07: TLS 1.3 bevorzugen, TLS 1.2 nur im dort geprüften Profil und bis zum dokumentierten Migrationshorizont; HSTS-Header
   (`Strict-Transport-Security: max-age=31536000; includeSubDomains;
   preload`), OCSP Stapling. Schlüsselverwaltung: Hardware Security Module
   (HSM) PKCS#11, Cloud-KMS (AWS KMS, Azure Key Vault, GCP Cloud KMS) oder
@@ -461,14 +393,15 @@ configuration. Pure documentation changes are exempt.
   `ECDsaCng`, `ECDiffieHellman`); Python `cryptography` library (`Fernet`
   for symmetric, `hazmat.primitives` for low-level); Go `crypto/aes`,
   `crypto/cipher` (`cipher.NewGCM`), `crypto/ed25519`,
-  `golang.org/x/crypto/chacha20poly1305`. TLS configuration: TLS 1.3 as
-  minimum (TLS 1.2 fallback only with AEAD ciphers), HSTS header
+  `golang.org/x/crypto/chacha20poly1305`. TLS configuration follows CL-03-07: prefer TLS 1.3, use TLS 1.2 only within its reviewed profile and documented migration horizon; HSTS header
   (`Strict-Transport-Security: max-age=31536000; includeSubDomains;
   preload`), OCSP Stapling. Key management: Hardware Security Module
   (HSM) PKCS#11, cloud KMS (AWS KMS, Azure Key Vault, GCP Cloud KMS), or
   HashiCorp Vault. Key rotation every 90 days for active keys. References:
   NIST SP 800-131A Rev. 2, BSI TR-02102-1, OWASP Cryptographic Storage
   Cheat Sheet, ENISA Cryptographic Guidelines.
+- **DE:** Die obige generische Algorithmusauswahl und 90-Tage-Rotation sind lokale Baseline-Policy, keine pauschale BSI-Empfehlung. ChaCha20, Ed25519 und X25519 nicht als Empfehlung der TR-02102-1 ausgeben. Für BSI-Profilkonformität die konkrete Teilfassung und Parameter prüfen; für TLS gilt ausschließlich CL-03-07 mit TR-02102-2. Abweichungen mit Risiko und Owner dokumentieren.
+- **EN:** The generic algorithm choices and 90-day rotation above are local baseline policy, not blanket BSI recommendations. Do not attribute ChaCha20, Ed25519 or X25519 to TR-02102-1. Assess the specific part and parameters for BSI conformity; TLS follows CL-03-07 and TR-02102-2. Record deviations with risk and owner.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -677,57 +610,9 @@ configuration. Pure documentation changes are exempt.
 
 #### CL-08-10: Datei- und Netzwerk-I/O / File and Network I/O
 
-- **DE:** Pfade werden gegen Path-Traversal (`../`-Sequenzen, absolute
-  Pfade, Unicode-Tricks, NULL-Bytes) geschützt: Eingaben kanonisieren
-  (`Path.toAbsolutePath().normalize()` Java, `Path.GetFullPath` C#,
-  `os.path.realpath` Python, `filepath.Clean` Go), gegen erlaubtes Basis-
-  Verzeichnis prüfen (`startsWith(BASE_DIR)`), Allowlist von
-  Dateinamen-Mustern, Container/Chroot oder seccomp für Hard-Limits.
-  URLs werden gegen Server-Side Request Forgery (SSRF) abgesichert:
-  Allowlist erlaubter Hosts, Verbot von privaten IP-Ranges
-  (RFC 1918: 10/8, 172.16/12, 192.168/16; Loopback 127/8; Link-Local
-  169.254/16; Cloud-Metadata 169.254.169.254 AWS/Azure, metadata.google.
-  internal GCP), DNS-Rebinding-Schutz (Resolved-IP nach DNS-Auflösung
-  validieren), keine Redirects ohne Re-Validation. Bibliotheken: Java
-  `java.net.http.HttpClient` mit Custom `Authenticator`, Python
-  `requests` mit `allowed_hosts`, Go `net/http` mit Custom `Transport`,
-  Node.js `ssrf-req-filter`. Up- und Downloads prüfen Größe (Maximum vor
-  Empfang über `Content-Length`-Header und Streaming-Limit), MIME-Typ
-  (Magic-Byte-Erkennung mit `Apache Tika`, `python-magic`, `file(1)`
-  statt nur Header-Vertrauen), Dateierweiterung-Allowlist, Antivirus-Scan
-  (ClamAV, VirusTotal API), Speicherung außerhalb des Webroots oder mit
-  zufälligen Dateinamen, Image-Stripping von Metadaten (EXIF) und
-  Re-Encoding (ImageMagick mit Policy gegen RCE-CVEs). XML/JSON Parser:
-  XXE-Schutz (`DocumentBuilderFactory.setFeature("http://apache.org/xml/
-  features/disallow-doctype-decl", true)` Java; `defusedxml` Python),
-  JSON-Bomben-Schutz (Tiefen- und Größenlimit). Referenzen: OWASP File
-  Upload Cheat Sheet, OWASP SSRF Cheat Sheet, CWE-22, CWE-918, CWE-434,
-  CWE-611.
-- **EN:** Paths are protected against path traversal (`../` sequences,
-  absolute paths, Unicode tricks, NULL bytes): canonicalise inputs
-  (`Path.toAbsolutePath().normalize()` Java, `Path.GetFullPath` C#,
-  `os.path.realpath` Python, `filepath.Clean` Go), check against allowed
-  base directory (`startsWith(BASE_DIR)`), allowlist of filename patterns,
-  container/chroot or seccomp for hard limits. URLs are protected against
-  Server-Side Request Forgery (SSRF): allowlist of allowed hosts,
-  prohibition of private IP ranges (RFC 1918: 10/8, 172.16/12, 192.168/16;
-  loopback 127/8; link-local 169.254/16; cloud metadata 169.254.169.254
-  AWS/Azure, metadata.google.internal GCP), DNS rebinding protection
-  (validate resolved IP after DNS resolution), no redirects without
-  re-validation. Libraries: Java `java.net.http.HttpClient` with custom
-  `Authenticator`, Python `requests` with `allowed_hosts`, Go `net/http`
-  with custom `Transport`, Node.js `ssrf-req-filter`. Uploads and
-  downloads check size (maximum before receiving via `Content-Length`
-  header and streaming limit), MIME type (magic-byte detection with
-  `Apache Tika`, `python-magic`, `file(1)` instead of trusting headers
-  only), file-extension allowlist, antivirus scan (ClamAV, VirusTotal
-  API), storage outside the webroot or with random filenames, image
-  metadata stripping (EXIF) and re-encoding (ImageMagick with policy
-  against RCE CVEs). XML/JSON parser: XXE protection
-  (`DocumentBuilderFactory.setFeature("http://apache.org/xml/features/
-  disallow-doctype-decl", true)` Java; `defusedxml` Python), JSON-bomb
-  protection (depth and size limits). References: OWASP File Upload Cheat
-  Sheet, OWASP SSRF Cheat Sheet, CWE-22, CWE-918, CWE-434, CWE-611.
+- **DE:** Dateipfade mit pfadkomponentenbewusstem Vergleich innerhalb eines erlaubten Basisverzeichnisses halten; ein einfacher Zeichenketten-Präfixvergleich genügt nicht. Symlinks, Reparse Points und Rennen zwischen Prüfung und Öffnung berücksichtigen und sichere Dateioperationen verwenden. Netzwerkziele einschließlich Redirects und aufgelöster IP-Adressen auf erlaubte Ziele begrenzen; Timeouts und Größenlimits setzen.
+- **EN:** Confine files with a path-component-aware check against an allowed base directory; a string-prefix check is insufficient. Account for symlinks, reparse points, and check/open races, and use safe file operations. Restrict network destinations including redirects and resolved IP addresses; set timeouts and size limits.
+- **Akzeptanz / Acceptance:** Negativtests für Geschwisterpräfix, Traversal, Symlink und Redirect/SSRF. / Negative tests for sibling prefixes, traversal, symlinks, redirects, and SSRF.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -886,6 +771,8 @@ configuration. Pure documentation changes are exempt.
   coverage of documented public interfaces and critical UI flows; every
   new or changed public interface has at least one positive and one
   negative integration test.
+- **DE:** An unsicheren Sprach-/FFI-Grenzen, nativen Abhängigkeiten und Nicht-MSL-Komponenten zusätzlich risikobasiert Fuzzing und geeignete Speicher-/Undefined-Behavior-Sanitizer einsetzen, soweit die Zielplattform dies unterstützt. Andernfalls Plattformgrenze, kompensierende Tests und Restrisiko dokumentieren. Diese lokale Testregel unterstützt die Memory-Safe-Roadmap nach CL-08-13; eine MSL allein beweist keine sichere native Grenze.
+- **EN:** At unsafe language/FFI boundaries, native dependencies and non-MSL components, additionally use risk-based fuzzing and suitable memory/undefined-behaviour sanitizers where the target platform supports them. Otherwise record the platform limit, compensating tests and residual risk. This local testing rule supports the memory-safe roadmap under CL-08-13; MSL alone does not prove native-boundary safety.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -1510,6 +1397,8 @@ configuration. Pure documentation changes are exempt.
   logging, dependency handling, or shell/script code. "Memory-safe
   language" status does not replace this review; it only reduces certain
   memory-error risks.
+- **DE:** Sprachwahl nach CISA „The Case for Memory Safe Roadmaps“ (Dezember 2023) im Sprachprofil begründen: MSL bevorzugen, Nicht-MSL-Ausnahmen mit Plattformzwang, kompensierenden Kontrollen und priorisierter Migrations-Roadmap dokumentieren. CL-08-12 prüft Tests für verbleibende unsichere Grenzen. Die Roadmap ist eine Empfehlung; MSL allein verhindert nicht alle Schwachstellen.
+- **EN:** Justify language selection in the language profile using CISA “The Case for Memory Safe Roadmaps” (December 2023): prefer MSL; document non-MSL exceptions with platform constraints, compensating controls and a prioritised migration roadmap. CL-08-12 tests remaining unsafe boundaries. The roadmap is guidance; MSL alone does not prevent all vulnerabilities.
 - **Akzeptanz / Acceptance:** Pull Request, Review-Dokument oder
   Spec-Kit-Artefakt verweist auf die ausgefüllten Profile für die
   betroffenen Sprachen (z. B. C/C89, C#/.NET, Rust, Go, Swift,
@@ -1701,3 +1590,10 @@ pull request.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+- **Version 2.0.3 (2026-10-20):** Unabhängige Reviewkorrekturen und Baseline 3.4.3; siehe [Prüfbericht](../../maintenance/gsdb-independent-fixes-2026-10-20.md). / Independent review corrections and baseline 3.4.3; see review report.
+
+- **Version 2.0.4 (2026-10-20):** Acht P3-Nachbefunde korrigiert, Baseline 3.4.4. / Correct eight P3 follow-up findings, baseline 3.4.4.

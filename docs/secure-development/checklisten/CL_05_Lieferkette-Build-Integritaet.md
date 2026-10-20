@@ -12,8 +12,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 05 – Lieferkette und Build-Integritaet / Supply Chain and Build Integrity
 
 **Dokument-ID / Document ID:** CL-05
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.2
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -950,77 +950,9 @@ for internal libraries as soon as more than one team uses them.
 
 #### CL-05-11: Lizenz-Compliance / Licence Compliance
 
-- **DE:** Die SBOM wird auf erlaubte Lizenzen geprüft. Verbotene oder
-  unklare Lizenzen werden vor Release ersetzt oder durch Rechtsabstimmung
-  freigegeben.
-  Werkzeuge zur Lizenzprüfung:
-  - **`license-checker`** (npm) – `license-checker --json --out licenses.json`.
-  - **`pip-licenses`** (Python) – `pip-licenses --format=json`.
-  - **`license-maven-plugin`** – `mvn license:aggregate-third-party-report`.
-  - **`cargo-deny`** (Rust) – Lizenz-Allowlist in `deny.toml`.
-  - **`dotnet list package --include-transitive`** + Skript für SPDX-Mapping.
-  - **`syft`** + **`grype`** – SBOM enthält SPDX-Lizenzen.
-  - **FOSSA**, **Black Duck**, **JFrog Xray** – kommerziell.
-  Empfohlene Lizenz-Klassifikation:
-  - **Erlaubt (Allowlist)** – permissive, kompatibel:
-    `MIT`, `Apache-2.0`, `BSD-2-Clause`, `BSD-3-Clause`, `ISC`, `Zlib`,
-    `Unlicense`, `CC0-1.0`.
-  - **Bedingt erlaubt (Review)** – Copyleft, prüfbar:
-    `LGPL-2.1`, `LGPL-3.0`, `MPL-2.0`, `EPL-2.0` (nur dynamisch gelinkt).
-  - **Verboten (Denylist)** – starkes Copyleft, kommerziell unverträglich:
-    `GPL-2.0`, `GPL-3.0`, `AGPL-3.0`, `SSPL-1.0`, `BUSL-1.1`, `Commons Clause`,
-    proprietäre Lizenzen ohne klare Nutzungsrechte.
-  - **Unklar** – `UNKNOWN`, fehlende SPDX-ID: zwingend manuell klären.
-  Allowlist-Konfiguration (Beispiel `cargo-deny`):
-  ```toml
-  [licenses]
-  unlicensed = "deny"
-  allow = ["MIT", "Apache-2.0", "BSD-3-Clause", "ISC", "Unicode-DFS-2016"]
-  copyleft = "deny"
-  confidence-threshold = 0.93
-  ```
-  Rechtsabstimmungs-Workflow:
-  - Bei Verstoß: Ticket „Legal Review" mit SPDX-ID, Komponentenname,
-    Verwendungskontext (statisch/dynamisch gelinkt, modifiziert/unmodifiziert).
-  - Freigabe-Dokument vom Rechtsteam mit Geltungsdauer (z. B. ein Jahr).
-  - Ablage in `docs/security/license-exceptions.md`.
-- **EN:** The SBOM is checked for permitted licences. Forbidden or unclear
-  licences are replaced before release or cleared with legal review.
-  Licence checking tools:
-  - **`license-checker`** (npm) – `license-checker --json --out licenses.json`.
-  - **`pip-licenses`** (Python) – `pip-licenses --format=json`.
-  - **`license-maven-plugin`** – `mvn license:aggregate-third-party-report`.
-  - **`cargo-deny`** (Rust) – licence allowlist in `deny.toml`.
-  - **`dotnet list package --include-transitive`** + script for SPDX mapping.
-  - **`syft`** + **`grype`** – SBOM contains SPDX licences.
-  - **FOSSA**, **Black Duck**, **JFrog Xray** – commercial.
-  Recommended licence classification:
-  - **Allowed (allowlist)** – permissive, compatible:
-    `MIT`, `Apache-2.0`, `BSD-2-Clause`, `BSD-3-Clause`, `ISC`, `Zlib`,
-    `Unlicense`, `CC0-1.0`.
-  - **Conditional (review)** – copyleft, reviewable:
-    `LGPL-2.1`, `LGPL-3.0`, `MPL-2.0`, `EPL-2.0` (dynamic linking only).
-  - **Forbidden (denylist)** – strong copyleft, commercially incompatible:
-    `GPL-2.0`, `GPL-3.0`, `AGPL-3.0`, `SSPL-1.0`, `BUSL-1.1`, `Commons Clause`,
-    proprietary licences without clear usage rights.
-  - **Unclear** – `UNKNOWN`, missing SPDX ID: must be clarified manually.
-  Allowlist configuration (example `cargo-deny`):
-  ```toml
-  [licenses]
-  unlicensed = "deny"
-  allow = ["MIT", "Apache-2.0", "BSD-3-Clause", "ISC", "Unicode-DFS-2016"]
-  copyleft = "deny"
-  confidence-threshold = 0.93
-  ```
-  Legal review workflow:
-  - On violation: ticket "Legal Review" with SPDX ID, component name,
-    usage context (statically/dynamically linked, modified/unmodified).
-  - Release document from legal team with validity period (e.g. one year).
-  - Storage in `docs/security/license-exceptions.md`.
-- **Akzeptanz / Acceptance:** Lizenz-Bericht je Release im SPDX/CycloneDX-Format
-  vorhanden, Allowlist/Denylist in `deny.toml` oder gleichwertiger
-  Konfiguration; alle Komponenten haben gültige SPDX-IDs; Ausnahmen mit
-  Rechtsfreigabe in `docs/security/license-exceptions.md` dokumentiert.
+- **DE:** Lizenzen werden anhand konkreter Lizenzfassung, Nutzungsart, Weitergabe und Kombination bewertet. Copyleft ist nicht pauschal kommerziell unvereinbar und dynamisches Linken ist keine allgemeine Ausnahme für alle Lizenzen. Fehlende oder unklare Rechte bleiben Open bis zur zuständigen Entscheidung. SBOM, Lizenztexte, Pflichten und Projekt-Allowlist nachvollziehbar halten; Rechtsfragen werden nicht durch Scanner entschieden.
+- **EN:** Assess exact licence versions, use, redistribution, and combination. Copyleft is not inherently incompatible with commercial use, and dynamic linking is not a universal exemption. Missing or unclear rights remain Open until the responsible decision. Maintain SBOM, licence texts, obligations, and project allow-list; scanners do not decide legal questions.
+- **Akzeptanz / Acceptance:** Lizenzentscheidung mit Quelle, Owner und Pflichten; ungeklärte Rechte blockieren die betroffene Weitergabe. / Licence decision with source, owner, and obligations; unresolved rights block affected redistribution.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -1147,18 +1079,19 @@ for internal libraries as soon as more than one team uses them.
 - **DE:** Bindet ein release- oder verteilbares Artefakt ein KI-Modell
   oder einen KI-Dienst ein, wird diese KI-Abhängigkeit in der SBOM bzw.
   im Lieferketten-Evidenz-Dokument geführt. CycloneDX bildet dies über
-  Komponenten des Typs `machine-learning-model` bzw. `service` ab
-  (ML-BOM). Erfasst werden Anbieter, Modell- oder Dienst-Identifikator,
+  Modell-Komponenten des Typs `machine-learning-model` und die eigene
+  `services`-Sammlung für Dienste ab (ML-BOM; eingesetzte Schemaversion prüfen). Erfasst werden Anbieter, Modell- oder Dienst-Identifikator,
   Version oder Endpunkt sowie ein Verweis auf Model Card oder AI-SBOM
   des Anbieters. Für fremdbezogene Modelle wird keine eigene Modell-
   oder Trainingsdaten-SBOM erzeugt; maßgeblich ist die
-  Anbieter-Transparenz (siehe CL_KI-Codeerzeugung, Prüfpunkt 15).
+  Anbieter-Transparenz (siehe CL-09-15).
   Bezugsrahmen ist die G7-Leitlinie „Software Bill of Materials for AI –
   Minimum Elements" (2026).
 - **EN:** If a release or distributable artefact embeds an AI model or
   AI service, this AI dependency is recorded in the SBOM or the
   supply-chain evidence document. CycloneDX represents this through
-  components of type `machine-learning-model` or `service` (ML-BOM).
+  model components of type `machine-learning-model` and the separate
+  `services` collection (ML-BOM; check the emitted schema version).
   Recorded are the provider, model or service identifier, version or
   endpoint, and a link to the provider's model card or AI-SBOM. For
   externally sourced models no own model or training-data SBOM is
@@ -1352,3 +1285,10 @@ document where applicable.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+DE: Baseline-Bindung 3.4.3 (20.10.2026), redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.3 (2026-10-20), editorial; semantic document version unchanged.
+
+DE: Baseline-Bindung 3.4.4, redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.4 is editorial; semantic document version unchanged.

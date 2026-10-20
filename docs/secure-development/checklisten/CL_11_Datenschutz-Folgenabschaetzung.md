@@ -12,8 +12,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 11 – Datenschutz-Folgenabschaetzung (DSGVO Art. 35) / Data Protection Impact Assessment (GDPR Art. 35)
 
 **Dokument-ID / Document ID:** CL-11
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.3
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -464,7 +464,7 @@ status must not be shown by color alone.
 #### CL-11-06: Konsultation der oder des Datenschutzbeauftragten / Consultation of the Data Protection Officer
 
 - **DE:** Die DPIA wird gemäß DSGVO Art. 35 Abs. 2 unter Beteiligung
-  der Datenschutzrolle erstellt. Die
+  einer oder eines benannten DSB, sofern benannt, erstellt. Die
   Stellungnahme der oder des DSB wird in die DPIA-Dokumentation
   aufgenommen. Sie enthält mindestens: Beurteilung der DPIA-Methodik,
   Beurteilung der Vollständigkeit, Empfehlungen zu Maßnahmen,
@@ -474,7 +474,7 @@ status must not be shown by color alone.
   nicht oder nicht vollständig umgesetzt wird, wird dies begründet
   dokumentiert.
 - **EN:** The DPIA is prepared with involvement of the Organisation data
-  protection officer (DPO) per GDPR Art. 35(2). The DPO opinion is
+  protection officer (DPO), where designated, per GDPR Art. 35(2). The DPO opinion is
   included in the DPIA documentation. It contains at least: assessment
   of DPIA methodology, completeness assessment, recommendations on
   measures, indication of any further advice or consultation needs,
@@ -482,8 +482,8 @@ status must not be shown by color alone.
   significant concerns). If the DPO recommendation is not or not fully
   implemented, the reasons are documented.
 - **Akzeptanz / Acceptance:** Datierte und unterschriebene Stellungnahme
-  der oder des DSB als Anlage zur DPIA; Antwortdokument bei
-  Abweichungen. / Dated and signed DPO opinion attached to the DPIA;
+  der oder des DSB, sofern benannt, als Anlage zur DPIA; Antwortdokument bei
+  Abweichungen. / Dated and signed DPO opinion, where designated, attached to the DPIA;
   response document where there are deviations.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
@@ -497,7 +497,7 @@ status must not be shown by color alone.
   - [ ] `Not Fulfilled`
   - [ ] `Not Assessed`
 - **Begründung / Explanation:** _Kurz erklären: Was wurde geprüft? Warum passt der Status? Welche Annahme gilt? Schreibe so, dass eine neue Entwicklerin, ein neuer Entwickler oder eine auszubildende Person den Entscheid ohne Spezialwissen versteht. / Briefly explain: What was checked? Why does the status fit? Which assumption applies? Write so that a new developer or apprentice can understand the decision without specialist security knowledge._
-- **Evidenz / Evidence:** _Pfad, Link, Ticket, DSB-Stellungnahme nennen. Wenn der Nachweis nicht selbsterklärend ist, kurz beschreiben, was er zeigt. / Name path, link, ticket, DPO opinion. If the evidence is not self-explanatory, briefly describe what it shows._
+- **Evidenz / Evidence:** _Pfad, Link, Ticket, DSB-Stellungnahme nennen. Wenn der Nachweis nicht selbsterklärend ist, kurz beschreiben, was er zeigt. / Name path, link, ticket, DPO opinion where a DPO is designated. If the evidence is not self-explanatory, briefly describe what it shows._
 - **Restrisiko / Residual risk:** _Verbleibendes Risiko oder `None` mit kurzer Begründung dokumentieren. / Record remaining risk or `None` with a short rationale._
 - **Neubewertungs-Trigger / Re-evaluation trigger:** _Aenderung, Termin oder Ereignis nennen, das eine erneute Prüfung auslöst. / Name the change, date, or event that triggers renewed review._
 - **Nächste Maßnahme / Next action:** _Bei `Open`, `Partly Fulfilled`, `Not Fulfilled` oder `Not Assessed` ausfüllen: konkrete Aufgabe, verantwortliche Person, Zieltermin und erwarteter Nachweis. / Fill for `Open`, `Partly Fulfilled`, `Not Fulfilled`, or `Not Assessed`: concrete task, owner, target date, and expected evidence._
@@ -512,7 +512,7 @@ status must not be shown by color alone.
   und Auftragsverarbeitern, geplante Schutzmaßnahmen und alle
   weiteren von der Behörde angeforderten Informationen. Die Antwort
   der Aufsichtsbehörde wird in der DPIA-Dokumentation abgelegt; die
-  Verarbeitung beginnt erst nach Klärung.
+  Verarbeitung beginnt als zusätzliche lokale Freigaberegel erst nach dokumentierter Klärung. Art. 36 verlangt die vorherige Konsultation bei verbleibendem hohen Risiko; er ist kein pauschales gesetzliches Genehmigungserfordernis für jede Verarbeitung.
 - **EN:** If the DPIA shows residual high risk despite planned measures,
   the competent supervisory authority is consulted before processing
   starts per GDPR Art. 36. For the organisation this is the competent data protection supervisory authority of the project or seat jurisdiction. The consultation
@@ -520,11 +520,11 @@ status must not be shown by color alone.
   responsibilities between controllers and processors, planned
   protective measures, and any further information requested by the
   authority. The authority's response is filed with the DPIA
-  documentation; processing only begins after the matter is settled.
+  documentation; as an additional local release rule, processing only begins after documented resolution. Article 36 requires prior consultation for residual high risk; it is not a blanket statutory authorisation requirement for every processing activity.
 - **Akzeptanz / Acceptance:** Konsultationsanfrage und Antwort der
-  Aufsichtsbehörde dokumentiert; Verarbeitung erst nach abgeschlossener
+  Aufsichtsbehörde dokumentiert; zusätzliche lokale Freigaberegel kenntlich gemacht; Verarbeitung erst nach abgeschlossener
   Konsultation aufgenommen. / Consultation request and authority
-  response documented; processing only started after the consultation
+  response documented; identify the additional local release rule; processing only started after the consultation
   is closed.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
@@ -547,7 +547,9 @@ status must not be shown by color alone.
 
 - **DE:** Jede Verarbeitung personenbezogener Daten wird im zentralen
   Verzeichnis der Verarbeitungstätigkeiten (Records of Processing
-  Activities, RoPA) der Organisation gemäß DSGVO Art. 30 geführt.
+  Activities, RoPA) der Organisation geführt. Dies ist die lokale
+  Baseline-Vorgabe; die eng begrenzte gesetzliche Ausnahme aus Art. 30(5)
+  und die Rollen aus Art. 30(1)/(2) werden gesondert bewertet.
   Mindestinhalte: Name und Kontaktdaten der verantwortlichen Stelle,
   Zwecke der Verarbeitung, Kategorien Betroffener, Kategorien
   personenbezogener Daten, Empfängerkategorien, Drittlandsübermittlungen
@@ -557,7 +559,9 @@ status must not be shown by color alone.
   internes RoPA-System; alternativ DSGVO-konforme Drittsysteme; in
   Spezialfällen tabellarische Vorlagen mit Versionierung im definierten Nachweisspeicher.
 - **EN:** Every processing of personal data is registered in the Organisation
-  central record of processing activities (RoPA) per GDPR Art. 30.
+  central record of processing activities (RoPA) under local baseline
+  policy. Assess the narrow Article 30(5) exemption and controller/processor
+  roles under Article 30(1)/(2) separately.
   Minimum content: name and contact details of the controller,
   purposes of processing, categories of data subjects, categories of
   personal data, categories of recipients, third-country transfers
@@ -697,8 +701,8 @@ status must not be shown by color alone.
   rechtlicher Wirkung ohne Schutzvorkehrungen (Art. 22).
   Implementierung: Selfservice-Portal für Auskunft und Export, klare
   Kontaktstelle für formlose Anfragen, dokumentierter Workflow zur
-  Bearbeitung mit Einhaltung der Frist (Monat, mit zweimonatiger
-  Verlängerungsoption gemäß Art. 12 Abs. 3), Identitätsprüfung der
+  Bearbeitung mit Einhaltung der Frist (Monat, mit begründeter Verlängerung um bis zu zwei Monate und Mitteilung
+  innerhalb des ersten Monats gemäß Art. 12 Abs. 3), Identitätsprüfung der
   Antragsstellenden, Lösch- und Sperrkonzept für jede Datenkategorie.
 - **EN:** The exercise of data-subject rights per GDPR Art. 12–22 is
   ensured technically and organisationally. Reviews: transparent
@@ -709,8 +713,8 @@ status must not be shown by color alone.
   decision with legal effect without safeguards (Art. 22).
   Implementation: self-service portal for access and export, clear
   contact point for informal requests, documented handling workflow
-  meeting the deadline (one month, with two-month extension per Art.
-  12(3)), identity verification of requesters, erasure and blocking
+  meeting the deadline (one month, with a justified extension of up to two months and notification
+  within the first month under Art. 12(3)), identity verification of requesters, erasure and blocking
   concept per data category.
 - **Akzeptanz / Acceptance:** Dokumentierte Prozesse und Schnittstellen
   für jedes Betroffenenrecht; Frist- und Identitätsprüfung im
@@ -736,7 +740,8 @@ status must not be shown by color alone.
 #### CL-11-12: Fortschreibung und Aktualisierung / Maintenance and Update
 
 - **DE:** Die DPIA ist ein lebendes Dokument. Sie wird mindestens
-  jährlich auf Aktualität geprüft und bei jeder wesentlichen Änderung
+  jährlich (lokale Review-Regel, keine feste DSGVO-Jahresfrist) auf Aktualität
+  geprüft und bei jeder wesentlichen Änderung
   der Verarbeitung außerplanmäßig aktualisiert. Wesentliche Änderungen
   sind insbesondere: neue Datenkategorien, neue Empfänger oder neue
   Drittlandsübermittlungen, neue Auftragsverarbeiter, Wechsel der
@@ -746,9 +751,9 @@ status must not be shown by color alone.
   Schwellwertanalyse-relevante Erkenntnisse aus Vorfällen, Audits oder
   Schwachstellen. Die Versionshistorie der DPIA wird in der
   Dokumentation geführt; jede Version wird mit Datum, Autor\*in und
-  Stellungnahme der oder des DSB versehen.
+  gegebenenfalls DSB-Stellungnahme versehen.
 - **EN:** The DPIA is a living document. It is reviewed at least
-  annually and updated outside the regular cycle on any material change
+  annually (local policy, not a fixed GDPR annual deadline) and updated outside the regular cycle on any material change
   of the processing. Material changes include new data categories, new
   recipients or third-country transfers, new processors, change of legal
   basis, new purposes, use of new technologies (for example AI/machine
@@ -756,7 +761,7 @@ status must not be shown by color alone.
   scope (scaling), new threshold-analysis-relevant findings from
   incidents, audits, or vulnerabilities. The DPIA version history is
   kept in the documentation; each version carries date, author, and
-  DPO opinion.
+  DPO opinion where a DPO is designated.
 - **Akzeptanz / Acceptance:** DPIA mit aktueller Versionsangabe;
   jährliche Überprüfung dokumentiert; Auslöser für außerplanmäßige
   Aktualisierungen festgelegt. / DPIA with current version; annual
@@ -891,3 +896,10 @@ status must not be shown by color alone.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+- **Version 2.0.3 (2026-10-20):** Unabhängige Reviewkorrekturen und Baseline 3.4.3; siehe [Prüfbericht](../../maintenance/gsdb-independent-fixes-2026-10-20.md). / Independent review corrections and baseline 3.4.3; see review report.
+
+DE: Baseline-Bindung 3.4.4, redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.4 is editorial; semantic document version unchanged.
