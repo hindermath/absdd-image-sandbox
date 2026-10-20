@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "SecureDevelopmentGateEvidence",
+  "contextId": "absdd-image-sandbox-gsdb344",
+  "gate": "closure",
+  "mode": "development",
+  "createdAt": "2026-10-20T19:59:51.6696920+00:00",
+  "review": {
+    "owner": "Thorsten Hindermann",
+    "reviewer": "Codex under explicit bounded three-pilot GSDB rollout authority; human product decisions remain independent",
+    "reviewedAt": "2026-10-20T19:59:51.6696920+00:00",
+    "reviewDue": "2027-01-10",
+    "residualRisk": "Source-only GSDB adoption and Assurance package integration do not establish product compliance, physical accessibility, operational sandbox approval or licensed ISO review. Historical evidence remains preserved.",
+    "reevaluationTrigger": "Primary source, baseline, preset, scope or authority change; quarterly review."
+  },
+  "assessments": [
+    {
+      "dueAt": "2026-12-31",
+      "implementation": "Not Fulfilled",
+      "evidence": "docs/maintenance/gsdb-344-pilot-2026-10-20.md",
+      "nextAction": "Resolve project-specific product/pilot/general-release decisions separately from this authorised technical rollout.",
+      "id": "HUMAN-PRODUCT-DECISIONS",
+      "applicability": "Applicable",
+      "owner": "Thorsten Hindermann"
+    }
+  ],
+  "outcome": "Blocked",
+  "externalComparisonBoundary": "HOSK/GWDG: ExternalComparison only; never local evidence",
+  "verificationScope": "absdd-image-sandbox: GSDB 3.4.4 and the exact fourteen-preset profile, including Assurance 0.1.5; no product feature or fleet release.",
+  "runbookApplicability": "N/A",
+  "runbookRationale": "Bounded governance integration; commands, scope and proof limits are recorded in the pilot report.",
+  "humanDecisions": {
+    "technicalValidation": {
+      "status": "Open",
+      "authority": "Thorsten Hindermann",
+      "evidence": "Human decision pending; source review and CI do not confer approval."
+    },
+    "pilotAuthorization": {
+      "status": "Open",
+      "authority": "Thorsten Hindermann",
+      "evidence": "Human decision pending; source review and CI do not confer approval."
+    },
+    "projectAcceptance": {
+      "status": "Open",
+      "authority": "Thorsten Hindermann",
+      "evidence": "Human decision pending; source review and CI do not confer approval."
+    },
+    "generalRelease": {
+      "status": "Open",
+      "authority": "Thorsten Hindermann",
+      "evidence": "Human decision pending; source review and CI do not confer approval."
+    }
+  },
+  "nextAction": "Complete exact-head pilot delivery under explicit MergeAndSync/admin authority; broader project acceptance and historical findings remain separate."
+}

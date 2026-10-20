@@ -12,8 +12,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 02 – Sichere Softwarearchitektur / Secure Software Architecture
 
 **Dokument-ID / Document ID:** CL-02
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.3
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -200,7 +200,7 @@ impact.
   Eingangsvalidierung im Application-Code (Bean Validation, Pydantic,
   FluentValidation); (3) parametrisierte SQL-Queries; (4) Datenbank-
   Berechtigungen mit Read-Only-Rollen je nach Anwendungsfall; (5)
-  Datenbank-Verschlüsselung at-rest (TDE in PostgreSQL/SQL Server,
+  Datenbank-Verschlüsselung at-rest (plattformgeeignete Speicherverschlüsselung,
   AWS RDS Encryption); (6) Audit-Logging mit unveränderlichem Speicher
   (Append-Only-Log, S3 Object Lock). Beispiel für ein API-Token:
   HTTPS + kurze TTL + Audience-Claim + Token-Revocation-Liste.
@@ -216,7 +216,7 @@ impact.
   application code (Bean Validation, Pydantic, FluentValidation);
   (3) parameterised SQL queries; (4) database privileges with
   read-only roles per use case; (5) database encryption at rest
-  (TDE in PostgreSQL/SQL Server, AWS RDS encryption); (6) audit
+  (platform-appropriate storage encryption, AWS RDS encryption); (6) audit
   logging with immutable storage (append-only log, S3 Object Lock).
   Example for an API token: HTTPS + short TTL + audience claim +
   token revocation list. Example for containers: signed image
@@ -769,18 +769,18 @@ impact.
 
 - **DE:** Wenn ein Projekt Cloud-Dienste, SaaS, PaaS, IaaS, verwaltete
   Dienste, Container-Registries, Artefakt-Hosting oder providergebundene
-  Deployments wesentlich nutzt oder bereitstellt, wird BSI C3A als
+  Deployments wesentlich nutzt oder bereitstellt, wird BSI C3A v1.0 (27.04.2026) als
   Bewertungsrahmen für selbstbestimmte Cloud-Nutzung geprüft. Die
   Architektur dokumentiert Provider-Abhängigkeiten, Lock-in-Risiken,
   Exit- oder Portabilitätsoptionen, Daten- und Betriebsstandorte sowie
-  betroffene S-ADRs. Reine Entwicklungsinfrastruktur darf mit kurzer
+  betroffene S-ADRs. C3A ist selbst nicht bindend, setzt C5 voraus und umfasst SOV-1 bis SOV-6; SOV-7/8 sind ausgenommen. Eine EU-Region allein belegt keine Autonomie; C3A ersetzt weder C5 noch Datenschutz-/Transferprüfung. Reine Entwicklungsinfrastruktur darf mit kurzer
   Toolchain-Begründung als `nicht anwendbar` dokumentiert werden.
 - **EN:** If a project materially uses or provides cloud services, SaaS,
   PaaS, IaaS, managed services, container registries, artefact hosting, or
-  provider-dependent deployments, BSI C3A is checked as an assessment
+  provider-dependent deployments, BSI C3A v1.0 (2026-04-27) is checked as an assessment
   framework for self-determined cloud use. The architecture documents
   provider dependencies, lock-in risks, exit or portability options, data
-  and operation locations, and affected S-ADRs. Generic development
+  and operation locations, and affected S-ADRs. C3A is not binding by itself, presupposes C5 and covers SOV-1 to SOV-6; SOV-7/8 are excluded. An EU region alone does not demonstrate autonomy; C3A replaces neither C5 nor privacy/transfer review. Generic development
   infrastructure may be documented as `not applicable` with a short
   toolchain rationale.
 - **Akzeptanz / Acceptance:** `docs/security/cloud-autonomy-applicability.md`
@@ -812,18 +812,18 @@ impact.
 #### CL-02-13: Cloud-Compliance-Assurance / Cloud Compliance Assurance
 
 - **DE:** Wenn ein Projekt Cloud-Dienste wesentlich nutzt oder bereitstellt,
-  wird BSI C5 als Assurance-Rahmen geprüft. Die Architektur dokumentiert,
+  wird BSI C5:2026 v1.1.0 (11.08.2026) als Assurance-Rahmen geprüft. Die Architektur dokumentiert,
   ob ein C5-Testat oder ein gleichwertiger Nachweis vorliegt, welchen
   Umfang dieser Nachweis abdeckt, welche Shared-Responsibility-Lücken
   bleiben, welche Subdienstleister betroffen sind und welche
   Kundenpflichten offen sind. Fehlt ein C5-Nachweis, werden Ersatznachweise
-  und Restrisiken dokumentiert.
-- **EN:** If a project materially uses or provides cloud services, BSI C5
-  is checked as an assurance framework. The architecture documents whether
+  und Restrisiken dokumentiert. Testattyp, geprüfter Zeitraum, Dienst/Region, Abweichungen und ergänzende Kundenkontrollen nachweisen. Ein C5-Testat ist keine pauschale Souveränitäts- oder Datenschutzfreigabe.
+- **EN:** If a project materially uses or provides cloud services, it
+  uses BSI C5:2026 v1.1.0 (2026-08-11) as an assurance framework. The architecture documents whether
   a C5 attestation or equivalent evidence exists, which scope it covers,
   which shared-responsibility gaps remain, which subprocessors are
   involved, and which customer-side duties remain open. If C5 evidence is
-  missing, substitute evidence and residual risks are documented.
+  missing, substitute evidence and residual risks are documented. Evidence report type, assessed period, service/region, exceptions and complementary customer controls. A C5 report is not blanket sovereignty or privacy approval.
 - **Akzeptanz / Acceptance:** `docs/security/cloud-compliance-assurance.md`
   oder ein gleichwertiges Spec-Kit-Artefakt nennt C5-/Assurance-Status,
   Scope, Provider/Subdienstleister, Shared-Responsibility-Gaps,
@@ -959,3 +959,10 @@ rationale.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+- **Version 2.0.3 (2026-10-20):** Unabhängige Reviewkorrekturen und Baseline 3.4.3; siehe [Prüfbericht](../../maintenance/gsdb-independent-fixes-2026-10-20.md). / Independent review corrections and baseline 3.4.3; see review report.
+
+DE: Baseline-Bindung 3.4.4, redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.4 is editorial; semantic document version unchanged.

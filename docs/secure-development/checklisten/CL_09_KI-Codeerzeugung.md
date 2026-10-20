@@ -12,8 +12,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 09 – KI-gestuetzte Codeerzeugung / AI-Assisted Code Generation
 
 **Dokument-ID / Document ID:** CL-09
-**Version / Version:** 2.2.0
-**Baseline-Version / Baseline version:** 3.2.0
+**Version / Version:** 2.2.4
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -151,69 +151,9 @@ whose output flows into production code or production-near scripts.
 
 #### CL-09-01: Genehmigte KI-Werkzeuge / Approved AI Tools
 
-- **DE:** Es kommen nur Werkzeuge zum Einsatz, die in der Liste der
-  genehmigten Software stehen. Cloud-basierte und lokale Werkzeuge sind
-  getrennt freigegeben, weil sie unterschiedliche Datenschutz-, Lizenz-
-  und Auftragsverarbeitungs-Profile haben. Genehmigte Cloud-Werkzeuge
-  (Beispielkatalog mit Auftragsverarbeitung gemäß DSGVO Art. 28):
-  GitHub Copilot Business und Enterprise (kein Training auf Kundendaten,
-  Indemnification, EU-Datenresidenz Enterprise), Microsoft 365 Copilot
-  (DPA, EU Data Boundary), Anthropic Claude (Enterprise-Plan mit Zero
-  Data Retention nach Verhandlung), OpenAI ChatGPT Enterprise/Team mit
-  ZDR, Google Gemini Code Assist (Enterprise-DPA), JetBrains AI Assistant
-  (Enterprise-Plan, Datenresidenz EU), AWS Bedrock/Q Developer in eigener
-  AWS-Region, Azure OpenAI Service in EU-Region. Genehmigte lokale
-  Werkzeuge ohne Cloud-Datenfluss: Continue.dev mit lokalem Ollama,
-  Tabby ML mit eigener GPU, Codeium Self-Hosted, llama.cpp mit Code Llama
-  70B/Qwen2.5-Coder/DeepSeek-Coder-V2/StarCoder2, LM Studio, vLLM, GPT4All.
-  Verboten ohne explizite Freigabe: kostenlose Web-Chat-Bots ohne DPA,
-  Browser-Plugins unbekannter Herkunft, Forks aus inoffiziellen Stores.
-  Software-Inventar (CMDB Snipe-IT, ServiceNow CMDB, Atlassian Insight)
-  pflegt pro Werkzeug: Hersteller, Lizenztyp (Pro/Business/Enterprise),
-  EU/US-Datenresidenz, ZDR-Status (Zero Data Retention), Trainings-Opt-out,
-  DPA-Datum, Vendor-Risk-Score. SBOM-Eintrag (CycloneDX) für jede lokale
-  Modell-Datei mit SHA-256-Hash. Beispiel für `docs/security/ai-tools-inventory.md`:
-  Tabelle mit Spalten: Werkzeug, Variante, Vendor, EU-DPA-Datum, ZDR,
-  `excludeFiles`-Profil, freigegeben-bis-Datum, Owner Security Champion.
-  Vierteljährliche Re-Evaluation, neue Werkzeuge nur nach
-  Vendor-Security-Assessment (CAIQ, SOC 2 Type II, ISO/IEC 27001-Zertifikat,
-  ISO/IEC 42001 AI-Management-System falls verfügbar). Referenzen:
-  ISO/IEC 27001 A.5.23 (Cloud-Services), DSGVO Art. 28, NIST AI RMF
-  GOVERN-1.1, OWASP Top 10 for LLM Applications LLM05:2025 (Improper Output Handling), EU AI
-  Act Verordnung (EU) 2024/1689.
-- **EN:** Only tools listed in the approved software inventory are used.
-  Cloud-based and local tools are approved separately because they have
-  different data protection, licensing, and data processing profiles.
-  Approved cloud tools (example catalogue with data processing under GDPR
-  Art. 28): GitHub Copilot Business and Enterprise (no training on
-  customer data, indemnification, EU data residency in Enterprise),
-  Microsoft 365 Copilot (DPA, EU Data Boundary), Anthropic Claude
-  (Enterprise plan with Zero Data Retention after negotiation), OpenAI
-  ChatGPT Enterprise/Team with ZDR, Google Gemini Code Assist (Enterprise
-  DPA), JetBrains AI Assistant (Enterprise plan, EU data residency), AWS
-  Bedrock/Q Developer in own AWS region, Azure OpenAI Service in EU
-  region. Approved local tools without cloud data flow: Continue.dev with
-  local Ollama, Tabby ML with own GPU, Codeium Self-Hosted, llama.cpp
-  with Code Llama 70B/Qwen2.5-Coder/DeepSeek-Coder-V2/StarCoder2, LM
-  Studio, vLLM, GPT4All. Forbidden without explicit approval: free web
-  chatbots without DPA, browser plugins of unknown origin, forks from
-  unofficial stores. Software inventory (CMDB Snipe-IT, ServiceNow CMDB,
-  Atlassian Insight) maintains per tool: vendor, licence type
-  (Pro/Business/Enterprise), EU/US data residency, ZDR (Zero Data
-  Retention) status, training opt-out, DPA date, vendor risk score. SBOM
-  entry (CycloneDX) for each local model file with SHA-256 hash. Example
-  for `docs/security/ai-tools-inventory.md`: table with columns: tool,
-  variant, vendor, EU DPA date, ZDR, `excludeFiles` profile, approved-
-  until date, security champion owner. Quarterly re-evaluation, new tools
-  only after vendor security assessment (CAIQ, SOC 2 Type II, ISO/IEC
-  27001 certificate, ISO/IEC 42001 AI management system if available).
-  References: ISO/IEC 27001 A.5.23 (cloud services), GDPR Art. 28, NIST
-  AI RMF GOVERN-1.1, OWASP Top 10 for LLM Applications LLM05:2025 (Improper Output Handling),
-  EU AI Act Regulation (EU) 2024/1689.
-- **Akzeptanz / Acceptance:** `docs/security/ai-tools-inventory.md`
-  vorhanden mit Vendor, Lizenztyp, EU-DPA-Datum, ZDR-Status, freigegeben-bis-Datum,
-  Owner; pro Werkzeug Datenschutzhinweis und SOC 2/ISO 27001-Nachweis;
-  vierteljährliche Re-Evaluation dokumentiert.
+- **DE:** KI-Werkzeuge werden vor Nutzung mit Betriebsart, Anbieter, Datenflüssen, Vertragslage, Telemetrie, Aufbewahrung und technischen Zugriffen bewertet und genehmigt. Produktnamen oder Tarifbezeichnungen beweisen weder Trainingsausschluss noch Zero Data Retention. Anbieterangaben und wirksame Kontoeinstellungen am Prüftag belegen; unbekannte Vertrags- oder Datenschutzeigenschaften bleiben offen.
+- **EN:** Approve AI tools only after reviewing operating mode, provider, data flows, contracts, telemetry, retention, and technical access. Product or plan names prove neither training exclusion nor zero data retention. Record current provider evidence and effective account settings; unknown contract or privacy properties remain open.
+- **Akzeptanz / Acceptance:** Datierter Inventareintrag mit Quelle, Owner, Scope und Ablauf. / Dated inventory with source, owner, scope, and expiry.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -494,78 +434,9 @@ whose output flows into production code or production-near scripts.
 
 #### CL-09-05: Schutz vor halluzinierten Paketen / Protection Against Hallucinated Packages
 
-- **DE:** KI-Modelle erfinden manchmal Bibliotheken
-  („Slopsquatting"-Risiko). Vorgeschlagene Paketnamen werden gegen die
-  offizielle Registry geprüft, weil Angreifer halluzinierte Paketnamen
-  als typosquatted Schadpakete registrieren können (Beispiel-Vorfälle:
-  `huggingface-cli` Halluzinationen führten 2024 zu Schadpaket-Anmeldungen
-  auf PyPI; gleicher Angriffsvektor auf npm mit `node-fetch-2`,
-  `aws-sdk-s3-helper` etc.). Prüfschritte: (1) Existenz auf offizieller
-  Registry verifizieren (siehe Item 4); (2) Veröffentlichungsdatum
-  prüfen — Pakete < 30 Tage alt mit verdächtigem Namen sind starkes
-  Red-Flag, automatische Sperrung via npm `minimumReleaseAge: "30
-  days"` für Lock-Dateien oder Renovate `minimumReleaseAge`-Regel; (3)
-  Maintainer-Profil prüfen — neue Account ohne andere Pakete oder
-  Verbindung zur erwarteten Organisation ist verdächtig (`npm owner ls
-  <package>`, `pip show <package> | grep Author`, GitHub-Profil-Alter
-  und -Aktivität); (4) Download-Statistik prüfen — < 100 Downloads/Woche
-  bei vermeintlich populärem Paketnamen ist Halluzinations-Indiz; (5)
-  Cross-Check Levenshtein-Distanz zu populären Paketen
-  (`packagename-typosquat-detector`, npm `package-name-similarity`,
-  `pip-audit --vulnerability-service all`); (6) GitHub-Repository-Link
-  und README aufrufen — fehlende oder generisch wirkende Inhalte sind
-  Red Flags. Bekannte Halluzinations-Muster: Bindestrich-Variationen
-  (`requests-http` statt `requests`), Singular/Plural-Wechsel (`eslint-plugin-react`
-  vs. `eslint-plugins-react`), Versions-Suffixe (`lodash3`, `react-dom2`),
-  scope-Verschiebungen (`@aws-sdk/s3` vs. `@aws-sdks/s3`). Automatisierte
-  Verteidigung: `socket.dev` (Supply-chain-Sicherheit, prüft neue
-  Pakete auf Anomalien wie obfuscated code, install scripts,
-  Telemetrie-Code, typosquatting), `phylum.io`,
-  `apiiro/dependency-combobulator`, GitHub Native (npm provenance,
-  PyPI Trusted Publishers via OIDC). CI-Gate: `npm install` mit
-  `--ignore-scripts` standardmäßig, danach manuelle Allowlist für
-  bekannte sichere `postinstall`-Skripte. Referenzen: OWASP LLM Top 10
-  LLM05 (Improper Output Handling), Lasso Security (Slopsquatting-
-  Forschung 2024), JFrog SecurityResearch (PyPI-Halluzinations-Studie),
-  CRA Anhang I Teil II 2.2 (Schwachstellenmanagement Lieferkette).
-- **EN:** AI models sometimes invent libraries ("slopsquatting" risk).
-  Suggested package names are verified against the official registry,
-  because attackers can register hallucinated package names as
-  typosquatted malicious packages (example incidents: `huggingface-cli`
-  hallucinations led to malicious package uploads on PyPI in 2024;
-  same attack vector on npm with `node-fetch-2`, `aws-sdk-s3-helper`,
-  etc.). Check steps: (1) Verify existence on the official registry
-  (see item 4); (2) Check publication date — packages < 30 days old
-  with suspicious names are a strong red flag, auto-block via npm
-  `minimumReleaseAge: "30 days"` for lock files or Renovate
-  `minimumReleaseAge` rule; (3) Check maintainer profile — new account
-  without other packages or connection to the expected organization is
-  suspicious (`npm owner ls <package>`, `pip show <package> | grep
-  Author`, GitHub profile age and activity); (4) Check download
-  statistics — < 100 downloads/week for an allegedly popular package
-  name is a hallucination indicator; (5) Cross-check Levenshtein
-  distance to popular packages
-  (`packagename-typosquat-detector`, npm `package-name-similarity`,
-  `pip-audit --vulnerability-service all`); (6) Open the GitHub
-  repository link and README — missing or generic content is a red
-  flag. Known hallucination patterns: hyphen variations
-  (`requests-http` instead of `requests`), singular/plural swaps
-  (`eslint-plugin-react` vs. `eslint-plugins-react`), version suffixes
-  (`lodash3`, `react-dom2`), scope shifts (`@aws-sdk/s3` vs.
-  `@aws-sdks/s3`). Automated defence: `socket.dev` (supply-chain
-  security, checks new packages for anomalies like obfuscated code,
-  install scripts, telemetry code, typosquatting), `phylum.io`,
-  `apiiro/dependency-combobulator`, GitHub Native (npm provenance, PyPI
-  Trusted Publishers via OIDC). CI gate: `npm install` with
-  `--ignore-scripts` by default, then a manual allowlist for known-safe
-  `postinstall` scripts. References: OWASP LLM Top 10 LLM05 (Improper
-  Output Handling), Lasso Security (slopsquatting research 2024),
-  JFrog Security Research (PyPI hallucination study), CRA Annex I Part
-  II 2.2 (supply chain vulnerability management).
-- **Akzeptanz / Acceptance:** Registry-Prüfung dokumentiert mit
-  Veröffentlichungsdatum, Maintainer-Profil, Download-Statistik,
-  Levenshtein-Cross-Check zu populären Paketen; CI-Gate `socket.dev`/
-  `phylum.io` aktiv; `--ignore-scripts` als Default mit Allowlist.
+- **DE:** Von KI vorgeschlagene Pakete vor Installation in der offiziellen Registry prüfen: Name, Maintainer, Quellrepository, veröffentlichte Version und Herkunft müssen zusammenpassen. Ähnliche Schreibweisen und unerwartete Installationsskripte prüfen. Downloads oder Paketalter allein beweisen keine Vertrauenswürdigkeit. Keine ungeprüften historischen Vorfallsbehauptungen als Begründung übernehmen.
+- **EN:** Verify AI-proposed packages in the official registry before installation: name, maintainer, source repository, release, and provenance must agree. Check similar spellings and unexpected installation scripts. Download counts or package age alone do not establish trust. Do not rely on unverified historical incident claims.
+- **Akzeptanz / Acceptance:** Registry- und Herkunftsnachweis sowie Dependency-/Secret-Scan nach Risiko. / Registry and provenance evidence plus risk-based dependency and secret checks.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -585,84 +456,9 @@ whose output flows into production code or production-near scripts.
 
 #### CL-09-06: Lizenz-Klärung / Licence Clearance
 
-- **DE:** KI-erzeugte Codeschnipsel können Lizenzfragen aufwerfen,
-  weil das Modell auf Trainingsdaten mit unterschiedlichen Lizenzen
-  (MIT, Apache-2.0, BSD, GPLv2, GPLv3, AGPL, proprietär ohne Lizenz)
-  trainiert wurde und längere wörtliche Zitate aus GPL-Code rechtlich
-  problematisch sein können (vgl. Doe v. GitHub Sammelklage 2022,
-  weiterhin offen). Zweifelhafte Schnipsel werden umgeschrieben oder
-  durch einen klar lizenzierten Block ersetzt. Konkrete Maßnahmen: (1)
-  Tools mit Code-Reference-Filter aktivieren — GitHub Copilot
-  „Suggestions matching public code: Block" (Settings → Copilot → Block
-  matching public code), AWS CodeWhisperer/Q Developer „Reference
-  Tracker", Tabnine „Restrict suggestions matching public code"; (2)
-  Bei längeren Code-Vorschlägen (≥ 5 Zeilen, nicht-trivial)
-  Plagiats-Suche durchführen — `grep` durch GitHub-Suche
-  (`https://github.com/search?type=code&q="<10-15 Token Schnipsel>"`),
-  CodeProbe, BlueOak, FOSSology, ScanCode Toolkit, Black Duck Code Sight,
-  Synopsys Code Insight; (3) Bei Treffer mit GPL/AGPL/CC-BY-SA: Block
-  umschreiben oder Lizenz beachten (eigenes Projekt muss kompatible
-  Lizenz haben; AGPL ist für SaaS besonders restriktiv); (4)
-  Lizenz-Verträglichkeit für gesamtes Projekt prüfen — Lizenz-Matrix in
-  `LICENSE-COMPATIBILITY.md` mit erlaubten Lizenzen (MIT, BSD-2/3-Clause,
-  Apache-2.0, ISC, MPL-2.0), bedingt erlaubt (LGPL bei dynamischer
-  Verlinkung), verboten (GPL/AGPL für proprietäre Produkte, WTFPL
-  unprofessionell, „Public Domain" rechtlich unklar in DE/EU); (5)
-  Vendor-Indemnification nutzen — GitHub Copilot Business/Enterprise
-  übernimmt Rechtsbeistand bei Lizenz-Streit, AWS Q Developer Pro mit
-  IP-Indemnification, Anthropic Claude Enterprise mit IP-Indemnity nach
-  Verhandlung. (6) Author-Trailer im Commit: `Co-developed-with: <Tool>
-  v<Version>` als nachvollziehbarer Hinweis. SBOM-Eintrag (CycloneDX
-  oder SPDX) für jede neue Abhängigkeit mit `licenseId` und SPDX-
-  Lizenz-Identifikator. Tooling: SCANCODE-TOOLKIT, REUSE-Tool für
-  SPDX-konforme Lizenzkennzeichnung in Quelldateien (SPDX-License-Identifier-
-  Header), `pip-licenses`, `license-checker` (npm), `cargo-deny`,
-  `go-licenses`. Referenzen: SPDX `spdx.org/licenses/`, OpenChain ISO/IEC
-  5230 (Open Source License Compliance Management), REUSE Software
-  `reuse.software/`, Linux Foundation TODO Group, ISO/IEC 27001 A.5.32
-  (intellectual property rights), CRA Anhang I Teil II 1.f (sichere
-  Standardkonfiguration und keine bekannten Schwachstellen).
-- **EN:** AI-generated code snippets can raise licence questions,
-  because the model was trained on data with different licences (MIT,
-  Apache-2.0, BSD, GPLv2, GPLv3, AGPL, proprietary without licence) and
-  longer verbatim quotes from GPL code can be legally problematic (cf.
-  Doe v. GitHub class action 2022, still open). Doubtful snippets are
-  rewritten or replaced by a clearly licensed block. Concrete measures:
-  (1) Enable code reference filters in tools — GitHub Copilot
-  "Suggestions matching public code: Block" (Settings → Copilot → Block
-  matching public code), AWS CodeWhisperer/Q Developer "Reference
-  Tracker", Tabnine "Restrict suggestions matching public code"; (2)
-  For longer code suggestions (≥ 5 lines, non-trivial) perform
-  plagiarism search — `grep` through GitHub search
-  (`https://github.com/search?type=code&q="<10-15 token snippet>"`),
-  CodeProbe, BlueOak, FOSSology, ScanCode Toolkit, Black Duck Code
-  Sight, Synopsys Code Insight; (3) On hit with GPL/AGPL/CC-BY-SA:
-  rewrite the block or honour the licence (your project needs a
-  compatible licence; AGPL is particularly restrictive for SaaS); (4)
-  Check licence compatibility for the entire project — licence matrix
-  in `LICENSE-COMPATIBILITY.md` with allowed licences (MIT, BSD-2/3-
-  Clause, Apache-2.0, ISC, MPL-2.0), conditionally allowed (LGPL for
-  dynamic linking), forbidden (GPL/AGPL for proprietary products, WTFPL
-  unprofessional, "Public Domain" legally unclear in DE/EU); (5) Use
-  vendor indemnification — GitHub Copilot Business/Enterprise covers
-  legal defence in licence disputes, AWS Q Developer Pro with IP
-  indemnification, Anthropic Claude Enterprise with IP indemnity after
-  negotiation. (6) Author trailer in commit: `Co-developed-with:
-  <tool> v<version>` as a traceable note. SBOM entry (CycloneDX or
-  SPDX) for each new dependency with `licenseId` and SPDX licence
-  identifier. Tooling: SCANCODE-TOOLKIT, REUSE Tool for SPDX-compliant
-  licence labelling in source files (SPDX-License-Identifier headers),
-  `pip-licenses`, `license-checker` (npm), `cargo-deny`,
-  `go-licenses`. References: SPDX `spdx.org/licenses/`, OpenChain ISO/IEC
-  5230 (Open Source License Compliance Management), REUSE Software
-  `reuse.software/`, Linux Foundation TODO Group, ISO/IEC 27001 A.5.32
-  (intellectual property rights), CRA Annex I Part II 1.f (secure
-  default configuration and no known vulnerabilities).
-- **Akzeptanz / Acceptance:** Hinweis im PR, wenn KI-Vorschlag
-  übernommen wurde, mit Lizenz-Check (Plagiats-Suche bei ≥ 5 Zeilen,
-  Tool-Reference-Filter aktiv); SPDX-License-Identifier in Quelldateien;
-  Lizenz-Matrix `LICENSE-COMPATIBILITY.md`; SBOM mit `licenseId` für
-  jede Abhängigkeit.
+- **DE:** Übernommene KI-Vorschläge auf Herkunft, Lizenzhinweise und erkennbare Übernahmen prüfen. Die Länge eines Snippets ist keine allgemeine rechtliche Freigabegrenze. Unklare Rechte werden durch zuständige Personen bewertet; fremde Lizenzhinweise erhalten und Pflichten dokumentieren. Aktuelle Rechtsfragen nicht aus pauschalen Aussagen über laufende Verfahren ableiten.
+- **EN:** Check adopted AI suggestions for origin, licence notices, and identifiable copying. Snippet length is not a universal legal clearance threshold. Responsible people resolve unclear rights; retain third-party notices and record obligations. Do not infer legal status from general claims about ongoing litigation.
+- **Akzeptanz / Acceptance:** Nachvollziehbare Lizenzentscheidung oder Open mit Owner und nächster Maßnahme. / Traceable licence decision or Open with owner and next action.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -1175,137 +971,9 @@ whose output flows into production code or production-near scripts.
 
 #### CL-09-11: Werkzeug-Konfiguration und Telemetrie / Tool Configuration and Telemetry
 
-- **DE:** Telemetrie und Daten-Sharing der KI-Werkzeuge sind nach
-  Vorgabe konfiguriert. Sensible Code-Bereiche werden vom KI-Werkzeug
-  per Konfiguration ausgenommen, weil Cloud-Werkzeuge je nach Tier
-  Telemetrie an den Anbieter senden (Latenz-Metriken, Akzeptanz-Raten,
-  Fehler-Logs) und manche zusätzlich Code-Snippets für Modell-
-  Verbesserung. Konkrete Konfigurations-Profile je Werkzeug:
-
-  **GitHub Copilot Business/Enterprise** — Org-Admin-Settings:
-  - Suggestions matching public code: `Block`
-  - Allow GitHub to use my code snippets for product improvements:
-    `false` (default in Business/Enterprise, in Individual variabel)
-  - Content exclusions in `.copilotignore` oder via Org-Settings
-    (Repo-Pfade): `*.env*`, `**/secrets/**`, `**/.aws/**`, `**/.ssh/**`,
-    `**/*.pem`, `**/*.p12`, `**/*.pfx`, `**/credentials.json`,
-    `**/*.kdbx`, `**/.gnupg/**`, `**/security/**`, `**/private/**`,
-    `**/personal-data/**`
-  - VS-Code-Setting: `"github.copilot.advanced": { "secret_key": "..." }`
-    nicht einrichten; `"github.copilot.editor.enableAutoCompletions":
-    true` aktiviert lassen
-  - JetBrains Plugin: Settings → GitHub Copilot → Block public code:
-    enabled
-  - Audit Log via GitHub REST API
-    `/orgs/{org}/copilot/usage` und Compliance API
-
-  **JetBrains AI Assistant** — Settings → Tools → AI Assistant:
-  - „Allow detail data collection": disabled
-  - „Connect to local model only" wenn DSGVO-kritisch
-  - Codebase-Indexing-Ausschluss-Patterns analog `excludeFiles`
-
-  **Anthropic Claude (Code/Console)** — Workspace-Settings:
-  - Zero Data Retention (ZDR) aktiviert (Enterprise-Verhandlung
-    erforderlich)
-  - Trainings-Opt-out aktiviert
-  - System-Prompt: „Do not access files in /secrets, /.env, /.aws,
-    /.ssh"
-
-  **OpenAI ChatGPT Enterprise/Team** — Admin-Console:
-  - „Use my data for training": disabled
-  - SOC 2 Type II + ISO/IEC 27001-Nachweis vorhanden
-  - SSO/SAML mit IdP-Conditional-Access
-
-  **AWS Q Developer Pro** — IAM-Identity-Center-Setup:
-  - Customizations: blockierte Repos via Allowlist
-  - Reference tracker: enabled
-
-  **Continue.dev (lokal)** — `~/.continue/config.yaml`:
-  - Provider: `ollama` mit `localhost:11434`
-  - Telemetry: disabled (`allowAnonymousTelemetry: false`)
-  - System-Prompt mit Pfad-Ausschluss
-
-  **Tabnine** — Self-Hosted oder Enterprise mit zero retention.
-
-  Versioniertes Konfigurations-Profil in Repo: `.github/copilot.yml`
-  oder `.copilotignore`/`.aiderignore`/`.cursorignore` je Werkzeug,
-  zusätzlich Org-weit dokumentiert in `docs/security/ai-tool-config.md`
-  mit Owner, letztem Review-Datum und Drift-Detection-Skript (Vergleich
-  Org-API-Settings vs. Soll-Zustand). Audit: monatlicher Vergleich der
-  Live-Konfiguration gegen Soll mittels GitHub REST/JetBrains-Audit/
-  Anthropic-Console-API; Abweichung erzeugt Ticket. Referenzen: DSGVO
-  Art. 25 (Privacy by Design and by Default), Art. 32 (Sicherheit der
-  Verarbeitung), ISO/IEC 27001 A.5.23 (Cloud-Services), A.8.10
-  (Information deletion), NIST AI RMF MEASURE-2.10 (data privacy
-  measurement), EU AI Act Art. 10 (Data Governance).
-- **EN:** Telemetry and data sharing of AI tools are configured per
-  policy. Sensitive code areas are excluded from the AI tool by
-  configuration, because cloud tools send telemetry to the vendor
-  depending on tier (latency metrics, acceptance rates, error logs)
-  and some additionally send code snippets for model improvement.
-  Concrete configuration profiles per tool:
-
-  **GitHub Copilot Business/Enterprise** — org admin settings:
-  - Suggestions matching public code: `Block`
-  - Allow GitHub to use my code snippets for product improvements:
-    `false` (default in Business/Enterprise, variable in Individual)
-  - Content exclusions in `.copilotignore` or via org settings (repo
-    paths): `*.env*`, `**/secrets/**`, `**/.aws/**`, `**/.ssh/**`,
-    `**/*.pem`, `**/*.p12`, `**/*.pfx`, `**/credentials.json`,
-    `**/*.kdbx`, `**/.gnupg/**`, `**/security/**`, `**/private/**`,
-    `**/personal-data/**`
-  - VS Code setting: do not configure
-    `"github.copilot.advanced": { "secret_key": "..." }`; leave
-    `"github.copilot.editor.enableAutoCompletions": true`
-  - JetBrains plugin: Settings → GitHub Copilot → Block public code:
-    enabled
-  - Audit log via GitHub REST API
-    `/orgs/{org}/copilot/usage` and Compliance API
-
-  **JetBrains AI Assistant** — Settings → Tools → AI Assistant:
-  - "Allow detail data collection": disabled
-  - "Connect to local model only" when GDPR-critical
-  - Codebase indexing exclusion patterns analogous to `excludeFiles`
-
-  **Anthropic Claude (Code/Console)** — workspace settings:
-  - Zero Data Retention (ZDR) enabled (enterprise negotiation
-    required)
-  - Training opt-out enabled
-  - System prompt: "Do not access files in /secrets, /.env, /.aws,
-    /.ssh"
-
-  **OpenAI ChatGPT Enterprise/Team** — admin console:
-  - "Use my data for training": disabled
-  - SOC 2 Type II + ISO/IEC 27001 certificate available
-  - SSO/SAML with IdP conditional access
-
-  **AWS Q Developer Pro** — IAM Identity Center setup:
-  - Customizations: blocked repos via allowlist
-  - Reference tracker: enabled
-
-  **Continue.dev (local)** — `~/.continue/config.yaml`:
-  - Provider: `ollama` with `localhost:11434`
-  - Telemetry: disabled (`allowAnonymousTelemetry: false`)
-  - System prompt with path exclusion
-
-  **Tabnine** — self-hosted or enterprise with zero retention.
-
-  Versioned configuration profile in repo: `.github/copilot.yml` or
-  `.copilotignore`/`.aiderignore`/`.cursorignore` per tool,
-  additionally org-wide documented in `docs/security/ai-tool-config.md`
-  with owner, last review date, and drift detection script
-  (comparison of org API settings vs. target state). Audit: monthly
-  comparison of live configuration vs. target via GitHub REST/JetBrains
-  audit/Anthropic Console API; deviation creates a ticket. References:
-  GDPR Art. 25 (Privacy by Design and by Default), Art. 32 (Security
-  of Processing), ISO/IEC 27001 A.5.23 (cloud services), A.8.10
-  (information deletion), NIST AI RMF MEASURE-2.10 (data privacy
-  measurement), EU AI Act Art. 10 (Data Governance).
-- **Akzeptanz / Acceptance:** Konfigurations-Profil im Repository
-  (`.copilotignore`/`.github/copilot.yml`/`.continue/config.yaml`); Org-
-  Admin-Settings für Trainings-Opt-out und Public-Code-Block aktiv;
-  monatlicher Drift-Audit dokumentiert; Owner und Review-Datum in
-  `docs/security/ai-tool-config.md`.
+- **DE:** Werkzeugkonfiguration und Telemetrie anhand der aktuellen offiziellen Dokumentation und der tatsächlichen Version prüfen. Ignore-Dateien, Kontextausschlüsse und Kontoeinstellungen wirken produktspezifisch und sind keine allgemeine Zugriffssperre. Private Kontodaten, Sitzungen und Secrets nicht in die versionierte Konfiguration aufnehmen. Nicht nachgewiesene Ausschlussmechanismen als offen behandeln.
+- **EN:** Verify configuration and telemetry against current official documentation and the actual tool version. Ignore files, context exclusions, and account settings are product-specific and do not provide a universal access barrier. Keep private account data, sessions, and secrets out of tracked configuration. Treat unverified exclusion mechanisms as open.
+- **Akzeptanz / Acceptance:** Versionsgebundene Konfigurationsprüfung mit Negativtest für ausgeschlossene Daten. / Version-bound configuration review with a negative test for excluded data.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -1407,7 +1075,9 @@ whose output flows into production code or production-near scripts.
 - **Akzeptanz / Acceptance:** Schulungsnachweis pro Person in HR/LMS
   vorhanden; Onboarding vor erstem KI-Tool-Zugriff abgeschlossen;
   jährliche Auffrischung dokumentiert; CTF/Spot-the-Bug-Übungen
-  halbjährlich; Erfüllungsquote ≥ 95 % im Quartalsbericht.
+  halbjährlich; Erfüllungsquote ≥ 95 % im Quartalsbericht; als lokale Freigaberegel ausgewiesen. / Local release rule: evidence training per person, onboarding before first AI-tool access, annual refresher, semiannual CTF/spot-the-bug exercises and ≥95% completion in the quarterly report.
+- **DE:** Jahres-/Halbjahresintervalle, Stundenansätze, Zugriffssperre und ≥95-%-Quote sind zusätzliche lokale Baseline-Vorgaben, keine Zahlen- oder Zugangsvorgaben aus KI-VO Art. 4. Dessen geänderte Fassung verlangt Maßnahmen zur Unterstützung der Entwicklung von KI-Kompetenz unter Berücksichtigung der Personen und des Nutzungskontexts, jedoch keine Garantie eines bestimmten individuellen Kompetenzniveaus. Gesetzliche Anwendbarkeit und lokale Schulungsfreigabe getrennt dokumentieren.
+- **EN:** Annual/semiannual intervals, training hours, access suspension and the ≥95% quota are additional local baseline rules, not numerical or access requirements imposed by AI Act Article 4. Its amended wording requires measures supporting development of AI literacy in light of people and use context, without guaranteeing any specific individual literacy level. Record statutory applicability separately from local training clearance.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -1427,142 +1097,9 @@ whose output flows into production code or production-near scripts.
 
 #### CL-09-13: Audit-Spur der Werkzeugnutzung / Audit Trail of Tool Usage
 
-- **DE:** Die Nutzung der KI-Werkzeuge ist nachvollziehbar
-  (Werkzeugname, Zeitraum, beteiligte Personen). Zentrale Logs des
-  Werkzeugs werden für Audits aufbewahrt, soweit möglich. Konkrete
-  Audit-Quellen je Werkzeug:
-
-  **GitHub Copilot Business/Enterprise:** REST-API
-  `/orgs/{org}/copilot/usage` (täglich aggregierte Nutzungsmetriken),
-  `/enterprises/{enterprise}/copilot/usage`, Audit Log API
-  `/orgs/{org}/audit-log` mit Action-Patterns
-  `copilot.cfb_seat_*`/`copilot_user_*`, Compliance API für PR-bezogene
-  Suggestions-Akzeptanz, GitHub Webhook auf
-  `copilot_seat_management`-Events. Logs in eigenen S3-Bucket via
-  GitHub Actions oder direkt in SIEM (Splunk, Microsoft Sentinel,
-  Elastic) replizieren.
-
-  **JetBrains AI Assistant:** Audit-Events in JetBrains Toolbox
-  Enterprise Console; lokale Logs in `~/Library/Logs/JetBrains/...`
-  (macOS) bzw. `%APPDATA%/JetBrains/...` (Windows) bei Bedarf
-  per MDM einsammeln.
-
-  **Anthropic Claude Console (Workspaces):** Console → Settings →
-  Activity Logs (90-180 Tage Retention), Audit-Log-Export via API,
-  Webhooks für Workspace-Events; `claude code`-CLI lokal:
-  `.claude/projects/<repo-hash>/*.jsonl` lokal vorhanden, optional
-  zentralisierbar.
-
-  **OpenAI ChatGPT Enterprise/Team:** Compliance API für Conversations,
-  Workspace Activity Logs, SIEM-Integration via API-Polling.
-
-  **AWS Q Developer Pro:** AWS CloudTrail-Events, IAM Identity Center
-  Access Logs, Q Developer Customizations Audit.
-
-  **Git Duo:** Git Audit Events Stream (`Audit Streaming`-Feature
-  mit JSONL-Export an SIEM-Endpunkt), Project-Level-Events.
-
-  **Continue.dev/Tabby/Ollama lokal:** `~/.continue/sessions/*.json`,
-  Ollama-Logs in `journalctl -u ollama` oder
-  `~/Library/Logs/Ollama/server.log`.
-
-  Aufbewahrungsfristen-Pflicht: ≥ 1 Jahr für Standard-Audits, ≥ 6
-  Jahre für DSGVO-Compliance-Bezüge, ≥ 10 Jahre für CRA-Vorfall-
-  Verläufe (Verordnung (EU) 2024/2847 Art. 14). Speicherort: zentraler
-  SIEM (Splunk Enterprise Security mit `audit_logs`-Index, Microsoft
-  Sentinel Workspace mit DCR-Rules, Elastic Security mit dedicated
-  data stream, IBM QRadar AQL-Query-Repository), append-only mit WORM
-  (S3 Object Lock compliance mode, Azure Immutable Blob Storage with
-  Time-based Retention, Google Cloud Storage Bucket Lock). Zugriffs-
-  Modell: nur Security-Team und Compliance-Officer (RBAC), Vier-Augen
-  für Löschungen vor Ablauf der Retention. Korrelation: KI-Tool-Logs
-  mit Git-Commit-Logs (via `Co-developed-with`-Trailer aus Item 10)
-  und PR-Metadaten matchen, um KI-Anteil je Vorfall zu bestimmen.
-  Beispiel-SIEM-Query (Splunk):
-  ```text
-  index=audit_logs sourcetype=github_audit
-  action=copilot_user.* user=<dev>
-  | stats count by action _time
-  ```
-  Datenschutz-Konformität: Logs enthalten typischerweise Username/E-Mail
-  → in Verzeichnis von Verarbeitungstätigkeiten (DSGVO Art. 30) als
-  Verarbeitung „Audit-Logging KI-Tool-Nutzung" eintragen, technische
-  und organisatorische Maßnahmen Art. 32 dokumentieren, Betriebsrat-
-  Information bei Mitbestimmungsrecht (BetrVG § 87 Abs. 1 Nr. 6 in DE).
-  Referenzen: ISO/IEC 27001 A.8.15 (Logging) und A.5.34 (Privacy and
-  protection of PII), NIST SP 800-92 (Log Management), DSGVO Art. 30,
-  CRA Anhang I Teil II 2.1 lit. c (Logging), BSI IT-Grundschutz
-  OPS.1.1.5 (Protokollierung), EU AI Act Art. 12 (Record-keeping).
-- **EN:** AI tool use is traceable (tool name, time frame, people
-  involved). Where feasible, central tool logs are retained for
-  audits. Concrete audit sources per tool:
-
-  **GitHub Copilot Business/Enterprise:** REST API
-  `/orgs/{org}/copilot/usage` (daily aggregated usage metrics),
-  `/enterprises/{enterprise}/copilot/usage`, Audit Log API
-  `/orgs/{org}/audit-log` with action patterns
-  `copilot.cfb_seat_*`/`copilot_user_*`, Compliance API for PR-
-  related suggestions acceptance, GitHub webhook on
-  `copilot_seat_management` events. Replicate logs to your own S3
-  bucket via GitHub Actions or directly to SIEM (Splunk, Microsoft
-  Sentinel, Elastic).
-
-  **JetBrains AI Assistant:** audit events in JetBrains Toolbox
-  Enterprise console; local logs in `~/Library/Logs/JetBrains/...`
-  (macOS) or `%APPDATA%/JetBrains/...` (Windows) collected via MDM if
-  needed.
-
-  **Anthropic Claude Console (Workspaces):** Console → Settings →
-  Activity Logs (90–180 days retention), audit log export via API,
-  webhooks for workspace events; `claude code` CLI locally:
-  `.claude/projects/<repo-hash>/*.jsonl` available locally, optionally
-  centralizable.
-
-  **OpenAI ChatGPT Enterprise/Team:** Compliance API for conversations,
-  workspace activity logs, SIEM integration via API polling.
-
-  **AWS Q Developer Pro:** AWS CloudTrail events, IAM Identity Center
-  access logs, Q Developer Customizations audit.
-
-  **Git Duo:** Git Audit Events stream (`Audit Streaming` feature
-  with JSONL export to SIEM endpoint), project-level events.
-
-  **Continue.dev/Tabby/Ollama locally:** `~/.continue/sessions/*.json`,
-  Ollama logs in `journalctl -u ollama` or
-  `~/Library/Logs/Ollama/server.log`.
-
-  Retention period requirements: ≥ 1 year for standard audits, ≥ 6
-  years for GDPR compliance ties, ≥ 10 years for CRA incident histories
-  (Regulation (EU) 2024/2847 Art. 14). Storage location: central SIEM
-  (Splunk Enterprise Security with `audit_logs` index, Microsoft
-  Sentinel workspace with DCR rules, Elastic Security with dedicated
-  data stream, IBM QRadar AQL query repository), append-only with
-  WORM (S3 Object Lock compliance mode, Azure Immutable Blob Storage
-  with time-based retention, Google Cloud Storage Bucket Lock). Access
-  model: security team and compliance officer only (RBAC), four-eyes
-  for deletions before retention expiry. Correlation: match AI tool
-  logs with git commit logs (via `Co-developed-with` trailer from item
-  10) and PR metadata to determine AI share per incident. Example
-  SIEM query (Splunk):
-  ```text
-  index=audit_logs sourcetype=github_audit
-  action=copilot_user.* user=<dev>
-  | stats count by action _time
-  ```
-  Data protection compliance: logs typically contain usernames/email
-  → enter in record of processing activities (GDPR Art. 30) as
-  processing "audit logging AI tool usage", document technical and
-  organizational measures per Art. 32, works council notification on
-  co-determination right (BetrVG § 87(1) No. 6 in DE). References:
-  ISO/IEC 27001 A.8.15 (logging) and A.5.34 (privacy and protection of
-  PII), NIST SP 800-92 (Log Management), GDPR Art. 30, CRA Annex I
-  Part II 2.1 lit. c (logging), BSI IT-Grundschutz OPS.1.1.5
-  (Protokollierung), EU AI Act Art. 12 (record-keeping).
-- **Akzeptanz / Acceptance:** Aufbewahrungsfrist und Pfad festgelegt
-  (≥ 1 Jahr Standard, ≥ 6 Jahre DSGVO, ≥ 10 Jahre CRA);
-  Werkzeug-spezifische Audit-Quellen in SIEM angebunden; WORM-Speicher
-  aktiv; Verzeichnis von Verarbeitungstätigkeiten mit KI-Tool-Logging-
-  Eintrag.
+- **DE:** Die Audit-Spur nennt Werkzeug, Version, Scope, verantwortliche Person und relevante Entscheidungen. Aufbewahrung je Datenkategorie aus Zweck, Rechtsgrundlage, Vertragslage und Schutzbedarf ableiten; DSGVO und CRA begründen keine pauschalen Fristen von sechs beziehungsweise zehn Jahren für sämtliche Agenten- oder Plattformlogs. Zugriff begrenzen, Integrität sichern und Löschung testen.
+- **EN:** Audit records identify tool, version, scope, responsible person, and relevant decisions. Derive retention per data category from purpose, legal basis, contracts, and risk; GDPR and CRA do not impose universal six- or ten-year periods for all agent or platform logs. Restrict access, protect integrity, and test deletion.
+- **Akzeptanz / Acceptance:** Dokumentierter Aufbewahrungs- und Löschplan mit Quelle, Owner und Integritätstest. / Retention and deletion plan with source, owner, and integrity test.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -1733,25 +1270,28 @@ whose output flows into production code or production-near scripts.
 
 #### CL-09-16: KI-Regulierungs-Screening / AI Regulatory Screening
 
-- **DE:** Bei KI-Werkzeugen, KI-Diensten, Modellen oder KI-Komponenten wird
-  geprüft, ob neben dieser Checkliste auch regulatorische Anforderungen aus
-  CL_Standards-Anwendbarkeit anwendbar sind. Das betrifft insbesondere EU
-  AI Act, CRA, NIS2, DORA sowie Kunden- oder Sektorvorgaben. Reine Nutzung
-  von KI als Entwicklungswerkzeug kann als `nicht anwendbar` dokumentiert
-  werden, wenn kein KI-System, Modell oder Dienst Teil des ausgelieferten
-  oder betriebenen Systems ist.
-- **EN:** For AI tools, AI services, models, or AI components, check
-  whether regulatory requirements from CL_Standards-Anwendbarkeit also
-  apply. This covers in particular the EU AI Act, CRA, NIS2, DORA, and
-  customer or sector rules. Pure use of AI as a development tool may be
-  documented as `not applicable` when no AI system, model, or service is
-  part of the released or operated system.
-- **Akzeptanz / Acceptance:** KI-Inventar, Lieferkettennachweis oder
-  Spec-Kit-Artefakt verlinkt das CL_01-Regulatory-Screening und nennt, ob
-  die KI-Nutzung nur Werkzeugnutzung oder Bestandteil des Produkts bzw.
-  Dienstes ist. / AI inventory, supply-chain evidence, or Spec Kit artefact
-  links the CL_01 regulatory screening and states whether the AI use is
-  tool-only use or part of the product or service.
+- **DE:** Regulatorische Anwendbarkeit nach CL-01-12 fuer Produkt, KI-Werkzeugbetrieb
+  und Organisation getrennt pruefen. Je Rechtsregime (KI-VO, CRA, NIS2/BSIG,
+  DORA sowie Kunden-/Sektorvorgaben) Land, Rolle, Scope und Anwendungsdatum
+  dokumentieren. Auch reine KI-Werkzeugnutzung kann Betreiberpflichten ausloesen,
+  etwa Massnahmen zur KI-Kompetenz nach KI-VO Art. 4; das Fehlen einer
+  KI-Komponente im ausgelieferten Produkt begruendet kein pauschales N/A.
+  N/A nur fuer den einzeln begruendeten Rechts-/Rollenumfang; unbekannte
+  Anwendbarkeit bleibt Open.
+- **EN:** Assess regulatory applicability under CL-01-12 separately for the
+  product, AI tool operation and organisation. For each regime (AI Act, CRA,
+  NIS2/German BSIG, DORA and customer/sector rules), record jurisdiction, role,
+  scope and application date. Tool-only AI use can still trigger deployer duties,
+  such as measures supporting AI literacy under AI Act Article 4; absence of
+  AI in the released product establishes no blanket N/A. Use N/A only for an
+  individually justified legal/role scope; unknown applicability remains Open.
+- **Akzeptanz / Acceptance:** Verlinktes CL-01-12-Screening mit getrennten
+  Produkt-/Werkzeug-/Organisationsentscheidungen je Rechtsregime, Rolle,
+  Begruendung, Quellenfassung, Evidence, Owner/Reviewer und Wiedervorlage;
+  KI-Kompetenzmassnahmen soweit anwendbar nachgewiesen. / Link CL-01-12 screening
+  with separate product/tool/organisation decisions per regime, role, rationale,
+  source version, evidence, owner/reviewer and re-review date; evidence AI-literacy
+  measures where applicable.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -1967,3 +1507,12 @@ justified as not applicable.
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
 - **Version 2.1.0 (2026-07-17):** Nachweisrahmen auf das verbindliche Siebenerprofil einschließlich `autonomous-run-governance` erweitert; autonome Ausführung bleibt ausdrücklich delegationspflichtig; synchron mit sichere-Entwicklung-Basis 3.1.0. / Extended the evidence framework to the binding seven-preset profile including `autonomous-run-governance`; autonomous execution still requires explicit delegation; synchronized with secure-development baseline 3.1.0.
 - **Version 2.2.0 (2026-07-19):** Nachweisrahmen auf das verbindliche Achterprofil einschließlich `parallel-autonomous-run-governance` erweitert; parallele autonome Kampagnen bleiben ausdrücklich delegationspflichtig; synchron mit sichere-Entwicklung-Basis 3.2.0. / Extended the evidence framework to the binding eight-preset profile including `parallel-autonomous-run-governance`; parallel autonomous campaigns still require explicit delegation; synchronized with secure-development baseline 3.2.0.
+- **Version 2.2.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.2.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+- **Version 2.2.3 (2026-10-20):** KI-Werkzeugbetrieb getrennt vom Produkt auf regulatorische Rollen pruefen; Baseline 3.4.2. / Screen AI tool operation separately from product regulatory roles; baseline 3.4.2.
+
+
+DE: Baseline-Bindung 3.4.3 (20.10.2026), redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.3 (2026-10-20), editorial; semantic document version unchanged.
+
+- **Version 2.2.4 (2026-10-20):** Acht P3-Nachbefunde korrigiert, Baseline 3.4.4. / Correct eight P3 follow-up findings, baseline 3.4.4.

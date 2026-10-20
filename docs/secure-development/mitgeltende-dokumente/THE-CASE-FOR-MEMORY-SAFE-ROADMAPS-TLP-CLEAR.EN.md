@@ -942,3 +942,5 @@ Blog.” Mozilla Hacks – the Web Developer Blog. October 9, 2017. https://hack
 a-super-fast-css-engine-quantum-css-aka-stylo/.
 46 Newman, Lily Hay. “The Rise of Rust, the ‘Viral’ Secure Programming Language That’s Taking over Tech.”
 WIRED, November 2, 2022. https://www.wired.com/story/rust-secure-programming-language-memory-safe/.
+
+**Primärquellen-Nachprüfung / Primary-source follow-up (2026-10-20):** [Offizielle Kopie des Mitherausgebers NCSC NZ / Official co-author copy](https://www.ncsc.govt.nz/assets/OLD/The-Case-for-Memory-Safe-Roadmaps-508c.pdf), Dezember / December 2023; byte-identisch / byte-identical SHA-256 `dfe3e72e075738e345aab81a541f72ab4c0cd149235426108090bf48787bc34b`.

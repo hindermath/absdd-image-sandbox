@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "SecureDevelopmentGateEvidence",
+  "contextId": "absdd-image-sandbox-gsdb344",
+  "gate": "delta",
+  "mode": "development",
+  "createdAt": "2026-10-20T19:59:51.6767227+00:00",
+  "review": {
+    "owner": "Thorsten Hindermann",
+    "reviewer": "Codex under explicit bounded three-pilot GSDB rollout authority; human product decisions remain independent",
+    "reviewedAt": "2026-10-20T19:59:51.6767227+00:00",
+    "reviewDue": "2027-01-10",
+    "residualRisk": "Source-only GSDB adoption and Assurance package integration do not establish product compliance, physical accessibility, operational sandbox approval or licensed ISO review. Historical evidence remains preserved.",
+    "reevaluationTrigger": "Primary source, baseline, preset, scope or authority change; quarterly review."
+  },
+  "assessments": [
+    {
+      "evidence": "docs/maintenance/gsdb-344-pilot-2026-10-20.md",
+      "implementation": "Fulfilled",
+      "applicability": "Applicable",
+      "id": "GSDB-344-INTEGRATION"
+    }
+  ],
+  "outcome": "Ready",
+  "externalComparisonBoundary": "HOSK/GWDG: ExternalComparison only; never local evidence",
+  "verificationScope": "absdd-image-sandbox: GSDB 3.4.4 and the exact fourteen-preset profile, including Assurance 0.1.5; no product feature or fleet release.",
+  "runbookApplicability": "N/A",
+  "runbookRationale": "Bounded governance integration; commands, scope and proof limits are recorded in the pilot report."
+}

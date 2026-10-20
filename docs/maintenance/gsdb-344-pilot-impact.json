@@ -1,0 +1,120 @@
+{
+  "feature": "absdd-image-sandbox-gsdb344-pilot",
+  "entries": [
+    {
+      "changeId": "CHG001",
+      "scope": "adoption",
+      "decision": "UpdateRequired",
+      "rationale": "Bounded GSDB 3.4.4 and Assurance 0.1.5 adoption; preserve historical and project-specific evidence, reassess changed controls without inferred acceptance.",
+      "documents": [
+        "README.md",
+        "docs/maintenance/gsdb-344-pilot-2026-10-20.md",
+        "docs/maintenance/gsdb-344-external-references.json",
+        "docs/maintenance/governance-review-and-rollout.md",
+        "docs/maintenance/gsdb-coverage-2026-10-20.md",
+        "docs/maintenance/gsdb-coverage-independent-fixes-2026-10-20.md",
+        "docs/maintenance/gsdb-coverage-p3-followup-2026-10-20.md",
+        "docs/maintenance/gsdb-independent-fixes-2026-10-20.md",
+        "docs/maintenance/gsdb-level0-review-2026-10-19.md",
+        "docs/maintenance/gsdb-p3-followup-2026-10-20.md",
+        "docs/maintenance/gsdb-review-remediation-2026-10-20.md",
+        "docs/maintenance/gsdb-source-closure-2026-10-20.md",
+        "docs/maintenance/gsdb-source-review-2026-10-20.json",
+        "docs/maintenance/gsdb-source-review-independent-fixes-2026-10-20.json",
+        "docs/maintenance/gsdb-source-review-p3-followup-2026-10-20.json",
+        "COMPLIANCE-PLAN_RL-SE-001.md",
+        "docs/security/agent-session-log/2026-10-20-2202-gsdb-pilot.md",
+        ".github/workflows/documentation-and-sandbox.yml"
+      ],
+      "owner": "Thorsten Hindermann",
+      "audiences": [
+        "Maintainers",
+        "Reviewers"
+      ],
+      "readerPaths": [
+        "README → pilot report → controlled sources → project assurance evidence"
+      ],
+      "canonicalSource": "docs/secure-development/baseline-manifest.json",
+      "navigationImpact": "README links the bounded pilot report; historical contexts are not rewritten.",
+      "documentClass": "ReviewEvidence",
+      "languageStrategy": "German first, English second; canonical bilingual checklist content retained.",
+      "languagePartners": [
+        "docs/maintenance/gsdb-344-pilot-2026-10-20.md"
+      ],
+      "platformAndExampleProof": "Bash first on macOS, PowerShell parity, native repository CI, negative fixtures and unchanged historical evidence; confirmed results in delivery PR.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/maintenance/gsdb-344-pilot-2026-10-20.md",
+      "risk": "No product acceptance inferred; project hardening findings and image/runtime contracts remain separate.",
+      "criticality": "Usage",
+      "reevaluationTrigger": "Source, baseline, preset, role or authority change."
+    },
+    {
+      "changeId": "CHG002",
+      "scope": "compendium",
+      "decision": "GeneratedUpdate",
+      "rationale": "Bounded GSDB 3.4.4 and Assurance 0.1.5 adoption; preserve historical and project-specific evidence, reassess changed controls without inferred acceptance.",
+      "documents": "docs/secure-development/Checklistensammelband_Sichere-Entwicklung.md",
+      "owner": "Thorsten Hindermann",
+      "audiences": [
+        "Maintainers",
+        "Reviewers"
+      ],
+      "readerPaths": [
+        "README → pilot report → controlled sources → project assurance evidence"
+      ],
+      "canonicalSource": "docs/secure-development/baseline-manifest.json",
+      "navigationImpact": "README links the bounded pilot report; historical contexts are not rewritten.",
+      "documentClass": "ReviewEvidence",
+      "languageStrategy": "German first, English second; canonical bilingual checklist content retained.",
+      "languagePartners": [
+        "docs/maintenance/gsdb-344-pilot-2026-10-20.md"
+      ],
+      "platformAndExampleProof": "Bash first on macOS, PowerShell parity, native repository CI, negative fixtures and unchanged historical evidence; confirmed results in delivery PR.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/maintenance/gsdb-344-pilot-2026-10-20.md",
+      "risk": "No product acceptance inferred; project hardening findings and image/runtime contracts remain separate.",
+      "criticality": "Usage",
+      "reevaluationTrigger": "Source, baseline, preset, role or authority change.",
+      "generatedSource": {
+        "path": "docs/secure-development/baseline-manifest.json",
+        "renderer": "bash scripts/build-secure-development-docs.sh"
+      }
+    },
+    {
+      "changeId": "CHG003",
+      "scope": "statistics",
+      "decision": "GeneratedUpdate",
+      "rationale": "Bounded GSDB 3.4.4 and Assurance 0.1.5 adoption; preserve historical and project-specific evidence, reassess changed controls without inferred acceptance.",
+      "documents": "docs/project-statistics.md",
+      "owner": "Thorsten Hindermann",
+      "audiences": [
+        "Maintainers",
+        "Reviewers"
+      ],
+      "readerPaths": [
+        "README → pilot report → controlled sources → project assurance evidence"
+      ],
+      "canonicalSource": "docs/project-statistics.config.json",
+      "navigationImpact": "README links the bounded pilot report; historical contexts are not rewritten.",
+      "documentClass": "ReviewEvidence",
+      "languageStrategy": "German first, English second; canonical bilingual checklist content retained.",
+      "languagePartners": [
+        "docs/maintenance/gsdb-344-pilot-2026-10-20.md"
+      ],
+      "platformAndExampleProof": "Bash first on macOS, PowerShell parity, native repository CI, negative fixtures and unchanged historical evidence; confirmed results in delivery PR.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/maintenance/gsdb-344-pilot-2026-10-20.md",
+      "risk": "No product acceptance inferred; project hardening findings and image/runtime contracts remain separate.",
+      "criticality": "Usage",
+      "reevaluationTrigger": "Source, baseline, preset, role or authority change.",
+      "generatedSource": {
+        "path": "docs/project-statistics.config.json",
+        "renderer": "bash scripts/render-project-statistics.sh"
+      }
+    }
+  ],
+  "schemaVersion": "1.1"
+}

@@ -222,6 +222,13 @@ session evidence aligned to the same pin.
 
 | 2026-10-18 | Vierzehn README-Patch-Pakete / Fourteen README patch packages | Begrenzte Integration aus Home Baseline #335 mit unveraenderlichen Quellenbindungen, kompletter Agentenkomposition und getrennten technischen Assurance-Gates. Keine Image-/Provider-/Netzwerkaenderung, Produkt- oder Zertifizierungsfreigabe. Statistik-Nachlauf erst nach gesichtetem Quell-Commit; Methodik bleibt unveraendert. / Bounded installation; generated measurement follows the approved clean source commit. [Nachweis / Evidence](maintenance/preset-readme-patch-rollout-2026-10-18.md). |
 
+### 2026-10-20 - GSDB 3.4.4 / Assurance 0.1.5 Pilot
+
+DE: Manifestgebundene GSDB-Übernahme aus Level 0 d9898356, 157 IDs erhalten;
+Assurance 0.1.5 gezielt integriert, andere 13 Pakete und historische Evidence erhalten.
+[Nachweis / Evidence](maintenance/gsdb-344-pilot-2026-10-20.md).
+EN: Bounded source/preset adoption and new project evidence; no product or fleet acceptance.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->

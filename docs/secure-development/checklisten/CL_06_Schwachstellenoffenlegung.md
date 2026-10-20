@@ -12,8 +12,8 @@ This document is organization-neutral and written as a generic training and revi
 ## Checkliste 06 – Schwachstellenoffenlegung / Vulnerability Disclosure
 
 **Dokument-ID / Document ID:** CL-06
-**Version / Version:** 2.0.0
-**Baseline-Version / Baseline version:** 3.0.0
+**Version / Version:** 2.0.2
+**Baseline-Version / Baseline version:** 3.4.4
 **Dokumenttyp / Document type:** Kanonische, wiederverwendbare Pruefvorlage / Canonical reusable review template
 
 ### Nachweisinstanz / Evidence Instance
@@ -628,101 +628,9 @@ products. Recommended for internal tooling.
 
 #### CL-06-07: CRA-Pflichtmeldung 24 Stunden / CRA 24-Hour Notification
 
-- **DE:** Bei aktiv ausgenutzten Schwachstellen oder schweren Sicherheitsvorfällen
-  wird die zuständige CSIRT/ENISA innerhalb von 24 Stunden vorab informiert
-  (Frühwarnung), gefolgt von 72-Stunden-Meldung und Schlussbericht.
-  Cyber Resilience Act (CRA) Pflichtmeldungen (Art. 14 Verordnung (EU) 2024/2847):
-  - **Frühwarnung (24 h)**: Mitteilung an ENISA und nationale CSIRT, dass
-    eine aktiv ausgenutzte Schwachstelle bekannt ist.
-  - **Vulnerability Notification (72 h)**: detaillierte Beschreibung,
-    Schweregrad, betroffene Produkte, Mitigation, ggf. PoC.
-  - **Schlussbericht für aktiv ausgenutzte Schwachstellen**: spätestens
-    14 Tage nach Bereitstellung des Patches, mit Ursachenanalyse,
-    Auswirkungen, getroffenen Maßnahmen und Lessons Learned.
-  - **Schlussbericht für schwere Sicherheitsvorfälle**: spätestens einen
-    Monat nach der 72-Stunden-Meldung.
-  Meldewege:
-  - **ENISA** – Single Reporting Platform (geplant ab 2026).
-  - **CSIRT-Bund (BSI)** – `cert@bsi.bund.de`,
-    [BSI-Meldeformular](https://www.bsi.bund.de/DE/Service/Meldestelle).
-  - **Nationale CSIRT** je EU-Mitgliedstaat (CSIRT-Network).
-  - **CIRCL** (Luxemburg), **CERT-FR** (Frankreich), **CERT.at** (Österreich).
-  Pflichtinhalte der Meldung:
-  - Hersteller-Identifikation (Name, Anschrift, Kontakt).
-  - Produkt-Identifikation (Name, Version, betroffene Versionen).
-  - Schwachstellen-Beschreibung (Typ, CWE, CVSS, CVE, falls vergeben).
-  - Aktiv-Ausnutzungs-Indikatoren (IOCs, Quelle, Zeitpunkt).
-  - Geografische Reichweite, Anzahl betroffener Anwender.
-  - Mitigation und Patch-Verfügbarkeit.
-  - Ansprechperson für Rückfragen (Name, E-Mail, Telefon, ggf. PGP).
-  Krisen-Runbook:
-  - 24/7 Bereitschaft mit Eskalationskette: Engineer -> Lead -> Security Lead -> GF.
-  - Vorlagen-Texte für ENISA-Meldung in DE und EN bereit.
-  - Decision-Tree: aktiv ausgenutzt oder schwerer Sicherheitsvorfall?
-    Dann 24-h-Frühwarnung, 72-h-Meldung und Schlussbericht.
-  - Tabletop-Übung mindestens jährlich (siehe Item 11).
-  Synergien mit anderen Pflichten:
-  - **NIS2-Richtlinie** Art. 23: 24-h-Frühwarnung, 72-h-Lagebericht,
-    1 Monat Schlussbericht.
-  - **DORA**: für Finanzunternehmen und relevante IKT-Drittparteien
-    können zusätzliche Klassifizierungs-, Melde- und Testpflichten gelten.
-  - **DSGVO Art. 33**: 72-h-Meldung an Datenschutzbehörde bei
-    Datenpanne mit personenbezogenen Daten.
-  - **TKG/IT-Sicherheitsgesetz** für regulierte Branchen.
-- **EN:** For actively exploited vulnerabilities or severe incidents, the
-  responsible CSIRT/ENISA receives an early warning within 24 hours, followed
-  by a 72-hour report and a final report.
-  Cyber Resilience Act (CRA) mandatory notifications (Art. 14 Regulation (EU)
-  2024/2847):
-  - **Early warning (24 h)**: notify ENISA and national CSIRT that an
-    actively exploited vulnerability is known.
-  - **Vulnerability notification (72 h)**: detailed description, severity,
-    affected products, mitigation, possibly PoC.
-  - **Final report for actively exploited vulnerabilities**: no later than
-    14 days after patch availability, with root cause analysis, impact,
-    measures taken, and lessons learned.
-  - **Final report for severe incidents**: no later than one month after
-    the 72-hour notification.
-  Reporting channels:
-  - **ENISA** – Single Reporting Platform (planned from 2026).
-  - **CSIRT-Bund (BSI)** – `cert@bsi.bund.de`,
-    [BSI reporting form](https://www.bsi.bund.de/DE/Service/Meldestelle).
-  - **National CSIRTs** per EU member state (CSIRT Network).
-  - **CIRCL** (Luxembourg), **CERT-FR** (France), **CERT.at** (Austria).
-  Mandatory report contents:
-  - Manufacturer identification (name, address, contact).
-  - Product identification (name, version, affected versions).
-  - Vulnerability description (type, CWE, CVSS, CVE if assigned).
-  - Active-exploitation indicators (IOCs, source, time).
-  - Geographic scope, number of affected users.
-  - Mitigation and patch availability.
-  - Contact person for follow-up (name, email, phone, PGP if available).
-  Crisis runbook:
-  - 24/7 on-call with escalation chain: engineer -> lead -> Security Lead ->
-    management.
-  - Template texts for ENISA notification ready in DE and EN.
-  - Decision tree: actively exploited or severe incident? Then 24-hour
-    early warning, 72-hour notification, and final report.
-  - Tabletop drill at least annually (see item 11).
-  Synergies with other obligations:
-  - **NIS2 Directive** Art. 23: 24-h early warning, 72-h status report,
-    1-month final report.
-  - **DORA**: for financial entities and relevant ICT third-party
-    providers, additional classification, reporting, and testing duties may
-    apply.
-  - **GDPR Art. 33**: 72-h notification to data protection authority for
-    breaches involving personal data.
-  - **TKG/IT-Sicherheitsgesetz** for regulated industries.
-- **Akzeptanz / Acceptance:** Meldewege (ENISA, BSI CSIRT-Bund) in der
-  Krisenanleitung benannt; 24/72/14-Tage-Workflow als Decision-Tree;
-  Vorlagentext DE/EN; 24/7-Bereitschaft mit Eskalationskette; Tabletop-
-  Übung jährlich nachgewiesen; CL_01-Regulatory-Screening zeigt, ob NIS2,
-  DORA, DSGVO oder kundenspezifische Meldewege zusätzlich anwendbar sind. /
-  Reporting channels (ENISA, BSI CSIRT-Bund) are named in the crisis
-  procedure; 24/72/14-day workflow as a decision tree; DE/EN template text;
-  24/7 on-call with escalation chain; annual tabletop drill evidenced;
-  CL_01 regulatory screening shows whether NIS2, DORA, GDPR, or customer-
-  specific reporting paths additionally apply.
+- **DE:** CRA-Meldeketten aus CL-07-09 im Runbook umsetzen: 24-/72-Stunden-Fristen ab Kenntnis und getrennte Schlussfristen für Schwachstelle/Vorfall; gesetzliche Plattform und Pflichtinhalte verwenden. Zusätzlich Anwendbarkeit anderer Meldeketten prüfen: DSGVO Art. 33 mit Risikoschwelle und 72 Stunden ab Kenntnis des Verantwortlichen; Auftragsverarbeiter informiert nach Art. 33(2) ohne unangemessene Verzögerung. NIS2/BSIG und DORA haben eigene Rollen, Schwellen und Fristauslöser. Eine gemeinsame Incident-Akte darf mehrere Pflichten bedienen, ersetzt aber keine einzelne vorgeschriebene Meldung.
+- **EN:** Implement CL-07-09 CRA reporting chains in the runbook: awareness-based 24/72-hour clocks and separate vulnerability/incident final deadlines; use the statutory platform and content. Also screen other chains: GDPR Article 33 with its risk threshold and 72 hours from controller awareness; a processor informs without undue delay under Article 33(2). NIS2/BSIG and DORA have their own roles, thresholds and triggers. One incident file may support several duties but does not replace any required notification.
+- **Akzeptanz / Acceptance:** Runbook mit Rollen, Schwellen, Fristen, Vertretung und Übungsnachweis; Screening nach CL-01-12 verlinkt. / Runbook with roles, thresholds, clocks, deputies and exercise evidence; link CL-01-12 screening.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -833,69 +741,9 @@ products. Recommended for internal tooling.
 
 #### CL-06-09: Patch-Bereitstellung / Patch Availability
 
-- **DE:** Sicherheits-Patches werden für die unterstützten Versionen
-  bereitgestellt. Der unterstützte Lebenszyklus ist veröffentlicht.
-  Lifecycle-Modelle:
-  - **Semantic Versioning** (`MAJOR.MINOR.PATCH`) mit klaren Support-Fenstern.
-  - **LTS-Modell** (Long Term Support) – z. B. Ubuntu LTS 5+5 Jahre,
-    Node.js Active LTS 18 Monate + Maintenance LTS 12 Monate.
-  - **N/N-1-Modell**: aktuelle Major + vorletzte Major werden gepflegt.
-  - **Release-Train**: festgelegte Release-Kadenz (z. B. quartalsweise).
-  Lifecycle-Tabelle (Beispiel):
-  | Version | Erstrelease | Aktiv-Support bis | Security-Support bis | EOL |
-  |---|---|---|---|---|
-  | 3.x | 2025-10-01 | 2027-04-01 | 2028-10-01 | 2028-10-01 |
-  | 2.x | 2024-04-01 | 2025-10-01 | 2027-04-01 | 2027-04-01 |
-  | 1.x | 2023-01-01 | 2024-04-01 | 2025-10-01 | 2025-10-01 |
-  Patch-Bereitstellung:
-  - Patches als Backport in alle aktiv und security-supporteten Branches.
-  - Versionierung: Patch-Release `3.2.4` für Security-Fix in 3.x.
-  - Container-Images mit semantischen Tags (`3.2`, `3.2.4`, `3.2.4-202604`)
-    plus `latest`.
-  - Hash-pinned Releases (SHA-256) und Cosign-Signaturen.
-  Kommunikation:
-  - Lifecycle-Seite öffentlich: `/lifecycle` oder `SECURITY.md`.
-  - Deprecation-Hinweis in Software bei EOL-Approach (z. B. 6 Monate vorher).
-  - Migration-Guide für Major-Upgrades.
-  - LTS-Verlängerungen kommerziell anbieten, falls anwendbar.
-  CRA-Anforderungen:
-  - Mindestens 5 Jahre Security-Support nach dem Release oder über die
-    erwartete Produktlebenszeit (CRA Art. 13).
-  - Bei vorzeitigem EOL: schriftliche Begründung und Migrationspfad.
-- **EN:** Security patches are provided for supported versions. The
-  supported lifecycle is published.
-  Lifecycle models:
-  - **Semantic Versioning** (`MAJOR.MINOR.PATCH`) with clear support
-    windows.
-  - **LTS model** (long-term support) – e.g. Ubuntu LTS 5+5 years,
-    Node.js Active LTS 18 months + Maintenance LTS 12 months.
-  - **N/N-1 model**: current major + previous major are maintained.
-  - **Release train**: defined release cadence (e.g. quarterly).
-  Lifecycle table (example):
-  | Version | First release | Active support until | Security support until | EOL |
-  |---|---|---|---|---|
-  | 3.x | 2025-10-01 | 2027-04-01 | 2028-10-01 | 2028-10-01 |
-  | 2.x | 2024-04-01 | 2025-10-01 | 2027-04-01 | 2027-04-01 |
-  | 1.x | 2023-01-01 | 2024-04-01 | 2025-10-01 | 2025-10-01 |
-  Patch delivery:
-  - Patches as backports in all actively and security-supported branches.
-  - Versioning: patch release `3.2.4` for a security fix in 3.x.
-  - Container images with semantic tags (`3.2`, `3.2.4`, `3.2.4-202604`)
-    plus `latest`.
-  - Hash-pinned releases (SHA-256) and Cosign signatures.
-  Communication:
-  - Public lifecycle page: `/lifecycle` or `SECURITY.md`.
-  - Deprecation notice in software approaching EOL (e.g. 6 months prior).
-  - Migration guide for major upgrades.
-  - Offer commercial LTS extensions where applicable.
-  CRA requirements:
-  - At least 5 years of security support after release or for the expected
-    product lifetime (CRA Art. 13).
-  - On early EOL: written justification and migration path.
-- **Akzeptanz / Acceptance:** Lifecycle-Tabelle in `SECURITY.md` oder
-  `/lifecycle`-Seite; Patch-Plan mit Backport-Strategie dokumentiert;
-  Container-Tags + Cosign-Signatur; CRA-konformer Mindest-Support-Zeitraum
-  (≥ 5 Jahre) eingehalten oder begründet abweichend.
+- **DE:** Unterstützte Versionen, Supportende, Patch- und Backportstrategie veröffentlichen. Für CRA-Produkte CL-07-10 und Art. 13(8)–(10) anwenden: Support begründen, gesetzliche Ausnahme für erwartete Nutzung unter fünf Jahren gesondert prüfen und verfügbare Updates mindestens zehn Jahre nach Ausgabe oder bis Supportende bereithalten, je nachdem, was länger ist. Ersatz einer älteren Softwarefassung nur unter den Bedingungen aus Art. 13(10). Ein kurzer Beispiel-Lifecycle oder kommerzielle LTS-Zusatzleistung hebt diese Pflichten nicht auf. Releases mit Integritätsnachweis und verständlicher EOL-/Migrationsinformation bereitstellen.
+- **EN:** Publish supported versions, support end, patch and backport strategy. For CRA products apply CL-07-10 and Article 13(8)–(10): justify support, assess the expected-use-under-five-years exception separately, and retain issued updates for at least ten years after issue or until support end, whichever is longer. Replace an older software version only under Article 13(10) conditions. A short example lifecycle or commercial LTS add-on does not override these duties. Provide release integrity evidence and clear EOL/migration information.
+- **Akzeptanz / Acceptance:** Lifecycle-Tabelle, Patch-/Backportplan und drei getrennte CRA-Fristen konsistent nachgewiesen. / Consistent lifecycle table, patch/backport plan and three distinct CRA clocks.
 - **Lernstufe / Learning stage:** _Grundlage, Aufbau oder Vertiefung gemaess Lernpfad dokumentieren. / Record foundation, intermediate, or advanced according to the learning path._
 - **Verantwortliche Rolle / Responsible role:** _Lernende Person, ausbildende Person, Projektverantwortung oder Security-Rolle benennen. / Name learner, instructor, project owner, or security role._
 - **Anwendbarkeit / Applicability:**
@@ -1238,3 +1086,10 @@ SLAs are defined, and the CRA reporting path has been rehearsed.
 ---
 
 - **Version 2.0.0 (2026-07-10):** Einheitliches zweiachsiges Statusmodell, stabile CL-IDs, Lernstufe, Rollen-, Evidenz-, Restrisiko- und Neubewertungsfelder sowie klare Trennung zwischen Vorlage und Projektnachweis eingeführt; synchron mit sichere-Entwicklung-Basis 3.0.0. / Added the unified two-axis status model, stable CL IDs, learning-stage, role, evidence, residual-risk, and re-evaluation fields, plus clear separation between template and project evidence; synchronized with secure-development baseline 3.0.0.
+- **Version 2.0.1 (2026-10-19):** Level-0-Konsolidierung: Baseline-Bindung und fachliche Konsistenz geprüft; Grenzen im Reviewbericht. / Level-0 consolidation: baseline binding and consistency reviewed; limitations recorded in the review report.
+- **Version 2.0.2 (2026-10-20):** Primärquellen-Nachprüfung und Baseline-Bindung 3.4.1; Details im Quellenabschluss. / Primary-source follow-up and baseline binding 3.4.1; see source closure report.
+
+
+DE: Baseline-Bindung 3.4.3 (20.10.2026), redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.3 (2026-10-20), editorial; semantic document version unchanged.
+
+DE: Baseline-Bindung 3.4.4, redaktionell; fachliche Dokumentversion unverändert. / EN: Baseline binding 3.4.4 is editorial; semantic document version unchanged.
