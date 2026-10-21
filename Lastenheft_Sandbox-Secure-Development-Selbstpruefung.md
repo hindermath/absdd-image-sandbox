@@ -58,6 +58,27 @@ Organisation.
 security, reproducibility, and practical usability. Acceptance means technical
 evidence, not formal approval by an organization.
 
+## Aktualisierte Pruefgrundlage / Updated Review Baseline
+
+**DE:** GSDB (generische Secure-Development-Basis) 3.4.4 mit 157 stabilen
+Kontroll-IDs und Assurance 0.1.5 aus PR #96 sind die aktuelle Grundlage.
+Assurance ist ein versioniertes Spec-Kit-Regel-/Werkzeugpaket fuer
+Kontrollnachweise. Die historische GSDB-Pruefung bleibt unveraendert;
+der [Delta-Abgleich](docs/maintenance/intake-gsdb344-delta-2026-10-21.md)
+ergaenzt ihre 50 geaenderten Kontrolltexte durch die Gruppen G01-G10.
+H bezeichnet das vorgelagerte Hardening, A diese unabhaengige Abnahme und L
+den spaeteren Lernenden-Selbstbau. Ein erfolgreicher Quellenrollout und die
+historische Feature-003-Studie sind keine aktuelle Sandbox-Abnahme.
+
+**EN:** GSDB (generic Secure Development Baseline) 3.4.4 with 157 stable
+control IDs and Assurance 0.1.5 from PR #96 are the current baseline.
+Assurance is a versioned Spec Kit rule/tool package for control evidence.
+The historical assessment remains unchanged; the linked delta alignment
+maps 50 changed control texts to groups G01-G10. H is preceding hardening,
+A this independent acceptance and L later learner self-build. Successful
+source rollout and the historical Feature 003 study do not establish current
+sandbox acceptance.
+
 ## Ausgangslage und Zielbild / Current and Target State
 
 **DE:** Zum Start dieser Abnahme muss die technische Haertung abgeschlossen
@@ -122,6 +143,79 @@ and reviewer perspectives.
 5. Security controls and learning flow are evaluated together.
 6. Documentation alone cannot justify a positive result when a practical local check is possible.
 
+## Delta-Anforderungen und Abnahme / Delta Requirements and Acceptance
+
+- **A-344-01:** Die vollstaendige H-Uebergabe gegen historische Befunde und
+  alle 50 Delta-IDs unabhaengig pruefen: H-344-01 bis H-344-10 und
+  AC-H-344-01 bis AC-H-344-10, Quellenfassung, Anwendbarkeit, Erfuellung,
+  Evidenzpfad und offene Punkte. / Independently review the complete H
+  handoff against historical findings and all 50 delta IDs, including all
+  ten H requirements/acceptance criteria, source version, applicability,
+  implementation, evidence paths and Open items.
+- **A-344-02:** Assurance 0.1.5 mit Bash und PowerShell auf exakte eindeutige
+  aktive Versionen, Checklisten-Dokument-IDs und Sammelband-Baseline pruefen,
+  einschliesslich deutscher und englischer Richtlinienmetadaten. Ein korrekt
+  gehashter falscher aktiver Wert muss scheitern; eingebettete Checklisten
+  behalten ihre eigene Baseline. / Check exact unique active metadata with
+  both Assurance shells, including both guideline languages. A wrong active
+  value must fail even with a valid hash; embedded checklists retain their
+  own baseline.
+- **A-344-03:** Anwendbarkeit und technische Umsetzung getrennt bewerten;
+  N/A braucht Begruendung und Not Assessed, Unsicherheit bleibt Open mit
+  Owner, Follow-up und Trigger. Pass/Fail ist nur das Ergebnis eines
+  einzelnen Checks, keine formale Freigabe. Menschliche Rechts-, Datenschutz-,
+  Provider-/Modell- oder Betriebsentscheidungen nur als reale Evidenz oder
+  Open referenzieren; weder Scan noch SBOM ersetzen sie. / Separate
+  applicability from implementation. N/A requires a reason and Not Assessed;
+  uncertainty stays Open with owner, follow-up and trigger. Pass/Fail is a
+  check result, not formal approval. Reference human legal, privacy,
+  provider/model or operational decisions as real evidence or Open; scans
+  and SBOMs do not replace them.
+- **A-344-04:** Pruefende duerfen die zu bewertende Haertung nicht selbst
+  verfasst haben. Ergebnisse an konkreten Git-Stand, Plattform, Architektur,
+  Image-ID, Zeitpunkt und Pruefbefehle binden. Fehler an H zurueckgeben;
+  L bleibt bis erfolgreicher technischer Abnahme blockiert. / Reviewers must
+  not have authored the hardening being accepted. Bind results to exact Git
+  revision, platform, architecture, image ID, time and commands. Return
+  defects to H; L stays blocked until successful technical acceptance.
+
+- **AC-A-344-01:** Ein Abnahmebericht enthaelt 50 eindeutige Delta-Zeilen
+  samt H-Verweis und beurteilt auch AlreadyCovered-/N/A-Begruendungen.
+  Fehlende oder unbrauchbare Evidenz ergibt kein Pass. / Acceptance report
+  contains 50 unique delta rows linked to H and reviews AlreadyCovered/N/A
+  rationales. Missing or unusable evidence cannot receive Pass.
+- **AC-A-344-02:** Beide Shells akzeptieren den aktuellen Metadatenbestand;
+  temporaere manipulierte Fixtures (Pruefdateien) mit erneuerten Hashes
+  werden mit Exit 2 und Pfad/Feld-Diagnose abgelehnt. Produktivquellen und
+  historische Nachweise bleiben bytegleich. / Both shells accept current
+  metadata and reject temporary tampered fixtures with refreshed hashes,
+  exit 2 and path/field diagnostics. Real sources and historical evidence
+  remain byte-identical.
+- **AC-A-344-03:** Bericht trennt Quellenvalidierung, technische Bewertung
+  und menschliche Entscheidungen. Offene oder fehlgeschlagene anwendbare
+  Abnahmekontrollen verhindern einen positiven Gesamtabschluss; menschliche
+  Entscheidungen werden nicht automatisch geschlossen. / Report separates
+  source validation, technical assessment and human decisions. Open or
+  failed applicable acceptance controls prevent positive overall closure;
+  human decisions are not closed automatically.
+- **AC-A-344-04:** Reviewer-Identitaet und genaue Testumgebung sind
+  dokumentiert; eine textorientierte Uebergabe nennt Befunde, gesperrte
+  Nutzung/Weitergabe und den naechsten erlaubten Schritt fuer L oder H.
+  Ein ARM64-Erfolg belegt keinen AMD64-Test. / Reviewer identity and exact
+  environment are recorded; text-first handoff identifies defects, blocked
+  usage/distribution and the next permitted L or H action. ARM64 success
+  does not establish AMD64 testing.
+
+**DE:** Offene Uebergaben O-344-TECH, O-344-HUMAN und O-344-CLOUD aus dem
+Delta-Abgleich bleiben mit Owner, Follow-up und Trigger verbindlich. Die
+Plattformabdeckung wird nicht durch CI-Runner oder diese Intake-Pflege
+erweitert; fehlende Zielsysteme bleiben Open/Skipped mit Grund.
+
+**EN:** Open handoffs O-344-TECH, O-344-HUMAN and O-344-CLOUD retain their
+owners, follow-up and triggers. CI runners and intake maintenance do not
+expand platform acceptance; missing target systems stay Open/Skipped with
+a reason.
+
 ## Abhaengigkeiten und Risiken / Dependencies and Risks
 
 **DE:** Die technische Sandbox-Haertung muss abgeschlossen sein. Lokale
@@ -181,11 +275,11 @@ only on macOS do not prove full Windows or Linux coverage.
 
 <!-- spec-kit-command-id: speckit.specify -->
 ```text
-$speckit-specify Erstelle eine Spezifikation ausschliesslich auf Grundlage von Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md und den Ergebnissen der technischen Haertung. Plane eine unabhaengige technische Abnahme ohne weitere Haertung oder formale Freigabe.
+$speckit-specify Erstelle eine Spezifikation auf Grundlage von Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md, docs/maintenance/intake-gsdb344-delta-2026-10-21.md und der vollstaendigen Hardening-Uebergabe. Beruecksichtige A-344-01 bis A-344-04 und deren Akzeptanzkriterien sowie GSDB 3.4.4 und Assurance 0.1.5. Plane unabhaengige technische Abnahme ohne weitere Haertung oder formale Freigabe; keine Implementierung starten.
 ```
 
 <!-- spec-kit-command-id: speckit.autonomous -->
 ```text
-$speckit-autonomous Fuehre den vollstaendigen Spec-Kit-Lauf fuer Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md mit Delivery Authority LocalImplementation aus. Pruefe die Sandbox lokal, dokumentiere Plattformgrenzen ehrlich und stoppe vor Commit, Push, Pull Request, Merge oder Hosting-Aenderungen.
+$speckit-autonomous Fuehre erst nach abgeschlossener Haertung, aktuellem Review und gesonderter Startautoritaet den vollstaendigen Spec-Kit-Lauf fuer Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md mit Delivery Authority LocalImplementation aus. Pruefe den GSDB-3.4.4-Delta-Abgleich und Assurance 0.1.5 unabhaengig, dokumentiere Plattformgrenzen und offene menschliche Entscheidungen und stoppe vor Commit, Push, Pull Request, Merge oder Hosting-Aenderungen.
 ```
 <!-- intake-authoring:end -->

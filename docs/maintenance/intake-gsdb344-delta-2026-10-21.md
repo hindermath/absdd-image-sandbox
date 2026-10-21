@@ -1,0 +1,205 @@
+# Intake-Abgleich GSDB 3.4.4 / Intake Alignment GSDB 3.4.4
+
+## Auftrag und Quellen / Authority and Sources
+
+DE: Der Owner genehmigt am 2026-10-21 gezielte Updates der drei aktiven
+Intakes und danach ein unabhaengiges Vollreview. Operation:
+`6e710bf0-3c9c-4913-91d8-457c5cf432a0`. Keine technische Umsetzung, kein
+Produktlauf, Build, Containerstart, Commit, Push oder Plattformumbau.
+Die historische GSDB-Bestandspruefung bleibt abgeschlossen und unveraendert;
+dieser Abgleich ergaenzt ihre Lueckenliste, ersetzt aber keine Abnahme.
+
+EN: On 2026-10-21 the owner authorizes targeted updates to the three active
+intakes followed by independent full review. No technical implementation,
+product run, build, container start, commit, push or platform change. The
+completed historical assessment remains unchanged. This alignment supplements
+its gap list and does not establish acceptance.
+
+- [PR #96](https://github.com/hindermath/absdd-image-sandbox/pull/96), merge
+  `5a2ba8baeffea9be4f07aad82c8c41c81051ffe1`.
+- [Baseline](../secure-development/baseline-manifest.json): GSDB 3.4.4,
+  157 IDs, Sammelband / compendium 2.4.4; Level-0 source
+  `d98983568d6ac234dbecb50c2fee0873e83804a4`.
+- [50 normative Aenderungen / normative changes](gsdb-344-control-delta.json).
+- [Assurance-Vertrag / assurance contract](../../.specify/presets/secure-development-assurance-governance/templates/secure-development-evidence-contract.md)
+  and [0.1.5 validation](../../.specify/presets/secure-development-assurance-governance/docs/release-0.1.5-validation.md).
+- [Rollout-Nachweis / rollout evidence](gsdb-344-pilot-2026-10-20.md).
+
+DE: Vorpruefung: Ziele, Manifest, Receipt-Lineage und bisheriges Review sind
+konsistent. Alle drei Receipts melden ausschliesslich den erklaerten
+`AGENTS.md`-Quellenwechsel von `c9bc1634b4938748964c480b3259ed47d0649c9329a2947e344ba4ca968b1ec3`
+auf `7a3f15d27b26bab78c685aa7df148d15416c947708a0c19ec96364ed590ee1b2`.
+Das ist kein Nachweis semantischer Aktualitaet des alten Reviews. Die neue
+Quellenbindung ersetzt dieses Review ausdruecklich. Externe Rechtsquellen
+werden hier als aufgezeichneter GSDB-Quellenstand behandelt, nicht neu
+rechtlich bestaetigt. Jede spaetere Rechtsentscheidung verlangt zustaendige
+Pruefung aktueller Primaerquellen.
+
+EN: Targets, manifest, receipt lineage and prior review agree. The three
+receipts report only the explained AGENTS source change shown above. This
+does not establish semantic freshness of the old review; the new binding
+explicitly supersedes it. Legal references are the recorded GSDB snapshot,
+not fresh legal verification. Later legal decisions require responsible
+review of current primary sources.
+
+## Leseschluessel und Status / Reading Key and Status
+
+DE: H = Container-Hardening, A = unabhaengige Sandbox-Abnahme, L = Lernenden-
+Selbstbau. `UpdateRequired` bedeutet eine Anforderungsanpassung;
+`AlreadyCovered` bedeutet vorhandene Anforderungsabdeckung, nicht bestandene
+Umsetzung; `N/A` bedeutet nur die unten begrenzte Nichtanwendbarkeit.
+Die Gruppen G01 bis G10 werden in H durch H-344-01 bis H-344-10 samt
+AC-H-344-01 bis AC-H-344-10 verbraucht. A-344-01 bis A-344-04 pruefen
+die Uebergabe unabhaengig. L-FR-016 bis L-FR-019 und L-AC-013 bis L-AC-016
+begrenzen die Lernenden-Auswirkungen. Eine Tabelle ersetzt keinen Test.
+
+EN: H = container hardening, A = independent sandbox acceptance, L = learner
+self-build. UpdateRequired changes requirements; AlreadyCovered means
+requirements coverage, not verified implementation; N/A applies only to the
+stated bounded scope. Groups G01-G10 map to H-344-01 through H-344-10 and
+their matching acceptance criteria. A-344-01 through A-344-04 independently
+review the handoff; L-FR-016 through L-FR-019 and L-AC-013 through L-AC-016
+bound learner effects. A mapping table is not test evidence.
+
+DE: Vor den Gruppen: SAMM ist ein Modell zur Bewertung der Sicherheitsreife,
+SSDF ein Rahmen fuer sichere Entwicklungspraktiken. C3A bewertet
+selbstbestimmte Cloud-Nutzung, C5 Sicherheitsnachweise fuer Cloud-Dienste.
+DSFA/DPIA bezeichnet eine Datenschutz-Folgenabschaetzung; DSB/DPO die
+Datenschutzbeauftragte Person und RoPA das Verzeichnis der
+Verarbeitungstaetigkeiten. TLS schuetzt Netzwerkverbindungen, PQC bezeichnet
+Kryptografie gegen Angriffe mit Quantencomputern. Branch-Abdeckung misst,
+welcher Anteil der Entscheidungszweige durch Tests ausgefuehrt wird.
+
+EN: Before the groups: SAMM assesses security maturity, SSDF describes secure
+development practices, C3A assesses self-determined cloud use and C5 cloud
+security assurance. DPIA means data protection impact assessment, DPO the
+privacy adviser and RoPA the processing-activities register. TLS protects
+network connections and PQC means post-quantum cryptography. Branch coverage
+measures the share of decision branches exercised by tests.
+
+| Gruppe / Group | Inhalt und erwartete Evidenz / Content and expected evidence |
+| --- | --- |
+| G01 | Baseline, Standardsausgabe und getrennte Anwendbarkeit/Umsetzung; datierte Kontrollmatrix mit Quellen. / Baseline, standards edition and separate applicability/implementation; dated control matrix with sources. |
+| G02 | Sichere Skript-, Pfad-, Prozess- und Netzwerkgrenzen; Sprachprofil und positive/negative Test- sowie Coverage-Nachweise. / Safe script, path, process and network boundaries; language profile, positive/negative test and coverage evidence. |
+| G03 | Versionsgebundene Agenten-, Konfigurations-, Auto-Update- und Datenflusspruefung; Inventar und sichere Ausschlusstests ohne echte Secrets. / Version-bound agent, configuration, auto-update and data-flow review; inventory and safe exclusion tests without real secrets. |
+| G04 | Paket-/Lizenzherkunft, lokale SBOM und bedingte KI-Abhaengigkeiten; Herkunfts- und Lieferkettenbericht. / Package/licence provenance, local SBOM and conditional AI dependencies; provenance and supply-chain report. |
+| G05 | Datenkategorien, Aufbewahrung, Loeschung und Datenschutzentscheidungen; Metadaten-/Loeschkonzept, ggf. menschliche Datenschutzpruefung. / Data categories, retention, deletion and privacy decisions; metadata/deletion plan and human privacy review where needed. |
+| G06 | Produkt-, Werkzeugbetriebs- und Organisationsrollen getrennt screenen; Rechts-/Support-/Meldeentscheidungen als menschliche Evidenz oder Open. / Screen product, tool-operation and organisation roles separately; legal, support and reporting decisions as human evidence or Open. |
+| G07 | Vorhandene Krypto-/TLS-Nutzung inventarisieren, Profilkonflikte und Migration bewerten; kein neues Krypto- oder Zertifikatsprodukt. / Inventory existing crypto/TLS use, evaluate profile conflicts and migration; no new crypto or certificate product. |
+| G08 | Profil 14, Versions-/Prioritaets-/Override-Matrix und anlassbezogene Revalidierung; exakte aktive Metadaten in DE/EN pruefen. / Profile 14, version/priority/override matrix and event-driven revalidation; check exact active metadata in both languages. |
+| G09 | Cloud-/Registry-/Provider-Abhaengigkeiten begrenzt screenen; Toolchain-N/A oder offener Review mit Scope. / Bounded cloud, registry and provider dependency screening; scoped toolchain N/A or Open review. |
+| G10 | Bestehende Lernendenbasis erhalten, KI-Kompetenz und Reifegrad getrennt einordnen; Schulungs-/Reviewplan ohne erfundene Teilnahme. / Preserve learner baseline, separate AI literacy and maturity assessment; training/review plan without invented attendance. |
+
+## Vollstaendige Kontrollzuordnung / Complete Control Mapping
+
+DE: Alle 50 IDs aus dem Quellen-Delta stehen genau einmal in dieser Tabelle.
+Die Intake-Zuordnung ist Anforderungsumfang, keine generelle Rechts- oder
+Kontrollfreigabe. Bereits abgedeckte und N/A-Zeilen werden ebenfalls durch A
+auf ihre Begruendung geprueft. Nicht aufgefuehrte 107 Kontrollen werden nicht
+neu bewertet oder als erfuellt ausgegeben.
+
+EN: Every one of the 50 delta IDs occurs exactly once below. Intake mapping
+defines requirements scope, not blanket legal or control approval. A also
+reviews the reasons for AlreadyCovered and N/A. The other 107 controls are
+neither reassessed nor claimed fulfilled by this update.
+
+| Kontroll-ID / Control ID | Entscheidung / Decision | Intakes; Gruppe / Group | Begruendung / Rationale |
+| --- | --- | --- | --- |
+| CL-01-08 | UpdateRequired | H, A; G10 | SAMM-Version und begrenzte Reifegradbewertung fehlen als konkreter Nachweis. / Explicit SAMM version and bounded maturity evidence are missing. |
+| CL-07-03 | UpdateRequired | H, A; G06 | Annex-IV-Screening an zustaendige Rollenentscheidung binden, keine Zertifizierung erfinden. / Bind Annex IV screening to responsible role decisions, no invented certification. |
+| CL-07-12 | UpdateRequired | H, A; G06 | Rechtsbezogenes N/A braucht Scope und Gegenpruefung. / Legal N/A needs scope and counter-review. |
+| CL-08-12 | UpdateRequired | H, A; G02 | Sicherheitskritische Skripte und CLI-Schnittstellen brauchen positive/negative Tests und messbare Abdeckung. / Critical scripts and CLI interfaces need positive/negative tests and measurable coverage. |
+| CL-08-10 | UpdateRequired | H, A, L; G02 | Mount-/Dateigrenzen, Links und Netzwerkziele konkret pruefen. / Check mount/path boundaries, links and network destinations. |
+| CL-08-13 | UpdateRequired | H, A; G02 | Speichersichere Sprachen ersetzen kein sprachbezogenes Review. / Memory-safe languages do not replace language-specific review. |
+| CL-08-02 | UpdateRequired | H, A, L; G02 | Prozessargumente strukturiert behandeln; keine neue SQL-/Webanwendung. / Use structured process arguments; no new SQL/web application. |
+| CL-08-06 | UpdateRequired | H, A; G07 | Vorhandene Kryptonutzung und abweichende Rotationsaussagen explizit einordnen. / Classify existing crypto use and conflicting rotation statements explicitly. |
+| CL-08-03 | N/A | H, A; G02 | Keine eigene Authentifizierungsimplementierung im Sandbox-Produkt; installierte CLI-Anmeldung bleibt G03. Bei eigenem Login neu bewerten. / No first-party sandbox authentication implementation; installed CLI sign-in remains G03. Reassess if a login is added. |
+| CL-09-12 | UpdateRequired | H, A, L; G10 | KI-Kompetenz und lokale Schulungsregeln ohne erfundene HR-/Teilnahmenachweise einordnen. / Classify AI literacy and local training rules without invented HR/attendance evidence. |
+| CL-09-01 | UpdateRequired | H, A, L; G03 | Tarifnamen belegen keinen Trainingsausschluss oder Null-Aufbewahrung. / Plan names do not prove training exclusion or zero retention. |
+| CL-09-11 | UpdateRequired | H, A, L; G03 | Ignore-Dateien sind keine allgemeine Zugriffssperre. / Ignore files are not a general access barrier. |
+| CL-09-06 | UpdateRequired | H, A, L; G04 | KI-Vorschlaege nach Herkunft und Rechten pruefen; unklare Rechte eskalieren. / Review AI suggestions for provenance and rights; escalate unclear rights. |
+| CL-09-05 | UpdateRequired | H, A, L; G04 | Registry, Maintainer, Version und Installationsskripte nachvollziehen. / Trace registry, maintainer, version and install scripts. |
+| CL-09-16 | UpdateRequired | H, A, L; G06 | Reine Werkzeugnutzung ist kein pauschales regulatorisches N/A. / Tool-only use is not blanket regulatory N/A. |
+| CL-09-13 | UpdateRequired | H, A, L; G05 | Datenbezogene Aufbewahrung statt pauschaler Agentenlog-Frist. / Data-specific retention instead of a blanket agent-log period. |
+| CL-10-12 | UpdateRequired | H, A, L; G05 | Dieselbe Audit-Anforderung gemeinsam nachweisen, nicht doppelt schliessen. / Share the same audit evidence without duplicate closure claims. |
+| CL-11-06 | UpdateRequired | H, A; G05 | DSB-Stellungnahme nur soweit benannt/anwendbar; menschliche Entscheidung offen halten. / DPO opinion where designated/applicable; retain human decision boundary. |
+| CL-11-07 | UpdateRequired | H, A; G05 | Konsultation und zusaetzliche lokale Freigaberegel nicht verwechseln. / Distinguish consultation from an additional local approval rule. |
+| CL-11-11 | UpdateRequired | H, A, L; G05 | Metadaten und Agentenzustand brauchen datenbezogenen Rechteprozess, kein neues Portal. / Metadata and agent state need a scoped rights process, not a new portal. |
+| CL-11-12 | UpdateRequired | H, A; G05 | Jaehrliche Review-Regel als lokal markieren, Anlassreview erhalten. / Mark annual review as local and retain event-driven review. |
+| CL-11-08 | UpdateRequired | H, A; G05 | RoPA-Rollen/Ausnahmen pruefen; externe Registereintraege bleiben menschlich. / Review RoPA roles/exceptions; external register entries remain human-owned. |
+| CL-07-06 | UpdateRequired | H, A; G06 | Konformitaetspfad erst nach Produkt-/Rollenentscheidung. / Conformity route follows product/role determination. |
+| CL-07-01 | UpdateRequired | H, A; G06 | FOSS, Marktbereitstellung und Bestandsprodukt separat screenen. / Screen FOSS, market availability and existing products separately. |
+| CL-07-07 | UpdateRequired | H, A; G06 | CE-/Erklaerungspflicht nicht aus oeffentlichem Repository ableiten. / Do not infer CE/declaration duties from a public repository. |
+| CL-07-11 | UpdateRequired | H, A; G06 | Lieferantenrollen und lokale Vertragsklauseln getrennt behandeln. / Separate supplier roles and local contractual rules. |
+| CL-01-03 | UpdateRequired | H, A, L; G04 | SBOM erhalten; Quell-Selbstbau statt Registry-Publikation als begrenzten Lieferweg bewerten. / Preserve SBOM; assess source self-build instead of registry publication as the bounded distribution route. |
+| CL-01-01 | UpdateRequired | H, A; G01 | Veroeffentlichte SSDF-Fassung von Entwurf unterscheiden und Pruefzuordnung korrigieren. / Distinguish published SSDF from draft and correct check mapping. |
+| CL-01-12 | UpdateRequired | H, A, L; G06 | Produkt, Werkzeugbetrieb und Organisation mit Datum/Rolle getrennt bewerten. / Separate product, tool operation and organisation by date/role. |
+| CL-01-10 | UpdateRequired | H, A; G01 | OWASP-Ausgaben und Kontrollnamen statt vermischter Nummern binden. / Bind OWASP editions and control names, not mixed numbering. |
+| CL-01-11 | UpdateRequired | H, A, L; G01 | Anwendbarkeit und Erfuellung als zwei unabhaengige Felder fuehren. / Track applicability and fulfillment as independent fields. |
+| CL-02-02 | AlreadyCovered | H, A; G02 | Mehrschichtige Haertung in H-Scope und minimalen Rechten bereits gefordert; Beispiele sind kein neuer Kubernetes-/Cloud-Auftrag. / Layered hardening and minimal privileges already required; examples do not mandate Kubernetes/cloud additions. |
+| CL-02-13 | UpdateRequired | H, A; G09 | Cloud-Nutzung auf C5-Scope screenen, kein Testat behaupten. / Screen cloud use for C5 scope; claim no attestation. |
+| CL-02-12 | UpdateRequired | H, A, L; G09 | Registry-/Hosting-Abhaengigkeiten und Toolchain-Ausnahme begruenden. / Explain registry/hosting dependencies and toolchain exemption. |
+| CL-03-10 | UpdateRequired | H, A; G07 | Schluesseltypen und oeffentliche TLS-Zertifikate getrennt einordnen; keine Rotation ausfuehren. / Separate key types and public TLS certificates; do not rotate. |
+| CL-03-02 | N/A | H, A; G07 | Keine eigene RSA-/ECDH-Implementierung oder Schluesselerzeugung; vorhandene TLS-/Signaturabhaengigkeiten bleiben G07. Bei eigener Kryptofunktion neu bewerten. / No first-party RSA/ECDH implementation or key generation; existing TLS/signature dependencies remain G07. Reassess if first-party crypto is added. |
+| CL-12-12 | UpdateRequired | H, A, L; G08 | Profil 14 und quartals-/anlassbezogene Gesamtpruefung explizit aufnehmen. / Explicitly require profile 14 and quarterly/event-driven complete review. |
+| CL-03-07 | UpdateRequired | H, A; G07 | Vorhandene ausgehende TLS-Nutzung pruefen; kein oeffentlicher Sandbox-Webdienst vorausgesetzt. / Review existing outbound TLS use; do not assume a public sandbox web service. |
+| CL-05-13 | UpdateRequired | H, A, L; G04 | Eingebettetes Modell/Dienst von installiertem Agentenwerkzeug unterscheiden; bedingtes SBOM-Mapping. / Distinguish embedded model/service from installed agent tooling; conditional SBOM mapping. |
+| CL-05-11 | UpdateRequired | H, A, L; G04 | Lizenzfassung und konkrete Weitergabe statt pauschaler Copyleft-Verbote. / Exact licence and distribution instead of blanket copyleft bans. |
+| CL-06-07 | UpdateRequired | H, A; G06 | Anwendbare Meldeketten getrennt vorbereiten, keine Meldung ausloesen. / Prepare separate applicable reporting chains; submit no report. |
+| CL-06-09 | UpdateRequired | H, A, L; G06 | Support-/Updateanforderungen nach Rolle bewerten; keine erfundene LTS-Zusage. / Assess support/update duties by role; invent no LTS promise. |
+| CL-07-02 | UpdateRequired | H, A; G06 | Produktklassen nicht aus Beispieltabellen ableiten. / Do not infer product class from example tables. |
+| CL-07-10 | UpdateRequired | H, A, L; G06 | Support, Updateverfuegbarkeit und Aufbewahrung getrennt behandeln. / Separate support, update availability and retention. |
+| CL-07-04 | UpdateRequired | H, A; G06 | Risikobasiertes Anhang-I-Mapping benoetigt eigene Evidenz, nicht nur Scan. / Risk-based Annex I mapping requires evidence, not just a scan. |
+| CL-07-05 | UpdateRequired | H, A; G06 | Schwachstellenbehandlung und lokale Werkzeugregeln von Rechtsanforderung trennen. / Separate vulnerability handling and local tools from legal requirements. |
+| CL-07-08 | UpdateRequired | H, A; G06 | Technische Dokumentation ist nicht mit persoenlichen Agentenlogs gleichzusetzen. / Technical documentation is not personal agent logs. |
+| CL-07-09 | UpdateRequired | H, A; G06 | Rollen, Meldeausloeser und Fristen nur nach zustaendiger Anwendbarkeitspruefung. / Reporting roles, triggers and periods follow responsible applicability review. |
+| CL-03-14 | UpdateRequired | H, A; G07 | Krypto-Abhaengigkeiten und Migrationsbedarf dokumentieren, keine neue Krypto bauen. / Record crypto dependencies and migration needs; build no new crypto. |
+| CL-12-05 | UpdateRequired | H, A, L; G03 | Inventar, Auto-Update und genehmigte Nutzung von providerfreiem Image trennen. / Separate inventory, auto-update and approved use from a provider-free image. |
+
+## Offene Umsetzung und Entscheidungen / Open Implementation and Decisions
+
+DE: Die Tabelle entscheidet nur die Intake-Auswirkung. Fuer G01-G10 ist die
+spaetere technische Erfuellung `Not Assessed`; dieses Authoring fuehrt keine
+Kontrolle aus. Anwendbarkeit fuer G01-G05/G07/G08/G10: `Applicable` innerhalb
+des begrenzten Sandbox-Screenings; G06 (Rechts-/Rollenentscheidung) und G09
+(Cloud-Kontext) bleiben `Open`. Die beiden begrenzten N/A-Zeilen erhalten
+`Not Assessed` und bleiben auf die fehlende Eigenimplementierung beschraenkt.
+Fuer persoenliche Daten ist eine DSFA (Datenschutz-Folgenabschaetzung, DPIA)
+nur nach Screening zu fordern; DSB bedeutet Datenschutzbeauftragte Person,
+RoPA ist das Verzeichnis der Verarbeitungstaetigkeiten. SAMM bewertet
+Sicherheitsreife, SSDF beschreibt sichere Entwicklungspraktiken, C3A/C5 sind
+Bewertungsrahmen fuer Cloud-Nutzung. PQC bezeichnet Kryptografie gegen
+Angriffe mit Quantencomputern; TLS schuetzt Netzwerkverbindungen.
+
+EN: This table decides intake impact only. Later technical fulfillment is
+Not Assessed for G01-G10; authoring executes no control. G01-G05/G07/G08/G10
+are Applicable within bounded sandbox screening; G06 legal/role decisions
+and G09 cloud context remain Open. Both bounded N/A rows use Not Assessed
+and cover only absent first-party implementations. A data protection impact
+assessment (DPIA) follows screening; DPO is the responsible privacy adviser,
+RoPA the processing-activities register. SAMM assesses security maturity,
+SSDF describes secure development practices, and C3A/C5 assess cloud use.
+PQC means post-quantum cryptography; TLS protects network connections.
+
+| Open-ID | Owner | Follow-up / Folgemassnahme | Re-Evaluation-Trigger / Anlass |
+| --- | --- | --- | --- |
+| O-344-TECH | Maintainer | G01-G10 im spaeter autorisierten Hardening pruefen und Evidenz erzeugen; bisher Not Assessed. / Assess G01-G10 and produce evidence in later authorized hardening; currently Not Assessed. | Vor Hardening-Start, bei Quell-/Runtimewechsel. / Before hardening starts or source/runtime changes. |
+| O-344-HUMAN | Repository Owner; Security Review, bei Bedarf Datenschutz-/Rechtsberatung / privacy/legal adviser as needed | G05/G06-Rollen, Datenschutz, Rechte, Provider-/Modell- und formale Sandbox-Entscheidungen datiert pruefen; keine agentische Freigabe. / Review scoped privacy, legal, provider/model and sandbox decisions; no agent approval. | Vor betroffener Nutzung/Weitergabe oder bei Rollen-/Datenflussaenderung. / Before affected use/distribution or role/data-flow changes. |
+| O-344-CLOUD | Repository Owner; Architecture Review | G09-Scope, Abhaengigkeiten und begruendete Ausnahme oder erforderliche Nachweise pruefen. / Assess G09 scope, dependencies and justified exemption or required evidence. | Vor Cloud-/Provider-Erweiterung oder Wechsel von Hosting/Registry. / Before cloud/provider extension or hosting/registry change. |
+
+## Uebergabe und unveraenderte Grenzen / Handoff and Unchanged Boundaries
+
+DE: H liefert eine kontroll-ID-bezogene Matrix und begruendete offene Punkte
+an A; A prueft dieselben Nachweise unabhaengig und gibt Fehler an H zurueck.
+L darf erst nach erfolgreicher technischer Abnahme starten. Auch dann bleiben
+menschliche Nutzungs-/Freigabeentscheidungen separat. Die Statusfolge bleibt
+Completed, Eligible, Blocked, Blocked. Die historische Feature-003-Studie
+und der nur quellbezogene Rollout von PR #96 sind keine aktuelle Sandbox-
+Abnahme. Kein Provider wird eingerichtet und kein Modell wird vorgewaehlt.
+
+EN: H hands a control-ID matrix and justified Open items to A; A checks the
+same evidence independently and returns defects to H. L starts only after
+successful technical acceptance. Human usage/approval decisions remain
+separate. Statuses stay Completed, Eligible, Blocked, Blocked. Neither the
+historical Feature 003 study nor the source-only PR #96 rollout establishes
+current sandbox acceptance. No provider or model is configured.

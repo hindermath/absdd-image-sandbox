@@ -71,6 +71,19 @@ flowchart TD
 
 ## Naechste Aktion / Next Action
 
+### Quellenabgleich 2026-10-21 / Source Alignment 2026-10-21
+
+DE: Die drei aktiven Intakes verwenden den
+[GSDB-3.4.4-Delta-Abgleich](docs/maintenance/intake-gsdb344-delta-2026-10-21.md)
+und Assurance 0.1.5. Die historische GSDB-Root bleibt abgeschlossen.
+Reihenfolge und Status sind unveraendert; Quellenuebernahme und
+Review-Bereitschaft sind keine Ausfuehrungs- oder Sandbox-Freigabe.
+
+EN: The three active intakes consume the linked GSDB 3.4.4 delta alignment
+and Assurance 0.1.5. The historical GSDB root remains Completed. Order and
+statuses are unchanged; source adoption and review readiness grant no
+execution or sandbox approval.
+
 Den Serienstatus schreibfrei pruefen. Danach darf der naechste Kandidat
 ebenfalls schreibfrei angezeigt werden; keiner dieser Befehle startet Arbeit:
 

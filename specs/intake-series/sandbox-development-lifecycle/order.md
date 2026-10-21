@@ -4,6 +4,17 @@ Diese Datei haelt die sichtbare Abarbeitungsreihenfolge der vorhandenen Lastenhe
 
 *This file records the visible processing order of existing requirements documents. It prepares later Spec Kit runs and does not start a run by itself.*
 
+## Quellenabgleich 2026-10-21 / Source Alignment 2026-10-21
+
+DE: Die drei aktiven Intakes beziehen GSDB 3.4.4 und Assurance 0.1.5 ueber
+den [Delta-Abgleich](../../../docs/maintenance/intake-gsdb344-delta-2026-10-21.md).
+Die abgeschlossene historische Root und die Statusfolge bleiben unveraendert.
+Review-Bereitschaft ist keine Ausfuehrungsfreigabe.
+
+EN: The three active intakes consume GSDB 3.4.4 and Assurance 0.1.5 through
+the linked delta alignment. The completed historical root and lifecycle
+statuses remain unchanged. Review readiness grants no execution authority.
+
 <!-- secure-development-hardening-order:start -->
 ## Verlinkte Lastenheft-Reihenfolge / Linked Requirements Order
 
