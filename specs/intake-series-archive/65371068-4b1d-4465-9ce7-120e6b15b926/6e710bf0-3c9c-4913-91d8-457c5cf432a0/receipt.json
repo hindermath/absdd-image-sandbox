@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "476bb589-b50b-4833-aa0e-27fea9a1d29d",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.3"
+  },
+  "createdAt": "2026-10-06T17:24:26Z",
+  "operation": {
+    "type": "Update",
+    "authorityEvidence": "Explicit owner request on 2026-10-06, annotations 1 and 2: explain and correct IR002-IR004 and repeat full intake review. Local only; no execution, advancement or remote delivery.",
+    "operationId": "8524075f-f913-41da-a68b-a0f5c5aef582"
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "693eb837641f015846b32f78143dfaac3c6fabe2ace653e47f50ca73bfa1b685"
+  },
+  "supersedes": {
+    "receiptNormalizedSha256": "d69914512aadf1d89f029e5b86a54a26f65d5ddf2e743d103775b597e02e05ed",
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/8524075f-f913-41da-a68b-a0f5c5aef582/manifest.json",
+    "manifestArchiveSha256": "66f190a12d3e602681dcc4bb255263a3932631c3c79112fed4f195dc07bc420e",
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/8524075f-f913-41da-a68b-a0f5c5aef582/receipt.json"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status"
+}

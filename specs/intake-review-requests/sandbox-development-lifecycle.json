@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.1",
-  "reviewId": "3d519e73-1ac3-44e5-a250-0b9f87f5c504",
+  "reviewId": "867d4a2e-f31e-4d70-a295-693c36c7a564",
   "mode": "Series",
   "policy": "learner-a11y-bilingual-series",
   "targets": [
@@ -53,5 +53,19 @@
     "manifestPath": "N/A",
     "workers": [],
     "operatorExceptions": []
-  }
+  },
+  "changeSources": [
+    "docs/secure-development/baseline-manifest.json",
+    "docs/maintenance/gsdb-344-source-inventory.json",
+    "docs/maintenance/gsdb-344-control-delta.json",
+    ".specify/presets/secure-development-assurance-governance/templates/secure-development-evidence-contract.md",
+    ".specify/presets/secure-development-assurance-governance/docs/release-0.1.5-validation.md",
+    "AGENTS.md",
+    "docs/maintenance/intake-gsdb344-delta-2026-10-21.md",
+    "docs/maintenance/gsdb-344-pilot-2026-10-20.md",
+    "docs/maintenance/gsdb-344-preset-installed-lock.json",
+    "COMPLIANCE-PLAN_RL-SE-001.md",
+    "docs/maintenance/intake-gsdb344-review-pass-1-2026-10-21.md"
+  ],
+  "authorityEvidence": "Explicit owner request on 2026-10-21: update exactly three active intakes to GSDB 3.4.4 and Assurance 0.1.5, then independent full review of all three and the four-target series. Local governance authoring only; no technical implementation, product run, build/start, commit or push; no lifecycle advancement."
 }

@@ -16,6 +16,21 @@ use; no prior experience with containers, Podman, forks, Spec Kit, or software
 bills of materials is assumed.
 **Profile:** learner-a11y-bilingual
 
+DE: Spec Kit ist ein Werkzeugablauf, der Anforderungen, Spezifikation,
+Planung, Aufgaben und Nachweise geordnet verbindet. Ein Intake ist die
+Anforderungsdatei vor einem solchen Lauf. Review prueft diese Datei;
+Review-Bereitschaft ist keine Ausfuehrungsfreigabe. Ein Smoke-Test ist ein
+kleiner Funktionstest, eine Toolchain eine Gruppe von Entwicklungswerkzeugen.
+Secrets sind vertrauliche Zugangsdaten; CI bezeichnet automatisierte
+Repository-Pruefungen und LSP die Verbindung zwischen Editor und Sprachwerkzeug.
+
+EN: Spec Kit is a workflow connecting requirements, specification, planning,
+tasks and evidence in order. An intake is the requirements file before such
+a run. Review checks this file; review readiness grants no execution
+authority. A smoke test is a small functional check and a toolchain a group
+of development tools. Secrets are confidential credentials; CI means
+automated repository checks and LSP connects editor and language tools.
+
 ## Purpose
 
 Das Repository soll als lernorientierte Ausgangsbasis genutzt werden koennen.
@@ -168,11 +183,110 @@ secrets, and weakening existing security controls.*
   PowerShell-7-Variante mit gleichwertigem Verhalten, Hilfe und den im
   Repository verlangten Nachweisen erstellt werden.
 
-*The requirements establish a fork-first, platform-neutral onboarding flow,
-local Podman builds, no prebuilt project image or publishing workflow,
-safe local configuration, toolchain verification, local SBOM evidence,
-upstream updates, optional GitHub-template separation, human-owned platform
-settings, and cross-platform parity for any new helper scripts.*
+**EN: Complete counterparts of the same FR IDs:**
+
+- **FR-001:** Documentation MUST describe a personal fork or an institution-
+  provided repository as the primary acquisition route.
+- **FR-002:** Documentation MUST explain origin as the writable learner copy
+  and upstream as the maintained reference, with setup, verification and
+  later update commands.
+- **FR-003:** GitHub MUST NOT be a universal prerequisite. A GitHub account
+  is required only for the direct GitHub fork or optional GitHub Copilot sign-in.
+- **FR-004:** Fork and GitHub template MUST be explained at first use and
+  clearly distinguished with respect to receiving updates.
+- **FR-005:** The normal startup route MUST build the image locally using
+  `podman compose build --pull`, then start it with Compose.
+- **FR-006:** Compose, CI configuration and onboarding MUST NOT reference a
+  prebuilt project image in GHCR or another project registry as a substitute
+  for self-build.
+- **FR-007:** The repository MUST NOT include an automatic workflow pushing
+  the finished sandbox image to a registry. A later registry workflow needs
+  a new explicit requirement.
+- **FR-008:** Onboarding MUST explain which local files are created from
+  templates, why they stay ignored, and where secrets must never be entered.
+- **FR-009:** The learning path MUST describe prerequisites, expected storage
+  and time requirements, build progress, common errors and successful
+  completion as ordered text.
+- **FR-010:** A documented post-build check MUST cover at least OpenCode,
+  Codex, Claude Code, Antigravity CLI, GitHub Copilot CLI, Syft and the six
+  language toolchains.
+- **FR-011:** Local CycloneDX SBOM generation MUST remain a learning and
+  supply-chain record. An SBOM is a structured list of image components.
+- **FR-012:** Update guidance MUST show how learners review and adopt
+  upstream changes without overwriting local configuration or project work.
+- **FR-013:** If recommended, optional GitHub template use MUST be a separate
+  profile and must not displace the fork/upstream default.
+- **FR-014:** Platform settings such as Template repository and branch
+  protection MUST be labelled human actions; agents must not claim activation.
+- **FR-015:** Any needed new helper scripts MUST have Bash and PowerShell 7
+  variants with equivalent behavior, help and repository-required evidence.
+
+## GSDB-Ergaenzung / GSDB Supplement
+
+DE: GSDB ist die generische Secure-Development-Basis. Die Version 3.4.4 und
+Assurance 0.1.5 aus PR #96 ergaenzen die historische Bestandspruefung;
+Assurance ist ein Spec-Kit-Regel-/Werkzeugpaket fuer Kontrollnachweise.
+Der [Delta-Abgleich](../docs/maintenance/intake-gsdb344-delta-2026-10-21.md)
+ordnet alle 50 geaenderten Kontrolltexte zu. H bedeutet vorgelagertes
+Hardening, A unabhaengige technische Abnahme, L diesen Selbstbau-Intake.
+Nur die mit L markierten Auswirkungen werden hier umgesetzt; Rechts- und
+Providerentscheidungen werden nicht in ein Lernenden-Buildskript verschoben.
+
+EN: GSDB means generic Secure Development Baseline. Version 3.4.4 and
+Assurance 0.1.5 from PR #96 supplement the historical assessment; Assurance
+is a Spec Kit rule/tool package for control evidence. The linked alignment
+maps all 50 changed texts. H means preceding hardening, A independent
+technical acceptance and L this self-build intake. Only L-marked effects
+apply here; legal/provider decisions are not moved into learner build scripts.
+
+- **L-FR-016:** Lernende MUESSEN Quelle, Version und Pflegeverantwortung von
+  Paketen sowie Lizenzhinweise und lokale SBOM nachvollziehen koennen.
+  Installierte Agenten sind nicht automatisch eingebettete KI-Modelle;
+  unbekannte Rechte bleiben Open mit Owner und Folgeaktion. / Learners MUST
+  be able to trace package source, version, maintainer, licence notices and
+  local SBOM. Installed agents are not automatically embedded AI models;
+  unclear rights stay Open with owner and follow-up.
+- **L-FR-017:** Die Anleitung MUSS providerfreien Build und spaetere
+  genehmigte KI-Nutzung trennen. Keine Provider-/Modellkonfiguration oder
+  echten Zugangsdaten fuer den Selbstbau verlangen; Ignore-Dateien nicht
+  als Zugriffssperre und Tarifnamen nicht als Datenschutzbeweis darstellen.
+  / Guidance MUST separate provider-free build from later approved AI use.
+  Require no provider/model configuration or real credentials for self-build;
+  do not present ignore files as access barriers or plan names as privacy proof.
+- **L-FR-018:** Der Aktualisierungsweg MUSS den GSDB-/Preset-Quellenstand und
+  Profil 14 mit 14 aktiven Presets sichtbar machen. Bei Quellenwechsel
+  anlassbezogen pruefen; Quartalsreview und zusaetzliche Jahrespruefung am
+  3. Oktober nennen. Assurance prueft exakte aktive Metadaten, nicht nur
+  Hashes. Nichts stillschweigend installieren oder ueberschreiben. / Update
+  guidance MUST expose GSDB/preset source versions and profile 14 with 14
+  active presets. Explain event-driven, quarterly and additional annual
+  3 October review; Assurance checks exact active metadata, not hashes alone.
+  Silently installing or overwriting content is prohibited.
+- **L-FR-019:** Die Anleitung MUSS sichere Projekt-/Dateigrenzen, getrennte
+  Audit-Metadaten und Agentenzustaende sowie begrenzte Loeschung erklaeren.
+  KI-Kompetenzangebote von tatsaechlicher Teilnahme und lokale Regeln von
+  Rechtsentscheidungen unterscheiden. Open nennt Owner, Follow-up und
+  Re-Evaluation-Trigger; N/A braucht Grund und Not Assessed. / Guidance MUST
+  explain safe project/path boundaries, separate audit metadata and agent
+  state, and scoped deletion. Distinguish AI literacy offers from attendance
+  and local rules from legal decisions. Open records owner, follow-up and
+  re-evaluation trigger; N/A needs a reason and Not Assessed.
+
+DE: Die Umsetzungspruefung dieser vier Anforderungen erfolgt erst nach
+erfolgreicher technischer Abnahme A und gesonderter Startautoritaet.
+O-344-TECH, O-344-HUMAN und O-344-CLOUD im Delta-Abgleich behalten ihre
+Owner/Folgemassnahmen/Trigger. Anwendbarkeit (Applicable, N/A, Open) und
+Erfuellung (Fulfilled, Partly Fulfilled, Not Fulfilled, Not Assessed) sind
+getrennt. Der aktuelle Quellenrollout ist keine Nutzungsfreigabe und keine
+aktuelle Abnahme. Fork/upstream und der Ausschluss fertiger Projekt-Images
+bleiben unveraendert.
+
+EN: Implementation checks for these four requirements follow successful
+technical acceptance A and separate execution authority. The alignment's
+Open handoffs retain their owners, follow-up and triggers. Applicability and
+implementation are separate fields with the values above. Source rollout
+grants no usage approval or current acceptance. Fork/upstream and the
+exclusion of ready-made project images remain unchanged.
 
 ## Quality And Governance
 
@@ -278,10 +392,63 @@ required governance records.*
   Protection oder anderen Plattformregeln bleibt als menschlicher Schritt
   `Open`, bis ein Owner oder Admin sie tatsaechlich ausfuehrt und prueft.
 
-*Acceptance requires a clean fresh checkout, working origin/upstream workflow,
-successful local Compose build and smoke checks, no project-registry delivery
-path, a local valid SBOM, platform-neutral and accessible documentation,
-passing repository checks, and truthful human-only platform status.*
+**EN: Complete counterparts of the same AC IDs:**
+
+- **AC-001:** A fresh personal fork or institutional checkout can be
+  configured without private paths or credentials; local files stay ignored.
+- **AC-002:** A learner can use the guidance to set up origin/upstream,
+  explain their roles and perform the update route or follow it through a
+  safe preview/check mode.
+- **AC-003:** `podman-compose config` succeeds in a fresh checkout after the
+  documented local template files have been created.
+- **AC-004:** `podman compose build --pull` builds successfully locally;
+  startup, shell access and clean shutdown work as documented.
+- **AC-005:** The documented smoke test confirms six language toolchains,
+  OpenCode, four required agents and Syft.
+- **AC-006:** Repository search and CI checks confirm no prebuilt project
+  image is fetched from a registry or automatically pushed there.
+- **AC-007:** Local SBOM generation produces valid CycloneDX JSON; its
+  generated artifact remains untracked by default.
+- **AC-008:** Guidance directly compares fork and GitHub template and clearly
+  names fork/upstream as the maintainable learning default.
+- **AC-009:** Users without GitHub can follow core guidance with an
+  institutional Git URL; GitHub steps form a recognizable separate profile.
+- **AC-010:** German precedes English, technical terms are explained at first
+  use, and dependencies, decisions, states and next steps remain understandable
+  without visual rendering.
+- **AC-011:** `pre-commit run --all-files`, `git diff --check` and relevant
+  repository validators complete without unexpected findings.
+- **AC-012:** Possible activation of Template repository, branch protection
+  or other platform rules remains a human Open item until an owner/admin
+  actually performs and verifies it.
+
+## Delta-Akzeptanzkriterien / Delta Acceptance Criteria
+
+- **L-AC-013:** Ein textorientierter Lernpfad nennt Quellen-/Versions-/
+  Lizenzpruefung und lokale SBOM mit erwarteten Ergebnissen; ungeklaerte
+  Rechte oder KI-Abhaengigkeiten sind nachvollziehbar Open/N/A, nicht
+  pauschal erledigt. / A text-first path describes source/version/licence
+  checks and local SBOM with expected results; unclear rights or AI
+  dependencies are traceably Open/N/A, not blanket-complete.
+- **L-AC-014:** Ein frischer Checkout bleibt ohne Secrets oder
+  Provider-/Modellwahl baubar. Build- und Nutzungsanleitung trennen diese
+  Schritte und enthalten keine unbelegten Datenschutzversprechen. / A fresh
+  checkout builds without secrets or provider/model selection; build and
+  use guidance separate these steps and contain no unproved privacy promises.
+- **L-AC-015:** Dokumentation nennt GSDB 3.4.4, Assurance 0.1.5 als hier
+  gepruefte Baseline, Profil 14 und Reviewanlaesse. Ein sicherer Vorschau-/
+  Pruefpfad erklaert veraltete Metadaten und stoppt vor unerlaubtem Update;
+  spaetere Baselinewechsel brauchen neue bewusste Pruefung. / Documentation
+  names the reviewed baseline, profile 14 and review triggers. A safe
+  preview/check path explains stale metadata and stops before unauthorized
+  updates; later baseline changes need fresh explicit review.
+- **L-AC-016:** DE/EN-Anleitung beschreibt Daten-/Dateigrenzen und sichere
+  Loeschung mit synthetischen Beispielen; keine realen Agentenzustaende
+  werden als Test geloescht. Menschliche Entscheidungen und Schulungsteilnahme
+  bleiben echte Nachweise oder Open mit Verantwortlichen. / DE/EN guidance
+  explains data/path boundaries and safe deletion using synthetic examples;
+  tests delete no real agent state. Human decisions and training attendance
+  remain actual evidence or owned Open items.
 
 ## Assumptions And Open Questions
 
@@ -310,14 +477,14 @@ new feature questions.*
 ### Specify
 
 ```text
-$speckit-specify Erstelle eine Spezifikation ausschliesslich auf Grundlage von intakes/learner-fork-self-build-sandbox.md. Bewahre den Fork-/upstream-Standard, den bewussten Ausschluss eines fertigen Projekt-Images aus GHCR oder anderen Projekt-Registries, die DE-first/EN-second-Lernendenbasis, WCAG 2.2 AA, Plattformneutralitaet und alle menschlichen Stop-Grenzen. Klaere materielle Luecken, aber beginne keine Implementierung und fuehre keine Commits, Pushes, Pull Requests, Merges oder Plattformaenderungen aus.
+$speckit-specify Erstelle eine Spezifikation auf Grundlage von intakes/learner-fork-self-build-sandbox.md und den L-markierten Auswirkungen in docs/maintenance/intake-gsdb344-delta-2026-10-21.md. Beruecksichtige L-FR-016 bis L-FR-019 und L-AC-013 bis L-AC-016 sowie die aktualisierte GSDB-/Assurance-Baseline. Bewahre Fork/upstream, den Ausschluss fertiger Projekt-Images, die DE-first/EN-second-Lernendenbasis, WCAG 2.2 AA, Plattformneutralitaet und menschliche Stop-Grenzen. Beginne keine Implementierung und fuehre keine Commits, Pushes, Pull Requests, Merges oder Plattformaenderungen aus.
 ```
 
 <!-- spec-kit-command-id: speckit.autonomous -->
 ### Autonomous
 
 ```text
-$speckit-autonomous Fuehre den vollstaendigen Spec-Kit-Lauf fuer intakes/learner-fork-self-build-sandbox.md mit Delivery Authority LocalImplementation aus. Implementiere nur lokal, erhalte den Fork-/upstream-Standard und den Ausschluss eines fertig bereitgestellten Projekt-Images, pruefe die Lernenden-, A11Y-, Sicherheits-, Lieferketten- und Plattformanforderungen und stoppe vor Commit, Push, Pull Request, Merge oder GitHub-/Hosting-Einstellungen.
+$speckit-autonomous Fuehre erst nach erfolgreicher unabhaengiger Sandbox-Abnahme, aktuellem Review und gesonderter Startautoritaet den vollstaendigen Spec-Kit-Lauf fuer intakes/learner-fork-self-build-sandbox.md mit Delivery Authority LocalImplementation aus. Bewahre den L-bezogenen GSDB-3.4.4-Delta-Abgleich, Assurance 0.1.5, Fork/upstream und den Ausschluss fertiger Projekt-Images. Implementiere nur lokal, pruefe Lernenden-, A11Y-, Sicherheits-, Lieferketten- und Plattformanforderungen und stoppe vor Commit, Push, Pull Request, Merge oder Hosting-Aenderungen.
 ```
 
 <!-- intake-authoring:end -->

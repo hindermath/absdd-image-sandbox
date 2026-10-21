@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "737b3688-1272-4051-a123-a9f624d30266",
+  "mode": "Series",
+  "status": "NeedsRemediation",
+  "policy": "learner-a11y-bilingual-series",
+  "reviewedAt": "2026-10-21T11:02:16Z",
+  "repository": {
+    "root": ".",
+    "head": "5a2ba8baeffea9be4f07aad82c8c41c81051ffe1"
+  },
+  "requestEvidence": {
+    "path": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "normalizedSha256": "b6f38831e7bb38da6ce35f9cbb81b81ee86459b7bccfcf5e883dd3c33e9270c6"
+  },
+  "targets": [
+    {
+      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "role": "Primary",
+      "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "c11029a6d7b20067139a3b5129cdaa54c4c8bb01e383678229464989ae89932d",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "8002cad312d4e05dd48eda42d1eede0d17471e0f812a6ed509cb7e3c174b42f7",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "9f009ebc7da34dbcaf0b16d825bf07172c826464934b3f28f506efbcdade78e1",
+      "gitBlob": "N/A"
+    }
+  ],
+  "findings": [
+    {
+      "id": "IR005",
+      "category": "Bilingual completeness",
+      "severity": "Medium",
+      "target": "intakes/learner-fork-self-build-sandbox.md",
+      "reviewerId": "GS344-R001",
+      "owner": "Intake Maintainer",
+      "evidence": "docs/maintenance/intake-gsdb344-review-pass-1-2026-10-21.md",
+      "reevaluationTrigger": "Updated translations and bindings, then independent full review",
+      "disposition": "Open: fully translate FR-001..015 and AC-001..012 without scope change"
+    },
+    {
+      "id": "IR006",
+      "category": "First-use terminology",
+      "severity": "Low",
+      "target": "docs/maintenance/intake-gsdb344-delta-2026-10-21.md",
+      "reviewerId": "GS344-R002",
+      "owner": "Documentation Maintainer",
+      "evidence": "docs/maintenance/intake-gsdb344-review-pass-1-2026-10-21.md",
+      "reevaluationTrigger": "Updated first-use explanations and independent first-reader pass",
+      "disposition": "Open: introduce terms bilingually before use in matrix and affected intakes"
+    }
+  ],
+  "questions": [],
+  "acceptedRisks": [],
+  "operatorExceptions": [],
+  "coverage": {
+    "individual": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "series": [
+      "Four targets, one root, three binding edges, complete assessment-to-self-build handoff"
+    ],
+    "workers": []
+  },
+  "summary": {
+    "high": 0,
+    "critical": 0,
+    "medium": 1,
+    "low": 1
+  },
+  "supersedes": "specs/intake-review-archive/3d519e73-1ac3-44e5-a250-0b9f87f5c504/6e710bf0-3c9c-4913-91d8-457c5cf432a0/result.json",
+  "reviewerEvidence": {
+    "mode": "IndependentAgentFullSeriesReview",
+    "pass": 1,
+    "reviewer": "01a15e15-d17d-7081-81ff-c46bd195c339",
+    "humanAcceptance": "NotClaimed"
+  }
+}
