@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "SecureDevelopmentGateEvidence",
+  "contextId": "sandbox-stable-presets",
+  "gate": "delta",
+  "mode": "development",
+  "createdAt": "2026-10-24T17:54:30.559806+00:00",
+  "review": {
+    "owner": "Thorsten Hindermann",
+    "reviewer": "Codex under bounded technical rollout authority; human patch sighting still pending",
+    "reviewedAt": "2026-10-24T17:54:30.559806+00:00",
+    "reviewDue": "2027-01-10",
+    "residualRisk": "Technical document and package integrity is not product acceptance, formal sandbox approval, legal or regulatory certification.",
+    "reevaluationTrigger": "Preset, baseline, composition, scope, runtime or authority change."
+  },
+  "assessments": [
+    {
+      "id": "SOURCE-14",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/maintenance/stable-preset-source-lock-2026-10-24.json"
+    },
+    {
+      "id": "INSTALLED-14",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/maintenance/stable-preset-installed-lock-2026-10-24.json"
+    },
+    {
+      "id": "NATIVE-COMPOSITION",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": ".specify/presets/security-governance/.composed/speckit.specify.md"
+    }
+  ],
+  "outcome": "Ready",
+  "externalComparisonBoundary": "HOSK/GWDG: ExternalComparison only; never local evidence",
+  "verificationScope": "Fourteen released packages, native target composition and unchanged GSDB 3.4.4 document identity only; no product execution or new human release.",
+  "runbookApplicability": "N/A",
+  "runbookRationale": "Bounded repository-only preset installation; actual commands and review limits are in the linked rollout report."
+}

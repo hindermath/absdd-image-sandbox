@@ -1,13 +1,32 @@
 # Model Routing Governance
 
-Patch **0.1.5** liefert die verbesserte zweisprachige Einstiegs- und
-Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
-[Release-Nachweis / Release record](docs/release-0.1.5-validation.md).
+<!-- current-package: 0.1.7 -->
 
-*Patch 0.1.5 packages the improved bilingual getting-started and composition
+Paketkennung: **v0.1.7**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.1.7-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
+
+<span lang="en">Package identity: v0.1.7. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
+
+[Release-Abschluss und Verbesserungsprofil / Publication closeout and improvement profile](docs/release-0.1.6-validation.md).
+
+Der unten verlinkte Basispaket-Nachweis bleibt historisch; dieses Paket nimmt die Quellenkorrekturen als neue Version auf.
+
+<span lang="en">The linked base-package evidence remains historical; this package includes the source corrections as a new version.</span>
+
+**Leserpfad / Reader path:** [Deutsch: Einstieg, Begriffe und Fehlerhilfe](docs/user-guide.md) · [English: start, terms and troubleshooting](docs/user-guide.EN.md).
+
+Historisches Basispaket **v0.1.6**. Der [Release-Stand](https://github.com/hindermath/spec-kit-preset-model-routing-governance/releases) wird getrennt geprüft; ein Commit auf main ist noch keine Veröffentlichung oder Installation.
+
+*Historical base package v0.1.6. The release page records actual publication separately; a main-branch commit is not publication or installation.*
+
+
+Patch **0.1.6** liefert die verbesserte zweisprachige Einstiegs- und
+Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
+[Release-Nachweis / Release record](docs/release-0.1.6-validation.md).
+
+*Patch 0.1.6 packages the improved bilingual getting-started and composition
 guide. Behavior and authority boundaries remain unchanged.*
 
-Version `0.1.4` removes a stale version-specific diagnostic from an unsupported
+Version `0.1.6` removes a stale version-specific diagnostic from an unsupported
 harness path. Generated agent instructions, bilingual documentation,
 PowerShell 7 validation, and all routing and authority semantics remain
 unchanged from 0.1.3.
@@ -86,6 +105,31 @@ konkrete Bindung liegt lokal außerhalb des Projekt-Repositories.
 
 ### Harness-Fähigkeiten
 
+Die Policy nennt Adapter-Kategorien; eine Kategorie ist kein Nachweis einer
+implementierten Funktion. Im stabilen Resolver dieses Pakets gilt:
+
+| Harness | Tatsächlich vorhandener Pfad / Implemented path |
+|---|---|
+| Codex | Strukturierte Metadaten und automatische Profile / structured metadata and automatic profiles |
+| Antigravity (`agy`) | Namenskatalog und heuristische Zuordnung / name catalogue and heuristic mapping |
+| Claude | Keine automatische Kandidatenprüfung oder Profilerzeugung / no automatic candidate validation or profile rendering |
+| Copilot | Keine automatische Kandidatenprüfung oder Profilerzeugung / no automatic candidate validation or profile rendering |
+| OpenCode | Policy-Kategorie, kein implementierter automatischer Resolverpfad / policy category, no implemented automatic resolver path |
+
+*Policy categories do not prove implemented capabilities. Only Codex and
+Antigravity have automatic selection/profile paths in this stable resolver.
+Other harness labels must not be presented as working adapters.*
+
+Codex verwendet die vorhandenen Default-/Beschreibungshinweise; Antigravity
+verwendet vorhandene Namensmuster und vorgegebene Effort-Werte. Das sind
+Heuristiken, kein unabhängiger Qualitäts-, Zugangs- oder Fähigkeitsnachweis.
+Dieser Dokumentationspatch ändert diese Implementierung nicht.
+
+*Codex uses existing default/description hints; Antigravity uses existing name
+patterns and preset effort values. These are heuristics, not independent
+quality, access or capability evidence. This documentation patch changes
+none of that implementation.*
+
 - `Enumerate`: strukturierte Modelle und Reasoning-Stufen, beispielsweise
   Codex `model/list`.
 - `EnumerateNames`: Modellnamenliste plus Validierung, beispielsweise
@@ -93,6 +137,14 @@ konkrete Bindung liegt lokal außerhalb des Projekt-Repositories.
 - `ValidateCandidate`: ausdrücklich konfigurierte Kandidaten einzeln prüfen.
 - `ConfiguredOnly`: keine belastbare Discovery; nur vorhandene Konfiguration
   verwenden.
+
+Die letzten beiden Kategorien beschreiben Policy-Begriffe, nicht hier
+implementierte Ausführungspfade. Bei diesen Harnessen die bestehende Grenze
+melden; kein automatischer Wechsel und keine Behauptung einer erfolgreichen Prüfung.
+
+*The last two categories are policy concepts, not implemented execution paths
+in this release. Report the existing limit rather than switching harnesses or
+claiming a successful check.*
 
 Unbekannte oder mehrdeutige Zuordnungen blockieren. Es gibt keinen stillen
 Fallback und keinen automatischen Anbieterwechsel.
@@ -110,6 +162,16 @@ nach ausdrücklicher Autorisierung.
 Das Statuskommando ist read-only. Refresh schreibt ausschließlich die lokale
 Konfigurationsdatei. Beide Commands erteilen keine Spec-Kit-, Git- oder
 Remote-Autorität.
+
+Status und Refresh lesen Discovery-Metadaten. Refresh führt den in Profilen
+beschriebenen Modellzugangs-Preflight nicht aus. Ein späterer Runner-Preflight
+kann trotz read-only-Sandbox Modellkontingent verbrauchen. Die eigenen
+Ausführungs- und Kontingentgrenzen des Laufs gelten weiterhin.
+
+*Status and refresh read discovery metadata. Refresh does not execute the
+model-access preflight described in generated profiles. A later runner preflight
+can consume model quota even in a read-only sandbox; applicable run and quota
+authority remains required.*
 
 ## English
 
@@ -130,7 +192,7 @@ Codex binding only after explicit authorization.
 ## Installation
 
 ```bash
-specify preset add --from https://github.com/hindermath/spec-kit-preset-model-routing-governance/archive/refs/tags/v0.1.5.zip --priority 61
+specify preset add --from https://github.com/hindermath/spec-kit-preset-model-routing-governance/archive/refs/tags/v0.1.7.zip --priority 61
 ```
 
 License: MIT.

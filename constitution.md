@@ -6,7 +6,7 @@ Neue Pflichten, keine entfernten Regeln; abhaengige Vorlagen synchron gepflegt. 
 Historical Sync Impact Report (superseded by the 2026-09-13 Mermaid/report amendment)
 Version change: 1.16.2 -> 1.16.3
 Modified principles:
-- Spec Kit preset governance: pin autonomous-run-governance v0.4.4 and require exact staged-candidate validation.
+- Spec Kit preset governance: pin autonomous-run-governance v0.4.7 and require exact staged-candidate validation.
 - None
 Added sections:
 - None
@@ -906,14 +906,14 @@ workspace family consists of:
 
 | Preset | Version | Priority | Scope |
 |---|---:|---:|---|
-| `security-governance` | `v0.7.2` | `10` | secure development, MSL, language-specific secure coding, SSDF, ASVS, SBOM/VEX/SLSA, AI-SBOM, CRA/regulatory applicability |
-| `architecture-governance` | `v0.6.3` | `20` | secure architecture, STRIDE/CAPEC, Zero Trust, SAMM, S-ADR, BSI C3A cloud autonomy, BSI C5 cloud assurance |
-| `isaqb-architecture-governance` | `v0.2.3` | `30` | general iSAQB/arc42 architecture governance |
-| `a11y-governance` | `v0.4.4` | `40` | WCAG 2.2 AA, bilingual DE/EN, CEFR B2, inclusive artefacts, didactic inline-code-comment review |
-| `cross-platform-governance` | `v0.2.3` | `50` | Bash/PowerShell parity, macOS/Linux/Windows script governance |
-| `agent-parity-governance` | `v0.4.3` | `60` | synchronized agent guidance, fleet-completion evidence, and agent-neutral Spec-Kit model routing |
-| `autonomous-run-governance` | `v0.4.5` | `70` | permission-bounded, evidence-first governance with resumable, validated closeout |
-| `parallel-autonomous-run-governance` | `v0.2.7` | `80` | isolated bounded campaigns, mixed runner profiles, cooperative stop/resume, provider-gated resumable consolidation, and declared post-merge closeout |
+| `security-governance` | `v0.7.4` | `10` | secure development, MSL, language-specific secure coding, SSDF, ASVS, SBOM/VEX/SLSA, AI-SBOM, CRA/regulatory applicability |
+| `architecture-governance` | `v0.6.5` | `20` | secure architecture, STRIDE/CAPEC, Zero Trust, SAMM, S-ADR, BSI C3A cloud autonomy, BSI C5 cloud assurance |
+| `isaqb-architecture-governance` | `v0.2.5` | `30` | general iSAQB/arc42 architecture governance |
+| `a11y-governance` | `v0.4.6` | `40` | WCAG 2.2 AA, bilingual DE/EN, CEFR B2, inclusive artefacts, didactic inline-code-comment review |
+| `cross-platform-governance` | `v0.2.5` | `50` | Bash/PowerShell parity, macOS/Linux/Windows script governance |
+| `agent-parity-governance` | `v0.4.5` | `60` | synchronized agent guidance, fleet-completion evidence, and agent-neutral Spec-Kit model routing |
+| `autonomous-run-governance` | `v0.4.7` | `70` | permission-bounded, evidence-first governance with resumable, validated closeout |
+| `parallel-autonomous-run-governance` | `v0.2.9` | `80` | isolated bounded campaigns, mixed runner profiles, cooperative stop/resume, provider-gated resumable consolidation, and declared post-merge closeout |
 
 `autonomous-run-governance` is installed as part of the mandatory eight-preset
 governance matrix. Installation does not authorize an autonomous run.
@@ -960,8 +960,8 @@ breaking cleanup.
 All eight presets are published as standalone repositories under
 `https://github.com/hindermath/spec-kit-preset-*`. The original six have been
 listed in the `github/spec-kit` community preset catalog since 2026-05-04;
-`autonomous-run-governance` v0.2.2 was verified there on 2026-07-17.
-`parallel-autonomous-run-governance` v0.2.1 was submitted to the community
+`autonomous-run-governance` v0.4.7 was verified there on 2026-07-17.
+`parallel-autonomous-run-governance` v0.2.9 was submitted to the community
 catalog as `github/spec-kit#3591`. Registered Level-0, Level-1, and Level-2
 repositories with Spec Kit SHOULD install all eight presets from the central
 matrix unless the repository documents a narrow exception. Fleet evidence MUST

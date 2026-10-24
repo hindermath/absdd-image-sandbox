@@ -1,14 +1,33 @@
 # Agent Parity Governance Preset
 
-Patch **0.4.3** liefert die verbesserte zweisprachige Einstiegs- und
-Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
-[Release-Nachweis / Release record](docs/release-0.4.3-validation.md).
+<!-- current-package: 0.4.5 -->
 
-*Patch 0.4.3 packages the improved bilingual getting-started and composition
+Paketkennung: **v0.4.5**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.4.5-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
+
+<span lang="en">Package identity: v0.4.5. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
+
+[Release-Abschluss und Verbesserungsprofil / Publication closeout and improvement profile](docs/release-0.4.4-validation.md).
+
+Der unten verlinkte Basispaket-Nachweis bleibt historisch; dieses Paket nimmt die Quellenkorrekturen als neue Version auf.
+
+<span lang="en">The linked base-package evidence remains historical; this package includes the source corrections as a new version.</span>
+
+**Leserpfad / Reader path:** [Deutsch: Einstieg, Begriffe und Fehlerhilfe](docs/user-guide.md) · [English: start, terms and troubleshooting](docs/user-guide.EN.md).
+
+Historisches Basispaket **v0.4.4**. Der [Release-Stand](https://github.com/hindermath/spec-kit-preset-agent-parity-governance/releases) wird getrennt geprüft; ein Commit auf main ist noch keine Veröffentlichung oder Installation.
+
+*Historical base package v0.4.4. The release page records actual publication separately; a main-branch commit is not publication or installation.*
+
+
+Patch **0.4.4** liefert die verbesserte zweisprachige Einstiegs- und
+Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
+[Release-Nachweis / Release record](docs/release-0.4.4-validation.md).
+
+*Patch 0.4.4 packages the improved bilingual getting-started and composition
 guide. Behavior and authority boundaries remain unchanged.*
 
-Version: `0.4.3`
-Status: published, standard governance preset
+Version: `0.4.5`
+Status: Veröffentlichung über die Release-Seite prüfen / verify publication on the release page
 Priority: `60`
 Requires: Spec-Kit `>=0.8.0` (uses the `wrap` and `append` composition
 strategies introduced in `0.8.x`).
@@ -82,12 +101,12 @@ Leserpfad / Reader path: [Installation](#installation--installation) →
 [Regeln / Rules](#regeln--rules) → [Prüfung / Verification](#prüfung--verification) →
 [Fehlersuche / Troubleshooting](#fehlersuche--troubleshooting).
 
-Dieses Standard-Preset verhindert stillen Drift zwischen KI-Agenten-Dateien.
+Dieses Standard-Preset unterstützt die Prüfung auf Drift zwischen KI-Agenten-Dateien.
 Gemeinsame Regeln sollen atomar auf allen gepflegten Agent-Flächen landen,
 absichtliche Abweichungen sollen dokumentiert sein, und Modell-Routing soll
 agentenneutral bleiben.
 
-*This standard preset prevents silent drift between AI-agent guidance files.
+*This standard preset supports checking drift between AI-agent guidance files.
 Shared rules should land atomically on every maintained agent surface,
 intentional deviations should be documented, and model routing should remain
 agent-neutral.*
@@ -164,7 +183,7 @@ shared and which are intentionally agent-specific.*
 ### Veröffentlichter Tag / Published Tag
 
 ```bash
-specify preset add --from https://github.com/hindermath/spec-kit-preset-agent-parity-governance/archive/refs/tags/v0.4.3.zip --priority 60
+specify preset add --from https://github.com/hindermath/spec-kit-preset-agent-parity-governance/archive/refs/tags/v0.4.5.zip --priority 60
 specify preset info agent-parity-governance
 ```
 
@@ -219,6 +238,16 @@ Agentenmix.
 instruction files. The preset does not require a specific vendor or agent mix.*
 
 ## Modell-Routing / Model Routing
+
+Die folgende Übersicht erklärt typische Rollen. Maßgeblich bleibt der
+konkrete Command-Vertrag; ein fachliches Intake- oder Assurance-Review kann
+deshalb frontier-reasoning verlangen statt coding-review. Installation prüft
+oder synchronisiert keine bestehenden Agenten-Dateien automatisch.
+
+*The list explains typical roles. Actual command contracts remain authoritative:
+semantic intake/assurance review may require frontier-reasoning rather than
+coding-review. Installation does not automatically verify or synchronize
+existing agent files.*
 
 - `frontier-reasoning` für semantische Intake-Entscheidungen sowie Specify,
   Clarify, Plan, Tasks und Analyze.

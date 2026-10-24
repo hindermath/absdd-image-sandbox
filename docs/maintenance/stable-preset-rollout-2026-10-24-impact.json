@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "1.1",
+  "feature": "sandbox-stable-fourteen-preset-rollout-2026-10-24",
+  "entries": [
+    {
+      "changeId": "CHG001",
+      "scope": "sandbox-installation-and-agent-composition",
+      "decision": "UpdateRequired",
+      "rationale": "DE: Aktueller begrenzter Vierzehner-Rollout, keine Produktfreigabe. EN: Current bounded fourteen-preset rollout, no product acceptance.",
+      "documents": [
+        "README.md",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "GEMINI.md",
+        ".github/copilot-instructions.md",
+        ".github/agents/copilot-instructions.md",
+        "constitution.md",
+        ".specify/memory/constitution.md",
+        "docs/maintenance/stable-preset-rollout-2026-10-24.md"
+      ],
+      "owner": "Thorsten Hindermann",
+      "audiences": [
+        "Maintainers",
+        "Preset users"
+      ],
+      "readerPaths": [
+        "README → bounded rollout report → source lock, installed lock and delivery PR"
+      ],
+      "canonicalSource": "scripts/config/spec-kit-project-statistics-governance-presets.json",
+      "navigationImpact": "DE: Datierter Rollout-Nachweis mit Quellen-Lock. EN: Dated rollout record links exact source bindings.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and English second; paired README files and synchronized guidance.",
+      "languagePartners": [],
+      "platformAndExampleProof": "Existing Linux/aarch64 container; actual check outcomes in session log and gate record. Other host platforms and human accessibility acceptance remain separate.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/maintenance/stable-preset-rollout-2026-10-24.md",
+      "risk": "DE: Nur dieses Projekt; keine Implementierung, Home-Synchronisierung oder weitere Flotte. EN: This project only; no implementation, Home sync or wider fleet.",
+      "criticality": "Usage",
+      "reevaluationTrigger": "Preset, priority, composition, override or runtime-distribution change."
+    },
+    {
+      "changeId": "CHG002",
+      "scope": "sandbox-technical-assurance-revalidation",
+      "decision": "UpdateRequired",
+      "rationale": "DE: Aktueller begrenzter Vierzehner-Rollout, keine Produktfreigabe. EN: Current bounded fourteen-preset rollout, no product acceptance.",
+      "documents": [
+        "docs/security/secure-development/2026-10-24-sandbox-stable-presets/baseline.json",
+        "docs/security/secure-development/2026-10-24-sandbox-stable-presets/deltas/001-fourteen-presets.json",
+        "docs/security/secure-development/2026-10-24-sandbox-stable-presets/closure.json",
+        "docs/security/secure-development/2026-10-24-sandbox-stable-presets/image-impact.json",
+        "docs/security/secure-development/2026-10-24-sandbox-stable-presets/evidence-matrix.md"
+      ],
+      "owner": "Thorsten Hindermann",
+      "audiences": [
+        "Technical reviewers",
+        "Maintainers"
+      ],
+      "readerPaths": [
+        "Rollout -> technical context -> four runbooks and executed command proof"
+      ],
+      "canonicalSource": "docs/secure-development/baseline-manifest.json and docs/maintenance/stable-preset-source-lock-2026-10-24.json",
+      "navigationImpact": "DE: Neuer technischer Kontext; historische Kontexte bleiben erhalten. EN: Add a technical context and preserve historical contexts.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "Bilingual matrix/runbooks; language-neutral JSON keys, paths and hashes.",
+      "languagePartners": [],
+      "platformAndExampleProof": "Existing Linux/aarch64 container; actual check outcomes in session log and gate record. Other host platforms and human accessibility acceptance remain separate.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/maintenance/stable-preset-rollout-2026-10-24.md",
+      "risk": "Technical integrity checks do not establish complete control implementation, human product acceptance or regulatory/certification approval.",
+      "criticality": "Security",
+      "reevaluationTrigger": "Controlled-document, installed payload, scope or authority change."
+    },
+    {
+      "changeId": "CHG003",
+      "scope": "statistics",
+      "decision": "GeneratedUpdate",
+      "rationale": "DE: Aktueller begrenzter Vierzehner-Rollout, keine Produktfreigabe. EN: Current bounded fourteen-preset rollout, no product acceptance.",
+      "documents": [
+        "docs/project-statistics.md"
+      ],
+      "owner": "Thorsten Hindermann",
+      "audiences": [
+        "Maintainers",
+        "Readers"
+      ],
+      "readerPaths": [
+        "README → project statistics → bounded delivery evidence"
+      ],
+      "canonicalSource": "docs/project-statistics.config.json",
+      "navigationImpact": "Existing ledger and last overall-statistics section retained.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and English second.",
+      "languagePartners": [],
+      "platformAndExampleProof": "Existing Linux/aarch64 container; actual check outcomes in session log and gate record. Other host platforms and human accessibility acceptance remain separate.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/maintenance/stable-preset-rollout-2026-10-24.md",
+      "risk": "Repository transparency is not measured AI productivity, personal time or a quality score.",
+      "criticality": "Usage",
+      "reevaluationTrigger": "Source or ledger changes.",
+      "generatedSource": {
+        "path": "docs/project-statistics.config.json",
+        "renderer": "bash scripts/render-project-statistics.sh --repo ."
+      }
+    }
+  ]
+}

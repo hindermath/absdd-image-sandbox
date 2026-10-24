@@ -1,13 +1,32 @@
 # Intake Sequencing Governance
 
-Patch **0.2.9** liefert die verbesserte zweisprachige Einstiegs- und
-Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
-[Release-Nachweis / Release record](docs/release-0.2.9-validation.md).
+<!-- current-package: 0.2.11 -->
 
-*Patch 0.2.9 packages the improved bilingual getting-started and composition
+Paketkennung: **v0.2.11**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.2.11-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
+
+<span lang="en">Package identity: v0.2.11. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
+
+[Release-Abschluss und Verbesserungsprofil / Publication closeout and improvement profile](docs/release-0.2.10-validation.md).
+
+Der unten verlinkte Basispaket-Nachweis bleibt historisch; dieses Paket nimmt die Quellenkorrekturen als neue Version auf.
+
+<span lang="en">The linked base-package evidence remains historical; this package includes the source corrections as a new version.</span>
+
+**Leserpfad / Reader path:** [Deutsch: Einstieg, Begriffe und Fehlerhilfe](docs/user-guide.md) · [English: start, terms and troubleshooting](docs/user-guide.EN.md).
+
+Historisches Basispaket **v0.2.10**. Der [Release-Stand](https://github.com/hindermath/spec-kit-preset-intake-sequencing-governance/releases) wird getrennt geprüft; ein Commit auf main ist noch keine Veröffentlichung oder Installation.
+
+*Historical base package v0.2.10. The release page records actual publication separately; a main-branch commit is not publication or installation.*
+
+
+Patch **0.2.10** liefert die verbesserte zweisprachige Einstiegs- und
+Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
+[Release-Nachweis / Release record](docs/release-0.2.10-validation.md).
+
+*Patch 0.2.10 packages the improved bilingual getting-started and composition
 guide. Behavior and authority boundaries remain unchanged.*
 
-Aktuelle Version / Current version: **0.2.9**. Der Installationsbefehl steht
+Paketversion / Package version: **0.2.11**. Der Installationsbefehl steht
 auf einer Zeile und ist direkt vom Community-Validator auswertbar. Die
 Sequencing-Logik ist gegenueber 0.2.7 unveraendert; bestehende Tags und
 Archive bleiben erhalten. Siehe [Patch-Nachweis](docs/release-0.2.8-validation.md).
@@ -25,7 +44,7 @@ bleiben gesperrt. Schema, Commands und Prioritaet bleiben gleich.
 Running Active series with an Active member may have no additional Eligible
 candidate. The candidate remains N/A; this grants no execution authority.
 Ready still requires exactly one candidate, and all integrity checks remain.
-Coordinated patch versions: Authoring 0.3.8, Review 0.2.5, Sequencing 0.2.9.
+Documentation target combination (not a new field-test claim): Authoring 0.3.10, Review 0.2.7, Sequencing 0.2.11.
 
 Fuer die Python-basierten Pruefungen eine gepflegte Python-Version verwenden.
 macOS-System-Python 3.9 kann gueltige UTC-Zeitstempel mit sieben Nachkommastellen
@@ -101,7 +120,7 @@ delivery order. This preset stores both a learner-readable order and a
 machine-checkable typed graph. It never writes intake content and never starts
 the work it selects.
 
-Version `0.2.3` publishes the agent-neutral `model-routing.json` contract for
+Version `0.2.10` publishes the agent-neutral `model-routing.json` contract for
 composition with Model Routing Governance. Sequencing behavior is unchanged.
 
 Version `0.2.2` preserves the project-declared learner contract in the readable
@@ -130,7 +149,7 @@ Ein gewöhnlicher zweiter Index im selben Repository bleibt ein Fehler.*
 ## Installation
 
 ```bash
-specify preset add --from https://github.com/hindermath/spec-kit-preset-intake-sequencing-governance/archive/refs/tags/v0.2.9.zip --priority 66
+specify preset add --from https://github.com/hindermath/spec-kit-preset-intake-sequencing-governance/archive/refs/tags/v0.2.11.zip --priority 66
 ```
 
 ## Commands

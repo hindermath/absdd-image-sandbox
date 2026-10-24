@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "SecureDevelopmentGateEvidence",
+  "contextId": "sandbox-stable-presets",
+  "gate": "baseline",
+  "mode": "development",
+  "createdAt": "2026-10-24T17:54:30.559806+00:00",
+  "review": {
+    "owner": "Thorsten Hindermann",
+    "reviewer": "Codex under bounded technical rollout authority; human patch sighting still pending",
+    "reviewedAt": "2026-10-24T17:54:30.559806+00:00",
+    "reviewDue": "2027-01-10",
+    "residualRisk": "Technical document and package integrity is not product acceptance, formal sandbox approval, legal or regulatory certification.",
+    "reevaluationTrigger": "Preset, baseline, composition, scope, runtime or authority change."
+  },
+  "assessments": [
+    {
+      "id": "GSDB-344-DOCUMENT-IDENTITY",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/secure-development/baseline-manifest.json",
+      "scope": "Unchanged manifest and controlled documents; not checklist implementation."
+    }
+  ],
+  "outcome": "Ready",
+  "externalComparisonBoundary": "HOSK/GWDG: ExternalComparison only; never local evidence",
+  "verificationScope": "Fourteen released packages, native target composition and unchanged GSDB 3.4.4 document identity only; no product execution or new human release.",
+  "runbookApplicability": "N/A",
+  "runbookRationale": "Bounded repository-only preset installation; actual commands and review limits are in the linked rollout report.",
+  "baselineBinding": {
+    "manifestPath": "docs/secure-development/baseline-manifest.json",
+    "baselineVersion": "3.4.4",
+    "manifestNormalizedSha256": "d73564dce25433aee2e3d5bc3df1cf18b3f5944c9e4197fff95ab5af2dfd385d",
+    "documentBindings": [
+      {
+        "path": "Richtlinie_Sichere-Entwicklung.md",
+        "version": "3.4.4",
+        "normalizedSha256": "cd80b23afc87a53b523cd6eb5b47ffce1873b6a3f3906abecfef8321a811e88b"
+      },
+      {
+        "path": "Checklistensammelband_Sichere-Entwicklung.md",
+        "version": "2.4.4",
+        "normalizedSha256": "9f4eda3b2774b90318d838870b67e7ac10dafb8470e495e808bcca534a8b1699"
+      },
+      {
+        "path": "checklisten/CL_01_Standards-Anwendbarkeit.md",
+        "version": "2.0.4",
+        "normalizedSha256": "d52d339fcb61a8585cf425104517e51a88b3826c3311a0a47d17f549b4fb3396"
+      },
+      {
+        "path": "checklisten/CL_02_Sichere-Softwarearchitektur.md",
+        "version": "2.0.3",
+        "normalizedSha256": "45f51a1bf357c8fe13689aa20b81b6b0298114090e834efa20129ff6f3e099d7"
+      },
+      {
+        "path": "checklisten/CL_03_Krypto-Mindestvorgaben.md",
+        "version": "2.0.3",
+        "normalizedSha256": "be5d2629200268cb202ffba99f34f5d1e11252686496b5e9f7f477f5d7a69db3"
+      },
+      {
+        "path": "checklisten/CL_04_Bedrohungsmodellierung.md",
+        "version": "2.0.2",
+        "normalizedSha256": "e916e7edf32afa5c61674395d84b9bc4354a098d747a9fa219ba52d7c8912edf"
+      },
+      {
+        "path": "checklisten/CL_05_Lieferkette-Build-Integritaet.md",
+        "version": "2.0.2",
+        "normalizedSha256": "63d0ef15476da6d5d782c2feb9c74387e4328ce9a9228b47df730a382a99f80b"
+      },
+      {
+        "path": "checklisten/CL_06_Schwachstellenoffenlegung.md",
+        "version": "2.0.2",
+        "normalizedSha256": "b9548318e2d261a4534645167e1576642ec1809aa342ed532b9739c74b63a174"
+      },
+      {
+        "path": "checklisten/CL_07_CRA-Anwendbarkeit.md",
+        "version": "2.0.5",
+        "normalizedSha256": "03b972af3e45b7fdc3e297fc1ef4b55d23d105f6dcc77f74b68e24b1c38cc53c"
+      },
+      {
+        "path": "checklisten/CL_08_Sicherheits-Code-Review.md",
+        "version": "2.0.4",
+        "normalizedSha256": "571b0ee9c2970c09c4a5dd4ef17831d4a2b7f88571265f32037bb784a2b3be17"
+      },
+      {
+        "path": "checklisten/CL_09_KI-Codeerzeugung.md",
+        "version": "2.2.4",
+        "normalizedSha256": "1a1c97d69b74026d76c76e620b4160e54a4f3bfb2c09d6b5f60f891e2a8b7c62"
+      },
+      {
+        "path": "checklisten/CL_10_Sichere-Entwicklungsumgebung.md",
+        "version": "2.0.2",
+        "normalizedSha256": "3403d31987dd1d26f2e76002193ad7aaf856dd516e8c0ebbfa3ab72ff48b562c"
+      },
+      {
+        "path": "checklisten/CL_11_Datenschutz-Folgenabschaetzung.md",
+        "version": "2.0.3",
+        "normalizedSha256": "bd40ec60bb50af1f4a482135b5b982892a64aa55b0dbfbc9777e3957589b2577"
+      },
+      {
+        "path": "checklisten/CL_12_Agentische-KI-Sandbox.md",
+        "version": "2.2.2",
+        "normalizedSha256": "2c02d0730c7a1e4ec93f062499f7ebc68083f5ffce432929459c917918b07fc4"
+      },
+      {
+        "path": "mitgeltende-dokumente/BCM-Notfallhandbuch.md",
+        "version": "1.0.2",
+        "normalizedSha256": "fb91c500eeb05d30d6479451c7a438b6c3446312997586d84fad39b524ca2e57"
+      },
+      {
+        "path": "mitgeltende-dokumente/Checkliste_Secure-Development-Life-Cycle.md",
+        "version": "1.0.2",
+        "normalizedSha256": "bd2c83b50207c74086c330cc009cd832c5a3b037ae2d4f52829afa4ed5c50f18"
+      },
+      {
+        "path": "mitgeltende-dokumente/Datenschutzleitlinie.md",
+        "version": "1.0.2",
+        "normalizedSha256": "33a8059f1dc431b855288cf2d7e78536ca209f999b70f41b415c24acc7b3d7a4"
+      },
+      {
+        "path": "mitgeltende-dokumente/Gebrauch_kryptografischer_Massnahmen.md",
+        "version": "1.0.2",
+        "normalizedSha256": "a02da2be31fad6ecc8bbf16d1af97807a38926aee77f9b1a947d343f584c7e57"
+      },
+      {
+        "path": "mitgeltende-dokumente/Kompetenzprofile_und_Schulungsplan_Sichere-Entwicklung.md",
+        "version": "1.0.2",
+        "normalizedSha256": "3b08fa0e6a89682dd40fd51555f4457231d038ded1f7568f9e9ff7866195f8fc"
+      },
+      {
+        "path": "mitgeltende-dokumente/Leitlinie_Sichere-Entwicklungs-Sandbox.md",
+        "version": "1.0.2",
+        "normalizedSha256": "f4d95fef212a1e2650180f76545b5bc2cf2986b7d3782f5fd33eb87d2630ff5d"
+      },
+      {
+        "path": "mitgeltende-dokumente/Leitlinie_Sichere-Programmierung.md",
+        "version": "1.0.2",
+        "normalizedSha256": "f5e049b8e63595606ff5f8246c55e2dd21217e06c222032ee6230a9483ab030a"
+      },
+      {
+        "path": "mitgeltende-dokumente/Leitlinie_Sicheres-Softwaredesign.md",
+        "version": "1.0.2",
+        "normalizedSha256": "5dd4be0a41c70c846ac105768c93d69f62e7a304279cf927236e7fbce9de4203"
+      },
+      {
+        "path": "mitgeltende-dokumente/Richtlinie_Changemanagement.md",
+        "version": "1.0.2",
+        "normalizedSha256": "7bbbb1afad0e19eb3dcc7d1e9f50bbd3e25bcc39e03a2285e8453824af4d6cb2"
+      },
+      {
+        "path": "mitgeltende-dokumente/Richtlinie_Dienstleister-und-Lieferantenbeziehungen.md",
+        "version": "1.0.2",
+        "normalizedSha256": "14c6be136308292538b06da7193ee8de81e515794a8adf793470f476898a69ba"
+      },
+      {
+        "path": "mitgeltende-dokumente/Richtlinie_Secure-Development-Life-Cycle.md",
+        "version": "1.2.2",
+        "normalizedSha256": "1e6295603702321c31d078325e674089f862d8e4180352cc2784e1042e9ff404"
+      },
+      {
+        "path": "mitgeltende-dokumente/Richtlinie_Testmanagement.md",
+        "version": "1.0.2",
+        "normalizedSha256": "472fada9488db36e3d558f59d6100765381ad24c5361a685da75a71dc7bdf562"
+      },
+      {
+        "path": "mitgeltende-dokumente/Richtlinie_Zugangssteuerung.md",
+        "version": "1.0.2",
+        "normalizedSha256": "819436b981a00fa30e513c090ffea9648476b2d68986bc9770e862a804e18639"
+      },
+      {
+        "path": "mitgeltende-dokumente/Standardsregister_Sichere-Entwicklung.md",
+        "version": "1.1.4",
+        "normalizedSha256": "3dfabf0c1ff6f90e5125e1f337f6cc359b2140adc1a3a71da80dc8af87406ed4"
+      },
+      {
+        "path": "mitgeltende-dokumente/Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md",
+        "version": "1.5.3",
+        "normalizedSha256": "702e93704405090c3daa785495fc19b676fe3a63c85d576acf0861ed9206d58a"
+      },
+      {
+        "path": "Lernpfad_Sichere-Entwicklung_Lehrjahr-1-bis-3.md",
+        "version": "1.0.2",
+        "normalizedSha256": "ead13d92489d1e9bb2af2182687a3f1e7c5e2a607dc91de676e090957685c37d"
+      }
+    ]
+  }
+}
