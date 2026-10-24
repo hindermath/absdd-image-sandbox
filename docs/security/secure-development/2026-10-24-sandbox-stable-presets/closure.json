@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "SecureDevelopmentGateEvidence",
+  "contextId": "sandbox-stable-presets",
+  "gate": "closure",
+  "mode": "development",
+  "createdAt": "2026-10-24T17:54:30.559806+00:00",
+  "review": {
+    "owner": "Thorsten Hindermann",
+    "reviewer": "Codex under bounded technical rollout authority; human patch sighting still pending",
+    "reviewedAt": "2026-10-24T17:54:30.559806+00:00",
+    "reviewDue": "2027-01-10",
+    "residualRisk": "Technical document and package integrity is not product acceptance, formal sandbox approval, legal or regulatory certification.",
+    "reevaluationTrigger": "Preset, baseline, composition, scope, runtime or authority change."
+  },
+  "assessments": [
+    {
+      "id": "HUMAN-PATCH-SIGHTING",
+      "applicability": "Applicable",
+      "implementation": "Fulfilled",
+      "evidence": "docs/security/agent-session-log/2026-10-24-stable-presets.md",
+      "owner": "Thorsten Hindermann",
+      "dueAt": "2026-12-31"
+    }
+  ],
+  "outcome": "Ready",
+  "externalComparisonBoundary": "HOSK/GWDG: ExternalComparison only; never local evidence",
+  "verificationScope": "Fourteen released packages, native target composition and unchanged GSDB 3.4.4 document identity only; no product execution or new human release.",
+  "runbookApplicability": "N/A",
+  "runbookRationale": "Bounded repository-only preset installation; actual commands and review limits are in the linked rollout report.",
+  "humanDecisions": {
+    "technicalValidation": {
+      "status": "Fulfilled",
+      "authority": "Thorsten Hindermann",
+      "evidence": "Exact patch sighting plus the scoped technical checks recorded in the session log; not product or regulatory acceptance."
+    },
+    "pilotAuthorization": {
+      "status": "Open",
+      "authority": "Thorsten Hindermann",
+      "evidence": "Not inferred from package installation or technical validation."
+    },
+    "projectAcceptance": {
+      "status": "Open",
+      "authority": "Thorsten Hindermann",
+      "evidence": "Not inferred from package installation or technical validation."
+    },
+    "generalRelease": {
+      "status": "Open",
+      "authority": "Thorsten Hindermann",
+      "evidence": "Not inferred from package installation or technical validation."
+    }
+  },
+  "nextAction": "Deliver the sighted patch, generate statistics after the clean content commit, require exact-head CI and resolved review findings before MergeAndSync. Product acceptance and general release remain separate."
+}

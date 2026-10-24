@@ -1,10 +1,29 @@
 # Project Statistics Governance
 
-Patch **0.1.1** liefert die verbesserte zweisprachige Einstiegs- und
-Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
-[Release-Nachweis / Release record](docs/release-0.1.1-validation.md).
+<!-- current-package: 0.1.3 -->
 
-*Patch 0.1.1 packages the improved bilingual getting-started and composition
+Paketkennung: **v0.1.3**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.1.3-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
+
+<span lang="en">Package identity: v0.1.3. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
+
+[Release-Abschluss und Verbesserungsprofil / Publication closeout and improvement profile](docs/release-0.1.2-validation.md).
+
+Der unten verlinkte Basispaket-Nachweis bleibt historisch; dieses Paket nimmt die Quellenkorrekturen als neue Version auf.
+
+<span lang="en">The linked base-package evidence remains historical; this package includes the source corrections as a new version.</span>
+
+**Leserpfad / Reader path:** [Deutsch: Einstieg, Begriffe und Fehlerhilfe](docs/user-guide.md) · [English: start, terms and troubleshooting](docs/user-guide.EN.md).
+
+Historisches Basispaket **v0.1.2**. Der [Release-Stand](https://github.com/hindermath/spec-kit-preset-project-statistics-governance/releases) wird getrennt geprüft; ein Commit auf main ist noch keine Veröffentlichung oder Installation.
+
+*Historical base package v0.1.2. The release page records actual publication separately; a main-branch commit is not publication or installation.*
+
+
+Patch **0.1.2** liefert die verbesserte zweisprachige Einstiegs- und
+Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
+[Release-Nachweis / Release record](docs/release-0.1.2-validation.md).
+
+*Patch 0.1.2 packages the improved bilingual getting-started and composition
 guide. Behavior and authority boundaries remain unchanged.*
 
 **Reproduzierbare Projekttransparenz fuer Git und Spec Kit.**
@@ -19,12 +38,16 @@ This optional MIT preset makes text inventory, artifact mix and visible Git
 activity traceable. Results bind Git sources, configuration and tool version.
 It does not measure quality, learner or individual performance, or AI time savings.
 
-**Release-Linie / Release line:** `v0.1.0`, fuer regulaere Veroeffentlichung
-nach abgeschlossenem Feldtest freigegeben / approved for regular publication
-after completed field acceptance. Den tatsaechlichen Status zeigt die
-[Release-Seite / release page](https://github.com/hindermath/spec-kit-preset-project-statistics-governance/releases/tag/v0.1.0).
-Paket und Hash bleiben gegenueber dem geprueften Pre-Release unveraendert.
-The package and hash are unchanged from the tested pre-release.
+**Paketstand / Package version:** `v0.1.2`. Dieser Dokumentationspatch berichtigt
+Download- und Prüfsummenanleitung. Der Feldtest von v0.1.0 bleibt historische
+Evidence, keine Abnahme jedes späteren ZIPs. Den Veröffentlichungsstand und
+den zum genauen Quellarchiv gehörenden SHA-256 zeigt nach Veröffentlichung die
+[Release-Seite / release page](https://github.com/hindermath/spec-kit-preset-project-statistics-governance/releases/tag/v0.1.2).
+
+*This documentation patch corrects download/checksum guidance. The v0.1.0 field
+test remains historical evidence, not acceptance of each later ZIP. After
+publication, the linked release notes identify this exact source archive and
+its SHA-256. While a release is not published, no new archive/hash is claimed.*
 
 ## Inhalt und Leserpfade / Contents and reader paths
 
@@ -120,23 +143,39 @@ measurement performs no fetch or automatic tool installation.
 
 ### Paket zuerst pruefen / Verify the package first
 
-Freigegebener ZIP-SHA-256 / approved ZIP SHA-256:
+Lies zuerst die Release-Notes von **v0.1.2**. Kopiere ausschließlich den dort
+für die exakte `archive/refs/tags/v0.1.2.zip`-URL angegebenen SHA-256 in das
+folgende Beispiel. Fehlt der Nachweis, stoppe und frage die Betreuung.
+Ein ZIP kann seine eigene endgültige Prüfsumme nicht in seiner README enthalten:
+Eine Änderung der README würde das ZIP und damit dessen Hash wieder verändern.
+Die Release-Notes sind deshalb der getrennte Prüfsummennachweis.
 
-```text
-d8ad7d5eef920f50b629121b64ba8123c22ec4f6dadd14da5cd826d1c50f420a
-```
+*Read the v0.1.2 release notes first. Copy only the SHA-256 bound there to the
+exact archive/refs/tags/v0.1.2.zip URL into the example. Missing evidence means
+stop and ask the maintainer. Embedding a ZIP's own final hash in its README
+would change that ZIP again; release notes provide the separate hash record.*
 
 macOS/Linux, in einem neuen temporaeren Verzeichnis ausserhalb des Projekts:
 macOS/Linux, in a new temporary directory outside the project:
 
 ```bash
 statistics_download_dir=$(mktemp -d)
-curl --fail --location --output "$statistics_download_dir/v0.1.0.zip" \
-  https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.1.zip
-# macOS:
-shasum -a 256 "$statistics_download_dir/v0.1.0.zip"
-# Linux, alternativ / alternatively:
-sha256sum "$statistics_download_dir/v0.1.0.zip"
+expected_sha256='REPLACE_WITH_V0_1_2_SOURCE_ARCHIVE_SHA256_FROM_RELEASE_NOTES'
+if ! printf '%s' "$expected_sha256" | LC_ALL=C grep -Eq '^[0-9a-fA-F]{64}$'; then
+  printf 'STOP: SHA-256 aus den Release-Notes eintragen / enter SHA-256 from release notes\n' >&2
+  exit 2
+fi
+curl --fail --location --output "$statistics_download_dir/v0.1.2.zip" \
+  https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.3.zip
+if command -v shasum >/dev/null 2>&1; then
+  actual_sha256=$(shasum -a 256 "$statistics_download_dir/v0.1.2.zip" | cut -d ' ' -f 1)
+else
+  actual_sha256=$(sha256sum "$statistics_download_dir/v0.1.2.zip" | cut -d ' ' -f 1)
+fi
+if [ "$(printf '%s' "$actual_sha256" | tr 'A-F' 'a-f')" != "$(printf '%s' "$expected_sha256" | tr 'A-F' 'a-f')" ]; then
+  printf 'STOP: Prüfsumme abweichend / checksum mismatch\n' >&2
+  exit 2
+fi
 ```
 
 Windows/PowerShell 7:
@@ -144,26 +183,32 @@ Windows/PowerShell 7:
 ```powershell
 $StatisticsDownloadDir = Join-Path ([IO.Path]::GetTempPath()) ('statistics-download-' + [guid]::NewGuid())
 $null = New-Item -ItemType Directory -Path $StatisticsDownloadDir
-$StatisticsZip = Join-Path $StatisticsDownloadDir 'v0.1.0.zip'
-Invoke-WebRequest -Uri 'https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.1.zip' -OutFile $StatisticsZip
-Get-FileHash -LiteralPath $StatisticsZip -Algorithm SHA256
+$ExpectedSha256 = 'REPLACE_WITH_V0_1_2_SOURCE_ARCHIVE_SHA256_FROM_RELEASE_NOTES'
+if ($ExpectedSha256 -notmatch '^[0-9a-fA-F]{64}$') { throw 'STOP: SHA-256 aus den Release-Notes eintragen / enter SHA-256 from release notes' }
+$StatisticsZip = Join-Path $StatisticsDownloadDir 'v0.1.2.zip'
+Invoke-WebRequest -Uri 'https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.3.zip' -OutFile $StatisticsZip
+$ActualSha256 = (Get-FileHash -LiteralPath $StatisticsZip -Algorithm SHA256).Hash
+if ($ActualSha256 -ine $ExpectedSha256) { throw 'STOP: Prüfsumme abweichend / checksum mismatch' }
 ```
 
 Nur bei exakt passender Pruefsumme fortfahren; Gross-/Kleinschreibung des
 Hexwerts ist unerheblich. Bei Abweichung stoppen und nichts installieren.
-Die Release-Seite bietet dasselbe ZIP und `SHA256SUMS`. Ein HTTPS-Download
-oder ein Tagname allein ersetzt keine Hashpruefung.
+GitHub bietet das Quellarchiv automatisch an. Zusätzliche hochgeladene Assets
+wie `SHA256SUMS` sind nicht vorausgesetzt. Ein Asset-Hash gilt nicht automatisch
+für das Quellarchiv. HTTPS oder ein Tagname allein ersetzt keine Hashprüfung.
 
 Continue only if the checksum matches, ignoring hexadecimal letter case.
-If it differs, stop without installing. The release page provides the same ZIP
-and `SHA256SUMS`. HTTPS or a tag name alone does not replace hash verification.
+If it differs, stop without installing. GitHub provides source archives
+automatically; uploaded assets such as SHA256SUMS are not assumed. An asset
+hash does not automatically identify the source archive. HTTPS or a tag name
+alone does not replace hash verification.
 
 ### In das Zielprojekt installieren / Install into the target project
 
 Im bereits initialisierten Spec-Kit-Zielprojekt / in the initialized target:
 
 ```text
-specify preset add --from https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.1.zip --priority 90
+specify preset add --from https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.3.zip --priority 90
 specify preset list
 specify preset info project-statistics-governance
 specify preset resolve project-statistics-contract

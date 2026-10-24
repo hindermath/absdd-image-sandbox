@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "scope": "sandbox-stable-fourteen-preset-candidate",
+  "baselineCommit": "29c584ebc51513f73822e261bb9571c6b1048fb5",
+  "centralSource": "ded29751",
+  "platform": "existing Linux/aarch64 container, adedev 1655:1655",
+  "checks": [
+    {
+      "id": "released-source-zip-sha256",
+      "outcome": "Passed",
+      "verifiedPackages": 14
+    },
+    {
+      "id": "central-installer",
+      "outcome": "Passed",
+      "exitCode": 0
+    },
+    {
+      "id": "installed-release-payload-comparison",
+      "outcome": "Passed",
+      "verifiedPackages": 14
+    },
+    {
+      "id": "native-composition-and-surfaces",
+      "outcome": "Passed",
+      "tests": 6,
+      "exitCode": 0
+    },
+    {
+      "id": "matrix-bash",
+      "outcome": "Passed",
+      "exitCode": 0
+    },
+    {
+      "id": "matrix-powershell",
+      "outcome": "Passed",
+      "exitCode": 0
+    },
+    {
+      "id": "documentation-impact",
+      "outcome": "Passed",
+      "entries": 3,
+      "exitCode": 0
+    },
+    {
+      "id": "gsdb-generator-check",
+      "outcome": "Passed",
+      "exitCode": 0
+    },
+    {
+      "id": "gsdb-consolidation",
+      "outcome": "Passed",
+      "exitCode": 0
+    },
+    {
+      "id": "assurance-018-regression",
+      "outcome": "Passed",
+      "exitCode": 0
+    },
+    {
+      "id": "assurance-context-status-both-shells",
+      "outcome": "Passed",
+      "exitCode": 0,
+      "contextOverall": "Ready",
+      "reason": "Exact human patch sighting is recorded; scoped technical artifact validation passes. Product acceptance and general release remain Open."
+    },
+    {
+      "id": "cached-pre-commit-all-files",
+      "outcome": "Passed",
+      "hooks": 5,
+      "exitCode": 0
+    },
+    {
+      "id": "git-diff-check",
+      "outcome": "Passed",
+      "exitCode": 0
+    },
+    {
+      "id": "statistics-preview",
+      "outcome": "Passed",
+      "exitCode": 0
+    },
+    {
+      "id": "statistics-write",
+      "outcome": "Deferred",
+      "exitCode": 1,
+      "reason": "Renderer requires clean tree. No commit before exact human patch sighting; render after approved content commit without bypass."
+    },
+    {
+      "id": "statistics-post-write-parity",
+      "outcome": "NotRun",
+      "reason": "Writing was correctly blocked; no generated update is claimed."
+    },
+    {
+      "id": "compose-config",
+      "outcome": "Passed",
+      "reason": "Explicitly approved one-time host control-plane exception: existing podman-compose 1.6.0 config --quiet on the identical mounted compose.yml; no tool installation.",
+      "exitCode": 0
+    },
+    {
+      "id": "remote-exact-head-ci",
+      "outcome": "NotRun",
+      "reason": "No commit or push before exact human sighting."
+    }
+  ],
+  "humanPatchSighting": "Approved",
+  "delivery": "ContentCommitAuthorized",
+  "limits": [
+    "No SDK or validator patch",
+    "No image, mount or volume change",
+    "No Home sync or runtime-only follow-up",
+    "No Root Home overlay or private profile migration",
+    "No model call or product run"
+  ],
+  "approvedPatchSha256": "7fcafe06f6d8ceb7beeebb2b42ad55aaefcf81c437119083cc514c86fa09a2d3",
+  "followupAuthority": "Only observed gate/session-log results and generated statistics with unchanged config/methodology; no functional expansion or repeated human sighting for that bounded follow-up."
+}

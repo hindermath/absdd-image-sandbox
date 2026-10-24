@@ -111,6 +111,21 @@ try {
         Invoke-Validator $Shell receipt 0
     }
 
+    # DE: Metadatenpatches duerfen bestehende Receipts nicht ungueltig machen.
+    # EN: Metadata patches must preserve valid receipts from earlier releases.
+    foreach ($GeneratorVersion in @('0.2.10', '0.2.11')) {
+        Reset-Fixture
+        $script:Receipt.generator.version = $GeneratorVersion
+        Save-Json $script:Receipt (Join-Path $TempRoot 'receipt.json')
+        foreach ($Shell in @('Bash', 'PowerShell')) {
+            $Before = (Get-FileHash (Join-Path $TempRoot 'receipt.json') -Algorithm SHA256).Hash
+            Invoke-Validator $Shell receipt 0
+            if ((Get-FileHash (Join-Path $TempRoot 'receipt.json') -Algorithm SHA256).Hash -ne $Before) {
+                throw 'Receipt validation changed the metadata fixture'
+            }
+        }
+    }
+
     Reset-Fixture
     $script:Manifest.status = 'Idle'
     $script:Manifest.orderedTargets = @()

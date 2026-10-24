@@ -1,5 +1,14 @@
 # Lieferung und Feldtest / Delivery and field test
 
+> Historischer Liefernachweis für v0.1.0, kein aktueller Installations- oder
+> Freigabeauftrag für spätere Pakete. Version, Hash, Assets und damalige
+> Autorität unten gelten ausschließlich für diesen Stand. Für aktuelle Nutzung
+> [Deutsch](user-guide.md), [English](user-guide.EN.md) und die README lesen.
+>
+> Historical v0.1.0 delivery evidence, not current installation instructions or
+> release authority for later packages. Versions, hashes, assets and authority
+> below belong only to that state. Use the current paired guides and README.
+
 Diese Anleitung erklaert, was bei einer Lieferung entschieden, geprueft und
 unveraendert bewahrt wird. Sie richtet sich an Lernende, Entwickler und
 Maintainer. Fuer Installation und taegliche Nutzung zuerst die
@@ -254,13 +263,13 @@ does not require catalog acceptance.
 | 2026-09-18 | Drei Pilotlieferungen und zentraler Feldtest fachlich abgenommen, PR #3 gemergt / pilots and central field report accepted and delivered |
 | 2026-09-18 | Separater Plan fuer regulaere Freigabe und ausfuehrliche Dokumentation genehmigt / separate regular-publication and documentation plan authorized |
 
-Die README und Lieferdokumentation auf `main` beschreiben den fortgeschriebenen
-Freigabestand. Im unveraenderten Tag-ZIP bleiben README, Liefertext und
+Die damalige README und Lieferdokumentation auf `main` beschrieben den fortgeschriebenen
+v0.1.0-Freigabestand. Im unveraenderten v0.1.0-Tag-ZIP bleiben README, Liefertext und
 urspruengliche Release-Evidence historisch. Neue Release-Notes verlinken deshalb
 den abgenommenen Bericht commitgebunden ausserhalb des alten ZIPs. Weder
 Tagverschiebung noch neuer Paketexport ist fuer diese Metadaten-Promotion noetig.
 
-Main-branch guidance tracks current approval. The unchanged tag ZIP retains
+At that time, main-branch guidance tracked v0.1.0 approval. The unchanged v0.1.0 tag ZIP retains
 historical README, delivery text and original evidence. Updated release notes
 link the accepted report at its exact later commit outside that ZIP. Metadata
 promotion requires neither moving the tag nor exporting a new package.

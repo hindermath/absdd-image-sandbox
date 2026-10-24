@@ -1,14 +1,33 @@
 # Security Governance Preset
 
-Patch **0.7.2** liefert die verbesserte zweisprachige Einstiegs- und
-Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
-[Release-Nachweis / Release record](docs/release-0.7.2-validation.md).
+<!-- current-package: 0.7.4 -->
 
-*Patch 0.7.2 packages the improved bilingual getting-started and composition
+Paketkennung: **v0.7.4**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.7.4-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
+
+<span lang="en">Package identity: v0.7.4. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
+
+[Release-Abschluss und Verbesserungsprofil / Publication closeout and improvement profile](docs/release-0.7.3-validation.md).
+
+Der unten verlinkte Basispaket-Nachweis bleibt historisch; dieses Paket nimmt die Quellenkorrekturen als neue Version auf.
+
+<span lang="en">The linked base-package evidence remains historical; this package includes the source corrections as a new version.</span>
+
+**Leserpfad / Reader path:** [Deutsch: Einstieg, Begriffe und Fehlerhilfe](docs/user-guide.md) · [English: start, terms and troubleshooting](docs/user-guide.EN.md).
+
+Historisches Basispaket **v0.7.3**. Der [Release-Stand](https://github.com/hindermath/spec-kit-preset-security-governance/releases) wird getrennt geprüft; ein Commit auf main ist noch keine Veröffentlichung oder Installation.
+
+*Historical base package v0.7.3. The release page records actual publication separately; a main-branch commit is not publication or installation.*
+
+
+Patch **0.7.3** liefert die verbesserte zweisprachige Einstiegs- und
+Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
+[Release-Nachweis / Release record](docs/release-0.7.3-validation.md).
+
+*Patch 0.7.3 packages the improved bilingual getting-started and composition
 guide. Behavior and authority boundaries remain unchanged.*
 
-Version: `0.7.2`
-Status: stable release; professional review and native CI completed
+Version: `0.7.4`
+Status: Veröffentlichung über die Release-Seite prüfen / verify publication on the release page
 Priority: `10`
 Requires: Spec-Kit `>=0.8.0` (uses the `wrap` and `append` composition
 strategies introduced in `0.8.x`).
@@ -178,7 +197,7 @@ Regulatory content is unchanged from v0.7.0. Historical tags and archives
 remain immutable; release and consumer integration evidence remain separate.*
 
 ```bash
-specify preset add --from https://github.com/hindermath/spec-kit-preset-security-governance/archive/refs/tags/v0.7.2.zip --priority 10
+specify preset add --from https://github.com/hindermath/spec-kit-preset-security-governance/archive/refs/tags/v0.7.4.zip --priority 10
 specify preset info security-governance
 ```
 

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "SecureDevelopmentGateEvidence",
+  "contextId": "sandbox-stable-presets",
+  "gate": "image-impact",
+  "mode": "development",
+  "createdAt": "2026-10-24T17:54:30.559806+00:00",
+  "review": {
+    "owner": "Thorsten Hindermann",
+    "reviewer": "Codex under bounded technical rollout authority; human patch sighting still pending",
+    "reviewedAt": "2026-10-24T17:54:30.559806+00:00",
+    "reviewDue": "2027-01-10",
+    "residualRisk": "Technical document and package integrity is not product acceptance, formal sandbox approval, legal or regulatory certification.",
+    "reevaluationTrigger": "Preset, baseline, composition, scope, runtime or authority change."
+  },
+  "assessments": [
+    {
+      "id": "NO-IMAGE-MUTATION",
+      "applicability": "N/A",
+      "implementation": "Not Assessed",
+      "reason": "Existing image and container reused; no Dockerfile, Compose, mount, volume, network or deployment change.",
+      "reevaluationTrigger": "Image, toolchain, Compose or deployment change",
+      "evidence": "docs/maintenance/stable-preset-rollout-2026-10-24.md"
+    }
+  ],
+  "outcome": "Ready",
+  "externalComparisonBoundary": "HOSK/GWDG: ExternalComparison only; never local evidence",
+  "verificationScope": "Fourteen released packages, native target composition and unchanged GSDB 3.4.4 document identity only; no product execution or new human release.",
+  "runbookApplicability": "N/A",
+  "runbookRationale": "Bounded repository-only preset installation; actual commands and review limits are in the linked rollout report.",
+  "imageChecks": {
+    "build": "N/A",
+    "compose": "N/A",
+    "toolchain": "N/A",
+    "ociDigest": "N/A",
+    "sbom": "N/A",
+    "secrets": "N/A",
+    "mounts": "N/A",
+    "network": "N/A",
+    "ci": "N/A"
+  }
+}

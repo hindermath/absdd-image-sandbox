@@ -409,19 +409,17 @@ Audit-ready evidence requirement:
 - If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
 - If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
 
+## Nutzungshilfe / Reader help
 
-Audit-ready evidence requirement:
+DE: Gemeinsame Regeln auf tatsächlich gepflegten Agentenflächen inhaltlich gleich halten. Diese Command-Erklärung ändert keine Berechtigungen oder Voraussetzungen.
+Die bestehenden technischen Feldnamen und Statuswerte nicht übersetzen oder
+nur zum Bestehen eines Tests verändern. Einführung, Begriffe, Beispiel,
+Ergebnis und Fehlerhilfe stehen im [deutschen Leserpfad](https://github.com/hindermath/spec-kit-preset-agent-parity-governance/blob/main/docs/user-guide.md).
 
-- Ensure this specify wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
-- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
-- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
-
-
-Audit-ready evidence requirement:
-
-- Ensure this specify wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
-- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
-- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+EN: Keep shared rules semantically equivalent across actually maintained agent surfaces. This command explanation changes no authority or prerequisites.
+Keep technical field names and states unchanged; never alter them just to pass.
+See the [English reader path](https://github.com/hindermath/spec-kit-preset-agent-parity-governance/blob/main/docs/user-guide.EN.md)
+for introduction, terms, example, result and troubleshooting.
 
 
 Audit-ready evidence requirement:
@@ -429,6 +427,56 @@ Audit-ready evidence requirement:
 - Ensure this specify wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
 - If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
 - If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+## Nutzungshilfe / Reader help
+
+DE: Dieselbe fachliche Funktion auf benannten Plattformen prüfen, ohne nicht ausgeführte Tests zu behaupten. Diese Command-Erklärung ändert keine Berechtigungen oder Voraussetzungen.
+Die bestehenden technischen Feldnamen und Statuswerte nicht übersetzen oder
+nur zum Bestehen eines Tests verändern. Einführung, Begriffe, Beispiel,
+Ergebnis und Fehlerhilfe stehen im [deutschen Leserpfad](https://github.com/hindermath/spec-kit-preset-cross-platform-governance/blob/main/docs/user-guide.md).
+
+EN: Check the same functional behaviour on named platforms without claiming unperformed tests. This command explanation changes no authority or prerequisites.
+Keep technical field names and states unchanged; never alter them just to pass.
+See the [English reader path](https://github.com/hindermath/spec-kit-preset-cross-platform-governance/blob/main/docs/user-guide.EN.md)
+for introduction, terms, example, result and troubleshooting.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this specify wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+## Nutzungshilfe / Reader help
+
+DE: Nutzbare Oberflächen und verständliche zweisprachige Dokumentation von Anfang an einplanen. Diese Command-Erklärung ändert keine Berechtigungen oder Voraussetzungen.
+Die bestehenden technischen Feldnamen und Statuswerte nicht übersetzen oder
+nur zum Bestehen eines Tests verändern. Einführung, Begriffe, Beispiel,
+Ergebnis und Fehlerhilfe stehen im [deutschen Leserpfad](https://github.com/hindermath/spec-kit-preset-a11y-governance/blob/main/docs/user-guide.md).
+
+EN: Plan usable interfaces and understandable bilingual documentation from the start. This command explanation changes no authority or prerequisites.
+Keep technical field names and states unchanged; never alter them just to pass.
+See the [English reader path](https://github.com/hindermath/spec-kit-preset-a11y-governance/blob/main/docs/user-guide.EN.md)
+for introduction, terms, example, result and troubleshooting.
+
+
+Audit-ready evidence requirement:
+
+- Ensure this specify wrapper requires concrete Markdown evidence/checklist updates for every applicable checkpoint.
+- If a checkpoint does not apply in the current Spec-Kit run, require `N/A` with a short rationale instead of omitting it.
+- If a checkpoint is undecided, require `Open` with owner, follow-up, and re-evaluation trigger.
+
+## Nutzungshilfe / Reader help
+
+DE: Systemaufbau und Architekturentscheidungen mit wenigen passenden Vorlagen erklären. Diese Command-Erklärung ändert keine Berechtigungen oder Voraussetzungen.
+Die bestehenden technischen Feldnamen und Statuswerte nicht übersetzen oder
+nur zum Bestehen eines Tests verändern. Einführung, Begriffe, Beispiel,
+Ergebnis und Fehlerhilfe stehen im [deutschen Leserpfad](https://github.com/hindermath/spec-kit-preset-isaqb-architecture-governance/blob/main/docs/user-guide.md).
+
+EN: Explain system structure and architecture decisions with a few suitable templates. This command explanation changes no authority or prerequisites.
+Keep technical field names and states unchanged; never alter them just to pass.
+See the [English reader path](https://github.com/hindermath/spec-kit-preset-isaqb-architecture-governance/blob/main/docs/user-guide.EN.md)
+for introduction, terms, example, result and troubleshooting.
 
 
 Audit-ready evidence requirement:
@@ -492,6 +540,18 @@ NIS2/DORA-related scope. C3A/C5 evidence does not replace regulatory evidence.
 - Supplier dependency / tested recovery / exit / concentration risk:
 - Legal Open finding / qualified reviewer / next action / due date:
 
+## Nutzungshilfe / Reader help
+
+DE: Sicherheitsentscheidungen zur Systemstruktur nachvollziehbar machen, getrennt von der codebezogenen Security-Prüfung. Diese Command-Erklärung ändert keine Berechtigungen oder Voraussetzungen.
+Die bestehenden technischen Feldnamen und Statuswerte nicht übersetzen oder
+nur zum Bestehen eines Tests verändern. Einführung, Begriffe, Beispiel,
+Ergebnis und Fehlerhilfe stehen im [deutschen Leserpfad](https://github.com/hindermath/spec-kit-preset-architecture-governance/blob/main/docs/user-guide.md).
+
+EN: Make system-structure security decisions traceable, separately from code-level security verification. This command explanation changes no authority or prerequisites.
+Keep technical field names and states unchanged; never alter them just to pass.
+See the [English reader path](https://github.com/hindermath/spec-kit-preset-architecture-governance/blob/main/docs/user-guide.EN.md)
+for introduction, terms, example, result and troubleshooting.
+
 
 Audit-ready evidence requirement:
 
@@ -523,3 +583,15 @@ Use regulatory-applicability-template as the index and link
 gdpr-applicability-template, ai-act-applicability-template,
 cra-applicability-template, nis2-applicability-template and
 dora-applicability-template where relevant. An unfilled record is not evidence.
+
+## Nutzungshilfe / Reader help
+
+DE: Sichere Entwicklung planen und begründen, ohne eine bestandene Sicherheitsprüfung vorzutäuschen. Diese Command-Erklärung ändert keine Berechtigungen oder Voraussetzungen.
+Die bestehenden technischen Feldnamen und Statuswerte nicht übersetzen oder
+nur zum Bestehen eines Tests verändern. Einführung, Begriffe, Beispiel,
+Ergebnis und Fehlerhilfe stehen im [deutschen Leserpfad](https://github.com/hindermath/spec-kit-preset-security-governance/blob/main/docs/user-guide.md).
+
+EN: Plan and explain secure development without claiming a passed security assessment. This command explanation changes no authority or prerequisites.
+Keep technical field names and states unchanged; never alter them just to pass.
+See the [English reader path](https://github.com/hindermath/spec-kit-preset-security-governance/blob/main/docs/user-guide.EN.md)
+for introduction, terms, example, result and troubleshooting.

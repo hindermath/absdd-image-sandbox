@@ -229,6 +229,16 @@ Assurance 0.1.5 gezielt integriert, andere 13 Pakete und historische Evidence er
 [Nachweis / Evidence](maintenance/gsdb-344-pilot-2026-10-20.md).
 EN: Bounded source/preset adoption and new project evidence; no product or fleet acceptance.
 
+### 2026-10-24 - Vierzehn stabile Preset-Patches / Fourteen stable preset patches
+
+DE: Begrenzter Sandbox-Installationskandidat mit unveraenderten Prioritaeten,
+native Agentenkomposition und neuer technischer Assurance-Delta-Kontext.
+Keine Produkt-, Home-, Image- oder weitere Flottenaenderung. Lieferung erst
+nach konkreter Diff-Sichtung und bestandenen Checks; keine KI-Zeitmessung.
+EN: Bounded installation candidate, native command composition and separate
+technical assurance evidence. No product, Home, image or wider fleet changes.
+Delivery awaits explicit patch sighting and successful checks; no AI-time claim.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
