@@ -2,6 +2,13 @@
 
 Owner: Thorsten Hindermann. Documentation Impact: `UpdateRequired`.
 
+Aktueller Stand / Current state: Konkrete Patch-Sichtung, eng genehmigte
+Host-Compose-Ausnahme und Inhaltscommit sind erfolgt. Statistik-Renderer und
+Bash-/PowerShell-CheckOnly bestanden nach dem sauberen Inhaltscommit bei
+unveraenderter Konfiguration und Methodik. Remote-CI, Review und Merge/Sync
+bleiben bis zum tatsächlichen Ergebnis offen. Earlier pending notes retain
+their historical pre-approval state; current local technical checks pass.
+
 ## Auftrag und Quellen / Authority and sources
 
 DE: Genehmigter Sandbox-Kandidat nach zentraler Lieferung und Home Runtime.

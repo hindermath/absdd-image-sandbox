@@ -1,5 +1,15 @@
 # Agentensitzung / Agent session: stabile Preset-Patches
 
+Aktueller Lieferstand / Current delivery state: Gesichtet und Inhaltscommit
+erstellt. Anschliessend Statistik aus sauberem Arbeitsbaum mit unveraenderter
+Konfiguration/Methodik erzeugt; Bash- und PowerShell-CheckOnly bestanden,
+jeweils Exit 0. Der technische Assurance-Kontext ist nach dokumentierter
+Sichtung in beiden Shells Ready; Produkt- und allgemeine Freigaben bleiben
+Open. Fruehere offene Eintraege unten dokumentieren den jeweiligen Vorzustand.
+Exact patch sighting and content commit are complete; canonical statistics
+rendering and both shell checks pass. Remote exact-head CI/review/merge and
+final synchronization still follow; no product acceptance is inferred.
+
 DE: Aktueller ausdruecklicher Auftrag: Sandbox-Kandidat fuer alle vierzehn
 veroeffentlichten Patches aus zentraler Quelle `ded29751`, nach Root/Home
 Runtime und den anderen benannten Piloten. DeliveryMode MergeAndSync mit

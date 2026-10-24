@@ -82,14 +82,15 @@
     },
     {
       "id": "statistics-write",
-      "outcome": "Deferred",
-      "exitCode": 1,
-      "reason": "Renderer requires clean tree. No commit before exact human patch sighting; render after approved content commit without bypass."
+      "outcome": "Passed",
+      "exitCode": 0,
+      "reason": "After the approved content commit, the unchanged canonical renderer wrote from a clean tree. The prior dirty-tree guard was respected."
     },
     {
       "id": "statistics-post-write-parity",
-      "outcome": "NotRun",
-      "reason": "Writing was correctly blocked; no generated update is claimed."
+      "outcome": "Passed",
+      "exitCode": 0,
+      "reason": "Bash and PowerShell check-only both confirm the canonical generated block under unchanged configuration and methodology."
     },
     {
       "id": "compose-config",
@@ -104,7 +105,7 @@
     }
   ],
   "humanPatchSighting": "Approved",
-  "delivery": "ContentCommitAuthorized",
+  "delivery": "ContentCommitted; exact-head remote CI, review and merge still pending",
   "limits": [
     "No SDK or validator patch",
     "No image, mount or volume change",
