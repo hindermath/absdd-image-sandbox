@@ -1,0 +1,79 @@
+UNABHAENGIGES VOLLREVIEW / INDEPENDENT FULL REVIEW
+Review-ID: 0298d3b3-7ff1-42d8-a5f7-349d01139cf4
+Operation: ac2d3c31-d99d-40e1-8782-0b9cc8282b22
+Time: 2026-10-25T11:11:07Z
+Reviewer: Codex independent reviewer; not author of the reviewed corrections.
+
+DE: Urteil Ready nur fuer Anforderungen, Dokumentation und lokale Quellen.
+EN: Ready for requirements, documentation and local source bindings only.
+Findings: Critical 0 / High 0 / Medium 0 / Low 0.
+Questions: 0. Accepted risks: 0. Campaign workers: 0.
+Pending IR001 ReviewFreshness completed through actual full review, not acceptance.
+
+DE: Alle vier vollstaendigen Targets und drei aktiven Intakes gelesen.
+Plan, lokaler Skill, installierte Review-Policy/Checklist angewandt.
+H: Anforderungen 1-7, H-344-01..10, AC-H-344-01..10.
+A: Anforderungen 1-6, A-344-01..04, AC-A-344-01..04.
+L: FR-001..015, L-FR-016..019, AC-001..012, L-AC-013..016.
+Root: historisch Completed; AcceptedBaseline schliesst keinen Gap.
+EN: Four full targets reviewed, including requirements, criteria, six active
+prompts, dependency handoffs and retained historical root.
+DE/EN counterparts, first-year prerequisites, first-use terms and text-first
+dependencies checked. Historical root is not newly authored learner guidance.
+
+DE: Delta 50/50 eindeutige IDs; 47 UpdateRequired, 1 AlreadyCovered, 2 N/A.
+CL-02-02 bleibt Anforderungsabdeckung, nicht technischer Pass.
+CL-08-03 N/A nur fehlende eigene Authentifizierung; CLI-Anmeldung in G03.
+CL-03-02 N/A nur fehlende Eigenkryptografie; TLS/Signaturen in G07.
+EN: Both N/A decisions are bounded and independently reconsidered by A;
+new first-party functions trigger review. N/A keeps Not Assessed.
+All G01-G10 groups, H-to-A evidence and L-marked impacts retained.
+
+DE: Eine Root, vier geordnete Ziele, drei Kanten, kein Zyklus.
+Completed / Eligible / Blocked / Blocked unveraendert; Eligible startet nichts.
+EN: H hands off to A; A returns defects to H; L requires successful acceptance.
+O-344-TECH/HUMAN/CLOUD retain owners, follow-ups and triggers.
+
+DE: REV-001 Swift 6.4.1 == Image 6.4.1-noble; Registry-Vorvergleich
+zeigt nur Versionsfeldwechsel, Swiftly und Archivhashes unveraendert.
+REV-002 Tabelle Go/Rust/Swift 1.27.3/1.99.1/6.4.1, Tests und Hook geprueft.
+REV-003 Statusnachtrag und Build-Log 2026-10-25-1047.md trennen Historie,
+aktuellen ARM64-Stand und Intake-Gueltigkeit. Keine eigene Runtimepruefung.
+EN: Corrections are valid at source/documentation level, not deployment proof.
+
+DE: Eigene Bash-Validatoren bestanden: 3 Receipts mit je 27 Quellen,
+Manifest, Serienreceipt, Governance 2.0. 37 rohe GSDB-Inventarhashes stimmen.
+Alte archivierte Targets/Receipts, Request und Serienrecords entsprechen
+roh den im Vorgangerreview gebundenen Hashes.
+EN: Archived previous review output byte identity before archiving is owner
+evidence; no independent pre-archive capture is invented.
+Old Ready 4398a97e-6773-4b3f-b9d5-a8fbf52005f5 explicitly superseded.
+
+DE: Parent berichtet 48 fokussierte Pass; Offline-Links 380/103 eindeutig/
+0 Fehler/57 externe Ausschluesse. Nicht selbst wiederholt.
+REV-TEST-TIMING Open, Owner Maintainer, ersetzt REV-TEST-315.
+Python3.15: required_cli_drift wiederholt Timeout20s.
+Python3.14:18 Tests,15 Pass,2 Linux-only-Skips,1 Timing-Failure;
+probe_classifies_timeout_capability_and_redacts_paths: TimedOut statt Unusable.
+Alle vier urspruenglichen Brew-Faelle bestehen unter 3.14.
+EN: Overall suite is not fully green. Isolate unchanged timing-sensitive
+fixtures under 3.15/3.14 before claiming green overall coverage or global
+maintenance authority. No loosened limits, masking edit or accepted risk.
+Fixture cli.json is separate from corrected repository registry.
+
+DE: JSON enthaelt Requesthash, vier Zielhashes und 81 eigene normalisierte
+Inputhashes. BOM einmal entfernen, CRLF/CR->LF, sonst keine Aenderung.
+Alle 81 rohen Snapshots waren vor Ausgabe unveraendert.
+Aktuelle Journale sind separate reviewedOutputSnapshots; Parent darf nur
+Abschlussvalidierung ergaenzen. Alte Journale bleiben historisch.
+Parent-Log 2026-10-25-1211.md ist OUTPUT, kein frozen Input oder Receipt-Input.
+EN: No self-hashing review outputs; no reviewer session log created.
+Only the three owner-authorized review output files were changed.
+Bash result validator and scoped diff check passed after output writing;
+all 81 normalized input hashes independently rechecked and matched.
+
+DE: Ready ist keine Runtime-/Provider-/Sandbox-/Rechts-/Datenschutz-/A11Y-/
+Produkt-/Plattform-/Release-/Wartungsfreigabe. Keine Risiken akzeptiert.
+EN: Parent records final PowerShell validation and completion output snapshots;
+retain the timing boundary. No implementation, build, restart, maintenance,
+provider/secret access, commit, push or implicit intake execution.

@@ -1,0 +1,126 @@
+# Unabhaengiges Intake- und Dokumentationsreview / Independent Intake and Documentation Review
+
+## Identitaet Und Grenze / Identity and Boundary
+
+DE: Review-ID `4398a97e-6773-4b3f-b9d5-a8fbf52005f5`, Operation
+`64d6ad91-2d6e-4e63-a340-0fdb4d3a6b1c`. Unabhaengiger Reviewer:
+`01a1721f-5d14-7bb3-b634-3c78390504a1`, nicht Autor der Aenderungen.
+Der vorherige Review `906fd637-ee39-4784-bd13-6d7f194249de` ist
+[archiviert](../intake-review-archive/906fd637-ee39-4784-bd13-6d7f194249de/64d6ad91-2d6e-4e63-a340-0fdb4d3a6b1c/result.json)
+und ausdruecklich ersetzt. Keine Runtime-, Anbieter-, menschliche A11Y-
+oder formelle Freigabe. Kein Produktlauf gestartet.
+
+EN: The review and operation IDs identify a separate reviewer who did not
+author the changes. The prior review is archived and explicitly superseded.
+This grants no runtime, provider, human accessibility or formal approval and
+starts no product run.
+
+## Unabhaengiges Erstreview / Independent First Review
+
+DE: Ergebnis NeedsRemediation: sechs Medium- und vier Low-Befunde, keine
+Critical-/High-Befunde. Alle vier Intakes, acht Folgeprompts und die gesamte
+Reihe wurden vollstaendig gelesen. Je aktiver Intake waren 20/20 Quellen
+passend gebunden. Die 50-ID-Zuordnung blieb 47 UpdateRequired, 1 AlreadyCovered
+und 2 begrenzte N/A. Intake-Anforderungen selbst hatten keinen neuen Befund.
+Keine Zielbytes wurden durch den Reviewer veraendert.
+
+EN: First outcome: NeedsRemediation, six Medium and four Low findings, no
+Critical/High. The reviewer read all four intakes, eight follow-up prompts
+and the full series. Each active intake had 20 current sources. The unchanged
+50-control mapping has 47 UpdateRequired, one AlreadyCovered and two bounded
+N/A. No new requirement finding; the reviewer changed no target bytes.
+
+| ID | Severity | Befund / Finding | Korrektur / Correction |
+|---|---|---|---|
+| DOC-R01 | Medium | Alltags-up kann Container ersetzen / routine up can replace container | kein Build/Pull und kein Ersatz vorhandener Container / no build, pull or replacement |
+| DOC-R02 | Medium | Reihenstatus veraltet / outdated series state | Completed, Eligible, Blocked, Blocked |
+| DOC-R03 | Medium | historische Scanwerte als aktuell / historical scan labelled current | Datum/Image und Historie trennen / separate date, image and history |
+| DOC-R04 | Medium | Env-Vorlage ueberschreibt lokale Werte / env template overwrites local values | bedingte Anlage / create only if absent |
+| DOC-R05 | Medium | Agentenlauf im konto-freien Ersttag / agent run in account-free introduction | optional, Voraussetzungen und direkter Stopp / optional with prerequisites and skip to shutdown |
+| DOC-R06 | Medium | Referenz statt Fork als origin / reference instead of fork as origin | persoenliche oder institutionelle URL / personal or institutional URL |
+| DOC-R07 | Low | clone-Zielname angenommen / assumed clone directory | explizites Zielverzeichnis / explicit destination |
+| DOC-R08 | Low | vorheriger AGENTS-Hash als aktuell / previous guidance hash labelled current | Snapshot markieren, Originalbytes erhalten, aktuelle Bindung erneuern / label snapshot, preserve original, refresh current binding |
+| DOC-R09 | Low | Kapazitaetshinweis ohne Pruefpfad / capacity statement without check path | Host-Pruefung und Machine-Grenze erklaeren / explain host check and machine boundary |
+| DOC-R10 | Low | Tabellenzellen nur deutsch / German-only table cells | gleichwertige englische Inhalte / equivalent English content |
+
+## Zweites Vollreview / Second Full Review
+
+DE: Das zweite unabhaengige Vollreview bestaetigte DOC-R01 bis DOC-R10 als
+Resolved, meldete aber DOC-R11 (Medium: Wiederanlauf nach down unvollstaendig)
+und DOC-R12 (High: Wrapper setzt down trotz Auditfehler fort). Die
+Intake-Anforderungen selbst blieben ohne Befund. Beide neuen Punkte wurden
+begrenzt korrigiert und zur dritten vollstaendigen Pruefung vorgelegt.
+
+EN: The second independent full review confirmed resolution of DOC-R01 through
+DOC-R10, but found DOC-R11, Medium, incomplete restart after down, and DOC-R12,
+High, shutdown continuing after audit failure. Intake requirements remained
+without findings. Both new issues were corrected within scope and submitted
+for a third full review.
+
+DE: Alltag erlaubt jetzt Anlegen aus vorhandenem lokalen Image ohne Build,
+Pull oder Ersatz eines vorhandenen Containers. Beide Wrapper brechen bei
+Exportfehler vor jedem down ab. Fuenf Agent-Surfaces zeigen den normalen Stopp
+ohne Loeschoption. [Negativer Nachweis](../../docs/security/audit-shutdown-fail-closed-2026-10-25.md):
+drei Tests, 26 Unterfaelle, ausschliesslich kuenstliche Engines.
+
+EN: Daily use can now create from an existing local image without build,
+pull or replacement. Both wrappers abort before any down after export
+failure. Five agent surfaces show non-destructive normal shutdown. Negative
+tests cover 26 subcases with fake engines only.
+
+## Erneutes Vollreview / Repeated Full Review
+
+DE: Im dritten Vollreview blieb DOC-R13 (Medium) offen: fruehe direkte
+down-Beispiele in fuenf Agent-Surfaces und gemeinsame normale/destruktive
+PowerShell-Bloecke. Auch diese Beispiele sind korrigiert und die letzte
+AGENTS-Aenderung ist nachvollziehbar archiviert und neu gebunden.
+
+EN: The third full review found DOC-R13, Medium: early direct-down examples
+in five agent surfaces and combined normal/destructive PowerShell blocks.
+These examples were corrected, the final agent change archived and rebound.
+
+**Abschliessendes Ergebnis / Final outcome: Ready**
+
+DE: Im vierten unabhaengigen Vollreview wurden alle DOC-R01 bis DOC-R13 als
+Resolved bestaetigt. Keine offenen Findings, materiellen Scopefragen oder
+akzeptierten Risiken. Vier Intakes, acht Folgeprompts, die Reihe, Leserpfade,
+Agent-Surfaces und Sicherheitsfix wurden erneut vollstaendig geprueft.
+Der Reviewer aenderte keine Datei; 75 Pruefdateien blieben bytegleich.
+Der Parent hat vor der Ergebnisuebertragung alle 67 expliziten Hashbindungen
+gegen den aktuellen Stand nachgerechnet. Das
+[unabhaengige Urteil](sandbox-development-lifecycle-independent.txt) und das
+[maschinenlesbare Ergebnis](../intake-review-results/sandbox-development-lifecycle.json)
+enthalten die Bindungen. Das Operationsjournal wird nur um Abschlussmetadaten
+ergaenzt; dessen gepruefter Vorher-Hash bleibt separat dokumentiert.
+
+EN: The fourth independent full review confirmed DOC-R01 through DOC-R13
+resolved, with no open findings, material scope questions or accepted risks.
+All four intakes, eight prompts, series, reader paths, agent surfaces and
+safety fix were fully reviewed again. The reviewer changed no files and 75
+monitored files remained byte-identical. Before transcription, the parent
+matched all 67 explicit hash bindings to current inputs. The independent
+output and machine-readable result contain those bindings. Only completion
+metadata is added to the operation journal; its reviewed prior hash remains
+separately recorded.
+
+DE: Dieses Ready gilt ausschliesslich fuer Anforderungen, Dokumentation und
+statische Sicherheitspruefung. Es erlaubt keinen Produktstart, Commit, Push,
+Merge, Rollout oder eine formelle Freigabe. Die Statusfolge bleibt Completed,
+Eligible, Blocked, Blocked. Genau ein naechster Governance-Schritt:
+`$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json`.
+
+EN: Ready applies only to requirements, documentation and static safety review,
+not execution, delivery, rollout or formal approval. Lifecycle remains
+Completed, Eligible, Blocked, Blocked. The single next governance step is the
+read-only status query above.
+
+## Weiter Offene Betriebsnachweise / Still Open Operating Evidence
+
+DE: AMD64-Abnahme auf Windows und Ubuntu/WSL2, effektive OpenCode-2-Kontrollen,
+sitzungsbezogener V2-Auditnachweis, Linux-Reproduktion der Warnungen und
+menschliches Learning-/A11Y-Review bleiben separat offen. Owner, Follow-up
+und Trigger stehen im [Nachpruefungsregister](../../docs/security/toolchain-followups-2026-10-25.md).
+
+EN: AMD64 acceptance, effective OpenCode 2 controls, V2 session audit coverage,
+Linux warning reproduction and human Learning/A11Y review remain separate
+open items with owners, follow-ups and triggers in the follow-up register.

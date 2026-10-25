@@ -1,0 +1,198 @@
+# Gezielter Intake-Quellenabgleich / Targeted Intake Source Alignment
+
+## Historischer Snapshot / Historical Snapshot
+
+DE: Die folgenden Hash- und Review-Angaben beschreiben ausschliesslich den
+ersten Quellenabgleich vor dem Versions- und Dokumentationsnachtrag. Sie
+sind kein aktueller AGENTS- oder Freigabestand. Der anschliessende
+[Dokumentationsabgleich](documentation-alignment-2026-10-25.md) und die neuen
+Receipts fuehren die aktuelle Bindung. Die urspruenglichen Bytes dieses
+Snapshots bleiben im
+[Quellarchiv](../../specs/intake-authoring-operations/64d6ad91-2d6e-4e63-a340-0fdb4d3a6b1c/source-alignment-before-remediation.txt)
+erhalten. Historische Operations- und Review-Hashes werden nicht umgeschrieben.
+
+EN: Hash and review statements below describe only the first source alignment,
+before version and documentation amendments. They are not current agent
+guidance or approval. The later documentation alignment and new receipts
+provide the current binding. Original snapshot bytes remain in the source
+archive. Historical operation and review hashes are not rewritten.
+
+## Auftrag und Grenze / Authority and Boundary
+
+DE: Expliziter Ownerauftrag am 2026-10-25: drei bestehende Intakes samt
+Quellenbindungen gezielt aktualisieren und danach unabhaengig vollstaendig
+reviewen. Operation `8e843682-0ece-4a9f-a996-7068453e30f7`.
+Keine technische Implementierung, kein Produktlauf, Build, Containerstart,
+Commit, Push, Home-Sync, Provider-/Modellaufruf oder Plattformumbau.
+Dieser Abgleich erneuert keine menschliche Freigabe und schliesst keine
+technische, rechtliche oder organisatorische Kontrolle.
+
+EN: Explicit owner authority on 2026-10-25 permits targeted updates to three
+existing intakes and their source bindings followed by independent full
+review. No technical implementation, product run, build, container start,
+commit, push, Home sync, provider/model call or platform change. This
+alignment renews no human approval and closes no technical, legal or
+organisational control.
+
+## Quellen und nachvollzogener Wechsel / Sources and Observed Changes
+
+DE: Arbeitsbasis ist der lokale Commit
+`9a6cf88747f07f4b081d3033546f2d83861e2916` (PR #99), mit dem Inhaltscommit
+`707ab58` fuer die stabilen Preset-Patches. Vergleichspunkt ist der nach
+PR #97 gelieferte Stand `29c584ebc51513f73822e261bb9571c6b1048fb5`.
+Alle drei Intake-Texte sind vor diesem Update unveraendert; jedes Receipt
+hat dieselben drei geaenderten Quellen. Weitere Quellenabweichungen wurden
+nicht gefunden. Beide Authoring-Validatoren meldeten zuvor Exit 2; das alte
+Review blieb nur an die alten, unveraenderten Zieltexte gebunden.
+
+EN: Work uses the local PR #99 commit above, including the stable-patch
+content commit, compared with the delivered PR #97 state. All three intake
+texts were unchanged before this update; each receipt has the same three
+changed sources and no other drift. Both authoring validators previously
+returned exit 2. The old review bound the unchanged old targets only.
+
+| Quelle / Source | Bisheriger SHA-256 / Previous | Damaliger Snapshot-SHA-256 / SHA-256 at that snapshot | Inhaltliche Wirkung / Content impact |
+| --- | --- | --- | --- |
+| AGENTS.md | `7a3f15d27b26bab78c685aa7df148d15416c947708a0c19ec96364ed590ee1b2` | `30032f667790bf30e113b4c67ce64adc6a06412d7b6ddd44562f2ea08f55898f` | Aktuelle Preset-Versionen und Rollout-Referenz, gleiche Prioritaeten und menschliche Grenzen. / Current versions and rollout reference, same priorities and human boundaries. |
+| Assurance evidence contract | `1e3d7235fc24eb26c9385f635571cf544a28eed4a6e1d996c9921d01c350ba0b` | `cd471d1c3b6d40717aee4d306e0b9e3d8a3627c39121c8114816411c411e171d` | Bilinguale Leserhilfe ergaenzt; Starter ist kein bestandener Nachweis, passende Evidence weiterverwenden. / Added bilingual reader help; a starter is not passed evidence, reuse suitable evidence. |
+| gsdb-344-preset-installed-lock.json | `5fdff7332ff77786835e4993218c88bc12d436b47ec428c39e708e73fab10d5a` | `7db6043a5dd680a033be126aaf39b13a1006605a1ace2a460795c8034831469f` | Vierzehn stabile Paketstaende und tatsaechliche Installationsbindung erneuert; nicht Produkt-Erfuellung. / Updated fourteen stable packages and installed-payload binding, not product fulfillment. |
+
+Die kompletten repositoryrelativen Quellpfade und Hashes stehen in jedem
+neuen Receipt. / Each new receipt records full repository-relative source
+paths and hashes.
+
+## Aktuelle Pruefbasis / Current Verification Baseline
+
+- [Stabiler Preset-Rollout](stable-preset-rollout-2026-10-24.md),
+  [Quellen-Lock](stable-preset-source-lock-2026-10-24.json) und
+  [Installations-Lock](stable-preset-installed-lock-2026-10-24.json).
+- [Aktiver CI-Installations-Lock](gsdb-344-preset-installed-lock.json).
+- [Assurance-Vertrag](../../.specify/presets/secure-development-assurance-governance/templates/secure-development-evidence-contract.md),
+  [0.1.8-Paketnachweis](../../.specify/presets/secure-development-assurance-governance/docs/release-0.1.8-validation.md),
+  [deutscher Leserpfad](../../.specify/presets/secure-development-assurance-governance/docs/user-guide.md)
+  und [englischer Leserpfad](../../.specify/presets/secure-development-assurance-governance/docs/user-guide.EN.md).
+- Unveraenderte [GSDB-Baseline](../secure-development/baseline-manifest.json),
+  [37-Dateien-Inventar](gsdb-344-source-inventory.json),
+  [50-Kontroll-Delta](gsdb-344-control-delta.json) und
+  [Intake-Kontrollzuordnung vom 2026-10-21](intake-gsdb344-delta-2026-10-21.md).
+
+DE: Leserpfad bedeutet eine geordnete Erklaerung von Einstieg, Beispiel,
+Ergebnis und Fehlerhilfe. Er erteilt keine Berechtigung. Der Paketnachweis
+0.1.8 ist ein historischer Vorbereitungsstand, kein Beweis seiner eigenen
+Veroeffentlichung; der externe Tag-/Archivnachweis stammt aus dem lokalen
+Quellen-Lock. Assurance v0.1.8 bindet dort Tag-Commit
+`100ff9e6e037b0d162bdadd8bfd0bf30520ff7b6` und ZIP-SHA-256
+`bce2969fa25b8753199ef40730037fedc7689971e6a54cc3a9da4ef0f64762dc`.
+Dieser Auftrag prueft lokale Bindungen, keine erneute Online-Veroeffentlichung
+und laedt keine Pakete nach.
+
+EN: A reader path explains entry, example, result and troubleshooting in
+order; it grants no authority. The 0.1.8 preparation document does not prove
+its own publication. The local external source lock records the exact tag
+commit and archive hash above. This task checks local bindings, does not
+revalidate online publication and downloads no packages.
+
+| Preset | Version | Prioritaet / Priority |
+| --- | --- | --- |
+| a11y-governance | 0.4.6 | 40 |
+| agent-parity-governance | 0.4.5 | 60 |
+| architecture-governance | 0.6.5 | 20 |
+| autonomous-run-governance | 0.4.7 | 70 |
+| cross-platform-governance | 0.2.5 | 50 |
+| intake-authoring-governance | 0.3.10 | 64 |
+| intake-review-governance | 0.2.7 | 65 |
+| intake-sequencing-governance | 0.2.11 | 66 |
+| isaqb-architecture-governance | 0.2.5 | 30 |
+| model-routing-governance | 0.1.7 | 61 |
+| parallel-autonomous-run-governance | 0.2.9 | 80 |
+| project-statistics-governance | 0.1.3 | 90 |
+| secure-development-assurance-governance | 0.1.8 | 15 |
+| security-governance | 0.7.4 | 10 |
+
+DE: Alle vierzehn sind aktiviert; Profil, Prioritaeten und Reihenfolge der
+Intakes bleiben erhalten. Paketversion und Generator-/Evidence-Schema sind
+verschiedene Angaben. Neue Intake-Receipts verwenden Generator 0.3.10;
+vorige Receipts bleiben mit ihren damaligen Versionen byte-identisch.
+Die globale SDK-Komposition, die bereits installierten Presets und
+Modell-Routing-Konfiguration werden in diesem Auftrag nicht geaendert.
+
+EN: All fourteen are enabled; preserve profile, priorities and intake order.
+Package version differs from generator/evidence schema. New intake receipts
+use generator 0.3.10; prior receipts preserve their original bytes/versions.
+This task changes neither SDK composition, installed presets nor model routing.
+
+## Auswirkungen auf die Intakes / Intake Impact
+
+| Intake | Gezielte Aenderung / Targeted change | Unveraendert / Preserved |
+| --- | --- | --- |
+| H: Container-Hardening | Aktive Assurance-Basis 0.1.8 und aktuelle Guidance-/Payload-Bindung fuer H-344-08 und Folgeprompts. / Active tool baseline and current guidance/payload bindings. | H-344-01 bis H-344-10, Grenzwerte, Sicherheit und Human-only. / Requirements, thresholds, security and human stops. |
+| A: Unabhaengige Abnahme | A-344-02 prueft den aktuellen 0.1.8-Stand; alte Nachweise bleiben historisch. / Check current tool baseline; older evidence remains historical. | A-344-01 bis A-344-04, unabhaengige praktische Abnahme und Blocker. / Requirements, independent acceptance and blockers. |
+| L: Lernenden-Selbstbau | Aktuelle Quellen-/Versionsangabe fuer L-FR-018/L-AC-015 und vollstaendige DE/EN-Leserhilfe. / Current sources/versions and bilingual reader help. | Fork/upstream, keine fertigen Projekt-Images, lokale Secrets und Rechte bleiben getrennt. / Distribution, secrets and authority boundaries. |
+
+DE: Die Assurance-Validatoren in Bash und PowerShell sind gegenueber
+PR #97 bytegleich; der fachliche Vertrag ist ausser der Leserhilfe unveraendert.
+Die geaenderte Authoring-Validierung akzeptiert zusaetzlich bekannte fruehere
+Generatoren 0.3.8/0.3.9 und das eigene aktuelle Template, keine beliebigen
+Versionen. Neue Generator-Metadaten sind keine Migration historischer
+Schemas. Leserhilfen/Package-Patches erzeugen keine neuen fachlichen Gates.
+Die 50 Delta-IDs und ihre Entscheidungen (47 UpdateRequired, 1 AlreadyCovered,
+2 begrenzte N/A) werden nicht neu bewertet oder als erfuellt ausgegeben.
+157 Kontroll-IDs und alle 37 GSDB-Dateien bleiben unveraendert.
+
+EN: Both Assurance validators are byte-identical to PR #97; the professional
+contract is unchanged except for reader help. Authoring additionally accepts
+known prior generators 0.3.8/0.3.9 and its own current template, not arbitrary
+versions. New generator metadata does not migrate historical schemas. Reader
+help/package patches introduce no new professional gates. The 50 delta IDs
+and their existing decisions are neither reassessed nor marked fulfilled.
+All 157 control IDs and 37 GSDB files remain unchanged.
+
+## Provenienz, Uebergabe und offene Punkte / Provenance, Handoff and Open Items
+
+DE: Jeder vorige Intake ist die erste gebundene Quelle des Updates. Neue
+Receipt-/Operations-IDs erhalten die Intake-IDs. Vorige Ziel-/Receipt-Bytes,
+Serienmanifest/-Receipt und Request/Ergebnis/Bericht des vorherigen Reviews
+werden archiviert. Markdown-Rohsnapshots nutzen `.txt`, damit urspruengliche
+relative Links nicht als neue Anleitung am Archivort interpretiert werden;
+die Bytes werden nicht zur Linkreparatur veraendert. Das alte Ready wird
+explizit ersetzt, nicht durch einen neu berechneten Hash wiederverwendet.
+
+EN: Each prior intake is the first binding source. New receipt/operation IDs
+retain intake identity. Archive prior target/receipt bytes, series records
+and the former review triplet. Raw Markdown snapshots use .txt to preserve
+original relative-link context without rewriting bytes. Explicitly supersede
+old Ready; never reuse it merely with recalculated hashes.
+
+DE: Die Reihe bleibt Completed, Eligible, Blocked, Blocked. H liefert an A;
+erst nach erfolgreicher unabhaengiger technischer Abnahme folgt L. Das
+aktuelle Inhaltsreview prueft Anforderungen, keine Produkt-Erfuellung.
+Die [offenen Uebergaben](intake-gsdb344-delta-2026-10-21.md) behalten ihre
+Owner, Follow-ups und Re-Evaluation-Trigger. Dieser Auftrag aendert auch
+keine zwischenzeitlich getrennt dokumentierte menschliche Entscheidung.
+
+EN: Preserve Completed, Eligible, Blocked, Blocked. H hands off to A; L
+follows successful independent technical acceptance. This content review
+checks requirements, not product fulfillment. Existing Open handoffs retain
+their owners, follow-up and triggers. This task also changes no separately
+recorded intervening human decision.
+
+| Open-ID | Owner | Follow-up / Folgemassnahme | Trigger |
+| --- | --- | --- | --- |
+| O-344-TECH | Maintainer | G01-G10 im spaeter gesondert autorisierten Hardening praktisch pruefen. / Practical checks in separately authorized hardening. | Vor Start oder bei Quell-/Runtimewechsel. / Before start or source/runtime change. |
+| O-344-HUMAN | Repository Owner; Security Review, ggf. Datenschutz-/Rechtsberatung / privacy/legal adviser if needed | Reale Rollen-/Nutzungs-/Freigabeentscheidungen separat nachweisen, nicht aus Paketinstallation ableiten. / Evidence actual decisions separately, never infer them from installation. | Vor betroffener Nutzung/Weitergabe oder bei Rollen-/Datenflussaenderung. / Before affected use/distribution or role/data-flow change. |
+| O-344-CLOUD | Repository Owner; Architecture Review | Begrenzten Cloud-Scope und erforderliche Evidenz/Begruendung klaeren. / Clarify scoped cloud applicability and evidence/rationale. | Vor Cloud-/Provider-/Hosting-/Registrywechsel. / Before related change. |
+
+## Review- und Nachweisgrenze / Review and Proof Boundary
+
+DE: Nach dem vorbereiteten Update erfolgt ein neuer unabhaengiger Vollreview
+aller vier Ziele, der Reihe und der unveraenderten 50-ID-Zuordnung. Ein
+formal gueltiger Hash ersetzt dieses Inhaltsurteil nicht. Keine Risiken
+agentisch akzeptieren. Ready ist weder Startautoritaet noch Plattform-,
+Sandbox-, Provider-, Modell-, Rechts- oder A11Y-Freigabe. Der naechste Schritt
+bleibt bis zum tatsaechlichen Review-Ergebnis offen.
+
+EN: Independently review all four targets, the series and unchanged 50-ID
+mapping after preparing the update. Valid hashes cannot replace content
+review. Accept no risks on behalf of humans. Ready grants no execution,
+platform, sandbox, provider, model, legal or accessibility approval. The next
+step remains pending until the actual review outcome is known.

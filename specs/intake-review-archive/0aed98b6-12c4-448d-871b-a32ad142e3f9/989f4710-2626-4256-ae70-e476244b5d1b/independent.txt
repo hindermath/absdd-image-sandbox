@@ -1,0 +1,26 @@
+Independent full intake/series review / Unabhaengiges Vollreview
+reviewId=0aed98b6-12c4-448d-871b-a32ad142e3f9
+operationId=561af2f2-bbfe-45f5-a9ca-e975dd70c497
+reviewedAt=2026-10-25T18:22:27.700Z
+reviewer=Codex; source/correction author=false
+threadId=01a1741a-8f17-7f92-acec-ff7ee32ecb5b (tool-provided); separate agentId=N/A
+supersedes=specs/intake-review-archive/5fa23447-e96c-403c-b7da-79c506a11586/561af2f2-bbfe-45f5-a9ca-e975dd70c497/result.json
+status=Ready (intake quality only / nur Intakequalitaet)
+coverage=4 complete intakes; whole series; 6 current prompts; 60 sources per active receipt; 180 current source bindings; historical receipt 3 sources
+snapshot=244 fresh normalized text hashes; no NUL, path escape or observed input drift
+lineage=17 raw+normalized archival preimages; 13 also match previously bound inputs; prior review outputs and unbound prior test have explicit boundary
+GSDB=50 IDs once: 47 UpdateRequired, 1 AlreadyCovered, 2 bounded N/A; 37 raw inventory hashes; 14 local preset identities
+findings=0 open; 0 questions; 0 accepted risks
+IR201=ResolvedAndVerified; original High/SafeOperationDocumentation; profile normal stop safe, deliberate deletion separately consented; owner Maintainer/Documentation Author; trigger shutdown/wrapper/volume/consent change
+IR202=ResolvedAndVerified; original Medium/SecurityBoundaryPrecision; profile distinguishes host/container/tmp/volume/Codex boundaries DE/EN; owner Maintainer/Documentation Author; trigger mount/permission/tmp/policy/wording change
+regression=reviewer python3 -B scripts/tests/test_learner_documentation_contract.py: 12/12 Pass, exit 0, isolated; destructive flags are negative static fixtures only
+validators=16/16 Pass/Aligned, exit 0: authoring 8, series manifest/receipt 4, config 2, result 2; both Bash and pwsh -NonInteractive -NoProfile
+diff-check=exit 0, three authorized outputs only
+final-input-drift=244 checked; 0 changed; excluded mutable parent metadata not bound
+lifecycle=Completed/Eligible/Blocked/Blocked unchanged
+rights=named human original-rights decision only; LIC-01 and other LIC-02 Open; no blanket third-party clearance or template activation
+open=O-344-TECH/HUMAN/CLOUD, UPD-AMD64/V2-LOOP/V2-AUDIT/SMOKE-WARN/APPROVAL, DOC-A11Y and native/keyboard/screen-reader/first-use acceptance remain separate
+boundary=No execution start, technical/human acceptance, risk acceptance, legal general release, WCAG certification, Git/build/runtime/global-maintenance/network action
+hash exclusions=mutable journals, final sessionlog, generated commit assignment, three review outputs; immutable source snapshots included
+DE: Das fruehere NeedsRemediation bleibt historische Evidenz; die Korrekturen sind fachlich verifiziert, keine Risiken akzeptiert. Ready ersetzt keine Start- oder Abnahmeentscheidung.
+EN: Prior NeedsRemediation remains historical evidence; corrections are verified, no risks accepted. Ready replaces neither start authority nor acceptance.

@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "867d4a2e-f31e-4d70-a295-693c36c7a564",
+  "mode": "Series",
+  "status": "Ready",
+  "policy": "learner-a11y-bilingual-series",
+  "reviewedAt": "2026-10-21T11:08:05Z",
+  "repository": {
+    "root": ".",
+    "head": "5a2ba8baeffea9be4f07aad82c8c41c81051ffe1"
+  },
+  "requestEvidence": {
+    "path": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "normalizedSha256": "3fa52c8c2f1907a25f8f36090fb26152058fad056f4778b03abc50889774d260"
+  },
+  "targets": [
+    {
+      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "role": "Primary",
+      "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "a132f61e61f7184764d9bf9ba093adcd1389564644c386f2f1a615d72b9c89cb",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "8002cad312d4e05dd48eda42d1eede0d17471e0f812a6ed509cb7e3c174b42f7",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "f056ccea8592f854654413492de99b1c503286f4253fae2431abb55275f21db7",
+      "gitBlob": "N/A"
+    }
+  ],
+  "findings": [],
+  "questions": [],
+  "acceptedRisks": [],
+  "operatorExceptions": [],
+  "coverage": {
+    "individual": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "series": [
+      "Four targets, one root, three binding edges; full intake and handoff review",
+      "50/50 changed normative texts: 47 UpdateRequired, 1 AlreadyCovered, 2 bounded N/A; ten groups; source adoption is not implementation"
+    ],
+    "workers": []
+  },
+  "summary": {
+    "high": 0,
+    "critical": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "supersedes": "specs/intake-review-archive/737b3688-1272-4051-a123-a9f624d30266/6e710bf0-3c9c-4913-91d8-457c5cf432a0/result.json",
+  "reviewerEvidence": {
+    "humanAcceptance": "NotClaimed",
+    "reviewer": "01a15e15-d17d-7081-81ff-c46bd195c339",
+    "pass": 2,
+    "proofBoundary": "Requirements and series review only; no technical, legal, privacy, provider/model or operational acceptance.",
+    "reviewedHashes": {
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a",
+      "Lastenheft_Secure-Development-Container-Hardening.md": "a132f61e61f7184764d9bf9ba093adcd1389564644c386f2f1a615d72b9c89cb",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md": "8002cad312d4e05dd48eda42d1eede0d17471e0f812a6ed509cb7e3c174b42f7",
+      "intakes/learner-fork-self-build-sandbox.md": "f056ccea8592f854654413492de99b1c503286f4253fae2431abb55275f21db7",
+      "docs/maintenance/intake-gsdb344-delta-2026-10-21.md": "8b4c39378079fe624128c12b2f94c25423e7edb317f79e8965ad4927a065320f",
+      "specs/intake-review-requests/sandbox-development-lifecycle.json": "3fa52c8c2f1907a25f8f36090fb26152058fad056f4778b03abc50889774d260"
+    },
+    "resolvedFindingIds": [
+      "IR005",
+      "IR006"
+    ],
+    "resolvedReviewerAliases": [
+      "GS344-R001",
+      "GS344-R002"
+    ],
+    "mode": "IndependentAgentFullSeriesReview",
+    "beforeAfterIdentical": true
+  }
+}

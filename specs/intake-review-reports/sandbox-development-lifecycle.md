@@ -1,100 +1,59 @@
-# Unabhaengiges Intake-Vollreview / Independent Full Intake Review
+# Unabhaengiges Reihenreview / Independent Series Review
 
-## Ergebnis / Outcome
+## Deutsch
 
-DE: **Ready**, zweiter vollstaendiger Review-Pass am 2026-10-21. Reviewer
-`01a15e15-d17d-7081-81ff-c46bd195c339` (Bernoulli) war nicht Autor der
-Aenderungen und blieb schreibfrei. Review-ID:
-`867d4a2e-f31e-4d70-a295-693c36c7a564`. Vier von vier Einzelzielen,
-Gesamtreihe und 50 von 50 Kontrollaenderungen geprueft. Keine offenen oder
-neuen Findings, keine offenen Reviewfragen, keine akzeptierten Risiken.
+### Auftrag, Unabhaengigkeit und Historie
 
-EN: **Ready**, second complete review pass on 2026-10-21. Reviewer Bernoulli,
-identified above, did not author the changes and made no writes. Review
-covers all four individual targets, the complete series and all 50 delta
-controls. No open/new findings, open review questions or accepted risks.
+Ergebnis: **Ready** fuer die aktualisierten Intakebindungen. Review 787003c4-b366-46c8-adc0-bacb47654c02, Operation 989f4710-2626-4256-ae70-e476244b5d1b, Zeitpunkt 2026-10-25T18:37:53.889Z. Dies ist ein gezieltes unabhaengiges EOF-Nachreview, kein erneutes Vollreview und kein neuer Produkt-/Governance-Lauf. Der Reviewer hat weder die zwei EOF-Korrekturen noch die Binding-Erneuerung verfasst und schreibt nur die drei vereinbarten Reviewausgaben.
 
-## Findings und Historie / Findings and History
+Supersedes: specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/result.json. Dessen vollstaendige fachliche Pruefung aller vier Intakes, sechs aktuellen Prompts und der gesamten Reihe wird ausdruecklich fuer unveraenderte Inhalte weiterverwendet. Das Vollreview ist mit Datum und 244 damaligen Hashes historische fachliche Evidenz, kein als neu ausgegebener Testlauf. Werkzeugseitige Threadkennung: 01a1741a-8f17-7f92-acec-ff7ee32ecb5b; separate Agentkennung N/A, keine erfundene UUID.
 
-| ID; Reviewer-Alias | Urspruengliche Severity / Original severity | Status und Korrektur / Status and correction |
-| --- | --- | --- |
-| IR005; GS344-R001 | Medium | Resolved: englische FR-001 bis FR-015 und AC-001 bis AC-012 vollstaendig, gleiche IDs und gleicher Scope. / Complete English counterparts, same IDs and scope. |
-| IR006; GS344-R002 | Low | Resolved: Spec Kit, Kontroll-/Cloud-Begriffe und Branch-Abdeckung vor oder bei Erstgebrauch erklaert. / Spec Kit, control/cloud terms and branch coverage explained before or at first use. |
+### Offene Findings
 
-DE: Der [erste Pass](../../docs/maintenance/intake-gsdb344-review-pass-1-2026-10-21.md)
-ergab NeedsRemediation mit einem Medium- und einem Low-Befund. Er ist mit
-damaligen Request-/Ergebnis-/Ziel-/Matrixbytes archiviert. Dessen Trigger
-sind durch Korrektur und diesen erneuten Vollreview erfuellt; keine
-Risikoakzeptanz wurde erfunden. Die alte Ready-Bindung vom 2026-10-06 ist
-ebenfalls archiviert und explizit ersetzt, nicht stillschweigend als aktuell
-weiterverwendet.
+Keine neuen oder verbleibenden Findings, keine Rueckfragen, Critical/High/Medium/Low jeweils 0, keine Risikoakzeptanz.
 
-EN: The linked first pass found one Medium and one Low issue and concluded
-NeedsRemediation. Its request, result and target/matrix snapshots are
-archived. Corrections and this full re-review satisfy its triggers without
-invented risk acceptance. The 2026-10-06 Ready binding is also archived and
-explicitly superseded, not silently reused as current evidence.
+| ID | Kategorie / urspruengliche Severity | Location | Owner | Status, Follow-up, Trigger |
+|---|---|---|---|---|
+| IR201 / IR-20261025-01 | SafeOperationDocumentation / High | docs/fuer-lernende/sandbox-profil.md:28-51 | Repository Maintainer / Documentation Author | Bleibt ResolvedAndVerified: normaler Stopp ohne Loeschoption, absichtliche Loeschung gesondert und menschlich bestaetigt. Korrektur/Regression erhalten; bei Stopp-, Wrapper-, Volume- oder Einwilligungsaenderung neu pruefen. |
+| IR202 / IR-20261025-02 | SecurityBoundaryPrecision / Medium | docs/fuer-lernende/sandbox-profil.md:89-137 | Repository Maintainer / Documentation Author | Bleibt ResolvedAndVerified: Host/Container-Schreibschicht/Temp/Volumes/Codex getrennt DE/EN. Regression erhalten; bei Mount-, Rechte-, Temp-, Policy- oder Textaenderung neu pruefen. |
 
-## Vollstaendige Abdeckung / Complete Coverage
+Aufloesungsevidenz und urspruengliche Findingdaten bleiben im Vollreview sowie unter reviewerEvidence.resolvedFindings erhalten. Profil, Regressionstest und Konfigurationen sind hashgleich; die EOF-Korrektur beruehrt die Befunde nicht. Die damaligen 12/12 eigenen Dokumentationstests sind historische Evidenz; kein neuer Testlauf wird behauptet.
 
-| Ziel / Target | Inhaltsurteil / Content verdict | Lifecycle |
-| --- | --- | --- |
-| Archivierte GSDB / Historical GSDB | Ready als historische Quelle / as historical source | Completed |
-| Container-Hardening | Ready als Intake / as intake | Eligible |
-| Sandbox-Abnahme / Acceptance | Ready als Intake / as intake | Blocked |
-| Lernenden-Selbstbau / Learner self-build | Ready als Intake / as intake | Blocked |
+### Fachliche Grundlage und begrenzter Deltaabgleich
 
-DE: Vier eindeutige Ziele, eine Root, drei verbindliche geordnete Kanten,
-keine Zyklen. Beide Reihenansichten stimmen ueberein. Alle 50 aktuellen
-Normtexte samt Akzeptanz wurden erneut abgeglichen: 47 UpdateRequired,
-1 AlreadyCovered, 2 begrenzte N/A. Gruppen G01-G10 umfassen
-3/6/3/5/7/16/5/1/2/2 Kontrollen. H-Anforderungen und Abnahmekriterien,
-unabhaengige A-Uebergabe und begrenzte L-Auswirkungen sind konsistent.
-Jedes der drei Receipts bindet zwoelf aktuelle Quellen einschliesslich des
-ersten Reviewberichts. Keine verdeckte Scope-Erweiterung oder numerische
-Grenzwertabsenkung gefunden. Sprachreihenfolge, Vorkenntnisse, Begriffe und
-textorientierte A11Y sind fuer diesen Anforderungsvertrag ausreichend.
+Alle 244 vorherigen Reviewinputs wurden aktuell gehasht: 236 sind unveraendert. Geaendert sind genau zwei Workshopquellen sowie sechs erwartete Metadaten-/Bindingdateien (drei Receipts, Request, Manifest und Serienreceipt). Bei jedem der beiden Workshops ist der vollstaendige dekomprimierte Vorlaeufer bytegenau aktueller Inhalt plus ein finales LF. Kein Wortlaut, Folieninhalt, Sprachpaar, Recht oder Sicherheitsinhalt aendert sich; keine Praesentationsregeneration und keine Scan-Ausnahme.
 
-EN: Four unique targets, one root, three binding ordered edges, no cycles;
-both order views agree. All 50 current normative texts and acceptance clauses
-were reviewed again: 47 UpdateRequired, 1 AlreadyCovered and 2 bounded N/A.
-G01-G10 cover 3/6/3/5/7/16/5/1/2/2 controls. H requirements/criteria,
-independent A handoff and bounded L effects agree. Each receipt binds twelve
-current sources including pass 1. No hidden scope extension or weakened
-numerical threshold. Language order, prior knowledge, terminology and
-text-first accessibility are sufficient for this requirements contract.
+Die neue Quelle docs/maintenance/closeout-eof-alignment-2026-10-25.md wurde fachlich gelesen. DE/EN begrenzen die Zustimmung auf EOF, Bindungen und Nachreview sowie den getrennten elterlichen Tagesabschluss. Es entsteht keine neue Startautoritaet oder Abnahme. Das Manifest ergaenzt nur ihren Evidencepfad. Die Receipts erneuern Identitaeten/Operation/Archivverweise, binden den jeweiligen archivierten Target zuerst, aktualisieren die zwei Workshop-Hashes und ergaenzen SRC061 sowie die begrenzte Entscheidung IAD404. Alte Entscheidungen, Intake-IDs, Zieltexte, Sprache, Promptstatus und DeliveryAuthority bleiben erhalten.
 
-## Schreibfreiheit / No-Write Proof
+Alle vier Intake-Texte sind hashgleich, einschliesslich aller Anforderungen, Akzeptanzschwellen, Addenda und sechs Folgeprompts. Beide Reihenansichten sind unveraendert. Eine Root, drei bindende Kanten und Completed / Eligible / Blocked / Blocked bleiben bestehen. Das Vollreview der historischen Wurzel, Hardening-, Selbstpruefungs- und Lernendenanforderungen, GSDB-50-Zuordnung, Assurance-0.1.8-Uebergabe, DE/EN/B2/A11Y-, Rechte-, Template- und Human-only-Grenzen bleibt fuer diese nachgewiesen unveraenderten Inhalte anwendbar; es wurde nicht redundant wiederholt.
 
-Normalisierte SHA-256, vor = nach Pass 2 / normalized SHA-256, before = after pass 2:
+### Aktuelle Verifikation und Grenzen
 
-| Artefakt / Artifact | Hash |
-| --- | --- |
-| Historische GSDB / Historical GSDB | `9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a` |
-| Hardening | `a132f61e61f7184764d9bf9ba093adcd1389564644c386f2f1a615d72b9c89cb` |
-| Abnahme / Acceptance | `8002cad312d4e05dd48eda42d1eede0d17471e0f812a6ed509cb7e3c174b42f7` |
-| Lernenden-Selbstbau / Learner self-build | `f056ccea8592f854654413492de99b1c503286f4253fae2431abb55275f21db7` |
-| Delta-Matrix | `8b4c39378079fe624128c12b2f94c25423e7edb317f79e8965ad4927a065320f` |
+- 260 aktuelle normalisierte Texthashes; zwei Gzip-Archive separat mit raw-SHA-256 und Payloadhash gebunden. Keine Bindung an mutable Operationsjournale, neue Parentlogs, generiertes Inventory/Groupassignment oder die drei Reviewausgaben.
+- 17 Archivvorbilder geprueft: sechs Target-/Receipt-, vier Reihen-, vier Review- und drei Quellvorbilder (davon zwei Gzip). Raw-/Payload-/normalisierte Hashes stimmen. 14 Vorbilder stimmen mit frueheren Inputhashes ueberein; drei damalige Reviewausgaben hatten keine Selbstbindung. Rechtevorlaeufer erhalten. Archivierungszeit bleibt dokumentierte Provenienz, keine selbst beobachtete Chronologie.
+- Drei aktuelle Receipts mit je 61 Quellen: alle 183 Bindungen geprueft; historisches Drei-Quellen-Receipt unveraendert. IDs und graph-/hashgebundenes Serienreceipt konsistent.
+- Eigene aktuelle Validatoren: acht Receipt-, vier Serienmanifest-/Serienreceipt- und zwei Ergebnislaeufe, alle 14 Pass mit Exit 0, jeweils Bash und PowerShell -NonInteractive -NoProfile. Exakte Befehle im JSON. Finale Validierungsevidenz nach den Ergebnislaeufen ergaenzt, ohne Aenderung von Targets/Request/Status/Findings. Unveraenderte Governanceconfig/Policy-Pruefung aus dem Vollreview gezielt weiterverwendet; damalige Inventarzaehler nicht als neu behauptet. Abschlussabgleich: 260 Textinputs und zwei Gzip-Archive ohne Drift. Keine weiteren Testschleifen; Parent-Pruefungen sind nicht eigene Evidenz.
+- LIC-01 und andere LIC-02, O-344-TECH/HUMAN/CLOUD, UPD-AMD64/V2-LOOP/V2-AUDIT/SMOKE-WARN/APPROVAL sowie DOC-A11Y und native/Screenreader/Tastatur/Erstnutzungsabnahmen bleiben getrennt offen. Begrenzte Eigenrechteentscheidung ist keine allgemeine Drittrechtsfreigabe; Template bleibt inaktiv.
+- Parent uebernimmt Gruppen 4-7 und MergeAndSync unter aktueller Ownerautoritaet, unter Erhalt der ersten drei Commits, mit einem Gesamtpush und exaktem Mergecommit/Admin-Bypass erst nach gruenen Checks. Reviewer veraendert kein Git, Runtime, Image oder Journal. Ready erteilt weder Produkt-/Intakestart noch technische/menschliche Abnahme, Risikoakzeptanz, Rechts- oder A11Y-Allgemeinfreigabe.
 
-Request: `3fa52c8c2f1907a25f8f36090fb26152058fad056f4778b03abc50889774d260`.
+## English
 
-## Nachweisgrenze und naechste Aktion / Proof Boundary and Next Action
+### Scope, Independence and History
 
-DE: Ready gilt fuer Anforderungen und Reihenintegration, nicht fuer
-technische Erfuellung oder Sandbox-, Rechts-, Datenschutz-, Provider-,
-Modell- oder Plattformfreigabe. O-344-TECH, O-344-HUMAN und O-344-CLOUD
-bleiben mit Owner, Folgeaktion und Trigger im
-[Delta-Abgleich](../../docs/maintenance/intake-gsdb344-delta-2026-10-21.md)
-offen. Keine Builds, Produktlaeufe, externen Rechtspruefungen oder
-Plattform-/Screenreader-Abnahmen. Technische Validatoren des Hauptagenten
-belegen Bindungen und ersetzen nicht dieses semantische Urteil.
+**Ready** concerns updated intake bindings only. Review 787003c4-b366-46c8-adc0-bacb47654c02, operation 989f4710-2626-4256-ae70-e476244b5d1b, is an independent bounded EOF follow-up, not a repeated full semantic review or new product/governance run. The reviewer authored neither EOF edits nor binding refresh and changes only the three agreed outputs. It explicitly supersedes specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/result.json. That complete four-intake, six-prompt and whole-series review is reused only for proven unchanged content. Its date, 244 hashes and results remain historical evidence, not newly executed tests. Tool-exposed thread identity is 01a1741a-8f17-7f92-acec-ff7ee32ecb5b; no separate agent ID was exposed or invented.
 
-EN: Ready covers requirements and series integration, not implementation or
-sandbox, legal, privacy, provider, model or platform approval. The linked
-alignment retains the three owned Open handoffs and their follow-up/triggers.
-No builds, product runs, external legal checks or platform/screen-reader
-acceptance. Parent validators establish bindings, not semantic review.
+### Findings and Semantic Continuity
 
-```text
-$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json
-```
+No open findings/questions and no accepted risks; all severity counts are zero. IR201 (SafeOperationDocumentation, originally High, profile lines 28-51, Repository Maintainer / Documentation Author) remains ResolvedAndVerified: safe routine stop and separately consented deliberate deletion. Preserve its correction/regression and reopen on stop, wrapper, volume or consent changes. IR202 (SecurityBoundaryPrecision, originally Medium, same owner, profile lines 89-137) remains resolved: equivalent DE/EN host/container-layer/tmp/volume/Codex distinctions. Reopen on mount, permission, tmp, policy or wording changes. Stable aliases, original findings and resolution evidence remain in the full-review archive and structured resolvedFindings. Profile, tests and configurations match prior hashes. The old 12/12 reviewer tests are historical, not rerun.
+
+All 244 prior inputs were freshly hashed: 236 unchanged; exactly two workshop EOF-only changes and six expected metadata/binding changes (three receipts, request, manifest and series receipt). Each full decompressed predecessor equals current bytes plus one final LF. Wording, slide content, language equivalence, rights and security meaning are unchanged; no regeneration or scan exception. The new bilingual EOF proposal was semantically reviewed: bounded EOF, bindings and follow-up authority, with parent closeout distinct from start or acceptance. Manifest adds only its evidence path. Receipts renew operation/identity/archive metadata, bind their own archived predecessor first, refresh two source hashes and append SRC061/IAD404; existing decisions, intake identities, language, target, promptState and deliveryAuthority remain unchanged.
+
+All four target hashes, requirements, acceptance thresholds, addenda and six prompts are unchanged. Both order views, one root, three binding edges and Completed / Eligible / Blocked / Blocked remain unchanged. The prior full semantic review of root/hardening/acceptance/self-build requirements, GSDB fifty-control mapping, Assurance 0.1.8 handoff, DE/EN/B2/A11Y, rights, template and human-only boundaries remains applicable to these verified unchanged inputs; no redundant historical review was performed.
+
+### Current Evidence and Boundaries
+
+There are 260 current normalized text hashes and two separately raw/payload-hashed Gzip archives. Mutable journals, new parent logs, generated inventory/group assignment and review outputs are excluded to prevent circularity. All seventeen preimages match: six target/receipt, four series, four review and three source snapshots including two Gzip payloads. Fourteen match previously bound input hashes; three prior review outputs could not self-bind. Rights predecessor is preserved; archival timing is recorded provenance, not personally observed chronology. All 183 current source bindings (61 per active receipt), preserved identities, manifest and series receipt are verified; the historical three-source receipt is unchanged.
+
+All fourteen current independent validator invocations passed, exit 0: eight authoring, four series-manifest/receipt and two review-result checks, in Bash and PowerShell -NonInteractive -NoProfile. Exact commands are in JSON. Final evidence was appended after result validation without changing targets, request, status or findings. Final drift check found no changes across 260 text inputs and two Gzip archives. Unchanged governance-config/policy validation is explicitly reused from the full review, without presenting old computed inventory counts as fresh. No test loops were added and parent checks are not reviewer evidence. LIC-01/other LIC-02, O-344-TECH/HUMAN/CLOUD, UPD-AMD64/V2-LOOP/V2-AUDIT/SMOKE-WARN/APPROVAL, DOC-A11Y and native/keyboard/screen-reader/first-use acceptance remain separately Open. Bounded original-rights confirmation is not blanket third-party clearance; template activation remains blocked.
+
+Parent owns groups 4-7 and guarded MergeAndSync, preserving the first three commits, one combined push and exact-head merge commit/admin bypass only after green checks. Reviewer performs no Git, runtime, build, image or journal changes. Ready grants no product/intake start, technical/human acceptance, risk acceptance, general legal release or accessibility conformance.

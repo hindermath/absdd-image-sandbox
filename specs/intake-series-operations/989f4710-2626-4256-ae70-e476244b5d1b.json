@@ -1,0 +1,32 @@
+{
+  "status": "Completed",
+  "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+  "archiveManifestNormalizedSha256": "a76a2949ddf494be44cf073c37ecbf6359fc3cfc3751ab007d6d90a3ecee5c07",
+  "createdAt": "2026-10-25T18:34:32Z",
+  "manifestNormalizedSha256": "740f5c72a9aff540c063df8adf37f1ba30e1df2fad99b869896de9860645b2c4",
+  "schemaVersion": "1.0",
+  "archiveManifestPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/989f4710-2626-4256-ae70-e476244b5d1b/manifest.json",
+  "documentType": "IntakeSeriesOperation",
+  "type": "Update",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "operationId": "989f4710-2626-4256-ae70-e476244b5d1b",
+  "authorityEvidence": "Owner explicitly approved removing only the two extra workshop EOF blank lines, renewing affected source bindings and independent follow-up review, then completing groups 4-7 and MergeAndSync with admin bypass. Preserve the first three commits, intake identities, all requirements, six follow-up prompts, lifecycle and future execution authority. One combined content push and exact-head merge-commit only after green checks. No build, restart, global maintenance or new formal approval.",
+  "lifecycle": [
+    "Completed",
+    "Eligible",
+    "Blocked",
+    "Blocked"
+  ],
+  "validation": {
+    "publication": "Local filesystem artifact publication only; Git delivery remains separate",
+    "independentReview": "Ready",
+    "lifecycle": "Completed, Eligible, Blocked, Blocked",
+    "priorTechnicalEvidence": "Unchanged successful technical checks recorded in 2026-10-25-1917.md; not rerun",
+    "reviewedInputs": 260,
+    "archiveFidelity": "15 exact raw preimages plus two lossless workshop Gzip payloads verified",
+    "changeBoundary": "Exactly one final LF removed per workshop source; intake texts and six prompts unchanged",
+    "reviewId": "787003c4-b366-46c8-adc0-bacb47654c02",
+    "sessionLog": "docs/security/agent-session-log/2026-10-25-1934.md"
+  },
+  "nextAction": "$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json"
+}

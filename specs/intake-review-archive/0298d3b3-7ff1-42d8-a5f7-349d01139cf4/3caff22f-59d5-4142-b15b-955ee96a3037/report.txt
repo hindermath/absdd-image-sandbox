@@ -1,0 +1,227 @@
+# Unabhaengiges Vollreview / Independent Full Review
+
+## Urteil / Verdict
+
+**Ready**, ausschliesslich fuer Anforderungen, Dokumentation und lokale Quellenbindung.
+**Ready**, for requirements, documentation and local source bindings only.
+
+- Review-ID: `0298d3b3-7ff1-42d8-a5f7-349d01139cf4`
+- Operation: `ac2d3c31-d99d-40e1-8782-0b9cc8282b22`
+- Zeitpunkt / Time: `2026-10-25T11:11:07Z`
+- Reviewer: Codex, unabhaengiger Reviewer dieses Owner-Auftrags, nicht Autor der Korrekturen. / Independent reviewer of this owner commission, not the corrections' author.
+- Umfang / Scope: vier vollstaendige Ziele, davon drei aktive Intakes; keine Campaign-Worker. / Four complete targets, three active intakes; zero campaign workers.
+- Findings: Critical 0, High 0, Medium 0, Low 0. Offene Inhaltsfragen 0, akzeptierte Risiken 0. / Zero open content questions or accepted risks.
+
+Das vorbereitende IR001 (`ReviewFreshness`) ist durch dieses echte Vollreview erledigt,
+nicht durch Risikoakzeptanz. REV-001 bis REV-003 sind innerhalb ihrer Quellen- und
+Dokumentationsgrenze nachvollziehbar korrigiert. Das alte Ready
+`4398a97e-6773-4b3f-b9d5-a8fbf52005f5` ist ausdruecklich ersetzt; sein Archiv
+bleibt unveraendert. Der anfaengliche pending-Status war kein vorgegebenes Urteil.
+
+The preparatory IR001 freshness placeholder is discharged by this full review,
+not risk acceptance. REV-001 through REV-003 are corrected within their source
+and documentation boundary. The previous Ready is explicitly superseded while
+its archive remains unchanged. The initial pending state did not predetermine the verdict.
+
+## Gepruefte Inhalte / Reviewed Content
+
+Die vier Targets wurden vollstaendig gelesen. Plan, lokaler Review-Skill und
+installierte Review-Policy/Checklist wurden verwendet. Die generische
+Secure-Development-Basis bleibt organisationsneutral; keine externe Policy wird erfunden.
+
+All four targets were read in full. The compliance plan, local review skill and
+installed review policy/checklist were applied. The generic Secure Development
+Baseline stays organisation-neutral; no external policy is invented.
+
+| Ziel / Target | Vollstaendige Pruefung / Full review |
+|---|---|
+| Archivierte GSDB-Root / Archived GSDB root | Zweck, Scope, Nicht-Ziele, Anforderungen 1-7, Abnahme, historische Prompts und AcceptedBaseline-Uebergabe gelesen. Historisches Completed-Artefakt, keine neue Ausfuehrungsquelle oder nachtraegliche Umschreibung. / Purpose, scope, exclusions, requirements 1-7, acceptance, historical prompts and AcceptedBaseline handoff read; retained historical Completed input, not rewritten or re-executed. |
+| Container-Hardening H | Grundanforderungen 1-7, H-344-01 bis 10, AC-H-344-01 bis 10 und beide Folgeprompts geprueft. 85 Prozent Branch- und 80 Prozent Schnittstellen/UI-Schwellen bleiben bestehen; fehlende Messung bleibt Open. / Base requirements, all ten delta requirements and criteria plus both prompts checked; coverage thresholds remain and missing measurement stays Open. |
+| Unabhaengige Abnahme A | Grundanforderungen 1-6, A-344-01 bis 04, AC-A-344-01 bis 04 und beide Prompts geprueft. Nichtautorenschaft, exakte Testumgebung, Rueckgabe an H und L-Blockade bleiben verbindlich. / All base/delta requirements, criteria and both prompts checked; non-authorship, exact environment, return to H and blocking L remain binding. |
+| Selbstbau L / Self-build L | FR-001 bis 015, L-FR-016 bis 019, AC-001 bis 012, L-AC-013 bis 016 und beide Prompts geprueft. Fork/upstream, Git-neutrale Profile, lokaler Selbstbau, keine fertigen Projekt-Images, keine Secrets und Human-only-Plattformgrenzen bleiben erhalten. / All functional/delta requirements, criteria and both prompts checked; fork/upstream, neutral hosting profiles, local self-build, no ready-made images, no secrets and human platform boundaries retained. |
+
+Die drei aktiven Intakes erklaeren Voraussetzungen und Begriffe fuer das erste
+Ausbildungsjahr, bieten gleichwertige englische Anforderungen/AC und benoetigen
+keine Spec-Kit-Vorkenntnisse. Die archivierte Root bleibt ein historischer
+Originaltext; ihre kuerzeren Sprachabschnitte und damaligen Root-Prompts werden
+nicht als neue Lernendenanleitung oder aktueller Startauftrag angeboten.
+Abhaengigkeiten und naechste Aktionen sind textorientiert nachvollziehbar.
+Dies ist redaktionelles Inhaltsreview, keine menschliche Erstnutzungs- oder A11Y-Abnahme.
+
+The active intakes explain first-year prerequisites and terminology, provide
+equivalent English requirements/criteria and assume no Spec Kit experience.
+The archived root remains an original historical text; its shorter language
+sections and old root prompts are not offered as new learner guidance or a
+current execution order. Dependencies and next actions remain understandable
+as text. Editorial review is not human first-use or accessibility acceptance.
+
+## Delta Und Reihe / Delta and Series
+
+50 Tabellenzeilen entsprechen exakt 50 eindeutigen IDs des Quellen-Deltas:
+47 UpdateRequired, 1 AlreadyCovered, 2 begrenzte N/A. Alle Gruppen G01-G10
+sind durch H-Anforderungen/AC gebunden und werden von A unabhaengig geprueft;
+die L-markierten Folgen bleiben auf den Lernenden-Selbstbau begrenzt.
+
+Fifty table rows exactly match fifty unique source-delta IDs: 47 UpdateRequired,
+one AlreadyCovered and two bounded N/A. H requirements/criteria bind groups
+G01-G10, A independently checks the handoff, and L-marked effects remain limited to self-build.
+
+- G01: Quellen-/Standardsfassung und getrennte Anwendbarkeit/Umsetzung. / Source editions and separate applicability/implementation.
+- G02: Pfad-/Prozess-/Netzwerkgrenzen, Sprachprofil, positive/negative Tests und Coverage. / Path/process/network boundaries, language profile, positive/negative tests and coverage.
+- G03: Agenten-Versionen, wirksame Konfiguration, Datenfluss und Ausschlusstests ohne echte Secrets. / Agent versions, effective configuration, data flow and credential-free exclusion tests.
+- G04: Herkunft, Maintainer, Lizenz, SBOM und bedingte KI-Abhaengigkeiten. / Provenance, maintainer, licence, SBOM and conditional AI dependencies.
+- G05: Audit-Metadaten getrennt von Agentenzustand, Aufbewahrung, Loeschung und Datenschutz-Screening. / Audit metadata separate from agent state, retention, deletion and privacy screening.
+- G06: Produkt-, Betriebs- und Organisationsrollen mit zustaendiger menschlicher Rechtspruefung. / Product, operator and organisation roles with responsible human legal review.
+- G07: Vorhandene Krypto-/TLS-Abhaengigkeiten und Profilkonflikte, keine neue Eigenkryptografie. / Existing crypto/TLS dependencies and profile conflicts, no new custom crypto.
+- G08: Profil 14, exakte aktive Assurance-Metadaten in DE/EN, Quartals-/Anlassreview plus 3. Oktober. / Profile 14, exact active DE/EN Assurance metadata, quarterly/event review plus 3 October.
+- G09: Begrenztes Cloud-Screening ohne erfundenes Testat. / Scoped cloud screening without invented attestation.
+- G10: Lernenden-/A11Y-Basis, KI-Kompetenz und Reifegrad ohne erfundene Teilnahme. / Learner/accessibility baseline, AI literacy and maturity without invented attendance.
+
+AlreadyCovered fuer CL-02-02 ist Anforderungsabdeckung mehrschichtiger Haertung,
+kein technischer Pass. CL-08-03 N/A gilt nur fuer fehlende eigene Authentifizierung;
+installierte CLI-Anmeldung bleibt G03. CL-03-02 N/A gilt nur fuer fehlende eigene
+Kryptoimplementierung/Schluesselerzeugung; vorhandene TLS-/Signaturabhaengigkeiten
+bleiben G07. A prueft beide Begruendungen erneut; neue Eigenfunktionen loesen
+Neubewertung aus. N/A bleibt Not Assessed, Unsicherheit Open.
+
+AlreadyCovered for CL-02-02 means layered-hardening requirements coverage, not
+technical success. CL-08-03 N/A excludes only absent first-party authentication,
+retaining CLI sign-in in G03. CL-03-02 N/A excludes only absent first-party
+crypto/key generation, retaining TLS/signature dependencies in G07. A reviews
+both reasons; new first-party functions trigger reassessment. N/A stays Not Assessed;
+uncertainty stays Open.
+
+Request und Manifest stimmen ueberein: eine Root, vier Ziele genau einmal,
+drei vorwaertsgerichtete Kanten, kein Zyklus. Completed/Eligible/Blocked/Blocked
+bleibt erhalten. AcceptedBaseline schliesst keine Gaps; H liefert die
+kontrollbezogene Matrix an A, A gibt Fehler an H zurueck, L wartet auf
+erfolgreiche technische Abnahme. Eligible ist keine Startautoritaet.
+O-344-TECH, O-344-HUMAN und O-344-CLOUD behalten Owner, Follow-up und Trigger.
+
+Request and manifest agree: one root, four targets exactly once, three forward
+edges and no cycle. Lifecycle states remain unchanged. AcceptedBaseline closes
+no gaps; H hands the control matrix to A, A returns defects to H, and L waits
+for successful technical acceptance. Eligibility is not execution authority.
+The three named Open handoffs retain owners, follow-up and triggers.
+
+## Korrekturen Und Herkunft / Corrections and Provenance
+
+REV-001: Registry-Swift 6.4.1 entspricht Dockerfile 6.4.1-noble. Strukturvergleich
+gegen die archivierte Registry-Vorversion zeigt ausschliesslich dieses geaenderte
+Versionsfeld; Swiftly 1.1.2 und Archivhashes sind unveraendert.
+REV-002: Lernendentabelle nennt Go 1.27.3, Rust 1.99.1, Swift 6.4.1; bestehende
+Supported/Open-Werte bleiben erhalten. Die beiden neuen statischen Testmethoden
+und der Hook binden Registry, Tabelle und Image-Pins; hier nicht erneut ausgefuehrt.
+REV-003: Statusnachtrag und Verweise trennen gestoppte Machine/ersetzten Kandidaten,
+spaeteren ARM64-Neubau, dirty Build-Inhalt und aktuelle Review-Geltung.
+Der Build-Log 2026-10-25-1047.md ist gelesen, kein hier wiederholter Build.
+
+REV-001 aligns Swift registry/image versions; structured comparison with the
+archived registry shows only the version field changed, preserving Swiftly
+and archive hashes. REV-002 aligns learner versions, retaining Supported/Open;
+two new static methods and hook triggers were inspected, not rerun here.
+REV-003 separates historical machine/candidate state, later ARM64 replacement,
+dirty build content and current review validity. The build log was read, not rerun.
+
+Die drei neuen Receipts binden jeweils 27 Quellen und erhalten Intake-IDs.
+Die sechs archivierten alten Target-/Receipt-Dateien sowie alter Request und
+Serienmanifest/-Receipt stimmen roh mit den Hashes des Vorgangerreviews ueberein.
+Alle 37 GSDB-Inventardateien stimmen mit ihren rohen Inventarhashes ueberein.
+Die Byteidentitaet des ehemaligen Review-Outputs vor seiner Archivierung ist
+Owner-Evidence; ohne eigenen Vorab-Snapshot wird diese nicht neu behauptet.
+Die archivierten Review-Dateien sind jetzt selbst hashgebundene Inputs.
+
+Each new receipt binds 27 sources and preserves intake identity. The six archived
+target/receipt files, old request and series manifest/receipt match prior review
+hashes as raw bytes. All 37 GSDB inventory files match their raw inventory hashes.
+Former review-output byte identity before archiving is owner evidence, not an
+independently recaptured pre-archive snapshot. Archived review files are now
+themselves hash-bound inputs.
+
+## Validierung Und Offene Testgrenze / Validation and Open Test Boundary
+
+Eigene schreibfreie Bash-Pruefungen mit Exit 0: drei Authoring-Receipts,
+Serienmanifest, Serienreceipt und Governance-Konfiguration 2.0. Inventar:
+5 physische aktive passende Dateien, davon 3 aktive Serienziele, 4 Serienziele
+insgesamt; SeriesManifest erlaubt eigenstaendige Dateien ausserhalb dieser Reihe.
+Der Bash-Review-Ergebnisvalidator und der gezielte Diff-Check bestehen nach
+Schreiben mit Exit 0; alle 81 normalisierten Inputhashes sind erneut bestaetigt.
+PowerShell-Preset-Abschlussvalidierung bleibt beim Parent.
+
+Own write-free Bash checks passed: three authoring receipts, series manifest,
+series receipt and governance config 2.0. Physical active count is five versus
+three active series members and four total series members; SeriesManifest permits
+standalone files outside this series. Bash result validation and scoped diff
+check passed after writing, and all 81 normalized input hashes were rechecked.
+Parent owns final PowerShell preset validation.
+
+Parent meldet 48 bestandene fokussierte Tests und Offline-Linkpruefung einschliesslich
+Fragmenten: 380 Links, 103 eindeutig, 0 Fehler, 57 externe Ausschluesse.
+Dies sind uebernommene Testbeobachtungen, keine eigenen Wiederholungen.
+
+Parent reports 48 focused passes and offline fragment-aware link checks:
+380 links, 103 unique, zero errors, 57 external exclusions. These are attributed
+observations, not reruns by this reviewer.
+
+**REV-TEST-TIMING: Open**, Owner Maintainer; ersetzt das engere REV-TEST-315.
+Unter Host-Python 3.15 timeoutet required_cli_drift wiederholt mit unveraenderter
+20s-Grenze. Unter vorhandenem Host-Python 3.14 bestehen alle vier urspruenglichen
+Brew-Timeout-Faelle, aber die 18er-Suite hat 15 Pass, 2 Linux-only-Skips und einen
+Timing-Failure: test_probe_classifies_timeout_capability_and_redacts_paths liefert
+TimedOut statt Unusable; unter 3.15 war dieser Fall zuerst bestanden.
+Keine vollstaendig gruene Gesamtsuite. Follow-up: isolierte Ursachenanalyse der
+unveraenderten zeitkritischen Fixtures unter 3.15/3.14. Trigger: vor Behauptung
+einer gruenen Gesamtsuite oder globaler Wartungsfreigabe. Keine Timeout-Lockerung,
+keine Kaschierung, keine neue Produktanforderung und keine Risikoakzeptanz.
+Die eigene temporaere cli.json trennt diese Fixtures von der korrigierten
+Repo-Registry. Parent dokumentiert Details im Abschluss-Output 2026-10-25-1211.md.
+
+REV-TEST-TIMING remains Open, owned by Maintainer, replacing REV-TEST-315.
+Host Python 3.15 repeatedly exceeds the unchanged 20-second fixture limit.
+Under installed Python 3.14 all four original Brew cases pass, but the
+18-case suite has 15 passes, two Linux-only skips and one timing failure
+(TimedOut instead of Unusable); that probe passed initially under 3.15.
+No fully green overall suite is claimed. Follow up with isolated cause analysis
+before claiming a green suite or authorizing global maintenance. No relaxed
+timeouts, masking edits, new product requirement or risk acceptance.
+Temporary fixture registries are separate from the corrected repository registry.
+Parent records details in the new completion output.
+
+## Hash- Und Output-Grenze / Hash and Output Boundary
+
+Das JSON bindet den Request und alle vier aktuellen Zielhashes sowie 81 eigene
+normalisierte Inputhashes unter reviewerEvidence.reviewedHashes. Normalisierung:
+genau ein fuehrendes UTF-8-BOM entfernen, CRLF/CR zu LF, sonst keine Aenderung.
+Vor Ausgabe waren alle 81 rohen Input-Snapshots unveraendert.
+Historische Operationsjournale sind keine zu aktualisierenden Inputs.
+
+The JSON binds the request, all four target hashes and 81 independently computed
+normalized input hashes. Remove one leading UTF-8 BOM, convert CRLF/CR to LF,
+and change nothing else. All 81 raw snapshots were unchanged before output.
+Historical operation journals are not inputs to update.
+
+Die zwei aktuellen Operationsjournale stehen getrennt unter reviewedOutputSnapshots.
+Der Parent darf dort nur Abschlussvalidierung ergaenzen, nicht Autoritaet,
+Targets, Lineage oder Lifecycle aendern. Der neue Parent-Session-Log
+docs/security/agent-session-log/2026-10-25-1211.md ist ebenfalls OUTPUT, kein
+Receipt-Input und kein frozen Input. Kein eigener Session-Log angelegt.
+Die drei Review-Ausgaben haben keine zirkulaeren Selbsthashes.
+
+The two current journals are separate output snapshots; parent may add completion
+validation only, without changing authority, targets, lineage or lifecycle.
+The new parent session log is also OUTPUT, not a receipt or frozen input.
+No reviewer session log was created. Review outputs have no circular self-hashes.
+
+## Naechster Schritt Und Grenzen / Next Step and Boundaries
+
+Parent: Abschlussvalidatoren inklusive PowerShell und Output-Snapshots dokumentieren;
+REV-TEST-TIMING offen weiterfuehren. Kein Intake startet automatisch.
+Ready ist kein Nachweis fuer Runtime, Provider/Modell, Sandbox, Recht,
+Datenschutz, A11Y, Produkt, Plattform, Release oder globale Wartung.
+Kein Risiko wurde fuer den Owner akzeptiert; kein Build, Neustart, Commit oder Push.
+
+Parent: record final validators, including PowerShell, and output snapshots;
+retain the timing boundary as Open. No intake starts automatically.
+Ready proves none of the runtime, provider/model, sandbox, legal, privacy,
+accessibility, product, platform, release or global maintenance approvals.
+No owner risk was accepted; no build, restart, commit or push occurred.

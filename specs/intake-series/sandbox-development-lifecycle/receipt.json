@@ -1,28 +1,28 @@
 {
   "schemaVersion": "1.0",
   "documentType": "IntakeSeriesReceipt",
-  "receiptId": "41120268-fb72-453c-bb0b-8b443bdeeb6f",
+  "receiptId": "96d44fde-9957-424a-8ab7-ccc7f2eb24ec",
   "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
   "generator": {
     "preset": "intake-sequencing-governance",
-    "version": "0.2.3"
+    "version": "0.2.11"
   },
-  "createdAt": "2026-10-21T10:50:17Z",
+  "createdAt": "2026-10-25T18:34:32Z",
   "operation": {
-    "authorityEvidence": "Explicit owner request on 2026-10-21: update exactly three active intakes to GSDB 3.4.4 and Assurance 0.1.5, then independent full review of all three and the four-target series. Local governance authoring only; no technical implementation, product run, build/start, commit or push; no lifecycle advancement.",
-    "type": "Update",
-    "operationId": "6e710bf0-3c9c-4913-91d8-457c5cf432a0"
+    "operationId": "989f4710-2626-4256-ae70-e476244b5d1b",
+    "authorityEvidence": "Owner explicitly approved removing only the two extra workshop EOF blank lines, renewing affected source bindings and independent follow-up review, then completing groups 4-7 and MergeAndSync with admin bypass. Preserve the first three commits, intake identities, all requirements, six follow-up prompts, lifecycle and future execution authority. One combined content push and exact-head merge-commit only after green checks. No build, restart, global maintenance or new formal approval.",
+    "type": "Update"
   },
   "status": "Ready",
   "manifest": {
     "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
-    "normalizedSha256": "27f9d3d49d8327532302316be5c719ac71074b7cdc16667e826529524576bdbf"
+    "normalizedSha256": "740f5c72a9aff540c063df8adf37f1ba30e1df2fad99b869896de9860645b2c4"
   },
   "supersedes": {
-    "receiptNormalizedSha256": "e0dbf378e4f40a70e71ae0d6fe7a52da2827146def89a1913604110de89d3a50",
-    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/6e710bf0-3c9c-4913-91d8-457c5cf432a0/manifest.json",
-    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/6e710bf0-3c9c-4913-91d8-457c5cf432a0/receipt.json",
-    "manifestArchiveSha256": "693eb837641f015846b32f78143dfaac3c6fabe2ace653e47f50ca73bfa1b685"
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/989f4710-2626-4256-ae70-e476244b5d1b/manifest.json",
+    "manifestArchiveSha256": "a76a2949ddf494be44cf073c37ecbf6359fc3cfc3751ab007d6d90a3ecee5c07",
+    "receiptNormalizedSha256": "bfed79083ffcd2dcf8235d45fa569b3ad0d94e5b921a646b007204de7a3ecfed",
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/989f4710-2626-4256-ae70-e476244b5d1b/receipt.json"
   },
   "tombstone": {
     "path": "N/A",

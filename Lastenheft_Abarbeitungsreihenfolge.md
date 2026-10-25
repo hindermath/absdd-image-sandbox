@@ -1,5 +1,21 @@
 # Abarbeitungsreihenfolge der Sandbox-Intakes / Sandbox Intake Order
 
+DE: Der [Tagesabschluss-Rechteabgleich](docs/maintenance/closeout-rights-alignment-2026-10-25.md)
+erneuert Quellenbindungen und unabhängiges Review; Completed, Eligible,
+Blocked, Blocked und sämtliche Startgates bleiben unverändert.
+
+EN: Closeout rights alignment refreshes sources and independent review only;
+preserve Completed, Eligible, Blocked, Blocked and all execution gates.
+
+DE: Das [optionale Template-Profil](docs/maintenance/template-profile-alignment-2026-10-25.md) erneuert Anforderungen und Quellenbindungen, nicht Lifecycle oder Startautoritaet. Fork bleibt Standard; die Template-Aktivierung bleibt gesperrt.
+
+EN: The optional template profile refreshes requirements and source bindings, not lifecycle or execution authority. Fork remains the default; template activation remains blocked.
+
+DE: Der [Maven-Quellenabgleich](docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md) erneuert ausschliesslich Quellenbindungen und Review; Reihenfolge, Status und Startautoritaet bleiben unveraendert.
+
+EN: Maven source alignment refreshes source bindings and review only; order, lifecycle and execution authority remain unchanged.
+
+
 **Status:** aktiv / active
 
 **Verbindliche Quelle / Binding source:** `specs/intake-series/sandbox-development-lifecycle/manifest.json`
@@ -71,16 +87,35 @@ flowchart TD
 
 ## Naechste Aktion / Next Action
 
-### Quellenabgleich 2026-10-21 / Source Alignment 2026-10-21
+DE: Die [Review-Korrektur](docs/maintenance/sandbox-current-state-2026-10-25.md)
+erneuert Quellen und das separat gefuehrte Vollreview, nicht die Lifecycle-
+Status oder Startautoritaet. Completed, Eligible, Blocked, Blocked bleibt erhalten.
+
+EN: Review correction refreshes sources and the separately recorded full
+review, not lifecycle or execution authority. Preserve Completed, Eligible,
+Blocked, Blocked.
+
+### Quellenabgleich 2026-10-25 / Source Alignment 2026-10-25
+
+DE: Zusaetzlich bindet der [Dokumentationsabgleich](docs/maintenance/documentation-alignment-2026-10-25.md)
+die aktualisierte Agent-Guidance und offene Werkzeug-Nachpruefungen. Die
+Statusfolge bleibt Completed, Eligible, Blocked, Blocked; ein Inhaltsreview
+ist keine technische oder menschliche Freigabe.
+
+EN: Documentation alignment additionally binds updated agent guidance and
+open toolchain follow-ups. Preserve Completed, Eligible, Blocked, Blocked;
+content review is not technical or human approval.
 
 DE: Die drei aktiven Intakes verwenden den
 [GSDB-3.4.4-Delta-Abgleich](docs/maintenance/intake-gsdb344-delta-2026-10-21.md)
-und Assurance 0.1.5. Die historische GSDB-Root bleibt abgeschlossen.
+und Assurance 0.1.8 gemäß [aktuellem Quellenabgleich](docs/maintenance/intake-sources-alignment-2026-10-25.md).
+Die historische GSDB-Root bleibt abgeschlossen.
 Reihenfolge und Status sind unveraendert; Quellenuebernahme und
 Review-Bereitschaft sind keine Ausfuehrungs- oder Sandbox-Freigabe.
 
 EN: The three active intakes consume the linked GSDB 3.4.4 delta alignment
-and Assurance 0.1.5. The historical GSDB root remains Completed. Order and
+and Assurance 0.1.8 according to the current source alignment linked above.
+The historical GSDB root remains Completed. Order and
 statuses are unchanged; source adoption and review readiness grant no
 execution or sandbox approval.
 

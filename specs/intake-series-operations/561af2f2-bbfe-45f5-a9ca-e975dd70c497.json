@@ -1,0 +1,37 @@
+{
+  "operationId": "561af2f2-bbfe-45f5-a9ca-e975dd70c497",
+  "archiveManifestNormalizedSha256": "1289b799a1fa4fc2a9da1d88c3a135e6e55f6e833be168e5ec85d07eef8de8d1",
+  "schemaVersion": "1.0",
+  "archiveManifestPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/561af2f2-bbfe-45f5-a9ca-e975dd70c497/manifest.json",
+  "manifestNormalizedSha256": "a76a2949ddf494be44cf073c37ecbf6359fc3cfc3751ab007d6d90a3ecee5c07",
+  "createdAt": "2026-10-25T18:15:36Z",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "status": "Completed",
+  "documentType": "IntakeSeriesOperation",
+  "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+  "authorityEvidence": "Owner explicitly approved correction of IR201/IR202 and continuation of the daily closeout plan: safe routine shutdown, precise host/container/agent boundaries, focused static regressions, exact archival preimages, preserved intake identities, refreshed bindings and independent full four-intake review. Seven thematic commits, one total push and exact-head merge-commit with admin bypass only after green technical checks remain authorized. Reuse the existing ARM64 candidate only with unchanged 14 build inputs; no build, service restart, template activation, product run, new execution authority or formal approval.",
+  "lifecycle": [
+    "Completed",
+    "Eligible",
+    "Blocked",
+    "Blocked"
+  ],
+  "type": "Update",
+  "validation": {
+    "protectedService": "Same container, image, start time and six volumes",
+    "reviewedInputs": 244,
+    "candidate": "Reuse successful unchanged ARM64 build; all14 inputs, imageID and SBOM hash verified",
+    "composeConfig": "Passed, static only",
+    "maintenanceAndFingerprintTests": "34 tests: 32 passed, two expected Linux-only skips on macOS",
+    "lifecycle": "Completed, Eligible, Blocked, Blocked",
+    "archiveFidelity": "17 captured raw and normalized preimage hashes verified",
+    "independentReview": "Ready",
+    "offlineLinks": "1936 total, 1211 OK, 725 excluded, zero errors",
+    "sessionLog": "docs/security/agent-session-log/2026-10-25-1917.md",
+    "preCommit": "All ten hooks passed",
+    "focusedDocumentationTests": "12 passed",
+    "publication": "Local filesystem artifact publication only; Git delivery remains separate",
+    "reviewId": "0aed98b6-12c4-448d-871b-a32ad142e3f9"
+  },
+  "nextAction": "$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json"
+}

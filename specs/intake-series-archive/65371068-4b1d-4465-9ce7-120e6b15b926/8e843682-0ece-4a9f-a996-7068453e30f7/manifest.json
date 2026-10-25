@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesManifest",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "title": "Sichere Sandbox vom Befund bis zur Selbstbau-Vorlage / Secure Sandbox from Assessment to Self-Build Template",
+  "policy": "intake-sequencing-governance-v0.2.3",
+  "status": "Active",
+  "orderedTargets": [
+    {
+      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "role": "Primary",
+      "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a",
+      "status": "Completed"
+    },
+    {
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "a132f61e61f7184764d9bf9ba093adcd1389564644c386f2f1a615d72b9c89cb",
+      "status": "Eligible"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "8002cad312d4e05dd48eda42d1eede0d17471e0f812a6ed509cb7e3c174b42f7",
+      "status": "Blocked"
+    },
+    {
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "f056ccea8592f854654413492de99b1c503286f4253fae2431abb55275f21db7",
+      "status": "Blocked"
+    }
+  ],
+  "roots": [
+    "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+  ],
+  "dependencies": [
+    {
+      "from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "to": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "kind": "AssessmentBaseline",
+      "binding": true
+    },
+    {
+      "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "kind": "SandboxBaseline",
+      "binding": true
+    },
+    {
+      "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "to": "intakes/learner-fork-self-build-sandbox.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    }
+  ],
+  "evidencePaths": [
+    "specs/intake-authoring-receipts/",
+    "specs/intake-authoring-archive/",
+    "specs/intake-authoring-tombstones/",
+    "specs/intake-review-reports/sandbox-development-lifecycle.md",
+    "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/acceptance-decision.md",
+    "docs/maintenance/intake-gsdb344-delta-2026-10-21.md"
+  ]
+}

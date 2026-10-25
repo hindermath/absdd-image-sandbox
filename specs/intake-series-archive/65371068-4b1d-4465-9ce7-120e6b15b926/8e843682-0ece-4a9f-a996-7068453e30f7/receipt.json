@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "41120268-fb72-453c-bb0b-8b443bdeeb6f",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.3"
+  },
+  "createdAt": "2026-10-21T10:50:17Z",
+  "operation": {
+    "authorityEvidence": "Explicit owner request on 2026-10-21: update exactly three active intakes to GSDB 3.4.4 and Assurance 0.1.5, then independent full review of all three and the four-target series. Local governance authoring only; no technical implementation, product run, build/start, commit or push; no lifecycle advancement.",
+    "type": "Update",
+    "operationId": "6e710bf0-3c9c-4913-91d8-457c5cf432a0"
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "27f9d3d49d8327532302316be5c719ac71074b7cdc16667e826529524576bdbf"
+  },
+  "supersedes": {
+    "receiptNormalizedSha256": "e0dbf378e4f40a70e71ae0d6fe7a52da2827146def89a1913604110de89d3a50",
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/6e710bf0-3c9c-4913-91d8-457c5cf432a0/manifest.json",
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/6e710bf0-3c9c-4913-91d8-457c5cf432a0/receipt.json",
+    "manifestArchiveSha256": "693eb837641f015846b32f78143dfaac3c6fabe2ace653e47f50ca73bfa1b685"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status"
+}

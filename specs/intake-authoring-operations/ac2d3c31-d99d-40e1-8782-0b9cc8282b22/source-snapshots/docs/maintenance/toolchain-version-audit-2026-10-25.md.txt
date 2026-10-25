@@ -1,0 +1,279 @@
+# Versionsabgleich / Version Audit 2026-10-25
+
+## Auftrag und Grenze / Authority and Boundary
+
+DE: Der Owner beauftragte aktuelle stabile Werkzeugversionen und bestaetigte
+Hauptversionswechsel; Java, Node und .NET sollen bevorzugt LTS verwenden.
+LTS bedeutet langfristig unterstuetzte Versionslinie. Dieser Abgleich aendert
+keine Provider, Modelle, Zugangsdaten, Freigaben oder Plattformregeln und startet
+keinen Spec-Kit-Produktlauf. Keine Commits oder Pushes sind beauftragt.
+
+EN: The owner requested current stable tools and confirmed major upgrades,
+preferring long-term support (LTS) lines for Java, Node and .NET. This audit
+does not change providers, models, credentials, approvals or platform rules or
+start a Spec Kit product run. No commit or push is authorized.
+
+## Sollversionen / Target Versions
+
+DE: Die Werte wurden live gegen offizielle Registries, Release-APIs und
+Release-Metadaten abgeglichen. Sie beschreiben das Dockerfile, nicht automatisch
+den laufenden Container. Vorabversionen wurden nicht gewaehlt.
+
+EN: Values were checked live against official registries, release APIs and
+release metadata. They describe the Dockerfile, not automatically the running
+container. Prereleases were not selected.
+
+| Werkzeug / Tool | Bisher / Before | Neu / Target | Einordnung / Classification |
+|---|---|---|---|
+| MCR .NET SDK | 10.0, Digest September | 10.0.402, neuer Multiarch-Digest | .NET 10 LTS, Ubuntu 24.04 |
+| .NET-Kompatibilitaets-SDK / compatibility SDK | 10.0.301 | 10.0.303 | aktuelle Patchversion der absichtlich erhaltenen 10.0.3xx-Linie / current patch of retained feature band |
+| Java | 21 | 25 | aktuelle LTS-Linie aus Ubuntu / current LTS from Ubuntu |
+| Maven | Ubuntu 3.8.7 | 3.10.0 | eigenes Apache-Release, SHA-512 / separate Apache release |
+| Python | Ubuntu 3.12 | 3.15.1 | CPython aus Astral-Standalone-Build 20261021, native SHA-256 / native standalone build |
+| PowerShell | 7.6.4 | 7.6.8 | vorhandenes globales Tool aktualisieren / update existing global tool |
+| Go | 1.26.3 | 1.27.3 | stable |
+| gopls | v0.21.1 | v0.24.0 | stable |
+| staticcheck | v0.7.0 | v0.8.2 | stable |
+| govulncheck | v1.3.0 | v1.9.0 | stable |
+| Delve | v1.26.3 | v1.27.2 | stable |
+| Rust | 1.95.0 | 1.99.1 | stable |
+| rustup | 1.28.2 | 1.29.2 | stable |
+| Swift | 6.3.3-noble | 6.4.1-noble | Ubuntu 24.04, beide Downloadpfade erreichbar / both download paths available |
+| Node.js | 22 | 24 | aktuelle LTS-Linie / current LTS, Registry: 24.22.1 |
+| npm | mit NodeSource gebuendelt / bundled | 12.2.1 | eigener Pin, unterstuetzt Node 24.15+ / separate pin, supports Node 24.15+ |
+| uv | 0.11.16 | 0.13.5 | stable |
+| OpenCode | opencode-ai 1.14.50 | @opencode/cli 2.1.4 | offizieller V2-Paketwechsel / official V2 package change |
+| Codex | 0.144.1 | 0.164.0 | stable |
+| Claude Code | 2.1.206 | 2.1.310 | benoetigt mindestens Node 22 / requires Node 22 or later |
+| Gemini CLI | 0.50.0 | 0.65.0 | stable |
+| Antigravity CLI | 1.1.1 | 1.4.7 | stable |
+| Copilot CLI | 1.0.70 | 1.0.103 | stable |
+| Syft | 1.46.0 | 1.55.0 | stable |
+| actionlint | 1.7.12 | 1.7.12 | bereits aktuell / already current |
+| Pandoc | 3.12 | 3.12.1 | stable |
+| Lychee | 0.24.2 | 0.24.2 | bereits aktuell / already current |
+| Typst | 0.15.1 | 0.15.1 | bereits aktuell / already current |
+| Tinymist | 0.15.8 | 0.15.10 | stable |
+| Spec Kit | 0.12.8 | 1.2.3 | exakter Release-Commit / exact release commit |
+
+## Integritaet und Paketquellen / Integrity and Package Sources
+
+DE: Das MCR-Manifest
+`sha256:747cbade5bfd918a175ac32f8f1d931edec2c7d0d5397a3de72eaef1ac1f66d2`
+enthaelt native Linux-AMD64- und ARM64-Images. Beide Config-Blobs melden SDK
+10.0.402 und Ubuntu 24.04; ihre Historie enthaelt PowerShell 7.6.7. Deshalb
+wird das vorhandene globale Tool aus Microsofts offiziellen 7.6.8-Paketen
+aktualisiert und anschliessend per Versionsaufruf geprueft. Die im Dockerfile
+festen SHA-256-Werte stammen aus den aktuellen offiziellen
+dotnet-docker-Installationsdefinitionen fuer beide Architekturen.
+
+EN: The MCR index contains native Linux AMD64 and ARM64 images. Both config
+blobs declare SDK 10.0.402 and Ubuntu 24.04, with PowerShell 7.6.7 in their
+history. The existing global tool is therefore updated using official
+Microsoft 7.6.8 packages and checked afterwards. Committed SHA-256 hashes come
+from the current official dotnet-docker definitions for both architectures.
+
+DE: Aktualisierte Pandoc-, Tinymist- und Antigravity-Hashes kommen aus den
+offiziellen Release-Asset-Digests. Go-Hashes kommen aus go.dev, SDK-SHA-512
+aus Microsofts Release-Metadaten. Unveraenderte Lychee-, Typst- und
+actionlint-Hashes stimmen mit ihren aktuellen Release-Assets ueberein.
+Swift behalt seine PGP-Signaturpruefung; uv, rustup und Syft behalten ihre
+Checksummenpruefung. npm installiert exakte Paketversionen mit Registry-
+Integritaetsdaten. Es gibt keinen AMD64-Fallback fuer ARM64.
+
+EN: Updated Pandoc, Tinymist and Antigravity hashes come from official release
+asset digests, Go hashes from go.dev and SDK SHA-512 from Microsoft metadata.
+Unchanged Lychee, Typst and actionlint hashes match their current release
+assets. Swift keeps PGP verification; uv, rustup and Syft keep checksum checks.
+npm installs exact versions with registry integrity metadata. No AMD64 fallback
+is introduced for ARM64.
+
+DE: Der Owner bestaetigte gesondert auch eigene aktuelle Python-/Maven-Pins.
+Python 3.15.1 kommt als hashgepruefter nativer CPython-Standalone-Build von
+Astral unter `/opt/cpython`; `python` und `python3` zeigen darauf. Ubuntu-
+Systemwerkzeuge behalten `/usr/bin/python3`. Maven 3.10.0 kommt von Apache,
+separat mit SHA-512 geprueft. Restliche APT-Pakete folgen den signierten
+Ubuntu-24.04-Quellen. NodeSource liefert die aktuelle Patchversion in Node 24.
+Die Home-Baseline ist eine gebundene Inhaltsquelle, kein Werkzeug-Release;
+ihr Commit bleibt unveraendert.
+
+EN: The owner separately confirmed upstream Python/Maven pins. Native,
+hash-verified CPython 3.15.1 from Astral is installed under /opt/cpython and
+selected by python/python3. Ubuntu system tools retain /usr/bin/python3.
+Maven 3.10.0 is separately verified with SHA-512 from Apache. Remaining APT
+packages follow signed Ubuntu 24.04 repositories; NodeSource supplies Node 24
+patches. The Home Baseline is bound content; its commit stays unchanged.
+
+DE: npm 12.2.1 wird separat gepinnt und nach den nativen Agenten-Hooks
+installiert. Laut Registry unterstuetzt es Node `^24.15.0`; das installierte
+Node 24.22.1 erfuellt dies. Renovate bleibt fuer npm innerhalb 12.x.
+
+EN: npm 12.2.1 is separately pinned and installed after native agent hooks.
+Its published Node requirement is satisfied by Node 24.22.1. Renovate retains
+the compatible npm 12.x line.
+
+## Kompatibilitaet / Compatibility
+
+DE: OpenCode 2 erhaelt eine native geordnete `permissions`-Liste. Jede bisherige
+Regel bleibt mit gleicher Reihenfolge, Ressource und Wirkung enthalten;
+`bash` wird `shell`, `task` wird `subagent`. Globale Standardregel bleibt `ask`,
+Secret-Dateien und destruktive Kommandos bleiben blockiert. Sitzungsfreigabe
+und automatische Updates bleiben aus. Der Regressionstest prueft alle Regeln
+gegen die eingefrorene V1-Fixture und ausgewaehlte Schutzfaelle. Er ist kein
+Nachweis gegen beliebige Shell-Umgehungen oder geaenderte Agentenregeln.
+
+EN: OpenCode 2 uses native ordered permissions. Every previous rule retains
+order, resource and effect; bash becomes shell and task becomes subagent.
+The global default remains ask, secret files and destructive commands remain
+blocked, and sharing/automatic updates stay disabled. Regression tests compare
+all rules with the frozen V1 fixture and selected security cases. This does not
+prove protection against arbitrary shell bypasses or changed agent overrides.
+
+DE: `doom_loop` und `lsp` sind laut V2-Dokumentation keine aktuellen Core-
+Berechtigungsaktionen. Die Regeln bleiben fuer Erweiterungen erhalten, stellen
+aber keinen belegten V2-Loop-Schutz dar. Vor Provider-Nutzung benoetigt dieser
+Punkt einen gezielten Review; keine pauschale Sicherheitsparitaet behaupten.
+V2 teilt Konfigurationsorte mit V1: Daten vor erster Nutzung sichern und keine
+Rueckwaertskompatibilitaet des neuen Formats mit V1 behaupten.
+
+EN: doom_loop and lsp are not current V2 Core permission actions. Their rules
+remain for extensions but do not prove V2 loop protection. Review this before
+provider use; do not claim complete security parity. Back up data before V2
+use and do not claim V1 compatibility for the new configuration format.
+
+DE: Spec Kit 1.2.3 ist auf den aufgeloesten Release-Commit
+`5ea8b1cf0a38699340a38e00d02770308997d8c0` gepinnt. Der enge Bind-Mount-Patch
+greift vor dem Import der Kopiermodule; der neue Einstieg ohne `import json`
+ist abgedeckt. Unbekannte Modulstrukturen werden weiterhin abgelehnt.
+Keine bestehenden Projekt-Presets oder Feature-Artefakte werden neu generiert.
+
+EN: Spec Kit 1.2.3 is pinned to its peeled release commit. The narrow bind-mount
+patch runs before copying modules are imported, including the new entrypoint
+without import json. Unknown layouts remain rejected. Existing project presets
+and feature artifacts are not regenerated.
+
+## Bisherige Pruefungen / Checks So Far
+
+DE: 57 fokussierte Regressionstests sind bestanden: OpenCode-/Syft-Vertrag 5,
+Spec-Kit-Patch 4, JSON-Preflight 5, Agent-Surface-Paritaet 6, Prompt-Dispatcher 4
+und Hardening-Validator 28 sowie Versions-/Install-Hook-/Runtime-Pins 5. Compose-Konfiguration, PowerShell-/Bash-Syntax,
+Renovate-Schema und OpenCode-Schema sind erfolgreich geprueft. Die neuen
+OpenCode-Regeln wurden ausserdem vom echten 2.1.4-CLI aus einem isolierten Home
+gelesen; `run --help` bleibt mit dem Dispatcher kompatibel. Spec Kit 1.2.3
+erzeugte ein isoliertes OpenCode-Testprojekt mit zehn Commands, ohne Git-Repo.
+
+EN: All 57 focused regression tests passed: OpenCode/Syft contract 5, Spec Kit
+patch 4, JSON preflight 5, agent surface parity 6, prompt dispatchers 4 and
+hardening validator 28 plus version/install-hook/runtime pins 5. Compose configuration, shell syntax and Renovate and
+OpenCode schemas passed. The real OpenCode 2.1.4 CLI read the rules from an
+isolated home and its run help remains compatible with the dispatcher. Spec Kit
+1.2.3 generated ten commands in an isolated OpenCode project without Git.
+
+DE: Gitleaks fand im vollstaendigen Snapshot einmal den unveraenderten
+oeffentlichen Swift-PGP-Fingerprint in `Dockerfile`. Das ist kein Secret.
+Der separate Scan des tatsaechlichen Aenderungsumfangs plus neuer Dateien
+fand keine Secrets. Keine Allowlist wurde erweitert. Initiale Pruefversuche
+mit dem entfernten Spec-Kit-Flag `--no-git` beziehungsweise ohne erlaubte
+Schema-Referenzaufloesung wurden korrekt abgewiesen und mit passender Syntax
+erfolgreich wiederholt; sie gelten nicht selbst als bestandene Tests.
+
+EN: Gitleaks flagged the unchanged public Swift PGP fingerprint once in the
+full snapshot; it is not a secret. A separate scan of actual changes plus new
+files found no secrets. No allowlist was broadened. Initial attempts using the
+removed Spec Kit no-git flag or disabled schema reference resolution were
+correctly rejected, then successfully repeated with supported syntax. Those
+initial attempts are not counted as passing checks.
+
+## Verbleibende Grenzen / Remaining Boundaries
+
+DE: Im ersten Runtime-Smoke brachte das Kompatibilitaets-SDK zusaetzlich
+Runtime 10.0.11 mit. Das finale Image behaelt beide SDKs, stellt den originalen
+Host aus dem unveraenderten MCR-Basisstage wieder her und entfernt aeltere
+Runtime-/hostfxr-Patches derselben 10.0-Linie. Nur Runtime 10.0.13 bleibt aktiv
+installiert. Das betrifft ausschliesslich Image-Pfade, keine Datenvolumes.
+
+EN: The first runtime smoke exposed an additional 10.0.11 runtime from the
+compatibility SDK. The final image keeps both SDKs, restores the original
+host from its immutable MCR base stage and removes older runtime/hostfxr patches
+of the same 10.0 line. Only runtime 10.0.13 remains installed. Data volumes are
+not involved.
+
+| ID | Status | Owner | Follow-up | Re-Evaluation-Trigger |
+|---|---|---|---|---|
+| UPD-INTAKE | Open | Maintainer | AGENTS-Quellenbindung der drei lokalen Intakes erneut aktualisieren und unabhaengig reviewen / refresh the three intake bindings and review independently | vor Intake-/Produktstart / before intake or product start |
+| UPD-V2-LOOP | Open | Security Review | V2-Loop-Verhalten vor Provider-Nutzung gezielt pruefen / review V2 loop behavior before provider use | vor realer agentischer Nutzung / before real agent use |
+| UPD-V2-AUDIT | Open | Maintainer / Security Review | V2-Sitzungsablage gegen die enge Metadaten-Allowlist pruefen; keine Datenbankinhalte exportieren / review V2 session storage against the narrow metadata allowlist; never export database content | vor auditpflichtiger V2-Nutzung / before audit-bound V2 use |
+| UPD-AMD64 | Open | Maintainer | native Windows-/Ubuntu-WSL2-Abnahme mit separater Evidenz / native Windows and Ubuntu WSL2 acceptance with separate evidence | vor AMD64-Verteilung / before AMD64 distribution |
+| UPD-SMOKE-WARN | Open | Maintainer / Documentation Review | Swift-Signalwarnungen und Poppler-Suspects-Warnung untersuchen / investigate Swift signal and Poppler Suspects warnings | vor strenger PDF-Freigabe, Debugger-Abnahme oder naechstem Toolupdate / before strict PDF approval, debugger acceptance or next tool update |
+| UPD-APPROVAL | Open | Repository Owner / Security Review | neue Versionen nach technischen Nachweisen bewerten / assess new versions after technical evidence | vor freigabepflichtiger Nutzung / before approval-bound use |
+
+DE: Der unmittelbar vorherige Intake-Review wurde gegen den alten AGENTS-Hash
+erstellt. Die jetzt beauftragten Java-/Spec-Kit-Guidance-Aenderungen machen
+diese Quellenbindung absichtlich veraltet. Receipts und Ready-Ergebnis werden
+nicht stillschweigend umgeschrieben; Ready ist nicht mehr als aktuell nutzbar.
+Historische Freigaben und Session-Logs bleiben unveraendert.
+
+EN: The preceding intake review used the old AGENTS hash. The requested Java
+and Spec Kit guidance changes intentionally make that binding stale. Receipts
+and the Ready result are not silently rewritten; Ready is no longer usable as
+current authority. Historical approvals and session logs stay unchanged.
+
+## ARM64-Ergebnis / ARM64 Result
+
+DE: Separates Pruefimage `localhost/absdd-image-sandbox:version-audit-20261025`,
+Image-ID `24139e60314c2b55e0d066fb6c9aa45fd7cd4d0101ab330a0e7b8832ce512cec`,
+`linux/arm64`, Standardbenutzer `adedev`. Der vollstaendige Sprach-/Dokumentations-
+Smoke wurde ohne Netzwerk, mit verworfenen Capabilities und ohne neue
+Privilegien durchgefuehrt. PDF-Seiten und Inhalte sowie beide lokalen
+Link-Faelle wurden geprueft. Der absichtlich fehlende Link muss scheitern.
+
+EN: The separate audit image is Linux ARM64 with adedev as default user.
+Full language/documentation smoke checks used no network, dropped capabilities
+and no new privileges. PDF pages/content and positive/negative local link
+cases were checked. The deliberately missing link must fail.
+
+DE: Swift meldet `safeExec: signal(32/33, SIG_DFL) failed: Invalid argument`;
+Poppler meldet `Suspects object is wrong type (boolean)`. Die Programme laufen
+mit Exit 0 durch; diese Beobachtungen bleiben offen, die Ursache wird nicht
+behauptet. Der Funktionstest beweist weder PDF-Barrierefreiheit noch eine
+vollstaendige PDF-/Debugger-/Plattformabnahme.
+
+EN: Swift reports safeExec warnings for signals 32/33 and Poppler reports a
+Suspects boolean warning. Programs exit successfully; these observations stay
+open without an asserted cause. Functional checks do not establish PDF
+accessibility or complete PDF/debugger/platform acceptance.
+
+## Quellen / Sources
+
+- [MCR SDK manifest](https://mcr.microsoft.com/v2/dotnet/sdk/manifests/10.0)
+- [Microsoft SDK 10 release metadata](https://builds.dotnet.microsoft.com/dotnet/release-metadata/10.0/releases.json)
+- [Microsoft AMD64 SDK definition](https://github.com/dotnet/dotnet-docker/blob/main/src/sdk/10.0/noble/amd64/Dockerfile)
+- [Microsoft ARM64 SDK definition](https://github.com/dotnet/dotnet-docker/blob/main/src/sdk/10.0/noble/arm64v8/Dockerfile)
+- [Ubuntu OpenJDK 25](https://packages.ubuntu.com/noble-updates/openjdk-25-jdk-headless)
+- [Node release index](https://nodejs.org/dist/index.json)
+- [npm 12.2.1 metadata](https://registry.npmjs.org/npm/12.2.1)
+- [Python 3.15.1](https://www.python.org/downloads/release/python-3151/)
+- [Astral CPython build 20261021](https://github.com/astral-sh/python-build-standalone/releases/tag/20261021)
+- [Apache Maven releases](https://maven.apache.org/download.cgi)
+- [Apache Maven SHA-512](https://dlcdn.apache.org/maven/maven-3/3.10.0/binaries/apache-maven-3.10.0-bin.tar.gz.sha512)
+- [Go releases and checksums](https://go.dev/dl/?mode=json)
+- [Go module proxy](https://proxy.golang.org/)
+- [Rust stable manifest](https://static.rust-lang.org/dist/channel-rust-stable.toml)
+- [rustup stable manifest](https://static.rust-lang.org/rustup/release-stable.toml)
+- [Swift 6.4.1](https://github.com/swiftlang/swift/releases/tag/swift-6.4.1-RELEASE)
+- [npm OpenCode](https://registry.npmjs.org/@opencode%2fcli/2.1.4)
+- [npm Codex](https://registry.npmjs.org/@openai%2fcodex/0.164.0)
+- [npm Claude Code](https://registry.npmjs.org/@anthropic-ai%2fclaude-code/2.1.310)
+- [npm Gemini CLI](https://registry.npmjs.org/@google%2fgemini-cli/0.65.0)
+- [npm Copilot](https://registry.npmjs.org/@github%2fcopilot/1.0.103)
+- [OpenCode migration](https://opencode.ai/v2/docs/migrate-v1/)
+- [OpenCode permissions](https://opencode.ai/v2/docs/permissions)
+- [uv 0.13.5](https://github.com/astral-sh/uv/releases/tag/0.13.5)
+- [Antigravity 1.4.7](https://github.com/google-antigravity/antigravity-cli/releases/tag/1.4.7)
+- [Syft 1.55.0](https://github.com/anchore/syft/releases/tag/v1.55.0)
+- [actionlint 1.7.12](https://github.com/rhysd/actionlint/releases/tag/v1.7.12)
+- [Pandoc 3.12.1](https://github.com/jgm/pandoc/releases/tag/3.12.1)
+- [Lychee 0.24.2](https://github.com/lycheeverse/lychee/releases/tag/lychee-v0.24.2)
+- [Typst 0.15.1](https://github.com/typst/typst/releases/tag/v0.15.1)
+- [Tinymist 0.15.10](https://github.com/Myriad-Dreamin/tinymist/releases/tag/v0.15.10)
+- [Spec Kit 1.2.3](https://github.com/github/spec-kit/releases/tag/v1.2.3)

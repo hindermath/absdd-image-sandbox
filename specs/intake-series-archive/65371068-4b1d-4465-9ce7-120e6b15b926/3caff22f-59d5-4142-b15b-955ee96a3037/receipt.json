@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "643a163a-f233-4baf-ad56-912b9b2d45b7",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.11"
+  },
+  "createdAt": "2026-10-25T11:00:44Z",
+  "operation": {
+    "type": "Update",
+    "authorityEvidence": "Owner explicitly approved Drei Review-Findings Korrigieren on 2026-10-25: align Swift registry and learner versions, clarify current/historical state, refresh all three intake bindings and independently fully review the series. No new upgrades, build, restart, provider/secret configuration, commit or push. Preserve existing changes, historical evidence and lifecycle.",
+    "operationId": "ac2d3c31-d99d-40e1-8782-0b9cc8282b22"
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "e61f52f9d3806fc8039a78ee4e0f1edb5e7c7712f5a61d1d961b0298ed7c36f1"
+  },
+  "supersedes": {
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/receipt.json",
+    "receiptNormalizedSha256": "8e8f34ed5da39d3eb9751033bdfe0ca5b9feebf91e689944c6f93ca9de52ce97",
+    "manifestArchiveSha256": "7a70f761c2de1246bfdc6a780710a1f05be3ad2a079bfa0dd30d7963eb1369c1",
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/manifest.json"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status"
+}

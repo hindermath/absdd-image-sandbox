@@ -1,0 +1,54 @@
+Independent full-series review
+Review-ID: 5fa23447-e96c-403c-b7da-79c506a11586
+Operation-ID: 7ed5b22f-e402-4e7b-aca0-1d68259a6eac
+Reviewer: Codex Independent Lifecycle Reviewer
+Reviewer thread ID (tool-provided): 01a1741a-8f17-7f92-acec-ff7ee32ecb5b
+Distinct Agent-ID: not exposed; none invented
+Reviewed-at: 2026-10-25T17:38:42.213Z
+Verdict: NeedsRemediation
+Targets: 4 (1 historical Completed root, 3 active); campaign workers: 0
+Findings: Critical 0; High 1; Medium 1; Low 0
+Accepted risks: 0; unanswered material questions: 0
+
+DE: Vollstaendiges unabhaengiges Inhaltsreview aller vier Intakes, 50 Delta-IDs,
+sechs aktiven Prompts, je 58 Receipt-Quellen und Reihen-/Abnahmegrenzen.
+IR201 High: sandbox-profil.md:28,40 empfiehlt Volume-Loeschung als
+Normalstopp; Autor muss DE/EN korrigieren, Regression/Quellenbindung erneuern.
+IR202 Medium: sandbox-profil.md:100-101 verwechselt Host-Mount-Grenze
+mit beschreibbaren Containerdateien; gleichwertig klarstellen und nachpruefen.
+Owner beider Findings: Repository Maintainer / Documentation Author.
+Disposition Open, Trigger Quellenkorrektur + Evidenz + unabhaengiges Nachreview.
+Kein Risiko akzeptiert, keine Quelle repariert und kein Ready erzwungen.
+
+174 Quellbindungen korrekt; 15 aktuelle Archive roh/normalisiert korrekt;
+37 Baseline-Dateien roh korrekt; 14 lokale Profilmetadaten konsistent.
+224 aktuelle Textinputs einschliesslich aller alten 189 Pfade frisch gehasht.
+Historische/Validatorinputs sind Integritaetskontext, keine pauschale Neuabnahme.
+Eigene Ausgaben, mutable Operationsjournale und neuer Abschlusslog ungebunden.
+Alle drei aktuellen Receipts je Bash/PowerShell Pass/0; historisches Receipt
+beidseits Pass/0; Serienmanifest/-Receipt Pass/0 und Config Aligned/0.
+Erstes Ergebnisformat scheiterte wegen ID/target; IR201/IR202 bewahren die
+urspruenglichen Kennungen als aliases. Beide Ergebnisvalidatoren Pass/0:
+Series, NeedsRemediation, 4 targets; kein fachliches Ready. Diff-Check Exit 0.
+Exakte Befehle im JSON unter reviewerEvidence.validationCommands.
+
+Completed/Eligible/Blocked/Blocked bleibt. Rechte bestaetigt nur fuer benannte
+neue Eigenanteile; LIC-01, andere LIC-02 und Template-Aktivierung bleiben Open.
+Home Baseline/Sandbox/persoenliche Produktrepos getrennt; Fork Standard.
+Keine aktuelle Produkt-, Runtime-, Rechts-, Plattform- oder A11Y-Abnahme.
+Altes fdf7797f Review wird explizit supersediert; Autoren-Pendingmarker ist
+kein frueheres Independentreview. Historische Sprache und IR101 nicht retconnen.
+Nur die drei Reviewausgaben geschrieben; keine Builds/Runtime/Gitmutation/Logs.
+
+EN: Full independent semantic review covers all four intakes, 50 delta IDs,
+six active prompts and all 58 sources per current receipt. Two owned Open
+findings require author correction and independent re-review: unsafe routine
+volume removal (High), and confused host/container write boundary (Medium).
+No accepted risks or invented approval. Fresh hashes and current structural
+checks do not erase content defects. Historical Ready is explicitly superseded,
+not reused; the author pending marker was never independent evidence.
+Preserve lifecycle, bounded human rights confirmation and all other Open gates.
+Only the three review outputs are written. No build/runtime/Git or log changes.
+Both result validators pass with NeedsRemediation, exit 0; scoped diff check
+passes. These are current macOS-host checks, not native Windows/Linux proof.
+Next: return findings, obtain corrected/rebound sources, re-review same IDs.

@@ -1,0 +1,31 @@
+{
+  "authorityEvidence": "Owner approved implementation of the optional template profile: fork remains default, own original contributions MIT with third-party rights preserved, targeted three-intake update with byte-identical archives and independent full-series review. No template setting, product execution, build/restart, commit, push or PR. Lifecycle and start authority unchanged.",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "status": "Completed",
+  "reviewId": "fdf7797f-aaf1-460a-a760-aa8a285bcd5c",
+  "operationId": "50131ced-9c70-43d3-9fa1-51d1d37e60cd",
+  "manifestNormalizedSha256": "c999c059c8543fa0e75e460c720e72825f324b2823291a9c3a051496cd080f13",
+  "receiptPath": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+  "type": "Update",
+  "lifecycle": [
+    "Completed",
+    "Eligible",
+    "Blocked",
+    "Blocked"
+  ],
+  "archivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/50131ced-9c70-43d3-9fa1-51d1d37e60cd",
+  "schemaVersion": "1.0",
+  "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+  "documentType": "IntakeSeriesOperation",
+  "createdAt": "2026-10-25T16:32:11Z",
+  "validation": {
+    "sessionLog": "docs/security/agent-session-log/2026-10-25-1714.md",
+    "series": "Manifest and receipt, both shells, unchanged lifecycle",
+    "review": "Independent full-series review; see current hash-bound result and report",
+    "boundary": "No activation, build, restart, product execution, commit or push",
+    "completedAt": "2026-10-25T16:51:42Z",
+    "authoring": "Three receipts, both Bash and PowerShell, current hashes and sources",
+    "archiveFidelity": "21 byte-identical captured preimages"
+  },
+  "nextAction": "$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json"
+}

@@ -1,0 +1,144 @@
+# Unabhaengiges Reihenreview / Independent Series Review
+
+## Entscheidung / Decision
+
+DE: **Ready** fuer Anforderungen, Dokumentation, Quellenkorrektur und lokale Bindungen. Keine neuen Findings: Critical 0, High 0, Medium 0, Low 0. Keine offenen Reviewfragen, akzeptierten Risiken oder Operatorausnahmen. Das Urteil folgt dem vollstaendigen aktuellen Inhaltsreview, nicht dem alten Ready oder allein Hashpruefungen.
+
+EN: **Ready** for requirements, documentation, source correction and local bindings. No new findings: Critical 0, High 0, Medium 0, Low 0. No unanswered review questions, accepted risks or operator exceptions. This decision follows the complete current content review, not the previous Ready or hashes alone.
+
+- Review: c22a09e1-a781-4f5f-b691-a8d8839298b8
+- Operation: 3caff22f-59d5-4142-b15b-955ee96a3037
+- Zeitpunkt / Time: 2026-10-25T13:43:07Z
+- Reviewer: Codex, unabhaengiger Reviewer, nicht Autor / independent reviewer, not author.
+- Request: specs/intake-review-requests/sandbox-development-lifecycle.json
+- Request normalized SHA-256: f9aec9ad4fc2779356eea7524f295e95f5a4601b7d22fb3bc55858c7381fed46
+
+DE: Ersetzt ausdruecklich das archivierte Ergebnis unter specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/result.json. Dessen Ready gilt nur fuer seine archivierten Eingaben. Der Pending-Platzhalter IR-MAVEN-REVIEW-FRESHNESS ist durch dieses Vollreview erledigt, nicht als Risiko akzeptiert.
+
+EN: Explicitly supersedes the archived result at the path above. Its Ready applies only to its archived inputs. Full review discharges the pending placeholder, without accepting risk.
+
+## Vollstaendige Ziele / Complete Targets
+
+| Ziel / Target | Rolle / Role | Lifecycle | Normalized SHA-256 |
+|---|---|---|---|
+| specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md | Primary | Completed | 9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a |
+| Lastenheft_Secure-Development-Container-Hardening.md | OrderedMember | Eligible | c3d9ff9b9a9dadd5df9b81414182b98d93b46163d5ddfcd54c65fb681dd50c9e |
+| Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md | OrderedMember | Blocked | 70aa55b50ea87b58973ce958027ab5f3fea39e018bd96756c56e31512f29930f |
+| intakes/learner-fork-self-build-sandbox.md | OrderedMember | Blocked | 1f895c155fbd5a9bc211f9cfe7322a4a62c85de090f715fd26e2b8f6cb460396 |
+
+DE: Drei aktive Intakes und die gesamte viergliedrige Reihe geprueft; null Campaign-Worker. Eine Root, drei eindeutige gerichtete Kanten, jedes Ziel genau einmal. Request und Manifest stimmen ueberein. Root-Abschluss und historische Root-Prompts bleiben historisch; sie werden nicht erneut ausgefuehrt. Die Root-Abnahme akzeptiert die Lueckenliste als Arbeitsbasis, schliesst aber keine ihrer Kontrollen. Die alten Fristen und Befunde bleiben historische Uebergaben, keine aktuelle Erledigungsbehauptung.
+
+EN: Reviewed three active intakes and the complete four-member series; zero campaign workers. One root, three unique directed edges, every target once. Request and manifest agree. Root completion and its prompts remain historical, without re-execution. Root acceptance accepts the gap list as the work baseline, not its control fulfillment. Old deadlines and findings remain historical handoffs, not current completion claims.
+
+## Inhaltsurteil / Content Assessment
+
+| Bereich / Area | Beurteilung / Assessment |
+|---|---|
+| H | Anforderungen 1-7, H-344-01..10 und AC-H-344-01..10: Befundbezug, minimale Rechte, reproduzierbare Downloads, isolierter Agentenzustand und praktische Nachweise sind getrennt pruefbar. 85 % Branch- und 80 % Schnittstellen/UI-Abdeckung bleiben erhalten; fehlende Messung ist Open, keine erfundene Anwendung. / Requirements retain finding traceability, least privilege, reproducible downloads, state separation and practical evidence. Coverage thresholds remain binding; absent measurement stays Open. |
+| A | Anforderungen 1-6 und A/AC-A-344-01..04: unabhaengiger Nicht-Autor, genaue Revision/Plattform/Architektur/Image/Zeit, 50 H-Uebergaben, beide Assurance-Shells und manipulierte Metadaten-Fixtures. Anwendbare Open/Fail-Kontrollen verhindern positiven Gesamtabschluss. / Requires a non-author reviewer, exact environment, all H handoffs, both shells and negative metadata fixtures; applicable Open/Fail controls block positive closure. |
+| L | FR-001..015, L-FR-016..019, AC-001..012 und L-AC-013..016: Fork/institutionelle Kopie, origin/upstream, providerfreier lokaler Selbstbau, keine fertigen Projekt-Images oder automatischen Registry-Pushes. GitHub bleibt optionales Profil. / Preserves fork/institutional acquisition, origin/upstream, provider-free self-build and no ready-made project images or automatic registry push; GitHub remains optional. |
+| Uebergaben / Handoffs | Historische Baseline nach H, H mit Kontrollmatrix nach A, Fehler zurueck nach H, L erst nach erfolgreicher unabhaengiger technischer Abnahme. Completed/Eligible/Blocked/Blocked unveraendert. / Baseline to H, H control matrix to A, defects back to H; L follows successful independent technical acceptance. Lifecycle unchanged. |
+| Sprache und Lernen / Language and learning | Aktive Anforderungen/ACs DE zuerst und gleichwertig EN; Grundbedienung als einzige Vorbildung, Spec Kit/Intake/Toolchain und wichtige Fachbegriffe erklaert. Lernpfad bleibt im vorhandenen Markdown-Pfad, keine zweite Lernreihenquelle. / Active requirements/ACs are German-first with equivalent English; basic terminal use only, explained workflow terms, existing Markdown learning path retained. |
+| A11Y | Textorientierte Abhaengigkeiten, Zustaende und Entscheidungen; WCAG 2.2 AA und B2 sind Pruefziele, kein automatisches Ergebnis. Menschliche Tastatur-, Screenreader-, Rendering- und Erstnutzungspruefung bleibt Open. / Text-first relationships and decisions; WCAG/B2 remain targets, with human assistive-technology, rendering and first-use review Open. |
+| Autoritaet / Authority | LocalImplementation beschreibt spaetere Grenze, keine jetzige Starterlaubnis. Alle sechs aktiven Folgeprompts enthalten aktuelle Nachtraege; autonome Prompts verlangen separate Autoritaet und stoppen vor Git-/Hosting-Lieferung. / LocalImplementation bounds later work, not current start authority; all six prompts consume current amendments, with autonomous execution separately authorized and bounded before Git/hosting delivery. |
+
+## GSDB Und Assurance / GSDB and Assurance
+
+DE: GSDB 3.4.4, 157 stabile IDs, Profil 14 mit 14 aktiven Presets und Assurance 0.1.8 sind konsistent gebunden. Lokale Registry und Installations-Lock stimmen fuer Version, Prioritaet, Aktivierung und Manifest-Hash ueberein. Paketversion, Generatorversion und Evidence-Schema sind verschieden. Der 0.1.8-Vorbereitungsnachweis ist kein Veroeffentlichungsbeweis; Quellen-Lock bindet Commit 100ff9e6e037b0d162bdadd8bfd0bf30520ff7b6 und ZIP-SHA-256 bce2969fa25b8753199ef40730037fedc7689971e6a54cc3a9da4ef0f64762dc. Kein erneuter Online- oder Rechtsquellencheck.
+
+EN: GSDB 3.4.4, 157 stable IDs, profile 14 with 14 active presets and Assurance 0.1.8 are consistently bound. Local registry agrees with the installation lock. Package, generator and evidence-schema versions differ. Preparation does not establish publication; the local source lock binds the exact commit/archive above. No fresh online or legal-source verification.
+
+DE: Alle 50 Delta-IDs und die G01-G10-Zuordnung wurden gegen aktuelle Kontrolltexte fachlich geprueft: 47 UpdateRequired, 1 AlreadyCovered, 2 begrenzte N/A. AlreadyCovered bedeutet nur Anforderungsabdeckung. N/A fuer CL-08-03 und CL-03-02 betrifft nur fehlende eigene Authentifizierungs-/Kryptoimplementierung; CLI-Anmeldung, TLS und Signaturabhaengigkeiten bleiben in G03/G07. N/A behaelt Not Assessed; unbekannte Anwendbarkeit bleibt Open. Die anderen 107 Kontrollen werden nicht neu bewertet.
+
+EN: All 50 delta IDs and group assignments were reviewed against current control text: 47 UpdateRequired, 1 AlreadyCovered and 2 bounded N/A. AlreadyCovered means requirements coverage only. N/A covers absent first-party authentication/crypto only, not CLI sign-in, TLS or signatures. N/A retains Not Assessed; uncertain applicability remains Open. The other 107 controls are not reassessed.
+
+| Kontroll-ID / Control ID | Entscheidung / Decision | Zuordnung / Mapping |
+|---|---|---|
+| CL-01-08 | UpdateRequired | H, A; G10 |
+| CL-07-03 | UpdateRequired | H, A; G06 |
+| CL-07-12 | UpdateRequired | H, A; G06 |
+| CL-08-12 | UpdateRequired | H, A; G02 |
+| CL-08-10 | UpdateRequired | H, A, L; G02 |
+| CL-08-13 | UpdateRequired | H, A; G02 |
+| CL-08-02 | UpdateRequired | H, A, L; G02 |
+| CL-08-06 | UpdateRequired | H, A; G07 |
+| CL-08-03 | N/A | H, A; G02 |
+| CL-09-12 | UpdateRequired | H, A, L; G10 |
+| CL-09-01 | UpdateRequired | H, A, L; G03 |
+| CL-09-11 | UpdateRequired | H, A, L; G03 |
+| CL-09-06 | UpdateRequired | H, A, L; G04 |
+| CL-09-05 | UpdateRequired | H, A, L; G04 |
+| CL-09-16 | UpdateRequired | H, A, L; G06 |
+| CL-09-13 | UpdateRequired | H, A, L; G05 |
+| CL-10-12 | UpdateRequired | H, A, L; G05 |
+| CL-11-06 | UpdateRequired | H, A; G05 |
+| CL-11-07 | UpdateRequired | H, A; G05 |
+| CL-11-11 | UpdateRequired | H, A, L; G05 |
+| CL-11-12 | UpdateRequired | H, A; G05 |
+| CL-11-08 | UpdateRequired | H, A; G05 |
+| CL-07-06 | UpdateRequired | H, A; G06 |
+| CL-07-01 | UpdateRequired | H, A; G06 |
+| CL-07-07 | UpdateRequired | H, A; G06 |
+| CL-07-11 | UpdateRequired | H, A; G06 |
+| CL-01-03 | UpdateRequired | H, A, L; G04 |
+| CL-01-01 | UpdateRequired | H, A; G01 |
+| CL-01-12 | UpdateRequired | H, A, L; G06 |
+| CL-01-10 | UpdateRequired | H, A; G01 |
+| CL-01-11 | UpdateRequired | H, A, L; G01 |
+| CL-02-02 | AlreadyCovered | H, A; G02 |
+| CL-02-13 | UpdateRequired | H, A; G09 |
+| CL-02-12 | UpdateRequired | H, A, L; G09 |
+| CL-03-10 | UpdateRequired | H, A; G07 |
+| CL-03-02 | N/A | H, A; G07 |
+| CL-12-12 | UpdateRequired | H, A, L; G08 |
+| CL-03-07 | UpdateRequired | H, A; G07 |
+| CL-05-13 | UpdateRequired | H, A, L; G04 |
+| CL-05-11 | UpdateRequired | H, A, L; G04 |
+| CL-06-07 | UpdateRequired | H, A; G06 |
+| CL-06-09 | UpdateRequired | H, A, L; G06 |
+| CL-07-02 | UpdateRequired | H, A; G06 |
+| CL-07-10 | UpdateRequired | H, A, L; G06 |
+| CL-07-04 | UpdateRequired | H, A; G06 |
+| CL-07-05 | UpdateRequired | H, A; G06 |
+| CL-07-08 | UpdateRequired | H, A; G06 |
+| CL-07-09 | UpdateRequired | H, A; G06 |
+| CL-03-14 | UpdateRequired | H, A; G07 |
+| CL-12-05 | UpdateRequired | H, A, L; G03 |
+
+## Maven Und Impact-Korrekturen / Maven and Impact Corrections
+
+DE: Der Dockerfile-Diff ergaenzt ausschliesslich den offiziellen archive.apache.org-Fallback nach fehlgeschlagenem dlcdn.apache.org-Download. Maven 3.10.0, Dateiname und feste SHA-512 bleiben unveraendert. Beide Pfade landen in derselben SHA-512-Pruefung vor tar. Ein erfolgreicher Download mit falscher Pruefsumme scheitert ohne Fallback; Ausfall beider Quellen bleibt fatal. Das ist eine zu pruefende Quellenkorrektur, keine neue Image-Abnahme oder Aktualisierung des laufenden Images.
+
+EN: The Dockerfile diff adds only the official archive fallback after CDN download failure. Version, filename and committed SHA-512 remain unchanged. Both paths reach the same checksum check before extraction. A corrupt successful download fails without fallback; both sources unavailable also fails. Source correction does not constitute image acceptance or update the running image.
+
+DE: Alle zwoelf Testmethoden und der neue Fixture-Helper wurden gelesen. Die fuenf neuen Faelle pruefen CDN-Erfolg ohne Archiv, Fallback mit gleicher Version, falsche CDN-Pruefsumme ohne Fallback, falsche Archiv-Pruefsumme und Ausfall beider Quellen. Der Helper extrahiert den echten Download-/Pruefsummenpraefix, ersetzt nur die feste Pruefsumme durch den Testdatenhash, setzt kuenstliches curl vor den PATH und verwendet echten SHA-512-Verifier. Teil-Downloads werden im Fallback ueberschrieben. tar/Installation liegen ausserhalb des ausgefuehrten Praefix. Diese statische Pruefung wurde nicht als eigener Testlauf ausgegeben; der Alignment-Nachweis berichtet 12 bestandene Tests vom Autor.
+
+EN: Read all twelve test methods and the fixture helper. Five new cases cover success, fallback, both corruption paths and source unavailability. The helper extracts actual download/checksum code, substitutes the fixture checksum, shadows curl and uses a real SHA-512 verifier; fallback overwrites partial data. Extraction/installation is excluded. This is static review, not a reviewer test run; the alignment document reports the author's twelve passing tests.
+
+DE: Der Impact-Diff aendert exakt fuenf platformAndExampleProof-Felder: frueherer gestoppter Machine-Versuch historisch, aktueller Statusnachtrag verlinkt, AMD64 und menschliche A11Y weiter Open. Der Statusnachtrag trennt den spaeteren ARM64-Build samt SBOM von alten Kandidaten und benennt den dirty Buildkontext. Keine Laufzeit wurde hier abgefragt.
+
+EN: Exactly five impact fields now classify the stopped-machine attempt as historical, link current dated status and preserve AMD64/human A11Y as Open. The status addendum separates later ARM64 build/SBOM from older candidates and identifies the dirty build context. This reviewer queried no runtime.
+
+## Provenienz Und Pruefung / Provenance and Validation
+
+DE: 139 strikte UTF-8-Textinputs sind mit normalisiertem SHA-256 im JSON gebunden; ein BOM entfernen, CRLF/CR zu LF, sonst unveraendert. Drei Receipts enthalten je 29 aktuelle Quellen, Intake-IDs und erste Vorgaengerquelle bleiben erhalten. Alle 17 Archive/Snapshots stimmen mit Roh- und Normalisierungshashes im Operationsjournal ueberein. Zusaetzlich stimmen alle 37 Rohhashes des GSDB-Inventars; das PDF wird nur roh geprueft, nicht als normalisierter Text gezaehlt. 24 lokale Intake-Linkziele vorhanden; keine Online-/Fragment-/Renderingabnahme.
+
+EN: JSON binds 139 strict UTF-8 text inputs by normalized SHA-256. Three receipts each bind 29 sources and preserve identity/prior-first-source lineage. All 17 archive snapshots match recorded raw and normalized hashes. All 37 GSDB inventory raw hashes agree; the PDF is raw-only, outside the normalized-text count. All 24 local intake link targets exist; no online, fragment or rendering acceptance.
+
+DE: Der Owner berichtet einen driftfreien 81-Hash-Preflight und Kopien aus einem privaten Preimage vor Aenderung. Diese zeitliche Entstehung wurde nicht selbst beobachtet; die vorhandenen Archivbytes wurden unabhaengig geprueft. Parent-Operationsjournale sind OUTPUT-Snapshots ausserhalb der normativen Eingabehashmenge. Nur Abschlussmetadaten duerfen spaeter ergaenzt werden; keine Scope-/Autoritaets-/Lineage-/Statusaenderung. Historische Journale und Logs bleiben unveraendert.
+
+EN: The owner reports an unchanged 81-hash preflight and pre-change private-preimage capture. Chronology was not independently observed; retained archive bytes were independently checked. Parent operation journals are output snapshots, not frozen normative inputs. Later completion metadata only; preserve scope, authority, lineage and lifecycle, historical journals and logs.
+
+DE: Bash und PowerShell: drei Authoring-Receipts mit je 29 Quellen, Serienmanifest, Serienreceipt und Schema-2.0-Konfiguration bestanden (Aligned; physisch 5 aktive Intakes, davon 3 Serienmitglieder, 4 Serienziele insgesamt). Beide Review-Ergebnisvalidatoren bestehen fuer dieses Schema-1.1-Ergebnis mit vier Zielen. Alle 139 Eingaben vor und nach dem Schreiben roh und normalisiert ohne Drift. Auf die drei Ausgaben begrenztes git diff --check: Exit 0. Erste Bash-Aufrufe mit falschen Optionsnamen lieferten Usage/Exit 2; mit --file beziehungsweise --config korrekt wiederholt. Keine Quellreparatur.
+
+EN: Both shells passed three receipts with 29 sources each, manifest, series receipt and schema-2.0 config (Aligned; 5 physical active intakes, 3 active series members, 4 total targets). Both result validators pass for this schema-1.1 four-target review. All 139 inputs match raw and normalized hashes before/after writing; scoped diff check exits 0. Initial wrong Bash options produced usage/exit 2 and were corrected without source repair.
+
+## Abnahmegrenzen Und Rueckgabe / Acceptance Boundaries and Handoff
+
+DE: O-344-TECH, O-344-HUMAN und O-344-CLOUD behalten Owner, Follow-up und Trigger. Ebenso bleiben UPD-AMD64, UPD-V2-LOOP, UPD-V2-AUDIT, UPD-SMOKE-WARN, DOC-A11Y und UPD-APPROVAL offen. OpenCode-2-Dateimetadaten mit session_coverage=not-exported sind keine Sitzungsabdeckung. Windows-Host und Ubuntu/WSL2 brauchen eigene Evidenz; ARM64-Erfolg beweist keinen AMD64-Test. REV-TEST-TIMING bleibt eine historische, nicht erneut gepruefte Testgrenze vor Behauptung einer insgesamt gruenen Suite, kein akzeptiertes Risiko.
+
+EN: Preserve owners, follow-ups and triggers for the three O-344 handoffs and all listed platform, OpenCode, audit, warning, accessibility and approval items. OpenCode storage metadata does not prove session coverage. Windows host and Ubuntu/WSL2 require distinct evidence; ARM64 does not prove AMD64. The historical timing-test boundary remains unverified and open before an overall-green claim, not an accepted risk.
+
+DE: Keine Builds, Containeraktionen, echten Downloads, globalen Wartungslaeufe, Provideraufrufe, Installationen oder Git-Schreibbefehle. Kein Folgekommando gestartet. Nur die drei benannten Kandidaten-Ausgaben werden geschrieben; kein Session-Log ausserhalb dieser expliziten Schreibgrenze. Ergebnis an Parent zur begrenzten Abschlussfortschreibung melden. Ready ist keine technische, menschliche, rechtliche, Datenschutz-, Provider-/Modell-, Sandbox-, Plattform-, Produkt- oder Release-Freigabe.
+
+EN: No builds, container actions, actual downloads, global maintenance, provider calls, installations or Git writes. No follow-up command started. Write only the three authorized candidate outputs, with no extra session-log write. Return the result to parent for bounded completion metadata. Ready grants none of the technical, human, legal, privacy, provider/model, sandbox, platform, product or release approvals.

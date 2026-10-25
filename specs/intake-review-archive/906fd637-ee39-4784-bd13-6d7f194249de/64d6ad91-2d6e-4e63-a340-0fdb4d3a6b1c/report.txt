@@ -1,0 +1,99 @@
+# Unabhaengiges Intake-Vollreview / Independent Full Intake Review
+
+## Ergebnis / Outcome
+
+DE: **Ready**, neuer unabhaengiger Vollreview am 2026-10-25. Reviewer
+`01a17007-3877-7f82-95a2-4be0a2fa06d2` (Kierkegaard) hat die Aenderungen
+nicht verfasst und blieb schreibfrei. Review-ID:
+`906fd637-ee39-4784-bd13-6d7f194249de`. Vier von vier Zielen, die gesamte
+Reihe und 50 von 50 Kontrollzuordnungen vollstaendig geprueft. Keine neuen
+Findings, offenen Reviewfragen oder akzeptierten Risiken; alle Severity-
+Zaehler sind null. Das vorherige Review ist archiviert und explizit ersetzt.
+
+EN: **Ready**, new independent full review on 2026-10-25. Reviewer
+Kierkegaard, identified above, did not author the changes and made no writes.
+Full review covers all four targets, the whole series and all 50 control
+mappings. No new findings, open questions or accepted risks; every severity
+count is zero. The prior review is archived and explicitly superseded.
+
+## Inhaltsabdeckung / Semantic Coverage
+
+| Ziel / Target | Urteil / Verdict | Unveraenderter Lifecycle / Preserved lifecycle |
+| --- | --- | --- |
+| Historische GSDB / Historical GSDB | Ready als historische Eingangsquelle / as historical input | Completed |
+| Container-Hardening | Ready als Intake / as intake | Eligible |
+| Unabhaengige Abnahme / Independent acceptance | Ready als Intake / as intake | Blocked |
+| Lernenden-Selbstbau / Learner self-build | Ready als Intake / as intake | Blocked |
+
+DE: Vollstaendige Zieltexte, Anforderungen und Akzeptanzkriterien, Scope,
+Nicht-Ziele, Quellen-/Archivbindungen, Folgeprompts, Vorkenntnisse,
+Erstbegriffe, DE-first/EN-second, B2 und textorientierte A11Y geprueft.
+Textalternative und Mermaid passen zur Reihe. Vier eindeutige Ziele, eine
+Root und drei geordnete verbindliche Kanten; keine Zyklen oder fehlenden
+Uebergaben. Keine Sicherheitsabschwachung oder versteckte Scope-Erweiterung.
+
+EN: Complete target texts, requirements/acceptance, scope/non-goals, source
+and archive bindings, follow-up prompts, prior knowledge, first-use terms,
+language order, B2 and text-first accessibility were reviewed. Text and
+Mermaid agree with four targets, one root and three ordered binding edges;
+no cycles or missing handoffs. No weakened security or hidden scope extension.
+
+DE: GSDB 3.4.4 mit 157 IDs und alle 37 Inventardateien bleiben unveraendert.
+Die 50 Zuordnungen sind weiterhin 47 UpdateRequired, 1 AlreadyCovered und
+2 begrenzte N/A in zehn Gruppen. Assurance 0.1.8 ist korrekt PR #99
+zugeordnet, nicht PR #96. Aktuelle Quellen-/Installations-Locks, Assurance-
+Vertrag, 0.1.8-Vorbereitungsnachweis und DE/EN-Guides wurden einbezogen.
+Paket, Generator und Schema bleiben getrennt; die 14 Prioritaeten bleiben
+erhalten. Jedes der drei Receipts bindet 16 aktuelle Quellen ohne Drift.
+Vorgaenger-/Serien-/Reviewarchive sind byte-identisch; alte Rechts-,
+Provider-, Plattform- oder sonstige menschliche Entscheidungen wurden nicht
+neu bewertet oder automatisch fortgeschrieben.
+
+EN: GSDB 3.4.4/157 IDs and all 37 inventory files are unchanged. Preserve
+47 UpdateRequired, 1 AlreadyCovered and 2 bounded N/A in ten groups.
+Assurance 0.1.8 correctly refers to PR #99, not PR #96. Review includes
+current source/installed locks, contract, preparation record and both guides.
+Package, generator and schema remain distinct; all fourteen priorities stay
+unchanged. Each receipt binds sixteen current sources without drift.
+Predecessor, series and review archives preserve exact bytes. No old legal,
+provider, platform or other human decision was reassessed or advanced.
+
+## Schreibfreie Hashbindung / Read-Only Hash Binding
+
+Normalisierte SHA-256: bei allen sieben Artefakten Ersthash = Endhash. /
+Normalized SHA-256: first = last for all seven artifacts.
+
+| Artefakt / Artifact | Hash |
+| --- | --- |
+| Archivierte GSDB / Archived GSDB | `9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a` |
+| Hardening | `754ef173e99fcb66521ffc697d8313cf8fdb1a473c17127a7ba00d57a901ff6b` |
+| Abnahme / Acceptance | `3d2b2ac6fbc83f7b542482a2287a30e877544bcafb78ee1464a364befa7041d7` |
+| Lernenden-Selbstbau / Learner self-build | `9d3a14ca2e9805fcf2643e1154770fdd57badf6664bcafd343f10379de5fae7d` |
+| Neuer Quellenabgleich / New source alignment | `e6ef3589cf679f3177cad9f9c5abe03272debd1265633c5616a26278bda1a33c` |
+| Unveraenderte 50-ID-Matrix / Unchanged matrix | `8b4c39378079fe624128c12b2f94c25423e7edb317f79e8965ad4927a065320f` |
+| Review request | `4e56602b1b78cc884ac31ccb6f029929090d5e957a8eb89eb84a2d7e8098f38c` |
+
+## Grenzen und naechste Aktion / Boundaries and Next Action
+
+DE: Dieses Urteil gilt ausschliesslich fuer den Anforderungsvertrag und die
+Reihenintegration. Es ist kein Runtime-Test, kein erneuter Online-Release-
+Nachweis, keine Rechts-, Produkt-, Provider-/Modell-, Sandbox- oder
+vollstaendige A11Y-Abnahme. Der Reviewer hat keine Dateien geschrieben,
+keine weiteren Agenten gestartet und keine Build-, Container-, Netzwerk-
+oder Provideraufrufe ausgefuehrt. Shellvalidatoren, Link-/Secret-Pruefungen
+des Hauptagenten belegen technische Bindungen, nicht dieses Inhaltsurteil.
+Offene Uebergaben und ihre Owner, Follow-ups und Trigger stehen im
+[aktuellen Quellenabgleich](../../docs/maintenance/intake-sources-alignment-2026-10-25.md).
+Eligible oder Ready erteilt keine Startautoritaet.
+
+EN: This verdict covers requirements and series integration only, not runtime,
+online publication, legal, product, provider/model, sandbox or full
+accessibility acceptance. The reviewer made no writes or further delegations,
+build/container/network/provider calls. Parent shell/link/secret checks prove
+bindings, not semantic judgment. The linked current source alignment retains
+owned Open handoffs and their follow-up/triggers. Eligible/Ready grants no
+execution authority.
+
+```text
+$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json
+```

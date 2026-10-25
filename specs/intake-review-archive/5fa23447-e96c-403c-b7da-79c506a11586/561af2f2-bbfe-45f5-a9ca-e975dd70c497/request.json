@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "5fa23447-e96c-403c-b7da-79c506a11586",
+  "mode": "Series",
+  "policy": "learner-a11y-bilingual-series",
+  "targets": [
+    {
+      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "role": "Primary"
+    },
+    {
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "role": "OrderedMember"
+    }
+  ],
+  "series": {
+    "orderedTargetPaths": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "roots": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+    ],
+    "dependencies": [
+      {
+        "from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+        "to": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "kind": "AssessmentBaseline"
+      },
+      {
+        "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "kind": "SandboxBaseline"
+      },
+      {
+        "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "to": "intakes/learner-fork-self-build-sandbox.md",
+        "kind": "HardCompletionGate"
+      }
+    ]
+  },
+  "campaign": {
+    "manifestPath": "N/A",
+    "workers": [],
+    "operatorExceptions": []
+  },
+  "changeSources": [
+    "docs/maintenance/intake-sources-alignment-2026-10-25.md",
+    "AGENTS.md",
+    ".specify/presets/secure-development-assurance-governance/templates/secure-development-evidence-contract.md",
+    "docs/maintenance/gsdb-344-preset-installed-lock.json",
+    "docs/maintenance/stable-preset-rollout-2026-10-24.md",
+    "docs/maintenance/stable-preset-source-lock-2026-10-24.json",
+    "docs/maintenance/stable-preset-installed-lock-2026-10-24.json",
+    "docs/secure-development/baseline-manifest.json",
+    "docs/maintenance/gsdb-344-source-inventory.json",
+    "docs/maintenance/gsdb-344-control-delta.json",
+    "docs/maintenance/intake-gsdb344-delta-2026-10-21.md",
+    ".specify/presets/secure-development-assurance-governance/docs/release-0.1.8-validation.md",
+    ".specify/presets/secure-development-assurance-governance/docs/user-guide.md",
+    ".specify/presets/secure-development-assurance-governance/docs/user-guide.EN.md",
+    "COMPLIANCE-PLAN_RL-SE-001.md",
+    "docs/maintenance/documentation-alignment-2026-10-25.md",
+    "docs/security/toolchain-followups-2026-10-25.md",
+    "docs/fuer-lernende/lernwege.md",
+    "docs/fuer-lernende/barrierefreiheit.md",
+    "docs/maintenance/sandbox-current-state-2026-10-25.md",
+    "docs/maintenance/toolchain-version-audit-2026-10-25.md",
+    "scripts/config/required-cli-tools-registry.json",
+    "scripts/tests/test_toolchain_version_pins.py",
+    "docs/fuer-lernende/sandbox-profil.md",
+    "docs/security/agent-session-log/2026-10-25-1047.md",
+    "Dockerfile",
+    "docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md",
+    "docs/maintenance/documentation-impact-2026-10-25.json",
+    "LICENSE",
+    "docs/licensing.md",
+    "docs/maintenance/template-profile-alignment-2026-10-25.md",
+    "docs/fuer-lernende/template-profil.md",
+    "docs/betrieb/template-erstuebernahme.md",
+    "README.md",
+    "CLAUDE.md",
+    "GEMINI.md",
+    ".github/copilot-instructions.md",
+    ".github/agents/copilot-instructions.md",
+    "docs/fuer-lernende/git-und-hosting.md",
+    "docs/fuer-lernende/installation.md",
+    "docs/fuer-lernende/entwickler-kurzpfad.md",
+    "docs/fuer-lernende/faq.md",
+    "docs/fuer-lernende/README.md",
+    "docs/lernwerkstaetten/README.md",
+    "docs/lernwerkstaetten/moderation.md",
+    ".github/workflows/gsdb-pilot-contracts.yml",
+    ".github/workflows/project-statistics-pilot-native-proof.yml",
+    "scripts/tests/test_template_profile.py",
+    "docs/praesentationen/workshop-spec-kit.de.md",
+    "docs/praesentationen/workshop-spec-kit.en.md",
+    "docs/praesentationen/werkstatt-sysinfo.de.md",
+    "docs/praesentationen/werkstatt-sysinfo.en.md",
+    "docs/praesentationen/werkstatt-web.de.md",
+    "docs/praesentationen/werkstatt-web.en.md",
+    ".github/workflows/documentation-and-sandbox.yml",
+    "docs/maintenance/closeout-rights-alignment-2026-10-25.md",
+    "docs/praesentationen/README.md"
+  ],
+  "authorityEvidence": "Owner approved the 25 October closeout: bounded confirmation of exploitation rights for new introductory/SysInfo/web learning materials, preserved third-party rights, one targeted three-intake refresh and independent full-series review, seven thematic commits, one push and one exact-head merge-commit PR with admin bypass only after green checks. Separate cached ARM64 candidate only; no running-service replacement, template activation, product run or formal sandbox approval."
+}
