@@ -22,6 +22,18 @@ developers. Spec Kit organizes requirements, plans and tasks. Evidence is an
 attributable record; a gate is a mandatory check. Open means unresolved,
 not passed or risk-accepted.
 
+## Clarifications
+
+### Session 2026-10-25
+
+- Q: Ab welcher Schwelle blockiert ein Schwachstellenbefund im finalen Image? / Which vulnerability threshold blocks acceptance? → A: Critical immer; High mit verfuegbarem Fix nur ohne begruendete VEX-Aussage `not_affected` oder Open-Eintrag mit Owner/Trigger; High ohne Fix ist dokumentiertes Restrisiko. / Critical always blocks; fixable High blocks unless justified VEX not_affected or Open with owner/trigger; unfixable High is documented residual risk.
+- Q: Darf das Feature mit offenen Plattformluecken abgeschlossen werden? / May the feature close with open platform gaps? → A: Ja, mit echtem macOS/ARM64-Beleg als Minimum; fehlende Windows-/WSL2-Pfade gehen als genaue Open/Blocked-Punkte mit Owner und Trigger (UPD-AMD64) in die Uebergabe, AMD64-abhaengige Nutzung bleibt gesperrt. / Yes, with real macOS/ARM64 evidence as minimum; missing Windows/WSL2 paths are handed over as exact Open/Blocked items with owner/trigger (UPD-AMD64) and AMD64-dependent use stays restricted.
+- Q: Welcher Egress-Grundsatz gilt fuer den Container? / Which container egress posture applies? → A: Bestehenden Standard-Egress beibehalten; veroeffentlichte Ports bleiben auf `127.0.0.1` (5100-5199); Egress-Ziele inventarisieren, begruenden und im Threat Model bewerten; Allowlist nur als Open-Folgemassnahme. / Keep default egress; published ports stay on 127.0.0.1 (5100-5199); inventory, justify and threat-model egress targets; allowlist only as Open follow-up.
+- Q: Wie wird "sicherheitskritisches Modul" fuer die Coverage-Nenner abgegrenzt? / How is "security-critical module" scoped for coverage denominators? → A: Alle repo-eigenen Python-/Bash-/PowerShell-Helfer, die Prozessargumente, Pfade/Mounts, Netzwerk/Downloads/Pruefsummen, Audit-Export oder Agenten-Dispatch verarbeiten, unabhaengig von Aenderung; namentliche Liste im Plan. / All repository-owned Python/Bash/PowerShell helpers handling process arguments, paths/mounts, network/downloads/checksums, audit export or agent dispatch, changed or not; named list in the plan.
+- Q: Wie werden Selbstaktualisierungen der Agenten-CLIs behandelt? / How are agent CLI self-updates handled? → A: Wo unterstuetzt, standardmaessig per Konfiguration/Umgebungsvariable in Image/Compose deaktivieren; Updates nur ueber gepinnte Dockerfile-Versionen mit Renovate; nicht abschaltbare Auto-Updates erhalten Open-Eintrag mit Negativtest bzw. Nutzungsgrenze. / Disable by default via config/env in image/Compose where supported; update only through pinned Dockerfile versions with Renovate; non-disableable auto-updates get an Open record with negative test or usage restriction.
+- Q: Welche Aufbewahrungsfrist gilt fuer Audit-Metadaten? / Which retention period applies to audit metadata? → A: Feste Frist 30 Tage; der Stopp-Wrapper loescht nach erfolgreichem Export automatisch aeltere `audit-logs/*.jsonl`. / Fixed 30 days; after successful export the stop wrapper automatically deletes older audit-logs/*.jsonl files.
+- Q: Wird das Container-Root-Dateisystem schreibgeschuetzt? / Is the container root filesystem made read-only? → A: Beschreibbare Schicht bleibt Standard; Schreiborte inventarisieren und begruenden; optionales Compose-Profil mit `read_only` als gepruefte Haertungsvariante mit dokumentierten Grenzen. / Writable layer stays default; inventory and justify write locations; optional read_only Compose profile as a tested hardening variant with documented limits.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Kontrolliert lernen / Learn Within Safe Boundaries (Priority: P1)
@@ -167,24 +179,51 @@ observations remain unresolved.
   Mount-/Netzwerkgrenzen MUESSEN erhalten oder nachweisbar verbessert werden.
   Host-Mounts, beschreibbare Container-Schicht, temporaere Orte und persistente
   Volumes sind unterscheidbar; funktionierende Lernablaeufe rechtfertigen
-  keine pauschale Schutzabschaltung. EN: Preserve or evidence improvements
+  keine pauschale Schutzabschaltung. Netzwerk: bestehender Standard-Egress
+  bleibt; veroeffentlichte Ports bleiben auf `127.0.0.1:5100-5199` begrenzt;
+  jedes Egress-Ziel (Paketquellen, Downloads, Agenten-Provider) wird
+  inventarisiert, begruendet und im Threat Model bewertet; eine technische
+  Egress-Allowlist ist nicht Teil dieses Features und bleibt Open-Folgemassnahme.
+  Dateisystem: die beschreibbare Container-Schicht bleibt Standard; jeder
+  Schreibort wird inventarisiert und begruendet. Zusaetzlich gibt es ein
+  optionales Compose-Profil mit `read_only: true` und benoetigten `tmpfs`-Orten
+  als gepruefte Haertungsvariante; nicht unterstuetzte Lernablaeufe (z. B.
+  globale Paketinstallation) werden dort als Grenze dokumentiert.
+  EN: Preserve or evidence improvements
   to rootless/non-root operation, minimal capabilities, file rights and
   reasoned mount/network limits. Distinguish host mounts, writable container
   layer, temporary locations and persistent volumes; usability does not
-  justify blanket disabling of safeguards.
+  justify blanket disabling of safeguards. Network: keep default egress;
+  published ports stay bound to 127.0.0.1:5100-5199; inventory, justify and
+  threat-model every egress target (package sources, downloads, agent
+  providers); a technical egress allowlist is out of scope and stays an
+  Open follow-up. Filesystem: the writable container layer stays default and
+  every write location is inventoried and justified. An optional Compose
+  profile with read_only: true plus required tmpfs locations is provided as
+  a tested hardening variant; unsupported learning flows (e.g. global package
+  installs) are documented there as limits.
 - **FR-003 (US1, US2; H-344-02)**: DE: Jede neue/geaenderte Schnittstelle
   MUSS positive und negative Faelle fuer strukturierte Prozessargumente,
   komponentenbewusste Pfade, Symlinks, Windows-Reparse-Points und relevante
   Redirect-/Netzwerkziele abdecken. Sprachbezogene Pruefung ist erforderlich.
   Fuer sicherheitskritische Module gelten mindestens 85 % Branch-Abdeckung
   und 80 % der dokumentierten oeffentlichen Schnittstellen/kritischen
-  UI-Ablaeufe gemaess AC-H-344-02. Messumfang und Nenner sind offenzulegen;
+  UI-Ablaeufe gemaess AC-H-344-02. Sicherheitskritisch sind alle
+  repo-eigenen Python-, Bash- und PowerShell-Helfer, die Prozessargumente,
+  Dateipfade/Mounts, Netzwerk/Downloads/Pruefsummen, Audit-Export oder
+  Agenten-Dispatch verarbeiten, unabhaengig davon, ob dieses Feature sie
+  aendert; der Plan legt diese Liste namentlich als Nenner fest.
+  Messumfang und Nenner sind offenzulegen;
   fehlende Messung ist Open, echte Nichtanwendbarkeit braucht Begruendung.
   EN: Every new/changed interface needs positive/negative cases for structured
   arguments, component-aware paths, symbolic links, Windows reparse points
   and relevant redirects/network targets, with language-specific review.
   Require 85% security-critical branch coverage and 80% documented public
-  interface/critical UI-flow coverage per AC-H-344-02. Disclose scope and
+  interface/critical UI-flow coverage per AC-H-344-02. Security-critical
+  means every repository-owned Python, Bash and PowerShell helper handling
+  process arguments, paths/mounts, network/downloads/checksums, audit export
+  or agent dispatch, whether or not this feature changes it; the plan names
+  this list as the denominator. Disclose scope and
   denominator; missing measurement is Open, genuine N/A needs rationale.
 - **FR-004 (US2; Intake Anforderung 3, H-344-04)**: DE: Basisimage und
   Downloads MUESSEN an feste Versionen/Inhaltspruefwerte, Herkunft,
@@ -202,11 +241,20 @@ observations remain unresolved.
   OpenCode-2-Loop-, Agent-Override- und Subagent-Schutz bleibt ohne wirksamen
   Nachweis Open. Kein Test setzt echte Anmeldung oder Zugangsdaten voraus;
   nicht sicher pruefbare Live-Eigenschaften bleiben Nutzungssperren zugeordnet.
+  Selbstaktualisierung wird, wo die CLI es unterstuetzt, standardmaessig per
+  Konfiguration oder Umgebungsvariable in Image/Compose deaktiviert; Updates
+  erfolgen nur ueber gepinnte Dockerfile-Versionen mit Renovate. Nicht
+  abschaltbare Auto-Updates erhalten einen Open-Eintrag mit Negativtest oder
+  Nutzungsgrenze.
   EN: Inventory every installed agent CLI including OpenCode by version,
   effective configuration, self-update, data flow and isolated state. Use
   synthetic exclusion negatives. OpenCode 2 loop, override and subagent
   safeguards remain Open without effectiveness proof. No test requires real
   sign-in or credentials; untestable live properties retain usage restrictions.
+  Where a CLI supports it, self-update is disabled by default via config or
+  environment variable in image/Compose; updates come only from pinned
+  Dockerfile versions with Renovate. Non-disableable auto-updates get an Open
+  record with a negative test or usage restriction.
 - **FR-006 (US1, US3; H-344-05)**: DE: Audit-Metadaten und persistente
   Agentendaten MUESSEN getrennte Aufbewahrungs-, Zugriffs-, Integritaets- und
   Loeschregeln mit Datenschutz-Screening erhalten. Normales Stoppen erhaelt
@@ -215,23 +263,42 @@ observations remain unresolved.
   Dateimetadaten behalten `session_coverage=not-exported`; Datenbank-, Prompt-,
   Antwort- und Credential-Inhalte werden nicht exportiert. Benachbarte WAL-/
   SHM-Dateien sind kein Ausweichweg. Sitzungsabdeckung bleibt gesondert Open.
+  Aufbewahrung der Audit-Metadaten: feste Frist 30 Tage. Der Stopp-Wrapper
+  (Bash und PowerShell gleichwertig) loescht erst nach erfolgreichem Export
+  automatisch `audit-logs/*.jsonl`, deren Datum aelter als 30 Tage ist; der
+  aktuelle Export, andere Dateien und persistente Agentenvolumes bleiben
+  unberuehrt. Ein Loeschfehler wird gemeldet. Eine spaetere abweichende
+  Datenschutzentscheidung (O-344-HUMAN) hat Vorrang und loest Neubewertung aus.
   EN: Separate audit metadata from persistent agent data with scoped retention,
   access, integrity, deletion and privacy screening. Normal stop preserves
   volumes and fails closed after required export failure. Deletion tests use
   isolated synthetic data. OpenCode 2 file metadata keeps session_coverage=
   not-exported, never exporting database, prompt, response, credential or
   adjacent WAL/SHM contents. Session coverage remains separately Open.
+  Audit metadata retention is a fixed 30 days. Only after successful export,
+  the stop wrapper (equivalent Bash and PowerShell) automatically deletes
+  audit-logs/*.jsonl files dated older than 30 days; the current export,
+  other files and persistent agent volumes stay untouched. Deletion errors
+  are reported. A later differing privacy decision (O-344-HUMAN) takes
+  precedence and triggers reassessment.
 - **FR-007 (US2, US3; H-344-04)**: DE: Fuer das finale lokale Image MUSS
   eine zu Image-ID, Architektur, Baueingaben und Datum passende SBOM mit
   Schwachstellenbewertung vorliegen. VEX, Signatur und SLSA werden
   anwendbarkeitsbezogen belegt oder offen gehalten, nicht aus SBOM-Existenz
   abgeleitet. Ungeklaerte Rechte sperren betroffene Weitergabe; die benannte
   Workshop-Ownerentscheidung schliesst LIC-01/sonstige LIC-02-Faelle nicht.
+  Schwachstellen-Gate: jede Critical-CVE blockiert die Abnahme; eine High-CVE
+  mit verfuegbarem Fix blockiert, ausser es liegt eine begruendete VEX-Aussage
+  `not_affected` oder ein Open-Eintrag mit Owner, Folgemassnahme und Trigger
+  vor; High ohne verfuegbaren Fix wird als Restrisiko mit Trigger dokumentiert.
   EN: The final local image needs an SBOM and vulnerability assessment bound
   to image, architecture, build inputs and date. Evidence or leave Open scoped
   VEX/signature/SLSA decisions; SBOM presence proves none of these. Unclear
   rights block affected distribution; bounded workshop rights do not close
-  LIC-01 or other LIC-02 concerns.
+  LIC-01 or other LIC-02 concerns. Vulnerability gate: any Critical CVE blocks
+  acceptance; a fixable High CVE blocks unless a justified VEX not_affected
+  statement or an Open record with owner, follow-up and trigger exists; High
+  without an available fix is documented residual risk with a trigger.
 - **FR-008 (US3; H-344-06)**: DE: Ein datiertes Register MUSS Produkt,
   Werkzeugbetrieb und Organisation fuer DS-GVO, KI-VO, CRA, NIS2/BSIG und DORA
   getrennt nach Land, Rolle, direkter/vertraglicher Pflicht, Quellenfassung
@@ -435,7 +502,12 @@ observations remain unresolved.
   Basis-Lernablaeufe erhalten ihre begruendeten Schutzgrenzen; 100 % der
   veraenderten Schnittstellen besitzen positive/negative Abnahmefaelle.
   Kein normaler Stopp loescht persistente Testdaten; kein erforderlicher
-  fehlgeschlagener Export wird uebergangen. EN: Every documented basic flow
+  fehlgeschlagener Export wird uebergangen. Synthetische Tests zeigen: nach
+  dem Wrapper-Stopp sind 0 Audit-JSONL-Dateien aelter als 30 Tage vorhanden,
+  100 % der juengeren bleiben erhalten; bei fehlgeschlagenem Export wird
+  nichts geloescht. EN: Synthetic tests show 0 audit JSONL files older than
+  30 days after wrapper stop, 100% of newer ones retained, and no deletion
+  after failed export. Every documented basic flow
   retains justified safeguards; 100% of changed interfaces have positive/
   negative acceptance cases. Normal shutdown loses no persistent test data
   and never bypasses required failed export.
@@ -448,9 +520,13 @@ observations remain unresolved.
   bewertete Werkzeug-/Abhaengigkeitseintrag hat aktuelle Herkunfts-, Versions-,
   Konfigurations- und anwendbare Integritaets-/Rechtenachweise oder eine
   konkrete Sperre; keine unbelegte Wirksamkeits-/Lieferkettenfreigabe.
+  Das finale Image hat 0 Critical-CVEs und 0 High-CVEs mit verfuegbarem Fix
+  ohne VEX-/Open-Zuordnung gemaess FR-007.
   EN: Every assessed tool/dependency has current origin, version,
   configuration and applicable integrity/rights evidence or an explicit
   restriction, never unsupported effectiveness or supply-chain approval.
+  The final image has 0 Critical CVEs and 0 fixable High CVEs lacking a
+  VEX/Open disposition per FR-007.
 - **SC-005 (FR-008, FR-010, FR-011, FR-014)**: DE: Alle zehn
   Delta-Gruppen sind bewertet; exakt 14 Presets sind zugeordnet; jede offene
   menschliche Entscheidung hat Owner, Folgemassnahme und Wiedervorlage.
@@ -465,8 +541,14 @@ observations remain unresolved.
 - **SC-007 (FR-013)**: DE: Fuer alle drei Plattformpfade sind getrennte,
   aktuelle Abnahmebelege oder genaue Open-/Blocked-Luecken vorhanden; kein
   Ergebnis wird zwischen Plattformen oder Architekturen als Ersatz kopiert.
+  Feature-Abschluss setzt mindestens einen echten macOS/ARM64-Beleg voraus;
+  fehlende Windows-/WSL2-Pfade gehen mit Owner und Trigger (UPD-AMD64) in die
+  Uebergabe und sperren AMD64-abhaengige Nutzung weiter.
   EN: Each of three platform paths has distinct current acceptance evidence
   or exact Open/Blocked gaps; never substitute another platform/architecture.
+  Feature closure requires at least real macOS/ARM64 evidence; missing
+  Windows/WSL2 paths enter the handoff with owner and trigger (UPD-AMD64)
+  and keep AMD64-dependent use restricted.
 - **SC-008 (FR-006, FR-014, FR-015)**: DE: Die Uebergabe enthaelt fuer
   jeden In-Scope-Checkpoint einen getrennten technischen und menschlichen
   Status. Null unberechtigte Freigaben, null vertrauliche Exportinhalte und
