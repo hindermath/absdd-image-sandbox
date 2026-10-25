@@ -1,6 +1,6 @@
 # Sandbox-Profil: absdd-image-sandbox / Sandbox Profile
 
-**Stand / Date:** 2026-07-10
+**Stand / Date:** 2026-10-25
 **Ausrichtung / Orientation:** DE-first, EN-second, CEFR B2, WCAG 2.2 AA
 
 **DE:** Dieses Dokument ist das konsolidierte Sandbox-Profil für Lernende. Es fasst alle Informationen
@@ -25,7 +25,12 @@ files are linked under `Verweise / References`.
 | Betriebssystem im Container / OS inside | Ubuntu (Linux) |
 | Ports nach außen / Ports to host | `127.0.0.1:5100-5199` — nur für Web-App-Tests, nicht dauerhaft belegt |
 | Starten / Start | `podman compose up -d` |
-| Stoppen / Stop | `bash scripts/compose-down-with-audit.sh --podman -v` (empfohlen / recommended) |
+| Stoppen / Stop | `bash scripts/compose-down-with-audit.sh --podman` (empfohlen / recommended) |
+
+**DE:** Der normale Stopp erhält die persistenten Volumes und Anmeldungen.
+Eine absichtliche Volume-Löschung benötigt einen getrennten Auftrag mit
+ausdrücklicher menschlicher Zustimmung und vorherigem Audit-Export.
+Audit-Metadaten sind kein Backup der Agentendaten.
 
 **EN:**
 
@@ -37,17 +42,24 @@ files are linked under `Verweise / References`.
 | OS inside | Ubuntu (Linux) |
 | Ports to host | `127.0.0.1:5100-5199` — for web app tests only, not permanently occupied |
 | Start | `podman compose up -d` |
-| Stop | `bash scripts/compose-down-with-audit.sh --podman -v` (recommended) |
+| Stop | `bash scripts/compose-down-with-audit.sh --podman` (recommended) |
+
+**EN:** Routine shutdown preserves persistent volumes and sign-ins.
+Deliberate volume removal needs a separate request with explicit human
+authorization and a prior audit export. Audit metadata is not a backup of
+agent data.
 
 ---
 
 ## 2 Mount-Matrix / Mount Matrix
 
-**DE:** Diese Tabelle zeigt, welche Verzeichnisse vom Host in den Container eingebunden sind und welche
-Schreibrechte gelten. Alles, was nicht in dieser Liste steht, ist vom Container aus nicht erreichbar.
+**DE:** Diese Tabelle zeigt die mit der dokumentierten Compose-Konfiguration
+ausdrücklich eingebundenen Host-Verzeichnisse, persistenten Volumes und die
+eingebaute Referenz. Sie beschreibt keine vollständige Dateisystem-Sperre.
 
-**EN:** This table shows which directories are mounted from the host into the container and what write
-permissions apply. Anything not listed here is unreachable from the container.
+**EN:** This table shows host directories explicitly exposed by the documented
+Compose configuration, persistent volumes and the embedded reference. It does
+not describe a complete filesystem restriction.
 
 | Host-Quelle / Host Source | Container-Ziel / Container Target | Lesen / Read | Schreiben / Write | Zweck / Purpose |
 |---|---|---|---|---|
@@ -74,13 +86,16 @@ permissions apply. Anything not listed here is unreachable from the container.
 | Image-Inhalt / image content | `/opt/home-baseline` (`~/home-baseline-source`; `~/home-baseline-tmp` veraltet / deprecated) | Ja / Yes | **Nein / No** | Gepinnte read-only Level-0-Quelle aus `home-baseline.lock.json` |
 | (optional) `${HOME_BASELINE_DIR}` | `/opt/home-baseline` (gleiche Links / same links) | Ja / Yes | Ja / Yes | Nur mit `compose.home-baseline.yml`; eigener beschreibbarer Checkout ueberdeckt die Referenz |
 
-**DE:** Host-Verzeichnisse außerhalb dieser Mounts sind **nicht sichtbar** und
-**nicht beschreibbar** aus dem Container. Die eingebaute Referenz ist
-Image-Inhalt, kein Host-Mount, und bleibt im Standardmodus read-only.
+**DE:** Nicht eingebundene Host-Verzeichnisse werden durch diese Konfiguration
+nicht als Dateipfade bereitgestellt. Das ist keine absolute Isolationsgarantie;
+zusätzliche Mounts und geänderte Laufzeitrechte müssen neu geprüft werden.
+Die eingebaute Referenz ist Image-Inhalt, kein Host-Mount, und bleibt im
+Standardmodus read-only.
 
-**EN:** Host directories outside these mounts are **not visible** and **not
-writable** from the container. The embedded reference is image content, not a
-host mount, and remains read-only in default mode.
+**EN:** This configuration does not expose unmounted host directories as file
+paths. This is not an absolute isolation guarantee; additional mounts and
+changed runtime permissions need a new review. The embedded reference is image
+content, not a host mount, and remains read-only in default mode.
 
 ---
 
@@ -94,11 +109,32 @@ host mount, and remains read-only in default mode.
 | `/ade-dev-sandbox` | Ja / Yes | Nur für kontrollierte Wartungsaufgaben an diesem Setup-Repo |
 | `/audit` | Ja / Yes | Audit-Metadaten — kein Prompt-Text, keine Secrets |
 | `/dotnet-config/ContainerBuild.props` | **Nein / No** | Read-only gemountet |
-| Host-Dateisystem außerhalb der Mounts / Host filesystem outside mounts | **Nicht erreichbar / Not reachable** | Isolation schützt den Host |
-| `.ssh`, `.gnupg`, Credential-Dateien | **Lesen verboten / Read denied** | Durch `codex/requirements.toml` blockiert |
+| Nicht eingebundene Host-Verzeichnisse / Unmounted host directories | Nicht als Dateipfade bereitgestellt / Not exposed as file paths | Gilt für die dokumentierte Compose-Konfiguration / Applies to the documented Compose configuration |
+| Eigene Container-Schreibschicht / Container writable layer | Nach Rechten von `adedev` / Subject to `adedev` permissions | Nicht dauerhaft bei Container-Entfernung / Not durable across container removal |
+| Temporäre Container-Pfade, etwa `/tmp` / Temporary container paths such as `/tmp` | Nach Benutzerrechten; Agenten können weiter einschränken / Subject to user permissions; agents may restrict further | Kein dauerhafter Projektspeicher / Not durable project storage |
+| Benannte Volumes / Named volumes | Nach Benutzerrechten / Subject to user permissions | Überleben normalen Stopp und Container-Entfernung ohne Volume-Löschung / Survive routine shutdown and container removal without volume removal |
+| `.ssh`, `.gnupg`, Credential-Dateien | Zusätzliche Codex-Lesesperren / Additional Codex read restrictions | `codex/requirements.toml`: agentenspezifisch, keine allgemeine Betriebssystem-Sperre / Agent-specific, not a general OS restriction |
 
-**EN:** The container cannot write to anything outside the listed mounts. Sensitive paths like `.ssh` and
-`.gnupg` are blocked from being read by the Codex agent through `codex/requirements.toml`.
+**DE:** Host-Mounts, die eigene Container-Schreibschicht und persistente Volumes
+sind verschiedene Speicherbereiche. `adedev` kann innerhalb seiner
+Benutzerrechte auch außerhalb der Mounts im Container schreiben. Diese
+Container-Dateien sind bei Container-Entfernung nicht dauerhaft; ein bloßer
+Stopp löscht die Schreibschicht nicht. Sichere Projektdaten gehören in die
+vorgesehenen Mounts. Codex-Regeln sind eine zusätzliche agentenspezifische
+Grenze, keine allgemeine Betriebssystem-Sperre und kein Schutzversprechen für
+alle CLIs. `exclude_slash_tmp = true` und `exclude_tmpdir_env_var = true` in
+`codex/config.toml` erlauben Codex nicht automatisch Schreibzugriff auf `/tmp`
+oder `$TMPDIR`, auch wenn diese für den Container-Benutzer beschreibbar sind.
+
+**EN:** Host mounts, the container writable layer and persistent volumes are
+different storage areas. Within its user permissions, `adedev` can also write
+to container paths outside the mounts. These container files are not durable
+across container removal; stopping alone does not delete the writable layer.
+Keep project data in the intended mounts. Codex rules are an additional
+agent-specific boundary, not a general OS restriction or a protection promise
+for all CLIs. In `codex/config.toml`, `exclude_slash_tmp = true` and
+`exclude_tmpdir_env_var = true` do not automatically permit Codex to write to
+`/tmp` or `$TMPDIR`, even if those paths are writable by the container user.
 
 ---
 
@@ -162,11 +198,11 @@ The sandbox supports six MSL languages. The table shows version, test command, a
 | Sprache / Language | Version | Status | Test-Befehl / Test Command | Audit-Tool |
 |---|---|---|---|---|
 | **C# / .NET** | .NET SDK 10.0 (MCR) | `Supported` | `dotnet test` | `dotnet list package --vulnerable` |
-| **Go** | 1.26.3 | `Supported` | `go test ./...` | `govulncheck ./...` |
-| **Java** | OpenJDK 21 | `Supported` | `mvn test` | `mvn dependency:analyze` |
-| **Python** | 3.x (Ubuntu) | `Supported` | `python -m pytest` | `pip-audit` (via `uv`) |
-| **Rust** | 1.95.0 | `Supported` | `cargo test` | `cargo audit` |
-| **Swift** | 6.3.3 | `Open` | `swift test` | Kein globales Audit-Tool installiert / No global audit tool installed |
+| **Go** | 1.27.3 | `Supported` | `go test ./...` | `govulncheck ./...` |
+| **Java** | OpenJDK 25 LTS | `Supported` | `mvn test` | `mvn dependency:analyze` |
+| **Python** | CPython 3.15.1 | `Supported` | `python -m pytest` | `pip-audit` (via `uv`) |
+| **Rust** | 1.99.1 | `Supported` | `cargo test` | `cargo audit` |
+| **Swift** | 6.4.1 | `Open` | `swift test` | Kein globales Audit-Tool installiert / No global audit tool installed |
 
 **DE:** Python ist einer der sechs verbindlichen MSL-Pfade und zugleich die
 erste Skriptgrundlage. Zusaetzlich stellt die Sandbox PowerShell 7 als zweite

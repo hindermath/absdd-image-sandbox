@@ -1,6 +1,6 @@
 # Erster Tag: Vom Start zum ersten Erfolg / First Day: From Start to First Success
 
-**Stand / Date:** 2026-07-10
+**Stand / Date:** 2026-10-25
 **Ausrichtung / Orientation:** DE-first, EN-second, CEFR B2, WCAG 2.2 AA
 
 **DE:** Du hast Podman installiert und den Container gestartet
@@ -17,21 +17,21 @@ cleanly. At the end you will have a real first success.
 
 ## Schritt 1: Bin ich im Container? / Step 1: Am I Inside the Container?
 
-**DE:** Öffne eine Shell im Container (falls noch nicht geschehen):
+**DE:** Host, Bash oder PowerShell: Oeffne eine Shell im Container (falls noch nicht geschehen):
 
-**EN:** Open a shell in the container (if not already done):
+**EN:** On the host, in Bash or PowerShell: open a container shell if needed:
 
 ```bash
 podman compose exec ade bash
 ```
 
-**DE:** Schau auf die Eingabeaufforderung. Steht dort `adedev@...`, bist du
-**im** Container. Der Benutzer `adedev` hat bewusst **keine** Root-Rechte — das
-ist Teil der Absicherung.
+**DE:** Im Container, Bash: Pruefe `id` und `pwd`. Erwartet wird Benutzer
+`adedev` mit UID ungleich `0`. Der Prompt `adedev@...` hilft zur Orientierung,
+ist aber allein kein Nachweis. Non-root ist ein Teil der Absicherung.
 
-**EN:** Look at the prompt. If it shows `adedev@...`, you are **inside** the
-container. The user `adedev` deliberately has **no** root rights — that is part
-of the hardening.
+**EN:** Inside the container, in Bash: check id and pwd. Expect adedev with a
+nonzero UID. The prompt helps orientation but is not proof by itself.
+Non-root is one part of the hardening.
 
 ---
 
@@ -61,14 +61,14 @@ pwsh --version
 ```
 
 **DE:** Jeder Befehl gibt eine **Versionsnummer** aus, zum Beispiel `10.0.x`
-(für .NET) oder `go version go1.26.3 ...`. Eine Versionsnummer bedeutet: Das
-Werkzeug ist installiert und einsatzbereit. Erscheint `command not found`,
+(für .NET) oder `go version go1.27.x ...`. Das belegt die Aufrufbarkeit,
+nicht alle Funktionen oder eine Freigabe. Erscheint `command not found`,
 stimmt etwas mit dem Container nicht — siehe
 [troubleshooting.md](troubleshooting.md).
 
 **EN:** Each command prints a **version number**, for example `10.0.x` (for
-.NET) or `go version go1.26.3 ...`. A version number means: the tool is
-installed and ready. If `command not found` appears, something is wrong with the
+.NET) or `go version go1.27.x ...`. This proves the executable responds,
+not all functionality or approval. If `command not found` appears, something is wrong with the
 container — see [troubleshooting.md](troubleshooting.md).
 
 **DE:** Alle Versionen auf einmal prüft dieses Skript:
@@ -117,6 +117,8 @@ on your host in the `python-projects` folder.
 
 ```bash
 cd /python-projects
+exercise_dir="$(mktemp -d /python-projects/first-steps.XXXXXX)"
+cd "$exercise_dir"
 echo 'print("Hallo aus der Sandbox / Hello from the sandbox")' > hallo.py
 python hallo.py
 ```
@@ -129,11 +131,13 @@ python hallo.py
 Hallo aus der Sandbox / Hello from the sandbox
 ```
 
-**DE:** Geschafft — du hast Code **im Container** ausgeführt, nicht auf deinem
-echten Rechner. Genau das ist der Kern des Container-First-Gates.
+**DE:** Der Code lief im Container, die Datei liegt durch den Mount auch auf
+deinem echten Rechner. Der neue Uebungsordner verhindert, dass ein vorhandenes
+`hallo.py` ueberschrieben wird. Die Sicherheitsgrenze bleibt der Mount.
 
-**EN:** Done — you ran code **inside the container**, not on your real machine.
-That is exactly the heart of the Container-First Gate.
+**EN:** Code ran in the container, but the mount stores the file on your real
+host too. The new exercise directory avoids overwriting an existing hallo.py.
+The mount remains the security boundary.
 
 **DE:** Wichtig: Nutze für Übungen fiktive, datensparsame Beispiele. Keine
 echten personenbezogenen Daten, keine Secrets — auch nicht in Testdateien.
@@ -143,7 +147,22 @@ personal data, no secrets — not even in test files.
 
 ---
 
-## Schritt 4: Erster kontrollierter Agentenlauf / Step 4: First Controlled Agent Run
+## Schritt 4 (optional): Erster kontrollierter Agentenlauf / Step 4 (Optional): First Controlled Agent Run
+
+**DE:** Der technische Ersttag funktioniert ohne KI-Konto. Ohne genehmigte
+Agentennutzung ueberspringst du Schritt 4 und gehst direkt zu
+[Schritt 5: sicher stoppen](#schritt-5-sauber-und-auditkonform-stoppen--step-5-stop-cleanly-and-audit-compliant).
+Fuer diesen optionalen Schritt brauchst du ein eigenes Projekt-Repository
+(Level 2), eine passende Freigabe und gegebenenfalls Anmeldung. Lies vorher
+[Sandbox-Profil](sandbox-profil.md), [Git](git-und-hosting.md) und
+[Agenten und Spec Kit](agenten-und-spec-kit.md), einschliesslich der offenen
+OpenCode-2-Nachpruefungen. Die Anleitung erteilt keine Nutzungserlaubnis.
+
+**EN:** The technical first day needs no AI account. Without approved agent
+use, skip step 4 and go directly to step 5, safe shutdown. This optional
+step needs your own project repository (Level 2), applicable approval and
+possibly sign-in. First read the sandbox profile, Git guide, and agents and
+Spec Kit, including OpenCode 2 follow-ups. This guide grants no usage authority.
 
 **DE:** Fuehre diesen Schritt nur in einem eigenen Level-2-Checkout innerhalb
 eines freigegebenen Projekt-Mounts aus. Pruefe zuerst den Ausgangszustand:
@@ -193,14 +212,17 @@ keine andere Datei und fuehre keinen Commit aus.
 ```bash
 git status --short
 git diff -- docs/agent-first-run-check.md
+cat docs/agent-first-run-check.md
 # Danach den projektspezifischen Testbefehl aus Unit 00 ausfuehren.
 ```
 
-Nur wenn Diff und Test passen, darfst du die Aenderung behalten. Andernfalls
+Neue ungetrackte Dateien erscheinen nicht im normalen Diff; lies sie deshalb
+zusaetzlich. Nur wenn Inhalt und Test passen, darfst du die Aenderung behalten. Andernfalls
 entfernst du die Uebungsdatei wieder. Der Agent darf nie selbst Freigabe oder
 Merge behaupten.
 
-Keep the change only if the diff and test are correct. Otherwise remove the
+New untracked files do not appear in a normal diff, so read them too.
+Keep the change only if its content and test are correct. Otherwise remove the
 exercise file. The agent must never claim human approval or merge completion.
 
 ---
@@ -293,28 +315,21 @@ or secrets.
 
 ## Status lesen, ohne ihn zu erraten / Read Status Without Guessing
 
-**DE:** Ein erfolgreicher Start bedeutet nur, dass dein lokaler technischer
-Pfad funktioniert. Er bedeutet nicht automatisch, dass alle Plattform-,
-Security- und Lernendengates bestanden sind. Der aktuelle Feature-Stand ist
-`Blocked`: getrennte Windows-Host- und Ubuntu/WSL2-Evidenz, die zugehoerigen
-VS-Code-Attaches, der moderierte Test durch `Learning/A11Y Review` sowie offene
-Critical-/High-Matches fehlen noch. Die beiden Plattformpfade duerfen denselben
-Windows-Rechner, aber keine gemeinsame Podman-Laufzeit oder Evidenz nutzen.
+**DE:** Ein erfolgreicher Start beweist nur deinen lokalen technischen Pfad.
+Pruefe den [Versionsabgleich](../maintenance/toolchain-version-audit-2026-10-25.md)
+und die [offenen Nachpruefungen](../security/toolchain-followups-2026-10-25.md).
+Behaupte keine Gesamtfreigabe, setze Scan-Treffer nicht selbst auf
+`not affected` und nutze den Audit-Wrapper ohne Volume-Loeschung.
 
-**EN:** Successful startup proves only your local technical path. It does not
-mean that every platform, security, and learner gate passed. The current
-feature state is blocked because separate Windows-host and Ubuntu/WSL2
-evidence, their VS Code attachments, the moderated Learning/A11Y Review test,
-and open Critical/High matches are still missing. Both platform paths may use
-the same Windows computer but not the same Podman runtime or evidence.
+**EN:** Successful startup proves only your local technical path. Check the
+version audit and open follow-ups. Claim no overall approval, do not mark
+scan findings not affected yourself and use audit shutdown without deleting
+volumes.
 
-**DE:** Deine sichere naechste Aktion ist deshalb: Ausgabe lesen, keine
-Freigabe behaupten, keine Treffer selbst auf `not affected` setzen und mit dem
-Audit-Wrapper stoppen. Der menschliche Erstnutzungstest wird erst wiederholt,
-wenn `Learning/A11Y Review` echte Teilnehmende aus allen vier Berufen ohne
-Spec-Kit-Vorerfahrung moderieren kann.
+**DE:** Ein moderierter Erstnutzungstest durch Learning/A11Y Review bleibt
+eine echte menschliche Beobachtung. Kein Agent darf Teilnehmende oder
+bestandenes Screenreader-/Plattformverhalten erfinden.
 
-**EN:** Your safe next action is to read the output, claim no approval, never
-set findings to `not affected` yourself, and stop through the audit wrapper.
-The human first-use test is retried only when Learning/A11Y Review can moderate
-real participants from all four occupations without prior Spec Kit experience.
+**EN:** Moderated first-use testing by Learning/A11Y Review remains a real
+human observation. No agent may invent participants or passed screen-reader
+or platform behaviour.

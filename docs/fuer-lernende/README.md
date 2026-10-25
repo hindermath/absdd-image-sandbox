@@ -1,6 +1,6 @@
 # Für Lernende: Einstieg in die Sandbox-Umgebung / For Learners: Getting Started
 
-**Stand / Date:** 2026-08-14
+**Stand / Date:** 2026-10-25
 **Ausrichtung / Orientation:** DE-first, EN-second, CEFR B2, WCAG 2.2 AA
 
 ---
@@ -9,14 +9,14 @@
 
 **DE:** Die `absdd-image-sandbox` ist eine **Container-Umgebung** für sichere
 Softwareentwicklung mit KI-Agenten. Sie bietet eine abgeschottete Umgebung, in
-der du Fehler machen kannst, ohne dass etwas außerhalb des Containers
-beschädigt wird. Sie enthält die Basiswerkzeuge (Sprachlaufzeiten, Testtools,
+der du mit begrenzten Rechten lernst. Beschreibbare Host-Mounts und
+Netzverbindungen bleiben echte Risiken. Sie enthält die Basiswerkzeuge (Sprachlaufzeiten, Testtools,
 KI-Agenten) für die drei Secure-Trader-Lernprojekte CaseTracker, OrderDesk und
 ServiceHarvester.
 
 **EN:** The `absdd-image-sandbox` is a **container environment** for secure software development with AI
-agents. It provides a walled-off space where you can make mistakes without damaging anything outside the
-container. It contains the baseline tools (language runtimes, test tools, AI agents) for the three Secure
+agents. It provides a restricted learning space, not absolute host isolation.
+Writable host mounts and network access remain real risks. It contains the baseline tools (language runtimes, test tools, AI agents) for the three Secure
 Trader training projects: CaseTracker, OrderDesk, and ServiceHarvester.
 
 **DE:** Die öffentliche Referenzadresse lautet: `https://github.com/hindermath/absdd-image-sandbox`
@@ -34,6 +34,42 @@ GitHub account is required.
 ---
 
 ## Neu hier? Ohne Vorkenntnisse? / New Here? No Prior Knowledge?
+
+**DE:** Der [Fork-/Template-Vergleich](template-profil.md) erklärt die spätere
+optionale unabhängige Sandbox-Kopie. Fork bleibt Standard; Template ist noch
+nicht aktiviert. [Lizenz/Herkunft](../licensing.md) und persönliche Übernahme-
+Gates gelten unabhängig vom Bezugsweg.
+
+**EN:** The fork/template comparison explains a later optional independent
+sandbox copy. Fork remains default; template is not enabled. License/provenance
+and personal handover gates apply to either route.
+
+**DE:** Waehle zuerst deinen [Lernweg](lernwege.md). Fuer Softwareentwickler
+mit Git-Erfahrung gibt es einen [Kurzpfad](entwickler-kurzpfad.md). Fuer die
+taegliche Nutzung helfen [Alltag](alltag.md), [FAQ](faq.md) und die
+[Hinweise zur Barrierefreiheit](barrierefreiheit.md).
+
+**EN:** Choose your learning path first. Developers with Git experience can
+use the short path. Daily workflow, FAQ and accessibility guidance support
+repeated use.
+
+**DE:** Für angeleitete Gruppenarbeit gibt es den
+[neutralen Spec-Kit-Workshop](../praesentationen/README.md) als Markdown und
+PowerPoint, jeweils auf Deutsch und Englisch. Beispiele sind keine
+automatischen Ausführungs- oder Installationsaufträge.
+
+**EN:** Guided group work can use the neutral Spec Kit workshop linked above:
+Markdown and PowerPoint in both German and English. Examples grant no
+automatic execution or installation authority.
+
+**DE:** Danach verbinden die [Projektwerkstätten](../lernwerkstaetten/README.md)
+Präsentationen mit eigener praktischer Arbeit: SysInfoTool in sechs Stufen
+oder eine Webanwendung mit begründeter Wahl zwischen MVC und MVC plus REST-API.
+Die Intake-Pakete werden erst im persönlichen Lernrepo geprüft und aktiviert.
+
+**EN:** The project workshops then connect presentations and personal practice:
+six SysInfo stages or a justified choice between MVC and MVC plus REST API.
+Intake packages are reviewed and activated only in the personal learning repo.
 
 **DE:** Wenn du noch **nie mit Containern gearbeitet** hast, folge dieser
 Reihenfolge. Jedes Dokument baut auf dem vorherigen auf und setzt kein Vorwissen
@@ -97,11 +133,11 @@ each training year.
 
 | Lehrjahr / Year | Erwartung / Expectation | Sandbox Pflicht? / Mandatory? |
 |---|---|---|
-| 1. Lehrjahr / Year 1 | Verstehe die Grenzen und fuehre den ersten kontrollierten Agentenlauf nach Anleitung aus. | **Ja, sobald ein Agent genutzt wird.** Ohne Agentenlauf ist die praktische Nutzung `N/A`. / **Yes, as soon as an agent is used.** Without an agent call, practical use is `N/A`. |
-| 2. Lehrjahr / Year 2 | Bereite ein **Betriebskonzept** vor: Konfiguration, Secrets, Schreibgrenzen, Laufzeitannahmen, KI-Agenten-Grenzen. | **Ja fuer jeden Agentenlauf.** Die Nachweistiefe steigt. / **Yes for every agent call.** Evidence depth increases. |
-| 3. Lehrjahr SI / Year 3 SI | Nutze die Sandbox **tatsächlich** für KI-gestützte Schreibarbeit und riskante Experimente. Betriebsnachweise liefern. | Ja (SI-Track und DV-Track). / Yes (SI track and DV track). |
-| 3. Lehrjahr DV / Year 3 DV | Nutze die Sandbox als Referenzprofil; dokumentiere Netzwerkzugriffe, Mounts und Abweichungen nachvollziehbar. | Ja (SI-Track und DV-Track). / Yes (SI track and DV track). |
-| 3. Lehrjahr AE/DPA / Year 3 AE/DPA | Sandbox ist relevant, aber weniger zentral als für SI/DV. | Teils — je nach Aufgabe. / Partial — depends on the task. |
+| 1. Lehrjahr / Year 1 | Grenzen verstehen; optionalen kontrollierten Agentenlauf nach Voraussetzungen durchfuehren. / Understand boundaries; perform the optional controlled agent task only after meeting prerequisites. | **Ja, sobald ein Agent genutzt wird.** Ohne Agentenlauf ist die praktische Nutzung `N/A`. / **Yes, as soon as an agent is used.** Without an agent call, practical use is `N/A`. |
+| 2. Lehrjahr / Year 2 | Betriebskonzept fuer Konfiguration, Secrets, Schreib- und Laufzeitgrenzen vorbereiten. / Prepare an operating concept for configuration, secrets, write and runtime boundaries. | **Ja fuer jeden Agentenlauf.** Die Nachweistiefe steigt. / **Yes for every agent call.** Evidence depth increases. |
+| 3. Lehrjahr SI / Year 3 SI | Sandbox fuer KI-Schreibarbeit und riskante Experimente nutzen; Betriebsnachweise liefern. / Use the sandbox for AI writes and risky experiments; provide operating evidence. | Ja (SI-Track und DV-Track). / Yes (SI track and DV track). |
+| 3. Lehrjahr DV / Year 3 DV | Netzwerkzugriffe, Mounts und Abweichungen im Referenzprofil dokumentieren. / Document network access, mounts and deviations in the reference profile. | Ja (SI-Track und DV-Track). / Yes (SI track and DV track). |
+| 3. Lehrjahr AE/DPA / Year 3 AE/DPA | Relevant, aber weniger zentral als fuer SI/DV. / Relevant, but less central than for SI/DV. | Teils — je nach Aufgabe. / Partial — depends on the task. |
 
 **DE:** **Lesen und Review darf immer außerhalb der Sandbox stattfinden** — auch in JetBrains-IDEs, VS Code
 oder Visual Studio. Die Sandbox ist für KI-gestützte Schreibarbeit, riskante Experimente und reproduzierbare
@@ -131,13 +167,15 @@ git --version
 podman --version
 
 # 2. Repo holen / Get the repo
-SANDBOX_REPO_URL="<INSTITUTIONELLE-URL-ODER-HTTPS://GITHUB.COM/HINDERMATH/ABSDD-IMAGE-SANDBOX.GIT>"
-git clone "$SANDBOX_REPO_URL"
+SANDBOX_REPO_URL="<URL-DEINES-FORKS-ODER-INSTITUTIONELLEN-REPOS>"
+git clone "$SANDBOX_REPO_URL" absdd-image-sandbox
 cd absdd-image-sandbox
-cp opencode.env.example opencode.env
+if [ ! -e .env ]; then cp .env.example .env; fi
+if [ ! -e opencode.env ]; then cp opencode.env.example opencode.env; fi
 
 # 3. Podman-Machine (nur macOS/Windows / only macOS/Windows)
-podman machine init
+podman machine list
+# init nur wenn noch keine Machine besteht / init only if no machine exists
 podman machine start
 
 # 4. Konfig prüfen, bauen, starten / Validate, build, start
@@ -156,12 +194,12 @@ git log -1 --oneline
 **DE:** Läuft der Container, siehst du die Eingabeaufforderung `adedev@...`.
 Prüfe dann die Werkzeuge und stoppe sauber — beides erklärt
 [erste-schritte.md](erste-schritte.md) Schritt für Schritt (inklusive
-`scripts/compose-down-with-audit.sh --podman -v`).
+`scripts/compose-down-with-audit.sh --podman` ohne Volume-Loeschung).
 
 **EN:** When the container runs you see the prompt `adedev@...`. Then check the
 tools and stop cleanly — both explained step by step in
 [erste-schritte.md](erste-schritte.md) (including
-`scripts/compose-down-with-audit.sh --podman -v`).
+`scripts/compose-down-with-audit.sh --podman` without volume deletion).
 
 ---
 
@@ -169,23 +207,23 @@ tools and stop cleanly — both explained step by step in
 
 | Dokument / Document | Inhalt / Content |
 |---|---|
-| [container-grundlagen.md](container-grundlagen.md) | Container-Grundbegriffe für Anfänger: Image, Container, Volume, Mount, Diagramm |
-| [warum-sandbox.md](warum-sandbox.md) | Container-First-Gate, vier Schutzziele, ISO 27001, Anfängerfehler |
-| [installation.md](installation.md) | Podman installieren je Betriebssystem, Schritt für Schritt |
-| [erste-schritte.md](erste-schritte.md) | Erster Tag: starten, erstes Programm, sauber stoppen |
-| [vscode-dev-containers.md](vscode-dev-containers.md) | Host-VS-Code an den Container hängen; `code`-Befehl richtig verstehen |
-| [agent-prompt.md](agent-prompt.md) | Einen einzelnen Agenten-Prompt aus Bash oder PowerShell sicher an den Container uebergeben |
-| [agenten-und-spec-kit.md](agenten-und-spec-kit.md) | Alle installierten Agenten, Anmeldungsgrenzen, sicherer Arbeitsablauf und Spec Kit |
-| [git-und-hosting.md](git-und-hosting.md) | Providerneutraler Fork-, `origin`-/`upstream`-, Branch- und Review-Ablauf |
-| [toolchains/README.md](toolchains/README.md) | Index fuer .NET, Java, Go, Rust, Python, PowerShell, Swift und Node.js |
-| [troubleshooting.md](troubleshooting.md) | Typische Anfängerfehler: Symptom, Ursache, Lösung |
-| [sandbox-profil.md](sandbox-profil.md) | Vollständiges Sandbox-Profil: Mounts, Schreibgrenzen, Netzwerk, MSL-Matrix, KI-Agenten |
-| [GLOSSAR.md](GLOSSAR.md) | Erklärungen für Abkürzungen wie MSL, SBOM, CL_12, P0 |
-| [sandbox-readiness-template.md](sandbox-readiness-template.md) | Ausfüllbare Vorlage für die Jahr-2-Sandbox-Entscheidung |
-| [betriebsnachweise-template.md](betriebsnachweise-template.md) | Vorlage für Betriebsnachweise (Jahr 3, SI- und DV-Track) |
-| [../../README.md](../../README.md) | Ausführliche Anleitung für Entwickler und Administratoren |
-| [../betrieb/README.md](../betrieb/README.md) | Technische Image-, Compose-, Validierungs- und Wartungsreferenz |
-| [../secure-development/](../secure-development/) | Richtlinie, 12 Checklisten und Leitlinien für sichere Entwicklung |
+| [container-grundlagen.md](container-grundlagen.md) | Container-Grundbegriffe für Anfänger: Image, Container, Volume, Mount, Diagramm / Container basics: image, container, volume, mount and diagram |
+| [warum-sandbox.md](warum-sandbox.md) | Container-First-Gate, vier Schutzziele, ISO 27001, Anfängerfehler / Container-first gate, four protection goals, ISO 27001 and beginner mistakes |
+| [installation.md](installation.md) | Podman installieren je Betriebssystem, Schritt für Schritt / Install Podman for your OS, step by step |
+| [erste-schritte.md](erste-schritte.md) | Erster Tag: starten, erstes Programm, sauber stoppen / First day: start, first program and safe shutdown |
+| [vscode-dev-containers.md](vscode-dev-containers.md) | Host-VS-Code an den Container hängen; `code`-Befehl richtig verstehen / Attach host VS Code; understand the code command |
+| [agent-prompt.md](agent-prompt.md) | Einen einzelnen Agenten-Prompt aus Bash oder PowerShell sicher an den Container uebergeben / Send one agent prompt safely from Bash or PowerShell |
+| [agenten-und-spec-kit.md](agenten-und-spec-kit.md) | Alle installierten Agenten, Anmeldungsgrenzen, sicherer Arbeitsablauf und Spec Kit / Installed agents, sign-in boundaries, safe workflow and Spec Kit |
+| [git-und-hosting.md](git-und-hosting.md) | Providerneutraler Fork-, `origin`-/`upstream`-, Branch- und Review-Ablauf / Provider-neutral fork, origin/upstream, branch and review workflow |
+| [toolchains/README.md](toolchains/README.md) | Index fuer .NET, Java, Go, Rust, Python, PowerShell, Swift und Node.js / Index for .NET, Java, Go, Rust, Python, PowerShell, Swift and Node.js |
+| [troubleshooting.md](troubleshooting.md) | Typische Anfängerfehler: Symptom, Ursache, Lösung / Beginner errors: symptom, cause and solution |
+| [sandbox-profil.md](sandbox-profil.md) | Vollständiges Sandbox-Profil: Mounts, Schreibgrenzen, Netzwerk, MSL-Matrix, KI-Agenten / Full sandbox profile: mounts, write boundaries, network, language matrix and agents |
+| [GLOSSAR.md](GLOSSAR.md) | Erklärungen für Abkürzungen wie MSL, SBOM, CL_12, P0 / Explain abbreviations such as MSL, SBOM, CL_12 and P0 |
+| [sandbox-readiness-template.md](sandbox-readiness-template.md) | Ausfüllbare Vorlage für die Jahr-2-Sandbox-Entscheidung / Fillable template for the second-year sandbox decision |
+| [betriebsnachweise-template.md](betriebsnachweise-template.md) | Vorlage für Betriebsnachweise (Jahr 3, SI- und DV-Track) / Operating-evidence template for third-year SI and DV |
+| [../../README.md](../../README.md) | Ausführliche Anleitung für Entwickler und Administratoren / Detailed guide for developers and administrators |
+| [../betrieb/README.md](../betrieb/README.md) | Technische Image-, Compose-, Validierungs- und Wartungsreferenz / Technical image, Compose, validation and maintenance reference |
+| [../secure-development/](../secure-development/) | Richtlinie, 12 Checklisten und Leitlinien für sichere Entwicklung / Guideline, twelve checklists and secure-development guidance |
 
 ---
 
@@ -288,39 +326,24 @@ complete the related intake document.
 
 ## Aktueller Sicherheitsstatus / Current Security Status
 
-**DE:** Diese Anleitung richtet sich ab dem ersten Ausbildungsjahr an
-Fachinformatiker*innen, IT-System-Elektroniker*innen, Kaufleute fuer
-IT-System-Management und Kaufleute fuer Digitalisierungsmanagement. Du musst
-Spec Kit vorher nicht kennen. Ein **Gate** ist eine pruefbare Bedingung, die
-vor dem naechsten Schritt erfuellt sein muss.
+**DE:** Lies den [datums- und imagegebundenen Versionsabgleich](../maintenance/toolchain-version-audit-2026-10-25.md)
+und die [offenen Nachpruefungen](../security/toolchain-followups-2026-10-25.md).
+Dockerfile-Soll, gebautes Pruefimage und laufender Container sind verschiedene
+Staende. Alte Vulnerabilitaetszahlen oder Feature-Zustaende werden hier nicht
+als aktuelle Gesamtfreigabe wiederholt. Erfolgreicher Einstieg erteilt keine
+Provider-, Security-, Rechts-, Plattform- oder A11Y-Freigabe.
 
-**EN:** This guide is for first-year IT specialists, IT systems electronics
-technicians, IT systems management assistants, and digitalisation management
-assistants. No prior Spec Kit knowledge is required. A gate is a checkable
-condition that must be met before the next step.
+**EN:** Read the dated, image-bound version audit and open follow-ups. Target
+Dockerfile, built audit image and running container are different states.
+Historical vulnerability counts and feature states are not repeated here as
+current overall approval. Successful onboarding grants no provider, security,
+legal, platform or accessibility approval.
 
-**DE:** Das aktuelle Image bestand den technischen Start- und Werkzeugtest auf
-macOS mit rootless Podman. Trotzdem ist die Gesamtfreigabe `Blocked`: getrennte
-Windows-Host- und Ubuntu/WSL2-Tests, die zugehoerigen
-VS-Code-Dev-Containers-Attaches und ein moderierter Erstnutzungstest fehlen.
-Beide Plattformtests duerfen auf demselben Windows-Rechner laufen, benoetigen
-aber eigene Podman-Laufzeiten und Evidenz. Ausserdem bleiben 14 Critical- und
-360 High-Schwachstellenmatches offen. Wenn du nur lernst, folge weiter dem
-sicheren Start- und Stopppfad. Wenn du das Image freigeben oder weitergeben
-willst, warte auf die genannten Reviews und Dispositionen.
+**DE:** Naechster Schritt fuer Lernende: [Lernweg waehlen](lernwege.md).
+Fuer Maintainer: offene Nachpruefungen und menschliche Entscheidungen lesen.
+Die [historische Feature-Evidenz](../security/secure-development/2026-08-30-container-hardening/README.md)
+bleibt nachvollziehbar, ersetzt aber keinen Test des neuen Kandidaten.
 
-**EN:** The current image passed technical startup and tool checks on macOS
-rootless Podman. Overall approval is still blocked: separate Windows-host and
-Ubuntu/WSL2 tests, their VS Code Dev Containers attachments, and a moderated
-first-use test are missing. Both platform tests may use the same Windows
-computer but require their own Podman runtimes and evidence. Fourteen Critical
-and 360 High vulnerability matches also remain open. You may continue the
-controlled learning path, but do not claim approval or distribute the image
-until the named reviews and dispositions exist.
-
-Der genaue Status steht im
-[Feature-Evidenzindex](../security/secure-development/2026-08-30-container-hardening/README.md).
-Der naechste Human-only-Schritt gehoert `Learning/A11Y Review`; Lernende und
-Agenten erzeugen keine Ersatzbeobachtungen. / The exact status is in the
-feature evidence index. Learning/A11Y Review owns the next human-only step;
-learners and agents do not create substitute observations.
+**EN:** Learners: choose your learning path. Maintainers: read open follow-ups
+and human decisions. Historical feature evidence remains traceable but does
+not replace testing the new candidate.

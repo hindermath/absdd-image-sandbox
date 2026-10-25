@@ -1,5 +1,15 @@
 # Agentische Podman-Sandbox / Agentic Podman Sandbox
 
+**DE:** [Lizenz und Herkunft](docs/licensing.md): MIT für nachweislich eigene
+Inhalte, fremde Rechte bleiben erhalten. Der Standardbezug bleibt Fork oder
+institutionelle Kopie mit gemeinsamer Historie. Das
+[optionale Template-Profil](docs/fuer-lernende/template-profil.md) ist
+vorbereitet, **noch nicht aktiviert** und ersetzt weder Updates noch Abnahmen.
+
+**EN:** MIT covers demonstrably original content; third-party rights remain.
+Fork/shared-history institutional copies remain the default. The optional
+template profile linked above is prepared, **not enabled**, and transfers no approval.
+
 [GSDB 3.4.4: Pilotrollout / pilot rollout](docs/maintenance/gsdb-344-pilot-2026-10-20.md).
 
 <!-- learner-a11y-baseline:start -->
@@ -64,6 +74,9 @@ environment, not an application.
 | Zielgruppe / Audience | Einstieg / Entry point | Inhalt / Content |
 |---|---|---|
 | Lernende / Learners | [docs/fuer-lernende/README.md](docs/fuer-lernende/README.md) | geführter Einstieg, Toolchains, Agenten, Git und Fehlerhilfe / guided setup, toolchains, agents, Git, and troubleshooting |
+| Berufe und Fachrichtungen / Occupations and specialisations | [Lernwege](docs/fuer-lernende/lernwege.md) | gemeinsame Grundlage ab Lehrjahr 1 und passende Vertiefungen / shared first-year foundation and suitable follow-ups |
+| Entwickler ohne Spezialkenntnisse / Non-specialist developers | [Entwickler-Kurzpfad](docs/fuer-lernende/entwickler-kurzpfad.md) | kompakter Einstieg ohne Sicherheitsabkuerzung / compact entry without security shortcuts |
+| Wiederkehrende Arbeit / Daily use | [Alltag](docs/fuer-lernende/alltag.md) und [FAQ](docs/fuer-lernende/faq.md) | Daten erhalten, Aenderungen verstehen und sicher stoppen / preserve data, understand changes and stop safely |
 | Maintainer und Review / Maintainers and review | [docs/betrieb/README.md](docs/betrieb/README.md) | Image-Aufbau, Compose-Grenzen, Validierung, Audit, SBOM und Wartung / image construction, Compose boundaries, validation, audit, SBOM, and maintenance |
 | Security Review | [docs/security/](docs/security/) | Freigabe-, Inventar-, Isolations- und Evidenzstand / approval, inventory, isolation, and evidence state |
 
@@ -105,6 +118,21 @@ images, configuration files, or logs.
 
 ## Barrierefreiheit / Accessibility
 
+Aktuelles lokales Image, SBOM und getrennte Nachweisgrenzen:
+[Statusnachtrag vom 2026-10-25](docs/maintenance/sandbox-current-state-2026-10-25.md).
+
+*Current local image, SBOM and separate evidence boundaries: see the dated
+status addendum. It grants no sandbox or provider approval.*
+
+Pruefregeln, bekannte Rendering-Grenzen und offene menschliche Abnahmen stehen
+in [Verstaendlichkeit und Barrierefreiheit](docs/fuer-lernende/barrierefreiheit.md).
+Der aktuelle technische Stand und offene Versionsnachpruefungen stehen im
+[Nachpruefungsregister](docs/security/toolchain-followups-2026-10-25.md).
+
+*Review rules, rendering limitations and open human acceptance are documented
+in the accessibility guide. The follow-up register records technical status
+and remaining version checks. Neither is a blanket conformance claim.*
+
 Anleitungen und Nachweise bleiben textbasiert, semantisch gegliedert und ohne
 rein farbliche Bedeutung. Terminalausgaben muessen auch mit Screenreadern und
 Braille-Zeilen nachvollziehbar bleiben.
@@ -116,7 +144,7 @@ understandable with screen readers and Braille displays.
 ## Repository-Struktur
 
 - `Dockerfile`: baut das Image aus dem digest-gepinnten MCR-.NET-SDK-Image
-  und stellt Java JDK 21, Maven, Go, Rust, Python, PowerShell 7, Node.js,
+  und stellt Java JDK 25 LTS, Maven, Go, Rust, Python, PowerShell 7, Node.js,
   OpenCode, Swift, die vier Required-Agenten, Syft, `uv`, Spec Kit und
   Hilfswerkzeuge bereit.
 - `compose.yml`: definiert den Service `ade`, getrennte persistente
@@ -229,7 +257,7 @@ Kopiere die Beispielumgebungsdatei, damit `compose.yml` eine vorhandene
 `opencode.env` findet:
 
 ```bash
-cp opencode.env.example opencode.env
+if [ ! -e opencode.env ]; then cp opencode.env.example opencode.env; fi
 chmod 600 opencode.env
 ```
 
@@ -513,16 +541,27 @@ Stoppen ohne Volume-Loeschung:
 bash scripts/compose-down-with-audit.sh --podman
 ```
 
-Stoppen mit Volume-Loeschung:
+Stoppen mit Volume-Loeschung nur nach ausdruecklicher Bestaetigung: Diese
+Variante entfernt persistente Agentendaten und lokale Anmeldungen.
+
+*Volume removal requires explicit confirmation: this variant deletes
+persistent agent data and local sign-ins.*
 
 ```bash
 bash scripts/compose-down-with-audit.sh --podman -v
 ```
 
-PowerShell:
+PowerShell, normaler Stopp ohne Volume-Loeschung / normal shutdown without
+volume deletion:
 
 ```powershell
 .\scripts\compose-down-with-audit.ps1 -Engine podman
+```
+
+Nur nach ausdruecklicher Datenverlustbestaetigung / only after explicit
+confirmation of data loss:
+
+```powershell
 .\scripts\compose-down-with-audit.ps1 -Engine podman -Volumes
 ```
 
@@ -573,18 +612,29 @@ Installations- und Pruefreferenz steht unter
 
 ## Spec-kit-Workflow / Spec Kit Workflow
 
-Spec Kit **0.12.8** wird im Image auf den Release-Commit
-`464d57fe30c72e9a88d279cc49834539ec989c03` gepinnt. Der vorhandene
+Spec Kit **1.2.3** wird im Image auf den Release-Commit
+`5ea8b1cf0a38699340a38e00d02770308997d8c0` gepinnt. Der vorhandene
 Bind-Mount-Patch bleibt erhalten; der Build prueft die Paketversion.
 Bestehende Container erhalten die Version erst durch Neubau und Neuerstellung,
 nicht durch einen blossen Neustart. Ein Update startet keinen Spec-Kit-Lauf.
 
-*The image pins Spec Kit **0.12.8** to the release commit shown above,
+*The image pins Spec Kit **1.2.3** to the release commit shown above,
 retains the bind-mount patch and checks package metadata during build.
 Existing containers need a rebuild and recreation, not just a restart.
 Updating the CLI does not start a Spec Kit feature.*
 
-[Upgrade-Nachweis / Upgrade evidence](docs/maintenance/spec-kit-0128-upgrade.md)
+[Aktueller Versionsabgleich / Current version audit](docs/maintenance/toolchain-version-audit-2026-10-25.md)
+
+OpenCode 2 wird als `@opencode/cli` installiert. Die geordneten V2-
+`permissions` in `opencode.jsonc` erhalten die bisherigen Schutzregeln;
+`update: "disable"` verhindert automatische Updates. Vor dem ersten V2-Start
+persistente OpenCode-Daten sichern. V1 und V2 nicht gegen dieselbe aktive
+Konfiguration betreiben. Provider, Modelle und Anmeldungen bleiben unveraendert.
+
+*OpenCode 2 uses `@opencode/cli`. Ordered V2 permissions preserve the existing
+rules and automatic updates remain disabled. Back up persistent OpenCode data
+before first V2 use; do not run V1 and V2 against the same active configuration.
+Providers, models and sign-in remain unchanged.*
 
 Unter `/rider-projects` bevorzugt:
 
@@ -605,8 +655,10 @@ Die aktiven Anforderungen bilden eine gepruefte, vierstufige Spec-Kit-Serie:
 3. Das finale lokale Image unabhaengig abnehmen.
 4. Die forkbare Selbstbau-Vorlage fuer Lernende bearbeiten.
 
-Nur die erste Stufe ist aktuell ausfuehrbar. Jede weitere Stufe ist durch den
-nachweisbaren Abschluss ihrer Vorgaengerin blockiert. Die lesbare Reihenfolge
+Die Statusfolge ist `Completed`, `Eligible`, `Blocked`, `Blocked`: Die
+GSDB-Pruefung ist abgeschlossen; technische Haertung ist die naechste
+grundsaetzlich zulaessige Stufe. `Eligible` ist keine Startautoritaet.
+Abnahme und Selbstbau-Vorlage bleiben von ihren Vorgaengerinnen abhaengig. Die lesbare Reihenfolge
 steht in `Lastenheft_Abarbeitungsreihenfolge.md`; die verbindliche
 maschinenlesbare Quelle ist
 `specs/intake-series/sandbox-development-lifecycle/manifest.json`.
@@ -619,8 +671,10 @@ Entscheidungen.
 *The active requirements form a reviewed four-stage Spec Kit series: assess the
 GSDB baseline and gaps, implement prioritized technical hardening,
 independently accept the final local image, and then work on the forkable
-self-build template. Only the first stage is currently eligible. Every later
-stage is blocked by verified completion of its predecessor. The intake files
+self-build template. Statuses are Completed, Eligible, Blocked, Blocked:
+GSDB assessment is complete and hardening is next eligible. Eligibility grants
+no execution authority. Acceptance and the self-build template still depend
+on verified predecessor completion. The intake files
 do not start work automatically, and formal sandbox, provider, model, and legal
 approvals remain human decisions.*
 
@@ -785,7 +839,7 @@ Mount-, Volume- und Haertungsdetails in
 2. Create the local env file:
 
 ```bash
-cp opencode.env.example opencode.env
+if [ ! -e opencode.env ]; then cp opencode.env.example opencode.env; fi
 chmod 600 opencode.env
 ```
 
@@ -851,9 +905,21 @@ Use [the learner documentation](docs/fuer-lernende/README.md) for the guided
 path and [the operations reference](docs/betrieb/README.md) for image,
 Compose, validation, audit, SBOM, and maintenance details.
 
-## Aktueller Haertungsnachweis / Current Hardening Evidence
+## Historischer Haertungsnachweis / Historical Hardening Evidence
 
-**DE:** Der aktuelle Abschlussnachweis fuer Feature 003 umfasst getrennte
+**DE:** Dieser Abschnitt bewahrt den Abschlussstand von Feature 003 aus
+September 2026 fuer die unten genannte Ubuntu/WSL2-Image-ID. Der neue
+[Versionsabgleich vom 2026-10-25](docs/maintenance/toolchain-version-audit-2026-10-25.md)
+bindet einen anderen ARM64-Kandidaten. Dessen neue Versionen, SBOM und
+[offene Nachpruefungen](docs/security/toolchain-followups-2026-10-25.md) erhalten
+keine Plattformabnahme, CVE-Disposition oder Freigabe aus diesem alten Stand.
+
+**EN:** This section preserves the September 2026 Feature 003 closeout for
+the Ubuntu/WSL2 image below. The October 25 version audit binds a different
+ARM64 candidate. Its new versions, SBOM and open follow-ups do not inherit
+platform acceptance, vulnerability disposition or approval from this history.
+
+**DE:** Der damalige Abschlussnachweis fuer Feature 003 umfasst getrennte
 Build-, Laufzeit-, Toolchain- und VS-Code-Nachweise auf Windows, Ubuntu/WSL2
 und macOS. Die dokumentweite Rootless- und Supply-Chain-Bindung verwendet das
 Ubuntu/WSL2-Image
@@ -866,7 +932,7 @@ bestanden. Eingehend bleiben nur die Loopback-Ports `5100-5199` veroeffentlicht;
 Agentenzustaende liegen in getrennten Volumes. Diese technische Evidenz ist
 keine formelle Freigabe.
 
-**EN:** Current Feature 003 closeout evidence contains separate build, runtime,
+**EN:** Historical Feature 003 closeout evidence contains separate build, runtime,
 toolchain, and VS Code results for Windows, Ubuntu/WSL2, and macOS. The
 document-wide rootless and supply-chain binding uses the Ubuntu/WSL2 image
 above. Windows and macOS retain separate local image identities, and the macOS
@@ -876,7 +942,7 @@ dispatcher dry-run without provider access, and audit-aware stop passed. Only
 loopback ports `5100-5199` are published, and agent state remains in separate
 volumes. This technical evidence is not formal approval.
 
-**DE:** Die aktuelle CycloneDX-SBOM mit 23.960 Komponenten wurde mit Syft
+**DE:** Die damalige CycloneDX-SBOM mit 23.960 Komponenten wurde mit Syft
 1.46.0 erzeugt und mit dem digest-gepinnten Grype 0.117.0 ausgewertet. Der Scan
 meldet 1.286 Matches in 390 eindeutigen Advisory-Gruppen: 14 Critical, 326 High,
 787 Medium, 144 Low, 11 Negligible und 4 Unknown. Alle 390 Gruppen bleiben
@@ -885,7 +951,7 @@ Behebung wird behauptet. `GATE-SUPPLY-01` besteht fuer die befristete,
 source-only Ein-Personen-Machbarkeitsstudie als Transparenzgate, nicht als
 Freigabe fuer ein vorgebautes Image, Verteilung oder Produktion.
 
-**EN:** The current 23,960-component CycloneDX SBOM was generated with Syft
+**EN:** The historical 23,960-component CycloneDX SBOM was generated with Syft
 1.46.0 and assessed with digest-pinned Grype 0.117.0. The scan reports 1,286
 matches across 390 unique advisory groups: 14 Critical, 326 High, 787 Medium,
 144 Low, 11 Negligible, and 4 Unknown. All 390 groups remain visibly

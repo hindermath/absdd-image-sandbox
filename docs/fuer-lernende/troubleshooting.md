@@ -1,5 +1,14 @@
 # Fehlerbehebung / Troubleshooting
 
+**DE:** Fuer grundlegende Fragen lies zuerst die [FAQ](faq.md). Versions-
+und imagegebundene Warnungen stehen in den
+[Nachpruefungen](../security/toolchain-followups-2026-10-25.md).
+Ein Socketfehler ist kein Grund fuer Storage-Reset oder Volume-Loeschung.
+
+**EN:** For basic questions, start with the FAQ. Version- and image-bound
+warnings are recorded in the follow-ups. A socket error does not justify
+storage reset or volume deletion.
+
 **Stand / Date:** 2026-07-10
 **Ausrichtung / Orientation:** DE-first, EN-second, CEFR B2, WCAG 2.2 AA
 

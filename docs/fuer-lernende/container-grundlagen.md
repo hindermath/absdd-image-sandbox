@@ -23,15 +23,15 @@ containers, read this first. Afterwards you understand why a sandbox is useful
 überall gleich aussieht und die man auf jedes Schiff, jeden Zug und jeden LKW
 laden kann. Ein Software-Container ist dasselbe Prinzip für Programme. Er packt
 ein Programm **zusammen mit allen Werkzeugen und Bibliotheken**, die es zum
-Laufen braucht, in eine abgeschlossene Kiste. Diese Kiste läuft auf jedem
-Computer gleich — egal ob macOS, Windows oder Linux.
+Laufen braucht, in eine abgeschlossene Kiste. Die passende Architektur und
+Laufzeit muessen vorhanden sein; Plattformunterschiede werden getrennt geprueft.
 
 **EN:** Picture a shipping container: a standardized box that looks the same
 everywhere and can be loaded onto any ship, train, or truck. A software
 container follows the same principle for programs. It packs a program
 **together with all the tools and libraries** it needs to run into one enclosed
-box. This box runs the same on every computer — whether macOS, Windows, or
-Linux.
+box. The right architecture and runtime must be available; platform
+differences are checked separately.
 
 **DE:** Der große Vorteil: Auf deinem Rechner muss nicht C#, Go, Java, Python,
 Rust und Swift einzeln installiert und richtig eingestellt sein. All das steckt

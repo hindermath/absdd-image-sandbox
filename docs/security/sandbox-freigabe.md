@@ -77,6 +77,17 @@ nicht stillschweigend in eine CISO-/ISB-/KIB-Freigabe umgedeutet.
 
 ### Genehmigte Tool-Versionen
 
+Wartungshinweis 2026-10-25: Die folgende Tabelle bleibt der bisher dokumentierte
+Freigabestand, nicht der neue Dockerfile-Sollstand. Die angefragten aktuellen
+Versionen stehen im [Versionsabgleich](../maintenance/toolchain-version-audit-2026-10-25.md)
+und im [KI-Werkzeug-Inventar](ai-tools-inventory.md). Technische Update- und
+Build-Nachweise ersetzen keine erforderliche menschliche Freigabe.
+
+*Maintenance note: the table below preserves the previously documented approval
+state, not the new Dockerfile target. The linked version audit and inventory
+describe the update. Technical update/build evidence does not replace any
+required human approval.*
+
 | Tool | Version / Quelle |
 |---|---|
 | .NET SDK | Microsoft .NET SDK aus MCR-Basisimage `mcr.microsoft.com/dotnet/sdk:10.0` plus hashgeprueftes Kompatibilitaets-SDK `10.0.301` |

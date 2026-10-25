@@ -25,14 +25,18 @@ the Dockerfile as the single version source.
 **DE:** Der Build startet mit dem Microsoft-.NET-SDK-Image aus MCR. Tag und
 SHA256-Digest stehen gemeinsam in `FROM`: Der Tag bleibt lesbar, der Digest
 macht den Inhalt reproduzierbar. Ubuntu-Pakete liefern unter anderem JDK,
-Maven, Python, Buildwerkzeuge, PowerShell aus dem Basisimage und allgemeine
-CLI-Helfer. Node.js wird über ein signiertes NodeSource-APT-Repository
+System-Python, Buildwerkzeuge und allgemeine CLI-Helfer. Das vorhandene
+PowerShell-Tool aus dem Basisimage wird hashgeprüft aktualisiert.
+CPython für Projekte und Apache Maven sind separate, hashgeprüfte
+Releases. Node.js wird über ein signiertes NodeSource-APT-Repository
 installiert.
 
 **EN:** The build starts from the Microsoft .NET SDK image in MCR. Tag and
 SHA256 digest appear together in `FROM`: the tag remains readable and the
-digest makes content reproducible. Ubuntu packages provide the JDK, Maven,
-Python, build tools, PowerShell from the base image, and common CLI helpers.
+digest makes content reproducible. Ubuntu packages provide the JDK,
+system Python, build tools, and common CLI helpers. The existing PowerShell tool
+from the base image receives a hash-verified update.
+Project CPython and Apache Maven use separate hash-verified releases.
 Node.js is installed from a signed NodeSource APT repository.
 
 **DE:** Jede `ARG`-Zeile besitzt unmittelbar davor Renovate-Metadaten mit
@@ -63,11 +67,11 @@ documentation smoke test.
 
 | Familie / Family | Installation und Kontrolle / Installation and control |
 |---|---|
-| .NET und PowerShell | gepinntes Basisimage plus hashgeprüftes Kompatibilitäts-SDK `10.0.301`; Build prüft die erwartete PowerShell-Version / pinned base image plus hash-verified compatibility SDK `10.0.301`; build checks expected PowerShell version |
-| Java | Ubuntu OpenJDK und Maven / Ubuntu OpenJDK and Maven |
+| .NET und PowerShell | gepinntes Basisimage plus hashgeprüftes Kompatibilitäts-SDK `10.0.303`; vorhandenes PowerShell-Tool hashgeprüft aktualisiert / pinned base image plus hash-verified compatibility SDK `10.0.303`; hash-verified update of existing PowerShell tool |
+| Java | Ubuntu OpenJDK 25 LTS und hashgeprüftes Apache Maven 3.10.0 / Ubuntu OpenJDK 25 LTS and hash-verified Apache Maven 3.10.0 |
 | Go | Releasearchiv; zusätzliche Werkzeuge als Benutzer `adedev` / release archive; additional tools as user `adedev` |
 | Rust | festes `rustup-init` mit SHA256-Prüfung; Komponenten über gepinnte Toolchain / pinned `rustup-init` with SHA256 verification; components through pinned toolchain |
-| Python | Ubuntu Python plus verifiziertes `uv`/`uvx`-Release / Ubuntu Python plus verified `uv`/`uvx` release |
+| Python | nativer CPython-Standalone-Build 3.15.1 mit SHA-256 unter `/opt/cpython`; Ubuntu-System-Python unverändert / native SHA-256-verified CPython 3.15.1 under `/opt/cpython`; system Python unchanged |
 | Swift | signiertes Ubuntu-Release, Architekturprüfung, SourceKit-LSP / signed Ubuntu release, architecture check, SourceKit-LSP |
 | Node.js | signierte APT-Quelle; npm für globale Agentenpakete / signed APT source; npm for global agent packages |
 | GitHub Actions | hashgeprüftes `actionlint`-Release für `amd64` und `arm64`; `gh` bleibt auf der Control Plane / hash-verified `actionlint` release for `amd64` and `arm64`; `gh` remains on the control plane |

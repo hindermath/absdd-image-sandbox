@@ -104,6 +104,17 @@ native architecture without requiring Rosetta.
 
 Im Container / Inside the container:
 
+**DE:** Die beiden folgenden Befehle setzen eine eigene `documentation.md`
+im aktuellen Arbeitsordner voraus. Sie erzeugen beziehungsweise ersetzen
+`documentation.typ` und `documentation.pdf`. Fuer eine erste, temporaere
+Uebung ohne vorhandene Dateien verwende stattdessen den separaten Smoke-Test
+unten. Bei einer fehlenden Eingabedatei stoppe und waehle den richtigen Ordner.
+
+**EN:** These commands require your own documentation.md in the current
+directory. They create or replace documentation.typ and documentation.pdf.
+For a first temporary exercise without existing files, use the standalone
+smoke test below. If input is missing, stop and choose the correct directory.
+
 ```bash
 pandoc documentation.md --standalone --to=typst -o documentation.typ
 typst compile documentation.typ documentation.pdf

@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.1",
+  "feature": "documentation-alignment-2026-10-25",
+  "entries": [
+    {
+      "changeId": "CHG001",
+      "scope": "Learner and developer reader paths",
+      "documents": [
+        "README.md",
+        "docs/fuer-lernende/README.md",
+        "docs/fuer-lernende/lernwege.md",
+        "docs/fuer-lernende/entwickler-kurzpfad.md",
+        "docs/fuer-lernende/alltag.md",
+        "docs/fuer-lernende/faq.md"
+      ],
+      "canonicalSource": "docs/fuer-lernende/README.md",
+      "criticality": "Usage",
+      "rationale": "DE: Bestehende Markdown-Struktur vertiefen, kein zweiter Lernreihenkatalog. EN: Expand existing Markdown, no second learning-series catalogue.",
+      "decision": "UpdateRequired",
+      "owner": "Maintainer",
+      "audiences": [
+        "First-year apprentices in all four IT occupations",
+        "Developers without specialist knowledge",
+        "Maintainers"
+      ],
+      "readerPaths": [
+        "LearnerFirstUse",
+        "DeveloperShortPath",
+        "MaintainerReview"
+      ],
+      "navigationImpact": "DE: Bestehende Einstiege und Links erhalten; neue Seiten verlinken. EN: Preserve entries/links and link new pages.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and equivalent English per section; no separate website.",
+      "languagePartners": [],
+      "platformAndExampleProof": "DE: Historische Untersuchung vor dem Image-Austausch: Host-Quell-/Metadatentests und PDF-Vergleich; damalige Linux-Wiederholung durch gestoppte Machine blockiert. Aktueller Laufzeit-/SBOM-Nachweis: docs/maintenance/sandbox-current-state-2026-10-25.md. AMD64 und menschliche A11Y bleiben Open. EN: Historical investigation before image replacement: host source/metadata tests and PDF comparison; the then-planned Linux retest was blocked by a stopped machine. Current runtime/SBOM evidence: docs/maintenance/sandbox-current-state-2026-10-25.md. AMD64 and human A11Y remain Open.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/maintenance/documentation-alignment-2026-10-25.md",
+      "risk": "Runtime and human acceptance remain separate; no new approval or rollout.",
+      "reevaluationTrigger": "Before release/approval claims or after command, source, navigation or runtime changes."
+    },
+    {
+      "changeId": "CHG002",
+      "scope": "Shell and platform instructions",
+      "documents": [
+        "docs/fuer-lernende/installation.md",
+        "docs/fuer-lernende/erste-schritte.md",
+        "docs/fuer-lernende/container-grundlagen.md"
+      ],
+      "canonicalSource": "compose.yml",
+      "criticality": "Security",
+      "rationale": "DE: Host/Container und getrennte Windows-/WSL2-Laufzeiten erklaeren, destruktive Defaults vermeiden. EN: Explain execution locations and separate runtimes; avoid destructive defaults.",
+      "decision": "UpdateRequired",
+      "owner": "Maintainer",
+      "audiences": [
+        "First-year apprentices in all four IT occupations",
+        "Developers without specialist knowledge",
+        "Maintainers"
+      ],
+      "readerPaths": [
+        "LearnerFirstUse",
+        "DeveloperShortPath",
+        "MaintainerReview"
+      ],
+      "navigationImpact": "DE: Bestehende Einstiege und Links erhalten; neue Seiten verlinken. EN: Preserve entries/links and link new pages.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and equivalent English per section; no separate website.",
+      "languagePartners": [],
+      "platformAndExampleProof": "DE: Historische Untersuchung vor dem Image-Austausch: Host-Quell-/Metadatentests und PDF-Vergleich; damalige Linux-Wiederholung durch gestoppte Machine blockiert. Aktueller Laufzeit-/SBOM-Nachweis: docs/maintenance/sandbox-current-state-2026-10-25.md. AMD64 und menschliche A11Y bleiben Open. EN: Historical investigation before image replacement: host source/metadata tests and PDF comparison; the then-planned Linux retest was blocked by a stopped machine. Current runtime/SBOM evidence: docs/maintenance/sandbox-current-state-2026-10-25.md. AMD64 and human A11Y remain Open.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/maintenance/documentation-alignment-2026-10-25.md",
+      "risk": "Runtime and human acceptance remain separate; no new approval or rollout.",
+      "reevaluationTrigger": "Before release/approval claims or after command, source, navigation or runtime changes."
+    },
+    {
+      "changeId": "CHG003",
+      "scope": "OpenCode 2 audit record and warning investigation",
+      "documents": [
+        "docs/security/toolchain-followups-2026-10-25.md",
+        "docs/fuer-lernende/agenten-und-spec-kit.md",
+        "docs/betrieb/README.md",
+        "docs/betrieb/validierung-und-wartung.md"
+      ],
+      "canonicalSource": "scripts/audit-export.sh",
+      "criticality": "Security",
+      "rationale": "DE: Additive storage-metadata ist kein Sitzungsnachweis; Runtime und Freigaben offen. EN: Additive storage metadata is not session evidence; runtime and approval remain open.",
+      "decision": "UpdateRequired",
+      "owner": "Maintainer",
+      "audiences": [
+        "First-year apprentices in all four IT occupations",
+        "Developers without specialist knowledge",
+        "Maintainers"
+      ],
+      "readerPaths": [
+        "LearnerFirstUse",
+        "DeveloperShortPath",
+        "MaintainerReview"
+      ],
+      "navigationImpact": "DE: Bestehende Einstiege und Links erhalten; neue Seiten verlinken. EN: Preserve entries/links and link new pages.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and equivalent English per section; no separate website.",
+      "languagePartners": [],
+      "platformAndExampleProof": "DE: Historische Untersuchung vor dem Image-Austausch: Host-Quell-/Metadatentests und PDF-Vergleich; damalige Linux-Wiederholung durch gestoppte Machine blockiert. Aktueller Laufzeit-/SBOM-Nachweis: docs/maintenance/sandbox-current-state-2026-10-25.md. AMD64 und menschliche A11Y bleiben Open. EN: Historical investigation before image replacement: host source/metadata tests and PDF comparison; the then-planned Linux retest was blocked by a stopped machine. Current runtime/SBOM evidence: docs/maintenance/sandbox-current-state-2026-10-25.md. AMD64 and human A11Y remain Open.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/maintenance/documentation-alignment-2026-10-25.md",
+      "risk": "Runtime and human acceptance remain separate; no new approval or rollout.",
+      "reevaluationTrigger": "Before release/approval claims or after command, source, navigation or runtime changes."
+    },
+    {
+      "changeId": "CHG004",
+      "scope": "Bilingual accessibility review boundary",
+      "documents": [
+        "docs/fuer-lernende/barrierefreiheit.md"
+      ],
+      "canonicalSource": "docs/fuer-lernende/barrierefreiheit.md",
+      "criticality": "Usage",
+      "rationale": "DE: Markdown-Checks und menschliche WCAG-/Erstnutzungsabnahme trennen. EN: Distinguish source checks from human WCAG/first-use acceptance.",
+      "decision": "UpdateRequired",
+      "owner": "Maintainer",
+      "audiences": [
+        "First-year apprentices in all four IT occupations",
+        "Developers without specialist knowledge",
+        "Maintainers"
+      ],
+      "readerPaths": [
+        "LearnerFirstUse",
+        "DeveloperShortPath",
+        "MaintainerReview"
+      ],
+      "navigationImpact": "DE: Bestehende Einstiege und Links erhalten; neue Seiten verlinken. EN: Preserve entries/links and link new pages.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and equivalent English per section; no separate website.",
+      "languagePartners": [],
+      "platformAndExampleProof": "DE: Historische Untersuchung vor dem Image-Austausch: Host-Quell-/Metadatentests und PDF-Vergleich; damalige Linux-Wiederholung durch gestoppte Machine blockiert. Aktueller Laufzeit-/SBOM-Nachweis: docs/maintenance/sandbox-current-state-2026-10-25.md. AMD64 und menschliche A11Y bleiben Open. EN: Historical investigation before image replacement: host source/metadata tests and PDF comparison; the then-planned Linux retest was blocked by a stopped machine. Current runtime/SBOM evidence: docs/maintenance/sandbox-current-state-2026-10-25.md. AMD64 and human A11Y remain Open.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/maintenance/documentation-alignment-2026-10-25.md",
+      "risk": "Runtime and human acceptance remain separate; no new approval or rollout.",
+      "reevaluationTrigger": "Before release/approval claims or after command, source, navigation or runtime changes."
+    },
+    {
+      "changeId": "CHG005",
+      "scope": "Agent parity and intake lineage",
+      "documents": [
+        "AGENTS.md",
+        "CLAUDE.md",
+        "GEMINI.md",
+        ".github/copilot-instructions.md",
+        ".github/agents/copilot-instructions.md",
+        "Lastenheft_Secure-Development-Container-Hardening.md",
+        "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "intakes/learner-fork-self-build-sandbox.md"
+      ],
+      "canonicalSource": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+      "criticality": "Security",
+      "rationale": "DE: Quellenwechsel mit Archivierung und unabhaengigem Vollreview, keine Statusanhebung. EN: Source change with archives and independent full review, no lifecycle advancement.",
+      "decision": "UpdateRequired",
+      "owner": "Maintainer",
+      "audiences": [
+        "First-year apprentices in all four IT occupations",
+        "Developers without specialist knowledge",
+        "Maintainers"
+      ],
+      "readerPaths": [
+        "LearnerFirstUse",
+        "DeveloperShortPath",
+        "MaintainerReview"
+      ],
+      "navigationImpact": "DE: Bestehende Einstiege und Links erhalten; neue Seiten verlinken. EN: Preserve entries/links and link new pages.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and equivalent English per section; no separate website.",
+      "languagePartners": [],
+      "platformAndExampleProof": "DE: Historische Untersuchung vor dem Image-Austausch: Host-Quell-/Metadatentests und PDF-Vergleich; damalige Linux-Wiederholung durch gestoppte Machine blockiert. Aktueller Laufzeit-/SBOM-Nachweis: docs/maintenance/sandbox-current-state-2026-10-25.md. AMD64 und menschliche A11Y bleiben Open. EN: Historical investigation before image replacement: host source/metadata tests and PDF comparison; the then-planned Linux retest was blocked by a stopped machine. Current runtime/SBOM evidence: docs/maintenance/sandbox-current-state-2026-10-25.md. AMD64 and human A11Y remain Open.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/maintenance/documentation-alignment-2026-10-25.md",
+      "risk": "Runtime and human acceptance remain separate; no new approval or rollout.",
+      "reevaluationTrigger": "Before release/approval claims or after command, source, navigation or runtime changes."
+    },
+    {
+      "changeId": "CHG006",
+      "scope": "Fail-closed audit shutdown and safe daily restart",
+      "documents": [
+        "docs/security/audit-shutdown-fail-closed-2026-10-25.md",
+        "docs/betrieb/validierung-und-wartung.md",
+        "docs/fuer-lernende/alltag.md",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "GEMINI.md",
+        ".github/copilot-instructions.md",
+        ".github/agents/copilot-instructions.md"
+      ],
+      "canonicalSource": "scripts/compose-down-with-audit.sh",
+      "criticality": "Security",
+      "rationale": "DE: Bei Auditfehler vor jedem down abbrechen; normalen Wiederanlauf ohne Build, Pull oder unbeabsichtigten Containerersatz erklaeren. EN: Abort before any down after export failure; document daily restart without builds, pulls or unintended replacement.",
+      "decision": "UpdateRequired",
+      "owner": "Maintainer",
+      "audiences": [
+        "First-year apprentices in all four IT occupations",
+        "Developers without specialist knowledge",
+        "Maintainers"
+      ],
+      "readerPaths": [
+        "LearnerFirstUse",
+        "DeveloperShortPath",
+        "MaintainerReview"
+      ],
+      "navigationImpact": "DE: Bestehende Einstiege und Links erhalten; neue Seiten verlinken. EN: Preserve entries/links and link new pages.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and equivalent English per section; no separate website.",
+      "languagePartners": [],
+      "platformAndExampleProof": "26 fake-engine subcases for both wrappers, ShellCheck and parsers; no real Podman run or volume deletion. Native platform acceptance remains Open.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/security/audit-shutdown-fail-closed-2026-10-25.md",
+      "risk": "Runtime and human acceptance remain separate; no new approval or rollout.",
+      "reevaluationTrigger": "Before release/approval claims or after command, source, navigation or runtime changes."
+    }
+  ]
+}

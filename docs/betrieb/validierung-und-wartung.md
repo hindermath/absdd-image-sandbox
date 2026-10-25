@@ -227,10 +227,16 @@ deletion:
 bash scripts/compose-down-with-audit.sh --podman -v
 ```
 
-PowerShell:
+PowerShell, ohne Volumenloeschung / PowerShell, without volume deletion:
 
 ```powershell
 pwsh -NoProfile -File scripts/compose-down-with-audit.ps1 -Engine podman
+```
+
+Nur nach bewusster Bestaetigung des Datenverlusts / Only after deliberate
+confirmation of data loss:
+
+```powershell
 pwsh -NoProfile -File scripts/compose-down-with-audit.ps1 -Engine podman -Volumes
 ```
 
@@ -243,6 +249,18 @@ Best-Effort-Ergänzung.
 session ID, time, project path, and actor hint. Prompt, response, and raw
 session data remain excluded. The entrypoint hook is only a best-effort
 addition.
+
+**DE:** Beide Wrapper brechen bei jedem fehlgeschlagenen Audit-Export vor
+`down` ab. Es werden dann weder Container noch Volumes entfernt. Der
+[negative Sicherheitsnachweis](../security/audit-shutdown-fail-closed-2026-10-25.md)
+prueft dies ohne echte Podman-Ressourcen. Ein Export mit Exit 0 beweist
+nicht automatisch vollstaendige OpenCode-2-Sitzungsabdeckung; deren
+[Nachpruefung](../security/toolchain-followups-2026-10-25.md) bleibt offen.
+
+**EN:** Both wrappers abort before down whenever audit export fails. No
+container or volume is removed in that case. Negative safety tests use fake
+engines only. Exit 0 does not automatically prove complete OpenCode 2 session
+coverage; that follow-up remains open.
 
 ## Plattformnachweis / Platform Evidence
 
@@ -265,9 +283,21 @@ macOS check is not complete cross-platform acceptance.
 Zurück zum [Betriebsindex](README.md). / Return to the
 [operations index](README.md).
 
-## Feature-003-Abnahmestand / Feature 003 Acceptance State
+## Historischer Feature-003-Abnahmestand / Historical Feature 003 Acceptance State
 
-**DE:** Fuer den aktuellen technischen Stand wurden Build, Runtime, sechs
+**DE:** Der folgende Abschnitt beschreibt den damaligen Feature-003-Stand,
+nicht das neue Pruefimage. Aktuelle Grenzen stehen im
+[Versionsabgleich](../maintenance/toolchain-version-audit-2026-10-25.md) und
+in den [Nachpruefungen](../security/toolchain-followups-2026-10-25.md).
+Die alten Befehle sind historische Referenz, kein Auftrag zur Wiederholung
+eines Gesamtmodus oder zur Aenderung abgeschlossener Run-States.
+
+**EN:** This section describes the earlier feature state, not the new audit
+image. Current boundaries are in the version audit and follow-ups. Commands
+below are historical reference, not authority to rerun the all mode or change
+completed run states.
+
+**DE:** Fuer den damaligen technischen Stand wurden Build, Runtime, sechs
 Sprachen, zwei Skriptgrundlagen, sechs Agenten-CLIs, Dispatcher-Dry-run,
 Audit-Stopp und eine SBOM-/Scan-Kette bereits gegen das unveraenderte Image
 `sha256:5bec1910211e61f60d140907a75689f9f6e31c2ec5baceaac7ff10b99d846eaf`

@@ -96,25 +96,33 @@ podman-compose config
 
 ## Aktueller Verifikationsstand / Current Verification State
 
-**DE:** Der technische Referenzstand fuer diese Dokumentation ist das lokale
-Image `sha256:5bec1910211e61f60d140907a75689f9f6e31c2ec5baceaac7ff10b99d846eaf`.
-Build, macOS-rootless-Podman-Runtime, Toolchain-Smoke, sechs Agenten-CLIs,
-Dispatcher-Dry-run, Audit-Stopp und genau eine SBOM-/Grype-Kette sind belegt.
-Getrennte Windows-Host- und Ubuntu/WSL2-Paritaet, die zugehoerigen
-VS-Code-Attaches, der menschliche Erstnutzungstest sowie 14 Critical- und 360
-High-Matches bleiben offen. Beide Plattformpfade duerfen dieselbe
-Windows-Hardware, aber keine gemeinsame Podman-Laufzeit oder Evidenz nutzen.
-Darum bleibt der Feature-Abschluss blockiert.
+**DE:** Der [aktuelle Statusnachtrag](../maintenance/sandbox-current-state-2026-10-25.md)
+verbindet den spaeteren Neubau und Austausch mit Image-ID und SBOM. Die
+unten verlinkte erste Versionspruefung bleibt historischer Kontext.
 
-**EN:** The technical reference state is the local image above. Build, native
-macOS rootless-Podman runtime, toolchain smoke, six agent CLIs, dispatcher
-dry-run, audit stop, and one SBOM/Grype chain are evidenced. Separate
-Windows-host and Ubuntu/WSL2 parity, their VS Code attachments, the human
-first-use test, and 14 Critical plus 360 High matches remain open. Both paths
-may share Windows hardware but not a Podman runtime or evidence, so feature
-completion is blocked.
+**EN:** The current status addendum binds the later rebuild and replacement
+to image identity and SBOM. The first version audit linked below remains
+historical context.
 
-Die kanonischen Laufdaten stehen im
-[Feature-Evidenzindex](../security/secure-development/2026-08-30-container-hardening/README.md).
-Sie ersetzen keine formelle Security- oder Plattformfreigabe. / Canonical run
-data is in the feature evidence index and does not replace formal approval.
+**DE:** Der [Versionsabgleich vom 2026-10-25](../maintenance/toolchain-version-audit-2026-10-25.md)
+bindet das ARM64-Pruefimage, dessen Smoke-Tests und SBOM. Das ist nicht
+automatisch das laufende Image. Die [Nachpruefungen](../security/toolchain-followups-2026-10-25.md)
+trennen AMD64-Abnahme, OpenCode-2-Kontrollen, Warnungen und menschliche
+Entscheidungen. Die [Dokumentationspruefung](../fuer-lernende/barrierefreiheit.md)
+bleibt von technischer Toolchain-Abnahme getrennt.
+
+**EN:** The dated version audit binds the ARM64 audit image, smoke tests and
+SBOM. It is not automatically the running image. Follow-ups distinguish
+AMD64 acceptance, OpenCode 2 controls, warnings and human decisions.
+Documentation accessibility review remains separate from toolchain acceptance.
+
+**DE:** Fruehere Image-IDs, CVE-Zaehler und Blocker stehen unveraendert in der
+[historischen Feature-Evidenz](../security/secure-development/2026-08-30-container-hardening/README.md).
+Sie werden ohne neuen Scan weder auf ein neues Image uebertragen noch fuer
+erledigt erklaert. Ein abgeschlossener Feature-Run ersetzt keine aktuelle
+Gesamtfreigabe oder die separat gefuehrte Intake-Reihe.
+
+**EN:** Earlier image IDs, vulnerability counts and blockers remain in
+historical feature evidence. Without a new scan they are neither assigned
+to a new image nor declared resolved. A completed feature run does not replace
+current approval or the separately maintained intake series.

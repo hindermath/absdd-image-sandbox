@@ -27,6 +27,18 @@ valid Git targets.
 
 ## Repository einrichten / Set Up the Repository
 
+**DE:** Fork oder institutionelle Kopie mit gemeinsamer Historie bleibt der
+Standard. Ein Template ist ein unabhängiges neues Repo, kein Fork. Das
+[optionale Template-Profil](template-profil.md) ist vorbereitet, noch nicht
+aktiviert. Die Upstream-Merge-Blöcke unten gelten **nicht** für eine Template-
+Kopie. Ein neues Repo zum Lernen mit SysInfo/Web enthält nur das ausgewählte
+Lernpaket, nicht die vollständige Sandbox.
+
+**EN:** Fork/shared-history institutional copy remains the default. A template
+is independent, not a fork. The optional profile is prepared, not enabled.
+The upstream merge blocks below do not apply to template copies. New SysInfo/
+web product repos contain one selected learning package, not the whole sandbox.
+
 **DE:** Ersetze die Platzhalter durch die von deiner Institution oder dem
 Projekt bereitgestellten HTTPS-Adressen:
 
@@ -61,6 +73,17 @@ git config --local --list
 ```
 
 ## Vor der Arbeit aktualisieren / Update Before Work
+
+**DE:** Nur bei bestätigter gemeinsamer Historie mit der Referenz verwenden.
+Ist `main` durch eigene Commits abgewichen, stoppt `--ff-only`; Änderungen
+bewusst in einem Review-Branch integrieren, nicht erzwingen. Ohne gemeinsamen
+Vorgänger oder in einer Template-Kopie den getrennten Versionsvergleich aus
+dem Template-Profil verwenden. Auch ein Remote-Name beweist keine Verwandtschaft.
+
+**EN:** Use only with verified shared reference history. Local divergent
+commits cause ff-only to stop; integrate deliberately through review, never
+force. Independent template histories require the separate version-comparison
+route. Remote naming alone proves no ancestry.
 
 ```bash
 git fetch --prune upstream
@@ -105,17 +128,28 @@ local audit data, or agent caches.
 
 ## Review auf der Hosting-Plattform / Review on the Hosting Platform
 
-**DE:** Erstelle auf der aktiven Plattform einen Merge Request oder Pull
-Request von deinem Branch nach `upstream/main`. Beschreibe Zweck, Tests,
+**DE:** Für persönliche Änderungen zielt der Merge/Pull Request auf den
+Zielbranch deines eigenen `origin`. Nur ein ausdrücklich beabsichtigter Beitrag
+zur Referenz geht aus einem geeigneten Fork nach `upstream/main`. Ein
+Template-Repo hat keine automatische Beitragsbeziehung zur Referenz. Beschreibe Zweck, Tests,
 Konfigurations- und Secret-Auswirkungen sowie ausgelassene Plattformprüfungen.
 Die Plattformbezeichnung ändert den Review-Grundsatz nicht.
 
-**EN:** On the active platform, create a merge request or pull request from
-your branch to `upstream/main`. Describe purpose, tests, configuration and
+**EN:** Personal changes target your own origin branch. Only an intentional
+reference contribution from a suitable fork targets upstream/main; template
+copies have no automatic contribution relationship. Describe purpose, tests, configuration and
 secret impact, and skipped platform checks. Platform terminology does not
 change the review principle.
 
 ## Nach dem Merge / After the Merge
+
+**DE:** Der folgende Block betrifft einen bestätigten Referenzmerge mit
+gemeinsamer Historie. Nach einem persönlichen Merge dagegen den Zielbranch
+aus `origin` aktualisieren; keine Änderungen automatisch an die Referenz senden.
+
+**EN:** The following block concerns a confirmed reference merge with shared
+history. After a personal merge, update from origin instead; do not automatically
+submit changes to the reference.
 
 ```bash
 git switch main
