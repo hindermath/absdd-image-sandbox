@@ -1,0 +1,642 @@
+# Repository Guidelines
+
+<!-- documentation-reader-contract:start -->
+## Dokumentationspflege / Documentation Maintenance
+
+DE: Bestehende Markdown-Leserpfade unter `docs/fuer-lernende/` und
+`docs/betrieb/` erweitern, keine zweite Lernreihenquelle erzeugen.
+Deutsch zuerst, gleichwertiges Englisch danach, etwa CEFR B2. Befehle mit
+Ausfuehrungsort (Host, Ubuntu/WSL2 oder Container), Shell, Voraussetzungen,
+erwartetem Ergebnis und Fehlerhilfe erklaeren. Destruktive Volume-Optionen
+nicht als normalen Stopp empfehlen. Aktuelle Statusangaben an Datum, Image
+und Evidenz binden; historische Zahlen nicht ungeprueft fortschreiben.
+WCAG 2.2 AA ist Pruefziel, kein Ergebnis automatischer Markdown-Checks.
+OpenCode-2-Datenbankmetadaten sind kein sitzungsbezogener Auditnachweis:
+`session_coverage=not-exported`; keine Datenbankinhalte exportieren.
+
+EN: Extend existing learner and operations Markdown paths; do not create a
+second learning-series source. Use German first and equivalent English,
+around CEFR B2. Explain command location, shell, prerequisites, expected
+result and error help. Never recommend destructive volume options as normal
+shutdown. Bind current status to date, image and evidence; do not repeat
+historical counts without checking. WCAG 2.2 AA is a review target, not the
+result of automated Markdown checks. OpenCode 2 storage metadata does not
+prove session-level audit coverage; never export database contents.
+<!-- documentation-reader-contract:end -->
+
+## Active Compliance Work Queue
+
+This repository maintains open sandbox-governance findings against the generic Secure Development Guideline and checklist `CL_12` ("Agentic AI in Sandbox Environments") from `docs/secure-development`. The complete work list with concrete tasks, acceptance criteria, verification steps, and escalation rules is in `COMPLIANCE-PLAN_RL-SE-001.md`.
+
+**Read `COMPLIANCE-PLAN_RL-SE-001.md` at the start of every Claude session.** That file is the single source of truth for:
+
+- the priority order of open work (P0 must run first, then P1, P2, P3);
+- the per-task commit and pull request conventions used for these changes;
+- the items that must NOT be handled by an agent and have to be escalated to a human (API key rotation, formal sandbox approval, platform-side branch protection rules, external management-system register entries).
+
+At the end of every Claude session, append a short session log under `docs/security/agent-session-log/<YYYY-MM-DD-HHMM>.md` as required by the plan. The log records which plan IDs were completed, partially completed, or escalated.
+
+The plan and these guidelines work together: this `CLAUDE.md` file describes the repository conventions; `COMPLIANCE-PLAN_RL-SE-001.md` describes the generic secure-development and sandbox-governance work that brings those conventions into provable conformance.
+
+## Secure-Development Neutralitaet / Secure Development Neutrality
+
+Treat `docs/secure-development/` as the generic Secure-Development-Basis for
+training, review, and hardening work. Do not describe it as a company policy,
+internal guideline, or concrete management-system requirement.
+
+Generic roles and placeholders such as organization, project owner, security
+review, CISO/ISB/KIB, document repository, risk register, RoPA, provider, or
+platform are allowed when they remain generic. Concrete organizations, private
+URLs, local host paths, provider portals, account-specific defaults, external
+document-management or security-management systems, or platform rules must be
+removed, generalized, or marked as example, context, `N/A`, `Open`, or
+project-specific evidence.
+
+Spec-Kit runs against this baseline must create project-specific evidence.
+Human-only items such as formal approval, external registers, secret rotation,
+provider/model approvals, and platform branch protection must not be claimed as
+completed by an agent.
+
+## Git Hosting for Learners
+
+Learner documentation must not require a GitHub account universally. The
+learner's personal fork or institution-provided repository is `origin`; the
+institution-maintained reference is `upstream`. GitHub is one profile alongside
+GitLab, Codeberg, Forgejo, and other Git-capable institutional systems. Require
+a GitHub account only for the direct GitHub route or optional GitHub Copilot
+sign-in. Keep the public GitHub URL as provenance, not as the only clone path.
+
+## Project Structure & Module Organization
+
+This repository contains a Podman-based agentic learning sandbox with OpenCode, four required agent CLIs, six required memory-safe language toolchains (.NET/C#, Java, Go, Rust, Python, and Swift), PowerShell 7 as a second scripting foundation, Node.js/npm as supporting tooling, Syft, and Spec Kit; it is not an application codebase.
+
+- `Dockerfile`: builds from the Microsoft .NET SDK image in MCR pinned by digest and provides the six required language toolchains (.NET/C#, Java, Go, Rust, Python, and Swift), a version-checked PowerShell 7 from the base image as a second scripting foundation, Node.js/npm as supporting tooling, pinned OpenCode, Codex, Claude Code, Antigravity CLI, GitHub Copilot CLI, Syft, `uv`, Spec Kit, and common CLI helper tools.
+- `compose.yml`: defines the `ade` service, builds the local image, and mounts separate persistent state volumes for OpenCode and all four required agents.
+- `home-baseline.lock.json`: pins the public `home-baseline` release and exact commit embedded as a read-only shallow Git reference under `/opt/home-baseline`.
+- `scripts/sync-home-baseline-runtime.sh`: installs the explicit three-mode wrapper that previews, checks, or applies manifest-defined Home Runtime content without Git side effects.
+- `compose.home-baseline.yml`: optional Compose override that replaces the embedded reference with the learner's writable personal `home-baseline-source` checkout. The canonical user path is `/home/adedev/home-baseline-source`; `/home/adedev/home-baseline-tmp` remains a deprecated compatibility symlink.
+- The container runs commands as the Linux user `adedev`; keep home-directory paths under `/home/adedev`.
+- `opencode.jsonc`: configures OpenCode safety defaults without an API key or preselected model. Keep comments useful for first-year IT specialist apprentices.
+- Agent state is isolated in `codex_data`, `claude_data`, `gemini_data`, and `copilot_data`; do not replace these with bind mounts to committed directories.
+- `opencode.env.example`: documents that no OpenCode provider environment variable is required by this image.
+- `workspace/`: mounted into the container as `/workspace`; place working project files there.
+- `ADE_DEV_SANDBOX_DIR`: host checkout of this repository mounted into the container as `/ade-dev-sandbox` for controlled repository maintenance tasks from inside the container.
+- `HOME_BASELINE_DIR`: optional persistent host checkout of the learner's personal `home-baseline-source` fork, used only with `compose.home-baseline.yml` and mounted over `/opt/home-baseline`; `/home/adedev/home-baseline-source` is canonical and `/home/adedev/home-baseline-tmp` is transitional.
+- `RIDER_PROJECTS_DIR`: host directory mounted into the container as `/rider-projects` for Rider projects.
+- `JAVA_PROJECTS_DIR`: host directory mounted into the container as `/java-projects` for Java, Maven, and Spring Boot projects.
+- `POWERSHELL_PROJECTS_DIR`: host directory mounted into the container as `/powershell-projects` for PowerShell learning and project work.
+- `GO_PROJECTS_DIR`: host directory mounted into the container as `/go-projects` for Go projects.
+- `RUST_PROJECTS_DIR`: host directory mounted into the container as `/rust-projects` for Rust projects.
+- `PYTHON_PROJECTS_DIR`: host directory mounted into the container as `/python-projects` for Python projects.
+- `SWIFT_PROJECTS_DIR`: host directory mounted into the container as `/swift-projects` for Swift projects.
+- `SECURE_CASE_TRACKER_PROJECTS_DIR`: host directory mounted into the container as `/secure-case-tracker-projects` for Secure CaseTracker learning and project work.
+- `SECURE_SERVICE_HARVESTER_PROJECTS_DIR`: host directory mounted into the container as `/secure-service-harvester-projects` for Secure Service Harvester learning and project work.
+- `SECURE_ORDER_DESK_PROJECTS_DIR`: host directory mounted into the container as `/secure-order-desk-projects` for Secure OrderDesk learning and project work.
+- `java-projects/`: local fallback mount for `/java-projects` when `JAVA_PROJECTS_DIR` is not set.
+- `powershell-projects/`: local fallback mount for `/powershell-projects` when `POWERSHELL_PROJECTS_DIR` is not set.
+- `go-projects/`: local fallback mount for `/go-projects` when `GO_PROJECTS_DIR` is not set.
+- `rust-projects/`: local fallback mount for `/rust-projects` when `RUST_PROJECTS_DIR` is not set.
+- `python-projects/`: local fallback mount for `/python-projects` when `PYTHON_PROJECTS_DIR` is not set.
+- `swift-projects/`: local fallback mount for `/swift-projects` when `SWIFT_PROJECTS_DIR` is not set.
+- `secure-case-tracker-projects/`: local fallback mount for `/secure-case-tracker-projects` when `SECURE_CASE_TRACKER_PROJECTS_DIR` is not set.
+- `secure-service-harvester-projects/`: local fallback mount for `/secure-service-harvester-projects` when `SECURE_SERVICE_HARVESTER_PROJECTS_DIR` is not set.
+- `secure-order-desk-projects/`: local fallback mount for `/secure-order-desk-projects` when `SECURE_ORDER_DESK_PROJECTS_DIR` is not set.
+- `dotnet/ContainerBuild.props`: mounted into `/dotnet-config` and loaded through `DirectoryBuildPropsPath` to redirect .NET build artifacts to `/dotnet-build`.
+- `dotnet/dotnet-wrapper.sh`: installed as `/usr/local/bin/dotnet` to filter one known workload verification noise line while preserving real output and exit codes.
+- `spec-kit/patch-specify-cli.py`: patches Spec Kit copy behavior so initialization works better on Windows/WSL bind mounts.
+- `README.md`: user-facing setup and operation guide.
+
+There is currently no `src/`, `tests/`, or asset directory.
+
+## Build, Test, and Development Commands
+
+Run commands from the repository root:
+
+```bash
+podman-compose config
+```
+
+Validates the Compose file without printing values from `opencode.env` and
+without requiring a running Podman machine.
+
+```bash
+podman compose up -d
+```
+
+Builds the image if needed and starts the `ade` container.
+
+```bash
+podman compose exec ade bash
+```
+
+Opens a shell inside the running container.
+
+On macOS or Windows, initialize and start the Podman machine before running Compose commands:
+
+```bash
+podman machine init
+podman machine start
+podman compose build --pull
+podman compose up -d
+podman compose exec ade bash
+```
+
+Use `podman-compose config` for config-only validation. If `podman compose`
+is not available for lifecycle actions on the local installation, use
+`podman-compose` with the same arguments.
+
+```bash
+specify version
+specify check
+```
+
+Verifies the Spec Kit CLI installation inside the container.
+
+```bash
+cd /rider-projects
+```
+
+Moves to the mounted Windows/Rider projects directory inside the container.
+
+```bash
+cd /home/adedev/home-baseline-source
+```
+
+Moves to the pinned read-only `home-baseline` reference included in the image.
+Its source, release, commit, and license are locked in
+`home-baseline.lock.json`; no script from the reference runs automatically.
+For writable Level-0 work, public users create their personal fork or
+institution-provided repository and set `HOME_BASELINE_DIR` locally. The
+Compose override replaces `/opt/home-baseline` while preserving this user-facing
+path. Only the direct GitHub profile requires a GitHub account.
+
+The Level-0 source is used directly inside the container. Normal writing
+`sync-home.*` runs targeting `/home/adedev` remain blocked. The explicit
+`sync-home-baseline-runtime --apply` wrapper may synchronize only manifest-defined
+`homeRuntime` content; `--dry-run` and `--check-only` are write-free, and no
+mode means no write. The wrapper offers no force mode and runs no pull, push,
+commit, Git initialization, Git configuration, or identity change. Selected
+runtime content may enter persistent agent volumes, but credentials, provider
+state, and local settings must remain untouched. No writing sync runs during
+image build or container startup.
+
+```bash
+bash scripts/compose-down-with-audit.sh --podman
+```
+
+Stops the environment after successful metadata export and preserves volumes.
+Volume deletion is a separate human-confirmed operation; never append `-v`
+or `-Volumes` for normal shutdown. Use the PowerShell wrapper described below
+on a PowerShell host. Do not bypass the wrapper or a failed audit export.
+
+## Coding Style & Naming Conventions
+
+Use two-space indentation for JSON and YAML. Keep shell commands simple and copyable. Use lowercase file names unless an ecosystem convention requires otherwise, such as `Dockerfile`, `README.md`, and `AGENTS.md`.
+
+Prefer explicit configuration over hidden behavior. Keep secrets out of tracked files.
+
+Every `ARG` in `Dockerfile` must have an immediately preceding Renovate metadata comment with a matching `argName`. Use the generic form `# renovate: datasource=<renovate-datasource> depName=<dependency-name> versioning=<versioning> argName=<ARG_NAME>` when the value is a simple version. Add or update a dedicated `renovate.json` custom manager when the value needs special parsing, and keep `docs/security/dependency-update-policy.md` in sync. The local pre-commit hook `dockerfile-arg-renovate-metadata` enforces this for current and future Dockerfile `ARG` lines.
+
+## Agentische Skriptausfuehrung / Agentic Script Execution
+
+Vor lokaler Automation zuerst das Betriebssystem erkennen. Wenn `pwsh`
+verfuegbar ist, vorhandene PowerShell-7-Skripte oder Cmdlets bevorzugen und
+auf diesem macOS-Host wegen Profil-Nebenwirkungen `pwsh -NoProfile` nutzen.
+Fuer strukturierte lokale Automation ist C# ueber `.NET` oder `mono` ein
+zulaessiger zweiter Weg, wenn Typisierung, Dateiformate oder
+Wiederverwendbarkeit davon profitieren. Erst wenn PowerShell oder C# nicht
+sinnvoll passen, die OS-nahe vorhandene Repo-Variante nutzen, in diesem
+Repository typischerweise Bash, Podman-Compose-Befehle oder vorhandene
+`scripts/`-Wrapper. Keine neue Sprache nur aus Bequemlichkeit einfuehren, wenn
+ein bestehendes Repo-Skript denselben Zweck erfuellt.
+
+*Before local automation, detect the operating system. If `pwsh` is available,
+prefer existing PowerShell 7 scripts or Cmdlets and use `pwsh -NoProfile` on
+this macOS host because the profile has side effects. For structured local
+automation, C# via `.NET` or `mono` is an acceptable second option when typing,
+file formats, or reuse benefit from it. Only use the OS-native existing
+repository variant when PowerShell or C# does not fit, typically Bash, Podman
+Compose commands, or existing `scripts/` wrappers in this repository. Do not
+introduce a new language for convenience when an existing repository script
+already solves the task.*
+
+<!-- agent-prompt-dispatcher-guidance:start -->
+## Nicht-interaktive Agenten-Prompts / Non-Interactive Agent Prompts
+
+Die Repo-Einstiege `scripts/agent-prompt.sh` und
+`scripts/agent-prompt.ps1` zielen standardmaessig auf den laufenden
+Compose-Service `ade`. Im Image sind beide als `agent-prompt` und
+`/usr/local/bin/agent-prompt.ps1` installiert; dort setzt
+`ADE_AGENT_PROMPT_TARGET=local` die direkte CLI-Ausfuehrung. Unterstuetzt
+werden `codex`, `claude`, `opencode`, `copilot`, `gemini` und `agy`;
+Antigravity-Printmodus bleibt experimentell.
+
+Prompts mit vertraulichem Inhalt ueber stdin oder `--prompt-file` uebergeben.
+Der Dispatcher darf keine Anmeldung, Provider- oder Modellwahl,
+Berechtigungserweiterung oder Approval-Umgehung automatisieren. Gemeinsame
+Aenderungen an Mapping und Argumentsemantik muessen atomar in beiden Skripten,
+`scripts/tests/test_agent_prompt_dispatchers.py`, `README.md` und der
+Lernenden-Anleitung gepflegt werden.
+
+*The repository entrypoints target the running `ade` service by default. Both
+variants are installed in the image and run agent CLIs directly there through
+`ADE_AGENT_PROMPT_TARGET=local`. Use stdin or `--prompt-file` for
+confidential prompts. The dispatcher must not automate sign-in, provider or
+model selection, permission broadening, or approval bypasses. Keep both
+scripts, their parity tests, and user documentation synchronized.*
+<!-- agent-prompt-dispatcher-guidance:end -->
+
+
+## Testing Guidelines
+
+There is no test framework in this repository. Before committing, run:
+
+```bash
+podman-compose config
+```
+
+If `compose.home-baseline.yml` or the optional `HOME_BASELINE_DIR` workflow
+changed, also run with a local checkout:
+
+```bash
+HOME_BASELINE_DIR=/path/to/home-baseline-source podman-compose -f compose.yml -f compose.home-baseline.yml config
+```
+
+For Dockerfile changes, also run:
+
+```bash
+podman compose build --pull
+```
+
+The `--pull` flag is still useful for registry access checks, but the Dockerfile pins the MCR-hosted .NET SDK base image by digest for reproducible builds. Update the digest deliberately in the Dockerfile when the base image should change.
+
+Before distributing or handing over a rebuilt sandbox image, generate a
+CycloneDX JSON SBOM from the final image:
+
+```bash
+scripts/build-and-sbom.sh --skip-build
+```
+
+On Windows, use the PowerShell variant:
+
+```powershell
+.\scripts\build-and-sbom.ps1 -SkipBuild
+```
+
+Generated `sboms/*.cdx.json` files are build artifacts. Keep `sboms/.gitkeep`
+tracked, but do not commit generated SBOM files unless the release process
+explicitly requires it.
+
+After Dockerfile changes that affect language toolchains, also verify the container tools:
+
+```bash
+dotnet --info
+java --version
+javac --version
+mvn --version
+go version
+gopls version
+rustc --version
+cargo --version
+cargo clippy --version
+python --version
+pwsh --version
+node --version
+npm --version
+swift --version
+swiftc --version
+command -v sourcekit-lsp
+codex --version
+claude --version
+agy --version
+copilot --version
+syft version
+```
+
+Use `podman-compose config` for config-only validation. `podman compose config`
+is only an additional local plausibility check when the Podman machine
+or socket is healthy. If `podman compose` is not available for lifecycle
+actions on the local installation, use `podman-compose` with the same
+arguments.
+
+When a local Podman machine or Compose provider does not use the intended
+endpoint, do not treat a stored SSH connection such as `127.0.0.1:<port>` as
+the repository default. First use the platform's native Podman setup. If an
+explicit endpoint is needed, derive it from the local platform at runtime and
+keep the concrete path or pipe out of committed files:
+
+- macOS: read `.ConnectionInfo.PodmanSocket.Path` from
+  `podman machine inspect podman-machine-default`, verify that it is a socket,
+  and set `CONTAINER_HOST=unix://...` for Podman plus `DOCKER_HOST=unix://...`
+  only for Docker-compatible API clients.
+- Windows: use the `PodmanPipe` or socket reported by `podman machine inspect`
+  or Podman Desktop; do not hard-code a named pipe or machine port in repo
+  guidance.
+- Linux: prefer direct local Podman without an endpoint override; when an API
+  socket is needed for Docker-compatible tooling, use the active local Podman
+  socket such as `unix://${XDG_RUNTIME_DIR}/podman/podman.sock`.
+
+`DOCKER_HOST` in this repository means "Docker-compatible API endpoint for
+Podman-backed tooling"; it does not reintroduce Docker as the target runtime.
+
+For README or `AGENTS.md` changes that add or change documented copy-and-paste
+commands, always run `git diff --check` as the minimum repository-side
+plausibility check. If Podman or `podman-compose` is
+available, also run the documented commands practically inside the container.
+Use temporary directories under `/tmp` for these checks unless the documentation
+explicitly describes a host-mounted project directory; this keeps sample
+projects out of `/workspace`, `/rider-projects`, and the repository.
+
+Treat platform coverage explicitly. A successful run on only one host platform
+is a local plausibility check, not full cross-platform acceptance. When a change
+claims or affects macOS, Windows/WSL2, and Linux/Ubuntu behavior, verify the
+commands on each affected platform when those systems are available. For
+config-only validation, prefer `podman-compose config`; for lifecycle commands,
+use the platform's actual Podman Compose command (`podman compose` or
+`podman-compose`) rather than assuming one spelling. If a platform, engine,
+Podman socket, or network access for package downloads is unavailable, record
+the skipped check and the reason in the pull request text or in the agent
+session log.
+
+For documented web-app examples, bind the app to `0.0.0.0` inside the container
+and use a port from the published `5100-5199` range. During practical checks,
+verify that the app responds over HTTP and stop any background test process
+before ending the session.
+
+Do not require a real API key for validation unless the change explicitly affects live Opencode usage.
+
+For .NET projects under `/rider-projects`, keep `bin`, `obj`, and AppHost output off the Windows bind mount. The mounted `ContainerBuild.props` sends build output to the `dotnet_build` volume at `/dotnet-build` and imports repository-specific `Directory.Build.props` files when present.
+
+For Java projects, use `/java-projects` and prefer project-local Maven or Gradle wrappers when a repository provides them. The container includes JDK 25 LTS and Maven for baseline Java and Spring Boot development. Gradle and Spring Boot CLI are not installed globally unless this repository is intentionally extended.
+
+For Go projects, use `/go-projects` unless a project-specific mount is configured. Keep dependencies in `go.mod`, run `gofmt`/`go test ./...`, and add web frameworks such as `gin`, `fiber`, or `chi` per project instead of installing them globally.
+
+For Rust projects, use `/rust-projects` unless a project-specific mount is configured. Keep dependencies in `Cargo.toml`, run `cargo fmt`, `cargo clippy -- -D warnings`, and `cargo test`. Add frameworks such as `tokio`, `axum`, `actix-web`, or `serde` per project instead of installing them globally.
+
+For Python projects, use `/python-projects` unless a project-specific mount is configured. The default `python` and `python3` use pinned CPython under `/opt/cpython`; `/usr/bin/python3` remains Ubuntu-managed for system tools. Keep virtual environments project-local or under an explicitly chosen cache path, and do not rely on globally installed application dependencies.
+
+For PowerShell projects, use `/powershell-projects` unless a project-specific mount is configured. Run scripts with `pwsh -NoLogo -NoProfile`, keep modules project-local or explicitly versioned, and validate repository-owned scripts with PSScriptAnalyzer when that module is available.
+
+For Swift projects, use `/swift-projects` unless a project-specific mount is configured. Keep dependencies in `Package.swift`, run `swift build`, `swift test`, and `swift run` for executable smoke checks. The image includes SourceKit-LSP for editors that attach through VS Code Dev Containers or another LSP-capable client.
+
+ASP.NET apps must bind to `0.0.0.0` inside the container to be reachable from Windows. Compose publishes `127.0.0.1:5100-5199:5100-5199`; keep sample web app ports in that range unless the Compose file is updated.
+
+The Compose environment disables general .NET workload update notifications with `DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE=true` and disables the MSBuild workload resolver with `MSBuildEnableWorkloadResolver=false`. Install real workloads explicitly in the Dockerfile and re-enable the resolver if a project requires MAUI, WebAssembly, or another optional SDK workload.
+
+The `dotnet` wrapper must only filter the exact workload verification message. Do not broaden the filter, because normal warnings and build errors must stay visible.
+
+Spec Kit is installed from the exact release commit pinned in `Dockerfile`; the build verifies its package version. Keep the commit and version check synchronized when upgrading. See `docs/maintenance/toolchain-version-audit-2026-10-25.md` for the latest version audit.
+
+For Spec Kit initialization under `/rider-projects`, prefer `specify init . --integration opencode --force`. If prompted for script type, choose `sh` in this Linux container. For each application repository, decide whether `.opencode/` or sensitive parts of it belong in that repository's `.gitignore`.
+
+Spec Kit is patched after installation to avoid Python metadata-preserving copy operations on host bind mounts. Keep this patch narrow; it should only affect copying behavior, not Spec Kit command semantics.
+
+## Commit & Pull Request Guidelines
+
+The current history uses short, imperative commit messages, for example `Update opencode podman setup` and `Add README table of contents`.
+
+For pull requests, include:
+
+- a short summary of the change
+- any Podman Compose commands used for validation
+- notes about configuration or secret handling
+- screenshots only if documentation rendering or UI output is relevant
+
+Repository governance lives partly in this repository and partly in the active
+GitHub hosting platform. `.github/CODEOWNERS` and
+`.github/pull_request_template.md` are repository-side guidance for reviews.
+Platform-side enforcement such as repository rulesets, required checks, Code
+Owner review, signed-commit policy, and admin bypass must be configured
+separately by an Owner or Admin on GitHub. For the target public-readiness
+ruleset and signed-commit notes, see `docs/security/branch-protection.md`.
+
+## Security & Configuration Tips
+
+Never commit `opencode.env`; it is ignored by `.gitignore` and may contain local provider secrets when a user adds their own OpenCode configuration. Keep local secret files restricted:
+
+```bash
+chmod 600 opencode.env
+```
+
+If copying credentials for a local OpenCode provider, only write the key into `opencode.env` and do not print it in logs or documentation.
+
+Run the repository secret scan before committing:
+
+```bash
+pre-commit install
+pre-commit run --all-files
+```
+
+If `pre-commit` is not installed in the current environment, install it first with `uv tool install pre-commit` or run it via `uvx pre-commit run --all-files`.
+
+Audit text for P1-3: "Client-side Control; central secret push blocking
+depends on the active hosting platform, edition, and admin-operated hooks."
+
+Run the agent-session audit export at least once per workday and always before removing Compose volumes. The standard stop path is the wrapper, because it exports metadata before running `compose down`:
+
+```bash
+bash scripts/compose-down-with-audit.sh --podman
+```
+
+On Windows PowerShell with Podman:
+
+```powershell
+.\scripts\compose-down-with-audit.ps1 -Engine podman
+```
+
+Normal shutdown preserves volumes. Add `-v` or `-Volumes` only after explicit confirmation of data loss. Both wrappers abort before `down` if audit export fails. If a wrapper cannot be used, a human must confirm successful metadata export before any deliberate volume removal; do not bypass an export failure. The entrypoint hook is best effort and does not replace this check.
+
+The export writes metadata only to `/audit/YYYY-MM-DD.jsonl`. Do not extend it to include prompt text, response text, raw session payloads, or secrets. The default host directory is `audit-logs/`; generated JSONL files stay untracked.
+
+## Spec-Kit-Modell-Routing / Spec Kit Model Routing
+
+- Modellwahl ist operative Agenten-Routing-Guidance, keine Feature-Anforderung. Modellnamen nicht in `spec.md`, `plan.md`, `tasks.md` oder einzelne Feature-Specs schreiben; diese Artefakte muessen reproduzierbar bleiben, auch wenn Modellnamen wechseln oder ein anderer KI-Agent verwendet wird.
+- Der jeweilige Agent soll diese Empfehlungen auf seine aktuell verfuegbaren Modelle abbilden; keine feste Anbieter- oder Modellbindung ableiten.
+- Fuer Spec-Kit-Spezifikation, Klaerung, Planung, Tasks und Analyse (`/speckit-specify`, `/speckit-clarify`, `/speckit-plan`, `/speckit-tasks`, `/speckit-analyze`; je nach Agent auch `/speckit.specify` usw.) das staerkste verfuegbare Frontier-Reasoning-/Coding-Modell bevorzugen.
+- Fuer vollstaendige, lang laufende `/speckit-implement`-Laeufe das staerkste verfuegbare Long-Running-Agent-Modell bevorzugen; das Frontier-Modell nutzen, wenn maximale Urteilsguete wichtiger ist als Laufzeitstabilitaet.
+- Fuer fokussierte Reviews oder CI-Fixes ein coding-optimiertes Modell bevorzugen.
+- Fuer triviale Bereinigung, Formatierung oder risikoarme mechanische Edits ist ein schnelles kleines Coding-Modell akzeptabel.
+
+*Model choice is operational agent-routing guidance, not a feature requirement. Do not pin model names in `spec.md`, `plan.md`, `tasks.md`, or individual feature specs; those artifacts must stay reproducible even when model names change or another AI agent is used. Each agent should map these recommendations to its currently available models; do not derive a fixed vendor or model requirement. For Spec-Kit specification, clarification, planning, task generation, and analysis (`/speckit-specify`, `/speckit-clarify`, `/speckit-plan`, `/speckit-tasks`, `/speckit-analyze`; or `/speckit.specify` etc. depending on the agent surface), prefer the strongest available frontier reasoning/coding model. For complete long-running `/speckit-implement` runs, prefer the strongest available long-running agent model; use the frontier model when maximum judgment quality is more important than runtime stability. For focused review or CI fixes, prefer a coding-optimized model. For trivial cleanup, formatting, or low-risk mechanical edits, a fast small coding model is acceptable.*
+
+<!-- learner-a11y-baseline:start -->
+## Hinweise zur Lernenden- und A11Y-Basis / Notes on the Learner and A11Y Baseline
+
+- Verbindliche Zielgruppen ab dem ersten Ausbildungsjahr sind
+  Fachinformatiker*innen, IT-System-Elektroniker*innen, Kaufleute für
+  IT-System-Management und Kaufleute für Digitalisierungsmanagement.
+- Lern-, Bedien-, Governance- und Spec-Kit-Inhalte stehen auf Deutsch zuerst
+  und Englisch danach, verwenden ungefähr CEFR B2 und erklären Fachbegriffe
+  beim ersten Auftreten.
+- Spec-Kit-Erfahrung wird nicht vorausgesetzt. Befehle, Artefakte, Zustände und
+  Übergänge werden beim ersten Gebrauch verständlich eingeführt.
+- Abhängigkeiten, Zustände und Entscheidungen erhalten eine vollständige
+  textorientierte Erklärung; eine ausschließlich visuelle Darstellung genügt
+  nicht.
+- `Programmierung #include<everyone>` und WCAG 2.2 Level AA gelten als
+  verbindliche Prüfbasis, soweit die Kriterien auf das Artefakt anwendbar sind.
+
+*The binding audience starts in the first training year and includes IT
+specialist and IT systems electronics technician apprentices plus both IT
+management occupations. Learner, usage,
+governance, and Spec Kit content is German-first/English-second at about CEFR
+B2, explains technical terms at first use, assumes no prior Spec Kit
+experience, and never relies on visual-only dependency, state, or decision
+information. `Programmierung #include<everyone>` and WCAG 2.2 Level AA are the
+review baseline wherever applicable.*
+<!-- learner-a11y-baseline:end -->
+
+<!-- intake-mermaid-guidance:start -->
+## Textorientierte Mermaid-Diagramme / Text-First Mermaid Diagrams
+
+- Kommende Lastenhefte und Intake-Reihenfolgen sollen bei nicht trivialen
+  Abhaengigkeiten, Ablaeufen oder Zustaenden ein Mermaid-Diagramm direkt im
+  versionierten Markdown enthalten.
+- Vor jedem Diagramm muss eine vollstaendige deutschsprachige und danach
+  englischsprachige Textalternative als geordnete Liste oder Tabelle stehen.
+  Sie nennt alle Knoten, Kanten, Status und Entscheidungen und bleibt die
+  verstaendliche Grundlage, wenn Mermaid nicht gerendert wird.
+- Mermaid ist eine ergaenzende Ansicht. Ein vorhandenes maschinenlesbares
+  Manifest bleibt massgeblich; Diagramm und Text duerfen keinen davon
+  unabhaengigen Zustand erfinden.
+- Der Mermaid-Quelltext verwendet stabile, sprechende Knoten-IDs, einfache
+  `flowchart TD`- oder `flowchart LR`-Strukturen und keine Information, die nur
+  durch Farbe, Form oder Position vermittelt wird. Externe Bilder oder
+  generierte Binaerdiagramme sind fuer diese Ergaenzung nicht erforderlich.
+- Bei Aenderungen an Abhaengigkeiten oder Status werden Textalternative und
+  Mermaid-Quelle gemeinsam aktualisiert.
+
+*Future requirements documents and intake order views should embed Mermaid
+for non-trivial dependencies, flows, or states. A complete German-first and
+English-second ordered text or table alternative must precede every diagram
+and carry every node, edge, status, and decision. Mermaid is supplementary;
+the machine-readable manifest remains authoritative. Use stable descriptive
+node IDs, simple flowcharts, and no color-, shape-, or position-only meaning.
+Update the text alternative and Mermaid source together.*
+<!-- intake-mermaid-guidance:end -->
+
+<!-- SPECKIT START -->
+For additional context about technologies to be used, project structure,
+shell commands, and other important information, read the current plan
+<!-- SPECKIT END -->
+
+<!-- statistics-profile-2-guidance:begin -->
+## Statistikprofil 2 / Statistics Profile 2
+
+- Verbindlich sind `docs/project-statistics.config.json` und der markierte Profil-2-Block in `docs/project-statistics.md`; aktualisieren mit `render-project-statistics.*`.
+- Profil 2 zeigt exakte KPI, Artefaktmix, 52-Wochen-Aktivitaet, Wochen- und kumulatives Volumen, belastbare Phasen oder Monatsfallback sowie Speedup-Vergleiche.
+- Nur ASCII verwenden: Heatmap `0..4`, `-` fuer noch nicht abgelaufene Tage und Gauges `#`/`.`; jedes Textdiagramm bleibt hoechstens 100 Zeichen breit.
+- Jede Grafik braucht genaue Zahlen und eine bilinguale CEFR-B2-Textalternative, Deutsch zuerst und Englisch danach.
+- Methodik v2 wertet Git-getrackten Text und Bruttoaenderungen aus Nicht-Merge-Commits aus; Ledger, `STATS.md` und Binaerdaten bleiben ausgeschlossen.
+- Referenzen dieses Repositories: `80` Zeilen/Arbeitstag konservativ und `100` Zeilen/Arbeitstag Thorsten-Solo. Speedup bleibt Lieferdichte, keine Stoppuhr- oder Personenbewertung.
+- Dieser Vertrag ersetzt aeltere Visualisierungsvorgaben; historische Ledger-Eintraege und archivierte Profil-1-Diagramme bleiben unveraendert.
+- Gemeinsame Aenderungen werden synchron in `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md` und `.github/agents/copilot-instructions.md` gepflegt.
+
+*Profile 2 is governed by the JSON configuration and generated marker block. Use ASCII `0..4`, `-`, and `#`/`.`, exact values, German-first bilingual CEFR-B2 alternatives, and a 100-character chart limit. Methodology v2 excludes the ledger, `STATS.md`, and binaries. This repository uses manual references of `80` and `100` lines per workday. Speedup describes delivery density, not stopwatch or personal performance. This contract supersedes older visualization rules while retaining historical entries and archived Profile 1 charts.*
+<!-- statistics-profile-2-guidance:end -->
+
+## Secure Development Assurance – freigegebenes Projektprofil / Approved Project Profile
+
+- Die unveraenderte Basis des optionalen 14er-Statistik-Piloten ist `secure-development-assurance-thirteen-governance-presets`: die bisherigen zwölf Presets plus `secure-development-assurance-governance` v0.1.8, aktiviert mit Priorität 15. Andere Profile und globale Defaults bleiben unverändert.
+- Maßgebliche Produktquellen sind ausschließlich die veröffentlichten eigenständigen GitHub-Preset-Repositories. Lokale Installationen sind Integrationskopien, keine zusätzlichen Produktquellen; Änderungen entstehen im jeweiligen Preset-Repository, nicht in einem Home-Baseline-Scaffold.
+- `speckit.secure-development-status` prüft Evidence strikt lesend. `speckit.secure-development-review` benötigt einen ausdrücklich beauftragten Gate-/Kontext-Review; die Installation startet keine Reviews und erteilt keine menschlichen Freigaben.
+- Keine C5-Testat-, Zertifizierungs- oder vollständige Readiness-Prüfung; `Ready` gilt nur für den gebundenen Evidence-Kontext. Projektgeführte Baseline-Versionen werden nicht durch die Preset-Version ersetzt.
+- Bedienung, Paketbindung, Erhaltungsnachweis und Grenzen: [Integrationsnachweis](docs/maintenance/secure-development-assurance-integration.md), relativ zur Repository-Wurzel.
+
+*The optional fourteen-preset statistics pilot retains this thirteen-preset base: its existing twelve presets plus Secure Development Assurance v0.1.8, enabled at priority 15. Other profiles and global defaults stay unchanged. Published standalone GitHub repositories are the only product sources; installed copies are integrations, not competing sources. Status is read-only; a gate review requires explicit context-specific authority. Installation starts no reviews and grants no human approvals. This is not a C5 attestation, certification, or full readiness check; `Ready` is evidence-context-specific. The project baseline retains its own version. See the integration record relative to the repository root.*
+
+<!-- BEGIN spec-kit-diagrams-completion -->
+## Mermaid und Spec-Kit-Abschlussbericht / Mermaid and Spec Kit completion report
+
+Neue Lastenhefte enthalten bei hilfreichen Abläufen, Zuständen oder Abhängigkeiten
+lesbaren Mermaid-Quelltext im Markdown und eine gleichwertige Textalternative.
+Bei einfachen Inhalten die Nichtanwendung kurz begründen. Diagramme bilden die
+verbindlichen Text-/Manifestquellen ab; Farbe allein trägt keine Bedeutung.
+Nach jedem vollständig abgeschlossenen Spec-Kit-Feature-Lauf den vollständigen
+Ergebnisbericht im Chat anzeigen und im Feature-Verzeichnis als
+`completion-report.md` versionieren. Einzelne Planungs-/Status-/Review-Kommandos
+lösen keinen solchen Bericht aus; blockierte oder pausierte Läufe als
+Zwischenbericht kennzeichnen. Vorlage: `.specify/templates/completion-report-template.md`;
+Regel: `docs/spec-kit-diagrams-and-completion-reports.md`.
+Ergebnis, Tests, Dokumentation, Git-gebundene Umfangszahlen, Verlauf und Restpunkte
+belegen. Programmlogik von generierter Evidence, Git-Wandzeit von aktiver
+Arbeitszeit und bestandene von ausgefallenen Prüfungen unterscheiden. Finale
+Merge-/Sync-Evidence im Chat und bestehenden Closeout-Nachweis ergänzen; keine
+zusätzlichen Commits allein für selbstreferenzielle Berichts-/Statistikwerte.
+Diese Projektregel und lokale Vorlagen bei Spec-Kit-Updates erhalten.
+
+*New intakes use readable Mermaid Markdown and equivalent text alternatives for
+useful workflows, states or dependencies; justify omission for simple content.
+Diagrams reflect authoritative text/manifests and never rely on color alone.
+After each completed feature run, show the full outcome report in chat and
+version completion-report.md in the feature directory using the shared template
+and rule above. Individual planning/status/review commands do not trigger it;
+paused/blocked runs receive interim reports. Evidence outcomes, tests, docs,
+Git-bound counts, delivery history and remaining work. Distinguish code from
+volume generated as evidence, elapsed from active time, and passed from failed
+checks. Add final merge/sync proof in chat and existing closeout evidence, without
+commits solely for self-referential counts or IDs. Preserve local rules/templates
+across Spec Kit updates.*
+<!-- END spec-kit-diagrams-completion -->
+
+<!-- project-statistics-pilot:begin -->
+## Optionaler Statistik-Pilot / Optional Statistics Pilot
+
+Dieses Projekt verwendet im genehmigten Pilotbranch das Profil
+`project-statistics-fourteen-governance-presets`: unveraenderte 13er-Basis plus
+`project-statistics-governance` v0.1.3, aktiviert mit Prioritaet 90.
+Das Preset dient reproduzierbarer Projekttransparenz, nicht der Bewertung von
+Lernenden, Qualitaet oder KI-Zeitersparnis. Die bestehende Statistik bleibt
+kanonisch. Der kuenftige getrennte Kontext ist `docs/project-statistics-pilot/`;
+Referenz-Modellrechnungen bleiben ausgeschaltet. Installation startet weder
+Messung noch Spec-Kit-Feature und erteilt keine Commit-/Push-/Mergefreigabe.
+Integrationsnachweis: `docs/maintenance/project-statistics-installation-v010.md`
+relativ zur Repository-Wurzel. Kein Home-Runtime-Sync und keine globale
+Default-Aenderung. Operative Profilzuordnung erst nach gepruefter Lieferung.
+
+This project's approved pilot branch opts into fourteen presets: the unchanged
+thirteen-preset base plus Project Statistics Governance v0.1.3 at priority 90.
+It provides reproducible project transparency, not learner ratings, quality
+scores or AI time-savings measurements. Existing statistics remain canonical;
+the future pilot context is separate and reference estimates remain off.
+Installation starts no measurement or Spec Kit feature and grants no delivery
+authority. See the integration record relative to the repository root.
+No Home Runtime sync or global default change; operational assignment follows
+reviewed delivery.
+<!-- project-statistics-pilot:end -->
+
+## macOS-CI-Runner / macOS CI runners
+
+Bisherige macOS-14-Jobs verwenden explizit `macos-15`. Die bestehende
+Repository-Auswahl fuer Linux-only-Wartungsjobs bleibt erhalten. Ein gruener
+CI-Lauf beweist nur die ausgefuehrten Checks, keine Produkt-Plattformabnahme.
+Bei Runnerwechseln auch verpflichtende Checknamen und Migrationsvorlagen
+pruefen. Betrieb und Pruefgrenzen: `docs/maintenance/macos-runner-migration.md`.
+
+Existing macOS 14 jobs explicitly use `macos-15`. Keep the existing repository
+selection for Linux-only maintenance jobs. Successful CI proves the executed
+checks, not product platform acceptance. Review required check names and
+migration templates whenever runner labels change. See the linked guide.
+
+## Governance-Zielstand 2026-10-24 / Governance target 2026-10-24
+
+DE: Das explizit genehmigte 14er-Profil bindet Security 0.7.4, Architecture
+0.6.5 und Intake Authoring 0.3.10 / Review 0.2.7 / Sequencing 0.2.11. Alle vierzehn
+Presets werden aktualisiert; Prioritaeten bleiben erhalten. DS-GVO, KI-VO, CRA, NIS2
+und DORA werden fuer Beispielprodukt, Entwicklungswerkzeuge und Organisation
+getrennt auf Anwendbarkeit geprueft; Ausbildung ist keine pauschale Ausnahme.
+Ungeklaerte Rollen bleiben Open. C5 Typ 1 und Typ 2 sind getrennte Nachweise,
+keine Produktzertifizierung. Installation startet keinen Produktlauf, erneuert
+keine Intake-Receipts und ersetzt keine menschliche Sandbox-/Risikofreigabe.
+Vor einem Lauf Quellen-/Review-Frische, Serie, lokales Routing und aktuelle
+Delivery-Autoritaet erneut pruefen. Nachweis: docs/maintenance/stable-preset-rollout-2026-10-24.md.
+
+EN: The explicitly approved fourteen-preset profile binds Security 0.7.4,
+Architecture 0.6.5 and Intake Authoring 0.3.10 / Review 0.2.7 / Sequencing 0.2.11.
+Update all fourteen packages and preserve all priorities. Screen GDPR, AI Act, CRA,
+NIS2 and DORA separately for example product, development tools and organization;
+education is not a blanket exemption and unknown roles remain Open. Distinguish
+C5 Type 1 from Type 2 evidence, without claiming product certification.
+Installation starts no product run, refreshes no intake receipts and grants
+no human sandbox/risk acceptance. Before a run recheck source/review freshness,
+series, local routing and delivery authority; see the linked integration record.

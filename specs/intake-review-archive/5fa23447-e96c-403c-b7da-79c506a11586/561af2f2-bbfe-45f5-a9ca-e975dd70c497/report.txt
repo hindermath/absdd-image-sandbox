@@ -1,0 +1,275 @@
+# Unabhaengiges Reihenreview / Independent Series Review
+
+## Deutsch
+
+**Verdikt: NeedsRemediation.** Zwei offene Findings: High 1, Medium 1;
+Critical 0, Low 0. Keine akzeptierten Risiken, keine materiellen Rueckfragen.
+Dies ist ein neues unabhaengiges Inhaltsurteil, kein Autoren-Pendingmarker.
+
+- Review-ID: `5fa23447-e96c-403c-b7da-79c506a11586`
+- Operation: `7ed5b22f-e402-4e7b-aca0-1d68259a6eac`
+- Reviewer: Codex Independent Lifecycle Reviewer.
+- Toolgelieferte Reviewer-Threadkennung: `01a1741a-8f17-7f92-acec-ff7ee32ecb5b`.
+  Eine gesonderte Agent-ID ist nicht exponiert und wird nicht erfunden.
+- Zeitpunkt: 2026-10-25T17:38:42.213Z; Snapshot: 2026-10-25T17:38:42.227Z.
+- HEAD: `9a6cf88747f07f4b081d3033546f2d83861e2916`, dirty Worktree.
+  Aktuelle Inhaltshashes, nicht HEAD allein, binden das Review.
+- Vier Ziele: eine historische Completed-Wurzel, drei aktive Intakes;
+  keine Campaign-Worker. 224 aktuelle Textinputs, darunter alle alten 189 Pfade.
+
+### Auftrag, Unabhaengigkeit und Historie
+
+Dieser Reviewer ist nicht Autor der Intakes, Quellen oder Receipts und repariert
+sie nicht. Nur die drei beauftragten Reviewausgaben werden geschrieben;
+keine Sessionlogs oder Journale. Das neue Ergebnis supersediert ausdruecklich
+`specs/intake-review-archive/fdf7797f-aaf1-460a-a760-aa8a285bcd5c/7ed5b22f-e402-4e7b-aca0-1d68259a6eac/result.json`.
+Das aktive `IR-PENDING-01` war nur Autorenmarker, kein frueheres unabhaengiges
+Review. Alte Ready-Urteile und das damalige behobene IR101 sind keine aktuelle
+Erfolgsevidenz. Die historische Sprachform und Root-Prompts bleiben erhalten;
+kein Retcon und keine Wiederaufnahme des abgeschlossenen Laufs.
+
+### Offene Findings
+
+| ID | Severity | Kategorie | Location | Owner |
+|---|---|---|---|---|
+| IR201 | High | SafeOperationDocumentation | docs/fuer-lernende/sandbox-profil.md:28 und :40 | Repository Maintainer / Documentation Author |
+| IR202 | Medium | SecurityBoundaryPrecision | docs/fuer-lernende/sandbox-profil.md:100-101 | Repository Maintainer / Documentation Author |
+
+**IR201:** Beide aktiven Stopptabellen empfehlen
+`bash scripts/compose-down-with-audit.sh --podman -v`. Das Skript reicht
+`-v` nach erfolgreichem Audit unmittelbar an Compose weiter; es fragt keine
+Datenverlustbestaetigung ab. Damit empfiehlt der zentrale Lernendenpfad die
+Loeschung persistenter Agentendaten und Anmeldungen als normalen Stopp.
+Das widerspricht AGENTS Reader-Vertrag, README und FAQ. Die korrekte
+Warnung an anderer Stelle heilt den gefaehrlichen Copy-and-paste-Einstieg nicht.
+
+Follow-up: Autor entfernt `-v` in beiden normalen Stoppreihen, beschreibt
+absichtliche Volume-Loeschung nur getrennt mit vorheriger menschlicher
+Bestaetigung und erweitert den Dokumentationsregressionstest auf dieses Profil.
+Trigger: korrigierte DE/EN-Quelle, passende Testevidenz, nachvollziehbare
+Archivierung/Quellenneubindung und unabhaengiges Nachreview vor Ready.
+Disposition: Open; kein Risiko akzeptiert, kein destruktiver Befehl ausgefuehrt.
+
+**IR202:** Der englische Satz behauptet, der Container koenne
+nirgendwo ausserhalb der aufgefuehrten Mounts schreiben. Das verwechselt
+ungemountete Hostdateien mit dem eigenen Container-Dateisystem. Compose setzt
+kein read-only Root-Dateisystem; das Image nutzt ein beschreibbares adedev-Home
+und temporaere Pfade. Codex-Schreibgrenzen sind zudem eine eigene Schicht.
+
+Follow-up: Autor erklaert gleichwertig DE/EN explizite Hostfreigaben,
+fluechtige Containerdateien, persistente Volumes und agentenspezifische Grenzen.
+Keine absolute Isolationsgarantie und keine neue Runtimeaenderung einfuehren.
+Trigger: statischer Abgleich mit Compose/Dockerfile/Konfiguration,
+Dokumentationsregression und aktualisierte Quellenbindung vor Nachreview.
+Disposition: Open. Es wird keine Isolation zur Reparatur abgeschaltet.
+
+### Vollstaendige fachliche Abdeckung
+
+| Ziel | Gepruefter Inhalt | Fachliche Bewertung |
+|---|---|---|
+| Historische GSDB-Wurzel | Zweck, Scope/Nicht-Ziele, Anforderungen 1-7, fuenf AC, beide historischen Prompts, AcceptedBaseline-Entscheidung und Lueckenlisten-Uebergabe | Historische Anforderungen gelesen; Completed ist keine Schliessung der Gaps und keine aktuelle Sandboxabnahme. Keine neue B2-/DEEN-Zertifizierung des Archivtexts. |
+| H: Container-Hardening | Anforderungen 1-7, H-344-01..10, AC-H-344-01..10, Herkunft, Daten, Prozess-/Pfadgrenzen, 85/80-Prozent-Schwellen und Human-only | Aktuelle Anforderungen konsistent; die beiden Findings betreffen eine gemeinsam gebundene aktive Quelle. Open gilt nicht als erfuellt. |
+| A: unabhaengige Abnahme | Anforderungen 1-6, A-344-01..04 und AC-A-344-01..04, Negativfixtures, Reviewerunabhaengigkeit, Image-/Plattformbindung | Praktische Abnahme bleibt spaeter erforderlich; Fehler zurueck an H, L bleibt bis erfolgreicher Abnahme blockiert. |
+| L: Lernenden-Selbstbau | FR-001..015, L-FR-016..023, AC-001..012 und L-AC-013..020, vollstaendige aktive DE/EN-Paare | Fork bleibt Standard; Template ist vorbereitet, nicht aktiviert. Rechte, eigene Historie und persoenliche Gates bleiben getrennt. |
+
+Alle 50 Delta-IDs sind genau einmal zugeordnet: 47 UpdateRequired,
+1 AlreadyCovered, 2 begrenzte N/A. Die normativen aktuellen Textzeilen sind
+in den lokalen Checklisten vorhanden; zwei aggregierte Auszuege sind keine
+zusammenhaengenden Bloecke. G01-G10 werden durch H, die unabhaengige H-Pruefung
+in A und die begrenzten L-Auswirkungen abgedeckt. N/A betrifft fehlende eigene
+Login-/Kryptoimplementierung, nicht CLI-Anmeldung oder vorhandene TLS-Abhaengigkeit.
+Die anderen 107 Kontrollen werden nicht neu als erfuellt bewertet.
+
+Request, Manifest, Receipts und beide Reihenansichten stimmen in Identitaeten,
+einer Wurzel und drei vorwaerts gerichteten verbindlichen Kanten ueberein.
+**Completed / Eligible / Blocked / Blocked** bleibt erhalten. Enabled bedeutet
+nur vorhandene Prompts. Alle sechs aktiven Prompts nennen das vollstaendige
+Ziel, aktuelle Nachtraege und bestehende Ausfuehrungsgrenzen. LocalImplementation,
+Vorgaengerabnahme und gesonderte Startautoritaet bleiben unabhaengig von der
+heutigen Repo-Lieferentscheidung. Gegenueber den aktuellen Vorgaengern wurden
+nur der begrenzte Rechte-Nachtrag und die entsprechenden Promptergaenzungen
+gefunden; keine fachliche Akzeptanzschwelle wurde entfernt.
+
+### Quellen, Rechte, Lernenden und CI
+
+Alle 58 Quellen jedes aktiven Receipts wurden auf fachliche Relevanz und
+Widersprueche zur Reihe beurteilt; 174 aktuelle Quellhashbindungen stimmen.
+SRC001 ist jeweils der archivierte Vorgaenger. Quellenpflege, Generatorversion,
+Evidence-Schema und Produktnachweis bleiben getrennt. Vier gemeinsame
+Guidance-Bloecke sind ueber die fuenf Agentenflaechen identisch.
+
+Die aktuelle menschliche Option "Eigene Rechte bestaetigen" ist im Auftrag
+und in docs/licensing.md nachvollziehbar: nur neu formulierte DE/EN-
+Grundlagenworkshops samt Exporten, vier SysInfo/Web-Folienskripte und drei
+portable Lernpakete mit persoenlichen Intake-Reihen. Keine agentische
+Rechtsmeinung oder Freigabe fremder Originaltexte, Vorlagen, Fonts, Werkzeuge
+oder Originalcode. LIC-02 ist nur fuer benannte Eigenanteile begrenzt;
+LIC-01, andere LIC-02-Betroffenheiten und Template-Aktivierung bleiben offen.
+Die aeltere pauschale Open-Formulierung im Template-Abgleich wird durch den
+expliziten aktuellen Nachtrag praezisiert, nicht historisch umgeschrieben.
+
+Der neue Praesentationsindex erklaert Home Baseline als kanonische Lernquelle,
+die Sandbox als Werkzeugumgebung und persoenliche Produktrepos als getrennte
+Praxisorte. Eingebetteter gepinnter Stand und moeglicherweise neuerer Online-
+Stand sind unterschieden; kein automatischer Runtime-Sync. Fork/Template/Clone,
+Origin/Upstream und unabhaengige Historien sind erklaert. Keine kopierten Runs
+fortsetzen, keine Quellenfreigabe als eigene Abnahme und keine blinden Merges.
+
+Die sechs Folienskripte, Werkstattindizes und aktiven Anforderungen enthalten
+vergleichbare DE/EN-Erklaerungen, begrenzte Beispielauftraege und textorientierte
+Zustaende/Entscheidungen. B2 ist redaktionell beurteilt, nicht mit Lernenden
+gemessen. Tastatur, Screenreader, Erstnutzung, native Praesentationsbedienung,
+Rendering und vollstaendige WCAG-/PDF-Abnahme bleiben separate offene Pruefungen.
+IR201/02 zeigen, dass ein gruener Quellvalidator diese Inhalte nicht abnimmt.
+
+Nur referenzgebundene historische GSDB-Projektevidenz und der exakte
+Statistik-Pilot sind im CI auf das Referenzrepo begrenzt. Allgemeine Pin-,
+Parity-, Generator-, Negativfixture-, Assurance- und Template-Tests bleiben
+aktiv. Die Linkausnahme betrifft nur order.md/requirements-order.md unter
+Serie/Operation im Serienarchiv; sie hebt Archivintegritaet nicht auf.
+Maven-Fallback behaelt Version/Checksumme und scheitert bei falscher Pruefsumme.
+Diese Tests wurden statisch gelesen, nicht hier als Produkt-/Buildtests ausgefuehrt.
+
+### Aktuelle Verifikation und Grenzen
+
+- 15 aktuelle Archivvorabbilder: rohe und normalisierte Hashes stimmen.
+  Davon 12 gegen alte reviewedHashes vergleichbar; die drei alten Reviewausgaben
+  gegen aufgezeichnete Archivhashes. Die Chronologie vor dieser Sitzung wurde
+  nicht persoenlich beobachtet. Alle 37 GSDB-Inventardateien sind roh hashgleich.
+- 14 lokale Preset-Versionen/Prioritaeten/Aktivierungen stimmen mit Registry,
+  Lock, lokalem Manifest und Source-Lock-Tag ueberein. Keine erneute Online-
+  Releaseverifikation, keine komplette Neuabnahme aller Paketdateien.
+- 224 aktuelle strikte UTF-8-Textinputs einschliesslich aller 189 alten Pfade
+  neu gehasht; genau eine echte BOM entfernen, CRLF/CR zu LF, kein Trim.
+  Kontext-/Archiv-/Validatorinputs erhalten Integritaetspruefung, nicht pauschal
+  ein neues Inhaltsguetesiegel. Eigene Ausgaben, mutable Journale und der neue
+  Abschlusslog sind nicht gebunden. Endpruefung meldet keinen Quelldrift.
+- Selbst ausgefuehrt: drei aktive Receipts in Bash und PowerShell Pass/0, je
+  58 Quellen; historisches 3-Quellen-Receipt beidseits Pass/0. Serienmanifest
+  und Serienreceipt beidseits Pass/0; Governance-Konfiguration Aligned/0.
+  Beide Review-Ergebnisvalidatoren bestehen nach der Formatkorrektur mit Exit 0
+  (Series, NeedsRemediation, 4 targets). Das ist kein fachliches Ready.
+  Exakte Befehle: reviewerEvidence.validationCommands im JSON. Alle Laeufe
+  auf diesem macOS-Host; zwei Shells sind kein Windows-/Linux-Nachweis.
+  Abschliessender Diff-Check der drei Ausgaben: Exit 0.
+- Erstes Ergebnisformat scheiterte beidseits mit Exit 2 (Finding-ID-Format
+  und fehlendes target). Korrigiert zu IR201/IR202; die urspruenglichen
+  Commentary-Kennungen bleiben als aliases erhalten. Kein Befund abgeschwaecht.
+- Erste Config-Aufrufe ohne Pflichtparameter scheiterten mit Bash 2/PowerShell 1;
+  korrekte Aufrufe mit requirements/intake-governance-config.json sind beidseits
+  Aligned/0. Kein Repositoryfinding und kein Fehlversuch als Pass gezaehlt.
+- Keine Builds, Runtimeaktionen, Installationen, Git-Schreibaktionen,
+  Commits/Pushes oder Plattformaenderungen. Parent-Tests und historische
+  Buildlogs sind nicht als eigene Reviewerlaeufe ausgegeben.
+
+Die heutige Lieferung mit sieben Commits, einem Push und einem gemeinsamen
+Merge-Commit-PR/Admin-Bypass ist eine dokumentierte einmalige Ownerausnahme,
+keine Abschaffung technischer Checks oder Review-Thread-Pruefung. Dieser
+Reviewer uebt diese Autoritaet nicht aus. Offene O-344-TECH/HUMAN/CLOUD,
+UPD-AMD64/V2-LOOP/V2-AUDIT/SMOKE-WARN/APPROVAL und DOC-A11Y bleiben erhalten.
+Insbesondere gilt session_coverage=not-exported; Datenbankinhalte werden
+weder gelesen noch exportiert. Kein neues Runtime-, Rechts- oder A11Y-Pass.
+
+**Naechster Schritt:** beide Findings eng durch den Autor korrigieren lassen,
+betroffene Quellen und Receipts nachvollziehbar neu binden und mit denselben
+Finding-IDs unabhaengig nachpruefen. Kein Specify-/Autonomous-/Produktstart;
+NeedsRemediation wird nicht durch Risikoakzeptanz oder alte Ready-Claims ersetzt.
+
+## English
+
+**Verdict: NeedsRemediation.** One High and one Medium open finding; no
+Critical/Low findings, accepted risks or material unanswered questions.
+Reviewer Codex Independent Lifecycle Reviewer did not author or repair any
+reviewed input. Tool-provided reviewer thread ID is
+`01a1741a-8f17-7f92-acec-ff7ee32ecb5b`; no separate agent ID is exposed.
+Only the three commissioned review outputs are written, with no session log
+or operation journal. The archived fdf7797f result is explicitly superseded;
+the active IR-PENDING-01 was an author marker, never independent review.
+Historical Ready/IR101 and the historical root's wording are not current proof.
+
+**IR201 (High, SafeOperationDocumentation):** sandbox-profil.md lines
+28 and 40 recommend --podman -v as routine shutdown in both languages. The
+wrapper forwards that option without asking for confirmation; persistent
+agent data/sign-ins can be deleted. Owner: Repository Maintainer/Documentation
+Author. Remove the deletion option from normal stop, explain deliberate
+removal only with prior human confirmation, and cover this profile in the
+documentation regression. Re-evaluate after source correction, test evidence,
+traceable receipt refresh and independent review, before Ready. Open, not accepted.
+
+**IR202 (Medium, SecurityBoundaryPrecision):** lines 100-101 claim the
+container cannot write anywhere outside listed mounts. That conflates unmounted
+host paths with writable container-local home/temporary paths; Compose has no
+read-only root filesystem. Codex restrictions form a separate layer. Same owner:
+clarify host exposure, ephemeral container files, persistent volumes and agent
+restrictions equivalently in DE/EN without claiming absolute isolation. Recheck
+against configuration, focused documentation assertions and refreshed source
+bindings. Open, without weakening any runtime control.
+
+Full semantic review covers all four intakes: historical root requirements
+1-7/five AC and handoff; H 1-7/H-344-01..10 and matching AC; A 1-6/A-344-01..04
+and matching AC; L FR-001..015/L-FR-016..023 and AC-001..012/L-AC-013..020.
+All 50 delta IDs map once: 47 UpdateRequired, one AlreadyCovered, two bounded
+N/A for absent first-party login/crypto implementations. Other 107 controls
+are not declared fulfilled. Both 85/80% thresholds and independent technical
+acceptance remain; Open is not Pass. H delivers evidence to A; A returns defects
+to H and blocks L until successful acceptance. Historical AcceptedBaseline
+accepts the gap list, not its risks or current runtime.
+
+Request, identities, receipts, manifest, both order views, one root and three
+forward binding edges agree. Preserve Completed/Eligible/Blocked/Blocked.
+Six active prompts consume full current targets and supplements, retain
+LocalImplementation and separate execution authority. The closeout adds bounded
+rights clarification, not a product start, changed threshold or template activation.
+All 58 sources per active receipt were assessed for series relevance/conflicts;
+all 174 normalized source bindings match, with each archived predecessor first.
+
+The current user-confirmed human rights decision concerns only named newly
+written DE/EN introductory workshops/exports, four SysInfo/web decks and three
+portable learning packages/personal series. It is not an agent legal opinion,
+a relicensing of third-party originals/fonts/tools or a blanket LIC-02 closure.
+LIC-01, other LIC-02 scopes and template gates stay Open. The explicit new
+supplement refines older Open wording without rewriting history. The presentation
+index correctly separates canonical Home Baseline learning, sandbox tooling and
+empty personal product repos; pinned offline and newer online revisions differ.
+No automatic Runtime sync, inherited approval, copied run resume or blind
+unrelated-history merge is authorized. Fork remains default; template is not enabled.
+
+Active requirements, six decks and workshop guides provide equivalent language
+explanations and text-first decisions/states. B2 is editorial judgment, not
+measured comprehension. Human first use, keyboard/screen-reader/native presentation
+and full WCAG/PDF acceptance remain Open. Only source-specific historical GSDB
+proof and exact-history statistics CI are reference-scoped; general regression
+checks stay active. The narrow archived-order link exception waives no archive
+integrity. Maven fallback preserves version/checksum; static review is not test
+execution or image acceptance.
+
+Current checks independently verify all 15 archived preimages (raw/normalized),
+37 raw baseline inventory hashes, 14 registry/lock/local-manifest/source-tag
+metadata matches, and 224 freshly hashed current text inputs including all old
+189 paths. Archive and validator/context inputs receive integrity inspection,
+not blanket fresh semantic approval. Pre-edit chronology was not re-observed;
+old review outputs match recorded archive hashes, not nonexistent self-hashes.
+Own outputs, mutable journals and the new closeout log are excluded. No input
+drift was seen. All three active 58-source receipts and the historical 3-source receipt pass
+both shells (exit 0), as do series manifest/receipt; governance is Aligned/0.
+Initial review output failed both validators for ID format/missing target
+(exit 2), corrected to IR201/IR202 with original labels retained as aliases.
+Both corrected result validators pass with exit 0 (Series, NeedsRemediation,
+4 targets), without asserting content readiness. Exact commands are recorded
+in reviewerEvidence.validationCommands. All runs used this macOS host; two
+shells do not establish native Windows/Linux acceptance. Scoped diff check
+passes with exit 0.
+Initial config calls omitted their required parameter and failed (2/1), then
+corrected calls passed Aligned/0; invocation mistakes are not repository findings.
+
+No build/runtime/package installation, model/provider call, Git write, commit,
+push or hosting change was performed. Parent tests and historical build logs
+are not reviewer-run evidence. Recorded local legal references were not revalidated
+online and establish no legal approval. Preserve O-344 and toolchain/A11Y/approval
+Open boundaries, including session_coverage=not-exported and no database export.
+Seven commits/one push/one merge-commit PR/admin bypass after green checks and
+thread inspection are recorded delivery-agent authority, not exercised here.
+
+Next: bounded author correction of both findings, traceable source/receipt
+refresh and independent re-review retaining the same IDs. Do not start Specify,
+Autonomous or any product, accept risk, or reuse old Ready to bypass remediation.

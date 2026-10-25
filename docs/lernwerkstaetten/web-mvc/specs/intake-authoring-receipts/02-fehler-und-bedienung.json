@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "2.0",
+  "documentType": "IntakeReceipt",
+  "receiptId": "f1bced64-ec2c-46b1-80ca-735f113458f0",
+  "intakeId": "78ef6ea1-f327-4e15-97d4-7205e1ce1803",
+  "generator": {
+    "preset": "intake-authoring-governance",
+    "version": "0.3.10"
+  },
+  "createdAt": "2026-10-25T15:45:40Z",
+  "operation": {
+    "operationId": "c9ad9291-9278-4805-9eec-3bac40b28f6e",
+    "type": "Create",
+    "authorityEvidence": "Owner approved the complete two-workshop plan and requested implementation on 2026-10-25. Authority covers reusable Draft learning packages only; no personal product execution or remote delivery."
+  },
+  "status": "ReadyForReview",
+  "target": {
+    "path": "intakes/02-fehler-und-bedienung.md",
+    "normalizedSha256": "398164cd4d5aa290e0aa01f57a62dc1468d511f9e4771a84bca2c91b333bb468"
+  },
+  "sources": [
+    {
+      "sourceId": "SRC001",
+      "order": 1,
+      "kind": "File",
+      "label": "basis.md",
+      "location": "Repository",
+      "path": "basis.md",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "9b9b61e675146d469e6eaad2452195017eff0679e52180c06930ae77b7e8256e",
+      "gitBlob": "N/A",
+      "proofBoundary": "Package-local source; no private URL or inherited approval"
+    },
+    {
+      "sourceId": "SRC002",
+      "order": 2,
+      "kind": "File",
+      "label": "sources.json",
+      "location": "Repository",
+      "path": "sources.json",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "88910d009eb0ed2a08cabb67677f795b6368a7c883bd1c1b0846fdeba8a7869d",
+      "gitBlob": "N/A",
+      "proofBoundary": "Package-local source; no private URL or inherited approval"
+    },
+    {
+      "sourceId": "SRC003",
+      "order": 3,
+      "kind": "File",
+      "label": "decision.md",
+      "location": "Repository",
+      "path": "decision.md",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "439708981fe51c18534de68bec1f7f48579a675c50cd6c14785ca1231615660e",
+      "gitBlob": "N/A",
+      "proofBoundary": "Package-local source; no private URL or inherited approval"
+    }
+  ],
+  "profile": "generic-markdown",
+  "languagePolicy": "GermanFirstEnglishSecond-CEFR-B2",
+  "decisions": [
+    {
+      "status": "Answered",
+      "answer": "Neu aus Hello World / New from Hello World",
+      "evidence": "Explicit planning answers and approved implementation plan, 2026-10-25",
+      "id": "IAD001",
+      "question": "Neuaufbau oder Fork? / New build or fork?"
+    },
+    {
+      "status": "Answered",
+      "answer": "Zwei alternative Wahlpfade / Two alternative routes",
+      "evidence": "Explicit planning answers and approved implementation plan, 2026-10-25",
+      "id": "IAD002",
+      "question": "Web-Lernfolge? / Web learning order?"
+    },
+    {
+      "status": "Answered",
+      "answer": "Sechs Stufen, eine aus sechs Sprachen / Six stages, one of six languages",
+      "evidence": "Explicit planning answers and approved implementation plan, 2026-10-25",
+      "id": "IAD003",
+      "question": "SysInfo-Umfang und Sprachen? / SysInfo scope and languages?"
+    },
+    {
+      "status": "Answered",
+      "answer": "Fixtures zuerst, Container-Erfassung mit bewusstem Opt-in / Fixtures first, explicit container opt-in",
+      "evidence": "Explicit planning answers and approved implementation plan, 2026-10-25",
+      "id": "IAD004",
+      "question": "Reale Systemdaten? / Real system data?"
+    },
+    {
+      "status": "Answered",
+      "answer": "Portable Lernpakete, Aktivierung nur persönlich / Portable packages, personal activation only",
+      "evidence": "Explicit planning answers and approved implementation plan, 2026-10-25",
+      "id": "IAD005",
+      "question": "Aktive Sandbox-Reihen oder Lernpakete? / Active sandbox series or learning packages?"
+    }
+  ],
+  "openDecisionIds": [],
+  "questionCount": 5,
+  "agentSurface": {
+    "specifyCanonicalId": "speckit.specify",
+    "specifyInvocation": "$speckit-specify",
+    "autonomousCanonicalId": "speckit.autonomous",
+    "autonomousInvocation": "$speckit-autonomous"
+  },
+  "deliveryAuthority": "LocalImplementation",
+  "authorityEvidence": "Default: no remote authority. Future personal execution requires a separate current human request; package creation executes no product.",
+  "promptState": "Enabled",
+  "provenanceMode": "New",
+  "supersedes": {
+    "receiptPath": "N/A",
+    "targetNormalizedSha256": "N/A",
+    "archiveTargetPath": "N/A",
+    "archiveReceiptPath": "N/A"
+  },
+  "legacyAdoption": {
+    "evidenceType": "N/A",
+    "priorTargetNormalizedSha256": "N/A",
+    "priorGitBlob": "N/A"
+  },
+  "updateAuthorized": false,
+  "updateAuthorityEvidence": "N/A",
+  "series": {
+    "order": 3,
+    "seriesId": "373e3c56-0e13-401b-941a-2820960da1c9",
+    "supersedesIntakeIds": [],
+    "manifestPath": "specs/intake-series/learning/manifest.json",
+    "role": "OrderedMember"
+  },
+  "nextAction": "$speckit-intake-review intakes/02-fehler-und-bedienung.md (as part of full personal series review; no implementation)"
+}

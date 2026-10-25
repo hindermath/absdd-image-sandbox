@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesOperation",
+  "operationId": "ac2d3c31-d99d-40e1-8782-0b9cc8282b22",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "type": "Update",
+  "status": "Completed",
+  "createdAt": "2026-10-25T11:00:44Z",
+  "authorityEvidence": "Owner explicitly approved Drei Review-Findings Korrigieren on 2026-10-25: align Swift registry and learner versions, clarify current/historical state, refresh all three intake bindings and independently fully review the series. No new upgrades, build, restart, provider/secret configuration, commit or push. Preserve existing changes, historical evidence and lifecycle.",
+  "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+  "manifestNormalizedSha256": "e61f52f9d3806fc8039a78ee4e0f1edb5e7c7712f5a61d1d961b0298ed7c36f1",
+  "archiveManifestPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/manifest.json",
+  "archiveManifestNormalizedSha256": "7a70f761c2de1246bfdc6a780710a1f05be3ad2a079bfa0dd30d7963eb1369c1",
+  "lifecycle": [
+    "Completed",
+    "Eligible",
+    "Blocked",
+    "Blocked"
+  ],
+  "validation": {
+    "completedAt": "2026-10-25T11:21:36Z",
+    "staging": "Bash and PowerShell passed before publication",
+    "finalBash": "Passed by independent reviewer",
+    "finalPowerShell": "Three receipts, series manifest, series receipt and review result passed",
+    "independentFullReview": "Ready",
+    "reviewer": "Codex independent reviewer in current owner-commissioned review; not author of reviewed corrections",
+    "reviewerAgentId": "01a172be-4586-76e2-86b1-19e6da949e3b",
+    "reviewId": "0298d3b3-7ff1-42d8-a5f7-349d01139cf4",
+    "independentInputHashes": 81,
+    "parentFrozenInputs": 70,
+    "completedFindingIds": [
+      "REV-001",
+      "REV-002",
+      "REV-003"
+    ],
+    "focusedRegressionTests": "48 passed plus 6 agent-surface parity tests",
+    "expandedMaintenanceTests": "Open: REV-TEST-TIMING; no fully green expanded suite claimed",
+    "preCommit": "10 hooks passed",
+    "offlineLinks": "380 total, 103 unique, 0 errors, 57 external exclusions",
+    "archiveFidelity": "12 lineage files matched exact preimage bytes; previous session logs unchanged",
+    "runtimeAndHumanAcceptance": "Open; no build, restart, provider call or formal approval",
+    "sessionLog": "docs/security/agent-session-log/2026-10-25-1211.md",
+    "outputBoundary": "Completion metadata only; authority, target set, source lineage and lifecycle remain unchanged"
+  },
+  "nextAction": "$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json"
+}

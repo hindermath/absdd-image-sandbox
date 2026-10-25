@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "1a9a7adb-0608-4957-8796-5b7c71ddd09e",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.11"
+  },
+  "createdAt": "2026-10-25T18:15:36Z",
+  "operation": {
+    "authorityEvidence": "Owner explicitly approved correction of IR201/IR202 and continuation of the daily closeout plan: safe routine shutdown, precise host/container/agent boundaries, focused static regressions, exact archival preimages, preserved intake identities, refreshed bindings and independent full four-intake review. Seven thematic commits, one total push and exact-head merge-commit with admin bypass only after green technical checks remain authorized. Reuse the existing ARM64 candidate only with unchanged 14 build inputs; no build, service restart, template activation, product run, new execution authority or formal approval.",
+    "operationId": "561af2f2-bbfe-45f5-a9ca-e975dd70c497",
+    "type": "Update"
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "a76a2949ddf494be44cf073c37ecbf6359fc3cfc3751ab007d6d90a3ecee5c07"
+  },
+  "supersedes": {
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/561af2f2-bbfe-45f5-a9ca-e975dd70c497/receipt.json",
+    "manifestArchiveSha256": "1289b799a1fa4fc2a9da1d88c3a135e6e55f6e833be168e5ec85d07eef8de8d1",
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/561af2f2-bbfe-45f5-a9ca-e975dd70c497/manifest.json",
+    "receiptNormalizedSha256": "80fb8a4da8e710bcb4e45696aaafd01ddef50097c725ffdbf9d6c71759290aaf"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status"
+}

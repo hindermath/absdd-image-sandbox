@@ -1,0 +1,393 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "c22a09e1-a781-4f5f-b691-a8d8839298b8",
+  "mode": "Series",
+  "status": "Ready",
+  "policy": "learner-a11y-bilingual-series",
+  "reviewedAt": "2026-10-25T13:43:07Z",
+  "repository": {
+    "root": ".",
+    "head": "9a6cf88747f07f4b081d3033546f2d83861e2916"
+  },
+  "requestEvidence": {
+    "path": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "normalizedSha256": "f9aec9ad4fc2779356eea7524f295e95f5a4601b7d22fb3bc55858c7381fed46"
+  },
+  "targets": [
+    {
+      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "role": "Primary",
+      "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "c3d9ff9b9a9dadd5df9b81414182b98d93b46163d5ddfcd54c65fb681dd50c9e",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "70aa55b50ea87b58973ce958027ab5f3fea39e018bd96756c56e31512f29930f",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "1f895c155fbd5a9bc211f9cfe7322a4a62c85de090f715fd26e2b8f6cb460396",
+      "gitBlob": "N/A"
+    }
+  ],
+  "findings": [],
+  "questions": [],
+  "acceptedRisks": [],
+  "operatorExceptions": [],
+  "coverage": {
+    "individual": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "series": [
+      "Historical Completed root read as predecessor only; no rewriting or re-execution.",
+      "H requirements 1-7, H-344-01..10, AC-H-344-01..10 independently reviewed in full.",
+      "A requirements 1-6, A-344-01..04, AC-A-344-01..04 independently reviewed in full.",
+      "L FR-001..015, L-FR-016..019, AC-001..012, L-AC-013..016 independently reviewed in full.",
+      "One root, four ordered targets, three unique forward binding edges; manifest and request agree; Completed/Eligible/Blocked/Blocked preserved.",
+      "50 delta IDs reviewed with G01-G10 mapping: 47 UpdateRequired, 1 AlreadyCovered, 2 bounded N/A; no implementation fulfillment inferred.",
+      "DE-first/EN-second active requirements and acceptance counterparts; beginner terminology, text-first handoffs, platform and human A11Y boundaries reviewed.",
+      "All six active prompts bind current alignment and preserve LocalImplementation and separate start authority.",
+      "Maven diff changes only fallback control flow; version and committed SHA-512 unchanged; checksum before extraction; checksum mismatch never invokes fallback.",
+      "Five isolated test methods inspect actual Dockerfile download/checksum prefix with fake curl and real checksum verifier; no tar/install in executed prefix; reviewed statically only.",
+      "Exactly five impact-register fields now distinguish historical stopped-machine attempt from later dated ARM64/SBOM evidence; open acceptance limits retained.",
+      "Three receipts bind 29 current local sources each and unchanged intake identities; 17 archived snapshots match recorded raw and normalized hashes.",
+      "Current registry matches fourteen installed-lock versions, priorities, enabled flags and manifest hashes; Assurance 0.1.8 publication is local lock evidence only."
+    ],
+    "workers": [],
+    "documentation": [
+      "docs/maintenance/intake-sources-alignment-2026-10-25.md",
+      "AGENTS.md",
+      ".specify/presets/secure-development-assurance-governance/templates/secure-development-evidence-contract.md",
+      "docs/maintenance/gsdb-344-preset-installed-lock.json",
+      "docs/maintenance/stable-preset-rollout-2026-10-24.md",
+      "docs/maintenance/stable-preset-source-lock-2026-10-24.json",
+      "docs/maintenance/stable-preset-installed-lock-2026-10-24.json",
+      "docs/secure-development/baseline-manifest.json",
+      "docs/maintenance/gsdb-344-source-inventory.json",
+      "docs/maintenance/gsdb-344-control-delta.json",
+      "docs/maintenance/intake-gsdb344-delta-2026-10-21.md",
+      ".specify/presets/secure-development-assurance-governance/docs/release-0.1.8-validation.md",
+      ".specify/presets/secure-development-assurance-governance/docs/user-guide.md",
+      ".specify/presets/secure-development-assurance-governance/docs/user-guide.EN.md",
+      "COMPLIANCE-PLAN_RL-SE-001.md",
+      "docs/maintenance/documentation-alignment-2026-10-25.md",
+      "docs/security/toolchain-followups-2026-10-25.md",
+      "docs/fuer-lernende/lernwege.md",
+      "docs/fuer-lernende/barrierefreiheit.md",
+      "docs/maintenance/sandbox-current-state-2026-10-25.md",
+      "docs/maintenance/toolchain-version-audit-2026-10-25.md",
+      "scripts/config/required-cli-tools-registry.json",
+      "scripts/tests/test_toolchain_version_pins.py",
+      "docs/fuer-lernende/sandbox-profil.md",
+      "docs/security/agent-session-log/2026-10-25-1047.md",
+      "Dockerfile",
+      "docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md",
+      "docs/maintenance/documentation-impact-2026-10-25.json"
+    ]
+  },
+  "summary": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "supersedes": "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/result.json",
+  "operationId": "3caff22f-59d5-4142-b15b-955ee96a3037",
+  "reviewerEvidence": {
+    "reviewer": "Codex independent reviewer in this owner-commissioned candidate-only review; not author of targets or corrections",
+    "mode": "IndependentFullSeriesContentAndSourceCodeReview",
+    "operationId": "3caff22f-59d5-4142-b15b-955ee96a3037",
+    "reviewInputsUnchanged": true,
+    "filesMonitored": 139,
+    "normalization": "Strict UTF-8; remove exactly one leading BOM; CRLF and CR to LF; reject NUL; no other changes.",
+    "reviewedHashes": {
+      ".agents/skills/speckit-intake-review/SKILL.md": "8338b3e6d84b55e5498fb63c46f1a2256c7b6f98f1545254af590002ee7cda9e",
+      ".pre-commit-config.yaml": "0e5a01738c3f4c065f2e5af2a895737a70b8b0d0f7adda6130362d84e635baff",
+      ".specify/presets/.registry": "b56f7088b13a522a62105022ad8242bd5d00b6fd9ca9c95a738a7d755115dc24",
+      ".specify/presets/intake-authoring-governance/scripts/resolve-intake-archive-target.py": "b44309c8ec122eeb0a9052578aa8c20b39e3b0a7db8e432795a9bdda3c7380e5",
+      ".specify/presets/intake-authoring-governance/scripts/resolve-intake-repository-file.py": "865ed197980fb7c86e575a354a4e5109e883415a1540aabf8f152c722606dc93",
+      ".specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-artifact.ps1": "e0b0f5939477308792fd6f7e3c7ef2c435ada3d04b2cd89025103c0d08bb0732",
+      ".specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-artifact.sh": "0a529bc855321464e1392e207d6b4fbb9bde58876d561ad9271be32742743b4e",
+      ".specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-receipt.ps1": "16685bf54b407669bb34d74c5624c2c28d0157b76ca721f525e7c77e1d3a9423",
+      ".specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-receipt.sh": "b7fb928105b20eff692162ad466633cd380fe8c97a18a7252b6c4266a263905e",
+      ".specify/presets/intake-authoring-governance/scripts/validate-intake-governance-config.ps1": "c14349c5f03c67a04a78eab16d3876269e16b03911e7035fe2c4dbc87bcd3e22",
+      ".specify/presets/intake-authoring-governance/scripts/validate-intake-governance-config.py": "e139287ce32c9f3301aa700715e44318ef8ddb2b6d4c815fbfe0d6d3ceec66c4",
+      ".specify/presets/intake-authoring-governance/scripts/validate-intake-governance-config.sh": "65883402020f36416c652437999cf646ead4eae1a40a73012db7d4136ac7cf3d",
+      ".specify/presets/intake-review-governance/scripts/validate-intake-governance-config.ps1": "c14349c5f03c67a04a78eab16d3876269e16b03911e7035fe2c4dbc87bcd3e22",
+      ".specify/presets/intake-review-governance/scripts/validate-intake-governance-config.py": "e139287ce32c9f3301aa700715e44318ef8ddb2b6d4c815fbfe0d6d3ceec66c4",
+      ".specify/presets/intake-review-governance/scripts/validate-intake-governance-config.sh": "65883402020f36416c652437999cf646ead4eae1a40a73012db7d4136ac7cf3d",
+      ".specify/presets/intake-review-governance/scripts/validate-intake-review-result.ps1": "c94f3db6f5c8fe2f2237abafe6411484881bd404ee99311404c5558d17fff22e",
+      ".specify/presets/intake-review-governance/scripts/validate-intake-review-result.sh": "702313e7bc08df3be82b0adb2853c9ad11912db738c000debdc4ff8bb90896c7",
+      ".specify/presets/intake-review-governance/templates/intake-review-checklist-template.md": "73d245a53f3f4b0a56e696e3ba1cdd6a7f7568191aae216eb192cae91a84e13c",
+      ".specify/presets/intake-review-governance/templates/intake-review-policy-template.json": "fcf4fc8e732e8d949dffcfc08de97ef6dd6f2b9aa23e00c68dd2ea525d2b96e0",
+      ".specify/presets/intake-sequencing-governance/scripts/validate-intake-governance-config.ps1": "c14349c5f03c67a04a78eab16d3876269e16b03911e7035fe2c4dbc87bcd3e22",
+      ".specify/presets/intake-sequencing-governance/scripts/validate-intake-governance-config.py": "e139287ce32c9f3301aa700715e44318ef8ddb2b6d4c815fbfe0d6d3ceec66c4",
+      ".specify/presets/intake-sequencing-governance/scripts/validate-intake-governance-config.sh": "65883402020f36416c652437999cf646ead4eae1a40a73012db7d4136ac7cf3d",
+      ".specify/presets/intake-sequencing-governance/scripts/validate-intake-series-manifest.ps1": "03e52d13276d44945dd21028a5822f004460cc920e80d22e0f06dbc300a53521",
+      ".specify/presets/intake-sequencing-governance/scripts/validate-intake-series-manifest.sh": "ad3af65abf9d206647707b7f9cc12611a6aaa0323f4db00036db3f6b96b9d4cc",
+      ".specify/presets/intake-sequencing-governance/scripts/validate-intake-series-receipt.ps1": "9950683043c0eab460b0f807576644d1ac7eae700839616c52e93ba6fb0eddaf",
+      ".specify/presets/intake-sequencing-governance/scripts/validate-intake-series-receipt.sh": "dc06a6bb999413ff48cc267f589bd019fa64f45f531962b098fcfcbdf6559efb",
+      ".specify/presets/intake-sequencing-governance/scripts/validate-intake-series.py": "d4627807c6cb1034862514c0b95c50ea17a7252c73a627f1e8494688f7d4c2df",
+      ".specify/presets/secure-development-assurance-governance/docs/release-0.1.8-validation.md": "32f8ca77698e577286c4da6424152fa15e67ad835e383f5136037512972ac85d",
+      ".specify/presets/secure-development-assurance-governance/docs/user-guide.EN.md": "c43d264557cf2793c10855370183c6a050fa3e9b7caad9d2641a80b59969d0f7",
+      ".specify/presets/secure-development-assurance-governance/docs/user-guide.md": "afa1f7d1c32b12f82d9179403881b596977998f40b27da0f70d62e39aec4bdd7",
+      ".specify/presets/secure-development-assurance-governance/preset.yml": "d6d15d42efd7d2fdf8efeecc9925bd82171a86181d295b734be6eb9db4d232bc",
+      ".specify/presets/secure-development-assurance-governance/templates/secure-development-evidence-contract.md": "cd471d1c3b6d40717aee4d306e0b9e3d8a3627c39121c8114816411c411e171d",
+      "AGENTS.md": "fd7ee2cd51501e9e16138308ebe771181d7c7dd3fdad250e89c6b6b3255582d5",
+      "COMPLIANCE-PLAN_RL-SE-001.md": "314a8c7d0aa3cc8b81e96b9091e3d77aa5fa5365f14e84eb615a805f0103b2cd",
+      "Dockerfile": "a98213c4abe13322ce0be2d9012c7fad52033e04f525c453beca386161fa33d7",
+      "docs/betrieb/README.md": "bfcb0fa9c4416ea3891b39b79b29bb74039815ddc76931689617530ee7b31cb0",
+      "docs/fuer-lernende/barrierefreiheit.md": "ed0dc1fcd700882941d99fee7f0df9eb2f67ed22147d99a5f947cdd32efdf425",
+      "docs/fuer-lernende/lernwege.md": "410cad507918348b0dcd61d43dc1347b383c3e506f09fcc9215b43ae22d46f15",
+      "docs/fuer-lernende/sandbox-profil.md": "8f4290bbce601bba3d429f65765cb24205810a9b575c46045a33b37978501469",
+      "docs/maintenance/documentation-alignment-2026-10-25.md": "eccc16f09a31b1cf1b644574e17a22b353db6523baf5b2fa6139b51d2de7d540",
+      "docs/maintenance/documentation-impact-2026-10-25.json": "3e7f95f4d86a300c67d459ce839036fbb15c2a20fb3f5825dea6be2bd79e64a3",
+      "docs/maintenance/gsdb-344-control-delta.json": "05787af045845a45093ef473a9abc3c0ecd20460dd36911e69f3e81ea71b26ae",
+      "docs/maintenance/gsdb-344-preset-installed-lock.json": "7db6043a5dd680a033be126aaf39b13a1006605a1ace2a460795c8034831469f",
+      "docs/maintenance/gsdb-344-source-inventory.json": "9d03e6ab54c6bb61207a63a37e44a0ecb1dd8b7e1fce6029a5e508342a497e3c",
+      "docs/maintenance/intake-gsdb344-delta-2026-10-21.md": "8b4c39378079fe624128c12b2f94c25423e7edb317f79e8965ad4927a065320f",
+      "docs/maintenance/intake-sources-alignment-2026-10-25.md": "2e1c90d4b43d8c3e22f35235011a27a497e6a535515b65cf71be1ab2efd585f4",
+      "docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md": "b657955d235eb6ec7070b508060b596411ff76106fe96e9ac76897a8ab097f6e",
+      "docs/maintenance/sandbox-current-state-2026-10-25.md": "53776e64d116f71b9448ee945943ee7cfb13566aaacc97f2f79e1a4739b2a2b0",
+      "docs/maintenance/stable-preset-installed-lock-2026-10-24.json": "7db6043a5dd680a033be126aaf39b13a1006605a1ace2a460795c8034831469f",
+      "docs/maintenance/stable-preset-rollout-2026-10-24.md": "bf5f0c2381ce00da9f9c0dc03f0cd17737f115ae0b81e951f677efc75f28fd02",
+      "docs/maintenance/stable-preset-source-lock-2026-10-24.json": "0b329d2b68ccec96dca635f58564348dac88527f7f515f4f422fddf974657a12",
+      "docs/maintenance/toolchain-version-audit-2026-10-25.md": "2283aa9cc1e6e1dae4ec4cbd4b147c4fd98587ab12156b079fbce3a02517fb11",
+      "docs/secure-development/baseline-manifest.json": "d73564dce25433aee2e3d5bc3df1cf18b3f5944c9e4197fff95ab5af2dfd385d",
+      "docs/secure-development/checklisten/CL_01_Standards-Anwendbarkeit.md": "d52d339fcb61a8585cf425104517e51a88b3826c3311a0a47d17f549b4fb3396",
+      "docs/secure-development/checklisten/CL_02_Sichere-Softwarearchitektur.md": "45f51a1bf357c8fe13689aa20b81b6b0298114090e834efa20129ff6f3e099d7",
+      "docs/secure-development/checklisten/CL_03_Krypto-Mindestvorgaben.md": "be5d2629200268cb202ffba99f34f5d1e11252686496b5e9f7f477f5d7a69db3",
+      "docs/secure-development/checklisten/CL_04_Bedrohungsmodellierung.md": "e916e7edf32afa5c61674395d84b9bc4354a098d747a9fa219ba52d7c8912edf",
+      "docs/secure-development/checklisten/CL_05_Lieferkette-Build-Integritaet.md": "63d0ef15476da6d5d782c2feb9c74387e4328ce9a9228b47df730a382a99f80b",
+      "docs/secure-development/checklisten/CL_06_Schwachstellenoffenlegung.md": "b9548318e2d261a4534645167e1576642ec1809aa342ed532b9739c74b63a174",
+      "docs/secure-development/checklisten/CL_07_CRA-Anwendbarkeit.md": "03b972af3e45b7fdc3e297fc1ef4b55d23d105f6dcc77f74b68e24b1c38cc53c",
+      "docs/secure-development/checklisten/CL_08_Sicherheits-Code-Review.md": "571b0ee9c2970c09c4a5dd4ef17831d4a2b7f88571265f32037bb784a2b3be17",
+      "docs/secure-development/checklisten/CL_09_KI-Codeerzeugung.md": "1a1c97d69b74026d76c76e620b4160e54a4f3bfb2c09d6b5f60f891e2a8b7c62",
+      "docs/secure-development/checklisten/CL_10_Sichere-Entwicklungsumgebung.md": "3403d31987dd1d26f2e76002193ad7aaf856dd516e8c0ebbfa3ab72ff48b562c",
+      "docs/secure-development/checklisten/CL_11_Datenschutz-Folgenabschaetzung.md": "bd40ec60bb50af1f4a482135b5b982892a64aa55b0dbfbc9777e3957589b2577",
+      "docs/secure-development/checklisten/CL_12_Agentische-KI-Sandbox.md": "2c02d0730c7a1e4ec93f062499f7ebc68083f5ffce432929459c917918b07fc4",
+      "docs/secure-development/Checklistensammelband_Sichere-Entwicklung.md": "9f4eda3b2774b90318d838870b67e7ac10dafb8470e495e808bcca534a8b1699",
+      "docs/secure-development/Lernpfad_Sichere-Entwicklung_Lehrjahr-1-bis-3.md": "ead13d92489d1e9bb2af2182687a3f1e7c5e2a607dc91de676e090957685c37d",
+      "docs/secure-development/mitgeltende-dokumente/BCM-Notfallhandbuch.md": "fb91c500eeb05d30d6479451c7a438b6c3446312997586d84fad39b524ca2e57",
+      "docs/secure-development/mitgeltende-dokumente/Checkliste_Secure-Development-Life-Cycle.md": "bd2c83b50207c74086c330cc009cd832c5a3b037ae2d4f52829afa4ed5c50f18",
+      "docs/secure-development/mitgeltende-dokumente/Datenschutzleitlinie.md": "33a8059f1dc431b855288cf2d7e78536ca209f999b70f41b415c24acc7b3d7a4",
+      "docs/secure-development/mitgeltende-dokumente/Gebrauch_kryptografischer_Massnahmen.md": "a02da2be31fad6ecc8bbf16d1af97807a38926aee77f9b1a947d343f584c7e57",
+      "docs/secure-development/mitgeltende-dokumente/Kompetenzprofile_und_Schulungsplan_Sichere-Entwicklung.md": "3b08fa0e6a89682dd40fd51555f4457231d038ded1f7568f9e9ff7866195f8fc",
+      "docs/secure-development/mitgeltende-dokumente/Leitlinie_Sichere-Entwicklungs-Sandbox.md": "f4d95fef212a1e2650180f76545b5bc2cf2986b7d3782f5fd33eb87d2630ff5d",
+      "docs/secure-development/mitgeltende-dokumente/Leitlinie_Sichere-Programmierung.md": "f5e049b8e63595606ff5f8246c55e2dd21217e06c222032ee6230a9483ab030a",
+      "docs/secure-development/mitgeltende-dokumente/Leitlinie_Sicheres-Softwaredesign.md": "5dd4be0a41c70c846ac105768c93d69f62e7a304279cf927236e7fbce9de4203",
+      "docs/secure-development/mitgeltende-dokumente/README.md": "8fca36f4778c5d38ecf17d38e237737ace57480aba37cc0567686d5e016fa24e",
+      "docs/secure-development/mitgeltende-dokumente/Richtlinie_Changemanagement.md": "7bbbb1afad0e19eb3dcc7d1e9f50bbd3e25bcc39e03a2285e8453824af4d6cb2",
+      "docs/secure-development/mitgeltende-dokumente/Richtlinie_Dienstleister-und-Lieferantenbeziehungen.md": "14c6be136308292538b06da7193ee8de81e515794a8adf793470f476898a69ba",
+      "docs/secure-development/mitgeltende-dokumente/Richtlinie_Secure-Development-Life-Cycle.md": "1e6295603702321c31d078325e674089f862d8e4180352cc2784e1042e9ff404",
+      "docs/secure-development/mitgeltende-dokumente/Richtlinie_Testmanagement.md": "472fada9488db36e3d558f59d6100765381ad24c5361a685da75a71dc7bdf562",
+      "docs/secure-development/mitgeltende-dokumente/Richtlinie_Zugangssteuerung.md": "819436b981a00fa30e513c090ffea9648476b2d68986bc9770e862a804e18639",
+      "docs/secure-development/mitgeltende-dokumente/Standardsregister_Sichere-Entwicklung.md": "3dfabf0c1ff6f90e5125e1f337f6cc359b2140adc1a3a71da80dc8af87406ed4",
+      "docs/secure-development/mitgeltende-dokumente/THE-CASE-FOR-MEMORY-SAFE-ROADMAPS-TLP-CLEAR.DE.md": "867542e599f946d1a42c1dc1fe0a30455744fea852d43a3dcc84140ee370a719",
+      "docs/secure-development/mitgeltende-dokumente/THE-CASE-FOR-MEMORY-SAFE-ROADMAPS-TLP-CLEAR.EN.md": "f1eded9f9c858e874ede948b354e618a4e264298f3c4a3e3753a6627d9231e3c",
+      "docs/secure-development/mitgeltende-dokumente/THE-CASE-FOR-MEMORY-SAFE-ROADMAPS-TLP-CLEAR.sha256": "fc62c1f879c6e17739e17c5114ccc38dea7e8552ddbad55e606e130dd5b696de",
+      "docs/secure-development/mitgeltende-dokumente/Verzahnung_Richtlinie_Checklisten_Spec-Kit-Presets.md": "702e93704405090c3daa785495fc19b676fe3a63c85d576acf0861ed9206d58a",
+      "docs/secure-development/README.md": "ea99db9660f224f1cbd20ee8413d608dd8b27faa3462a2623bd3dde064a687bb",
+      "docs/secure-development/Richtlinie_Sichere-Entwicklung.md": "cd80b23afc87a53b523cd6eb5b47ffce1873b6a3f3906abecfef8321a811e88b",
+      "docs/security/agent-session-log/2026-10-25-1047.md": "151e1b51bd99afa777e8f1046694e0957fdf6ff95da9ef19fc794a399e0fd2ed",
+      "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/acceptance-decision.md": "12fbac3263f31646e83e4d9b841a73c41d96dcc8ca259be68b40f356bd0354c7",
+      "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/prioritized-gap-list.md": "b7e631e9df5e37686ab1ff2c0a07552c5d59c23af28621c917e36d2a42f55542",
+      "docs/security/toolchain-followups-2026-10-25.md": "5f27bebe0d4698737c77b27d31373374a25d2a6e5f83acb58d906cf0471f4203",
+      "intakes/learner-fork-self-build-sandbox.md": "1f895c155fbd5a9bc211f9cfe7322a4a62c85de090f715fd26e2b8f6cb460396",
+      "Lastenheft_Abarbeitungsreihenfolge.md": "5921adba199dcf14deb04220dc165bd4c80afb02ede1b6d9780e1784ae0b98b3",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md": "70aa55b50ea87b58973ce958027ab5f3fea39e018bd96756c56e31512f29930f",
+      "Lastenheft_Secure-Development-Container-Hardening.md": "c3d9ff9b9a9dadd5df9b81414182b98d93b46163d5ddfcd54c65fb681dd50c9e",
+      "Pflichtenheft.md": "e9854cd5c4de665f2a9a409b924cd40a201a4eaee8ffc7236f826d6ab8377b7e",
+      "README.md": "8936b9c560d9be10cb952afbedeae52b68179215115c74623facca1d0ef5149a",
+      "renovate.json": "7766b9feb5851a9463b09931d0d9f8eacb5407f4b7abfe64565f5af545ad34e8",
+      "requirements/intake-governance-config.json": "d7740f7ff839ca310607acd2e20dd9d58ffcc8ef9553ad73e00e353508a0c5be",
+      "scripts/config/required-cli-tools-registry.json": "672fab11b0fe215c1dab8d7475736d331d678daa02eac33b6c3913ae271e8ce4",
+      "scripts/tests/test_toolchain_version_pins.py": "3a4e032b61badae73987760c6a97d423de51a12e58a47ecb84f57b57836a2ba8",
+      "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json": "20d57076beb79f592e60bbe9f7f78be31aada8aa85e395e4e67e71bc828dd80d",
+      "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/3caff22f-59d5-4142-b15b-955ee96a3037/target.txt": "39f7979e0f8479bca0cb096fdf8e1199a7b7c841ecb3fa2a54506d7f1d1d08ed",
+      "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/receipt.json": "479d9da1950d8fb4320b18a224a8b57872f8f945526e183ce0da24f2ab64d5ad",
+      "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/target.txt": "018e8753f1ba922c24ca3d6756647ebeeecb7fc92426ddbc758d4daccf9ee2dd",
+      "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json": "799cdad6924de04be0c9d71d65d354fa30f5144be4a61116ed16a7796ee368f8",
+      "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/3caff22f-59d5-4142-b15b-955ee96a3037/target.txt": "9b55b5820652f99e777c71d1eb2b8e7dd55aa91e0d74c4f9423cbfa10f4470f3",
+      "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/receipt.json": "579afa4ca50ea3d954916bb8293b75214ab5fa246e11e30d59cec19fd0e886ac",
+      "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/target.txt": "eb7be6eab3d05a47227e492a347367ccdab44edcd45f529b758cf677d129c44d",
+      "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json": "38d0d7dc9e348aa4fe25bdcbd2b72b79774c89f2f19df728453fa005504b0bf7",
+      "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/3caff22f-59d5-4142-b15b-955ee96a3037/target.txt": "dfb1d8702b79ea9914d8158ad01d5ea8e06b75b18118b574338959c6885a5307",
+      "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/receipt.json": "664e1a50c027e3ad41c5526bf48332a03b0391d331a915733f6700c90d1e8764",
+      "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/target.txt": "6ef4f680d749703351767dfede0fbf8cef5d8fd3044a30d7cc3303c667b5d0c3",
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a",
+      "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/source-snapshots/Dockerfile.txt": "b8880e957bec256e1cb166eb5251643a35c2c54327313584dff2ba052b844aa5",
+      "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/source-snapshots/docs/maintenance/documentation-impact-2026-10-25.json.txt": "66a18628b63b0baec8c92ab5e9edcf638b9221074a512f87535cf7eb78fb7273",
+      "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/source-snapshots/scripts/tests/test_toolchain_version_pins.py.txt": "201dba162a88ab746665de68a34de8c4fc060c42e0dc7af5612aba56796e18ed",
+      "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json": "0e1f12a68846fbe57d8bd9779e2f75c498e65be71f1852b87f56db5c48621b55",
+      "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json": "60c37f5db47dfd48ac22643cc051e6ac06789d911f677dc956f0b0d365fe0abd",
+      "specs/intake-authoring-receipts/secure-development-container-hardening.json": "85f397ad9bafef7f4510fd2d9959e58ebb8b856f123a747bcd419ea7c508291f",
+      "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/independent.txt": "62bb4c8cb6cf6b80c64dc33835c67f4283b8f429d5d3b9f79496e81dcd114866",
+      "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/report.txt": "64533602a959e4bbc01d8ae82ec3e76b308fb1d5a27f5ec3a1c7317313daf80e",
+      "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/request.json": "e3d429ee3fe852286a0e0550224f01a2cc3ae5789e3067ffc576659abb4f47f6",
+      "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/result.json": "12b50b53d76b8ae9b89d992cc9932599a9f5f3288f28256628a4c6324df55014",
+      "specs/intake-review-archive/4398a97e-6773-4b3f-b9d5-a8fbf52005f5/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/independent.txt": "9d2e085da2e9bf430fb8183c1cb7f330926e714c9f8de83d8231592642b80413",
+      "specs/intake-review-archive/4398a97e-6773-4b3f-b9d5-a8fbf52005f5/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/report.txt": "ba94b211fccdc275bd137ad8df7863c723aab5a74771ed3e38fc6047d698b37e",
+      "specs/intake-review-archive/4398a97e-6773-4b3f-b9d5-a8fbf52005f5/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/request.json": "cf091857c5ca0e8bb5fa74aee3680c11965e2f20f95b2e10bf78024c9a1480ea",
+      "specs/intake-review-archive/4398a97e-6773-4b3f-b9d5-a8fbf52005f5/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/result.json": "7033d95e6612ef6b830795f4432ba68bdc0f6c4cbaad389125b60504a81e3d07",
+      "specs/intake-review-requests/sandbox-development-lifecycle.json": "f9aec9ad4fc2779356eea7524f295e95f5a4601b7d22fb3bc55858c7381fed46",
+      "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/manifest.json": "e61f52f9d3806fc8039a78ee4e0f1edb5e7c7712f5a61d1d961b0298ed7c36f1",
+      "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/order.md": "3391e54fcafe38bd55f9d07c0f6f033abed2a9586f4ef874e34b720e33a6c659",
+      "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json": "4095a45e6b350ed40435e1a802f890ad5661853da9b8ae049c1d033a38522b15",
+      "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/requirements-order.md": "ff2c8296f3b38c3bf555ecb179fc75d61e811d045595ac3ae7c628a10b1ced78",
+      "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/manifest.json": "7a70f761c2de1246bfdc6a780710a1f05be3ad2a079bfa0dd30d7963eb1369c1",
+      "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/receipt.json": "8e8f34ed5da39d3eb9751033bdfe0ca5b9feebf91e689944c6f93ca9de52ce97",
+      "specs/intake-series/sandbox-development-lifecycle/manifest.json": "028676722dd6aa76e077922b5fdae6962e2c336e5da668dcd4e761bc5317bb26",
+      "specs/intake-series/sandbox-development-lifecycle/order.md": "1fb1343c4a30449a86bfddc7fe5e39cb533a5418374d5704927305f30759f43d",
+      "specs/intake-series/sandbox-development-lifecycle/receipt.json": "c36c9c8fef65adcbd71ca22afd5f943bee6c4a8bb3811f563558d79586639a8d"
+    },
+    "reviewedOutputSnapshots": {
+      "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/operation.json": "521d64f533104d86620e4e4ff69aa3137fc80a4a4caf693492eb61be36a8fe39",
+      "specs/intake-series-operations/3caff22f-59d5-4142-b15b-955ee96a3037.json": "93ad98c569a40d7d2a28f8cdf1193f9fbce739f8f4a5076d7e252acb7cc86ea7"
+    },
+    "outputSnapshotBoundary": "Parent authoring/series operation journals are OUTPUT snapshots, not frozen normative inputs. Parent may append completion metadata only, preserving scope, authority, lineage and lifecycle. No operation journal or historical session log was modified by reviewer. The three current review outputs exclude self-hashes.",
+    "priorReviewBoundary": "Explicitly supersedes archived result 0298d3b3-7ff1-42d8-a5f7-349d01139cf4 at result.supersedes. Its Ready applies only to archived inputs. All 17 archive/snapshot raw and normalized hashes match operation evidence. Pre-change capture from a private preimage and 81-hash preflight are owner-provided chronology, not independently observed by this reviewer.",
+    "placeholderDisposition": "IR-MAVEN-REVIEW-FRESHNESS was a pending-review placeholder, discharged by this full review, not risk acceptance.",
+    "proofBoundary": "Ready assesses requirements, documentation, source-code correction and local provenance only. No build, container action, actual download, provider call, global maintenance, installation, Git write or follow-up command. No runtime/product/platform/legal/privacy/provider/model/sandbox/release or human A11Y approval. No fresh online source/publication verification.",
+    "humanAcceptance": "NotClaimed",
+    "archiveVerification": {
+      "files": 17,
+      "rawHashMismatches": 0,
+      "normalizedHashMismatches": 0
+    },
+    "sourceInventoryVerification": {
+      "files": 37,
+      "rawHashMismatches": 0,
+      "binaryAttachmentBoundary": "PDF checked by raw inventory SHA-256 only; not counted among 139 normalized text inputs."
+    },
+    "controlDeltaVerification": {
+      "uniqueIds": 50,
+      "UpdateRequired": 47,
+      "AlreadyCovered": 1,
+      "NA": 2
+    },
+    "localLinkVerification": {
+      "activeIntakeLocalPaths": 24,
+      "missing": 0,
+      "boundary": "Existence/containment only; external URLs and rendered fragments not verified."
+    },
+    "validation": [
+      {
+        "check": "Bash authoring receipts",
+        "status": "Pass",
+        "count": 3,
+        "sourcesPerReceipt": 29,
+        "exitCode": 0
+      },
+      {
+        "check": "Bash series manifest and receipt",
+        "status": "Pass",
+        "targets": 4,
+        "roots": 1,
+        "dependencies": 3,
+        "exitCode": 0
+      },
+      {
+        "check": "Bash governance schema 2.0 config",
+        "status": "Aligned",
+        "exitCode": 0
+      },
+      {
+        "check": "PowerShell authoring receipts, series manifest/receipt and schema 2.0 config",
+        "status": "Pass",
+        "count": 3,
+        "sourcesPerReceipt": 29,
+        "configOutcome": "Aligned",
+        "activeIntakeCount": 5,
+        "activeSeriesTargetCount": 3,
+        "seriesTargetCount": 4,
+        "exitCode": 0
+      },
+      {
+        "check": "Bash and PowerShell review result validators",
+        "status": "Pass",
+        "reviewId": "c22a09e1-a781-4f5f-b691-a8d8839298b8",
+        "targets": 4,
+        "exitCode": 0
+      },
+      {
+        "check": "Input hashes before output write",
+        "status": "Pass",
+        "files": 139,
+        "mismatches": 0
+      },
+      {
+        "check": "Input raw/normalized hashes after output write",
+        "status": "Pass",
+        "files": 139,
+        "mismatches": 0
+      },
+      {
+        "check": "Scoped git diff --check on three review outputs",
+        "status": "Pass",
+        "exitCode": 0
+      }
+    ],
+    "validationInvocationNotes": "Initial Bash series/config invocations used incorrect flags and returned usage exit 2; corrected to --file and --config, then passed. No validator or source was repaired.",
+    "reportedValidation": [
+      {
+        "source": "docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md",
+        "check": "12 toolchain pin tests including 5 isolated download cases",
+        "status": "PassReportedNotRerun",
+        "reason": "Reviewer has write authority only for three outputs; fixtures create temporary files. Static code review performed, no fresh fixture/runtime claim."
+      }
+    ],
+    "validationBoundaries": [
+      {
+        "id": "REV-TEST-TIMING",
+        "status": "Open",
+        "owner": "Maintainer",
+        "evidence": "Archived prior review reviewerEvidence.validationBoundaries and reportedValidation",
+        "followUp": "Separate isolated reproduction of existing timing-sensitive fixture results under host Python versions; no relaxed timeouts, masking changes or global maintenance.",
+        "reevaluationTrigger": "Before claiming a fully green overall suite or authorizing global maintenance.",
+        "disposition": "Retained historical test boundary; not rerun, newly accepted or closed by this review."
+      }
+    ],
+    "nextAction": "Return these three outputs to parent for bounded completion metadata only; no follow-up command or implementation started."
+  },
+  "series": {
+    "orderedTargetPaths": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "roots": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+    ],
+    "dependencies": [
+      {
+        "from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+        "to": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "kind": "AssessmentBaseline"
+      },
+      {
+        "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "kind": "SandboxBaseline"
+      },
+      {
+        "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "to": "intakes/learner-fork-self-build-sandbox.md",
+        "kind": "HardCompletionGate"
+      }
+    ]
+  }
+}

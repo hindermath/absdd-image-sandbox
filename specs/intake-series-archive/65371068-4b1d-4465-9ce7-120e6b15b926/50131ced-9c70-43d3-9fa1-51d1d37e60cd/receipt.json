@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "665dea92-703b-43c3-8c35-34f55f39e5de",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.11"
+  },
+  "createdAt": "2026-10-25T13:30:29Z",
+  "operation": {
+    "type": "Update",
+    "authorityEvidence": "Owner explicitly requested on 2026-10-25: fix the two final-review findings by adding the official Apache Maven archive fallback with unchanged version/SHA-512 and isolated download fixtures, classify earlier stopped-machine statements as historical with current status reference, then refresh all three intake source bindings with preserved identities and byte-identical archives and independently fully review the series. Preserve lifecycle and execution authority. No global maintenance, installation, container build/restart, commit or push.",
+    "operationId": "3caff22f-59d5-4142-b15b-955ee96a3037"
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "028676722dd6aa76e077922b5fdae6962e2c336e5da668dcd4e761bc5317bb26"
+  },
+  "supersedes": {
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+    "receiptNormalizedSha256": "4095a45e6b350ed40435e1a802f890ad5661853da9b8ae049c1d033a38522b15",
+    "manifestArchiveSha256": "e61f52f9d3806fc8039a78ee4e0f1edb5e7c7712f5a61d1d961b0298ed7c36f1",
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/manifest.json"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status"
+}

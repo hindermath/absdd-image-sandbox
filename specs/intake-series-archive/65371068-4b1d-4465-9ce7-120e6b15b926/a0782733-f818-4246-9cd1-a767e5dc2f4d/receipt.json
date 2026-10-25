@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "018a1771-59a5-41cd-812e-6ad960dadecf",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.11"
+  },
+  "createdAt": "2026-10-25T19:42:12Z",
+  "operation": {
+    "type": "Update",
+    "operationId": "cf00bd75-048f-4a85-803b-54ab5a160b44",
+    "authorityEvidence": "Owner explicitly approved the targeted CI correction round for PR100 and MergeAndSync with admin bypass only after fresh green technical checks. Correct stale statistics with the existing renderer after content commit, current preset-integrity gate instead of historical receipt, and pin the published .NET10 GA SDK matching the verified MCR baseline. Renew affected source bindings and independent bounded review as necessary. Preserve intake identities, all requirements, six prompts, lifecycle and future execution authority. No image build, container restart, global maintenance, platform-rule change or formal approval."
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "5240a9ad955342ffa3b13522a07979cbbba251caf93a9674ce6560d2db9c4b84"
+  },
+  "supersedes": {
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/cf00bd75-048f-4a85-803b-54ab5a160b44/manifest.json",
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/cf00bd75-048f-4a85-803b-54ab5a160b44/receipt.json",
+    "receiptNormalizedSha256": "f928af6ff0e5cd15748ae4b42914d6cac4c728c59974368d0da44d6b031ff07b",
+    "manifestArchiveSha256": "740f5c72a9aff540c063df8adf37f1ba30e1df2fad99b869896de9860645b2c4"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status"
+}

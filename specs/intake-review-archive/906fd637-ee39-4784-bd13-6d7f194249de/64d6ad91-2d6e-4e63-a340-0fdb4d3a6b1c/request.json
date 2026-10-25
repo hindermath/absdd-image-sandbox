@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "906fd637-ee39-4784-bd13-6d7f194249de",
+  "mode": "Series",
+  "policy": "learner-a11y-bilingual-series",
+  "targets": [
+    {
+      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "role": "Primary"
+    },
+    {
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "role": "OrderedMember"
+    }
+  ],
+  "series": {
+    "orderedTargetPaths": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "roots": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+    ],
+    "dependencies": [
+      {
+        "from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+        "to": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "kind": "AssessmentBaseline"
+      },
+      {
+        "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "kind": "SandboxBaseline"
+      },
+      {
+        "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "to": "intakes/learner-fork-self-build-sandbox.md",
+        "kind": "HardCompletionGate"
+      }
+    ]
+  },
+  "campaign": {
+    "manifestPath": "N/A",
+    "workers": [],
+    "operatorExceptions": []
+  },
+  "changeSources": [
+    "docs/maintenance/intake-sources-alignment-2026-10-25.md",
+    "AGENTS.md",
+    ".specify/presets/secure-development-assurance-governance/templates/secure-development-evidence-contract.md",
+    "docs/maintenance/gsdb-344-preset-installed-lock.json",
+    "docs/maintenance/stable-preset-rollout-2026-10-24.md",
+    "docs/maintenance/stable-preset-source-lock-2026-10-24.json",
+    "docs/maintenance/stable-preset-installed-lock-2026-10-24.json",
+    "docs/secure-development/baseline-manifest.json",
+    "docs/maintenance/gsdb-344-source-inventory.json",
+    "docs/maintenance/gsdb-344-control-delta.json",
+    "docs/maintenance/intake-gsdb344-delta-2026-10-21.md",
+    ".specify/presets/secure-development-assurance-governance/docs/release-0.1.8-validation.md",
+    ".specify/presets/secure-development-assurance-governance/docs/user-guide.md",
+    ".specify/presets/secure-development-assurance-governance/docs/user-guide.EN.md",
+    "COMPLIANCE-PLAN_RL-SE-001.md"
+  ],
+  "authorityEvidence": "Explicit owner request on 2026-10-25: targeted source comparison, update the three affected intakes and source bindings, then independent full review. Local governance authoring only; no technical implementation, product run, container build/start, commit, push or lifecycle advancement."
+}

@@ -20,6 +20,8 @@ concurrency:
 
 jobs:
   native-proof:
+    # This exact-history pilot belongs to the reference, not a fresh template history.
+    if: github.repository == 'hindermath/absdd-image-sandbox'
     name: Statistics pilot (${{ matrix.os }})
     strategy:
       fail-fast: false
@@ -44,6 +46,7 @@ jobs:
         run: |
           Set-StrictMode -Version Latest
           $ErrorActionPreference = 'Stop'
+          . ./scripts/lib/statistics-ci-evidence.ps1
           $env:GIT_OPTIONAL_LOCKS = '0'
           $source = (Get-Location).Path
           $workflowHead = (& git rev-parse HEAD).Trim()
@@ -74,11 +77,16 @@ jobs:
           $sourceBefore = Get-ProofHashSet $source
           $pilotBefore = Get-ProofHashSet $pilot
           $package = Join-Path $pilot '.specify/presets/project-statistics-governance'
-          $receipt = Get-Content (Join-Path $pilot 'docs/maintenance/project-statistics-installation-v010.json') -Raw | ConvertFrom-Json
-          foreach ($file in $receipt.installedPayloadFiles) {
-              foreach ($root in @($source,$pilot)) {
-                  $installed = Join-Path $root ('.specify/presets/project-statistics-governance/' + $file.path)
-                  if ((Get-FileHash -LiteralPath $installed).Hash.ToLowerInvariant() -cne $file.sha256) { throw 'Installed payload drift.' }
+          # Current integration locks bind every installed payload and release source.
+          # Preserve the v010 installation receipt as historical evidence, not an active lock.
+          $python = if ($IsWindows) { 'python' } else { 'python3' }
+          foreach ($root in @($source,$pilot)) {
+              Push-Location -LiteralPath $root
+              try {
+                  & $python -B -m unittest scripts.tests.test_spec_kit_agent_surface_parity.SpecKitAgentSurfaceParityTests.test_gsdb_rollout_installed_payload_and_release_bindings
+                  if ($LASTEXITCODE -ne 0) { throw 'Current installed payload or release-source drift.' }
+              } finally {
+                  Pop-Location
               }
           }
           $snapshot = Get-Content (Join-Path $pilot $mutable[2]) -Raw | ConvertFrom-Json
@@ -113,10 +121,9 @@ jobs:
                   else { $output = @(& pwsh -NoProfile -File $engine -Action Status -Repo $pilot -Config $config -Json) }
                   $code = $LASTEXITCODE
                   $output | Write-Output
-                  if ($code -ne 0) { throw "${shell} parity failed with exit ${code}." }
                   $result = ($output -join "`n") | ConvertFrom-Json
-                  if ($result.status -ne 'CURRENT' -or -not $result.reproducible -or -not $result.current -or $result.changed -or
-                      $result.sourceRevision -cne $snapshot.measurement.sourceRevision -or $result.asOf -cne $snapshot.measurement.asOf) { throw 'Unexpected parity result.' }
+                  # A frozen historical pilot must reproduce, not claim current data.
+                  Assert-HistoricalStatisticsReplay -Decision $result -ExitCode $code -Snapshot $snapshot
                   if ((Get-ProofHashSet $pilot) -cne $before -or
                       (@(& git -C $pilot status --porcelain=v1 --untracked-files=all) -join "`n") -cne $beforeStatus) { throw 'Status changed checked content.' }
                   $decisionPath = Join-Path $evidence "$($variant.name)-${shell}.json"
@@ -170,6 +177,7 @@ jobs:
         run: |
           Set-StrictMode -Version Latest
           $ErrorActionPreference = 'Stop'
+          . ./scripts/lib/statistics-ci-evidence.ps1
           $paths = @('docs/project-statistics-pilot/config.json', 'docs/project-statistics-pilot/report.md',
               'docs/project-statistics-pilot/snapshot.json', 'docs/project-statistics.md', 'docs/project-statistics.config.json')
           $before = @{}
@@ -178,15 +186,14 @@ jobs:
           $shells = if ($IsWindows) { @('PowerShell') } else { @('Bash', 'PowerShell') }
           foreach ($shell in $shells) {
               if ($shell -eq 'Bash') {
-                  $output = @(& bash .specify/presets/project-statistics-governance/scripts/project-statistics.sh status --repo . --config docs/project-statistics-pilot/config.json --json)
+                  $output = @(& bash scripts/render-project-statistics.sh --repo . --check-only --json)
               } else {
-                  $output = @(& pwsh -NoProfile -File .specify/presets/project-statistics-governance/scripts/project-statistics.ps1 -Action Status -Repo . -Config docs/project-statistics-pilot/config.json -Json)
+                  $output = @(& pwsh -NoProfile -File scripts/render-project-statistics.ps1 -Repo . -CheckOnly -Json)
               }
               $code = $LASTEXITCODE
               $output | Write-Output
-              if ($code -ne 0) { throw 'Delivery snapshot status failed.' }
               $decision = ($output -join "`n") | ConvertFrom-Json
-              if (-not $decision.reproducible -or -not $decision.current -or $decision.changed -or $decision.status -ne 'CURRENT') { throw 'Delivery snapshot is not current.' }
+              Assert-CurrentStatisticsProfile2 -Decision $decision -ExitCode $code
               & git merge-base --is-ancestor $decision.sourceRevision HEAD
               if ($LASTEXITCODE -ne 0) { throw 'Measurement source is not an ancestor of delivery head.' }
               foreach ($path in $paths) { if ((Get-FileHash $path).Hash -cne $before[$path]) { throw 'Delivery status modified checked content.' } }
@@ -195,7 +202,8 @@ jobs:
               $decision | ConvertTo-Json | Set-Content $decisionPath -Encoding utf8NoBOM
               [ordered]@{head=(& git rev-parse HEAD).Trim();shell=$shell;exitCode=$code;
                   decisionSha256=(Get-FileHash $decisionPath).Hash.ToLowerInvariant();
-                  snapshotSha256=(Get-FileHash $paths[2]).Hash.ToLowerInvariant();checkedContentChanges=0} |
+                  historicalSnapshotSha256=(Get-FileHash $paths[2]).Hash.ToLowerInvariant();
+                  currentLedgerSha256=(Get-FileHash $paths[3]).Hash.ToLowerInvariant();checkedContentChanges=0} |
                   ConvertTo-Json | Set-Content (Join-Path $evidence "delivery-${shell}-evidence.json") -Encoding utf8NoBOM
           }
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

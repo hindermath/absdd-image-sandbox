@@ -15,19 +15,19 @@
     {
       "path": "Lastenheft_Secure-Development-Container-Hardening.md",
       "role": "OrderedMember",
-      "normalizedSha256": "a132f61e61f7184764d9bf9ba093adcd1389564644c386f2f1a615d72b9c89cb",
+      "normalizedSha256": "8a9fac14e92da1a901504a1daa15e56bf744b1d6c8cf192f0385716bcddbcaf3",
       "status": "Eligible"
     },
     {
       "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
       "role": "OrderedMember",
-      "normalizedSha256": "8002cad312d4e05dd48eda42d1eede0d17471e0f812a6ed509cb7e3c174b42f7",
+      "normalizedSha256": "23fb312bc8821f7cea59222c4b53959e790d972db7968f1955ca64be87d50f5a",
       "status": "Blocked"
     },
     {
       "path": "intakes/learner-fork-self-build-sandbox.md",
       "role": "OrderedMember",
-      "normalizedSha256": "f056ccea8592f854654413492de99b1c503286f4253fae2431abb55275f21db7",
+      "normalizedSha256": "d73d504931a2b1d8bae483edbd8e65c47de5aea29fa0eb78e39166de9f5b0f41",
       "status": "Blocked"
     }
   ],
@@ -60,6 +60,21 @@
     "specs/intake-authoring-tombstones/",
     "specs/intake-review-reports/sandbox-development-lifecycle.md",
     "docs/security/secure-development/2026-08-30-gsdb-baseline-assessment/acceptance-decision.md",
-    "docs/maintenance/intake-gsdb344-delta-2026-10-21.md"
+    "docs/maintenance/intake-gsdb344-delta-2026-10-21.md",
+    "docs/maintenance/intake-sources-alignment-2026-10-25.md",
+    "docs/maintenance/documentation-alignment-2026-10-25.md",
+    "docs/security/toolchain-followups-2026-10-25.md",
+    "docs/maintenance/sandbox-current-state-2026-10-25.md",
+    "docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md",
+    "docs/maintenance/documentation-impact-2026-10-25.json",
+    "docs/maintenance/template-profile-alignment-2026-10-25.md",
+    "docs/licensing.md",
+    "docs/fuer-lernende/template-profil.md",
+    "docs/betrieb/template-erstuebernahme.md",
+    "docs/maintenance/closeout-rights-alignment-2026-10-25.md",
+    "docs/maintenance/closeout-review-remediation-2026-10-25.md",
+    "docs/maintenance/closeout-eof-alignment-2026-10-25.md",
+    "docs/maintenance/closeout-ci-alignment-2026-10-25.md",
+    "docs/maintenance/closeout-statistics-history-2026-10-25.md"
   ]
 }

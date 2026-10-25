@@ -254,7 +254,7 @@ snapshot_registry() {
   local name="$1"
   shift
   local destination="$WORK_DIR/$name"
-  "$@" > "$destination"
+  "$@" > "$destination" || return $?
   printf '%s\n' "$destination"
 }
 
@@ -326,53 +326,19 @@ validate_item_id() {
   fi
 }
 
+read_registry_snapshot() {
+  local line
+  while IFS= read -r line; do
+    printf '%s\n' "$line"
+  done < "$WORK_DIR/registries/$1"
+}
+
 registry_items() {
-  local section="$1"
-  local scope="${2:-all}"
-  python3 - "$REGISTRY" "$section" "$scope" <<'PY'
-import json
-import sys
-
-registry_path, section, scope = sys.argv[1:4]
-with open(registry_path, encoding="utf-8") as handle:
-    data = json.load(handle)
-
-if section == "aptFallback":
-    items = data.get("aptFallback", {}).get("packages", [])
-    key = "name"
-else:
-    items = data.get(section, [])
-    key = "name"
-
-for item in items:
-    if scope != "all" and item.get("scope", "required") != scope:
-        continue
-    value = item.get(key)
-    if value:
-        print(value)
-PY
+  read_registry_snapshot "brew-$1-${2:-all}.tsv"
 }
 
 registry_scoped_items() {
-  local section="$1"
-  python3 - "$REGISTRY" "$section" <<'PY'
-import json
-import sys
-
-registry_path, section = sys.argv[1:3]
-with open(registry_path, encoding="utf-8") as handle:
-    data = json.load(handle)
-items = (
-    data.get("aptFallback", {}).get("packages", [])
-    if section == "aptFallback"
-    else data.get(section, [])
-)
-for item in items:
-    value = item.get("name")
-    scope = item.get("scope", "required")
-    if value and scope in {"required", "optional"}:
-        print(f"{value}\t{scope}")
-PY
+  read_registry_snapshot "brew-$1-scoped.tsv"
 }
 
 registry_linked_formulae() {
@@ -406,99 +372,19 @@ PY
 }
 
 vscode_registry_items() {
-  local section="$1"
-  local scope="${2:-all}"
-  python3 - "$VSCODE_REGISTRY" "$section" "$scope" <<'PY'
-import json
-import sys
-
-registry_path, section, scope = sys.argv[1:4]
-with open(registry_path, encoding="utf-8") as handle:
-    data = json.load(handle)
-
-for item in data.get(section, []):
-    if scope != "all" and item.get("scope", "required") != scope:
-        continue
-    value = item.get("id")
-    if value:
-        print(value)
-PY
+  read_registry_snapshot "vscode-${2:-all}.tsv"
 }
 
 vscode_registry_scoped_items() {
-  python3 - "$VSCODE_REGISTRY" <<'PY'
-import json
-import sys
-
-with open(sys.argv[1], encoding="utf-8") as handle:
-    data = json.load(handle)
-for item in data.get("extensions", []):
-    value = item.get("id")
-    scope = item.get("scope", "required")
-    if value and scope in {"required", "optional"}:
-        print(f"{value}\t{scope}")
-PY
+  read_registry_snapshot 'vscode-scoped.tsv'
 }
 
 cli_registry_items() {
-  local scope="${1:-all}"
-  python3 - "$CLI_REGISTRY" "$OS_NAME" "$scope" <<'PY'
-import json
-import sys
-
-registry_path, os_name, scope = sys.argv[1:4]
-with open(registry_path, encoding="utf-8") as handle:
-    data = json.load(handle)
-
-for item in data.get("tools", []):
-    if scope != "all" and item.get("scope", "required") != scope:
-        continue
-    if os_name not in item.get("platforms", []):
-        continue
-    install = item.get("install", {})
-    print(
-        "\t".join(
-            [
-                item.get("id", ""),
-                item.get("command", ""),
-                json.dumps(item.get("args", []), separators=(",", ":")),
-                install.get("manager") or "-",
-                json.dumps(install.get("arguments", []), separators=(",", ":")),
-                install.get("url", ""),
-                install.get("sha256", ""),
-                install.get("interpreter", ""),
-            ]
-        )
-    )
-PY
+  read_registry_snapshot "cli-${1:-all}.tsv"
 }
 
 npm_agent_registry_items() {
-  local scope="${1:-all}"
-  python3 - "$NPM_AGENT_REGISTRY" "$OS_NAME" "$scope" <<'PY'
-import json
-import sys
-
-registry_path, os_name, scope = sys.argv[1:4]
-with open(registry_path, encoding="utf-8") as handle:
-    data = json.load(handle)
-
-for item in data.get("tools", []):
-    if scope != "all" and item.get("scope", "required") != scope:
-        continue
-    if os_name not in item.get("platforms", []):
-        continue
-    print(
-        "\t".join(
-            [
-                item.get("id", ""),
-                item.get("package", ""),
-                item.get("command", ""),
-                json.dumps(item.get("args", []), separators=(",", ":")),
-            ]
-        )
-    )
-PY
+  read_registry_snapshot "npm-${1:-all}.tsv"
 }
 
 registry_excluded_casks() {
@@ -1435,6 +1321,15 @@ collect_apt_results() {
 log "Agentic Homebrew registry maintenance"
 log "Registry: $REGISTRY"
 log "OS: $OS_NAME"
+
+# Snapshot registry metadata once per run; availability probes remain live.
+snapshot_args=(snapshot-registries --output "$WORK_DIR/registries"
+  --brew "$REGISTRY" --cli "$CLI_REGISTRY" --npm "$NPM_AGENT_REGISTRY"
+  --platform "$OS_NAME")
+if [ "$SKIP_VSCODE_EXTENSIONS" -eq 0 ]; then
+  snapshot_args+=(--vscode "$VSCODE_REGISTRY")
+fi
+python3 "$LINUX_HARDENING" "${snapshot_args[@]}"
 
 if command -v brew >/dev/null 2>&1; then
   if [ "$COMPARE_ONLY" -eq 0 ] && [ "$SKIP_UPGRADE" -eq 0 ]; then

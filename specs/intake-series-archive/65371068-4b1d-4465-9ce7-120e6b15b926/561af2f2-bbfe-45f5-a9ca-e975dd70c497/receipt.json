@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "c5e22cf0-9f6a-4f27-acfc-3b98f00d7020",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.11"
+  },
+  "createdAt": "2026-10-25T17:26:44Z",
+  "operation": {
+    "authorityEvidence": "Owner approved the 25 October closeout: bounded confirmation of exploitation rights for new introductory/SysInfo/web learning materials, preserved third-party rights, one targeted three-intake refresh and independent full-series review, seven thematic commits, one push and one exact-head merge-commit PR with admin bypass only after green checks. Separate cached ARM64 candidate only; no running-service replacement, template activation, product run or formal sandbox approval.",
+    "type": "Update",
+    "operationId": "7ed5b22f-e402-4e7b-aca0-1d68259a6eac"
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "1289b799a1fa4fc2a9da1d88c3a135e6e55f6e833be168e5ec85d07eef8de8d1"
+  },
+  "supersedes": {
+    "manifestArchiveSha256": "c999c059c8543fa0e75e460c720e72825f324b2823291a9c3a051496cd080f13",
+    "receiptNormalizedSha256": "1f5fa452cf5f8ec1ea5a34a87112e6506d5e239a997eff38087c5cf4a177e95e",
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/7ed5b22f-e402-4e7b-aca0-1d68259a6eac/receipt.json",
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/7ed5b22f-e402-4e7b-aca0-1d68259a6eac/manifest.json"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status"
+}

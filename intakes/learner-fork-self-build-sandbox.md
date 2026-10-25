@@ -31,6 +31,60 @@ authority. A smoke test is a small functional check and a toolchain a group
 of development tools. Secrets are confidential credentials; CI means
 automated repository checks and LSP connects editor and language tools.
 
+## Dokumentations- und Versionsnachtrag 2026-10-25 / Documentation and Version Addendum
+
+DE: Der [Dokumentationsabgleich](../docs/maintenance/documentation-alignment-2026-10-25.md)
+und die [Werkzeug-Nachpruefungen](../docs/security/toolchain-followups-2026-10-25.md)
+ergaenzen die vorhandene Pruefgrundlage. Sie binden die aktuelle Agent-Guidance,
+nicht eine technische Gesamterledigung. AMD64-Abnahme, effektive OpenCode-2-
+Kontrollen, sitzungsbezogene Auditabdeckung und Linux-Warnungsreproduktion
+bleiben anhand der dort benannten Owner, Follow-ups und Trigger zu pruefen.
+Reine Datenbank-Dateimetadaten ersetzen keinen Sitzungsnachweis. Der
+[gemeinsame Lernweg](../docs/fuer-lernende/lernwege.md) und die
+[A11Y-Pruefgrenzen](../docs/fuer-lernende/barrierefreiheit.md) konkretisieren
+bestehende Zielgruppen- und Verstaendlichkeitsanforderungen. Die bisherigen
+Kontroll-IDs, Akzeptanzbedingungen, Uebergaben und menschlichen Grenzen bleiben
+erhalten; keine neue Freigabe und kein Produktstart.
+
+EN: Documentation alignment and toolchain follow-ups supplement the existing
+review basis. They bind current agent guidance, not overall technical
+completion. AMD64 acceptance, effective OpenCode 2 controls, session-level
+audit coverage and Linux warning reproduction remain subject to the listed
+owners, follow-ups and triggers. Database file metadata is not session
+evidence. The shared learning path and A11Y review boundaries clarify existing
+audience and readability requirements. Preserve control IDs, acceptance
+conditions, handoffs and human boundaries; no new approval or product start.
+
+## Maven-Quellenabgleich 2026-10-25 / Maven Source Alignment
+
+DE: Der [gezielte Quellenabgleich](../docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md) bindet den
+offiziellen Apache-Archiv-Fallback und die historische Einordnung des
+Impact-Registers. Maven-Version und feste SHA-512 bleiben unveraendert.
+Isolierte Download-Fixtures sind keine Image- oder Plattformabnahme.
+Anforderungen, Kontroll-IDs, Akzeptanzschwellen, Uebergaben und menschliche
+Grenzen bleiben erhalten; Quellenpflege erteilt keine Startautoritaet.
+
+EN: The targeted source alignment binds the official Apache archive fallback
+and historical impact-register context. Maven version and committed SHA-512
+remain unchanged. Isolated download fixtures grant no image or platform
+acceptance. Preserve requirements, control IDs, acceptance thresholds,
+handoffs and human boundaries; source maintenance grants no execution authority.
+
+## Review-Korrektur 2026-10-25 / Review Correction
+
+DE: Der [aktuelle Statusnachtrag](../docs/maintenance/sandbox-current-state-2026-10-25.md)
+ordnet REV-001 bis REV-003 zu: einheitliche Swift-Sollversion, richtige
+Lernenden-Versionsangaben und verstaendliche aktuelle Nachweisverweise.
+Die spaetere Selbstbau-Vorlage behaelt Fork/upstream, vorhandene Anforderungen,
+Akzeptanzschwellen und menschliche Grenzen. Kein fertiges Projekt-Image,
+keine Installation durch Registry-Pflege und kein impliziter Produktstart.
+
+EN: The current status addendum maps REV-001 through REV-003: consistent
+Swift target version, correct learner version text and clear current evidence
+references. The later self-build template retains fork/upstream, existing
+requirements, acceptance thresholds and human boundaries. No ready-made
+project image, registry-triggered installation or implicit product start.
+
 ## Purpose
 
 Das Repository soll als lernorientierte Ausgangsbasis genutzt werden koennen.
@@ -224,7 +278,8 @@ secrets, and weakening existing security controls.*
 ## GSDB-Ergaenzung / GSDB Supplement
 
 DE: GSDB ist die generische Secure-Development-Basis. Die Version 3.4.4 und
-Assurance 0.1.5 aus PR #96 ergaenzen die historische Bestandspruefung;
+Assurance 0.1.8 aus dem Preset-Abgleich vom 2026-10-24 (PR #99)
+ergaenzen die historische Bestandspruefung;
 Assurance ist ein Spec-Kit-Regel-/Werkzeugpaket fuer Kontrollnachweise.
 Der [Delta-Abgleich](../docs/maintenance/intake-gsdb344-delta-2026-10-21.md)
 ordnet alle 50 geaenderten Kontrolltexte zu. H bedeutet vorgelagertes
@@ -233,11 +288,26 @@ Nur die mit L markierten Auswirkungen werden hier umgesetzt; Rechts- und
 Providerentscheidungen werden nicht in ein Lernenden-Buildskript verschoben.
 
 EN: GSDB means generic Secure Development Baseline. Version 3.4.4 and
-Assurance 0.1.5 from PR #96 supplement the historical assessment; Assurance
+Assurance 0.1.8 from the 2026-10-24 preset alignment (PR #99) supplement
+the historical assessment; Assurance
 is a Spec Kit rule/tool package for control evidence. The linked alignment
 maps all 50 changed texts. H means preceding hardening, A independent
 technical acceptance and L this self-build intake. Only L-marked effects
 apply here; legal/provider decisions are not moved into learner build scripts.
+
+DE: Der [Quellenabgleich vom 2026-10-25](../docs/maintenance/intake-sources-alignment-2026-10-25.md)
+bindet das aktuelle Vierzehner-Profil und die Leserhilfen, ohne ein Lernenden-
+oder Produktprojekt zu starten. Die früheren Versionsangaben im Delta-Bericht
+sind historischer Kontext, keine Update-/Downgrade-Anweisung. Paketversionen
+und Evidence-Schemata sind nicht dasselbe. Fork/upstream, geordneter Selbstbau,
+keine fertigen Projekt-Images und menschliche Entscheidungen bleiben erhalten.
+
+EN: The linked 2026-10-25 source alignment binds the current fourteen-preset
+profile and reader help without starting a learner/product project. Earlier
+versions in the delta report are historical context, not update/downgrade
+instructions. Package versions and evidence schemas are distinct. Preserve
+fork/upstream, ordered self-build, no ready-made project images and human
+decisions.
 
 - **L-FR-016:** Lernende MUESSEN Quelle, Version und Pflegeverantwortung von
   Paketen sowie Lizenzhinweise und lokale SBOM nachvollziehen koennen.
@@ -435,7 +505,7 @@ required governance records.*
   Schritte und enthalten keine unbelegten Datenschutzversprechen. / A fresh
   checkout builds without secrets or provider/model selection; build and
   use guidance separate these steps and contain no unproved privacy promises.
-- **L-AC-015:** Dokumentation nennt GSDB 3.4.4, Assurance 0.1.5 als hier
+- **L-AC-015:** Dokumentation nennt GSDB 3.4.4, Assurance 0.1.8 als hier
   gepruefte Baseline, Profil 14 und Reviewanlaesse. Ein sicherer Vorschau-/
   Pruefpfad erklaert veraltete Metadaten und stoppt vor unerlaubtem Update;
   spaetere Baselinewechsel brauchen neue bewusste Pruefung. / Documentation
@@ -470,6 +540,77 @@ required governance records.*
 resolved. No material authoring questions remain; Intake Review may identify
 new feature questions.*
 
+## Optionales Template-Profil 2026-10-25 / Optional Template Profile
+
+DE: Der [Tagesabschluss-Rechteabgleich](../docs/maintenance/closeout-rights-alignment-2026-10-25.md)
+grenzt die menschliche Ownerbestätigung auf die benannte neue Workshop-/
+Lernmaterial-Lieferung ab. L-FR-020 und L-AC-017 bleiben unverändert verbindlich:
+LIC-01 und andere LIC-02-Betroffenheiten bleiben Open, fremde Rechte erhalten
+und Template-Aktivierung sowie persönliche Abnahmen separat zu entscheiden.
+Der heutige Lieferauftrag erlaubt keinen Start dieses blockierten Intakes.
+
+EN: The linked closeout rights alignment limits human owner confirmation to
+the named new workshop/learning delivery. L-FR-020 and L-AC-017 remain binding:
+LIC-01 and other LIC-02 concerns stay Open, preserve third-party rights and
+decide template activation and personal acceptance separately. Today's source
+delivery authority does not start this blocked intake.
+
+**DE:** [Abgleich](../docs/maintenance/template-profile-alignment-2026-10-25.md),
+[Profil](../docs/fuer-lernende/template-profil.md) und
+[Lizenzabgrenzung](../docs/licensing.md) konkretisieren FR-013. Fork bleibt
+Standard; Aktivierung ist eine spätere gesonderte Ownerentscheidung nach den
+bestehenden Vorgängerabnahmen. Dieser Intake bleibt Blocked in der Reihe.
+
+- **L-FR-020:** MIT nur für nachweislich eigene Inhalte anwenden; fremde
+  Lizenzen/Attribution erhalten und LIC-01/02 vor Template-Aktivierung klären.
+- **L-FR-021:** Fork, Template und Clone sowie getrennte Historien erklären;
+  keine pauschalen Upstream-/Unrelated-History-Merges empfehlen. Persönliche
+  Änderungen gegen origin reviewen; Referenzbeiträge aus geeignetem Fork.
+- **L-FR-022:** Persönliche Erstübernahme muss Owner/CODEOWNERS, CI-Gates,
+  Statistikbasis und Governance-Evidenz getrennt zuordnen. Kopierte Zustände
+  und Freigaben sind Referenzkontext; keine automatischen Resets oder Resume-Läufe.
+- **L-FR-023:** Template nur main, bewusst gewählte private Ausgangssichtbarkeit,
+  persönliche Konfiguration und lokalen Selbstbau beschreiben. Sandbox, Level-0
+  und leere Produktrepos trennen. Keine vorgezogene Aktivierung/Remote-Erstellung.
+- **L-AC-017:** Rechte-/Attributionsmatrix verlinkt die Root-Lizenz und fremde
+  Hinweise; ungeklärte Gruppen mit Owner/Follow-up/Trigger blockieren Aktivierung.
+- **L-AC-018:** Isolierte Git-Fixtures zeigen verwandte Fork-Historie und
+  unabhängige Template-Historie. Blindes Fast-forward scheitert bei letzterer;
+  dokumentierter Versionsvergleich schützt persönliche Dateien und Daten.
+- **L-AC-019:** Übernahme-Checkliste und CI-Vertrag lassen allgemeine Sicherheits-
+  und Regressionstests aktiv; historische Proofs werden nicht zu persönlichen
+  Erfolgen. Eigene Reviewer/Gates/Statistiken sind gesondert nachgewiesen oder Open.
+- **L-AC-020:** Anleitung und Materialien DE/EN erklären main-only, Origin,
+  Rechte, Selbstbau und Repo-Trennung. Bestehende Reihe bleibt unverändert;
+  kein Template-Flag oder Testrepo ohne späteren ausdrücklichen Auftrag.
+
+**EN:** The linked alignment/profile/license boundaries refine existing FR-013.
+Fork stays default; activation is a later owner decision after predecessor
+acceptance. This intake remains Blocked in its series.
+
+- **L-FR-020:** Apply MIT only to demonstrably original work; preserve third-party
+  rights/attribution and resolve LIC-01/02 before template activation.
+- **L-FR-021:** Explain fork/template/clone and independent history; no blind
+  upstream/unrelated-history merges. Personal PRs target origin, reference
+  contributions use a suitable fork.
+- **L-FR-022:** Personal handover must assign owners/CODEOWNERS, CI gates,
+  statistics and evidence separately. Copied states/approvals are source context;
+  no automatic reset or source-run resume.
+- **L-FR-023:** Explain default-main-only template use, deliberate private
+  starting visibility, personal config and local self-build. Separate sandbox,
+  Level-0 and empty product repos. No premature activation/remote creation.
+- **L-AC-017:** Rights matrix links root and third-party notices; unresolved
+  groups have owner/follow-up/trigger and block activation.
+- **L-AC-018:** Isolated Git fixtures demonstrate fork ancestry and unrelated
+  template history; blind fast-forward fails for the latter. Documented
+  comparison preserves personal files and data.
+- **L-AC-019:** Handover/CI keep general security and regressions active;
+  historical proofs grant no personal success. Personal owners/gates/statistics
+  have distinct evidence or remain Open.
+- **L-AC-020:** Equivalent DE/EN materials explain main-only, origin, rights,
+  self-build and repo separation. Preserve lifecycle; no flag/test repo without
+  a later explicit request.
+
 <!-- intake-authoring:prompts -->
 ## Copy-Ready Spec Kit Prompts
 
@@ -477,14 +618,14 @@ new feature questions.*
 ### Specify
 
 ```text
-$speckit-specify Erstelle eine Spezifikation auf Grundlage von intakes/learner-fork-self-build-sandbox.md und den L-markierten Auswirkungen in docs/maintenance/intake-gsdb344-delta-2026-10-21.md. Beruecksichtige L-FR-016 bis L-FR-019 und L-AC-013 bis L-AC-016 sowie die aktualisierte GSDB-/Assurance-Baseline. Bewahre Fork/upstream, den Ausschluss fertiger Projekt-Images, die DE-first/EN-second-Lernendenbasis, WCAG 2.2 AA, Plattformneutralitaet und menschliche Stop-Grenzen. Beginne keine Implementierung und fuehre keine Commits, Pushes, Pull Requests, Merges oder Plattformaenderungen aus.
+$speckit-specify Erstelle eine Spezifikation auf Grundlage von intakes/learner-fork-self-build-sandbox.md und den L-markierten Auswirkungen in docs/maintenance/intake-gsdb344-delta-2026-10-21.md. Beruecksichtige L-FR-016 bis L-FR-019 und L-AC-013 bis L-AC-016 sowie die aktualisierte GSDB-/Assurance-Baseline. Bewahre Fork/upstream, den Ausschluss fertiger Projekt-Images, die DE-first/EN-second-Lernendenbasis, WCAG 2.2 AA, Plattformneutralitaet und menschliche Stop-Grenzen. Beginne keine Implementierung und fuehre keine Commits, Pushes, Pull Requests, Merges oder Plattformaenderungen aus. Beruecksichtige den Dokumentations- und Versionsnachtrag vom 2026-10-25 sowie docs/maintenance/documentation-alignment-2026-10-25.md und docs/security/toolchain-followups-2026-10-25.md; offene Nachweise nicht als erledigt behandeln. Aktuellen Statusnachtrag docs/maintenance/sandbox-current-state-2026-10-25.md mit REV-001 bis REV-003 beruecksichtigen; technische und menschliche Nachweise nicht vorwegnehmen. Beruecksichtige docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md; isolierte Downloadtests sind kein Image-Build oder neue Abnahme. Beruecksichtige docs/maintenance/template-profile-alignment-2026-10-25.md und die neuen Rechte-/Historiengrenzen; Fork bleibt Standard, Template ist nicht aktiviert, bestehende Lifecycle- und Startgates bleiben erhalten. Beruecksichtige docs/maintenance/closeout-rights-alignment-2026-10-25.md: Ownerrechte nur fuer die benannte Lernmaterial-Lieferung bestaetigt; LIC-01 und andere LIC-02-Betroffenheiten sowie saemtliche Startgates bleiben offen. Beruecksichtige docs/maintenance/closeout-review-remediation-2026-10-25.md: IR201/IR202 nur als nachreviewte Quellenkorrektur behandeln; Lifecycle und Startautoritaet bleiben unveraendert.
 ```
 
 <!-- spec-kit-command-id: speckit.autonomous -->
 ### Autonomous
 
 ```text
-$speckit-autonomous Fuehre erst nach erfolgreicher unabhaengiger Sandbox-Abnahme, aktuellem Review und gesonderter Startautoritaet den vollstaendigen Spec-Kit-Lauf fuer intakes/learner-fork-self-build-sandbox.md mit Delivery Authority LocalImplementation aus. Bewahre den L-bezogenen GSDB-3.4.4-Delta-Abgleich, Assurance 0.1.5, Fork/upstream und den Ausschluss fertiger Projekt-Images. Implementiere nur lokal, pruefe Lernenden-, A11Y-, Sicherheits-, Lieferketten- und Plattformanforderungen und stoppe vor Commit, Push, Pull Request, Merge oder Hosting-Aenderungen.
+$speckit-autonomous Fuehre erst nach erfolgreicher unabhaengiger Sandbox-Abnahme, aktuellem Review und gesonderter Startautoritaet den vollstaendigen Spec-Kit-Lauf fuer intakes/learner-fork-self-build-sandbox.md mit Delivery Authority LocalImplementation aus. Bewahre den L-bezogenen GSDB-3.4.4-Delta-Abgleich, Assurance 0.1.8, Fork/upstream und den Ausschluss fertiger Projekt-Images. Implementiere nur lokal, pruefe Lernenden-, A11Y-, Sicherheits-, Lieferketten- und Plattformanforderungen und stoppe vor Commit, Push, Pull Request, Merge oder Hosting-Aenderungen. Beruecksichtige den Dokumentations- und Versionsnachtrag vom 2026-10-25 sowie docs/maintenance/documentation-alignment-2026-10-25.md und docs/security/toolchain-followups-2026-10-25.md; offene Nachweise nicht als erledigt behandeln. Aktuellen Statusnachtrag docs/maintenance/sandbox-current-state-2026-10-25.md mit REV-001 bis REV-003 beruecksichtigen; technische und menschliche Nachweise nicht vorwegnehmen. Beruecksichtige docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md; isolierte Downloadtests sind kein Image-Build oder neue Abnahme. Beruecksichtige docs/maintenance/template-profile-alignment-2026-10-25.md und die neuen Rechte-/Historiengrenzen; Fork bleibt Standard, Template ist nicht aktiviert, bestehende Lifecycle- und Startgates bleiben erhalten. Beruecksichtige docs/maintenance/closeout-rights-alignment-2026-10-25.md: Ownerrechte nur fuer die benannte Lernmaterial-Lieferung bestaetigt; LIC-01 und andere LIC-02-Betroffenheiten sowie saemtliche Startgates bleiben offen. Beruecksichtige docs/maintenance/closeout-review-remediation-2026-10-25.md: IR201/IR202 nur als nachreviewte Quellenkorrektur behandeln; Lifecycle und Startautoritaet bleiben unveraendert.
 ```
 
 <!-- intake-authoring:end -->

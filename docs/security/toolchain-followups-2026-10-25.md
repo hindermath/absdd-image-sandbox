@@ -1,0 +1,158 @@
+# Werkzeug-Nachpruefungen / Toolchain Follow-Ups
+
+## Stand Und Grenze / State and Boundary
+
+DE: Dies ist der erhaltene Untersuchungsstand vor dem spaeteren Image-Austausch.
+Aktuelle Laufzeit- und SBOM-Bindung: [Statusnachtrag](../maintenance/sandbox-current-state-2026-10-25.md).
+Die folgenden Aussagen zur gestoppten Machine gelten nur fuer diesen frueheren
+Versuch. Offene Sicherheits- und Freigabepunkte bleiben davon getrennt.
+
+EN: This preserves the investigation before the later image replacement.
+See the status addendum for current runtime and SBOM bindings. Statements
+below about a stopped machine apply only to that earlier attempt. Open
+security and approval items remain separate.
+
+DE: Dieser Nachtrag gehoert zur genehmigten Dokumentationsvertiefung und
+technischen Untersuchung vom 2026-10-25. Er ersetzt keine historischen
+Session-Logs. Der [Versionsabgleich](../maintenance/toolchain-version-audit-2026-10-25.md)
+bindet Kandidat `24139e60314c2b55e0d066fb6c9aa45fd7cd4d0101ab330a0e7b8832ce512cec`
+(`linux/arm64`) und die damaligen Tests. Beim jetzigen Versuch meldet
+`podman machine list` die Machine als gestoppt; der dynamisch ermittelte Unix-
+Socket ist nicht vorhanden. Kein Start, Neubau oder Austausch wurde ausgefuehrt.
+Der damalige laufende Container ist damit kein aktuell bestaetigter Lauf.
+
+EN: This addendum covers the approved documentation and technical investigation.
+It does not rewrite historical logs. The version audit binds the ARM64
+candidate above and its earlier tests. In this session Podman reports its
+machine stopped and the discovered Unix socket is absent. No machine start,
+build or deployment was performed. The previously running container is not
+therefore confirmed running now.
+
+## OpenCode 2: Statische Sicherheitspruefung / Static Security Review
+
+DE: Geprueft: native geordnete Permissions, fruehere Regelreihenfolge,
+Default-Ask-Regel, gesperrte Secret-Pfade, deaktiviertes Sharing und Updates,
+kein voreingestellter Provider oder Modell. Die Regression prueft die
+Konfiguration; sie simuliert nicht den gesamten echten Agentenprozess.
+Die [offizielle V2-Dokumentation](https://opencode.ai/v2/docs/permissions)
+beschreibt Agent-Regeln nach globalen Regeln und eigene Subagent-Policies.
+Eine globale Regel allein ist deshalb keine unveraenderliche Sicherheitsgrenze.
+Konfiguration und Erweiterungen duerfen nur bewusst und nach Review wechseln.
+
+EN: Reviewed native ordered permissions, retained rule order, default ask,
+blocked secret paths, disabled sharing/updates, and no preselected provider
+or model. Regression checks configuration, not the whole agent process.
+V2 documentation describes agent rules after global rules and separate
+subagent policies. A global rule alone is not an immutable security boundary.
+Configuration and extensions require deliberate review.
+
+DE: `doom_loop` und `lsp` sind laut V2-Dokumentation keine aktuellen Core-
+Permission-Aktionen. Ihre erhaltenen Regeln sind kein bewiesener Schleifen-
+oder LSP-Schutz. Kein Anbieteraufruf und kein realer Agentenlauf erfolgte.
+Der offene V2-Loop-Nachweis bleibt ein Blocker fuer entsprechend
+freigabepflichtige reale Nutzung, nicht eine agentisch akzeptierte Abweichung.
+
+EN: doom_loop and lsp are not current V2 Core permission actions. Retaining
+these rules does not prove loop or LSP protection. No provider call or real
+agent session was performed. Loop-control evidence remains open before
+approval-bound real use, not an agent-accepted exception.
+
+## V2-Audit: Nur Dateimetadaten / File Metadata Only
+
+DE: Bash- und PowerShell-Exporter erkennen ausschliesslich die regulaere Datei
+`opencode.db` im konfigurierten OpenCode-Datenordner. Sie exportieren einen
+`storage-metadata`-Datensatz mit Werkzeug, Ablageformat, Dateipfad,
+Aenderungszeit, Exportzeit und `session_coverage: not-exported`. Symlinks
+werden fuer diesen Eintrag ausgelassen. Die Datenbank wird weder geoeffnet
+noch per SQL abgefragt. WAL-/SHM-Dateien, Prompt-, Antwort-, Credential- und
+sonstige Datenbankinhalte werden nicht eingelesen oder exportiert.
+
+EN: Both exporters recognise only a regular opencode.db file in the configured
+OpenCode data directory. The storage-metadata record contains tool, storage
+format, path, modification/export times and session_coverage: not-exported.
+Database symlinks are skipped. No database open or SQL query occurs; WAL/SHM,
+prompts, responses, credentials and other database contents are not read or
+exported.
+
+DE: Bestehende V1-Dateimetadaten bleiben unter der bisherigen engen Allowlist.
+Sechs neue Tests pruefen beide Exporter mit kuenstlicher Datei, Symlink und
+fehlender Datenbank; vertrauliche Testmarker erscheinen nicht in Ausgaben,
+die Bytes bleiben unveraendert. Das ist kein V2-Sitzungsnachweis. Ein
+erfolgreicher Export schliesst die Audit-Luecke nicht. Vor auditpflichtiger
+V2-Nutzung muss Security Review die noetigen Sitzungsfelder und einen sicheren
+Exportweg festlegen; kein vollstaendiger Datenbankexport als Ersatz.
+
+EN: Existing V1 file metadata keeps its narrow allowlist. Six new tests cover
+both exporters with synthetic file, symlink and absent database; private
+markers are absent from output and bytes remain unchanged. This is not
+V2 session evidence. Successful export does not close that gap. Before
+audit-bound use, Security Review must define necessary session fields and a
+safe export route, never whole-database export as a substitute.
+
+## Swift Und Poppler / Swift and Poppler
+
+DE: Die Swift-Signalwarnung passt als begruendete Hypothese zum
+[SwiftPM-safeExec-Code](https://github.com/swiftlang/swift-package-manager/blob/main/Sources/Commands/Utilities/TestingSupport.swift),
+der Signalhandler zuruecksetzt. [Linux NPTL](https://man7.org/linux/man-pages/man7/nptl.7.html)
+reserviert Signale 32/33 intern und beschreibt EINVAL fuer entsprechende
+Handler-Aenderungen. Das erklaert die beobachtete Kombination plausibel,
+beweist aber nicht die genaue Ursache im gepinnten Linux-Build. Keine
+Signalbehandlung gepatcht, keine Warnung gefiltert. Linux-Reproduktion,
+direkter Programmstart im Vergleich zu `swift run` und Debugger-Abnahme
+bleiben ausstehend, solange die Podman-Machine gestoppt ist.
+
+EN: A reasoned hypothesis connects the Swift warning with SwiftPM safeExec
+resetting signal handlers and Linux NPTL reserving signals 32/33. NPTL
+documents EINVAL for these handler changes. This plausibly explains the
+combination but does not prove the exact pinned Linux build's cause. No
+signal handling was patched or warning filtered. Linux reproduction,
+comparison of direct execution with swift run, and debugger acceptance
+remain pending while the machine is stopped.
+
+DE: Fuer Poppler beschreibt der
+[Typst-Upstreambefund 7140](https://github.com/typst/typst/issues/7140#issuecomment-3400827040)
+eine falsche Typmeldung bei `Suspects=false` und verweist auf Poppler-Code.
+Der eigene isolierte Hostvergleich nutzt Pandoc 3.12.1, Typst 0.15.1 und
+pdfinfo 26.05.0: Markdown zu `.typ` zu PDF, eine Seite, Exitcodes 0,
+keine Suspects-Warnung. Dafuer wurden nur temporaere Dateien angelegt und
+danach entfernt. Dies ist ein macOS-Hostvergleich, keine Wiederholung mit
+dem aelteren Ubuntu-Poppler im Image. `pdftotext` ist im Host-PATH nicht
+vorhanden; die vollstaendige Inhaltspruefung wurde hier nicht wiederholt.
+Es wird weder eine neue Poppler-Version ins Image eingebaut noch das PDF
+zur Warnungsunterdrueckung veraendert. PDF-Konformitaet und Barrierefreiheit
+bleiben getrennte Pruefungen.
+
+EN: Typst upstream issue 7140 identifies a false type warning for Suspects=false
+and points to Poppler code. Our isolated host comparison used Pandoc 3.12.1,
+Typst 0.15.1 and pdfinfo 26.05.0: Markdown to Typst to PDF, one page, exit 0
+and no Suspects warning. Temporary files were removed. This is a macOS host
+comparison, not a repeat with the image's older Ubuntu Poppler. Host PATH
+lacks pdftotext, so full text extraction was not repeated. No newer Poppler
+was installed in the image and no PDF was rewritten to suppress warnings.
+PDF conformance and accessibility remain separate assessments.
+
+## Offene Arbeit Und Abnahme / Open Work and Acceptance
+
+| ID | Status | Owner | Follow-up / Folgemassnahme | Re-Evaluation-Trigger |
+|---|---|---|---|---|
+| UPD-AMD64 | Open | Maintainer / Platform Review | Windows-PowerShell7-Podman-Machine und Ubuntu/WSL2-rootless-Podman getrennt bauen, smoke-testen und VS Code beobachten / separate build, smoke and observed VS Code attach | vor AMD64-Verteilung / before AMD64 distribution |
+| UPD-V2-LOOP | Open | Security Review | effektives Loop-, Agent-Override- und Subagent-Verhalten mit sicherer Testumgebung pruefen / test effective loop, override and subagent behaviour safely | vor realer freigabepflichtiger Nutzung / before approval-bound real use |
+| UPD-V2-AUDIT | Open | Maintainer / Security Review | notwendigen Sitzungsnachweis definieren und datensparsam testen; Presence-Metadaten genuegen nicht / define and test minimal session evidence; presence is insufficient | vor auditpflichtiger V2-Nutzung / before audit-bound V2 use |
+| UPD-SMOKE-WARN | Open | Maintainer / Documentation Review | Swift-Linux- und Ubuntu-Poppler-Reproduktion nachholen; Upstream-Befund gegen genaue Versionen pruefen / reproduce on pinned Linux/Ubuntu versions | vor Debugger-/strenger PDF-Abnahme oder naechstem Toolupdate / before debugger or strict PDF acceptance or next update |
+| DOC-A11Y | Open | Learning/A11Y Review | [menschliche Erstnutzungs- und Rendering-Pruefung](../fuer-lernende/barrierefreiheit.md) organisieren / organise human first-use and rendering checks | vor Konformitaetsbehauptung oder unbegleitetem Rollout / before conformance claim or unattended rollout |
+| UPD-APPROVAL | Open | Repository Owner / Security Review | neue Versionen und Nachweise menschlich bewerten / assess new versions and evidence | vor freigabepflichtiger Nutzung / before approval-bound use |
+
+DE: Beide AMD64-Laeufe duerfen dieselbe Windows-Hardware verwenden, muessen
+aber getrennte Laufzeiten, Runner-Bezeichnungen, Befehle, Exitcodes,
+Zeitstempel und Image-IDs fuer denselben geprueften Git-Head liefern.
+Windows-Ergebnisse nicht nach Ubuntu/WSL2 kopieren. Native Linux-Hardware
+wird nicht als getestet oder abgenommen ausgegeben. Fehlende Beobachtungen
+bleiben Open oder Blocked. Intake-Quellenbindung und Review stehen separat
+im [Dokumentationsabgleich](../maintenance/documentation-alignment-2026-10-25.md).
+
+EN: Both AMD64 runs may share Windows hardware but require separate runtimes,
+runner labels, commands, exit codes, timestamps and image IDs for the same
+reviewed Git head. Never copy Windows results into Ubuntu/WSL2 evidence.
+Native Linux hardware is not claimed tested or accepted. Missing observations
+remain Open or Blocked. Intake source binding and review are recorded separately
+in the documentation alignment.

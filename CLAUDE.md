@@ -1,5 +1,29 @@
 # Repository Guidelines
 
+<!-- documentation-reader-contract:start -->
+## Dokumentationspflege / Documentation Maintenance
+
+DE: Bestehende Markdown-Leserpfade unter `docs/fuer-lernende/` und
+`docs/betrieb/` erweitern, keine zweite Lernreihenquelle erzeugen.
+Deutsch zuerst, gleichwertiges Englisch danach, etwa CEFR B2. Befehle mit
+Ausfuehrungsort (Host, Ubuntu/WSL2 oder Container), Shell, Voraussetzungen,
+erwartetem Ergebnis und Fehlerhilfe erklaeren. Destruktive Volume-Optionen
+nicht als normalen Stopp empfehlen. Aktuelle Statusangaben an Datum, Image
+und Evidenz binden; historische Zahlen nicht ungeprueft fortschreiben.
+WCAG 2.2 AA ist Pruefziel, kein Ergebnis automatischer Markdown-Checks.
+OpenCode-2-Datenbankmetadaten sind kein sitzungsbezogener Auditnachweis:
+`session_coverage=not-exported`; keine Datenbankinhalte exportieren.
+
+EN: Extend existing learner and operations Markdown paths; do not create a
+second learning-series source. Use German first and equivalent English,
+around CEFR B2. Explain command location, shell, prerequisites, expected
+result and error help. Never recommend destructive volume options as normal
+shutdown. Bind current status to date, image and evidence; do not repeat
+historical counts without checking. WCAG 2.2 AA is a review target, not the
+result of automated Markdown checks. OpenCode 2 storage metadata does not
+prove session-level audit coverage; never export database contents.
+<!-- documentation-reader-contract:end -->
+
 ## Active Compliance Work Queue
 
 This repository maintains open sandbox-governance findings against the generic Secure Development Guideline and checklist `CL_12` ("Agentic AI in Sandbox Environments") from `docs/secure-development`. The complete work list with concrete tasks, acceptance criteria, verification steps, and escalation rules is in `COMPLIANCE-PLAN_RL-SE-001.md`.
@@ -32,6 +56,32 @@ Spec-Kit runs against this baseline must create project-specific evidence.
 Human-only items such as formal approval, external registers, secret rotation,
 provider/model approvals, and platform branch protection must not be claimed as
 completed by an agent.
+
+<!-- optional-template-profile:start -->
+## Optionales Template-Profil / Optional Template Profile
+
+Fork oder institutionelle Kopie mit gemeinsamer Historie bleibt Standard.
+Das optionale GitHub-Template-Profil ist vorbereitet, nicht aktiviert.
+Eine Template-Kopie hat eigene Historie; keine pauschalen Upstream-Merges
+oder Verknuepfung mit --allow-unrelated-histories empfehlen.
+Kopierte Compliance-Workqueues, Intakes, Run-States, Statistiken und Abnahmen
+sind Referenzkontext, keine persoenlichen Auftraege oder Nachweise.
+Keine kopierten Autonomous-Laeufe fortsetzen und keine Status zur scheinbaren
+Neuinbetriebnahme umschreiben. Persoenliche Baseline, Review und Startautoritaet
+muessen getrennt hergestellt werden. Sandbox-, Level-0- und Produkt-Repos
+auseinanderhalten. MIT gilt nur fuer nachweislich eigene Inhalte;
+Lizenz- und Aktivierungsgates bleiben erhalten. Siehe
+docs/fuer-lernende/template-profil.md und docs/licensing.md.
+
+*Fork/shared-history institutional copy remains the default. The optional
+template profile is prepared, not enabled. Template copies have independent
+history: do not recommend blind upstream or unrelated-history merges.
+Copied workqueues, intakes, states, statistics and approvals are source
+context, not personal authority/evidence. Never resume copied source runs
+or reset their statuses. Establish a separate personal baseline, review and
+start decision. Keep sandbox, Level-0 and product repos distinct. MIT covers
+demonstrably original content only; rights and activation gates remain.*
+<!-- optional-template-profile:end -->
 
 ## Git Hosting for Learners
 
@@ -157,11 +207,13 @@ state, and local settings must remain untouched. No writing sync runs during
 image build or container startup.
 
 ```bash
-podman compose down
-podman compose down -v
+bash scripts/compose-down-with-audit.sh --podman
 ```
 
-Stops the environment. The `-v` variant also removes all persistent agent data and local sign-in state.
+Stops the environment after successful metadata export and preserves volumes.
+Volume deletion is a separate human-confirmed operation; never append `-v`
+or `-Volumes` for normal shutdown. Use the PowerShell wrapper described below
+on a PowerShell host. Do not bypass the wrapper or a failed audit export.
 
 ## Coding Style & Naming Conventions
 
@@ -341,13 +393,13 @@ Do not require a real API key for validation unless the change explicitly affect
 
 For .NET projects under `/rider-projects`, keep `bin`, `obj`, and AppHost output off the Windows bind mount. The mounted `ContainerBuild.props` sends build output to the `dotnet_build` volume at `/dotnet-build` and imports repository-specific `Directory.Build.props` files when present.
 
-For Java projects, use `/java-projects` and prefer project-local Maven or Gradle wrappers when a repository provides them. The container includes JDK 21 and Maven for baseline Java and Spring Boot development. Gradle and Spring Boot CLI are not installed globally unless this repository is intentionally extended.
+For Java projects, use `/java-projects` and prefer project-local Maven or Gradle wrappers when a repository provides them. The container includes JDK 25 LTS and Maven for baseline Java and Spring Boot development. Gradle and Spring Boot CLI are not installed globally unless this repository is intentionally extended.
 
 For Go projects, use `/go-projects` unless a project-specific mount is configured. Keep dependencies in `go.mod`, run `gofmt`/`go test ./...`, and add web frameworks such as `gin`, `fiber`, or `chi` per project instead of installing them globally.
 
 For Rust projects, use `/rust-projects` unless a project-specific mount is configured. Keep dependencies in `Cargo.toml`, run `cargo fmt`, `cargo clippy -- -D warnings`, and `cargo test`. Add frameworks such as `tokio`, `axum`, `actix-web`, or `serde` per project instead of installing them globally.
 
-For Python projects, use `/python-projects` unless a project-specific mount is configured. Keep virtual environments project-local or under an explicitly chosen cache path, and do not rely on globally installed application dependencies.
+For Python projects, use `/python-projects` unless a project-specific mount is configured. The default `python` and `python3` use pinned CPython under `/opt/cpython`; `/usr/bin/python3` remains Ubuntu-managed for system tools. Keep virtual environments project-local or under an explicitly chosen cache path, and do not rely on globally installed application dependencies.
 
 For PowerShell projects, use `/powershell-projects` unless a project-specific mount is configured. Run scripts with `pwsh -NoLogo -NoProfile`, keep modules project-local or explicitly versioned, and validate repository-owned scripts with PSScriptAnalyzer when that module is available.
 
@@ -359,7 +411,7 @@ The Compose environment disables general .NET workload update notifications with
 
 The `dotnet` wrapper must only filter the exact workload verification message. Do not broaden the filter, because normal warnings and build errors must stay visible.
 
-Spec Kit is installed with `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.8.3`. Keep the version pinned unless intentionally upgrading and updating documentation.
+Spec Kit is installed from the exact release commit pinned in `Dockerfile`; the build verifies its package version. Keep the commit and version check synchronized when upgrading. See `docs/maintenance/toolchain-version-audit-2026-10-25.md` for the latest version audit.
 
 For Spec Kit initialization under `/rider-projects`, prefer `specify init . --integration opencode --force`. If prompted for script type, choose `sh` in this Linux container. For each application repository, decide whether `.opencode/` or sensitive parts of it belong in that repository's `.gitignore`.
 
@@ -409,16 +461,16 @@ depends on the active hosting platform, edition, and admin-operated hooks."
 Run the agent-session audit export at least once per workday and always before removing Compose volumes. The standard stop path is the wrapper, because it exports metadata before running `compose down`:
 
 ```bash
-bash scripts/compose-down-with-audit.sh --podman -v
+bash scripts/compose-down-with-audit.sh --podman
 ```
 
 On Windows PowerShell with Podman:
 
 ```powershell
-.\scripts\compose-down-with-audit.ps1 -Engine podman -Volumes
+.\scripts\compose-down-with-audit.ps1 -Engine podman
 ```
 
-If the wrapper cannot be used, run `audit-export` inside the container before `podman compose down -v`. The image entrypoint also runs `audit-export` as a best-effort hook on graceful container shutdown when `ADE_AUDIT_ON_STOP=true` is set, but hard kills or host aborts can still skip it.
+Normal shutdown preserves volumes. Add `-v` or `-Volumes` only after explicit confirmation of data loss. Both wrappers abort before `down` if audit export fails. If a wrapper cannot be used, a human must confirm successful metadata export before any deliberate volume removal; do not bypass an export failure. The entrypoint hook is best effort and does not replace this check.
 
 The export writes metadata only to `/audit/YYYY-MM-DD.jsonl`. Do not extend it to include prompt text, response text, raw session payloads, or secrets. The default host directory is `audit-logs/`; generated JSONL files stay untracked.
 

@@ -4,6 +4,18 @@ title = "ade-dev-sandbox gitleaks configuration"
 useDefault = true
 
 [[allowlists]]
+description = "Public Swift release PGP fingerprint in its exact Dockerfile assignment and captured provenance only"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = [
+  '''^(Dockerfile|specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/source-snapshots/Dockerfile\.txt)$''',
+]
+regexes = [
+  '''^(?:\n)?[ \t]*swift_signing_key=(?:"52BB7E3DE28A71BE22EC05FFEF80A866B47A981F");[ \t]+\\[ \t]*\r?$''',
+]
+
+[[allowlists]]
 description = "Allow documented placeholder values in example files only"
 condition = "AND"
 regexTarget = "line"

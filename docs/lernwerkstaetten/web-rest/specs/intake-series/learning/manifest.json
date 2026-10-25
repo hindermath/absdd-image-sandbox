@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesManifest",
+  "seriesId": "600e29d1-eeed-4407-a5a5-b6e3430d1cab",
+  "title": "Weg B: MVC plus REST / Route B: MVC plus REST",
+  "policy": "intake-sequencing-governance-v0.2.11",
+  "status": "Draft",
+  "orderedTargets": [
+    {
+      "path": "intakes/00-vertrag.md",
+      "role": "Primary",
+      "normalizedSha256": "a2d9f65a38bbf7035b83d5f96b0de6f55821d79bbc7a95b10f02a391e52ab244",
+      "status": "Pending"
+    },
+    {
+      "path": "intakes/01-sqlite.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "7f33709963f1a3274ebda95c899a4057c8250f7cceee3f5e4d195acee81d0e18",
+      "status": "Pending"
+    },
+    {
+      "path": "intakes/02-mvc-client.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "1c30719924eb245732598a26d097912de550d6d9db2c5d535332656202f087c5",
+      "status": "Pending"
+    },
+    {
+      "path": "intakes/03-abschluss.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "978c4e168acc8bff9b9c86a8a42720b7a6187bde2e585c5abfc9809bf63c3fa8",
+      "status": "Pending"
+    }
+  ],
+  "roots": [
+    "intakes/00-vertrag.md"
+  ],
+  "dependencies": [
+    {
+      "from": "intakes/00-vertrag.md",
+      "to": "intakes/01-sqlite.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "intakes/01-sqlite.md",
+      "to": "intakes/02-mvc-client.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "intakes/02-mvc-client.md",
+      "to": "intakes/03-abschluss.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    }
+  ],
+  "evidencePaths": [
+    "basis.md",
+    "sources.json",
+    "order.md",
+    "specs/intake-authoring-receipts/",
+    "specs/intake-review-requests/learning.json"
+  ]
+}

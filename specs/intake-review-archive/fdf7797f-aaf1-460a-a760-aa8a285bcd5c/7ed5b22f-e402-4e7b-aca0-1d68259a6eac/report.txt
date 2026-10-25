@@ -1,0 +1,228 @@
+# Unabhaengiges Reihenreview / Independent Series Review
+
+## Deutsch
+
+**Verdikt: Ready.** Keine offenen Intake-Findings, keine offenen fachlichen
+Rueckfragen und keine akzeptierten Risiken. IR101 wurde durch den Autor
+korrigiert und unabhaengig nachgeprueft; es wurde nicht heruntergestuft.
+
+- Review-ID: `fdf7797f-aaf1-460a-a760-aa8a285bcd5c`
+- Operation: `50131ced-9c70-43d3-9fa1-51d1d37e60cd`
+- Reviewer: Codex Independent Lifecycle Reviewer ILR-fdf7797f
+- Agent-ID: `e99afff1-3344-4e99-8c7c-20197a66dc1c`
+- Zeitpunkt: `2026-10-25T16:44:38.183Z`
+- Endsnapshot nach 17:42 CET: `2026-10-25T16:42:22.755Z`
+- Repository-HEAD: `9a6cf88747f07f4b081d3033546f2d83861e2916`, mit lokalen Aenderungen.
+  Die aktuellen Text-Hashes binden den Inhalt, nicht HEAD allein.
+- Umfang: vier Intakes, davon eine historische Completed-Wurzel und drei
+  aktive Ziele; keine Campaign-Worker. 189 Text-Eingaben sind aktuell gehasht.
+
+### Auftrag und Unabhaengigkeit
+
+Dieser Reviewer hat die Zieltexte, Quellen, Receipts und Korrekturen nicht
+verfasst. Er hat ausschliesslich die drei beauftragten Review-Ausgaben
+veraendert. Keine Quellen, Intakes, Archivbytes, Logs, Presets oder
+Operationsjournale wurden geschrieben. Der ausdrueckliche Drei-Dateien-Auftrag
+schliesst auch einen zusaetzlichen Session-Log aus.
+
+Das alte Review `c22a09e1-a781-4f5f-b691-a8d8839298b8` wird explizit
+supersediert. Sein altes Ready am aktiven Pfad galt nicht fuer den neuen
+Request. Vor Ersetzung stimmten die Bytes des alten aktiven Ergebnisses mit
+`specs/intake-review-archive/c22a09e1-a781-4f5f-b691-a8d8839298b8/50131ced-9c70-43d3-9fa1-51d1d37e60cd/result.json`
+ueberein. Fruehere Hashes und Claims wurden nicht als aktuelles Urteil uebernommen.
+
+### Vollstaendige fachliche Abdeckung
+
+| Stufe | Gepruefter Inhalt | Ergebnis und Uebergabe |
+|---|---|---|
+| Historische GSDB-Wurzel | Identitaet, Ziel, Scope, Nicht-Ziele, Anforderungen 1-7, fuenf AC, Evidenz und beide historischen Prompts; AcceptedBaseline-Entscheidung | Completed bleibt historisch. Lueckenliste ist H-Baseline, kein neuer Lauf oder Kontrollabschluss. Historische Sprach-/Pfadgestalt wird nicht umgeschrieben oder als neue Lernendenabnahme zertifiziert. |
+| H: Container-Hardening | Anforderungen 1-7; H-344-01..10 und AC-H-344-01..10; Rechte, Pfade, Agentendaten, Lieferkette, Anwendbarkeit, 85/80-Prozent-Schwellen, menschliche Stops | Fachlich konsistent; begruendet Open ist nicht bestanden. Kontrollbezogene Matrix geht spaeter an A. |
+| A: unabhaengige Abnahme | Anforderungen 1-6; A-344-01..04 und AC-A-344-01..04; unabhaengige Autorenschaft, praktische Checks, manipulierte Metadatenfixtures, Plattform-/Image-Bindung | Keine weitere Haertung durch die Abnahme; Fehler zurueck an H. L bleibt bis erfolgreicher technischer Abnahme blockiert. |
+| L: Lernenden-Selbstbau | FR-001..015, L-FR-016..023; AC-001..012 und L-AC-013..020; vollstaendige aktive DE/EN-Paare | Neue Anforderungen konkretisieren FR-013. Fork bleibt Standard, Template nur vorbereitet; Rechte, Erstuebernahme, eigene Historie und getrennte leere Produktrepos sind explizit. |
+
+Alle 50 Delta-IDs kommen genau einmal in der Zuordnung vor: 47 UpdateRequired,
+eine AlreadyCovered und zwei begrenzte N/A. G01-G10, H- und A-Uebergaben und
+die L-Auswirkungen sind nachvollziehbar. Die beiden N/A betreffen fehlende
+eigene Authentifizierungs-/Kryptoimplementierung, nicht CLI-Anmeldung,
+TLS-Abhaengigkeiten oder allgemeine Lieferkettenpflichten. Die anderen 107
+Kontrollen werden nicht pauschal neu bewertet oder als erfuellt ausgegeben.
+
+Request, Manifest und beide Reihenansichten stimmen bei einer Wurzel und drei
+vorwaerts gerichteten verbindlichen Kanten ueberein. Die Reihenstatus bleiben
+**Completed / Eligible / Blocked / Blocked**. Die sechs aktiven Folgeprompts
+binden vollstaendige Intakes und aktuelle Nachtraege, bewahren
+LocalImplementation und gesonderte Startautoritaet und stoppen vor Lieferung
+oder Plattformaenderungen. Historische Wurzelprompts sind keine Resume-Anweisung.
+
+### Quellen, Rechte und Lernendenpfad
+
+Template-Profil, Lizenzabgrenzung, fuenf identische gemeinsame Agent-Bloecke,
+Git-Anleitung, Installation, Kurzpfad, FAQ, Erstuebernahme-Checkliste und
+Workshop-Markdown unterscheiden Fork, unabhaengige Sandbox und Produktrepo.
+Kein pauschaler Upstream-/Unrelated-History-Merge; persoenliches origin und
+gezielter Vergleich erhalten lokale Arbeit. Level-0 bleibt getrennt.
+
+MIT betrifft nur nachweislich eigene Werke. Fremde Rechte, Preset-Lizenzen,
+Generatorherkunft und Attribution bleiben getrennt. **LIC-01/LIC-02 bleiben
+Open und sperren Aktivierung/Weitergabe betroffener Inhalte.** Das ist eine
+explizite spaetere Voraussetzung, keine agentisch akzeptierte Rechtsunsicherheit.
+Keine kopierten Freigaben, Run-States oder Statistiken werden persoenliche
+Nachweise; keine automatischen Resets oder Fortsetzungen. Main-only/private
+Ausgangssichtbarkeit und menschliche Aktivierung sind eigenstaendige Schritte.
+
+Die aktiven Anforderungen und AC haben gleichwertige DE/EN-Gegenstuecke.
+Zustaende und Uebergaben sind textorientiert; Begriffe und angenommene
+Vorkenntnisse sind erklaert. B2 ist eine redaktionelle Einschaetzung, kein
+Nachweis realer Verstaendlichkeit. WCAG 2.2 AA, Erstnutzung, Tastatur,
+Screenreader und Rendering/PPTX/PDF-Abnahme bleiben getrennte menschliche
+Pruefungen, nicht Ergebnisse dieses Quellreviews.
+
+### CI und Tests
+
+Nur historische referenzgebundene GSDB-Projektevidenz und der exakte
+Statistik-Pilot sind auf das Quellrepo begrenzt. Allgemeine Generator-, Pin-,
+Parity-, Negativfixture-, Assurance-, Navigations- und Sicherheitschecks
+bleiben aktiv. Die acht Template-Testmethoden werden nun auch im allgemeinen
+statischen CI-Job aufgerufen, ohne Repository-Ausnahme.
+
+Die neue Linkausnahme ist auf
+`(^|/)specs/intake-series-archive/[^/]+/[^/]+/(order|requirements-order)\.md$`
+begrenzt. Sie betrifft nur diese zwei Dateinamen unter Serie/Operation.
+Aktive Ansichten, Lernendendokumente, andere Archivdateinamen und tiefere Pfade
+bleiben geprueft. Archivintegritaet ist separat nachzuweisen; eine
+Linkaufloesungsausnahme akzeptiert keine geaenderten Archivbytes.
+Der neue Regressionstest hat positive und negative Scope-Faelle.
+
+Maven-Download-/Checksummentests und Template-Git-Fixtures wurden statisch
+reviewt, hier nicht erneut ausgefuehrt. Falsche Checksumme bleibt harter Fehler;
+Fallback aendert weder Version noch Soll-Checksumme. Isolierte Git-Tests
+belegen keine echte Plattform- oder Template-Abnahme.
+
+### Finding IR101: behoben
+
+High, Provenienznormalisierung; Owner: Intake Author / Repository Maintainer.
+Der erste FINAL-Refresh entfernte wegen eines kulturabhaengigen BOM-Vergleichs
+auch ohne BOM das erste Zeichen. Damit waren drei Ziel- und 168 Quellenhashes
+falsch. Beispiel LICENSE: korrekt
+`fa6db19fcebeaefb5f045ef20aee1e82325670388f3bd0acd31345da59e4985a`.
+Das Entfernen des ersten M reproduziert den falschen Wert
+`21414b80ac0cc730f904c086ae67b70db8fe497f866b1343aa8fa29742765f14`.
+
+Der Autor korrigierte nur den temporaeren Helper und band die drei aktuellen
+Receipts korrekt zurueck. Dieser Reviewer hat anschliessend alle drei Ziele
+und jeweils 56 Quellen aus den tatsaechlichen Bytes neu gehasht und die sechs
+Bash-/PowerShell-Receiptpruefungen erfolgreich wiederholt. Keine Quell- oder
+Archivkorrektur durch den Reviewer. Disposition: behoben und nachgeprueft,
+keine Risikoakzeptanz. Trigger: jeder kuenftige Quellen-/Receipt- oder
+Normalisierungswechsel. IR101 bleibt unter reviewerEvidence.resolvedFindings
+erhalten; findings und summary beschreiben ausschliesslich offene Befunde.
+
+### Nachweise und Grenzen
+
+- Reviewer selbst: drei Authoring-Receipts in beiden Shells Pass, jeweils
+  56 Quellen; Serienmanifest und Serienreceipt in beiden Shells Pass;
+  Governance-Konfiguration in beiden Shells Aligned.
+- Unabhaengig: 21 Archiv-/Quellsnapshots roh und normalisiert ohne Abweichung;
+  37 GSDB-Inventardateien roh ohne Abweichung; 14 lokale Profilstaende stimmen
+  mit Registry und Lock ueberein; alle Intake-Identitaeten erhalten, Vorziel
+  jeweils erste Quelle. Chronologie vor dieser Sitzung ist aufgezeichnete,
+  nicht persoenlich beobachtete Evidenz.
+- Endsnapshot: striktes UTF-8, genau eine tatsaechlich vorhandene BOM entfernen,
+  CRLF/CR zu LF, kein Trim oder sonstiger Zeichenverlust. reviewedHashes
+  enthaelt nur aktuelle Textwerte, keine eigenen Ergebnisse und keine
+  noch veraenderlichen Operationsjournale.
+- Owner separat gemeldet: 50 Fokusregressionen und 12 Toolchain-Tests Pass,
+  SecretScan 261 Dateien und 366 XML-Teile sauber, Compose und lokale Links
+  gruen; Vollrepo-Lychee 1925 Links, 1200 OK, 725 offline ausgeschlossen,
+  null Fehler. Diese Meldungen werden nicht als eigener Reviewer-Test ausgegeben.
+- Fruehere parallele Maven-5s-Timeouts sind kein pauschaler gruener
+  Pre-commit-Nachweis. Eine vollstaendig gruene Gesamtpruefung wird hier nicht
+  behauptet. Der separate historische Wartungs-Timing-Nachweis bleibt Resolved;
+  die aktuellen Maven-Beobachtungen sind ein anderes Thema.
+- Keine Builds, Containeraktionen, Installationen, Provideraufrufe,
+  Git-Schreibaktionen, Remote- oder Plattformaenderungen. Keine aktuelle
+  Online-/Rechts-/Releaseverifikation und keine menschliche Abnahme.
+
+Offen bleiben die in ihren Quellen mit Owner/Folgeaktion/Trigger gefuehrten
+LIC-01/02, O-344-TECH/HUMAN/CLOUD und UPD-AMD64/V2-LOOP/V2-AUDIT/SMOKE-WARN,
+DOC-A11Y und UPD-APPROVAL. Diese Umsetzungs-/Freigabegrenzen widersprechen
+keinem Ready fuer Anforderungen; sie werden hier nicht geschlossen.
+
+**Naechster erlaubter Schritt:** Ergebnis an den Owner. Ein gesonderter
+Journaleintrag darf den Reviewabschluss dokumentieren, ohne gebundene Eingaben
+zu veraendern. Ready ist keine Start-, Liefer-, Lizenz-, Produkt-, A11Y- oder
+Sandbox-Freigabe. Kein Specify/Autonomous-Lauf wurde gestartet.
+
+## English
+
+**Verdict: Ready.** Four targets, one historical Completed root and three
+active intakes; no campaign workers, open intake findings, unanswered material
+questions or accepted risks. Reviewer Codex Independent Lifecycle Reviewer ILR-fdf7797f, agent ID
+`e99afff1-3344-4e99-8c7c-20197a66dc1c`, did not author or repair the reviewed texts or sources.
+Only the three commissioned review outputs were written. No archive, target,
+log or operation journal was modified. The archived c22a09e1 review is explicitly
+superseded; its previous active-path Ready did not apply to this request.
+
+The full root requirements and acceptance criteria, H requirements 1-7 and
+H-344-01..10/AC-H-344-01..10, A requirements 1-6 and
+A-344-01..04/AC-A-344-01..04, and L FR-001..015/L-FR-016..023 plus
+AC-001..012/L-AC-013..020 were assessed for identity, audience, scope,
+measurability, security, privacy, accessibility, platforms, evidence,
+authority and handoff consistency. The historical root remains a predecessor,
+not a newly executable or newly language-certified document. Active DE/EN
+requirements/acceptance pairs preserve thresholds and human stops.
+
+All 50 delta IDs map exactly once: 47 UpdateRequired, one AlreadyCovered and
+two bounded N/A. Other controls are not silently declared fulfilled. One
+root and three forward binding edges agree across request, manifest and order
+views. Preserve Completed/Eligible/Blocked/Blocked. The six active prompts
+consume full intakes/current alignments, retain LocalImplementation and
+separate start authority, and stop before remote delivery/platform changes.
+
+Fork/shared-history acquisition remains default. Template use is prepared,
+not enabled; independent history does not support blind upstream/unrelated
+merges. Personal origin, private initial visibility, main-only copying,
+local self-build, separate Level-0 and empty product repos are explicit.
+Copied evidence, approvals, statistics and run states are source context,
+not personal authority; no resets or resumed source runs. MIT covers only
+proven original work; third-party rights and generator provenance remain
+separate. Open LIC-01/02 block activation/affected redistribution. Personal
+baseline, reviewers, gates and start authority must be established separately.
+
+Only historical reference GSDB proof and the exact-history statistics pilot
+are reference-scoped. General checks remain active. The template suite now
+runs in general static CI. The anchored archived-link exception covers only
+the two order filenames at series/operation depth, not active docs, other
+archived names or deeper paths; it waives no archive integrity check.
+The new test has positive and negative scope cases. Fixtures were reviewed
+statically, not rerun by this reviewer or presented as live platform acceptance.
+
+IR101 was a High provenance defect in the first FINAL refresh: a culture-sensitive
+BOM test removed a real first character from no-BOM files. The incorrect LICENSE
+hash is independently reproduced by removing its initial M. The author fixed
+the temporary helper and refreshed declared hashes without source changes.
+All three target and 168 source hashes were independently recomputed correctly;
+all six final receipt validations passed. Disposition: remediated and verified,
+not accepted risk or severity downgrade. Re-evaluate on any future source,
+receipt or normalization change; the finding remains in resolvedFindings.
+
+Both shells pass three 56-source receipts, series manifest/receipt and governance
+config. All 21 recorded archives match raw/normalized hashes; all 37 baseline
+inventory members match raw hashes; 14 local profile metadata entries agree.
+189 actual text inputs are freshly bound after 17:42 CET; current review
+outputs and mutable journals are excluded. Source chronology predating this
+session and external publication/legal claims were not independently re-observed.
+
+The owner separately reports passing 50 focused regressions, 12 toolchain tests,
+secret scanning, Compose and links. These are not reviewer-run tests. No full
+pre-commit green claim is made for earlier concurrent-load Maven timeouts;
+the historical maintenance timing resolution is a distinct preserved record.
+B2 is editorial review, not measured comprehension. Human first-use, keyboard,
+screen-reader, rendering/PPTX/PDF and full WCAG acceptance remain separate.
+
+Retain all existing technical, rights, human and platform Open boundaries with
+their named owners/follow-ups/triggers. No build, container operation, installation,
+provider call, Git write, commit, push or platform mutation occurred. Ready
+reviews requirements and provenance only, not product, runtime, rights, release
+or sandbox approval. Return the result to the owner; later journal completion
+must not alter bound inputs or imply permission to start the next stage.

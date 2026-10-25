@@ -1,0 +1,311 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeOperation",
+  "operationId": "3caff22f-59d5-4142-b15b-955ee96a3037",
+  "type": "Update",
+  "status": "Completed",
+  "createdAt": "2026-10-25T13:30:29Z",
+  "authorityEvidence": "Owner explicitly requested on 2026-10-25: fix the two final-review findings by adding the official Apache Maven archive fallback with unchanged version/SHA-512 and isolated download fixtures, classify earlier stopped-machine statements as historical with current status reference, then refresh all three intake source bindings with preserved identities and byte-identical archives and independently fully review the series. Preserve lifecycle and execution authority. No global maintenance, installation, container build/restart, commit or push.",
+  "proposalPath": "docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md",
+  "proposalNormalizedSha256": "b657955d235eb6ec7070b508060b596411ff76106fe96e9ac76897a8ab097f6e",
+  "approval": {
+    "evidence": "Owner explicitly requested on 2026-10-25: fix the two final-review findings by adding the official Apache Maven archive fallback with unchanged version/SHA-512 and isolated download fixtures, classify earlier stopped-machine statements as historical with current status reference, then refresh all three intake source bindings with preserved identities and byte-identical archives and independently fully review the series. Preserve lifecycle and execution authority. No global maintenance, installation, container build/restart, commit or push.",
+    "approved": true,
+    "approvedBy": "Repository Owner (current explicit instruction; source update only)",
+    "approvedAt": "2026-10-25T13:30:29Z"
+  },
+  "targets": [
+    {
+      "intakeId": "a92a7ced-bbf3-4408-9754-7b739be19a41",
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "receiptId": "dc6d0a31-67bf-44b7-a36d-cac29df95c7f",
+      "oldHash": "dfb1d8702b79ea9914d8158ad01d5ea8e06b75b18118b574338959c6885a5307",
+      "newHash": "c3d9ff9b9a9dadd5df9b81414182b98d93b46163d5ddfcd54c65fb681dd50c9e"
+    },
+    {
+      "intakeId": "51d24064-dfa6-4375-9bcd-58cccc545167",
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "receiptId": "d9f9aae1-9ae9-43ce-987d-a922f22b9fc3",
+      "oldHash": "39f7979e0f8479bca0cb096fdf8e1199a7b7c841ecb3fa2a54506d7f1d1d08ed",
+      "newHash": "70aa55b50ea87b58973ce958027ab5f3fea39e018bd96756c56e31512f29930f"
+    },
+    {
+      "intakeId": "5926e53e-39b7-475f-8a6b-e2ec08b0a803",
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "receiptId": "14be85e6-5227-4a74-8d91-b487ec8c6fd4",
+      "oldHash": "9b55b5820652f99e777c71d1eb2b8e7dd55aa91e0d74c4f9423cbfa10f4470f3",
+      "newHash": "1f895c155fbd5a9bc211f9cfe7322a4a62c85de090f715fd26e2b8f6cb460396"
+    }
+  ],
+  "reviewId": "c22a09e1-a781-4f5f-b691-a8d8839298b8",
+  "previousReviewId": "0298d3b3-7ff1-42d8-a5f7-349d01139cf4",
+  "lifecycle": [
+    "Completed",
+    "Eligible",
+    "Blocked",
+    "Blocked"
+  ],
+  "archiveEvidence": [
+    {
+      "source": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/manifest.json",
+      "rawSha256": "e61f52f9d3806fc8039a78ee4e0f1edb5e7c7712f5a61d1d961b0298ed7c36f1",
+      "normalizedSha256": "e61f52f9d3806fc8039a78ee4e0f1edb5e7c7712f5a61d1d961b0298ed7c36f1"
+    },
+    {
+      "source": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+      "rawSha256": "4095a45e6b350ed40435e1a802f890ad5661853da9b8ae049c1d033a38522b15",
+      "normalizedSha256": "4095a45e6b350ed40435e1a802f890ad5661853da9b8ae049c1d033a38522b15"
+    },
+    {
+      "source": "specs/intake-series/sandbox-development-lifecycle/order.md",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/order.md",
+      "rawSha256": "3391e54fcafe38bd55f9d07c0f6f033abed2a9586f4ef874e34b720e33a6c659",
+      "normalizedSha256": "3391e54fcafe38bd55f9d07c0f6f033abed2a9586f4ef874e34b720e33a6c659"
+    },
+    {
+      "source": "Lastenheft_Abarbeitungsreihenfolge.md",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/requirements-order.md",
+      "rawSha256": "ff2c8296f3b38c3bf555ecb179fc75d61e811d045595ac3ae7c628a10b1ced78",
+      "normalizedSha256": "ff2c8296f3b38c3bf555ecb179fc75d61e811d045595ac3ae7c628a10b1ced78"
+    },
+    {
+      "source": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+      "archive": "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/request.json",
+      "rawSha256": "e3d429ee3fe852286a0e0550224f01a2cc3ae5789e3067ffc576659abb4f47f6",
+      "normalizedSha256": "e3d429ee3fe852286a0e0550224f01a2cc3ae5789e3067ffc576659abb4f47f6"
+    },
+    {
+      "source": "specs/intake-review-results/sandbox-development-lifecycle.json",
+      "archive": "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/result.json",
+      "rawSha256": "12b50b53d76b8ae9b89d992cc9932599a9f5f3288f28256628a4c6324df55014",
+      "normalizedSha256": "12b50b53d76b8ae9b89d992cc9932599a9f5f3288f28256628a4c6324df55014"
+    },
+    {
+      "source": "specs/intake-review-reports/sandbox-development-lifecycle.md",
+      "archive": "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/report.txt",
+      "rawSha256": "64533602a959e4bbc01d8ae82ec3e76b308fb1d5a27f5ec3a1c7317313daf80e",
+      "normalizedSha256": "64533602a959e4bbc01d8ae82ec3e76b308fb1d5a27f5ec3a1c7317313daf80e"
+    },
+    {
+      "source": "specs/intake-review-reports/sandbox-development-lifecycle-independent.txt",
+      "archive": "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/independent.txt",
+      "rawSha256": "62bb4c8cb6cf6b80c64dc33835c67f4283b8f429d5d3b9f79496e81dcd114866",
+      "normalizedSha256": "62bb4c8cb6cf6b80c64dc33835c67f4283b8f429d5d3b9f79496e81dcd114866"
+    },
+    {
+      "source": "Dockerfile",
+      "archive": "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/source-snapshots/Dockerfile.txt",
+      "rawSha256": "b8880e957bec256e1cb166eb5251643a35c2c54327313584dff2ba052b844aa5",
+      "normalizedSha256": "b8880e957bec256e1cb166eb5251643a35c2c54327313584dff2ba052b844aa5"
+    },
+    {
+      "source": "scripts/tests/test_toolchain_version_pins.py",
+      "archive": "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/source-snapshots/scripts/tests/test_toolchain_version_pins.py.txt",
+      "rawSha256": "201dba162a88ab746665de68a34de8c4fc060c42e0dc7af5612aba56796e18ed",
+      "normalizedSha256": "201dba162a88ab746665de68a34de8c4fc060c42e0dc7af5612aba56796e18ed"
+    },
+    {
+      "source": "docs/maintenance/documentation-impact-2026-10-25.json",
+      "archive": "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/source-snapshots/docs/maintenance/documentation-impact-2026-10-25.json.txt",
+      "rawSha256": "66a18628b63b0baec8c92ab5e9edcf638b9221074a512f87535cf7eb78fb7273",
+      "normalizedSha256": "66a18628b63b0baec8c92ab5e9edcf638b9221074a512f87535cf7eb78fb7273"
+    },
+    {
+      "source": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "archive": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/3caff22f-59d5-4142-b15b-955ee96a3037/target.txt",
+      "rawSha256": "dfb1d8702b79ea9914d8158ad01d5ea8e06b75b18118b574338959c6885a5307",
+      "normalizedSha256": "dfb1d8702b79ea9914d8158ad01d5ea8e06b75b18118b574338959c6885a5307"
+    },
+    {
+      "source": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "archive": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+      "rawSha256": "38d0d7dc9e348aa4fe25bdcbd2b72b79774c89f2f19df728453fa005504b0bf7",
+      "normalizedSha256": "38d0d7dc9e348aa4fe25bdcbd2b72b79774c89f2f19df728453fa005504b0bf7"
+    },
+    {
+      "source": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "archive": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/3caff22f-59d5-4142-b15b-955ee96a3037/target.txt",
+      "rawSha256": "39f7979e0f8479bca0cb096fdf8e1199a7b7c841ecb3fa2a54506d7f1d1d08ed",
+      "normalizedSha256": "39f7979e0f8479bca0cb096fdf8e1199a7b7c841ecb3fa2a54506d7f1d1d08ed"
+    },
+    {
+      "source": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "archive": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+      "rawSha256": "20d57076beb79f592e60bbe9f7f78be31aada8aa85e395e4e67e71bc828dd80d",
+      "normalizedSha256": "20d57076beb79f592e60bbe9f7f78be31aada8aa85e395e4e67e71bc828dd80d"
+    },
+    {
+      "source": "intakes/learner-fork-self-build-sandbox.md",
+      "archive": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/3caff22f-59d5-4142-b15b-955ee96a3037/target.txt",
+      "rawSha256": "9b55b5820652f99e777c71d1eb2b8e7dd55aa91e0d74c4f9423cbfa10f4470f3",
+      "normalizedSha256": "9b55b5820652f99e777c71d1eb2b8e7dd55aa91e0d74c4f9423cbfa10f4470f3"
+    },
+    {
+      "source": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "archive": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+      "rawSha256": "799cdad6924de04be0c9d71d65d354fa30f5144be4a61116ed16a7796ee368f8",
+      "normalizedSha256": "799cdad6924de04be0c9d71d65d354fa30f5144be4a61116ed16a7796ee368f8"
+    }
+  ],
+  "validation": {
+    "completedAt": "2026-10-25T13:55:46Z",
+    "preflight": "81 prior review inputs current; old receipts/series/review passed before edits",
+    "stagingBash": "Passed",
+    "stagingPowerShell": "Passed",
+    "finalBash": "Three receipts (29 sources each), manifest, series receipt, operation, config and review passed",
+    "finalPowerShell": "Same checks passed",
+    "independentFullReview": "Ready",
+    "reviewId": "c22a09e1-a781-4f5f-b691-a8d8839298b8",
+    "reviewerAgentId": "01a17346-c644-7881-8a58-1817485693d3",
+    "independentInputHashes": 139,
+    "isolatedToolchainTests": "12 passed including five download/checksum cases",
+    "focusedRegressions": "71 tests: 69 passed, two existing Linux-only Swift skips, zero errors; 150.482s",
+    "archiveFidelity": "17 raw and normalized archive/snapshot hashes match exact captured preimages",
+    "publication": "38 candidate paths copied only after complete 1850-file preimage concurrency check; all published bytes matched candidate",
+    "composeConfig": "Passed, static only",
+    "offlineLinks": "50 links, 13 unique targets, no errors",
+    "diffCheck": "Passed",
+    "secretScan": {
+      "status": "OpenFalsePositive",
+      "exitCode": 1,
+      "findings": 1,
+      "rule": "generic-api-key",
+      "classification": "Unchanged public Swift PGP fingerprint in byte-identical Dockerfile source snapshot; no actual secret identified",
+      "owner": "Maintainer / Security Review",
+      "followUp": "Separately review narrowly scoped false-positive handling; scanner configuration unchanged",
+      "reevaluationTrigger": "Before commit, pre-commit or publication of new snapshot"
+    },
+    "runtimeAndHumanAcceptance": "Open; unchanged; no build, restart or approvals",
+    "sessionLog": "docs/security/agent-session-log/2026-10-25-1428.md",
+    "outputBoundary": "Completion metadata only; preserve target set, authority, lineage and lifecycle"
+  },
+  "rollbackBoundary": "Publish only validated candidate bytes after complete preimage concurrency checks; restore only this operation on failure, never unrelated user work.",
+  "completionBoundary": "Targeted download reliability and source/evidence correction; no build, runtime change, acceptance or delivery",
+  "nextAction": "$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json",
+  "intendedTargets": [
+    "docs/maintenance/documentation-impact-2026-10-25.json",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/manifest.json",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/order.md",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/requirements-order.md",
+    "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/request.json",
+    "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/result.json",
+    "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/report.txt",
+    "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/independent.txt",
+    "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/source-snapshots/Dockerfile.txt",
+    "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/source-snapshots/scripts/tests/test_toolchain_version_pins.py.txt",
+    "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/source-snapshots/docs/maintenance/documentation-impact-2026-10-25.json.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/3caff22f-59d5-4142-b15b-955ee96a3037/target.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+    "Lastenheft_Secure-Development-Container-Hardening.md",
+    "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/3caff22f-59d5-4142-b15b-955ee96a3037/target.txt",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+    "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+    "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/3caff22f-59d5-4142-b15b-955ee96a3037/target.txt",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+    "intakes/learner-fork-self-build-sandbox.md",
+    "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+    "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+    "Lastenheft_Abarbeitungsreihenfolge.md",
+    "specs/intake-series/sandbox-development-lifecycle/order.md",
+    "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "specs/intake-review-results/sandbox-development-lifecycle.json",
+    "specs/intake-review-reports/sandbox-development-lifecycle.md",
+    "specs/intake-review-reports/sandbox-development-lifecycle-independent.txt",
+    "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/operation.json",
+    "specs/intake-series-operations/3caff22f-59d5-4142-b15b-955ee96a3037.json",
+    "Dockerfile",
+    "scripts/tests/test_toolchain_version_pins.py",
+    "docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md"
+  ],
+  "validatedTargets": [
+    "docs/maintenance/documentation-impact-2026-10-25.json",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/manifest.json",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/order.md",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/requirements-order.md",
+    "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/request.json",
+    "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/result.json",
+    "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/report.txt",
+    "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/independent.txt",
+    "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/source-snapshots/Dockerfile.txt",
+    "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/source-snapshots/scripts/tests/test_toolchain_version_pins.py.txt",
+    "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/source-snapshots/docs/maintenance/documentation-impact-2026-10-25.json.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/3caff22f-59d5-4142-b15b-955ee96a3037/target.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+    "Lastenheft_Secure-Development-Container-Hardening.md",
+    "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/3caff22f-59d5-4142-b15b-955ee96a3037/target.txt",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+    "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+    "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/3caff22f-59d5-4142-b15b-955ee96a3037/target.txt",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+    "intakes/learner-fork-self-build-sandbox.md",
+    "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+    "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+    "Lastenheft_Abarbeitungsreihenfolge.md",
+    "specs/intake-series/sandbox-development-lifecycle/order.md",
+    "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "specs/intake-review-results/sandbox-development-lifecycle.json",
+    "specs/intake-review-reports/sandbox-development-lifecycle.md",
+    "specs/intake-review-reports/sandbox-development-lifecycle-independent.txt",
+    "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/operation.json",
+    "specs/intake-series-operations/3caff22f-59d5-4142-b15b-955ee96a3037.json",
+    "Dockerfile",
+    "scripts/tests/test_toolchain_version_pins.py",
+    "docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md"
+  ],
+  "publishedTargets": [
+    "docs/maintenance/documentation-impact-2026-10-25.json",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/manifest.json",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/order.md",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/requirements-order.md",
+    "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/request.json",
+    "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/result.json",
+    "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/report.txt",
+    "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/independent.txt",
+    "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/source-snapshots/Dockerfile.txt",
+    "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/source-snapshots/scripts/tests/test_toolchain_version_pins.py.txt",
+    "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/source-snapshots/docs/maintenance/documentation-impact-2026-10-25.json.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/3caff22f-59d5-4142-b15b-955ee96a3037/target.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+    "Lastenheft_Secure-Development-Container-Hardening.md",
+    "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/3caff22f-59d5-4142-b15b-955ee96a3037/target.txt",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+    "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+    "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/3caff22f-59d5-4142-b15b-955ee96a3037/target.txt",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json",
+    "intakes/learner-fork-self-build-sandbox.md",
+    "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+    "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+    "Lastenheft_Abarbeitungsreihenfolge.md",
+    "specs/intake-series/sandbox-development-lifecycle/order.md",
+    "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "specs/intake-review-results/sandbox-development-lifecycle.json",
+    "specs/intake-review-reports/sandbox-development-lifecycle.md",
+    "specs/intake-review-reports/sandbox-development-lifecycle-independent.txt",
+    "specs/intake-authoring-operations/3caff22f-59d5-4142-b15b-955ee96a3037/operation.json",
+    "specs/intake-series-operations/3caff22f-59d5-4142-b15b-955ee96a3037.json",
+    "Dockerfile",
+    "scripts/tests/test_toolchain_version_pins.py",
+    "docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md"
+  ],
+  "failure": {
+    "message": "N/A",
+    "class": "N/A"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "9fb55541-eb03-4212-9e05-e07f4c33ffa4",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.11"
+  },
+  "createdAt": "2026-10-25T08:12:17Z",
+  "operation": {
+    "type": "Update",
+    "authorityEvidence": "Owner approved the complete documentation alignment plan on 2026-10-25 with Ja, Plan umsetzen: expand existing Markdown, investigate bounded toolchain follow-ups, refresh three intake source bindings and independently fully review the series. No product run, deployment, formal approval, commit or push; preserve lifecycle statuses.",
+    "operationId": "64d6ad91-2d6e-4e63-a340-0fdb4d3a6b1c"
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "7a70f761c2de1246bfdc6a780710a1f05be3ad2a079bfa0dd30d7963eb1369c1"
+  },
+  "supersedes": {
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/64d6ad91-2d6e-4e63-a340-0fdb4d3a6b1c/receipt.json",
+    "receiptNormalizedSha256": "817ae587545523b3b57222051838fe307b36c328baf2e3af64533875e4c3d84c",
+    "manifestArchiveSha256": "b8e94a755cf6533f5900a4f39a0737a47b58c8bf7846bdf09650288a24133894",
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/64d6ad91-2d6e-4e63-a340-0fdb4d3a6b1c/manifest.json"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status"
+}

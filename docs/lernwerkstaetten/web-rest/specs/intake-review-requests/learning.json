@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "4a47867e-344f-4c36-aac5-80bb69510953",
+  "mode": "Series",
+  "policy": "generic-markdown",
+  "targets": [
+    {
+      "path": "intakes/00-vertrag.md",
+      "role": "Primary"
+    },
+    {
+      "path": "intakes/01-sqlite.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/02-mvc-client.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/03-abschluss.md",
+      "role": "OrderedMember"
+    }
+  ],
+  "series": {
+    "dependencies": [
+      {
+        "from": "intakes/00-vertrag.md",
+        "to": "intakes/01-sqlite.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/01-sqlite.md",
+        "to": "intakes/02-mvc-client.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/02-mvc-client.md",
+        "to": "intakes/03-abschluss.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      }
+    ],
+    "orderedTargetPaths": [
+      "intakes/00-vertrag.md",
+      "intakes/01-sqlite.md",
+      "intakes/02-mvc-client.md",
+      "intakes/03-abschluss.md"
+    ],
+    "roots": [
+      "intakes/00-vertrag.md"
+    ]
+  },
+  "campaign": {
+    "manifestPath": "N/A",
+    "workers": [],
+    "operatorExceptions": []
+  }
+}

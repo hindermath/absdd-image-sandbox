@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "85f08461-1303-434c-ad4f-f93584830ac8",
+  "mode": "Series",
+  "policy": "generic-markdown",
+  "targets": [
+    {
+      "path": "intakes/00-cli.md",
+      "role": "Primary"
+    },
+    {
+      "path": "intakes/01-yaml.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/02-sqlite.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/03-rest.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/04-dokumentation.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/05-review.md",
+      "role": "OrderedMember"
+    }
+  ],
+  "series": {
+    "dependencies": [
+      {
+        "from": "intakes/00-cli.md",
+        "to": "intakes/01-yaml.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/01-yaml.md",
+        "to": "intakes/02-sqlite.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/02-sqlite.md",
+        "to": "intakes/03-rest.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/03-rest.md",
+        "to": "intakes/04-dokumentation.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/04-dokumentation.md",
+        "to": "intakes/05-review.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      }
+    ],
+    "orderedTargetPaths": [
+      "intakes/00-cli.md",
+      "intakes/01-yaml.md",
+      "intakes/02-sqlite.md",
+      "intakes/03-rest.md",
+      "intakes/04-dokumentation.md",
+      "intakes/05-review.md"
+    ],
+    "roots": [
+      "intakes/00-cli.md"
+    ]
+  },
+  "campaign": {
+    "manifestPath": "N/A",
+    "workers": [],
+    "operatorExceptions": []
+  }
+}

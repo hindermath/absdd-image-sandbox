@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "90116b19-6fbe-4630-a411-48c8ff372117",
+  "seriesId": "600e29d1-eeed-4407-a5a5-b6e3430d1cab",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.11"
+  },
+  "createdAt": "2026-10-25T15:45:40Z",
+  "operation": {
+    "operationId": "eca8c4db-68e0-415d-9305-2b47156af151",
+    "type": "Create",
+    "authorityEvidence": "Owner approved the complete two-workshop plan and requested implementation on 2026-10-25. Authority covers reusable Draft learning packages only; no personal product execution or remote delivery."
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series/learning/manifest.json",
+    "normalizedSha256": "755d73032a42e25eb23a1e129e6012164e255f14341d66e1cbc0d9671262e69b"
+  },
+  "supersedes": {
+    "receiptPath": "N/A",
+    "receiptNormalizedSha256": "N/A",
+    "manifestArchivePath": "N/A",
+    "manifestArchiveSha256": "N/A"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status specs/intake-series/learning/manifest.json (Draft package, no start authority)"
+}

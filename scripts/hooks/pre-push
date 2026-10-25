@@ -8,11 +8,32 @@ set -euo pipefail
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 zero_sha="0000000000000000000000000000000000000000"
 regex_files=()
+push_commits=()
 
-secret_content_regex='(id_token|access_token|refresh_token|api[_-]?key|client[_-]?secret|password[[:space:]]*=|authorization:[[:space:]]*bearer|bearer[[:space:]]+[A-Za-z0-9._~+/=-]*|sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|AIza[0-9A-Za-z_-]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY-----)'
+secret_content_regex="((id_token|access_token|refresh_token|api[_-]?key|client[_-]?secret|password)[\"']?[[:space:]]*[:=]|authorization:[[:space:]]*bearer|bearer[[:space:]]+[A-Za-z0-9._~+/=-]+|sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|AIza[0-9A-Za-z_-]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY-----)"
 secret_name_regex='(auth\.json|(^|\/)\.env(\.[^.]+)?$|[^/]*(secret|credential|creds)[^/]*\.(json|yaml|yml|xml|ini|cfg|conf|toml)|[^/]*id_rsa[^/]*|[^/]*\.(pem|key|p12|pfx))$'
 allowed_secret_name_regex='(^|/)\.env\.(example|sample|template|dist)$'
 allowed_secret_content_path_regex='(^|/)scripts/(hooks/pre-push|scan-agent-secrets\.(sh|ps1)|lib/hg-secrets\.(sh|ps1))$'
+
+# DE: Nur diese bereits geprueften Keynote-Bytes sind keine Schluesseldateien.
+# EN: Only these reviewed Keynote bytes are not key files. Content scans stay on.
+is_reviewed_keynote() {
+  local path="$1" expected=""
+  case "${path#"$REPO_ROOT/"}" in
+    docs/praesentationen/exports/workshop-spec-kit.de.key) expected='79d80b6b5641e7f0452572ab934adc95f7b7199b' ;;
+    docs/praesentationen/exports/workshop-spec-kit.en.key) expected='f412c5718e5d1983b67b77b25abdb484e172beea' ;;
+    *) return 1 ;;
+  esac
+  [ "$(git -C "$REPO_ROOT" hash-object --no-filters -- "$path")" = "$expected" ] || return 1
+  local commit blob relative="${path#"$REPO_ROOT/"}" seen=0
+  for commit in "${push_commits[@]+"${push_commits[@]}"}"; do
+    if blob="$(git -C "$REPO_ROOT" rev-parse --verify "$commit:$relative" 2>/dev/null)"; then
+      seen=1
+      [ "$blob" = "$expected" ] || return 1
+    fi
+  done
+  [ "$seen" -eq 1 ]
+}
 
 echo "pre-push: Prüfe git-getrackte Dateien auf Secrets …"
 
@@ -42,11 +63,14 @@ add_regex_file() {
 collect_regex_files_for_existing_ref() {
   local remote_sha="$1"
   local local_sha="$2"
-  local rel_file
+  local rel_file commit
 
-  while IFS= read -r rel_file; do
-    add_regex_file "$rel_file"
-  done < <(git -C "$REPO_ROOT" diff --name-only "$remote_sha..$local_sha" 2>/dev/null || true)
+  while IFS= read -r commit; do
+    push_commits+=("$commit")
+    while IFS= read -r rel_file; do
+      add_regex_file "$rel_file"
+    done < <(git -C "$REPO_ROOT" diff-tree --root --no-commit-id --name-only -r "$commit")
+  done < <(git -C "$REPO_ROOT" rev-list "$remote_sha..$local_sha")
 }
 
 collect_regex_files_for_new_ref() {
@@ -61,6 +85,7 @@ collect_regex_files_for_new_ref() {
 
   while IFS= read -r commit; do
     [ -n "$commit" ] || continue
+    push_commits+=("$commit")
     while IFS= read -r rel_file; do
       add_regex_file "$rel_file"
     done < <(git -C "$REPO_ROOT" diff-tree --root --no-commit-id --name-only -r "$commit" 2>/dev/null || true)
@@ -154,6 +179,9 @@ if [ "${#tracked_files[@]}" -gt 0 ]; then
     if printf '%s\n' "$f" | grep -Eiq "$allowed_secret_name_regex"; then
       continue
     fi
+    if is_reviewed_keynote "$f"; then
+      continue
+    fi
     name_hits+=("$f")
   done < <(printf '%s\n' "${tracked_files[@]}" | grep -Ei "$secret_name_regex" | grep -v '\.github/workflows/' || true)
 fi
@@ -172,7 +200,7 @@ if [ "${#tracked_files[@]}" -gt 0 ]; then
       continue
     fi
     content_hits+=("$f")
-  done < <(grep -rEl --include='*' "$secret_content_regex" "${tracked_files[@]}" 2>/dev/null || true)
+  done < <(grep -rEil --include='*' "$secret_content_regex" "${tracked_files[@]}" 2>/dev/null || true)
 fi
 
 if [ "${#content_hits[@]}" -gt 0 ]; then
@@ -187,7 +215,7 @@ if [ -d "$gitconfig_d" ]; then
   inc_hits=()
   while IFS= read -r f; do
     inc_hits+=("$f")
-  done < <(grep -rEl --include='*.inc' "$secret_content_regex" "$gitconfig_d" 2>/dev/null || true)
+  done < <(grep -rEil --include='*.inc' "$secret_content_regex" "$gitconfig_d" 2>/dev/null || true)
   if [ "${#inc_hits[@]}" -gt 0 ]; then
     found_high=1
     echo "  HIGH: Secret-Muster in ~/.gitconfig.d/ gefunden / Secret patterns found in ~/.gitconfig.d/:" >&2

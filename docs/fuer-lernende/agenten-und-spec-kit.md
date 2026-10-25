@@ -50,6 +50,18 @@ and verify that deletion is truly intended.
 
 ## Interaktiver Einstieg / Interactive Entry
 
+**DE:** OpenCode 2 hat offene Kontroll- und Audit-Nachpruefungen; siehe
+[V2-Sicherheitsreview](../security/toolchain-followups-2026-10-25.md).
+Installiert bedeutet hier nicht fuer reale Provider-Nutzung abgenommen.
+Alle CLI-Aufrufe bleiben von Desktop-Anmeldungen und Desktop-Fernsteuerung
+getrennt. Nutze vor einer echten Sitzung nur den projektspezifisch erlaubten
+Weg; fuer Grundlagen reichen die Tests ohne KI-Konto.
+
+**EN:** OpenCode 2 has open control and audit follow-ups; see the V2 security
+review. Installed does not mean accepted for real provider use. CLI calls
+remain separate from desktop sign-in and remote desktop control. Use only
+the project-authorised path for real sessions; basic checks need no AI account.
+
 **DE:** Öffne zuerst eine Shell im laufenden Container und wechsle in dein
 Projekt. Starte danach genau das freigegebene Werkzeug:
 
@@ -58,6 +70,11 @@ Then start exactly the approved tool:
 
 ```bash
 podman compose exec ade bash
+```
+
+Im Container, Bash / Inside the container, Bash:
+
+```bash
 cd /workspace
 git status --short --branch
 ```

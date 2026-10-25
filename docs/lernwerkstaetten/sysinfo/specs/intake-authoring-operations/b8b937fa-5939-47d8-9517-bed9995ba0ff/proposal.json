@@ -1,0 +1,130 @@
+{
+  "documentType": "LearningPackageProposal",
+  "seriesId": "73249749-e3a4-4fd5-9eea-1caba78e6d45",
+  "authorityEvidence": "Owner approved the complete two-workshop plan and requested implementation on 2026-10-25. Authority covers reusable Draft learning packages only; no personal product execution or remote delivery.",
+  "scope": "Portable Draft only",
+  "orderedMembers": [
+    {
+      "intakeId": "43fc087e-fe89-4b10-94e8-20c55d7c5327",
+      "path": "intakes/00-cli.md",
+      "receiptPath": "specs/intake-authoring-receipts/00-cli.json",
+      "title": "CLI and exports",
+      "order": 1,
+      "normalizedSha256": "5b75fb31eca428856cfc06d428dbfcba2a39fc147a082ebac5e6f332b2e96e5f"
+    },
+    {
+      "intakeId": "b8035d88-b79e-4f54-a3e4-9247c24f92e6",
+      "path": "intakes/01-yaml.md",
+      "receiptPath": "specs/intake-authoring-receipts/01-yaml.json",
+      "title": "YAML",
+      "order": 2,
+      "normalizedSha256": "87ef3d0b3f087eff1683213f762014cf83d4a865d9874860a4c5c3d2df456098"
+    },
+    {
+      "intakeId": "f824a4c4-0a2d-4a2e-a95e-7e8080d7960b",
+      "path": "intakes/02-sqlite.md",
+      "receiptPath": "specs/intake-authoring-receipts/02-sqlite.json",
+      "title": "SQLite",
+      "order": 3,
+      "normalizedSha256": "8011766c2b7b614632900a4ad29fa570f6d81a47af10c7ee54cf3f148e12b4a7"
+    },
+    {
+      "intakeId": "02a5fdd9-5154-41c2-91b0-743c8243863c",
+      "path": "intakes/03-rest.md",
+      "receiptPath": "specs/intake-authoring-receipts/03-rest.json",
+      "title": "REST snapshots",
+      "order": 4,
+      "normalizedSha256": "a3acfca9baf50d07310d84c47e6d6b3bc29555502ff199563a040799817decdd"
+    },
+    {
+      "intakeId": "2bab5243-9c8a-44b0-a9ec-cbf76c7baf99",
+      "path": "intakes/04-dokumentation.md",
+      "receiptPath": "specs/intake-authoring-receipts/04-dokumentation.json",
+      "title": "Generated documentation",
+      "order": 5,
+      "normalizedSha256": "1ecb7f2e017194ab6eb1b2573a54e232e3a39377e27e7faeae53d8bc13935e1a"
+    },
+    {
+      "intakeId": "20c3e173-afa4-429d-907e-4ed42eb9973f",
+      "path": "intakes/05-review.md",
+      "receiptPath": "specs/intake-authoring-receipts/05-review.json",
+      "title": "Evidence review",
+      "order": 6,
+      "normalizedSha256": "c889550efea0f9c4cf4e05681768ebc5f33e59d02dcc0b7cf261e78dd688877f"
+    }
+  ],
+  "roots": [
+    "intakes/00-cli.md"
+  ],
+  "dependencies": [
+    {
+      "from": "intakes/00-cli.md",
+      "to": "intakes/01-yaml.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "intakes/01-yaml.md",
+      "to": "intakes/02-sqlite.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "intakes/02-sqlite.md",
+      "to": "intakes/03-rest.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "intakes/03-rest.md",
+      "to": "intakes/04-dokumentation.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "intakes/04-dokumentation.md",
+      "to": "intakes/05-review.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    }
+  ],
+  "coverage": [
+    {
+      "path": "intakes/00-cli.md",
+      "topic": "CLI and exports",
+      "sourceCatalog": "sources.json",
+      "disposition": "Covered"
+    },
+    {
+      "path": "intakes/01-yaml.md",
+      "topic": "YAML",
+      "sourceCatalog": "sources.json",
+      "disposition": "Covered"
+    },
+    {
+      "path": "intakes/02-sqlite.md",
+      "topic": "SQLite",
+      "sourceCatalog": "sources.json",
+      "disposition": "Covered"
+    },
+    {
+      "path": "intakes/03-rest.md",
+      "topic": "REST snapshots",
+      "sourceCatalog": "sources.json",
+      "disposition": "Covered"
+    },
+    {
+      "path": "intakes/04-dokumentation.md",
+      "topic": "Generated documentation",
+      "sourceCatalog": "sources.json",
+      "disposition": "Covered"
+    },
+    {
+      "path": "intakes/05-review.md",
+      "topic": "Evidence review",
+      "sourceCatalog": "sources.json",
+      "disposition": "Covered"
+    }
+  ],
+  "overlapDecision": "Common contract shared, stage deltas separate; web routes are alternatives in separate packages, no cross-route dependency."
+}

@@ -1,0 +1,1041 @@
+# Agentische Podman-Sandbox / Agentic Podman Sandbox
+
+[GSDB 3.4.4: Pilotrollout / pilot rollout](docs/maintenance/gsdb-344-pilot-2026-10-20.md).
+
+<!-- learner-a11y-baseline:start -->
+## Lernenden- und A11Y-Basis / Learner and A11Y Baseline
+
+Dieses Lern- und Referenzprojekt richtet sich ab dem ersten Ausbildungsjahr an
+Fachinformatiker*innen, IT-System-Elektroniker*innen, Kaufleute für
+IT-System-Management und Kaufleute für Digitalisierungsmanagement. Inhalte
+stehen auf Deutsch zuerst und Englisch danach, verwenden ungefähr CEFR B2,
+erklären Fachbegriffe beim ersten Auftreten
+und setzen keine Spec-Kit-Erfahrung voraus. Abhängigkeiten, Zustände und
+Entscheidungen bleiben ohne ausschließlich visuelle Darstellung verständlich.
+`Programmierung #include<everyone>` und WCAG 2.2 Level AA sind die Prüfbasis,
+soweit die Kriterien anwendbar sind.
+
+*This learning and reference project targets IT specialist and IT systems
+electronics technician apprentices plus both IT management occupations from
+their first training year. Content is
+German-first/English-second at about CEFR B2, explains technical terms at first
+use, assumes no prior Spec Kit experience, and never relies on visual-only
+dependency, state, or decision information. `Programmierung #include<everyone>`
+and WCAG 2.2 Level AA are the review baseline wherever applicable.*
+<!-- learner-a11y-baseline:end -->
+
+Dieses Repository stellt eine Podman-basierte Container-Umgebung fuer
+OpenCode, die vier Required-Agenten Codex, Claude Code, Antigravity CLI und
+GitHub Copilot CLI, sechs verbindliche speichersichere Sprachpfade (.NET/C#,
+Java, Go, Rust, Python und Swift), PowerShell 7 als zweite Skriptbasis,
+Node.js/npm als unterstuetzendes Werkzeug, Syft und Spec Kit bereit. Es ist
+eine Sandbox- und Lernumgebung, keine Anwendung.
+
+The repository provides a Podman-based container environment with OpenCode,
+the four required agents Codex, Claude Code, Antigravity CLI, and GitHub
+Copilot CLI, six required memory-safe language paths (.NET/C#, Java, Go, Rust,
+Python, and Swift), PowerShell 7 as a second scripting foundation, Node.js/npm
+as supporting tooling, Syft, and Spec Kit. It is a sandbox and training
+environment, not an application.
+
+## Ueberblick / Overview
+
+| Bereich | Standard |
+|---|---|
+| Container-Laufzeit | Podman |
+| Compose-Lifecycle-Befehl | `podman compose` |
+| Compose-Config-Validierung | `podman-compose config` |
+| Lifecycle-Fallback | `podman-compose`, falls `podman compose` lokal nicht verfuegbar ist |
+| Basisimage | Microsoft .NET SDK aus MCR, im `Dockerfile` per Digest gepinnt |
+| Verbindliche MSL-Pfade | .NET/C#, Java, Go, Rust, Python und Swift |
+| Zusaetzliche Skript- und Werkzeugbasis | PowerShell 7 als zweite Skriptbasis; Node.js/npm als unterstuetzendes Werkzeug |
+| OpenCode | Installiert, aber ohne vorkonfigurierten Modellanbieter |
+| Codex | Systemweite Defaults aus `codex/config.toml` und `codex/requirements.toml` |
+| Claude Code | Installiert; persistenter Zustand in `claude_data` |
+| Gemini CLI | Installiert; persistenter Zustand in `gemini_data` |
+| Antigravity CLI | Installiert; persistenter Zustand in `gemini_data` |
+| GitHub Copilot CLI | Installiert; persistenter Zustand in `copilot_data` |
+| Software-Bill-of-Materials | Syft ist installiert; `scripts/build-and-sbom.*` erzeugt die Image-SBOM |
+| Dokumentation / Documentation | Pandoc, Typst, Tinymist und Lychee; [PDF-Funktionstest / PDF functional test](#dokumentation-als-pdf--documentation-as-pdf) |
+| Arbeitsverzeichnis im Container | `/rider-projects` |
+
+### Dokumentationspfade / Documentation Paths
+
+| Zielgruppe / Audience | Einstieg / Entry point | Inhalt / Content |
+|---|---|---|
+| Lernende / Learners | [docs/fuer-lernende/README.md](docs/fuer-lernende/README.md) | geführter Einstieg, Toolchains, Agenten, Git und Fehlerhilfe / guided setup, toolchains, agents, Git, and troubleshooting |
+| Berufe und Fachrichtungen / Occupations and specialisations | [Lernwege](docs/fuer-lernende/lernwege.md) | gemeinsame Grundlage ab Lehrjahr 1 und passende Vertiefungen / shared first-year foundation and suitable follow-ups |
+| Entwickler ohne Spezialkenntnisse / Non-specialist developers | [Entwickler-Kurzpfad](docs/fuer-lernende/entwickler-kurzpfad.md) | kompakter Einstieg ohne Sicherheitsabkuerzung / compact entry without security shortcuts |
+| Wiederkehrende Arbeit / Daily use | [Alltag](docs/fuer-lernende/alltag.md) und [FAQ](docs/fuer-lernende/faq.md) | Daten erhalten, Aenderungen verstehen und sicher stoppen / preserve data, understand changes and stop safely |
+| Maintainer und Review / Maintainers and review | [docs/betrieb/README.md](docs/betrieb/README.md) | Image-Aufbau, Compose-Grenzen, Validierung, Audit, SBOM und Wartung / image construction, Compose boundaries, validation, audit, SBOM, and maintenance |
+| Security Review | [docs/security/](docs/security/) | Freigabe-, Inventar-, Isolations- und Evidenzstand / approval, inventory, isolation, and evidence state |
+
+Die Detailseiten beschreiben den aktuellen lokalen Image-Vertrag. `Dockerfile`,
+Compose-Dateien, Repository-Skripte und praktisch validiertes Verhalten bleiben
+die technische Wahrheit.
+
+*The detailed pages describe the current local image contract. The Dockerfile,
+Compose files, repository scripts, and practically validated behavior remain
+the technical source of truth.*
+
+## Public-Readiness-Status
+
+Dieses Repository ist als oeffentlich nutzbare Ausbildungs-Sandbox vorbereitet.
+Das bedeutet: Anleitungen sollen ohne private Infrastruktur, interne
+Organisationstexte oder konkrete Providerkonten verstaendlich sein.
+
+Public-Readiness ist keine formelle Freigabe. Offene Freigabe-, Provider-,
+Rechts-, SBOM-, VEX-, SLSA- oder AI-SBOM-Punkte bleiben in
+`docs/security/` und den aktiven Spec-Kit-Artefakten als `Open`, `N/A` oder
+`_TODO_` sichtbar.
+
+*This repository is prepared as a public-ready training sandbox. That means
+the guidance should be understandable without private infrastructure,
+organization-specific rules, or concrete provider accounts. Public readiness is
+not a formal approval; open approval, provider, legal, SBOM, VEX, SLSA, or
+AI-SBOM items remain explicit in `docs/security/` and the active Spec Kit
+artifacts.*
+
+## Fuer Auszubildende / For Apprentices
+
+Die Sandbox stellt eine kontrollierte Lernumgebung bereit. Auszubildende sollen
+die dokumentierten Smoke- und Sicherheitspruefungen verwenden und keine echten
+Zugangsdaten in Images, Konfigurationen oder Protokolle uebernehmen.
+
+The sandbox provides a controlled learning environment. Apprentices should use
+the documented smoke and security checks and must not place real credentials in
+images, configuration files, or logs.
+
+## Barrierefreiheit / Accessibility
+
+Aktuelles lokales Image, SBOM und getrennte Nachweisgrenzen:
+[Statusnachtrag vom 2026-10-25](docs/maintenance/sandbox-current-state-2026-10-25.md).
+
+*Current local image, SBOM and separate evidence boundaries: see the dated
+status addendum. It grants no sandbox or provider approval.*
+
+Pruefregeln, bekannte Rendering-Grenzen und offene menschliche Abnahmen stehen
+in [Verstaendlichkeit und Barrierefreiheit](docs/fuer-lernende/barrierefreiheit.md).
+Der aktuelle technische Stand und offene Versionsnachpruefungen stehen im
+[Nachpruefungsregister](docs/security/toolchain-followups-2026-10-25.md).
+
+*Review rules, rendering limitations and open human acceptance are documented
+in the accessibility guide. The follow-up register records technical status
+and remaining version checks. Neither is a blanket conformance claim.*
+
+Anleitungen und Nachweise bleiben textbasiert, semantisch gegliedert und ohne
+rein farbliche Bedeutung. Terminalausgaben muessen auch mit Screenreadern und
+Braille-Zeilen nachvollziehbar bleiben.
+
+Guidance and evidence remain text based, semantically structured, and do not
+encode essential meaning through color alone. Terminal output must remain
+understandable with screen readers and Braille displays.
+
+## Repository-Struktur
+
+- `Dockerfile`: baut das Image aus dem digest-gepinnten MCR-.NET-SDK-Image
+  und stellt Java JDK 25 LTS, Maven, Go, Rust, Python, PowerShell 7, Node.js,
+  OpenCode, Swift, die vier Required-Agenten, Syft, `uv`, Spec Kit und
+  Hilfswerkzeuge bereit.
+- `compose.yml`: definiert den Service `ade`, getrennte persistente
+  Podman-Volumes fuer die Agentenzustaende, die Host-Mounts und die
+  Portfreigabe `127.0.0.1:5100-5199`.
+- `home-baseline.lock.json`: pinnt Release, Commit, Quelle und Lizenz der
+  read-only Level-0-Referenz unter `/opt/home-baseline`.
+- `compose.home-baseline.yml`: optionale Compose-Erweiterung, die die
+  eingebaute Referenz durch ein eigenes, beschreibbares `home-baseline`-Repo
+  ersetzt.
+- `.devcontainer/devcontainer.json`: VS-Code-Dev-Containers-Konfiguration,
+  damit VS Code von aussen an den laufenden `ade`-Container anhaengen kann.
+- `opencode.jsonc`: setzt OpenCode-Sicherheitsregeln, aber keinen API-Key
+  und kein vorausgewaehltes Modell.
+- `opencode.env.example`: neutrale Vorlage fuer lokale Provider-Secrets,
+  falls Nutzer eigene OpenCode-Provider konfigurieren.
+- `codex/`: systemweite Codex-Defaults und Anforderungen.
+- `dotnet/ContainerBuild.props`: read-only Build-Konfiguration, die .NET-
+  Artefakte in das Podman-Volume `/dotnet-build` umleitet.
+- `scripts/compose-down-with-audit.*`: exportiert Audit-Metadaten vor dem
+  Stoppen der Umgebung.
+- `scripts/build-and-sbom.*`: erzeugt eine CycloneDX-SBOM mit dem im finalen
+  Image gepinnten Syft, ohne das Image auf dem Host ein zweites Mal zu exportieren.
+  Nur dieser kurzlebige Lesescan nutzt Root, damit alle Image-Pfade erfasst
+  werden; der Sandbox-Service selbst bleibt der Non-Root-Benutzer `adedev`.
+- `scripts/agent-prompt.*`: uebergibt einen einzelnen Prompt aus Bash oder
+  PowerShell an eine installierte Agenten-CLI im laufenden Container.
+- `docs/fuer-lernende/`: gefuehrter Lernpfad mit Toolchain-, Agenten-, Git-
+  und Fehlerhilfen.
+- `docs/betrieb/`: technische Referenz fuer Image, Compose, Validierung und
+  Wartung.
+- `docs/security/`: Compliance-, Freigabe-, Inventar- und Evidenzdokumente.
+
+## Voraussetzungen
+
+Podman und Compose-Unterstuetzung muessen installiert sein.
+
+Auf macOS mit Homebrew:
+
+```bash
+brew install podman podman-compose
+podman machine init
+podman machine start
+podman info
+podman compose version
+```
+
+Auf Ubuntu 24.04 LTS oder WSL2:
+
+```bash
+sudo apt update
+sudo apt install -y podman podman-compose
+podman --version
+podman-compose --version
+```
+
+Auf Windows wird Podman Desktop empfohlen. Danach in PowerShell pruefen:
+
+```powershell
+podman --version
+podman machine list
+podman compose version
+```
+
+Fuer reine Compose-Config-Validierung ist `podman-compose config` der
+Standard, weil dieser Check die Compose-Datei ohne laufende Podman-Machine
+parsen kann. Fuer Build-, Start-, Exec- und Stop-Aktionen wird weiterhin
+`podman compose` verwendet; wenn `podman compose` auf einem System nicht
+verfuegbar ist, verwende `podman-compose` mit denselben Argumenten.
+
+### Podman-Endpunkt-Auswahl
+
+Dieses Repository nutzt Podman als Container-Laufzeit. Verwende fuer normale
+Podman-Befehle zuerst die lokale Standardkonfiguration der Plattform. Setze
+einen expliziten API-Endpunkt nur, wenn ein Podman-Machine-, Podman-Desktop-
+oder Compose-Provider-Problem dies erfordert.
+
+Auf macOS und Windows werden Podman-Machines typischerweise ueber
+plattformlokale Endpunkte erreichbar gemacht. Ermittle den aktiven Endpunkt
+aus Podman selbst, statt einen Hostpfad, eine Pipe oder einen SSH-Port fest zu
+dokumentieren:
+
+```bash
+podman machine inspect podman-machine-default
+```
+
+Auf macOS kann der Unix-Socket bei Bedarf so fuer Podman und
+Docker-kompatible API-Clients gesetzt werden:
+
+```bash
+PODMAN_SOCKET="$(podman machine inspect podman-machine-default --format '{{.ConnectionInfo.PodmanSocket.Path}}')"
+test -S "$PODMAN_SOCKET"
+CONTAINER_HOST="unix://${PODMAN_SOCKET}" DOCKER_HOST="unix://${PODMAN_SOCKET}" podman info
+```
+
+Auf Windows die von `podman machine inspect` gemeldete `PodmanPipe` oder den
+gemeldeten Socket nutzen und nicht als projektspezifischen Default
+festschreiben. Auf Linux ist fuer direkte `podman`-Befehle normalerweise kein
+Endpoint-Override noetig. Wenn Docker-kompatible API-Werkzeuge einen Socket
+brauchen, verwende den lokal aktivierten Podman-Socket, zum Beispiel
+`unix://${XDG_RUNTIME_DIR}/podman/podman.sock` fuer rootless Podman.
+
+`DOCKER_HOST` bezeichnet in diesem Kontext nur die Docker-kompatible
+Podman-API fuer entsprechende Clients. Docker selbst ist fuer dieses Repository
+weiterhin nicht die Ziel-Laufzeit.
+
+## Lokale Konfiguration
+
+Kopiere die Beispielumgebungsdatei, damit `compose.yml` eine vorhandene
+`opencode.env` findet:
+
+```bash
+if [ ! -e opencode.env ]; then cp opencode.env.example opencode.env; fi
+chmod 600 opencode.env
+```
+
+Dieses Image konfiguriert keinen OpenCode-API-Key und kein vorausgewaehltes
+Modell. Die eingebaute OpenCode-Provider-Auswahl bleibt verfuegbar; wenn eine
+lokale OpenCode-Konfiguration eigene Provider nutzt, koennen die dafuer
+noetigen Secret-Variablen in `opencode.env` eingetragen werden. Secrets nie
+committen und nie in Logs ausgeben.
+
+Optionale Host-Mounts werden ueber `.env` oder die Shell gesetzt:
+
+```bash
+RIDER_PROJECTS_DIR=/pfad/zu/RiderProjects
+JAVA_PROJECTS_DIR=/pfad/zu/java-projects
+GO_PROJECTS_DIR=/pfad/zu/go-projects
+RUST_PROJECTS_DIR=/pfad/zu/rust-projects
+PYTHON_PROJECTS_DIR=/pfad/zu/python-projects
+POWERSHELL_PROJECTS_DIR=/pfad/zu/powershell-projects
+SWIFT_PROJECTS_DIR=/pfad/zu/swift-projects
+SECURE_CASE_TRACKER_PROJECTS_DIR=/pfad/zu/SecureCaseTrackerProjects
+SECURE_SERVICE_HARVESTER_PROJECTS_DIR=/pfad/zu/SecureServiceHarvesterProjects
+SECURE_ORDER_DESK_PROJECTS_DIR=/pfad/zu/SecureOrderDeskProjects
+AUDIT_DIR=./audit-logs
+```
+
+Nicht gesetzte Variablen fallen auf lokale Repository-Verzeichnisse zurueck.
+
+## Installierte Agenten pruefen
+
+Nach dem Build muessen OpenCode, alle installierten Agenten-CLIs und Syft eine
+Versionsausgabe liefern. Codex, Claude Code, Antigravity und Copilot sind die
+vier Required-Agenten; OpenCode und Gemini CLI sind zusaetzlich installiert.
+Anmeldung und Providerfreigabe sind davon getrennte, menschlich verantwortete
+Schritte.
+
+```bash
+podman compose exec ade sh -lc 'opencode --version && codex --version && claude --version && gemini --version && agy --version && copilot --version && syft version'
+```
+
+Die vollstaendige Toolchain prueft:
+
+```bash
+podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh
+```
+
+Der JSON-Preflight eignet sich fuer automatisierte Installations- und
+Repositorypruefungen. Mit `--repo` validiert er auch die durch `global.json`
+geforderte .NET-SDK-Auswahl:
+
+```bash
+podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh \
+  --json --repo /secure-case-tracker-projects/SecureCaseTracker-CSharp
+```
+
+`actionlint` ist im Image gepinnt. GitHub-Administration mit `gh` bleibt auf
+der getrennten Control Plane; GitHub-Credentials werden nicht in den
+Agentencontainer eingebunden.
+
+Codex erhaelt pro Aufruf nur das mit `--cwd` gewaehlte Arbeitsverzeichnis als
+Schreibwurzel. Agentenlaeufe verwenden dafuer den image-eigenen Pfad
+`/home/adedev/codex-workspace`; die Projekt-Bind-Mounts dienen der
+agentenlosen Installation, Pruefung und dem kontrollierten Import oder Export.
+Die geschuetzten Metadaten-Platzhalter `.git`, `.agents` und `.codex` sind dort
+bereits im Image read-only angelegt. Weitere Verzeichnisse werden bei Bedarf
+einzeln mit `--add-dir` gebunden. Das haelt die Bubblewrap-Argumentliste auch
+bei vielen gemounteten Repositories begrenzt und umgeht die Grenze
+verschachtelter Bubblewrap-Binds auf Host-Mounts.
+
+## Agenten-Prompts ohne TUI / Agent Prompts Without a TUI
+
+Die Repo-Skripte uebergeben einen einzelnen Prompt standardmaessig mit
+`podman compose exec -T` an den laufenden Service `ade`. Dadurch werden die im
+Container installierten CLIs und ihre vorhandenen persistenten Zustaende
+verwendet. Die Bash- und PowerShell-Einstiege haben dieselbe Schnittstelle:
+
+```bash
+scripts/agent-prompt.sh codex -- "Pruefe die aktuellen Aenderungen."
+printf '%s\n' 'Fasse dieses Repository zusammen.' | scripts/agent-prompt.sh claude
+```
+
+```powershell
+pwsh -NoProfile -File scripts/agent-prompt.ps1 codex -- 'Pruefe die aktuellen Aenderungen.'
+Get-Content -Raw .\auftrag.txt | pwsh -NoProfile -File scripts/agent-prompt.ps1 opencode
+```
+
+Im Container stehen `agent-prompt` und
+`/usr/local/bin/agent-prompt.ps1` direkt bereit. Der Dispatcher unterstuetzt
+`codex`, `claude`, `opencode`, `copilot`, `gemini` und `agy`; der nicht-
+interaktive Antigravity-Aufruf bleibt experimentell. Der Wrapper meldet keinen
+Agenten an, waehlt keinen Provider oder Modellanbieter und erweitert keine
+Berechtigungen. Fuer Prompts mit vertraulichem Inhalt stdin oder
+`--prompt-file` statt eines Shell-Arguments verwenden.
+
+*The repository scripts send one prompt to the running `ade` service through
+`podman compose exec -T`, reusing the image-installed CLIs and their persistent
+state. Inside the container, use `agent-prompt` or the PowerShell entrypoint
+directly. The wrapper does not sign in, select a provider, or broaden agent
+permissions. Prefer standard input or `--prompt-file` for confidential prompt
+content. Antigravity print mode remains experimental.*
+
+Die vollstaendige Anleitung mit Arbeitsverzeichnis, Agentenargumenten und
+Fehlerbildern steht in
+[docs/fuer-lernende/agent-prompt.md](docs/fuer-lernende/agent-prompt.md).
+Eine Einordnung aller Agenten, Anmeldungs- und Autoritaetsgrenzen sowie Spec Kit
+steht in
+[docs/fuer-lernende/agenten-und-spec-kit.md](docs/fuer-lernende/agenten-und-spec-kit.md).
+
+## Home-Baseline-Referenz und persoenlicher Override
+
+`home-baseline.lock.json` unterstuetzt zwei streng getrennte Modi: Schema 1
+bindet einen Release-Tag an dessen exakten Commit. Schema 2 verwendet
+`refType: "commit"` und einen vollstaendigen Commit-Hash ohne Release-Tag.
+Der aktuelle Wartungsstand verwendet Schema 2, weil die benoetigten Aenderungen
+noch nicht Bestandteil eines neueren Releases sind. Der Installer prueft in
+beiden Modi den geladenen Commit; er folgt niemals automatisch `main`.
+
+*The lock supports two separate modes: schema 1 binds a release tag to its
+exact commit; schema 2 uses `refType: "commit"` and a full commit hash without
+a release tag. The current maintenance state uses schema 2 because the needed
+changes are not part of a newer release yet. Both modes verify the fetched
+commit and never automatically follow `main`.*
+
+Das Image enthaelt `home-baseline` als read-only Shallow-Git-Referenz. Release,
+Commit, Quelle und MIT-Lizenz sind in `home-baseline.lock.json` festgehalten.
+Im Container liegt die Referenz technisch unter `/opt/home-baseline`;
+`~/home-baseline-source` ist der kanonische Benutzerpfad. Der veraltete
+Uebergangspfad `~/home-baseline-tmp` zeigt vorerst auf dasselbe Ziel. Dadurch
+sind die Lernreihen direkt und nach dem Build auch offline lesbar. Es wird kein
+Baseline-Skript automatisch ausgefuehrt und es werden keine Zugangsdaten
+eingebaut.
+
+Der eingebettete und offline lesbare Stand wird ausschliesslich durch Release
+und Commit in `home-baseline.lock.json` bestimmt. Links auf den Branch `main`
+zeigen dagegen den aktuellen Upstream-Stand und koennen neuer als das Image
+sein. Die kanonische Beschreibung der Home-Quell- und Runtime-Grenze steht in
+der
+[Home-Baseline-Architektur](https://github.com/hindermath/home-baseline/blob/main/docs/architecture/source-and-home-runtime.md).
+
+*The embedded, offline-readable state is defined exclusively by the release
+and commit in `home-baseline.lock.json`. Links to the `main` branch show the
+current upstream state and may be newer than the image. The canonical Home
+source and runtime boundary is described in the
+[Home Baseline architecture](https://github.com/hindermath/home-baseline/blob/main/docs/architecture/source-and-home-runtime.md).*
+
+| Bereich / Area | Kanonische Verantwortung / Canonical responsibility |
+|---|---|
+| Lernpfad, Git-/Hosting-Governance und Home-Source-/Runtime-Vertrag / learner path, Git and hosting governance, and Home source/runtime contract | `home-baseline` |
+| Image-Build, Toolversionen, Container-Mounts, Laufzeitbefehle und Runtime-Wrapper / image build, tool versions, container mounts, runtime commands, and runtime wrapper | `absdd-image-sandbox` |
+
+Das Image stellt eigene Mounts nur fuer Secure CaseTracker, Secure
+ServiceHarvester und Secure OrderDesk bereit. Dieser operative Ausschnitt ist
+kleiner als der Home-Baseline-Katalog und definiert dessen weitere Lernreihen
+nicht um.
+
+*The image provides dedicated mounts only for Secure CaseTracker, Secure
+ServiceHarvester, and Secure OrderDesk. This operational subset is smaller
+than the Home Baseline catalog and does not redefine its other learning
+series.*
+
+```bash
+podman compose exec ade sh -lc 'cd ~/home-baseline-source && git status --short --branch && git log -1 --oneline'
+```
+
+Fuer Aenderungen, Commits und Pushes forken Lernende weiterhin die von ihrer
+Institution bereitgestellte Referenz in den persoenlichen Namensraum ihres
+Git-Systems und klonen dieses Repository dauerhaft auf dem Host. Nur im
+direkten GitHub-Profil ist die Referenz
+<https://github.com/hindermath/home-baseline>. Der persoenliche Checkout hat
+`origin`; die institutionelle Referenz wird als `upstream` gefuehrt. Die
+vollstaendige Reihenfolge steht in der von der Institution mitgelieferten
+`START-HERE-FUER-LERNENDE.md`; die oeffentliche Provenienz liegt unter
+<https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md>.
+
+Fuer die Verbindung zwischen diesem Sandbox-Image und den Lernreihen siehe
+auch [docs/fuer-lernende/README.md](docs/fuer-lernende/README.md).
+
+Der lokale Checkout kann danach die eingebaute read-only Referenz ersetzen:
+
+```bash
+HOME_BASELINE_DIR=/pfad/zu/home-baseline-source
+podman-compose -f compose.yml -f compose.home-baseline.yml config
+podman compose -f compose.yml -f compose.home-baseline.yml up -d
+podman compose exec ade sh -lc 'cd ~/home-baseline-source && git status --short --branch'
+```
+
+Der Override mountet den Host-Checkout ueber das reale Ziel
+`/opt/home-baseline`; beide Benutzerpfade bleiben erhalten. Normale schreibende
+`sync-home.*`-Laeufe nach `/home/adedev` sind weiterhin gesperrt. Nur der
+Wrapper `sync-home-baseline-runtime` darf die im Manifest als `homeRuntime`
+markierten Dateien synchronisieren:
+
+```bash
+sync-home-baseline-runtime --dry-run
+sync-home-baseline-runtime --check-only
+sync-home-baseline-runtime --apply
+```
+
+Ohne Modus schreibt der Wrapper nichts; `--force` wird nicht angeboten.
+`--apply` fuehrt weder Pull, Push, Commit noch Git-Initialisierung aus und
+aendert weder `.gitconfig` noch die Git-Identitaet. `sourceOnly` und
+`machineLocal` bleiben ausgeschlossen. Lokale Konflikte brechen den Lauf ab.
+Nach einer Container-Neuerstellung stellt ein erneutes `--apply` die
+Runtime-Wurzeldateien wieder her. Manifestdefinierte Agentendateien koennen in
+persistente Volumes geschrieben werden; Anmeldedaten, Providerzustand und
+lokale Einstellungen bleiben unangetastet. `podman compose down -v` loescht
+diese Volumes weiterhin absichtlich. Es gibt keinen automatischen schreibenden
+Sync beim Imagebau oder Containerstart.
+
+*The override mounts the host checkout at `/opt/home-baseline`; both user paths
+remain available. Normal writing `sync-home.*` runs targeting `/home/adedev`
+remain blocked. Only `sync-home-baseline-runtime --apply` may synchronize the
+manifest-defined `homeRuntime`. It performs no pull, push, commit, Git
+initialization, Git configuration, or identity change; it excludes `sourceOnly`
+and `machineLocal` and stops on local conflicts. Preview and check modes are
+write-free. Reapply after recreating the container to restore runtime root
+files. Selected agent files may enter persistent volumes, while credentials,
+provider state, and local settings remain untouched. No writing sync runs
+automatically during build or startup.*
+
+## Bauen und Starten
+
+```bash
+podman-compose config
+podman compose build --pull
+podman compose up -d
+podman compose ps
+podman compose exec ade bash
+```
+
+Der Container startet im Arbeitsverzeichnis `/rider-projects`. Das Image
+laeuft nach dem Build als Linux-Benutzer `adedev`.
+
+## VS Code von aussen verbinden
+
+Die empfohlene VS-Code-Nutzung ist der offizielle Dev-Containers-Workflow:
+VS Code laeuft auf dem Host und verbindet sich in den laufenden Container.
+Es wird kein dauerhafter Browser-IDE- oder VS-Code-Server-Dienst im Image
+gestartet und kein zusaetzlicher IDE-Port veroeffentlicht. VS Code installiert
+den passenden Remote-Server beim Verbinden selbst in den Container.
+
+Voraussetzungen auf dem Host:
+
+- VS Code Desktop
+- VS Code Extension "Dev Containers"
+- Podman oder Podman Desktop mit einer Docker-kompatiblen Container-Sicht
+
+Container starten:
+
+```bash
+podman compose up -d ade
+```
+
+Danach in VS Code:
+
+1. Command Palette oeffnen: `F1`
+2. `Dev Containers: Attach to Running Container...` auswaehlen
+3. Den Container `ade` beziehungsweise `absdd-image-sandbox-ade-1`
+   auswaehlen
+4. Im verbundenen Fenster den Ordner `/rider-projects`, `/workspace` oder
+   `/swift-projects` oeffnen. Fuer Wartungsarbeiten an diesem Setup-Repo
+   `/ade-dev-sandbox` oeffnen.
+
+Zur Kontrolle im VS-Code-Terminal:
+
+```bash
+whoami
+pwd
+```
+
+`whoami` muss `adedev` ausgeben. Wenn ein Projekt Web-Ports braucht, weiter
+Ports aus dem bereits veroeffentlichten Bereich `5100-5199` verwenden oder
+temporaer ueber VS Code weiterleiten.
+
+Wenn `specify check` im Container `Visual Studio Code (not found)` meldet, ist
+das bei diesem Setup erwartbar: VS Code ist ein Host-Werkzeug und nicht als
+dauerhaft laufende IDE im Container installiert.
+
+Stoppen ohne Volume-Loeschung:
+
+```bash
+bash scripts/compose-down-with-audit.sh --podman
+```
+
+Stoppen mit Volume-Loeschung nur nach ausdruecklicher Bestaetigung: Diese
+Variante entfernt persistente Agentendaten und lokale Anmeldungen.
+
+*Volume removal requires explicit confirmation: this variant deletes
+persistent agent data and local sign-ins.*
+
+```bash
+bash scripts/compose-down-with-audit.sh --podman -v
+```
+
+PowerShell, normaler Stopp ohne Volume-Loeschung / normal shutdown without
+volume deletion:
+
+```powershell
+.\scripts\compose-down-with-audit.ps1 -Engine podman
+```
+
+Nur nach ausdruecklicher Datenverlustbestaetigung / only after explicit
+confirmation of data loss:
+
+```powershell
+.\scripts\compose-down-with-audit.ps1 -Engine podman -Volumes
+```
+
+## Toolchecks
+
+Nach Dockerfile-Aenderungen, die Toolchains betreffen, im laufenden Container
+pruefen:
+
+```bash
+podman compose exec ade sh -lc 'dotnet --info'
+podman compose exec ade sh -lc 'java --version; javac --version; mvn --version'
+podman compose exec ade sh -lc 'go version; gopls version'
+podman compose exec ade sh -lc 'rustc --version; cargo --version; cargo clippy --version'
+podman compose exec ade sh -lc 'python --version'
+podman compose exec ade sh -lc 'pwsh --version'
+podman compose exec ade sh -lc 'node --version; npm --version'
+podman compose exec ade sh -lc 'swift --version; swiftc --version; command -v sourcekit-lsp'
+podman compose exec ade sh -lc 'opencode --version; codex --version; claude --version; gemini --version; agy --version; copilot --version'
+podman compose exec ade sh -lc 'specify version; specify check'
+podman compose exec ade sh -lc 'actionlint -version; actionlint .github/workflows/*.yml'
+```
+
+Fuer eine praktische Pruefung der sechs verbindlichen MSL-Toolchain-Familien
+(.NET/C#, Java/JVM, Go, Rust, Python und Swift) kann der wiederholbare
+Smoke-Test im Container ausgefuehrt werden. Er prueft ausserdem PowerShell 7
+sowie Node.js/npm als unterstuetzende Skript- und Werkzeugbasis:
+
+```bash
+podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh
+```
+
+Der Test legt temporaere Projekte unter `/home/adedev/smoke-tests` an und
+raeumt sie nach dem Lauf wieder auf. Der Swift-Teil erzeugt ein temporaeres
+SwiftPM-Projekt, baut es mit `swift build` und fuehrt es mit `swift run` aus.
+TypeScript- und Kotlin-Compiler werden nicht als global installierte Werkzeuge
+behauptet; sie gehoeren bei Bedarf als projektlokale Abhaengigkeiten in das
+jeweilige Projekt.
+
+Fuer dokumentierte Web-App-Beispiele im Container an `0.0.0.0` binden und
+Ports aus `5100-5199` verwenden. Praktische Checks sollen HTTP-Antworten
+pruefen und Hintergrundprozesse am Ende stoppen.
+
+Ausfuehrliche, projektbezogene Anleitungen fuer .NET, Java, Go, Rust, Python,
+PowerShell, Swift und Node.js stehen im
+[Toolchain-Index](docs/fuer-lernende/toolchains/README.md). Die technische
+Installations- und Pruefreferenz steht unter
+[docs/betrieb/](docs/betrieb/README.md).
+
+## Spec-kit-Workflow / Spec Kit Workflow
+
+Spec Kit **1.2.3** wird im Image auf den Release-Commit
+`5ea8b1cf0a38699340a38e00d02770308997d8c0` gepinnt. Der vorhandene
+Bind-Mount-Patch bleibt erhalten; der Build prueft die Paketversion.
+Bestehende Container erhalten die Version erst durch Neubau und Neuerstellung,
+nicht durch einen blossen Neustart. Ein Update startet keinen Spec-Kit-Lauf.
+
+*The image pins Spec Kit **1.2.3** to the release commit shown above,
+retains the bind-mount patch and checks package metadata during build.
+Existing containers need a rebuild and recreation, not just a restart.
+Updating the CLI does not start a Spec Kit feature.*
+
+[Aktueller Versionsabgleich / Current version audit](docs/maintenance/toolchain-version-audit-2026-10-25.md)
+
+OpenCode 2 wird als `@opencode/cli` installiert. Die geordneten V2-
+`permissions` in `opencode.jsonc` erhalten die bisherigen Schutzregeln;
+`update: "disable"` verhindert automatische Updates. Vor dem ersten V2-Start
+persistente OpenCode-Daten sichern. V1 und V2 nicht gegen dieselbe aktive
+Konfiguration betreiben. Provider, Modelle und Anmeldungen bleiben unveraendert.
+
+*OpenCode 2 uses `@opencode/cli`. Ordered V2 permissions preserve the existing
+rules and automatic updates remain disabled. Back up persistent OpenCode data
+before first V2 use; do not run V1 and V2 against the same active configuration.
+Providers, models and sign-in remain unchanged.*
+
+Unter `/rider-projects` bevorzugt:
+
+```bash
+specify init . --integration opencode --force
+```
+
+Falls nach dem Skripttyp gefragt wird, im Linux-Container `sh` auswaehlen.
+Begriffe, Artefakte, Agenten- und Autoritaetsgrenzen erklaert
+[KI-Agenten und Spec Kit](docs/fuer-lernende/agenten-und-spec-kit.md).
+
+## Verwaltete Sandbox-Intake-Serie / Managed Sandbox Intake Series
+
+Die aktiven Anforderungen bilden eine gepruefte, vierstufige Spec-Kit-Serie:
+
+1. GSDB-Bestand und Sicherheitsluecken pruefen.
+2. Priorisierte technische Sandbox-Haertung umsetzen.
+3. Das finale lokale Image unabhaengig abnehmen.
+4. Die forkbare Selbstbau-Vorlage fuer Lernende bearbeiten.
+
+Die Statusfolge ist `Completed`, `Eligible`, `Blocked`, `Blocked`: Die
+GSDB-Pruefung ist abgeschlossen; technische Haertung ist die naechste
+grundsaetzlich zulaessige Stufe. `Eligible` ist keine Startautoritaet.
+Abnahme und Selbstbau-Vorlage bleiben von ihren Vorgaengerinnen abhaengig. Die lesbare Reihenfolge
+steht in `Lastenheft_Abarbeitungsreihenfolge.md`; die verbindliche
+maschinenlesbare Quelle ist
+`specs/intake-series/sandbox-development-lifecycle/manifest.json`.
+
+Die Intake-Dateien starten keinen Lauf automatisch. Ein Specify- oder
+Implementierungslauf braucht eine neue, ausdrueckliche Autoritaet. Formale
+Sandbox-, Provider-, Modell- und Rechtsfreigaben bleiben menschliche
+Entscheidungen.
+
+*The active requirements form a reviewed four-stage Spec Kit series: assess the
+GSDB baseline and gaps, implement prioritized technical hardening,
+independently accept the final local image, and then work on the forkable
+self-build template. Statuses are Completed, Eligible, Blocked, Blocked:
+GSDB assessment is complete and hardening is next eligible. Eligibility grants
+no execution authority. Acceptance and the self-build template still depend
+on verified predecessor completion. The intake files
+do not start work automatically, and formal sandbox, provider, model, and legal
+approvals remain human decisions.*
+
+## SBOM
+
+Vor Weitergabe eines neu gebauten Images eine CycloneDX-SBOM erzeugen:
+
+```bash
+bash scripts/build-and-sbom.sh --skip-build
+```
+
+PowerShell:
+
+```powershell
+.\scripts\build-and-sbom.ps1 -SkipBuild
+```
+
+Die Skripte pruefen zuerst die Architektur und nutzen bevorzugt Syft aus dem
+geprueften Image. Nur wenn es dort fehlt, ist die exakt vorgegebene lokale
+Syft-Version erlaubt; es gibt keinen beweglichen Container-Fallback. Generierte
+`sboms/*.cdx.json` sind Build-Artefakte und werden nicht committet.
+
+*The scripts first check architecture and prefer Syft from the verified image.
+Only the exact configured host Syft version is accepted as a fallback. Generated
+SBOM files remain untracked build artifacts.*
+
+Der vollstaendige Ablauf und seine Aussagegrenzen stehen in
+[Validierung und Wartung](docs/betrieb/validierung-und-wartung.md).
+
+## Architekturgesicherter Neubau / Architecture-Checked Rebuild
+
+Der Preflight (Pruefung vor dem Build) vergleicht die physische Host-Architektur
+mit Podman und der Zielplattform. Apple Silicon verwendet `linux/arm64`,
+Intel/AMD verwendet `linux/amd64`. Nach dem Build und vor dem Start wird auch
+das Image geprueft. Unbekannte Werte oder Abweichungen brechen den Ablauf ab.
+Die Apple-Hardware wird auch aus einer uebersetzten macOS-Shell erkannt.
+
+Vor dem Austausch eines Containers dessen nicht persistente Dateien sichern
+und Audit-Metadaten exportieren. Dazu gehoeren gegebenenfalls Agentendaten
+ausserhalb der benannten Volumes. Sicherungen koennen Geheimnisse enthalten:
+nur lokal, zugriffsgeschuetzt und niemals im Git-Repository ablegen. Keine alten
+Werkzeug-Binaries, `node_modules` oder Caches ueber neue Installationen kopieren.
+
+*The preflight compares physical host hardware, Podman, and target platform.
+Apple Silicon uses `linux/arm64`; Intel/AMD uses `linux/amd64`. Image checks run
+after build and before start. Unknown values and mismatches stop the workflow,
+including when the macOS shell is translated. Before replacement, back up
+non-persistent files and export audit metadata. Agent state outside named
+volumes may need a separate backup. Keep potentially secret backups local,
+access-restricted, and out of Git. Do not restore old binaries or caches over
+new installations.*
+
+PowerShell 7, vom Repository-Wurzelverzeichnis / from the repository root:
+
+```powershell
+pwsh -NoProfile -File scripts/sandbox-lifecycle.ps1 build
+pwsh -NoProfile -File scripts/build-and-sbom.ps1 -SkipBuild
+pwsh -NoProfile -File scripts/sandbox-lifecycle.ps1 up
+```
+
+Bash:
+
+```bash
+bash scripts/sandbox-lifecycle.sh build
+bash scripts/build-and-sbom.sh --skip-build
+bash scripts/sandbox-lifecycle.sh up
+```
+
+`up` behaelt vorhandene Container und meldet ein veraltetes Image als Fehler.
+Erst nach der Sicherung `recreate` statt `up` verwenden, um einen vorhandenen
+Container bewusst zu ersetzen. Volumes bleiben erhalten. Fuer den optionalen
+Home-Baseline-Override bei jedem Lifecycle-Aufruf `-HomeBaseline` beziehungsweise
+`--home-baseline` ergaenzen. Es erfolgt kein automatischer Home-Runtime-Sync.
+
+*`up` retains existing containers and reports an outdated image as an error.
+Only after backup, use `recreate` instead of `up` to deliberately replace a
+container. Volumes are retained. Add `-HomeBaseline` or `--home-baseline` to
+each lifecycle call when using the optional Home Baseline override. There is
+no automatic Home Runtime sync.*
+
+Cross-Build bedeutet Bauen fuer eine andere Architektur. Er ist nur mit
+expliziter Zielplattform und zusaetzlicher Freigabe erlaubt:
+`-Platform linux/amd64 -AllowCrossArchitecture` beziehungsweise
+`--platform linux/amd64 --allow-cross-architecture`. Das ist keine Zusicherung,
+dass die benoetigte Uebersetzung auf dem Host verfuegbar ist. Widersprechende
+`DOCKER_DEFAULT_PLATFORM`- oder `CONTAINER_DEFAULT_PLATFORM`-Werte muessen
+vorher entfernt oder angepasst werden. Direkte `podman compose`-Aufrufe
+umgehen die Wrapper-Pruefung; der Dockerfile prueft nur die Zielarchitektur.
+
+*A cross-build targets another architecture and requires both an explicit
+platform and the additional approval option. This does not guarantee host
+translation support. Remove or correct conflicting platform environment
+defaults first. Direct Compose calls bypass the wrapper guard; the Dockerfile
+only checks the target architecture. Native ARM64 operation needs neither
+macOS Intel-app translation nor Linux-VM Intel translation.*
+
+## Validierung vor Commit
+
+Mindestens:
+
+```bash
+podman-compose config
+git diff --check
+```
+
+`podman compose config` kann als zusaetzliche lokale Plausibilitaetspruefung
+laufen, wenn die Podman-Machine beziehungsweise der Podman-Socket funktioniert.
+Ein lokaler Socket- oder Machine-Fehler ist kein Repo-Fehler, solange
+`podman-compose config` erfolgreich ist.
+
+Bei Dockerfile-Aenderungen:
+
+```bash
+podman compose build --pull
+```
+
+Bei Toolchain-Aenderungen zusaetzlich die Toolchecks aus diesem Dokument
+ausfuehren. Wenn eine Plattform, Podman-Machine oder Netzwerkzugriff nicht
+verfuegbar ist, die ausgelassene Pruefung mit Grund im Pull Request oder im
+Session-Log dokumentieren.
+
+Die vollstaendige Maintainer-Pruefmatrix steht in
+[Validierung und Wartung](docs/betrieb/validierung-und-wartung.md).
+
+## Troubleshooting
+
+Podman-Machine auf macOS oder Windows pruefen:
+
+```bash
+podman machine list
+podman machine start
+podman info
+```
+
+Container neu starten:
+
+```bash
+podman compose up -d --force-recreate
+podman compose exec ade bash
+```
+
+Build-Volume fuer .NET zuruecksetzen, wenn Besitzrechte im Volume defekt sind:
+
+```bash
+bash scripts/compose-down-with-audit.sh --podman
+podman volume rm absdd-image-sandbox_dotnet_build
+podman compose up -d
+```
+
+OpenCode sowie die vier Required-Agenten verwenden getrennte Podman-Volumes:
+`opencode_data`, `codex_data`, `claude_data`, `gemini_data` und
+`copilot_data`. `podman compose down -v` entfernt diese Daten einschliesslich
+lokaler Anmeldezustaende. Vorher immer den Audit-Wrapper verwenden.
+Weitere Fehlerbilder fuer Lernende stehen in
+[docs/fuer-lernende/troubleshooting.md](docs/fuer-lernende/troubleshooting.md);
+Mount-, Volume- und Haertungsdetails in
+[Compose und Speicher](docs/betrieb/compose-und-speicher.md).
+
+## English Quick Start
+
+1. Install Podman and Compose support.
+2. Create the local env file:
+
+```bash
+if [ ! -e opencode.env ]; then cp opencode.env.example opencode.env; fi
+chmod 600 opencode.env
+```
+
+3. Build and start:
+
+```bash
+podman-compose config
+podman compose build --pull
+podman compose up -d
+podman compose exec ade bash
+```
+
+4. The image includes a pinned, read-only shallow Git reference at
+   `~/home-baseline-source`. The deprecated `~/home-baseline-tmp` path remains
+   as a compatibility link. Its release, commit, source, and MIT license are
+   recorded in `home-baseline.lock.json`; no baseline script runs
+   automatically. To make changes, optionally replace it with your personal
+   `home-baseline` repository. First fork the reference provided by your
+   institution into your personal namespace, then clone it persistently on the
+   host. Only the direct GitHub profile uses
+   <https://github.com/hindermath/home-baseline>. Follow the
+   `START-HERE-FUER-LERNENDE.md` supplied by your institution; the public
+   provenance is available
+   [on GitHub](https://github.com/hindermath/home-baseline/blob/main/docs/learning-units/START-HERE-FUER-LERNENDE.md).
+   The lock file defines the exact offline state; `main` is the current
+   upstream documentation and may be newer. The responsibility boundary is
+   documented in the
+   [Home Baseline architecture](https://github.com/hindermath/home-baseline/blob/main/docs/architecture/source-and-home-runtime.md).
+
+```bash
+HOME_BASELINE_DIR=/path/to/home-baseline-source
+podman compose -f compose.yml -f compose.home-baseline.yml up -d
+podman compose exec ade sh -lc 'cd ~/home-baseline-source && git status --short --branch'
+```
+
+Use this Level-0 source directly in the container. Normal writing
+`sync-home.*` runs remain blocked when they target `/home/adedev`. Use
+`sync-home-baseline-runtime --dry-run`, `--check-only`, or explicit `--apply`
+for the manifest-defined Home Runtime. No mode means no write, and no runtime
+sync runs automatically.
+
+5. Stop with audit export:
+
+```bash
+bash scripts/compose-down-with-audit.sh --podman
+```
+
+OpenCode is installed without a preconfigured API key or preselected model.
+The built-in provider picker remains available; add local provider settings
+only in local, untracked configuration when needed.
+
+Codex, Claude Code, Antigravity CLI, and GitHub Copilot CLI are installed as the
+four required agents. Their presence does not imply account, provider, legal,
+or organizational approval.
+
+For a single non-interactive prompt from the host, use
+`scripts/agent-prompt.sh <agent> -- "<prompt>"` or the PowerShell counterpart
+`pwsh -NoProfile -File scripts/agent-prompt.ps1 <agent> -- '<prompt>'`. See
+[the learner guide](docs/fuer-lernende/agent-prompt.md) for stdin, prompt-file,
+working-directory, and permission guidance.
+
+Use [the learner documentation](docs/fuer-lernende/README.md) for the guided
+path and [the operations reference](docs/betrieb/README.md) for image,
+Compose, validation, audit, SBOM, and maintenance details.
+
+## Historischer Haertungsnachweis / Historical Hardening Evidence
+
+**DE:** Dieser Abschnitt bewahrt den Abschlussstand von Feature 003 aus
+September 2026 fuer die unten genannte Ubuntu/WSL2-Image-ID. Der neue
+[Versionsabgleich vom 2026-10-25](docs/maintenance/toolchain-version-audit-2026-10-25.md)
+bindet einen anderen ARM64-Kandidaten. Dessen neue Versionen, SBOM und
+[offene Nachpruefungen](docs/security/toolchain-followups-2026-10-25.md) erhalten
+keine Plattformabnahme, CVE-Disposition oder Freigabe aus diesem alten Stand.
+
+**EN:** This section preserves the September 2026 Feature 003 closeout for
+the Ubuntu/WSL2 image below. The October 25 version audit binds a different
+ARM64 candidate. Its new versions, SBOM and open follow-ups do not inherit
+platform acceptance, vulnerability disposition or approval from this history.
+
+**DE:** Der damalige Abschlussnachweis fuer Feature 003 umfasst getrennte
+Build-, Laufzeit-, Toolchain- und VS-Code-Nachweise auf Windows, Ubuntu/WSL2
+und macOS. Die dokumentweite Rootless- und Supply-Chain-Bindung verwendet das
+Ubuntu/WSL2-Image
+`sha256:bcdd1c8d4234ff8de8edbd1f3c52fe06c1a97d876d1c6a8996928bdff4376f2c`.
+Windows und macOS besitzen getrennte lokale Image-Identitaeten; die
+macOS-Podman-Machine meldet `Rootful=true`. Containerstart, Laufzeitgrenzen,
+sechs speichersichere Sprachfamilien, PowerShell und Node.js, sechs
+Agentenoberflaechen, Dispatcher-Dry-run ohne Provideraufruf und der Audit-Stopp
+bestanden. Eingehend bleiben nur die Loopback-Ports `5100-5199` veroeffentlicht;
+Agentenzustaende liegen in getrennten Volumes. Diese technische Evidenz ist
+keine formelle Freigabe.
+
+**EN:** Historical Feature 003 closeout evidence contains separate build, runtime,
+toolchain, and VS Code results for Windows, Ubuntu/WSL2, and macOS. The
+document-wide rootless and supply-chain binding uses the Ubuntu/WSL2 image
+above. Windows and macOS retain separate local image identities, and the macOS
+Podman machine reports `Rootful=true`. Startup, runtime boundaries, six
+memory-safe language families, PowerShell and Node.js, six agent surfaces, a
+dispatcher dry-run without provider access, and audit-aware stop passed. Only
+loopback ports `5100-5199` are published, and agent state remains in separate
+volumes. This technical evidence is not formal approval.
+
+**DE:** Die damalige CycloneDX-SBOM mit 23.960 Komponenten wurde mit Syft
+1.46.0 erzeugt und mit dem digest-gepinnten Grype 0.117.0 ausgewertet. Der Scan
+meldet 1.286 Matches in 390 eindeutigen Advisory-Gruppen: 14 Critical, 326 High,
+787 Medium, 144 Low, 11 Negligible und 4 Unknown. Alle 390 Gruppen bleiben
+sichtbar `Open`/`in_triage`; weder Risikoakzeptanz noch `not affected` oder
+Behebung wird behauptet. `GATE-SUPPLY-01` besteht fuer die befristete,
+source-only Ein-Personen-Machbarkeitsstudie als Transparenzgate, nicht als
+Freigabe fuer ein vorgebautes Image, Verteilung oder Produktion.
+
+**EN:** The historical 23,960-component CycloneDX SBOM was generated with Syft
+1.46.0 and assessed with digest-pinned Grype 0.117.0. The scan reports 1,286
+matches across 390 unique advisory groups: 14 Critical, 326 High, 787 Medium,
+144 Low, 11 Negligible, and 4 Unknown. All 390 groups remain visibly
+`Open`/`in_triage`; no risk acceptance, `not affected` decision, or remediation
+is claimed. For the time-bounded, source-only, single-person feasibility study,
+`GATE-SUPPLY-01` passes as a transparency gate, not as approval of a prebuilt
+image, distribution, or production use.
+
+**DE:** Der autonome Feature-003-Lauf ist mit 85 von 85 Aufgaben `Completed`.
+Der Abschluss gilt ausschliesslich fuer die bis 31.12.2026 befristete
+[Machbarkeitsentscheidung](docs/security/secure-development/2026-08-30-container-hardening/feasibility-study-decision.json).
+Unabhaengige Learning-/A11Y-Pruefung und moderierter Lernendentest sind
+`NotPerformed`; sie werden vor Lernenden-Rollout, vorgebauter Image-Verteilung,
+produktiver Nutzung oder bei Ablauf wieder verpflichtend.
+
+**EN:** The autonomous Feature 003 run is `Completed` with all 85 tasks done.
+Closeout applies only to the source-only feasibility decision through
+2026-12-31. Independent Learning/A11Y review and a moderated learner test are
+`NotPerformed`; they become mandatory again before learner rollout, prebuilt
+image distribution, production use, or expiry.
+
+Der textorientierte Nachweis und die naechsten Owner-Aktionen stehen im
+[Feature-Evidenzindex](docs/security/secure-development/2026-08-30-container-hardening/README.md),
+die Bedienwege in der [Betriebsreferenz](docs/betrieb/README.md) und im
+[Lernendenpfad](docs/fuer-lernende/README.md). / The text-first evidence and
+owner actions are in the feature evidence index; operating and learner routes
+remain in the linked guides.
+
+<!-- statistics-profile-2-readme:begin -->
+## Statistikprofil 2 / Statistics Profile 2
+
+Die lebende Projektstatistik steht in `docs/project-statistics.md`. Sie wird reproduzierbar aus `docs/project-statistics.config.json` mit `scripts/render-project-statistics.sh` oder `scripts/render-project-statistics.ps1` erzeugt. Alle Diagramme sind ASCII-only, hoechstens 100 Zeichen breit und durch genaue Werte sowie eine deutsche und englische Textalternative ergaenzt.
+
+*The living project statistics are stored in `docs/project-statistics.md`. They are rendered reproducibly from `docs/project-statistics.config.json` with the Bash or PowerShell renderer. Every chart is ASCII-only, at most 100 characters wide, and accompanied by exact values plus German and English text alternatives.*
+<!-- statistics-profile-2-readme:end -->
+
+## Secure Development Assurance – Projektintegration / Project Integration
+
+Das ausdrücklich freigegebene 13-Preset-Profil ergänzt die bisherigen zwölf Presets unverändert. [Bedienung und Integrationsnachweis](docs/maintenance/secure-development-assurance-integration.md).
+
+*The explicitly approved thirteen-preset profile preserves the existing twelve presets. See the linked usage and integration record.*
+
+Aktueller begrenzter Nachlauf: Security 0.7.4, Architecture 0.6.5 und Intake
+Authoring 0.3.10 / Review 0.2.7 / Sequencing 0.2.11 im optionalen 14er-Profil.
+[Quellen, Pruefungen und Freigabegrenzen](docs/maintenance/stable-preset-rollout-2026-10-24.md).
+
+*Current bounded follow-up: all fourteen governance patches in the optional
+fourteen-preset profile. See the linked sources, checks and approval boundaries.*
+
+<!-- BEGIN spec-kit-diagrams-completion -->
+## Diagramme und Ergebnisberichte / Diagrams and outcome reports
+
+[Mermaid- und Abschlussbericht-Regeln](docs/spec-kit-diagrams-and-completion-reports.md)
+führen vom neuen Lastenheft zum belegten Feature-Ergebnisbericht. / The linked
+rules explain accessible intake diagrams and evidence-based feature reports.
+<!-- END spec-kit-diagrams-completion -->
+Statistik-Pilot / Statistics pilot: [Installationsstand und Grenzen](docs/maintenance/project-statistics-installation-v010.md).
+
+## Dokumentation als PDF / Documentation as PDF
+
+**DE:** Pandoc wandelt Markdown in Typst-Quelltext um. Typst setzt daraus das
+PDF. Lychee prueft Links; Tinymist stellt den Typst-Sprachserver fuer Editoren
+bereit. Alle vier CLIs sind im Image enthalten. Apple Silicon verwendet
+`linux/arm64`; Intel-/AMD-Windows und dessen Ubuntu/WSL2 verwenden
+`linux/amd64`. Podman waehlt die native Architektur ohne Rosetta-Voraussetzung.
+
+**EN:** Pandoc converts Markdown to Typst source, and Typst creates the PDF.
+Lychee checks links; Tinymist provides the Typst language server for editors.
+All four CLIs are included in the image. Apple Silicon uses `linux/arm64`;
+Intel/AMD Windows and its Ubuntu/WSL2 use `linux/amd64`. Podman selects the
+native architecture without requiring Rosetta.
+
+Im Container / Inside the container:
+
+```bash
+pandoc documentation.md --standalone --to=typst -o documentation.typ
+typst compile documentation.typ documentation.pdf
+```
+
+Separater Funktionstest vom Host / Standalone functional test from the host:
+
+```bash
+podman compose exec ade bash /ade-dev-sandbox/scripts/smoke-test-documentation.sh
+```
+
+**DE:** Der Test prueft Versionen, lokale Links (auch einen erwarteten Fehler),
+Markdown-zu-PDF-Konvertierung, Seitenzahl und extrahierten Text. Er verwendet
+temporaere Dateien und keine externen Downloads. Der vollstaendige
+Toolchain-Smoke-Test fuehrt ihn ebenfalls aus. Das Ergebnis ist kein Nachweis
+der PDF-Barrierefreiheit. Tinymist ist ein CLI-Sprachserver; eine Editor-
+Erweiterung wird dadurch nicht automatisch installiert.
+
+**EN:** The test checks versions, local links (including an expected failure),
+Markdown-to-PDF conversion, page count, and extracted text. It uses temporary
+files and no external downloads. The full toolchain smoke test also runs it.
+The result does not prove PDF accessibility. Tinymist is a CLI language
+server; installing it does not automatically install an editor extension.

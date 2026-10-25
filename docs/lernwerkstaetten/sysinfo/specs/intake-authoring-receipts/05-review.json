@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "2.0",
+  "documentType": "IntakeReceipt",
+  "receiptId": "76aec603-6829-489f-adf1-24b38357274e",
+  "intakeId": "20c3e173-afa4-429d-907e-4ed42eb9973f",
+  "generator": {
+    "preset": "intake-authoring-governance",
+    "version": "0.3.10"
+  },
+  "createdAt": "2026-10-25T15:45:40Z",
+  "operation": {
+    "operationId": "b8b937fa-5939-47d8-9517-bed9995ba0ff",
+    "type": "Create",
+    "authorityEvidence": "Owner approved the complete two-workshop plan and requested implementation on 2026-10-25. Authority covers reusable Draft learning packages only; no personal product execution or remote delivery."
+  },
+  "status": "ReadyForReview",
+  "target": {
+    "path": "intakes/05-review.md",
+    "normalizedSha256": "c889550efea0f9c4cf4e05681768ebc5f33e59d02dcc0b7cf261e78dd688877f"
+  },
+  "sources": [
+    {
+      "sourceId": "SRC001",
+      "order": 1,
+      "kind": "File",
+      "label": "basis.md",
+      "location": "Repository",
+      "path": "basis.md",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "e7896e26abe1f6b3d47051256d54ea73d044da684e923c8daa7105ecd796f2c8",
+      "gitBlob": "N/A",
+      "proofBoundary": "Package-local source; no private URL or inherited approval"
+    },
+    {
+      "sourceId": "SRC002",
+      "order": 2,
+      "kind": "File",
+      "label": "sources.json",
+      "location": "Repository",
+      "path": "sources.json",
+      "requestedUrl": "N/A",
+      "finalUrl": "N/A",
+      "retrievedAt": "N/A",
+      "httpStatus": "N/A",
+      "contentType": "N/A",
+      "contentLength": "N/A",
+      "etag": "N/A",
+      "lastModified": "N/A",
+      "redirectChain": [],
+      "rawSha256": "N/A",
+      "normalizedSha256": "ce221fe734982c1729d22063fb7ed2d96284e226be99a030dab4dcefbbdc9a37",
+      "gitBlob": "N/A",
+      "proofBoundary": "Package-local source; no private URL or inherited approval"
+    }
+  ],
+  "profile": "generic-markdown",
+  "languagePolicy": "GermanFirstEnglishSecond-CEFR-B2",
+  "decisions": [
+    {
+      "status": "Answered",
+      "answer": "Neu aus Hello World / New from Hello World",
+      "evidence": "Explicit planning answers and approved implementation plan, 2026-10-25",
+      "id": "IAD001",
+      "question": "Neuaufbau oder Fork? / New build or fork?"
+    },
+    {
+      "status": "Answered",
+      "answer": "Zwei alternative Wahlpfade / Two alternative routes",
+      "evidence": "Explicit planning answers and approved implementation plan, 2026-10-25",
+      "id": "IAD002",
+      "question": "Web-Lernfolge? / Web learning order?"
+    },
+    {
+      "status": "Answered",
+      "answer": "Sechs Stufen, eine aus sechs Sprachen / Six stages, one of six languages",
+      "evidence": "Explicit planning answers and approved implementation plan, 2026-10-25",
+      "id": "IAD003",
+      "question": "SysInfo-Umfang und Sprachen? / SysInfo scope and languages?"
+    },
+    {
+      "status": "Answered",
+      "answer": "Fixtures zuerst, Container-Erfassung mit bewusstem Opt-in / Fixtures first, explicit container opt-in",
+      "evidence": "Explicit planning answers and approved implementation plan, 2026-10-25",
+      "id": "IAD004",
+      "question": "Reale Systemdaten? / Real system data?"
+    },
+    {
+      "status": "Answered",
+      "answer": "Portable Lernpakete, Aktivierung nur persönlich / Portable packages, personal activation only",
+      "evidence": "Explicit planning answers and approved implementation plan, 2026-10-25",
+      "id": "IAD005",
+      "question": "Aktive Sandbox-Reihen oder Lernpakete? / Active sandbox series or learning packages?"
+    }
+  ],
+  "openDecisionIds": [],
+  "questionCount": 5,
+  "agentSurface": {
+    "specifyCanonicalId": "speckit.specify",
+    "specifyInvocation": "$speckit-specify",
+    "autonomousCanonicalId": "speckit.autonomous",
+    "autonomousInvocation": "$speckit-autonomous"
+  },
+  "deliveryAuthority": "LocalImplementation",
+  "authorityEvidence": "Default: no remote authority. Future personal execution requires a separate current human request; package creation executes no product.",
+  "promptState": "Enabled",
+  "provenanceMode": "New",
+  "supersedes": {
+    "receiptPath": "N/A",
+    "targetNormalizedSha256": "N/A",
+    "archiveTargetPath": "N/A",
+    "archiveReceiptPath": "N/A"
+  },
+  "legacyAdoption": {
+    "evidenceType": "N/A",
+    "priorTargetNormalizedSha256": "N/A",
+    "priorGitBlob": "N/A"
+  },
+  "updateAuthorized": false,
+  "updateAuthorityEvidence": "N/A",
+  "series": {
+    "order": 6,
+    "seriesId": "73249749-e3a4-4fd5-9eea-1caba78e6d45",
+    "supersedesIntakeIds": [],
+    "manifestPath": "specs/intake-series/learning/manifest.json",
+    "role": "OrderedMember"
+  },
+  "nextAction": "$speckit-intake-review intakes/05-review.md (as part of full personal series review; no implementation)"
+}

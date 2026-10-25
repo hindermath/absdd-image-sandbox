@@ -16,16 +16,22 @@ jobs:
         os: [ubuntu-22.04, macos-15, windows-2022]
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-      - name: Verify generator, exact installed profile and project evidence
+      - name: Verify generator and exact installed profile
         shell: pwsh
         run: |
           if ($IsWindows) { python scripts/tests/test_spec_kit_agent_surface_parity.py } else { python3 scripts/tests/test_spec_kit_agent_surface_parity.py }
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          pwsh -NoProfile -File scripts/validate-documentation-impact.ps1 -Evidence docs/maintenance/gsdb-344-pilot-impact.json
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           pwsh -NoProfile -File scripts/build-secure-development-docs.ps1 -Check
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           pwsh -NoProfile -File scripts/install-spec-kit-governance-presets.ps1 -Repo . -PresetConfig scripts/config/spec-kit-project-statistics-governance-presets.json -CheckOnly
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      # Reference evidence is not personal acceptance in independent copies.
+      # Generic generator, pin, parity and negative-fixture checks still run there.
+      - name: Verify reference-only historical project evidence
+        if: github.repository == 'hindermath/absdd-image-sandbox'
+        shell: pwsh
+        run: |
+          pwsh -NoProfile -File scripts/validate-documentation-impact.ps1 -Evidence docs/maintenance/gsdb-344-pilot-impact.json
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           pwsh -NoProfile -File .specify/presets/secure-development-assurance-governance/scripts/validate-secure-development-assurance.ps1 -Action Status -EvidenceDirectory docs/security/secure-development/2026-10-20-absdd-image-sandbox-gsdb344
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

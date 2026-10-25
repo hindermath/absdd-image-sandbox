@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "fac084f2-9130-402d-9dba-80d2981b6c0b",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.11"
+  },
+  "createdAt": "2026-10-24T22:27:23Z",
+  "operation": {
+    "authorityEvidence": "Explicit owner request on 2026-10-25: targeted source comparison, update the three affected intakes and source bindings, then independent full review. Local governance authoring only; no technical implementation, product run, container build/start, commit, push or lifecycle advancement.",
+    "operationId": "8e843682-0ece-4a9f-a996-7068453e30f7",
+    "type": "Update"
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "b8e94a755cf6533f5900a4f39a0737a47b58c8bf7846bdf09650288a24133894"
+  },
+  "supersedes": {
+    "manifestArchiveSha256": "27f9d3d49d8327532302316be5c719ac71074b7cdc16667e826529524576bdbf",
+    "receiptNormalizedSha256": "3014820d0aa4c20ccac306ca4c437acb755d1190b091adc7115cfe4d613a9e24",
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/8e843682-0ece-4a9f-a996-7068453e30f7/manifest.json",
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/8e843682-0ece-4a9f-a996-7068453e30f7/receipt.json"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status"
+}

@@ -1,0 +1,96 @@
+#!/usr/bin/env python3
+"""DE: Toolchain-Pins absichern. EN: Protect toolchain version pins."""
+
+import json
+from pathlib import Path
+import re
+import unittest
+
+
+ROOT = Path(__file__).resolve().parents[2]
+
+
+class VersionPinTests(unittest.TestCase):
+    def test_linux_swift_registry_matches_image_toolchain(self):
+        text = (ROOT / "Dockerfile").read_text()
+        tag = re.search(r"(?m)^ARG SWIFT_DOCKER_TAG=(\S+)$", text).group(1)
+        registry = json.loads(
+            (ROOT / "scripts/config/required-cli-tools-registry.json").read_text()
+        )
+        swift = next(tool for tool in registry["tools"] if tool["id"] == "swift")
+        self.assertEqual(swift["install"]["linux"]["swiftVersion"], tag.removesuffix("-noble"))
+
+    def test_learner_language_versions_match_image_pins(self):
+        text = (ROOT / "Dockerfile").read_text()
+        profile = (ROOT / "docs/fuer-lernende/sandbox-profil.md").read_text()
+        for language, arg in (("Go", "GO_VERSION"), ("Rust", "RUST_TOOLCHAIN"),
+                              ("Swift", "SWIFT_DOCKER_TAG")):
+            version = re.search(r"(?m)^ARG " + arg + r"=(\S+)$", text).group(1)
+            version = version.removesuffix("-noble")
+            row = re.search(r"(?m)^\| \*\*" + language + r"\*\* \| ([^|]+)\|", profile)
+            self.assertIsNotNone(row, language)
+            self.assertEqual(row.group(1).strip(), version, language)
+
+    def test_compat_sdk_keeps_the_base_host_and_runtime_patch(self):
+        text = (ROOT / "Dockerfile").read_text()
+        self.assertIn("AS dotnet-base", text)
+        self.assertIn(
+            "COPY --from=dotnet-base /usr/share/dotnet/dotnet /usr/share/dotnet/dotnet",
+            text,
+        )
+        self.assertIn('${DOTNET_VERSION%.*}', text)
+        self.assertIn('"${path##*/}" != "${DOTNET_VERSION}"', text)
+
+    def test_native_agent_hooks_are_narrow_and_checked(self):
+        text = (ROOT / "Dockerfile").read_text()
+        self.assertIn(
+            "--allow-scripts=@opencode/cli,@anthropic-ai/claude-code,@github/keytar,node-pty",
+            text,
+        )
+        self.assertNotIn("--allow-scripts=true", text)
+        self.assertNotIn("--allow-scripts=*", text)
+        self.assertIn("libsecret-1-0", text)
+        self.assertIn("&& opencode --version", text)
+        self.assertIn("&& claude --version", text)
+        self.assertIn("require(p)", text)
+
+    def test_python_is_native_and_keeps_system_interpreter(self):
+        text = (ROOT / "Dockerfile").read_text()
+        for architecture, target in (("amd64", "x86_64"), ("arm64", "aarch64")):
+            self.assertRegex(
+                text,
+                architecture + r'\) python_target="' + target
+                + r'"; python_sha256="[0-9a-f]{64}"',
+            )
+        self.assertIn('"${python_sha256}" "${tmp_dir}/${archive}" | sha256sum -c -', text)
+        self.assertIn("/usr/local/bin/python3", text)
+        self.assertNotIn("/opt/cpython/bin/python3 /usr/bin/", text)
+        self.assertIn("openjdk-${JAVA_VERSION}-jdk-headless", text)
+
+    def test_maven_uses_verified_upstream_not_apt(self):
+        text = (ROOT / "Dockerfile").read_text()
+        self.assertRegex(text, r'(?m)^ARG MAVEN_VERSION=[0-9]+\.[0-9]+\.[0-9]+$')
+        self.assertRegex(text, r'maven_sha512="[0-9a-f]{128}"')
+        self.assertIn('"${maven_sha512}" "${tmp_dir}/${archive}" | sha512sum -c -', text)
+        self.assertIn("https://dlcdn.apache.org/maven/", text)
+        self.assertNotRegex(text, r"(?m)^\s+maven \\\s*$")
+
+    def test_lts_args_remain_major_numbers(self):
+        config = json.loads((ROOT / "renovate.json").read_text())
+        text = (ROOT / "Dockerfile").read_text()
+        self.assertIn("dockerfile", config["enabledManagers"])
+        self.assertRegex(text, r"(?m)^ARG NPM_VERSION=12\.[0-9]+\.[0-9]+$")
+        self.assertIn('"npm@${NPM_VERSION}"', text)
+        for package, arg in (("java-jdk", "JAVA_VERSION"), ("node", "NODE_MAJOR")):
+            major = re.search(r"(?m)^ARG " + arg + r"=([0-9]+)$", text).group(1)
+            rule = next(
+                rule for rule in config["packageRules"]
+                if package in rule.get("matchPackageNames", [])
+            )
+            pattern = rule["extractVersion"].replace("(?<version>", "(?P<version>")
+            self.assertEqual(re.match(pattern, f"v{major}.99.1")["version"], major)
+            self.assertEqual(rule["allowedVersions"], f"/^{major}$/")
+
+
+if __name__ == "__main__":
+    unittest.main()

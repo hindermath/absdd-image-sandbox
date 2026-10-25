@@ -1,0 +1,37 @@
+{
+  "archiveManifestNormalizedSha256": "c999c059c8543fa0e75e460c720e72825f324b2823291a9c3a051496cd080f13",
+  "type": "Update",
+  "manifestNormalizedSha256": "1289b799a1fa4fc2a9da1d88c3a135e6e55f6e833be168e5ec85d07eef8de8d1",
+  "authorityEvidence": "Owner approved the 25 October closeout: bounded confirmation of exploitation rights for new introductory/SysInfo/web learning materials, preserved third-party rights, one targeted three-intake refresh and independent full-series review, seven thematic commits, one push and one exact-head merge-commit PR with admin bypass only after green checks. Separate cached ARM64 candidate only; no running-service replacement, template activation, product run or formal sandbox approval.",
+  "archiveManifestPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/7ed5b22f-e402-4e7b-aca0-1d68259a6eac/manifest.json",
+  "documentType": "IntakeSeriesOperation",
+  "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+  "operationId": "7ed5b22f-e402-4e7b-aca0-1d68259a6eac",
+  "status": "Applying",
+  "schemaVersion": "1.0",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "lifecycle": [
+    "Completed",
+    "Eligible",
+    "Blocked",
+    "Blocked"
+  ],
+  "createdAt": "2026-10-25T17:26:44Z",
+  "validation": {
+    "delivery": "Paused before staging/commit/push pending explicit bounded remediation coordination",
+    "candidateImageId": "253c5a09223be15713b9f95002a4f3fdb9c448b909d27f98cecaf3f0c8d07f3d",
+    "reviewId": "5fa23447-e96c-403c-b7da-79c506a11586",
+    "sessionLog": "docs/security/agent-session-log/2026-10-25-1829.md",
+    "candidate": "localhost/absdd-closeout-20261025_ade:latest",
+    "nativeTechnicalChecks": "ARM64 build, non-root smoke, JSON preflight, actionlint and SBOM passed",
+    "archiveFidelity": "15 exact captured preimages verified",
+    "independentReview": "NeedsRemediation",
+    "findingIds": [
+      "IR201",
+      "IR202"
+    ],
+    "protectedService": "same container/image/start time; all six volumes preserved",
+    "currentReviewedInputs": 224
+  },
+  "nextAction": "Owner coordination of IR201/IR202 source correction, regression, rebinding and independent re-review before any staging or delivery"
+}

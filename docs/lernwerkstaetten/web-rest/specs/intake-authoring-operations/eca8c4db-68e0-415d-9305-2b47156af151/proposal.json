@@ -1,0 +1,90 @@
+{
+  "documentType": "LearningPackageProposal",
+  "seriesId": "600e29d1-eeed-4407-a5a5-b6e3430d1cab",
+  "authorityEvidence": "Owner approved the complete two-workshop plan and requested implementation on 2026-10-25. Authority covers reusable Draft learning packages only; no personal product execution or remote delivery.",
+  "scope": "Portable Draft only",
+  "orderedMembers": [
+    {
+      "intakeId": "eecea30e-db9d-4dcb-a66d-72afc2844590",
+      "path": "intakes/00-vertrag.md",
+      "receiptPath": "specs/intake-authoring-receipts/00-vertrag.json",
+      "title": "Fixture API contract",
+      "order": 1,
+      "normalizedSha256": "a2d9f65a38bbf7035b83d5f96b0de6f55821d79bbc7a95b10f02a391e52ab244"
+    },
+    {
+      "intakeId": "ca88233c-1ab6-4960-834c-38dc2e824cfa",
+      "path": "intakes/01-sqlite.md",
+      "receiptPath": "specs/intake-authoring-receipts/01-sqlite.json",
+      "title": "API SQLite",
+      "order": 2,
+      "normalizedSha256": "7f33709963f1a3274ebda95c899a4057c8250f7cceee3f5e4d195acee81d0e18"
+    },
+    {
+      "intakeId": "040b5887-172b-4749-bb81-591ff9a9d4be",
+      "path": "intakes/02-mvc-client.md",
+      "receiptPath": "specs/intake-authoring-receipts/02-mvc-client.json",
+      "title": "MVC client",
+      "order": 3,
+      "normalizedSha256": "1c30719924eb245732598a26d097912de550d6d9db2c5d535332656202f087c5"
+    },
+    {
+      "intakeId": "3080a698-183d-4c39-a71b-d3e0c7073f5c",
+      "path": "intakes/03-abschluss.md",
+      "receiptPath": "specs/intake-authoring-receipts/03-abschluss.json",
+      "title": "Evidence and closure",
+      "order": 4,
+      "normalizedSha256": "978c4e168acc8bff9b9c86a8a42720b7a6187bde2e585c5abfc9809bf63c3fa8"
+    }
+  ],
+  "roots": [
+    "intakes/00-vertrag.md"
+  ],
+  "dependencies": [
+    {
+      "from": "intakes/00-vertrag.md",
+      "to": "intakes/01-sqlite.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "intakes/01-sqlite.md",
+      "to": "intakes/02-mvc-client.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "intakes/02-mvc-client.md",
+      "to": "intakes/03-abschluss.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    }
+  ],
+  "coverage": [
+    {
+      "path": "intakes/00-vertrag.md",
+      "topic": "Fixture API contract",
+      "sourceCatalog": "sources.json",
+      "disposition": "Covered"
+    },
+    {
+      "path": "intakes/01-sqlite.md",
+      "topic": "API SQLite",
+      "sourceCatalog": "sources.json",
+      "disposition": "Covered"
+    },
+    {
+      "path": "intakes/02-mvc-client.md",
+      "topic": "MVC client",
+      "sourceCatalog": "sources.json",
+      "disposition": "Covered"
+    },
+    {
+      "path": "intakes/03-abschluss.md",
+      "topic": "Evidence and closure",
+      "sourceCatalog": "sources.json",
+      "disposition": "Covered"
+    }
+  ],
+  "overlapDecision": "Common contract shared, stage deltas separate; web routes are alternatives in separate packages, no cross-route dependency."
+}

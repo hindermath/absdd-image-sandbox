@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeOperation",
+  "operationId": "b8b937fa-5939-47d8-9517-bed9995ba0ff",
+  "type": "CreateSeries",
+  "status": "Completed",
+  "publicationScope": "ReusableDraftPackageOnly",
+  "createdAt": "2026-10-25T15:45:40Z",
+  "authorityEvidence": "Owner approved the complete two-workshop plan and requested implementation on 2026-10-25. Authority covers reusable Draft learning packages only; no personal product execution or remote delivery.",
+  "proposalPath": "specs/intake-authoring-operations/b8b937fa-5939-47d8-9517-bed9995ba0ff/proposal.json",
+  "proposalNormalizedSha256": "fc1a1323c31c64c0b98c137e8ed2f668100dc6f193a07c6a85dff142c14f271e",
+  "approval": {
+    "approvedBy": "Owner",
+    "approvedAt": "2026-10-25T15:45:40Z",
+    "evidence": "Approved plan: new build, two web routes, full SysInfo, container opt-in, portable packages; technical proposal derived without scope expansion.",
+    "approved": true
+  },
+  "stagingDirectory": "specs/intake-authoring-operations/b8b937fa-5939-47d8-9517-bed9995ba0ff/staging",
+  "intendedTargets": [
+    "intakes/00-cli.md",
+    "intakes/01-yaml.md",
+    "intakes/02-sqlite.md",
+    "intakes/03-rest.md",
+    "intakes/04-dokumentation.md",
+    "intakes/05-review.md"
+  ],
+  "validatedTargets": [
+    "intakes/00-cli.md",
+    "intakes/01-yaml.md",
+    "intakes/02-sqlite.md",
+    "intakes/03-rest.md",
+    "intakes/04-dokumentation.md",
+    "intakes/05-review.md"
+  ],
+  "publishedTargets": [
+    "intakes/00-cli.md",
+    "intakes/01-yaml.md",
+    "intakes/02-sqlite.md",
+    "intakes/03-rest.md",
+    "intakes/04-dokumentation.md",
+    "intakes/05-review.md"
+  ],
+  "rollbackBoundary": "No active sandbox or personal series published; this package is an inactive portable draft.",
+  "failure": {
+    "class": "N/A",
+    "message": "N/A"
+  },
+  "nextAction": "Draft artifact authoring complete; full-series review and activation remain personal future actions. No product execution or acceptance."
+}

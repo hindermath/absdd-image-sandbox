@@ -4,7 +4,7 @@ set -euo pipefail
 IMAGE_NAME="${IMAGE_NAME:-localhost/absdd-image-sandbox_ade:latest}"
 SBOM_DIR="${SBOM_DIR:-sboms}"
 CONTAINER_RUNTIME="${CONTAINER_RUNTIME:-podman}"
-SYFT_VERSION="${SYFT_VERSION:-1.46.0}"
+SYFT_VERSION="${SYFT_VERSION:-1.55.0}"
 SKIP_BUILD="${SKIP_BUILD:-false}"
 DRY_RUN="false"
 PLATFORM=""

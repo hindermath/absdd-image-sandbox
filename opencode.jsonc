@@ -1,194 +1,124 @@
 {
-  // DE: Schema fuer Editor-Hilfe, Autovervollstaendigung und Validierung.
-  // EN: Schema for editor help, autocomplete, and validation.
   "$schema": "https://opencode.ai/config.json",
-
-  // DE: OpenCode darf keine Sitzungen teilen.
-  // EN: OpenCode must not share sessions.
-  // DE: Das verhindert versehentliche oeffentliche Links zu Chat-Verlaeufen.
-  // EN: This prevents accidental public links to chat history.
+  // DE: Keine Sitzungsfreigabe und keine unkontrollierten Updates.
+  // EN: Disable session sharing and uncontrolled updates.
   "share": "disabled",
+  "update": "disable",
 
-  // DE: Updates erfolgen kontrolliert ueber Dockerfile, Commit und Image-Build.
-  // EN: Updates happen in a controlled way through Dockerfile, commit, and image build.
-  // DE: OpenCode soll sich beim Start nicht selbst aktualisieren.
-  // EN: OpenCode must not update itself during startup.
-  "autoupdate": false,
-
-  // DE: Dieses Image installiert OpenCode ohne API-Key und ohne vorausgewaehltes Modell.
-  // EN: This image installs OpenCode without an API key and without a preselected model.
-  // DE: Die eingebaute Provider-Auswahl bleibt verfuegbar, damit Nutzer bei Bedarf
-  // DE: lokal ueber /connect einen eigenen Provider verbinden koennen.
-  // EN: The built-in provider picker remains available so users can connect
-  // EN: their own provider locally through /connect when needed.
-
-  // DE: Globale Sicherheitsregeln fuer OpenCode-Werkzeuge.
-  // EN: Global security rules for OpenCode tools.
-  // DE: OpenCode ist ohne diese Regeln recht offen eingestellt.
-  // EN: OpenCode is quite open without these rules.
-  // DE: Die Regeln sind fuer einen ISO-9001/27001-Kontext bewusst vorsichtig.
-  // EN: The rules are intentionally careful for an ISO 9001/27001 context.
-  // DE: "allow" laeuft ohne Nachfrage, "ask" fragt nach, "deny" blockiert.
-  // EN: "allow" runs without approval, "ask" asks, and "deny" blocks.
-  // DE: Bei Musterregeln gewinnt die letzte passende Regel.
-  // EN: For pattern rules, the last matching rule wins.
-  "permission": {
-    // DE: Grundregel: Alles fragt nach, wenn unten nichts Spezielleres steht.
-    // EN: Base rule: everything asks unless a more specific rule below applies.
-    "*": "ask",
-
-    // DE: Lesen ist im Projekt erlaubt, aber Secrets und lokale Tool-Daten sind gesperrt.
-    // EN: Reading is allowed in the project, but secrets and local tool data are blocked.
-    // DE: Beispiel-Dateien bleiben lesbar, weil sie keine echten Geheimnisse enthalten duerfen.
-    // EN: Example files stay readable because they must not contain real secrets.
-    "read": {
-      "*": "allow",
-      "*.env": "deny",
-      "*.env.*": "deny",
-      "**/*.env": "deny",
-      "**/*.env.*": "deny",
-      ".env": "deny",
-      "**/.env": "deny",
-      "opencode.env": "deny",
-      "**/opencode.env": "deny",
-      "codex.env": "deny",
-      "**/codex.env": "deny",
-      "$HOME/.ssh/**": "deny",
-      "$HOME/.gnupg/**": "deny",
-      "$HOME/.config/gh/**": "deny",
-      "$HOME/.config/glab-cli/**": "deny",
-      "$HOME/.config/containers/**": "deny",
-      "$HOME/.local/share/containers/**": "deny",
-      "$HOME/.codex/**": "deny",
-      "$HOME/.local/share/opencode/**": "deny",
-      ".env.example": "allow",
-      "**/.env.example": "allow",
-      "*.env.example": "allow",
-      "**/*.env.example": "allow"
-    },
-
-    // DE: Datei- und Inhaltssuche ist fuer normale Code-Analyse erlaubt.
-    // EN: File and content search is allowed for normal code analysis.
-    "glob": "allow",
-    "grep": "allow",
-    "list": "allow",
-
-    // DE: Aenderungen brauchen Freigabe; Secret-Dateien bleiben gesperrt.
-    // EN: Changes need approval; secret files stay blocked.
-    "edit": {
-      "*": "ask",
-      "*.env": "deny",
-      "*.env.*": "deny",
-      "**/*.env": "deny",
-      "**/*.env.*": "deny",
-      ".env": "deny",
-      "**/.env": "deny",
-      "opencode.env": "deny",
-      "**/opencode.env": "deny",
-      "codex.env": "deny",
-      "**/codex.env": "deny",
-      "$HOME/.ssh/**": "deny",
-      "$HOME/.gnupg/**": "deny",
-      "$HOME/.config/gh/**": "deny",
-      "$HOME/.config/glab-cli/**": "deny",
-      "$HOME/.config/containers/**": "deny",
-      "$HOME/.local/share/containers/**": "deny",
-      "$HOME/.codex/**": "deny",
-      "$HOME/.local/share/opencode/**": "deny"
-    },
-
-    // DE: Shell-Kommandos sind der groesste Hebel fuer Risiko.
-    // EN: Shell commands are the biggest source of risk.
-    // DE: Nur sehr einfache Lese- und Git-Status-Kommandos laufen ohne Nachfrage.
-    // EN: Only simple read-only and Git status commands run without approval.
-    // DE: Build-, Netzwerk-, Container- und Paketmanager-Kommandos fragen nach.
-    // EN: Build, network, container, and package-manager commands ask for approval.
-    // DE: Offensichtlich destruktive Kommandos werden blockiert.
-    // EN: Clearly destructive commands are blocked.
-    "bash": {
-      "*": "ask",
-      "pwd": "allow",
-      "ls": "allow",
-      "ls *": "allow",
-      "git status": "allow",
-      "git status *": "allow",
-      "git diff": "allow",
-      "git diff *": "allow",
-      "git log": "allow",
-      "git log *": "allow",
-      "git show": "allow",
-      "git show *": "allow",
-      "git branch": "allow",
-      "git branch *": "allow",
-      "git remote": "allow",
-      "git remote *": "allow",
-      "git commit *": "ask",
-      "git push *": "ask",
-      "podman *": "ask",
-      "podman-compose *": "ask",
-      "dotnet *": "ask",
-      "mvn *": "ask",
-      "npm *": "ask",
-      "npx *": "ask",
-      "curl *": "ask",
-      "wget *": "ask",
-      "python *": "ask",
-      "python3 *": "ask",
-      "chmod *": "ask",
-      "chown *": "ask",
-      "rm *": "deny",
-      "sudo *": "deny",
-      "su *": "deny",
-      "dd *": "deny",
-      "mkfs *": "deny",
-      "mount *": "deny",
-      "umount *": "deny",
-      "ssh *": "ask",
-      "scp *": "ask",
-      "rsync *": "ask"
-    },
-
-    // DE: Zugriff ausserhalb des Projektverzeichnisses muss bestaetigt werden.
-    // EN: Access outside the project directory must be approved.
-    // DE: OpenCode-interne Arbeitsverzeichnisse sind eng begrenzt erlaubt.
-    // EN: OpenCode internal work directories are allowed only narrowly.
-    "external_directory": {
-      "*": "ask",
-      "/ade-dev-sandbox/**": "allow",
-      "/opt/home-baseline/**": "allow",
-      "/home/adedev/home-baseline-source/**": "allow",
-      "/home/adedev/home-baseline-tmp/**": "allow",
-      "/tmp/opencode/*": "allow",
-      "/home/adedev/.local/share/opencode/tool-output/*": "allow"
-    },
-
-    // DE: Netzwerkzugriff durch OpenCode selbst braucht Freigabe.
-    // EN: Network access by OpenCode itself needs approval.
-    "webfetch": "ask",
-    "websearch": "ask",
-    "codesearch": "ask",
-
-    // DE: Subagenten und Skills koennen viel Kontext und Rechte erhalten.
-    // EN: Subagents and skills can receive broad context and permissions.
-    "task": "ask",
-    "skill": "ask",
-    "lsp": "ask",
-
-    // DE: Aufgabenlisten sind lokal und fuer Arbeitsschritte unkritisch.
-    // EN: Todo lists are local and low-risk for work steps.
-    "todowrite": "allow",
-
-    // DE: OpenCode soll bei Wiederholungsschleifen immer nachfragen.
-    // EN: OpenCode must ask when it detects repeated tool loops.
-    "doom_loop": "ask",
-
-    // DE: Der Agent soll nicht eigenstaendig Rueckfragen erzwingen.
-    // EN: The agent must not force user questions on its own.
-    "question": "deny",
-
-    // DE: Repository-Klone und Repository-Uebersichten sind bewusst gesperrt.
-    // EN: Repository clones and repository overviews are blocked on purpose.
-    "repo_clone": "deny",
-    "repo_overview": "deny"
-  }
+  // DE: Kein API-Key, Provider oder Modell ist voreingestellt.
+  // EN: No API key, provider or model is preselected.
+  // DE: Reihenfolge erhalten: Die letzte passende Regel gewinnt.
+  // EN: Preserve order: the last matching rule wins.
+  // DE: shell/subagent ersetzen bash/task aus OpenCode 1.
+  // EN: shell/subagent replace OpenCode 1 bash/task.
+  // DE: Erweiterungsaktionen bleiben vorsorglich erhalten. doom_loop und lsp
+  //     sind keine garantierten Core-Kontrollen in V2; siehe Upgrade-Nachweis.
+  // EN: Retain extension actions defensively. doom_loop and lsp are not
+  //     guaranteed V2 Core controls; see the upgrade evidence.
+  "permissions": [
+    {"action":"*","resource":"*","effect":"ask"},
+    {"action":"read","resource":"*","effect":"allow"},
+    {"action":"read","resource":"*.env","effect":"deny"},
+    {"action":"read","resource":"*.env.*","effect":"deny"},
+    {"action":"read","resource":"**/*.env","effect":"deny"},
+    {"action":"read","resource":"**/*.env.*","effect":"deny"},
+    {"action":"read","resource":".env","effect":"deny"},
+    {"action":"read","resource":"**/.env","effect":"deny"},
+    {"action":"read","resource":"opencode.env","effect":"deny"},
+    {"action":"read","resource":"**/opencode.env","effect":"deny"},
+    {"action":"read","resource":"codex.env","effect":"deny"},
+    {"action":"read","resource":"**/codex.env","effect":"deny"},
+    {"action":"read","resource":"$HOME/.ssh/**","effect":"deny"},
+    {"action":"read","resource":"$HOME/.gnupg/**","effect":"deny"},
+    {"action":"read","resource":"$HOME/.config/gh/**","effect":"deny"},
+    {"action":"read","resource":"$HOME/.config/glab-cli/**","effect":"deny"},
+    {"action":"read","resource":"$HOME/.config/containers/**","effect":"deny"},
+    {"action":"read","resource":"$HOME/.local/share/containers/**","effect":"deny"},
+    {"action":"read","resource":"$HOME/.codex/**","effect":"deny"},
+    {"action":"read","resource":"$HOME/.local/share/opencode/**","effect":"deny"},
+    {"action":"read","resource":".env.example","effect":"allow"},
+    {"action":"read","resource":"**/.env.example","effect":"allow"},
+    {"action":"read","resource":"*.env.example","effect":"allow"},
+    {"action":"read","resource":"**/*.env.example","effect":"allow"},
+    {"action":"glob","resource":"*","effect":"allow"},
+    {"action":"grep","resource":"*","effect":"allow"},
+    {"action":"list","resource":"*","effect":"allow"},
+    {"action":"edit","resource":"*","effect":"ask"},
+    {"action":"edit","resource":"*.env","effect":"deny"},
+    {"action":"edit","resource":"*.env.*","effect":"deny"},
+    {"action":"edit","resource":"**/*.env","effect":"deny"},
+    {"action":"edit","resource":"**/*.env.*","effect":"deny"},
+    {"action":"edit","resource":".env","effect":"deny"},
+    {"action":"edit","resource":"**/.env","effect":"deny"},
+    {"action":"edit","resource":"opencode.env","effect":"deny"},
+    {"action":"edit","resource":"**/opencode.env","effect":"deny"},
+    {"action":"edit","resource":"codex.env","effect":"deny"},
+    {"action":"edit","resource":"**/codex.env","effect":"deny"},
+    {"action":"edit","resource":"$HOME/.ssh/**","effect":"deny"},
+    {"action":"edit","resource":"$HOME/.gnupg/**","effect":"deny"},
+    {"action":"edit","resource":"$HOME/.config/gh/**","effect":"deny"},
+    {"action":"edit","resource":"$HOME/.config/glab-cli/**","effect":"deny"},
+    {"action":"edit","resource":"$HOME/.config/containers/**","effect":"deny"},
+    {"action":"edit","resource":"$HOME/.local/share/containers/**","effect":"deny"},
+    {"action":"edit","resource":"$HOME/.codex/**","effect":"deny"},
+    {"action":"edit","resource":"$HOME/.local/share/opencode/**","effect":"deny"},
+    {"action":"shell","resource":"*","effect":"ask"},
+    {"action":"shell","resource":"pwd","effect":"allow"},
+    {"action":"shell","resource":"ls","effect":"allow"},
+    {"action":"shell","resource":"ls *","effect":"allow"},
+    {"action":"shell","resource":"git status","effect":"allow"},
+    {"action":"shell","resource":"git status *","effect":"allow"},
+    {"action":"shell","resource":"git diff","effect":"allow"},
+    {"action":"shell","resource":"git diff *","effect":"allow"},
+    {"action":"shell","resource":"git log","effect":"allow"},
+    {"action":"shell","resource":"git log *","effect":"allow"},
+    {"action":"shell","resource":"git show","effect":"allow"},
+    {"action":"shell","resource":"git show *","effect":"allow"},
+    {"action":"shell","resource":"git branch","effect":"allow"},
+    {"action":"shell","resource":"git branch *","effect":"allow"},
+    {"action":"shell","resource":"git remote","effect":"allow"},
+    {"action":"shell","resource":"git remote *","effect":"allow"},
+    {"action":"shell","resource":"git commit *","effect":"ask"},
+    {"action":"shell","resource":"git push *","effect":"ask"},
+    {"action":"shell","resource":"podman *","effect":"ask"},
+    {"action":"shell","resource":"podman-compose *","effect":"ask"},
+    {"action":"shell","resource":"dotnet *","effect":"ask"},
+    {"action":"shell","resource":"mvn *","effect":"ask"},
+    {"action":"shell","resource":"npm *","effect":"ask"},
+    {"action":"shell","resource":"npx *","effect":"ask"},
+    {"action":"shell","resource":"curl *","effect":"ask"},
+    {"action":"shell","resource":"wget *","effect":"ask"},
+    {"action":"shell","resource":"python *","effect":"ask"},
+    {"action":"shell","resource":"python3 *","effect":"ask"},
+    {"action":"shell","resource":"chmod *","effect":"ask"},
+    {"action":"shell","resource":"chown *","effect":"ask"},
+    {"action":"shell","resource":"rm *","effect":"deny"},
+    {"action":"shell","resource":"sudo *","effect":"deny"},
+    {"action":"shell","resource":"su *","effect":"deny"},
+    {"action":"shell","resource":"dd *","effect":"deny"},
+    {"action":"shell","resource":"mkfs *","effect":"deny"},
+    {"action":"shell","resource":"mount *","effect":"deny"},
+    {"action":"shell","resource":"umount *","effect":"deny"},
+    {"action":"shell","resource":"ssh *","effect":"ask"},
+    {"action":"shell","resource":"scp *","effect":"ask"},
+    {"action":"shell","resource":"rsync *","effect":"ask"},
+    {"action":"external_directory","resource":"*","effect":"ask"},
+    {"action":"external_directory","resource":"/ade-dev-sandbox/**","effect":"allow"},
+    {"action":"external_directory","resource":"/opt/home-baseline/**","effect":"allow"},
+    {"action":"external_directory","resource":"/home/adedev/home-baseline-source/**","effect":"allow"},
+    {"action":"external_directory","resource":"/home/adedev/home-baseline-tmp/**","effect":"allow"},
+    {"action":"external_directory","resource":"/tmp/opencode/*","effect":"allow"},
+    {"action":"external_directory","resource":"/home/adedev/.local/share/opencode/tool-output/*","effect":"allow"},
+    {"action":"webfetch","resource":"*","effect":"ask"},
+    {"action":"websearch","resource":"*","effect":"ask"},
+    {"action":"codesearch","resource":"*","effect":"ask"},
+    {"action":"subagent","resource":"*","effect":"ask"},
+    {"action":"skill","resource":"*","effect":"ask"},
+    {"action":"lsp","resource":"*","effect":"ask"},
+    {"action":"todowrite","resource":"*","effect":"allow"},
+    {"action":"doom_loop","resource":"*","effect":"ask"},
+    {"action":"question","resource":"*","effect":"deny"},
+    {"action":"repo_clone","resource":"*","effect":"deny"},
+    {"action":"repo_overview","resource":"*","effect":"deny"}
+  ]
 }

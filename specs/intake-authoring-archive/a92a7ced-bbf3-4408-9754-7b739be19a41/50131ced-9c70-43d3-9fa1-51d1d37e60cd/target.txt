@@ -1,0 +1,473 @@
+<!-- intake-authoring:begin -->
+# Technische Sandbox-Haertung / Technical Sandbox Hardening
+
+**Status:** ReadyForReview
+
+**Zielgruppe / Audience:** Auszubildende, Lernbegleitung, Entwicklung und Security Review
+
+**Lieferautoritaet / Delivery authority:** LocalImplementation
+
+## Voraussetzungen und Begriffe / Prerequisites and Terms
+
+**DE:** Ein Intake ist eine Anforderungsdatei vor einem Spec-Kit-Lauf; Spec Kit
+ordnet Anforderungen, Planung und Aufgaben. Vorausgesetzt werden nur
+grundlegende Computer- und Terminalbedienung, keine Container-, Sicherheits-
+oder Spec-Kit-Erfahrung. Die Zielgruppe beginnt im ersten Ausbildungsjahr
+und umfasst Fachinformatiker*innen, IT-System-Elektroniker*innen und die
+beiden kaufmaennischen IT-Ausbildungsberufe. LocalImplementation erlaubt nur
+lokale Umsetzung; eine Review-Bereitschaft ist keine Start- oder Lieferfreigabe.
+
+**EN:** An intake is a requirements file before a Spec Kit run; Spec Kit
+organizes requirements, planning and tasks. Only basic computer and terminal
+use is assumed, not container, security or Spec Kit experience. The audience
+starts in the first training year and includes IT specialists, IT systems
+electronics technicians and both IT management training occupations.
+LocalImplementation permits local work only; review readiness does not
+authorize execution or delivery.
+
+**DE:** GSDB bezeichnet hier die generische Secure-Development-Basis, also die
+lokale Richtlinie und Checklisten zur sicheren Entwicklung. Podman betreibt
+Container (isolierte Arbeitsumgebungen); ein Image ist deren Bauvorlage.
+Eine Toolchain ist eine zusammengehoerige Gruppe von Entwicklungswerkzeugen.
+Rootless bedeutet Betrieb ohne Administratorrechte; Linux-Capabilities sind
+einzelne Betriebssystemrechte. Mounts binden Verzeichnisse ein, Egress ist
+ausgehender Netzwerkverkehr. Pinning legt Versionen fest; ein Digest ist ein
+Inhaltspruefwert. CLI bedeutet Kommandozeilenwerkzeug, LSP bedeutet Language
+Server Protocol fuer Editorfunktionen, ein Smoke-Test ist ein kleiner
+Funktionstest. SBOM (Software Bill of Materials) listet Softwarebestandteile;
+VEX (Vulnerability Exploitability eXchange) dokumentiert die Anwendbarkeit
+von Schwachstellen, SLSA (Supply-chain Levels for Software Artifacts) beschreibt
+Nachweise zur Build-Lieferkette. Eine Signatur ist ein kryptografischer
+Herkunftsnachweis. A11Y steht fuer Barrierefreiheit; Human-only bezeichnet
+Entscheidungen, die Menschen vorbehalten sind.
+
+**EN:** GSDB here means the generic Secure Development Baseline: the local
+guideline and checklists. Podman runs containers (isolated work environments);
+an image is their build template. A toolchain groups development tools.
+Rootless operation needs no administrator privileges; Linux capabilities are
+individual operating-system permissions. Mounts connect directories; egress
+is outgoing network traffic. Pinning fixes versions; a digest checks content.
+A CLI is a command-line tool, LSP means Language Server Protocol for editor
+features, and a smoke test is a small functional check. A Software Bill of
+Materials (SBOM) lists software components. Vulnerability Exploitability
+eXchange (VEX) records vulnerability applicability; Supply-chain Levels for
+Software Artifacts (SLSA) describes build supply-chain evidence. A signature
+proves cryptographic origin. A11Y means accessibility; Human-only decisions
+are reserved for people.
+
+## Dokumentations- und Versionsnachtrag 2026-10-25 / Documentation and Version Addendum
+
+DE: Der [Dokumentationsabgleich](docs/maintenance/documentation-alignment-2026-10-25.md)
+und die [Werkzeug-Nachpruefungen](docs/security/toolchain-followups-2026-10-25.md)
+ergaenzen die vorhandene Pruefgrundlage. Sie binden die aktuelle Agent-Guidance,
+nicht eine technische Gesamterledigung. AMD64-Abnahme, effektive OpenCode-2-
+Kontrollen, sitzungsbezogene Auditabdeckung und Linux-Warnungsreproduktion
+bleiben anhand der dort benannten Owner, Follow-ups und Trigger zu pruefen.
+Reine Datenbank-Dateimetadaten ersetzen keinen Sitzungsnachweis. Der
+[gemeinsame Lernweg](docs/fuer-lernende/lernwege.md) und die
+[A11Y-Pruefgrenzen](docs/fuer-lernende/barrierefreiheit.md) konkretisieren
+bestehende Zielgruppen- und Verstaendlichkeitsanforderungen. Die bisherigen
+Kontroll-IDs, Akzeptanzbedingungen, Uebergaben und menschlichen Grenzen bleiben
+erhalten; keine neue Freigabe und kein Produktstart.
+
+EN: Documentation alignment and toolchain follow-ups supplement the existing
+review basis. They bind current agent guidance, not overall technical
+completion. AMD64 acceptance, effective OpenCode 2 controls, session-level
+audit coverage and Linux warning reproduction remain subject to the listed
+owners, follow-ups and triggers. Database file metadata is not session
+evidence. The shared learning path and A11Y review boundaries clarify existing
+audience and readability requirements. Preserve control IDs, acceptance
+conditions, handoffs and human boundaries; no new approval or product start.
+
+## Maven-Quellenabgleich 2026-10-25 / Maven Source Alignment
+
+DE: Der [gezielte Quellenabgleich](docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md) bindet den
+offiziellen Apache-Archiv-Fallback und die historische Einordnung des
+Impact-Registers. Maven-Version und feste SHA-512 bleiben unveraendert.
+Isolierte Download-Fixtures sind keine Image- oder Plattformabnahme.
+Anforderungen, Kontroll-IDs, Akzeptanzschwellen, Uebergaben und menschliche
+Grenzen bleiben erhalten; Quellenpflege erteilt keine Startautoritaet.
+
+EN: The targeted source alignment binds the official Apache archive fallback
+and historical impact-register context. Maven version and committed SHA-512
+remain unchanged. Isolated download fixtures grant no image or platform
+acceptance. Preserve requirements, control IDs, acceptance thresholds,
+handoffs and human boundaries; source maintenance grants no execution authority.
+
+## Review-Korrektur 2026-10-25 / Review Correction
+
+DE: Der [aktuelle Statusnachtrag](docs/maintenance/sandbox-current-state-2026-10-25.md)
+ordnet REV-001 bis REV-003 zu: Swift-Registry und Image-Pin konsistent halten,
+aktive Lernenden-Versionen korrekt benennen und historische von aktuellen
+Laufzeit-/Review-Nachweisen trennen. Diese Quellennachpflege aendert keine
+Kontroll-ID, Anforderung, Akzeptanzschwelle, Uebergabe oder menschliche Grenze.
+Eine korrigierte Registry fuehrt keine Installation aus; Image-, Plattform-,
+Audit- und Freigabepruefungen bleiben getrennt.
+
+EN: The current status addendum maps REV-001 through REV-003: consistent
+Swift registry/image pins, correct active learner versions and separate
+historical/current runtime and review evidence. Source maintenance changes
+no control ID, requirement, acceptance threshold, handoff or human boundary.
+A registry correction does not install tools; image, platform, audit and
+approval checks remain separate.
+
+## Zweck / Purpose
+
+**DE:** Dieser Intake beschreibt die technische und dokumentarische Haertung
+der Podman-basierten Entwicklungs-Sandbox. Die priorisierte Lueckenliste der
+GSDB-Bestandspruefung ist die verbindliche fachliche Baseline.
+
+**EN:** This intake defines technical and documentation hardening for the
+Podman-based development sandbox. The prioritized gap list from the GSDB
+baseline assessment is its binding baseline.
+
+## Aktualisierte Baseline / Updated Baseline
+
+**DE:** Die historische GSDB-Lueckenliste bleibt verbindlich. Ergaenzend gilt
+GSDB 3.4.4 mit 157 stabilen Kontroll-IDs bleibt unveraendert. Aktive
+Pruefwerkzeug-Basis ist Assurance 0.1.8 aus dem stabilen Preset-Abgleich
+vom 2026-10-24 (PR #99). Der
+[Intake-Delta-Abgleich](docs/maintenance/intake-gsdb344-delta-2026-10-21.md)
+ordnet alle 50 geaenderten Kontrolltexte zehn Anforderungsgruppen zu.
+Assurance ist das Preset fuer strukturierte Kontroll- und Freigabenachweise;
+ein Preset ist ein versioniertes Regel-/Werkzeugpaket fuer Spec Kit.
+Die folgende Ergaenzung ist keine Neubewertung aller 157 Kontrollen und
+kein Auftrag zur Erfuellung externer Rechts-/Organisationspflichten.
+Quellenuebernahme oder die abgeschlossene Feature-003-Studie ersetzen keine
+aktuelle praktische Sandbox-Abnahme.
+
+**EN:** The historical GSDB gap list remains binding, supplemented by GSDB
+3.4.4 with 157 stable control IDs. The active verification-tool baseline is
+Assurance 0.1.8 from the 2026-10-24 stable preset alignment (PR #99). The linked
+delta alignment maps all 50 changed control texts to ten requirement groups.
+Assurance is the preset for structured control and approval evidence; a
+preset is a versioned Spec Kit rule/tool package. This supplement does not
+reassess all 157 controls or authorize external legal/organisation actions.
+Source adoption and the completed Feature 003 study do not replace current
+practical sandbox acceptance.
+
+**DE:** Der [Quellenabgleich vom 2026-10-25](docs/maintenance/intake-sources-alignment-2026-10-25.md)
+ergänzt den unveränderten Kontroll-Delta-Abgleich und bindet aktuelle
+Agent-Guidance, den Assurance-Vertrag und das Vierzehner-Preset-Profil.
+Die dortigen früheren Versionsangaben sind historischer Kontext, keine
+Anweisung zum Zurückstufen. Anforderungen H-344-01 bis H-344-10,
+Grenzwerte und menschliche Stop-Grenzen bleiben erhalten. Paketversion,
+Generatorversion und Evidence-Schema sind getrennte Angaben; neue Receipts
+verwenden aktuelle Generator-Metadaten, alte bleiben unverändert.
+
+**EN:** The linked 2026-10-25 source alignment supplements the unchanged
+control-delta matrix and binds current agent guidance, Assurance contract
+and fourteen-preset profile. Earlier version names there are historical
+context, not downgrade instructions. H-344-01 through H-344-10, thresholds
+and human stops remain unchanged. Package version, generator version and
+evidence schema are separate; new receipts use current generator metadata
+while old receipts remain unchanged.
+
+## Ausgangslage und Zielbild / Current and Target State
+
+**DE:** Das Image stellt Agenten, Entwicklungswerkzeuge und mehrere
+speichersichere Toolchain-Familien bereit. Nach dem Lauf sind anwendbare
+Sicherheitsluecken mit reproduzierbaren Aenderungen behoben oder mit
+begruendetem Restrisiko offen dokumentiert.
+
+**EN:** The image provides agents, development tools, and several memory-safe
+toolchain families. After the run, applicable security gaps are fixed through
+reproducible changes or remain explicitly documented with justified residual
+risk.
+
+## Scope
+
+- Basisimage, Digest-Pinning, reproduzierbare Downloads und Versions-Pinning.
+- Rootless-Laufzeit, Linux-Capabilities, Mounts, Dateirechte und Schreibgrenzen.
+- Netzwerkentscheidung, Paketquellen und dokumentierte Egress-Grenzen.
+- OpenCode und alle erforderlichen Agenten-CLIs samt isoliertem Zustand.
+- Tatsachlich installierte Toolchains, LSP-Werkzeuge und Smoke-Tests.
+- SBOM, Schwachstellenbewertung, VEX/SLSA/Signatur-Anwendbarkeit.
+- VS-Code-Dev-Container-Zugriff und lokale Projekt-Mappings.
+- Lernenden-, A11Y- und Plattformdokumentation.
+
+**EN:**
+- Base image, digest pinning, reproducible downloads and version pinning.
+- Rootless runtime, Linux capabilities, mounts, file permissions and write boundaries.
+- Network decision, package sources and documented egress limits.
+- OpenCode and all required agent CLIs with isolated state.
+- Actually installed toolchains, LSP tools and smoke tests.
+- SBOM, vulnerability assessment and VEX/SLSA/signature applicability.
+- VS Code Dev Containers access and local project mappings.
+- Learner, accessibility and platform documentation.
+
+## Nicht-Ziele / Non-Goals
+
+- Kein fertiges Projekt-Image in GHCR oder einer anderen Projekt-Registry.
+- Keine produktive Cloud- oder Mehrmandantenplattform.
+- Keine echte Provider-, Modell-, Rechts- oder Sandbox-Freigabe.
+- Keine Secrets im Image, in Commits oder in Testprotokollen.
+
+**EN:**
+- No ready-made project image in GitHub Container Registry (GHCR) or another project registry.
+- No production cloud or multi-tenant platform.
+- No actual provider, model, legal or sandbox approval.
+- No secrets (credentials) in images, commits or test logs.
+
+## Anforderungen / Requirements
+
+1. Jede Aenderung muss auf einen Befund der GSDB-Bestandspruefung zeigen.
+2. Build- und Laufzeitrechte bleiben minimal und begruendet.
+3. Downloads, Toolversionen und Basisimage bleiben reproduzierbar pruefbar.
+4. Agenten- und Providerzustand bleibt voneinander und vom Repository getrennt.
+5. Toolchain-Behauptungen muessen durch Versions- und Projekt-Smoke-Tests
+   belegt sein.
+6. Sicherheitsrestriktionen duerfen die dokumentierten Lern- und
+   Entwicklungsablaeufe nicht unbegruendet blockieren.
+7. Offene Human-only-Punkte bleiben als solche gekennzeichnet.
+
+**EN:**
+1. Every change must trace to a GSDB baseline assessment finding.
+2. Build and runtime permissions remain minimal and justified.
+3. Downloads, tool versions and the base image remain reproducibly verifiable.
+4. Agent and provider state stay separate from each other and the repository.
+5. Toolchain claims require version and small project functional checks.
+6. Security controls must not block documented learning and development flows without justification.
+7. Open Human-only items remain explicitly identified.
+
+## Delta-Anforderungen / Delta Requirements
+
+**DE:** G01-G10 und die einzelnen Kontroll-IDs sind im verlinkten Abgleich
+definiert. H-344-NN und AC-H-344-NN gehoeren jeweils zur Gruppe GNN.
+Erwartete Evidenz wird erst im spaeter separat autorisierten Lauf erzeugt,
+unter `docs/security/` mit einem expliziten Pfad pro Kontroll-ID. Die
+Anwendbarkeit (`Applicable`, `N/A`, `Open`) und Umsetzung (`Fulfilled`,
+`Partly Fulfilled`, `Not Fulfilled`, `Not Assessed`) sind getrennte Felder.
+N/A bedeutet nicht anwendbar mit Begruendung und Not Assessed; Unsicherheit
+bleibt Open. Open/_TODO_ nennt Owner, Follow-up und Re-Evaluation-Trigger.
+
+**EN:** The linked alignment defines G01-G10 and their control IDs.
+H-344-NN and AC-H-344-NN map to GNN. Expected evidence is produced only in a
+later separately authorized run under docs/security, with an explicit path
+per control ID. Applicability and implementation are separate fields, using
+the values above. N/A requires a reason and Not Assessed; uncertainty stays
+Open. Open/_TODO_ records owner, follow-up and re-evaluation trigger.
+
+- **H-344-01 / G01:** Historische Befunde und Delta-IDs in einer versionierten
+  Matrix verbinden; Standardsausgabe und direkte Quelle nennen. / Connect
+  historical findings and delta IDs in a versioned matrix with standards
+  edition and direct source.
+- **H-344-02 / G02:** Betroffene Skript-/CLI-Grenzen auf sichere
+  Prozessargumente, komponentenbewusste Pfade, Symlinks, Windows-Reparse-Points
+  (Dateisystemumleitungen), Redirects und Netzwerkziele pruefen. Sprachprofil
+  und positive/negative Tests fuer betroffene Schnittstellen vorsehen;
+  fremde Beispiele erzeugen keine neue Web-/Datenbank-/Login-Anwendung. /
+  Review affected script/CLI boundaries for structured arguments, path
+  components, filesystem links, redirects and network targets. Require
+  language-specific profiles and positive/negative tests for affected
+  interfaces; examples do not add web/database/login applications.
+- **H-344-03 / G03:** Tatsachliche CLI-Versionen, Konfiguration,
+  Selbstaktualisierung und Datenfluesse inventarisieren; Ausschluesse mit
+  synthetischen Daten negativ pruefen. Unbelegte Provider-/Modell-, Vertrags-,
+  Trainings- oder Aufbewahrungsaussagen bleiben Open, keine Anmeldung oder
+  Providerkonfiguration als Pruefvoraussetzung. / Inventory actual CLI
+  versions, configuration, self-updates and data flows; test exclusions with
+  synthetic data. Unproved provider/model, contract, training or retention
+  claims stay Open; no sign-in or provider setup is required.
+- **H-344-04 / G04:** Paketname, Maintainer (verantwortliche Paketpflege),
+  Registry, Version, Quelle, Installationsskripte und konkrete Lizenzfassung
+  pruefbar verbinden. Lokale Image-SBOM beibehalten; eingebettete KI-Modelle
+  oder Dienste bedingt gesondert erfassen. Installierte Agenten allein
+  beweisen keine eingebettete Modellabhaengigkeit. Ungeklaerte Rechte an die
+  zustaendige Person geben, keine Registry-Publikation einfuehren. / Link
+  package name, maintainer, registry, version, source, install scripts and
+  exact licence. Preserve local image SBOM and conditionally record embedded
+  AI models/services; installed agents alone do not prove embedded models.
+  Escalate unclear rights; introduce no registry publication.
+- **H-344-05 / G05:** Audit-Metadaten und persistente Agentenzustaende als
+  getrennte Datenkategorien erfassen; Aufbewahrung, Zugriff, Integritaet und
+  Loeschung risikobasiert planen. Datenschutz-Screening (Vorpruefung) und
+  erforderliche menschliche Entscheidungen dokumentieren, keine pauschale
+  gesetzliche Agentenlog-Frist oder externen Registerabschluss behaupten. /
+  Separate audit metadata from persistent agent data; plan scoped retention,
+  access, integrity and deletion. Record privacy screening and required
+  human decisions; assert no blanket statutory log period or external
+  register completion.
+- **H-344-06 / G06:** Produkt, Werkzeugbetrieb und Organisation getrennt nach
+  Land, Rolle, Quellenfassung und Datum screenen. CRA (Cyber Resilience Act,
+  EU-Regeln fuer Produkte mit digitalen Elementen), KI-VO (EU-KI-Verordnung),
+  NIS2/BSIG (Cybersicherheitsrecht) und DORA (digitale Resilienz im
+  Finanzsektor) nicht pauschal aus FOSS (freie Open-Source-Software) ableiten.
+  Support, Updates, Meldeketten und Konformitaet nur nach zustaendiger
+  Anwendbarkeitsentscheidung konkretisieren; Unklarheiten bleiben Open. /
+  Screen product, tool operation and organisation separately by country,
+  role, source version and date. Do not infer CRA, AI Act, NIS2/BSIG or DORA
+  applicability from FOSS status alone. Specify support, updates, reporting
+  and conformity only after responsible applicability decisions; uncertainty
+  stays Open.
+- **H-344-07 / G07:** Vorhandene TLS-/Signatur-/Kryptoabhaengigkeiten und
+  Migrationsbedarf inventarisieren. Widerspruechliche generische und
+  spezifische Rotations-/Profilangaben mit Security Review klaeren, nicht
+  stillschweigend waehlen. Keine Schluessel erzeugen/rotieren, keine eigene
+  Kryptografie und keinen oeffentlichen TLS-Dienst einfuehren. / Inventory
+  existing TLS, signature and crypto dependencies and migration needs.
+  Escalate conflicting generic/specific rotation or profile requirements to
+  Security Review. Generate/rotate no keys and add no custom crypto or
+  public TLS service.
+- **H-344-08 / G08:** Das zugeordnete Profil 14 mit allen 14 Presets auf
+  Version, Prioritaet, Overrides (bewusste Regelersetzungen) und Abdeckung
+  pruefen. Assurance 0.1.8 muss exakte eindeutige aktive Versionen,
+  Checklisten-Dokument-IDs und Sammelband-Baseline in beiden Sprachabschnitten
+  pruefen. Quartals-/Anlassreview und zusaetzliche Jahrespruefung am
+  3. Oktober mit Owner festhalten; keine automatische Aktualisierung. /
+  Review all 14 presets of assigned profile 14 for versions, priority,
+  overrides and coverage. Assurance 0.1.8 checks exact unique active versions,
+  checklist document IDs and compendium baseline in both languages. Assign
+  owners for quarterly/event-driven review and the additional annual
+  3 October review; apply no automatic update.
+- **H-344-09 / G09:** Hosting-, Registry- und Providerabhaengigkeiten auf
+  Cloud-Relevanz begrenzt screenen. Eine Toolchain-Ausnahme begruenden oder
+  Nachweise/Restrisiken offen zuordnen; kein Cloud-Testat, keine
+  Datenschutz-/Souveraenitaetsfreigabe erfinden. / Screen hosting, registry
+  and provider dependencies for bounded cloud relevance. Justify toolchain
+  exemptions or assign Open evidence/risks; invent no cloud attestation,
+  privacy or sovereignty approval.
+- **H-344-10 / G10:** Bestehende Lernenden- und A11Y-Basis erhalten,
+  KI-Kompetenzmassnahmen und begrenzte Sicherheitsreife getrennt planen.
+  Lokale Schulungsregeln als solche markieren; Teilnahme-, HR- oder
+  Reifegradnachweise nicht aus vorhandener Dokumentation ableiten. /
+  Preserve learner/accessibility requirements and plan AI literacy and
+  bounded security maturity separately. Label local training rules; do not
+  infer attendance, HR or maturity evidence from documentation alone.
+
+## Abhaengigkeiten und Risiken / Dependencies and Risks
+
+**DE:** Dieser Intake setzt eine abgeschlossene GSDB-Bestandspruefung voraus;
+ihr dokumentierter Abschluss erfuellt diese fachliche Voraussetzung und ist
+kein Blocker. Aktuelles Intake-Review und ausdrueckliche Ausfuehrungsautoritaet
+bleiben davon getrennt erforderlich. Nicht reproduzierbare Downloads, ueberbreite Mounts, veraltete
+Agenten oder widerspruechliche Toolchain-Angaben sind zentrale Risiken.
+
+**EN:** This intake requires a completed GSDB baseline assessment; its
+documented completion fulfills that prerequisite rather than blocking it.
+Current intake review and explicit execution authority remain separate requirements.
+Non-reproducible downloads, overly broad mounts, stale agents, or conflicting
+toolchain claims are key risks.
+
+## Erwartete Artefakte und Evidenz / Expected Artefacts and Evidence
+
+- Gezielte Aenderungen an Image, Compose, Konfiguration und Dokumentation.
+- Aktualisierte SBOM- und Scan-Nachweise.
+- Reproduzierbarer Toolchain- und Agenten-Smoke-Test.
+- Aktualisierte projektspezifische Evidenz unter `docs/security/`.
+
+**EN:**
+- Targeted changes to image, Compose, configuration and documentation.
+- Updated SBOM and scan evidence.
+- Reproducible toolchain and agent smoke test.
+- Updated project-specific evidence under `docs/security/`.
+
+## Akzeptanzkriterien / Acceptance Criteria
+
+- Alle in Scope liegenden priorisierten Befunde sind behoben oder begruendet
+  offen.
+- Image und Compose-Konfiguration bauen beziehungsweise validieren erfolgreich.
+- Agenten, Toolchains, VS-Code-Zugriff und Mounts sind praktisch geprueft.
+- SBOM-Erzeugung funktioniert fuer das finale lokale Image.
+- Keine Freigabe oder Remote-Verteilung wird erfunden oder automatisch
+  ausgefuehrt.
+
+**EN:**
+- All prioritized findings in scope are resolved or remain Open with justification.
+- Image build and Compose configuration validation succeed.
+- Agents, toolchains, VS Code access and mounts are checked in practice.
+- SBOM generation works for the final local image.
+- No approval or remote distribution is invented or performed automatically.
+
+## Delta-Abnahmekriterien / Delta Acceptance Criteria
+
+- **AC-H-344-01:** Jede der 50 Delta-IDs hat genau eine Zuordnung,
+  Quellenfassung, Begruendung und Evidenzpfad oder Open-Eintrag; die
+  historischen Befunde bleiben verlinkt. / Each of 50 delta IDs has one
+  mapping, source version, rationale and evidence path or Open record;
+  historical findings remain linked.
+- **AC-H-344-02:** Sprachprofile und Testberichte zeigen betroffene Grenzen,
+  positive/negative Faelle und Abdeckung gemaess CL-08-12: mindestens 85 %
+  Branch-Abdeckung (Anteil der geprueften Entscheidungszweige) sicherheitskritischer Module und 80 % der dokumentierten
+  oeffentlichen Schnittstellen/kritischen UI-Ablaeufe; jede neue/geaenderte
+  Schnittstelle hat beide Testarten. Fehlende Messung bleibt Open, echte
+  Nichtanwendbarkeit wird begruendet, keine Anwendung wird nur fuer Tests
+  erfunden. / Profiles and reports identify affected boundaries, both case
+  types and CL-08-12 coverage thresholds: 85% critical-module branches
+  (the share of decision paths exercised) and
+  80% documented public interfaces/critical UI flows, with both test types
+  for every new/changed interface. Missing measurement stays Open; genuine
+  non-applicability is justified without inventing an application.
+- **AC-H-344-03:** Versions-/Konfigurationsmatrix und synthetische
+  Ausschlusstests belegen G03 oder dokumentieren eine konkrete Luecke;
+  keinerlei echte Zugangsdaten sind erforderlich. / Version/configuration
+  matrix and synthetic exclusion tests evidence G03 or identify a concrete
+  gap; no real credentials are required.
+- **AC-H-344-04:** Herkunfts-/Lizenzbericht und finale lokale SBOM decken
+  G04 ab; KI-Abhaengigkeit ist nachgewiesen oder begruendet N/A, unklare
+  Rechte blockieren betroffene Weitergabe. / Provenance/licence report and
+  final local SBOM cover G04; AI dependency is evidenced or justified N/A,
+  and unclear rights block affected redistribution.
+- **AC-H-344-05:** Ein datenbezogenes Audit-/Loeschkonzept mit sicheren
+  synthetischen Integritaets-/Loeschtests und verlinktem Datenschutz-Screening
+  liegt vor; noetige menschliche Entscheidungen bleiben nachverfolgbar Open.
+  / A data-specific audit/deletion plan, safe synthetic integrity/deletion
+  tests and linked privacy screening exist; needed human decisions stay Open.
+- **AC-H-344-06:** Ein datiertes Rollen-/Anwendbarkeitsregister nennt G06,
+  zustaendige Pruefung, Quellen und bedingte Folgepflichten oder Open;
+  keine automatische Rechts-/CE-/Release-Freigabe. / A dated role and
+  applicability register records G06, responsible review, sources and
+  conditional duties or Open; no automatic legal/CE/release approval.
+- **AC-H-344-07:** Krypto-/TLS-Inventar benennt relevante Abhaengigkeiten,
+  Profilkonflikte, Migration und begruendete Ausnahmen; offene Entscheidungen
+  haben Owner und Trigger. / Crypto/TLS inventory identifies dependencies,
+  profile conflicts, migration and justified exemptions; Open decisions have
+  owner and trigger.
+- **AC-H-344-08:** Profilmatrix umfasst exakt 14 Presets; beide
+  Assurance-Validatoren akzeptieren aktuelle Metadaten und lehnen falsch
+  gebundene aktive Metadaten ab. Reviewplan nennt Quartals-/Anlassreview und
+  den 3. Oktober. / Matrix contains exactly 14 presets; both Assurance
+  validators accept current metadata and reject incorrect active metadata
+  even with refreshed hashes. Review plan records quarterly/event review
+  and 3 October.
+- **AC-H-344-09:** Cloud-Screening begruendet N/A oder nennt benoetigte
+  Nachweise, Owner und Restrisiko als Open. / Cloud screening justifies N/A
+  or records required evidence, owner and residual risk as Open.
+- **AC-H-344-10:** Lern-/Reviewplan trennt Schulungsangebot, reale Teilnahme,
+  lokale Regeln und Reifegrad; DE/EN und textorientierte A11Y-Pruefung sind
+  dokumentiert. / Learning/review plan separates training offer, actual
+  attendance, local rules and maturity; DE/EN and text-first accessibility
+  review are documented.
+
+**DE:** O-344-TECH, O-344-HUMAN und O-344-CLOUD im Delta-Abgleich sind die
+verbindlichen offenen Uebergaben mit Owner, Follow-up und Trigger. Ein
+begruendet offener Punkt ist keine bestandene Kontrolle; betroffene
+Nutzungs-/Weitergabesperren und die Abnahmebedingungen bleiben wirksam.
+
+**EN:** O-344-TECH, O-344-HUMAN and O-344-CLOUD in the alignment are binding
+Open handoffs with owner, follow-up and trigger. A justified Open item is not
+a passed control; affected usage/distribution stops and acceptance conditions
+remain in force.
+
+## Annahmen und offene Fragen / Assumptions and Open Questions
+
+- Podman bleibt die Referenzlaufzeit.
+- Es bestehen keine offenen Intake-Authoring-Fragen.
+
+**EN:**
+- Podman remains the reference runtime.
+- No intake-authoring questions remain Open.
+
+<!-- intake-authoring:prompts -->
+## Kopierbare Folgekommandos / Copy-Ready Follow-Up Commands
+
+<!-- spec-kit-command-id: speckit.specify -->
+```text
+$speckit-specify Erstelle eine Spezifikation auf Grundlage von Lastenheft_Secure-Development-Container-Hardening.md, der historischen GSDB-Lueckenliste und docs/maintenance/intake-gsdb344-delta-2026-10-21.md. Beruecksichtige H-344-01 bis H-344-10 und deren Akzeptanzkriterien, GSDB 3.4.4 und Assurance 0.1.8. Plane technische und dokumentarische Haertung ohne Registry-Verteilung oder formale Freigabe; keine Implementierung starten. Beruecksichtige den Dokumentations- und Versionsnachtrag vom 2026-10-25 sowie docs/maintenance/documentation-alignment-2026-10-25.md und docs/security/toolchain-followups-2026-10-25.md; offene Nachweise nicht als erledigt behandeln. Aktuellen Statusnachtrag docs/maintenance/sandbox-current-state-2026-10-25.md mit REV-001 bis REV-003 beruecksichtigen; technische und menschliche Nachweise nicht vorwegnehmen. Beruecksichtige docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md; isolierte Downloadtests sind kein Image-Build oder neue Abnahme.
+```
+
+<!-- spec-kit-command-id: speckit.autonomous -->
+```text
+$speckit-autonomous Fuehre erst nach aktuellem Review und gesonderter Startautoritaet den vollstaendigen Spec-Kit-Lauf fuer Lastenheft_Secure-Development-Container-Hardening.md mit Delivery Authority LocalImplementation aus. Bewahre historische Befunde, den GSDB-3.4.4-Delta-Abgleich, Assurance 0.1.8 und offene menschliche Entscheidungen. Implementiere und pruefe die priorisierten Haertungen lokal und stoppe vor Commit, Push, Pull Request, Merge oder Hosting-Aenderungen. Beruecksichtige den Dokumentations- und Versionsnachtrag vom 2026-10-25 sowie docs/maintenance/documentation-alignment-2026-10-25.md und docs/security/toolchain-followups-2026-10-25.md; offene Nachweise nicht als erledigt behandeln. Aktuellen Statusnachtrag docs/maintenance/sandbox-current-state-2026-10-25.md mit REV-001 bis REV-003 beruecksichtigen; technische und menschliche Nachweise nicht vorwegnehmen. Beruecksichtige docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md; isolierte Downloadtests sind kein Image-Build oder neue Abnahme.
+```
+<!-- intake-authoring:end -->

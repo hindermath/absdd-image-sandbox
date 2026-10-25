@@ -47,6 +47,62 @@ Bill of Materials (SBOM) lists software components. DE-first/EN-second means
 German before English, CEFR B2 indicates moderate language complexity, and
 WCAG 2.2 AA is the applicable accessibility review baseline.
 
+## Dokumentations- und Versionsnachtrag 2026-10-25 / Documentation and Version Addendum
+
+DE: Der [Dokumentationsabgleich](docs/maintenance/documentation-alignment-2026-10-25.md)
+und die [Werkzeug-Nachpruefungen](docs/security/toolchain-followups-2026-10-25.md)
+ergaenzen die vorhandene Pruefgrundlage. Sie binden die aktuelle Agent-Guidance,
+nicht eine technische Gesamterledigung. AMD64-Abnahme, effektive OpenCode-2-
+Kontrollen, sitzungsbezogene Auditabdeckung und Linux-Warnungsreproduktion
+bleiben anhand der dort benannten Owner, Follow-ups und Trigger zu pruefen.
+Reine Datenbank-Dateimetadaten ersetzen keinen Sitzungsnachweis. Der
+[gemeinsame Lernweg](docs/fuer-lernende/lernwege.md) und die
+[A11Y-Pruefgrenzen](docs/fuer-lernende/barrierefreiheit.md) konkretisieren
+bestehende Zielgruppen- und Verstaendlichkeitsanforderungen. Die bisherigen
+Kontroll-IDs, Akzeptanzbedingungen, Uebergaben und menschlichen Grenzen bleiben
+erhalten; keine neue Freigabe und kein Produktstart.
+
+EN: Documentation alignment and toolchain follow-ups supplement the existing
+review basis. They bind current agent guidance, not overall technical
+completion. AMD64 acceptance, effective OpenCode 2 controls, session-level
+audit coverage and Linux warning reproduction remain subject to the listed
+owners, follow-ups and triggers. Database file metadata is not session
+evidence. The shared learning path and A11Y review boundaries clarify existing
+audience and readability requirements. Preserve control IDs, acceptance
+conditions, handoffs and human boundaries; no new approval or product start.
+
+## Maven-Quellenabgleich 2026-10-25 / Maven Source Alignment
+
+DE: Der [gezielte Quellenabgleich](docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md) bindet den
+offiziellen Apache-Archiv-Fallback und die historische Einordnung des
+Impact-Registers. Maven-Version und feste SHA-512 bleiben unveraendert.
+Isolierte Download-Fixtures sind keine Image- oder Plattformabnahme.
+Anforderungen, Kontroll-IDs, Akzeptanzschwellen, Uebergaben und menschliche
+Grenzen bleiben erhalten; Quellenpflege erteilt keine Startautoritaet.
+
+EN: The targeted source alignment binds the official Apache archive fallback
+and historical impact-register context. Maven version and committed SHA-512
+remain unchanged. Isolated download fixtures grant no image or platform
+acceptance. Preserve requirements, control IDs, acceptance thresholds,
+handoffs and human boundaries; source maintenance grants no execution authority.
+
+## Review-Korrektur 2026-10-25 / Review Correction
+
+DE: Der [aktuelle Statusnachtrag](docs/maintenance/sandbox-current-state-2026-10-25.md)
+ordnet REV-001 bis REV-003 zu. Fuer die spaetere unabhaengige Abnahme sind
+Registry/Image-Versionskonsistenz, richtige Lernenden-Versionen und getrennte
+historische/aktuelle Evidenz zu beachten. Alle vorhandenen Kontroll-IDs,
+Akzeptanzschwellen, Uebergaben und menschlichen Grenzen bleiben unveraendert.
+Ein lokaler ARM64-Erfolg ist keine AMD64-Abnahme oder Freigabe; korrigierte
+Texte und Quellenbindungen ersetzen keine praktische Abnahme.
+
+EN: The current status addendum maps REV-001 through REV-003. Later independent
+acceptance must consider registry/image consistency, correct learner versions
+and separate historical/current evidence. Existing control IDs, acceptance
+thresholds, handoffs and human boundaries remain unchanged. Local ARM64
+success grants no AMD64 acceptance or approval; corrected text/source bindings
+do not replace practical acceptance.
+
 ## Zweck / Purpose
 
 **DE:** Dieser Intake prueft die technisch gehaertete Sandbox unabhaengig auf
@@ -61,7 +117,8 @@ evidence, not formal approval by an organization.
 ## Aktualisierte Pruefgrundlage / Updated Review Baseline
 
 **DE:** GSDB (generische Secure-Development-Basis) 3.4.4 mit 157 stabilen
-Kontroll-IDs und Assurance 0.1.5 aus PR #96 sind die aktuelle Grundlage.
+Kontroll-IDs und Assurance 0.1.8 aus dem Preset-Abgleich vom 2026-10-24
+(PR #99) sind die aktuelle Grundlage; die GSDB selbst ist unveraendert.
 Assurance ist ein versioniertes Spec-Kit-Regel-/Werkzeugpaket fuer
 Kontrollnachweise. Die historische GSDB-Pruefung bleibt unveraendert;
 der [Delta-Abgleich](docs/maintenance/intake-gsdb344-delta-2026-10-21.md)
@@ -71,13 +128,26 @@ den spaeteren Lernenden-Selbstbau. Ein erfolgreicher Quellenrollout und die
 historische Feature-003-Studie sind keine aktuelle Sandbox-Abnahme.
 
 **EN:** GSDB (generic Secure Development Baseline) 3.4.4 with 157 stable
-control IDs and Assurance 0.1.5 from PR #96 are the current baseline.
+control IDs and Assurance 0.1.8 from the 2026-10-24 preset alignment
+(PR #99) are the current baseline; GSDB itself is unchanged.
 Assurance is a versioned Spec Kit rule/tool package for control evidence.
 The historical assessment remains unchanged; the linked delta alignment
 maps 50 changed control texts to groups G01-G10. H is preceding hardening,
 A this independent acceptance and L later learner self-build. Successful
 source rollout and the historical Feature 003 study do not establish current
 sandbox acceptance.
+
+**DE:** Zusätzlich gilt der [Quellenabgleich vom 2026-10-25](docs/maintenance/intake-sources-alignment-2026-10-25.md).
+Er erneuert die Werkzeug-/Guidance-Bindung, nicht die 50 Kontrollentscheidungen
+oder deren Erfüllung. Ältere Assurance-Versionen im Delta-Bericht bleiben
+historisch; für A-344-02 ist 0.1.8 maßgeblich. Neue Leserhilfen sind kein
+bestandener Test. A-344-01 bis A-344-04 und ihre Grenzwerte bleiben erhalten.
+
+**EN:** The linked 2026-10-25 source alignment also applies. It refreshes tool
+and guidance bindings, not the 50 control decisions or their fulfillment.
+Older Assurance versions in the delta report remain historical; A-344-02
+uses 0.1.8. New reader help is not passed test evidence. A-344-01 through
+A-344-04 and their thresholds remain unchanged.
 
 ## Ausgangslage und Zielbild / Current and Target State
 
@@ -152,7 +222,7 @@ and reviewer perspectives.
   handoff against historical findings and all 50 delta IDs, including all
   ten H requirements/acceptance criteria, source version, applicability,
   implementation, evidence paths and Open items.
-- **A-344-02:** Assurance 0.1.5 mit Bash und PowerShell auf exakte eindeutige
+- **A-344-02:** Assurance 0.1.8 mit Bash und PowerShell auf exakte eindeutige
   aktive Versionen, Checklisten-Dokument-IDs und Sammelband-Baseline pruefen,
   einschliesslich deutscher und englischer Richtlinienmetadaten. Ein korrekt
   gehashter falscher aktiver Wert muss scheitern; eingebettete Checklisten
@@ -270,16 +340,43 @@ only on macOS do not prove full Windows or Linux coverage.
 - Provider sign-in is not required for version and configuration checks.
 - No intake-authoring questions remain Open.
 
+## Template-Quellenabgleich 2026-10-25 / Template Source Alignment
+
+DE: Der [Tagesabschluss-Rechteabgleich](docs/maintenance/closeout-rights-alignment-2026-10-25.md)
+bindet die ausdrückliche Ownerbestätigung nur für die benannte neue Workshop-/
+Lernmaterial-Lieferung. LIC-01 und andere LIC-02-Betroffenheiten bleiben offen.
+Keine Änderung von Kontrollanforderungen, Akzeptanzschwellen, Lifecycle oder
+Startautorität; insbesondere keine Template- oder Sandboxfreigabe.
+
+EN: The linked closeout rights alignment binds explicit owner confirmation
+only for the named new workshop/learning delivery. LIC-01 and other LIC-02
+concerns remain Open. Controls, acceptance thresholds, lifecycle and start
+authority are unchanged; no template or sandbox approval is granted.
+
+**DE:** [Template-Abgleich](docs/maintenance/template-profile-alignment-2026-10-25.md)
+bindet das optionale Profil, Lizenzgrenzen und die CI-Trennung historischer
+Referenzevidenz. Fork bleibt Standard; Template ist vorbereitet, nicht aktiviert.
+Keine kopierten Run-States, Statistiken oder Freigaben als persönliche Nachweise
+verwenden. Hardening-/Abnahme-Gates und bestehende Akzeptanzschwellen bleiben
+unverändert. Diese Quellenpflege startet weder Produktarbeit noch die blockierte
+Selbstbau-Stufe und führt keine Hosting-Einstellung aus.
+
+**EN:** The template alignment binds the optional profile, rights boundaries
+and source-only historical CI evidence. Fork remains default; template use is
+prepared, not enabled. Copied states/statistics/approvals are not personal
+evidence. Preserve hardening/acceptance gates and thresholds. Source maintenance
+starts no product or blocked self-build work and changes no hosting setting.
+
 <!-- intake-authoring:prompts -->
 ## Kopierbare Folgekommandos / Copy-Ready Follow-Up Commands
 
 <!-- spec-kit-command-id: speckit.specify -->
 ```text
-$speckit-specify Erstelle eine Spezifikation auf Grundlage von Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md, docs/maintenance/intake-gsdb344-delta-2026-10-21.md und der vollstaendigen Hardening-Uebergabe. Beruecksichtige A-344-01 bis A-344-04 und deren Akzeptanzkriterien sowie GSDB 3.4.4 und Assurance 0.1.5. Plane unabhaengige technische Abnahme ohne weitere Haertung oder formale Freigabe; keine Implementierung starten.
+$speckit-specify Erstelle eine Spezifikation auf Grundlage von Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md, docs/maintenance/intake-gsdb344-delta-2026-10-21.md und der vollstaendigen Hardening-Uebergabe. Beruecksichtige A-344-01 bis A-344-04 und deren Akzeptanzkriterien sowie GSDB 3.4.4 und Assurance 0.1.8. Plane unabhaengige technische Abnahme ohne weitere Haertung oder formale Freigabe; keine Implementierung starten. Beruecksichtige den Dokumentations- und Versionsnachtrag vom 2026-10-25 sowie docs/maintenance/documentation-alignment-2026-10-25.md und docs/security/toolchain-followups-2026-10-25.md; offene Nachweise nicht als erledigt behandeln. Aktuellen Statusnachtrag docs/maintenance/sandbox-current-state-2026-10-25.md mit REV-001 bis REV-003 beruecksichtigen; technische und menschliche Nachweise nicht vorwegnehmen. Beruecksichtige docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md; isolierte Downloadtests sind kein Image-Build oder neue Abnahme. Beruecksichtige docs/maintenance/template-profile-alignment-2026-10-25.md und die neuen Rechte-/Historiengrenzen; Fork bleibt Standard, Template ist nicht aktiviert, bestehende Lifecycle- und Startgates bleiben erhalten. Beruecksichtige docs/maintenance/closeout-rights-alignment-2026-10-25.md: Ownerrechte nur fuer die benannte Lernmaterial-Lieferung bestaetigt; LIC-01 und andere LIC-02-Betroffenheiten sowie saemtliche Startgates bleiben offen. Beruecksichtige docs/maintenance/closeout-review-remediation-2026-10-25.md: IR201/IR202 nur als nachreviewte Quellenkorrektur behandeln; Lifecycle und Startautoritaet bleiben unveraendert.
 ```
 
 <!-- spec-kit-command-id: speckit.autonomous -->
 ```text
-$speckit-autonomous Fuehre erst nach abgeschlossener Haertung, aktuellem Review und gesonderter Startautoritaet den vollstaendigen Spec-Kit-Lauf fuer Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md mit Delivery Authority LocalImplementation aus. Pruefe den GSDB-3.4.4-Delta-Abgleich und Assurance 0.1.5 unabhaengig, dokumentiere Plattformgrenzen und offene menschliche Entscheidungen und stoppe vor Commit, Push, Pull Request, Merge oder Hosting-Aenderungen.
+$speckit-autonomous Fuehre erst nach abgeschlossener Haertung, aktuellem Review und gesonderter Startautoritaet den vollstaendigen Spec-Kit-Lauf fuer Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md mit Delivery Authority LocalImplementation aus. Pruefe den GSDB-3.4.4-Delta-Abgleich und Assurance 0.1.8 unabhaengig, dokumentiere Plattformgrenzen und offene menschliche Entscheidungen und stoppe vor Commit, Push, Pull Request, Merge oder Hosting-Aenderungen. Beruecksichtige den Dokumentations- und Versionsnachtrag vom 2026-10-25 sowie docs/maintenance/documentation-alignment-2026-10-25.md und docs/security/toolchain-followups-2026-10-25.md; offene Nachweise nicht als erledigt behandeln. Aktuellen Statusnachtrag docs/maintenance/sandbox-current-state-2026-10-25.md mit REV-001 bis REV-003 beruecksichtigen; technische und menschliche Nachweise nicht vorwegnehmen. Beruecksichtige docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md; isolierte Downloadtests sind kein Image-Build oder neue Abnahme. Beruecksichtige docs/maintenance/template-profile-alignment-2026-10-25.md und die neuen Rechte-/Historiengrenzen; Fork bleibt Standard, Template ist nicht aktiviert, bestehende Lifecycle- und Startgates bleiben erhalten. Beruecksichtige docs/maintenance/closeout-rights-alignment-2026-10-25.md: Ownerrechte nur fuer die benannte Lernmaterial-Lieferung bestaetigt; LIC-01 und andere LIC-02-Betroffenheiten sowie saemtliche Startgates bleiben offen. Beruecksichtige docs/maintenance/closeout-review-remediation-2026-10-25.md: IR201/IR202 nur als nachreviewte Quellenkorrektur behandeln; Lifecycle und Startautoritaet bleiben unveraendert.
 ```
 <!-- intake-authoring:end -->

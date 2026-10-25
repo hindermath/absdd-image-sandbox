@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -12,10 +13,12 @@ import shlex
 import signal
 import stat
 import subprocess
+import sys
 import tarfile
 import tempfile
 import time
 import unittest
+from unittest import mock
 
 
 REPOSITORY = Path(__file__).resolve().parents[2]
@@ -23,6 +26,9 @@ BREW_MAINTAINER = REPOSITORY / "scripts" / "maintain-agentic-brew-apps.sh"
 WORKSPACE_MAINTAINER = REPOSITORY / "scripts" / "maintain-agentic-workspace.sh"
 HELPER = REPOSITORY / "scripts" / "lib" / "linux-maintenance-hardening.py"
 FLEET_ENGINE = REPOSITORY / "scripts" / "lib" / "agentic_workspace_fleet.py"
+HELPER_SPEC = importlib.util.spec_from_file_location("linux_maintenance_contract", HELPER)
+HELPER_MODULE = importlib.util.module_from_spec(HELPER_SPEC)
+HELPER_SPEC.loader.exec_module(HELPER_MODULE)
 
 
 def write_json(path: Path, value: object) -> None:
@@ -59,6 +65,8 @@ def empty_registries(root: Path) -> dict[str, Path]:
 def install_fake_brew(root: Path) -> tuple[Path, Path, Path]:
     bin_dir = root / "bin"
     bin_dir.mkdir()
+    # Exercise the selected test interpreter, not another host PATH version.
+    (bin_dir / "python3").symlink_to(sys.executable)
     state = root / "brew-state"
     log = root / "brew-install-log"
     state.write_text("", encoding="utf-8")
@@ -253,7 +261,7 @@ def write_swift_registry(path: Path, digest: str) -> None:
 
 def run_helper(*arguments: str, timeout: float = 10) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
-        ["python3", str(HELPER), *arguments],
+        [sys.executable, str(HELPER), *arguments],
         cwd=REPOSITORY,
         text=True,
         stdout=subprocess.PIPE,
@@ -293,6 +301,102 @@ def base_report(run_id: str) -> dict:
 
 @unittest.skipIf(os.name == "nt", "Linux maintenance fixtures require a POSIX host.")
 class LinuxMaintenanceHardeningTests(unittest.TestCase):
+    def test_fixture_python_is_the_selected_test_interpreter(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            bin_dir, _, _ = install_fake_brew(root)
+            self.assertTrue((bin_dir / "python3").samefile(sys.executable))
+            completed = subprocess.run(
+                [str(bin_dir / "python3"), "-c", "import sys; print(sys.version)"],
+                env=dict(os.environ, PATH=str(bin_dir)), text=True,
+                capture_output=True, check=True, timeout=5,
+            )
+            self.assertEqual(completed.stdout.strip(), sys.version)
+
+    def test_registry_snapshot_reads_sources_once_and_preserves_scope_and_arguments(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            paths = empty_registries(root)
+            write_json(paths["brew"], {
+                "formulae": [{"name": "alpha"}, {"name": "beta", "scope": "optional"}],
+                "casks": [], "aptFallback": {"packages": [{"name": "package"}]},
+            })
+            write_json(paths["cli"], {"tools": [
+                {"id": "linux", "command": "tool", "platforms": ["Linux"],
+                 "args": ["--flag", "value with spaces"]},
+                {"id": "windows", "command": "other", "platforms": ["Windows"]},
+                {"id": "extra", "command": "extra", "platforms": ["Linux"],
+                 "scope": "optional"},
+            ]})
+            write_json(paths["npm"], {"tools": [
+                {"id": "agent", "package": "@example/agent", "command": "agent",
+                 "platforms": ["Linux"]},
+            ]})
+            write_json(paths["vscode"], {"extensions": [
+                {"id": "example.required"}, {"id": "example.optional", "scope": "optional"},
+            ]})
+            output = root / "snapshot"
+            original = Path.read_text
+            with mock.patch.object(Path, "read_text", autospec=True, side_effect=original) as read:
+                HELPER_MODULE.snapshot_registries(output, paths["brew"], paths["cli"],
+                                                 paths["npm"], "Linux", paths["vscode"])
+            self.assertCountEqual([call.args[0] for call in read.call_args_list],
+                                  [paths[key] for key in ("brew", "cli", "npm", "vscode")])
+            self.assertEqual((output / "brew-formulae-required.tsv").read_text(), "alpha\n")
+            self.assertEqual((output / "brew-formulae-optional.tsv").read_text(), "beta\n")
+            self.assertEqual((output / "brew-aptFallback-scoped.tsv").read_text(), "package\trequired\n")
+            row = (output / "cli-required.tsv").read_text().rstrip("\n").split("\t")
+            self.assertEqual(row[:2], ["linux", "tool"])
+            self.assertEqual(json.loads(row[2]), ["--flag", "value with spaces"])
+            self.assertEqual(row[3:5], ["-", "[]"])
+            self.assertTrue((output / "cli-optional.tsv").read_text().startswith("extra\textra\t"))
+            self.assertIn("@example/agent", (output / "npm-required.tsv").read_text())
+            self.assertEqual((output / "vscode-optional.tsv").read_text(), "example.optional\n")
+
+    def test_registry_snapshot_skips_disabled_vscode_and_rejects_unsafe_fields(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            paths = empty_registries(root)
+            paths["vscode"].write_text("not json", encoding="utf-8")
+            output = root / "snapshot"
+            HELPER_MODULE.snapshot_registries(output, paths["brew"], paths["cli"],
+                                             paths["npm"], "Linux", None)
+            self.assertEqual((output / "vscode-all.tsv").read_bytes(), b"")
+            write_json(paths["brew"], {"formulae": [{"name": "bad\nargument"}]})
+            with self.assertRaises(HELPER_MODULE.ContractError):
+                HELPER_MODULE.snapshot_registries(output, paths["brew"], paths["cli"],
+                                                 paths["npm"], "Linux", None)
+
+    def test_invalid_registry_snapshot_blocks_package_actions_and_finalizes_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            paths = empty_registries(root)
+            _, _, install_log = install_fake_brew(root)
+            write_json(paths["brew"], {"formulae": [{"name": "must-not-install"}]})
+            paths["cli"].write_text('{"tools":', encoding="utf-8")
+            completed = run_brew_maintainer(root, paths)
+            self.assertEqual(completed.returncode, 2, completed.stdout)
+            self.assertEqual(install_log.read_text(), "")
+            result = json.loads((root / "toolchain-result.json").read_text())
+            self.assertEqual(result["overallStatus"], "FAILED")
+            self.assertEqual(result["exitCode"], 2)
+
+    def test_missing_snapshot_is_not_reported_as_an_empty_success(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            paths = empty_registries(root)
+            bin_dir, _, install_log = install_fake_brew(root)
+            python = bin_dir / "python3"
+            python.unlink()
+            write_executable(python, "#!/bin/sh\n"
+                             'if [ "${2:-}" = snapshot-registries ]; then exit 0; fi\n'
+                             f'exec {shlex.quote(sys.executable)} "$@"\n')
+            completed = run_brew_maintainer(root, paths)
+            self.assertNotEqual(completed.returncode, 0, completed.stdout)
+            self.assertEqual(install_log.read_text(), "")
+            result = json.loads((root / "toolchain-result.json").read_text())
+            self.assertEqual(result["overallStatus"], "FAILED")
+
     def test_empty_optional_module_probe_still_publishes_one_valid_result(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -488,41 +592,75 @@ class LinuxMaintenanceHardeningTests(unittest.TestCase):
     def test_probe_classifies_timeout_capability_and_redacts_paths(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            bin_dir = root / "bin"
-            bin_dir.mkdir()
-            write_executable(
-                bin_dir / "unusable",
-                f"#!/usr/bin/env bash\nprintf 'failure in {root}/secret\\n' >&2\nexit 7\n",
-            )
-            write_executable(
-                bin_dir / "blocked",
-                "#!/usr/bin/env bash\nprintf 'snap-confine lacks cap_dac_override capability\\n' >&2\nexit 1\n",
-            )
-            write_executable(bin_dir / "hang", "#!/usr/bin/env bash\nsleep 30\n")
-
+            hang = root / "hang"
+            write_executable(hang, "#!/bin/sh\nsleep 30\n")
             results = {}
-            for label in ("unusable", "blocked", "hang"):
-                timeout_seconds = "0.2" if label == "hang" else "1"
-                completed = run_helper(
-                    "probe",
-                    "--tool-id",
-                    label,
-                    "--timeout-seconds",
-                    timeout_seconds,
-                    "--redact",
-                    str(root),
-                    "--",
-                    str(bin_dir / label),
-                    timeout=5,
-                )
-                self.assertIn(completed.returncode, (0, 1), completed.stdout)
-                results[label] = json.loads(completed.stdout)
+            # Exit classification is independent of scheduler/launcher latency.
+            # A real process below still exercises the unchanged timeout path.
+            for label, code, evidence in (
+                ("unusable", 7, f"failure in {root}/secret"),
+                ("blocked", 1, "snap-confine lacks cap_dac_override capability"),
+            ):
+                process = mock.Mock()
+                process.wait.return_value = code
+
+                def spawn(command, *, stdout, **kwargs):
+                    self.assertEqual(command, [label])
+                    self.assertTrue(kwargs["start_new_session"])
+                    self.assertEqual(kwargs["stdin"], subprocess.DEVNULL)
+                    stdout.write(evidence.encode())
+                    return process
+
+                with mock.patch.object(HELPER_MODULE.subprocess, "Popen", side_effect=spawn):
+                    result, exit_code = HELPER_MODULE.bounded_probe(label, [label], 1, 2048, [str(root)])
+                process.wait.assert_called_once_with(timeout=1)
+                self.assertEqual(exit_code, 1)
+                self.assertEqual(result["exitCode"], code)
+                self.assertFalse(result["timedOut"])
+                results[label] = result
+            completed = run_helper("probe", "--tool-id", "hang", "--timeout-seconds",
+                                   "0.2", "--", str(hang), timeout=5)
+            self.assertEqual(completed.returncode, 1, completed.stdout)
+            results["hang"] = json.loads(completed.stdout)
 
             self.assertEqual(results["unusable"]["status"], "Unusable")
             self.assertEqual(results["blocked"]["status"], "CapabilityBlocked")
             self.assertEqual(results["hang"]["status"], "TimedOut")
             self.assertTrue(results["hang"]["processTreeCleaned"])
             self.assertNotIn(str(root), results["unusable"]["sanitizedEvidence"])
+
+    def test_probe_captures_real_stderr_classifies_capability_and_redacts_paths(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            private_path = str(Path(directory) / "private path" / "secret")
+            for label, code, marker, expected_status in (
+                ("native-stderr", 7, "native stderr failure", "Unusable"),
+                ("native-capability", 1, "snap-confine lacks cap_dac_override capability",
+                 "CapabilityBlocked"),
+            ):
+                with self.subTest(tool=label):
+                    completed = run_helper(
+                        "probe", "--tool-id", label, "--timeout-seconds", "1",
+                        "--redact", directory, "--", "/bin/sh", "-c",
+                        'printf \'%s in %s\\n\' "$1" "$2" >&2; exit "$3"',
+                        label, marker, private_path, str(code), timeout=5,
+                    )
+                    self.assertEqual(completed.returncode, 1, completed.stdout)
+                    result = json.loads(completed.stdout)
+                    self.assertEqual(result["status"], expected_status)
+                    self.assertEqual(result["exitCode"], code)
+                    self.assertFalse(result["timedOut"])
+                    self.assertIn(marker, result["sanitizedEvidence"])
+                    self.assertIn("<redacted>/private path/secret", result["sanitizedEvidence"])
+                    self.assertNotIn(directory, result["sanitizedEvidence"])
+
+    def test_probe_reports_real_native_nonzero_exit(self) -> None:
+        completed = run_helper("probe", "--tool-id", "native-exit", "--timeout-seconds",
+                               "1", "--", "/bin/sh", "-c", "exit 7", timeout=5)
+        self.assertEqual(completed.returncode, 1, completed.stdout)
+        result = json.loads(completed.stdout)
+        self.assertEqual(result["status"], "Unusable")
+        self.assertEqual(result["exitCode"], 7)
+        self.assertFalse(result["timedOut"])
 
     def test_swift_contract_accepts_current_matrix_and_rejects_ubuntu_2004(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -1011,7 +1149,7 @@ exit 2
     def test_probe_timeout_is_bounded(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             executable = Path(directory) / "hang"
-            write_executable(executable, "#!/usr/bin/env bash\nsleep 30\n")
+            write_executable(executable, "#!/bin/sh\nsleep 30\n")
             started = time.monotonic()
             completed = run_helper(
                 "probe",

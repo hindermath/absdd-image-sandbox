@@ -13,7 +13,8 @@
     "security"
   ],
   "enabledManagers": [
-    "custom.regex"
+    "custom.regex",
+    "dockerfile"
   ],
   "customManagers": [
     {
@@ -43,8 +44,30 @@
   ],
   "packageRules": [
     {
+      "matchPackageNames": ["mcr.microsoft.com/dotnet/sdk"],
+      "allowedVersions": "/^10\\.0$/"
+    },
+    {
+      "matchPackageNames": ["java", "java-jdk"],
+      "extractVersion": "^v?(?<version>[0-9]+)(?:\\.|$)",
+      "allowedVersions": "/^25$/"
+    },
+    {
+      "matchPackageNames": ["node"],
+      "extractVersion": "^v?(?<version>[0-9]+)(?:\\.|$)",
+      "allowedVersions": "/^24$/"
+    },
+    {
+      "matchPackageNames": ["npm"],
+      "allowedVersions": "/^12\\./"
+    },
+    {
       "matchPackageNames": ["lycheeverse/lychee"],
       "extractVersion": "^lychee-v(?<version>.*)$"
+    },
+    {
+      "matchPackageNames": ["python", "astral-sh/python-build-standalone"],
+      "groupName": "Python runtime Dockerfile ARGs"
     },
     {
       "matchManagers": [
@@ -85,7 +108,7 @@
     },
     {
       "matchPackageNames": [
-        "opencode-ai",
+        "@opencode/cli",
         "@openai/codex",
         "@anthropic-ai/claude-code",
         "@google/gemini-cli",

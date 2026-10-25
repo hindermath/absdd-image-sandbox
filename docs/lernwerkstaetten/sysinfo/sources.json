@@ -1,0 +1,86 @@
+{
+  "documentType": "LearningReferenceCatalog",
+  "createdAt": "2026-10-25T15:45:40Z",
+  "proofBoundary": "Pinned authenticated API observations; raw bodies temporary, no private access prerequisite and no source approval transferred",
+  "references": [
+    {
+      "file": "Lastenheft_SysInfoTool_HOSK.md",
+      "commit": "cf1c6b025a9ae92f1cab571926f9e253ad76be8e",
+      "label": "SysInfo reference",
+      "gitBlob": "a69844fb9a0151ff25f8c23d1e393f14ade148a3",
+      "rawSha256": "95463225ffee7b536e73174d1ca11e94132e61e1368acc584ba9ac837683f781",
+      "normalizedSha256": "95463225ffee7b536e73174d1ca11e94132e61e1368acc584ba9ac837683f781"
+    },
+    {
+      "file": "Lastenheft_SysInfoTool_HOSK_YAML.md",
+      "commit": "cf1c6b025a9ae92f1cab571926f9e253ad76be8e",
+      "label": "SysInfo reference",
+      "gitBlob": "0dc262b51f0d1f5444a91a85fdc9ea01013702dc",
+      "rawSha256": "e3cc37e2f8c81ba66d698fadb81edf7861aa1fbc2a01dcc2ec7f6d4e296e3577",
+      "normalizedSha256": "e3cc37e2f8c81ba66d698fadb81edf7861aa1fbc2a01dcc2ec7f6d4e296e3577"
+    },
+    {
+      "file": "Lastenheft_SysInfoTool_HOSK_SQLite.md",
+      "commit": "cf1c6b025a9ae92f1cab571926f9e253ad76be8e",
+      "label": "SysInfo reference",
+      "gitBlob": "d754608c606903db02167a54c0a3936285e695df",
+      "rawSha256": "1d599859ecd9f39b63bc9eb4c8927ad3d8e6486a3715c01339d067ae9fb08052",
+      "normalizedSha256": "1d599859ecd9f39b63bc9eb4c8927ad3d8e6486a3715c01339d067ae9fb08052"
+    },
+    {
+      "file": "Lastenheft_SysInfoTool_HOSK_REST_API.md",
+      "commit": "cf1c6b025a9ae92f1cab571926f9e253ad76be8e",
+      "label": "SysInfo reference",
+      "gitBlob": "e6c53a160e1354f26afbbba0e82aa2c921edfad8",
+      "rawSha256": "be81f076b719593a17f58da6efb943e3d0be3fde8b873ede175bca695e58787d",
+      "normalizedSha256": "be81f076b719593a17f58da6efb943e3d0be3fde8b873ede175bca695e58787d"
+    },
+    {
+      "file": "Lastenheft_SysInfoTool_HOSK_Dokumentation.md",
+      "commit": "cf1c6b025a9ae92f1cab571926f9e253ad76be8e",
+      "label": "SysInfo reference",
+      "gitBlob": "a82693ab3fb17434637a9721cd068f12a5fd5161",
+      "rawSha256": "ad8302663f859a258a495bf179d488d92bf6e56b311b2dfc96a914a7dd29eb51",
+      "normalizedSha256": "ad8302663f859a258a495bf179d488d92bf6e56b311b2dfc96a914a7dd29eb51"
+    },
+    {
+      "file": "Lastenheft_SysInfoTool_HOSK_RL_SE_Compliance.md",
+      "commit": "cf1c6b025a9ae92f1cab571926f9e253ad76be8e",
+      "label": "SysInfo reference",
+      "gitBlob": "ad70b3c7c63774edc86bc8f6db8abe9ba7dcb37a",
+      "rawSha256": "b2adddef3bb607001ce924dfcfa053fd2e99775310103ed3d41a57f655ca0eaa",
+      "normalizedSha256": "b2adddef3bb607001ce924dfcfa053fd2e99775310103ed3d41a57f655ca0eaa"
+    },
+    {
+      "file": "Lastenheft_Abarbeitungsreihenfolge.md",
+      "commit": "cf1c6b025a9ae92f1cab571926f9e253ad76be8e",
+      "label": "SysInfo reference",
+      "gitBlob": "a6b09a7a63ee1b7286d535ecef7b35efec45caa9",
+      "rawSha256": "61218a6f27658d915f75ad9b5d82df72895724b1b5c91cc5e1790640dbc29259",
+      "normalizedSha256": "61218a6f27658d915f75ad9b5d82df72895724b1b5c91cc5e1790640dbc29259"
+    },
+    {
+      "file": "SysInfoToolHOSK/Program.cs",
+      "commit": "cf1c6b025a9ae92f1cab571926f9e253ad76be8e",
+      "label": "SysInfo reference",
+      "gitBlob": "a53ee580dd0fe06b19eab46c74b20c58bb016b2b",
+      "rawSha256": "216d1fce32cec2c1e1ce933e8599d2266ad132c7db6f41c67c560753722886c3",
+      "normalizedSha256": "216d1fce32cec2c1e1ce933e8599d2266ad132c7db6f41c67c560753722886c3"
+    },
+    {
+      "file": "SysInfoToolHOSK/SysInfoToolHOSK.csproj",
+      "commit": "cf1c6b025a9ae92f1cab571926f9e253ad76be8e",
+      "label": "SysInfo reference",
+      "gitBlob": "7b635654e86793f2e5a3f75da37e34442213eb67",
+      "rawSha256": "6454346b7f4279d682f728619463e57276af1e8c9d498a3bf3ed257be80ca45c",
+      "normalizedSha256": "ed73249cd1d639360103b585a23f88978d60f6bead9ab76869ef790ad0f16e5d"
+    }
+  ],
+  "adaptations": [
+    "DE: Institution und Originalproduktname generalisiert; EN: institution and product variant generalized.",
+    "DE: Fixtures als Default, reale Container-Erfassung und sensible Kategorien mit separatem Opt-in; keine Host-Erfassung. EN: fixture default and explicit per-run container/sensitive opt-in, no host collection.",
+    "DE: CLI-Schutzoptionen ergänzt, CSV-Spalten und sechs Kategorien erhalten. EN: safety CLI added; six categories and CSV columns preserved.",
+    "DE: Bindung 0.0.0.0 im Entwicklungscontainer mit Loopback am Host, Port 5113; HTTPS bewusst vorbereiten. EN: sandbox binding and local-only publication, port 5113, explicit trusted HTTPS.",
+    "DE: Sechs Stufen und 80-Prozent-Coverage beibehalten; keine historische Abnahme übernommen. EN: six stages/80-percent coverage preserved, no inherited acceptance."
+  ]
+}

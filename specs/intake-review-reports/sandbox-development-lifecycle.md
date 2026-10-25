@@ -1,100 +1,182 @@
-# Unabhaengiges Intake-Vollreview / Independent Full Intake Review
+# Unabhaengiges Reihenreview / Independent Series Review
 
-## Ergebnis / Outcome
+## Deutsch
 
-DE: **Ready**, zweiter vollstaendiger Review-Pass am 2026-10-21. Reviewer
-`01a15e15-d17d-7081-81ff-c46bd195c339` (Bernoulli) war nicht Autor der
-Aenderungen und blieb schreibfrei. Review-ID:
-`867d4a2e-f31e-4d70-a295-693c36c7a564`. Vier von vier Einzelzielen,
-Gesamtreihe und 50 von 50 Kontrollaenderungen geprueft. Keine offenen oder
-neuen Findings, keine offenen Reviewfragen, keine akzeptierten Risiken.
+### Auftrag und Ergebnis
 
-EN: **Ready**, second complete review pass on 2026-10-21. Reviewer Bernoulli,
-identified above, did not author the changes and made no writes. Review
-covers all four individual targets, the complete series and all 50 delta
-controls. No open/new findings, open review questions or accepted risks.
+**Ready** fuer das begrenzte Statistik-History-/Profile-2-CI-Nachreview.
+Keine offenen Findings oder Fragen; alle Severity-Zaehler 0; keine Risikoakzeptanz.
+Review a8d1af24-3b78-40c2-9023-1ec9bd0aee33, Operation a0782733-f818-4246-9cd1-a767e5dc2f4d, Zeitpunkt 2026-10-25T21:12:52.542Z.
 
-## Findings und Historie / Findings and History
+Ausschliesslicher Review-/Schreibort: temporaerer ci-history-worktree,
+HEAD 08cba2613f5e1b61e71145c4f47a7a6e31a2476c. Originalrepo und dessen parallel
+nutzergeaenderte Keynote-Dateien wurden weder fuer dieses Review gelesen noch
+veraendert oder gestaged. Reviewer verfasste weder Implementierung noch
+Binding-Refresh und schreibt nur die drei vereinbarten Reviewausgaben.
+Toolbekannte Threadkennung 01a1741a-8f17-7f92-acec-ff7ee32ecb5b; separate
+Agentkennung N/A. Keine erfundene UUID.
 
-| ID; Reviewer-Alias | Urspruengliche Severity / Original severity | Status und Korrektur / Status and correction |
-| --- | --- | --- |
-| IR005; GS344-R001 | Medium | Resolved: englische FR-001 bis FR-015 und AC-001 bis AC-012 vollstaendig, gleiche IDs und gleicher Scope. / Complete English counterparts, same IDs and scope. |
-| IR006; GS344-R002 | Low | Resolved: Spec Kit, Kontroll-/Cloud-Begriffe und Branch-Abdeckung vor oder bei Erstgebrauch erklaert. / Spec Kit, control/cloud terms and branch coverage explained before or at first use. |
+Supersedes: specs/intake-review-archive/7620f78c-4cc8-4f42-823a-25695796065c/a0782733-f818-4246-9cd1-a767e5dc2f4d/result.json.
+Die vorherige begrenzte CI-Pruefung und ihre vollstaendige fachliche
+Vier-Intake-/Reihengrundlage bleiben fuer hashgleich unveraenderte Inputs
+anwendbar. Kein redundantes Vollreview und keine als neu dargestellten
+historischen Tests oder menschlichen Abnahmen.
 
-DE: Der [erste Pass](../../docs/maintenance/intake-gsdb344-review-pass-1-2026-10-21.md)
-ergab NeedsRemediation mit einem Medium- und einem Low-Befund. Er ist mit
-damaligen Request-/Ergebnis-/Ziel-/Matrixbytes archiviert. Dessen Trigger
-sind durch Korrektur und diesen erneuten Vollreview erfuellt; keine
-Risikoakzeptanz wurde erfunden. Die alte Ready-Bindung vom 2026-10-06 ist
-ebenfalls archiviert und explizit ersetzt, nicht stillschweigend als aktuell
-weiterverwendet.
+### Fachliche Delta-Pruefung
 
-EN: The linked first pass found one Medium and one Low issue and concluded
-NeedsRemediation. Its request, result and target/matrix snapshots are
-archived. Corrections and this full re-review satisfy its triggers without
-invented risk acceptance. The 2026-10-06 Ready binding is also archived and
-explicitly superseded, not silently reused as current evidence.
+DEC-STAT-HISTORY-2026-10-25 ist die ausdrueckliche menschliche Wahl einer
+getrennten historischen Reproduktion und aktuellen Statistikpruefung. Sie ist
+keine Risikoannahme, Produktfreigabe oder pauschale Akzeptanz von DRIFT.
 
-## Vollstaendige Abdeckung / Complete Coverage
+1. Historisch: Assert-HistoricalStatisticsReplay verlangt echte Boolean-
+   Felder fuer reproducible/current/changed, erfolgreiche Reproduktion,
+   changed=false und exakte case-sensitive Revision-/Stichtaggleichheit zu
+   nichtleeren Snapshotfeldern. current=true ist nur mit CURRENT/Exit 0,
+   current=false nur mit DRIFT/Exit 1 konsistent. Unbekannte Zustaende,
+   falsche Typen/Exitcodes, Korruption oder Schreibeffekte bleiben Fehler.
+   Das Workflowparsing und strikte Fehlerbehandlung sowie umgebende
+   Datei-/Status-/Abstammungspruefungen bleiben aktiv.
+2. Aktuell: Assert-CurrentStatisticsProfile2 verlangt unabhaengig CURRENT,
+   Exit 0, changed als Boolean false, Methodik 2 und eine nichtleere Revision.
+   Linux prueft beide vorhandenen Shell-Einstiege, Windows wie zuvor native
+   PowerShell. Beide Adapter/Engine-CheckOnly-JSON-Vertraege wurden gelesen.
+   Der bestehende Renderer prueft das aktive Ledger, nicht das eingefrorene
+   Pilotdataset. Die historische Reproduktion kann dieses Gate nie ersetzen.
+3. Evidence: historicalSnapshotSha256 und currentLedgerSha256 sind getrennte
+   Felder. Bestehende Preset-/Payloadintegritaet, Native-Fixtures, Encoding-
+   Varianten, Raw-Blobs, Hash-/Nichtschreib-, Ancestry- und Sauberkeitspruefungen
+   bleiben erhalten. Kein Build oder Renderlauf durch diesen Reviewer.
+4. Tests: Die neuen gemeinsamen Funktionen und ihre Workflowverdrahtung wurden
+   fachlich gelesen. Das PowerShell-Skript prueft 3 gueltige und 14 ungueltige
+   Entscheidungen; die fokussierte Python-Suite bindet es ein und prueft die
+   historische/aktuelle Trennung. Parent meldet 5 Tests Passed in 0.909 Sekunden.
+   Dies ist Parent-Nachweis, kein eigener Suite-Lauf. Parent prueft echte
+   historische CLI/Helper und aktuelles Ledger erst im passenden Commitkontext.
 
-| Ziel / Target | Inhaltsurteil / Content verdict | Lifecycle |
-| --- | --- | --- |
-| Archivierte GSDB / Historical GSDB | Ready als historische Quelle / as historical source | Completed |
-| Container-Hardening | Ready als Intake / as intake | Eligible |
-| Sandbox-Abnahme / Acceptance | Ready als Intake / as intake | Blocked |
-| Lernenden-Selbstbau / Learner self-build | Ready als Intake / as intake | Blocked |
+### Historie und Quellenbindungen
 
-DE: Vier eindeutige Ziele, eine Root, drei verbindliche geordnete Kanten,
-keine Zyklen. Beide Reihenansichten stimmen ueberein. Alle 50 aktuellen
-Normtexte samt Akzeptanz wurden erneut abgeglichen: 47 UpdateRequired,
-1 AlreadyCovered, 2 begrenzte N/A. Gruppen G01-G10 umfassen
-3/6/3/5/7/16/5/1/2/2 Kontrollen. H-Anforderungen und Abnahmekriterien,
-unabhaengige A-Uebergabe und begrenzte L-Auswirkungen sind konsistent.
-Jedes der drei Receipts bindet zwoelf aktuelle Quellen einschliesslich des
-ersten Reviewberichts. Keine verdeckte Scope-Erweiterung oder numerische
-Grenzwertabsenkung gefunden. Sprachreihenfolge, Vorkenntnisse, Begriffe und
-textorientierte A11Y sind fuer diesen Anforderungsvertrag ausreichend.
+Der historische Pilot bleibt byte-identisch: Fuer config.json, report.md und
+snapshot.json unter docs/project-statistics-pilot stimmen selbst gelesene
+Working-Tree-Blob-IDs mittels hash-object --no-filters mit HEAD:path ueberein.
+Kein historisches Triplet neu generiert oder umgeschrieben.
 
-EN: Four unique targets, one root, three binding ordered edges, no cycles;
-both order views agree. All 50 current normative texts and acceptance clauses
-were reviewed again: 47 UpdateRequired, 1 AlreadyCovered and 2 bounded N/A.
-G01-G10 cover 3/6/3/5/7/16/5/1/2/2 controls. H requirements/criteria,
-independent A handoff and bounded L effects agree. Each receipt binds twelve
-current sources including pass 1. No hidden scope extension or weakened
-numerical threshold. Language order, prior knowledge, terminology and
-text-first accessibility are sufficient for this requirements contract.
+Alle vorherigen 283 Textinputs wurden nur im Worktree aktuell gehasht:
+275 unveraendert; geaendert sind der deklarierte Workflow, der fokussierte
+Python-Test und sechs erwartete Metadaten-/Bindingdateien. Alle vier Targets,
+Anforderungen, Schwellen, sechs Prompts, Intake-Identitaeten und Reihenansichten
+bleiben gleich. Graph: eine Root, drei bindende Kanten; Lifecycle weiterhin
+Completed / Eligible / Blocked / Blocked. Keine neue Startautoritaet.
 
-## Schreibfreiheit / No-Write Proof
+Drei Receipts mit je 67 Quellen, insgesamt 201 Bindungen, sind aktuell.
+SRC001 ist der exakte archivierte Vorlaeufer; SRC048/SRC063 erhalten aktuelle
+Hashes, SRC065..067 binden Vorschlag, Helper und PS-Tests. IAD406 dokumentiert
+nur die begrenzte menschliche CI-Entscheidung; alte Entscheidungen, Sprache,
+Promptstatus und DeliveryAuthority bleiben unveraendert. Das Manifest ergaenzt
+nur drei Evidencepfade, das erneuerte Serienreceipt bindet es korrekt.
 
-Normalisierte SHA-256, vor = nach Pass 2 / normalized SHA-256, before = after pass 2:
+17 Archivvorbilder sind raw/normalisiert hashgenau: sechs Target-/Receipt-,
+vier Reihen-, vier Review- und drei Quellvorbilder (Lizenz, Workflow, Python-Test).
+14 entsprechen den alten gebundenen Inputs; drei Reviewausgaben hatten keine
+zirkulaere Selbstbindung. Archivierungszeitfolge ist dokumentierte Provenienz,
+keine selbst beobachtete Chronologie. Historische Sprache und Rechtevorlaeufer
+bleiben erhalten. IR201/IR202 und die getrennte PP201/PP202-Aufloesungshistorie
+bleiben mit Evidence, Owner, Follow-up und Trigger im JSON erhalten; kein neuer
+Hookscan, keine wiederholte historische Gesamtpruefung.
 
-| Artefakt / Artifact | Hash |
-| --- | --- |
-| Historische GSDB / Historical GSDB | `9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a` |
-| Hardening | `a132f61e61f7184764d9bf9ba093adcd1389564644c386f2f1a615d72b9c89cb` |
-| Abnahme / Acceptance | `8002cad312d4e05dd48eda42d1eede0d17471e0f812a6ed509cb7e3c174b42f7` |
-| Lernenden-Selbstbau / Learner self-build | `f056ccea8592f854654413492de99b1c503286f4253fae2431abb55275f21db7` |
-| Delta-Matrix | `8b4c39378079fe624128c12b2f94c25423e7edb317f79e8965ad4927a065320f` |
+### Verifikation und Grenzen
 
-Request: `3fa52c8c2f1907a25f8f36090fb26152058fad056f4778b03abc50889774d260`.
+309 normalisierte Texthashes: bisherige 283, 17 neue Archive, drei neue
+Vorschlag-/Helper-/Testquellen sowie sechs unmittelbar gepruefte Renderer-/
+Config-/Pilottriplet-Inputs. Zwei vorherige unveraenderte Gzip-Archive sind
+separat raw-hash-gebunden. Generated docs/project-statistics.md, mutable
+Operationsjournale, neue Logs, generierte Inventare/Commitgruppen und diese
+Reviewausgaben sind ausgeschlossen; unveraenderliche Quellsnapshots bleiben
+gebunden. Generierte Statistik kann daher getrennt committed werden, ohne
+diesen fachlichen Snapshot zirkulaer zu veraendern.
 
-## Nachweisgrenze und naechste Aktion / Proof Boundary and Next Action
+Eigene Pflichtvalidatoren: acht Receipt-, vier Serienmanifest-/Serienreceipt-
+und zwei Ergebnislaeufe, alle 14 Pass mit Exit 0, jeweils Bash und PowerShell
+-NonInteractive -NoProfile ausschliesslich im Worktree. Exakte Kommandos im
+JSON. Finale Nachweise nach erfolgreicher Ergebnisvalidierung ergaenzt, ohne
+Targets/Request/Status/Findings zu aendern; kein redundanter Wiederholungslauf.
+Abschlussabgleich: 309 Textinputs und zwei Binaerarchive ohne Drift. Unveraenderte Config-/Policy-Pruefung aus der Vollreview-Basis wird
+explizit weiterverwendet, ohne alte Inventarzaehler als aktuell auszugeben.
+Kein doppelter fokussierter/full Maintenance-/Produkt-/Native-Build-Testlauf.
 
-DE: Ready gilt fuer Anforderungen und Reihenintegration, nicht fuer
-technische Erfuellung oder Sandbox-, Rechts-, Datenschutz-, Provider-,
-Modell- oder Plattformfreigabe. O-344-TECH, O-344-HUMAN und O-344-CLOUD
-bleiben mit Owner, Folgeaktion und Trigger im
-[Delta-Abgleich](../../docs/maintenance/intake-gsdb344-delta-2026-10-21.md)
-offen. Keine Builds, Produktlaeufe, externen Rechtspruefungen oder
-Plattform-/Screenreader-Abnahmen. Technische Validatoren des Hauptagenten
-belegen Bindungen und ersetzen nicht dieses semantische Urteil.
+Ready ist weder aktuelle Ledger-Abnahme noch technischer/menschlicher
+Produktnachweis. Alle Lizenz-/Template-/O-344-/Plattform-/OpenCode-/A11Y-Gates
+bleiben getrennt. Parent fuehrt echte Reproduktion und aktuelles Profile2-Gate
+im Inhaltscommitkontext, separates sauberes Statistikcommit sowie frische
+Exact-Head-CI vor PR100 MergeAndSync aus. Keine neue Freigabe, Risikoakzeptanz,
+Originalrepo-, Keynote-, Source-, Git-, Log-/Journal-, Build-/Runtime- oder
+Wartungsmutation durch diesen Reviewer.
 
-EN: Ready covers requirements and series integration, not implementation or
-sandbox, legal, privacy, provider, model or platform approval. The linked
-alignment retains the three owned Open handoffs and their follow-up/triggers.
-No builds, product runs, external legal checks or platform/screen-reader
-acceptance. Parent validators establish bindings, not semantic review.
+## English
 
-```text
-$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json
-```
+**Ready** for the bounded statistics-history/current-Profile2 CI follow-up,
+not a new full intake/product review. No open findings/questions or accepted
+risks; all severity counts zero. Review a8d1af24-3b78-40c2-9023-1ec9bd0aee33, operation a0782733-f818-4246-9cd1-a767e5dc2f4d,
+explicitly supersedes specs/intake-review-archive/7620f78c-4cc8-4f42-823a-25695796065c/a0782733-f818-4246-9cd1-a767e5dc2f4d/result.json. Prior bounded CI and original complete
+four-intake/whole-series semantic review remain dated evidence only for proven
+unchanged inputs, not newly performed tests or human acceptance.
+
+All work targets the supplied temporary ci-history-worktree at HEAD
+08cba2613f5e1b61e71145c4f47a7a6e31a2476c. The original checkout and user-modified
+Keynote files were neither read for this review nor edited/staged. Reviewer
+authored no correction/refresh and writes only the three agreed outputs.
+Tool-exposed thread identity is 01a1741a-8f17-7f92-acec-ff7ee32ecb5b; separate
+agent ID N/A, no invented UUID.
+
+The explicit owner DEC-STAT-HISTORY-2026-10-25 separates historical exact
+reproduction from mandatory active freshness, not risk acceptance or blanket
+DRIFT permission. Historical helper requires Boolean reproducible/current/
+changed, successful reproduction, no changes and exact case-sensitive nonempty
+recorded revision/cutoff. Current historical replay requires CURRENT/0;
+noncurrent but reproducible replay requires DRIFT/1. Invalid states/types,
+corruption, inconsistent exits or writes fail. Independently, active Profile2
+requires CURRENT/0, changed Boolean false, methodology 2 and a nonempty revision.
+Linux uses both existing shell entrypoints; Windows retains native PowerShell
+coverage. The existing renderer adapter and engine check-only JSON interface
+were reviewed; active ledger freshness never follows from historical replay.
+Separate historicalSnapshotSha256/currentLedgerSha256 fields prevent conflation.
+Existing installed-payload integrity, native fixtures, encoding/raw-blob,
+protected-file hash/no-write, ancestry and cleanliness checks remain intact.
+
+The helper tests cover three valid and fourteen rejected decisions; Python
+wires the helper and checks workflow separation. Parent reports five focused
+tests passed in 0.909 seconds, not reviewer-run tests. Parent owns actual
+historical CLI/helper and active ledger validation after the content commit.
+No duplicate full suite, native build, rendering or product runtime test.
+
+All three historical pilot files have identical no-filter working-tree and
+HEAD Git blob IDs, independently read; no historical regeneration. All 283
+prior text inputs were compared in the worktree: 275 unchanged, workflow/test
+and six expected metadata/binding changes. All four targets, requirements,
+thresholds, six prompts, IDs, views, one root/three binding edges and Completed /
+Eligible / Blocked / Blocked remain unchanged. All 201 current source bindings
+(67 per receipt) verify. Archived predecessor stays first; refreshed workflow/
+Python-test hashes and appended proposal/helper/PS-test sources plus IAD406
+preserve old decisions, language, prompt state and delivery authority. Manifest
+adds only three evidence paths; current series receipt binds it correctly.
+All seventeen preimages match raw/normalized hashes; fourteen match prior
+inputs, three prior review outputs lacked circular self-binding. Archival timing
+remains recorded provenance. Rights/history/language and resolved IR201/IR202
+plus separate PP201/PP202 evidence/owners/follow-ups/triggers are preserved;
+no new hook scan or historical full re-review.
+
+There are 309 normalized text hashes plus two unchanged binary gzip records.
+Generated project statistics, mutable journals/new logs/generated inventory or
+groups and these outputs are excluded; immutable snapshots remain bound. Required
+authoring/series/result validators independently passed in both shells: eight
+authoring, four series and two result invocations, all fourteen exit 0, within
+the supplied worktree. Exact commands are in JSON. Final evidence appended
+after result validation without changing targets/request/status/findings or
+redundant reruns. Final comparison: 309 text inputs and two binary archives,
+zero drift. Unchanged config/policy assessment
+is explicitly reused without presenting old inventory counts as current.
+Ready grants no active-ledger acceptance, technical/human product approval,
+legal release, new start or risk acceptance. Existing rights/template/O-344/
+platform/OpenCode/A11Y gates remain. Parent owns actual replay/current checks,
+separate clean statistics commit and fresh exact-head CI before PR100
+MergeAndSync. No original/source/Keynote/Git/log/journal/build/runtime/global-
+maintenance writes by reviewer beyond the three authorized worktree outputs.
