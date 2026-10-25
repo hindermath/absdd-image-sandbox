@@ -24,7 +24,19 @@ trap 'rm -f "$tmp_output"' EXIT
 
 iso_from_epoch() {
   local epoch="$1"
-  date -u -d "@${epoch}" +%Y-%m-%dT%H:%M:%SZ
+  if [ "$(uname -s)" = Darwin ]; then
+    date -u -r "$epoch" +%Y-%m-%dT%H:%M:%SZ
+  else
+    date -u -d "@${epoch}" +%Y-%m-%dT%H:%M:%SZ
+  fi
+}
+
+file_mtime() {
+  if [ "$(uname -s)" = Darwin ]; then
+    stat -f %m "$1"
+  else
+    stat -c %Y "$1"
+  fi
 }
 
 session_id_from_path() {
@@ -49,7 +61,7 @@ emit_entry() {
   fi
 
   session_id="$(session_id_from_path "$source_path")"
-  mtime="$(stat -c %Y "$source_path")"
+  mtime="$(file_mtime "$source_path")"
   timestamp="$(iso_from_epoch "$mtime")"
 
   jq -cn \
@@ -100,6 +112,19 @@ emit_tool_version() {
 
 collect_opencode() {
   local session_diff_dir="${opencode_dir}/storage/session_diff"
+  local database="${opencode_dir}/opencode.db"
+
+  # V2 storage presence is not per-session coverage; never open the database.
+  if [ -f "$database" ] && [ ! -L "$database" ]; then
+    jq -cn \
+      --arg source_path "$database" \
+      --arg modified_at "$(iso_from_epoch "$(file_mtime "$database")")" \
+      --arg exported_at "$exported_at" \
+      '{record_type: "storage-metadata", tool: "opencode",
+        storage_format: "sqlite", source_path: $source_path,
+        modified_at: $modified_at, exported_at: $exported_at,
+        session_coverage: "not-exported"}' >>"$tmp_output"
+  fi
 
   if [ -d "$session_diff_dir" ]; then
     while IFS= read -r -d '' path; do

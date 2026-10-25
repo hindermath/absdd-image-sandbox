@@ -48,7 +48,9 @@ Write-Host "Running audit-export before compose down..."
 if ($LASTEXITCODE -eq 0) {
     Write-Host "Audit metadata export completed before compose down."
 } else {
-    Write-Warning "Audit metadata export did not complete; continuing with compose down."
+    $auditExitCode = $LASTEXITCODE
+    Write-Warning "Audit export failed; compose down and volume removal are blocked."
+    exit $auditExitCode
 }
 
 $effectiveDownArgs = @()

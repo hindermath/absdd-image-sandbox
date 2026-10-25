@@ -58,6 +58,20 @@ function Export-AdeAgentAuditMetadata {
         }
     }
 
+    # V2 presence is not per-session coverage. Never open or query the database.
+    $database = Join-Path $tools[0].State 'opencode.db'
+    if (Test-Path -LiteralPath $database -PathType Leaf) {
+        $item = Get-Item -LiteralPath $database
+        if (-not ($item.Attributes -band [IO.FileAttributes]::ReparsePoint)) {
+            $records.Add([ordered]@{
+                record_type = 'storage-metadata'; tool = 'opencode'
+                storage_format = 'sqlite'; source_path = $item.FullName
+                modified_at = $item.LastWriteTimeUtc.ToString('yyyy-MM-ddTHH:mm:ssZ')
+                exported_at = $exportedAt; session_coverage = 'not-exported'
+            })
+        }
+    }
+
     $allowLists = @(
         @{ Tool = 'opencode'; Root = "$($tools[0].State)/storage/session_diff"; Filter = 'ses_*'; Recurse = $false },
         @{ Tool = 'codex'; Root = "$($tools[1].State)/sessions"; Filter = '*'; Recurse = $true },
