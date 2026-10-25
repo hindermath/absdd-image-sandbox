@@ -20,6 +20,8 @@ concurrency:
 
 jobs:
   native-proof:
+    # This exact-history pilot belongs to the reference, not a fresh template history.
+    if: github.repository == 'hindermath/absdd-image-sandbox'
     name: Statistics pilot (${{ matrix.os }})
     strategy:
       fail-fast: false

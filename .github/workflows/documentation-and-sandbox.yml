@@ -33,6 +33,7 @@ jobs:
             --exclude-path scripts/templates/secure-development-compendium-header.md
             --exclude-path docs/security/agent-session-log
             --exclude-path scripts/tests/linked-intake-evidence
+            --exclude-path '(^|/)specs/intake-series-archive/[^/]+/[^/]+/(order|requirements-order)\.md$'
             './**/*.md'
           fail: true
 
@@ -72,3 +73,6 @@ jobs:
 
       - name: Check Home Baseline documentation boundary
         run: python3 scripts/tests/test_home_baseline_documentation_contract.py
+
+      - name: Check optional template contracts
+        run: python3 scripts/tests/test_template_profile.py

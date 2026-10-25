@@ -25,6 +25,36 @@ repos:
         language: python
         pass_filenames: false
         files: ^(Dockerfile|spec-kit/patch-specify-cli\.py|scripts/tests/test_specify_container_patch\.py)$
+      - id: opencode-v2-policy
+        name: check OpenCode 2 policy migration
+        entry: python scripts/tests/test_opencode_v2_policy.py
+        language: python
+        pass_filenames: false
+        files: ^(Dockerfile|renovate\.json|opencode\.jsonc|scripts/build-and-sbom\.(sh|ps1)|scripts/tests/test_opencode_v2_policy\.py|scripts/tests/fixtures/opencode-v1-policy\.json)$
+      - id: toolchain-version-pins
+        name: check native Python Maven and LTS pins
+        entry: python scripts/tests/test_toolchain_version_pins.py
+        language: python
+        pass_filenames: false
+        files: ^(Dockerfile|renovate\.json|scripts/config/required-cli-tools-registry\.json|docs/fuer-lernende/sandbox-profil\.md|scripts/tests/test_toolchain_version_pins\.py)$
+      - id: audit-storage-metadata
+        name: check metadata-only audit exporter parity
+        entry: python scripts/tests/test_audit_storage_metadata.py
+        language: python
+        pass_filenames: false
+        files: ^(scripts/audit-export\.(sh|ps1)|scripts/tests/test_audit_storage_metadata\.py)$
+      - id: learner-documentation-contract
+        name: check learner documentation source contract
+        entry: python scripts/tests/test_learner_documentation_contract.py
+        language: python
+        pass_filenames: false
+        files: ^(README\.md|AGENTS\.md|CLAUDE\.md|GEMINI\.md|\.github/.*copilot-instructions\.md|docs/fuer-lernende/.*\.md|docs/betrieb/.*\.md|scripts/tests/test_learner_documentation_contract\.py)$
+      - id: audit-shutdown-fail-closed
+        name: check audit shutdown fails closed before volume deletion
+        entry: python scripts/tests/test_audit_shutdown_fail_closed.py
+        language: python
+        pass_filenames: false
+        files: ^(scripts/compose-down-with-audit\.(sh|ps1)|scripts/tests/test_audit_shutdown_fail_closed\.py)$
 
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.30.1
