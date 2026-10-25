@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeOperation",
+  "operationId": "eca8c4db-68e0-415d-9305-2b47156af151",
+  "type": "CreateSeries",
+  "status": "Completed",
+  "publicationScope": "ReusableDraftPackageOnly",
+  "createdAt": "2026-10-25T15:45:40Z",
+  "authorityEvidence": "Owner approved the complete two-workshop plan and requested implementation on 2026-10-25. Authority covers reusable Draft learning packages only; no personal product execution or remote delivery.",
+  "proposalPath": "specs/intake-authoring-operations/eca8c4db-68e0-415d-9305-2b47156af151/proposal.json",
+  "proposalNormalizedSha256": "9dc53e248dc1fd89cb3f28c496a77e6b75ea93d05c0c38edba4bd233a64e9577",
+  "approval": {
+    "approvedBy": "Owner",
+    "approvedAt": "2026-10-25T15:45:40Z",
+    "evidence": "Approved plan: new build, two web routes, full SysInfo, container opt-in, portable packages; technical proposal derived without scope expansion.",
+    "approved": true
+  },
+  "stagingDirectory": "specs/intake-authoring-operations/eca8c4db-68e0-415d-9305-2b47156af151/staging",
+  "intendedTargets": [
+    "intakes/00-vertrag.md",
+    "intakes/01-sqlite.md",
+    "intakes/02-mvc-client.md",
+    "intakes/03-abschluss.md"
+  ],
+  "validatedTargets": [
+    "intakes/00-vertrag.md",
+    "intakes/01-sqlite.md",
+    "intakes/02-mvc-client.md",
+    "intakes/03-abschluss.md"
+  ],
+  "publishedTargets": [
+    "intakes/00-vertrag.md",
+    "intakes/01-sqlite.md",
+    "intakes/02-mvc-client.md",
+    "intakes/03-abschluss.md"
+  ],
+  "rollbackBoundary": "No active sandbox or personal series published; this package is an inactive portable draft.",
+  "failure": {
+    "class": "N/A",
+    "message": "N/A"
+  },
+  "nextAction": "Draft artifact authoring complete; full-series review and activation remain personal future actions. No product execution or acceptance."
+}

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "c3f159ab-3c89-4cbd-ad23-37813841eb46",
+  "mode": "Series",
+  "policy": "generic-markdown",
+  "targets": [
+    {
+      "path": "intakes/00-formular.md",
+      "role": "Primary"
+    },
+    {
+      "path": "intakes/01-crud.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/02-fehler-und-bedienung.md",
+      "role": "OrderedMember"
+    },
+    {
+      "path": "intakes/03-abschluss.md",
+      "role": "OrderedMember"
+    }
+  ],
+  "series": {
+    "dependencies": [
+      {
+        "from": "intakes/00-formular.md",
+        "to": "intakes/01-crud.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/01-crud.md",
+        "to": "intakes/02-fehler-und-bedienung.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      },
+      {
+        "from": "intakes/02-fehler-und-bedienung.md",
+        "to": "intakes/03-abschluss.md",
+        "kind": "HardCompletionGate",
+        "binding": true
+      }
+    ],
+    "orderedTargetPaths": [
+      "intakes/00-formular.md",
+      "intakes/01-crud.md",
+      "intakes/02-fehler-und-bedienung.md",
+      "intakes/03-abschluss.md"
+    ],
+    "roots": [
+      "intakes/00-formular.md"
+    ]
+  },
+  "campaign": {
+    "manifestPath": "N/A",
+    "workers": [],
+    "operatorExceptions": []
+  }
+}

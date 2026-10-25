@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesManifest",
+  "seriesId": "373e3c56-0e13-401b-941a-2820960da1c9",
+  "title": "Weg A: MVC / Route A: MVC",
+  "policy": "intake-sequencing-governance-v0.2.11",
+  "status": "Draft",
+  "orderedTargets": [
+    {
+      "path": "intakes/00-formular.md",
+      "role": "Primary",
+      "normalizedSha256": "6e63037e09b72d1a6f96682fab1c40384681e43b8c1be3b1f86895c459523b7a",
+      "status": "Pending"
+    },
+    {
+      "path": "intakes/01-crud.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "a6799d811fae56116b87a8aff231c94b3caaf72268ef3da8e7ec4a0e43571976",
+      "status": "Pending"
+    },
+    {
+      "path": "intakes/02-fehler-und-bedienung.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "398164cd4d5aa290e0aa01f57a62dc1468d511f9e4771a84bca2c91b333bb468",
+      "status": "Pending"
+    },
+    {
+      "path": "intakes/03-abschluss.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "6504a724fa5ffeead51c0d280acb23ccdd387012d78ff21daaa2aab262002c57",
+      "status": "Pending"
+    }
+  ],
+  "roots": [
+    "intakes/00-formular.md"
+  ],
+  "dependencies": [
+    {
+      "from": "intakes/00-formular.md",
+      "to": "intakes/01-crud.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "intakes/01-crud.md",
+      "to": "intakes/02-fehler-und-bedienung.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "intakes/02-fehler-und-bedienung.md",
+      "to": "intakes/03-abschluss.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    }
+  ],
+  "evidencePaths": [
+    "basis.md",
+    "sources.json",
+    "order.md",
+    "specs/intake-authoring-receipts/",
+    "specs/intake-review-requests/learning.json"
+  ]
+}

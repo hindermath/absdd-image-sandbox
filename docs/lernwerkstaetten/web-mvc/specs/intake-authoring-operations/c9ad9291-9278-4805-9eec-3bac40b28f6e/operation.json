@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeOperation",
+  "operationId": "c9ad9291-9278-4805-9eec-3bac40b28f6e",
+  "type": "CreateSeries",
+  "status": "Completed",
+  "publicationScope": "ReusableDraftPackageOnly",
+  "createdAt": "2026-10-25T15:45:40Z",
+  "authorityEvidence": "Owner approved the complete two-workshop plan and requested implementation on 2026-10-25. Authority covers reusable Draft learning packages only; no personal product execution or remote delivery.",
+  "proposalPath": "specs/intake-authoring-operations/c9ad9291-9278-4805-9eec-3bac40b28f6e/proposal.json",
+  "proposalNormalizedSha256": "26fa4ac04623ae059b5611294e307da65ba3559e3469a02667302ff3cc696cf0",
+  "approval": {
+    "approvedBy": "Owner",
+    "approvedAt": "2026-10-25T15:45:40Z",
+    "evidence": "Approved plan: new build, two web routes, full SysInfo, container opt-in, portable packages; technical proposal derived without scope expansion.",
+    "approved": true
+  },
+  "stagingDirectory": "specs/intake-authoring-operations/c9ad9291-9278-4805-9eec-3bac40b28f6e/staging",
+  "intendedTargets": [
+    "intakes/00-formular.md",
+    "intakes/01-crud.md",
+    "intakes/02-fehler-und-bedienung.md",
+    "intakes/03-abschluss.md"
+  ],
+  "validatedTargets": [
+    "intakes/00-formular.md",
+    "intakes/01-crud.md",
+    "intakes/02-fehler-und-bedienung.md",
+    "intakes/03-abschluss.md"
+  ],
+  "publishedTargets": [
+    "intakes/00-formular.md",
+    "intakes/01-crud.md",
+    "intakes/02-fehler-und-bedienung.md",
+    "intakes/03-abschluss.md"
+  ],
+  "rollbackBoundary": "No active sandbox or personal series published; this package is an inactive portable draft.",
+  "failure": {
+    "class": "N/A",
+    "message": "N/A"
+  },
+  "nextAction": "Draft artifact authoring complete; full-series review and activation remain personal future actions. No product execution or acceptance."
+}

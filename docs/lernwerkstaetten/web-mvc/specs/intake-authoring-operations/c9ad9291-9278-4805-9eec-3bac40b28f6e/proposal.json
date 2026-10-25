@@ -1,0 +1,90 @@
+{
+  "documentType": "LearningPackageProposal",
+  "seriesId": "373e3c56-0e13-401b-941a-2820960da1c9",
+  "authorityEvidence": "Owner approved the complete two-workshop plan and requested implementation on 2026-10-25. Authority covers reusable Draft learning packages only; no personal product execution or remote delivery.",
+  "scope": "Portable Draft only",
+  "orderedMembers": [
+    {
+      "intakeId": "66049f06-f965-411a-8d0a-32fa351a569a",
+      "path": "intakes/00-formular.md",
+      "receiptPath": "specs/intake-authoring-receipts/00-formular.json",
+      "title": "Fixture form",
+      "order": 1,
+      "normalizedSha256": "6e63037e09b72d1a6f96682fab1c40384681e43b8c1be3b1f86895c459523b7a"
+    },
+    {
+      "intakeId": "3c373c07-c8dc-4826-b703-51aeec2d2bf7",
+      "path": "intakes/01-crud.md",
+      "receiptPath": "specs/intake-authoring-receipts/01-crud.json",
+      "title": "SQLite CRUD",
+      "order": 2,
+      "normalizedSha256": "a6799d811fae56116b87a8aff231c94b3caaf72268ef3da8e7ec4a0e43571976"
+    },
+    {
+      "intakeId": "78ef6ea1-f327-4e15-97d4-7205e1ce1803",
+      "path": "intakes/02-fehler-und-bedienung.md",
+      "receiptPath": "specs/intake-authoring-receipts/02-fehler-und-bedienung.json",
+      "title": "Errors and usability",
+      "order": 3,
+      "normalizedSha256": "398164cd4d5aa290e0aa01f57a62dc1468d511f9e4771a84bca2c91b333bb468"
+    },
+    {
+      "intakeId": "af6381af-ff3e-44d6-9290-51ceaede32ff",
+      "path": "intakes/03-abschluss.md",
+      "receiptPath": "specs/intake-authoring-receipts/03-abschluss.json",
+      "title": "Evidence and closure",
+      "order": 4,
+      "normalizedSha256": "6504a724fa5ffeead51c0d280acb23ccdd387012d78ff21daaa2aab262002c57"
+    }
+  ],
+  "roots": [
+    "intakes/00-formular.md"
+  ],
+  "dependencies": [
+    {
+      "from": "intakes/00-formular.md",
+      "to": "intakes/01-crud.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "intakes/01-crud.md",
+      "to": "intakes/02-fehler-und-bedienung.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "intakes/02-fehler-und-bedienung.md",
+      "to": "intakes/03-abschluss.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    }
+  ],
+  "coverage": [
+    {
+      "path": "intakes/00-formular.md",
+      "topic": "Fixture form",
+      "sourceCatalog": "sources.json",
+      "disposition": "Covered"
+    },
+    {
+      "path": "intakes/01-crud.md",
+      "topic": "SQLite CRUD",
+      "sourceCatalog": "sources.json",
+      "disposition": "Covered"
+    },
+    {
+      "path": "intakes/02-fehler-und-bedienung.md",
+      "topic": "Errors and usability",
+      "sourceCatalog": "sources.json",
+      "disposition": "Covered"
+    },
+    {
+      "path": "intakes/03-abschluss.md",
+      "topic": "Evidence and closure",
+      "sourceCatalog": "sources.json",
+      "disposition": "Covered"
+    }
+  ],
+  "overlapDecision": "Common contract shared, stage deltas separate; web routes are alternatives in separate packages, no cross-route dependency."
+}

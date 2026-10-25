@@ -1,0 +1,150 @@
+{
+  "documentType": "LearningReferenceCatalog",
+  "createdAt": "2026-10-25T15:45:40Z",
+  "proofBoundary": "Pinned authenticated API observations; raw bodies temporary, no private access prerequisite and no source approval transferred",
+  "references": [
+    {
+      "file": "README.md",
+      "commit": "9dc05a3a51e1bfb2c46b979ced9ce33daa66f9a5",
+      "label": "Web MVC REST reference",
+      "gitBlob": "ca61ef6ab77908ec7e2a8ab32b8e27d78f25794f",
+      "rawSha256": "ab4a9f29c2743852f42970273dd1e8b194371478e7af8e8886ce6c6bee9348b2",
+      "normalizedSha256": "ab4a9f29c2743852f42970273dd1e8b194371478e7af8e8886ce6c6bee9348b2"
+    },
+    {
+      "file": "docs/Architektur.md",
+      "commit": "9dc05a3a51e1bfb2c46b979ced9ce33daa66f9a5",
+      "label": "Web MVC REST reference",
+      "gitBlob": "7ea631654408dfc59bab71f53412925b528055a5",
+      "rawSha256": "cf2ebff4b83d819e15590b249d728e733075e6a09e160ac451e72874bc892961",
+      "normalizedSha256": "cf2ebff4b83d819e15590b249d728e733075e6a09e160ac451e72874bc892961"
+    },
+    {
+      "file": "docs/Entscheidungshilfe.md",
+      "commit": "9dc05a3a51e1bfb2c46b979ced9ce33daa66f9a5",
+      "label": "Web MVC REST reference",
+      "gitBlob": "96df94ee3589cb0092c06de866c79b952c0fadaa",
+      "rawSha256": "2f84a050211d91e98e3bc2c68d6e0af2f2166ee0df819ffcd166d4a2ff172900",
+      "normalizedSha256": "2f84a050211d91e98e3bc2c68d6e0af2f2166ee0df819ffcd166d4a2ff172900"
+    },
+    {
+      "file": "docs/Sicherheit.md",
+      "commit": "9dc05a3a51e1bfb2c46b979ced9ce33daa66f9a5",
+      "label": "Web MVC REST reference",
+      "gitBlob": "58bef3d9468ddafbacbb68f32ad46fe09a2ae36a",
+      "rawSha256": "adc676f51e82b01238f1e8b7e63523348113e667e435ee1baa2eb7bbf62fdf56",
+      "normalizedSha256": "adc676f51e82b01238f1e8b7e63523348113e667e435ee1baa2eb7bbf62fdf56"
+    },
+    {
+      "file": "docs/Tests.md",
+      "commit": "9dc05a3a51e1bfb2c46b979ced9ce33daa66f9a5",
+      "label": "Web MVC REST reference",
+      "gitBlob": "0a39eaa24855a5303e2024d486005b9d1e6ee441",
+      "rawSha256": "d8c1178682297c8b38c3f80b2ab63871e5e1ec94a5d285322001daaa06619f9f",
+      "normalizedSha256": "d8c1178682297c8b38c3f80b2ab63871e5e1ec94a5d285322001daaa06619f9f"
+    },
+    {
+      "file": "docs/Lernpfad.md",
+      "commit": "9dc05a3a51e1bfb2c46b979ced9ce33daa66f9a5",
+      "label": "Web MVC REST reference",
+      "gitBlob": "dc5edec785ee061feb812f814bcde7bba6399dd4",
+      "rawSha256": "125ba0f148d5b34bd4df8cca1e78ec9d77d7f20d74c4c3e46641c0a400344dc9",
+      "normalizedSha256": "125ba0f148d5b34bd4df8cca1e78ec9d77d7f20d74c4c3e46641c0a400344dc9"
+    },
+    {
+      "file": "docs/Berufspfade.md",
+      "commit": "9dc05a3a51e1bfb2c46b979ced9ce33daa66f9a5",
+      "label": "Web MVC REST reference",
+      "gitBlob": "60b03b7a4c0c560c4116958c87fcc30c0bcf395f",
+      "rawSha256": "58d7e17e15f67d85c75d000947b255d68c0c8460733e9fa222923077cb3791b3",
+      "normalizedSha256": "58d7e17e15f67d85c75d000947b255d68c0c8460733e9fa222923077cb3791b3"
+    },
+    {
+      "file": "WebApplication3.Api/Contracts/TextEntryRequest.cs",
+      "commit": "9dc05a3a51e1bfb2c46b979ced9ce33daa66f9a5",
+      "label": "Web MVC REST reference",
+      "gitBlob": "04c779164db980d416eaa397f8a5849d8413550f",
+      "rawSha256": "3d25b2f43df8ae9a0a694b7f9a44bc40133031c131771d115b73f2395e25d557",
+      "normalizedSha256": "3d25b2f43df8ae9a0a694b7f9a44bc40133031c131771d115b73f2395e25d557"
+    },
+    {
+      "file": "WebApplication3.Api/Controllers/TextEntriesController.cs",
+      "commit": "9dc05a3a51e1bfb2c46b979ced9ce33daa66f9a5",
+      "label": "Web MVC REST reference",
+      "gitBlob": "8b52d21d3496ddfb743c78025fba96a460fef6ff",
+      "rawSha256": "77de4d2d6b5b02ae815b6d7a7ca905d97cfd0e9e233f0a94723bd1fdb459c7ef",
+      "normalizedSha256": "77de4d2d6b5b02ae815b6d7a7ca905d97cfd0e9e233f0a94723bd1fdb459c7ef"
+    },
+    {
+      "file": "WebApplication3/Services/TextEntriesApiClient.cs",
+      "commit": "9dc05a3a51e1bfb2c46b979ced9ce33daa66f9a5",
+      "label": "Web MVC REST reference",
+      "gitBlob": "f182379c884a118ad40e77dab79eacf226eb9025",
+      "rawSha256": "d2eae9ee7c8a116cd89982d45fc70ce0d8cb776e109515134447e2d50f5aebf7",
+      "normalizedSha256": "d2eae9ee7c8a116cd89982d45fc70ce0d8cb776e109515134447e2d50f5aebf7"
+    },
+    {
+      "file": "README.md",
+      "commit": "b17b09db203355a6a1fb4192c40dafba098613ff",
+      "label": "Web MVC reference",
+      "gitBlob": "48817a94a276b2f1f0cfd7cbf4443c7c9e4b41bf",
+      "rawSha256": "6ab83efd0a69e9a0558b3db76ab27c00dd6a1cc25d90bfbc942e54123b88b6c5",
+      "normalizedSha256": "6ab83efd0a69e9a0558b3db76ab27c00dd6a1cc25d90bfbc942e54123b88b6c5"
+    },
+    {
+      "file": "docs/Architektur.md",
+      "commit": "b17b09db203355a6a1fb4192c40dafba098613ff",
+      "label": "Web MVC reference",
+      "gitBlob": "2051652d3ec1832bcbf3428d3cbf287b81cb5b48",
+      "rawSha256": "3eaf9a5632ae5f0467f90276bba8e629aea0d8317b7ea57f96d743c0c0ed42fa",
+      "normalizedSha256": "3eaf9a5632ae5f0467f90276bba8e629aea0d8317b7ea57f96d743c0c0ed42fa"
+    },
+    {
+      "file": "docs/Entscheidungshilfe.md",
+      "commit": "b17b09db203355a6a1fb4192c40dafba098613ff",
+      "label": "Web MVC reference",
+      "gitBlob": "96df94ee3589cb0092c06de866c79b952c0fadaa",
+      "rawSha256": "2f84a050211d91e98e3bc2c68d6e0af2f2166ee0df819ffcd166d4a2ff172900",
+      "normalizedSha256": "2f84a050211d91e98e3bc2c68d6e0af2f2166ee0df819ffcd166d4a2ff172900"
+    },
+    {
+      "file": "docs/Sicherheit.md",
+      "commit": "b17b09db203355a6a1fb4192c40dafba098613ff",
+      "label": "Web MVC reference",
+      "gitBlob": "4e488c679af5b6f4a3d0fd3a59a4674eacf678bd",
+      "rawSha256": "15ca2581bc9394a45f4a55bfe4b8c38eae5d9eeae315123bb16e55fa7724431f",
+      "normalizedSha256": "15ca2581bc9394a45f4a55bfe4b8c38eae5d9eeae315123bb16e55fa7724431f"
+    },
+    {
+      "file": "docs/Tests.md",
+      "commit": "b17b09db203355a6a1fb4192c40dafba098613ff",
+      "label": "Web MVC reference",
+      "gitBlob": "c208479e8bdc61ee86e812faa8a20277e2c3296a",
+      "rawSha256": "10900ff9386ae5117843c95c8014bfde019af0e3aeacb27206915dcd4e43e754",
+      "normalizedSha256": "10900ff9386ae5117843c95c8014bfde019af0e3aeacb27206915dcd4e43e754"
+    },
+    {
+      "file": "WebApplication4/Program.cs",
+      "commit": "b17b09db203355a6a1fb4192c40dafba098613ff",
+      "label": "Web MVC reference",
+      "gitBlob": "8bff9b6bf224e097b4eeced6561744eaab555be7",
+      "rawSha256": "9d8c5daeeea690f923d6b0920dec040117167fbe3909e44fc08fbdd99e053b51",
+      "normalizedSha256": "9d8c5daeeea690f923d6b0920dec040117167fbe3909e44fc08fbdd99e053b51"
+    },
+    {
+      "file": "WebApplication4/Controllers/HomeController.cs",
+      "commit": "b17b09db203355a6a1fb4192c40dafba098613ff",
+      "label": "Web MVC reference",
+      "gitBlob": "52bfceb38ee1ea61f542d06a1ff3495ac40b14ec",
+      "rawSha256": "afb86d79237059d68d88bce2df64382f42ce90e8bd560df9ef805e6ac0e02c27",
+      "normalizedSha256": "afb86d79237059d68d88bce2df64382f42ce90e8bd560df9ef805e6ac0e02c27"
+    }
+  ],
+  "adaptations": [
+    "DE: Zwei gleichwertig zu begründende Web-Architekturen; genau ein persönlicher Pfad. EN: two justified web architectures, one personal route.",
+    "DE: Neue App aus Hello World, Referenzen nicht als fertige Lernlösung kopieren. EN: new implementation, no finished reference code copied.",
+    "DE: Basisbetrieb innerhalb des bestehenden Entwicklungscontainers mit SQLite; PostgreSQL/App-Container später. EN: existing sandbox plus SQLite first, PostgreSQL/app images later.",
+    "DE: Ports 5111/5112 statt Referenzports, korrekte HTTPS-Vertrauensprüfung erhalten. EN: sandbox ports replace reference ports, retain certificate validation.",
+    "DE: Sicherheitsregeln ab erster Stufe, 70-Prozent-Coverage je App erhalten; keine alten Freigaben übernehmen. EN: controls from first stage and 70-percent coverage per app, no inherited approvals."
+  ]
+}

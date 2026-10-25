@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesManifest",
+  "seriesId": "73249749-e3a4-4fd5-9eea-1caba78e6d45",
+  "title": "SysInfo: sechs Produktstufen / Six Product Stages",
+  "policy": "intake-sequencing-governance-v0.2.11",
+  "status": "Draft",
+  "orderedTargets": [
+    {
+      "path": "intakes/00-cli.md",
+      "role": "Primary",
+      "normalizedSha256": "5b75fb31eca428856cfc06d428dbfcba2a39fc147a082ebac5e6f332b2e96e5f",
+      "status": "Pending"
+    },
+    {
+      "path": "intakes/01-yaml.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "87ef3d0b3f087eff1683213f762014cf83d4a865d9874860a4c5c3d2df456098",
+      "status": "Pending"
+    },
+    {
+      "path": "intakes/02-sqlite.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "8011766c2b7b614632900a4ad29fa570f6d81a47af10c7ee54cf3f148e12b4a7",
+      "status": "Pending"
+    },
+    {
+      "path": "intakes/03-rest.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "a3acfca9baf50d07310d84c47e6d6b3bc29555502ff199563a040799817decdd",
+      "status": "Pending"
+    },
+    {
+      "path": "intakes/04-dokumentation.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "1ecb7f2e017194ab6eb1b2573a54e232e3a39377e27e7faeae53d8bc13935e1a",
+      "status": "Pending"
+    },
+    {
+      "path": "intakes/05-review.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "c889550efea0f9c4cf4e05681768ebc5f33e59d02dcc0b7cf261e78dd688877f",
+      "status": "Pending"
+    }
+  ],
+  "roots": [
+    "intakes/00-cli.md"
+  ],
+  "dependencies": [
+    {
+      "from": "intakes/00-cli.md",
+      "to": "intakes/01-yaml.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "intakes/01-yaml.md",
+      "to": "intakes/02-sqlite.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "intakes/02-sqlite.md",
+      "to": "intakes/03-rest.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "intakes/03-rest.md",
+      "to": "intakes/04-dokumentation.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "intakes/04-dokumentation.md",
+      "to": "intakes/05-review.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    }
+  ],
+  "evidencePaths": [
+    "basis.md",
+    "sources.json",
+    "order.md",
+    "specs/intake-authoring-receipts/",
+    "specs/intake-review-requests/learning.json"
+  ]
+}
