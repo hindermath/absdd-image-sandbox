@@ -76,11 +76,16 @@ jobs:
           $sourceBefore = Get-ProofHashSet $source
           $pilotBefore = Get-ProofHashSet $pilot
           $package = Join-Path $pilot '.specify/presets/project-statistics-governance'
-          $receipt = Get-Content (Join-Path $pilot 'docs/maintenance/project-statistics-installation-v010.json') -Raw | ConvertFrom-Json
-          foreach ($file in $receipt.installedPayloadFiles) {
-              foreach ($root in @($source,$pilot)) {
-                  $installed = Join-Path $root ('.specify/presets/project-statistics-governance/' + $file.path)
-                  if ((Get-FileHash -LiteralPath $installed).Hash.ToLowerInvariant() -cne $file.sha256) { throw 'Installed payload drift.' }
+          # Current integration locks bind every installed payload and release source.
+          # Preserve the v010 installation receipt as historical evidence, not an active lock.
+          $python = if ($IsWindows) { 'python' } else { 'python3' }
+          foreach ($root in @($source,$pilot)) {
+              Push-Location -LiteralPath $root
+              try {
+                  & $python -B -m unittest scripts.tests.test_spec_kit_agent_surface_parity.SpecKitAgentSurfaceParityTests.test_gsdb_rollout_installed_payload_and_release_bindings
+                  if ($LASTEXITCODE -ne 0) { throw 'Current installed payload or release-source drift.' }
+              } finally {
+                  Pop-Location
               }
           }
           $snapshot = Get-Content (Join-Path $pilot $mutable[2]) -Raw | ConvertFrom-Json

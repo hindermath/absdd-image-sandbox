@@ -1,0 +1,36 @@
+{
+  "lifecycle": [
+    "Completed",
+    "Eligible",
+    "Blocked",
+    "Blocked"
+  ],
+  "manifestNormalizedSha256": "5240a9ad955342ffa3b13522a07979cbbba251caf93a9674ce6560d2db9c4b84",
+  "operationId": "cf00bd75-048f-4a85-803b-54ab5a160b44",
+  "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+  "archiveManifestNormalizedSha256": "740f5c72a9aff540c063df8adf37f1ba30e1df2fad99b869896de9860645b2c4",
+  "authorityEvidence": "Owner explicitly approved the targeted CI correction round for PR100 and MergeAndSync with admin bypass only after fresh green technical checks. Correct stale statistics with the existing renderer after content commit, current preset-integrity gate instead of historical receipt, and pin the published .NET10 GA SDK matching the verified MCR baseline. Renew affected source bindings and independent bounded review as necessary. Preserve intake identities, all requirements, six prompts, lifecycle and future execution authority. No image build, container restart, global maintenance, platform-rule change or formal approval.",
+  "createdAt": "2026-10-25T19:42:12Z",
+  "documentType": "IntakeSeriesOperation",
+  "type": "Update",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "schemaVersion": "1.0",
+  "archiveManifestPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/cf00bd75-048f-4a85-803b-54ab5a160b44/manifest.json",
+  "status": "Completed",
+  "validation": {
+    "reviewId": "7620f78c-4cc8-4f42-823a-25695796065c",
+    "workflowSyntax": "Both YAML files and ten embedded PowerShell scripts parsed",
+    "compose": "Passed, static only",
+    "priorTechnicalEvidence": "Existing image/runtime evidence reused unchanged; no new build or lifecycle actions",
+    "remoteCI": "Pending a new pushed head, not claimed passed",
+    "lifecycle": "Completed, Eligible, Blocked, Blocked",
+    "sessionLog": "docs/security/agent-session-log/2026-10-25-2042.md",
+    "publication": "Local filesystem artifact publication only; Git delivery remains separate",
+    "archiveFidelity": "17 exact raw preimages verified, including both changed workflow sources",
+    "reviewedInputs": 283,
+    "independentReview": "Ready",
+    "targetedRegressions": "Nine CI contracts and agent parity tests passed",
+    "changeBoundary": "Current installed/release integrity gate in both pilot worktrees; published SDK pin; unchanged intake texts and six prompts"
+  },
+  "nextAction": "$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json"
+}

@@ -1,28 +1,28 @@
 {
   "schemaVersion": "1.0",
   "documentType": "IntakeSeriesReceipt",
-  "receiptId": "96d44fde-9957-424a-8ab7-ccc7f2eb24ec",
+  "receiptId": "018a1771-59a5-41cd-812e-6ad960dadecf",
   "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
   "generator": {
     "preset": "intake-sequencing-governance",
     "version": "0.2.11"
   },
-  "createdAt": "2026-10-25T18:34:32Z",
+  "createdAt": "2026-10-25T19:42:12Z",
   "operation": {
-    "operationId": "989f4710-2626-4256-ae70-e476244b5d1b",
-    "authorityEvidence": "Owner explicitly approved removing only the two extra workshop EOF blank lines, renewing affected source bindings and independent follow-up review, then completing groups 4-7 and MergeAndSync with admin bypass. Preserve the first three commits, intake identities, all requirements, six follow-up prompts, lifecycle and future execution authority. One combined content push and exact-head merge-commit only after green checks. No build, restart, global maintenance or new formal approval.",
-    "type": "Update"
+    "type": "Update",
+    "operationId": "cf00bd75-048f-4a85-803b-54ab5a160b44",
+    "authorityEvidence": "Owner explicitly approved the targeted CI correction round for PR100 and MergeAndSync with admin bypass only after fresh green technical checks. Correct stale statistics with the existing renderer after content commit, current preset-integrity gate instead of historical receipt, and pin the published .NET10 GA SDK matching the verified MCR baseline. Renew affected source bindings and independent bounded review as necessary. Preserve intake identities, all requirements, six prompts, lifecycle and future execution authority. No image build, container restart, global maintenance, platform-rule change or formal approval."
   },
   "status": "Ready",
   "manifest": {
     "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
-    "normalizedSha256": "740f5c72a9aff540c063df8adf37f1ba30e1df2fad99b869896de9860645b2c4"
+    "normalizedSha256": "5240a9ad955342ffa3b13522a07979cbbba251caf93a9674ce6560d2db9c4b84"
   },
   "supersedes": {
-    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/989f4710-2626-4256-ae70-e476244b5d1b/manifest.json",
-    "manifestArchiveSha256": "a76a2949ddf494be44cf073c37ecbf6359fc3cfc3751ab007d6d90a3ecee5c07",
-    "receiptNormalizedSha256": "bfed79083ffcd2dcf8235d45fa569b3ad0d94e5b921a646b007204de7a3ecfed",
-    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/989f4710-2626-4256-ae70-e476244b5d1b/receipt.json"
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/cf00bd75-048f-4a85-803b-54ab5a160b44/manifest.json",
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/cf00bd75-048f-4a85-803b-54ab5a160b44/receipt.json",
+    "receiptNormalizedSha256": "f928af6ff0e5cd15748ae4b42914d6cac4c728c59974368d0da44d6b031ff07b",
+    "manifestArchiveSha256": "740f5c72a9aff540c063df8adf37f1ba30e1df2fad99b869896de9860645b2c4"
   },
   "tombstone": {
     "path": "N/A",

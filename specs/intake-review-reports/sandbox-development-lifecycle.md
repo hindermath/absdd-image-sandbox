@@ -2,58 +2,171 @@
 
 ## Deutsch
 
-### Auftrag, Unabhaengigkeit und Historie
+### Auftrag und Ergebnis
 
-Ergebnis: **Ready** fuer die aktualisierten Intakebindungen. Review 787003c4-b366-46c8-adc0-bacb47654c02, Operation 989f4710-2626-4256-ae70-e476244b5d1b, Zeitpunkt 2026-10-25T18:37:53.889Z. Dies ist ein gezieltes unabhaengiges EOF-Nachreview, kein erneutes Vollreview und kein neuer Produkt-/Governance-Lauf. Der Reviewer hat weder die zwei EOF-Korrekturen noch die Binding-Erneuerung verfasst und schreibt nur die drei vereinbarten Reviewausgaben.
+**Ready** fuer das begrenzte CI-/Quellenbindungs-Nachreview. Keine offenen
+Findings oder Rueckfragen, alle Severity-Zaehler 0, keine Risikoakzeptanz.
+Review 7620f78c-4cc8-4f42-823a-25695796065c; Operation cf00bd75-048f-4a85-803b-54ab5a160b44; Zeitpunkt 2026-10-25T19:45:33.683Z.
+Der Reviewer hat weder Korrekturen noch Binding-Refresh verfasst und aendert
+nur die drei vereinbarten Reviewausgaben. Toolbekannte Threadkennung:
+01a1741a-8f17-7f92-acec-ff7ee32ecb5b; separate Agentkennung N/A.
 
-Supersedes: specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/result.json. Dessen vollstaendige fachliche Pruefung aller vier Intakes, sechs aktuellen Prompts und der gesamten Reihe wird ausdruecklich fuer unveraenderte Inhalte weiterverwendet. Das Vollreview ist mit Datum und 244 damaligen Hashes historische fachliche Evidenz, kein als neu ausgegebener Testlauf. Werkzeugseitige Threadkennung: 01a1741a-8f17-7f92-acec-ff7ee32ecb5b; separate Agentkennung N/A, keine erfundene UUID.
+Supersedes: specs/intake-review-archive/787003c4-b366-46c8-adc0-bacb47654c02/cf00bd75-048f-4a85-803b-54ab5a160b44/result.json.
+Das vorherige EOF-Nachreview und die dort explizit referenzierte vollstaendige
+fachliche Vier-Intake-/Reihenpruefung bleiben die Grundlage fuer nachgewiesen
+unveraenderte Inhalte, keine als neu ausgegebenen Tests oder Abnahmen.
+Kein neues Vollreview, kein Produkt-/Governance-Lauf.
 
-### Offene Findings
+### Begrenzte fachliche Pruefung
 
-Keine neuen oder verbleibenden Findings, keine Rueckfragen, Critical/High/Medium/Low jeweils 0, keine Risikoakzeptanz.
+1. Maintenance-TUI: Archivdiff zeigt ausschliesslich den Wechsel von Floating
+   10.0.x auf SDK 10.0.402 plus Kommentar. Pin stimmt mit dem unveraenderten
+   Dockerfile-Baselinekommentar ueberein. Actionpins, Berechtigungen, Matrix,
+   Locked-Restore, Builds, Tests und komplette CI-Regressionsschritte bleiben
+   erhalten. Offizielle GA-Metadaten und HEAD 200 sind Parent-Nachweise,
+   keine eigene Netzpruefung; frische Runner-CI bleibt erforderlich.
+2. Statistik-Pilot: Nur die historische v010-Receipt-Payloadschleife wird
+   ersetzt. Die historische Receipt bleibt unveraendert. In beiden Worktrees
+   wird derselbe bereits vorhandene Integritaetstest ueber Python -B aufgerufen.
+   Jeder fehlerhafte Exitcode fuehrt zum Abbruch; try/finally stellt das
+   Arbeitsverzeichnis wieder her. Ancestry-, Native-Fixture-, Encoding-Parity-,
+   Unveraendertheits- und Evidencepruefungen danach bleiben bestehen.
+3. Der gelesene bestehende Gate prueft aktive GSDB-Integrationslocks fuer alle
+   14 Presets: Registryabdeckung und -hash, Manifestidentitaet/-version/-hash,
+   alle Payload-Dateien und aggregierte Anzahl/Hashes. Statistik ist aktuell
+   0.1.3, nicht die historische 0.1.0. Releaseprofile werden fuer Version,
+   Archiv-URL und Repository mit dem aktiven Quellenlock verglichen. Das ist
+   lokaler Provenienzabgleich, keine externe Releaseauthentifizierung oder
+   menschliche Freigabe. Drei neue fokussierte Tests pruefen Workflowverkabelung,
+   Pin/erhaltene Gates und Ablehnung manipulierter Payloads sowie Manifeste.
+4. Neuer bilingualer Vorschlag begrenzt die Autoritaet auf PR100-CI-Korrektur,
+   Quellenrefresh und Tagesabschluss. Die Statistik wird nach Inhaltscommit
+   mit unveraenderter Konfiguration/Methodik separat erzeugt und in einem
+   dritten reinen Statistikcommit vor dem Push geliefert. Diese generierte
+   Datei ist bewusst nicht gebunden und hier nicht als CURRENT bestaetigt.
 
-| ID | Kategorie / urspruengliche Severity | Location | Owner | Status, Follow-up, Trigger |
-|---|---|---|---|---|
-| IR201 / IR-20261025-01 | SafeOperationDocumentation / High | docs/fuer-lernende/sandbox-profil.md:28-51 | Repository Maintainer / Documentation Author | Bleibt ResolvedAndVerified: normaler Stopp ohne Loeschoption, absichtliche Loeschung gesondert und menschlich bestaetigt. Korrektur/Regression erhalten; bei Stopp-, Wrapper-, Volume- oder Einwilligungsaenderung neu pruefen. |
-| IR202 / IR-20261025-02 | SecurityBoundaryPrecision / Medium | docs/fuer-lernende/sandbox-profil.md:89-137 | Repository Maintainer / Documentation Author | Bleibt ResolvedAndVerified: Host/Container-Schreibschicht/Temp/Volumes/Codex getrennt DE/EN. Regression erhalten; bei Mount-, Rechte-, Temp-, Policy- oder Textaenderung neu pruefen. |
+### Bindungen, Historie und Findingkontinuitaet
 
-Aufloesungsevidenz und urspruengliche Findingdaten bleiben im Vollreview sowie unter reviewerEvidence.resolvedFindings erhalten. Profil, Regressionstest und Konfigurationen sind hashgleich; die EOF-Korrektur beruehrt die Befunde nicht. Die damaligen 12/12 eigenen Dokumentationstests sind historische Evidenz; kein neuer Testlauf wird behauptet.
+Alle bisherigen 260 Textinputs frisch gehasht: 252 unveraendert; zwei benannte
+Workflowaenderungen und sechs erwartete Binding-/Metadatenaenderungen.
+Alle vier Targettexte, Anforderungen, Schwellen, Addenda und sechs Prompts
+sind unveraendert. Beide Reihenansichten, Intake-IDs, eine Root, drei bindende
+Kanten und Completed / Eligible / Blocked / Blocked bleiben erhalten.
 
-### Fachliche Grundlage und begrenzter Deltaabgleich
+Alle drei aktiven Receipts mit je 64 Quellen, insgesamt 192 aktuelle Bindungen,
+sind geprueft. Erste Quelle ist der exakte archivierte Intakevorlaeufer.
+SRC048 wird neu gehasht, SRC062..064 binden CI-Vorschlag, fokussierten Test und
+Maintenance-Workflow; IAD405 dokumentiert nur die begrenzte Entscheidung.
+Bestehende Entscheidungen, Sprache, Promptstatus und DeliveryAuthority bleiben.
+Das Manifest ergaenzt nur Evidencepfade; das Serienreceipt bindet es aktuell.
 
-Alle 244 vorherigen Reviewinputs wurden aktuell gehasht: 236 sind unveraendert. Geaendert sind genau zwei Workshopquellen sowie sechs erwartete Metadaten-/Bindingdateien (drei Receipts, Request, Manifest und Serienreceipt). Bei jedem der beiden Workshops ist der vollstaendige dekomprimierte Vorlaeufer bytegenau aktueller Inhalt plus ein finales LF. Kein Wortlaut, Folieninhalt, Sprachpaar, Recht oder Sicherheitsinhalt aendert sich; keine Praesentationsregeneration und keine Scan-Ausnahme.
+17 neue Archivvorbilder sind raw und normalisiert hashgenau: sechs Target-/
+Receipt-, vier Reihen-, vier Review- und drei Quellsnapshots, darunter beide
+Workflowvorstaende und Lizenzvorlaeufer. 14 entsprechen bereits gebundenen
+alten Inputs; drei Reviewausgaben hatten keine zirkulaere Selbstbindung.
+Archiv-vor-Edit-Chronologie ist dokumentierte Provenienz, nicht selbst
+beobachtete Zeitfolge. Keine historischen Befunde oder Sprachformen retconnt.
 
-Die neue Quelle docs/maintenance/closeout-eof-alignment-2026-10-25.md wurde fachlich gelesen. DE/EN begrenzen die Zustimmung auf EOF, Bindungen und Nachreview sowie den getrennten elterlichen Tagesabschluss. Es entsteht keine neue Startautoritaet oder Abnahme. Das Manifest ergaenzt nur ihren Evidencepfad. Die Receipts erneuern Identitaeten/Operation/Archivverweise, binden den jeweiligen archivierten Target zuerst, aktualisieren die zwei Workshop-Hashes und ergaenzen SRC061 sowie die begrenzte Entscheidung IAD404. Alte Entscheidungen, Intake-IDs, Zieltexte, Sprache, Promptstatus und DeliveryAuthority bleiben erhalten.
+IR201 (urspruenglich High, SafeOperationDocumentation) und IR202 (Medium,
+SecurityBoundaryPrecision) bleiben mit Originalevidence, Owner, Follow-up und
+Trigger im JSON ResolvedAndVerified; die betroffenen Texte/Tests sind unveraendert.
+Der getrennte Bericht docs/security/pre-push-false-positive-review-2026-10-25.md
+wird als fachliche Historie mitgebunden: PP201 (Medium, SecretDetectionCorrectness)
+und PP202 (Medium, CommitHistoryCoverage) sind dort behoben. Owner bleibt
+Repository Maintainer / Hook Author; Assignment-/Quoting-/Leerwertaenderungen
+beziehungsweise Ref-/Range-/Pfad-/Blob-Pinaenderungen loesen Nachpruefung aus.
+Kein neuer Hookscan und keine allgemeine Sicherheitsabnahme dieses CI-Reviews.
 
-Alle vier Intake-Texte sind hashgleich, einschliesslich aller Anforderungen, Akzeptanzschwellen, Addenda und sechs Folgeprompts. Beide Reihenansichten sind unveraendert. Eine Root, drei bindende Kanten und Completed / Eligible / Blocked / Blocked bleiben bestehen. Das Vollreview der historischen Wurzel, Hardening-, Selbstpruefungs- und Lernendenanforderungen, GSDB-50-Zuordnung, Assurance-0.1.8-Uebergabe, DE/EN/B2/A11Y-, Rechte-, Template- und Human-only-Grenzen bleibt fuer diese nachgewiesen unveraenderten Inhalte anwendbar; es wurde nicht redundant wiederholt.
+### Verifikation und Grenzen
 
-### Aktuelle Verifikation und Grenzen
+283 aktuelle normalisierte Texthashes und zwei unveraenderte fruehere Gzip-
+Archive separat raw-hash-gebunden. Zusatzinputs gegenueber 260: 17 Textarchive,
+CI-Vorschlag/Test und vier unmittelbar gepruefte Hilfsquellen (Gatecode,
+Quellenlock, historische Receipt und PP-Bericht). Mutable Operationsjournale,
+neue Sessionlogs, generierte Inventare/Commitgruppen, docs/project-statistics.md
+und diese Ausgaben sind nicht gebunden. Unveraenderliche Quellsnapshots unter
+Operationsverzeichnissen bleiben gebunden.
 
-- 260 aktuelle normalisierte Texthashes; zwei Gzip-Archive separat mit raw-SHA-256 und Payloadhash gebunden. Keine Bindung an mutable Operationsjournale, neue Parentlogs, generiertes Inventory/Groupassignment oder die drei Reviewausgaben.
-- 17 Archivvorbilder geprueft: sechs Target-/Receipt-, vier Reihen-, vier Review- und drei Quellvorbilder (davon zwei Gzip). Raw-/Payload-/normalisierte Hashes stimmen. 14 Vorbilder stimmen mit frueheren Inputhashes ueberein; drei damalige Reviewausgaben hatten keine Selbstbindung. Rechtevorlaeufer erhalten. Archivierungszeit bleibt dokumentierte Provenienz, keine selbst beobachtete Chronologie.
-- Drei aktuelle Receipts mit je 61 Quellen: alle 183 Bindungen geprueft; historisches Drei-Quellen-Receipt unveraendert. IDs und graph-/hashgebundenes Serienreceipt konsistent.
-- Eigene aktuelle Validatoren: acht Receipt-, vier Serienmanifest-/Serienreceipt- und zwei Ergebnislaeufe, alle 14 Pass mit Exit 0, jeweils Bash und PowerShell -NonInteractive -NoProfile. Exakte Befehle im JSON. Finale Validierungsevidenz nach den Ergebnislaeufen ergaenzt, ohne Aenderung von Targets/Request/Status/Findings. Unveraenderte Governanceconfig/Policy-Pruefung aus dem Vollreview gezielt weiterverwendet; damalige Inventarzaehler nicht als neu behauptet. Abschlussabgleich: 260 Textinputs und zwei Gzip-Archive ohne Drift. Keine weiteren Testschleifen; Parent-Pruefungen sind nicht eigene Evidenz.
-- LIC-01 und andere LIC-02, O-344-TECH/HUMAN/CLOUD, UPD-AMD64/V2-LOOP/V2-AUDIT/SMOKE-WARN/APPROVAL sowie DOC-A11Y und native/Screenreader/Tastatur/Erstnutzungsabnahmen bleiben getrennt offen. Begrenzte Eigenrechteentscheidung ist keine allgemeine Drittrechtsfreigabe; Template bleibt inaktiv.
-- Parent uebernimmt Gruppen 4-7 und MergeAndSync unter aktueller Ownerautoritaet, unter Erhalt der ersten drei Commits, mit einem Gesamtpush und exaktem Mergecommit/Admin-Bypass erst nach gruenen Checks. Reviewer veraendert kein Git, Runtime, Image oder Journal. Ready erteilt weder Produkt-/Intakestart noch technische/menschliche Abnahme, Risikoakzeptanz, Rechts- oder A11Y-Allgemeinfreigabe.
+Eigene aktuelle Validatoren: acht Receipt-, vier Serienmanifest-/Serienreceipt-
+und zwei Ergebnislaeufe, alle 14 Pass mit Exit 0, jeweils Bash und PowerShell
+-NonInteractive -NoProfile. Exakte Kommandos im JSON. Finale Evidence wurde
+nach erfolgreicher Ergebnisvalidierung ergaenzt, ohne Targets/Request/Status/
+Findings zu aendern; keine redundante Wiederholung. Abschlussabgleich: 283
+Textinputs und zwei Binaerarchive ohne Drift. Unveraenderte Config-/Policy-Pruefung aus dem
+Vollreview wird explizit wiederverwendet, ohne alte Inventarzaehler als neu
+anzugeben. Parent meldet neun fokussierte CI-/Agentparitaetstests in 0.213 Sekunden
+bestanden, danach nur einen unbenutzten Import entfernt. Dies ist Parent-
+Evidenz, kein eigener Suite-Lauf. Parent uebernimmt aktuelle Syntax/Links/Secrets
+und frische CI; keine wiederholten Maintenance-/Produktpruefungen durch Reviewer.
+
+Alle bisherigen Lizenz-, Template-, O-344-, Plattform-/Architektur-, OpenCode-,
+Human-only- und A11Y-Grenzen bleiben erhalten. Ready erteilt keine neue
+Startautoritaet, technische/menschliche Abnahme, Rechtsfreigabe oder Risikoakzeptanz.
+PR100 MergeAndSync mit Admin-Bypass bleibt an frische gruene Exact-Head-Checks
+gebunden; keine Pruefanforderung wird erlassen. Keine Builds, Neustarts,
+Plattformregel-, Runtime-, Git- oder globalen Wartungsaenderungen durch Reviewer.
 
 ## English
 
-### Scope, Independence and History
+**Ready** for this bounded CI/source-binding follow-up only: no open findings
+or questions, all severity counts zero, no accepted risks. Review 7620f78c-4cc8-4f42-823a-25695796065c,
+operation cf00bd75-048f-4a85-803b-54ab5a160b44, explicitly supersedes specs/intake-review-archive/787003c4-b366-46c8-adc0-bacb47654c02/cf00bd75-048f-4a85-803b-54ab5a160b44/result.json.
+The prior EOF follow-up and its referenced complete four-intake/series semantic
+review are reused only for proven unchanged inputs, not claimed as newly
+performed tests or acceptance. Reviewer authored neither correction nor refresh
+and edits only the three agreed outputs. Tool-exposed thread identity remains
+01a1741a-8f17-7f92-acec-ff7ee32ecb5b; separate agent ID N/A.
 
-**Ready** concerns updated intake bindings only. Review 787003c4-b366-46c8-adc0-bacb47654c02, operation 989f4710-2626-4256-ae70-e476244b5d1b, is an independent bounded EOF follow-up, not a repeated full semantic review or new product/governance run. The reviewer authored neither EOF edits nor binding refresh and changes only the three agreed outputs. It explicitly supersedes specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/result.json. That complete four-intake, six-prompt and whole-series review is reused only for proven unchanged content. Its date, 244 hashes and results remain historical evidence, not newly executed tests. Tool-exposed thread identity is 01a1741a-8f17-7f92-acec-ff7ee32ecb5b; no separate agent ID was exposed or invented.
+The maintenance workflow diff only pins SDK 10.0.402 instead of floating 10.0.x,
+matching the unchanged Dockerfile baseline comment. Action pins, permissions,
+matrix, locked restore/build/tests and full CI regressions remain. Official GA
+metadata and HEAD 200 are parent evidence, not an independent network check.
+The statistics workflow replaces only the historical v010 payload loop with
+the same existing integrity test in both worktrees via Python -B; nonzero status
+throws and try/finally restores location. Subsequent native, ancestry, encoding,
+content-preservation and evidence checks remain. The historical receipt is
+unchanged. Reviewed gate implementation checks active GSDB installed locks for
+all fourteen presets, registry coverage/hash, manifest identity/version/hash
+and complete payload counts/hashes; statistics is 0.1.3. Release profiles match
+version, archive URL and repository against the active source lock. This is
+local provenance equality, not external release authentication or human approval.
+Three new focused tests cover wiring/pin and negative payload/manifest tampering.
 
-### Findings and Semantic Continuity
+The bilingual proposal preserves bounded authority. Generated statistics use
+unchanged config/methodology after content commit in a separate third pure-
+generated commit before push; that mutable output is excluded and not declared
+CURRENT here. All 260 prior text inputs were freshly hashed: 252 unchanged,
+two declared workflow and six metadata/binding changes. All four targets,
+requirements, thresholds, six prompts, identities, both views, root/three edges
+and Completed / Eligible / Blocked / Blocked remain unchanged. All 192 current
+source bindings (64 per active receipt) and current series manifest/receipt
+are verified. Archived predecessor is first; refreshed workflow hash and three
+new sources/IAD405 preserve existing decisions, language, prompt state and
+delivery authority. All seventeen preimages match raw and normalized hashes;
+fourteen match previously bound inputs, three prior review outputs could not
+self-bind. Archival timing is recorded provenance, not personally observed.
+Rights predecessor and historical language remain intact.
 
-No open findings/questions and no accepted risks; all severity counts are zero. IR201 (SafeOperationDocumentation, originally High, profile lines 28-51, Repository Maintainer / Documentation Author) remains ResolvedAndVerified: safe routine stop and separately consented deliberate deletion. Preserve its correction/regression and reopen on stop, wrapper, volume or consent changes. IR202 (SecurityBoundaryPrecision, originally Medium, same owner, profile lines 89-137) remains resolved: equivalent DE/EN host/container-layer/tmp/volume/Codex distinctions. Reopen on mount, permission, tmp, policy or wording changes. Stable aliases, original findings and resolution evidence remain in the full-review archive and structured resolvedFindings. Profile, tests and configurations match prior hashes. The old 12/12 reviewer tests are historical, not rerun.
+IR201/IR202 remain resolved with original evidence/owner/follow-up/triggers.
+The separate bound hook-review report preserves resolved PP201/PP202 history,
+not a new hook scan or general security acceptance. Its owner remains Hook
+Author / Maintainer; assignment/quoting/empty-value and ref/range/path/blob-pin
+changes respectively trigger re-evaluation. There are 283 current normalized
+text hashes plus two unchanged binary gzip records. Mutable journals/new
+session logs/generated inventory or groups, generated project statistics and
+these outputs are excluded; immutable snapshots stay included.
 
-All 244 prior inputs were freshly hashed: 236 unchanged; exactly two workshop EOF-only changes and six expected metadata/binding changes (three receipts, request, manifest and series receipt). Each full decompressed predecessor equals current bytes plus one final LF. Wording, slide content, language equivalence, rights and security meaning are unchanged; no regeneration or scan exception. The new bilingual EOF proposal was semantically reviewed: bounded EOF, bindings and follow-up authority, with parent closeout distinct from start or acceptance. Manifest adds only its evidence path. Receipts renew operation/identity/archive metadata, bind their own archived predecessor first, refresh two source hashes and append SRC061/IAD404; existing decisions, intake identities, language, target, promptState and deliveryAuthority remain unchanged.
-
-All four target hashes, requirements, acceptance thresholds, addenda and six prompts are unchanged. Both order views, one root, three binding edges and Completed / Eligible / Blocked / Blocked remain unchanged. The prior full semantic review of root/hardening/acceptance/self-build requirements, GSDB fifty-control mapping, Assurance 0.1.8 handoff, DE/EN/B2/A11Y, rights, template and human-only boundaries remains applicable to these verified unchanged inputs; no redundant historical review was performed.
-
-### Current Evidence and Boundaries
-
-There are 260 current normalized text hashes and two separately raw/payload-hashed Gzip archives. Mutable journals, new parent logs, generated inventory/group assignment and review outputs are excluded to prevent circularity. All seventeen preimages match: six target/receipt, four series, four review and three source snapshots including two Gzip payloads. Fourteen match previously bound input hashes; three prior review outputs could not self-bind. Rights predecessor is preserved; archival timing is recorded provenance, not personally observed chronology. All 183 current source bindings (61 per active receipt), preserved identities, manifest and series receipt are verified; the historical three-source receipt is unchanged.
-
-All fourteen current independent validator invocations passed, exit 0: eight authoring, four series-manifest/receipt and two review-result checks, in Bash and PowerShell -NonInteractive -NoProfile. Exact commands are in JSON. Final evidence was appended after result validation without changing targets, request, status or findings. Final drift check found no changes across 260 text inputs and two Gzip archives. Unchanged governance-config/policy validation is explicitly reused from the full review, without presenting old computed inventory counts as fresh. No test loops were added and parent checks are not reviewer evidence. LIC-01/other LIC-02, O-344-TECH/HUMAN/CLOUD, UPD-AMD64/V2-LOOP/V2-AUDIT/SMOKE-WARN/APPROVAL, DOC-A11Y and native/keyboard/screen-reader/first-use acceptance remain separately Open. Bounded original-rights confirmation is not blanket third-party clearance; template activation remains blocked.
-
-Parent owns groups 4-7 and guarded MergeAndSync, preserving the first three commits, one combined push and exact-head merge commit/admin bypass only after green checks. Reviewer performs no Git, runtime, build, image or journal changes. Ready grants no product/intake start, technical/human acceptance, risk acceptance, general legal release or accessibility conformance.
+All fourteen required independent authoring/series/result validator invocations
+passed with exit 0 in both shells: eight receipts, four series and two result
+checks. Exact commands are in JSON. Final evidence was appended after result
+validation without changing targets/request/status/findings or redundant reruns.
+Final comparison found zero drift across 283 text inputs and two binary archives. Unchanged config/policy validation
+is explicitly reused without presenting historical inventory counts as fresh.
+Parent reports nine focused CI/parity tests passed in 0.213 seconds before an
+unused-import-only removal; not reviewer-executed tests. Parent owns current
+syntax/links/secrets and fresh native CI; no duplicate maintenance/product suite.
+Existing rights/template/O-344/platform/architecture/OpenCode/human/A11Y gates
+remain separate. Ready grants no start, technical/human acceptance, legal
+release or risk acceptance. PR100 parent MergeAndSync/admin bypass still requires
+fresh green exact-head checks. No reviewer build, restart, platform-rule, Git,
+runtime or global maintenance action.

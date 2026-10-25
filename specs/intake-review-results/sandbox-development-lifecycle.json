@@ -1,18 +1,18 @@
 {
   "schemaVersion": "1.1",
-  "reviewId": "787003c4-b366-46c8-adc0-bacb47654c02",
+  "reviewId": "7620f78c-4cc8-4f42-823a-25695796065c",
   "mode": "Series",
   "status": "Ready",
   "policy": "learner-a11y-bilingual-series",
-  "reviewedAt": "2026-10-25T18:37:53.889Z",
+  "reviewedAt": "2026-10-25T19:45:33.683Z",
   "repository": {
     "root": ".",
-    "head": "a7939b5662a6d884707f543dff4387e7f5c1610a",
-    "workingTree": "Concurrent parent closeout; current reviewed hashes, not HEAD alone, bind this review."
+    "head": "a4aeadb023b5c555c5069a5f986160cd081d9e00",
+    "workingTree": "Parent CI-correction round; current hashes bind reviewed inputs, not HEAD alone."
   },
   "requestEvidence": {
     "path": "specs/intake-review-requests/sandbox-development-lifecycle.json",
-    "normalizedSha256": "6660f14e7c24ab45d031a2f7c457b3a89f603e6b734f8bbcec7cc7885662789d"
+    "normalizedSha256": "ef779b29295fff63ef920148769799ba995823780a8055ef8c7e61654a22d717"
   },
   "targets": [
     {
@@ -52,9 +52,10 @@
       "intakes/learner-fork-self-build-sandbox.md"
     ],
     "series": [
-      "Bounded independent EOF follow-up, not a fresh full semantic review. Prior complete four-intake/whole-series semantic review 0aed98b6-12c4-448d-871b-a32ad142e3f9 is explicitly reused only for hash-proven unchanged content.",
-      "All four targets and six current prompts unchanged; previous full requirements/acceptance/security/DE-EN/B2/A11Y/rights/template/GSDB50/Assurance/handoff/start-authority assessment remains applicable.",
-      "Compared every one of 244 prior reviewed inputs: 236 unchanged; two source EOF-only changes and six expected binding/metadata changes. Verified current 61-source receipts (183 bindings), manifest, series receipt, unchanged order views and 17 exact archival preimages."
+      "Independent bounded CI/source-binding follow-up, not a new full intake or product review. Prior complete semantic review and EOF follow-up reused only for proven unchanged inputs.",
+      "Compared all prior 260 text inputs: 252 unchanged; two declared workflow changes and six metadata/binding changes. All four target bodies, requirements, six prompts, identities, order views, start gates and lifecycle unchanged.",
+      "Current 64-source receipts checked: 192 bindings; 17 exact raw/normalized preimages; manifest/receipt graph and supersedes checked.",
+      "SDK pin-only workflow diff; existing installed/release integration gate in both source/pilot worktrees; gate implementation and three focused tests read, including negative payload/manifest fixtures."
     ],
     "documentation": [
       "docs/maintenance/intake-sources-alignment-2026-10-25.md",
@@ -116,7 +117,10 @@
       "docs/praesentationen/README.md",
       "docs/maintenance/closeout-review-remediation-2026-10-25.md",
       "scripts/tests/test_learner_documentation_contract.py",
-      "docs/maintenance/closeout-eof-alignment-2026-10-25.md"
+      "docs/maintenance/closeout-eof-alignment-2026-10-25.md",
+      "docs/maintenance/closeout-ci-alignment-2026-10-25.md",
+      "scripts/tests/test_closeout_ci_contracts.py",
+      ".github/workflows/maintenance-tui.yml"
     ],
     "workers": []
   },
@@ -126,8 +130,8 @@
     "medium": 0,
     "low": 0
   },
-  "supersedes": "specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/result.json",
-  "operationId": "989f4710-2626-4256-ae70-e476244b5d1b",
+  "supersedes": "specs/intake-review-archive/787003c4-b366-46c8-adc0-bacb47654c02/cf00bd75-048f-4a85-803b-54ab5a160b44/result.json",
+  "operationId": "cf00bd75-048f-4a85-803b-54ab5a160b44",
   "series": {
     "orderedTargetPaths": [
       "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
@@ -161,20 +165,20 @@
     "agentId": "N/A",
     "threadId": "01a1741a-8f17-7f92-acec-ff7ee32ecb5b",
     "identitySource": "Tool-provided Codex thread identity from this review conversation; no separate agentId was exposed. No invented agent UUID.",
-    "independence": "Reviewer authored neither workshop EOF edits nor binding refresh. Only three authorized review outputs changed.",
-    "mode": "Independent bounded newline-only follow-up using the verified prior full semantic review for unchanged content.",
-    "operationId": "989f4710-2626-4256-ae70-e476244b5d1b",
-    "snapshotAt": "2026-10-25T18:37:53.889Z",
-    "normalization": "Strict UTF-8; leading BOM removed, CRLF/CR normalized to LF; SHA-256; NUL and realpath containment checked. Binary gzip hashes and decompressed payload hashes recorded separately.",
-    "filesMonitored": 260,
+    "independence": "Reviewer authored neither workflow correction nor binding refresh. Only the three authorized review outputs edited.",
+    "mode": "Bounded independent CI/source-binding follow-up",
+    "operationId": "cf00bd75-048f-4a85-803b-54ab5a160b44",
+    "snapshotAt": "2026-10-25T19:45:33.683Z",
+    "normalization": "Strict UTF-8, leading BOM removed, CRLF/CR to LF, SHA-256; NUL/realpath containment checked. Binary gzip archives raw-hash bound separately.",
+    "filesMonitored": 283,
     "reviewedHashes": {
       ".agents/skills/speckit-intake-review/SKILL.md": "8338b3e6d84b55e5498fb63c46f1a2256c7b6f98f1545254af590002ee7cda9e",
       ".github/agents/copilot-instructions.md": "e4f6f834714c43cfe1f6e72c5c265a2bce496451fa9bda4a10516213977f9cf4",
       ".github/copilot-instructions.md": "7d2582279f0265073fb287762d91199d3b937dfb6496cee3264d7147fa2aef8f",
       ".github/workflows/documentation-and-sandbox.yml": "4553363f7f93a44ca91e988e7c5234f8091b6d78c882714deacd05615cdbb2a5",
       ".github/workflows/gsdb-pilot-contracts.yml": "382ec0812c0595ab14955788b5df524b36c4a2cea7f56e26447e6e608d79db09",
-      ".github/workflows/maintenance-tui.yml": "b66ab1f78c8fd9ff9a891bf4cbbb61211985ccd13981039f8e9b926c8b1d863c",
-      ".github/workflows/project-statistics-pilot-native-proof.yml": "684275de84964c67996491f834164d2e7d9b55f946cdc4b69cd8c084e8627db2",
+      ".github/workflows/maintenance-tui.yml": "f57c19b2f75670c3340dac3c2132d50b18dde8ba31a8f5e11c9dad897893910d",
+      ".github/workflows/project-statistics-pilot-native-proof.yml": "eac76e7d1fd9bc548d0d4d8e981a9a9d705d6bcd2e47e5e7a395e90ca05687ef",
       ".pre-commit-config.yaml": "0e5a01738c3f4c065f2e5af2a895737a70b8b0d0f7adda6130362d84e635baff",
       ".specify/presets/.registry": "b56f7088b13a522a62105022ad8242bd5d00b6fd9ca9c95a738a7d755115dc24",
       ".specify/presets/a11y-governance/preset.yml": "e10585b6b9c0e135ff675516a0bc1eb69abce01742adfed1c6c5c898786241da",
@@ -355,9 +359,9 @@
       "specs/intake-authoring-operations/50131ced-9c70-43d3-9fa1-51d1d37e60cd/source-snapshots/README.md.txt": "8936b9c560d9be10cb952afbedeae52b68179215115c74623facca1d0ef5149a",
       "specs/intake-authoring-operations/7ed5b22f-e402-4e7b-aca0-1d68259a6eac/source-snapshots/docs/licensing.md.txt": "9075e7670d80f26489497773f1019bcaf9fac7889aa175371865a64b1ef2385c",
       "specs/intake-authoring-receipts/gsdb-spec-kit-intensivpruefung.json": "ff23faf347a2353bf223700d3aa40edc5cf424af75403bffc5fe9ca61f7cefb7",
-      "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json": "20ff9332838c4459304932b128096c3c9227d8523188d26e601910e3a4d41018",
-      "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json": "f97cd628aa6c7886da5ca0d20126d451ac50c5dd7a026b6358e81a43eafb160f",
-      "specs/intake-authoring-receipts/secure-development-container-hardening.json": "ba776bc562c6e3917e503f531a0f22628cbf06a810d03bc6e0c1b385bd49431f",
+      "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json": "79f859547fa90dbea7cd8fffbbdae4a0eb11a0cc22b39b13108a70865ac8b48c",
+      "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json": "776939af15747f9c05e3a35f16436c329f7538af30325b9237d0acb948c8f64a",
+      "specs/intake-authoring-receipts/secure-development-container-hardening.json": "8cf750b665119a4397e0c5d385f8a0661fe9a699f97648a738ed74a573b51850",
       "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/independent.txt": "62bb4c8cb6cf6b80c64dc33835c67f4283b8f429d5d3b9f79496e81dcd114866",
       "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/report.txt": "64533602a959e4bbc01d8ae82ec3e76b308fb1d5a27f5ec3a1c7317313daf80e",
       "specs/intake-review-archive/0298d3b3-7ff1-42d8-a5f7-349d01139cf4/3caff22f-59d5-4142-b15b-955ee96a3037/request.json": "e3d429ee3fe852286a0e0550224f01a2cc3ae5789e3067ffc576659abb4f47f6",
@@ -374,7 +378,7 @@
       "specs/intake-review-archive/fdf7797f-aaf1-460a-a760-aa8a285bcd5c/7ed5b22f-e402-4e7b-aca0-1d68259a6eac/report.txt": "abad7f6369b8fc3b4fbccb30d02cfc2193a4be05451298cafb4d944cad56665f",
       "specs/intake-review-archive/fdf7797f-aaf1-460a-a760-aa8a285bcd5c/7ed5b22f-e402-4e7b-aca0-1d68259a6eac/request.json": "cd10cb6bb2f77a5f05171ea20cbfce678724b67bd68abc6c32cdc15d606a5fba",
       "specs/intake-review-archive/fdf7797f-aaf1-460a-a760-aa8a285bcd5c/7ed5b22f-e402-4e7b-aca0-1d68259a6eac/result.json": "21e1b2133a5ed4463db9e08fef23379933e68eae83c5cbed3f181796cbb3b3e2",
-      "specs/intake-review-requests/sandbox-development-lifecycle.json": "6660f14e7c24ab45d031a2f7c457b3a89f603e6b734f8bbcec7cc7885662789d",
+      "specs/intake-review-requests/sandbox-development-lifecycle.json": "ef779b29295fff63ef920148769799ba995823780a8055ef8c7e61654a22d717",
       "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/manifest.json": "e61f52f9d3806fc8039a78ee4e0f1edb5e7c7712f5a61d1d961b0298ed7c36f1",
       "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/order.md": "3391e54fcafe38bd55f9d07c0f6f033abed2a9586f4ef874e34b720e33a6c659",
       "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/3caff22f-59d5-4142-b15b-955ee96a3037/receipt.json": "4095a45e6b350ed40435e1a802f890ad5661853da9b8ae049c1d033a38522b15",
@@ -389,9 +393,9 @@
       "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/7ed5b22f-e402-4e7b-aca0-1d68259a6eac/requirements-order.md": "bd3faccc4899e09429327bfb98bc4f799afd71e12b336890e7785dfd1e35e19f",
       "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/manifest.json": "7a70f761c2de1246bfdc6a780710a1f05be3ad2a079bfa0dd30d7963eb1369c1",
       "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/ac2d3c31-d99d-40e1-8782-0b9cc8282b22/receipt.json": "8e8f34ed5da39d3eb9751033bdfe0ca5b9feebf91e689944c6f93ca9de52ce97",
-      "specs/intake-series/sandbox-development-lifecycle/manifest.json": "740f5c72a9aff540c063df8adf37f1ba30e1df2fad99b869896de9860645b2c4",
+      "specs/intake-series/sandbox-development-lifecycle/manifest.json": "5240a9ad955342ffa3b13522a07979cbbba251caf93a9674ce6560d2db9c4b84",
       "specs/intake-series/sandbox-development-lifecycle/order.md": "d6ffb45b48e926482281d01b36e20c748baae222be8c20b93a69a74d467823e7",
-      "specs/intake-series/sandbox-development-lifecycle/receipt.json": "f928af6ff0e5cd15748ae4b42914d6cac4c728c59974368d0da44d6b031ff07b",
+      "specs/intake-series/sandbox-development-lifecycle/receipt.json": "67c374e5c81c43e62d88a62d18b8b2f0a92898bd6137e3b84a0cf27606b1cf7f",
       "docs/maintenance/closeout-review-remediation-2026-10-25.md": "d49b8e4397a3fe6845469317f9b6f15ac4a6292032b9c11160493cf6c87866aa",
       "scripts/tests/test_learner_documentation_contract.py": "cc2ac202e03e5ab735572d67fad359d58bc0de79ba2841740e871292a905b12f",
       "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/561af2f2-bbfe-45f5-a9ca-e975dd70c497/target.txt": "a8d4f58f1c8ee3ff5f35995e0ad536259b8af204e521a64f67b76dcb00cbea60",
@@ -427,7 +431,30 @@
       "specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/report.txt": "19f953981bed4a0a93a4d19086a8b69e1353aadd3746b2823624e17ef7938fe1",
       "specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/independent.txt": "0d9b071295674ab0b15a425dc7daaa535380a306925eb3abc58e7689d1cb158d",
       "specs/intake-authoring-operations/989f4710-2626-4256-ae70-e476244b5d1b/source-snapshots/docs/licensing.md.txt": "910e686c32bd1b5bf07c547fd6b3043c369c5b92c85380dd5ed05d8b5f4af6ab",
-      "docs/maintenance/closeout-eof-alignment-2026-10-25.md": "9a2e1dab5f0cd6d8263740d96af45db5cf7d54e8fa8034c6838fbe7628ef870a"
+      "docs/maintenance/closeout-eof-alignment-2026-10-25.md": "9a2e1dab5f0cd6d8263740d96af45db5cf7d54e8fa8034c6838fbe7628ef870a",
+      "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/cf00bd75-048f-4a85-803b-54ab5a160b44/target.txt": "8a9fac14e92da1a901504a1daa15e56bf744b1d6c8cf192f0385716bcddbcaf3",
+      "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/cf00bd75-048f-4a85-803b-54ab5a160b44/receipt.json": "ba776bc562c6e3917e503f531a0f22628cbf06a810d03bc6e0c1b385bd49431f",
+      "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/cf00bd75-048f-4a85-803b-54ab5a160b44/target.txt": "23fb312bc8821f7cea59222c4b53959e790d972db7968f1955ca64be87d50f5a",
+      "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/cf00bd75-048f-4a85-803b-54ab5a160b44/receipt.json": "f97cd628aa6c7886da5ca0d20126d451ac50c5dd7a026b6358e81a43eafb160f",
+      "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/cf00bd75-048f-4a85-803b-54ab5a160b44/target.txt": "d73d504931a2b1d8bae483edbd8e65c47de5aea29fa0eb78e39166de9f5b0f41",
+      "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/cf00bd75-048f-4a85-803b-54ab5a160b44/receipt.json": "20ff9332838c4459304932b128096c3c9227d8523188d26e601910e3a4d41018",
+      "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/cf00bd75-048f-4a85-803b-54ab5a160b44/manifest.json": "740f5c72a9aff540c063df8adf37f1ba30e1df2fad99b869896de9860645b2c4",
+      "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/cf00bd75-048f-4a85-803b-54ab5a160b44/receipt.json": "f928af6ff0e5cd15748ae4b42914d6cac4c728c59974368d0da44d6b031ff07b",
+      "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/cf00bd75-048f-4a85-803b-54ab5a160b44/order.md": "d6ffb45b48e926482281d01b36e20c748baae222be8c20b93a69a74d467823e7",
+      "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/cf00bd75-048f-4a85-803b-54ab5a160b44/requirements-order.md": "477e7f21b522414558823e6f8640c684a2df8bef1e23c978faa7c29842373e8f",
+      "specs/intake-review-archive/787003c4-b366-46c8-adc0-bacb47654c02/cf00bd75-048f-4a85-803b-54ab5a160b44/request.json": "6660f14e7c24ab45d031a2f7c457b3a89f603e6b734f8bbcec7cc7885662789d",
+      "specs/intake-review-archive/787003c4-b366-46c8-adc0-bacb47654c02/cf00bd75-048f-4a85-803b-54ab5a160b44/result.json": "0afbc223d8d5db75d5f33ec30bd25a2c3569a8c8833482572605cc0463b7df01",
+      "specs/intake-review-archive/787003c4-b366-46c8-adc0-bacb47654c02/cf00bd75-048f-4a85-803b-54ab5a160b44/report.txt": "65e12fa363b0900cce50aeeeced9dc7ff944f4c60e3b9f218336288fc4e7ee4e",
+      "specs/intake-review-archive/787003c4-b366-46c8-adc0-bacb47654c02/cf00bd75-048f-4a85-803b-54ab5a160b44/independent.txt": "f788bb42b96c92a0ad9b3f91b240652ae10fabd1f71b1017988236652179d16f",
+      "specs/intake-authoring-operations/cf00bd75-048f-4a85-803b-54ab5a160b44/source-snapshots/docs/licensing.md.txt": "910e686c32bd1b5bf07c547fd6b3043c369c5b92c85380dd5ed05d8b5f4af6ab",
+      "specs/intake-authoring-operations/cf00bd75-048f-4a85-803b-54ab5a160b44/source-snapshots/.github/workflows/maintenance-tui.yml.txt": "b66ab1f78c8fd9ff9a891bf4cbbb61211985ccd13981039f8e9b926c8b1d863c",
+      "specs/intake-authoring-operations/cf00bd75-048f-4a85-803b-54ab5a160b44/source-snapshots/.github/workflows/project-statistics-pilot-native-proof.yml.txt": "684275de84964c67996491f834164d2e7d9b55f946cdc4b69cd8c084e8627db2",
+      "docs/maintenance/closeout-ci-alignment-2026-10-25.md": "61fe0260c9a36708cde94e562ec9e295542923ff1b11799e6ba8208508b960f3",
+      "scripts/tests/test_closeout_ci_contracts.py": "6fd2d19423614369d4b724822a43211eb255f2ddf6fc5e5c85cc7a96bf154f93",
+      "scripts/tests/test_spec_kit_agent_surface_parity.py": "90de6875f8db93ad98acf97befcc25a129dfac8163424cbfa2b447769c0de589",
+      "docs/maintenance/gsdb-344-preset-source-lock.json": "0b329d2b68ccec96dca635f58564348dac88527f7f515f4f422fddf974657a12",
+      "docs/maintenance/project-statistics-installation-v010.json": "8052e9c51bb7fe092e9df364ecdab2a32e86421190111a80352bd416cd90adc8",
+      "docs/security/pre-push-false-positive-review-2026-10-25.md": "6ca9c6feb8766474576b72c211d74abd9081f5fe36c76b705d648e34b4fc58d0"
     },
     "reviewedBinaryArchives": {
       "specs/intake-authoring-operations/989f4710-2626-4256-ae70-e476244b5d1b/source-snapshots/workshop-spec-kit.de.md.gz": {
@@ -441,7 +468,7 @@
         "normalizedPayloadSha256": "cc97a9dfa79ad7c8a91338e58202ab2978b0c91ee6a21d6da0467cc7974f5e5f"
       }
     },
-    "hashInventoryBoundary": "260 current normalized text hashes including all prior 244 paths, new proposal and 15 immutable text preimages. Two gzip files are separately raw-hash bound with payload hashes; never decode binary as text. Exclude mutable operation journals, final parent logs, generated inventory/group assignment and these review outputs. Retain the previously reviewed historical log as unchanged source evidence.",
+    "hashInventoryBoundary": "All prior 260 paths freshly hashed plus 17 text preimages, new proposal/test and four directly reviewed supporting inputs: gate implementation, active source lock, unchanged historical v010 receipt and separate PP review report. 283 text inputs plus two prior unchanged gzip archives. Exclude mutable operation journals, new session logs, generated docs/project-statistics.md, generated grouping/inventory and the three outputs. Immutable source snapshots inside operation directories are included.",
     "priorFullReview": {
       "path": "specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/result.json",
       "reviewId": "0aed98b6-12c4-448d-871b-a32ad142e3f9",
@@ -528,12 +555,18 @@
       },
       "boundary": "Prior full semantic assessment is deliberately reused for unchanged inputs, not claimed as performed again. Its tests, 16 validations, 37-source inventory check and 14-preset comparison remain dated historical evidence; no fresh runtime, product or human acceptance follows."
     },
+    "priorReviewBoundary": {
+      "supersedes": "specs/intake-review-archive/787003c4-b366-46c8-adc0-bacb47654c02/cf00bd75-048f-4a85-803b-54ab5a160b44/result.json",
+      "reviewId": "787003c4-b366-46c8-adc0-bacb47654c02",
+      "status": "Ready",
+      "boundary": "Prior EOF follow-up and its original complete four-intake/series semantic review remain dated evidence for hash-proven unchanged content, not newly performed semantic/test/native acceptance. Author Pending markers are not independent evidence."
+    },
     "deltaVerification": {
-      "comparedPriorInputs": 244,
-      "unchanged": 236,
+      "priorInputsCompared": 260,
+      "unchanged": 252,
       "changed": [
-        "docs/praesentationen/workshop-spec-kit.de.md",
-        "docs/praesentationen/workshop-spec-kit.en.md",
+        ".github/workflows/maintenance-tui.yml",
+        ".github/workflows/project-statistics-pilot-native-proof.yml",
         "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
         "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
         "specs/intake-authoring-receipts/secure-development-container-hardening.json",
@@ -542,215 +575,191 @@
         "specs/intake-series/sandbox-development-lifecycle/receipt.json"
       ],
       "unexpected": [],
-      "sourceChangeCount": 2,
-      "sourceChange": "Exactly one final LF removed per introductory workshop Markdown file: decompressed archived bytes equal current bytes plus one LF. All wording, slide content, DE/EN equivalence, requirements, licensing and safety meaning unchanged.",
-      "proposal": {
-        "path": "docs/maintenance/closeout-eof-alignment-2026-10-25.md",
-        "normalizedSha256": "9a2e1dab5f0cd6d8263740d96af45db5cf7d54e8fa8034c6838fbe7628ef870a",
-        "matchesOperation": true,
-        "semanticAssessment": "Equivalent DE/EN bounded EOF correction and binding refresh only; no exceptions, regeneration, template activation or new execution/acceptance authority. Parent delivery groups 4-7 and MergeAndSync remain a separate human-approved activity."
+      "allTargetsAndPromptsUnchanged": true,
+      "lifecycle": [
+        "Completed",
+        "Eligible",
+        "Blocked",
+        "Blocked"
+      ],
+      "workflowAssessment": {
+        "maintenance": "Only floating SDK 10.0.x replaced by exact 10.0.402 plus comment. Existing action pins, permissions, matrix, locked restore, build/test and full regression steps retained. Pin matches unchanged Dockerfile SDK baseline comment. Parent official GA metadata and HEAD 200 evidence are attributed, not an independent network check.",
+        "statistics": "Only historical v010 payload loop replaced by existing test_gsdb_rollout_installed_payload_and_release_bindings invoked via Python -B in both source and pilot worktrees, Push/Pop-Location in try/finally, every nonzero LASTEXITCODE throws. Subsequent native fixture, parity, content-preservation, ancestry and evidence checks retained.",
+        "gate": "Existing implementation enforces installed registry/coverage, manifest identity/version/hash, every payload file and aggregate count/hash for 14 active presets (statistics 0.1.3), plus profile version/archive URL/repository equality against active GSDB release-source lock. It does not independently authenticate external releases or confer human approval.",
+        "focusedTests": "Three tests inspected: both-worktree wiring, SDK/locked-restore/regression preservation, and successful synthetic baseline followed by independently rejected payload and manifest tampering. No suite rerun; parent reports combined nine tests passed in 0.213s before unused-import-only removal."
       },
-      "allFourTargetsUnchanged": true,
-      "sixPromptsUnchanged": true,
-      "seriesGraphAndLifecycleUnchanged": true,
-      "manifestDelta": "Only the new proposal was appended to evidencePaths.",
-      "receiptDelta": "Preserved intake IDs, new receipt IDs/timestamps/operation authority; SRC001 points to exact archived predecessor, SRC050/051 hashes refreshed, SRC061 proposal appended, IAD404 explains bounded EOF correction. Existing decisions, language, deliveryAuthority, promptState and target remain unchanged."
+      "bindingAssessment": "Three receipts preserve intake ID/target/language/deliveryAuthority/promptState and old decisions; new receipt metadata/operation/supersedes, archived SRC001 first, refreshed SRC048 workflow hash, appended SRC062..064 proposal/test/maintenance workflow and bounded IAD405 only. Manifest only adds three evidence paths. Current series receipt binds exact current manifest."
     },
-    "reviewInputsUnchanged": true,
     "archiveVerification": {
       "count": 17,
       "rawAndNormalizedMatches": 17,
       "priorInputMatches": 14,
       "details": [
         {
-          "path": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/989f4710-2626-4256-ae70-e476244b5d1b/target.txt",
+          "path": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/cf00bd75-048f-4a85-803b-54ab5a160b44/target.txt",
           "source": "Lastenheft_Secure-Development-Container-Hardening.md",
           "rawSha256": "8a9fac14e92da1a901504a1daa15e56bf744b1d6c8cf192f0385716bcddbcaf3",
-          "normalizedSha256": "8a9fac14e92da1a901504a1daa15e56bf744b1d6c8cf192f0385716bcddbcaf3",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": true
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": true
         },
         {
-          "path": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/989f4710-2626-4256-ae70-e476244b5d1b/receipt.json",
+          "path": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/cf00bd75-048f-4a85-803b-54ab5a160b44/receipt.json",
           "source": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
-          "rawSha256": "bafbe16676fb357d24a0f0ab3f97ed3b1ebb44e47dadf328e8b4f927cfb120ab",
-          "normalizedSha256": "bafbe16676fb357d24a0f0ab3f97ed3b1ebb44e47dadf328e8b4f927cfb120ab",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": true
+          "rawSha256": "ba776bc562c6e3917e503f531a0f22628cbf06a810d03bc6e0c1b385bd49431f",
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": true
         },
         {
-          "path": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/989f4710-2626-4256-ae70-e476244b5d1b/target.txt",
+          "path": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/cf00bd75-048f-4a85-803b-54ab5a160b44/target.txt",
           "source": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
           "rawSha256": "23fb312bc8821f7cea59222c4b53959e790d972db7968f1955ca64be87d50f5a",
-          "normalizedSha256": "23fb312bc8821f7cea59222c4b53959e790d972db7968f1955ca64be87d50f5a",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": true
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": true
         },
         {
-          "path": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/989f4710-2626-4256-ae70-e476244b5d1b/receipt.json",
+          "path": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/cf00bd75-048f-4a85-803b-54ab5a160b44/receipt.json",
           "source": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
-          "rawSha256": "d3b634c7b79962c37382e374c8a10dac38fa4e1d41af9dfcb845b9f38606cb42",
-          "normalizedSha256": "d3b634c7b79962c37382e374c8a10dac38fa4e1d41af9dfcb845b9f38606cb42",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": true
+          "rawSha256": "f97cd628aa6c7886da5ca0d20126d451ac50c5dd7a026b6358e81a43eafb160f",
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": true
         },
         {
-          "path": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/989f4710-2626-4256-ae70-e476244b5d1b/target.txt",
+          "path": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/cf00bd75-048f-4a85-803b-54ab5a160b44/target.txt",
           "source": "intakes/learner-fork-self-build-sandbox.md",
           "rawSha256": "d73d504931a2b1d8bae483edbd8e65c47de5aea29fa0eb78e39166de9f5b0f41",
-          "normalizedSha256": "d73d504931a2b1d8bae483edbd8e65c47de5aea29fa0eb78e39166de9f5b0f41",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": true
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": true
         },
         {
-          "path": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/989f4710-2626-4256-ae70-e476244b5d1b/receipt.json",
+          "path": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/cf00bd75-048f-4a85-803b-54ab5a160b44/receipt.json",
           "source": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
-          "rawSha256": "8aec8e2f8f26cf27d97b2226ff4ed5e53862e213c560cf23451f634a98d887b1",
-          "normalizedSha256": "8aec8e2f8f26cf27d97b2226ff4ed5e53862e213c560cf23451f634a98d887b1",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": true
+          "rawSha256": "20ff9332838c4459304932b128096c3c9227d8523188d26e601910e3a4d41018",
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": true
         },
         {
-          "path": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/989f4710-2626-4256-ae70-e476244b5d1b/manifest.json",
+          "path": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/cf00bd75-048f-4a85-803b-54ab5a160b44/manifest.json",
           "source": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
-          "rawSha256": "a76a2949ddf494be44cf073c37ecbf6359fc3cfc3751ab007d6d90a3ecee5c07",
-          "normalizedSha256": "a76a2949ddf494be44cf073c37ecbf6359fc3cfc3751ab007d6d90a3ecee5c07",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": true
+          "rawSha256": "740f5c72a9aff540c063df8adf37f1ba30e1df2fad99b869896de9860645b2c4",
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": true
         },
         {
-          "path": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/989f4710-2626-4256-ae70-e476244b5d1b/receipt.json",
+          "path": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/cf00bd75-048f-4a85-803b-54ab5a160b44/receipt.json",
           "source": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
-          "rawSha256": "bfed79083ffcd2dcf8235d45fa569b3ad0d94e5b921a646b007204de7a3ecfed",
-          "normalizedSha256": "bfed79083ffcd2dcf8235d45fa569b3ad0d94e5b921a646b007204de7a3ecfed",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": true
+          "rawSha256": "f928af6ff0e5cd15748ae4b42914d6cac4c728c59974368d0da44d6b031ff07b",
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": true
         },
         {
-          "path": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/989f4710-2626-4256-ae70-e476244b5d1b/order.md",
+          "path": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/cf00bd75-048f-4a85-803b-54ab5a160b44/order.md",
           "source": "specs/intake-series/sandbox-development-lifecycle/order.md",
           "rawSha256": "d6ffb45b48e926482281d01b36e20c748baae222be8c20b93a69a74d467823e7",
-          "normalizedSha256": "d6ffb45b48e926482281d01b36e20c748baae222be8c20b93a69a74d467823e7",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": true
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": true
         },
         {
-          "path": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/989f4710-2626-4256-ae70-e476244b5d1b/requirements-order.md",
+          "path": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/cf00bd75-048f-4a85-803b-54ab5a160b44/requirements-order.md",
           "source": "Lastenheft_Abarbeitungsreihenfolge.md",
           "rawSha256": "477e7f21b522414558823e6f8640c684a2df8bef1e23c978faa7c29842373e8f",
-          "normalizedSha256": "477e7f21b522414558823e6f8640c684a2df8bef1e23c978faa7c29842373e8f",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": true
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": true
         },
         {
-          "path": "specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/request.json",
+          "path": "specs/intake-review-archive/787003c4-b366-46c8-adc0-bacb47654c02/cf00bd75-048f-4a85-803b-54ab5a160b44/request.json",
           "source": "specs/intake-review-requests/sandbox-development-lifecycle.json",
-          "rawSha256": "ad729ea7d04516605cbb3faef0b45becaa4fd6184abc96f5ef759aea7c67ae52",
-          "normalizedSha256": "ad729ea7d04516605cbb3faef0b45becaa4fd6184abc96f5ef759aea7c67ae52",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": true
+          "rawSha256": "6660f14e7c24ab45d031a2f7c457b3a89f603e6b734f8bbcec7cc7885662789d",
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": true
         },
         {
-          "path": "specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/result.json",
+          "path": "specs/intake-review-archive/787003c4-b366-46c8-adc0-bacb47654c02/cf00bd75-048f-4a85-803b-54ab5a160b44/result.json",
           "source": "specs/intake-review-results/sandbox-development-lifecycle.json",
-          "rawSha256": "dd0c7883c3578f10b9368718260a5eae2a47078fcf44c6693cd4743374a674d4",
-          "normalizedSha256": "dd0c7883c3578f10b9368718260a5eae2a47078fcf44c6693cd4743374a674d4",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": "Not previously self-bound"
+          "rawSha256": "0afbc223d8d5db75d5f33ec30bd25a2c3569a8c8833482572605cc0463b7df01",
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": "Not previously bound"
         },
         {
-          "path": "specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/report.txt",
+          "path": "specs/intake-review-archive/787003c4-b366-46c8-adc0-bacb47654c02/cf00bd75-048f-4a85-803b-54ab5a160b44/report.txt",
           "source": "specs/intake-review-reports/sandbox-development-lifecycle.md",
-          "rawSha256": "19f953981bed4a0a93a4d19086a8b69e1353aadd3746b2823624e17ef7938fe1",
-          "normalizedSha256": "19f953981bed4a0a93a4d19086a8b69e1353aadd3746b2823624e17ef7938fe1",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": "Not previously self-bound"
+          "rawSha256": "65e12fa363b0900cce50aeeeced9dc7ff944f4c60e3b9f218336288fc4e7ee4e",
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": "Not previously bound"
         },
         {
-          "path": "specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/independent.txt",
+          "path": "specs/intake-review-archive/787003c4-b366-46c8-adc0-bacb47654c02/cf00bd75-048f-4a85-803b-54ab5a160b44/independent.txt",
           "source": "specs/intake-review-reports/sandbox-development-lifecycle-independent.txt",
-          "rawSha256": "0d9b071295674ab0b15a425dc7daaa535380a306925eb3abc58e7689d1cb158d",
-          "normalizedSha256": "0d9b071295674ab0b15a425dc7daaa535380a306925eb3abc58e7689d1cb158d",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": "Not previously self-bound"
+          "rawSha256": "f788bb42b96c92a0ad9b3f91b240652ae10fabd1f71b1017988236652179d16f",
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": "Not previously bound"
         },
         {
-          "path": "specs/intake-authoring-operations/989f4710-2626-4256-ae70-e476244b5d1b/source-snapshots/docs/licensing.md.txt",
+          "path": "specs/intake-authoring-operations/cf00bd75-048f-4a85-803b-54ab5a160b44/source-snapshots/docs/licensing.md.txt",
           "source": "docs/licensing.md",
           "rawSha256": "910e686c32bd1b5bf07c547fd6b3043c369c5b92c85380dd5ed05d8b5f4af6ab",
-          "normalizedSha256": "910e686c32bd1b5bf07c547fd6b3043c369c5b92c85380dd5ed05d8b5f4af6ab",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": true
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": true
         },
         {
-          "path": "specs/intake-authoring-operations/989f4710-2626-4256-ae70-e476244b5d1b/source-snapshots/workshop-spec-kit.de.md.gz",
-          "source": "docs/praesentationen/workshop-spec-kit.de.md",
-          "rawSha256": "185cba1691e853873191eca68263fa8aeef02b6722a6241778172f3e5ef43769",
-          "normalizedSha256": "f039762d15d3f5e27c8759cc9f697d92784f265c229b275d41e284ead5110ef5",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": true,
-          "payloadRawSha256": "f039762d15d3f5e27c8759cc9f697d92784f265c229b275d41e284ead5110ef5",
-          "payloadMatches": true,
-          "onlyFinalLFRemoved": true
+          "path": "specs/intake-authoring-operations/cf00bd75-048f-4a85-803b-54ab5a160b44/source-snapshots/.github/workflows/maintenance-tui.yml.txt",
+          "source": ".github/workflows/maintenance-tui.yml",
+          "rawSha256": "b66ab1f78c8fd9ff9a891bf4cbbb61211985ccd13981039f8e9b926c8b1d863c",
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": true
         },
         {
-          "path": "specs/intake-authoring-operations/989f4710-2626-4256-ae70-e476244b5d1b/source-snapshots/workshop-spec-kit.en.md.gz",
-          "source": "docs/praesentationen/workshop-spec-kit.en.md",
-          "rawSha256": "7c31de16e25d9ad2f4b1d8b0448733a215017e632336a87f0ea0fdcf46626652",
-          "normalizedSha256": "cc97a9dfa79ad7c8a91338e58202ab2978b0c91ee6a21d6da0467cc7974f5e5f",
-          "rawMatches": true,
-          "normalizedMatches": true,
-          "priorInputMatches": true,
-          "payloadRawSha256": "cc97a9dfa79ad7c8a91338e58202ab2978b0c91ee6a21d6da0467cc7974f5e5f",
-          "payloadMatches": true,
-          "onlyFinalLFRemoved": true
+          "path": "specs/intake-authoring-operations/cf00bd75-048f-4a85-803b-54ab5a160b44/source-snapshots/.github/workflows/project-statistics-pilot-native-proof.yml.txt",
+          "source": ".github/workflows/project-statistics-pilot-native-proof.yml",
+          "rawSha256": "684275de84964c67996491f834164d2e7d9b55f946cdc4b69cd8c084e8627db2",
+          "rawMatch": true,
+          "normalizedMatch": true,
+          "priorInputMatch": true
         }
       ],
-      "boundary": "15 text preimages and two lossless gzip preimages verified; 14 payloads match previously bound inputs, three prior review outputs have no circular self-binding. Archive-before-edit timing is recorded provenance, not independently observed chronology. Rights predecessor preserved."
+      "boundary": "Three prior review outputs have no circular input self-hash; 14 other preimages match prior bound inputs. Archival chronology is recorded provenance; byte/hash fidelity independently checked. Rights predecessor retained."
     },
     "receiptVerification": [
       {
         "path": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+        "receiptId": "e1c2ec75-79c3-4cc0-909c-c169b06222aa",
         "intakeId": "a92a7ced-bbf3-4408-9754-7b739be19a41",
-        "receiptId": "c5a5bfb8-215f-46be-bdb6-1186882733fd",
-        "sourceCount": 61,
-        "verifiedSourceBindings": 61,
-        "archivedFirstSource": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/989f4710-2626-4256-ae70-e476244b5d1b/target.txt"
+        "sourceCount": 64,
+        "verifiedBindings": 64,
+        "firstArchivedSource": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/cf00bd75-048f-4a85-803b-54ab5a160b44/target.txt"
       },
       {
         "path": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+        "receiptId": "c5ae32a7-2a38-49f5-afbf-f45bb5d94ac3",
         "intakeId": "51d24064-dfa6-4375-9bcd-58cccc545167",
-        "receiptId": "71acb14c-e3c3-4392-be36-9891e978a633",
-        "sourceCount": 61,
-        "verifiedSourceBindings": 61,
-        "archivedFirstSource": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/989f4710-2626-4256-ae70-e476244b5d1b/target.txt"
+        "sourceCount": 64,
+        "verifiedBindings": 64,
+        "firstArchivedSource": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/cf00bd75-048f-4a85-803b-54ab5a160b44/target.txt"
       },
       {
         "path": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+        "receiptId": "10527a32-9ac2-4a41-9bbc-35bc8cf33997",
         "intakeId": "5926e53e-39b7-475f-8a6b-e2ec08b0a803",
-        "receiptId": "12e4f61d-1924-4b3e-9ecb-c4245dd54c67",
-        "sourceCount": 61,
-        "verifiedSourceBindings": 61,
-        "archivedFirstSource": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/989f4710-2626-4256-ae70-e476244b5d1b/target.txt"
+        "sourceCount": 64,
+        "verifiedBindings": 64,
+        "firstArchivedSource": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/cf00bd75-048f-4a85-803b-54ab5a160b44/target.txt"
       }
     ],
-    "historicalReceiptBoundary": "Historical root and its adopted three-source receipt unchanged; validators rerun but no historical semantic re-review.",
     "resolvedFindings": [
       {
         "id": "IR201",
@@ -793,6 +802,11 @@
           "method": "Profile, regression source and cited configurations match the prior full-review hashes; no affected EOF content.",
           "status": "RemainsResolvedAndVerified",
           "priorFullReview": "specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/result.json"
+        },
+        "currentFollowUp": {
+          "reviewId": "7620f78c-4cc8-4f42-823a-25695796065c",
+          "status": "RemainsResolvedAndVerified",
+          "evidence": "Affected profile/test/config inputs remain hash-identical to prior complete review; CI-only delta does not alter resolution."
         }
       },
       {
@@ -836,98 +850,121 @@
           "method": "Profile, regression source and cited configurations match the prior full-review hashes; no affected EOF content.",
           "status": "RemainsResolvedAndVerified",
           "priorFullReview": "specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/result.json"
+        },
+        "currentFollowUp": {
+          "reviewId": "7620f78c-4cc8-4f42-823a-25695796065c",
+          "status": "RemainsResolvedAndVerified",
+          "evidence": "Affected profile/test/config inputs remain hash-identical to prior complete review; CI-only delta does not alter resolution."
         }
       }
     ],
+    "relatedSecurityReview": {
+      "path": "docs/security/pre-push-false-positive-review-2026-10-25.md",
+      "normalizedSha256": "6ca9c6feb8766474576b72c211d74abd9081f5fe36c76b705d648e34b4fc58d0",
+      "result": "Ready for bounded hook delta",
+      "resolvedFindings": [
+        {
+          "id": "PP201",
+          "category": "SecretDetectionCorrectness",
+          "originalSeverity": "Medium",
+          "status": "ResolvedAndVerified",
+          "owner": "Repository Maintainer / Hook Author",
+          "followUp": "Retain simplified assignment rule and focused regression.",
+          "reevaluationTrigger": "Field/operator/quoting/empty-value semantic changes."
+        },
+        {
+          "id": "PP202",
+          "category": "CommitHistoryCoverage",
+          "originalSeverity": "Medium",
+          "status": "ResolvedAndVerified",
+          "owner": "Repository Maintainer / Hook Author",
+          "followUp": "Retain commit-derived existing-ref candidate selection and regression.",
+          "reevaluationTrigger": "Ref/range/path-selection/blob-pin changes."
+        }
+      ],
+      "boundary": "Separate independent hook-review evidence retained, not rerun or promoted into general product/security acceptance by this CI follow-up."
+    },
     "validation": {
-      "authoring": "All four receipts independently validated in Bash and PowerShell -NonInteractive -NoProfile: 8/8 Pass, exit 0; historical 3 sources and active 61 sources each.",
-      "seriesManifest": "Both Bash and PowerShell Pass/0",
-      "seriesReceipt": "Both Bash and PowerShell Pass/0",
-      "reviewResult": "Both Bash and PowerShell Pass, exit 0: current Series/Ready/4 targets. Final validation evidence appended after these runs without changing targets, request, status or findings; no redundant rerun.",
-      "governanceConfig": {
-        "status": "Reused unchanged prior config/schema/policy assessment; not rerun",
-        "sourceReview": "specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/result.json",
-        "configHash": "d7740f7ff839ca310607acd2e20dd9d58ffcc8ef9553ad73e00e353508a0c5be",
-        "configAndPolicyUnchanged": true,
-        "boundary": "Prior computed inventory counts are historical, not asserted as fresh current counts."
-      },
-      "tests": "No test reruns. Prior independent 12/12 docs tests remain historical and hash-applicable; parent presentation/links/secrets checks are not reviewer-owned evidence.",
+      "authoring": "All four receipts: 8/8 Bash/PowerShell Pass, exit 0; active 64 sources each, historical receipt 3 sources.",
+      "series": "Four manifest/receipt Bash/PowerShell invocations Pass/0",
+      "reviewResult": "Both Bash and PowerShell Pass/0: current Series, Ready, 4 targets. Final evidence appended after successful result validation; targets/request/status/findings unchanged, no redundant reruns.",
+      "governanceConfig": "Unchanged schema/config/policy assessment explicitly reused from prior full review; no fresh computed inventory-count claim.",
+      "parentChecks": "Parent owns YAML/embedded PowerShell syntax, focused tests/script integrity, links/secrets and fresh CI. No duplicate maintenance/product test suite or native CI run by reviewer.",
       "currentRunCount": 14
     },
     "validationCommands": [
       {
         "command": "bash .specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-receipt.sh --receipt specs/intake-authoring-receipts/gsdb-spec-kit-intensivpruefung.json --repo .",
         "exitCode": 0,
-        "execution": "Executed independently during this EOF follow-up; observed Pass/0."
+        "execution": "Executed independently during this current CI follow-up, not inherited execution evidence."
       },
       {
         "command": "pwsh -NonInteractive -NoProfile -File .specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-receipt.ps1 -Receipt specs/intake-authoring-receipts/gsdb-spec-kit-intensivpruefung.json -Repo .",
         "exitCode": 0,
-        "execution": "Executed independently during this EOF follow-up; observed Pass/0."
+        "execution": "Executed independently during this current CI follow-up, not inherited execution evidence."
       },
       {
         "command": "bash .specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-receipt.sh --receipt specs/intake-authoring-receipts/secure-development-container-hardening.json --repo .",
         "exitCode": 0,
-        "execution": "Executed independently during this EOF follow-up; observed Pass/0."
+        "execution": "Executed independently during this current CI follow-up, not inherited execution evidence."
       },
       {
         "command": "pwsh -NonInteractive -NoProfile -File .specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-receipt.ps1 -Receipt specs/intake-authoring-receipts/secure-development-container-hardening.json -Repo .",
         "exitCode": 0,
-        "execution": "Executed independently during this EOF follow-up; observed Pass/0."
+        "execution": "Executed independently during this current CI follow-up, not inherited execution evidence."
       },
       {
         "command": "bash .specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-receipt.sh --receipt specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json --repo .",
         "exitCode": 0,
-        "execution": "Executed independently during this EOF follow-up; observed Pass/0."
+        "execution": "Executed independently during this current CI follow-up, not inherited execution evidence."
       },
       {
         "command": "pwsh -NonInteractive -NoProfile -File .specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-receipt.ps1 -Receipt specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json -Repo .",
         "exitCode": 0,
-        "execution": "Executed independently during this EOF follow-up; observed Pass/0."
+        "execution": "Executed independently during this current CI follow-up, not inherited execution evidence."
       },
       {
         "command": "bash .specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-receipt.sh --receipt specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json --repo .",
         "exitCode": 0,
-        "execution": "Executed independently during this EOF follow-up; observed Pass/0."
+        "execution": "Executed independently during this current CI follow-up, not inherited execution evidence."
       },
       {
         "command": "pwsh -NonInteractive -NoProfile -File .specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-receipt.ps1 -Receipt specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json -Repo .",
         "exitCode": 0,
-        "execution": "Executed independently during this EOF follow-up; observed Pass/0."
+        "execution": "Executed independently during this current CI follow-up, not inherited execution evidence."
       },
       {
         "command": "bash .specify/presets/intake-sequencing-governance/scripts/validate-intake-series-manifest.sh --file specs/intake-series/sandbox-development-lifecycle/manifest.json --repo . --json",
         "exitCode": 0,
-        "execution": "Executed independently during this EOF follow-up; observed Pass/0."
+        "execution": "Executed independently during this current CI follow-up, not inherited execution evidence."
       },
       {
         "command": "pwsh -NonInteractive -NoProfile -File .specify/presets/intake-sequencing-governance/scripts/validate-intake-series-manifest.ps1 -File specs/intake-series/sandbox-development-lifecycle/manifest.json -Repo . -Json",
         "exitCode": 0,
-        "execution": "Executed independently during this EOF follow-up; observed Pass/0."
+        "execution": "Executed independently during this current CI follow-up, not inherited execution evidence."
       },
       {
         "command": "bash .specify/presets/intake-sequencing-governance/scripts/validate-intake-series-receipt.sh --file specs/intake-series/sandbox-development-lifecycle/receipt.json --repo . --json",
         "exitCode": 0,
-        "execution": "Executed independently during this EOF follow-up; observed Pass/0."
+        "execution": "Executed independently during this current CI follow-up, not inherited execution evidence."
       },
       {
         "command": "pwsh -NonInteractive -NoProfile -File .specify/presets/intake-sequencing-governance/scripts/validate-intake-series-receipt.ps1 -File specs/intake-series/sandbox-development-lifecycle/receipt.json -Repo . -Json",
         "exitCode": 0,
-        "execution": "Executed independently during this EOF follow-up; observed Pass/0."
+        "execution": "Executed independently during this current CI follow-up, not inherited execution evidence."
       },
       {
         "command": "bash .specify/presets/intake-review-governance/scripts/validate-intake-review-result.sh --result specs/intake-review-results/sandbox-development-lifecycle.json --repo .",
         "exitCode": 0,
-        "execution": "Executed independently during this EOF follow-up; observed Pass/0."
+        "execution": "Executed independently during this current CI follow-up, not inherited execution evidence."
       },
       {
         "command": "pwsh -NonInteractive -NoProfile -File .specify/presets/intake-review-governance/scripts/validate-intake-review-result.ps1 -Result specs/intake-review-results/sandbox-development-lifecycle.json -Repo .",
         "exitCode": 0,
-        "execution": "Executed independently during this EOF follow-up; observed Pass/0."
+        "execution": "Executed independently during this current CI follow-up, not inherited execution evidence."
       }
     ],
     "rightsBoundary": "Explicit human own-rights confirmation applies only to named newly adapted introductory workshop/learning materials, SysInfo/Web teaching delivery and named original contributions. Provenance does not prove all third-party rights. LIC-01 and other LIC-02 scopes remain Open; MIT is not blanket clearance and template activation remains blocked.",
-    "deliveryBoundary": "Owner approved only two EOF corrections plus binding refresh and independent follow-up, then parent groups 4-7 MergeAndSync, preserving first three commits. One combined content push and exact-head merge commit with admin bypass only after green checks. Reviewer performs no Git mutation, build, restart, global maintenance or delivery.",
     "openBoundaries": [
       "LIC-01 and other LIC-02 scopes",
       "O-344-TECH/HUMAN/CLOUD",
@@ -935,13 +972,15 @@
       "DOC-A11Y and presentation first-use/keyboard/screen-reader/native-app acceptance",
       "Template activation and separate personal Level-0/product baseline and start decisions"
     ],
-    "proofBoundary": "Ready is intake quality/current binding consistency only. All prior semantic, technical/platform/architecture, legal, human and accessibility boundaries remain. No execution start, sandbox/product acceptance, risk acceptance or formal approval.",
-    "humanAcceptance": "Not granted; acceptedRisks remains empty.",
-    "nextAction": "Return follow-up to parent for explicitly authorized groups 4-7 and guarded MergeAndSync. No implicit intake/product start. Parent owns final journal and delivery metadata.",
-    "validationEnvironment": "Darwin/macOS; Bash and PowerShell 7 -NonInteractive -NoProfile. No tests/build/runtime/network/global maintenance.",
+    "deliveryBoundary": "Owner permits targeted PR100 CI correction and parent MergeAndSync/admin bypass only after fresh green technical checks; no waiver, platform-rule change, build/restart/global maintenance or formal/human approval. Generated statistics use unchanged config/methodology after content commit in a separately pure-generated third commit before push; excluded from this hash inventory, not declared CURRENT by this review.",
+    "humanAcceptance": "Not granted; no risk acceptance.",
+    "proofBoundary": "Ready concerns bounded CI source correctness and intake binding/series consistency only. Native CI, image/platform/product acceptance, template activation, general legal clearance, human decisions and A11Y conformance remain separate.",
+    "nextAction": "Return bounded review to parent; render/commit generated statistics separately as authorized and require fresh green exact-head CI before PR100 MergeAndSync. No intake/product run starts.",
+    "reviewInputsUnchanged": true,
+    "validationEnvironment": "Darwin/macOS; Bash and PowerShell 7 -NonInteractive -NoProfile. No build, runtime, Git mutation, network research or full maintenance/product tests.",
     "finalInputDriftCheck": {
-      "checkedAt": "2026-10-25T18:41:00.218Z",
-      "textInputs": 260,
+      "checkedAt": "2026-10-25T19:48:45.811Z",
+      "textInputs": 283,
       "binaryArchives": 2,
       "changed": 0
     }

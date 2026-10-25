@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "96d44fde-9957-424a-8ab7-ccc7f2eb24ec",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.11"
+  },
+  "createdAt": "2026-10-25T18:34:32Z",
+  "operation": {
+    "operationId": "989f4710-2626-4256-ae70-e476244b5d1b",
+    "authorityEvidence": "Owner explicitly approved removing only the two extra workshop EOF blank lines, renewing affected source bindings and independent follow-up review, then completing groups 4-7 and MergeAndSync with admin bypass. Preserve the first three commits, intake identities, all requirements, six follow-up prompts, lifecycle and future execution authority. One combined content push and exact-head merge-commit only after green checks. No build, restart, global maintenance or new formal approval.",
+    "type": "Update"
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "740f5c72a9aff540c063df8adf37f1ba30e1df2fad99b869896de9860645b2c4"
+  },
+  "supersedes": {
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/989f4710-2626-4256-ae70-e476244b5d1b/manifest.json",
+    "manifestArchiveSha256": "a76a2949ddf494be44cf073c37ecbf6359fc3cfc3751ab007d6d90a3ecee5c07",
+    "receiptNormalizedSha256": "bfed79083ffcd2dcf8235d45fa569b3ad0d94e5b921a646b007204de7a3ecfed",
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/989f4710-2626-4256-ae70-e476244b5d1b/receipt.json"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status"
+}

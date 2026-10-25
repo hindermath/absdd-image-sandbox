@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.1",
-  "reviewId": "787003c4-b366-46c8-adc0-bacb47654c02",
+  "reviewId": "7620f78c-4cc8-4f42-823a-25695796065c",
   "mode": "Series",
   "policy": "learner-a11y-bilingual-series",
   "targets": [
@@ -114,7 +114,10 @@
     "docs/praesentationen/README.md",
     "docs/maintenance/closeout-review-remediation-2026-10-25.md",
     "scripts/tests/test_learner_documentation_contract.py",
-    "docs/maintenance/closeout-eof-alignment-2026-10-25.md"
+    "docs/maintenance/closeout-eof-alignment-2026-10-25.md",
+    "docs/maintenance/closeout-ci-alignment-2026-10-25.md",
+    "scripts/tests/test_closeout_ci_contracts.py",
+    ".github/workflows/maintenance-tui.yml"
   ],
-  "authorityEvidence": "Owner explicitly approved removing only the two extra workshop EOF blank lines, renewing affected source bindings and independent follow-up review, then completing groups 4-7 and MergeAndSync with admin bypass. Preserve the first three commits, intake identities, all requirements, six follow-up prompts, lifecycle and future execution authority. One combined content push and exact-head merge-commit only after green checks. No build, restart, global maintenance or new formal approval."
+  "authorityEvidence": "Owner explicitly approved the targeted CI correction round for PR100 and MergeAndSync with admin bypass only after fresh green technical checks. Correct stale statistics with the existing renderer after content commit, current preset-integrity gate instead of historical receipt, and pin the published .NET10 GA SDK matching the verified MCR baseline. Renew affected source bindings and independent bounded review as necessary. Preserve intake identities, all requirements, six prompts, lifecycle and future execution authority. No image build, container restart, global maintenance, platform-rule change or formal approval."
 }
