@@ -117,7 +117,11 @@ javac --version
 mvn --version
 go version
 gopls version
+staticcheck -version
+govulncheck -version
+dlv version
 rustc --version
+rustup --version
 cargo --version
 cargo clippy --version
 python --version
@@ -133,8 +137,9 @@ claude --version
 agy --version
 copilot --version
 syft version
+uv --version
 actionlint -version
-specify version
+specify --version
 specify check
 
 section ".NET"

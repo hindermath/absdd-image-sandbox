@@ -624,9 +624,91 @@ def summarize_results(input_path: Path, output_path: Path, platform: str, mode: 
     return exit_code
 
 
+def snapshot_registries(output: Path, brew_path: Path, cli_path: Path,
+                        npm_path: Path, platform: str, vscode_path: Path | None) -> int:
+    """Read registry inputs once; never cache probes or installation results."""
+    def load(path: Path) -> dict:
+        try:
+            value = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, ValueError) as exc:
+            raise ContractError(f"registry cannot be read: {exc}") from exc
+        if not isinstance(value, dict):
+            raise ContractError("registry root must be an object")
+        return value
+
+    def write(name: str, rows: list[list[str]]) -> None:
+        if any(not isinstance(field, str) or any(c in field for c in "\t\r\n")
+               for row in rows for field in row):
+            raise ContractError("registry fields must be single-line strings")
+        (output / name).write_text(
+            "".join("\t".join(row) + "\n" for row in rows), encoding="utf-8"
+        )
+
+    def select(items: list, scope: str) -> list:
+        return [item for item in items
+                if scope == "all" or item.get("scope", "required") == scope]
+
+    def records(value) -> list:
+        if not isinstance(value, list) or any(not isinstance(item, dict) for item in value):
+            raise ContractError("registry entries must be an array of objects")
+        return value
+
+    brew, cli, npm = load(brew_path), load(cli_path), load(npm_path)
+    vscode = load(vscode_path) if vscode_path else {}
+    output.mkdir(parents=True, exist_ok=True)
+    for section in ("formulae", "casks", "aptFallback"):
+        fallback = brew.get("aptFallback", {})
+        if not isinstance(fallback, dict):
+            raise ContractError("apt fallback must be an object")
+        items = records(fallback.get("packages", []) if section == "aptFallback"
+                        else brew.get(section, []))
+        for scope in ("all", "required", "optional"):
+            write(f"brew-{section}-{scope}.tsv",
+                  [[item["name"]] for item in select(items, scope) if item.get("name")])
+        write(f"brew-{section}-scoped.tsv",
+              [[item["name"], item.get("scope", "required")] for item in items
+               if item.get("name") and item.get("scope", "required") in SCOPES])
+    for family, registry in (("cli", cli), ("npm", npm)):
+        items = [item for item in records(registry.get("tools", []))
+                 if platform in item.get("platforms", [])]
+        for scope in ("all", "required", "optional"):
+            rows = []
+            for item in select(items, scope):
+                args = json.dumps(item.get("args", []), separators=(",", ":"))
+                if family == "cli":
+                    install = item.get("install", {})
+                    if not isinstance(install, dict):
+                        raise ContractError("tool installation metadata must be an object")
+                    rows.append([item.get("id", ""), item.get("command", ""), args,
+                                 install.get("manager") or "-",
+                                 json.dumps(install.get("arguments", []), separators=(",", ":")),
+                                 install.get("url", ""), install.get("sha256", ""),
+                                 install.get("interpreter", "")])
+                else:
+                    rows.append([item.get("id", ""), item.get("package", ""),
+                                 item.get("command", ""), args])
+            write(f"{family}-{scope}.tsv", rows)
+    items = records(vscode.get("extensions", []))
+    for scope in ("all", "required", "optional"):
+        write(f"vscode-{scope}.tsv",
+              [[item["id"]] for item in select(items, scope) if item.get("id")])
+    write("vscode-scoped.tsv", [[item["id"], item.get("scope", "required")]
+                              for item in items if item.get("id")
+                              and item.get("scope", "required") in SCOPES])
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
     commands = parser.add_subparsers(dest="command", required=True)
+
+    snapshots = commands.add_parser("snapshot-registries")
+    snapshots.add_argument("--output", type=Path, required=True)
+    snapshots.add_argument("--brew", type=Path, required=True)
+    snapshots.add_argument("--cli", type=Path, required=True)
+    snapshots.add_argument("--npm", type=Path, required=True)
+    snapshots.add_argument("--platform", required=True)
+    snapshots.add_argument("--vscode", type=Path)
 
     probe = commands.add_parser("probe")
     probe.add_argument("--tool-id", required=True)
@@ -668,6 +750,9 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> int:
     args = build_parser().parse_args()
     try:
+        if args.command == "snapshot-registries":
+            return snapshot_registries(args.output, args.brew, args.cli, args.npm,
+                                       args.platform, args.vscode)
         if args.command == "probe":
             command = args.probe_command
             if command and command[0] == "--":

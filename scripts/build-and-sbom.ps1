@@ -30,7 +30,7 @@ param(
     [string] $ImageName = '',
     [string] $SbomDir = '',
     [ValidateSet('podman')] [string] $Runtime = 'podman',
-    [string] $SyftVersion = '1.46.0',
+    [string] $SyftVersion = '1.55.0',
     [switch] $SkipBuild,
     [string] $Platform = '',
     [switch] $AllowCrossArchitecture

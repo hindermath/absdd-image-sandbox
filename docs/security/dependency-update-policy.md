@@ -1,6 +1,31 @@
 # Abhängigkeits-Update-Richtlinie / Dependency-Update-Policy
 
-Stand: 2026-10-04
+Stand: 2026-10-25
+
+Aktueller Abgleich / Current audit:
+[2026-10-25](../maintenance/toolchain-version-audit-2026-10-25.md).
+Java und Node verwenden aktuelle LTS-Linien; .NET bleibt auf 10 LTS.
+Python und Maven werden separat auf stabile Upstream-Versionen gepinnt.
+Nur das System-Python und die weiteren APT-Pakete folgen Ubuntu 24.04.
+Go- und Python-Downloads erhalten feste Architektur-Hashes; Maven erhaelt
+eine feste SHA-512-Pruefsumme fuer das architekturunabhaengige Java-Archiv.
+
+Der zusaetzliche Renovate-Dockerfile-Manager verfolgt auch den MCR-Basisdigest.
+Die LTS-Grenzen bleiben bewusst bei .NET 10.0, Java 25 und Node 24; ein
+kuenftiger LTS-Wechsel benoetigt die gemeinsame Anpassung der Paketregeln.
+Java-/Node-Versionen werden fuer diese Major-ARGs auf ihre Hauptnummer
+normalisiert, damit keine Paketnamen wie `openjdk-25.0.4-jdk-headless` oder
+NodeSource-Pfade wie `node_24.22.1.x` entstehen.
+
+*The Dockerfile manager also tracks the MCR base digest. Rules intentionally
+retain .NET 10.0, Java 25 and Node 24; a future LTS switch must update these
+package rules together. Java/Node release versions are normalized to their
+major number so APT package names and NodeSource paths remain valid.*
+
+*Java and Node use current LTS lines; .NET stays on 10 LTS. Python and Maven
+use separately pinned stable upstream releases. System Python and remaining
+APT packages follow Ubuntu 24.04. Go/Python downloads use architecture hashes;
+Maven's architecture-independent Java archive has a committed SHA-512 hash.*
 
 Dokumentationswerkzeuge / Documentation tools: Pandoc, Lychee, Typst und
 Tinymist verwenden native AMD64-/ARM64-Releases mit fest hinterlegten
@@ -47,6 +72,9 @@ vorangestellte Metadatenzeile mit passendem `argName` hat.
 | ARG | Renovate datasource | Dependency |
 |---|---|---|
 | `JAVA_VERSION` | `java-version` | `java` |
+| `MAVEN_VERSION` | `maven` | `org.apache.maven:apache-maven` |
+| `PYTHON_VERSION` | `python-version` | `python` |
+| `PYTHON_BUILD_DATE` | `github-releases` | `astral-sh/python-build-standalone` |
 | `POWERSHELL_VERSION` | `github-releases` | `PowerShell/PowerShell` |
 | `GO_VERSION` | `golang-version` | `go` |
 | `GOPLS_VERSION` | `go` | `golang.org/x/tools/gopls` |
@@ -57,8 +85,9 @@ vorangestellte Metadatenzeile mit passendem `argName` hat.
 | `RUSTUP_VERSION` | `github-releases` | `rust-lang/rustup` |
 | `SWIFT_DOCKER_TAG` | `docker` | `swift` |
 | `NODE_MAJOR` | `node-version` | `node` |
+| `NPM_VERSION` | `npm` | `npm` |
 | `UV_VERSION` | `github-releases` | `astral-sh/uv` |
-| `OPENCODE_VERSION` | `npm` | `opencode-ai` |
+| `OPENCODE_VERSION` | `npm` | `@opencode/cli` |
 | `CODEX_VERSION` | `npm` | `@openai/codex` |
 | `CLAUDE_CODE_VERSION` | `npm` | `@anthropic-ai/claude-code` |
 | `GEMINI_CLI_VERSION` | `npm` | `@google/gemini-cli` |
@@ -69,15 +98,18 @@ vorangestellte Metadatenzeile mit passendem `argName` hat.
 | `LYCHEE_VERSION` | `github-releases` | `lycheeverse/lychee` |
 | `TYPST_VERSION` | `github-releases` | `typst/typst` |
 | `TINYMIST_VERSION` | `github-releases` | `Myriad-Dreamin/tinymist` |
+| `ACTIONLINT_VERSION` | `github-releases` | `rhysd/actionlint` |
+| `DOTNET_COMPAT_SDK_VERSION` | `dotnet-version` | `dotnet-sdk` |
 
 `JAVA_VERSION` versioniert bewusst die Java-Major-Linie fuer das Ubuntu-APT-
 Paket `openjdk-${JAVA_VERSION}-jdk-headless`. Die konkrete Ubuntu-Patchversion
 wird nicht exakt gepinnt und muss bei Renovate-PRs im Build validiert werden.
 
-`POWERSHELL_VERSION` beschreibt die PowerShell-Version, die das per Digest
-gepinnte Microsoft-.NET-SDK-Basisimage mitliefert. Der Build vergleicht diese
-Version mit `pwsh`; ein Renovate-Update ist deshalb erst zusammen mit einem
-geprueften Basisimage-Digest mergebar. PowerShell wird nicht doppelt installiert.
+`POWERSHELL_VERSION` pinnt die stabile PowerShell-Version. Wenn MCR noch eine
+alte Patchversion enthaelt, aktualisiert der Build dessen vorhandenes globales
+Tool aus dem offiziellen Microsoft-Paket mit festen AMD64-/ARM64-SHA-256-Hashes.
+Es entsteht keine zweite Tool-Installation. Paket-Hashes, Versions-ARG und
+Basisimage-Digest gemeinsam pruefen; der Build vergleicht das Ergebnis mit `pwsh`.
 
 ### Eingebettete Home-Baseline-Referenz
 
@@ -94,9 +126,25 @@ prueft die statische Lock-Struktur. Der Image-Build prueft den Tag gegen den
 Commit vor dem Checkout. Die lokale Arbeitskopie eines Maintainers ist keine
 zulaessige Build-Quelle.
 
+### Native npm-Installationsschritte / Native npm Install Hooks
+
+DE: npm blockiert nicht ausdruecklich erlaubte Installationsskripte. Der Build
+schliesst deshalb nur die benannten Hooks von `@opencode/cli`,
+`@anthropic-ai/claude-code`, `@github/keytar` und `node-pty` explizit ab. Es gibt
+keine globale Freigabe aller Skripte und keine persistierte npm-Freigabe.
+`libsecret-1-0` liefert die Laufzeitbibliothek fuer das vorhandene Keytar-Addon;
+das konfiguriert weder Schluesselbund, Konto noch Zugangsdaten. Versions- und
+Modul-Ladechecks muessen danach erfolgreich sein.
+
+EN: npm blocks unapproved install scripts. The build explicitly finalizes only
+the named hooks for OpenCode, Claude Code, keytar and node-pty. No blanket or
+persistent npm script approval is configured. libsecret supplies the existing
+keytar addon's runtime library, without configuring a keyring, account or
+credentials. Version and native module load checks must pass afterwards.
+
 ### Spec-Kit-Commitbindung
 
-Spec Kit 0.12.8 ist im Dockerfile direkt auf seinen Release-Commit gepinnt.
+Spec Kit 1.2.3 ist im Dockerfile direkt auf seinen Release-Commit gepinnt.
 Dieser Pin wird bewusst geprueft und nicht vom ARG-Manager automatisch
 aktualisiert. Der Image-Build prueft die installierte Paketversion; der lokale
 Hook `specify-container-patch` prueft den Bind-Mount-Patch fuer die alte und
@@ -154,6 +202,9 @@ preceding metadata line with a matching `argName`.
 | ARG | Renovate datasource | Dependency |
 |---|---|---|
 | `JAVA_VERSION` | `java-version` | `java` |
+| `MAVEN_VERSION` | `maven` | `org.apache.maven:apache-maven` |
+| `PYTHON_VERSION` | `python-version` | `python` |
+| `PYTHON_BUILD_DATE` | `github-releases` | `astral-sh/python-build-standalone` |
 | `POWERSHELL_VERSION` | `github-releases` | `PowerShell/PowerShell` |
 | `GO_VERSION` | `golang-version` | `go` |
 | `GOPLS_VERSION` | `go` | `golang.org/x/tools/gopls` |
@@ -164,8 +215,9 @@ preceding metadata line with a matching `argName`.
 | `RUSTUP_VERSION` | `github-releases` | `rust-lang/rustup` |
 | `SWIFT_DOCKER_TAG` | `docker` | `swift` |
 | `NODE_MAJOR` | `node-version` | `node` |
+| `NPM_VERSION` | `npm` | `npm` |
 | `UV_VERSION` | `github-releases` | `astral-sh/uv` |
-| `OPENCODE_VERSION` | `npm` | `opencode-ai` |
+| `OPENCODE_VERSION` | `npm` | `@opencode/cli` |
 | `CODEX_VERSION` | `npm` | `@openai/codex` |
 | `CLAUDE_CODE_VERSION` | `npm` | `@anthropic-ai/claude-code` |
 | `GEMINI_CLI_VERSION` | `npm` | `@google/gemini-cli` |
@@ -176,16 +228,19 @@ preceding metadata line with a matching `argName`.
 | `LYCHEE_VERSION` | `github-releases` | `lycheeverse/lychee` |
 | `TYPST_VERSION` | `github-releases` | `typst/typst` |
 | `TINYMIST_VERSION` | `github-releases` | `Myriad-Dreamin/tinymist` |
+| `ACTIONLINT_VERSION` | `github-releases` | `rhysd/actionlint` |
+| `DOTNET_COMPAT_SDK_VERSION` | `dotnet-version` | `dotnet-sdk` |
 
 `JAVA_VERSION` deliberately versions the Java major line for the Ubuntu APT
 package `openjdk-${JAVA_VERSION}-jdk-headless`. The concrete Ubuntu patch
 package version is not pinned exactly and must be validated in Renovate PR
 builds.
 
-`POWERSHELL_VERSION` records the PowerShell version supplied by the
-digest-pinned Microsoft .NET SDK base image. The build compares this value with
-`pwsh`, so a Renovate update can only merge together with a verified base-image
-digest. PowerShell is not installed twice.
+`POWERSHELL_VERSION` pins stable PowerShell. If MCR still contains an older
+patch, the build updates its existing global tool using the official Microsoft
+package and committed AMD64/ARM64 SHA-256 hashes, not a second installation.
+Review package hashes, version ARG and base-image digest together. The build
+checks the resulting `pwsh` version.
 
 ### Embedded Home-Baseline Reference
 
@@ -202,7 +257,7 @@ maintainer's local working tree is not an allowed build source.
 
 ### Spec Kit Commit Binding
 
-The Dockerfile pins Spec Kit 0.12.8 directly to its release commit. Review this
+The Dockerfile pins Spec Kit 1.2.3 directly to its release commit. Review this
 pin deliberately; the ARG manager does not update it automatically. The image
 build checks installed package metadata. The `specify-container-patch` local
 hook tests old and new module layouts, idempotency and unknown-layout blocking.

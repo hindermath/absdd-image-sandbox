@@ -29,7 +29,8 @@ class ContainerPatchTests(unittest.TestCase):
                 MODULE.main()
                 self.assertEqual(first, target.read_bytes(), "Patch must be idempotent")
             text = first.decode("utf-8")
-            self.assertLess(text.index("# Container patch:"), text.index("import json"))
+            anchor = "import json" if "import json" in original else "from .shared_infra import ("
+            self.assertLess(text.index("# Container patch:"), text.index(anchor))
             compile(text, str(target), "exec")
             # DE: Globales shutil-Patching nur im Kindprozess pruefen.
             # EN: Isolate global shutil mutations in a disposable child process.
@@ -57,6 +58,9 @@ assert (root / 'copied.txt').read_text() == 'bind mount contents'
 
     def test_split_module_layout(self) -> None:
         self.verify_layout("import os\nimport sys\nimport json\nfrom .shared_infra import (\n    install_shared_infra,\n)\n")
+
+    def test_v1_split_module_layout_without_json(self) -> None:
+        self.verify_layout("import os\nimport sys\nfrom .shared_infra import (\n    install_shared_infra,\n)\n")
 
     def test_unknown_layout_is_read_only(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

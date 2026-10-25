@@ -1,57 +1,64 @@
-# Tag 10.0 observed on 2026-09-04, pinned to its multi-architecture manifest digest.
-FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:e1ffd2a92ae84c1291bc1b6887501f8af98e6331e7af6d4c8d37168c5e87a64c
+# Tag 10.0 observed on 2026-10-25: SDK 10.0.402, native AMD64/ARM64 manifest.
+FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:747cbade5bfd918a175ac32f8f1d931edec2c7d0d5397a3de72eaef1ac1f66d2 AS dotnet-base
+FROM dotnet-base AS sandbox
 
 # renovate: datasource=java-version depName=java packageName=java-jdk versioning=semver-coerced argName=JAVA_VERSION
-ARG JAVA_VERSION=21
+ARG JAVA_VERSION=25
+# renovate: datasource=maven depName=org.apache.maven:apache-maven versioning=maven argName=MAVEN_VERSION
+ARG MAVEN_VERSION=3.10.0
+# renovate: datasource=python-version depName=python versioning=pep440 argName=PYTHON_VERSION
+ARG PYTHON_VERSION=3.15.1
+# renovate: datasource=github-releases depName=astral-sh/python-build-standalone versioning=loose argName=PYTHON_BUILD_DATE
+ARG PYTHON_BUILD_DATE=20261021
 # renovate: datasource=github-releases depName=PowerShell/PowerShell versioning=semver argName=POWERSHELL_VERSION
-ARG POWERSHELL_VERSION=7.6.4
+ARG POWERSHELL_VERSION=7.6.8
 # renovate: datasource=golang-version depName=go versioning=semver argName=GO_VERSION
-ARG GO_VERSION=1.26.3
+ARG GO_VERSION=1.27.3
 # renovate: datasource=go depName=golang.org/x/tools/gopls versioning=semver argName=GOPLS_VERSION
-ARG GOPLS_VERSION=v0.21.1
+ARG GOPLS_VERSION=v0.24.0
 # renovate: datasource=go depName=honnef.co/go/tools versioning=semver argName=STATICCHECK_VERSION
-ARG STATICCHECK_VERSION=v0.7.0
+ARG STATICCHECK_VERSION=v0.8.2
 # renovate: datasource=go depName=golang.org/x/vuln versioning=semver argName=GOVULNCHECK_VERSION
-ARG GOVULNCHECK_VERSION=v1.3.0
+ARG GOVULNCHECK_VERSION=v1.9.0
 # renovate: datasource=go depName=github.com/go-delve/delve versioning=semver argName=DELVE_VERSION
-ARG DELVE_VERSION=v1.26.3
+ARG DELVE_VERSION=v1.27.2
 # renovate: datasource=rust-version depName=rust versioning=rust-release-channel argName=RUST_TOOLCHAIN
-ARG RUST_TOOLCHAIN=1.95.0
+ARG RUST_TOOLCHAIN=1.99.1
 # renovate: datasource=github-releases depName=rust-lang/rustup versioning=semver argName=RUSTUP_VERSION
-ARG RUSTUP_VERSION=1.28.2
+ARG RUSTUP_VERSION=1.29.2
 # renovate: datasource=docker depName=swift versioning=docker argName=SWIFT_DOCKER_TAG
-ARG SWIFT_DOCKER_TAG=6.3.3-noble
+ARG SWIFT_DOCKER_TAG=6.4.1-noble
 # renovate: datasource=node-version depName=node versioning=node argName=NODE_MAJOR
-ARG NODE_MAJOR=22
+ARG NODE_MAJOR=24
 # renovate: datasource=github-releases depName=astral-sh/uv versioning=semver argName=UV_VERSION
-ARG UV_VERSION=0.11.16
-# renovate: datasource=npm depName=opencode-ai versioning=npm argName=OPENCODE_VERSION
-ARG OPENCODE_VERSION=1.14.50
+ARG UV_VERSION=0.13.5
+# renovate: datasource=npm depName=@opencode/cli versioning=npm argName=OPENCODE_VERSION
+ARG OPENCODE_VERSION=2.1.4
 # renovate: datasource=npm depName=@openai/codex versioning=npm argName=CODEX_VERSION
-ARG CODEX_VERSION=0.144.1
+ARG CODEX_VERSION=0.164.0
 # renovate: datasource=npm depName=@anthropic-ai/claude-code versioning=npm argName=CLAUDE_CODE_VERSION
-ARG CLAUDE_CODE_VERSION=2.1.206
+ARG CLAUDE_CODE_VERSION=2.1.310
 # renovate: datasource=npm depName=@google/gemini-cli versioning=npm argName=GEMINI_CLI_VERSION
-ARG GEMINI_CLI_VERSION=0.50.0
+ARG GEMINI_CLI_VERSION=0.65.0
 # renovate: datasource=github-releases depName=google-antigravity/antigravity-cli versioning=semver argName=ANTIGRAVITY_CLI_VERSION
-ARG ANTIGRAVITY_CLI_VERSION=1.1.1
+ARG ANTIGRAVITY_CLI_VERSION=1.4.7
 # renovate: datasource=npm depName=@github/copilot versioning=npm argName=COPILOT_CLI_VERSION
-ARG COPILOT_CLI_VERSION=1.0.70
+ARG COPILOT_CLI_VERSION=1.0.103
 # renovate: datasource=github-releases depName=anchore/syft versioning=semver argName=SYFT_VERSION
-ARG SYFT_VERSION=1.46.0
+ARG SYFT_VERSION=1.55.0
 # renovate: datasource=github-releases depName=rhysd/actionlint versioning=semver argName=ACTIONLINT_VERSION
 ARG ACTIONLINT_VERSION=1.7.12
 # renovate: datasource=dotnet-version depName=dotnet-sdk versioning=semver argName=DOTNET_COMPAT_SDK_VERSION
-ARG DOTNET_COMPAT_SDK_VERSION=10.0.301
+ARG DOTNET_COMPAT_SDK_VERSION=10.0.303
 
 # renovate: datasource=github-releases depName=jgm/pandoc versioning=semver-coerced argName=PANDOC_VERSION
-ARG PANDOC_VERSION=3.12
+ARG PANDOC_VERSION=3.12.1
 # renovate: datasource=github-releases depName=lycheeverse/lychee versioning=semver argName=LYCHEE_VERSION
 ARG LYCHEE_VERSION=0.24.2
 # renovate: datasource=github-releases depName=typst/typst versioning=semver argName=TYPST_VERSION
 ARG TYPST_VERSION=0.15.1
 # renovate: datasource=github-releases depName=Myriad-Dreamin/tinymist versioning=semver argName=TINYMIST_VERSION
-ARG TINYMIST_VERSION=0.15.8
+ARG TINYMIST_VERSION=0.15.10
 
 USER root
 ENV POWERSHELL_TELEMETRY_OPTOUT=1
@@ -87,7 +94,6 @@ RUN sed -i \
         libstdc++-13-dev \
         libxml2-dev \
         libz3-dev \
-        maven \
         openjdk-${JAVA_VERSION}-jdk-headless \
         pkg-config \
         poppler-utils \
@@ -118,10 +124,39 @@ RUN sed -i \
     && ln -sf /usr/bin/fdfind /usr/local/bin/fd \
     && rm -rf /var/lib/apt/lists/*
 RUN set -eux; \
+    tmp_dir="$(mktemp -d)"; \
+    archive="apache-maven-${MAVEN_VERSION}-bin.tar.gz"; \
+    maven_sha512="908b1501bfb420bf7c8affb855534a9c407fd6099367bfb9f2f2dcb8e9799102bffb84518cde74c679bd76870247c6528683abdd620581bffa90f95d92d175aa"; \
+    if ! curl -fsSL "https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/${archive}" -o "${tmp_dir}/${archive}"; then \
+        curl -fsSL "https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/${archive}" -o "${tmp_dir}/${archive}"; \
+    fi; \
+    printf '%s  %s\n' "${maven_sha512}" "${tmp_dir}/${archive}" | sha512sum -c -; \
+    tar -xzf "${tmp_dir}/${archive}" -C /opt; \
+    ln -s "/opt/apache-maven-${MAVEN_VERSION}/bin/mvn" /usr/local/bin/mvn; \
+    rm -rf "${tmp_dir}"; \
+    mvn --version
+RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
-        amd64) target="amd64"; checksum="67d7d011fed8c8543306022b985b9b2499ab9b74818df91d8727c7e9ebc5ba06" ;; \
-        arm64) target="arm64"; checksum="6cefcf7100e23a99447c26f89d1ff5b253f3407fcef99a9e27ae06f3ed16cb82" ;; \
+        amd64) python_target="x86_64"; python_sha256="01d901e09ca673c99a6c9bd9ec2cfbd58dbe8813d07514c36cb73cfd20b18bd8" ;; \
+        arm64) python_target="aarch64"; python_sha256="6efe65c43ae0bdebebeab4607f91a0053dd36d5e51cfd69a791d544e9b122be7" ;; \
+        *) echo "Unsupported Python architecture: ${arch}" >&2; exit 1 ;; \
+    esac; \
+    archive="cpython-${PYTHON_VERSION}+${PYTHON_BUILD_DATE}-${python_target}-unknown-linux-gnu-install_only_stripped.tar.gz"; \
+    tmp_dir="$(mktemp -d)"; \
+    curl -fsSL "https://github.com/astral-sh/python-build-standalone/releases/download/${PYTHON_BUILD_DATE}/${archive}" -o "${tmp_dir}/${archive}"; \
+    printf '%s  %s\n' "${python_sha256}" "${tmp_dir}/${archive}" | sha256sum -c -; \
+    mkdir -p /opt/cpython; \
+    tar -xzf "${tmp_dir}/${archive}" --strip-components=1 -C /opt/cpython; \
+    ln -s /opt/cpython/bin/python3 /usr/local/bin/python; \
+    ln -s /opt/cpython/bin/python3 /usr/local/bin/python3; \
+    rm -rf "${tmp_dir}"; \
+    python3 -c 'import sys; assert sys.version.split()[0] == "'"${PYTHON_VERSION}"'", sys.version'
+RUN set -eux; \
+    arch="$(dpkg --print-architecture)"; \
+    case "${arch}" in \
+        amd64) target="amd64"; checksum="d0c90410e90204c9ca83b8539fac5c7aed01fd537207e4585849f8abc5df20b8" ;; \
+        arm64) target="arm64"; checksum="445d96fd08801fe636cab1158b4f017ee320ac3b7446328b4fe2f902117b19b9" ;; \
         *) echo "Unsupported pandoc architecture: ${arch}" >&2; exit 1 ;; \
     esac; \
     archive="pandoc-${PANDOC_VERSION}-linux-${target}.tar.gz"; \
@@ -165,8 +200,8 @@ RUN set -eux; \
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
-        amd64) target="x86_64"; checksum="2428932e8d8b593ebc1ac4eed41fb9d3584166e1044bbcdef740b7296c348295" ;; \
-        arm64) target="aarch64"; checksum="ec78300e89b34e0958b615b1d42c275fd11bf91d2d27401bbef07150e477f199" ;; \
+        amd64) target="x86_64"; checksum="10df33ec0b6cb380b1354b55bd8a32fdc2f00fec281b7dc0a41086bd0038e0fc" ;; \
+        arm64) target="aarch64"; checksum="0a545957d894cec8a4ca9010d05a7fa27beb1e356c2b221b7f7f704538ff0bb0" ;; \
         *) echo "Unsupported tinymist architecture: ${arch}" >&2; exit 1 ;; \
     esac; \
     archive="tinymist-${target}-unknown-linux-gnu.tar.gz"; \
@@ -177,7 +212,22 @@ RUN set -eux; \
     install -m 0755 "${tmp_dir}/tinymist-${target}-unknown-linux-gnu/tinymist" /usr/local/bin/tinymist; \
     rm -rf "${tmp_dir}"; \
     tinymist --version
-# The SDK image's tool apphost can target a different architecture and precedes /usr/bin in PATH.
+# Update the existing tool when the stable PowerShell release is newer than MCR.
+RUN set -eux; \
+    arch="$(dpkg --print-architecture)"; \
+    case "${arch}" in \
+        amd64) ps_arch="x64"; ps_sha256="caeeff1d808dd54a9fde06976e17c5c92061989dc5fbe21e13bd5690883e4eb1" ;; \
+        arm64) ps_arch="arm64"; ps_sha256="6cddb58e698125156c725d57b5942f7e0468cd75e8f7b78b133641ede1a28a8e" ;; \
+        *) echo "Unsupported PowerShell architecture: ${arch}" >&2; exit 1 ;; \
+    esac; \
+    tmp_dir="$(mktemp -d)"; \
+    package="PowerShell.Linux.${ps_arch}.${POWERSHELL_VERSION}.nupkg"; \
+    curl -fsSL "https://powershellinfraartifacts-gkhedzdeaghdezhr.z01.azurefd.net/tool/${POWERSHELL_VERSION}/${package}" -o "${tmp_dir}/${package}"; \
+    printf '%s  %s\n' "${ps_sha256}" "${tmp_dir}/${package}" | sha256sum -c -; \
+    /usr/bin/dotnet tool update --tool-path /usr/share/powershell --add-source "${tmp_dir}" --version "${POWERSHELL_VERSION}" "PowerShell.Linux.${ps_arch}"; \
+    /usr/bin/dotnet nuget locals all --clear; \
+    rm -rf "${tmp_dir}"
+# The SDK image's tool apphost can precede /usr/bin in PATH.
 RUN actual_version="$(pwsh -NoLogo -NoProfile -Command '$PSVersionTable.PSVersion.ToString()')" \
     && ps_home="$(pwsh -NoLogo -NoProfile -Command '$PSHOME')" \
     && if [ "${actual_version}" != "${POWERSHELL_VERSION}" ]; then \
@@ -188,8 +238,8 @@ RUN actual_version="$(pwsh -NoLogo -NoProfile -Command '$PSVersionTable.PSVersio
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
-        amd64) dotnet_rid="linux-x64"; dotnet_sha512="cfbeec3a3a1d3ad3e168e37a77c4cc26c23125acd84a86d014047da3ecffce4c368a9acac4d7c950a047fa3d98989ce8aea69f8e5842cb6d330e8911e1c335a7" ;; \
-        arm64) dotnet_rid="linux-arm64"; dotnet_sha512="4ee438b363cb8468930d50b6bdc738a375e2f33b25bfd0c8dcb55853dda7f0fb187693e0f49dfc31556e68320b961a50dcf3b74c1f25abe3a5bd916db607db99" ;; \
+        amd64) dotnet_rid="linux-x64"; dotnet_sha512="538df11ceb9d86bdda061bab6ede3d1f6d46bb9ba087ae905643f3d456afe982949d1b952bceb305a5d22d2d6e69cc0e5100216ffcc709aaa86e867f2d9cdf9a" ;; \
+        arm64) dotnet_rid="linux-arm64"; dotnet_sha512="622e059198058ee5f92d7817bdd83885480a979628348f878201cb8dba52d168c1a324f9943a0e7a03ad547d85332aa82f16aced29da599ef02422b5378452de" ;; \
         *) echo "Unsupported .NET compatibility SDK architecture: ${arch}" >&2; exit 1 ;; \
     esac; \
     archive="dotnet-sdk-${DOTNET_COMPAT_SDK_VERSION}-${dotnet_rid}.tar.gz"; \
@@ -257,18 +307,19 @@ RUN swift --version \
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
-        amd64) go_arch="amd64" ;; \
-        arm64) go_arch="arm64" ;; \
+        amd64) go_arch="amd64"; go_sha256="65efbc80fdc1fa2cd2631cad5b481777a68e8725f34e89f50fc6ac714e379b40" ;; \
+        arm64) go_arch="arm64"; go_sha256="a06e99309dbcbdca1a8ccd2282c3ee146e55930886e26b4f1193269587165f49" ;; \
         *) echo "Unsupported Go architecture: ${arch}" >&2; exit 1 ;; \
     esac; \
     wget "https://go.dev/dl/go${GO_VERSION}.linux-${go_arch}.tar.gz" -O /tmp/go.tgz; \
+    printf '%s  %s\n' "${go_sha256}" /tmp/go.tgz | sha256sum -c -; \
     rm -rf /usr/local/go; \
     tar -C /usr/local -xzf /tmp/go.tgz; \
     rm /tmp/go.tgz
 RUN printf '%s\n' 'export PATH="/usr/local/go/bin:/home/adedev/go/bin:/home/adedev/.cargo/bin:${PATH}"' \
     > /etc/profile.d/ade-toolchains.sh
 RUN npm i -g \
-        "opencode-ai@${OPENCODE_VERSION}" \
+        "@opencode/cli@${OPENCODE_VERSION}" \
         "@openai/codex@${CODEX_VERSION}" \
         "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}" \
         "@google/gemini-cli@${GEMINI_CLI_VERSION}" \
@@ -348,12 +399,12 @@ RUN set -eux; \
     "${tmp_dir}/rustup-init" -y --no-modify-path --profile minimal --default-host "${rust_host}" --default-toolchain "${RUST_TOOLCHAIN}"; \
     rm -rf "${tmp_dir}"; \
     rustup component add rustfmt clippy rust-analyzer rust-src
-# Spec Kit v0.12.8: pin the peeled release commit, not a movable tag.
+# Spec Kit v1.2.3: pin the peeled release commit, not a movable tag.
 # Keep the existing bind-mount patch and reject unexpected package metadata.
-RUN uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@464d57fe30c72e9a88d279cc49834539ec989c03 \
+RUN uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@5ea8b1cf0a38699340a38e00d02770308997d8c0 \
     && python3 /usr/local/bin/patch-specify-cli.py \
     && /home/adedev/.local/share/uv/tools/specify-cli/bin/python -c \
-        'from importlib.metadata import version; actual = version("specify-cli"); assert actual == "0.12.8", actual'
+        'from importlib.metadata import version; actual = version("specify-cli"); assert actual == "1.2.3", actual'
 RUN mkdir -p \
       /home/adedev/.local/share/opencode \
       /home/adedev/.codex \
@@ -387,8 +438,8 @@ COPY ./home-baseline.lock.json /usr/local/share/absdd-image-sandbox/home-baselin
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
-        amd64) agy_arch="x64"; agy_sha256="2ee167841cdc9a1d7dc5a624f1f15b84ee5dbb94b85af662a7299118cb4b1586" ;; \
-        arm64) agy_arch="arm64"; agy_sha256="3fc542686c5c82d7a01e3796a8bfcda5ed849c6e70f07d4d0c93e51368952784" ;; \
+        amd64) agy_arch="x64"; agy_sha256="67fd4e70be739b1f8b18f90b511da8cd2a7aef24e888e5837402e025bf7fdbfc" ;; \
+        arm64) agy_arch="arm64"; agy_sha256="b273c791b7647f680598fa1dbdf9c8086bdc42374b2276fa70e900bf8120e1d5" ;; \
         *) echo "Unsupported Antigravity CLI architecture: ${arch}" >&2; exit 1 ;; \
     esac; \
     archive="agy_cli_linux_${agy_arch}.tar.gz"; \
@@ -412,6 +463,35 @@ RUN sed -i 's/\r$//' /usr/local/bin/audit-export /usr/local/bin/ade-entrypoint \
     && ln -s /opt/home-baseline /home/adedev/home-baseline-tmp \
     && chown -h adedev:adedev /home/adedev/home-baseline-source \
         /home/adedev/home-baseline-tmp
+# npm now blocks unnamed install hooks. Finalize only these native-agent hooks;
+# do not persist an npm allow-scripts setting or grant agent permissions.
+RUN apt-get -y update \
+    && apt-get -y install --no-install-recommends libsecret-1-0 \
+    && rm -rf /var/lib/apt/lists/* \
+    && PYTHON=/usr/bin/python3 npm rebuild --global \
+        --allow-scripts=@opencode/cli,@anthropic-ai/claude-code,@github/keytar,node-pty \
+        @opencode/cli @anthropic-ai/claude-code @github/keytar node-pty \
+    && opencode --version \
+    && claude --version \
+    && node -e 'for (const p of process.argv.slice(1)) require(p)' \
+        "$(npm root -g)/@google/gemini-cli/node_modules/@github/keytar" \
+        "$(npm root -g)/@google/gemini-cli/node_modules/@lydell/node-pty" \
+        "$(npm root -g)/@google/gemini-cli/node_modules/node-pty"
+# renovate: datasource=npm depName=npm versioning=npm argName=NPM_VERSION
+ARG NPM_VERSION=12.2.1
+RUN npm install --global "npm@${NPM_VERSION}" \
+    && npm --version
+# The compatibility SDK archive must not downgrade the base host or retain old runtimes.
+COPY --from=dotnet-base /usr/share/dotnet/dotnet /usr/share/dotnet/dotnet
+RUN set -eux; \
+    for root in /usr/share/dotnet/shared/Microsoft.NETCore.App /usr/share/dotnet/shared/Microsoft.AspNetCore.App /usr/share/dotnet/host/fxr; do \
+        for path in "${root}/${DOTNET_VERSION%.*}".*; do \
+            if [ -d "${path}" ] && [ "${path##*/}" != "${DOTNET_VERSION}" ]; then \
+                rm -rf "${path}"; \
+            fi; \
+        done; \
+    done; \
+    /usr/bin/dotnet --list-runtimes
 USER adedev
 
 ENTRYPOINT ["/usr/local/bin/ade-entrypoint"]

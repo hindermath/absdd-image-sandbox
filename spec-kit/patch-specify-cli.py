@@ -43,6 +43,7 @@ shutil.copy2 = _container_copyfile_no_metadata
 shutil.copymode = _container_copystat_no_metadata
 shutil.copystat = _container_copystat_no_metadata
 shutil.copytree = _container_copytree_no_metadata
+# End container copy patch.
 '''
 
 
@@ -59,7 +60,12 @@ def main() -> None:
     content = target.read_text()
     patch_start = content.find("\n# Container patch: Windows/WSL bind mounts")
     if patch_start != -1:
-        patch_end = content.find("\nimport json", patch_start)
+        end_marker = "\n# End container copy patch.\n"
+        marker_at = content.find(end_marker, patch_start)
+        patch_end = (
+            marker_at + len(end_marker)
+            if marker_at != -1 else content.find("\nimport json", patch_start)
+        )
         if patch_end == -1:
             raise SystemExit("existing container patch end not found")
         existing_patch = content[patch_start:patch_end]
@@ -73,10 +79,12 @@ def main() -> None:
 
     needle = "import shutil\n"
     if needle not in content:
-        # DE: 0.12.8 importiert Kopiermodule vor dem CLI-Start. Der Patch muss
-        # davor wirken, damit auch deren importierte shutil-Funktionen gelten.
-        # EN: Patch before 0.12.8 imports its split-out copying modules.
-        anchor = "import json\n"
+        # DE: Vor den Kopiermodulen wirken; 1.2.3 importiert hier kein json mehr.
+        # EN: Patch before copying modules; 1.2.3 no longer imports json here.
+        anchor = (
+            "import json\n" if "import json\n" in content
+            else "from .shared_infra import (\n"
+        )
         if "from .shared_infra import (" not in content or content.count(anchor) != 1:
             raise SystemExit("supported Spec Kit import anchor not found")
         target.write_text(content.replace(anchor, needle + PATCH + anchor, 1))

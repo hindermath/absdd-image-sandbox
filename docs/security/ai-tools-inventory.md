@@ -1,6 +1,6 @@
 # KI-Werkzeug-Inventar / AI Tool Inventory
 
-**Stand / Date:** 2026-07-10
+**Stand / Date:** 2026-10-25
 
 ## Zweck und Grenze / Purpose and Boundary
 
@@ -15,17 +15,26 @@ image. The image contains no AI models, provider approval, or predefined
 accounts. Sign-in, licensing, data residency, retention, and provider approval
 remain decisions of the responsible person or organization.
 
-## Installierte Werkzeuge / Installed Tools
+## Im Dockerfile geplante Werkzeuge / Tools Declared in Dockerfile
+
+DE: Dies ist der Sollstand, kein Nachweis fuer das bereits laufende Image.
+Build, Runtime-Smokes und neue SBOM sind getrennt nachzuweisen. Vorherige
+Freigaben werden durch das Update nicht erweitert.
+
+EN: This is the declared target, not evidence for the currently running image.
+Build, runtime smokes and a new SBOM need separate evidence. This update does
+not extend previous approvals.
 
 | Werkzeug / Tool | Paket und Version / Package and Version | Kommando / Command | Persistenter Zustand / Persistent State |
 |---|---|---|---|
-| OpenCode | `opencode-ai@1.14.50` | `opencode` | `/home/adedev/.local/share/opencode` (`opencode_data`) |
-| Codex CLI | `@openai/codex@0.144.1` | `codex` | `/home/adedev/.codex` (`codex_data`, `CODEX_HOME`) |
-| Claude Code | `@anthropic-ai/claude-code@2.1.206` | `claude` | `/home/adedev/.claude` (`claude_data`, `CLAUDE_CONFIG_DIR`) |
-| Antigravity CLI | `google-antigravity/antigravity-cli@1.1.1` | `agy` | `/home/adedev/.gemini-home/.gemini/antigravity-cli` (`gemini_data`) |
-| GitHub Copilot CLI | `@github/copilot@1.0.70` | `copilot` | `/home/adedev/.copilot` (`copilot_data`, `COPILOT_HOME`) |
-| GitHub Spec Kit | `specify-cli` 0.12.8, Release-Commit `464d57fe30c72e9a88d279cc49834539ec989c03` im Dockerfile | `specify` | lokale Projektartefakte, kein Agentenkonto |
-| Syft | `anchore/syft@1.46.0` | `syft` | kein persistentes Agentenkonto |
+| OpenCode | `@opencode/cli@2.1.4` | `opencode` | `/home/adedev/.local/share/opencode` (`opencode_data`) |
+| Codex CLI | `@openai/codex@0.164.0` | `codex` | `/home/adedev/.codex` (`codex_data`, `CODEX_HOME`) |
+| Claude Code | `@anthropic-ai/claude-code@2.1.310` | `claude` | `/home/adedev/.claude` (`claude_data`, `CLAUDE_CONFIG_DIR`) |
+| Antigravity CLI | `google-antigravity/antigravity-cli@1.4.7` | `agy` | `/home/adedev/.gemini-home/.gemini/antigravity-cli` (`gemini_data`) |
+| GitHub Copilot CLI | `@github/copilot@1.0.103` | `copilot` | `/home/adedev/.copilot` (`copilot_data`, `COPILOT_HOME`) |
+| Gemini CLI | `@google/gemini-cli@0.65.0` | `gemini` | `/home/adedev/.gemini-home` (`gemini_data`) |
+| GitHub Spec Kit | `specify-cli` 1.2.3, Release-Commit `5ea8b1cf0a38699340a38e00d02770308997d8c0` im Dockerfile | `specify` | lokale Projektartefakte, kein Agentenkonto |
+| Syft | `anchore/syft@1.55.0` | `syft` | kein persistentes Agentenkonto |
 
 OpenCode bleibt ein zusaetzliches Werkzeug. Die vier Required-Agenten dieser
 Lernumgebung sind Codex, Claude Code, Antigravity CLI und GitHub Copilot CLI.
