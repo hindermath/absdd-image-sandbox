@@ -1,0 +1,26 @@
+Independent bounded CI/source-binding follow-up / Begrenztes CI-Nachreview
+reviewId=7620f78c-4cc8-4f42-823a-25695796065c
+operationId=cf00bd75-048f-4a85-803b-54ab5a160b44
+reviewedAt=2026-10-25T19:45:33.683Z
+status=Ready for source/intake binding consistency only
+supersedes=specs/intake-review-archive/787003c4-b366-46c8-adc0-bacb47654c02/cf00bd75-048f-4a85-803b-54ab5a160b44/result.json
+priorFullReview=specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/result.json; reused only for unchanged semantic content, not rerun
+identity=Codex independent reviewer; threadId=01a1741a-8f17-7f92-acec-ff7ee32ecb5b; separate agentId=N/A; not correction author
+priorInputs=260 checked; 252 unchanged; 2 workflow changes +6 metadata/binding changes
+currentHashes=283 normalized text inputs +2 prior unchanged gzip archives
+archives=17 raw/normalized exact; 14 prior-input matches; 3 old review outputs had no self-binding
+bindings=3x64=192 verified; 4 target bodies/6 prompts/IDs/order/startgates unchanged
+lifecycle=Completed/Eligible/Blocked/Blocked
+semantic=SDK pin only; existing active installed/release gate in BOTH worktrees, nonzero exit throws; no disabled acceptance check
+history=IR201/IR202 retained resolved; separate PP201/PP202 resolution report bound, no new hook/full intake scan
+findings=0 open; 0 questions; 0 accepted risks
+validators=14/14 independent current Pass, exit 0: authoring8, series4, review2; Bash and pwsh -NonInteractive -NoProfile
+config=unchanged prior config/policy assessment reused explicitly, no fresh historical inventory-count claim
+validationOrder=final evidence appended after successful result validators; targets/request/status/findings unchanged; no redundant reruns
+finalInputDrift=283 text inputs +2 binary archives, 0 changed
+parentEvidence=9 focused CI/parity tests 0.213s before unused-import-only removal; official metadata/HEAD200 and fresh syntax/link/secret/CI validation remain parent responsibility
+exclusions=mutable operations, new logs, generated inventory/groups, generated docs/project-statistics.md, three review outputs
+statistics=unchanged renderer/config/methodology after content commit; separate pure-generated third commit before push, not reviewed as CURRENT
+boundary=no build/restart/globalmaintenance/Git/runtime/platform-rule changes; no human approval or risk acceptance
+DE: Ready ist kein Start- oder Abnahmeauftrag; Parent liefert PR100 erst nach frischen gruenen Exact-Head-Checks.
+EN: Ready is not start/acceptance authority; parent delivers PR100 only after fresh green exact-head checks.

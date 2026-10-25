@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.1",
-  "reviewId": "7620f78c-4cc8-4f42-823a-25695796065c",
+  "reviewId": "a8d1af24-3b78-40c2-9023-1ec9bd0aee33",
   "mode": "Series",
   "policy": "learner-a11y-bilingual-series",
   "targets": [
@@ -117,7 +117,10 @@
     "docs/maintenance/closeout-eof-alignment-2026-10-25.md",
     "docs/maintenance/closeout-ci-alignment-2026-10-25.md",
     "scripts/tests/test_closeout_ci_contracts.py",
-    ".github/workflows/maintenance-tui.yml"
+    ".github/workflows/maintenance-tui.yml",
+    "docs/maintenance/closeout-statistics-history-2026-10-25.md",
+    "scripts/lib/statistics-ci-evidence.ps1",
+    "scripts/tests/Test-StatisticsCiEvidence.ps1"
   ],
-  "authorityEvidence": "Owner explicitly approved the targeted CI correction round for PR100 and MergeAndSync with admin bypass only after fresh green technical checks. Correct stale statistics with the existing renderer after content commit, current preset-integrity gate instead of historical receipt, and pin the published .NET10 GA SDK matching the verified MCR baseline. Renew affected source bindings and independent bounded review as necessary. Preserve intake identities, all requirements, six prompts, lifecycle and future execution authority. No image build, container restart, global maintenance, platform-rule change or formal approval."
+  "authorityEvidence": "Owner explicitly selected DEC-STAT-HISTORY-2026-10-25: preserve historical pilot and separately require reproducibility of its exact measurement and CURRENT freshness of active Profile2. DRIFT allowed only for reproducible, consistently classified historical data, never corruption. Keep integrity, encoding, ancestry and no-write gates. Complete PR100 MergeAndSync after fresh green checks. Preserve intake identities/texts/prompts/lifecycle/authority and parallel user Keynote edits. Use clean temporary worktree; no image build, restart, global maintenance or formal approval."
 }

@@ -4,6 +4,8 @@
 import json
 from pathlib import Path
 import sys
+import shutil
+import subprocess
 import tempfile
 import unittest
 
@@ -15,6 +17,27 @@ from scripts.tests.test_spec_kit_agent_surface_parity import (  # noqa: E402
 
 
 class CloseoutCiContractTests(unittest.TestCase):
+    def test_historical_and_current_decision_contracts_fail_closed(self):
+        executable = shutil.which('pwsh')
+        if not executable:
+            self.skipTest('PowerShell 7 unavailable')
+        result = subprocess.run([executable, '-NoProfile', '-File',
+                                 str(ROOT / 'scripts/tests/Test-StatisticsCiEvidence.ps1'),
+                                 '-Repo', str(ROOT)], capture_output=True, text=True, timeout=30)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn('3 valid decisions and 14 invalid decisions rejected', result.stdout)
+
+    def test_workflow_separates_replay_from_live_freshness(self):
+        text = (ROOT / '.github/workflows/project-statistics-pilot-native-proof.yml').read_text(encoding='utf-8')
+        historical, live = text.split('- name: Verify current delivery snapshot without writes', 1)
+        self.assertIn('Assert-HistoricalStatisticsReplay -Decision $result -ExitCode $code -Snapshot $snapshot', historical)
+        self.assertIn('Assert-CurrentStatisticsProfile2 -Decision $decision -ExitCode $code', live)
+        self.assertIn('scripts/render-project-statistics.ps1 -Repo . -CheckOnly -Json', live)
+        self.assertIn('scripts/render-project-statistics.sh --repo . --check-only --json', live)
+        self.assertNotIn('--config docs/project-statistics-pilot/config.json', live)
+        self.assertIn('historicalSnapshotSha256=', live)
+        self.assertIn('currentLedgerSha256=', live)
+
     def test_statistics_workflow_uses_current_integrity_gate_in_both_worktrees(self):
         text = (ROOT / ".github/workflows/project-statistics-pilot-native-proof.yml").read_text(encoding="utf-8")
         self.assertNotIn("project-statistics-installation-v010.json", text)
