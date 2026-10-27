@@ -1,5 +1,18 @@
 # Abarbeitungsreihenfolge der Sandbox-Intakes / Sandbox Intake Order
 
+## Usability-Quellenabgleich 2026-10-27 / Usability Source Alignment
+
+DE: Die drei aktiven Intakes binden jetzt die drei Lernendenpfade und den
+Abgleich `docs/maintenance/usability-alignment-2026-10-27.md`.
+Neue unabhaengige Vollpruefung ausstehend; alte Reviews sind ueberholt.
+Completed, Eligible, Blocked, Blocked und alle Startgates bleiben erhalten.
+Kein Pilot, keine Haertung und keine technische oder menschliche Abnahme.
+
+EN: The three active intakes now bind the three learner paths and alignment.
+Independent full review is pending; previous reviews are superseded.
+Preserve Completed, Eligible, Blocked, Blocked and all execution gates.
+No pilot, hardening, technical acceptance or human approval is performed.
+
 DE: Der [Tagesabschluss-Rechteabgleich](docs/maintenance/closeout-rights-alignment-2026-10-25.md)
 erneuert Quellenbindungen und unabhängiges Review; Completed, Eligible,
 Blocked, Blocked und sämtliche Startgates bleiben unverändert.

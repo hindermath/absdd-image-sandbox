@@ -1,22 +1,19 @@
 {
-  "schemaVersion": "1.1",
+  "schemaVersion": "1.0",
+  "documentType": "IntakeReviewSupersession",
+  "status": "Superseded",
   "reviewId": "cfbc8af4-48be-40e2-9a4b-5381d60d3dd5",
-  "mode": "Single",
-  "policy": "learner-a11y-bilingual",
-  "targets": [
-    {
-      "path": "intakes/learner-fork-self-build-sandbox.md",
-      "role": "Primary"
-    }
-  ],
-  "series": {
-    "orderedTargetPaths": [],
-    "roots": [],
-    "dependencies": []
-  },
-  "campaign": {
-    "manifestPath": "N/A",
-    "workers": [],
-    "operatorExceptions": []
-  }
+  "supersededAt": "2026-10-27T17:55:27Z",
+  "operationId": "99ecfd91-17f2-4154-9d4e-e559242c5ce9",
+  "archivedResultPath": "specs/intake-review-archive/cfbc8af4-48be-40e2-9a4b-5381d60d3dd5/99ecfd91-17f2-4154-9d4e-e559242c5ce9/result.json",
+  "archivedResultRawSha256": "7baf232337da21a3ef7661c7764190d9a6a900cc484705fbb9c2f44ad34b999c",
+  "currentRequestPath": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+  "requestedReviewId": "5c452360-9bf7-44d9-84e0-10cae34e72ea",
+  "reason": "Historical Single Ready remains superseded. Current full-series independent review is Ready after USAB-IR001..004 were independently resolved. No technical/learner acceptance or execution authority.",
+  "currentResultPath": "specs/intake-review-results/sandbox-development-lifecycle.json",
+  "currentReportPath": "specs/intake-review-reports/sandbox-development-lifecycle.md",
+  "currentReviewId": "5c452360-9bf7-44d9-84e0-10cae34e72ea",
+  "currentReviewStatus": "Ready",
+  "currentReviewedAt": "2026-10-27T18:14:32.640Z",
+  "reviewCoverage": "Learner intake individually covered in the full four-target Series review; no second Single assessment."
 }

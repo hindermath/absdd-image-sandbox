@@ -30,7 +30,7 @@ Planned CLI extensions must exist before their commands can be used.
 ## Q1: Eingabefrische / Input Freshness
 
 DE: Host, Bash aus Repo-Wurzel; kein Container nötig. Bestehende Validatoren
-lesen Ziele, Quellen und Review. Erwartung: Exit 0, 67 aktuelle Quellen und
+lesen Ziele, Quellen und Review. Erwartung: Exit 0, 71 aktuelle Quellen und
 Ready-Reihenreview. Fehler: stoppen, Drift benennen; nicht eigenmächtig
 Receipts erneuern. Auch Spec-/Plan-Hash und Clarifications beim Übergang zu
 Tasks/Implementierung neu binden.
@@ -302,6 +302,31 @@ files. Fail on scanner errors rather than invent exceptions. This guide grants
 and performs no commit or push.
 
 ## Nachweisablage und Fehlerhilfe / Recording and Recovery
+
+### Geplanter Erstnutzungs-Pilot / Planned First-Use Pilot
+
+DE: Erst nach Implementierung und gesonderter Runtime-/Teilnahmeautorität.
+Learning/A11Y Review verwendet den bestehenden Lernpfad: Umgebung öffnen,
+Ausführungsort erkennen, eine passende Aufgabe wählen, synthetische Datei im
+Projekt-Mount speichern, über Audit-Wrapper stoppen, wieder öffnen und Datei
+prüfen. Danach isoliert einen synthetischen Exportfehler darstellen und die
+Fehlerhilfe bis zur sicheren Wiederaufnahme oder Eskalation anwenden.
+Je Schritt Erfolg, Fehlversuche, Hilfe und Verständnis in
+`docs/security/secure-development/004-container-hardening-followup/learner-usability-review.md`
+festhalten. Normalablauf ohne Admin, Datenverlust oder Schutzumgehung;
+betreute Fehlerklärung darf erforderlich sein. Keine echten Zugangsdaten,
+keine automatische Entsperrung und kein Ersatz für Plattform-/WCAG-Abnahme.
+Ausstehend: Open; Owner Learning/A11Y Review; Follow-up Pilot organisieren;
+Trigger vor Behauptung selbständiger Erstnutzung. Hier kein Pilot ausgeführt.
+EN: Requires later implementation and separate runtime/participation authority.
+Follow the existing guide to open, identify context, choose one task, save a
+synthetic project file, audit-stop, reopen and find it. Then demonstrate an
+isolated synthetic export failure and use recovery guidance or safe escalation.
+Record success, mistakes, help and comprehension per step at the stated path.
+No admin intervention, data loss or bypass in ordinary use; supervised recovery
+may be needed. No real credentials or automatic unlocking; no substitution for
+platform/WCAG acceptance. Pending Open, Learning/A11Y Review owner, organize
+pilot and reevaluate before claiming independent first use. Not executed here.
 
 DE: Für jeden Lauf EvidenceRecord gemäß [Datenmodell](data-model.md), inklusive
 Schreibscope/Skips/Restpunkten. Alle technischen Gates starten Not Assessed.

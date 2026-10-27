@@ -415,6 +415,26 @@ observations remain unresolved.
   Namensliste ersetzt diese Zuordnung nicht; separate Curricula sind kein Ziel.
   EN: Make all four named specialist tracks visible through relevant task/
   usage links in the shared reader path, not a names-only list or separate curricula.
+  DE: Der Standard-Lernablauf (öffnen, eine Aufgabe bearbeiten, im Projekt-Mount
+  speichern, auditgesichert stoppen, wieder öffnen) MUSS ohne administrative
+  Eingriffe oder Abschalten von Schutzmaßnahmen bedienbar sein. Einrichtung
+  und betreute Fehlerbehebung sind davon getrennt. Vollständige Toolchain-,
+  Coverage-, Preset- und Lieferkettenabnahmen sind Maintainer-Aufgaben, keine
+  Voraussetzung für den ersten Lernerfolg. Der beschreibbare Standard bleibt;
+  das optionale Read-only-Profil wird nicht zum stillen Anfänger-Default.
+  Sicherheitsabbrüche MÜSSEN Ursache, tatsächlich erfolgte Aktionen, Grenzen
+  der Datensicherheitsaussage, nächsten sicheren Schritt und Eskalation erklären.
+  Kein Exportfehler darf umgangen, keine fremde/verwaiste Sperre automatisch
+  gelöscht und keine Podman-Machine als pauschale Reparatur entfernt werden.
+  EN: The ordinary learning flow (open, complete one task, save in a project
+  mount, audit-protected shutdown and reopen) MUST work without administrative
+  intervention or disabling safeguards. Separate setup and supervised recovery.
+  Full toolchain, coverage, preset and supply-chain acceptance belongs to
+  maintainers, not first-success prerequisites. Preserve the writable default;
+  optional read-only operation is not a silent novice default. Security failures
+  MUST explain cause, actual actions, limits of data-safety claims, the next
+  safe action and escalation. Never bypass export failures, automatically remove
+  foreign/stale locks or delete a Podman machine as generic repair advice.
 - **FR-013 (US2, US3; Intake Abnahme, UPD-AMD64)**: DE: Toolchains,
   LSP-/Dokumentationswerkzeuge, Agenten, Mounts und VS-Code-Zugriff MUESSEN
   praktisch versionsgebunden geprueft werden. Apple Silicon/linux-arm64,
@@ -612,6 +632,21 @@ observations remain unresolved.
   oder offener Reviewgrenze zugeordnet. EN: Every changed learner guide has
   equivalent DE/EN, first-use definitions and text-based instructions; map
   every applicable A11Y criterion to human results or explicit review gaps.
+  DE: Ein betreuter Erstnutzungs-Pilot dokumentiert den vollständigen
+  Standardablauf und einen synthetischen Sicherheitsfehler mit Wiederaufnahme.
+  Je Schritt: Erfolg, Fehlversuche, benötigte Hilfe und Verständlichkeit.
+  Abnahmeziel: kein administrativer Eingriff im Normalablauf, kein Datenverlust
+  und keine Schutzumgehung; beim Fehler darf sichere Eskalation nötig sein.
+  Nicht beobachtete Zielgruppen-/Plattformbezüge bleiben Open mit Owner,
+  Follow-up und Trigger. Ein kleiner Pilot beweist weder allgemeine Usability
+  noch WCAG-, Sicherheits- oder Plattformabnahme.
+  EN: A supervised first-use pilot records the whole ordinary workflow plus
+  one synthetic security failure and recovery. Record success, failed attempts,
+  assistance and comprehension per step. Target: no admin intervention in the
+  ordinary flow, no data loss or bypass; safe escalation may be necessary for
+  failure recovery. Unobserved audience/platform coverage stays Open with owner,
+  follow-up and trigger. A small pilot proves no general usability, WCAG,
+  security or platform acceptance.
 - **SC-007 (FR-013)**: DE: Fuer alle drei Plattformpfade sind getrennte,
   aktuelle Abnahmebelege oder genaue Open-/Blocked-Luecken vorhanden; kein
   Ergebnis wird zwischen Plattformen oder Architekturen als Ersatz kopiert.
@@ -639,6 +674,21 @@ permit honest interim reports, not missing measurement/platform success.
 ## Assumptions
 
 ### Verbindliche Eingabe / Binding Input
+
+DE: Die folgenden IDs und Hashes sind der historische Eingabesnapshot der
+Spezifikation vor dem autorisierten Usability-Nachtrag vom 2026-10-27,
+nicht der behauptete aktuelle Quellenstand. Verbindlich für die Fortsetzung
+sind die aktuellen Targets, Receipts und das separat erneuerte unabhängige
+Reihenreview an den verlinkten kanonischen Pfaden. Der
+[Usability-Abgleich](../../docs/maintenance/usability-alignment-2026-10-27.md)
+dokumentiert die begrenzte Änderung. Vor Tasks müssen alle aktuellen Bindungen
+und das inhaltliche Review gültig sein; historische Hashes ersetzen das nicht.
+EN: The IDs/hashes below record the historical input snapshot before the
+authorized usability amendment of 2026-10-27, not claimed-current provenance.
+Continuation requires current targets/receipts and the separately renewed
+independent series review at the linked canonical paths. The usability
+alignment records the bounded change. Before Tasks, validate current bindings
+and substantive review; historical hashes are no substitute.
 
 - [Intake](../../Lastenheft_Secure-Development-Container-Hardening.md), ID
   `a92a7ced-bbf3-4408-9754-7b739be19a41`, normalized SHA-256

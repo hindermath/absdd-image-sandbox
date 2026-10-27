@@ -1,9 +1,9 @@
 # Implementation Plan: Sandbox-Härtungsnachlauf / Sandbox Hardening Follow-Up
 
 **Branch**: `codex/004-container-hardening-followup` | **Date**: 2026-10-26 | **Spec**: [spec.md](spec.md)
-**Input**: aktueller Intake samt 67 Quellen und sieben Clarifications / current bound intake and seven clarifications.
+**Input**: aktueller Intake samt autorisiert erneuertem Receipt und sieben Clarifications; vormals 67 Quellen / current renewed receipt and seven clarifications; formerly 67 sources.
 **Requirements Review**: 2026-10-27, base commit `88ade20`; see [review record](checklists/requirements-quality-review.md).
-**Planning revision**: `5e60e21` (historischer Entwurfsstand / historical design basis); current reviewed Spec raw SHA-256: `fae94900518e9c8af077656a89256cf1b4313f20f92c183db91b11672d032d3e`.
+**Planning revision**: `5e60e21` (historischer Entwurfsstand / historical design basis); usability amendment after `596b4ca`, current Spec raw SHA-256: `b66be89f0ca28dfada82a684d1e0fc131fb044a4d5819e36d222ea50d3af4349`.
 
 ## Summary
 
@@ -21,15 +21,25 @@ delivers independently reviewable evidence and unresolved decisions. Retain
 the ten groups and 50 control changes. A plan proves neither implementation
 nor acceptance.
 
-DE: Dieser Auftrag schreibt ausschließlich Planungsartefakte im Feature-
+DE: Historische Grenze des ursprünglichen Planungsauftrags: ausschließlich Planungsartefakte im Feature-
 Verzeichnis. Kein Test, Build, Smoke, Containerzugriff, Neustart, Agenten-
 Kontextupdate, Commit oder Push. Erforderliche Quellenvalidatoren wurden nur
 lesend ausgeführt. Die historische Specify-Auftragsgrenze wird nicht
 umgeschrieben; dieser neue Auftrag erlaubt Planung, nicht Umsetzung.
-EN: This request writes planning artifacts only inside this feature directory.
+EN: Historical boundary of the original planning request: planning artifacts only inside this feature directory.
 No tests, builds, smokes, container access, restarts, agent-context updates,
 commits or pushes. Required input validators ran read-only. This request adds
 planning authority without rewriting the historical Specify boundary.
+
+DE: Nachtrag 2026-10-27: Der Owner erlaubt zunächst Commit des gesichteten
+Ausgangsstands, danach ausschließlich Usability-Anforderungstexte,
+Lernendendokumentation, autorisierte Quellenpflege und unabhängigen Review
+mit gezielter statischer Validierung. Kein weiterer Commit/Push und keine
+Hardening-Implementierung, Builds oder Laufzeitaktionen.
+EN: Amendment 2026-10-27: the owner authorizes one reviewed-baseline commit,
+then usability requirements, learner documentation, authorized provenance
+renewal and independent review with scoped static validation. No further
+commit/push, hardening implementation, builds or runtime actions.
 
 ## Technical Context
 
@@ -421,7 +431,7 @@ this plan claims neither installation nor successful execution.
 | G004-11 | Applicable | 14 Presets + Assurance positive/negative; Q1/Q2/Q7 | E/preset-assurance-review.md, A/evidence-matrix.md | Quartal/Anlass + 3. Oktober / assigned Maintainer |
 | G004-12 | Open | C3A/C5-/Provider-/Registry-Screening | E/cloud-autonomy-applicability.md, E/cloud-compliance-assurance.md | O-344-CLOUD; Owner + Architecture Review vor Erweiterung / before extension |
 | G004-13 | Applicable | fünf Agentenflächen, Sprache/Lesepfade; Q2/Q8 | E/agent-parity-review.md, E/documentation-review.md | gemeinsame Regel-/Textänderung / shared guidance |
-| G004-14 | Applicable | manueller A11Y-/Erstnutzungsreview | docs/accessibility/004-container-hardening-followup.md | DOC-A11Y; Learning/A11Y Review vor Konformitätsclaim / before conformance claim |
+| G004-14 | Applicable | manueller A11Y-/Erstnutzungsreview | docs/accessibility/004-container-hardening-followup.md, E/learner-usability-review.md | DOC-A11Y; Learning/A11Y Review vor Konformitäts-/Erstnutzungsclaim / before conformance or independent-first-use claim |
 | G004-15 | Applicable | echter macOS-Host/ARM64-Kandidat; Q5 | E/platform-macos.md | aktuelles Image/Head / Platform Review |
 | G004-16 | Applicable | Windows-Host-PowerShell7-Podman; Q5 | E/platform-windows.md | UPD-AMD64 vor AMD64-Nutzung / Platform Review |
 | G004-17 | Applicable | Ubuntu-WSL2-Bash-rootless-Podman; Q5 | E/platform-wsl2.md | UPD-AMD64 vor AMD64-Nutzung / Platform Review |
@@ -467,6 +477,52 @@ guidance. C5 Type 1 is point-in-time; Type 2 requires period/effectiveness.
 Unknown stays Open, not a substitute for C3A or regulatory approval.
 
 ## Dokumentation und Parität / Documentation and Parity
+
+### Sicher bedienbarer Lernpfad / Usable Secure Learning Path
+
+DE: FR-012/SC-006 werden in den bestehenden Pfaden umgesetzt: `erste-schritte.md`
+beschränkt den Einstieg auf eine gewählte Aufgabe (Python als ausführbares
+Beispiel), `alltag.md` deckt Speichern/Stoppen/Wiederöffnen ab und
+`troubleshooting.md` trennt Selbsthilfe von betreuter Wiederherstellung.
+Die vollständige Werkzeug-/Governanceabnahme bleibt unter `docs/betrieb/`.
+Keine Rechteerweiterung, kein automatisches Entsperren, kein Machine-Reset und
+kein Umgehen des Audit-Exports als Komfortfunktion. Fehlermeldungen der späteren
+Wrapper-Implementierung erklären Ursache, Phase, tatsächlich veränderte Daten,
+sicheren nächsten Schritt und zuständige Hilfe; keine unbelegte Zusicherung
+„alles unverändert“ nach möglicher Teil-Retention.
+EN: Extend existing first-success, daily and recovery guides, with one selected
+task and Python as a runnable example. Keep full tool/governance acceptance in
+operations guidance. Never add privilege expansion, automatic lock removal,
+machine reset or audit bypass for convenience. Future wrapper messages explain
+cause, phase, actual data changes, safe next action and assistance; never claim
+all data is unchanged after possible partial retention.
+
+DE: Learning/A11Y Review plant einen freiwilligen, betreuten Pilot ohne echte
+Agenten-/Anmeldedaten: öffnen, Aufgabe wählen, synthetische Datei im eigenen
+Projekt-Mount speichern, auditgesichert stoppen und erneut öffnen; Datei
+wiederfinden. Danach einen synthetischen Exportfehler in isolierten Fixtures
+zeigen und anhand der Fehlerhilfe korrekt eskalieren/wiederaufnehmen.
+G004-14 erhält `E/learner-usability-review.md` zusätzlich zum A11Y-Beleg.
+Pro Schritt Ergebnis, Hilfebedarf, Fehlversuche, Verständnis und Schutzintegrität
+festhalten, keine personenbezogenen Rohprotokolle. Normalablauf ohne Admin,
+Datenverlust oder Bypass; Fehlerfall braucht keine selbständige Admin-Reparatur.
+Alle vier Berufe mit vier Fachinformatik-Fachrichtungen im Rekrutierungs-/
+Abdeckungsplan nennen, fehlende Beobachtungen nicht verallgemeinern. Nicht
+durchgeführt: Open, Owner Learning/A11Y Review, Follow-up betreuten Pilot
+organisieren, Trigger vor Behauptung selbständiger Erstnutzung. Sicherheits-,
+WCAG- und Plattformnachweise bleiben getrennt. Dieser Auftrag plant den Pilot,
+führt ihn und neue Laufzeittests nicht aus.
+EN: Learning/A11Y Review plans a voluntary supervised pilot using synthetic
+files and no real agent credentials: open, select one task, save in a project
+mount, audit shutdown, reopen and find the file. Then demonstrate an isolated
+synthetic export failure and safe escalation/recovery using the guide.
+Add `E/learner-usability-review.md` to G004-14 alongside accessibility evidence.
+Record outcomes, assistance, mistakes, comprehension and safeguard integrity
+without personal raw logs. Ordinary operation requires no admin, data loss or
+bypass; error recovery need not be independent admin repair. Plan audience
+coverage for all occupations/tracks and keep unobserved cases explicit. Pilot
+not run: Open, Learning/A11Y Review owner, organize pilot, reevaluate before
+claiming independent first use. Keep security/WCAG/platform evidence separate.
 
 DE: Documentation Impact = `UpdateRequired`. Owner Maintainer, Sprach- und
 A11Y-Partner Learning/A11Y Review. Klassen: Lernanleitung, Betriebsanleitung,
@@ -524,12 +580,14 @@ Keine neue gemeinsame Grundregel an der Constitution vorbei: wäre eine
 Änderung nötig, erst Ownerentscheidung, dann Constitution/Vorlagen/Flächen
 gemeinsam; vorher blockieren. Jede gebundene Quellenänderung vor späterer
 Fortsetzung autorisiert archivieren/rebinden und unabhängig vollständig
-reviewen, niemals nur Hashes zum Bestehen erneuern. Hier keine solche Änderung.
+reviewen, niemals nur Hashes zum Bestehen erneuern. Der Usability-Nachtrag
+führt diese Quellenpflege separat vom ursprünglichen Planungsauftrag aus.
 EN: Update all five maintained surfaces and affected templates atomically.
 New constitutional principles require separate authority and synchronized
 sources. Before later continuation after bound-source changes, perform an
 authorized archive/rebind and full independent review, not hash-only fixes.
-No source or guidance update is performed now.
+The usability amendment performs separately authorized provenance renewal;
+it does not retrospectively change the original planning authority.
 
 DE: Distribution: Repository-Dokumentation und lokaler Selbstbau, keine
 Registry-Publikation. Home-sync `N/A`, keine Level-0-/Runtimeänderung; Trigger

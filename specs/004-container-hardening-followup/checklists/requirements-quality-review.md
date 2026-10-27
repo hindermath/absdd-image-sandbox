@@ -86,6 +86,26 @@ references are textual evidence, not runtime proof.
 
 ## Ergebnis und verbleibende Grenzen / Outcome and Remaining Limits
 
+### Usability-Nachtrag 2026-10-27 / Usability Amendment
+
+DE: Nach Ausgangscommit `596b4ca` CHK017, CHK021–024, CHK027–029 und
+CHK036 erneut anhand ihrer Durchführungshinweise gelesen: FR-012/SC-006
+fordern nun einen schlanken Standardpfad ohne Admin-/Schutzumgehung,
+sichere Fehlerhilfe und einen getrennten betreuten Pilot. Plan und Quickstart
+ordnen Ablauf, synthetischen Fehlerfall, Beobachtungen und Open-Grenzen zu.
+Die 36 Fragen bleiben auf Anforderungsqualität beschränkt. Kein Pilot und
+keine technische Kontrolle wurden ausgeführt oder als erfüllt markiert.
+Die folgenden Aussagen zum damaligen unveränderten 67-Quellen-Stand sind
+historischer Reviewkontext; die aktuelle autorisierte Quellenpflege und deren
+unabhängiges Vollreview werden separat dokumentiert.
+EN: After baseline commit 596b4ca, reread the named items using their review
+instructions. FR-012/SC-006 now require a lean ordinary flow without admin or
+bypass, safe recovery and a separate supervised pilot. Plan/quickstart define
+workflow, synthetic failure, observations and Open boundaries. These 36 checks
+still assess writing quality, not executed usability/security acceptance.
+The unchanged 67-source statements below describe the earlier review; current
+authorized provenance renewal and independent full review are separate records.
+
 DE: 36/36 Fragen nach Textkorrekturen als Anforderungsqualität erfüllt.
 Sieben Textbefunde geschlossen. Keine neue offene Scope-/Ownerfrage aus
 diesem Textreview; operative Open-Punkte bleiben unverändert wirksam.

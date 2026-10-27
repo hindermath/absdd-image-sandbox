@@ -1,182 +1,117 @@
-# Unabhaengiges Reihenreview / Independent Series Review
+# Unabhaengiger Vollreview / Independent Full Review
 
 ## Deutsch
 
-### Auftrag und Ergebnis
+**Review-ID:** `5c452360-9bf7-44d9-84e0-10cae34e72ea`
+**Reviewer:** Huygens, unabhaengiger Codex-Reviewer; weder Dokumentations-/Feature004-Autor noch Provenienz-Autor Lorentz. Reviewer-UUID: `01a17e80-c3dc-75d1-9e04-3f55115ab79d`, vom koordinierenden Hauptagenten aus Agenten-Toolergebnis mitgeteilt; kein erfundener Laufzeit-Identifier.
+**Ergebnis:** `Ready`
+**Offen:** 0 Critical, 0 High, 0 Medium, 0 Low. **Behoben:** USAB-IR001 bis USAB-IR003 (Medium) und USAB-IR004 (Low). Keine Risikoannahme, keine offenen Klaerungsfragen.
+**Stand:** 2026-10-27T18:12:32.157Z; Git-HEAD `596b4cafd63f6e4befd03f6cd76c60820c134a5f`, autorisierter Arbeitsstand mit lokalen Aenderungen.
 
-**Ready** fuer das begrenzte Statistik-History-/Profile-2-CI-Nachreview.
-Keine offenen Findings oder Fragen; alle Severity-Zaehler 0; keine Risikoakzeptanz.
-Review a8d1af24-3b78-40c2-9023-1ec9bd0aee33, Operation a0782733-f818-4246-9cd1-a767e5dc2f4d, Zeitpunkt 2026-10-25T21:12:52.542Z.
+Das Ergebnis ist ein eigenes Inhaltsurteil nach dem vollstaendigen Lesepass aller vier Intake-Texte, der Reihe und der ergaenzenden Feature004-Planung. Es ist weder uebernommenes Ready noch ein Hash-only-Rebind. Nach unabhaengiger Nachpruefung sind alle vier USAB-Befunde behoben. Die bestehende technische und menschliche Open-Arbeit ist transparent beauftragter Folgeumfang, keine agentisch akzeptierte Abweichung und keine behauptete Abnahme.
 
-Ausschliesslicher Review-/Schreibort: temporaerer ci-history-worktree,
-HEAD 08cba2613f5e1b61e71145c4f47a7a6e31a2476c. Originalrepo und dessen parallel
-nutzergeaenderte Keynote-Dateien wurden weder fuer dieses Review gelesen noch
-veraendert oder gestaged. Reviewer verfasste weder Implementierung noch
-Binding-Refresh und schreibt nur die drei vereinbarten Reviewausgaben.
-Toolbekannte Threadkennung 01a1741a-8f17-7f92-acec-ff7ee32ecb5b; separate
-Agentkennung N/A. Keine erfundene UUID.
+### Begrenztes Nachreview USAB-IR004
 
-Supersedes: specs/intake-review-archive/7620f78c-4cc8-4f42-823a-25695796065c/a0782733-f818-4246-9cd1-a767e5dc2f4d/result.json.
-Die vorherige begrenzte CI-Pruefung und ihre vollstaendige fachliche
-Vier-Intake-/Reihengrundlage bleiben fuer hashgleich unveraenderte Inputs
-anwendbar. Kein redundantes Vollreview und keine als neu dargestellten
-historischen Tests oder menschlichen Abnahmen.
+Der Erstabschluss NeedsRemediation benannte als Low den veralteten Q1-Erwartungswert67. Der Feature004-Autor korrigierte ihn nach ausdruecklicher Nutzerautoritaet zu71. Unabhaengig nachgelesen: `specs/004-container-hardening-followup/quickstart.md:33` erwartet jetzt71 aktuelle Quellen. EN bleibt gleichwertig zaehlneutral; aktuelles akzeptiertes Review, Driftstopp und gesonderte Tasks-/Implementierungsautoritaet bleiben erforderlich.
 
-### Fachliche Delta-Pruefung
+**Disposition: ResolvedAndVerified.** Aktueller raw/normalized SHA256: `cd3ca50c739aa8ee3e0eb7a0a5a37f378c7f2553db6730dd6e7342fa7177a5df`. Der urspruengliche Befund, alter Hash, Empfehlung, Owner und Trigger bleiben im JSON erhalten. Feature004 ist keine gebundene Intake-Quelle; diese Korrektur benoetigt keinen Rebind. Keine weitere fachliche Luecke festgestellt. Schema-Alias IR004 ist nur die technische Entsprechung des stabilen USAB-IR004.
 
-DEC-STAT-HISTORY-2026-10-25 ist die ausdrueckliche menschliche Wahl einer
-getrennten historischen Reproduktion und aktuellen Statistikpruefung. Sie ist
-keine Risikoannahme, Produktfreigabe oder pauschale Akzeptanz von DRIFT.
+### Nachgepruefte Korrekturen
 
-1. Historisch: Assert-HistoricalStatisticsReplay verlangt echte Boolean-
-   Felder fuer reproducible/current/changed, erfolgreiche Reproduktion,
-   changed=false und exakte case-sensitive Revision-/Stichtaggleichheit zu
-   nichtleeren Snapshotfeldern. current=true ist nur mit CURRENT/Exit 0,
-   current=false nur mit DRIFT/Exit 1 konsistent. Unbekannte Zustaende,
-   falsche Typen/Exitcodes, Korruption oder Schreibeffekte bleiben Fehler.
-   Das Workflowparsing und strikte Fehlerbehandlung sowie umgebende
-   Datei-/Status-/Abstammungspruefungen bleiben aktiv.
-2. Aktuell: Assert-CurrentStatisticsProfile2 verlangt unabhaengig CURRENT,
-   Exit 0, changed als Boolean false, Methodik 2 und eine nichtleere Revision.
-   Linux prueft beide vorhandenen Shell-Einstiege, Windows wie zuvor native
-   PowerShell. Beide Adapter/Engine-CheckOnly-JSON-Vertraege wurden gelesen.
-   Der bestehende Renderer prueft das aktive Ledger, nicht das eingefrorene
-   Pilotdataset. Die historische Reproduktion kann dieses Gate nie ersetzen.
-3. Evidence: historicalSnapshotSha256 und currentLedgerSha256 sind getrennte
-   Felder. Bestehende Preset-/Payloadintegritaet, Native-Fixtures, Encoding-
-   Varianten, Raw-Blobs, Hash-/Nichtschreib-, Ancestry- und Sauberkeitspruefungen
-   bleiben erhalten. Kein Build oder Renderlauf durch diesen Reviewer.
-4. Tests: Die neuen gemeinsamen Funktionen und ihre Workflowverdrahtung wurden
-   fachlich gelesen. Das PowerShell-Skript prueft 3 gueltige und 14 ungueltige
-   Entscheidungen; die fokussierte Python-Suite bindet es ein und prueft die
-   historische/aktuelle Trennung. Parent meldet 5 Tests Passed in 0.909 Sekunden.
-   Dies ist Parent-Nachweis, kein eigener Suite-Lauf. Parent prueft echte
-   historische CLI/Helper und aktuelles Ledger erst im passenden Commitkontext.
+| Stabile ID | Urspruenglicher Befund | Nachpruefung im finalen troubleshooting.md | Disposition |
+| --- | --- | --- | --- |
+| USAB-IR001, Medium | Alt DE 98-104/EN 108-114: App-Portwechsel als Loesung eines Compose-Startkonflikts trotz komplett gebundener Spanne. | Neu 98-125: gesamter Hostbereich erklaert; separater App-interner Konflikt; nur eigenen bewusst beendbaren Prozess stoppen, sonst betreute lokale Konfiguration; Loopback bleibt. Abgleich mit compose.yml:57. | ResolvedAndVerified |
+| USAB-IR002, Medium | Alt DE 249-251/EN 263-265: Image bauen, danach im unveraenderten Container testen. | Neu DE 274-281/EN 293-299: Mount-Dateien sichern, erfolgreicher Audit-Stopp ohne Volumeloeschung, Build und kontrollierte Neuerstellung, erst neues Image/Container pruefen. Auditfehler hat keinen Down-Bypass. FAQ-Abgleich erfolgt. | ResolvedAndVerified |
+| USAB-IR003, Medium | Alt DE 195-204/EN 206-213: Windows/WSL2 gemeinsam zu Machine/PowerShell schicken. | Neu 206-238: Kontext zuerst bestimmen; Windows vorhandene Machine/PowerShell7; Ubuntu/WSL2 Bash, UID ungleich0, eigener rootless Podman, keine weitere Machine oder Windows-Endpunktumschaltung. | ResolvedAndVerified |
 
-### Historie und Quellenbindungen
+Gebundene Korrekturquelle: `docs/fuer-lernende/troubleshooting.md`, normalized SHA-256 `7367f3d82cb26296558305b8e0c6827bd96534ffca441832fbd23b9f742dd7f3`. USAB-IR004 ist im begrenzten Nachreview oben mit Originalbefund und Korrekturbeleg dokumentiert. Verifikation ist unabhaengiger Text-/Konfigurationsvergleich, kein ausgefuehrter Port-, Image- oder Windows-/WSL2-Test. Ursprungsbefunde, Empfehlungen, alte/neue Zeilen, Hash und Trigger bleiben im JSON erhalten.
 
-Der historische Pilot bleibt byte-identisch: Fuer config.json, report.md und
-snapshot.json unter docs/project-statistics-pilot stimmen selbst gelesene
-Working-Tree-Blob-IDs mittels hash-object --no-filters mit HEAD:path ueberein.
-Kein historisches Triplet neu generiert oder umgeschrieben.
+### Individuelle Inhaltsabdeckung
 
-Alle vorherigen 283 Textinputs wurden nur im Worktree aktuell gehasht:
-275 unveraendert; geaendert sind der deklarierte Workflow, der fokussierte
-Python-Test und sechs erwartete Metadaten-/Bindingdateien. Alle vier Targets,
-Anforderungen, Schwellen, sechs Prompts, Intake-Identitaeten und Reihenansichten
-bleiben gleich. Graph: eine Root, drei bindende Kanten; Lifecycle weiterhin
-Completed / Eligible / Blocked / Blocked. Keine neue Startautoritaet.
+1. **Historische GSDB-Root:** Zweck, alle Scope-/Nichtzielpunkte, sieben Anforderungen, fuenf Abnahmepunkte und beide Prompts gelesen. Sie erzeugt Bestandsmatrix und priorisierte Lueckenliste, nicht Hardening oder Freigaben. Die historische AcceptedBaseline-Entscheidung akzeptiert diese Arbeitsbasis, schliesst aber keine Gaps/Risiken. Originale Klassifikationssprache und Bytes bleiben unveraendert; aktuelle aktive Vorgaben sind kein Auftrag zum Umschreiben der abgeschlossenen Root.
+2. **H, Container-Hardening:** Alle sieben Grundanforderungen, H-344-01 bis -10, AC-H-344-01 bis -10, Nachtraege und beide Prompts gelesen. Nachweisbare Rechte/Isolation, reproduzierbare Herkunft, 85-%-Branch-/80-%-Interfacepruefung, synthetische Positiv-/Negativfaelle und getrennte Daten-/Rechts-/Cloud-/Kryptopruefung sind pruefbar zugeordnet. Open ist kein Pass. Usability-Nachtrag konkretisiert den vorhandenen Lernumfang, ohne Schutzlockerung oder Pilot-Abnahme.
+3. **A, unabhaengige Abnahme:** Alle Grundanforderungen, A-344-01 bis -04, zugehoerige vier AC, Artefakte und beide Prompts gelesen. Die Abnahme muss von den Hardening-Autoren unabhaengig sein, alle50 H-Uebergaben inklusive AlreadyCovered/N/A begruenden, aktuelle Head-/Image-/Plattform-/Zeit-/Befehlsidentitaet sichern und Metadatenmutationen trotz neuer Hashes ablehnen. Fehlende Evidenz und anwendbare Open/Fail verhindern positiven Abschluss; Fehler gehen an H zurueck.
+4. **L, Lernenden-Selbstbau:** FR001-015/AC001-012, L-FR016-023/L-AC013-020, Entscheidungen, Risiken, Template-Nachtrag und beide Prompts vollstaendig gelesen. Fork/institutionelles origin und upstream bleiben Standard; kein universeller GitHub-Zwang, kein fertiges Projekt-Registry-Image, keine Providerdaten fuer den Build. SBOM, Pins und Isolation bleiben erhalten. Template-Historie, persoenliche Baseline und fremde Rechte sind getrennt; LIC-01/weitere LIC-02 sowie A-Abschluss und separate Startautoritaet werden nicht umgangen.
 
-Drei Receipts mit je 67 Quellen, insgesamt 201 Bindungen, sind aktuell.
-SRC001 ist der exakte archivierte Vorlaeufer; SRC048/SRC063 erhalten aktuelle
-Hashes, SRC065..067 binden Vorschlag, Helper und PS-Tests. IAD406 dokumentiert
-nur die begrenzte menschliche CI-Entscheidung; alte Entscheidungen, Sprache,
-Promptstatus und DeliveryAuthority bleiben unveraendert. Das Manifest ergaenzt
-nur drei Evidencepfade, das erneuerte Serienreceipt bindet es korrekt.
+Alle sechs aktiven Prompts behalten Specify-versus-Implementierung und LocalImplementation-versus-Remote klar getrennt. Enabled bedeutet kopierbarer Prompt, nicht Ausfuehrungsfreigabe. Der neue identische Promptzusatz bindet ausschliesslich die Usability-Quelle und die bestehenden Startgrenzen.
 
-17 Archivvorbilder sind raw/normalisiert hashgenau: sechs Target-/Receipt-,
-vier Reihen-, vier Review- und drei Quellvorbilder (Lizenz, Workflow, Python-Test).
-14 entsprechen den alten gebundenen Inputs; drei Reviewausgaben hatten keine
-zirkulaere Selbstbindung. Archivierungszeitfolge ist dokumentierte Provenienz,
-keine selbst beobachtete Chronologie. Historische Sprache und Rechtevorlaeufer
-bleiben erhalten. IR201/IR202 und die getrennte PP201/PP202-Aufloesungshistorie
-bleiben mit Evidence, Owner, Follow-up und Trigger im JSON erhalten; kein neuer
-Hookscan, keine wiederholte historische Gesamtpruefung.
+### Reihen- und Deltaabdeckung
 
-### Verifikation und Grenzen
+Die Reihe hat genau vier Ziele, eine Root und drei eindeutige gerichtete Kanten ohne Zyklus:
+abgeschlossene Bestandspruefung -> H mit AssessmentBaseline -> A mit SandboxBaseline -> L mit HardCompletionGate.
+Status bleibt **Completed -> Eligible -> Blocked -> Blocked**. Eligible ist nur ein Kandidatenstatus, keine Startautoritaet. H liefert seine kontrollbezogene Matrix und offenen Grenzen an A; A gibt Maengel an H zurueck; L wartet auf erfolgreiche unabhaengige technische Abnahme und eigenen Startauftrag.
 
-309 normalisierte Texthashes: bisherige 283, 17 neue Archive, drei neue
-Vorschlag-/Helper-/Testquellen sowie sechs unmittelbar gepruefte Renderer-/
-Config-/Pilottriplet-Inputs. Zwei vorherige unveraenderte Gzip-Archive sind
-separat raw-hash-gebunden. Generated docs/project-statistics.md, mutable
-Operationsjournale, neue Logs, generierte Inventare/Commitgruppen und diese
-Reviewausgaben sind ausgeschlossen; unveraenderliche Quellsnapshots bleiben
-gebunden. Generierte Statistik kann daher getrennt committed werden, ohne
-diesen fachlichen Snapshot zirkulaer zu veraendern.
+| Gruppe | Inhaltliche Beurteilung der Anforderungen und Uebergabe |
+| --- | --- |
+| G01 | Historische Befunde, Fassungen und getrennte Anwendbarkeit/Erfuellung sind explizit; 50er-Zuordnung ist kein neuer Erfolg aller157 Kontrollen. |
+| G02 | Prozessargumente, komponentenbewusste Pfade/Links/Reparse-Points und Netzwerkgrenzen haben positive/negative Tests und messbare 85/80-Schwellen; keine neue Web-/Login-App nur zum Testen. AlreadyCovered bedeutet Anforderungsabdeckung. |
+| G03 | Exakte Agentenversionen, effektive Regeln, Auto-Updates und Datenfluesse brauchen synthetische Wirksamkeitsnachweise; Ignore-Dateien/Tarife ersetzen keine Sperren oder Datenschutzbelege. |
+| G04 | Paketquelle, Maintainer, Installationsskript, Lizenzfassung und finale lokale SBOM bleiben verbunden; Agenteninstallation beweist kein eingebettetes Modell. Ungeklaerte Rechte sperren betroffene Weitergabe. |
+| G05 | Auditmetadaten und Agentenzustaende werden getrennt; Datenschutz-/Aufbewahrungsentscheidungen bleiben kontextbezogen. OpenCode2 bleibt session_coverage=not-exported, kein DB/WAL/SHM-/Prompt-/Antwortexport. |
+| G06 | Produkt, Werkzeugbetrieb und Organisation werden rollen-/land-/quellenbezogen gescreent; keine aus FOSS oder Ausbildung erfundene Rechts-, CE- oder Freigabeentscheidung. |
+| G07 | Bestehende TLS-/Signatur-/Kryptoabhaengigkeiten und Profilkonflikte werden erfasst; begrenztes N/A betrifft nur fehlende eigene Implementierung, nicht saemtliche Abhaengigkeiten. Keine Schluesselrotation. |
+| G08 | Profil14 mit genau14 Presets; aktive Assurance0.1.8 prueft eindeutige exakte Metadaten in DE/EN auch gegen frisch gehashte falsche Fixtures; Quartals-/Anlassreview und3.Oktober sind benannt. |
+| G09 | Hosting/Registry/Provider bleiben begrenzt auf Cloudrelevanz zu pruefen; N/A braucht Grund, Unknown bleibt Open, kein erfundenes C3A-/C5-Testat. |
+| G10 | Gemeinsame Lern-/A11Y-Basis, KI-Kompetenzangebot versus Teilnahme und begrenzte Reifebewertung sind getrennt; Dokumentation erfindet keine Personen oder HR-Nachweise. |
 
-Eigene Pflichtvalidatoren: acht Receipt-, vier Serienmanifest-/Serienreceipt-
-und zwei Ergebnislaeufe, alle 14 Pass mit Exit 0, jeweils Bash und PowerShell
--NonInteractive -NoProfile ausschliesslich im Worktree. Exakte Kommandos im
-JSON. Finale Nachweise nach erfolgreicher Ergebnisvalidierung ergaenzt, ohne
-Targets/Request/Status/Findings zu aendern; kein redundanter Wiederholungslauf.
-Abschlussabgleich: 309 Textinputs und zwei Binaerarchive ohne Drift. Unveraenderte Config-/Policy-Pruefung aus der Vollreview-Basis wird
-explizit weiterverwendet, ohne alte Inventarzaehler als aktuell auszugeben.
-Kein doppelter fokussierter/full Maintenance-/Produkt-/Native-Build-Testlauf.
+Die komplette bestehende 50-Zeilen-Matrix wurde inhaltlich gegen diese Verteilung und H/A/L-Verbrauch gelesen. Unabhaengiger Mengenabgleich: **50 eindeutige IDs = 47 UpdateRequired + 1 AlreadyCovered + 2 begrenzte N/A**, exakt die IDs des GSDB-Deltas. Keine stille Auslassung oder Doppelzaehlung; die anderen107 Kontrollen werden nicht als erfuellt behauptet. Dies ist keine neue Rechtspruefung externer Primaerquellen und keine157-Kontrollen-Implementierungsabnahme.
 
-Ready ist weder aktuelle Ledger-Abnahme noch technischer/menschlicher
-Produktnachweis. Alle Lizenz-/Template-/O-344-/Plattform-/OpenCode-/A11Y-Gates
-bleiben getrennt. Parent fuehrt echte Reproduktion und aktuelles Profile2-Gate
-im Inhaltscommitkontext, separates sauberes Statistikcommit sowie frische
-Exact-Head-CI vor PR100 MergeAndSync aus. Keine neue Freigabe, Risikoakzeptanz,
-Originalrepo-, Keynote-, Source-, Git-, Log-/Journal-, Build-/Runtime- oder
-Wartungsmutation durch diesen Reviewer.
+### Zielgruppen, Sprache und sichere Nutzung
+
+Die kanonischen Leserpfade nennen alle vier IT-Berufe: Fachinformatik, IT-System-Elektronik, IT-System-Management und Digitalisierungsmanagement. Fuer die vier Fachinformatik-Tracks gibt es unterschiedliche bestehende Aufgabenbezuege: Anwendungsentwicklung (Programm/Tests), Systemintegration (Mounts/Volumes), Daten- und Prozessanalyse (synthetische CSV-/Metadaten), Digitale Vernetzung (lokale Ports/Datenfluss). Die weiteren Berufe erhalten Plattformdiagnose, Werkzeug-/Lizenz-/Betriebsvergleich beziehungsweise Prozess-/Entscheidungsaufgaben. Das sind keine sieben verschiedenen Berufe und keine zweite Lernreihe.
+
+Die neue erste Aufgabe ist ohne KI-Konto ausfuehrbar und nutzt einen eigenen Uebungsordner statt vorhandenes hallo.py zu ueberschreiben. Alltag beschreibt speichern, auditgesichert stoppen, wiederoeffnen und dieselbe Datei wiederfinden. Beschreibbare Container-Schicht ist kein Datenerhaltungsversprechen; persistente Projekt-Mounts und Agentenvolumes sind unterschieden. Die eingerichtete normale Nutzung benoetigt keine Adminreparatur oder Voll-Governancepruefung durch Lernende. Betreute Einrichtung/Fehlerklaerung ist davon getrennt. Schutzabschaltung, Machine-Reset, automatische fremde/stale Entsperrung oder fehlgeschlagenen Export umgehen sind keine Komfortpfade.
+
+DE zuerst und inhaltlich gleichwertiges EN, Erstbegriffe, textorientierte Status/Entscheidungen und sichere Fehlerhilfe wurden gelesen. CEFR-B2-Verstaendlichkeit ist ein redaktionelles Ziel; Markdown-Text, Sprachbloecke und Hashes beweisen kein WCAG2.2AA-Rendering. Tastatur-/Screenreader-/Plattform- und reale Lernendenbeobachtungen bleiben gesondert Open.
+
+### Feature004 und Nachweisgrenzen
+
+FR012/SC006 sowie Spec, Plan und Quickstart wurden kritisch mitgelesen. Der Pilot bleibt freiwillig, betreut, geplant und Open mit Learning/A11Y Review, Follow-up und Trigger vor Behauptung selbststaendiger Erstnutzung. Normalablauf und synthetischer Sicherheitsfehler sollen getrennte Beobachtungen liefern; kein kleiner Pilot ersetzt Sicherheits-, Plattform- oder WCAG-Abnahme. Die historischen Eingabehashes sind als historisch markiert; Fortsetzung verlangt aktuelle Bindungen und ein wirklich gueltiges Inhaltsreview. Feature004 ist bewusst keine Receipt-Quelle: kein Rueckkopplungszyklus. Die ehemalige Q1-Inkonsistenz USAB-IR004 ist nach unabhaengigem Nachreview behoben; der Pilot bleibt trotzdem unausgefuehrt und Open.
+
+### Provenienz und Archive
+
+- Handoff-Operation `99ecfd91-17f2-4154-9d4e-e559242c5ce9`; Requesthash `48172b0a13091080c1dd6ec5e6ffb2f73423fd9a3ef27c415dc8533ee3505f31`; Request bleibt unveraendert.
+- Alle **213 Quellenbindungen** (71 pro aktivem Receipt) unabhaengig mit strikter UTF8/BOM-/Zeilenenden-Normalisierung geprueft; Quellenpfade und Reihenfolge bewahrt. Jeweils archivierter Vorgaenger zuerst, bisherige66 weitere Quellen unveraendert, vier neue Quellen am Ende.
+- **21 Archive** unabhaengig per Rohhash gegen die tatsaechlichen HEAD-Blobs der urspruenglichen Pfade geprueft; byte-identische Vorstaende, keine nachtraegliche Link-/Inhaltsreparatur. Auch vorige Review-/Request-/Berichtbytes erhalten.
+- **37 GSDB-Dateien** gegen ihr Rohhash-Inventar geprueft; GSDB3.4.4, 157 IDs, Sammelband2.4.4 bleiben Baseline. Assurance0.1.8 ist aktive Werkzeugbasis, aeltere Versionen bleiben historischer Kontext.
+- Das vorherige Reihenreview wird ausdruecklich durch `supersedes` auf `specs/intake-review-archive/a8d1af24-3b78-40c2-9023-1ec9bd0aee33/99ecfd91-17f2-4154-9d4e-e559242c5ce9/result.json` ersetzt. Fremde IR201/IR202 bleiben mit Originalbefund und historischer Loesung im JSON erhalten; weitere fruehere Findings/PP-Lineage bleiben im unveraenderten Archiv, nicht als eigene heutige Testausfuehrung ausgegeben.
+- Das separate Learner-Review bleibt ein ueberholter Einzelreview-Verweis auf diese Gesamtbewertung; keine zweite widerspruechliche Ready-Entscheidung.
+
+| Rang | Ziel | Normalized SHA-256 |
+| --- | --- | --- |
+| 1 | `specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md` | `9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a` |
+| 2 | `Lastenheft_Secure-Development-Container-Hardening.md` | `b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560` |
+| 3 | `Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md` | `18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f` |
+| 4 | `intakes/learner-fork-self-build-sandbox.md` | `e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338` |
+
+Manifest: `936f44533c69d10563b7287a97ec12e16f74af9e0a8e6059b3f0a267e1b9b1bd`. Serienreceipt: `b203b4208d10feda4666d16165077ffba99337c61b82e675b44ab63f7cde1659`. Weitere Receipt-/Quell-/Archivhashes stehen im Ergebnis-JSON.
+
+### Validierung und naechster Schritt
+
+Schema2.0-Konfiguration wurde je einmal ueber Bash und PowerShell gelesen: beide Exit0/Aligned; de-DE, deutsches Naming, vier portable Rollen, sechs Collections und begrenzter Legacy-Alias passen. Frische Inventarwerte:5 physische aktive Dateien,3 aktive Serienmitglieder,4 Serienziele,1 Eligible-Kandidat. Diese verschiedenen Zaehler sind kein Widerspruch.
+
+Der Erststand NeedsRemediation bestand je einen Bash-/PowerShell-Ergebnisvalidator. Nach der begrenzten Q1-Korrektur und geaenderten Disposition folgt ein finaler gezielter Ergebnispass pro Shell; Ausgaben stehen im `sandbox-development-lifecycle-independent.txt`. Keine Wiederholung der unveraenderten Authoring-/Series-Kampagne. Die zehn Updaterpruefungen und Hauptagententests bleiben fremd zugeordnete Evidenz. Keine Runtime, Builds, Modellproben, Secretscans, Commits oder Pushes durch diesen Reviewer.
+
+Naechster erlaubter Schritt: fertiges Ready-Inhaltsreview an den Hauptagenten fuer dessen autorisierten finalen Secret-/Precommit-Pass und Sessionlog uebergeben. O-344-TECH/HUMAN/CLOUD, UPD-AMD64/V2-LOOP/V2-AUDIT/SMOKE-WARN/APPROVAL, DOC-A11Y, LIC-01/weitere LIC-02 und Template-/persoenliche Startgates bleiben mit ihren Ownern/Folgeschritten/Triggern offen. Ready ist keine automatische Fortsetzung zu Tasks, Implementierung, A oder L.
 
 ## English
 
-**Ready** for the bounded statistics-history/current-Profile2 CI follow-up,
-not a new full intake/product review. No open findings/questions or accepted
-risks; all severity counts zero. Review a8d1af24-3b78-40c2-9023-1ec9bd0aee33, operation a0782733-f818-4246-9cd1-a767e5dc2f4d,
-explicitly supersedes specs/intake-review-archive/7620f78c-4cc8-4f42-823a-25695796065c/a0782733-f818-4246-9cd1-a767e5dc2f4d/result.json. Prior bounded CI and original complete
-four-intake/whole-series semantic review remain dated evidence only for proven
-unchanged inputs, not newly performed tests or human acceptance.
+**Independent outcome: Ready.** Huygens completed full substantive reading of all four intake texts, the series and supplementary planning, independently verified final provenance and resolved all four USAB findings. Zero open Critical/High/Medium/Low findings, zero accepted risks and no unanswered clarification questions. Reviewer UUID `01a17e80-c3dc-75d1-9e04-3f55115ab79d` was provided by the coordinating agent from the spawn result; parent authored learner docs/Feature004 and Lorentz authored provenance, neither is this reviewer.
 
-All work targets the supplied temporary ci-history-worktree at HEAD
-08cba2613f5e1b61e71145c4f47a7a6e31a2476c. The original checkout and user-modified
-Keynote files were neither read for this review nor edited/staged. Reviewer
-authored no correction/refresh and writes only the three agreed outputs.
-Tool-exposed thread identity is 01a1741a-8f17-7f92-acec-ff7ee32ecb5b; separate
-agent ID N/A, no invented UUID.
+**USAB-IR004, Low, ResolvedAndVerified:** The first outcome NeedsRemediation correctly identified stale67-source Q1 guidance. After the author's authorized correction, independently reread lines29-39: line33 now expects71 current sources, with equivalent count-neutral EN and unchanged actual-review/drift/start gates. Current raw/normalized SHA256: `cd3ca50c739aa8ee3e0eb7a0a5a37f378c7f2553db6730dd6e7342fa7177a5df`. Original finding, prior hash and history remain in JSON. Feature004 is not an intake receipt source, so no rebind is required. No further content finding established; this resolves a text defect, not pilot/platform/WCAG acceptance.
 
-The explicit owner DEC-STAT-HISTORY-2026-10-25 separates historical exact
-reproduction from mandatory active freshness, not risk acceptance or blanket
-DRIFT permission. Historical helper requires Boolean reproducible/current/
-changed, successful reproduction, no changes and exact case-sensitive nonempty
-recorded revision/cutoff. Current historical replay requires CURRENT/0;
-noncurrent but reproducible replay requires DRIFT/1. Invalid states/types,
-corruption, inconsistent exits or writes fail. Independently, active Profile2
-requires CURRENT/0, changed Boolean false, methodology 2 and a nonempty revision.
-Linux uses both existing shell entrypoints; Windows retains native PowerShell
-coverage. The existing renderer adapter and engine check-only JSON interface
-were reviewed; active ledger freshness never follows from historical replay.
-Separate historicalSnapshotSha256/currentLedgerSha256 fields prevent conflation.
-Existing installed-payload integrity, native fixtures, encoding/raw-blob,
-protected-file hash/no-write, ancestry and cleanliness checks remain intact.
+**ResolvedAndVerified, USAB-IR001..003:** independently compared corrected DE/EN troubleshooting with Compose, FAQ and the separate platform paths. Lines98-125 now distinguish full-range Compose binding from app-internal port selection and preserve process ownership/loopback. Lines274-281/293-299 require successful audit-stop with preserved volumes, build, controlled recreation and actual new-container/image verification. Lines206-238 distinguish Windows-host PowerShell/existing-machine handling from Ubuntu/WSL2 Bash/nonzero UID/own rootless Podman, with no extra machine or endpoint switch. Original findings, old/new lines, recommendations, source hash and triggers remain in JSON. This was static verification, not executed runtime acceptance.
 
-The helper tests cover three valid and fourteen rejected decisions; Python
-wires the helper and checks workflow separation. Parent reports five focused
-tests passed in 0.909 seconds, not reviewer-run tests. Parent owns actual
-historical CLI/helper and active ledger validation after the content commit.
-No duplicate full suite, native build, rendering or product runtime test.
+**Individual coverage:** The historical root assesses twelve checklists, produces the gap matrix and explicitly forbids hardening/approval; its accepted assessment baseline remains historical and unchanged. H's seven original requirements and ten H/AC-H delta pairs require evidence-led least privilege, reproducible supply chain,85/80 coverage, synthetic tests, scoped privacy/legal/cloud/crypto checks, profile14 and learner/accessibility support. A's original requirements and four A/AC-A pairs require independent authorship, full50-row handoff including AlreadyCovered/N/A reasons, exact revision/image/platform/time/commands and wrong-metadata fixtures rejected despite refreshed hashes. Applicable Open/Fail cannot be a positive closure. L's FR001-015/AC001-012 and L-FR016-023/L-AC013-020 retain provider-free self-build, institutional/fork origin/upstream, Git neutrality, no ready project-registry image, preserved SBOM/pins/isolation, third-party rights and separate template/personal history. All six prompts and all acceptance/addendum/decision sections were read, not merely hashed.
 
-All three historical pilot files have identical no-filter working-tree and
-HEAD Git blob IDs, independently read; no historical regeneration. All 283
-prior text inputs were compared in the worktree: 275 unchanged, workflow/test
-and six expected metadata/binding changes. All four targets, requirements,
-thresholds, six prompts, IDs, views, one root/three binding edges and Completed /
-Eligible / Blocked / Blocked remain unchanged. All 201 current source bindings
-(67 per receipt) verify. Archived predecessor stays first; refreshed workflow/
-Python-test hashes and appended proposal/helper/PS-test sources plus IAD406
-preserve old decisions, language, prompt state and delivery authority. Manifest
-adds only three evidence paths; current series receipt binds it correctly.
-All seventeen preimages match raw/normalized hashes; fourteen match prior
-inputs, three prior review outputs lacked circular self-binding. Archival timing
-remains recorded provenance. Rights/history/language and resolved IR201/IR202
-plus separate PP201/PP202 evidence/owners/follow-ups/triggers are preserved;
-no new hook scan or historical full re-review.
+**Series coverage:** Four targets, one root and three unique acyclic edges preserve Completed -> Eligible -> Blocked -> Blocked. AssessmentBaseline feeds H; SandboxBaseline feeds independent A; HardCompletionGate blocks L until successful A and separate authority. Enabled prompts/Eligible status grant no execution. H returns control-linked evidence/Open items to A; defects return to H. No automatic downstream start or human approval.
 
-There are 309 normalized text hashes plus two unchanged binary gzip records.
-Generated project statistics, mutable journals/new logs/generated inventory or
-groups and these outputs are excluded; immutable snapshots remain bound. Required
-authoring/series/result validators independently passed in both shells: eight
-authoring, four series and two result invocations, all fourteen exit 0, within
-the supplied worktree. Exact commands are in JSON. Final evidence appended
-after result validation without changing targets/request/status/findings or
-redundant reruns. Final comparison: 309 text inputs and two binary archives,
-zero drift. Unchanged config/policy assessment
-is explicitly reused without presenting old inventory counts as current.
-Ready grants no active-ledger acceptance, technical/human product approval,
-legal release, new start or risk acceptance. Existing rights/template/O-344/
-platform/OpenCode/A11Y gates remain. Parent owns actual replay/current checks,
-separate clean statistics commit and fresh exact-head CI before PR100
-MergeAndSync. No original/source/Keynote/Git/log/journal/build/runtime/global-
-maintenance writes by reviewer beyond the three authorized worktree outputs.
+**All ten delta groups reviewed:** G01 retains source editions and separate applicability/fulfillment; G02 covers process/path/link/network boundaries, positive/negative tests and85/80 thresholds without inventing an app; G03 requires actual agent/version/config/update/data-flow evidence, not ignore/plan promises; G04 covers origin, exact licences and final local SBOM without assuming embedded models; G05 separates metadata/state, privacy and deletion, retaining OpenCode2 session_coverage=not-exported and no DB/WAL/SHM/prompt/response export; G06 requires scoped role/country/source regulatory decisions, not blanket FOSS/training exemptions; G07 inventories existing crypto/TLS and escalates conflicts without key rotation; G08 checks all14 presets, Assurance0.1.8 exact bilingual active metadata and review triggers; G09 leaves unsupported cloud claims Open; G10 separates training offers, actual participation and bounded maturity. The complete50-row rationale matrix has exactly47 UpdateRequired,1 AlreadyCovered and2 scoped N/A decisions. AlreadyCovered means requirement coverage, not implementation; N/A is bounded to absent first-party functions. No fulfillment claim for the other107 controls or fresh legal advice.
+
+**Audiences and use:** All four IT occupations and all four specialist tracks have shared canonical paths and distinct existing tasks: application development, systems integration, data/process analysis and digital networking; the other occupations cover platform diagnosis, tools/rights/operations and process/decision work. No duplicate curriculum. German precedes equivalent English, terms and states are explained as text. Account-free first success uses a fresh exercise directory; daily guidance covers save/audit-stop/reopen/find the same file, distinguishes writable container-layer loss from mounted persistence, and keeps admin intervention outside ordinary configured use. Recovery may be supervised but never bypasses audit failure, removes machines generically, auto-unlocks another run or weakens safeguards.
+
+**Feature004:** Complete spec/plan/quickstart and FR012/SC006 were reviewed. The voluntary supervised pilot stays planned/Open with Learning/A11Y Review owner/action/trigger and explicit unobserved audience/platform gaps. Hashes/historical input snapshots prove no acceptance. Pilot, WCAG rendering/keyboard/screen-reader proof, technical security and platform acceptance are separate. Feature004 is deliberately not a bound receipt source, avoiding a cycle. The stale Q1 count is independently corrected; planned pilot and other proof boundaries remain Open.
+
+**Independent provenance:**213/213 ordered source bindings verified, each archived predecessor first, unchanged old66-source tail and four declared additions.21 raw archives independently match actual HEAD predecessor blobs.37 GSDB inventory hashes match. All four target hashes, manifest/series-receipt hashes and the unchanged request hash are listed above and in JSON. Original prior review/foreign finding meaning remains in immutable supersedes archives; inherited IR201/IR202 history is not represented as new test execution. The old learner standalone record points to this combined review rather than asserting a separate Ready.
+
+**Validation and next action:** Both configuration entrypoints returned0/Aligned once. Schema2 language/naming/roles/collections/alias and fresh counts5 physical active files,3 active series members,4 targets and1 eligible candidate agree. The first NeedsRemediation record passed one Bash/PowerShell result-validation pair. After the bounded correction and changed outcome, one final pair validates Ready; actual outputs remain in independent.txt. No unchanged full gate campaign repeated. No build/runtime/model probe/secret scan/commit/push or source edit. Main agent owns final secret/precommit checks and session logging. Return the completed review; later execution still needs separate authority. All technical/human/cloud/platform/audit/rights/A11Y/template gates remain effective. No risk or approval was accepted.

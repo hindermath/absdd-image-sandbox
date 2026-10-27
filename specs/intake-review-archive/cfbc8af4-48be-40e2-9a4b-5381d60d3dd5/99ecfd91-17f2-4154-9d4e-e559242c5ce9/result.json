@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "cfbc8af4-48be-40e2-9a4b-5381d60d3dd5",
+  "mode": "Single",
+  "status": "Ready",
+  "policy": "learner-a11y-bilingual",
+  "reviewedAt": "2026-07-25T21:58:44Z",
+  "repository": {
+    "root": ".",
+    "head": "61f861a5250453e9b14a7a2165e924b35f5cba2d"
+  },
+  "requestEvidence": {
+    "path": "specs/intake-review-requests/learner-fork-self-build-sandbox.json",
+    "normalizedSha256": "3951706485022c17796ad624e749b5ac86b14bc5bf79cd87373785323963ffba"
+  },
+  "targets": [
+    {
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "role": "Primary",
+      "normalizedSha256": "6e17c637283212954857e82b53b2eeb11fd44a3c3d9996bb677ad991064d8293",
+      "gitBlob": "N/A"
+    }
+  ],
+  "findings": [],
+  "questions": [],
+  "acceptedRisks": [],
+  "operatorExceptions": [],
+  "coverage": {
+    "individual": [
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "series": [],
+    "workers": []
+  },
+  "summary": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "supersedes": "N/A"
+}
