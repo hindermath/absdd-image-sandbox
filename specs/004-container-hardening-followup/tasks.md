@@ -1,4 +1,4 @@
-# Tasks: Sandbox-Härtungsnachlauf / Sandbox Hardening Follow-Up
+# Aufgaben: Sandbox-Härtungsnachlauf / Tasks: Sandbox Hardening Follow-Up
 
 **Feature**: `004-container-hardening-followup`
 **Branch**: `codex/004-container-hardening-followup`
@@ -8,13 +8,22 @@
 
 ## Auftrag und Leseschlüssel / Authority and Reader Key
 
-DE: Diese Datei plant spätere Arbeit. Keine Aufgabe ist ausgeführt. Der Owner
+DE: Korrekturauftrag vom 2026-10-27 nach Ausgangscommit `cb1965a`:
+C1 (DE/EN-Überschriften), I1 (Inventare vor Implementierung) und I2
+(serieller Änderungsblock, abschließender Code-Freeze mit Schlussmessung).
+Die folgenden Hashes binden die korrigierten Texte. Aufgaben-IDs/Anzahl,
+Anforderungen und Sicherheitsgrenzen bleiben erhalten; kein Commit/Push.
+EN: Authorized correction after cb1965a covers bilingual headings, inventories
+before implementation and serial final changes followed by freeze/measurement.
+Hashes below bind corrected text; task identities, scope and security remain.
+
+DE: Historische Erzeugungsgrenze: Diese Datei plant spätere Arbeit. Keine Aufgabe ist ausgeführt. Der Owner
 hat nur den vorigen Stand committen und anschließend diese Aufgabenliste
 erstellen lassen; kein weiterer Commit/Push, Test, Build, Containerzugriff oder
 Implementierungsstart ist damit erlaubt. Keine neue Feature-Spec, kein
 Autonomous-Run und keine Wiederaufnahme von Feature 003. Tests werden geplant,
 weil Spec FR-003/SC-002/SC-003 sie ausdrücklich verlangen, nicht hier ausgeführt.
-EN: This file plans future work; no task has run. The owner authorized one
+EN: Original generation boundary: this file plans future work; no task has run. The owner authorized one
 baseline commit followed by this task list only, not another commit/push,
 test, build, container action or implementation. Create no new specification
 or autonomous run and never resume Feature 003. Tests are planned because
@@ -37,8 +46,8 @@ Paths are relative to this sandbox repository; new paths are future outputs.
 
 - Hardening-Intake-ID `a92a7ced-bbf3-4408-9754-7b739be19a41`; Receipt `9c16f468-1871-4a4d-9bb7-3d6e50143e6f`, 71 geordnete Quellen / ordered sources.
 - Drei aktuelle Receipts, Reihenmanifest und unabhängiges Review `5c452360-9bf7-44d9-84e0-10cae34e72ea`: lesend gültig, Review `Ready`, vier Ziele / three current receipts, valid series and Ready four-target review.
-- `spec.md` raw SHA-256: `b66be89f0ca28dfada82a684d1e0fc131fb044a4d5819e36d222ea50d3af4349`.
-- `plan.md` raw SHA-256: `a74e35a5912e0c52fb5f4bba2b91f4eaf2852d7b72b3ee1044ebe01c109f250f`.
+- `spec.md` current raw SHA-256: `2b4c407f2900e1cb97e8c373804e4f66dfb32a5eef2b7ec25b238811801cdf25`.
+- `plan.md` current raw SHA-256: `34237fd1cd790dc4fd218f5ed11e27792b4743ae71b64695fd5d67581ffa8f61`.
 - `quickstart.md` raw SHA-256: `cd3ca50c739aa8ee3e0eb7a0a5a37f378c7f2553db6730dd6e7342fa7177a5df`.
 
 DE: Research R06 und ältere Eingabehashes dokumentieren den damaligen
@@ -115,7 +124,7 @@ payload export, preserve OpenCode's explicit session-coverage limit and protect
 the live learner environment. File counts are not coverage and pilots are not
 accessibility/platform acceptance.
 
-## Phase 1: Setup / Vorbereitung
+## Phase 1: Vorbereitung / Setup
 
 **Ziel / Goal:** aktuellen Arbeitsumfang und überprüfbare Baseline herstellen / establish current scope and baseline. Keine neue Anwendung oder Installation / no new application or installation.
 
@@ -124,18 +133,18 @@ accessibility/platform acceptance.
 - [ ] T003 [P] Lege nach T001 `docs/security/secure-development/004-container-hardening-followup/checkpoints.md` als Arbeitsregister aller G004-01–18 und ergänzenden Standards aus Plan an; übernimm N/A-/Open-Gründe und Spec-Open-IDs mit Owner/Review/Frist/Trigger, keine fertigen Abnahmen. / Create the complete applicability and evidence register, not prefilled passes. [FR-014; SC-005, SC-008]
 - [ ] T004 Lege in `scripts/tests/fixtures/hardening-followup/README.md` die isolierten HOME-/Projekt-/Registry-/Fake-Compose-/Netzwerkgrenzen und Schreiborte für spätere Tests fest; benenne bei absolut aufgerufenen Binärdateien notwendige echte Isolation statt vermeintlicher PATH-Stubs. / Define safe fixture boundaries, no real maintenance, credentials or learner volumes. [FR-002, FR-003, FR-006; SC-002, SC-003]
 
-## Phase 2: Foundational / Gemeinsame Voraussetzungen
+## Phase 2: Gemeinsame Voraussetzungen / Foundational
 
 **Blocker / Prerequisite:** T001–T004 müssen vor Story-Arbeit abgeschlossen sein / finish setup before stories.
 
-- [ ] T005 Übertrage `data-model.md` in Feature-004-Evidenzvalidierung in `scripts/lib/secure_development_hardening.py` mit isolierten Fällen in `scripts/tests/test_hardening_followup.py`: exakte Statuskombinationen, Pflichtfelder, normalisierte versus rohe Hashes, fehlende Belege/Owner/Trigger und alte Kontexte ablehnen; historische Feature-003-Defaults und Fixtures erhalten. / Reuse the validator with explicit new-context records and reject invalid evidence, preserving legacy behavior. [FR-014, FR-015; SC-001, SC-008]
+- [ ] T005 Prüfe `data-model.md` und die bestehende Feature-003-Abgrenzung in `scripts/lib/secure_development_hardening.py` ausschließlich lesend; halte geplante Status-/Pflichtfeld-/Hash-/Kontextfälle in `docs/security/secure-development/004-container-hardening-followup/input-bindings.md` fest. Noch keinen Produktivcode ändern und keine Tests starten; T006–T011 liefern zuerst die reviewten Inventare und den Sicherheitsentwurf, T012 übernimmt die Implementierung. / Review existing contracts read-only and document intended validation cases; no production edits or tests before the reviewed inventories/design. [FR-014, FR-015; SC-001, SC-008]
 - [ ] T006 [P] Erzeuge `docs/security/secure-development/004-container-hardening-followup/coverage-modules.json` aus sämtlichen 104 Pfaden in `coverage-scope.md`, einschließlich unveränderter Helfer, Inline-/Patch-/Kindprozesslogik und künftigem Retention-Kern: Quellhash, Sprach-/Entscheidungsmodell, Nenner und Messlücken ausweisen; Inventar unabhängig auf Vollständigkeit reviewen lassen. / Establish the full source-bound module denominator, not only edited files. [FR-003; SC-003; G004-04]
 - [ ] T007 [P] Erzeuge `docs/security/secure-development/004-container-hardening-followup/interface-catalog.json` aus README, `docs/man/`, PowerShell-Hilfen und dokumentierten kritischen UI-Flows: eine ID je öffentlichem Modus/Flow, Pflichtvarianten/-plattformen und positive/negative Fälle, keine beliebigen Optionskombinationen als neue IDs; vor Abnahmelauf unabhängig reviewen. / Review a complete logical interface denominator; missing variants stay in scope. [FR-003; SC-002, SC-003]
 - [ ] T008 [P] Dokumentiere Kontext-, Deployment-/Bausteinsicht, Qualitätsziele/-szenarien, arc42 §8, ADR-/S-ADR-Verweise, Risiken und technische Schulden in `docs/architecture/004-container-hardening-followup/context-and-decisions.md`; bestehende Entscheidungen zu Rechten, Egress und Retention bewerten statt neu erfinden. / Produce scoped iSAQB architecture evidence using existing decisions where valid. [FR-002, FR-006, FR-014; CR-010/011]
 - [ ] T009 [P] Erfasse Host/VM/Container, Mounts, Zustände, Build-/Runtime-Rechte, Paketquellen und optionale Provider als Datenflüsse/Trust Boundaries in `docs/security/secure-development/004-container-hardening-followup/threat-model.md`; CIA, STRIDE, relevante CAPEC-Muster und jedes Egress-Ziel begründet zuordnen, Allowlist nur als owned Open-Follow-up. / Threat-model existing boundaries and outbound flows without introducing an egress ban. [FR-002, FR-005, FR-006; G004-02]
 - [ ] T010 Leite nach T008/T009 Default-/Read-only-/Audit-/Agenten-Sicherheitsfälle in `scripts/tests/fixtures/hardening-followup/` ab; speichere nur künstliche Dateibäume, Argumente und Metadaten, mit erwarteter Ablehnung und Erhaltungsumfang je Fall. / Prepare concrete safe acceptance fixtures before narrow changes. [FR-002, FR-003, FR-005, FR-006; SC-002]
 - [ ] T011 Dokumentiere Python als MSL und begrenzten Bash-/PowerShell-Glue samt sprachbezogenen Regeln, SSDF-/CWE-Prüfpunkten und didaktischen Kommentaren in `docs/security/secure-development/004-container-hardening-followup/{msl-applicability,secure-coding-review}.md`; keine MSL-Pauschalgarantie, keine neue C#-Anwendung. / Establish language-specific security review and explain nontrivial changed logic. [FR-003; CR-001, CR-005–007; G004-04]
-- [ ] T012 Erstelle und reviewe `specs/004-container-hardening-followup/gate-requirements.json` aus G004-01–18 in Plan und den Ergebnissen T002–T011, mit exakten Q1–Q8-Befehlsgruppen, erwarteten Belegen und gebundenen Hashes; fehlende Gate-Dateien dürfen keine Erfolgsvorlagen erzeugen. / Bind the reviewed feature-local gate contract before execution; do not reuse Feature-003 acceptance. [FR-014, FR-015; SC-008]
+- [ ] T012 Erstelle und reviewe nach T006–T011 zuerst `specs/004-container-hardening-followup/gate-requirements.json` aus G004-01–18, Ergebnissen T002–T011 und Q1–Q8. Implementiere erst danach die geplante Feature-004-Evidenzvalidierung in `scripts/lib/secure_development_hardening.py` mit isolierten Fällen in `scripts/tests/test_hardening_followup.py`: exakte Statuskombinationen/Pflichtfelder, normalisierte versus rohe Hashes, fehlende Belege/Owner/Trigger und alte Kontexte ablehnen, historische Defaults/Fixtures erhalten. Quell-/Kataloghashes nach Änderungen aktualisieren und betroffene Gates nachreviewen, niemals alte Evidence oder Erfolgsvorlagen als Ersatz. / After reviewed inventories/design, first review and bind the feature-local gate contract; only then implement scoped validation/tests and update affected hashes/review without changing legacy acceptance. [FR-003, FR-014, FR-015; SC-001, SC-003, SC-008]
 
 ## Phase 3: US1 — Kontrolliert lernen / Learn Within Safe Boundaries (P1, MVP)
 
@@ -195,15 +204,15 @@ historical Open status as proof of a current defect.
 - [ ] T042 [US2] Ergänze isolierte synthetische Bash-Entscheidungs-/Outcome-Fälle für sämtliche Bash-Pfade in `coverage-scope.md` unter `scripts/tests/fixtures/hardening-followup/` und bestehenden `scripts/tests/test_*.py`; Betrieb/Lifecycle, Downloads/Scanner/Hooks sowie Maintenance/Fleet/Renderer/Core getrennt zuordnen, nie globale Hostaktionen ausführen. / Cover every named shell boundary using source-bound fixtures and safe process isolation. [FR-003; SC-003]
 - [ ] T043 [US2] Ergänze entsprechende PowerShell-Entscheidungs-/Outcome-Fälle einschließlich `.psm1` und installierter Vorlagen aus `coverage-scope.md` unter `scripts/tests/fixtures/hardening-followup/`; gepinnte isolierte Messumgebung und echte benötigte native Prozessbelege, Pester-Command-/Zeilenwerte nur ergänzend. / Cover the complete named PowerShell scope without treating line coverage as branch coverage. [FR-003; SC-003]
 - [ ] T044 [US2] Ergänze positive/negative Fälle für den vollständigen reviewten Modus-/Flow-Katalog in `docs/security/secure-development/004-container-hardening-followup/interface-catalog.json` und zugeordneten `scripts/tests/`: alle neuen/geänderten Interfaces zu 100 %, übriger Katalog mit ehrlichen fehlenden Varianten, kein künstliches App-/API-Projekt. / Implement executable cases against the actual documented interface denominator. [FR-003; SC-002, SC-003]
-- [ ] T045 [US2] Miss nach T040–T044 gemäß Q4 in isolierter Umgebung mindestens 85 % Zweig-Outcomes je sicherheitskritischem Modul und 80 % logische Interfaces mit beiden Fallarten für alle beanspruchten Varianten; sichere Rohdaten temporär und Hash-/Nenner-/Skips-/Lückenbericht in `docs/security/secure-development/004-container-hardening-followup/secure-coding-review.md`, keine gemittelte oder erfundene Quote. / Measure real per-module branch and complete-interface coverage, keeping unmeasured/skipped scope explicit. [FR-003; SC-003; G004-04]
+- [ ] T045 [US2] Miss nach T040–T044 gemäß Q4 zunächst den Zwischenstand von 85 % Zweig-Outcomes je sicherheitskritischem Modul und 80 % logischen Interfaces mit beiden Fallarten für alle beanspruchten Varianten; sichere temporäre Rohdaten und Hash-/Nenner-/Skips-/Lückenbericht in `docs/security/secure-development/004-container-hardening-followup/secure-coding-review.md`. Dies ist die Lückenbasis für T046, kein finaler Freeze; die verbindliche Schlussmessung folgt in T053 nach T049/T052. / Measure the initial full-scope coverage and gaps without averaged or invented ratios; final acceptance measurement follows all remaining code changes in T053. [FR-003; SC-003; G004-04]
 - [ ] T046 [US2] Bearbeite die durch T045 konkret belegten Lücken nur in zugeordneten `scripts/tests/`-Fixtures beziehungsweise sicherheitskritischen Modulen aus `coverage-scope.md`; wiederhole betroffene Messungen nach Quell-/Katalogänderung, aktualisiere `coverage-modules.json`/`interface-catalog.json` im Feature-Evidenzverzeichnis; unerreichte Quote bleibt Abnahmelücke, keine Nennerverkleinerung. / Close evidenced coverage/security gaps without deleting scope or diluting thresholds. [FR-003; SC-003]
-- [ ] T047 [P] [US2] Inventarisiere nach eingefrorenem US2-Code TLS-, Signatur-/Kryptoabhängigkeiten, Profilkonflikte, Migration und begründete Ausnahmen in `docs/security/secure-development/004-container-hardening-followup/crypto-tls-inventory.md`; keine eigene Kryptografie oder Schlüssel-/Secret-Rotation. / Assess existing crypto dependencies and route unresolved profiles to Security Review. [FR-009; SC-004; G004-10]
+- [ ] T047 [US2] Inventarisiere den aktuellen US2-Zwischenstand der TLS-, Signatur-/Kryptoabhängigkeiten, Profilkonflikte, Migration und begründeten Ausnahmen in `docs/security/secure-development/004-container-hardening-followup/crypto-tls-inventory.md`; noch keinen finalen Code-Freeze behaupten. T053 gleicht die Quellen nach T049/T052 erneut ab; keine eigene Kryptografie oder Schlüssel-/Secret-Rotation. / Assess current crypto dependencies serially, retaining Security Review questions; revalidate against the final code in T053. [FR-009; SC-004; G004-10]
 - [ ] T048 [US2] Verknüpfe Ergebnisse aus T047 und tatsächlich vorhandene Rechte-/Integritätsmaßnahmen mit `docs/security/secure-development/004-container-hardening-followup/{control-matrix,dependency-audit}.md`; prüfe G04/G07 inklusive begrenzter N/A-Gründe, keine neue rechtliche oder kryptografische Ausnahme ohne zuständige Entscheidung. / Preserve H-344-04/07 rationale and open decisions, not blanket compliance claims. [FR-004, FR-007, FR-009; SC-001, SC-004]
-- [ ] T049 [P] [US2] Prüfe `scripts/build-and-sbom.{sh,ps1}` und `scripts/analyze-sbom.{sh,ps1}` mit isolierten Fällen in `scripts/tests/test_hardening_followup.py` gegen explizite unveränderliche Image-/SBOM-Auswahl, Scanner-/DB-Fehler, Argumenterhalt und native Architektur; nur aktuelle belegte Lücken ändern, keine bewegliche Latest-Datei als Abnahme. / Validate exact supply-chain artifact selection before later real scanning. [FR-003, FR-007; SC-004]
-- [ ] T050 [P] [US2] Vergleiche nach T046 genau 14 installierte Presets mit Version, Priorität, Overrides und Kontrollabdeckung gegen die Planmatrix und `scripts/config/spec-kit-project-statistics-governance-presets.json` in `docs/security/secure-development/004-container-hardening-followup/preset-assurance-review.md`; kein neues Profil/Auto-Update, Quartal/Anlass/3. Oktober mit Owner terminieren. / Verify the installed fourteen-preset profile and review cadence without incidental installation. [FR-010; SC-005; G004-11]
+- [ ] T049 [US2] Prüfe seriell `scripts/build-and-sbom.{sh,ps1}` und `scripts/analyze-sbom.{sh,ps1}` mit isolierten Fällen in `scripts/tests/test_hardening_followup.py` gegen explizite unveränderliche Image-/SBOM-Auswahl, Scanner-/DB-Fehler, Argumenterhalt und native Architektur; nur aktuell belegte Lücken vor dem finalen Freeze korrigieren, keine Latest-Datei-Heuristik. T053 muss geänderte Module/Interfaces erneut messen. / Validate and narrowly remediate supply-chain selection serially before the final freeze, followed by affected remeasurement in T053. [FR-003, FR-007; SC-004]
+- [ ] T050 [US2] Vergleiche seriell nach T049 genau 14 installierte Presets mit Version, Priorität, Overrides und Kontrollabdeckung gegen die Planmatrix und `scripts/config/spec-kit-project-statistics-governance-presets.json` in `docs/security/secure-development/004-container-hardening-followup/preset-assurance-review.md`; kein neues Profil/Auto-Update, Quartal/Anlass/3. Oktober mit Owner terminieren. / Verify the installed fourteen-preset profile and cadence without incidental installation; the final freeze is established only in T053. [FR-010; SC-005; G004-11]
 - [ ] T051 [US2] Ergänze projektspezifische isolierte Assurance-Mutationsfälle in `scripts/tests/test_hardening_followup.py` und `scripts/tests/fixtures/hardening-followup/` gegen die bestehenden Assurance-0.1.8-Prüfer: falsche aktive Version, CL-Dokument-ID, Sammelband-Baseline, Duplikate, Fließtext-only und DE/EN-Widerspruch müssen trotz frisch berechneter Hashes scheitern; auch gültige Positivfälle in Bash/PowerShell. / Test semantics as well as hashes without editing vendored contracts to pass. [FR-010; SC-005]
 - [ ] T052 [US2] Integriere die geprüften Feature-004-/Assurance-Bindungen in `scripts/lib/secure_development_hardening.py` und `scripts/test-ade-sandbox-hardening.{sh,ps1}`; gültige JSON-Struktur schließt keine Human-only-/Open-Gates, falsche Metadaten liefern Fehler ohne Evidenzumschreibung, historische Defaults weiter schützen. / Apply contract-aware validation with honest status and no schema fork. [FR-010, FR-014; SC-005, SC-008]
-- [ ] T053 [US2] Konsolidiere die einzelnen US2-Befundentscheidungen und alle G01–G10-/H-344-01–10-/AC-H-344-01–10-Verweise in `docs/security/secure-development/004-container-hardening-followup/control-matrix.md`; AlreadyCovered ist Anforderungsabdeckung, nicht automatisch Fulfilled, aktuelle offene Wirksamkeit/Quoten/Versionen behalten Sperren. / Record independently assessable current findings and their evidence, not blanket closure. [FR-001, FR-014; SC-001, SC-004, SC-005]
+- [ ] T053 [US2] Stelle erst nach T049–T052 und sämtlichen nötigen Korrekturen den finalen US2-Code-/Katalogstand fest: aktualisiere/reviewe `docs/security/secure-development/004-container-hardening-followup/{coverage-modules,interface-catalog}.json`, gleiche T047-Inventar und übrige Versions-/Konfigurationsbelege erneut ab und führe Q2/Q4-Schlussmessung samt Quellen-/Nenner-/Skipsbericht in `secure-coding-review.md` desselben Verzeichnisses durch. Bei weiterer Code-/Katalogkorrektur Freeze aufheben, betroffene Kataloge/Prüfungen/Messungen wiederholen und erst danach neu einfrieren; unerfüllte 85-/80-%-Gates bleiben Open. Konsolidiere anschließend alle G01–G10-/H-/AC-H-344-Zuordnungen in `control-matrix.md`. / Freeze only after all remaining production changes and reviewed catalogs, rerun final regression/coverage and current evidence, and reopen the freeze on further changes; map findings without blanket fulfillment. [FR-001, FR-003, FR-014; SC-001, SC-003, SC-004, SC-005]
 
 ## Phase 5: US3 — Nachweise unabhängig beurteilen / Review Evidence Independently (P3)
 
@@ -236,7 +245,7 @@ stay explicit rather than inferred from successful text checks.
 - [ ] T069 [US3] Erstelle die kontrollbezogene Übergabe an den gesonderten Intake `Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md` in `docs/security/secure-development/004-container-hardening-followup/handoff.md`: geänderte Flächen, Quellen/Hashes, tatsächliche Belege, fehlende Nachweise, Owner/Frist/Follow-up/Trigger und Nutzungsgrenzen; A darf Mängel an H zurückgeben, weder A noch Lernenden-Selbstbau automatisch starten. / Prepare the independent self-review handoff with explicit remaining restrictions and no new start authority. [FR-014, FR-015; SC-008]
 - [ ] T070 [US3] Bewerte den begrenzten technischen Abschluss in `docs/security/secure-development/004-container-hardening-followup/checkpoints.md` und `handoff.md` desselben Verzeichnisses: mindestens echter aktueller ARM64-Beleg, keine Critical-CVE, alle erforderlichen Befunddispositionen; AMD64-/Human-/Pilot-/Coverage-Lücken nicht als erledigte Tests oder Assurance-Gesamtabnahme ausgeben, `All` bleibt bei Pflichtlücken nonzero. / Decide bounded handoff versus blocked full acceptance without relaxing any gate or changing series lifecycle. [FR-007, FR-013, FR-014, FR-015; SC-003, SC-004, SC-007, SC-008]
 
-## Phase 6: Polish und spätere Abschlussgrenzen / Cross-Cutting Closeout
+## Phase 6: Abschluss und spätere Liefergrenzen / Cross-Cutting Closeout
 
 DE: Nach Story-Arbeit Belege finalisieren. Nicht verfügbare Pflichtnachweise
 bleiben offene Aufgaben; weder Polish noch lokaler Handoff machen sie grün.
@@ -267,7 +276,7 @@ acceptance pair and verify the plan's exact fifty-control partition.
 | --- | --- | --- | --- |
 | FR-001 | H-/AC-H-344-01, G004-01 | T001–T003, T053, T068, T079 | SC-001 |
 | FR-002 | G02, G004-02/03 | T004, T008–T010, T016, T023–T024, T028, T031–T032, T058–T062, T078 | SC-002, SC-007 |
-| FR-003 | H-/AC-H-344-02, G004-04 | T005–T007, T010–T011, T013–T028, T033, T037, T040–T046, T049, T073 | SC-002, SC-003 |
+| FR-003 | H-/AC-H-344-02, G004-04 | T006–T007, T010–T028, T033, T037, T040–T046, T049, T053, T073 | SC-002, SC-003 |
 | FR-004 | H-/AC-H-344-04, G004-05 | T033–T035, T048–T049 | SC-004 |
 | FR-005 | H-/AC-H-344-03, G004-06 | T009, T027, T036–T039, T053 | SC-004 |
 | FR-006 | H-/AC-H-344-05, G004-07 | T013–T022, T028, T031, T055, T069 | SC-002, SC-008 |
@@ -279,7 +288,7 @@ acceptance pair and verify the plan's exact fifty-control partition.
 | FR-012 | H-/AC-H-344-10, G004-13/14 | T019–T020, T026, T029–T030, T032, T065–T066, T071–T073 | SC-006 |
 | FR-013 | G004-15/16/17 | T058–T062, T063, T068–T070, T078 | SC-007 |
 | FR-014 | G004-01/18 and all checkpoints | T001–T003, T005, T012, T032, T053–T079 | SC-001, SC-005, SC-008 |
-| FR-015 | G004-18 | T001, T068–T070, T075–T076, T079–T080 | SC-008 |
+| FR-015 | G004-18 | T001, T005, T012, T068–T070, T075–T076, T079–T080 | SC-008 |
 
 | Intake requirement / Anforderung | Unverändertes Kriterium / Preserved criterion | Zuordnung / Mapping |
 | --- | --- | --- |
@@ -298,7 +307,7 @@ acceptance pair and verify the plan's exact fifty-control partition.
 | --- | --- |
 | SC-001 | T002/T053: historische Befunde und genau 50 eindeutige Delta-IDs; T068/T079 unabhängiger/finaler Vergleich / historical disposition and exact delta partition |
 | SC-002 | T013–T028/T031: Erhaltungs-/Abbruch-/Argument-/Isolationsfälle; T059–T062 native Grenzen / retention, failure, argument and native isolation evidence |
-| SC-003 | T006–T007/T040–T046: vollständige Nenner, 85 % je Modul, 80 % Interfaces, 100 % geänderte Interfaces; Skips sichtbar / full measurement without missing-scope inflation |
+| SC-003 | T006–T007/T040–T046/T053: vollständige Nenner, Zwischen- und Schlussmessung nach allen Codeänderungen, 85 % je Modul, 80 % Interfaces, 100 % geänderte Interfaces; Skips sichtbar / complete scope and final measurement after all changes |
 | SC-004 | T033–T039/T047–T049/T057/T063–T064: Versions-/Herkunfts-/Rechte-/Konfigurations- und finale CVE-Disposition / current origin, rights and vulnerability evidence |
 | SC-005 | T003/T050–T057/T067–T068: zehn Gruppen, 14 Presets, aktuelle Assurance-Metadaten und owned Human-/Cloud-Fragen / complete profile and scoped applicability |
 | SC-006 | T019–T020/T026/T029–T030/T065–T066/T071–T073: verständliche DE/EN-Nutzung, separate Human-A11Y- und Pilotbelege / readable use and separate actual human observations |
@@ -336,6 +345,24 @@ a separate later post-merge gate, not local-handoff prerequisite. Serialize
 shared files. Changed sources invalidate affected measurements and reviews;
 T075 never permits using stale inputs earlier.
 
+DE: T005 ist nur lesende Vertragsprüfung mit Dokumentation. T006–T011
+erstellen und reviewen die Nenner, Architektur und Sicherheitsfälle, bevor
+T012 erstmals Validator-Code ändert oder Tests ausführt. T045 misst bewusst
+einen Zwischenstand; T047–T052 laufen seriell und dürfen noch nötige belegte
+Produktivkorrekturen enthalten. Erst T053 reviewt die aktualisierten Kataloge,
+wiederholt die Schlussmessung und stellt den Freeze für T058–T068 her.
+Neu hinzukommende Plattformbelege aus T060/T061 aktualisieren vor T068 auch
+Interface-Zähler und Schlussbericht; unbeobachtete Varianten bleiben im Nenner.
+Nach T053 erfordert jede Produktiv-/Katalogänderung explizit Rückkehr zu dessen
+Review-/Messschritt, bevor Runtime- oder Abnahmenachweise weitergenutzt werden.
+EN: T005 is read-only contract assessment with documentation. Reviewed
+inventories/design precede the first validator edits/tests in T012. T045 is
+intermediate; T047–T052 remain serial and may contain evidenced fixes. Only
+T053 reviews updated catalogs, reruns final measurement and freezes the inputs
+for runtime/review. Newly obtained platform proof updates interface counts
+before T068; missing variants remain in scope. Later production/catalog
+changes reopen the T053 review/measurement before reusing affected proof.
+
 DE: US1 bietet ohne US2-/Rechts-/Cloud-Abschluss isoliert prüfbaren Nutzen;
 das ist keine allgemeine Betriebsfreigabe. US2 kann jeden Befund unabhängig
 bewerten. US3-Paketreview ist ohne neuen Build prüfbar, benötigt aber reale
@@ -353,12 +380,12 @@ incomplete; bounded handoff cannot turn those tasks or full assurance green.
 | Setup | T001 abgeschlossen / complete | T002 control-matrix.md und T003 checkpoints.md |
 | Grundlagen / Foundation | Setup und T005, gemeinsame Eingaberevision / shared inputs | T006 coverage-modules.json, T007 interface-catalog.json, T008 Architektur, T009 Threat Model; anschließend gemeinsam reviewen / then reconcile |
 | US1 | T012; keine gleichzeitigen gemeinsamen Wrapper-/Testdateiänderungen / no concurrent shared-file writes | Bewusst serieller MVP; unmarkierte Tasks nicht parallelisieren / deliberately serial safety slice |
-| US2 | T046, eingefrorener Code und disjunkte Dateien / frozen code and disjoint files | T047 Krypto-Inventar, T049 SBOM-Vertragsfälle, T050 Preset-Inventar; T048/T051/T052 warten auf ihre Inputs / dependent work waits |
+| US2 | T046 als Zwischenstand / intermediate state | T047–T052 seriell; keine parallelen Produktionsänderungen, finaler Freeze und Schlussmessung erst T053 / serial work, final freeze and measurement in T053 |
 | US3-Regelreview / governance | finale Kontroll-/Datenflussbasis / final control/flow context | T054 Rechtsregister, T055 Datenschutz, T056 Cloud-Screening, mit getrennten Dateien / separate records |
 | US3-Plattformen / platforms | T058 und gleicher finaler Head; separate Runtime/Artefakte / separate runtimes/artifacts | T060 Windows und T061 Ubuntu/WSL2 nur mit getrennten Podman-Laufzeiten und Ressourcen; danach T062 konsolidiert / consolidate afterward |
 
 DE: T049 schreibt die zentrale neue Testsuite und darf daher nicht gleichzeitig
-mit T005/T016/T022/T025/T051 laufen. T018/T019/T020 und T025/T026/T052 schreiben
+mit T012/T016/T022/T025/T051 laufen. T018/T019/T020 und T025/T026/T052 schreiben
 je dieselben öffentlichen Paare und bleiben seriell. T054 schreibt nicht das
 Datenschutzdetail von T055. Gemeinsame Kontrollmatrix/Checkpoint-/Statistik-
 und Agentenflächen werden nicht parallel verändert. Keine Delegations- oder
@@ -416,9 +443,9 @@ zusätzlich die anwendbaren US2-/US3-Nachweise und dokumentierten Grenzen.
 / MVP is setup, foundation and US1; handoff additionally needs applicable
 US2/US3 evidence and explicit restrictions.
 
-**Generation scope / Erzeugungsumfang:** ausschließlich diese Datei neu;
+**Ursprünglicher Erzeugungsumfang / Original Generation Scope:** ausschließlich diese Datei neu;
 kein Evidence-Verzeichnis, Gate-JSON, Test oder Runtime-Artefakt erzeugt.
 Die historische Feature-003-Studie, Quellenbindungen und Reihenstatus bleiben
 unverändert. Der vorhandene fremde Session-Log `2026-10-27-0747.md` bleibt
 ausgeschlossen. Optionaler `speckit.git.commit` vor/nach Tasks wird übersprungen;
-die neue Aufgabenliste bleibt uncommittet und ungepusht.
+die Aufgabenliste blieb bei ihrer Erzeugung uncommittet und ungepusht.

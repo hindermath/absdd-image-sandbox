@@ -1,11 +1,11 @@
-# Implementation Plan: Sandbox-Härtungsnachlauf / Sandbox Hardening Follow-Up
+# Implementierungsplan: Sandbox-Härtungsnachlauf / Implementation Plan: Sandbox Hardening Follow-Up
 
 **Branch**: `codex/004-container-hardening-followup` | **Date**: 2026-10-26 | **Spec**: [spec.md](spec.md)
 **Input**: aktueller Intake samt autorisiert erneuertem Receipt und sieben Clarifications; vormals 67 Quellen / current renewed receipt and seven clarifications; formerly 67 sources.
 **Requirements Review**: 2026-10-27, base commit `88ade20`; see [review record](checklists/requirements-quality-review.md).
-**Planning revision**: `5e60e21` (historischer Entwurfsstand / historical design basis); usability amendment after `596b4ca`, current Spec raw SHA-256: `b66be89f0ca28dfada82a684d1e0fc131fb044a4d5819e36d222ea50d3af4349`.
+**Planning revision**: `5e60e21` (historischer Entwurfsstand / historical design basis); usability amendment after `596b4ca`, current Spec raw SHA-256: `2b4c407f2900e1cb97e8c373804e4f66dfb32a5eef2b7ec25b238811801cdf25`.
 
-## Summary
+## Zusammenfassung / Summary
 
 DE: Vorhandene Schutzmaßnahmen zuerst gegen aktuelle Anforderungen prüfen,
 danach nur belegte Lücken gezielt schließen. US1 ist der kleinste nutzbare
@@ -41,7 +41,7 @@ then usability requirements, learner documentation, authorized provenance
 renewal and independent review with scoped static validation. No further
 commit/push, hardening implementation, builds or runtime actions.
 
-## Technical Context
+## Technischer Kontext / Technical Context
 
 | Feld / Field | Entscheidung / Decision |
 | --- | --- |
@@ -55,7 +55,7 @@ commit/push, hardening implementation, builds or runtime actions.
 | Constraints | Default-Egress und beschreibbare Schicht bleiben; Ports nur `127.0.0.1:5100-5199`; Read-only-Variante ausdrücklich optional. Keine Anmeldung/echten Secrets für Tests. / Preserve clarified defaults and safe fixtures. |
 | Scale/Scope | 15 FR, acht SC, 157 historische Kontrollbezüge als Eingabe, genau 50 Delta-Zuordnungen und 14 Presets; namentlicher Coverage-Nenner in [coverage-scope.md](coverage-scope.md). / Fixed requirement and evidence scope. |
 
-## Constitution Check
+## Verfassungsprüfung / Constitution Check
 
 DE: Verfassung 1.17.0; Planungsprüfung vor Phase 0 und nach Phase 1.
 `Pass` unten bedeutet widerspruchsfreier Entwurf, keine bestandene technische
@@ -86,9 +86,9 @@ EN: No new constitutional deviation is required. No agent-context updater is
 installed, and this request forbids writes to agent/input sources. Plan that
 future atomic change rather than inventing an updater now.
 
-## Project Structure
+## Projektstruktur / Project Structure
 
-### Documentation (this feature)
+### Dokumentation dieses Features / Documentation (this feature)
 
 ```text
 specs/004-container-hardening-followup/
@@ -109,7 +109,7 @@ eigenen Zustand; Feature-003-Artefakte bleiben unangetastet.
 EN: No tasks, run state or technical proof is produced now. Later autonomy
 requires separate authority/state, never resuming Feature 003.
 
-### Source Code (repository root)
+### Quellcode im Repository / Source Code (repository root)
 
 | Fläche / Surface | Geplanter Umgang / Planned treatment |
 | --- | --- |
@@ -168,6 +168,21 @@ EN: US1 has independent value without completed US2/legal/cloud decisions.
 US2 findings can be assessed separately; final US3 handoff depends on their
 applicable results. Serialize shared guidance, evidence, version, workflow
 and statistics writes.
+
+DE: Präzisierung nach Analyze: Die anfängliche Vertragsprüfung bleibt lesend.
+Reviewte Coverage-/Interface-Inventare und Sicherheitsentwurf kommen vor der
+ersten Validator-Implementierung oder Testausführung. Eine frühe Coverage-
+Messung dient nur der Lückenanalyse. Lieferketten-/Assurance-Korrekturen werden
+danach seriell abgeschlossen; erst anschließend Quellen/Kataloge reviewen,
+final messen und Code einfrieren. Weitere Änderungen heben den Freeze auf und
+erzwingen betroffene Wiederholungsnachweise. Neue Plattformbelege ergänzen vor
+dem Gesamtreview die Interface-Zähler, ohne fehlende Varianten zu entfernen.
+EN: Initial contract assessment stays read-only. Reviewed coverage/interface
+inventories and security design precede first validator edits/tests. Early
+coverage only identifies gaps. Finish remaining supply-chain/assurance fixes
+serially, then review inputs/catalogs, measure and freeze the final code.
+Further changes reopen the freeze and affected evidence. New platform proof
+updates interface counts before final review without dropping missing variants.
 
 ## Sicherheitsdesign / Security Design
 
@@ -629,7 +644,7 @@ exact-head checks and review-thread inspection, never previous green CI.
 There is no current remote task or autonomous authority. A later autonomous
 run needs its own valid state and explicit recovery boundaries.
 
-## Complexity Tracking
+## Komplexitätsbewertung / Complexity Tracking
 
 DE: Keine neue Verfassungsverletzung. Ein schmaler Retention-Helfer und ein
 optionaler Compose-Override sind kleiner als ein Cleanup-Dienst oder neue

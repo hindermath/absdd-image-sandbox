@@ -1,4 +1,4 @@
-# Feature Specification: Sandbox-Haertungsnachlauf / Sandbox Hardening Follow-Up
+# Feature-Spezifikation: Sandbox-Härtungsnachlauf / Feature Specification: Sandbox Hardening Follow-Up
 
 **Feature Branch**: `codex/004-container-hardening-followup`
 **Created**: 2026-10-25
@@ -35,9 +35,9 @@ The other occupations are IT systems electronics technician, IT systems
 management clerk and digitalization management clerk. Address their distinct
 needs without creating duplicate curricula or new sample applications.
 
-## Clarifications
+## Klärungen / Clarifications
 
-### Session 2026-10-25
+### Sitzung 2026-10-25 / Session 2026-10-25
 
 - Q: Ab welcher Schwelle blockiert ein Schwachstellenbefund im finalen Image? / Which vulnerability threshold blocks acceptance? → A: Critical immer; High mit verfuegbarem Fix nur ohne begruendete VEX-Aussage `not_affected` oder Open-Eintrag mit Owner/Trigger; High ohne Fix ist dokumentiertes Restrisiko. / Critical always blocks; fixable High blocks unless justified VEX not_affected or Open with owner/trigger; unfixable High is documented residual risk.
 - Q: Darf das Feature mit offenen Plattformluecken abgeschlossen werden? / May the feature close with open platform gaps? → A: Ja, mit echtem macOS/ARM64-Beleg als Minimum; fehlende Windows-/WSL2-Pfade gehen als genaue Open/Blocked-Punkte mit Owner und Trigger (UPD-AMD64) in die Uebergabe, AMD64-abhaengige Nutzung bleibt gesperrt. / Yes, with real macOS/ARM64 evidence as minimum; missing Windows/WSL2 paths are handed over as exact Open/Blocked items with owner/trigger (UPD-AMD64) and AMD64-dependent use stays restricted.
@@ -47,7 +47,7 @@ needs without creating duplicate curricula or new sample applications.
 - Q: Welche Aufbewahrungsfrist gilt fuer Audit-Metadaten? / Which retention period applies to audit metadata? → A: Feste Frist 30 Tage; der Stopp-Wrapper loescht nach erfolgreichem Export automatisch aeltere `audit-logs/*.jsonl`. / Fixed 30 days; after successful export the stop wrapper automatically deletes older audit-logs/*.jsonl files.
 - Q: Wird das Container-Root-Dateisystem schreibgeschuetzt? / Is the container root filesystem made read-only? → A: Beschreibbare Schicht bleibt Standard; Schreiborte inventarisieren und begruenden; optionales Compose-Profil mit `read_only` als gepruefte Haertungsvariante mit dokumentierten Grenzen. / Writable layer stays default; inventory and justify write locations; optional read_only Compose profile as a tested hardening variant with documented limits.
 
-## User Scenarios & Testing *(mandatory)*
+## Nutzungsszenarien und Prüfung / User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Kontrolliert lernen / Learn Within Safe Boundaries (Priority: P1)
 
@@ -155,7 +155,7 @@ observations remain unresolved.
    rights or provider decision, when use or distribution depends on it, then
    the restriction remains despite successful documentation checks.
 
-### Edge Cases
+### Grenzfälle / Edge Cases
 
 - DE: Quelle oder Hash geaendert: betroffene Aussage nicht als aktuell
   uebernehmen, Drift und zustaendigen Review dokumentieren. EN: Changed
@@ -183,9 +183,9 @@ observations remain unresolved.
   Never claim rollback of already deleted old metadata after partial failure;
   concurrent stops must not delete concurrently in the same audit scope.
 
-## Requirements *(mandatory)*
+## Anforderungen / Requirements *(mandatory)*
 
-### Functional Requirements
+### Funktionale Anforderungen / Functional Requirements
 
 - **FR-001 (US2, US3; H-344-01)**: DE: Der Nachlauf MUSS die historische
   priorisierte Lueckenliste erhalten und jede der 50 Delta-IDs genau einmal
@@ -475,7 +475,7 @@ observations remain unresolved.
   which independently checks and returns defects. Never automatically start
   self-review/learner self-build or let agents close human-only decisions.
 
-### Constitution Requirements *(mandatory)*
+### Verfassungsanforderungen / Constitution Requirements *(mandatory)*
 
 - **CR-001**: DE: Der Registry-Eintrag fuer `container-images/absdd-image-sandbox`
   ist Projektkontext: Python-Helfer plus Bash/PowerShell, kein neues
@@ -554,7 +554,7 @@ observations remain unresolved.
   attach. Bind revision, payload/decision hashes, command, runner, exit and
   write boundary; partial proof never means full platform acceptance.
 
-### Key Entities *(include if feature involves data)*
+### Zentrale Begriffe und Objekte / Key Entities *(include if feature involves data)*
 
 - **Hardening Finding / Haertungsbefund**: stabile GAP-/CL-ID, historische
   Quelle, Prioritaet, aktueller Befund, Anforderung und Owner. / Stable gap/
@@ -576,9 +576,9 @@ observations remain unresolved.
   fuer die unabhaengige Selbstpruefung. / Matrix, evidence and restrictions
   passed to independent self-review.
 
-## Success Criteria *(mandatory)*
+## Erfolgskriterien / Success Criteria *(mandatory)*
 
-### Measurable Outcomes
+### Messbare Ergebnisse / Measurable Outcomes
 
 - **SC-001 (FR-001, FR-014)**: DE: 50 von 50 Delta-IDs haben genau eine
   vollstaendige Zuordnung; alle priorisierten historischen In-Scope-Befunde
@@ -671,7 +671,7 @@ Messung oder Plattformpruefung in Erfolg.
 EN: Open/Blocked documents progress, never overall acceptance. SC-003/SC-007
 permit honest interim reports, not missing measurement/platform success.
 
-## Assumptions
+## Annahmen / Assumptions
 
 ### Verbindliche Eingabe / Binding Input
 
@@ -749,7 +749,7 @@ setup, secret creation/rotation, external register/platform changes and
 invented approvals. Fork remains default, template prepared not enabled;
 keep product, Level-0 and sandbox repositories separate.
 
-## Autonomous-run Applicability
+## Anwendbarkeit autonomer Läufe / Autonomous-run Applicability
 
 DE: `N/A` fuer einen neuen Autonomous-Lauf in diesem Specify-Auftrag:
 keine Run-State-Datei und kein Fortsetzen von Feature 003. Die spaetere
@@ -765,7 +765,7 @@ phase changes are N/A because not requested. Reassess on separately authorized
 autonomy/mechanism changes, with own validated state, stable gates,
 drift/stop/resume and closeout evidence.
 
-## Agent Parity Applicability
+## Anwendbarkeit der Agentenparität / Agent Parity Applicability
 
 DE: `Applicable` bei gemeinsamen Regelanpassungen: `AGENTS.md`, `CLAUDE.md`,
 `GEMINI.md`, `.github/copilot-instructions.md` und
@@ -778,7 +778,7 @@ plus affected maintained templates/commands, with no intended semantic
 deviation. Specify changes none of them or the constitution; feature rules
 do not silently create global policy.
 
-## Cross-Platform Applicability
+## Plattformübergreifende Anwendbarkeit / Cross-Platform Applicability
 
 DE: `Applicable` fuer betroffene bestehende Skriptwerkzeuge: Bash und
 PowerShell 7 mit gleicher Argument-, Ergebnis-, Fehler- und Schreibsemantik,
@@ -798,7 +798,7 @@ Test-SandboxHardening with the named shell/man counterpart; prefer existing
 tools. Inventory other affected approved-verb Cmdlets before implementation.
 This is a governance interface expectation, not a new implementation choice.
 
-## Accessibility Applicability
+## Anwendbarkeit der Barrierefreiheit / Accessibility Applicability
 
 DE: `Applicable` fuer Lern-/Betriebsdokumentation, Kommandohilfe, Fehlermeldungen
 und Statusberichte nach FR-012/CR-002. Korrekte Ueberschriften, Tabellenkoepfe,
@@ -813,7 +813,7 @@ Review rendering/keyboard/screen-reader behavior where applicable without
 blanket PDF/WCAG approval. Didactic comments apply to later nontrivial code;
 N/A for this text-only Specify step, reassess on first logic change.
 
-## Architecture Applicability
+## Anwendbarkeit der Architektur / Architecture Applicability
 
 DE: `Applicable`: Betrieb/Deployment, Konfiguration, Wartbarkeit und
 Sicherheitsqualitaet sind betroffen, keine neue Anwendung. Ziele: minimale
@@ -832,7 +832,7 @@ and missing platform observation preventing acceptance. Use the named
 architecture record, linking existing ADR/security ADR decisions on rights,
 write paths, egress and audit rather than inventing replacements.
 
-## Architecture Governance Applicability
+## Anwendbarkeit der Architektur-Governance / Architecture Governance Applicability
 
 DE: `Applicable`: Grenzen Host/Podman-VM/Container, Projekt-Mounts,
 persistente Agentenvolumes, privilegierter Build versus Non-root-Betrieb,
@@ -866,7 +866,7 @@ Separate supplier claims, independent assurance and customer duties. C5 Type 1
 is point-in-time; Type 2 needs period/effectiveness evidence. Unknown stays
 Open; C5 does not satisfy C3A automatically.
 
-## Security Governance Applicability
+## Anwendbarkeit der Sicherheits-Governance / Security Governance Applicability
 
 DE: SSDF und CWE Top 25 sind `Applicable` fuer betroffene Lieferketten-,
 Prozess-, Pfad- und Berechtigungsgrenzen; Quellenfassung explizit dokumentieren,
@@ -899,7 +899,7 @@ component joins the operated system. Privacy and regulatory applicability
 remain independently Open under O-344-HUMAN until dated role-bound review;
 technical checks provide no legal advice.
 
-## Security Evidence Expectations
+## Erwartete Sicherheitsnachweise / Security Evidence Expectations
 
 DE: Geplantes projektspezifisches Verzeichnis (noch nicht erzeugte technische
 Evidenz): `docs/security/secure-development/004-container-hardening-followup/`.
@@ -940,7 +940,7 @@ security index. Each applicable point needs Markdown results/checklist
 updates, never a blank template passed as evidence. Planning defines commands,
 stable gates, ownership and genuinely reusable current records.
 
-## Audit Evidence Applicability
+## Anwendbarkeit der Auditnachweise / Audit Evidence Applicability
 
 | Open-ID | Owner | Follow-up / Folgemassnahme | Re-Evaluation-Trigger / Anlass |
 | --- | --- | --- | --- |
