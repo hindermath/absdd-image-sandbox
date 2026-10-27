@@ -20,6 +20,7 @@ JSON carries project records without altering Assurance or historical formats.
 | HumanOnlyDecision | decisionId, role, question, jurisdiction, datedSource, dueAt, status, authorityEvidence, useRestriction, nextAction, trigger | Technische Prüfung schließt menschliche Entscheidung nicht / independent human authority |
 | PlatformObservation | platformPath, runnerToken, nativeArchitecture, sameReviewedHead, inputHashes, imageId, commands, exits, timestamps, observedVSCodeAttach, scopeLimits | Windows und WSL2 trotz gleicher Hardware separat / distinct runtime evidence on shared hardware |
 | Handoff | featureId, technicalScope, completedEvidence, unresolvedFindingIds, useRestrictions, independentReview, downstreamTarget, downstreamAuthority | Verlinkt Selbstprüfung, startet sie nicht / references but never starts next intake |
+| AuditStopRun | runId, canonicalAuditScope, lockOwner, frozenUtcDate, exportIdentity, phase, removedCount, remainingScope, errorPhase | Export/Retention/Down getrennt; keine Nutzdaten im Bericht / distinct phases without payload reporting |
 
 ## Invarianten / Invariants
 
@@ -57,6 +58,22 @@ JSON carries project records without altering Assurance or historical formats.
   brauchen beide Fallarten unabhängig von der 80-%-Gesamtquote.
   EN: Interface coverage requires executed positive and negative cases in a
   complete catalog; changed interfaces always need both case types.
+  DE: Eine ID bezeichnet einen öffentlichen dokumentierten Modus oder
+  kritischen UI-Ablauf. Varianten eines Paares teilen die ID, nicht ihre
+  Belege; alle beanspruchten Varianten müssen abgedeckt sein. Fehlende
+  Beobachtung bleibt im Nenner; Quellen-/Katalogänderung verlangt neue Messung.
+  EN: One ID is a documented mode/critical UI flow. Variants share identity,
+  not proof; every claimed variant is required, with missing proof retained
+  in the denominator and changed catalogs requiring remeasurement.
+- DE: AuditStopRun bindet eine exklusive eigene Sperre vor Export an den
+  Auditbereich. Erfolg benötigt einen gültigen nichtleeren aktuellen Export,
+  sichere Retention und echten Down-Erfolg getrennt. Fehlende/leere Evidence
+  oder fremde Sperre ist kein Erfolg; Vorschau ändert keinen Zustand.
+  Teilfehler berichten schon entfernte alte Metadaten, keine Rollback-Fiktion.
+  EN: Bind owned exclusive lock and scope before export. Distinguish valid
+  nonempty export, safe retention and down success. Missing/empty evidence
+  or foreign locks cannot pass; previews do not mutate. Report partial
+  deletion honestly, never invented rollback.
 - DE: VEX bezieht sich auf konkrete CVE, Paketversion und Image/SBOM.
   Critical ist nicht durch VEX/Open-Ausnahme freigegeben. Open bei High ist
   keine eigenmächtige Risikoannahme; weitere Sperren bleiben wirksam.

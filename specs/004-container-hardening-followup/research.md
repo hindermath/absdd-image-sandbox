@@ -42,6 +42,16 @@ No installation or version upgrade is performed.
   Container-Entrypoint als alleinige Garantie: verworfen. EN: Reject mtime,
   recursive cleanup, database queries and entrypoint-only guarantees.
 
+DE: Präzisierung aus Requirements-Review 2026-10-27: exklusive eigene Sperre
+je Auditbereich vor Export; Exit 0 allein genügt nicht ohne zugeordnete
+nichtleere Tagesdatei. Null Sitzungen sind kein Anlass für fingierte
+Session-Evidenz. Teilfehler haben keinen Lösch-Rollback; Wiederanlauf prüft
+nach neuer Sperre und Export verbleibende Dateien. Keine automatische
+Stale-Lock-Reparatur und keine behauptete native Race-Sicherheit ohne Beleg.
+EN: Requirements review adds explicit owned locking, attributable nonempty
+export, honest zero-session evidence, non-transactional partial deletion
+and safe retry. Never auto-repair stale locks or claim unproven race safety.
+
 ## R03: Messwerte nicht verwechseln / Do Not Equate Different Coverage Metrics
 
 - **Decision**: DE: Python-Zweige mit `coverage.py --branch` und

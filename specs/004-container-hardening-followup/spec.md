@@ -3,6 +3,7 @@
 **Feature Branch**: `codex/004-container-hardening-followup`
 **Created**: 2026-10-25
 **Status**: Draft
+**Requirements Review**: 2026-10-27; textuelle Präzisierungen, keine Umsetzung / textual refinements, no implementation.
 **Input**: `Lastenheft_Secure-Development-Container-Hardening.md` mit aktuellen Quellenbindungen / with current source bindings.
 
 DE: Eine Sandbox ist eine begrenzte Entwicklungsumgebung. Dieser Nachlauf
@@ -21,6 +22,18 @@ occupations, all four IT specialist tracks, educators and non-specialist
 developers. Spec Kit organizes requirements, plans and tasks. Evidence is an
 attributable record; a gate is a mandatory check. Open means unresolved,
 not passed or risk-accepted.
+
+DE: Beim Fachinformatiker sind Anwendungsentwicklung, Systemintegration,
+Daten- und Prozessanalyse und Digitale Vernetzung ausdrücklich eingeschlossen.
+Die drei weiteren Berufe sind IT-System-Elektroniker*in, Kaufleute für
+IT-System-Management und Kaufleute für Digitalisierungsmanagement. Lernpfade
+müssen ihre unterschiedlichen Aufgaben berücksichtigen, ohne eine zweite
+Lernreihe oder neue Beispielanwendungen allein hierfür zu erfinden.
+EN: IT specialist coverage explicitly includes application development,
+systems integration, data and process analysis, and digital networking.
+The other occupations are IT systems electronics technician, IT systems
+management clerk and digitalization management clerk. Address their distinct
+needs without creating duplicate curricula or new sample applications.
 
 ## Clarifications
 
@@ -63,10 +76,12 @@ completed legal review.
    nachvollziehbar. / Given a documented learning project, when its workflows
    run, then no unexplained privilege escalation is needed and write limits
    are clear.
-2. **Given** persistente Testdaten, **When** ein normaler Stopp erfolgt,
-   **Then** bleiben sie erhalten; scheitert der erforderliche Auditexport,
-   erfolgt kein Stopp ueber den Wrapper. / Given persistent test data, when
-   normal shutdown runs, then data survives; failed mandatory audit export
+2. **Given** persistente Projekt-/Agententestdaten, **When** ein normaler Stopp erfolgt,
+   **Then** bleiben diese erhalten; nur abgelaufene Audit-Metadaten unterliegen
+   der gesonderten Retention. Scheitert der erforderliche Auditexport,
+   erfolgt kein Stopp ueber den Wrapper. / Given persistent project/agent
+   test data, when normal shutdown runs, then it survives; only expired audit
+   metadata is subject to scoped retention. Failed mandatory audit export
    prevents wrapper shutdown.
 3. **Given** eine manipulierte Eingabe oder ein unzulaessiger Dateipfad,
    **When** eine betroffene Schnittstelle ihn verarbeitet, **Then** wird der
@@ -160,6 +175,13 @@ observations remain unresolved.
 - DE: Nur ein Teil der Coverage gemessen: fehlender Umfang bleibt offen;
   keine neue Anwendung erfinden, um eine Quote zu erreichen. EN: Partial
   coverage leaves missing scope open; do not invent an application to meet it.
+- DE: Auditexport fehlt, ist leer oder einem anderen Mount zugeordnet:
+  kein Retention-/Down-Erfolg. Bereits teilweise entfernte alte Metadaten
+  bei einem Fehler nicht als zurückgerollt behaupten. Gleichzeitige Stopps
+  für denselben Auditbereich dürfen nicht konkurrierend löschen.
+  EN: Missing, empty or wrong-mount export prevents retention/down success.
+  Never claim rollback of already deleted old metadata after partial failure;
+  concurrent stops must not delete concurrently in the same audit scope.
 
 ## Requirements *(mandatory)*
 
@@ -225,6 +247,20 @@ observations remain unresolved.
   or agent dispatch, whether or not this feature changes it; the plan names
   this list as the denominator. Disclose scope and
   denominator; missing measurement is Open, genuine N/A needs rationale.
+  DE: Die 85 % gelten je erfasstem sicherheitskritischem Modul; Zeilen- oder
+  Command-Coverage sind kein Branch-Ersatz. Für die 80-%-Quote bildet jeder
+  dokumentierte öffentliche Modus bzw. kritische UI-Ablauf eine eindeutige
+  fachliche ID; Bash-/PowerShell-Varianten sind keine doppelte Zähleinheit.
+  Der Katalog wird vor dem ersten Abnahmelauf vollständig reviewt und an die
+  Quellen gebunden. Eine ID zählt nur mit positiven und negativen Belegen
+  für alle beanspruchten Varianten/Plattformen als abgedeckt. Skips bleiben
+  im Nenner; geänderte Interfaces brauchen unabhängig von 80 % beide Fallarten.
+  EN: Apply 85% per inventoried security-critical module, not line/command
+  proxies. For 80%, assign one logical ID per documented public mode or
+  critical UI flow; paired shell variants are not duplicate units. Review
+  and source-bind the complete catalog before acceptance runs. Count an ID
+  as covered only with positive/negative proof for every claimed variant/
+  platform. Skips stay in the denominator; changed interfaces always need both.
 - **FR-004 (US2; Intake Anforderung 3, H-344-04)**: DE: Basisimage und
   Downloads MUESSEN an feste Versionen/Inhaltspruefwerte, Herkunft,
   Paketpflege, Registry, Installationsskripte und konkrete Lizenzfassungen
@@ -281,6 +317,32 @@ observations remain unresolved.
   other files and persistent agent volumes stay untouched. Deletion errors
   are reported. A later differing privacy decision (O-344-HUMAN) takes
   precedence and triggers reassessment.
+  DE: Erfolg verlangt zusätzlich zur Exit-0-Meldung eine diesem Lauf und
+  dem verifizierten Audit-Mount zugeordnete reguläre, nichtleere Tagesdatei.
+  Ohne exportierbare Sitzungen ist ein wahrheitsgemäßer Metadaten-/Leerbestands-
+  nachweis zulässig, keine erfundene Sitzung oder Abdeckung. Fehlende oder
+  leere Datei, unklarer Zielort oder fehlgeschlagene Retention verhindern Down.
+  Ein einmal festgelegter UTC-Tag und das ISO-Dateidatum bestimmen die Frist:
+  strikt vor UTC-Tag minus 30 Tage entfernen; genau 30 Tage und Zukunft behalten.
+  Gleichzeitige Wrapper desselben Auditbereichs müssen vor Export/Löschung
+  exklusiv serialisiert werden; Vorschau nimmt keine Sperre und verändert
+  nichts. Bei Teilfehlern bisherige Löschungen ehrlich benennen, übrige Dateien
+  und Volumes erhalten, kein behauptetes Rollback. Wiederanlauf prüft nach
+  erneuter Sperre/Export nur noch vorhandene zulässige Dateien; keine
+  automatische Entsperrung fremder/unklarer Läufe. Pfad-/Dateitypwechsel vor
+  Entfernung verhindern diese; unbelegte plattformspezifische Sicherheit
+  bleibt Open und erlaubt keine Löschung auf Verdacht.
+  EN: Beyond exit 0, require a regular nonempty day file attributable to the
+  current run and verified audit mount. No sessions may legitimately yield
+  metadata/empty-inventory evidence, never invented session coverage. Missing/
+  empty files, ambiguous location or retention failure prevent down. Freeze
+  one UTC day and compare ISO filename dates strictly before day minus 30;
+  retain exactly 30-day/future files. Serialize concurrent wrappers exclusively
+  before export/deletion; preview acquires no lock or writes. Report partial
+  deletion honestly, preserve remaining data/volumes and claim no rollback.
+  Retry acquires its own lock, reexports and considers remaining eligible
+  files only; never automatically clear another/unknown run's lock. Path/type
+  changes prevent deletion; unproven platform safety stays Open, not guessed.
 - **FR-007 (US2, US3; H-344-04)**: DE: Fuer das finale lokale Image MUSS
   eine zu Image-ID, Architektur, Baueingaben und Datum passende SBOM mit
   Schwachstellenbewertung vorliegen. VEX, Signatur und SLSA werden
@@ -348,6 +410,11 @@ observations remain unresolved.
   Separate training offer, actual attendance, local rules and maturity.
   Artifact-specific human review, not Markdown/PDF smokes alone, supports
   WCAG 2.2 AA assessment.
+  DE: Die vier genannten Fachinformatik-Fachrichtungen müssen im gemeinsamen
+  Leserpfad mit passenden Aufgaben-/Nutzungsbezügen erkennbar sein. Eine reine
+  Namensliste ersetzt diese Zuordnung nicht; separate Curricula sind kein Ziel.
+  EN: Make all four named specialist tracks visible through relevant task/
+  usage links in the shared reader path, not a names-only list or separate curricula.
 - **FR-013 (US2, US3; Intake Abnahme, UPD-AMD64)**: DE: Toolchains,
   LSP-/Dokumentationswerkzeuge, Agenten, Mounts und VS-Code-Zugriff MUESSEN
   praktisch versionsgebunden geprueft werden. Apple Silicon/linux-arm64,
@@ -501,7 +568,7 @@ observations remain unresolved.
 - **SC-002 (FR-002, FR-003, FR-006)**: DE: Alle dokumentierten
   Basis-Lernablaeufe erhalten ihre begruendeten Schutzgrenzen; 100 % der
   veraenderten Schnittstellen besitzen positive/negative Abnahmefaelle.
-  Kein normaler Stopp loescht persistente Testdaten; kein erforderlicher
+  Kein normaler Stopp loescht persistente Projekt-/Agententestdaten; kein erforderlicher
   fehlgeschlagener Export wird uebergangen. Synthetische Tests zeigen: nach
   dem Wrapper-Stopp sind 0 Audit-JSONL-Dateien aelter als 30 Tage vorhanden,
   100 % der juengeren bleiben erhalten; bei fehlgeschlagenem Export wird
@@ -509,8 +576,15 @@ observations remain unresolved.
   30 days after wrapper stop, 100% of newer ones retained, and no deletion
   after failed export. Every documented basic flow
   retains justified safeguards; 100% of changed interfaces have positive/
-  negative acceptance cases. Normal shutdown loses no persistent test data
+  negative acceptance cases. Normal shutdown loses no persistent project/agent test data
   and never bypasses required failed export.
+  DE: Die Datumsfälle beziehen sich auf das einmalige UTC-Laufdatum und
+  gültige reguläre Tagesdateien, nicht mtime oder ungeprüfte Links.
+  Fehlender/leerer Export, paralleler Lauf und Teilfehler haben eindeutig
+  beschriebene sichere Abbruch-/Wiederanlaufkriterien ohne Datenverlustbehauptung.
+  EN: Date cases use the frozen UTC day and valid regular day files, not
+  mtime/unverified links. Missing/empty export, concurrency and partial failure
+  have explicit fail-closed/retry criteria without false preservation claims.
 - **SC-003 (FR-003)**: DE: Die im Intake geforderten 85 %/80 % werden fuer
   die jeweils dokumentierten Nenner erreicht oder die konkrete Luecke samt
   Wirkung auf die Abnahme bleibt sichtbar Open; fehlende Zahlen gelten nie

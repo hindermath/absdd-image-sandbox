@@ -204,6 +204,21 @@ platform proof. Before tests, review the complete README/man/help mode/input
 and flow catalog; library functions are not automatically public CLIs.
 No coverage percentage is valid before the full catalog exists.
 
+DE: Zähleinheit verbindlich: ein dokumentierter öffentlicher Modus oder
+kritischer UI-Ablauf je fachlicher ID, mit allen beanspruchten Plattform- und
+Shellvarianten als Pflichtbelege dieser ID. Reine Optionskombinationen werden
+nicht beliebig als neue IDs gezählt; maßgeblich ist ein eigener dokumentierter
+Bedienvertrag. Vor dem ersten Abnahmelauf den vollständigen Katalog inklusive
+Quellhash reviewen. Nur IDs mit beiden Fallarten für alle beanspruchten
+Varianten gehören in den Zähler; Skips/fehlende Plattformen bleiben im Nenner.
+Änderungen am Katalog invalidieren die zugehörige Quote, nicht die Historie.
+EN: One documented public mode or critical UI flow is one logical ID, requiring
+all claimed platform/shell variants. Do not inflate counts with arbitrary
+option combinations: require a distinct documented usage contract. Review
+the full source-bound catalog before acceptance; count only IDs with both
+case types for every claimed variant. Skips remain in the denominator and
+catalog changes require remeasurement without rewriting history.
+
 DE: Mindestens 80 % des vollständigen Katalogs brauchen tatsächlich
 ausgeführte positive und negative Fälle; 100 % aller neuen/geänderten
 Interfaces brauchen beide. Ein Skip zählt nicht als ausgeführter Fall.

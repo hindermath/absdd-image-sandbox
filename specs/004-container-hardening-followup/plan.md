@@ -2,7 +2,8 @@
 
 **Branch**: `codex/004-container-hardening-followup` | **Date**: 2026-10-26 | **Spec**: [spec.md](spec.md)
 **Input**: aktueller Intake samt 67 Quellen und sieben Clarifications / current bound intake and seven clarifications.
-**Planning revision**: `5e60e21`; Spec raw SHA-256: `8af833973123c650ffeb1c63bc302b5f20ec1d929ac1ef8f935c0cb699a9f6a1`.
+**Requirements Review**: 2026-10-27, base commit `88ade20`; see [review record](checklists/requirements-quality-review.md).
+**Planning revision**: `5e60e21` (historischer Entwurfsstand / historical design basis); current reviewed Spec raw SHA-256: `fae94900518e9c8af077656a89256cf1b4313f20f92c183db91b11672d032d3e`.
 
 ## Summary
 
@@ -183,6 +184,36 @@ files, other names, directories, links and all agent volumes. Recheck path/
 type at deletion; never follow links, inspect contents or guess by mtime.
 Abort if host/container audit locations cannot be matched safely.
 
+DE: Vor Export eine exklusive, atomar angelegte Sperre pro kanonischem
+Auditbereich erwerben. Sie bindet Run-ID und Besitz, gilt für beide Wrapper
+und wird nur vom eigenen Lauf freigegeben. Ein zweiter Lauf oder eine unklare
+verwaiste Sperre bricht ohne Export/Retention/Down ab; kein automatisches
+Stale-Lock-Löschen. Eine manuelle Wiederaufnahme setzt die Prüfung voraus,
+dass der alte Lauf beendet ist. Vorschau liest nur erforderliche Konfiguration,
+erwirbt keine Sperre und öffnet keine Audit-/Agenten-Payloads.
+EN: Acquire an atomically created exclusive lock per canonical audit scope
+before export. Both wrappers share run/ownership semantics; only its owner
+releases it. A concurrent run or ambiguous stale lock aborts without export,
+retention or down. Never clear stale locks automatically; manual recovery
+must establish that the prior run ended. Preview reads necessary configuration
+only, never locks, writes or opens audit/agent payloads.
+
+DE: Exporterfolg ist nicht nur Exit 0: reguläre nichtleere Tagesdatei,
+aktueller Lauf und effektiver Audit-Mount müssen eindeutig zusammenpassen.
+Ein leerer Sitzungsbestand kann mit erlaubten Metadaten oder explizitem
+Leerbestandsnachweis ohne Sitzungsfiktion abgebildet werden; fehlende oder
+leere Datei verhindert Down. Vor jeder Entfernung Typ, Pfad und beobachtete
+Datei-/Verzeichnisidentität prüfen, Links/Reparse-Points nicht verfolgen.
+Unsichere native Umsetzung bleibt Gate Open, nicht als race-sicher behaupten.
+Eine Wrapper-Sperre koordiniert nur kooperierende Wrapper; ein fremder Writer
+darf daraus keine implizite Vertrauensstellung erhalten.
+EN: Export success requires a regular nonempty day file bound to the current
+run and effective mount, not just exit 0. Empty session inventory may use
+allowed metadata or explicit no-data evidence without invented sessions.
+Recheck path/type and file/directory identity; never follow links/reparse
+points. Unproven native safety remains Open rather than claimed race-safe.
+A wrapper lock only coordinates cooperating wrappers, not untrusted writers.
+
 DE: Ungültiger Export, unklare Pfade oder Löschfehler verhindern `down`,
 werden redigiert gemeldet und setzen keinen erfolgreichen Stoppstatus.
 Sicherheitsbedingtes strengeres Verhalten wird in Hilfe/Regressionsfällen
@@ -196,6 +227,19 @@ safe behavior. Dry-run/WhatIf exports, deletes and stops nothing. The 30-day
 setting is local policy, not statutory retention; a later responsible decision
 may supersede it. OpenCode 2 session evidence remains separate and never
 uses database/WAL/SHM, prompt or response exports.
+
+DE: Bei Teilfehlern gibt es keinen atomaren Lösch-Rollback: schon entfernte
+abgelaufene Metadaten nicht wiederherstellen oder als erhalten behaupten.
+Redigierten Phasen-/Anzahlstatus melden, noch vorhandene Daten erhalten,
+Down unterlassen und eigene Sperre geordnet freigeben. Wiederanlauf mit neuer
+Sperre und neuem Export ist für verbleibende Dateien idempotent. Erfolgskriterien
+„0 alte Dateien“ gelten für den kontrollierten erfolgreichen Lauf, nicht für
+einen Fehlerabbruch oder unkooperierende parallele Neuschreibvorgänge.
+EN: Deletion is not an atomic rollback transaction. Report already removed
+expired metadata honestly, preserve remaining data, skip down and release
+only the owned lock. Retrying acquires a new lock and reexports before
+idempotent selection of remaining files. Zero-old-files describes successful
+controlled completion, not failed or externally modified concurrent runs.
 
 ### Read-only-Variante / Read-Only Variant
 
@@ -318,6 +362,15 @@ Assurance context. Keep gate JSON in A and link from E, preserving both the
 spec paths and required Assurance layout without rewriting history. Neither
 directory is created now.
 
+DE: Das Datum im geplanten A-Verzeichnis bezeichnet den reservierten
+Planungskontext, keine durchgeführte Prüfung vom 26. Oktober. Tatsächliche
+createdAt-/reviewedAt-/Ausführungszeiten müssen beim späteren Lauf wahrheitsgemäß
+erfasst werden; keine Rückdatierung und kein zweiter datierter Kontext
+derselben ID zur Umgehung eines ungültigen Nachweises.
+EN: The planned A date reserves a context; it claims no executed October 26
+check. Record actual creation/review/execution times later without backdating
+or a duplicate same-ID context to bypass invalid evidence.
+
 DE: Standardowner Maintainer, Standardreviewer unabhängiger Security Review;
 abweichende Rollen unten. Jeder Gate-Datensatz führt FR/SC, Kontroll-IDs,
 exakte Befehlsliste, Revision, Payload-/Entscheidungshash, Schreibscope,
@@ -358,7 +411,7 @@ this plan claims neither installation nor successful execution.
 | G004-01 | Applicable | Quellen, GAP-/Delta-Zuordnung; Q1 | E/control-matrix.md | Quellen-/Baselinewechsel / source change |
 | G004-02 | Applicable | Rechte, Mounts, Default-Egress; Q3/Q5 | E/platform-parity.md, E/threat-model.md | Compose-/Mountänderung / changed mounts |
 | G004-03 | Applicable | optionale Read-only-Variante; Q3/Q5 | E/platform-parity.md | neue Schreiborte / write paths |
-| G004-04 | Applicable | Python-Banches + nachvollziehbare Shell-/PS-Zweigbelege; Q2/Q4 | E/secure-coding-review.md, E/msl-applicability.md | Quell-/Nenneränderung / denominator drift |
+| G004-04 | Applicable | Python-Branches + nachvollziehbare Shell-/PS-Zweigbelege; Q2/Q4 | E/secure-coding-review.md, E/msl-applicability.md | Quell-/Nenneränderung / denominator drift |
 | G004-05 | Applicable | Pin-/Downloadintegrität; Q2 | E/dependency-audit.md | Abhängigkeits-/Quellenwechsel / dependency change |
 | G004-06 | Applicable | sechs Agenten, Updates/Overrides; Q2/Q5 | E/agent-security-review.md | CLI-/Konfigwechsel / agent change |
 | G004-07 | Applicable | Audit/30-Tage-Retention/Fail-closed-Stopp; Q2 | E/audit-retention-review.md, E/gdpr-applicability.md | Datenfluss-/Fristwechsel / privacy role co-review |
@@ -428,6 +481,29 @@ A11Y partnership. Keep requirements and implementation evidence distinct,
 extend canonical indexes and reader paths rather than another learning series.
 Explain each command's location, shell, prerequisites, result and recovery.
 Use equivalent German-first/English prose at about CEFR B2.
+
+DE: Zielgruppenbezüge im gemeinsamen Leserpfad, keine neuen Curricula oder
+Anwendungen allein zum Erfüllen der Tabelle. Je Gruppe mindestens einen
+relevanten bestehenden Aufgaben-/Bedienbezug und passende Voraussetzungen
+redaktionell zuordnen; tatsächliche Lernenden-/A11Y-Abnahme bleibt separat.
+EN: Map at least one relevant existing task/usage path and prerequisites per
+audience in shared guides, not new curricula or applications merely to fill
+this table. Actual learner/accessibility acceptance remains separate.
+
+| Zielgruppe / Audience | Zuordnungsbezug / Usage focus |
+| --- | --- |
+| Fachinformatik Anwendungsentwicklung / application development | Projekt-, Toolchain- und Build-/Prüfablauf / project and build/check workflow |
+| Fachinformatik Systemintegration / systems integration | Rootless, Mounts, Rechte und Betrieb / isolation, rights and operation |
+| Fachinformatik Daten- und Prozessanalyse / data and process analysis | Synthetische Daten, Metadatenkategorien und datensparsame Analyse / synthetic data and minimal metadata analysis |
+| Fachinformatik Digitale Vernetzung / digital networking | Datenflüsse, Netzwerkgrenzen, Egress und lokale Ports / flows and network boundaries |
+| IT-System-Elektronik / IT systems electronics | Host-/VM-/Container-Abgrenzung und Diagnose / platform layers and diagnostics |
+| IT-System-Management / IT systems management | Werkzeugauswahl, Lizenz-/Providergrenzen und Betriebsverantwortung / tools, rights and operational roles |
+| Digitalisierungsmanagement / digitalization management | Prozess-/Datenflussbeschreibung und menschliche Entscheidungswege / processes, flows and decision paths |
+
+DE: Die vier Fachinformatik-Fachrichtungen bilden zusammen einen der vier
+IT-Berufe; die Tabelle macht daraus nicht sieben verschiedene Berufsabschlüsse.
+EN: The four IT specialist tracks belong to one of four occupations, not
+seven distinct qualifications.
 
 DE: WCAG-Zuordnung aus Spec CR-002/003: Struktur/Tabellen 1.3.1, nicht nur
 Farbe 1.4.1, Kontrast/Reflow 1.4.3/1.4.10 beim Rendering, Tastatur 2.1.1,

@@ -85,11 +85,18 @@ DE: Mindest-Retention-Fixtures: eingefrorener UTC-Tag, Datum -31/-30/-29,
 heute und Zukunft, ungültiger Name, Schaltjahr/Monatswechsel, Datei mit anderem
 mtime, Unterverzeichnis, Symlink/Reparse-Point, geänderter Pfad, Exportfehler,
 Löschfehler und Down-Fehler. Erfolgreicher Export vor Entfernung; nie private
-DB-Inhalte lesen. Normaler Stopp erhält alle sechs Volumes. Down-Argumente
+DB-Inhalte lesen. Zusätzlich fehlenden/leeren Export, echten Null-Sitzungs-
+Metadatennachweis, konkurrierenden Wrapper, fremde/verwaiste Sperre,
+Teillöschung und idempotenten Wiederanlauf spezifizieren. Bereits entfernte
+alte Metadaten sind kein erhalten gebliebener Bestand; Restdaten/Volumes
+bleiben geschützt, Vorschau erwirbt keine Sperre. Normales Stoppen erhält
+alle sechs Volumes. Down-Argumente
 mit Leerzeichen/Unicode/Optionszeichen bleiben unverändert.
 EN: Cover boundary dates, calendar edges, filenames/mtime, links/path races,
-phase failures and argument identity. Export precedes deletion; preserve
-volumes and never read private database payloads.
+phase failures and argument identity, including absent/empty export, honest
+zero-session metadata, concurrent/foreign/stale locks, partial deletion and
+retry. Preview never acquires locks. Export precedes deletion; preserve
+remaining data/volumes without inventing rollback or reading private payloads.
 
 ## Q3: Statische Konfiguration und Vorschau / Static Configuration and Preview
 

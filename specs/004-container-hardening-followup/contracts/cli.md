@@ -18,15 +18,32 @@ The extensions below are not implemented yet.
 DE: Erhalt: bisherige Engineauswahl, Reihenfolge und argv der erlaubten
 Compose-Down-Argumente; keine Rekonstruktion über Shellstring. Vorschau wird
 vom Wrapper konsumiert und nie an Compose weitergereicht. Sie beschreibt
-Export, festen UTC-Cutoff, Zielpfad und Down, ohne Export/Dateiöffnung/
-Schreibzugriff/Containeraktion. Explizite Volume-Löschung bleibt gesonderte
+Export, festen UTC-Cutoff, Zielpfad und Down, ohne Export/Audit- oder Agenten-
+Payloadzugriff/Schreibzugriff/Containeraktion. Notwendige Konfiguration darf
+nur lesend ausgewertet werden; Vorschau erwirbt keine Ausführungssperre.
+Explizite Volume-Löschung bleibt gesonderte
 menschlich bestätigte Operation; kein normaler Beispielbefehl enthält -v.
 Ungültige Eingaben sind Fehler, kein stiller Fallback.
 EN: Preserve engine choice and allowed down-argument order/identity without
 shell-string reconstruction. Consume preview flags locally; preview describes
-operations without export, payload reads, writes or container actions.
+operations without export, audit/agent payload reads, writes or container actions.
+Necessary configuration may be read; preview acquires no execution lock.
 Volume deletion remains separately human-confirmed and is never a normal
 shutdown example. Invalid inputs fail rather than silently falling back.
+
+DE: Reale Ausführung serialisiert Wrapper desselben kanonischen Auditbereichs
+mit exklusiver eigener Sperre vor Export. Paralleler Lauf/unklare Altsperre:
+nonzero, keine Aktionen; nur der Sperrbesitzer gibt frei, keine automatische
+Stale-Lock-Reparatur. Exporterfolg erfordert Exit 0 plus aktuelle zugeordnete
+reguläre nichtleere Tagesdatei. Null Sitzungen braucht wahrheitsgemäße
+Metadaten-/Leerbestandsaussage, keine erfundene Session. Fehlende/leere Datei
+oder Mountabweichung verhindert Retention und Down.
+EN: Serialize actual runs with an owned exclusive lock per canonical audit
+scope before export. Concurrent/ambiguous stale locks fail without actions;
+only the owner releases its lock, never automatic stale repair. Export needs
+exit 0 and a current attributable regular nonempty day file. Zero sessions
+needs honest metadata/no-data evidence, not invented sessions. Missing/empty
+or wrong-mount exports prevent retention and down.
 
 DE: Ablauf: exportiert das laufende Ziel erfolgreich → verifiziert effektiven
 Audit-Mount → löscht ausschließlich nach ISO-Dateidatum strikt ältere direkte
@@ -40,6 +57,14 @@ EN: Successful export precedes audit-mount validation, safe date-based retention
 and down. Any prior failure prevents down. Retain exact-30-day/today/newer
 files and all data volumes. Preserve down's actual exit status; prior errors
 are nonzero with phase-specific redacted diagnostics.
+
+DE: Teilfehler rollen frühere Metadatenlöschungen nicht zurück. Bereits
+entfernten Umfang redigiert melden, übrige Daten erhalten, kein Down.
+Neuer Lauf braucht eigene Sperre/erneuten Export und behandelt verbliebene
+zulässige Dateien idempotent; Pfad-/Dateitypwechsel verhindern Entfernung.
+EN: Partial failure does not roll back prior metadata deletion. Report actual
+scope, retain remaining data and skip down. Retry requires its own lock and
+fresh export with idempotent remaining-file handling; reject path/type drift.
 
 ## Hardening-Prüfung / Hardening Validation
 
