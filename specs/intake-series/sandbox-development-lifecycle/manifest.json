@@ -15,19 +15,19 @@
     {
       "path": "Lastenheft_Secure-Development-Container-Hardening.md",
       "role": "OrderedMember",
-      "normalizedSha256": "8a9fac14e92da1a901504a1daa15e56bf744b1d6c8cf192f0385716bcddbcaf3",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
       "status": "Eligible"
     },
     {
       "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
       "role": "OrderedMember",
-      "normalizedSha256": "23fb312bc8821f7cea59222c4b53959e790d972db7968f1955ca64be87d50f5a",
+      "normalizedSha256": "18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f",
       "status": "Blocked"
     },
     {
       "path": "intakes/learner-fork-self-build-sandbox.md",
       "role": "OrderedMember",
-      "normalizedSha256": "d73d504931a2b1d8bae483edbd8e65c47de5aea29fa0eb78e39166de9f5b0f41",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
       "status": "Blocked"
     }
   ],
@@ -75,6 +75,10 @@
     "docs/maintenance/closeout-review-remediation-2026-10-25.md",
     "docs/maintenance/closeout-eof-alignment-2026-10-25.md",
     "docs/maintenance/closeout-ci-alignment-2026-10-25.md",
-    "docs/maintenance/closeout-statistics-history-2026-10-25.md"
+    "docs/maintenance/closeout-statistics-history-2026-10-25.md",
+    "docs/fuer-lernende/erste-schritte.md",
+    "docs/fuer-lernende/troubleshooting.md",
+    "docs/fuer-lernende/alltag.md",
+    "docs/maintenance/usability-alignment-2026-10-27.md"
   ]
 }

@@ -2,6 +2,9 @@
 """Real hook execution in isolated repos; Gitleaks behavior is tested separately."""
 
 from pathlib import Path
+import base64
+import hashlib
+import json
 import os
 import subprocess
 import tempfile
@@ -86,6 +89,35 @@ class PrePushSecretPolicyTests(unittest.TestCase):
                 with self.subTest(field=field, syntax=suffix):
                     result = self.run_hook({"settings.txt": field + suffix + "\n"})
                     self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
+
+    def test_reviewed_deck_history_allows_only_language_specific_pins(self):
+        fixture = json.loads((ROOT / "scripts/tests/fixtures/keynote-previous-blobs.json")
+                             .read_text(encoding="utf-8"))
+        old, current = {}, {}
+        # Reverse byte patches keep reviewed history reproducible in shallow clones.
+        for lang in ("de", "en"):
+            path = f"docs/praesentationen/exports/workshop-spec-kit.{lang}.key"
+            data = current[path] = (ROOT / path).read_bytes()
+            entry = fixture[lang]
+            self.assertEqual(hashlib.sha256(data).hexdigest(), entry["inputSha256"])
+            limit = len(data)
+            for start, end, encoded in reversed(entry["patches"]):
+                self.assertTrue(0 <= start <= end <= limit)
+                data = data[:start] + base64.b64decode(encoded, validate=True) + data[end:]
+                limit = start
+            blob = hashlib.sha1(f"blob {len(data)}\0".encode() + data).hexdigest()
+            self.assertEqual(blob, entry["previousBlob"])
+            old[path] = data
+        for existing_ref in (False, True):
+            with self.subTest(existing_ref=existing_ref):
+                result = self.run_hook(old, after_commit=current, followup_commit=True,
+                                       existing_ref=existing_ref)
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        for files in (old, current):
+            paths = list(files)
+            with self.subTest(swapped_version="old" if files is old else "current"):
+                result = self.run_hook({paths[0]: files[paths[1]], paths[1]: files[paths[0]]})
+                self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
 
     def test_modified_deck_and_real_key_at_allowed_path_remain_blocked(self):
         original = (ROOT / DECK).read_bytes()

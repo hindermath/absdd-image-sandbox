@@ -1,28 +1,28 @@
 {
   "schemaVersion": "1.0",
   "documentType": "IntakeSeriesReceipt",
-  "receiptId": "d74b10af-47cb-4602-a169-6c481cfc8f0c",
+  "receiptId": "3cb90c62-7133-40ca-a60f-e66dc857b3ed",
   "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
   "generator": {
     "preset": "intake-sequencing-governance",
     "version": "0.2.11"
   },
-  "createdAt": "2026-10-25T21:08:28Z",
+  "createdAt": "2026-10-27T17:55:27Z",
   "operation": {
-    "authorityEvidence": "Owner explicitly selected DEC-STAT-HISTORY-2026-10-25: preserve historical pilot and separately require reproducibility of its exact measurement and CURRENT freshness of active Profile2. DRIFT allowed only for reproducible, consistently classified historical data, never corruption. Keep integrity, encoding, ancestry and no-write gates. Complete PR100 MergeAndSync after fresh green checks. Preserve intake identities/texts/prompts/lifecycle/authority and parallel user Keynote edits. Use clean temporary worktree; no image build, restart, global maintenance or formal approval.",
     "type": "Update",
-    "operationId": "a0782733-f818-4246-9cd1-a767e5dc2f4d"
+    "operationId": "99ecfd91-17f2-4154-9d4e-e559242c5ce9",
+    "authorityEvidence": "User authorizes the overall bounded 2026-10-27 learner-usability provenance plan. The coordinating principal agent commissioned independent reviewer Huygens, temporarily held publication for USAB-IR001-003, and issued the final completion/release after the troubleshooting corrections. This is execution coordination under existing user authority, not a new owner scope or acceptance decision. Retain intake IDs, accepted scope, 71-source order, lifecycle Completed/Eligible/Blocked/Blocked, security and human gates. No Feature004 source cycle. No pilot, hardening, runtime, build, commit or push. Independent full review belongs to Huygens, not this updater."
   },
   "status": "Ready",
   "manifest": {
     "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
-    "normalizedSha256": "ad49096bbc98258f8bc3411006113bedbbea85d5e52597ea3bc158da3c453be3"
+    "normalizedSha256": "936f44533c69d10563b7287a97ec12e16f74af9e0a8e6059b3f0a267e1b9b1bd"
   },
   "supersedes": {
-    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/a0782733-f818-4246-9cd1-a767e5dc2f4d/manifest.json",
-    "receiptNormalizedSha256": "67c374e5c81c43e62d88a62d18b8b2f0a92898bd6137e3b84a0cf27606b1cf7f",
-    "manifestArchiveSha256": "5240a9ad955342ffa3b13522a07979cbbba251caf93a9674ce6560d2db9c4b84",
-    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/a0782733-f818-4246-9cd1-a767e5dc2f4d/receipt.json"
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/99ecfd91-17f2-4154-9d4e-e559242c5ce9/receipt.json",
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/99ecfd91-17f2-4154-9d4e-e559242c5ce9/manifest.json",
+    "manifestArchiveSha256": "ad49096bbc98258f8bc3411006113bedbbea85d5e52597ea3bc158da3c453be3",
+    "receiptNormalizedSha256": "b9e4f4c5db58c48e49e6b92f6c9a699999548d84fd5a768e71ee65591a95598b"
   },
   "tombstone": {
     "path": "N/A",

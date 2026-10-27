@@ -1,0 +1,379 @@
+{
+  "operationId": "77be933d-e565-4b7d-8149-37687aa00386",
+  "documentType": "ProvenanceImpactPreflight",
+  "status": "NoAffectedBindings",
+  "createdAt": "2026-10-27T21:36:11.442266Z",
+  "head": "d48ce5f8bf0e5c3e612b4cc40fde0e5acf694240",
+  "authorityEvidence": "New explicit user overall-plan authority: narrowly fix Keynote pre-push exact blob allowlist and negative tests, then independent review and coordinated delivery. This agent owns provenance only: no hook/test/security-review edits, commit, push, merge or runtime. Renew only actually affected bindings after final source freeze.",
+  "affectedPlannedPaths": [
+    "scripts/hooks/pre-push",
+    "scripts/tests/test_pre_push_secret_policy.py",
+    "docs/security/pre-push-false-positive-review-2026-10-25.md",
+    "docs/security/keynote-pin-review-2026-10-27.md"
+  ],
+  "directReceiptMatches": [],
+  "reviewRequestResultManifestMatches": [],
+  "decision": "No affected current bindings, including new unbound reverse-patch fixture. No receipt renewal, new intake input or review supersession. Independent KEY-PIN-IR001 test-portability verification remains separately owned.",
+  "currentReview": {
+    "requestPath": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "requestNormalizedSha256": "48172b0a13091080c1dd6ec5e6ffb2f73423fd9a3ef27c415dc8533ee3505f31",
+    "reviewId": "5c452360-9bf7-44d9-84e0-10cae34e72ea",
+    "status": "Ready"
+  },
+  "lifecycle": [
+    "Completed",
+    "Eligible",
+    "Blocked",
+    "Blocked"
+  ],
+  "powershellBindingChecks": [
+    {
+      "receiptId": "9c16f468-1871-4a4d-9bb7-3d6e50143e6f",
+      "sourcesVerified": 71,
+      "targetVerified": true,
+      "intakeId": "a92a7ced-bbf3-4408-9754-7b739be19a41",
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "kind": "PowerShell strict UTF8 normalized SHA256"
+    },
+    {
+      "receiptId": "5c7b976f-d167-4f2f-8cf8-2bc67ba0aa9e",
+      "sourcesVerified": 71,
+      "targetVerified": true,
+      "intakeId": "51d24064-dfa6-4375-9bcd-58cccc545167",
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "kind": "PowerShell strict UTF8 normalized SHA256"
+    },
+    {
+      "receiptId": "d2586366-2993-40d0-a556-63d06371aa07",
+      "sourcesVerified": 71,
+      "targetVerified": true,
+      "intakeId": "5926e53e-39b7-475f-8a6b-e2ec08b0a803",
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "kind": "PowerShell strict UTF8 normalized SHA256"
+    }
+  ],
+  "archiveEvidence": [
+    {
+      "rawSha256": "435e085cafb46ac93a93e871c46d4533113f6261cd4ff283fcfbaae8cbcae8cb",
+      "source": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/specs/intake-authoring-receipts/secure-development-container-hardening.json.txt",
+      "normalizedSha256": "435e085cafb46ac93a93e871c46d4533113f6261cd4ff283fcfbaae8cbcae8cb",
+      "bytes": 60743
+    },
+    {
+      "rawSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "source": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/Lastenheft_Secure-Development-Container-Hardening.md.txt",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "bytes": 34226
+    },
+    {
+      "rawSha256": "91f3ff3ccb0b99cfdf95ef980e7805c8dacbd921f309267c790e8dd21124dea7",
+      "source": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json.txt",
+      "normalizedSha256": "91f3ff3ccb0b99cfdf95ef980e7805c8dacbd921f309267c790e8dd21124dea7",
+      "bytes": 60752
+    },
+    {
+      "rawSha256": "18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f",
+      "source": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md.txt",
+      "normalizedSha256": "18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f",
+      "bytes": 26169
+    },
+    {
+      "rawSha256": "ba834710ee96f4c8c279464d7b98379ecca11b7c9645f4b0898de3f324e5cdaa",
+      "source": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json.txt",
+      "normalizedSha256": "ba834710ee96f4c8c279464d7b98379ecca11b7c9645f4b0898de3f324e5cdaa",
+      "bytes": 62329
+    },
+    {
+      "rawSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "source": "intakes/learner-fork-self-build-sandbox.md",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/intakes/learner-fork-self-build-sandbox.md.txt",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "bytes": 42014
+    },
+    {
+      "rawSha256": "936f44533c69d10563b7287a97ec12e16f74af9e0a8e6059b3f0a267e1b9b1bd",
+      "source": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/specs/intake-series/sandbox-development-lifecycle/manifest.json.txt",
+      "normalizedSha256": "936f44533c69d10563b7287a97ec12e16f74af9e0a8e6059b3f0a267e1b9b1bd",
+      "bytes": 3710
+    },
+    {
+      "rawSha256": "b203b4208d10feda4666d16165077ffba99337c61b82e675b44ab63f7cde1659",
+      "source": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/specs/intake-series/sandbox-development-lifecycle/receipt.json.txt",
+      "normalizedSha256": "b203b4208d10feda4666d16165077ffba99337c61b82e675b44ab63f7cde1659",
+      "bytes": 1934
+    },
+    {
+      "rawSha256": "ebc52b4b59c8d886b879d8a0ed07d106468651fbfda5a3ee686c77bc8c1dc758",
+      "source": "specs/intake-series/sandbox-development-lifecycle/order.md",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/specs/intake-series/sandbox-development-lifecycle/order.md.txt",
+      "normalizedSha256": "ebc52b4b59c8d886b879d8a0ed07d106468651fbfda5a3ee686c77bc8c1dc758",
+      "bytes": 6141
+    },
+    {
+      "rawSha256": "7a8e234097b76e6dc0f5dc5118874ee0898e6016f3c29c8743d4a99841e6c2bf",
+      "source": "Lastenheft_Abarbeitungsreihenfolge.md",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/Lastenheft_Abarbeitungsreihenfolge.md.txt",
+      "normalizedSha256": "7a8e234097b76e6dc0f5dc5118874ee0898e6016f3c29c8743d4a99841e6c2bf",
+      "bytes": 9630
+    },
+    {
+      "rawSha256": "ef6210036d7e2880ff90c606e27a1e82d36df67b0c2da259c22a647a51f04416",
+      "source": "Pflichtenheft.md",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/Pflichtenheft.md.txt",
+      "normalizedSha256": "ef6210036d7e2880ff90c606e27a1e82d36df67b0c2da259c22a647a51f04416",
+      "bytes": 1590
+    },
+    {
+      "rawSha256": "48172b0a13091080c1dd6ec5e6ffb2f73423fd9a3ef27c415dc8533ee3505f31",
+      "source": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/specs/intake-review-requests/sandbox-development-lifecycle.json.txt",
+      "normalizedSha256": "48172b0a13091080c1dd6ec5e6ffb2f73423fd9a3ef27c415dc8533ee3505f31",
+      "bytes": 10109
+    },
+    {
+      "rawSha256": "70c2c820bcd94d0625e3d4894c9eee0bc3c492cd589f7770c19c80d17b86870c",
+      "source": "specs/intake-review-results/sandbox-development-lifecycle.json",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/specs/intake-review-results/sandbox-development-lifecycle.json.txt",
+      "normalizedSha256": "70c2c820bcd94d0625e3d4894c9eee0bc3c492cd589f7770c19c80d17b86870c",
+      "bytes": 53037
+    },
+    {
+      "rawSha256": "0946e386f0c94b5d05b09f04cb86920fee8bf96660cb1a18f9e58d8e392a3265",
+      "source": "specs/intake-review-requests/learner-fork-self-build-sandbox.json",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/specs/intake-review-requests/learner-fork-self-build-sandbox.json.txt",
+      "normalizedSha256": "0946e386f0c94b5d05b09f04cb86920fee8bf96660cb1a18f9e58d8e392a3265",
+      "bytes": 1309
+    },
+    {
+      "rawSha256": "0946e386f0c94b5d05b09f04cb86920fee8bf96660cb1a18f9e58d8e392a3265",
+      "source": "specs/intake-review-results/learner-fork-self-build-sandbox.json",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/specs/intake-review-results/learner-fork-self-build-sandbox.json.txt",
+      "normalizedSha256": "0946e386f0c94b5d05b09f04cb86920fee8bf96660cb1a18f9e58d8e392a3265",
+      "bytes": 1309
+    },
+    {
+      "rawSha256": "6c76fc07747356a601ffd184e16f2bd83057764b4902e0be32c6cf5e80542227",
+      "source": "specs/intake-review-reports/sandbox-development-lifecycle.md",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/specs/intake-review-reports/sandbox-development-lifecycle.md.txt",
+      "normalizedSha256": "6c76fc07747356a601ffd184e16f2bd83057764b4902e0be32c6cf5e80542227",
+      "bytes": 22900
+    },
+    {
+      "rawSha256": "f19300b9b898abea56d1cb949d88cb2ef77e5b0786f474da6038b26af51da43f",
+      "source": "specs/intake-review-reports/sandbox-development-lifecycle-independent.txt",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/specs/intake-review-reports/sandbox-development-lifecycle-independent.txt.txt",
+      "normalizedSha256": "f19300b9b898abea56d1cb949d88cb2ef77e5b0786f474da6038b26af51da43f",
+      "bytes": 3208
+    },
+    {
+      "rawSha256": "7d4740d72b5ff7380163a5e641a86033ecc84e2e023fc9892267837088e4e66d",
+      "source": "specs/intake-review-reports/learner-fork-self-build-sandbox.md",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/specs/intake-review-reports/learner-fork-self-build-sandbox.md.txt",
+      "normalizedSha256": "7d4740d72b5ff7380163a5e641a86033ecc84e2e023fc9892267837088e4e66d",
+      "bytes": 1167
+    },
+    {
+      "rawSha256": "99267c4a91d11f37a1aab57a730f3ba516508be4e5f2568e12abbc954be9c2ec",
+      "source": "scripts/hooks/pre-push",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/scripts/hooks/pre-push.txt",
+      "normalizedSha256": "99267c4a91d11f37a1aab57a730f3ba516508be4e5f2568e12abbc954be9c2ec",
+      "bytes": 8971
+    },
+    {
+      "rawSha256": "c3673ceefb3f773e80ff238b3afa9d64a72d1d42a39f635ae695c96759a894d3",
+      "source": "scripts/tests/test_pre_push_secret_policy.py",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/scripts/tests/test_pre_push_secret_policy.py.txt",
+      "normalizedSha256": "c3673ceefb3f773e80ff238b3afa9d64a72d1d42a39f635ae695c96759a894d3",
+      "bytes": 8021
+    },
+    {
+      "rawSha256": "6ca9c6feb8766474576b72c211d74abd9081f5fe36c76b705d648e34b4fc58d0",
+      "source": "docs/security/pre-push-false-positive-review-2026-10-25.md",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/baseline-snapshot/docs/security/pre-push-false-positive-review-2026-10-25.md.txt",
+      "normalizedSha256": "6ca9c6feb8766474576b72c211d74abd9081f5fe36c76b705d648e34b4fc58d0",
+      "bytes": 10826
+    }
+  ],
+  "archiveFidelity": "Every archive compared byte-for-byte against pre-edit source; raw and normalized SHA256 recorded.",
+  "protectedUntrackedLogs": {
+    "docs/security/agent-session-log/2026-10-27-0747.md": "c722eceb2e177c0c2725ae547cefc849775c4c0653f21b066ba42d0ce2d9fcd4",
+    "docs/security/agent-session-log/2026-10-27-2219.md": "24e7df79c84cba24fa1fac6f857224cd42c03b00874c949d98825f57994737e9"
+  },
+  "newReviewBoundary": "docs/security/keynote-pin-review-2026-10-27.md is planned new unbound security-review evidence, not an implicit intake source. Historical review2026-10-25 preserved unchanged.",
+  "zipInspection": "Coordinator reports read-only ZIP inspection: DE/EN 110 entries, no additions/removals, CRC valid and all Slide entries byte-identical; this provenance agent did not execute or independently accept that inspection.",
+  "nextAction": "Return no-impact evidence to coordinator for separately owned independent security review and delivery gates. No commit/push/runtime or MergeAndSync by provenance agent.",
+  "installedValidatorChecks": [
+    {
+      "output": "PASS: intake authoring 9c16f468-1871-4a4d-9bb7-3d6e50143e6f is current (ReadyForReview, 71 sources, Lastenheft_Secure-Development-Container-Hardening.md)",
+      "arguments": [
+        "--receipt",
+        "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+        "--repo",
+        "."
+      ],
+      "script": ".specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-receipt.sh",
+      "exitCode": 0
+    },
+    {
+      "output": "PASS: intake authoring 5c7b976f-d167-4f2f-8cf8-2bc67ba0aa9e is current (ReadyForReview, 71 sources, Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md)",
+      "arguments": [
+        "--receipt",
+        "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+        "--repo",
+        "."
+      ],
+      "script": ".specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-receipt.sh",
+      "exitCode": 0
+    },
+    {
+      "output": "PASS: intake authoring d2586366-2993-40d0-a556-63d06371aa07 is current (ReadyForReview, 71 sources, intakes/learner-fork-self-build-sandbox.md)",
+      "arguments": [
+        "--receipt",
+        "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+        "--repo",
+        "."
+      ],
+      "script": ".specify/presets/intake-authoring-governance/scripts/validate-intake-authoring-receipt.sh",
+      "exitCode": 0
+    },
+    {
+      "output": "PASS: 65371068-4b1d-4465-9ce7-120e6b15b926 (4 targets, 1 roots, 3 dependencies)",
+      "arguments": [
+        "--file",
+        "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+        "--repo",
+        "."
+      ],
+      "script": ".specify/presets/intake-sequencing-governance/scripts/validate-intake-series-manifest.sh",
+      "exitCode": 0
+    },
+    {
+      "output": "PASS: 65371068-4b1d-4465-9ce7-120e6b15b926 (4 targets, 1 roots, 3 dependencies)",
+      "arguments": [
+        "--file",
+        "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+        "--repo",
+        "."
+      ],
+      "script": ".specify/presets/intake-sequencing-governance/scripts/validate-intake-series-receipt.sh",
+      "exitCode": 0
+    },
+    {
+      "output": "PASS: intake review 5c452360-9bf7-44d9-84e0-10cae34e72ea is current (Series, Ready, 4 targets)",
+      "arguments": [
+        "--result",
+        "specs/intake-review-results/sandbox-development-lifecycle.json",
+        "--repo",
+        "."
+      ],
+      "script": ".specify/presets/intake-review-governance/scripts/validate-intake-review-result.sh",
+      "exitCode": 0
+    }
+  ],
+  "validationCompletedAt": "2026-10-27T21:36:33.147409Z",
+  "completedAt": "2026-10-27T21:37:12.720116Z",
+  "sourceFreeze": {
+    "authority": "Coordinating completion message reports final hook/test source freeze",
+    "finalFiles": [
+      {
+        "path": "scripts/hooks/pre-push",
+        "rawSha256": "99267c4a91d11f37a1aab57a730f3ba516508be4e5f2568e12abbc954be9c2ec"
+      },
+      {
+        "path": "scripts/tests/test_pre_push_secret_policy.py",
+        "rawSha256": "c3673ceefb3f773e80ff238b3afa9d64a72d1d42a39f635ae695c96759a894d3"
+      }
+    ],
+    "intakeImpact": "No current receipt/source/request/result/manifest binding includes these changed paths. Active intake IDs, receipts, review status and lifecycle unchanged.",
+    "actualTrackedDiff": [
+      "scripts/hooks/pre-push",
+      "scripts/tests/test_pre_push_secret_policy.py"
+    ]
+  },
+  "externalEvidence": {
+    "securityReview": "New keynote-pin review remains separately owned unbound evidence; no code/security-review acceptance or delivery gate closure by this agent",
+    "tests": "Coordinator reports 10 code tests passed; not rerun or accepted by provenance agent"
+  },
+  "reconstructedHeadPreimages": [
+    {
+      "gitBlob": "894272ff18a0b53a225aaec03a9896792595a6aa",
+      "rawSha256": "bac2945b7125440e50312f4e1be2ef76b9a2f4582fbc174161eedbe3a6d42470",
+      "commit": "d48ce5f8bf0e5c3e612b4cc40fde0e5acf694240",
+      "source": "scripts/hooks/pre-push",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/head-preimages/scripts/hooks/pre-push.txt",
+      "fidelity": "Exported bytes hash to exact immutable baseline Git blob"
+    },
+    {
+      "gitBlob": "9a0c24fd8673cc08078cf9c71a978c0862b3ab39",
+      "rawSha256": "161cb716c128d8a32e1e1eca0e05d5d2b4762d09e8f519575fe2069fef862ae4",
+      "commit": "d48ce5f8bf0e5c3e612b4cc40fde0e5acf694240",
+      "source": "scripts/tests/test_pre_push_secret_policy.py",
+      "archive": "specs/intake-authoring-operations/77be933d-e565-4b7d-8149-37687aa00386/head-preimages/scripts/tests/test_pre_push_secret_policy.py.txt",
+      "fidelity": "Exported bytes hash to exact immutable baseline Git blob"
+    }
+  ],
+  "snapshotTimingPrecision": "The working-tree hook/test snapshots hash identically to final frozen files. They are not evidence of the old scanner/test bytes before concurrent edits. Those immutable predecessor bytes are separately reconstructed from recorded clean HEAD d48ce5f8bf0e5c3e612b4cc40fde0e5acf694240 and exact Git blob identities verified. Original 21 snapshots untouched. This timing clarification changes no zero-impact binding decision.",
+  "boundedFollowUps": [
+    {
+      "findingId": "KEY-PIN-IR001",
+      "severity": "Medium",
+      "recordedAt": "2026-10-27T21:44:43.710922Z",
+      "scope": "Bounded test-portability follow-up only; updated test and new reverse-patch fixture. No new bound intake input.",
+      "reportedRemediation": "Coordinator reports correction removes dependence on historical Git objects being present in shallow CI; fixture is hash-verified by the corrected test.",
+      "currentFiles": [
+        {
+          "path": "scripts/tests/test_pre_push_secret_policy.py",
+          "rawSha256": "54d3d95329957e9bf9f0312b5aaa6bdf58673473c714294d01c8599256f10191",
+          "normalizedSha256": "54d3d95329957e9bf9f0312b5aaa6bdf58673473c714294d01c8599256f10191"
+        },
+        {
+          "path": "scripts/tests/fixtures/keynote-previous-blobs.json",
+          "rawSha256": "4dea8dec4e6eabb858b3a9dcad471c87100a3ea37375090e6438c242647c0b5e",
+          "normalizedSha256": "4dea8dec4e6eabb858b3a9dcad471c87100a3ea37375090e6438c242647c0b5e"
+        }
+      ],
+      "fixtureMetadata": [
+        {
+          "inputSha256": "74b72afd157635f08ca080da00c9a5615ff5626eec0d383af3f6ac8c8bbbf191",
+          "patchCount": 338,
+          "language": "de",
+          "previousBlob": "79d80b6b5641e7f0452572ab934adc95f7b7199b"
+        },
+        {
+          "inputSha256": "59a6c3d84c8285956d1fcaf72bd3cba178d2f95887dba6226afa98b3148ba6b0",
+          "patchCount": 302,
+          "language": "en",
+          "previousBlob": "f412c5718e5d1983b67b77b25abdb484e172beea"
+        }
+      ],
+      "bindingPathInspection": {
+        "artifacts": [
+          "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+          "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+          "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+          "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+          "specs/intake-review-requests/sandbox-development-lifecycle.json",
+          "specs/intake-review-results/sandbox-development-lifecycle.json",
+          "specs/intake-review-requests/learner-fork-self-build-sandbox.json",
+          "specs/intake-review-results/learner-fork-self-build-sandbox.json"
+        ],
+        "scope": "Path-membership inspection only, not a repeated 213-source hash campaign",
+        "matchedPaths": []
+      },
+      "decision": "NoAffectedBindings",
+      "unchangedIntakeState": "No receipt/manifest/prompt/intake edits, no review supersession, no new bound source; same identities and Completed/Eligible/Blocked/Blocked lifecycle.",
+      "testEvidence": "No code tests or fixture reconstruction executed by provenance agent in this follow-up. Earlier 10-test report is historical preflight context, not evidence for corrected test/fixture.",
+      "validationEvidence": "Six installed validators and PowerShell 213-source verification are historical initial-preflight evidence; no repeated unchanged campaign.",
+      "acceptance": "No finding closure or security acceptance asserted. Independent reviewer owns verification and disposition of KEY-PIN-IR001.",
+      "archiveBoundary": "No new archive or recursion. Existing 21 snapshots and reconstructed HEAD preimages untouched; prior full byte verification remains historical evidence."
+    }
+  ],
+  "validationEvidenceBoundary": "Historical initial preflight only: installedValidatorChecks, powershellBindingChecks, validationCompletedAt and the original coordinator-reported ten code tests were not repeated for KEY-PIN-IR001 correction."
+}

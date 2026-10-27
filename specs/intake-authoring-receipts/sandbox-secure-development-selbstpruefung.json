@@ -1,22 +1,22 @@
 {
   "schemaVersion": "2.0",
   "documentType": "IntakeReceipt",
-  "receiptId": "92fe3bf7-60dc-4928-92d7-ee3a7fd4c3de",
+  "receiptId": "5c7b976f-d167-4f2f-8cf8-2bc67ba0aa9e",
   "intakeId": "51d24064-dfa6-4375-9bcd-58cccc545167",
   "generator": {
     "preset": "intake-authoring-governance",
     "version": "0.3.10"
   },
-  "createdAt": "2026-10-25T21:08:28Z",
+  "createdAt": "2026-10-27T17:55:27Z",
   "operation": {
-    "authorityEvidence": "Owner explicitly selected DEC-STAT-HISTORY-2026-10-25: preserve historical pilot and separately require reproducibility of its exact measurement and CURRENT freshness of active Profile2. DRIFT allowed only for reproducible, consistently classified historical data, never corruption. Keep integrity, encoding, ancestry and no-write gates. Complete PR100 MergeAndSync after fresh green checks. Preserve intake identities/texts/prompts/lifecycle/authority and parallel user Keynote edits. Use clean temporary worktree; no image build, restart, global maintenance or formal approval.",
     "type": "Update",
-    "operationId": "a0782733-f818-4246-9cd1-a767e5dc2f4d"
+    "operationId": "99ecfd91-17f2-4154-9d4e-e559242c5ce9",
+    "authorityEvidence": "User authorizes the overall bounded 2026-10-27 learner-usability provenance plan. The coordinating principal agent commissioned independent reviewer Huygens, temporarily held publication for USAB-IR001-003, and issued the final completion/release after the troubleshooting corrections. This is execution coordination under existing user authority, not a new owner scope or acceptance decision. Retain intake IDs, accepted scope, 71-source order, lifecycle Completed/Eligible/Blocked/Blocked, security and human gates. No Feature004 source cycle. No pilot, hardening, runtime, build, commit or push. Independent full review belongs to Huygens, not this updater."
   },
   "status": "ReadyForReview",
   "target": {
     "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
-    "normalizedSha256": "23fb312bc8821f7cea59222c4b53959e790d972db7968f1955ca64be87d50f5a"
+    "normalizedSha256": "18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f"
   },
   "sources": [
     {
@@ -28,7 +28,7 @@
       "kind": "File",
       "label": "Previous intake; first binding source",
       "requestedUrl": "N/A",
-      "path": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/a0782733-f818-4246-9cd1-a767e5dc2f4d/target.txt",
+      "path": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/99ecfd91-17f2-4154-9d4e-e559242c5ce9/target.txt",
       "lastModified": "N/A",
       "proofBoundary": "RepositoryFile",
       "etag": "N/A",
@@ -1425,6 +1425,90 @@
       "redirectChain": [],
       "httpStatus": "N/A",
       "location": "Repository"
+    },
+    {
+      "order": 68,
+      "contentLength": "N/A",
+      "rawSha256": "N/A",
+      "contentType": "N/A",
+      "finalUrl": "N/A",
+      "kind": "File",
+      "label": "Bounded learner-usability source: docs/fuer-lernende/erste-schritte.md",
+      "requestedUrl": "N/A",
+      "path": "docs/fuer-lernende/erste-schritte.md",
+      "lastModified": "N/A",
+      "proofBoundary": "RepositoryFile",
+      "etag": "N/A",
+      "retrievedAt": "N/A",
+      "sourceId": "SRC068",
+      "gitBlob": "N/A",
+      "normalizedSha256": "ba1bdab5500b448c18e8654999cd78cc507584903a6bd186878e74eb470ea589",
+      "redirectChain": [],
+      "httpStatus": "N/A",
+      "location": "Repository"
+    },
+    {
+      "order": 69,
+      "contentLength": "N/A",
+      "rawSha256": "N/A",
+      "contentType": "N/A",
+      "finalUrl": "N/A",
+      "kind": "File",
+      "label": "Bounded learner-usability source: docs/fuer-lernende/troubleshooting.md",
+      "requestedUrl": "N/A",
+      "path": "docs/fuer-lernende/troubleshooting.md",
+      "lastModified": "N/A",
+      "proofBoundary": "RepositoryFile",
+      "etag": "N/A",
+      "retrievedAt": "N/A",
+      "sourceId": "SRC069",
+      "gitBlob": "N/A",
+      "normalizedSha256": "7367f3d82cb26296558305b8e0c6827bd96534ffca441832fbd23b9f742dd7f3",
+      "redirectChain": [],
+      "httpStatus": "N/A",
+      "location": "Repository"
+    },
+    {
+      "order": 70,
+      "contentLength": "N/A",
+      "rawSha256": "N/A",
+      "contentType": "N/A",
+      "finalUrl": "N/A",
+      "kind": "File",
+      "label": "Bounded learner-usability source: docs/fuer-lernende/alltag.md",
+      "requestedUrl": "N/A",
+      "path": "docs/fuer-lernende/alltag.md",
+      "lastModified": "N/A",
+      "proofBoundary": "RepositoryFile",
+      "etag": "N/A",
+      "retrievedAt": "N/A",
+      "sourceId": "SRC070",
+      "gitBlob": "N/A",
+      "normalizedSha256": "46ea6cac96f5cd73331372af50ea9354e2845166e766ab0bd7648b80bcc5a66f",
+      "redirectChain": [],
+      "httpStatus": "N/A",
+      "location": "Repository"
+    },
+    {
+      "order": 71,
+      "contentLength": "N/A",
+      "rawSha256": "N/A",
+      "contentType": "N/A",
+      "finalUrl": "N/A",
+      "kind": "File",
+      "label": "Bounded learner-usability source: docs/maintenance/usability-alignment-2026-10-27.md",
+      "requestedUrl": "N/A",
+      "path": "docs/maintenance/usability-alignment-2026-10-27.md",
+      "lastModified": "N/A",
+      "proofBoundary": "RepositoryFile",
+      "etag": "N/A",
+      "retrievedAt": "N/A",
+      "sourceId": "SRC071",
+      "gitBlob": "N/A",
+      "normalizedSha256": "a4794de74ca9c4f6309fce6248ddca0fe2d201ae0411a22e2e96bbf51510d9a1",
+      "redirectChain": [],
+      "httpStatus": "N/A",
+      "location": "Repository"
     }
   ],
   "profile": "learner-a11y-bilingual",
@@ -1496,14 +1580,15 @@
     "autonomousInvocation": "$speckit-autonomous"
   },
   "deliveryAuthority": "LocalImplementation",
-  "authorityEvidence": "Owner explicitly selected DEC-STAT-HISTORY-2026-10-25: preserve historical pilot and separately require reproducibility of its exact measurement and CURRENT freshness of active Profile2. DRIFT allowed only for reproducible, consistently classified historical data, never corruption. Keep integrity, encoding, ancestry and no-write gates. Complete PR100 MergeAndSync after fresh green checks. Preserve intake identities/texts/prompts/lifecycle/authority and parallel user Keynote edits. Use clean temporary worktree; no image build, restart, global maintenance or formal approval.",
+  "authorityEvidence": "User authorizes the overall bounded 2026-10-27 learner-usability provenance plan. The coordinating principal agent commissioned independent reviewer Huygens, temporarily held publication for USAB-IR001-003, and issued the final completion/release after the troubleshooting corrections. This is execution coordination under existing user authority, not a new owner scope or acceptance decision. Retain intake IDs, accepted scope, 71-source order, lifecycle Completed/Eligible/Blocked/Blocked, security and human gates. No Feature004 source cycle. No pilot, hardening, runtime, build, commit or push. Independent full review belongs to Huygens, not this updater.",
   "promptState": "Enabled",
   "provenanceMode": "Supersession",
   "supersedes": {
-    "archiveTargetPath": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/a0782733-f818-4246-9cd1-a767e5dc2f4d/target.txt",
-    "receiptPath": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/a0782733-f818-4246-9cd1-a767e5dc2f4d/receipt.json",
+    "archiveReceiptPath": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/99ecfd91-17f2-4154-9d4e-e559242c5ce9/receipt.json",
     "targetNormalizedSha256": "23fb312bc8821f7cea59222c4b53959e790d972db7968f1955ca64be87d50f5a",
-    "archiveReceiptPath": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/a0782733-f818-4246-9cd1-a767e5dc2f4d/receipt.json"
+    "archiveTargetPath": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/99ecfd91-17f2-4154-9d4e-e559242c5ce9/target.txt",
+    "receiptPath": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/99ecfd91-17f2-4154-9d4e-e559242c5ce9/receipt.json",
+    "receiptNormalizedSha256": "87f358514be38e7821d6d36c4e848bf6edd242172cc2919f513040b628bfa318"
   },
   "legacyAdoption": {
     "priorTargetNormalizedSha256": "N/A",
@@ -1511,7 +1596,7 @@
     "evidenceType": "N/A"
   },
   "updateAuthorized": true,
-  "updateAuthorityEvidence": "Owner explicitly selected DEC-STAT-HISTORY-2026-10-25: preserve historical pilot and separately require reproducibility of its exact measurement and CURRENT freshness of active Profile2. DRIFT allowed only for reproducible, consistently classified historical data, never corruption. Keep integrity, encoding, ancestry and no-write gates. Complete PR100 MergeAndSync after fresh green checks. Preserve intake identities/texts/prompts/lifecycle/authority and parallel user Keynote edits. Use clean temporary worktree; no image build, restart, global maintenance or formal approval.",
+  "updateAuthorityEvidence": "User authorizes the overall bounded 2026-10-27 learner-usability provenance plan. The coordinating principal agent commissioned independent reviewer Huygens, temporarily held publication for USAB-IR001-003, and issued the final completion/release after the troubleshooting corrections. This is execution coordination under existing user authority, not a new owner scope or acceptance decision. Retain intake IDs, accepted scope, 71-source order, lifecycle Completed/Eligible/Blocked/Blocked, security and human gates. No Feature004 source cycle. No pilot, hardening, runtime, build, commit or push. Independent full review belongs to Huygens, not this updater.",
   "series": {
     "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
     "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json",

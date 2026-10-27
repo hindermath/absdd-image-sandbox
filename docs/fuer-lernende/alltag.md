@@ -2,6 +2,26 @@
 
 [Einstieg / Start](README.md)
 
+## Der kurze Normalablauf / The Short Ordinary Workflow
+
+**DE:** Öffnen → eine Aufgabe wählen → im Projekt-Mount speichern → sicher
+stoppen → wieder öffnen und Datei wiederfinden. Die folgenden Abschnitte
+erklären diese Schritte. Nach abgeschlossener Einrichtung brauchst du dafür
+keine Admin-Rechte oder Agentenanmeldung und musst keine vollständige
+Governance-Abnahme selbst durchführen. Die Lernbegleitung verantwortet die eingerichtete,
+für deinen Lernzweck geprüfte Umgebung; das ersetzt keine Freigabe.
+Der Standard bleibt beschreibbar, jedoch nur innerhalb deiner Rechte und
+Agentenregeln. Ein zusätzlich eingeschränktes Read-only-Profil ist optional,
+kein stiller Standard und kein Grund, Schutzmaßnahmen abzuschalten.
+
+**EN:** Open → choose one task → save in its project mount → stop safely →
+reopen and find your file. The following sections explain these steps. After
+setup, this needs no admin rights, agent sign-in or full governance acceptance
+performed by you. Your instructor owns the configured environment checked
+for your learning purpose; this does not replace approval. The default is
+writable within your permissions and agent rules. An additional read-only
+profile is optional, not a silent default or reason to disable safeguards.
+
 ## Ziel Und Voraussetzungen / Goal and Prerequisites
 
 **DE:** Du kannst eine eingerichtete Sandbox wieder benutzen, Ergebnisse
@@ -134,3 +154,25 @@ als Reparaturversuch verwenden.
 
 **EN:** Problems? Read the FAQ, then troubleshooting. Do not try global prune
 or reset commands as a repair.
+
+## Wieder öffnen / Reopen
+
+**DE:** Notiere vor dem Stoppen deinen Projektpfad und den Namen deiner
+gespeicherten Datei. Wiederhole später „Vor dem Start“ und „Arbeiten“ oben
+auf dem Host und wechsle im Container in genau diesen Projekt-Mount.
+Öffne deine Datei im Editor und vergleiche den gespeicherten Inhalt.
+Erwartung: dieselbe Arbeit ist vorhanden; keine neue Datei als Ersatz anlegen.
+Fehlt sie, prüfe mit der Lernbegleitung zuerst Projektpfad und Mount-Zuordnung.
+Keine Volumes neu anlegen, löschen oder einen Reset versuchen. Daten nur in
+der Container-Schreibschicht überstehen eine Container-Neuerstellung nicht
+zuverlässig; Projekt-Mounts und regelmäßige Datensicherung sind deshalb wichtig.
+Bei Sicherheitsabbrüchen nutze die [Audit-Fehlerhilfe](troubleshooting.md).
+
+**EN:** Before shutdown, note your project path and saved filename. Later,
+repeat Before Starting and Working above on the host and return to that exact
+project mount inside the container. Open your file in the editor and compare
+its saved content. Expect the same work, not a new replacement file. If it is
+missing, ask your instructor to check the path and mount mapping first. Do not
+create/delete volumes or try a reset. Files only in the container writable
+layer do not reliably survive recreation; use project mounts and regular
+backups. Use audit troubleshooting for security failures.

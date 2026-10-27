@@ -1,6 +1,6 @@
 # Erster Tag: Vom Start zum ersten Erfolg / First Day: From Start to First Success
 
-**Stand / Date:** 2026-10-25
+**Stand / Date:** 2026-10-27 (Dokumentation / documentation, keine neue Runtime-Abnahme / no new runtime acceptance)
 **Ausrichtung / Orientation:** DE-first, EN-second, CEFR B2, WCAG 2.2 AA
 
 **DE:** Du hast Podman installiert und den Container gestartet
@@ -35,71 +35,41 @@ Non-root is one part of the hardening.
 
 ---
 
-## Schritt 2: Werkzeuge prüfen und die Ausgabe verstehen / Step 2: Check the Tools and Understand the Output
+## Schritt 2: Eine Aufgabe wählen / Step 2: Choose One Task
 
-**DE:** Prüfe, ob die sechs Sprachen (MSL — Memory-Safe Languages) da sind:
+**DE:** Du musst nicht alle Sprachen oder Agenten am ersten Tag prüfen.
+Wähle mit deiner Lernbegleitung eine Aufgabe aus deinem [Lernweg](lernwege.md).
+Das folgende Mini-Programm verwendet Python und braucht kein KI-Konto.
+Voraussetzung: die eingerichtete Sandbox läuft, du bist als `adedev` in ihrer
+Bash-Shell. Prüfe nur das Werkzeug für diese Aufgabe:
 
-**EN:** Check that the six languages (MSL — Memory-Safe Languages) are present:
+**EN:** You do not need to check every language or agent on day one. Choose
+one task with your instructor using your learning path. The following tiny
+program uses Python and needs no AI account. Prerequisite: the configured
+sandbox is running and you are in its Bash shell as adedev. Check just the
+tool for this task:
+
+Container, Bash / Container, Bash:
 
 ```bash
-dotnet --version
-go version
-java --version
 python --version
-rustc --version
-swift --version
 ```
 
-**DE:** PowerShell 7 ist die zweite Skriptgrundlage neben Python und wird
-separat geprueft:
+**DE:** Erwartet wird eine Versionsnummer. Das beweist Aufrufbarkeit, keine
+vollständige Abnahme. Bei `command not found`: nicht als root nachinstallieren,
+sondern [Fehlerhilfe](troubleshooting.md) und Lernbegleitung nutzen.
+Für eine andere Aufgabe folge dem passenden [Toolchain-Pfad](toolchains/README.md).
+Die vollständige Werkzeug-, Coverage- (Messung der Testabdeckung), Preset-
+(Governance-Regelsatz) und Lieferkettenprüfung gehört zur
+[Maintainer-Validierung](../betrieb/validierung-und-wartung.md), nicht zu deinem
+ersten Lernerfolg. Bestehende Sicherheits- und Freigabegrenzen gelten trotzdem.
 
-**EN:** PowerShell 7 is the second scripting foundation alongside Python and
-is checked separately:
-
-```bash
-pwsh --version
-```
-
-**DE:** Jeder Befehl gibt eine **Versionsnummer** aus, zum Beispiel `10.0.x`
-(für .NET) oder `go version go1.27.x ...`. Das belegt die Aufrufbarkeit,
-nicht alle Funktionen oder eine Freigabe. Erscheint `command not found`,
-stimmt etwas mit dem Container nicht — siehe
-[troubleshooting.md](troubleshooting.md).
-
-**EN:** Each command prints a **version number**, for example `10.0.x` (for
-.NET) or `go version go1.27.x ...`. This proves the executable responds,
-not all functionality or approval. If `command not found` appears, something is wrong with the
-container — see [troubleshooting.md](troubleshooting.md).
-
-**DE:** Alle Versionen auf einmal prüft dieses Skript:
-
-**EN:** This script checks all versions at once:
-
-```bash
-bash /ade-dev-sandbox/scripts/smoke-test-toolchains.sh
-```
-
-**DE:** Zu den geprueften Werkzeugen gehoeren auch die vier Required-Agenten
-und Syft. Jeder Befehl muss eine Version liefern; eine Anmeldung ist fuer
-diesen Installationsnachweis noch nicht erforderlich:
-
-**EN:** The checked tools also include the four required agents and Syft. Each
-command must print a version; sign-in is not required for this installation
-check:
-
-```bash
-codex --version
-claude --version
-agy --version
-copilot --version
-syft version
-```
-
-**DE:** Die vollständige Übersicht mit Test- und Audit-Befehlen je Sprache steht
-in der MSL-Support-Matrix im [sandbox-profil.md](sandbox-profil.md), Abschnitt 6.
-
-**EN:** The full overview with test and audit commands per language is in the
-MSL support matrix in [sandbox-profil.md](sandbox-profil.md), section 6.
+**EN:** Expect a version number. This proves the command responds, not full
+acceptance. For command not found, do not install as root: use troubleshooting
+and ask your instructor. For a different task follow its toolchain guide.
+Full tool, coverage (measured test coverage), preset (governance rule set) and
+supply-chain checks belong to maintainer validation, not first-success
+prerequisites. Existing security and approval boundaries still apply.
 
 ---
 

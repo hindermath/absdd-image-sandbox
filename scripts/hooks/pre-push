@@ -18,18 +18,19 @@ allowed_secret_content_path_regex='(^|/)scripts/(hooks/pre-push|scan-agent-secre
 # DE: Nur diese bereits geprueften Keynote-Bytes sind keine Schluesseldateien.
 # EN: Only these reviewed Keynote bytes are not key files. Content scans stay on.
 is_reviewed_keynote() {
-  local path="$1" expected=""
+  local path="$1" approved="" current=""
   case "${path#"$REPO_ROOT/"}" in
-    docs/praesentationen/exports/workshop-spec-kit.de.key) expected='79d80b6b5641e7f0452572ab934adc95f7b7199b' ;;
-    docs/praesentationen/exports/workshop-spec-kit.en.key) expected='f412c5718e5d1983b67b77b25abdb484e172beea' ;;
+    docs/praesentationen/exports/workshop-spec-kit.de.key) approved='79d80b6b5641e7f0452572ab934adc95f7b7199b 87f54be7bf9e6e8aba1118c1c7c1b2c54cc842f0' ;;
+    docs/praesentationen/exports/workshop-spec-kit.en.key) approved='f412c5718e5d1983b67b77b25abdb484e172beea bc9483d1889f7c5f3c62f13215a33224e5fe6b8b' ;;
     *) return 1 ;;
   esac
-  [ "$(git -C "$REPO_ROOT" hash-object --no-filters -- "$path")" = "$expected" ] || return 1
+  current="$(git -C "$REPO_ROOT" hash-object --no-filters -- "$path")" || return 1
+  case " $approved " in *" $current "*) ;; *) return 1 ;; esac
   local commit blob relative="${path#"$REPO_ROOT/"}" seen=0
   for commit in "${push_commits[@]+"${push_commits[@]}"}"; do
     if blob="$(git -C "$REPO_ROOT" rev-parse --verify "$commit:$relative" 2>/dev/null)"; then
       seen=1
-      [ "$blob" = "$expected" ] || return 1
+      case " $approved " in *" $blob "*) ;; *) return 1 ;; esac
     fi
   done
   [ "$seen" -eq 1 ]

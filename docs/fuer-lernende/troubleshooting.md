@@ -9,7 +9,7 @@ Ein Socketfehler ist kein Grund fuer Storage-Reset oder Volume-Loeschung.
 warnings are recorded in the follow-ups. A socket error does not justify
 storage reset or volume deletion.
 
-**Stand / Date:** 2026-07-10
+**Stand / Date:** 2026-10-27 (Dokumentationspflege / documentation update)
 **Ausrichtung / Orientation:** DE-first, EN-second, CEFR B2, WCAG 2.2 AA
 
 **DE:** Dieses Dokument sammelt typische Anfängerfehler beim ersten Start der
@@ -52,9 +52,15 @@ Look for the error that matches your message.
   Machine startet nicht.
 - **Ursache:** Auf macOS und Windows braucht Podman eine Linux-VM
   (Podman-Machine). Sie fehlt, ist beschädigt oder läuft schon.
-- **Lösung:** Prüfe den Zustand mit `podman machine list`. Läuft sie noch nicht,
-  starte mit `podman machine start`. Ist sie beschädigt, entferne und erstelle
-  sie neu:
+- **Lösung:** Prüfe auf dem Host (Bash oder PowerShell 7) mit
+  `podman machine list`, ob deine eingerichtete Machine existiert und läuft.
+  Erwartet wird eine Liste mit Zustand; der Befehl ändert keine Daten.
+  `already exists` bedeutet nicht, dass sie beschädigt ist. Starte nur die
+  vorhandene, gestoppte Machine mit `podman machine start`; dadurch wird keine
+  neue angelegt. Bei mehreren Machines kläre zuerst die richtige mit der
+  Lernbegleitung. Misslingt der Start, halte an und notiere Fehlermeldung,
+  Zeitpunkt und Betriebssystem ohne private Pfade oder Zugangsdaten.
+  Entferne weder Machine noch Volumes und führe keinen Reset aus.
 
 **EN:**
 
@@ -62,20 +68,26 @@ Look for the error that matches your message.
   does not start.
 - **Cause:** On macOS and Windows Podman needs a Linux VM (Podman machine). It
   is missing, damaged, or already running.
-- **Solution:** Check the state with `podman machine list`. If it is not running,
-  start with `podman machine start`. If it is damaged, remove and recreate it:
+- **Solution:** On the host (Bash or PowerShell 7), use `podman machine list`
+  to inspect the configured machine. Expect a state list without data changes.
+  Already exists does not mean damaged. Start only an existing stopped machine
+  with `podman machine start`; this creates no new machine. If several exist,
+  ask your instructor which to use. If startup fails, stop and record the
+  error, time and operating system without private paths or credentials.
+  Do not remove machines or volumes or reset storage.
 
-```bash
-podman machine stop
-podman machine rm
-podman machine init
-podman machine start
-```
+**DE:** Die Lernbegleitung diagnostiziert eine mögliche Beschädigung und prüft
+vor einer gesondert genehmigten destruktiven Wiederherstellung betroffene
+Projekte, Volumes, Datensicherung und Wiederherstellbarkeit. Eine Diagnose
+beweist noch keinen Datenverlust oder Datenerhalt. Ubuntu/WSL2 mit eigenem
+rootless Podman verwendet den Linux-Pfad ohne zusätzliche Podman-Machine;
+Windows-Host und Ubuntu/WSL2 nicht als denselben Ausführungsweg behandeln.
 
-**DE:** Auf Linux gibt es keine Podman-Machine — dort ist dieser Fehler nicht
-möglich.
-
-**EN:** On Linux there is no Podman machine — this error cannot occur there.
+**EN:** Your instructor diagnoses possible damage and checks affected
+projects, volumes, backups and recoverability before separately authorized
+destructive recovery. Diagnosis alone proves neither loss nor preservation.
+Ubuntu/WSL2 with its own rootless Podman uses the Linux path without an extra
+Podman machine; keep the Windows-host and Ubuntu/WSL2 execution paths distinct.
 
 ---
 
@@ -87,9 +99,15 @@ möglich.
   address already in use` für einen Port zwischen 5100 und 5199.
 - **Ursache:** Ein anderes Programm belegt bereits den Port. Der Container
   veröffentlicht `127.0.0.1:5100-5199` für Web-App-Tests.
-- **Lösung:** Beende das andere Programm oder wähle für deine Test-App einen
-  freien Port aus dem Bereich 5100–5199. Ändere die Portspanne **nicht** in
-  `compose.yml`, außer die Aufgabe verlangt es ausdrücklich.
+- **Lösung:** Beim Containerstart wird die gesamte Spanne gebunden. Ein anderer
+  Port deiner Test-App löst diesen Compose-Konflikt daher nicht. Lass den
+  belegenden Prozess mit der Lernbegleitung identifizieren. Beende nur ein
+  eigenes Programm, dessen Beenden du bewusst verantworten kannst. Bei einem
+  fremden oder benötigten Dienst nicht eingreifen: eine gesondert geprüfte
+  lokale Portkonfiguration mit der Lernbegleitung klären, Loopback-Bindung
+  erhalten. Die gemeinsame `compose.yml` nicht ungefragt ändern.
+  Nur bei einem App-internen Konflikt im bereits laufenden Container kann ein
+  anderer freier App-Port innerhalb 5100–5199 helfen.
 
 **EN:**
 
@@ -97,9 +115,14 @@ möglich.
   already in use` for a port between 5100 and 5199.
 - **Cause:** Another program already uses the port. The container publishes
   `127.0.0.1:5100-5199` for web app tests.
-- **Solution:** Stop the other program or pick a free port from the 5100–5199
-  range for your test app. Do **not** change the port range in `compose.yml`
-  unless the task explicitly requires it.
+- **Solution:** Container startup binds the entire range; choosing another
+  app port cannot fix this Compose conflict. Ask your instructor to identify
+  the occupying process. Stop only your own program whose shutdown you can
+  knowingly authorize. Do not interfere with another person's or a needed
+  service; arrange separately reviewed local port configuration, preserving
+  loopback binding. Do not change shared compose.yml without authority.
+  Only an app-internal conflict in an already running container may be solved
+  by another free app port within 5100–5199.
 
 ---
 
@@ -186,19 +209,33 @@ möglich.
 
 - **Symptom:** Befehle hängen oder melden, dass keine Verbindung zur
   Podman-Machine besteht.
-- **Ursache:** WSL2 oder die Podman-Machine läuft nicht.
-- **Lösung:** Öffne Podman Desktop und starte die Podman-Machine dort, oder
-  führe `podman machine start` aus. Prüfe mit `podman info`, dass eine
-  Verbindung besteht. Nutze PowerShell 7, nicht die alte Windows-PowerShell 5.
+- **Ursache:** Der gewählte Ausführungsweg ist nicht verfügbar oder wurde
+  verwechselt. Bestimme zuerst: Windows-Host oder Ubuntu in WSL2?
+- **Lösung Windows-Host:** PowerShell 7, nicht Windows PowerShell 5. Prüfe
+  die vorhandene Machine in Podman Desktop oder mit `podman machine list`;
+  starte nur die richtige vorhandene, gestoppte Machine. `podman info` muss
+  danach antworten. Bei Fehler nicht neu initialisieren, sondern Hilfe holen.
+- **Lösung Ubuntu/WSL2:** Im Ubuntu-Terminal mit Bash bleiben und dort
+  `id -u` sowie `podman info` prüfen. Erwartet: UID ungleich `0` und eigener
+  rootless Podman. Keine zusätzliche Machine anlegen und nicht zum
+  Windows-Endpunkt wechseln. Bei fehlendem Podman, falscher Identität oder
+  unklarem Kontext mit der Lernbegleitung den
+  [Ubuntu/WSL2-Installationspfad](installation.md) prüfen.
 
 **EN:**
 
 - **Symptom:** Commands hang or report that there is no connection to the Podman
   machine.
-- **Cause:** WSL2 or the Podman machine is not running.
-- **Solution:** Open Podman Desktop and start the Podman machine there, or run
-  `podman machine start`. Check with `podman info` that a connection exists. Use
-  PowerShell 7, not the old Windows PowerShell 5.
+- **Cause:** The selected execution path is unavailable or mixed up. First
+  identify whether you are on the Windows host or inside Ubuntu/WSL2.
+- **Windows host:** Use PowerShell 7, not Windows PowerShell 5. Inspect existing
+  machines in Podman Desktop or with podman machine list; start only the correct
+  existing stopped machine. Expect podman info to respond. On failure, ask for
+  help rather than initialize again.
+- **Ubuntu/WSL2:** Stay in Ubuntu Bash and inspect id -u and podman info there.
+  Expect a nonzero UID and your own rootless Podman. Do not create another
+  machine or switch to the Windows endpoint. For missing Podman, wrong identity
+  or unclear context, check the Ubuntu/WSL2 installation path with your instructor.
 
 ---
 
@@ -234,9 +271,14 @@ möglich.
   found`.
 - **Ursache:** Das Image wurde vor der Vier-Agenten-Erweiterung gebaut oder der
   Build ist fehlgeschlagen.
-- **Lösung:** Fuehre auf dem Host `podman compose build --pull` und danach
-  `bash scripts/smoke-test-toolchains.sh` im Container aus. Alle vier Befehle
-  muessen eine Version ausgeben.
+- **Lösung:** Ein Neubau allein ersetzt keinen laufenden Container. Nutze mit
+  der Lernbegleitung den [kontrollierten Austausch aus der FAQ](faq.md):
+  Projektdateien im Mount speichern, Audit-Stopp erfolgreich abschließen,
+  Volumes erhalten, neues Image bauen und daraus den Container kontrolliert
+  neu erstellen. Bei Auditfehler abbrechen, kein direktes `down` als Ersatz.
+  Erst danach im tatsächlich neuen Container die Werkzeug-Smokes nach
+  [Betriebsanleitung](../betrieb/validierung-und-wartung.md) ausführen und
+  verwendete Image-ID prüfen. Das ist betreute Wartung, kein normaler Lernschritt.
 - **Symptom:** Nach einem Neustart ist der Agent abgemeldet.
 - **Ursache:** Die Umgebung wurde mit `down -v` beendet; dadurch wurden die
   Agenten-Volumes geloescht.
@@ -248,9 +290,13 @@ möglich.
 - **Symptom:** `codex`, `claude`, `agy`, or `copilot` reports `command not
   found`.
 - **Cause:** The image predates the four-agent extension or its build failed.
-- **Solution:** Run `podman compose build --pull` on the host and then
-  `bash scripts/smoke-test-toolchains.sh` inside the container. All four
-  commands must print a version.
+- **Solution:** Building alone does not replace a running container. With
+  your instructor, follow controlled replacement in the FAQ: save project files
+  in their mount, complete audit shutdown, retain volumes, build and recreate
+  from the new image. Stop on audit failure, with no direct down substitute.
+  Only then run the operations guide's tool smokes in the actual new container
+  and check its image ID. This is supervised maintenance, not an ordinary
+  learning step.
 - **Symptom:** An agent is signed out after restart.
 - **Cause:** The environment was stopped with `down -v`, which removed the
   agent volumes.
@@ -260,6 +306,54 @@ möglich.
 ---
 
 ## Nichts hilft — was dann? / Nothing Helps — What Then?
+
+### Audit-Stopp bricht ab / Audit Shutdown Fails
+
+**DE:** Betrifft den Audit-Wrapper auf dem Host im Sandbox-Checkout (Bash
+oder PowerShell 7), nicht eine Shell im Container. Voraussetzung: du wolltest
+mit dem dokumentierten Wrapper stoppen. Erwartung: erfolgreicher Export von
+Metadaten vor `down`, ohne Löschen der Volumes. Metadaten beschreiben einen
+Vorgang, nicht dessen Prompt- oder Antwortinhalt.
+Bei Exportfehler stoppt der Wrapper vor `down`: kein direktes `compose down`
+als Ersatz und keine Löschoption ergänzen. Speichere offene Projektdateien
+im vorgesehenen Mount und gib der Lernbegleitung Phase, Exitcode, Zeitpunkt
+und geschwärzte Fehlermeldung. Nicht alle Stoppfehler sind Exportfehler;
+den Containerstatus daher nicht aus einer Fehlermeldung erraten.
+
+**EN:** This concerns the audit wrapper on the host in the sandbox checkout
+(Bash or PowerShell 7), not a container shell. Prerequisite: you tried the
+documented stop wrapper. Expect successful metadata export before down,
+without deleting volumes. Metadata describes an event, not prompt/response
+content. Export failure stops before down: never substitute direct compose
+down or add deletion flags. Save open project files in their mount and give
+your instructor the phase, exit code, time and redacted error. Not every stop
+failure is an export failure; do not infer container status from the error alone.
+
+**DE:** Feature 004 plant zusätzliche Prüfungen für fehlende/leere Exporte,
+Retention (Aufbewahrung alter Audit-Metadaten) und Sperren gegen gleichzeitige
+Stopps. Das ist noch keine Aussage über installierte Funktionen. Meldet ein
+späterer Wrapper eine belegte oder verwaiste Sperre: keinen zweiten Stopp
+erzwingen und keine Sperrdatei selbst löschen. Die Lernbegleitung muss zuerst
+den vorherigen Lauf und den richtigen Audit-Pfad prüfen. Erst nach geklärter
+Ursache erneut den normalen Wrapper verwenden; er muss frisch exportieren.
+Bei fehlgeschlagener Retention können alte Metadaten bereits teilweise
+entfernt sein. Keine Wiederherstellung oder unveränderte Daten behaupten;
+Restdaten und Volumes erhalten, tatsächlichen Umfang prüfen lassen.
+Agenten-Datenbanken, Prompts, Antworten und Zugangsdaten nicht zur Diagnose
+exportieren. Wenn sichere Wiederaufnahme unklar bleibt, eskalieren statt
+Schutzmaßnahmen abzuschalten.
+
+**EN:** Feature 004 plans added checks for absent/empty exports, retention
+(keeping old audit metadata for a defined period) and locks preventing
+concurrent stops. This does not claim those features are installed. If a
+future wrapper reports an occupied or stale lock, do not force another stop
+or delete the lock yourself. Your instructor must first check the previous
+run and correct audit path. Once the cause is resolved, retry the ordinary
+wrapper, which must export afresh. Failed retention may already have removed
+some expired metadata. Do not promise restoration or unchanged data; preserve
+the remainder and volumes and have the actual scope checked. Never export
+agent databases, prompts, responses or credentials for diagnosis. Escalate
+unclear recovery instead of disabling safeguards.
 
 **DE:** Prüfe der Reihe nach: Läuft die Podman-Machine (`podman machine list`)?
 Antwortet Podman (`podman info`)? Ist die Konfiguration gültig

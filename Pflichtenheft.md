@@ -1,5 +1,15 @@
 # Sandbox Requirements-Index / Sandbox Requirements Index
 
+DE: Usability-Quellenabgleich 2026-10-27: Die drei aktiven Intakes erhalten
+begrenzte Quellen-/Kontextergaenzungen, keine neue fachliche Reichweite.
+Identitaeten, Reihenfolge und Lifecycle bleiben unveraendert. Alte Reviews
+sind ueberholt; das neue unabhaengige Vollreview ist ausstehend, siehe
+`specs/intake-review-requests/sandbox-development-lifecycle.json`.
+
+EN: The bounded usability source/context update changes no accepted scope,
+identity, order or lifecycle. Previous reviews are superseded; independent
+full review is pending at the request linked above.
+
 Dieser Index verweist auf die bestehende Sandbox-Serie mit vier Zielen.
 Das abgeschlossene GSDB-Intake ist im kanonischen Manifest unter
 `specs/intake-authoring-archive/` gebunden. Seine byte-identische Root-Datei

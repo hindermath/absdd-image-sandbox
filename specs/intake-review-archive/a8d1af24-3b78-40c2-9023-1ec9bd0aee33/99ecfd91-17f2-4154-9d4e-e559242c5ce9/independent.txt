@@ -1,0 +1,28 @@
+Independent bounded statistics-history follow-up / Begrenztes Nachreview
+reviewId=a8d1af24-3b78-40c2-9023-1ec9bd0aee33
+operationId=a0782733-f818-4246-9cd1-a767e5dc2f4d
+reviewedAt=2026-10-25T21:12:52.542Z
+status=Ready for bounded source/binding correctness only
+supersedes=specs/intake-review-archive/7620f78c-4cc8-4f42-823a-25695796065c/a0782733-f818-4246-9cd1-a767e5dc2f4d/result.json
+workspace=/private/var/folders/g_/7dmrmw6j77d1b5q60yl_nr8m0000gn/T/absdd-closeout-a72518dd088a4613b2eb2b509ae2b7aa/ci-history-worktree
+head=08cba2613f5e1b61e71145c4f47a7a6e31a2476c (detached)
+identity=Codex independent reviewer; threadId=01a1741a-8f17-7f92-acec-ff7ee32ecb5b; separate agentId=N/A
+scope=only WT; original checkout/user Keynote edits neither read for review nor modified/staged
+basis=prior complete semantic review reused only for hash-proven unchanged content; no new full intake/product review
+inputs=283 prior compared; 275 unchanged; workflow/test +6 bindingmetadata deltas
+currentHashes=309 normalized text inputs +2 unchanged prior gzip archives
+archives=17 raw/normalized exact;14 prior-input matches;3 old review outputs no self-binding
+bindings=3x67=201 verified;4 targets/6 prompts/IDs/order/gates unchanged
+pilot=3 historical files unfiltered Git blob IDs match worktree HEAD exactly
+historyGate=bool reproducible/current/changed; exact nonempty revision/cutoff; reproducibletrue/changedfalse; consistent CURRENT0 or DRIFT1 only
+activeGate=independent existing Profile2 check-only renderer; CURRENT0/methodology2/changedboolfalse/nonemptyrevision; separate historicalSnapshotSha256 and currentLedgerSha256
+findings=0 open;0 questions;0 acceptedrisks;IR201/IR202/PP201/PP202 resolution history retained
+validators=14/14 current independent Pass, exit0: authoring8/series4/review2; Bash and pwsh -NonInteractive -NoProfile; worktree only
+config=unchanged prior config/policy assessment reused explicitly, not fresh historical inventory counts
+validationOrder=final evidence attached after successful result validators; targets/request/status/findings unchanged; no redundant reruns
+finalInputDrift=309 text inputs +2 binary archives checked;0 changed
+parentEvidence=5 focused tests Passed0.909s; helper tests3valid/14invalid; actual replay/current ledger and freshCI parent responsibility
+exclusions=mutablejournals/newlogs/generatedinventory/groups/generateddocs/project-statistics.md/reviewoutputs
+boundary=no original/source/Keynote/Git/runtime/build/log/journal/globalmaintenance writes; no human approval/riskacceptance
+DE: Historische Reproduzierbarkeit ersetzt nie aktuelle Ledger-Frische. Parent prueft beide vor freigegebener PR100-Lieferung.
+EN: Historical reproducibility never replaces current ledger freshness. Parent verifies both before authorized PR100 delivery.
