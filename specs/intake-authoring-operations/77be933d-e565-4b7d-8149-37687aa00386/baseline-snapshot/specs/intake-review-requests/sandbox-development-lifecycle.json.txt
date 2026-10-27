@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "5c452360-9bf7-44d9-84e0-10cae34e72ea",
+  "mode": "Series",
+  "policy": "learner-a11y-bilingual-series",
+  "targets": [
+    {
+      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "role": "Primary",
+      "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a"
+    },
+    {
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f"
+    },
+    {
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338"
+    }
+  ],
+  "series": {
+    "orderedTargetPaths": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "roots": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+    ],
+    "dependencies": [
+      {
+        "from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+        "to": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "kind": "AssessmentBaseline"
+      },
+      {
+        "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "kind": "SandboxBaseline"
+      },
+      {
+        "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "to": "intakes/learner-fork-self-build-sandbox.md",
+        "kind": "HardCompletionGate"
+      }
+    ]
+  },
+  "campaign": {
+    "manifestPath": "N/A",
+    "workers": [],
+    "operatorExceptions": []
+  },
+  "changeSources": [
+    "docs/maintenance/intake-sources-alignment-2026-10-25.md",
+    "AGENTS.md",
+    ".specify/presets/secure-development-assurance-governance/templates/secure-development-evidence-contract.md",
+    "docs/maintenance/gsdb-344-preset-installed-lock.json",
+    "docs/maintenance/stable-preset-rollout-2026-10-24.md",
+    "docs/maintenance/stable-preset-source-lock-2026-10-24.json",
+    "docs/maintenance/stable-preset-installed-lock-2026-10-24.json",
+    "docs/secure-development/baseline-manifest.json",
+    "docs/maintenance/gsdb-344-source-inventory.json",
+    "docs/maintenance/gsdb-344-control-delta.json",
+    "docs/maintenance/intake-gsdb344-delta-2026-10-21.md",
+    ".specify/presets/secure-development-assurance-governance/docs/release-0.1.8-validation.md",
+    ".specify/presets/secure-development-assurance-governance/docs/user-guide.md",
+    ".specify/presets/secure-development-assurance-governance/docs/user-guide.EN.md",
+    "COMPLIANCE-PLAN_RL-SE-001.md",
+    "docs/maintenance/documentation-alignment-2026-10-25.md",
+    "docs/security/toolchain-followups-2026-10-25.md",
+    "docs/fuer-lernende/lernwege.md",
+    "docs/fuer-lernende/barrierefreiheit.md",
+    "docs/maintenance/sandbox-current-state-2026-10-25.md",
+    "docs/maintenance/toolchain-version-audit-2026-10-25.md",
+    "scripts/config/required-cli-tools-registry.json",
+    "scripts/tests/test_toolchain_version_pins.py",
+    "docs/fuer-lernende/sandbox-profil.md",
+    "docs/security/agent-session-log/2026-10-25-1047.md",
+    "Dockerfile",
+    "docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md",
+    "docs/maintenance/documentation-impact-2026-10-25.json",
+    "LICENSE",
+    "docs/licensing.md",
+    "docs/maintenance/template-profile-alignment-2026-10-25.md",
+    "docs/fuer-lernende/template-profil.md",
+    "docs/betrieb/template-erstuebernahme.md",
+    "README.md",
+    "CLAUDE.md",
+    "GEMINI.md",
+    ".github/copilot-instructions.md",
+    ".github/agents/copilot-instructions.md",
+    "docs/fuer-lernende/git-und-hosting.md",
+    "docs/fuer-lernende/installation.md",
+    "docs/fuer-lernende/entwickler-kurzpfad.md",
+    "docs/fuer-lernende/faq.md",
+    "docs/fuer-lernende/README.md",
+    "docs/lernwerkstaetten/README.md",
+    "docs/lernwerkstaetten/moderation.md",
+    ".github/workflows/gsdb-pilot-contracts.yml",
+    ".github/workflows/project-statistics-pilot-native-proof.yml",
+    "scripts/tests/test_template_profile.py",
+    "docs/praesentationen/workshop-spec-kit.de.md",
+    "docs/praesentationen/workshop-spec-kit.en.md",
+    "docs/praesentationen/werkstatt-sysinfo.de.md",
+    "docs/praesentationen/werkstatt-sysinfo.en.md",
+    "docs/praesentationen/werkstatt-web.de.md",
+    "docs/praesentationen/werkstatt-web.en.md",
+    ".github/workflows/documentation-and-sandbox.yml",
+    "docs/maintenance/closeout-rights-alignment-2026-10-25.md",
+    "docs/praesentationen/README.md",
+    "docs/maintenance/closeout-review-remediation-2026-10-25.md",
+    "scripts/tests/test_learner_documentation_contract.py",
+    "docs/maintenance/closeout-eof-alignment-2026-10-25.md",
+    "docs/maintenance/closeout-ci-alignment-2026-10-25.md",
+    "scripts/tests/test_closeout_ci_contracts.py",
+    ".github/workflows/maintenance-tui.yml",
+    "docs/maintenance/closeout-statistics-history-2026-10-25.md",
+    "scripts/lib/statistics-ci-evidence.ps1",
+    "scripts/tests/Test-StatisticsCiEvidence.ps1",
+    "docs/fuer-lernende/erste-schritte.md",
+    "docs/fuer-lernende/troubleshooting.md",
+    "docs/fuer-lernende/alltag.md",
+    "docs/maintenance/usability-alignment-2026-10-27.md"
+  ],
+  "authorityEvidence": "User authorizes the overall bounded 2026-10-27 learner-usability provenance plan. The coordinating principal agent commissioned independent reviewer Huygens, temporarily held publication for USAB-IR001-003, and issued the final completion/release after the troubleshooting corrections. This is execution coordination under existing user authority, not a new owner scope or acceptance decision. Retain intake IDs, accepted scope, 71-source order, lifecycle Completed/Eligible/Blocked/Blocked, security and human gates. No Feature004 source cycle. No pilot, hardening, runtime, build, commit or push. Independent full review belongs to Huygens, not this updater.",
+  "operationId": "99ecfd91-17f2-4154-9d4e-e559242c5ce9",
+  "reviewScope": "Independent full substantive text and series review; no inherited acceptance, no pilot/hardening/runtime execution. Review all four targets and 71-source provenance of each active intake; Feature004 is not a binding source.",
+  "sourceBindings": [
+    {
+      "oldHash": "8a9fac14e92da1a901504a1daa15e56bf744b1d6c8cf192f0385716bcddbcaf3",
+      "newHash": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "sourceCount": 71,
+      "receiptId": "9c16f468-1871-4a4d-9bb7-3d6e50143e6f",
+      "receiptNormalizedSha256": "435e085cafb46ac93a93e871c46d4533113f6261cd4ff283fcfbaae8cbcae8cb",
+      "intakeId": "a92a7ced-bbf3-4408-9754-7b739be19a41",
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md"
+    },
+    {
+      "oldHash": "23fb312bc8821f7cea59222c4b53959e790d972db7968f1955ca64be87d50f5a",
+      "newHash": "18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f",
+      "sourceCount": 71,
+      "receiptId": "5c7b976f-d167-4f2f-8cf8-2bc67ba0aa9e",
+      "receiptNormalizedSha256": "91f3ff3ccb0b99cfdf95ef980e7805c8dacbd921f309267c790e8dd21124dea7",
+      "intakeId": "51d24064-dfa6-4375-9bcd-58cccc545167",
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md"
+    },
+    {
+      "oldHash": "d73d504931a2b1d8bae483edbd8e65c47de5aea29fa0eb78e39166de9f5b0f41",
+      "newHash": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "sourceCount": 71,
+      "receiptId": "d2586366-2993-40d0-a556-63d06371aa07",
+      "receiptNormalizedSha256": "ba834710ee96f4c8c279464d7b98379ecca11b7c9645f4b0898de3f324e5cdaa",
+      "intakeId": "5926e53e-39b7-475f-8a6b-e2ec08b0a803",
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "path": "intakes/learner-fork-self-build-sandbox.md"
+    }
+  ],
+  "seriesManifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "936f44533c69d10563b7287a97ec12e16f74af9e0a8e6059b3f0a267e1b9b1bd"
+  },
+  "seriesReceipt": {
+    "receiptId": "3cb90c62-7133-40ca-a60f-e66dc857b3ed",
+    "normalizedSha256": "b203b4208d10feda4666d16165077ffba99337c61b82e675b44ab63f7cde1659",
+    "path": "specs/intake-series/sandbox-development-lifecycle/receipt.json"
+  },
+  "supersedesReviewId": "a8d1af24-3b78-40c2-9023-1ec9bd0aee33",
+  "ownerReportedRemediation": {
+    "normalizedSha256": "7367f3d82cb26296558305b8e0c6827bd96534ffca441832fbd23b9f742dd7f3",
+    "status": "CoordinatorReportsCorrectedAwaitingIndependentVerification",
+    "sourcePath": "docs/fuer-lernende/troubleshooting.md",
+    "reviewer": "Huygens",
+    "topics": [
+      "Compose binds entire port range, not merely app port",
+      "Image build alone does not replace container; controlled audit-stop/recreate",
+      "Separate Windows host and Ubuntu/WSL2 execution contexts"
+    ],
+    "findingIds": [
+      "USAB-IR001",
+      "USAB-IR002",
+      "USAB-IR003"
+    ],
+    "acceptance": "Not asserted by provenance updater",
+    "reportedBy": "Coordinating principal agent; Huygens independently verifies findings"
+  }
+}

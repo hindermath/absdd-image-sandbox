@@ -1,0 +1,5 @@
+# Einzelreview ersetzt / Single Review Superseded
+
+DE: Historisches Einzelreview cfbc8af4-48be-40e2-9a4b-5381d60d3dd5 bleibt byte-identisch im bisherigen Archiv. Aktuelle individuelle Learner-Abdeckung im unabhaengigen Vollreview `5c452360-9bf7-44d9-84e0-10cae34e72ea`: [Gesamtbericht](sandbox-development-lifecycle.md), [Ergebnis](../intake-review-results/sandbox-development-lifecycle.json). Urteil **Ready**, null offene Findings; USAB-IR001..004 unabhaengig geloest. Kein neuer Single-Review. Learner-Stufe bleibt Blocked und benoetigt erfolgreiche unabhaengige Abnahme sowie eigene Startautoritaet; keine technische, Usability-, WCAG-, Rechts- oder Plattformfreigabe.
+
+EN: Historical Single review cfbc8af4-48be-40e2-9a4b-5381d60d3dd5 remains byte-identical in its existing archive. Current individual learner coverage belongs to the linked independent full review `5c452360-9bf7-44d9-84e0-10cae34e72ea`: **Ready**, zero open findings; USAB-IR001..004 independently resolved. No new Single assessment. Learner stage remains Blocked behind successful independent acceptance and separate start authority; no technical, usability, WCAG, legal or platform approval.
