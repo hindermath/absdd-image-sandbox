@@ -188,3 +188,67 @@ existing raw-hash allowance handles trailing spaces only, not blank-at-EOF;
 the canonical preset has the same limitation. Do not rewrite archives,
 weaken Git whitespace rules or call a failed gate green. An explicit decision
 on exact hash-bound EOF handling is needed before commit.
+
+## Finaler genehmigter EOF-Abschluss / Final approved EOF closeout
+
+DE: Der Owner erteilte danach die ausdrücklich ergänzte Freigabe für den
+kanonischen Validator samt Regressionen und anschließenden Lieferabschluss.
+Kanonisch: PR #28, neun native CI-Checks erfolgreich, Merge
+f2d597333e1d1146c3cd5b08ca1feacf489ae692, Release v0.4.8; Admin-Bypass
+ausschließlich für formale Approval-Sperre, null offene Review-Threads.
+Tag und externes ZIP binden die Verbraucherübernahme; SHA-256
+77394268cac40977821887344734fab958be650a1b64e1077c9f673cc1cba2ca.
+
+EN: The owner subsequently explicitly authorized canonical EOF correction,
+regression tests and delivery closeout. Canonical PR #28 passed nine native
+checks and merged at f2d597333e1d1146c3cd5b08ca1feacf489ae692; v0.4.8 is
+published. Admin bypass covered formal approval only, with no open threads.
+Bind consumer integration to the exact tag and external ZIP digest above.
+
+DE: Im Verbraucher nur dieses Paket aktualisiert; 13 andere Payloads,
+Prioritäten, registrierte Commands/Skills bleiben gleich. Beide aktiven
+Constitution-Pins und lokalen Profile/Locks geprüft, 26 Vorstände bytegleich
+archiviert. Alle vier aktuellen Receipts bestehen Bash und PowerShell mit
+75/11/81/77 Quellen; letztere drei großen Prüfungen benötigten mehrere Minuten
+wegen der separaten Pfad-/Inhaltschecks, wurden nicht übersprungen.
+Vollständiges Fünferreview 09d784df-eae0-4952-9f5f-a458379ed9c6: Ready,
+null Findings/Fragen/Risikoannahmen. Graph und Lifecycle unverändert.
+
+EN: Update this package only, preserving thirteen other payloads, priorities
+and command/skill registration. Verify paired active pins and local profiles/
+locks; preserve 26 preimages. Four receipts pass both Bash and PowerShell with
+75/11/81/77 sources; the three large native checks took several minutes and
+were not skipped. Complete five-target review is Ready without findings,
+questions or accepted risks; graph/lifecycle remain unchanged.
+
+DE: Der exakte LIVE-Staging-Validator besteht nun tatsächlich: 158 Dateien,
+acht ausschließlich historische Rohhash-Ausnahmen, Indexbaum
+4f8515f1f4eca6f4662e8e9f98c8da4c4f80aa73. Aktive U-Datei ohne EOF-Ausnahme.
+Gitleaks-Diffscan und statisches Compose bestanden. PSScriptAnalyzer 1.25.0
+prüfte alle 128 repo-eigenen Dateien ohne Error/Warning; vier Upstream-Pfade
+wie registriert ausgeschlossen. Lychee: 2033 Links, null Fehler. Installierte
+vollständige Cross-Shell-Evidence-Suite, sechs Payload-/Surface-Tests, exakte
+14er-Matrix, Archivchecker mit sechs Negativfällen und generierte GSDB-Doku
+bestanden. Historisches Assurance-Statusschema ist gültig, dessen Gesamtstatus
+bleibt Blocked mit offenen menschlichen Entscheidungen, nicht Produkt-Ready.
+
+EN: The exact LIVE staged validator now genuinely passes 158 files with eight
+historical raw-hash allowances, index tree above; no allowance for the active
+update. Secret diff and static Compose pass. All 128 owned PowerShell files
+have no analyzer findings; four registered upstream paths remain excluded.
+Lychee reports 2033 links and zero errors. Full installed cross-shell evidence,
+six payload/surface tests, exact fourteen-preset matrix, archive positive/six
+negative cases and generated GSDB documentation pass. Historical Assurance
+status schema is valid but overall remains Blocked with human decisions Open,
+not product Ready.
+
+DE: Inhaltscommit 8b03db6 enthält das geprüfte Paket. Statistik wird danach
+in einem sauberen isolierten Worktree gerendert und als eigener Statistik-
+Commit veröffentlicht. Elf alte transaktionale staging-Duplikate bleiben
+bewusst unverändert und unversioniert. Keine Runtime-, Container-, Home-,
+Flotten- oder Feature-004-Implementierungsaktion.
+
+EN: Content commit 8b03db6 contains the checked package. Render statistics in
+a clean isolated worktree and commit that output separately. Preserve eleven
+old transactional staging duplicates untracked. No runtime, container, Home,
+fleet or Feature 004 implementation action is performed.
