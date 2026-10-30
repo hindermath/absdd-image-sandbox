@@ -19,9 +19,15 @@
       "status": "Eligible"
     },
     {
+      "role": "OrderedMember",
+      "status": "Blocked",
+      "path": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "normalizedSha256": "a9c3e49d227f13b69716b62930417cdbebb09d0df129eac23385a1adc122f7f6"
+    },
+    {
       "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
       "role": "OrderedMember",
-      "normalizedSha256": "18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f",
+      "normalizedSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a",
       "status": "Blocked"
     },
     {
@@ -52,6 +58,18 @@
       "to": "intakes/learner-fork-self-build-sandbox.md",
       "kind": "HardCompletionGate",
       "binding": true
+    },
+    {
+      "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "to": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "binding": true,
+      "kind": "SandboxBaseline"
+    },
+    {
+      "from": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "binding": true,
+      "kind": "SandboxBaseline"
     }
   ],
   "evidencePaths": [
@@ -79,6 +97,12 @@
     "docs/fuer-lernende/erste-schritte.md",
     "docs/fuer-lernende/troubleshooting.md",
     "docs/fuer-lernende/alltag.md",
-    "docs/maintenance/usability-alignment-2026-10-27.md"
+    "docs/maintenance/usability-alignment-2026-10-27.md",
+    "specs/intake-series-operations/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/proposal.json",
+    "specs/intake-series-operations/1cadc99c-e344-4fc9-9fa0-78414f2d82cd.json",
+    "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "docs/maintenance/ir801-repair-2026-10-30.md",
+    "docs/maintenance/intake-delivery-repair-2026-10-30.md",
+    "docs/maintenance/historical-eof-integration-2026-10-30.md"
   ]
 }

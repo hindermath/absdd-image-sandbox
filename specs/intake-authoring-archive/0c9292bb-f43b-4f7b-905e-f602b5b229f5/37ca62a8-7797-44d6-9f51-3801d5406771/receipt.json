@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "2.0",
+  "documentType": "IntakeReceipt",
+  "receiptId": "9dc9943a-2258-4914-bd94-422c8749aa23",
+  "intakeId": "0c9292bb-f43b-4f7b-905e-f602b5b229f5",
+  "generator": {
+    "preset": "intake-authoring-governance",
+    "version": "0.3.10"
+  },
+  "createdAt": "2026-10-28T11:12:23Z",
+  "operation": {
+    "operationId": "e30c8c5b-526c-4ffb-9a78-e29c75e06ca5",
+    "type": "Create",
+    "authorityEvidence": "User explicitly requests one combined Lastenheft from issues #101, #102 and #104 and a proposed position in the existing sequence, with no implementation. Create one standalone intake and receipt; do not change active series, existing intake identities, states or execution gates."
+  },
+  "status": "ReadyForReview",
+  "target": {
+    "path": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+    "normalizedSha256": "c84477a1676ebbf42f5c2b0a6f9797f9d1d41857c8d4ebe2bcc2b7cb44586d4b"
+  },
+  "sources": [
+    {
+      "sourceId": "SRC001",
+      "rawSha256": "N/A",
+      "etag": "N/A",
+      "redirectChain": [],
+      "path": "requirements/baseline/sandbox-feature-update-2026-10-28/issue-101.md",
+      "gitBlob": "N/A",
+      "kind": "File",
+      "label": "Immutable title/body snapshot of GitHub issue #101, retrieved through the connected GitHub tool on 2026-10-28",
+      "order": 1,
+      "retrievedAt": "N/A",
+      "contentLength": "N/A",
+      "location": "Repository",
+      "requestedUrl": "N/A",
+      "normalizedSha256": "f4fe7d475f6b94269631b56e65918c82b5add51e032d2994df4a46f7f06f4bdb",
+      "httpStatus": "N/A",
+      "lastModified": "N/A",
+      "finalUrl": "N/A",
+      "proofBoundary": "RepositoryFile; connector-derived public issue snapshot only, no raw HTTP metadata or upstream implementation acceptance asserted",
+      "contentType": "N/A"
+    },
+    {
+      "sourceId": "SRC002",
+      "rawSha256": "N/A",
+      "etag": "N/A",
+      "redirectChain": [],
+      "path": "requirements/baseline/sandbox-feature-update-2026-10-28/issue-102.md",
+      "gitBlob": "N/A",
+      "kind": "File",
+      "label": "Immutable title/body snapshot of GitHub issue #102, retrieved through the connected GitHub tool on 2026-10-28",
+      "order": 2,
+      "retrievedAt": "N/A",
+      "contentLength": "N/A",
+      "location": "Repository",
+      "requestedUrl": "N/A",
+      "normalizedSha256": "9f5885f5b6005c2ccf1b23d0442bf03a7a941c73cdd455d23744bcbb23701423",
+      "httpStatus": "N/A",
+      "lastModified": "N/A",
+      "finalUrl": "N/A",
+      "proofBoundary": "RepositoryFile; connector-derived public issue snapshot only, no raw HTTP metadata or upstream implementation acceptance asserted",
+      "contentType": "N/A"
+    },
+    {
+      "sourceId": "SRC003",
+      "rawSha256": "N/A",
+      "etag": "N/A",
+      "redirectChain": [],
+      "path": "requirements/baseline/sandbox-feature-update-2026-10-28/issue-104.md",
+      "gitBlob": "N/A",
+      "kind": "File",
+      "label": "Immutable title/body snapshot of GitHub issue #104, retrieved through the connected GitHub tool on 2026-10-28",
+      "order": 3,
+      "retrievedAt": "N/A",
+      "contentLength": "N/A",
+      "location": "Repository",
+      "requestedUrl": "N/A",
+      "normalizedSha256": "bc930ff2245d3111faef9d5de5b70cbc2a0f9a18e410f54479df76392ca13d45",
+      "httpStatus": "N/A",
+      "lastModified": "N/A",
+      "finalUrl": "N/A",
+      "proofBoundary": "RepositoryFile; connector-derived public issue snapshot only, no raw HTTP metadata or upstream implementation acceptance asserted",
+      "contentType": "N/A"
+    }
+  ],
+  "profile": "requirements/intake-governance-config.json: artifactNaming.profile=de; intakePattern=Lastenheft_<slug>.md; standalone candidate outside unchanged active series",
+  "languagePolicy": "de-DE first, equivalent English second, approximately CEFR B2, WCAG 2.2 AA where applicable",
+  "decisions": [
+    {
+      "evidence": "Explicit user request: ein gemeinsames Lastenheft.",
+      "status": "Answered",
+      "question": "One combined intake or separate new intake series?",
+      "answer": "One combined intake for issues #101, #102 and #104.",
+      "id": "IAD001"
+    },
+    {
+      "evidence": "Explicit user instruction: Noch keine Implementierung starten.",
+      "status": "Answered",
+      "question": "What current execution authority exists?",
+      "answer": "Document creation and sequencing recommendation only. No implementation, builds, runtime, commit, push or remote writes.",
+      "id": "IAD002"
+    }
+  ],
+  "openDecisionIds": [],
+  "questionCount": 0,
+  "agentSurface": {
+    "specifyCanonicalId": "speckit.specify",
+    "specifyInvocation": "$speckit-specify",
+    "autonomousCanonicalId": "speckit.autonomous",
+    "autonomousInvocation": "$speckit-autonomous"
+  },
+  "deliveryAuthority": "LocalImplementation",
+  "authorityEvidence": "Schema default is a prepared upper bound for a separately authorized future local run only. Current authority is requirements drafting and a non-binding ordering proposal; no current implementation or remote-delivery authority.",
+  "promptState": "Enabled",
+  "provenanceMode": "New",
+  "supersedes": {
+    "receiptPath": "N/A",
+    "targetNormalizedSha256": "N/A",
+    "archiveTargetPath": "N/A",
+    "archiveReceiptPath": "N/A"
+  },
+  "legacyAdoption": {
+    "evidenceType": "N/A",
+    "priorTargetNormalizedSha256": "N/A",
+    "priorGitBlob": "N/A"
+  },
+  "updateAuthorized": false,
+  "updateAuthorityEvidence": "N/A",
+  "series": {
+    "role": "N/A",
+    "seriesId": "N/A",
+    "order": "N/A",
+    "supersedesIntakeIds": [],
+    "manifestPath": "N/A"
+  },
+  "nextAction": "$speckit-intake-review Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+  "orderingProposal": {
+    "existingManifest": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "before": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+    "existingManifestNormalizedSha256": "936f44533c69d10563b7287a97ec12e16f74af9e0a8e6059b3f0a267e1b9b1bd",
+    "binding": false,
+    "after": "Lastenheft_Secure-Development-Container-Hardening.md",
+    "authority": "Recommendation only; later series mutation needs separate explicit authority and consistent provenance migration."
+  }
+}

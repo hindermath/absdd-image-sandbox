@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "2.0",
+  "documentType": "IntakeReceipt",
+  "receiptId": "1faf3e2e-dbc0-4d5e-ac26-87e5fda59ff5",
+  "intakeId": "0c9292bb-f43b-4f7b-905e-f602b5b229f5",
+  "generator": {
+    "preset": "intake-authoring-governance",
+    "version": "0.3.10"
+  },
+  "createdAt": "2026-10-28T11:30:29Z",
+  "operation": {
+    "operationId": "37ca62a8-7797-44d6-9f51-3801d5406771",
+    "type": "Update",
+    "authorityEvidence": "User explicitly authorizes repairing IR701 from the named current review, updating provenance and a full Single re-review; no implementation, series migration or remote writes. Editorial first-use explanations and DE/EN equivalence only; preserve all goals, requirements, thresholds, authority, security/A11Y decisions and ordering."
+  },
+  "status": "ReadyForReview",
+  "target": {
+    "path": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+    "normalizedSha256": "da1d114d1c95026900daf8a27f922654e5cc91041ced17009fa4c3c6f6b9e795"
+  },
+  "sources": [
+    {
+      "rawSha256": "N/A",
+      "kind": "File",
+      "requestedUrl": "N/A",
+      "label": "Previous intake, first binding source",
+      "normalizedSha256": "c84477a1676ebbf42f5c2b0a6f9797f9d1d41857c8d4ebe2bcc2b7cb44586d4b",
+      "redirectChain": [],
+      "finalUrl": "N/A",
+      "sourceId": "SRC001",
+      "gitBlob": "N/A",
+      "lastModified": "N/A",
+      "path": "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/37ca62a8-7797-44d6-9f51-3801d5406771/target.txt",
+      "contentLength": "N/A",
+      "retrievedAt": "N/A",
+      "contentType": "N/A",
+      "etag": "N/A",
+      "order": 1,
+      "proofBoundary": "RepositoryFile; immutable predecessor/review/issue snapshot evidence only; no product acceptance",
+      "location": "Repository",
+      "httpStatus": "N/A"
+    },
+    {
+      "rawSha256": "N/A",
+      "kind": "File",
+      "requestedUrl": "N/A",
+      "label": "Explicit authorized change source: current IR701 review result",
+      "normalizedSha256": "c3a508326469600325e1dae1be82bdb8d0cced5bc2179a436c0cece09daeca46",
+      "redirectChain": [],
+      "finalUrl": "N/A",
+      "sourceId": "SRC002",
+      "gitBlob": "N/A",
+      "lastModified": "N/A",
+      "path": "specs/intake-review-archive/4ca2cab9-38dd-4394-8c72-d31852829226/37ca62a8-7797-44d6-9f51-3801d5406771/result.json",
+      "contentLength": "N/A",
+      "retrievedAt": "N/A",
+      "contentType": "N/A",
+      "etag": "N/A",
+      "order": 2,
+      "proofBoundary": "RepositoryFile; immutable predecessor/review/issue snapshot evidence only; no product acceptance",
+      "location": "Repository",
+      "httpStatus": "N/A"
+    },
+    {
+      "rawSha256": "N/A",
+      "kind": "File",
+      "requestedUrl": "N/A",
+      "label": "Immutable title/body snapshot of GitHub issue #101, retrieved through the connected GitHub tool on 2026-10-28",
+      "normalizedSha256": "f4fe7d475f6b94269631b56e65918c82b5add51e032d2994df4a46f7f06f4bdb",
+      "redirectChain": [],
+      "finalUrl": "N/A",
+      "sourceId": "SRC003",
+      "gitBlob": "N/A",
+      "lastModified": "N/A",
+      "path": "requirements/baseline/sandbox-feature-update-2026-10-28/issue-101.md",
+      "contentLength": "N/A",
+      "retrievedAt": "N/A",
+      "contentType": "N/A",
+      "etag": "N/A",
+      "order": 3,
+      "proofBoundary": "RepositoryFile; immutable predecessor/review/issue snapshot evidence only; no product acceptance",
+      "location": "Repository",
+      "httpStatus": "N/A"
+    },
+    {
+      "rawSha256": "N/A",
+      "kind": "File",
+      "requestedUrl": "N/A",
+      "label": "Immutable title/body snapshot of GitHub issue #102, retrieved through the connected GitHub tool on 2026-10-28",
+      "normalizedSha256": "9f5885f5b6005c2ccf1b23d0442bf03a7a941c73cdd455d23744bcbb23701423",
+      "redirectChain": [],
+      "finalUrl": "N/A",
+      "sourceId": "SRC004",
+      "gitBlob": "N/A",
+      "lastModified": "N/A",
+      "path": "requirements/baseline/sandbox-feature-update-2026-10-28/issue-102.md",
+      "contentLength": "N/A",
+      "retrievedAt": "N/A",
+      "contentType": "N/A",
+      "etag": "N/A",
+      "order": 4,
+      "proofBoundary": "RepositoryFile; immutable predecessor/review/issue snapshot evidence only; no product acceptance",
+      "location": "Repository",
+      "httpStatus": "N/A"
+    },
+    {
+      "rawSha256": "N/A",
+      "kind": "File",
+      "requestedUrl": "N/A",
+      "label": "Immutable title/body snapshot of GitHub issue #104, retrieved through the connected GitHub tool on 2026-10-28",
+      "normalizedSha256": "bc930ff2245d3111faef9d5de5b70cbc2a0f9a18e410f54479df76392ca13d45",
+      "redirectChain": [],
+      "finalUrl": "N/A",
+      "sourceId": "SRC005",
+      "gitBlob": "N/A",
+      "lastModified": "N/A",
+      "path": "requirements/baseline/sandbox-feature-update-2026-10-28/issue-104.md",
+      "contentLength": "N/A",
+      "retrievedAt": "N/A",
+      "contentType": "N/A",
+      "etag": "N/A",
+      "order": 5,
+      "proofBoundary": "RepositoryFile; immutable predecessor/review/issue snapshot evidence only; no product acceptance",
+      "location": "Repository",
+      "httpStatus": "N/A"
+    }
+  ],
+  "profile": "requirements/intake-governance-config.json: artifactNaming.profile=de; intakePattern=Lastenheft_<slug>.md; standalone candidate outside unchanged active series",
+  "languagePolicy": "de-DE first, equivalent English second, approximately CEFR B2, WCAG 2.2 AA where applicable",
+  "decisions": [
+    {
+      "evidence": "Explicit user request: ein gemeinsames Lastenheft.",
+      "status": "Answered",
+      "question": "One combined intake or separate new intake series?",
+      "answer": "One combined intake for issues #101, #102 and #104.",
+      "id": "IAD001"
+    },
+    {
+      "evidence": "Explicit user instruction: Noch keine Implementierung starten.",
+      "status": "Answered",
+      "question": "What current execution authority exists?",
+      "answer": "Document creation and sequencing recommendation only. No implementation, builds, runtime, commit, push or remote writes.",
+      "id": "IAD002"
+    },
+    {
+      "answer": "Yes, editorial terminology and bilingual equivalence plus provenance only; no implementation, series migration or remote mutation.",
+      "question": "Is repair of IR701 and full re-review authorized?",
+      "evidence": "User explicitly authorizes repairing IR701 from the named current review, updating provenance and a full Single re-review; no implementation, series migration or remote writes. Editorial first-use explanations and DE/EN equivalence only; preserve all goals, requirements, thresholds, authority, security/A11Y decisions and ordering.",
+      "status": "Answered",
+      "id": "IAD003"
+    }
+  ],
+  "openDecisionIds": [],
+  "questionCount": 0,
+  "agentSurface": {
+    "specifyCanonicalId": "speckit.specify",
+    "specifyInvocation": "$speckit-specify",
+    "autonomousCanonicalId": "speckit.autonomous",
+    "autonomousInvocation": "$speckit-autonomous"
+  },
+  "deliveryAuthority": "LocalImplementation",
+  "authorityEvidence": "LocalImplementation remains a prepared future upper bound only. Current user authority covers IR701 editorial repair, provenance maintenance and Single re-review; no implementation or remote writes.",
+  "promptState": "Enabled",
+  "provenanceMode": "Supersession",
+  "supersedes": {
+    "archiveTargetPath": "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/37ca62a8-7797-44d6-9f51-3801d5406771/target.txt",
+    "receiptPath": "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/37ca62a8-7797-44d6-9f51-3801d5406771/receipt.json",
+    "targetNormalizedSha256": "c84477a1676ebbf42f5c2b0a6f9797f9d1d41857c8d4ebe2bcc2b7cb44586d4b",
+    "archiveReceiptPath": "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/37ca62a8-7797-44d6-9f51-3801d5406771/receipt.json"
+  },
+  "legacyAdoption": {
+    "evidenceType": "N/A",
+    "priorTargetNormalizedSha256": "N/A",
+    "priorGitBlob": "N/A"
+  },
+  "updateAuthorized": true,
+  "updateAuthorityEvidence": "User explicitly authorizes repairing IR701 from the named current review, updating provenance and a full Single re-review; no implementation, series migration or remote writes. Editorial first-use explanations and DE/EN equivalence only; preserve all goals, requirements, thresholds, authority, security/A11Y decisions and ordering.",
+  "series": {
+    "role": "N/A",
+    "seriesId": "N/A",
+    "order": "N/A",
+    "supersedesIntakeIds": [],
+    "manifestPath": "N/A"
+  },
+  "nextAction": "$speckit-intake-review Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+  "orderingProposal": {
+    "existingManifest": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "before": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+    "existingManifestNormalizedSha256": "936f44533c69d10563b7287a97ec12e16f74af9e0a8e6059b3f0a267e1b9b1bd",
+    "binding": false,
+    "after": "Lastenheft_Secure-Development-Container-Hardening.md",
+    "authority": "Recommendation only; later series mutation needs separate explicit authority and consistent provenance migration."
+  },
+  "repairEvidence": {
+    "promptsUnchanged": true,
+    "priorReviewNormalizedSha256": "c3a508326469600325e1dae1be82bdb8d0cced5bc2179a436c0cece09daeca46",
+    "priorReviewPath": "specs/intake-review-archive/4ca2cab9-38dd-4394-8c72-d31852829226/37ca62a8-7797-44d6-9f51-3801d5406771/result.json",
+    "normativeRequirementsUnchanged": true,
+    "findingIds": [
+      "IR701"
+    ],
+    "priorReviewId": "4ca2cab9-38dd-4394-8c72-d31852829226",
+    "operationId": "37ca62a8-7797-44d6-9f51-3801d5406771"
+  }
+}

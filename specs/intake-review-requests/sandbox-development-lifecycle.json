@@ -1,27 +1,32 @@
 {
   "schemaVersion": "1.1",
-  "reviewId": "5c452360-9bf7-44d9-84e0-10cae34e72ea",
+  "reviewId": "aa89a3d1-59a0-42bb-965b-1614e3758c04",
   "mode": "Series",
   "policy": "learner-a11y-bilingual-series",
   "targets": [
     {
-      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
       "role": "Primary",
+      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
       "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a"
     },
     {
-      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
       "role": "OrderedMember",
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
       "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560"
     },
     {
-      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
       "role": "OrderedMember",
-      "normalizedSha256": "18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f"
+      "path": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "normalizedSha256": "a9c3e49d227f13b69716b62930417cdbebb09d0df129eac23385a1adc122f7f6"
     },
     {
-      "path": "intakes/learner-fork-self-build-sandbox.md",
       "role": "OrderedMember",
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "normalizedSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a"
+    },
+    {
+      "role": "OrderedMember",
+      "path": "intakes/learner-fork-self-build-sandbox.md",
       "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338"
     }
   ],
@@ -29,11 +34,9 @@
     "orderedTargetPaths": [
       "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
       "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
       "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
       "intakes/learner-fork-self-build-sandbox.md"
-    ],
-    "roots": [
-      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
     ],
     "dependencies": [
       {
@@ -50,7 +53,20 @@
         "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
         "to": "intakes/learner-fork-self-build-sandbox.md",
         "kind": "HardCompletionGate"
+      },
+      {
+        "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "to": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+        "kind": "SandboxBaseline"
+      },
+      {
+        "from": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+        "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "kind": "SandboxBaseline"
       }
+    ],
+    "roots": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
     ]
   },
   "campaign": {
@@ -128,69 +144,41 @@
     "docs/fuer-lernende/erste-schritte.md",
     "docs/fuer-lernende/troubleshooting.md",
     "docs/fuer-lernende/alltag.md",
-    "docs/maintenance/usability-alignment-2026-10-27.md"
+    "docs/maintenance/usability-alignment-2026-10-27.md",
+    "specs/intake-series-operations/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/proposal.json",
+    "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+    "docs/maintenance/ir801-repair-2026-10-30.md",
+    "specs/intake-review-archive/505a9246-a7a7-4a37-9fe4-eb73f3a2705d/0ad06585-48d6-4e43-a7cc-714d580eef0e/result.json",
+    "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+    "docs/maintenance/intake-delivery-repair-2026-10-30.md",
+    "specs/intake-review-archive/652008d6-e24f-4279-a95c-bc110136ceee/d0c6bf80-d268-4a0f-92a2-70e748f8330a/result.json",
+    "docs/maintenance/historical-eof-integration-2026-10-30.md",
+    "specs/intake-review-archive/ab11aa4c-d97a-458e-99f5-526ea89dbd56/b2e17f24-435e-4ea7-86e5-e68edbea0803/result.json",
+    "docs/maintenance/template-series-fixture-alignment-2026-10-30.md",
+    "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/result.json"
   ],
-  "authorityEvidence": "User authorizes the overall bounded 2026-10-27 learner-usability provenance plan. The coordinating principal agent commissioned independent reviewer Huygens, temporarily held publication for USAB-IR001-003, and issued the final completion/release after the troubleshooting corrections. This is execution coordination under existing user authority, not a new owner scope or acceptance decision. Retain intake IDs, accepted scope, 71-source order, lifecycle Completed/Eligible/Blocked/Blocked, security and human gates. No Feature004 source cycle. No pilot, hardening, runtime, build, commit or push. Independent full review belongs to Huygens, not this updater.",
-  "operationId": "99ecfd91-17f2-4154-9d4e-e559242c5ce9",
-  "reviewScope": "Independent full substantive text and series review; no inherited acceptance, no pilot/hardening/runtime execution. Review all four targets and 71-source provenance of each active intake; Feature004 is not a binding source.",
-  "sourceBindings": [
-    {
-      "oldHash": "8a9fac14e92da1a901504a1daa15e56bf744b1d6c8cf192f0385716bcddbcaf3",
-      "newHash": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
-      "sourceCount": 71,
-      "receiptId": "9c16f468-1871-4a4d-9bb7-3d6e50143e6f",
-      "receiptNormalizedSha256": "435e085cafb46ac93a93e871c46d4533113f6261cd4ff283fcfbaae8cbcae8cb",
-      "intakeId": "a92a7ced-bbf3-4408-9754-7b739be19a41",
-      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
-      "path": "Lastenheft_Secure-Development-Container-Hardening.md"
-    },
-    {
-      "oldHash": "23fb312bc8821f7cea59222c4b53959e790d972db7968f1955ca64be87d50f5a",
-      "newHash": "18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f",
-      "sourceCount": 71,
-      "receiptId": "5c7b976f-d167-4f2f-8cf8-2bc67ba0aa9e",
-      "receiptNormalizedSha256": "91f3ff3ccb0b99cfdf95ef980e7805c8dacbd921f309267c790e8dd21124dea7",
-      "intakeId": "51d24064-dfa6-4375-9bcd-58cccc545167",
-      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
-      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md"
-    },
-    {
-      "oldHash": "d73d504931a2b1d8bae483edbd8e65c47de5aea29fa0eb78e39166de9f5b0f41",
-      "newHash": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
-      "sourceCount": 71,
-      "receiptId": "d2586366-2993-40d0-a556-63d06371aa07",
-      "receiptNormalizedSha256": "ba834710ee96f4c8c279464d7b98379ecca11b7c9645f4b0898de3f324e5cdaa",
-      "intakeId": "5926e53e-39b7-475f-8a6b-e2ec08b0a803",
-      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
-      "path": "intakes/learner-fork-self-build-sandbox.md"
-    }
-  ],
+  "authorityEvidence": "Existing explicit publication/repair authority includes mechanically aligning regression fixtures to the approved five-member series and separating preserved dated workshop evidence from current operational installation metadata. Renew only affected H/A/L source receipts with byte-preserving lineage and complete series review; no target, scope, graph, lifecycle, export, runtime, Home or fleet changes.",
+  "operationId": "869be6a5-a352-4f1f-baaf-aad2d6efd086",
+  "reviewScope": "Complete five-target semantic re-review after source-only CI fixture alignment; all target texts, U receipt and series manifest/receipt unchanged.",
   "seriesManifest": {
     "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
-    "normalizedSha256": "936f44533c69d10563b7287a97ec12e16f74af9e0a8e6059b3f0a267e1b9b1bd"
+    "normalizedSha256": "6f3c90e8fe8165d8925c59241f06597f346aa24923d83717c6e764e958dfd0db"
   },
   "seriesReceipt": {
-    "receiptId": "3cb90c62-7133-40ca-a60f-e66dc857b3ed",
-    "normalizedSha256": "b203b4208d10feda4666d16165077ffba99337c61b82e675b44ab63f7cde1659",
-    "path": "specs/intake-series/sandbox-development-lifecycle/receipt.json"
+    "receiptId": "2b1ab440-21e3-4158-8ee2-eb70227be4d3",
+    "path": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+    "normalizedSha256": "88341c3454c98dc8880634817ed303f475dc89e6f390ccfa55e5ba60e41229ef"
   },
-  "supersedesReviewId": "a8d1af24-3b78-40c2-9023-1ec9bd0aee33",
-  "ownerReportedRemediation": {
-    "normalizedSha256": "7367f3d82cb26296558305b8e0c6827bd96534ffca441832fbd23b9f742dd7f3",
-    "status": "CoordinatorReportsCorrectedAwaitingIndependentVerification",
-    "sourcePath": "docs/fuer-lernende/troubleshooting.md",
-    "reviewer": "Huygens",
-    "topics": [
-      "Compose binds entire port range, not merely app port",
-      "Image build alone does not replace container; controlled audit-stop/recreate",
-      "Separate Windows host and Ubuntu/WSL2 execution contexts"
-    ],
-    "findingIds": [
-      "USAB-IR001",
-      "USAB-IR002",
-      "USAB-IR003"
-    ],
-    "acceptance": "Not asserted by provenance updater",
-    "reportedBy": "Coordinating principal agent; Huygens independently verifies findings"
+  "supersedesReviewId": "09d784df-eae0-4952-9f5f-a458379ed9c6",
+  "admissionEvidence": {
+    "requestedNotExecuted": false,
+    "priorSeriesReviewPath": "specs/intake-review-archive/5c452360-9bf7-44d9-84e0-10cae34e72ea/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/result.json",
+    "priorSingleReviewPath": "specs/intake-review-archive/0b5f49ef-5dcc-449c-a438-cdc8115ec0be/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/result.json"
+  },
+  "repairAuthorization": {
+    "finding": "DELIVERY-FORMAT-001",
+    "contractPath": "docs/maintenance/template-series-fixture-alignment-2026-10-30.md",
+    "authorityEvidence": "Existing explicit publication/repair authority includes mechanically aligning regression fixtures to the approved five-member series and separating preserved dated workshop evidence from current operational installation metadata. Renew only affected H/A/L source receipts with byte-preserving lineage and complete series review; no target, scope, graph, lifecycle, export, runtime, Home or fleet changes.",
+    "operationId": "869be6a5-a352-4f1f-baaf-aad2d6efd086"
   }
 }

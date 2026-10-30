@@ -1,0 +1,15 @@
+{
+  "oldNormalizedSha256": "c84477a1676ebbf42f5c2b0a6f9797f9d1d41857c8d4ebe2bcc2b7cb44586d4b",
+  "priorReviewId": "4ca2cab9-38dd-4394-8c72-d31852829226",
+  "scope": "38 equivalent glossary entries and provenance explanation; no requirements changes",
+  "target": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+  "authorityEvidence": "User explicitly authorizes repairing IR701 from the named current review, updating provenance and a full Single re-review; no implementation, series migration or remote writes. Editorial first-use explanations and DE/EN equivalence only; preserve all goals, requirements, thresholds, authority, security/A11Y decisions and ordering.",
+  "operationId": "37ca62a8-7797-44d6-9f51-3801d5406771",
+  "newReviewId": "0b5f49ef-5dcc-449c-a438-cdc8115ec0be",
+  "rollbackBoundary": "Active files unchanged until staged authoring and review validation pass; restore exact prior bytes on publication failure.",
+  "newReceiptId": "1faf3e2e-dbc0-4d5e-ac26-87e5fda59ff5",
+  "intakeId": "0c9292bb-f43b-4f7b-905e-f602b5b229f5",
+  "finding": "IR701",
+  "newNormalizedSha256": "da1d114d1c95026900daf8a27f922654e5cc91041ced17009fa4c3c6f6b9e795",
+  "oldReceiptId": "9dc9943a-2258-4914-bd94-422c8749aa23"
+}

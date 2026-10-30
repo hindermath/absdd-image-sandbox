@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "505a9246-a7a7-4a37-9fe4-eb73f3a2705d",
+  "mode": "Series",
+  "policy": "learner-a11y-bilingual-series",
+  "targets": [
+    {
+      "role": "Primary",
+      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a"
+    },
+    {
+      "role": "OrderedMember",
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560"
+    },
+    {
+      "role": "OrderedMember",
+      "path": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "normalizedSha256": "54813beb0eb4c523d5b6529739b24b196a3ffdab1ca1ac602abaad479d5d6e88"
+    },
+    {
+      "role": "OrderedMember",
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "normalizedSha256": "18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f"
+    },
+    {
+      "role": "OrderedMember",
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338"
+    }
+  ],
+  "series": {
+    "orderedTargetPaths": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "dependencies": [
+      {
+        "from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+        "to": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "kind": "AssessmentBaseline"
+      },
+      {
+        "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "kind": "SandboxBaseline"
+      },
+      {
+        "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "to": "intakes/learner-fork-self-build-sandbox.md",
+        "kind": "HardCompletionGate"
+      },
+      {
+        "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "to": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+        "kind": "SandboxBaseline"
+      },
+      {
+        "from": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+        "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "kind": "SandboxBaseline"
+      }
+    ],
+    "roots": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+    ]
+  },
+  "campaign": {
+    "manifestPath": "N/A",
+    "workers": [],
+    "operatorExceptions": []
+  },
+  "changeSources": [
+    "docs/maintenance/intake-sources-alignment-2026-10-25.md",
+    "AGENTS.md",
+    ".specify/presets/secure-development-assurance-governance/templates/secure-development-evidence-contract.md",
+    "docs/maintenance/gsdb-344-preset-installed-lock.json",
+    "docs/maintenance/stable-preset-rollout-2026-10-24.md",
+    "docs/maintenance/stable-preset-source-lock-2026-10-24.json",
+    "docs/maintenance/stable-preset-installed-lock-2026-10-24.json",
+    "docs/secure-development/baseline-manifest.json",
+    "docs/maintenance/gsdb-344-source-inventory.json",
+    "docs/maintenance/gsdb-344-control-delta.json",
+    "docs/maintenance/intake-gsdb344-delta-2026-10-21.md",
+    ".specify/presets/secure-development-assurance-governance/docs/release-0.1.8-validation.md",
+    ".specify/presets/secure-development-assurance-governance/docs/user-guide.md",
+    ".specify/presets/secure-development-assurance-governance/docs/user-guide.EN.md",
+    "COMPLIANCE-PLAN_RL-SE-001.md",
+    "docs/maintenance/documentation-alignment-2026-10-25.md",
+    "docs/security/toolchain-followups-2026-10-25.md",
+    "docs/fuer-lernende/lernwege.md",
+    "docs/fuer-lernende/barrierefreiheit.md",
+    "docs/maintenance/sandbox-current-state-2026-10-25.md",
+    "docs/maintenance/toolchain-version-audit-2026-10-25.md",
+    "scripts/config/required-cli-tools-registry.json",
+    "scripts/tests/test_toolchain_version_pins.py",
+    "docs/fuer-lernende/sandbox-profil.md",
+    "docs/security/agent-session-log/2026-10-25-1047.md",
+    "Dockerfile",
+    "docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md",
+    "docs/maintenance/documentation-impact-2026-10-25.json",
+    "LICENSE",
+    "docs/licensing.md",
+    "docs/maintenance/template-profile-alignment-2026-10-25.md",
+    "docs/fuer-lernende/template-profil.md",
+    "docs/betrieb/template-erstuebernahme.md",
+    "README.md",
+    "CLAUDE.md",
+    "GEMINI.md",
+    ".github/copilot-instructions.md",
+    ".github/agents/copilot-instructions.md",
+    "docs/fuer-lernende/git-und-hosting.md",
+    "docs/fuer-lernende/installation.md",
+    "docs/fuer-lernende/entwickler-kurzpfad.md",
+    "docs/fuer-lernende/faq.md",
+    "docs/fuer-lernende/README.md",
+    "docs/lernwerkstaetten/README.md",
+    "docs/lernwerkstaetten/moderation.md",
+    ".github/workflows/gsdb-pilot-contracts.yml",
+    ".github/workflows/project-statistics-pilot-native-proof.yml",
+    "scripts/tests/test_template_profile.py",
+    "docs/praesentationen/workshop-spec-kit.de.md",
+    "docs/praesentationen/workshop-spec-kit.en.md",
+    "docs/praesentationen/werkstatt-sysinfo.de.md",
+    "docs/praesentationen/werkstatt-sysinfo.en.md",
+    "docs/praesentationen/werkstatt-web.de.md",
+    "docs/praesentationen/werkstatt-web.en.md",
+    ".github/workflows/documentation-and-sandbox.yml",
+    "docs/maintenance/closeout-rights-alignment-2026-10-25.md",
+    "docs/praesentationen/README.md",
+    "docs/maintenance/closeout-review-remediation-2026-10-25.md",
+    "scripts/tests/test_learner_documentation_contract.py",
+    "docs/maintenance/closeout-eof-alignment-2026-10-25.md",
+    "docs/maintenance/closeout-ci-alignment-2026-10-25.md",
+    "scripts/tests/test_closeout_ci_contracts.py",
+    ".github/workflows/maintenance-tui.yml",
+    "docs/maintenance/closeout-statistics-history-2026-10-25.md",
+    "scripts/lib/statistics-ci-evidence.ps1",
+    "scripts/tests/Test-StatisticsCiEvidence.ps1",
+    "docs/fuer-lernende/erste-schritte.md",
+    "docs/fuer-lernende/troubleshooting.md",
+    "docs/fuer-lernende/alltag.md",
+    "docs/maintenance/usability-alignment-2026-10-27.md",
+    "specs/intake-series-operations/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/proposal.json",
+    "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md"
+  ],
+  "authorityEvidence": "Prepared review request only under explicit series-admission authority. A future full five-target review requires a separate user invocation; no review executed by this migration.",
+  "operationId": "1cadc99c-e344-4fc9-9fa0-78414f2d82cd",
+  "reviewScope": "Full five-member semantic/series review; verify preserved hardening direct gate and both added update edges, four active intake receipts, changed membership text, DE/EN order views, stale-review supersession and all existing human/start boundaries.",
+  "seriesManifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "0f8f3685aaba88448bbe160e4b7b6d62f63b0508f96525179546e4d33f15bcf1"
+  },
+  "seriesReceipt": {
+    "receiptId": "a0d180b1-03a6-4002-94ea-a88d999e4a17",
+    "path": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+    "normalizedSha256": "e8b940d18d6de069d5e7a2076db6360c32a53b0d8bd86a59a777c5d38b2ced45"
+  },
+  "supersedesReviewId": "5c452360-9bf7-44d9-84e0-10cae34e72ea",
+  "admissionEvidence": {
+    "requestedNotExecuted": true,
+    "priorSeriesReviewPath": "specs/intake-review-archive/5c452360-9bf7-44d9-84e0-10cae34e72ea/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/result.json",
+    "priorSingleReviewPath": "specs/intake-review-archive/0b5f49ef-5dcc-449c-a438-cdc8115ec0be/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/result.json"
+  }
+}

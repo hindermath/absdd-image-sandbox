@@ -1,32 +1,8 @@
-# Independent review execution record
+# Reviewstand nach Serienaufnahme / Review after series admission
 
-DE: Huygens hat Review 5c452360-9bf7-44d9-84e0-10cae34e72ea eigenstaendig als NeedsRemediation abgeschlossen: ein Low USAB-IR004, drei nachgepruefte geloeste Medium USAB-IR001..003. Vollstaendige Begruendung im gleichnamigen .md-Bericht, maschinenlesbare Bindungen im Review-JSON. Kein gesondertes Ready.
+DE: Der frühere unabhängige Reviewnachweis ist bytegleich archiviert. Das aktuelle vollständige fünfgliedrige Nachreview `aa89a3d1-59a0-42bb-965b-1614e3758c04` ist nach bestätigter IR801-Reparatur Ready. Dieser Verweis behauptet keinen zusätzlichen unabhängigen Reviewlauf. Historischer Nachweis und aktueller Bericht bleiben getrennt; Eligible ist keine Startfreigabe.
 
-EN: Huygens independently completed review 5c452360-9bf7-44d9-84e0-10cae34e72ea as NeedsRemediation: one Low USAB-IR004 and three independently resolved Medium findings. See the matching .md report and result JSON for full reasoning/bindings. No separate Ready.
+EN: The prior independent review record is archived byte for byte. Current complete five-member re-review `aa89a3d1-59a0-42bb-965b-1614e3758c04` is Ready after approved IR801 repair. This pointer claims no additional independent review run. Preserve the distinction between historical evidence and the current report; eligibility is not execution authority.
 
-
-## Executed result validation / Ausgefuehrte Ergebnisvalidierung
-
-Command: bash .specify/presets/intake-review-governance/scripts/validate-intake-review-result.sh --result specs/intake-review-results/sandbox-development-lifecycle.json --repo .
-Exit: 0
-PASS: intake review 5c452360-9bf7-44d9-84e0-10cae34e72ea is current (Series, NeedsRemediation, 4 targets)
-
-Command: pwsh -NoProfile -NonInteractive -File .specify/presets/intake-review-governance/scripts/validate-intake-review-result.ps1 -Result specs/intake-review-results/sandbox-development-lifecycle.json -Repo .
-Exit: 0
-PASS: intake review 5c452360-9bf7-44d9-84e0-10cae34e72ea is current (Series, NeedsRemediation, 4 targets)
-
-DE: Beide einmal ausgefuehrten Validatoren bestaetigen Schema/Request-/Zielbindung des Series-Ergebnisses NeedsRemediation. Das ist keine technische, menschliche oder Usability-Abnahme. Keine Wiederholung.
-EN: Each validator ran once and confirmed schema/request/target binding for Series/NeedsRemediation. This grants no technical, human or usability acceptance. No rerun.
-
-## Bounded follow-up / Begrenztes Nachreview
-
-DE: 2026-10-27T18:14:32.640Z: Q1 unabhaengig auf71 aktuelle Quellen und erhaltene Gates geprueft. USAB-IR004 ResolvedAndVerified; alle vier USAB-Befunde geloest, null offene Findings, Gesamturteil Ready. Reviewer-UUID vom koordinierenden Hauptagenten aus Agenten-Toolergebnis mitgeteilt:01a17e80-c3dc-75d1-9e04-3f55115ab79d. Die vorherigen NeedsRemediation-Ausgaben oben sind historische Erstvalidierung, keine aktuelle Disposition. Finaler gezielter Ergebnisvalidatorpass wird unmittelbar darunter dokumentiert.
-
-EN: Independent Q1 check confirms71 current sources and retained gates. USAB-IR004 resolved; all four findings resolved, zero open findings, combined outcome Ready. Reviewer UUID above was provided by the coordinating agent from the spawn result. Earlier NeedsRemediation outputs are historical first validation, not current status. Final targeted result validation is recorded below.
-Command: bash .specify/presets/intake-review-governance/scripts/validate-intake-review-result.sh --result specs/intake-review-results/sandbox-development-lifecycle.json --repo .
-Exit: 0
-PASS: intake review 5c452360-9bf7-44d9-84e0-10cae34e72ea is current (Series, Ready, 4 targets)
-
-Command: pwsh -NoProfile -NonInteractive -File .specify/presets/intake-review-governance/scripts/validate-intake-review-result.ps1 -Result specs/intake-review-results/sandbox-development-lifecycle.json -Repo .
-Exit: 0
-PASS: intake review 5c452360-9bf7-44d9-84e0-10cae34e72ea is current (Series, Ready, 4 targets)
+Archiv / Archive: specs/intake-review-archive/5c452360-9bf7-44d9-84e0-10cae34e72ea/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/independent.txt
+Neuer Auftrag / New request: specs/intake-review-requests/sandbox-development-lifecycle.json

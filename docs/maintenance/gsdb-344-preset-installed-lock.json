@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "hashContract": "sha256-utf8-lf-bom-or-raw-v1",
-  "baselineCommit": "29c584ebc51513f73822e261bb9571c6b1048fb5",
-  "registrySha256": "b56f7088b13a522a62105022ad8242bd5d00b6fd9ca9c95a738a7d755115dc24",
+  "baselineCommit": "d5c313b5461afc09bec97e9980e2fd7632e6d2ff",
+  "registrySha256": "995f1ea38097f14f70a5682e6eb0b9e01124f893dfcfa5a2e42682e874aa8f6e",
   "presets": [
     {
       "id": "a11y-governance",
@@ -33,12 +33,12 @@
     },
     {
       "id": "autonomous-run-governance",
-      "version": "0.4.7",
+      "version": "0.4.8",
       "priority": 70,
       "enabled": true,
-      "manifest_hash": "sha256:0034c2dc7da5c64be3e2bceb10fbea435bc0de921def37b4ec5e7203b9719367",
-      "fileCount": 67,
-      "contentSha256": "f80590747555adfbc38238f3040a499bdec98a32005b6a0287c79bd9bcde0b37"
+      "manifest_hash": "sha256:3f52b84de645299244346d5c5f2784e10f30302715561ae3c8c9b46279cab6a7",
+      "fileCount": 70,
+      "contentSha256": "cd6c14f4ea6a94cb05a95e8881e89c59369d556911f7d879a84c8c1825a833cc"
     },
     {
       "id": "cross-platform-governance",

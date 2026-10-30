@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesOperation",
+  "operationId": "869be6a5-a352-4f1f-baaf-aad2d6efd086",
+  "type": "Update",
+  "status": "Completed",
+  "createdAt": "2026-10-30T17:34:14Z",
+  "authorityEvidence": "Existing explicit publication/repair authority includes mechanically aligning regression fixtures to the approved five-member series and separating preserved dated workshop evidence from current operational installation metadata. Renew only affected H/A/L source receipts with byte-preserving lineage and complete series review; no target, scope, graph, lifecycle, export, runtime, Home or fleet changes.",
+  "proposalPath": "specs/intake-authoring-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086/proposal.json",
+  "proposalNormalizedSha256": "7b18b4770cd54feb9f859518ec070f72faa8a6b1f03267599eeca1196db3b1a9",
+  "approval": {
+    "approved": true,
+    "approvedBy": "Repository owner",
+    "approvedAt": "2026-10-30T17:34:14Z",
+    "evidence": "Existing explicit publication/repair authority includes mechanically aligning regression fixtures to the approved five-member series and separating preserved dated workshop evidence from current operational installation metadata. Renew only affected H/A/L source receipts with byte-preserving lineage and complete series review; no target, scope, graph, lifecycle, export, runtime, Home or fleet changes."
+  },
+  "archiveEvidence": [
+    {
+      "source": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/869be6a5-a352-4f1f-baaf-aad2d6efd086/manifest.json",
+      "rawSha256": "6f3c90e8fe8165d8925c59241f06597f346aa24923d83717c6e764e958dfd0db",
+      "normalizedSha256": "6f3c90e8fe8165d8925c59241f06597f346aa24923d83717c6e764e958dfd0db"
+    },
+    {
+      "source": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/869be6a5-a352-4f1f-baaf-aad2d6efd086/receipt.json",
+      "rawSha256": "88341c3454c98dc8880634817ed303f475dc89e6f390ccfa55e5ba60e41229ef",
+      "normalizedSha256": "88341c3454c98dc8880634817ed303f475dc89e6f390ccfa55e5ba60e41229ef"
+    },
+    {
+      "source": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+      "archive": "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/request.json",
+      "rawSha256": "ba3feb93cb4dbb22cf94d3041524e170bbf34106d46d5dc73f25a92182f24f98",
+      "normalizedSha256": "ba3feb93cb4dbb22cf94d3041524e170bbf34106d46d5dc73f25a92182f24f98"
+    },
+    {
+      "source": "specs/intake-review-results/sandbox-development-lifecycle.json",
+      "archive": "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/result.json",
+      "rawSha256": "99c49710f9b3177d252085fd11f02d472c6773b86fe920046bb31f946d88bf61",
+      "normalizedSha256": "99c49710f9b3177d252085fd11f02d472c6773b86fe920046bb31f946d88bf61"
+    },
+    {
+      "source": "specs/intake-review-reports/sandbox-development-lifecycle.md",
+      "archive": "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/report.txt",
+      "rawSha256": "fc4bcd51837e0a1b53ac8f73d2e51c030ee257972574f8da863255e4de2ae63c",
+      "normalizedSha256": "fc4bcd51837e0a1b53ac8f73d2e51c030ee257972574f8da863255e4de2ae63c"
+    },
+    {
+      "source": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "archive": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/869be6a5-a352-4f1f-baaf-aad2d6efd086/target.txt",
+      "rawSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560"
+    },
+    {
+      "source": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "archive": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/869be6a5-a352-4f1f-baaf-aad2d6efd086/receipt.json",
+      "rawSha256": "caf75b937b7966632367ed668c62d1ef47fd8d0a99ef74563761b3c398444d22",
+      "normalizedSha256": "caf75b937b7966632367ed668c62d1ef47fd8d0a99ef74563761b3c398444d22"
+    },
+    {
+      "source": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "archive": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/869be6a5-a352-4f1f-baaf-aad2d6efd086/target.txt",
+      "rawSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a",
+      "normalizedSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a"
+    },
+    {
+      "source": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "archive": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/869be6a5-a352-4f1f-baaf-aad2d6efd086/receipt.json",
+      "rawSha256": "92309c32d2fb7a31f1d69a7df6bba6fd98c615eab330e384673f7235a1989dfc",
+      "normalizedSha256": "92309c32d2fb7a31f1d69a7df6bba6fd98c615eab330e384673f7235a1989dfc"
+    },
+    {
+      "source": "intakes/learner-fork-self-build-sandbox.md",
+      "archive": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/869be6a5-a352-4f1f-baaf-aad2d6efd086/target.txt",
+      "rawSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338"
+    },
+    {
+      "source": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "archive": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/869be6a5-a352-4f1f-baaf-aad2d6efd086/receipt.json",
+      "rawSha256": "b4a2e977ac39c867fc7861f37ac55859962ca418e8c17a7f1da78caa3e8eeb35",
+      "normalizedSha256": "b4a2e977ac39c867fc7861f37ac55859962ca418e8c17a7f1da78caa3e8eeb35"
+    },
+    {
+      "source": "scripts/tests/test_template_profile.py",
+      "archive": "specs/intake-authoring-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086/source-snapshots/test_template_profile.py.txt",
+      "rawSha256": "ae35dbd8a481edd3b0f120e261014b560e8ea6fc6bc9a96906fab279f0c64826",
+      "normalizedSha256": "ae35dbd8a481edd3b0f120e261014b560e8ea6fc6bc9a96906fab279f0c64826"
+    },
+    {
+      "source": "docs/praesentationen/README.md",
+      "archive": "specs/intake-authoring-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086/source-snapshots/workshop-readme.md.txt",
+      "rawSha256": "fa6c3f69cfb5a90d26d4615138e5a1e190fe019524fb09f4e720fad202f7d0ab",
+      "normalizedSha256": "fa6c3f69cfb5a90d26d4615138e5a1e190fe019524fb09f4e720fad202f7d0ab"
+    }
+  ],
+  "intendedTargets": [
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/869be6a5-a352-4f1f-baaf-aad2d6efd086/manifest.json",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/869be6a5-a352-4f1f-baaf-aad2d6efd086/receipt.json",
+    "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/request.json",
+    "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/result.json",
+    "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/report.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/869be6a5-a352-4f1f-baaf-aad2d6efd086/target.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/869be6a5-a352-4f1f-baaf-aad2d6efd086/receipt.json",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/869be6a5-a352-4f1f-baaf-aad2d6efd086/target.txt",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/869be6a5-a352-4f1f-baaf-aad2d6efd086/receipt.json",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/869be6a5-a352-4f1f-baaf-aad2d6efd086/target.txt",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/869be6a5-a352-4f1f-baaf-aad2d6efd086/receipt.json",
+    "specs/intake-authoring-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086/source-snapshots/test_template_profile.py.txt",
+    "specs/intake-authoring-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086/source-snapshots/workshop-readme.md.txt",
+    "scripts/tests/test_template_profile.py",
+    "scripts/tests/test_workshop_presentations.py",
+    "docs/praesentationen/README.md",
+    "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+    "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+    "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+    "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "specs/intake-authoring-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086/proposal.json",
+    "specs/intake-authoring-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086/operation.json",
+    "specs/intake-series-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086.json",
+    "specs/intake-review-results/sandbox-development-lifecycle.json",
+    "specs/intake-review-reports/sandbox-development-lifecycle.md",
+    "Lastenheft_Abarbeitungsreihenfolge.md",
+    "specs/intake-series/sandbox-development-lifecycle/order.md",
+    "Pflichtenheft.md",
+    "specs/intake-review-reports/learner-fork-self-build-sandbox.md",
+    "specs/intake-review-reports/sandbox-feature-update-2026-10-28.md",
+    "specs/intake-review-reports/sandbox-development-lifecycle-independent.txt",
+    "specs/intake-review-results/learner-fork-self-build-sandbox.json",
+    "specs/intake-review-results/sandbox-feature-update-2026-10-28.json"
+  ],
+  "validatedTargets": [
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/869be6a5-a352-4f1f-baaf-aad2d6efd086/manifest.json",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/869be6a5-a352-4f1f-baaf-aad2d6efd086/receipt.json",
+    "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/request.json",
+    "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/result.json",
+    "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/report.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/869be6a5-a352-4f1f-baaf-aad2d6efd086/target.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/869be6a5-a352-4f1f-baaf-aad2d6efd086/receipt.json",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/869be6a5-a352-4f1f-baaf-aad2d6efd086/target.txt",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/869be6a5-a352-4f1f-baaf-aad2d6efd086/receipt.json",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/869be6a5-a352-4f1f-baaf-aad2d6efd086/target.txt",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/869be6a5-a352-4f1f-baaf-aad2d6efd086/receipt.json",
+    "specs/intake-authoring-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086/source-snapshots/test_template_profile.py.txt",
+    "specs/intake-authoring-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086/source-snapshots/workshop-readme.md.txt",
+    "scripts/tests/test_template_profile.py",
+    "scripts/tests/test_workshop_presentations.py",
+    "docs/praesentationen/README.md",
+    "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+    "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+    "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+    "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "specs/intake-authoring-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086/proposal.json",
+    "specs/intake-authoring-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086/operation.json",
+    "specs/intake-series-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086.json",
+    "specs/intake-review-results/sandbox-development-lifecycle.json",
+    "specs/intake-review-reports/sandbox-development-lifecycle.md",
+    "Lastenheft_Abarbeitungsreihenfolge.md",
+    "specs/intake-series/sandbox-development-lifecycle/order.md",
+    "Pflichtenheft.md",
+    "specs/intake-review-reports/learner-fork-self-build-sandbox.md",
+    "specs/intake-review-reports/sandbox-feature-update-2026-10-28.md",
+    "specs/intake-review-reports/sandbox-development-lifecycle-independent.txt",
+    "specs/intake-review-results/learner-fork-self-build-sandbox.json",
+    "specs/intake-review-results/sandbox-feature-update-2026-10-28.json"
+  ],
+  "publishedTargets": [
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/869be6a5-a352-4f1f-baaf-aad2d6efd086/manifest.json",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/869be6a5-a352-4f1f-baaf-aad2d6efd086/receipt.json",
+    "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/request.json",
+    "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/result.json",
+    "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/report.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/869be6a5-a352-4f1f-baaf-aad2d6efd086/target.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/869be6a5-a352-4f1f-baaf-aad2d6efd086/receipt.json",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/869be6a5-a352-4f1f-baaf-aad2d6efd086/target.txt",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/869be6a5-a352-4f1f-baaf-aad2d6efd086/receipt.json",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/869be6a5-a352-4f1f-baaf-aad2d6efd086/target.txt",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/869be6a5-a352-4f1f-baaf-aad2d6efd086/receipt.json",
+    "specs/intake-authoring-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086/source-snapshots/test_template_profile.py.txt",
+    "specs/intake-authoring-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086/source-snapshots/workshop-readme.md.txt",
+    "scripts/tests/test_template_profile.py",
+    "scripts/tests/test_workshop_presentations.py",
+    "docs/praesentationen/README.md",
+    "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+    "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+    "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+    "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "specs/intake-authoring-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086/proposal.json",
+    "specs/intake-authoring-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086/operation.json",
+    "specs/intake-series-operations/869be6a5-a352-4f1f-baaf-aad2d6efd086.json",
+    "specs/intake-review-results/sandbox-development-lifecycle.json",
+    "specs/intake-review-reports/sandbox-development-lifecycle.md",
+    "Lastenheft_Abarbeitungsreihenfolge.md",
+    "specs/intake-series/sandbox-development-lifecycle/order.md",
+    "Pflichtenheft.md",
+    "specs/intake-review-reports/learner-fork-self-build-sandbox.md",
+    "specs/intake-review-reports/sandbox-feature-update-2026-10-28.md",
+    "specs/intake-review-reports/sandbox-development-lifecycle-independent.txt",
+    "specs/intake-review-results/learner-fork-self-build-sandbox.json",
+    "specs/intake-review-results/sandbox-feature-update-2026-10-28.json"
+  ],
+  "rollbackBoundary": "Isolated transaction, exact preimages; no partial live publication",
+  "failure": {
+    "class": "N/A",
+    "message": "N/A"
+  },
+  "validation": {
+    "bash": "Passed",
+    "powerShell": "Passed",
+    "fullReview": "Ready; complete five-member semantic review with both result validators"
+  },
+  "nextAction": "$speckit-intake-review specs/intake-review-requests/sandbox-development-lifecycle.json",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "completedAt": "2026-10-30T17:43:42Z"
+}

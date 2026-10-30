@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "4ca2cab9-38dd-4394-8c72-d31852829226",
+  "mode": "Single",
+  "status": "NeedsRemediation",
+  "policy": "generic-markdown",
+  "reviewedAt": "2026-10-28T11:20:30Z",
+  "repository": {
+    "root": ".",
+    "head": "7bb2ffd7630c8d4f52d3600cb6e22b51f413e6b4"
+  },
+  "targets": [
+    {
+      "normalizedSha256": "c84477a1676ebbf42f5c2b0a6f9797f9d1d41857c8d4ebe2bcc2b7cb44586d4b",
+      "gitBlob": "N/A",
+      "role": "Primary",
+      "path": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md"
+    }
+  ],
+  "findings": [
+    {
+      "evidence": "Target lines 19-36, 127-131, 181-184 and 376-385: audience excludes prior container/programming/Spec Kit experience; SELinux, Bubblewrap, capability drop, Seccomp and LSP are unexplained, and English asks for definitions instead of supplying equivalent ones. Installed intake-review checklist lines 6-9 and AGENTS learner baseline require first-use explanations and equivalent DE/EN.",
+      "reevaluationTrigger": "Authorized terminology/DE-EN correction, updated target and receipt provenance, then full Single re-review; preserve functional scope and execution boundaries.",
+      "remediation": "Explain technical terms at first use or introduce a complete equivalent bilingual B2 glossary before use; preserve technical identifiers. Do not implement product changes.",
+      "disposition": "Open - RemediationRequired; no human risk acceptance exists",
+      "target": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "severity": "Medium",
+      "owner": "Requirements Author / Documentation & Learning Review",
+      "category": "Learning/Language/FirstUseTerminology",
+      "id": "IR701"
+    }
+  ],
+  "questions": [],
+  "acceptedRisks": [],
+  "operatorExceptions": [],
+  "coverage": {
+    "series": [],
+    "individual": [
+      "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md"
+    ],
+    "workers": []
+  },
+  "summary": {
+    "low": 0,
+    "high": 0,
+    "critical": 0,
+    "medium": 1
+  },
+  "supersedes": "N/A",
+  "sourceEvidence": [
+    {
+      "normalizedSha256": "f4fe7d475f6b94269631b56e65918c82b5add51e032d2994df4a46f7f06f4bdb",
+      "sourceId": "SRC001",
+      "path": "requirements/baseline/sandbox-feature-update-2026-10-28/issue-101.md"
+    },
+    {
+      "normalizedSha256": "9f5885f5b6005c2ccf1b23d0442bf03a7a941c73cdd455d23744bcbb23701423",
+      "sourceId": "SRC002",
+      "path": "requirements/baseline/sandbox-feature-update-2026-10-28/issue-102.md"
+    },
+    {
+      "normalizedSha256": "bc930ff2245d3111faef9d5de5b70cbc2a0f9a18e410f54479df76392ca13d45",
+      "sourceId": "SRC003",
+      "path": "requirements/baseline/sandbox-feature-update-2026-10-28/issue-104.md"
+    }
+  ],
+  "requirementsGovernance": {
+    "documentationLanguage": "de-DE",
+    "inventoryMode": "SeriesManifest",
+    "normalizedSha256": "d7740f7ff839ca310607acd2e20dd9d58ffcc8ef9553ad73e00e353508a0c5be",
+    "activeSeriesTargetCount": 3,
+    "outcome": "Aligned",
+    "eligibleCandidate": "Lastenheft_Secure-Development-Container-Hardening.md",
+    "seriesTargetCount": 4,
+    "activeIntakeCount": 6,
+    "path": "requirements/intake-governance-config.json"
+  },
+  "scopeBoundary": "One local Single intake and its bound source snapshots. No Series/Campaign re-review, live upstream refresh, independent human acceptance, implementation, build, runtime, commit, push or remote mutation. Same authoring chat; no independent four-eyes claim.",
+  "reportPath": "specs/intake-review-reports/sandbox-feature-update-2026-10-28.md",
+  "nextAction": "$speckit-intake-repair Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md — behebe IR701 aus specs/intake-review-results/sandbox-feature-update-2026-10-28.json, aktualisiere die Provenienz und führe anschließend das vollständige Single-Review erneut aus; keine Implementierung, Serienmigration oder Remote-Schreiboperation."
+}

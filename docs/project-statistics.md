@@ -1,6 +1,6 @@
 # Projektstatistik / Project Statistics — absdd-image-sandbox
 
-**Stand / Date:** 2026-07-10
+**Stand / Date:** 2026-10-30
 **Ausrichtung / Orientation:** DE-first, EN-second, CEFR B2, WCAG 2.2 AA
 
 > **DE:** Lebendiges Dokument — nach jedem abgeschlossenen Feature, jeder
@@ -239,6 +239,36 @@ EN: Bounded installation candidate, native command composition and separate
 technical assurance evidence. No product, Home, image or wider fleet changes.
 Delivery awaits explicit patch sighting and successful checks; no AI-time claim.
 
+### 2026-10-30 - Sandbox-Intake-Serie und IR801 / Sandbox intake series and IR801
+
+DE: Feature-Update als fünftes Ziel nach Hardening und vor Selbstprüfung
+aufgenommen. IR801-Vertrag ergänzt finale H/U-Baseline, unabhängige Prüfungen
+und keine Selbstabnahme. Vollständiges Nachreview Ready, null offene Findings;
+fünf Ziele, eine archivierte Root, fünf bindende Kanten. Provenienz und
+historische Vorstände erhalten. Keine Feature-Implementierung, Runtime-,
+Home- oder Flottenänderung; Feature 004 bleibt ein gesonderter Arbeitsstand.
+EN: Admit the feature update as the fifth target after hardening and before
+acceptance. IR801 binds the final H/U baseline, independent checks and no
+self-acceptance. Complete re-review Ready with no open findings; five targets,
+one archived root and five binding edges. Preserve provenance and history.
+No feature implementation, runtime, Home or fleet change; Feature 004 remains
+a separate work context.
+
+### 2026-10-30 - Kanonischer EOF-Fix / Canonical EOF fix
+
+DE: Autonomous v0.4.8 aus dem veröffentlichten eigenständigen Preset mit
+exaktem Tag-/ZIP-Nachweis lokal integriert. Die übrigen 13 Payloads bleiben
+unverändert. Aktive Profile/Locks und zwei Constitution-Pins aktualisiert;
+26 zusätzliche Vorstände bytegleich archiviert, vier aktive Receipts erneuert
+und vollständiges Serienreview Ready. Historische EOF-Bytes werden nur über
+exakte Rohhash-Ausnahmen erhalten, aktive U-Datei formatneutral normalisiert.
+Keine Feature-004-Implementierung, globale Profilverteilung oder Runtimeaktion.
+EN: Integrate published standalone Autonomous v0.4.8 with exact tag/ZIP proof,
+preserving thirteen other payloads. Renew local profiles/locks, paired pins,
+four receipts and complete Ready series review; preserve 26 preimages.
+Historical EOF allowances bind exact raw bytes; normalize the active update
+without semantic change. No Feature 004 execution, global rollout or runtime action.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
@@ -249,29 +279,29 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 397061 lines |
-| Textdateien / Text files | 2152 |
-| Beobachtbarer Zeitraum / Observable period | 2025-11-02..2026-10-29 |
-| Aktivtage / Active days | 86 |
-| Relevante Commits / Relevant commits | 282 |
-| Zeilen je Aktivtag / Lines per active day | 4617.0 |
+| Textbasis / Text base | 441462 lines |
+| Textdateien / Text files | 2284 |
+| Beobachtbarer Zeitraum / Observable period | 2025-11-02..2026-10-30 |
+| Aktivtage / Active days | 87 |
+| Relevante Commits / Relevant commits | 285 |
+| Zeilen je Aktivtag / Lines per active day | 5074.3 |
 | Peak-Tag im Fenster / Peak day in window | 2026-10-25 / 101840 |
-| Peak-Woche im Fenster / Peak week in window | 2026-10-25 / 128183 |
+| Peak-Woche im Fenster / Peak week in window | 2026-10-25 / 180596 |
 | Laengste Serie / Longest streak | 8 days |
-| Speedup vs. 80 lines/day | 57.7x |
-| Speedup vs. 100 lines/day | 46.2x |
-| Methodik / Methodology | v2; source `c8e07549bc34` |
+| Speedup vs. 80 lines/day | 63.4x |
+| Speedup vs. 100 lines/day | 50.7x |
+| Methodik / Methodology | v2; source `cfda4302d116` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [#...................]   0.0% | 97
-Tests                           [#...................]   3.1% | 12387
-Dokumentation / Documentation   [#############.......]  63.4% | 251745
-Skripte / Scripts               [##..................]   9.8% | 38788
-Konfiguration / Configuration   [###.................]  14.8% | 58679
+Tests                           [#...................]   2.8% | 12481
+Dokumentation / Documentation   [############........]  58.2% | 257075
+Skripte / Scripts               [##..................]   9.0% | 39548
+Konfiguration / Configuration   [####................]  19.6% | 86359
 Daten und Medien / Data and media [....................]   0.0% | 0
-Sonstiger Text / Other text     [##..................]   8.9% | 35365
+Sonstiger Text / Other text     [##..................]  10.4% | 45902
 ```
 
 Die Balken teilen die aktuelle getrackte Textbasis in stabile Kategorien. Prozent und Zeilenwert sind die genaue, textorientierte Aussage.
@@ -298,7 +328,7 @@ Mo/Mo  2 3 0 3 2 0 0 0 0 0 4 4 0 0 0 2 0 0 4 2 0 0 0 0 4 0
 Di/Tu  2 3 3 2 3 0 0 0 0 0 3 4 4 0 0 0 0 0 4 4 0 0 4 0 4 4
 Mi/We  3 0 0 2 4 0 0 0 0 2 1 2 4 0 0 2 0 0 0 0 0 0 0 0 4 0
 Do/Th  1 3 3 0 4 3 0 0 0 0 1 3 0 0 4 0 0 0 0 0 0 0 0 0 0 2
-Fr/Fr  0 2 1 3 0 0 0 2 4 4 4 4 1 0 4 0 0 3 0 3 0 0 0 0 0 -
+Fr/Fr  0 2 1 3 0 0 0 2 4 4 4 4 1 0 4 0 0 3 0 3 0 0 0 0 0 4
 Sa/Sa  0 0 2 0 0 0 2 0 4 4 0 4 2 0 2 0 0 0 4 1 3 0 4 0 4 -
 ```
 
@@ -322,8 +352,8 @@ Wochen / Weeks 01..26 | 2025-11-02..2026-05-02
 ```text
 Wochen / Weeks 27..52 | 2026-05-03..2026-10-31
   cap 200000 | . . . . . . . . . . . . . . . . . . . . . . . . . .
-      166667 | . . . . . . . . . . . . . . . . . . . . . . . . . .
-      133333 | . . . . . . . . . . . . . . . . . . . . . . . . . .
+      166667 | . . . . . . . . . . . . . . . . . . . . . . . . . #
+      133333 | . . . . . . . . . . . . . . . . . . . . . . . . . #
       100000 | . . . . . . . . . . . . . . . . . . . . . . . . . #
        66667 | . . . . . . . . . . . . . . . . . # . . . . . . . #
        33333 | . . . . . . . . # . . # . . . . . # # . . . . . # #
@@ -388,8 +418,8 @@ Die festen Slots halten den Phasenvergleich auch bei fehlenden oder spaeter erga
 
 ```text
 Scale: 0..100x
-80 lines/day       [############........] 57.7x
-100 lines/day      [#########...........] 46.2x
+80 lines/day       [#############.......] 63.4x
+100 lines/day      [##########..........] 50.7x
 ```
 
 Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen Referenzen. Sie messen keine Arbeitszeit.
@@ -399,10 +429,10 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 ### Durchsatzvergleich / Throughput Comparison
 
 ```text
-Scale: 0..5000 lines/day
+Scale: 0..10000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 100
-Visible repository [##################..] 4617.0
+Visible repository [##########..........] 5074.3
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -411,9 +441,9 @@ Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schre
 
 ### Textalternative / Text Alternative
 
-DE: Das Fenster beginnt am 2025-11-02 und endet am 2026-10-29. Es enthaelt 86 aktive und 276 inaktive vergangene Tage. Peak-Tag: 2026-10-25 / 101840. Peak-Woche: 2026-10-25 / 128183. Laengste Serie: 8 Tage (2026-07-10..2026-07-17).
+DE: Das Fenster beginnt am 2025-11-02 und endet am 2026-10-30. Es enthaelt 87 aktive und 276 inaktive vergangene Tage. Peak-Tag: 2026-10-25 / 101840. Peak-Woche: 2026-10-25 / 180596. Laengste Serie: 8 Tage (2026-07-10..2026-07-17).
 
-*EN: The window starts on 2025-11-02 and ends on 2026-10-29. It contains 86 active and 276 inactive elapsed days. Peak day: 2026-10-25 / 101840. Peak week: 2026-10-25 / 128183. Longest streak: 8 days (2026-07-10..2026-07-17).*
+*EN: The window starts on 2025-11-02 and ends on 2026-10-30. It contains 87 active and 276 inactive elapsed days. Peak day: 2026-10-25 / 101840. Peak week: 2026-10-25 / 180596. Longest streak: 8 days (2026-07-10..2026-07-17).*
 
 | Monat / Month | Geaenderte Textzeilen / Changed text lines |
 |---|---:|
@@ -428,6 +458,6 @@ DE: Das Fenster beginnt am 2025-11-02 und endet am 2026-10-29. Es enthaelt 86 ak
 | 2026-07 | 110442 |
 | 2026-08 | 96264 |
 | 2026-09 | 61410 |
-| 2026-10 | 187013 |
+| 2026-10 | 239426 |
 
 <!-- project-statistics-v2:end -->

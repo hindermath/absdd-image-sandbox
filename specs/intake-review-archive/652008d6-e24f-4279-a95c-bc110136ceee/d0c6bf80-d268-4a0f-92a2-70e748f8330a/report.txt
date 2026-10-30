@@ -1,0 +1,212 @@
+# Vollständiges Serien-Nachreview nach IR801 / Complete Series Re-review
+
+## Deutsch
+
+**Ergebnis: Ready.** IR801 ist nach ausdrücklicher Bestätigung des konkreten
+Reparaturvertrags behoben. Alle fünf Intake-Texte und ihre Übergaben wurden
+erneut fachlich beurteilt, nicht nur der reparierte Abschnitt. Keine offenen
+Findings, materiellen Fragen oder akzeptierten Risiken; null Kampagnen-Worker.
+Dies ist Anforderungsbereitschaft, keine technische, menschliche oder
+WCAG-AA-Abnahme und keine Start-/Lieferfreigabe.
+
+- Review-ID: `652008d6-e24f-4279-a95c-bc110136ceee`.
+- Operation: `0ad06585-48d6-4e43-a7cc-714d580eef0e`.
+- Datum: 30.10.2026. Reviewer: Codex, agentisches Intake-Nachreview.
+- Repository-Head: `d5c313b5461afc09bec97e9980e2fd7632e6d2ff`; vorhandene lokale Governance-Arbeit bleibt erhalten.
+- Policy: `learner-a11y-bilingual-series` aus dem expliziten Auftrag und Projekt-Guidance; installierte Checkliste und Schema-2.0-Konfiguration.
+- [Auftrag](../intake-review-requests/sandbox-development-lifecycle.json) und [Ergebnis mit allen aktuellen Hashes](../intake-review-results/sandbox-development-lifecycle.json).
+- [Bestätigter Reparaturvertrag](../../docs/maintenance/ir801-repair-2026-10-30.md).
+
+### Reparatur und Autorität
+
+Die Nutzerantwort bestätigt ausdrücklich: beide Vorgänger und finale
+Quellrevision/Image-ID übernehmen; neue Web-/Readiness-/Client-/Profilverträge
+und erhaltene Security-/Auditkontrollen risikobasiert unabhängig prüfen;
+niemand nimmt die selbst implementierten Hardening-/Update-Anteile ab.
+Archivierung, Governance-Erneuerung und vollständiges Nachreview sind umfasst.
+Implementierung, Commit und Push sind ausdrücklich ausgeschlossen.
+
+Geändert wurde fachlich nur
+`Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md`. Die bestehende
+Intake-ID `51d24064-dfa6-4375-9bcd-58cccc545167` bleibt. Neue Inhalte:
+
+- Ausgangslage und Abhängigkeiten verlangen H **und** U; beide auf denselben
+  finalen Quellstand und die exakte Image-ID pro Profil/Architektur beziehen.
+- A-344-04 belegt Reviewer-Unabhängigkeit je geprüftem Hardening-/Update-Anteil.
+- A-FU-01/02 und AC-A-FU-01/02 binden sämtliche FU-/FA-IDs, die sechs
+  risikobasierten Prüfgruppen und sichere positive/negative Gegenprüfungen.
+- Herkunft, Umfang und Begründung übernommener Evidence bleiben von selbst
+  wiederholten Prüfungen getrennt; keine pauschale Testverdopplung.
+- Beide kopierbaren Folgeprompts übernehmen U ausdrücklich und halten sämtliche
+  bisherigen Start-, Liefer-, Human-only- und Self-build-Gates aufrecht.
+
+Die alte Fassung und ihr Receipt sowie Manifest, Serienreceipt, beide
+Reihenansichten, Index und IR801-Request/-Ergebnis/-Bericht wurden vorher
+bytegleich archiviert. Das frühere High/NeedsRemediation bleibt historisch
+unverändert, nicht rückwirkend Ready. Neue Receipts, Operation und Review-ID
+ersetzen keine bestehende Anforderungsidentität oder historische Freigabe.
+
+### Vollständige fachliche Abdeckung
+
+Für jedes Ziel wurden Identität, Zielgruppe/Vorwissen, Zweck/Scope/Nicht-Ziele,
+Prüfbarkeit und messbare Kriterien, Abhängigkeiten, Sicherheit/Datenschutz/
+Lieferkette/A11Y/Plattform, Evidence, Autorität, Risiken, Quellen und Prompts
+erneut betrachtet. Vier unveränderte Texte wurden gegen die exakt gebundenen
+Inhalte des vorherigen vollständigen Reviews abgeglichen; dessen Ready wurde
+nicht übernommen (es lautete für die aktuelle Reihe NeedsRemediation).
+
+| Ziel | Ergebnis der erneuten Beurteilung |
+|---|---|
+| Archivierte GSDB-Root | Historische abgeschlossene Bestandsprüfung bleibt Eingang für H, nicht erneute Implementierung oder Produktfreigabe. Vollständige Checklisten-/Evidenzmatrix, offene menschliche Entscheidungen und Lückenliste sind ein konsistenter Übergabevertrag. |
+| H: Container-Hardening | H-344-01–10 und AC-H-344-01–10 erhalten die Kontrollgruppen und 85-/80-Prozent-Schwellen. Echte Anwendungen werden nicht nur für Kontrolltests erfunden. GSDB 3.4.4 und Assurance 0.1.8 bleiben getrennte Basis-/Werkzeugstände; rechtliche und operative Entscheidungen bleiben menschlich. |
+| U: Feature-Update | FU-001–023 und FA-001–012 decken Basis-/Versionserhalt, Ausgabepfade, Architektur, lokale Authentifizierung/Readiness, gemeinsame Clients, Profile, Wrapper, Daten/Audit/Lieferkette und Lernendenpfade ab. Native Nachweise und ehrliche Open/Blocked-Plattformgrenzen bleiben erforderlich. |
+| A: unabhängige Selbstprüfung | Neuer empfangender Vertrag übernimmt H/U, die finale gemeinsame Identität und FU-/FA-Evidence vollständig. Matrix, unabhängige positive/negative Gegenprüfungen, begründete Übernahmen, Reviewer-Zuordnung und Blocker für fehlende Nachweise schließen IR801 ohne alte Grenzwerte zu lockern. |
+| L: Lernenden-Selbstbau | Bleibt von erfolgreichem A und gesonderter Autorität abhängig. Fork/origin/upstream, providerfreier Selbstbau, Rechte-/Template-Gates, DE/EN, Quellenprüfung und sichere Datenpfade bleiben konsistent. Standard `all` trägt weiter den sechs-Sprachen-Smoke-Test; optionale reduzierte Profile ändern diesen Default nicht automatisch. |
+
+#### Übergaben und Invarianten
+
+1. GSDB liefert die abgeschlossene historische Baseline und Lückenliste an H.
+2. H liefert die Sicherheitsbaseline an U und bleibt direkter Vorgänger von A.
+3. U erhält H-Ergebnisse und bindet die Kombination auf dem finalen Update-Image.
+4. A übernimmt **beide** Vorgänger und ordnet unabhängige FU-/FA-Prüfverantwortung
+   zu; reine Wiederverwendung historischer Image-Ergebnisse ist kein Pass.
+5. L bleibt bis erfolgreicher unabhängiger A und neuer Startautorität blockiert.
+
+Fünf Ziele genau einmal, fünf unveränderte eindeutige azyklische Kanten und eine
+archivierte Zero-Indegree-Root. Statusfolge bleibt
+**Completed → Eligible → Blocked → Blocked → Blocked**. H ist allein strukturell
+Eligible; Ready dieses Reviews startet weder H noch irgendeinen anderen Lauf.
+Es entsteht keine neue Dependency-Ownership, kein Scope-Split und kein Rennen
+zwischen parallel gestarteten Mitgliedern.
+
+#### Sprache, Leserpfade und Grenzen
+
+Erstes Ausbildungsjahr, alle vier IT-Berufe einschließlich vier
+Fachinformatik-Fachrichtungen und keine vorausgesetzte Spec-Kit-Erfahrung
+bleiben adressiert. H/A/L erklären Voraussetzungen und Begriffe; U führt
+seine technische Begriffshilfe. DE zuerst, gleichwertiges EN, ungefähr B2 und
+vollständige textorientierte Zustände/Entscheidungen bleiben erhalten. Die
+Reparatur ergänzt keine zweite Lernreihe. Das normative Tabellenformat ist
+auch ohne Mermaid verständlich.
+
+Schema 2.0 bleibt Aligned: de-DE, vier portable Rollen, Sammlungen, deutscher
+Index, begrenzter Legacy-Pfad und beide textuellen Reihenansichten stimmen
+überein. Sechs physische aktive Dateien sind von vier aktiven Serienmitgliedern
+und fünf Zielen einschließlich archivierter Root zu unterscheiden.
+
+Kein Build, Containerbetrieb, Provider-/Modellaufruf, tatsächlicher
+Reviewer-Einsatz oder Plattform-/Screenreader-/Braille-/Nutzendentest wurde
+ausgeführt. Das Nachreview ist kein technisches unabhängiges A, keine
+Rechtsberatung, formelle Sandbox-Freigabe oder Risikoannahme. Solche späteren
+Nachweise bleiben reale Ausführungs-/Menschenaufgaben, keine Intake-Lücken.
+
+### Herkunft und Validierung
+
+- Intake-Receipt neu: `85aed2bd-ff6e-48ac-a1a9-9d42c65c784c`; Quellenreihenfolge: direkter archivierter Vorgänger zuerst, bestätigter Vertrag, archiviertes IR801-Ergebnis, bestehendes U, danach alle bisherigen Quellen unverändert geordnet. Insgesamt 77 Quellen.
+- Serienreceipt neu: `d7e2126d-1196-4eca-a879-8bac839a0cef`, gleiche Serien-ID. Zielmenge, Rollen, Roots, Kanten und Zustände unverändert; Hash des reparierten Mitglieds und Quellenbindung erneuert.
+- Intake-Archiv: `specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/0ad06585-48d6-4e43-a7cc-714d580eef0e/`.
+- Serienarchiv: `specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/0ad06585-48d6-4e43-a7cc-714d580eef0e/`.
+- Voriges IR801-Review: `specs/intake-review-archive/505a9246-a7a7-4a37-9fe4-eb73f3a2705d/0ad06585-48d6-4e43-a7cc-714d580eef0e/`.
+- Vor Veröffentlichung werden aktuelles Intake-Receipt, Serienmanifest und -receipt mit den installierten Bash- und PowerShell-Validatoren in isolierter Kopie geprüft. Ergebnisvalidierung und Erhaltungsnachweis werden nach tatsächlicher Ausführung unten festgehalten.
+- Erster Staging-Versuch wurde wegen fehlendem Zielnamen in `nextAction` abgelehnt. Die generierte Zeichenfolge wurde berichtigt; der fehlgeschlagene Versuch ist kein Pass, keine Validatorregel wurde abgeschwächt.
+
+Documentation Impact: **UpdateRequired**, Owner Repository Owner. Kanonisch
+sind bestätigter Reparaturvertrag, der empfangende Intake und erneuerte
+Bindings. Betroffene Leserpfade: Intake/Prompts, Reviewbericht/-JSON, Index und
+Statusansichten; DE/EN, `sourceOnly`, kein Home-Sync. Re-Evaluation bei geändertem
+Ziel, Request, Graph, Evidencebindung oder Reviewer-Zuordnung.
+
+### Nächste Aktion
+
+`$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json`
+
+## English
+
+**Outcome: Ready.** The explicitly approved bounded repair resolves IR801.
+All five intake contracts and handoffs were re-reviewed, not just the changed
+paragraph. No open findings (Critical/High/Medium/Low all zero), unanswered
+material questions, accepted risks, campaign workers or operator exceptions.
+Ready means requirement readiness, not technical/human/WCAG acceptance or
+permission to execute, commit or publish.
+
+Only the receiving independent-acceptance intake changes substantively; its
+identity remains. A-FU-01/02 and AC-A-FU-01/02 explicitly consume both H/U
+handoffs on the same final source revision and image identity per profile and
+architecture. A-344-04 records reviewer independence for each portion; nobody
+accepts the hardening/update portions they implemented. Risk-based independent
+positive/negative checks cover base/outputs, web authentication/readiness,
+shared clients, profiles/platforms, retained security/audit/data controls and
+learner/integrated evidence. Reused evidence needs provenance, matching identity
+and justification, rather than mechanically duplicating every test. Both prompts
+bind these obligations and preserve previous thresholds and human/start gates.
+
+The historical assessment remains immutable dependency context. H retains its
+ten control groups and 85/80 thresholds; U retains 23 requirements and 12
+acceptance criteria. A now explicitly consumes the new independent test scope.
+L still waits for successful A and fresh authority, retaining fork/upstream,
+self-build, rights and optional-template gates. Its six-language smoke applies
+to default `all`, without silently making reduced profiles the new default.
+All five texts were considered for identity, audience/prior knowledge,
+scope/non-goals, measurable criteria, dependencies, security/privacy/supply
+chain/A11Y/platform, evidence, authority, risks, sources and prompts. Four
+unchanged inputs were compared with the identical text of the prior full
+review; its blocking outcome was not inherited as Ready.
+
+The graph retains five targets, five unique acyclic edges, one archived root
+and Completed/Eligible/Blocked/Blocked/Blocked. Hardening alone is structurally
+eligible; no target starts. Schema 2.0 remains Aligned, with de-DE, roles,
+collections, index and textual orders consistent. Six physical active intake
+files differ from four active series members and five total targets. Beginner
+terms, German-first/equivalent-English, B2 target and text-first decisions remain.
+No rendering, screenreader/Braille, user, image/platform, human-approval, model
+or actual independent product-acceptance run occurred.
+
+Ten prior artifacts are archived byte for byte, including the original
+High/NeedsRemediation result; no historical outcome is rewritten. New intake,
+series and review receipts bind current hashes without changing identities or
+other targets. The repaired receipt has 77 sources: archived predecessor,
+explicit contract, archived finding, U, then all previous sources in order.
+Both installed shell validator variants are required before publication.
+An initial staged next-action validation failed and was corrected without
+weakening validators; it is not represented as a pass.
+
+Documentation Impact: UpdateRequired for source-only intake/prompt/provenance/
+review/index/status evidence; no Home sync. Reevaluate after target, request,
+graph, identity/evidence or reviewer-allocation drift. The next action is the
+read-only series-status command above. Final executed validation and
+preservation results follow below.
+
+## Ausgeführte Abschlussprüfungen / Executed final checks
+
+DE: In der isolierten Transaktion bestanden Intake-Receipt, Serienmanifest und
+Serienreceipt mit den installierten Bash- und PowerShell-Validatoren. Die drei
+unveränderten aktiven Receipts bestanden Bash; vier unveränderte Zieltexte sind
+bytegleich. Das neue vollständige Ready-Ergebnis besteht beide Ergebnisvalidatoren.
+Diff- und Secretprüfungen gehören zur Veröffentlichungskontrolle. Keine daraus
+abgeleitete technische oder menschliche Abnahme, kein Commit oder Push.
+
+EN: The isolated updated intake receipt, series manifest and series receipt
+passed both installed shell variants. Three unchanged active receipts passed
+Bash; four unchanged target texts are byte-identical. The complete Ready result
+passes both result validators. Publication checks include whitespace/secrets;
+this grants no product/human acceptance or delivery authority.
+
+### Erhaltung nach Veröffentlichung / Post-publication preservation
+
+DE: Alle 25 vorgesehenen Artefakte wurden transaktional übernommen. Die zehn
+Archivvorstände sind bytegleich nachgewiesen. Alle 2210 nicht betroffenen
+Bestandsdateien behalten den aggregierten Roh-SHA-256
+`dbf225fbf88c13f6caac6fde11920e232bac01d18a3add720f793ae7a88e0552`.
+Die bisherigen 73 Receipt-Quellen bleiben nach den vier neuen Quellen in
+ihrer ursprünglichen Reihenfolge gebunden. Zielmenge, Rollen, Kanten, Roots,
+Lifecycle und HEAD sind unverändert. Erneute aktive Ergebnisvalidierung
+mit Bash/PowerShell, Receipt-/Konfigurations-/Serienprüfung und diff-Check
+bestanden. Keine Dateien gestagt, kein Commit oder Push.
+
+EN: All 25 planned artifacts were published transactionally; ten archived
+preimages are byte-identical. All 2210 unrelated existing files retain the
+aggregate raw hash above. The former 73 sources remain in their original
+order after the four new sources. Targets/roles, edges, roots, lifecycle and
+HEAD are unchanged. Active Bash/PowerShell result checks plus receipt,
+configuration/series and whitespace checks passed. Nothing staged, committed
+or pushed. This is not an independent technical product-acceptance run.

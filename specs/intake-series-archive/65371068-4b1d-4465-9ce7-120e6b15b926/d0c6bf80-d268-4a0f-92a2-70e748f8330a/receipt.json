@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "d7e2126d-1196-4eca-a879-8bac839a0cef",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.11"
+  },
+  "createdAt": "2026-10-30T09:11:05Z",
+  "operation": {
+    "type": "Update",
+    "operationId": "0ad06585-48d6-4e43-a7cc-714d580eef0e",
+    "authorityEvidence": "User explicitly confirms the IR801 repair contract: receiving DE/EN acceptance and prompts bind hardening AND update, final source/image identity, independent risk-based checks and no self-acceptance; preserve thresholds, graph/lifecycle and human gates. User authorizes byte-preserving archives, binding renewal and complete series re-review; no implementation, commit or push."
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "8c83012b5fcbe7d2ec21709ff42536a72fd284a7652529bc8ae10a67f2282925"
+  },
+  "supersedes": {
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/0ad06585-48d6-4e43-a7cc-714d580eef0e/receipt.json",
+    "receiptNormalizedSha256": "e8b940d18d6de069d5e7a2076db6360c32a53b0d8bd86a59a777c5d38b2ced45",
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/0ad06585-48d6-4e43-a7cc-714d580eef0e/manifest.json",
+    "manifestArchiveSha256": "0f8f3685aaba88448bbe160e4b7b6d62f63b0508f96525179546e4d33f15bcf1"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json"
+}

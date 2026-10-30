@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "1.1",
+  "documentType": "IntakeReviewResult",
+  "reviewId": "09d784df-eae0-4952-9f5f-a458379ed9c6",
+  "mode": "Series",
+  "status": "Ready",
+  "policy": "learner-a11y-bilingual-series",
+  "reviewedAt": "2026-10-30T15:53:14Z",
+  "repository": {
+    "root": ".",
+    "head": "d5c313b5461afc09bec97e9980e2fd7632e6d2ff"
+  },
+  "reviewer": {
+    "name": "Codex",
+    "type": "Agent",
+    "scope": "Full semantic intake/series review; no product, human or accessibility acceptance"
+  },
+  "requestEvidence": {
+    "path": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "normalizedSha256": "ba3feb93cb4dbb22cf94d3041524e170bbf34106d46d5dc73f25a92182f24f98"
+  },
+  "targets": [
+    {
+      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "role": "Primary",
+      "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a",
+      "gitBlob": "68efb8d13f8635ef9994b37c771298f70019ed80"
+    },
+    {
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "gitBlob": "2c3cb1efec12ff00bd24927d45fb93c3a5c115e6"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "a9c3e49d227f13b69716b62930417cdbebb09d0df129eac23385a1adc122f7f6",
+      "gitBlob": "0316144f09335c4b786c5a3bbd2cefa3b82b92cf"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a",
+      "gitBlob": "7010736daefb84c5e7b9cb853efc32933d52576b"
+    },
+    {
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "gitBlob": "eff599a62a6b4328449d8a10eba2e6ca4387739a"
+    }
+  ],
+  "series": {
+    "orderedTargetPaths": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "dependencies": [
+      {
+        "from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+        "to": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "kind": "AssessmentBaseline"
+      },
+      {
+        "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "kind": "SandboxBaseline"
+      },
+      {
+        "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "to": "intakes/learner-fork-self-build-sandbox.md",
+        "kind": "HardCompletionGate"
+      },
+      {
+        "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "to": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+        "kind": "SandboxBaseline"
+      },
+      {
+        "from": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+        "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "kind": "SandboxBaseline"
+      }
+    ],
+    "roots": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+    ]
+  },
+  "findings": [],
+  "questions": [],
+  "acceptedRisks": [],
+  "operatorExceptions": [],
+  "coverage": {
+    "individual": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "series": [
+      "Full renewed semantic assessment of all five targets against identity, audience, learner assumptions/terms/language, purpose/scope/non-goals, measurable requirements/acceptance, security/privacy/A11Y/platform, authority, evidence, risks, references and both prompts.",
+      "Completed archived GSDB baseline remains immutable; hardening H-344-01..10 and AC-H-344-01..10 preserve 85/80 thresholds, current delta/baseline and no invented applications or human approval.",
+      "Update FU-001..023 and FA-001..012 retain Ubuntu/version/native architecture, Web authentication/readiness/common clients, profiles, data/audit/security and learner contracts. Exactly one extra EOF newline changed, not normative content.",
+      "Acceptance A-344 and A-FU-01/02 plus AC-A-FU-01/02 consume both H/U on identical final source/image identity; independent risk-based positive/negative checks and no self-acceptance remain explicit. Source-only rebinding is not technical acceptance.",
+      "Learner self-build remains behind successful independent acceptance and separate authority; all six-language default, optional reduced profiles, fork/upstream/template/licensing and human gates retained.",
+      "Five unique ordered targets, five binding acyclic dependencies, one completed archived root and exactly one declared Eligible hardening target; states and handoffs unchanged. Feature004 planning already exists, not duplicated or started.",
+      "All four active receipts retain intake IDs, archived predecessor first, explicit approved format/workflow contract second, prior ordered sources and controlled affected file hashes; three target texts are byte-identical. Original historical snapshots remain preserved.",
+      "Schema2 de-DE roles, collection paths, index/order and current manifest agree. Both specify/autonomous prompts retain scope and authority; enabled prompts do not grant start or delivery rights.",
+      "No findings, unanswered material questions, accepted risks, campaign workers or operator exceptions. No product/legal/human/A11Y approval inferred. Hash-bound archive CI changes are a separate technical gate."
+    ],
+    "workers": []
+  },
+  "summary": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "supersedes": "specs/intake-review-archive/ab11aa4c-d97a-458e-99f5-526ea89dbd56/b2e17f24-435e-4ea7-86e5-e68edbea0803/result.json",
+  "preservedPriorState": {
+    "resultPath": "specs/intake-review-archive/ab11aa4c-d97a-458e-99f5-526ea89dbd56/b2e17f24-435e-4ea7-86e5-e68edbea0803/result.json",
+    "resultRawSha256": "95e2faa76e6120eda2103d04eaa4f28165b7c6940726dac08591454ff955918b",
+    "requestPath": "specs/intake-review-archive/ab11aa4c-d97a-458e-99f5-526ea89dbd56/b2e17f24-435e-4ea7-86e5-e68edbea0803/request.json",
+    "reportPath": "specs/intake-review-archive/ab11aa4c-d97a-458e-99f5-526ea89dbd56/b2e17f24-435e-4ea7-86e5-e68edbea0803/report.txt",
+    "meaning": "Previous complete Ready is immutable historical scope; this full review separately evaluates all five current targets after bounded repair"
+  },
+  "seriesBinding": {
+    "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "manifestNormalizedSha256": "6f3c90e8fe8165d8925c59241f06597f346aa24923d83717c6e764e958dfd0db",
+    "receiptPath": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+    "receiptNormalizedSha256": "88341c3454c98dc8880634817ed303f475dc89e6f390ccfa55e5ba60e41229ef"
+  },
+  "validation": {
+    "requirementsConfig": "Bash Passed; schema2 Aligned",
+    "activeAuthoringReceipts": "Passed all four affected receipts, installed Bash and PowerShell",
+    "seriesManifestAndReceipt": "Passed installed Bash and PowerShell",
+    "resultBash": "Passed final installed Bash result validator",
+    "resultPowerShell": "Passed final installed PowerShell result validator",
+    "technicalAcceptance": "NotPerformed; intake-format repair and review only"
+  },
+  "documentationImpact": {
+    "decision": "UpdateRequired",
+    "owner": "Repository Owner",
+    "source": "Explicit bounded delivery-repair contract and complete five-member semantic re-review",
+    "readerPath": "Review report and machine-readable result; German first, equivalent English",
+    "distributionClass": "sourceOnly",
+    "homeSyncRequired": false,
+    "reevaluationTrigger": "Changed target, request, graph, receipt or explicit remediation"
+  },
+  "nextAction": "$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json",
+  "resolvedFindings": [
+    {
+      "id": "IR801",
+      "priorSeverity": "High",
+      "status": "Resolved",
+      "owner": "Repository Owner and Security Review",
+      "authorizationEvidence": "User explicitly confirms the IR801 repair contract: receiving DE/EN acceptance and prompts bind hardening AND update, final source/image identity, independent risk-based checks and no self-acceptance; preserve thresholds, graph/lifecycle and human gates. User authorizes byte-preserving archives, binding renewal and complete series re-review; no implementation, commit or push.",
+      "contractPath": "docs/maintenance/ir801-repair-2026-10-30.md",
+      "changedTarget": {
+        "role": "OrderedMember",
+        "path": "intakes/learner-fork-self-build-sandbox.md",
+        "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338"
+      },
+      "priorReviewPath": "specs/intake-review-archive/505a9246-a7a7-4a37-9fe4-eb73f3a2705d/0ad06585-48d6-4e43-a7cc-714d580eef0e/result.json",
+      "resolution": "A-FU-01/02 and AC-A-FU-01/02 explicitly bind both predecessors, final source/image and risk-based independent FU/FA coverage; A-344-04 excludes self-acceptance of implemented H/U portions; both prompts consume U and preserve all former gates.",
+      "reevaluationTrigger": "Changed target, shared image/source identity, reviewer allocation or renewed graph/request"
+    }
+  ]
+}

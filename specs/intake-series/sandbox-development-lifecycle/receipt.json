@@ -1,32 +1,32 @@
 {
   "schemaVersion": "1.0",
   "documentType": "IntakeSeriesReceipt",
-  "receiptId": "3cb90c62-7133-40ca-a60f-e66dc857b3ed",
+  "receiptId": "2b1ab440-21e3-4158-8ee2-eb70227be4d3",
   "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
   "generator": {
     "preset": "intake-sequencing-governance",
     "version": "0.2.11"
   },
-  "createdAt": "2026-10-27T17:55:27Z",
+  "createdAt": "2026-10-30T15:51:12Z",
   "operation": {
     "type": "Update",
-    "operationId": "99ecfd91-17f2-4154-9d4e-e559242c5ce9",
-    "authorityEvidence": "User authorizes the overall bounded 2026-10-27 learner-usability provenance plan. The coordinating principal agent commissioned independent reviewer Huygens, temporarily held publication for USAB-IR001-003, and issued the final completion/release after the troubleshooting corrections. This is execution coordination under existing user authority, not a new owner scope or acceptance decision. Retain intake IDs, accepted scope, 71-source order, lifecycle Completed/Eligible/Blocked/Blocked, security and human gates. No Feature004 source cycle. No pilot, hardening, runtime, build, commit or push. Independent full review belongs to Huygens, not this updater."
+    "operationId": "b2e17f24-435e-4ea7-86e5-e68edbea0803",
+    "authorityEvidence": "User explicitly grants additional authority to correct the canonical historical EOF validator and regression tests, preserve immutable archive and issue-snapshot bytes, perform controlled v0.4.8 consumer integration and neutral active-intake EOF correction, renew affected provenance/series/review bindings with complete review, and finish MergeAndSync with authorized admin bypass; no feature implementation, runtime, Home or fleet changes."
   },
   "status": "Ready",
   "manifest": {
     "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
-    "normalizedSha256": "936f44533c69d10563b7287a97ec12e16f74af9e0a8e6059b3f0a267e1b9b1bd"
+    "normalizedSha256": "6f3c90e8fe8165d8925c59241f06597f346aa24923d83717c6e764e958dfd0db"
   },
   "supersedes": {
-    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/99ecfd91-17f2-4154-9d4e-e559242c5ce9/receipt.json",
-    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/99ecfd91-17f2-4154-9d4e-e559242c5ce9/manifest.json",
-    "manifestArchiveSha256": "ad49096bbc98258f8bc3411006113bedbbea85d5e52597ea3bc158da3c453be3",
-    "receiptNormalizedSha256": "b9e4f4c5db58c48e49e6b92f6c9a699999548d84fd5a768e71ee65591a95598b"
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/b2e17f24-435e-4ea7-86e5-e68edbea0803/receipt.json",
+    "receiptNormalizedSha256": "d1f2436725b086dea753df017c90f7fe7c490229165db54101342cc330361ae3",
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/b2e17f24-435e-4ea7-86e5-e68edbea0803/manifest.json",
+    "manifestArchiveSha256": "a7d7ddac8ded520e202daf55d90d8280020de1cc66d4fe089759fb82d8b537a3"
   },
   "tombstone": {
     "path": "N/A",
     "normalizedSha256": "N/A"
   },
-  "nextAction": "$speckit-intake-series-status"
+  "nextAction": "$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json"
 }

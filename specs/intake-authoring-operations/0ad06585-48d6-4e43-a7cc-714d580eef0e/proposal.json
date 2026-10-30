@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeRepairProposal",
+  "operationId": "0ad06585-48d6-4e43-a7cc-714d580eef0e",
+  "finding": "IR801",
+  "authorityEvidence": "User explicitly confirms the IR801 repair contract: receiving DE/EN acceptance and prompts bind hardening AND update, final source/image identity, independent risk-based checks and no self-acceptance; preserve thresholds, graph/lifecycle and human gates. User authorizes byte-preserving archives, binding renewal and complete series re-review; no implementation, commit or push.",
+  "target": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+  "intakeId": "51d24064-dfa6-4375-9bcd-58cccc545167",
+  "beforeTargetSha256": "18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f",
+  "afterTargetSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a",
+  "orderedTargets": [
+    "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+    "Lastenheft_Secure-Development-Container-Hardening.md",
+    "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+    "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+    "intakes/learner-fork-self-build-sandbox.md"
+  ],
+  "roots": [
+    "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+  ],
+  "dependencies": [
+    {
+      "from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "to": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "kind": "AssessmentBaseline",
+      "binding": true
+    },
+    {
+      "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "kind": "SandboxBaseline",
+      "binding": true
+    },
+    {
+      "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "to": "intakes/learner-fork-self-build-sandbox.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "to": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "binding": true,
+      "kind": "SandboxBaseline"
+    },
+    {
+      "from": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "binding": true,
+      "kind": "SandboxBaseline"
+    }
+  ],
+  "beforeAndAfter": {
+    "targets": 5,
+    "roots": 1,
+    "edges": 5,
+    "eligible": 1,
+    "lifecycle": [
+      "Completed",
+      "Eligible",
+      "Blocked",
+      "Blocked",
+      "Blocked"
+    ]
+  },
+  "scope": "One receiving intake and its binding/review/status artifacts only; no implementation or delivery"
+}

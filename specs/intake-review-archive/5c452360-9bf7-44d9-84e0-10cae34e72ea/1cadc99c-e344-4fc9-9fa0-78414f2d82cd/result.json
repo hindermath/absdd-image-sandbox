@@ -1,0 +1,732 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "5c452360-9bf7-44d9-84e0-10cae34e72ea",
+  "mode": "Series",
+  "status": "Ready",
+  "policy": "learner-a11y-bilingual-series",
+  "reviewedAt": "2026-10-27T18:14:32.640Z",
+  "repository": {
+    "root": ".",
+    "head": "596b4cafd63f6e4befd03f6cd76c60820c134a5f",
+    "workingTree": "User-authorized dirty checkout; hashes bind the final handoff, not a clean-commit claim. No Git mutation by reviewer."
+  },
+  "requestEvidence": {
+    "path": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "normalizedSha256": "48172b0a13091080c1dd6ec5e6ffb2f73423fd9a3ef27c415dc8533ee3505f31"
+  },
+  "targets": [
+    {
+      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "role": "Primary",
+      "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f",
+      "gitBlob": "N/A"
+    },
+    {
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "gitBlob": "N/A"
+    }
+  ],
+  "findings": [],
+  "questions": [],
+  "acceptedRisks": [],
+  "operatorExceptions": [],
+  "coverage": {
+    "individual": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "series": [
+      "Full substantive review of all four intake texts in this conversation, not inherited Ready or a hash-only follow-up; final additions and six prompts checked against that read pass.",
+      "One archived completed root, three active members, one zero-indegree root and three unique binding edges; Completed/Eligible/Blocked/Blocked preserved. AssessmentBaseline -> SandboxBaseline -> HardCompletionGate; no implicit execution.",
+      "All 50 delta IDs reviewed through the complete rationale mapping and G01-G10 requirements/handoff coverage: 47 UpdateRequired, 1 AlreadyCovered, 2 bounded N/A; no other107-control fulfillment claim.",
+      "All three receipts independently verify 71 ordered sources each. First source is exact archived predecessor; remaining66 old sources unchanged and four new sources appended in declared order. No Feature004 source cycle.",
+      "21 archived preimages independently raw-SHA256 compared with actual HEAD blobs; 37 GSDB inventory hashes verified. Source identity and byte preservation do not prove usability or acceptance.",
+      "Four occupations including four IT specialist tracks, DE-first/equivalent-EN, novice terms, text-first decisions, normal writable flow without admin/bypass and supervised recovery reviewed.",
+      "Feature004 FR012/SC006, complete spec/plan/quickstart read: pilot remains planned/Open and hash binding is not acceptance. Former stale Q1 count USAB-IR004 independently resolved after authorized67->71 correction.",
+      "Prior foreign findings retained in immutable superseded archive and historicalResolvedFindings; USAB-IR001..003 independently resolved with original evidence and corrected-source hash."
+    ],
+    "documentation": [
+      "docs/fuer-lernende/erste-schritte.md",
+      "docs/fuer-lernende/troubleshooting.md",
+      "docs/fuer-lernende/alltag.md",
+      "docs/maintenance/usability-alignment-2026-10-27.md",
+      "docs/fuer-lernende/lernwege.md",
+      "docs/fuer-lernende/barrierefreiheit.md",
+      "docs/fuer-lernende/faq.md",
+      "docs/maintenance/intake-gsdb344-delta-2026-10-21.md",
+      "specs/004-container-hardening-followup/spec.md",
+      "specs/004-container-hardening-followup/plan.md",
+      "specs/004-container-hardening-followup/quickstart.md"
+    ],
+    "workers": []
+  },
+  "summary": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "supersedes": "specs/intake-review-archive/a8d1af24-3b78-40c2-9023-1ec9bd0aee33/99ecfd91-17f2-4154-9d4e-e559242c5ce9/result.json",
+  "operationId": "99ecfd91-17f2-4154-9d4e-e559242c5ce9",
+  "series": {
+    "orderedTargetPaths": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "roots": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+    ],
+    "dependencies": [
+      {
+        "from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+        "to": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "kind": "AssessmentBaseline"
+      },
+      {
+        "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "kind": "SandboxBaseline"
+      },
+      {
+        "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "to": "intakes/learner-fork-self-build-sandbox.md",
+        "kind": "HardCompletionGate"
+      }
+    ]
+  },
+  "reviewerEvidence": {
+    "reviewer": "Huygens - independent Codex intake/series reviewer",
+    "agentId": "N/A",
+    "threadId": "N/A",
+    "identitySource": "Reviewer Huygens and real reviewer UUID01a17e80-c3dc-75d1-9e04-3f55115ab79d explicitly confirmed by user. Parent authored learner docs/Feature004; Lorentz authored provenance. agentId/threadId remain N/A because no separate tool identity was exposed.",
+    "independence": "This reviewer authored neither learner docs/Feature004 nor Lorentz's provenance update. Findings were reported without source correction. Review writes only the six declared output paths.",
+    "mode": "Independent full substantive four-target review with final handoff verification",
+    "authority": "Direct user FINAL BASELINE HANDOFF authorizes completion and scoped review writes only. Main agent owns session log and final secret/pre-commit pass. No commit/push/runtime/build/source edits.",
+    "writeSet": [
+      "specs/intake-review-results/sandbox-development-lifecycle.json",
+      "specs/intake-review-reports/sandbox-development-lifecycle.md",
+      "specs/intake-review-reports/sandbox-development-lifecycle-independent.txt",
+      "specs/intake-review-results/learner-fork-self-build-sandbox.json",
+      "specs/intake-review-requests/learner-fork-self-build-sandbox.json",
+      "specs/intake-review-reports/learner-fork-self-build-sandbox.md"
+    ],
+    "requestUnchanged": true,
+    "normalization": "Strict UTF-8, remove one leading BOM, CRLF/CR to LF, no other text change, SHA-256. Binary NUL and symlink ancestry rejected for reviewed source bindings. Archives additionally compared by raw bytes hash against HEAD blobs.",
+    "checkedAt": "2026-10-27T18:06:52.6328320Z",
+    "reviewedHashes": {
+      "Lastenheft_Secure-Development-Container-Hardening.md": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "specs/intake-authoring-receipts/secure-development-container-hardening.json": "435e085cafb46ac93a93e871c46d4533113f6261cd4ff283fcfbaae8cbcae8cb",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md": "18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f",
+      "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json": "91f3ff3ccb0b99cfdf95ef980e7805c8dacbd921f309267c790e8dd21124dea7",
+      "intakes/learner-fork-self-build-sandbox.md": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json": "ba834710ee96f4c8c279464d7b98379ecca11b7c9645f4b0898de3f324e5cdaa",
+      "specs/intake-series/sandbox-development-lifecycle/manifest.json": "936f44533c69d10563b7287a97ec12e16f74af9e0a8e6059b3f0a267e1b9b1bd",
+      "specs/intake-series/sandbox-development-lifecycle/receipt.json": "b203b4208d10feda4666d16165077ffba99337c61b82e675b44ab63f7cde1659",
+      "specs/intake-review-requests/sandbox-development-lifecycle.json": "48172b0a13091080c1dd6ec5e6ffb2f73423fd9a3ef27c415dc8533ee3505f31",
+      "specs/intake-review-results/sandbox-development-lifecycle.json": "72fdd562d60ee5b37a293ad337c09e3f9b12cf42bd0107911b3c16be3585af27",
+      "specs/intake-review-reports/sandbox-development-lifecycle.md": "23cc951766cdfce58afc55b14441e8dcc04103bbdf4467e47e286389eb305758",
+      "specs/intake-review-reports/sandbox-development-lifecycle-independent.txt": "23cc951766cdfce58afc55b14441e8dcc04103bbdf4467e47e286389eb305758",
+      "specs/intake-review-results/learner-fork-self-build-sandbox.json": "c3d752bbd587753c76dc4db690d5ca0f1f0fd99dcfb27cb8143806dc9b9267ac",
+      "specs/intake-review-requests/learner-fork-self-build-sandbox.json": "c3d752bbd587753c76dc4db690d5ca0f1f0fd99dcfb27cb8143806dc9b9267ac",
+      "specs/intake-review-reports/learner-fork-self-build-sandbox.md": "9daadcc0375b4d79f5313a84fafd8ba85cce08b88d1eee56681fc133d953fdf4",
+      "specs/intake-series/sandbox-development-lifecycle/order.md": "ebc52b4b59c8d886b879d8a0ed07d106468651fbfda5a3ee686c77bc8c1dc758",
+      "Lastenheft_Abarbeitungsreihenfolge.md": "7a8e234097b76e6dc0f5dc5118874ee0898e6016f3c29c8743d4a99841e6c2bf",
+      "Pflichtenheft.md": "ef6210036d7e2880ff90c606e27a1e82d36df67b0c2da259c22a647a51f04416",
+      "docs/fuer-lernende/erste-schritte.md": "ba1bdab5500b448c18e8654999cd78cc507584903a6bd186878e74eb470ea589",
+      "docs/fuer-lernende/troubleshooting.md": "7367f3d82cb26296558305b8e0c6827bd96534ffca441832fbd23b9f742dd7f3",
+      "docs/fuer-lernende/alltag.md": "46ea6cac96f5cd73331372af50ea9354e2845166e766ab0bd7648b80bcc5a66f",
+      "docs/maintenance/usability-alignment-2026-10-27.md": "a4794de74ca9c4f6309fce6248ddca0fe2d201ae0411a22e2e96bbf51510d9a1",
+      "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/99ecfd91-17f2-4154-9d4e-e559242c5ce9/target.txt": "8a9fac14e92da1a901504a1daa15e56bf744b1d6c8cf192f0385716bcddbcaf3",
+      "docs/secure-development/baseline-manifest.json": "d73564dce25433aee2e3d5bc3df1cf18b3f5944c9e4197fff95ab5af2dfd385d",
+      "docs/maintenance/gsdb-344-control-delta.json": "05787af045845a45093ef473a9abc3c0ecd20460dd36911e69f3e81ea71b26ae",
+      ".specify/presets/secure-development-assurance-governance/templates/secure-development-evidence-contract.md": "cd471d1c3b6d40717aee4d306e0b9e3d8a3627c39121c8114816411c411e171d",
+      "AGENTS.md": "d80097518ac53aeb0ca8fc5f904e99a12754e562eeeff04a00338eb9f82e02f9",
+      "docs/maintenance/documentation-alignment-2026-10-25.md": "eccc16f09a31b1cf1b644574e17a22b353db6523baf5b2fa6139b51d2de7d540",
+      "docs/security/toolchain-followups-2026-10-25.md": "5f27bebe0d4698737c77b27d31373374a25d2a6e5f83acb58d906cf0471f4203",
+      "docs/fuer-lernende/lernwege.md": "50b0444645b5e936d2c6b9b71e9ba916c3f7c59332deda1216352c3c3d325b19",
+      "docs/fuer-lernende/barrierefreiheit.md": "ed0dc1fcd700882941d99fee7f0df9eb2f67ed22147d99a5f947cdd32efdf425",
+      "docs/maintenance/intake-sources-alignment-2026-10-25.md": "2e1c90d4b43d8c3e22f35235011a27a497e6a535515b65cf71be1ab2efd585f4",
+      "docs/maintenance/gsdb-344-preset-installed-lock.json": "7db6043a5dd680a033be126aaf39b13a1006605a1ace2a460795c8034831469f",
+      "docs/maintenance/stable-preset-rollout-2026-10-24.md": "bf5f0c2381ce00da9f9c0dc03f0cd17737f115ae0b81e951f677efc75f28fd02",
+      "docs/maintenance/stable-preset-source-lock-2026-10-24.json": "0b329d2b68ccec96dca635f58564348dac88527f7f515f4f422fddf974657a12",
+      "docs/maintenance/stable-preset-installed-lock-2026-10-24.json": "7db6043a5dd680a033be126aaf39b13a1006605a1ace2a460795c8034831469f",
+      "docs/maintenance/gsdb-344-source-inventory.json": "9d03e6ab54c6bb61207a63a37e44a0ecb1dd8b7e1fce6029a5e508342a497e3c",
+      "docs/maintenance/intake-gsdb344-delta-2026-10-21.md": "8b4c39378079fe624128c12b2f94c25423e7edb317f79e8965ad4927a065320f",
+      ".specify/presets/secure-development-assurance-governance/docs/release-0.1.8-validation.md": "32f8ca77698e577286c4da6424152fa15e67ad835e383f5136037512972ac85d",
+      ".specify/presets/secure-development-assurance-governance/docs/user-guide.md": "afa1f7d1c32b12f82d9179403881b596977998f40b27da0f70d62e39aec4bdd7",
+      ".specify/presets/secure-development-assurance-governance/docs/user-guide.EN.md": "c43d264557cf2793c10855370183c6a050fa3e9b7caad9d2641a80b59969d0f7",
+      "COMPLIANCE-PLAN_RL-SE-001.md": "314a8c7d0aa3cc8b81e96b9091e3d77aa5fa5365f14e84eb615a805f0103b2cd",
+      "docs/maintenance/sandbox-current-state-2026-10-25.md": "53776e64d116f71b9448ee945943ee7cfb13566aaacc97f2f79e1a4739b2a2b0",
+      "docs/maintenance/toolchain-version-audit-2026-10-25.md": "2283aa9cc1e6e1dae4ec4cbd4b147c4fd98587ab12156b079fbce3a02517fb11",
+      "scripts/config/required-cli-tools-registry.json": "672fab11b0fe215c1dab8d7475736d331d678daa02eac33b6c3913ae271e8ce4",
+      "scripts/tests/test_toolchain_version_pins.py": "3a4e032b61badae73987760c6a97d423de51a12e58a47ecb84f57b57836a2ba8",
+      "docs/fuer-lernende/sandbox-profil.md": "89c53823f6f7f7deaec1805d51b38e52aa17a3e6743185db9127d34b49fd0031",
+      "docs/security/agent-session-log/2026-10-25-1047.md": "151e1b51bd99afa777e8f1046694e0957fdf6ff95da9ef19fc794a399e0fd2ed",
+      "Dockerfile": "a98213c4abe13322ce0be2d9012c7fad52033e04f525c453beca386161fa33d7",
+      "docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md": "b657955d235eb6ec7070b508060b596411ff76106fe96e9ac76897a8ab097f6e",
+      "docs/maintenance/documentation-impact-2026-10-25.json": "3e7f95f4d86a300c67d459ce839036fbb15c2a20fb3f5825dea6be2bd79e64a3",
+      "LICENSE": "fa6db19fcebeaefb5f045ef20aee1e82325670388f3bd0acd31345da59e4985a",
+      "docs/licensing.md": "910e686c32bd1b5bf07c547fd6b3043c369c5b92c85380dd5ed05d8b5f4af6ab",
+      "docs/maintenance/template-profile-alignment-2026-10-25.md": "89b074e42ed36cec5ae47cf099c0479c8cf744bbb18c4630401320f554b9e9ab",
+      "docs/fuer-lernende/template-profil.md": "cbc239473c3ca4759e6507739477fce02f407469acbc300242fd363a13b59d89",
+      "docs/betrieb/template-erstuebernahme.md": "82d117f79082fa5188248e85722295c7afec6280a9457163d20ada5f98a0be0a",
+      "README.md": "18c968e1d3f8f438f79cf3394d0a0d37aaca44b5be5d4434bcf90416c24ed431",
+      "CLAUDE.md": "c4057f6bee4698c497ce1851f1a4d8e7c2a471a23d7ab60f2ac0f75c02be9b5a",
+      "GEMINI.md": "15d7c1e7fbd80f3e365b249556b9ca932151e1537ff8d9a82aa58533752aca79",
+      ".github/copilot-instructions.md": "7d2582279f0265073fb287762d91199d3b937dfb6496cee3264d7147fa2aef8f",
+      ".github/agents/copilot-instructions.md": "e4f6f834714c43cfe1f6e72c5c265a2bce496451fa9bda4a10516213977f9cf4",
+      "docs/fuer-lernende/git-und-hosting.md": "04b84ff4b62596bdbc3b75744cc35eddbaac576f63b0c6809cd7b4edcf5871cb",
+      "docs/fuer-lernende/installation.md": "ce1d111399a36567afe2de8b8fa2f7edc5fb591b6d39afdff4fc3f4ee262d256",
+      "docs/fuer-lernende/entwickler-kurzpfad.md": "2b3e3757915a5e89e5f350f0818c75834d74e2765785b3e85c9de9b365074133",
+      "docs/fuer-lernende/faq.md": "61f02e9632785795a591cd9e8e3ff6d581063f820047fa25cee1805815647957",
+      "docs/fuer-lernende/README.md": "d0cbabef81408d2e03118292d7864f7424a04649cc9d04006132c961a271ef31",
+      "docs/lernwerkstaetten/README.md": "37492b107ba5d219af638d854bf5a5c37cf8fc29dcf8bf991ff4aad3b8d3b6ba",
+      "docs/lernwerkstaetten/moderation.md": "58c7c5305546b604d55144d3c00e90eb2cea9182e35641f50ec06b4263c93d20",
+      ".github/workflows/gsdb-pilot-contracts.yml": "382ec0812c0595ab14955788b5df524b36c4a2cea7f56e26447e6e608d79db09",
+      ".github/workflows/project-statistics-pilot-native-proof.yml": "315007b84deb2f1c46b6c2a49cfffa8361221da3a52c70f16463d8ce7d6b07cf",
+      "scripts/tests/test_template_profile.py": "ae35dbd8a481edd3b0f120e261014b560e8ea6fc6bc9a96906fab279f0c64826",
+      "docs/praesentationen/workshop-spec-kit.de.md": "8e3e084595734f1009aa02c1936090ec2c8127b0498fa49c208b15c0a1447293",
+      "docs/praesentationen/workshop-spec-kit.en.md": "89519500f1ef8d880de81f360f88c392f55e2dc3c259b1fc4c55a02a3ae800a2",
+      "docs/praesentationen/werkstatt-sysinfo.de.md": "60eb3df8ef47a2564ae10d64cfeab063604f42800e8872a024367c8e679a106a",
+      "docs/praesentationen/werkstatt-sysinfo.en.md": "0b87f648717df7f249a6c57d3c1b3df7b2e02cd76df5bcb977607a5e9962ede5",
+      "docs/praesentationen/werkstatt-web.de.md": "cc8b2cd012636a52274e39f7c6e9203ed4efb58872702d56b763f18dc1428bff",
+      "docs/praesentationen/werkstatt-web.en.md": "97ba23094259c245c7fa195d16455c04265d7e68049a3367e663ea9cd3ca2423",
+      ".github/workflows/documentation-and-sandbox.yml": "4553363f7f93a44ca91e988e7c5234f8091b6d78c882714deacd05615cdbb2a5",
+      "docs/maintenance/closeout-rights-alignment-2026-10-25.md": "33eae4087fe68cde8e2c474b61fe130ea56024a61b80f262216946a6ec8fe7b6",
+      "docs/praesentationen/README.md": "fa6c3f69cfb5a90d26d4615138e5a1e190fe019524fb09f4e720fad202f7d0ab",
+      "docs/maintenance/closeout-review-remediation-2026-10-25.md": "d49b8e4397a3fe6845469317f9b6f15ac4a6292032b9c11160493cf6c87866aa",
+      "scripts/tests/test_learner_documentation_contract.py": "cc2ac202e03e5ab735572d67fad359d58bc0de79ba2841740e871292a905b12f",
+      "docs/maintenance/closeout-eof-alignment-2026-10-25.md": "9a2e1dab5f0cd6d8263740d96af45db5cf7d54e8fa8034c6838fbe7628ef870a",
+      "docs/maintenance/closeout-ci-alignment-2026-10-25.md": "61fe0260c9a36708cde94e562ec9e295542923ff1b11799e6ba8208508b960f3",
+      "scripts/tests/test_closeout_ci_contracts.py": "cdab6b0c7d97d618b8671baf493a05ed9159737f2f436197ef7107a51e1dbd10",
+      ".github/workflows/maintenance-tui.yml": "f57c19b2f75670c3340dac3c2132d50b18dde8ba31a8f5e11c9dad897893910d",
+      "docs/maintenance/closeout-statistics-history-2026-10-25.md": "fe805962cecaf6de8926cee10b8e6f70baaf456a722814a72ed5e22b64b0121a",
+      "scripts/lib/statistics-ci-evidence.ps1": "badabd767e5c09b909a9818f251bfab8fe63bb6b1deddf1547bb473d81f43779",
+      "scripts/tests/Test-StatisticsCiEvidence.ps1": "2980a039cd6db2681243f7e3762b6ced729f74bd794c3977e342f8d01fc003ef",
+      "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/99ecfd91-17f2-4154-9d4e-e559242c5ce9/target.txt": "23fb312bc8821f7cea59222c4b53959e790d972db7968f1955ca64be87d50f5a",
+      "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/99ecfd91-17f2-4154-9d4e-e559242c5ce9/target.txt": "d73d504931a2b1d8bae483edbd8e65c47de5aea29fa0eb78e39166de9f5b0f41",
+      "specs/004-container-hardening-followup/spec.md": "b66be89f0ca28dfada82a684d1e0fc131fb044a4d5819e36d222ea50d3af4349",
+      "specs/004-container-hardening-followup/plan.md": "a74e35a5912e0c52fb5f4bba2b91f4eaf2852d7b72b3ee1044ebe01c109f250f",
+      "specs/004-container-hardening-followup/quickstart.md": "cd3ca50c739aa8ee3e0eb7a0a5a37f378c7f2553db6730dd6e7342fa7177a5df",
+      "requirements/intake-governance-config.json": "d7740f7ff839ca310607acd2e20dd9d58ffcc8ef9553ad73e00e353508a0c5be",
+      ".agents/skills/speckit-intake-review/SKILL.md": "8338b3e6d84b55e5498fb63c46f1a2256c7b6f98f1545254af590002ee7cda9e"
+    },
+    "sourceBindingChecks": [
+      {
+        "intakeId": "a92a7ced-bbf3-4408-9754-7b739be19a41",
+        "receiptId": "9c16f468-1871-4a4d-9bb7-3d6e50143e6f",
+        "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "sourceCount": 71,
+        "verifiedBindings": 71,
+        "oldSourceTailUnchanged": true,
+        "firstSource": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/99ecfd91-17f2-4154-9d4e-e559242c5ce9/target.txt",
+        "deliveryAuthority": "LocalImplementation",
+        "promptState": "Enabled"
+      },
+      {
+        "intakeId": "51d24064-dfa6-4375-9bcd-58cccc545167",
+        "receiptId": "5c7b976f-d167-4f2f-8cf8-2bc67ba0aa9e",
+        "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "sourceCount": 71,
+        "verifiedBindings": 71,
+        "oldSourceTailUnchanged": true,
+        "firstSource": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/99ecfd91-17f2-4154-9d4e-e559242c5ce9/target.txt",
+        "deliveryAuthority": "LocalImplementation",
+        "promptState": "Enabled"
+      },
+      {
+        "intakeId": "5926e53e-39b7-475f-8a6b-e2ec08b0a803",
+        "receiptId": "d2586366-2993-40d0-a556-63d06371aa07",
+        "path": "intakes/learner-fork-self-build-sandbox.md",
+        "sourceCount": 71,
+        "verifiedBindings": 71,
+        "oldSourceTailUnchanged": true,
+        "firstSource": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/99ecfd91-17f2-4154-9d4e-e559242c5ce9/target.txt",
+        "deliveryAuthority": "LocalImplementation",
+        "promptState": "Enabled"
+      }
+    ],
+    "archiveChecks": [
+      {
+        "source": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "archive": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/99ecfd91-17f2-4154-9d4e-e559242c5ce9/target.txt",
+        "rawSha256": "8a9fac14e92da1a901504a1daa15e56bf744b1d6c8cf192f0385716bcddbcaf3",
+        "matchesHead": true
+      },
+      {
+        "source": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+        "archive": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/99ecfd91-17f2-4154-9d4e-e559242c5ce9/receipt.json",
+        "rawSha256": "a0d7cdd0a6f096260ab399774bb712572fe9b63d93ad1523bb6ad28e4f0d8949",
+        "matchesHead": true
+      },
+      {
+        "source": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "archive": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/99ecfd91-17f2-4154-9d4e-e559242c5ce9/target.txt",
+        "rawSha256": "23fb312bc8821f7cea59222c4b53959e790d972db7968f1955ca64be87d50f5a",
+        "matchesHead": true
+      },
+      {
+        "source": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+        "archive": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/99ecfd91-17f2-4154-9d4e-e559242c5ce9/receipt.json",
+        "rawSha256": "87f358514be38e7821d6d36c4e848bf6edd242172cc2919f513040b628bfa318",
+        "matchesHead": true
+      },
+      {
+        "source": "intakes/learner-fork-self-build-sandbox.md",
+        "archive": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/99ecfd91-17f2-4154-9d4e-e559242c5ce9/target.txt",
+        "rawSha256": "d73d504931a2b1d8bae483edbd8e65c47de5aea29fa0eb78e39166de9f5b0f41",
+        "matchesHead": true
+      },
+      {
+        "source": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+        "archive": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/99ecfd91-17f2-4154-9d4e-e559242c5ce9/receipt.json",
+        "rawSha256": "093977a4e101d39dbf5cbd7f36a6c2fb0c999582aa712d3353a044b2765a283b",
+        "matchesHead": true
+      },
+      {
+        "source": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+        "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/99ecfd91-17f2-4154-9d4e-e559242c5ce9/manifest.json",
+        "rawSha256": "ad49096bbc98258f8bc3411006113bedbbea85d5e52597ea3bc158da3c453be3",
+        "matchesHead": true
+      },
+      {
+        "source": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+        "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/99ecfd91-17f2-4154-9d4e-e559242c5ce9/receipt.json",
+        "rawSha256": "b9e4f4c5db58c48e49e6b92f6c9a699999548d84fd5a768e71ee65591a95598b",
+        "matchesHead": true
+      },
+      {
+        "source": "specs/intake-series/sandbox-development-lifecycle/order.md",
+        "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/99ecfd91-17f2-4154-9d4e-e559242c5ce9/order.md",
+        "rawSha256": "d6ffb45b48e926482281d01b36e20c748baae222be8c20b93a69a74d467823e7",
+        "matchesHead": true
+      },
+      {
+        "source": "Lastenheft_Abarbeitungsreihenfolge.md",
+        "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/99ecfd91-17f2-4154-9d4e-e559242c5ce9/requirements-order.md",
+        "rawSha256": "477e7f21b522414558823e6f8640c684a2df8bef1e23c978faa7c29842373e8f",
+        "matchesHead": true
+      },
+      {
+        "source": "Pflichtenheft.md",
+        "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/99ecfd91-17f2-4154-9d4e-e559242c5ce9/requirements-index.md",
+        "rawSha256": "e9854cd5c4de665f2a9a409b924cd40a201a4eaee8ffc7236f826d6ab8377b7e",
+        "matchesHead": true
+      },
+      {
+        "source": "specs/intake-review-results/sandbox-development-lifecycle.json",
+        "archive": "specs/intake-review-archive/a8d1af24-3b78-40c2-9023-1ec9bd0aee33/99ecfd91-17f2-4154-9d4e-e559242c5ce9/result.json",
+        "rawSha256": "8f222a3239c20399892757d4a7e3a8eb11040bac591fc3a5c4468782d01cabdc",
+        "matchesHead": true
+      },
+      {
+        "source": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+        "archive": "specs/intake-review-archive/a8d1af24-3b78-40c2-9023-1ec9bd0aee33/99ecfd91-17f2-4154-9d4e-e559242c5ce9/request.json",
+        "rawSha256": "5e0d346a7411dbbd5c01c95f878b721d640bba20169caef3f3f9d18702b49b1c",
+        "matchesHead": true
+      },
+      {
+        "source": "specs/intake-review-reports/sandbox-development-lifecycle.md",
+        "archive": "specs/intake-review-archive/a8d1af24-3b78-40c2-9023-1ec9bd0aee33/99ecfd91-17f2-4154-9d4e-e559242c5ce9/report.txt",
+        "rawSha256": "f1f0a220479f2528b7ff988e5d147bc607f45c211232cdb9a0d2cb353eaae748",
+        "matchesHead": true
+      },
+      {
+        "source": "specs/intake-review-reports/sandbox-development-lifecycle-independent.txt",
+        "archive": "specs/intake-review-archive/a8d1af24-3b78-40c2-9023-1ec9bd0aee33/99ecfd91-17f2-4154-9d4e-e559242c5ce9/independent.txt",
+        "rawSha256": "05309c6f4b01a93a8b94dafef55c2bbc58c8ec580cfa6fc66ec7ac19664ec3d3",
+        "matchesHead": true
+      },
+      {
+        "source": "specs/intake-review-results/learner-fork-self-build-sandbox.json",
+        "archive": "specs/intake-review-archive/cfbc8af4-48be-40e2-9a4b-5381d60d3dd5/99ecfd91-17f2-4154-9d4e-e559242c5ce9/result.json",
+        "rawSha256": "7baf232337da21a3ef7661c7764190d9a6a900cc484705fbb9c2f44ad34b999c",
+        "matchesHead": true
+      },
+      {
+        "source": "specs/intake-review-requests/learner-fork-self-build-sandbox.json",
+        "archive": "specs/intake-review-archive/cfbc8af4-48be-40e2-9a4b-5381d60d3dd5/99ecfd91-17f2-4154-9d4e-e559242c5ce9/request.json",
+        "rawSha256": "3951706485022c17796ad624e749b5ac86b14bc5bf79cd87373785323963ffba",
+        "matchesHead": true
+      },
+      {
+        "source": "specs/intake-review-reports/learner-fork-self-build-sandbox.md",
+        "archive": "specs/intake-review-archive/cfbc8af4-48be-40e2-9a4b-5381d60d3dd5/99ecfd91-17f2-4154-9d4e-e559242c5ce9/report.txt",
+        "rawSha256": "64e8265ff7e162b571a7ba75feb98ba346d27528c60acec1f6f5305e6c27d523",
+        "matchesHead": true
+      },
+      {
+        "source": "docs/fuer-lernende/erste-schritte.md",
+        "archive": "specs/intake-authoring-operations/99ecfd91-17f2-4154-9d4e-e559242c5ce9/source-snapshots/docs/fuer-lernende/erste-schritte.md.txt",
+        "rawSha256": "788e5a9b552c764d1c50a646e161b43cbfddfdbc6048d6a33e59be26ce01b3fb",
+        "matchesHead": true
+      },
+      {
+        "source": "docs/fuer-lernende/troubleshooting.md",
+        "archive": "specs/intake-authoring-operations/99ecfd91-17f2-4154-9d4e-e559242c5ce9/source-snapshots/docs/fuer-lernende/troubleshooting.md.txt",
+        "rawSha256": "63374ac93a807e95aa7a5df158609160baf0fef53853355bc07d8b3c6a2418a7",
+        "matchesHead": true
+      },
+      {
+        "source": "docs/fuer-lernende/alltag.md",
+        "archive": "specs/intake-authoring-operations/99ecfd91-17f2-4154-9d4e-e559242c5ce9/source-snapshots/docs/fuer-lernende/alltag.md.txt",
+        "rawSha256": "bd97a9a592b88b44466b84dccb77702eed67a363b058675d76b1ebd6da2f810f",
+        "matchesHead": true
+      }
+    ],
+    "scopeChecks": {
+      "gsdbFiles": 37,
+      "gsdbRawHashesCurrent": true,
+      "targetChanges": [
+        {
+          "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+          "preservedBodyAndPrompts": true,
+          "boundedPromptAdditions": 2
+        },
+        {
+          "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+          "preservedBodyAndPrompts": true,
+          "boundedPromptAdditions": 2
+        },
+        {
+          "path": "intakes/learner-fork-self-build-sandbox.md",
+          "preservedBodyAndPrompts": true,
+          "boundedPromptAdditions": 2
+        }
+      ]
+    },
+    "governanceConfigValidation": [
+      {
+        "command": "bash .specify/presets/intake-review-governance/scripts/validate-intake-governance-config.sh --config requirements/intake-governance-config.json --repo . --json",
+        "exitCode": 0,
+        "output": "{\"collections\": {\"active\": \".\", \"archive\": \"specs/intake-authoring-archive\", \"backlog\": \"requirements/intakes/backlog\", \"baseline\": \"requirements/baseline\", \"history\": \"specs/intake-review-results\", \"seriesManifest\": \"specs/intake-series/sandbox-development-lifecycle/manifest.json\"}, \"documentationLanguage\": \"de-DE\", \"inventory\": {\"activeIntakeCount\": 5, \"activeSeriesTargetCount\": 3, \"archiveIntakeCount\": 86, \"backlogIntakeCount\": 0, \"baselineCount\": 1, \"dependencyCount\": 3, \"eligibleCandidate\": \"Lastenheft_Secure-Development-Container-Hardening.md\", \"historyIntakeCount\": 2, \"seriesTargetCount\": 4}, \"inventoryMode\": \"SeriesManifest\", \"legacyArtifactNames\": [\"intakes/learner-fork-self-build-sandbox.md\"], \"missingPaths\": [], \"nextAction\": \"N/A\", \"outcome\": \"Aligned\", \"profile\": \"de\", \"resolvedNaming\": {\"canonicalIndex\": \"Pflichtenheft.md\", \"intakePattern\": \"Lastenheft_<slug>.md\", \"orderView\": \"Lastenheft_Abarbeitungsreihenfolge.md\"}, \"roles\": {\"intake-order\": \"Lastenheft_Abarbeitungsreihenfolge.md\", \"requirements-baseline\": \"requirements/baseline\", \"requirements-index\": \"Pflichtenheft.md\", \"requirements-intake\": \".\"}, \"schemaVersion\": \"2.0\"}\n"
+      },
+      {
+        "command": "pwsh -NoProfile -NonInteractive -File .specify/presets/intake-review-governance/scripts/validate-intake-governance-config.ps1 -Config requirements/intake-governance-config.json -Repo . -Json",
+        "exitCode": 0,
+        "output": "{\"collections\": {\"active\": \".\", \"archive\": \"specs/intake-authoring-archive\", \"backlog\": \"requirements/intakes/backlog\", \"baseline\": \"requirements/baseline\", \"history\": \"specs/intake-review-results\", \"seriesManifest\": \"specs/intake-series/sandbox-development-lifecycle/manifest.json\"}, \"documentationLanguage\": \"de-DE\", \"inventory\": {\"activeIntakeCount\": 5, \"activeSeriesTargetCount\": 3, \"archiveIntakeCount\": 86, \"backlogIntakeCount\": 0, \"baselineCount\": 1, \"dependencyCount\": 3, \"eligibleCandidate\": \"Lastenheft_Secure-Development-Container-Hardening.md\", \"historyIntakeCount\": 2, \"seriesTargetCount\": 4}, \"inventoryMode\": \"SeriesManifest\", \"legacyArtifactNames\": [\"intakes/learner-fork-self-build-sandbox.md\"], \"missingPaths\": [], \"nextAction\": \"N/A\", \"outcome\": \"Aligned\", \"profile\": \"de\", \"resolvedNaming\": {\"canonicalIndex\": \"Pflichtenheft.md\", \"intakePattern\": \"Lastenheft_<slug>.md\", \"orderView\": \"Lastenheft_Abarbeitungsreihenfolge.md\"}, \"roles\": {\"intake-order\": \"Lastenheft_Abarbeitungsreihenfolge.md\", \"requirements-baseline\": \"requirements/baseline\", \"requirements-index\": \"Pflichtenheft.md\", \"requirements-intake\": \".\"}, \"schemaVersion\": \"2.0\"}\n"
+      }
+    ],
+    "individualAssessment": [
+      {
+        "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+        "role": "CompletedHistoricalRoot",
+        "assessment": "Historical predecessor remains accepted as assessment baseline, not technical approval.",
+        "rationale": "Full historical intake read: twelve-checklist assessment produces evidence matrix and prioritized gaps; explicitly excludes hardening, runtime/hosting changes and human approval. Acceptance-decision preserves all open gaps and hands only baseline authority to H. Original vocabulary and bytes remain historical; no copied approval or re-execution.",
+        "requirementCoverage": "All original scope, seven requirements, five acceptance bullets and both follow-up prompts read; not a fresh 157-control implementation audit."
+      },
+      {
+        "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "role": "EligibleHardening",
+        "assessment": "Requirements and new addendum consistent; execution not authorized.",
+        "rationale": "Full H text read: seven original requirements plus H-344-01..10 and AC-H-344-01..10 cover current hardening, testable 85/80 thresholds, safe synthetic tests, provenance/licences, metadata-versus-state, scoped regulatory/cloud/crypto review, profile14 and learner/A11Y basis. Open does not mean passed. Addendum and both prompts preserve controls and LocalImplementation/no-remote stops.",
+        "requirementCoverage": "All original/delta requirements, acceptance criteria, assumptions, addenda and Specify/Autonomous prompts; FR012/SC006/plan/quickstart supplementary read includes USAB-IR004."
+      },
+      {
+        "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "role": "BlockedIndependentAcceptance",
+        "assessment": "Independent acceptance contract coherent and remains blocked behind H.",
+        "rationale": "Full A text read: A-344-01..04 and AC-A-344-01..04 require independent author/reviewer separation, all50 handoff rows including AlreadyCovered/N/A reasoning, exact image/head/platform/time/commands and negative metadata fixtures with refreshed hashes. Open/failed applicable controls forbid positive closure; failures return to H. No provider login or invented approval.",
+        "requirementCoverage": "All original requirements, four delta requirements and four delta acceptance criteria, practical acceptance, open handoffs and both prompts."
+      },
+      {
+        "path": "intakes/learner-fork-self-build-sandbox.md",
+        "role": "BlockedLearnerSelfBuild",
+        "assessment": "Learner requirements coherent; no independent standalone acceptance superseding the series.",
+        "rationale": "Full L text read: FR001..015/AC001..012, L-FR016..023/L-AC013..020 retain fork/institutional origin/upstream, Git neutrality, provider-free local build, no ready image registry distribution, SBOM/pins/isolation and personal template/history separation. Rights gates, successful A and separate start authority remain mandatory. New learner sources concretize existing requirements rather than grant activation.",
+        "requirementCoverage": "All original/delta/template requirements, acceptance criteria, decisions, risks and both prompts; all four occupations and four FI tracks resolved through canonical learning paths."
+      }
+    ],
+    "resolvedFindings": [
+      {
+        "id": "USAB-IR001",
+        "severity": "Medium",
+        "category": "RecoveryCorrectness",
+        "target": "docs/fuer-lernende/troubleshooting.md",
+        "owner": "Documentation Maintainer",
+        "disposition": "ResolvedAndVerified",
+        "originalLocation": {
+          "lines": [
+            98,
+            104,
+            108,
+            114
+          ]
+        },
+        "originalEvidence": "Compose-start port conflict was paired with choosing a different test-app port, although compose.yml:57 binds the entire 5100-5199 range.",
+        "correctionRecommendation": "Distinguish Compose host-range conflict from app-internal conflict; identify the occupying process, stop only an owned/authorized process or arrange separately reviewed local mapping without losing loopback.",
+        "resolutionLocation": {
+          "lines": [
+            98,
+            125
+          ]
+        },
+        "evidence": "Independent DE/EN reread: full-range binding and ineffective app-port workaround are explicit; separate app-internal case, process ownership, instructor assistance and retained loopback are stated.",
+        "resolutionSourceNormalizedSha256": "7367f3d82cb26296558305b8e0c6827bd96534ffca441832fbd23b9f742dd7f3",
+        "verifiedAt": "2026-10-27T18:12:32.157Z",
+        "verificationMethod": "Static substantive comparison with compose.yml:57; no runtime or port operations.",
+        "reevaluationTrigger": "Changed Compose port publication or recovery guidance."
+      },
+      {
+        "id": "USAB-IR002",
+        "severity": "Medium",
+        "category": "ImageContainerIdentity",
+        "target": "docs/fuer-lernende/troubleshooting.md",
+        "owner": "Documentation Maintainer",
+        "disposition": "ResolvedAndVerified",
+        "originalLocation": {
+          "lines": [
+            249,
+            251,
+            263,
+            265
+          ]
+        },
+        "originalEvidence": "Missing-agent recovery built an image and immediately tested inside the container, omitting replacement of a still-running old container.",
+        "correctionRecommendation": "Save mounted project work, successful audit shutdown with retained volumes, build and controlled recreation; verify actual new image identity before smoke tests; stop on audit error.",
+        "resolutionLocation": {
+          "lines": [
+            274,
+            281,
+            293,
+            299
+          ]
+        },
+        "evidence": "Independent DE/EN reread confirms build-versus-container distinction, linked FAQ replacement flow, persistence, audit-failure stop and actual new-container/image check. Maintenance is separated from ordinary learning.",
+        "resolutionSourceNormalizedSha256": "7367f3d82cb26296558305b8e0c6827bd96534ffca441832fbd23b9f742dd7f3",
+        "verifiedAt": "2026-10-27T18:12:32.157Z",
+        "verificationMethod": "Static semantic comparison with FAQ rebuild/recreation distinction; no build, stop or start.",
+        "reevaluationTrigger": "Changed image replacement, audit-stop, persistence or smoke-test instructions."
+      },
+      {
+        "id": "USAB-IR003",
+        "severity": "Medium",
+        "category": "PlatformContext",
+        "target": "docs/fuer-lernende/troubleshooting.md",
+        "owner": "Documentation Maintainer",
+        "disposition": "ResolvedAndVerified",
+        "originalLocation": {
+          "lines": [
+            195,
+            204,
+            206,
+            213
+          ]
+        },
+        "originalEvidence": "Combined Windows/WSL2 recovery sent both paths to Podman machine/PowerShell, contradicting the independent Ubuntu/WSL2 Bash/rootless path.",
+        "correctionRecommendation": "Identify context first; separate Windows-host PowerShell/existing-machine recovery from Ubuntu/WSL2 Bash/nonzero UID/own rootless Podman; no new machine or Windows endpoint fallback.",
+        "resolutionLocation": {
+          "lines": [
+            206,
+            238
+          ]
+        },
+        "evidence": "Independent DE/EN reread confirms two labelled contexts, existing-machine-only Windows handling, Ubuntu Bash id/podman checks and explicit prohibition of additional-machine creation or Windows-endpoint switching.",
+        "resolutionSourceNormalizedSha256": "7367f3d82cb26296558305b8e0c6827bd96534ffca441832fbd23b9f742dd7f3",
+        "verifiedAt": "2026-10-27T18:12:32.157Z",
+        "verificationMethod": "Static context comparison with earlier machine section and daily workflow; no native Windows/WSL2 test.",
+        "reevaluationTrigger": "Changed Windows/WSL2 installation, endpoint or recovery path."
+      },
+      {
+        "id": "USAB-IR004",
+        "stableId": "USAB-IR004",
+        "aliases": [
+          "USAB-IR004"
+        ],
+        "severity": "Low",
+        "category": "PlanningInputFreshness",
+        "target": "specs/004-container-hardening-followup/quickstart.md",
+        "location": {
+          "path": "specs/004-container-hardening-followup/quickstart.md",
+          "lines": [
+            33
+          ]
+        },
+        "summary": "Q1 erwartet weiterhin 67 statt 71 aktuelle Quellen / Q1 still expects 67 instead of 71 current sources",
+        "owner": "Feature 004 Documentation Maintainer",
+        "disposition": "ResolvedAndVerified",
+        "evidence": "Independent bounded reread of Q1 lines29-39 confirms line33 now expects71 current sources. EN remains equivalently count-neutral current bindings; actual review/receipt gates and stop-on-drift remain intact. Feature004 is not a receipt source; no intake provenance rebind needed.",
+        "followUp": "Replace the stale expected count with the final verified 71 or an explicit current-receipt-derived count, keeping DE/EN equivalent and requiring an actually accepted current review before continuation. No source edit authorized to this reviewer.",
+        "reevaluationTrigger": "Before using Q1 or proceeding to Tasks/implementation; any source-count change.",
+        "scopeBoundary": "Supplementary Feature004 planning consistency finding, not a defect in the four intake bodies or current source hashes.",
+        "identifierCompatibility": "Installed validators require findings[].id matching IR[0-9]{3,}; stable external identifier remains USAB-IR004 in stableId and aliases. No silent renumbering.",
+        "validatorCompatibleId": "IR004",
+        "originalEvidence": "Quickstart Q1 line 33 says 'Erwartung: Exit 0, 67 aktuelle Quellen und Ready-Reihenreview.' Each final active receipt contains 71 independently hash-verified sources. Plan line 4 already distinguishes formerly 67 sources. The Q1 expected count is therefore stale, not proof of source drift. EN has no matching fixed count.",
+        "originalLocation": {
+          "path": "specs/004-container-hardening-followup/quickstart.md",
+          "lines": [
+            33
+          ]
+        },
+        "resolutionLocation": {
+          "path": "specs/004-container-hardening-followup/quickstart.md",
+          "lines": [
+            33,
+            37,
+            38,
+            39
+          ]
+        },
+        "resolutionSourceNormalizedSha256": "cd3ca50c739aa8ee3e0eb7a0a5a37f378c7f2553db6730dd6e7342fa7177a5df",
+        "previousSourceNormalizedSha256": "1d46744b7bfce9d39b394e671b592b79edef8d3d68c2f0242d3484e7515b879e",
+        "verifiedAt": "2026-10-27T18:14:32.640Z",
+        "verificationMethod": "Bounded substantive Q1 reread and SHA256 check; unchanged full intake review reused without re-exploration."
+      }
+    ],
+    "historicalResolvedFindings": [
+      {
+        "id": "IR201",
+        "severity": "High",
+        "category": "SafeOperationDocumentation",
+        "summary": "Normaler Stopp empfiehlt Volume-Loeschung / Routine shutdown recommends volume removal",
+        "location": {
+          "path": "docs/fuer-lernende/sandbox-profil.md",
+          "lines": [
+            28,
+            30,
+            43,
+            47
+          ]
+        },
+        "evidence": "Current DE/EN routine-stop rows use the audit wrapper without destructive flags. Separate text requires explicit prior human consent for deliberate volume deletion and warns that metadata export is not a backup. Independently executed 12/12 static documentation tests include negative -v/--volumes/-Volumes fixtures.",
+        "owner": "Repository Maintainer / Documentation Author",
+        "followUp": "Preserve corrected bilingual wording and focused regression; reopen on the trigger below. No further correction is required in this review.",
+        "disposition": "ResolvedAndVerified",
+        "reevaluationTrigger": "Change to stop wrappers, shutdown guidance, persistent state or volume-deletion consent semantics.",
+        "aliases": [
+          "IR-20261025-01"
+        ],
+        "target": "docs/fuer-lernende/sandbox-profil.md",
+        "originalEvidence": "Both active learner-profile stop rows recommend bash scripts/compose-down-with-audit.sh --podman -v. The wrapper forwards -v to compose down; it does not ask for confirmation. This contradicts AGENTS documentation-reader-contract, README normal stop and FAQ, and can delete persistent agent state and sign-ins.",
+        "originalLocation": {
+          "path": "docs/fuer-lernende/sandbox-profil.md",
+          "lines": [
+            28,
+            40
+          ]
+        },
+        "originalReview": "specs/intake-review-archive/5fa23447-e96c-403c-b7da-79c506a11586/561af2f2-bbfe-45f5-a9ca-e975dd70c497/result.json",
+        "resolvedAt": "2026-10-25T18:22:27.7Z",
+        "resolutionSourceHash": "89c53823f6f7f7deaec1805d51b38e52aa17a3e6743185db9127d34b49fd0031",
+        "regressionSource": "scripts/tests/test_learner_documentation_contract.py",
+        "regressionSourceHash": "cc2ac202e03e5ab735572d67fad359d58bc0de79ba2841740e871292a905b12f",
+        "followUpVerification": {
+          "reviewId": "787003c4-b366-46c8-adc0-bacb47654c02",
+          "method": "Profile, regression source and cited configurations match the prior full-review hashes; no affected EOF content.",
+          "status": "RemainsResolvedAndVerified",
+          "priorFullReview": "specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/result.json"
+        },
+        "currentFollowUp": {
+          "reviewId": "7620f78c-4cc8-4f42-823a-25695796065c",
+          "status": "RemainsResolvedAndVerified",
+          "evidence": "Affected profile/test/config inputs remain hash-identical to prior complete review; CI-only delta does not alter resolution."
+        },
+        "statisticsHistoryFollowUp": {
+          "reviewId": "a8d1af24-3b78-40c2-9023-1ec9bd0aee33",
+          "status": "RemainsResolvedAndVerified",
+          "evidence": "Bounded workflow/helper delta does not change original affected source/config/test hashes."
+        }
+      },
+      {
+        "id": "IR202",
+        "severity": "Medium",
+        "category": "SecurityBoundaryPrecision",
+        "summary": "Container-Dateisystem und Host-Mount-Grenze verwechselt / Container filesystem confused with host mount boundary",
+        "location": {
+          "path": "docs/fuer-lernende/sandbox-profil.md",
+          "lines": [
+            89,
+            112,
+            118,
+            129
+          ]
+        },
+        "evidence": "Current equivalent DE/EN text distinguishes exposed host directories, writable container layer, temporary paths, persistent volumes, stop versus removal and additional agent-specific Codex restrictions. Compared with compose.yml, Dockerfile and codex configuration; focused static regression passed.",
+        "owner": "Repository Maintainer / Documentation Author",
+        "followUp": "Preserve corrected bilingual wording and focused regression; reopen on the trigger below. No further correction is required in this review.",
+        "disposition": "ResolvedAndVerified",
+        "reevaluationTrigger": "Change to mounts, root filesystem/user permissions, temporary paths, agent filesystem policy or boundary wording.",
+        "aliases": [
+          "IR-20261025-02"
+        ],
+        "target": "docs/fuer-lernende/sandbox-profil.md",
+        "originalEvidence": "The English summary says the container cannot write to anything outside the listed mounts. Compose has no read_only root filesystem and the image uses a writable adedev home and temporary paths. The claim must be scoped to unmounted host directories, not all container paths; Codex filesystem restrictions are a separate layer.",
+        "originalLocation": {
+          "path": "docs/fuer-lernende/sandbox-profil.md",
+          "lines": [
+            100,
+            101
+          ]
+        },
+        "originalReview": "specs/intake-review-archive/5fa23447-e96c-403c-b7da-79c506a11586/561af2f2-bbfe-45f5-a9ca-e975dd70c497/result.json",
+        "resolvedAt": "2026-10-25T18:22:27.7Z",
+        "resolutionSourceHash": "89c53823f6f7f7deaec1805d51b38e52aa17a3e6743185db9127d34b49fd0031",
+        "regressionSource": "scripts/tests/test_learner_documentation_contract.py",
+        "regressionSourceHash": "cc2ac202e03e5ab735572d67fad359d58bc0de79ba2841740e871292a905b12f",
+        "followUpVerification": {
+          "reviewId": "787003c4-b366-46c8-adc0-bacb47654c02",
+          "method": "Profile, regression source and cited configurations match the prior full-review hashes; no affected EOF content.",
+          "status": "RemainsResolvedAndVerified",
+          "priorFullReview": "specs/intake-review-archive/0aed98b6-12c4-448d-871b-a32ad142e3f9/989f4710-2626-4256-ae70-e476244b5d1b/result.json"
+        },
+        "currentFollowUp": {
+          "reviewId": "7620f78c-4cc8-4f42-823a-25695796065c",
+          "status": "RemainsResolvedAndVerified",
+          "evidence": "Affected profile/test/config inputs remain hash-identical to prior complete review; CI-only delta does not alter resolution."
+        },
+        "statisticsHistoryFollowUp": {
+          "reviewId": "a8d1af24-3b78-40c2-9023-1ec9bd0aee33",
+          "status": "RemainsResolvedAndVerified",
+          "evidence": "Bounded workflow/helper delta does not change original affected source/config/test hashes."
+        }
+      }
+    ],
+    "historicalFindingsBoundary": "IR201/IR202 objects are retained exactly as inherited historical records, including original evidence and prior test claims. This reviewer does not claim to have rerun those historic tests. Other prior findings/PP lineage remain unchanged in supersedes archive.",
+    "proofBoundary": "Ready is the independent intake/series requirements and supplementary planning-content outcome after all four USAB findings were independently resolved. No technical/WCAG/platform/usability/legal/product approval, risk acceptance or execution authority.",
+    "remainingBoundaries": [
+      "Supervised first-use pilot not run; Learning/A11Y Review owns participant/track/platform coverage before independent-first-use claims.",
+      "DOC-A11Y rendering, keyboard, screenreader and applicable WCAG observations not performed.",
+      "O-344-TECH/HUMAN/CLOUD; UPD-AMD64/V2-LOOP/V2-AUDIT/SMOKE-WARN/APPROVAL; LIC-01 and other LIC-02 scopes retain owners, follow-ups, triggers and usage/distribution stops.",
+      "No new source-code audit, full157-control reassessment, build, runtime, SBOM or cross-platform acceptance campaign. Parent-reported tests not counted as reviewer executions."
+    ],
+    "validationPlan": "Original NeedsRemediation result was validated once in Bash and PowerShell. Changed Ready disposition receives one final targeted result-validation pass per entrypoint; record actual outputs in independent.txt. No unchanged gate campaign repeated.",
+    "nextAction": "Return completed Ready requirements review to parent for authorized final secret/precommit checks and session log. Any later Tasks/implementation/runtime/intake progression requires its own valid authority and gates. No broader review repetition.",
+    "assessmentHistory": [
+      {
+        "status": "NeedsRemediation",
+        "reviewedAt": "2026-10-27T18:12:32.157Z",
+        "openFinding": "USAB-IR004",
+        "reason": "At first final review Q1 still expected67 rather than71. Not risk-accepted; subsequently corrected by the feature author."
+      }
+    ],
+    "reviewerUuid": "01a17e80-c3dc-75d1-9e04-3f55115ab79d",
+    "boundedFollowUp": {
+      "at": "2026-10-27T18:14:32.640Z",
+      "source": "specs/004-container-hardening-followup/quickstart.md",
+      "oldNormalizedSha256": "1d46744b7bfce9d39b394e671b592b79edef8d3d68c2f0242d3484e7515b879e",
+      "newNormalizedSha256": "cd3ca50c739aa8ee3e0eb7a0a5a37f378c7f2553db6730dd6e7342fa7177a5df",
+      "change": "Q1 expected count67->71; equivalent count-neutral EN unchanged",
+      "finding": "USAB-IR004",
+      "outcome": "ResolvedAndVerified",
+      "noRebindReason": "Feature004 is deliberately not among intake receipt sources."
+    }
+  }
+}

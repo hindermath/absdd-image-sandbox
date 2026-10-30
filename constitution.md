@@ -6,7 +6,7 @@ Neue Pflichten, keine entfernten Regeln; abhaengige Vorlagen synchron gepflegt. 
 Historical Sync Impact Report (superseded by the 2026-09-13 Mermaid/report amendment)
 Version change: 1.16.2 -> 1.16.3
 Modified principles:
-- Spec Kit preset governance: pin autonomous-run-governance v0.4.7 and require exact staged-candidate validation.
+- Spec Kit preset governance: pin autonomous-run-governance v0.4.8 and require exact staged-candidate validation.
 - None
 Added sections:
 - None
@@ -912,7 +912,7 @@ workspace family consists of:
 | `a11y-governance` | `v0.4.6` | `40` | WCAG 2.2 AA, bilingual DE/EN, CEFR B2, inclusive artefacts, didactic inline-code-comment review |
 | `cross-platform-governance` | `v0.2.5` | `50` | Bash/PowerShell parity, macOS/Linux/Windows script governance |
 | `agent-parity-governance` | `v0.4.5` | `60` | synchronized agent guidance, fleet-completion evidence, and agent-neutral Spec-Kit model routing |
-| `autonomous-run-governance` | `v0.4.7` | `70` | permission-bounded, evidence-first governance with resumable, validated closeout |
+| `autonomous-run-governance` | `v0.4.8` | `70` | permission-bounded, evidence-first governance with resumable, validated closeout |
 | `parallel-autonomous-run-governance` | `v0.2.9` | `80` | isolated bounded campaigns, mixed runner profiles, cooperative stop/resume, provider-gated resumable consolidation, and declared post-merge closeout |
 
 `autonomous-run-governance` is installed as part of the mandatory eight-preset

@@ -1,0 +1,93 @@
+{
+  "stagingDirectory": "specs/intake-authoring-operations/37ca62a8-7797-44d6-9f51-3801d5406771/staging",
+  "publishedTargets": [
+    "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+    "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+    "specs/intake-review-results/sandbox-feature-update-2026-10-28.json",
+    "specs/intake-review-reports/sandbox-feature-update-2026-10-28.md",
+    "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/37ca62a8-7797-44d6-9f51-3801d5406771/target.txt",
+    "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/37ca62a8-7797-44d6-9f51-3801d5406771/receipt.json",
+    "specs/intake-review-archive/4ca2cab9-38dd-4394-8c72-d31852829226/37ca62a8-7797-44d6-9f51-3801d5406771/result.json",
+    "specs/intake-review-archive/4ca2cab9-38dd-4394-8c72-d31852829226/37ca62a8-7797-44d6-9f51-3801d5406771/report.md"
+  ],
+  "type": "Update",
+  "createdAt": "2026-10-28T11:30:29Z",
+  "documentType": "IntakeOperation",
+  "protectedHashes": {
+    "requirements/baseline/sandbox-feature-update-2026-10-28/issue-104.md": "bc930ff2245d3111faef9d5de5b70cbc2a0f9a18e410f54479df76392ca13d45",
+    "requirements/baseline/sandbox-feature-update-2026-10-28/issue-102.md": "9f5885f5b6005c2ccf1b23d0442bf03a7a941c73cdd455d23744bcbb23701423",
+    "Lastenheft_Abarbeitungsreihenfolge.md": "7a8e234097b76e6dc0f5dc5118874ee0898e6016f3c29c8743d4a99841e6c2bf",
+    "specs/intake-series/sandbox-development-lifecycle/manifest.json": "936f44533c69d10563b7287a97ec12e16f74af9e0a8e6059b3f0a267e1b9b1bd",
+    "requirements/intake-governance-config.json": "d7740f7ff839ca310607acd2e20dd9d58ffcc8ef9553ad73e00e353508a0c5be",
+    "requirements/baseline/sandbox-feature-update-2026-10-28/issue-101.md": "f4fe7d475f6b94269631b56e65918c82b5add51e032d2994df4a46f7f06f4bdb",
+    "Pflichtenheft.md": "ef6210036d7e2880ff90c606e27a1e82d36df67b0c2da259c22a647a51f04416",
+    "specs/intake-series/sandbox-development-lifecycle/receipt.json": "b203b4208d10feda4666d16165077ffba99337c61b82e675b44ab63f7cde1659"
+  },
+  "authorityEvidence": "User explicitly authorizes repairing IR701 from the named current review, updating provenance and a full Single re-review; no implementation, series migration or remote writes. Editorial first-use explanations and DE/EN equivalence only; preserve all goals, requirements, thresholds, authority, security/A11Y decisions and ordering.",
+  "proposalNormalizedSha256": "6850dd0796475cb2ca074529e8ee1483c5f400087b13f290a62f6cfa52d857a1",
+  "approval": {
+    "approvedBy": "User",
+    "evidence": "User explicitly authorizes repairing IR701 from the named current review, updating provenance and a full Single re-review; no implementation, series migration or remote writes. Editorial first-use explanations and DE/EN equivalence only; preserve all goals, requirements, thresholds, authority, security/A11Y decisions and ordering.",
+    "approvedAt": "2026-10-28T11:30:29Z",
+    "approved": true
+  },
+  "validatedTargets": [
+    "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+    "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+    "specs/intake-review-results/sandbox-feature-update-2026-10-28.json",
+    "specs/intake-review-reports/sandbox-feature-update-2026-10-28.md",
+    "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/37ca62a8-7797-44d6-9f51-3801d5406771/target.txt",
+    "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/37ca62a8-7797-44d6-9f51-3801d5406771/receipt.json",
+    "specs/intake-review-archive/4ca2cab9-38dd-4394-8c72-d31852829226/37ca62a8-7797-44d6-9f51-3801d5406771/result.json",
+    "specs/intake-review-archive/4ca2cab9-38dd-4394-8c72-d31852829226/37ca62a8-7797-44d6-9f51-3801d5406771/report.md"
+  ],
+  "proposalPath": "specs/intake-authoring-operations/37ca62a8-7797-44d6-9f51-3801d5406771/proposal.json",
+  "schemaVersion": "1.0",
+  "nextAction": "$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json",
+  "archiveRawHashes": {
+    "receipt": "08a0345d1ebca7e4fce88df38c5f9ffb68a65de4ff7a2b702ccb46a66f51de05",
+    "target": "c84477a1676ebbf42f5c2b0a6f9797f9d1d41857c8d4ebe2bcc2b7cb44586d4b",
+    "report": "d2ec29a1cfb57d6f93e09bd2276d74d77c7b7fb4a7578e979cd095178a05bbed",
+    "result": "c3a508326469600325e1dae1be82bdb8d0cced5bc2179a436c0cece09daeca46"
+  },
+  "rollbackBoundary": "Active files unchanged until staged authoring and review validation pass; restore exact prior bytes on publication failure.",
+  "operationId": "37ca62a8-7797-44d6-9f51-3801d5406771",
+  "status": "Completed",
+  "intendedTargets": [
+    "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+    "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+    "specs/intake-review-results/sandbox-feature-update-2026-10-28.json",
+    "specs/intake-review-reports/sandbox-feature-update-2026-10-28.md",
+    "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/37ca62a8-7797-44d6-9f51-3801d5406771/target.txt",
+    "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/37ca62a8-7797-44d6-9f51-3801d5406771/receipt.json",
+    "specs/intake-review-archive/4ca2cab9-38dd-4394-8c72-d31852829226/37ca62a8-7797-44d6-9f51-3801d5406771/result.json",
+    "specs/intake-review-archive/4ca2cab9-38dd-4394-8c72-d31852829226/37ca62a8-7797-44d6-9f51-3801d5406771/report.md"
+  ],
+  "failure": {
+    "class": "N/A",
+    "message": "N/A"
+  },
+  "validation": {
+    "normativeContracts": "Unchanged",
+    "glossaryParity": "38/38",
+    "stagedReviewPowerShell": "Pass",
+    "stagedReviewBash": "Pass",
+    "stagedAuthoringBash": "Pass",
+    "stagedAuthoringPowerShell": "Pass",
+    "activeAuthoringBash": "Pass",
+    "activeAuthoringPowerShell": "Pass",
+    "activeReviewBash": "Pass",
+    "activeReviewPowerShell": "Pass",
+    "operationBash": "Pass",
+    "operationPowerShell": "Pass",
+    "diffCheck": "Pass"
+  },
+  "publicationAttempts": [
+    {
+      "rollback": "Prior active bytes restored; no archive published",
+      "reason": "Ausnahme beim Aufrufen von „CreateDirectory“ mit „1“ Argument(en): „The value cannot be an empty string. (Parameter 'path')“",
+      "status": "Failed"
+    }
+  ],
+  "completedAt": "2026-10-28T11:34:25Z"
+}

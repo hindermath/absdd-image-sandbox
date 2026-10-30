@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "1.1",
+  "documentType": "IntakeReviewResult",
+  "reviewId": "505a9246-a7a7-4a37-9fe4-eb73f3a2705d",
+  "mode": "Series",
+  "status": "NeedsRemediation",
+  "policy": "learner-a11y-bilingual-series",
+  "reviewedAt": "2026-10-30T08:59:05Z",
+  "repository": {"root": ".", "head": "d5c313b5461afc09bec97e9980e2fd7632e6d2ff"},
+  "reviewer": {"name": "Codex", "type": "Agent", "scope": "Full semantic intake/series review; no product, human or accessibility acceptance"},
+  "requestEvidence": {
+    "path": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "normalizedSha256": "52ae3f2a08bc2836d0be3315651e9502d8547a369bfd1ae23ee603e7b7c8a1da"
+  },
+  "targets": [
+    {
+      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "role": "Primary",
+      "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a",
+      "gitBlob": "68efb8d13f8635ef9994b37c771298f70019ed80"
+    },
+    {
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "gitBlob": "2c3cb1efec12ff00bd24927d45fb93c3a5c115e6"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "54813beb0eb4c523d5b6529739b24b196a3ffdab1ca1ac602abaad479d5d6e88",
+      "gitBlob": "fcc96d8d9fcf53f937d910e1792065ee6f0a0d0d"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f",
+      "gitBlob": "f167a9c154ff575f8c30452e50d977b3b843c171"
+    },
+    {
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "gitBlob": "eff599a62a6b4328449d8a10eba2e6ca4387739a"
+    }
+  ],
+  "series": {
+    "orderedTargetPaths": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "roots": ["specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"],
+    "dependencies": [
+      {"from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md", "to": "Lastenheft_Secure-Development-Container-Hardening.md", "kind": "AssessmentBaseline"},
+      {"from": "Lastenheft_Secure-Development-Container-Hardening.md", "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md", "kind": "SandboxBaseline"},
+      {"from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md", "to": "intakes/learner-fork-self-build-sandbox.md", "kind": "HardCompletionGate"},
+      {"from": "Lastenheft_Secure-Development-Container-Hardening.md", "to": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md", "kind": "SandboxBaseline"},
+      {"from": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md", "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md", "kind": "SandboxBaseline"}
+    ]
+  },
+  "findings": [
+    {
+      "id": "IR801",
+      "severity": "High",
+      "category": "SeriesHandoffAndPromptAlignment",
+      "target": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "title": "Neue Update-Angriffsfläche ist im empfangenden unabhängigen Abnahmevertrag nicht konkret gebunden / Updated attack surface lacks an explicit receiving independent acceptance contract",
+      "description": "Die fünfgliedrige Reihe und Abschnitt 7 des Updates verlangen Hardening UND Feature-Update vor der Selbstprüfung. Das empfangende Lastenheft, A-344-01/04, seine Abnahmekriterien und beide Folgeprompts binden jedoch weiterhin nur die Hardening-Übergabe. Es fehlen eine ausdrückliche Übernahme der FU-/FA-Nachweise auf dem finalen Update-Image und die unabhängige Gegenprüfung der neuen Web-Authentifizierung/Readiness, gemeinsamen Clients, Profile und erhaltenen Sicherheits-/Auditkontrollen. Die Unabhängigkeitsregel nennt nur Autoren der Härtung, nicht der zu prüfenden Update-Anteile. / The graph and update require both predecessors, but the receiving acceptance text and prompts still bind only hardening; independent acceptance of the updated image and new security-sensitive behavior is not concretely assigned.",
+      "disposition": "Open: Blockiert Ready für die vollständige Reihe; keine Reparatur im Review. Die vorhandenen Graphkanten und bisherigen H-/A-Grenzwerte erhalten. / Blocks series Ready; do not repair during review or weaken existing edges/thresholds.",
+      "owner": "Repository Owner und Security Review",
+      "evidence": "Update: FU-007..020, FA-003..008/012, Abschnitt 7 Zeilen 307-339; Selbstprüfung: Ausgangslage 172-183, A-344-01/04 235-270, AC-A-344-01..04 273-299, Abhängigkeiten 309-319, Specify/Autonomous 395/400. Kein Bezug auf den Update-Intake oder FU-/FA-IDs im empfangenden Text; generisches HTTP und installierte Toolchains ersetzen keinen prüfbaren Update-Handoff.",
+      "reevaluationTrigger": "Nach ausdrücklich autorisierter Anpassung des empfangenden DE/EN-Abnahmevertrags einschließlich Prompts, Image-/Quellenbindung und Reviewer-Unabhängigkeit; danach Receipts/Manifest/Reviewrequest nach Governance erneuern und alle fünf Ziele erneut reviewen.",
+      "remediationAcceptance": "Beide Vorgänger, dieselbe finale Quellrevision/Image-ID und die geforderten Profil-/Architekturbelege ausdrücklich übernehmen. Risikobasierte unabhängige positive/negative Gegenprüfungen der neuen FU-/FA-Verträge zuordnen oder einzelne Übernahmen begründen; keine automatische Verdopplung aller Tests, keine erfundene Plattformabnahme. Reviewer dürfen nicht die jeweils selbst implementierten Härtungs- oder Update-Anteile abnehmen. Bestehende menschliche und Self-build-Gates bleiben erhalten."
+    }
+  ],
+  "questions": [],
+  "acceptedRisks": [],
+  "operatorExceptions": [],
+  "coverage": {
+    "individual": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "series": [
+      "All five complete intake texts semantically reviewed, including bilingual requirements, acceptance and embedded prompts. Historical four-target Ready is not reused as this outcome.",
+      "Five targets ordered exactly once, five unique acyclic binding edges, one archived completed zero-indegree root; direct hardening-to-acceptance and added hardening-to-update-to-acceptance edges preserved.",
+      "Completed/Eligible/Blocked/Blocked/Blocked unchanged; sole structural candidate is hardening, not execution authority. New whole-series Ready is blocked by IR801.",
+      "GSDB/H/A/L control mapping, scope, non-goals, measurable thresholds, security/privacy/cloud applicability and human-only decisions retained; feature update is a separately bounded genuine change, not an invented test application.",
+      "Update FU-001..023 and FA-001..012 checked for Ubuntu base and target-version preservation, native architecture/profile matrix, authentication/readiness, common clients, persistence/audit, wrapper parity, supply chain and learner/accessibility requirements. Receiver gap recorded as IR801.",
+      "Learner self-build still defaults to full six-toolchain all profile; selectable reduced profiles do not automatically invalidate its default smoke criteria. Fork/upstream, optional template and rights boundaries retained.",
+      "Schema-2.0 de-DE configuration, four portable roles, collection paths, bounded legacy alias, physical versus active-series inventory, canonical index and both textual order views agree.",
+      "Request, manifest and series-receipt normalized hashes checked; four active authoring receipts passed with 71/7/73/73 sources. Existing archive lineage and historical supersessions preserved, no retroactive risk acceptance.",
+      "Prior knowledge, first-use terms, DE-first/equivalent-EN and text-first dependencies/status/actions assessed. No browser, screenreader, Braille, human pilot, image, platform or formal security acceptance claimed. No campaign workers."
+    ],
+    "workers": []
+  },
+  "summary": {"critical": 0, "high": 1, "medium": 0, "low": 0},
+  "supersedes": "specs/intake-review-archive/5c452360-9bf7-44d9-84e0-10cae34e72ea/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/result.json",
+  "preservedPriorState": {
+    "resultPath": "specs/intake-review-archive/505a9246-a7a7-4a37-9fe4-eb73f3a2705d/pre-review-20261030/result.json",
+    "resultRawSha256": "d3047413baf1e33a04985712adf05134b455a83a484c7a9bcffcd612dba76c73",
+    "reportPath": "specs/intake-review-archive/505a9246-a7a7-4a37-9fe4-eb73f3a2705d/pre-review-20261030/report.md",
+    "reportRawSha256": "ac91b2264935159440489878e00b68ef626feb365790004f16f225c23426bef8",
+    "meaning": "Preserved supersession marker and PendingReview report; original four-target Ready remains historical and unchanged."
+  },
+  "seriesBinding": {
+    "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "manifestNormalizedSha256": "0f8f3685aaba88448bbe160e4b7b6d62f63b0508f96525179546e4d33f15bcf1",
+    "receiptPath": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+    "receiptNormalizedSha256": "e8b940d18d6de069d5e7a2076db6360c32a53b0d8bd86a59a777c5d38b2ced45"
+  },
+  "validation": {
+    "requirementsConfig": "Passed: installed Bash schema-2.0 validator; Aligned",
+    "seriesManifestAndReceipt": "Passed: installed Bash validators; 5 targets, 5 edges, 1 root, 1 eligible",
+    "activeAuthoringReceipts": "Passed: installed Bash validator for all four active members; 224 source bindings",
+    "resultBash": "Passed: schema 1.1, request hash, five target hashes, series graph, coverage and blocking outcome validated",
+    "resultPowerShell": "Passed: schema 1.1, request hash, five target hashes, series graph, coverage and blocking outcome validated",
+    "preservation": "Passed: 740 protected files retain aggregate raw SHA-256 364dc8e465bbe84b71180bb588818f8e20c86940e25ba9b5a2f7f16374ba741a; repository HEAD unchanged",
+    "secretScans": "Passed: all five reviewed target texts and newly authored review evidence; no secrets reported",
+    "diffCheck": "Passed",
+    "technicalAcceptance": "NotPerformed: intake review only"
+  },
+  "documentationImpact": {
+    "decision": "UpdateRequired",
+    "owner": "Repository Owner",
+    "source": "Current five-target review request and read-only intake texts",
+    "readerPath": "Review report and machine-readable result; German first, equivalent English",
+    "distributionClass": "sourceOnly",
+    "homeSyncRequired": false,
+    "reevaluationTrigger": "Changed target, request, graph, receipt or explicit remediation"
+  },
+  "nextAction": "$speckit-intake-repair specs/intake-review-results/sandbox-development-lifecycle.json"
+}

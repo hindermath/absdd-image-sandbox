@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0",
+  "files": [
+    {
+      "archivePath": "specs/intake-review-archive/505a9246-a7a7-4a37-9fe4-eb73f3a2705d/0ad06585-48d6-4e43-a7cc-714d580eef0e/report.md",
+      "originalPath": "specs/intake-review-reports/sandbox-development-lifecycle.md",
+      "rawSha256": "d941582f67bc0e2b185954806da2c8bdc89653d53c89aa47425c7368d366f316",
+      "targets": [
+        "specs/intake-review-requests/sandbox-development-lifecycle.json",
+        "specs/intake-review-results/sandbox-development-lifecycle.json"
+      ]
+    },
+    {
+      "archivePath": "specs/intake-review-archive/5c452360-9bf7-44d9-84e0-10cae34e72ea/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/learner-review-marker.md",
+      "originalPath": "specs/intake-review-reports/learner-fork-self-build-sandbox.md",
+      "rawSha256": "7d4740d72b5ff7380163a5e641a86033ecc84e2e023fc9892267837088e4e66d",
+      "targets": [
+        "specs/intake-review-reports/sandbox-development-lifecycle.md",
+        "specs/intake-review-results/sandbox-development-lifecycle.json"
+      ]
+    },
+    {
+      "archivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/0ad06585-48d6-4e43-a7cc-714d580eef0e/requirements-index.md",
+      "originalPath": "Pflichtenheft.md",
+      "rawSha256": "f04f81a846359b10b4b0b9d005451b3ea36f10de747701728f22220e1fb90420",
+      "targets": [
+        "Lastenheft_Abarbeitungsreihenfolge.md",
+        "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+        "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+        "specs/intake-review-requests/sandbox-development-lifecycle.json",
+        "specs/intake-series-operations/1cadc99c-e344-4fc9-9fa0-78414f2d82cd.json"
+      ]
+    }
+  ]
+}

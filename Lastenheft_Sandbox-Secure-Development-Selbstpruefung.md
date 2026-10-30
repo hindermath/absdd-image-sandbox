@@ -171,14 +171,20 @@ A-344-04 and their thresholds remain unchanged.
 
 ## Ausgangslage und Zielbild / Current and Target State
 
-**DE:** Zum Start dieser Abnahme muss die technische Haertung abgeschlossen
-sein und ein finales
-lokales Image sowie aktualisierte Nachweise liefern. Die Abnahme wiederholt statische
+**DE:** Zum Start dieser Abnahme müssen sowohl die technische Härtung als auch
+der gemeinsame Feature-Update-Block aus
+`Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md` abgeschlossen
+sein. Beide Übergaben müssen auf dieselbe finale Quellrevision und das daraus
+erzeugte lokale Update-Image mit genauer Image-ID bezogen sein. Nachweise
+anderer Profile oder Architekturen dürfen nicht stillschweigend übertragen
+werden. Die Abnahme wiederholt statische
 und praktische Pruefungen aus Sicht von Lernenden und Reviewenden.
 
-**EN:** Before this acceptance starts, technical hardening must be complete
-and provide a final local image and
-updated evidence. Acceptance repeats static and practical checks from learner
+**EN:** Before this acceptance starts, both technical hardening and the combined
+feature-update block named above must be complete. Both handoffs must bind the
+same final source revision and resulting local update image with its exact
+image ID. Do not silently transfer evidence across profiles or architectures.
+Acceptance repeats static and practical checks from learner
 and reviewer perspectives.
 
 ## Scope
@@ -261,11 +267,15 @@ and reviewer perspectives.
   check result, not formal approval. Reference human legal, privacy,
   provider/model or operational decisions as real evidence or Open; scans
   and SBOMs do not replace them.
-- **A-344-04:** Pruefende duerfen die zu bewertende Haertung nicht selbst
-  verfasst haben. Ergebnisse an konkreten Git-Stand, Plattform, Architektur,
+- **A-344-04:** Prüfende dürfen die jeweils abzunehmenden Hardening- oder
+  Feature-Update-Anteile nicht selbst implementiert haben. Die
+  Verantwortungszuordnung muss diese Unabhängigkeit je geprüftem Anteil
+  nachvollziehbar belegen. Ergebnisse an konkreten Git-Stand, Plattform, Architektur,
   Image-ID, Zeitpunkt und Pruefbefehle binden. Fehler an H zurueckgeben;
   L bleibt bis erfolgreicher technischer Abnahme blockiert. / Reviewers must
-  not have authored the hardening being accepted. Bind results to exact Git
+  not accept hardening or feature-update portions they implemented themselves.
+  Record reviewer responsibility and independence for each accepted portion.
+  Bind results to exact Git
   revision, platform, architecture, image ID, time and commands. Return
   defects to H; L stays blocked until successful technical acceptance.
 
@@ -306,14 +316,78 @@ owners, follow-up and triggers. CI runners and intake maintenance do not
 expand platform acceptance; missing target systems stay Open/Skipped with
 a reason.
 
+## IR801: Verbindliche Update-Übergabe / Binding Update Handoff
+
+**DE:** Dieser Zusatz setzt ausschließlich den am 30.10.2026 ausdrücklich
+bestätigten Reparaturvertrag um. Die bisherigen A-344- und AC-A-344-Kriterien
+bleiben erhalten. H bezeichnet das Container-Hardening, U den gemeinsamen
+Ubuntu-/OpenCode-Web-/MSL-Update-Block, A diese unabhängige Abnahme und L den
+nachfolgenden Lernenden-Selbstbau. Der folgende Vertrag übernimmt die
+vorhandenen FU-001–023 und FA-001–012 aus U, ohne neue Produktfunktionen,
+Grenzwerte, Risikofreigaben oder Ausführungsrechte zu erfinden.
+
+**EN:** This addition implements only the repair contract explicitly approved
+on 2026-10-30. Existing A-344 and AC-A-344 criteria remain binding. H means
+container hardening, U the combined Ubuntu/OpenCode Web/MSL update, A this
+independent acceptance and L subsequent learner self-build. Consume U's
+existing FU-001–023 and FA-001–012 without inventing new features, thresholds,
+risk acceptance or execution authority.
+
+- **A-FU-01:** Beide abgeschlossenen Vorgängerübergaben, die finale gemeinsame
+  Quellrevision und die Image-ID pro geprüftem Profil und Architektur MÜSSEN
+  im Abnahmebericht ausdrücklich gebunden sein. Historische Build-/H-Nachweise
+  sind Ausgangsquellen, kein automatischer Nachweis für das neue U-Image. /
+  Explicitly bind both completed predecessor handoffs, the common final source
+  revision and image ID for each reviewed profile/architecture. Historical
+  build/hardening evidence is input, not automatic acceptance of U's new image.
+- **A-FU-02:** Eine vollständige Zuordnung aller FU-/FA-IDs zu Prüfzuständigkeit
+  und Evidence MUSS bestehen. Die unabhängige Gegenprüfung umfasst
+  risikobasiert die folgende Matrix. Jede übernommene U-Evidence braucht
+  Prüfumfang, Herkunft, passende Image-/Quellbindung und nachvollziehbare
+  Begründung; eigene Wiederholungen und Übernahmen bleiben unterscheidbar.
+  Keine automatische Verdopplung aller Tests. / Map every FU/FA ID to review
+  responsibility and evidence. Use the risk-based independent checks below.
+  Evidence reuse needs scope, provenance, matching image/source identity and
+  a reason; distinguish reuse from independently repeated checks. Do not
+  mechanically duplicate every test.
+
+| Prüfgruppe / Check group | Verbindlicher unabhängiger Prüfauftrag / Binding independent check | U-Vertrag / U contract |
+|---|---|---|
+| Basis und Ausgaben / Base and outputs | Finale OS-/Versions-/Architekturidentität und .NET-Ausgabepfade gegen U-Nachweise prüfen; positive/negative Kollisions- und Guardfälle bewerten. / Check final OS/version/architecture and .NET outputs against U evidence; assess positive/negative collision and guard cases. | FU-001–006, FA-001–002/009 |
+| Web und Readiness / Web and readiness | Authentifizierten Zugriff und Ablehnung ungültiger Anmeldung unabhängig gegenprüfen; Passwort-Negativfälle, frühen 401, begrenzte 503-/Verbindungsfehler-Wiederholung, Fristfehler, Secretfreiheit und Loopback-Portgrenze anhand der U-Kriterien prüfen. / Independently countercheck authenticated access and invalid-login rejection; check password negatives, early 401, bounded 503/connection retries, timeout failure, secret safety and loopback boundary against U criteria. | FU-007–009/011, FA-005 |
+| Gemeinsame Clients / Shared clients | Browser-Anmeldung sowie TUI-/CLI-Zuordnung zum selben Server und Testprojekt unabhängig prüfen; Sitzungen/Forks und Parallelitätsgrenzen belegen, ohne echte Provider-Secrets oder Inferenz. / Independently verify browser login and TUI/CLI mapping to the same server/project; evidence session/fork/concurrency limits without real provider secrets or inference. | FU-010, FA-006 |
+| Profile und Plattformen / Profiles and platforms | Alle sieben Profil-/Architekturbelege für native AMD64/ARM64-Prüfungen bewerten; positive/negative Werkzeugauswahl, ungültige Profile, Wrapper-Parität und SkipBuild-Abweichungen prüfen. Keine Plattform aus Emulation oder CI-Runnernamen ableiten. / Assess all seven profiles' native AMD64/ARM64 evidence; check positive/negative tool selection, invalid profiles, wrapper parity and SkipBuild mismatches. Infer no platform proof from emulation or runner names. | FU-012–018, FA-003–004/009–010 |
+| Sicherheit, Audit und Daten / Security, audit and data | Fortbestehende H-Kontrollen auf dem finalen U-Image prüfen; Non-root, CapEff=0, NoNewPrivs=1, Seccomp/innere Policies, Datenpersistenz und auditgesicherten Stop einschließlich Exportfehler-Sperre gegenprüfen. / Check retained H controls on the final U image; countercheck non-root, CapEff=0, NoNewPrivs=1, Seccomp/inner policies, persistence and audited stop including export-failure blocking. | FU-019–020, FA-007–008 |
+| Lernendenpfade und Gesamtbindung / Learner paths and integrated binding | DE/EN, sichere Fehlerhilfe, anwendbare A11Y- und Regressionsnachweise sowie gemeinsamen finalen Quellstand aller drei Issues prüfen. / Review DE/EN, safe recovery, applicable accessibility/regression evidence and the shared final revision for all three issues. | FU-021–023, FA-011–012 |
+
+- **AC-A-FU-01:** Der Bericht enthält eine vollständige FU-/FA-Zuordnung mit
+  Check-ID, Ergebnis, Reviewer, Anteil/Unabhängigkeit, Datum, Profil,
+  Host-/Engine-/Ziel-/Image-Architektur, Image-ID, Quellrevision und Evidencepfad.
+  Eigenprüfungen nennen Befehl und erwartetes/tatsächliches Ergebnis; Übernahmen
+  nennen Quelle und Begründung. / Record full FU/FA coverage, check ID, result,
+  reviewer/portion/independence, date, profile, host/engine/target/image
+  architecture, image ID, source revision and evidence. Repeated checks name
+  commands and expected/actual outcomes; reuse names source and reason.
+- **AC-A-FU-02:** Offene, fehlgeschlagene oder nicht passend gebundene
+  anwendbare Prüfungen verhindern einen positiven Gesamtabschluss. Fehlende
+  native oder menschliche Nachweise bleiben Open/Blocked mit Owner,
+  Folgeaktion und Trigger. Bestehende Grenzwerte und Human-only-Gates werden
+  nicht ersetzt. L bleibt bis erfolgreicher unabhängiger Abnahme blockiert. /
+  Open, failed or incorrectly bound applicable checks block positive overall
+  closure. Missing native/human evidence stays Open/Blocked with owner,
+  follow-up and trigger. Preserve existing thresholds and human-only gates;
+  L remains blocked until successful independent acceptance.
+
 ## Abhaengigkeiten und Risiken / Dependencies and Risks
 
-**DE:** Die technische Sandbox-Haertung muss abgeschlossen sein. Lokale
+**DE:** Technisches Sandbox-Hardening und der vollständige Feature-Update-Block
+müssen abgeschlossen und nach A-FU-01 gemeinsam gebunden sein. Lokale
 Podman-, Netzwerk- oder Plattformausfaelle werden von Repository-Fehlern
 getrennt dokumentiert. Nur auf macOS ausgefuehrte Checks belegen keine
 vollstaendige Windows- oder Linux-Abdeckung.
 
-**EN:** Technical sandbox hardening must be complete. Local Podman, network, or
+**EN:** Both technical hardening and the full feature-update block must be
+complete and jointly bound under A-FU-01. Local Podman, network, or
 platform failures are recorded separately from repository failures. Checks run
 only on macOS do not prove full Windows or Linux coverage.
 
@@ -393,10 +467,12 @@ starts no product or blocked self-build work and changes no hosting setting.
 <!-- spec-kit-command-id: speckit.specify -->
 ```text
 $speckit-specify Erstelle eine Spezifikation auf Grundlage von Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md, docs/maintenance/intake-gsdb344-delta-2026-10-21.md und der vollstaendigen Hardening-Uebergabe. Beruecksichtige A-344-01 bis A-344-04 und deren Akzeptanzkriterien sowie GSDB 3.4.4 und Assurance 0.1.8. Plane unabhaengige technische Abnahme ohne weitere Haertung oder formale Freigabe; keine Implementierung starten. Beruecksichtige den Dokumentations- und Versionsnachtrag vom 2026-10-25 sowie docs/maintenance/documentation-alignment-2026-10-25.md und docs/security/toolchain-followups-2026-10-25.md; offene Nachweise nicht als erledigt behandeln. Aktuellen Statusnachtrag docs/maintenance/sandbox-current-state-2026-10-25.md mit REV-001 bis REV-003 beruecksichtigen; technische und menschliche Nachweise nicht vorwegnehmen. Beruecksichtige docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md; isolierte Downloadtests sind kein Image-Build oder neue Abnahme. Beruecksichtige docs/maintenance/template-profile-alignment-2026-10-25.md und die neuen Rechte-/Historiengrenzen; Fork bleibt Standard, Template ist nicht aktiviert, bestehende Lifecycle- und Startgates bleiben erhalten. Beruecksichtige docs/maintenance/closeout-rights-alignment-2026-10-25.md: Ownerrechte nur fuer die benannte Lernmaterial-Lieferung bestaetigt; LIC-01 und andere LIC-02-Betroffenheiten sowie saemtliche Startgates bleiben offen. Beruecksichtige docs/maintenance/closeout-review-remediation-2026-10-25.md: IR201/IR202 nur als nachreviewte Quellenkorrektur behandeln; Lifecycle und Startautoritaet bleiben unveraendert. Beruecksichtige docs/maintenance/usability-alignment-2026-10-27.md und die dort benannten drei Lernendenpfade: begrenzte Usability-Konkretisierung ohne Scope-Ausweitung, Schutzlockerung, Pilot-Ausfuehrung oder neue Startautoritaet; unabhaengiges Vollreview erforderlich.
+Zusätzliche verbindliche Eingabe ist Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md mit FU-001–023 und FA-001–012. Übernimm beide abgeschlossenen Vorgänger und dieselbe finale Quellrevision/Image-ID nach A-FU-01/02 und AC-A-FU-01/02; plane risikobasierte unabhängige positive/negative Gegenprüfungen und begründete Evidenceübernahmen statt pauschaler Testverdopplung. Niemand darf die jeweils selbst implementierten Hardening- oder Update-Anteile abnehmen. Bestehende Schwellen, Graph- und Human-only-Gates bleiben erhalten; dieser Specify-Auftrag startet keine technische Abnahme oder Implementierung.
 ```
 
 <!-- spec-kit-command-id: speckit.autonomous -->
 ```text
 $speckit-autonomous Fuehre erst nach abgeschlossener Haertung, aktuellem Review und gesonderter Startautoritaet den vollstaendigen Spec-Kit-Lauf fuer Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md mit Delivery Authority LocalImplementation aus. Pruefe den GSDB-3.4.4-Delta-Abgleich und Assurance 0.1.8 unabhaengig, dokumentiere Plattformgrenzen und offene menschliche Entscheidungen und stoppe vor Commit, Push, Pull Request, Merge oder Hosting-Aenderungen. Beruecksichtige den Dokumentations- und Versionsnachtrag vom 2026-10-25 sowie docs/maintenance/documentation-alignment-2026-10-25.md und docs/security/toolchain-followups-2026-10-25.md; offene Nachweise nicht als erledigt behandeln. Aktuellen Statusnachtrag docs/maintenance/sandbox-current-state-2026-10-25.md mit REV-001 bis REV-003 beruecksichtigen; technische und menschliche Nachweise nicht vorwegnehmen. Beruecksichtige docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md; isolierte Downloadtests sind kein Image-Build oder neue Abnahme. Beruecksichtige docs/maintenance/template-profile-alignment-2026-10-25.md und die neuen Rechte-/Historiengrenzen; Fork bleibt Standard, Template ist nicht aktiviert, bestehende Lifecycle- und Startgates bleiben erhalten. Beruecksichtige docs/maintenance/closeout-rights-alignment-2026-10-25.md: Ownerrechte nur fuer die benannte Lernmaterial-Lieferung bestaetigt; LIC-01 und andere LIC-02-Betroffenheiten sowie saemtliche Startgates bleiben offen. Beruecksichtige docs/maintenance/closeout-review-remediation-2026-10-25.md: IR201/IR202 nur als nachreviewte Quellenkorrektur behandeln; Lifecycle und Startautoritaet bleiben unveraendert. Beruecksichtige docs/maintenance/usability-alignment-2026-10-27.md und die dort benannten drei Lernendenpfade: begrenzte Usability-Konkretisierung ohne Scope-Ausweitung, Schutzlockerung, Pilot-Ausfuehrung oder neue Startautoritaet; unabhaengiges Vollreview erforderlich.
+Zusätzlich vor jedem Start müssen Hardening UND Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md abgeschlossen und auf dieselbe finale Quellrevision/Image-ID gebunden sein. Prüfe FU-001–023/FA-001–012 nach A-FU-01/02 und AC-A-FU-01/02 risikobasiert unabhängig, einschließlich Web-Anmeldung/Readiness, Clients, Profilen und erhaltener Security-/Auditkontrollen. Übernommene Evidence begründen; keine pauschale Testverdopplung. Keine Selbstabnahme eigener Hardening-/Update-Anteile, keine Änderung bestehender Schwellen oder Human-only-Gates. Dieser Prompt ist keine Startfreigabe.
 ```
 <!-- intake-authoring:end -->

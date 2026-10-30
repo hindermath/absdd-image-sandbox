@@ -1,0 +1,126 @@
+# Vollständiges Serienreview nach Lieferreparatur / Full series review after delivery repair
+
+## Deutsch
+
+Ergebnis: **Ready**. Review-ID `ab11aa4c-d97a-458e-99f5-526ea89dbd56`.
+Operation `d0c6bf80-d268-4a0f-92a2-70e748f8330a`. Reviewer: Codex,
+agentisches vollständiges Intake-Review; keine Produkt- oder menschliche Abnahme.
+Fünf Ziele, null Kampagnen-Worker, null offene Findings, Fragen oder akzeptierte
+Risiken. Vorheriges vollständiges Ready `652008d6-e24f-4279-a95c-bc110136ceee`
+bleibt bytegleich archiviert und wird nicht als aktuelle Bewertung ausgegeben.
+
+Der Owner bestätigte den konkret zitierten Vertrag mit „Reparaturfreigabe
+erteilt“. Die neue Revision entfernt ausschließlich sechs Leerzeichen an drei
+Metadatenzeilen des Update-Intakes. Sie ändert keine Anforderung, Abnahme,
+Schwelle, Sicherheits-/Datenschutz-/A11Y-Entscheidung oder Prompt-Berechtigung.
+Die mitbetroffenen Quellenbindungen des Dokumentationsworkflows werden in
+allen vier aktiven Receipts erneuert. Ihre vier Intake-IDs und bisherigen
+Quellenreihenfolgen bleiben nach Vorgänger/Vertrag erhalten. Historische
+Receipts, Zieltexte, Serienmanifest/-Receipt und Reviewauftrag/-Ergebnis/-Text
+sind vor Änderung bytegleich gesichert (13 Vorstände).
+
+### Vollständige Zielbeurteilung
+
+| Ziel | Erneut beurteilte Verträge und Grenzen |
+|---|---|
+| GSDB-Root, Completed | Historische Bestandsprüfung aller Checklisten, begründete Anwendbarkeit, priorisierte Lückenliste, konkrete Evidence und offene Human-only-Punkte liefern die H-Baseline. Keine rückwirkende technische oder rechtliche Freigabe. |
+| H, Eligible | Zweck, Scope/Nicht-Ziele und sieben Grundanforderungen sowie H-344-01–10/AC-H-344-01–10 sind prüfbar. 50 Delta-IDs, 85/80-Prozent-Schwellen, kein erfundenes Produkt nur für Tests, Cloud-/Lizenz-/Rechts-/Lernenden-Grenzen und aktuelle GSDB/Assurance bleiben konsistent. Feature 004 existiert bereits als getrennte Planung; keine doppelte Specify- oder Implementierungsautorität. |
+| U, Blocked | FU-001–023/FA-001–012 behalten native Basis-/Versions-/Architekturprüfungen, sichere Ausgabepfade, lokale Passwort-/Readiness-/Clientverträge, sieben Profile, gemeinsame Infrastruktur, Daten/Audit/Security und gemessene imagegebundene SBOMs. Drei Formatstellen sind der einzige Textdelta. Die innerhalb des Intakes datierte Aufnahme-/Reviewvorbereitung ist historischer Erzeugungskontext, kein aktueller Reviewstatus; aktuelle Ergebnisse stehen an den kanonischen Reviewpfaden. |
+| A, Blocked | A-344/AC-A-344 und A-FU-01/02/AC-A-FU-01/02 verlangen beide abgeschlossenen H/U-Übergaben auf identischer finaler Quell-/Imageidentität je Profil/Architektur. Unabhängige risikobasierte positive/negative Gegenprüfungen, nachvollziehbare Evidenceübernahme und keine Selbstabnahme eigener Anteile schließen den früheren IR801-Vertrag weiterhin ein. |
+| L, Blocked | Erfolgreiche unabhängige A-Abnahme und eigene Startautorität bleiben Voraussetzungen. Persönlicher Fork/origin/upstream, optionales Template mit getrennten Rechte-/Historiengates, providerfreier Selbstbau, keine fertigen Registry-Images, sechs Sprachen im Standard all, DE/EN und sichere Daten-/Dateigrenzen sind konsistent. |
+
+Für jedes Ziel wurden Identität, Zielgruppe, Vorwissen/erste Begriffe,
+Zweck/Scope/Nicht-Ziele, atomare Anforderungen, messbare Abnahme, Abhängigkeiten,
+Risiken, Quellen, erwartete Artefakte, Sprache/A11Y/Plattform, Security/Privacy,
+Liefergrenzen sowie beide Folgeprompts betrachtet. Archivierte Roottexte bleiben
+historischer Kontext. Die fünf aktuellen Zielhashes werden neu gebunden;
+vier unveränderte Zieltexte wurden bytegleich nachgewiesen. Keine unbenannte
+Umsetzungsannahme, kein Kampagnen- oder Providerauftrag entsteht daraus.
+
+### Serie, Quellen und Prüfgrenzen
+
+Fünf eindeutige Ziele, eine abgeschlossene archivierte Root, fünf bindende
+azyklische Kanten; Completed/Eligible/Blocked/Blocked/Blocked unverändert.
+H→U, H→A, U→A und A→L ergänzen die GSDB→H-Baseline. Schema-2.0 de-DE,
+portable Rollen, Collection-Pfade, Index und lesbare Reihenansichten stimmen
+überein. Aktive Prompts und strukturelles Eligible erteilen keine Startrechte.
+Quellenbelege sind keine aktuelle Produkt-, Rechts-, Plattform-, Usability-
+oder WCAG-AA-Abnahme. Anforderungen an 85/80 %, native Plattformnachweise und
+menschliche Entscheidungen bleiben davon ausdrücklich getrennt.
+
+Die Archiv-Linkbehandlung bindet genau drei unveränderliche Dateien über ihre
+Rohhashes und prüft alle neun lokalen Ziele am ursprünglichen Dokumentort.
+Sie ist eine gesonderte technische Veröffentlichungskontrolle, keine Änderung
+archivierter Bedeutung. Positiv- und sechs Negativfixtures sowie tatsächliche
+Dateiprüfung bestehen; fehlende/rote Remote-Gates dürfen nicht ersetzt werden.
+Frühere Lieferprüfungsfehler bleiben im Session-Log erhalten. Erst nach beiden
+installierten Validatorvarianten und vollständigem Nachreview wird die isolierte
+Transaktion veröffentlicht; Ausführungsnachweise ergänzt das Lieferprotokoll.
+
+Documentation Impact: UpdateRequired; Owner Maintainer, Leserpfade bestehen aus
+Intake, Serie, Review und Liefernachweis. Kanonische Quelle ist der explizite
+Reparaturvertrag mit aktuellem Manifest/Receipt/Review. Source-only, kein Home-
+Sync, kein Image-Build oder Flottenrollout. Neubewertung bei Quellen-, Ziel-,
+Graph-, Archivkontext- oder Reviewdrift.
+
+Nächste Aktion: `$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json`.
+
+## English
+
+Outcome: **Ready**, review `ab11aa4c-d97a-458e-99f5-526ea89dbd56` under operation
+`d0c6bf80-d268-4a0f-92a2-70e748f8330a`. Five targets, no workers, findings,
+unanswered material questions or accepted risks. Codex performs an agent intake
+review, not product/human acceptance. Preserve previous complete Ready byte for
+byte as history; do not reuse it as the current assessment.
+
+The owner explicitly approved the quoted bounded repair. Remove only six
+spaces on three update metadata lines. No requirement, acceptance threshold,
+security/privacy/accessibility decision or prompt authority changes. Renew all
+four receipts because the documentation workflow is also a bound source. Keep
+intake identities and prior source order after preserved predecessor/approved
+contract. Thirteen preimages preserve target, receipt, series and review history.
+
+Reassess every target against identity, audience/assumed knowledge/first-use
+terms, purpose/scope/non-goals, atomic requirements, measurable acceptance,
+dependencies, risks, sources, evidence, language/accessibility/platform,
+security/privacy, delivery boundaries and both prompts:
+
+- Completed archived GSDB assessment supplies a justified evidence matrix and
+  prioritized gaps without rewriting historic approvals.
+- Hardening retains seven base requirements and all ten H/AC-H delta groups,
+  50 control mappings, 85/80 thresholds and human/cloud/licensing limits.
+  Existing Feature 004 planning is separate; do not create a duplicate feature.
+- Update retains FU-001–023/FA-001–012, native image/version/architecture,
+  output boundaries, password/readiness/common clients, seven profiles,
+  infrastructure, audit/data/security and fresh SBOM contracts. Only three
+  formatting locations change. Its dated admission/review-preparation text is
+  historical creation context; canonical current review paths govern freshness.
+- Acceptance consumes both completed H/U handoffs on the same final source
+  and exact image per profile/architecture. Preserve risk-based independent
+  positive/negative checks, justified evidence reuse and no self-acceptance.
+- Learner self-build remains behind successful independent acceptance and
+  separate authority. Preserve personal fork/origin/upstream, optional-template
+  rights/history, provider-free build, no registry image substitute, six-language
+  default all, bilingual learner guidance and safe file/data boundaries.
+
+Four unchanged target texts remain byte-identical. Five unique ordered targets,
+five binding acyclic edges and one completed archived root retain states
+Completed/Eligible/Blocked/Blocked/Blocked. de-DE schema-2 roles, collection
+paths, index and order views agree. Enabled prompts and eligibility grant no
+execution authority. Source proof is not product, legal, platform, usability or
+WCAG acceptance; native tests, coverage thresholds and human decisions remain
+separate gates.
+
+Hash-bound archive handling checks exactly three immutable files and nine
+original-context destinations. Its positive and six negative fixture cases
+pass; this separate CI gate changes no archive meaning or missing remote proof.
+Record failed preliminary delivery checks rather than calling them green.
+Publish the isolated transaction only after both installed validators and this
+complete review; delivery evidence records executed checks.
+
+Documentation Impact: UpdateRequired, Maintainer owner, existing intake/series/
+review/delivery reader paths. Approved contract plus current manifest/receipt/
+review are canonical. Source-only, no Home sync, image build or fleet rollout.
+Reevaluate on source/target/graph/archive-context/review changes.
+
+Next: `$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json`.

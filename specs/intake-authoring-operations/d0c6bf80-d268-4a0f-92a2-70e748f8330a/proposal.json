@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeRepairProposal",
+  "operationId": "d0c6bf80-d268-4a0f-92a2-70e748f8330a",
+  "authorityEvidence": "User explicitly approves the quoted bounded repair contract: three formatting-only Markdown hardbreak corrections; byte-preserving archives; renew affected intake/series/review bindings and perform complete five-member review; exact hash-bound original-context checks for nine archive links in three files, no archive rewriting or broad exclusions. Then continue authorized MergeAndSync/admin bypass; no feature implementation, runtime, Home or fleet changes.",
+  "changedText": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+  "formatDelta": "Exactly six trailing spaces removed at three metadata lines",
+  "unchangedTargets": [
+    "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+    "Lastenheft_Secure-Development-Container-Hardening.md",
+    "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+    "intakes/learner-fork-self-build-sandbox.md"
+  ],
+  "order": [
+    "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+    "Lastenheft_Secure-Development-Container-Hardening.md",
+    "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+    "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+    "intakes/learner-fork-self-build-sandbox.md"
+  ],
+  "roots": [
+    "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+  ],
+  "dependencies": [
+    {
+      "from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "to": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "kind": "AssessmentBaseline",
+      "binding": true
+    },
+    {
+      "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "kind": "SandboxBaseline",
+      "binding": true
+    },
+    {
+      "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "to": "intakes/learner-fork-self-build-sandbox.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "to": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "binding": true,
+      "kind": "SandboxBaseline"
+    },
+    {
+      "from": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "binding": true,
+      "kind": "SandboxBaseline"
+    }
+  ],
+  "states": [
+    "Completed",
+    "Eligible",
+    "Blocked",
+    "Blocked",
+    "Blocked"
+  ],
+  "sources": "Preserved predecessor first, explicit contract second, previous sources in prior order; only affected current-file hashes renewed"
+}
