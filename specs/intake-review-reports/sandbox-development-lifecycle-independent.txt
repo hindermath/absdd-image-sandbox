@@ -1,8 +1,8 @@
 # Reviewstand nach Serienaufnahme / Review after series admission
 
-DE: Der frühere unabhängige Reviewnachweis ist bytegleich archiviert. Das aktuelle vollständige fünfgliedrige Nachreview `09d784df-eae0-4952-9f5f-a458379ed9c6` ist nach bestätigter IR801-Reparatur Ready. Dieser Verweis behauptet keinen zusätzlichen unabhängigen Reviewlauf. Historischer Nachweis und aktueller Bericht bleiben getrennt; Eligible ist keine Startfreigabe.
+DE: Der frühere unabhängige Reviewnachweis ist bytegleich archiviert. Das aktuelle vollständige fünfgliedrige Nachreview `aa89a3d1-59a0-42bb-965b-1614e3758c04` ist nach bestätigter IR801-Reparatur Ready. Dieser Verweis behauptet keinen zusätzlichen unabhängigen Reviewlauf. Historischer Nachweis und aktueller Bericht bleiben getrennt; Eligible ist keine Startfreigabe.
 
-EN: The prior independent review record is archived byte for byte. Current complete five-member re-review `09d784df-eae0-4952-9f5f-a458379ed9c6` is Ready after approved IR801 repair. This pointer claims no additional independent review run. Preserve the distinction between historical evidence and the current report; eligibility is not execution authority.
+EN: The prior independent review record is archived byte for byte. Current complete five-member re-review `aa89a3d1-59a0-42bb-965b-1614e3758c04` is Ready after approved IR801 repair. This pointer claims no additional independent review run. Preserve the distinction between historical evidence and the current report; eligibility is not execution authority.
 
 Archiv / Archive: specs/intake-review-archive/5c452360-9bf7-44d9-84e0-10cae34e72ea/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/independent.txt
 Neuer Auftrag / New request: specs/intake-review-requests/sandbox-development-lifecycle.json

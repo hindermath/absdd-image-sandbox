@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.1",
-  "reviewId": "09d784df-eae0-4952-9f5f-a458379ed9c6",
+  "reviewId": "aa89a3d1-59a0-42bb-965b-1614e3758c04",
   "mode": "Series",
   "policy": "learner-a11y-bilingual-series",
   "targets": [
@@ -153,11 +153,13 @@
     "docs/maintenance/intake-delivery-repair-2026-10-30.md",
     "specs/intake-review-archive/652008d6-e24f-4279-a95c-bc110136ceee/d0c6bf80-d268-4a0f-92a2-70e748f8330a/result.json",
     "docs/maintenance/historical-eof-integration-2026-10-30.md",
-    "specs/intake-review-archive/ab11aa4c-d97a-458e-99f5-526ea89dbd56/b2e17f24-435e-4ea7-86e5-e68edbea0803/result.json"
+    "specs/intake-review-archive/ab11aa4c-d97a-458e-99f5-526ea89dbd56/b2e17f24-435e-4ea7-86e5-e68edbea0803/result.json",
+    "docs/maintenance/template-series-fixture-alignment-2026-10-30.md",
+    "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/result.json"
   ],
-  "authorityEvidence": "User explicitly grants additional authority to correct the canonical historical EOF validator and regression tests, preserve immutable archive and issue-snapshot bytes, perform controlled v0.4.8 consumer integration and neutral active-intake EOF correction, renew affected provenance/series/review bindings with complete review, and finish MergeAndSync with authorized admin bypass; no feature implementation, runtime, Home or fleet changes.",
-  "operationId": "b2e17f24-435e-4ea7-86e5-e68edbea0803",
-  "reviewScope": "Complete five-target semantic re-review after explicitly approved format-neutral publication repair and affected workflow/source rebinding.",
+  "authorityEvidence": "Existing explicit publication/repair authority includes mechanically aligning regression fixtures to the approved five-member series and separating preserved dated workshop evidence from current operational installation metadata. Renew only affected H/A/L source receipts with byte-preserving lineage and complete series review; no target, scope, graph, lifecycle, export, runtime, Home or fleet changes.",
+  "operationId": "869be6a5-a352-4f1f-baaf-aad2d6efd086",
+  "reviewScope": "Complete five-target semantic re-review after source-only CI fixture alignment; all target texts, U receipt and series manifest/receipt unchanged.",
   "seriesManifest": {
     "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
     "normalizedSha256": "6f3c90e8fe8165d8925c59241f06597f346aa24923d83717c6e764e958dfd0db"
@@ -167,7 +169,7 @@
     "path": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
     "normalizedSha256": "88341c3454c98dc8880634817ed303f475dc89e6f390ccfa55e5ba60e41229ef"
   },
-  "supersedesReviewId": "ab11aa4c-d97a-458e-99f5-526ea89dbd56",
+  "supersedesReviewId": "09d784df-eae0-4952-9f5f-a458379ed9c6",
   "admissionEvidence": {
     "requestedNotExecuted": false,
     "priorSeriesReviewPath": "specs/intake-review-archive/5c452360-9bf7-44d9-84e0-10cae34e72ea/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/result.json",
@@ -175,8 +177,8 @@
   },
   "repairAuthorization": {
     "finding": "DELIVERY-FORMAT-001",
-    "contractPath": "docs/maintenance/historical-eof-integration-2026-10-30.md",
-    "authorityEvidence": "User explicitly grants additional authority to correct the canonical historical EOF validator and regression tests, preserve immutable archive and issue-snapshot bytes, perform controlled v0.4.8 consumer integration and neutral active-intake EOF correction, renew affected provenance/series/review bindings with complete review, and finish MergeAndSync with authorized admin bypass; no feature implementation, runtime, Home or fleet changes.",
-    "operationId": "b2e17f24-435e-4ea7-86e5-e68edbea0803"
+    "contractPath": "docs/maintenance/template-series-fixture-alignment-2026-10-30.md",
+    "authorityEvidence": "Existing explicit publication/repair authority includes mechanically aligning regression fixtures to the approved five-member series and separating preserved dated workshop evidence from current operational installation metadata. Renew only affected H/A/L source receipts with byte-preserving lineage and complete series review; no target, scope, graph, lifecycle, export, runtime, Home or fleet changes.",
+    "operationId": "869be6a5-a352-4f1f-baaf-aad2d6efd086"
   }
 }

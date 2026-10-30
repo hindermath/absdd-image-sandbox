@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "context": "Immutable 2026-10-25 workshop profile, not today's operational install matrix",
+  "path": "specs/intake-authoring-operations/b2e17f24-435e-4ea7-86e5-e68edbea0803/source-snapshots/scripts/config/spec-kit-project-statistics-governance-presets.json.txt",
+  "rawSha256": "2cb57b4651616439b45bee12156b8c513187141100ecb39ac64f3fe9eaa8bcfa",
+  "currentOperationalProfile": "scripts/config/spec-kit-project-statistics-governance-presets.json",
+  "proofBoundary": "Source profile and existing DE/EN exports remain historical; active installed payloads are checked separately by exact current profile/lock tests"
+}

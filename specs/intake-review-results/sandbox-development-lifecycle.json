@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.1",
   "documentType": "IntakeReviewResult",
-  "reviewId": "09d784df-eae0-4952-9f5f-a458379ed9c6",
+  "reviewId": "aa89a3d1-59a0-42bb-965b-1614e3758c04",
   "mode": "Series",
   "status": "Ready",
   "policy": "learner-a11y-bilingual-series",
-  "reviewedAt": "2026-10-30T15:53:14Z",
+  "reviewedAt": "2026-10-30T17:35:11Z",
   "repository": {
     "root": ".",
     "head": "d5c313b5461afc09bec97e9980e2fd7632e6d2ff"
@@ -17,7 +17,7 @@
   },
   "requestEvidence": {
     "path": "specs/intake-review-requests/sandbox-development-lifecycle.json",
-    "normalizedSha256": "ba3feb93cb4dbb22cf94d3041524e170bbf34106d46d5dc73f25a92182f24f98"
+    "normalizedSha256": "7dbcd4e08d8a6852e512379391d303f5ebc5d4f73e5fddf67d9998ca75d3faf1"
   },
   "targets": [
     {
@@ -111,7 +111,8 @@
       "Five unique ordered targets, five binding acyclic dependencies, one completed archived root and exactly one declared Eligible hardening target; states and handoffs unchanged. Feature004 planning already exists, not duplicated or started.",
       "All four active receipts retain intake IDs, archived predecessor first, explicit approved format/workflow contract second, prior ordered sources and controlled affected file hashes; three target texts are byte-identical. Original historical snapshots remain preserved.",
       "Schema2 de-DE roles, collection paths, index/order and current manifest agree. Both specify/autonomous prompts retain scope and authority; enabled prompts do not grant start or delivery rights.",
-      "No findings, unanswered material questions, accepted risks, campaign workers or operator exceptions. No product/legal/human/A11Y approval inferred. Hash-bound archive CI changes are a separate technical gate."
+      "No findings, unanswered material questions, accepted risks, campaign workers or operator exceptions. No product/legal/human/A11Y approval inferred. Hash-bound archive CI changes are a separate technical gate.",
+      "Complete renewed semantic assessment after source-only CI fixture alignment: same five target texts, unchanged U receipt and series bindings; verify existing five-member lifecycle/edges and preserve dated workshop sources/exports against exact immutable profile snapshot. Prior Ready remains historical, not reused as a current outcome."
     ],
     "workers": []
   },
@@ -121,12 +122,12 @@
     "medium": 0,
     "low": 0
   },
-  "supersedes": "specs/intake-review-archive/ab11aa4c-d97a-458e-99f5-526ea89dbd56/b2e17f24-435e-4ea7-86e5-e68edbea0803/result.json",
+  "supersedes": "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/result.json",
   "preservedPriorState": {
-    "resultPath": "specs/intake-review-archive/ab11aa4c-d97a-458e-99f5-526ea89dbd56/b2e17f24-435e-4ea7-86e5-e68edbea0803/result.json",
-    "resultRawSha256": "95e2faa76e6120eda2103d04eaa4f28165b7c6940726dac08591454ff955918b",
-    "requestPath": "specs/intake-review-archive/ab11aa4c-d97a-458e-99f5-526ea89dbd56/b2e17f24-435e-4ea7-86e5-e68edbea0803/request.json",
-    "reportPath": "specs/intake-review-archive/ab11aa4c-d97a-458e-99f5-526ea89dbd56/b2e17f24-435e-4ea7-86e5-e68edbea0803/report.txt",
+    "resultPath": "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/result.json",
+    "resultRawSha256": "99c49710f9b3177d252085fd11f02d472c6773b86fe920046bb31f946d88bf61",
+    "requestPath": "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/request.json",
+    "reportPath": "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/report.txt",
     "meaning": "Previous complete Ready is immutable historical scope; this full review separately evaluates all five current targets after bounded repair"
   },
   "seriesBinding": {
@@ -137,7 +138,7 @@
   },
   "validation": {
     "requirementsConfig": "Bash Passed; schema2 Aligned",
-    "activeAuthoringReceipts": "Passed all four affected receipts, installed Bash and PowerShell",
+    "activeAuthoringReceipts": "Passed three renewed receipts with installed Bash/PowerShell; unchanged U receipt retains prior native proof and fresh Bash check",
     "seriesManifestAndReceipt": "Passed installed Bash and PowerShell",
     "resultBash": "Passed final installed Bash result validator",
     "resultPowerShell": "Passed final installed PowerShell result validator",

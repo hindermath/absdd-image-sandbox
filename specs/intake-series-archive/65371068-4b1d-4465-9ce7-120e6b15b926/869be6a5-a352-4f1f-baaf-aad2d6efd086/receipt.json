@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "2b1ab440-21e3-4158-8ee2-eb70227be4d3",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.11"
+  },
+  "createdAt": "2026-10-30T15:51:12Z",
+  "operation": {
+    "type": "Update",
+    "operationId": "b2e17f24-435e-4ea7-86e5-e68edbea0803",
+    "authorityEvidence": "User explicitly grants additional authority to correct the canonical historical EOF validator and regression tests, preserve immutable archive and issue-snapshot bytes, perform controlled v0.4.8 consumer integration and neutral active-intake EOF correction, renew affected provenance/series/review bindings with complete review, and finish MergeAndSync with authorized admin bypass; no feature implementation, runtime, Home or fleet changes."
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "6f3c90e8fe8165d8925c59241f06597f346aa24923d83717c6e764e958dfd0db"
+  },
+  "supersedes": {
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/b2e17f24-435e-4ea7-86e5-e68edbea0803/receipt.json",
+    "receiptNormalizedSha256": "d1f2436725b086dea753df017c90f7fe7c490229165db54101342cc330361ae3",
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/b2e17f24-435e-4ea7-86e5-e68edbea0803/manifest.json",
+    "manifestArchiveSha256": "a7d7ddac8ded520e202daf55d90d8280020de1cc66d4fe089759fb82d8b537a3"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json"
+}

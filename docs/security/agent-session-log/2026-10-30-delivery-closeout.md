@@ -252,3 +252,44 @@ EN: Content commit 8b03db6 contains the checked package. Render statistics in
 a clean isolated worktree and commit that output separately. Preserve eleven
 old transactional staging duplicates untracked. No runtime, container, Home,
 fleet or Feature 004 implementation action is performed.
+
+## CI-Quellenabgleich / CI source alignment
+
+DE: PR #106 auf d4f9bb6 hatte zwei echte rote Checks: Die Template-Fixture
+erwartete vier statt der genehmigten fünf Serienmitglieder; die Workshop-
+Fixture verglich das datierte Profil mit der neuen operativen Installation.
+Die ausdrückliche Korrekturfreigabe umfasst ausschließlich diesen Quellen-
+abgleich. Fünf Zieltexte, U-Receipt und aktive Serienbindungen bleiben
+bytegleich. Präsentationsquellen, Notizen und Exporte bleiben unverändert;
+ein Rohhash-Snapshot bindet ihr historisches Profil mit drei Negativfällen.
+Aktuelle Paket-/Quellenlocks werden weiterhin separat strikt geprüft.
+
+EN: PR #106 at d4f9bb6 had two real failed checks: the template fixture
+expected four instead of five approved series members, and the workshop
+fixture compared its dated profile with today's operational installation.
+Explicit correction authority covers this source alignment only. Preserve
+five targets, U receipt and active series bindings byte for byte. Preserve
+presentation sources, notes and exports; bind their historical profile to a
+raw-hash snapshot with three tamper negatives. Retain separate strict current
+package/source-lock checks.
+
+DE: Operation 869be6a5-a352-4f1f-baaf-aad2d6efd086 erhält 13 Vorstände
+bytegleich. Erneuerte H/A/L-Receipts bestehen Bash und PowerShell mit
+77/83/79 Quellen; die drei nativen Prüfungen liefen parallel, Exitcode 0.
+Unverändertes U-Receipt besteht zusätzlich Bash mit elf Quellen. Manifest
+und Serienreceipt bestehen beide Shells: fünf Ziele, eine Root, fünf Kanten.
+Vollständiges Nachreview aa89a3d1-59a0-42bb-965b-1614e3758c04 ist Ready,
+null Findings; beide Ergebnisvalidatoren bestehen. Alle 17 betroffenen Tests
+bestehen in 12.679 Sekunden. Ein redundanter lokaler Gesamtlauf wurde
+abgebrochen (Exit 130), nicht als bestanden gewertet; der vollständige
+hosted CI-Lauf auf dem Korrekturhead bleibt vor Merge erforderlich.
+
+EN: Operation above preserves thirteen preimages. Renewed H/A/L receipts pass
+Bash and PowerShell with 77/83/79 sources; parallel native checks exit zero.
+The unchanged U receipt also passes Bash with eleven sources. Both shells
+validate the unchanged five-target, one-root, five-edge series. Complete
+re-review above is Ready without findings; both result validators pass.
+All seventeen affected tests pass in 12.679 seconds. A redundant local full
+suite was cancelled (exit 130), not claimed as passed; complete hosted CI on
+the correction head remains mandatory before merge. No runtime, Home, fleet
+or Feature 004 execution is included.

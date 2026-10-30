@@ -24,6 +24,17 @@ remain the canonical guidance.
 
 ## Materialien / Materials
 
+DE: Die datierte Workshop-Matrix bleibt über einen [Rohhash-Snapshot](workshop-profile-snapshot.json)
+gebunden. Sie ist kein aktuelles Installationsprofil. Die operative Matrix
+unter `scripts/config/spec-kit-project-statistics-governance-presets.json`
+wird separat mit aktiven Paket-/Quellenlocks geprüft. Ein lokaler Preset-Patch
+schreibt vorhandene Präsentationsquellen, Sprecherhinweise und Exporte nicht um.
+
+EN: The dated workshop matrix binds its immutable raw-hash snapshot above,
+not today's install profile. Validate the operational matrix separately
+against current package/source locks. A local preset patch does not rewrite
+existing presentation sources, speaker notes or exports.
+
 **DE:** Der Workshop erklärt die Nutzung von `absdd-image-sandbox` und einen
 begrenzten Spec-Kit-Arbeitsablauf. Er setzt keine Container- oder KI-Erfahrung
 voraus. Beide Sprachfassungen enthalten dieselben 39 Themen, vollständige

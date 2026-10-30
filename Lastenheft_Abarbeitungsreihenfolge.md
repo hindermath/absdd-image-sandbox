@@ -21,13 +21,13 @@ veraltet. Dieses Review und das Single-Ready des Feature-Updates nach IR701
 bleiben bytegleich archiviert. Sie gelten nach Aufnahme und geändertem
 Graph nicht als aktuelle Prüfung der fünfgliedrigen Reihe.
 Der [neue vollständige Reviewauftrag](specs/intake-review-requests/sandbox-development-lifecycle.json)
-wurde nach dem bestätigten IR801-Vertrag erneuert und vollständig ausgeführt. Ergebnis: Ready (Review-ID 09d784df-eae0-4952-9f5f-a458379ed9c6). Dies ist Inhaltsbereitschaft, keine technische oder menschliche Abnahme und keine Startfreigabe.
+wurde nach dem bestätigten IR801-Vertrag erneuert und vollständig ausgeführt. Ergebnis: Ready (Review-ID aa89a3d1-59a0-42bb-965b-1614e3758c04). Dies ist Inhaltsbereitschaft, keine technische oder menschliche Abnahme und keine Startfreigabe.
 
 EN: The four-member full review above was Ready on 2026-10-27; describing
 that review as pending was stale. It and the feature update's post-IR701
 Single Ready remain archived byte for byte. Following admission and graph
 changes, neither is current acceptance of the five-member series.
-The renewed complete review is Ready (review ID 09d784df-eae0-4952-9f5f-a458379ed9c6) after authorized IR801 repair. This is requirement readiness, not product/human acceptance or execution authority.
+The renewed complete review is Ready (review ID aa89a3d1-59a0-42bb-965b-1614e3758c04) after authorized IR801 repair. This is requirement readiness, not product/human acceptance or execution authority.
 
 <!-- secure-development-hardening-order:start -->
 ## Verlinkte Lastenheft-Reihenfolge / Linked Requirements Order

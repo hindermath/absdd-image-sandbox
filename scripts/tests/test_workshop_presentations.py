@@ -2,6 +2,7 @@
 """Source/package regression checks, not native-app or human A11Y acceptance."""
 
 import json
+import hashlib
 from pathlib import Path
 import re
 import unittest
@@ -13,6 +14,13 @@ ROOT = Path(__file__).resolve().parents[2]
 DIRECTORY = ROOT / "docs/praesentationen"
 A = "{http://schemas.openxmlformats.org/drawingml/2006/main}"
 BANNED = re.compile(r"gwdg|gitlab-ce|it4science|\bzki\b|manage-spec-kit-presets|/Users/|/var/folders/", re.I)
+
+
+def workshop_matrix(snapshot, raw):
+    """The dated exports bind their immutable source, not today's install profile."""
+    if snapshot.get("schemaVersion") != 1 or hashlib.sha256(raw).hexdigest() != snapshot.get("rawSha256"):
+        raise ValueError("workshop profile snapshot drift")
+    return json.loads(raw)
 
 
 class WorkshopPresentationTests(unittest.TestCase):
@@ -37,13 +45,26 @@ class WorkshopPresentationTests(unittest.TestCase):
                 self.assertIn(required, text)
             self.assertNotIn("v1.0.0", text)
 
-    def test_pilot_matrix_matches_local_versioned_source(self):
-        matrix = json.loads((ROOT / "scripts/config/spec-kit-project-statistics-governance-presets.json").read_text())
+    def test_pilot_matrix_matches_immutable_workshop_source(self):
+        snapshot = json.loads((DIRECTORY / "workshop-profile-snapshot.json").read_text())
+        path = (ROOT / snapshot["path"]).resolve(strict=True)
+        self.assertTrue(path.is_relative_to(ROOT.resolve()))
+        matrix = workshop_matrix(snapshot, path.read_bytes())
         self.assertEqual(len(matrix["presets"]), 14)
         for item in matrix["presets"]:
             row = f"| {item['id']} | {item['version']} | {item['priority']} |"
             for lang in ("de", "en"):
                 self.assertIn(row, self.source(lang))
+
+    def test_workshop_snapshot_rejects_changed_bytes_or_hash(self):
+        snapshot = json.loads((DIRECTORY / "workshop-profile-snapshot.json").read_text())
+        raw = (ROOT / snapshot["path"]).read_bytes()
+        with self.assertRaises(ValueError):
+            workshop_matrix(snapshot, raw + b" ")
+        with self.assertRaises(ValueError):
+            workshop_matrix(dict(snapshot, rawSha256="0" * 64), raw)
+        with self.assertRaises(ValueError):
+            workshop_matrix(dict(snapshot, schemaVersion=2), raw)
 
     def test_pptx_has_39_editable_slides_and_39_note_parts(self):
         for lang in ("de", "en"):

@@ -84,7 +84,12 @@ class TemplateProfileTests(unittest.TestCase):
                 self.assertEqual(text.count(f"**{prefix}-{i:03}:**"), 2)
         manifest = json.loads(self.read("specs/intake-series/sandbox-development-lifecycle/manifest.json"))
         self.assertEqual([item["status"] for item in manifest["orderedTargets"]],
-                         ["Completed", "Eligible", "Blocked", "Blocked"])
+                         ["Completed", "Eligible", "Blocked", "Blocked", "Blocked"])
+        self.assertEqual(manifest["orderedTargets"][2]["path"],
+                         "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md")
+        edges = {(edge["from"], edge["to"]) for edge in manifest["dependencies"] if edge["binding"]}
+        self.assertIn((manifest["orderedTargets"][1]["path"], manifest["orderedTargets"][2]["path"]), edges)
+        self.assertIn((manifest["orderedTargets"][2]["path"], manifest["orderedTargets"][3]["path"]), edges)
 
     def test_link_exclusion_is_only_for_byte_identical_archived_order_views(self):
         workflow = self.read(".github/workflows/documentation-and-sandbox.yml")
