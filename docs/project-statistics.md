@@ -1,6 +1,6 @@
 # Projektstatistik / Project Statistics — absdd-image-sandbox
 
-**Stand / Date:** 2026-07-10
+**Stand / Date:** 2026-10-30
 **Ausrichtung / Orientation:** DE-first, EN-second, CEFR B2, WCAG 2.2 AA
 
 > **DE:** Lebendiges Dokument — nach jedem abgeschlossenen Feature, jeder
@@ -238,6 +238,36 @@ nach konkreter Diff-Sichtung und bestandenen Checks; keine KI-Zeitmessung.
 EN: Bounded installation candidate, native command composition and separate
 technical assurance evidence. No product, Home, image or wider fleet changes.
 Delivery awaits explicit patch sighting and successful checks; no AI-time claim.
+
+### 2026-10-30 - Sandbox-Intake-Serie und IR801 / Sandbox intake series and IR801
+
+DE: Feature-Update als fünftes Ziel nach Hardening und vor Selbstprüfung
+aufgenommen. IR801-Vertrag ergänzt finale H/U-Baseline, unabhängige Prüfungen
+und keine Selbstabnahme. Vollständiges Nachreview Ready, null offene Findings;
+fünf Ziele, eine archivierte Root, fünf bindende Kanten. Provenienz und
+historische Vorstände erhalten. Keine Feature-Implementierung, Runtime-,
+Home- oder Flottenänderung; Feature 004 bleibt ein gesonderter Arbeitsstand.
+EN: Admit the feature update as the fifth target after hardening and before
+acceptance. IR801 binds the final H/U baseline, independent checks and no
+self-acceptance. Complete re-review Ready with no open findings; five targets,
+one archived root and five binding edges. Preserve provenance and history.
+No feature implementation, runtime, Home or fleet change; Feature 004 remains
+a separate work context.
+
+### 2026-10-30 - Kanonischer EOF-Fix / Canonical EOF fix
+
+DE: Autonomous v0.4.8 aus dem veröffentlichten eigenständigen Preset mit
+exaktem Tag-/ZIP-Nachweis lokal integriert. Die übrigen 13 Payloads bleiben
+unverändert. Aktive Profile/Locks und zwei Constitution-Pins aktualisiert;
+26 zusätzliche Vorstände bytegleich archiviert, vier aktive Receipts erneuert
+und vollständiges Serienreview Ready. Historische EOF-Bytes werden nur über
+exakte Rohhash-Ausnahmen erhalten, aktive U-Datei formatneutral normalisiert.
+Keine Feature-004-Implementierung, globale Profilverteilung oder Runtimeaktion.
+EN: Integrate published standalone Autonomous v0.4.8 with exact tag/ZIP proof,
+preserving thirteen other payloads. Renew local profiles/locks, paired pins,
+four receipts and complete Ready series review; preserve 26 preimages.
+Historical EOF allowances bind exact raw bytes; normalize the active update
+without semantic change. No Feature 004 execution, global rollout or runtime action.
 
 ## Gesamtstatistik / Overall Statistics
 

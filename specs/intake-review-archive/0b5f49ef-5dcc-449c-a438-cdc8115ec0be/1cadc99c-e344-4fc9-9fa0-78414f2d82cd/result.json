@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.1",
+  "reviewId": "0b5f49ef-5dcc-449c-a438-cdc8115ec0be",
+  "mode": "Single",
+  "status": "Ready",
+  "policy": "generic-markdown",
+  "reviewedAt": "2026-10-28T11:33:05Z",
+  "repository": {
+    "root": ".",
+    "head": "7bb2ffd7630c8d4f52d3600cb6e22b51f413e6b4"
+  },
+  "targets": [
+    {
+      "normalizedSha256": "da1d114d1c95026900daf8a27f922654e5cc91041ced17009fa4c3c6f6b9e795",
+      "gitBlob": "N/A",
+      "role": "Primary",
+      "path": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md"
+    }
+  ],
+  "findings": [],
+  "questions": [],
+  "acceptedRisks": [],
+  "operatorExceptions": [],
+  "coverage": {
+    "series": [],
+    "individual": [
+      "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md"
+    ],
+    "workers": []
+  },
+  "summary": {
+    "low": 0,
+    "critical": 0,
+    "high": 0,
+    "medium": 0
+  },
+  "supersedes": "specs/intake-review-archive/4ca2cab9-38dd-4394-8c72-d31852829226/37ca62a8-7797-44d6-9f51-3801d5406771/result.json",
+  "sourceEvidence": [
+    {
+      "sourceId": "SRC001",
+      "path": "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/37ca62a8-7797-44d6-9f51-3801d5406771/target.txt",
+      "normalizedSha256": "c84477a1676ebbf42f5c2b0a6f9797f9d1d41857c8d4ebe2bcc2b7cb44586d4b"
+    },
+    {
+      "sourceId": "SRC002",
+      "path": "specs/intake-review-archive/4ca2cab9-38dd-4394-8c72-d31852829226/37ca62a8-7797-44d6-9f51-3801d5406771/result.json",
+      "normalizedSha256": "c3a508326469600325e1dae1be82bdb8d0cced5bc2179a436c0cece09daeca46"
+    },
+    {
+      "sourceId": "SRC003",
+      "path": "requirements/baseline/sandbox-feature-update-2026-10-28/issue-101.md",
+      "normalizedSha256": "f4fe7d475f6b94269631b56e65918c82b5add51e032d2994df4a46f7f06f4bdb"
+    },
+    {
+      "sourceId": "SRC004",
+      "path": "requirements/baseline/sandbox-feature-update-2026-10-28/issue-102.md",
+      "normalizedSha256": "9f5885f5b6005c2ccf1b23d0442bf03a7a941c73cdd455d23744bcbb23701423"
+    },
+    {
+      "sourceId": "SRC005",
+      "path": "requirements/baseline/sandbox-feature-update-2026-10-28/issue-104.md",
+      "normalizedSha256": "bc930ff2245d3111faef9d5de5b70cbc2a0f9a18e410f54479df76392ca13d45"
+    }
+  ],
+  "requirementsGovernance": {
+    "documentationLanguage": "de-DE",
+    "inventoryMode": "SeriesManifest",
+    "normalizedSha256": "d7740f7ff839ca310607acd2e20dd9d58ffcc8ef9553ad73e00e353508a0c5be",
+    "activeSeriesTargetCount": 3,
+    "outcome": "Aligned",
+    "eligibleCandidate": "Lastenheft_Secure-Development-Container-Hardening.md",
+    "seriesTargetCount": 4,
+    "activeIntakeCount": 6,
+    "path": "requirements/intake-governance-config.json",
+    "historyIntakeCount": 3
+  },
+  "scopeBoundary": "Full Single re-review after authorized editorial IR701 repair. One target, zero workers; no implementation, Series/Campaign review, migration, upstream refresh, independent human acceptance or remote mutation.",
+  "reportPath": "specs/intake-review-reports/sandbox-feature-update-2026-10-28.md",
+  "nextAction": "$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json",
+  "resolvedFindings": [
+    {
+      "priorReviewId": "4ca2cab9-38dd-4394-8c72-d31852829226",
+      "previousSeverity": "Medium",
+      "disposition": "Resolved",
+      "reevaluationTrigger": "Any change to audience, terminology, bilingual meaning or normative contracts requires a fresh complete review",
+      "evidence": "38 equivalent glossary entries before both requirement sections; complete Single checklist repeated; German FU/FA block, prompts and English normative contract unchanged",
+      "authorization": "User explicitly authorizes repairing IR701 from the named current review, updating provenance and a full Single re-review; no implementation, series migration or remote writes. Editorial first-use explanations and DE/EN equivalence only; preserve all goals, requirements, thresholds, authority, security/A11Y decisions and ordering.",
+      "owner": "Requirements Author / Documentation & Learning Review",
+      "id": "IR701"
+    }
+  ],
+  "repairOperationPath": "specs/intake-authoring-operations/37ca62a8-7797-44d6-9f51-3801d5406771/operation.json",
+  "authoringReceipt": {
+    "path": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+    "receiptId": "1faf3e2e-dbc0-4d5e-ac26-87e5fda59ff5",
+    "normalizedSha256": "9fa88f244c3ec7a0e6871535afec3f5e200ca3612d6e0ffafbebc789ac30b5fc",
+    "intakeId": "0c9292bb-f43b-4f7b-905e-f602b5b229f5"
+  },
+  "reviewCoverage": [
+    "identity-audience-goal-scope-nongoals",
+    "prior-knowledge",
+    "terminology-DE-EN",
+    "textual-states-dependencies",
+    "atomic-testable-requirements",
+    "measurable-acceptance",
+    "order-authority-risks",
+    "security-privacy-A11Y-platform-supply-chain",
+    "references-prompts-provenance",
+    "sensitive-data-format"
+  ]
+}

@@ -44,7 +44,7 @@
         "speckit-plan",
         "speckit-tasks"
       ],
-      "installed_at": "2026-10-24T17:50:33.119842+00:00"
+      "installed_at": "2026-10-24T19:50:33.119842+02:00"
     },
     "secure-development-assurance-governance": {
       "version": "0.1.8",
@@ -82,7 +82,7 @@
         "speckit-secure-development-status",
         "speckit-secure-development-review"
       ],
-      "installed_at": "2026-10-24T17:50:34.511411+00:00"
+      "installed_at": "2026-10-24T19:50:34.511411+02:00"
     },
     "architecture-governance": {
       "version": "0.6.5",
@@ -127,7 +127,7 @@
         "speckit-plan",
         "speckit-tasks"
       ],
-      "installed_at": "2026-10-24T17:50:35.702334+00:00"
+      "installed_at": "2026-10-24T19:50:35.702334+02:00"
     },
     "isaqb-architecture-governance": {
       "version": "0.2.5",
@@ -172,7 +172,7 @@
         "speckit-plan",
         "speckit-tasks"
       ],
-      "installed_at": "2026-10-24T17:50:36.994576+00:00"
+      "installed_at": "2026-10-24T19:50:36.994576+02:00"
     },
     "a11y-governance": {
       "version": "0.4.6",
@@ -217,7 +217,7 @@
         "speckit-plan",
         "speckit-tasks"
       ],
-      "installed_at": "2026-10-24T17:50:38.410637+00:00"
+      "installed_at": "2026-10-24T19:50:38.410637+02:00"
     },
     "cross-platform-governance": {
       "version": "0.2.5",
@@ -262,7 +262,7 @@
         "speckit-plan",
         "speckit-tasks"
       ],
-      "installed_at": "2026-10-24T17:50:39.698691+00:00"
+      "installed_at": "2026-10-24T19:50:39.698691+02:00"
     },
     "agent-parity-governance": {
       "version": "0.4.5",
@@ -307,7 +307,7 @@
         "speckit-plan",
         "speckit-tasks"
       ],
-      "installed_at": "2026-10-24T17:50:41.279974+00:00"
+      "installed_at": "2026-10-24T19:50:41.279974+02:00"
     },
     "model-routing-governance": {
       "version": "0.1.7",
@@ -345,7 +345,7 @@
         "speckit-model-routing-status",
         "speckit-model-routing-refresh"
       ],
-      "installed_at": "2026-10-24T17:50:42.509372+00:00"
+      "installed_at": "2026-10-24T19:50:42.509372+02:00"
     },
     "intake-authoring-governance": {
       "version": "0.3.10",
@@ -404,7 +404,7 @@
         "speckit-intake-delete",
         "speckit-intake-create-status"
       ],
-      "installed_at": "2026-10-24T17:50:43.852514+00:00"
+      "installed_at": "2026-10-24T19:50:43.852514+02:00"
     },
     "intake-review-governance": {
       "version": "0.2.7",
@@ -449,7 +449,7 @@
         "speckit-intake-repair",
         "speckit-intake-review-status"
       ],
-      "installed_at": "2026-10-24T17:50:45.082016+00:00"
+      "installed_at": "2026-10-24T19:50:45.082016+02:00"
     },
     "intake-sequencing-governance": {
       "version": "0.2.11",
@@ -515,12 +515,12 @@
         "speckit-intake-series-status",
         "speckit-intake-series-next"
       ],
-      "installed_at": "2026-10-24T17:50:46.265009+00:00"
+      "installed_at": "2026-10-24T19:50:46.265009+02:00"
     },
     "autonomous-run-governance": {
-      "version": "0.4.7",
+      "version": "0.4.8",
       "source": "local",
-      "manifest_hash": "sha256:0034c2dc7da5c64be3e2bceb10fbea435bc0de921def37b4ec5e7203b9719367",
+      "manifest_hash": "sha256:3f52b84de645299244346d5c5f2784e10f30302715561ae3c8c9b46279cab6a7",
       "enabled": true,
       "priority": 70,
       "registered_commands": {
@@ -574,7 +574,7 @@
         "speckit-autonomous-stop",
         "speckit-autonomous-resume"
       ],
-      "installed_at": "2026-10-24T17:50:47.611564+00:00"
+      "installed_at": "2026-10-30T15:51:12Z"
     },
     "parallel-autonomous-run-governance": {
       "version": "0.2.9",
@@ -633,7 +633,7 @@
         "speckit-parallel-autonomous-resume",
         "speckit-parallel-autonomous-consolidate"
       ],
-      "installed_at": "2026-10-24T17:50:49.003644+00:00"
+      "installed_at": "2026-10-24T19:50:49.003644+02:00"
     },
     "project-statistics-governance": {
       "version": "0.1.3",
@@ -678,7 +678,7 @@
         "speckit-statistics-status",
         "speckit-statistics-update"
       ],
-      "installed_at": "2026-10-24T17:50:50.285673+00:00"
+      "installed_at": "2026-10-24T19:50:50.285673+02:00"
     }
   }
 }

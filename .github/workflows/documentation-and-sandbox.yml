@@ -22,6 +22,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
+      - name: Check exact immutable archive links in their original context
+        shell: pwsh
+        run: |
+          ./scripts/tests/test-archived-markdown-links.ps1
+          ./scripts/check-archived-markdown-links.ps1 -Repo .
+
       # The raw header is renderer input; its generated compendium remains checked.
       - name: Check local Markdown links and anchors with Lychee
         uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2
@@ -34,6 +40,9 @@ jobs:
             --exclude-path docs/security/agent-session-log
             --exclude-path scripts/tests/linked-intake-evidence
             --exclude-path '(^|/)specs/intake-series-archive/[^/]+/[^/]+/(order|requirements-order)\.md$'
+            --exclude-path '^specs/intake-review-archive/505a9246-a7a7-4a37-9fe4-eb73f3a2705d/0ad06585-48d6-4e43-a7cc-714d580eef0e/report\.md$'
+            --exclude-path '^specs/intake-review-archive/5c452360-9bf7-44d9-84e0-10cae34e72ea/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/learner-review-marker\.md$'
+            --exclude-path '^specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/0ad06585-48d6-4e43-a7cc-714d580eef0e/requirements-index\.md$'
             './**/*.md'
           fail: true
 

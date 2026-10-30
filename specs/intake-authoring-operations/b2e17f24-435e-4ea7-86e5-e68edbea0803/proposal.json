@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeRepairProposal",
+  "operationId": "b2e17f24-435e-4ea7-86e5-e68edbea0803",
+  "authorityEvidence": "User explicitly grants additional authority to correct the canonical historical EOF validator and regression tests, preserve immutable archive and issue-snapshot bytes, perform controlled v0.4.8 consumer integration and neutral active-intake EOF correction, renew affected provenance/series/review bindings with complete review, and finish MergeAndSync with authorized admin bypass; no feature implementation, runtime, Home or fleet changes.",
+  "changedText": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+  "formatDelta": "Exactly one extra EOF newline removed; normative text unchanged",
+  "unchangedTargets": [
+    "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+    "Lastenheft_Secure-Development-Container-Hardening.md",
+    "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+    "intakes/learner-fork-self-build-sandbox.md"
+  ],
+  "order": [
+    "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+    "Lastenheft_Secure-Development-Container-Hardening.md",
+    "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+    "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+    "intakes/learner-fork-self-build-sandbox.md"
+  ],
+  "roots": [
+    "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+  ],
+  "dependencies": [
+    {
+      "from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "to": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "kind": "AssessmentBaseline",
+      "binding": true
+    },
+    {
+      "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "kind": "SandboxBaseline",
+      "binding": true
+    },
+    {
+      "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "to": "intakes/learner-fork-self-build-sandbox.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    },
+    {
+      "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "to": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "binding": true,
+      "kind": "SandboxBaseline"
+    },
+    {
+      "from": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "binding": true,
+      "kind": "SandboxBaseline"
+    }
+  ],
+  "states": [
+    "Completed",
+    "Eligible",
+    "Blocked",
+    "Blocked",
+    "Blocked"
+  ],
+  "sources": "Preserved predecessor first, explicit contract second, previous sources in prior order; only affected current-file hashes renewed",
+  "controlledIntegration": "Published canonical autonomous 0.4.8 only; exact ZIP/tag proof; thirteen other payloads retained"
+}

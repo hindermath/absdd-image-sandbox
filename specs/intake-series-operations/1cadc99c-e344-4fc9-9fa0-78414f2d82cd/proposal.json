@@ -1,0 +1,65 @@
+{
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "memberCountAfter": 5,
+  "authorityEvidence": "User annotation 1 explicitly admits the ready combined update into the proposed position after hardening and before acceptance; annotation 2 explicitly authorizes correcting stale review status views. User also requests series-next. Preserve all existing dependency gates and target identities; no implementation, autonomous run, new Intake Review, commit, push or remote mutation.",
+  "newMemberStatus": "Blocked",
+  "addedEdges": [
+    {
+      "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "to": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "binding": true,
+      "kind": "SandboxBaseline"
+    },
+    {
+      "from": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "binding": true,
+      "kind": "SandboxBaseline"
+    }
+  ],
+  "operationId": "1cadc99c-e344-4fc9-9fa0-78414f2d82cd",
+  "retainedEdges": [
+    {
+      "from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "to": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "kind": "AssessmentBaseline",
+      "binding": true
+    },
+    {
+      "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "kind": "SandboxBaseline",
+      "binding": true
+    },
+    {
+      "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "to": "intakes/learner-fork-self-build-sandbox.md",
+      "kind": "HardCompletionGate",
+      "binding": true
+    }
+  ],
+  "rootUnchanged": [
+    "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+  ],
+  "reviewDisposition": "Archive prior Ready and mark superseded; prepare full five-member review request only.",
+  "memberCountBefore": 4,
+  "orderBefore": [
+    "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+    "Lastenheft_Secure-Development-Container-Hardening.md",
+    "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+    "intakes/learner-fork-self-build-sandbox.md"
+  ],
+  "newFullReviewExecuted": false,
+  "edgeCountBefore": 3,
+  "oldMemberStatusesUnchanged": true,
+  "approved": true,
+  "orderAfter": [
+    "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+    "Lastenheft_Secure-Development-Container-Hardening.md",
+    "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+    "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+    "intakes/learner-fork-self-build-sandbox.md"
+  ],
+  "receiptChanges": "New member series binding order3; acceptance order3->4 and self-build order4->5; hardening receipt and all other intake content unchanged.",
+  "edgeCountAfter": 5
+}

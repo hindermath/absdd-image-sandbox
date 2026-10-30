@@ -1,0 +1,218 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesOperation",
+  "operationId": "d0c6bf80-d268-4a0f-92a2-70e748f8330a",
+  "type": "Update",
+  "status": "Completed",
+  "createdAt": "2026-10-30T11:38:48Z",
+  "authorityEvidence": "User explicitly approves the quoted bounded repair contract: three formatting-only Markdown hardbreak corrections; byte-preserving archives; renew affected intake/series/review bindings and perform complete five-member review; exact hash-bound original-context checks for nine archive links in three files, no archive rewriting or broad exclusions. Then continue authorized MergeAndSync/admin bypass; no feature implementation, runtime, Home or fleet changes.",
+  "proposalPath": "specs/intake-authoring-operations/d0c6bf80-d268-4a0f-92a2-70e748f8330a/proposal.json",
+  "proposalNormalizedSha256": "cf94138566ef8d6951269099f9dc146d5a03faa93e2d8f3b931aa0f3db8d20c8",
+  "approval": {
+    "approved": true,
+    "approvedBy": "Repository owner",
+    "approvedAt": "2026-10-30T11:38:48Z",
+    "evidence": "User explicitly approves the quoted bounded repair contract: three formatting-only Markdown hardbreak corrections; byte-preserving archives; renew affected intake/series/review bindings and perform complete five-member review; exact hash-bound original-context checks for nine archive links in three files, no archive rewriting or broad exclusions. Then continue authorized MergeAndSync/admin bypass; no feature implementation, runtime, Home or fleet changes."
+  },
+  "archiveEvidence": [
+    {
+      "source": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/d0c6bf80-d268-4a0f-92a2-70e748f8330a/manifest.json",
+      "rawSha256": "8c83012b5fcbe7d2ec21709ff42536a72fd284a7652529bc8ae10a67f2282925",
+      "normalizedSha256": "8c83012b5fcbe7d2ec21709ff42536a72fd284a7652529bc8ae10a67f2282925"
+    },
+    {
+      "source": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+      "rawSha256": "27c1acb18a2b790ca3cc484c0de4b9739b50978016b73203d73a3cbfb499545e",
+      "normalizedSha256": "27c1acb18a2b790ca3cc484c0de4b9739b50978016b73203d73a3cbfb499545e"
+    },
+    {
+      "source": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+      "archive": "specs/intake-review-archive/652008d6-e24f-4279-a95c-bc110136ceee/d0c6bf80-d268-4a0f-92a2-70e748f8330a/request.json",
+      "rawSha256": "f9d9b417bef0e3a94b9016ed2882f04b03a3a86716cdc27642b010bedb96a7cd",
+      "normalizedSha256": "f9d9b417bef0e3a94b9016ed2882f04b03a3a86716cdc27642b010bedb96a7cd"
+    },
+    {
+      "source": "specs/intake-review-results/sandbox-development-lifecycle.json",
+      "archive": "specs/intake-review-archive/652008d6-e24f-4279-a95c-bc110136ceee/d0c6bf80-d268-4a0f-92a2-70e748f8330a/result.json",
+      "rawSha256": "999bb1f476268515dbb584ab60c8aec525c9df4cd5a52db5cea6ef2508ea88f1",
+      "normalizedSha256": "999bb1f476268515dbb584ab60c8aec525c9df4cd5a52db5cea6ef2508ea88f1"
+    },
+    {
+      "source": "specs/intake-review-reports/sandbox-development-lifecycle.md",
+      "archive": "specs/intake-review-archive/652008d6-e24f-4279-a95c-bc110136ceee/d0c6bf80-d268-4a0f-92a2-70e748f8330a/report.txt",
+      "rawSha256": "59e4c996fddeb3bd481a3db26578a614241893e527ea5ebb816da89d55025b85",
+      "normalizedSha256": "59e4c996fddeb3bd481a3db26578a614241893e527ea5ebb816da89d55025b85"
+    },
+    {
+      "source": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "archive": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt",
+      "rawSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560"
+    },
+    {
+      "source": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "archive": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+      "rawSha256": "435e085cafb46ac93a93e871c46d4533113f6261cd4ff283fcfbaae8cbcae8cb",
+      "normalizedSha256": "435e085cafb46ac93a93e871c46d4533113f6261cd4ff283fcfbaae8cbcae8cb"
+    },
+    {
+      "source": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "archive": "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt",
+      "rawSha256": "54813beb0eb4c523d5b6529739b24b196a3ffdab1ca1ac602abaad479d5d6e88",
+      "normalizedSha256": "54813beb0eb4c523d5b6529739b24b196a3ffdab1ca1ac602abaad479d5d6e88"
+    },
+    {
+      "source": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "archive": "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+      "rawSha256": "b59b142647a5358bf67f13e4ece187ca0c7d29e1aacd280eaec9f490bc6bb462",
+      "normalizedSha256": "b59b142647a5358bf67f13e4ece187ca0c7d29e1aacd280eaec9f490bc6bb462"
+    },
+    {
+      "source": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "archive": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt",
+      "rawSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a",
+      "normalizedSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a"
+    },
+    {
+      "source": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "archive": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+      "rawSha256": "98c84067e4a7fd33f0c2a7d6eea821ca9ccc0de1e8494761c27a0e8051c6e184",
+      "normalizedSha256": "98c84067e4a7fd33f0c2a7d6eea821ca9ccc0de1e8494761c27a0e8051c6e184"
+    },
+    {
+      "source": "intakes/learner-fork-self-build-sandbox.md",
+      "archive": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt",
+      "rawSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338"
+    },
+    {
+      "source": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "archive": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+      "rawSha256": "3198352300be1dbecb41abcb947533f26c5ef76f42bc465903ed57c47b5b1f83",
+      "normalizedSha256": "3198352300be1dbecb41abcb947533f26c5ef76f42bc465903ed57c47b5b1f83"
+    }
+  ],
+  "intendedTargets": [
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/d0c6bf80-d268-4a0f-92a2-70e748f8330a/manifest.json",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+    "specs/intake-review-archive/652008d6-e24f-4279-a95c-bc110136ceee/d0c6bf80-d268-4a0f-92a2-70e748f8330a/request.json",
+    "specs/intake-review-archive/652008d6-e24f-4279-a95c-bc110136ceee/d0c6bf80-d268-4a0f-92a2-70e748f8330a/result.json",
+    "specs/intake-review-archive/652008d6-e24f-4279-a95c-bc110136ceee/d0c6bf80-d268-4a0f-92a2-70e748f8330a/report.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+    "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt",
+    "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+    "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+    "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+    "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+    "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+    "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+    "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+    "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "specs/intake-authoring-operations/d0c6bf80-d268-4a0f-92a2-70e748f8330a/proposal.json",
+    "specs/intake-authoring-operations/d0c6bf80-d268-4a0f-92a2-70e748f8330a/operation.json",
+    "specs/intake-series-operations/d0c6bf80-d268-4a0f-92a2-70e748f8330a.json",
+    "specs/intake-review-results/sandbox-development-lifecycle.json",
+    "specs/intake-review-reports/sandbox-development-lifecycle.md",
+    "Lastenheft_Abarbeitungsreihenfolge.md",
+    "specs/intake-series/sandbox-development-lifecycle/order.md",
+    "Pflichtenheft.md",
+    "specs/intake-review-reports/learner-fork-self-build-sandbox.md",
+    "specs/intake-review-reports/sandbox-feature-update-2026-10-28.md",
+    "specs/intake-review-reports/sandbox-development-lifecycle-independent.txt",
+    "specs/intake-review-results/learner-fork-self-build-sandbox.json",
+    "specs/intake-review-results/sandbox-feature-update-2026-10-28.json"
+  ],
+  "validatedTargets": [
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/d0c6bf80-d268-4a0f-92a2-70e748f8330a/manifest.json",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+    "specs/intake-review-archive/652008d6-e24f-4279-a95c-bc110136ceee/d0c6bf80-d268-4a0f-92a2-70e748f8330a/request.json",
+    "specs/intake-review-archive/652008d6-e24f-4279-a95c-bc110136ceee/d0c6bf80-d268-4a0f-92a2-70e748f8330a/result.json",
+    "specs/intake-review-archive/652008d6-e24f-4279-a95c-bc110136ceee/d0c6bf80-d268-4a0f-92a2-70e748f8330a/report.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+    "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt",
+    "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+    "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+    "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+    "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+    "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+    "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+    "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+    "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "specs/intake-authoring-operations/d0c6bf80-d268-4a0f-92a2-70e748f8330a/proposal.json",
+    "specs/intake-authoring-operations/d0c6bf80-d268-4a0f-92a2-70e748f8330a/operation.json",
+    "specs/intake-series-operations/d0c6bf80-d268-4a0f-92a2-70e748f8330a.json",
+    "specs/intake-review-results/sandbox-development-lifecycle.json",
+    "specs/intake-review-reports/sandbox-development-lifecycle.md",
+    "Lastenheft_Abarbeitungsreihenfolge.md",
+    "specs/intake-series/sandbox-development-lifecycle/order.md",
+    "Pflichtenheft.md",
+    "specs/intake-review-reports/learner-fork-self-build-sandbox.md",
+    "specs/intake-review-reports/sandbox-feature-update-2026-10-28.md",
+    "specs/intake-review-reports/sandbox-development-lifecycle-independent.txt",
+    "specs/intake-review-results/learner-fork-self-build-sandbox.json",
+    "specs/intake-review-results/sandbox-feature-update-2026-10-28.json"
+  ],
+  "publishedTargets": [
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/d0c6bf80-d268-4a0f-92a2-70e748f8330a/manifest.json",
+    "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+    "specs/intake-review-archive/652008d6-e24f-4279-a95c-bc110136ceee/d0c6bf80-d268-4a0f-92a2-70e748f8330a/request.json",
+    "specs/intake-review-archive/652008d6-e24f-4279-a95c-bc110136ceee/d0c6bf80-d268-4a0f-92a2-70e748f8330a/result.json",
+    "specs/intake-review-archive/652008d6-e24f-4279-a95c-bc110136ceee/d0c6bf80-d268-4a0f-92a2-70e748f8330a/report.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt",
+    "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+    "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt",
+    "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt",
+    "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt",
+    "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+    "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+    "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+    "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+    "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+    "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+    "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+    "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "specs/intake-authoring-operations/d0c6bf80-d268-4a0f-92a2-70e748f8330a/proposal.json",
+    "specs/intake-authoring-operations/d0c6bf80-d268-4a0f-92a2-70e748f8330a/operation.json",
+    "specs/intake-series-operations/d0c6bf80-d268-4a0f-92a2-70e748f8330a.json",
+    "specs/intake-review-results/sandbox-development-lifecycle.json",
+    "specs/intake-review-reports/sandbox-development-lifecycle.md",
+    "Lastenheft_Abarbeitungsreihenfolge.md",
+    "specs/intake-series/sandbox-development-lifecycle/order.md",
+    "Pflichtenheft.md",
+    "specs/intake-review-reports/learner-fork-self-build-sandbox.md",
+    "specs/intake-review-reports/sandbox-feature-update-2026-10-28.md",
+    "specs/intake-review-reports/sandbox-development-lifecycle-independent.txt",
+    "specs/intake-review-results/learner-fork-self-build-sandbox.json",
+    "specs/intake-review-results/sandbox-feature-update-2026-10-28.json"
+  ],
+  "rollbackBoundary": "Isolated transaction, exact preimages; no partial live publication",
+  "failure": {
+    "class": "N/A",
+    "message": "N/A"
+  },
+  "validation": {
+    "bash": "Passed",
+    "powerShell": "Passed",
+    "fullReview": "Ready; complete five-member semantic review with both result validators"
+  },
+  "nextAction": "$speckit-intake-review specs/intake-review-requests/sandbox-development-lifecycle.json",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "completedAt": "2026-10-30T11:49:36Z"
+}

@@ -1,0 +1,15 @@
+{
+  "requestedReviewId": "505a9246-a7a7-4a37-9fe4-eb73f3a2705d",
+  "supersededAt": "2026-10-28T11:51:35Z",
+  "reviewId": "5c452360-9bf7-44d9-84e0-10cae34e72ea",
+  "archivedResultRawSha256": "70c2c820bcd94d0625e3d4894c9eee0bc3c492cd589f7770c19c80d17b86870c",
+  "priorReviewStatus": "Ready",
+  "archivedResultPath": "specs/intake-review-archive/5c452360-9bf7-44d9-84e0-10cae34e72ea/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/result.json",
+  "schemaVersion": "1.0",
+  "documentType": "IntakeReviewSupersession",
+  "reason": "Explicit series admission changes graph and current membership bindings. Prior Ready preserved as historical; new full five-target review not executed.",
+  "currentRequestPath": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+  "currentReviewStatus": "PendingReview",
+  "operationId": "1cadc99c-e344-4fc9-9fa0-78414f2d82cd",
+  "status": "Superseded"
+}

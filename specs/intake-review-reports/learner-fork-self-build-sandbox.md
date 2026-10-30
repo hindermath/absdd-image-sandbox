@@ -1,5 +1,8 @@
-# Einzelreview ersetzt / Single Review Superseded
+# Learner-Reviewstatus / Learner review status
 
-DE: Historisches Einzelreview cfbc8af4-48be-40e2-9a4b-5381d60d3dd5 bleibt byte-identisch im bisherigen Archiv. Aktuelle individuelle Learner-Abdeckung im unabhaengigen Vollreview `5c452360-9bf7-44d9-84e0-10cae34e72ea`: [Gesamtbericht](sandbox-development-lifecycle.md), [Ergebnis](../intake-review-results/sandbox-development-lifecycle.json). Urteil **Ready**, null offene Findings; USAB-IR001..004 unabhaengig geloest. Kein neuer Single-Review. Learner-Stufe bleibt Blocked und benoetigt erfolgreiche unabhaengige Abnahme sowie eigene Startautoritaet; keine technische, Usability-, WCAG-, Rechts- oder Plattformfreigabe.
+DE: Das frühere Ready-Review ist bytegleich archiviert. Das vollständige fünfgliedrige Nachreview `09d784df-eae0-4952-9f5f-a458379ed9c6` ist nach bestätigter IR801-Reparatur Ready und deckt den Learner-Intake einzeln ab. Kein neues Single-Review, keine technische oder menschliche Abnahme. Die Learner-Stufe bleibt Blocked; Eligible ist keine Startfreigabe.
 
-EN: Historical Single review cfbc8af4-48be-40e2-9a4b-5381d60d3dd5 remains byte-identical in its existing archive. Current individual learner coverage belongs to the linked independent full review `5c452360-9bf7-44d9-84e0-10cae34e72ea`: **Ready**, zero open findings; USAB-IR001..004 independently resolved. No new Single assessment. Learner stage remains Blocked behind successful independent acceptance and separate start authority; no technical, usability, WCAG, legal or platform approval.
+EN: The prior Ready review is archived byte for byte. Complete five-member re-review `09d784df-eae0-4952-9f5f-a458379ed9c6` is Ready after approved IR801 repair and individually covers the learner intake. No new Single review or technical/human acceptance. The learner stage remains Blocked; eligibility is not execution authority.
+
+Historische Abdeckung / Historical coverage: specs/intake-review-archive/5c452360-9bf7-44d9-84e0-10cae34e72ea/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/result.json
+Neuer Auftrag / New request: specs/intake-review-requests/sandbox-development-lifecycle.json

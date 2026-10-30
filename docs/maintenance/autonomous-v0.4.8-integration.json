@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0",
+  "presetId": "autonomous-run-governance",
+  "version": "0.4.8",
+  "tag": "v0.4.8",
+  "tagCommit": "f2d597333e1d1146c3cd5b08ca1feacf489ae692",
+  "canonicalPr": "https://github.com/hindermath/spec-kit-preset-autonomous-run-governance/pull/28",
+  "canonicalHead": "854f9b96cd389755aee24c14d99271047152ef8f",
+  "nativeChecks": "9/9 Success, macOS/Linux/Windows, exact canonical PR head",
+  "mergeAuthority": "Owner-authorized admin bypass used only for formal approval after green technical checks and zero review threads",
+  "archiveUrl": "https://github.com/hindermath/spec-kit-preset-autonomous-run-governance/archive/refs/tags/v0.4.8.zip",
+  "archiveSha256": "77394268cac40977821887344734fab958be650a1b64e1077c9f673cc1cba2ca",
+  "archiveBytes": 152576,
+  "verifiedAt": "2026-10-30T15:51:12Z",
+  "consumerOperation": "b2e17f24-435e-4ea7-86e5-e68edbea0803",
+  "consumerScope": "Only autonomous preset, local profiles/active locks and paired constitution pins; preserve other thirteen package payloads, priority, command/skill registration and guidance composition",
+  "newPayload": {
+    "fileCount": 70,
+    "contentSha256": "cd6c14f4ea6a94cb05a95e8881e89c59369d556911f7d879a84c8c1825a833cc"
+  },
+  "otherThirteenLockEntries": "Byte-equivalent structured values retained; payload test required before publication",
+  "runtimeActions": "None",
+  "homeSync": "NotRequired",
+  "fleetRollout": "NotAuthorized",
+  "authorityContract": "docs/maintenance/historical-eof-integration-2026-10-30.md"
+}

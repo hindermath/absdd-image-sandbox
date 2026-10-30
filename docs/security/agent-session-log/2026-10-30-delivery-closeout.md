@@ -1,0 +1,190 @@
+# Veröffentlichungsabschluss / Delivery closeout — 2026-10-30
+
+## Auftrag und Grenzen / Authority and boundaries
+
+DE: Der Owner beauftragt die Prüfung und Veröffentlichung der ausstehenden
+Sandbox-Änderungen mit DeliveryMode MergeAndSync und Admin-Bypass. Die frühere
+IR801-Grenze ohne Commit/Push bleibt als historische Reparaturautorität
+erhalten; diese spätere Freigabe gilt ausschließlich für die Veröffentlichung.
+Keine Implementierung von Feature 004, Containeraktion, Home-Sync oder
+Flottenverteilung. Admin-Bypass ersetzt weder technische Gates noch umsetzbare
+Reviewbefunde. Keine Compliance- oder menschliche Freigabe wird erteilt.
+
+EN: The owner authorizes inspection and publication of the outstanding sandbox
+changes with MergeAndSync and admin bypass. Earlier no-commit/no-push repair
+authority remains historical; this later permission covers delivery only.
+No Feature 004 implementation, container operation, Home sync or fleet rollout.
+Bypass replaces neither technical gates nor actionable review findings and
+grants no compliance or human approval.
+
+## Umfang und Dokumentation / Scope and documentation
+
+DE: Zusammenhängende Intake-Aufnahme, IR701-/IR801-Reparaturevidence,
+Serien-/Reviewbindungen und bytegleich archivierte Vorstände. Bei Sichtung
+veraltete ungebundene Learner-/Review-Verweise auf das bereits vorhandene
+aktuelle Review korrigiert; keine neue Bewertung oder Lifecycle-Änderung.
+Transaktionale staging-Kopien bleiben lokal unverändert und außerhalb des
+Lieferumfangs. P1-1: partial, nachvollziehbare lokale Governance-Arbeit;
+alle anderen Compliance-Plan-Aufgaben außerhalb dieses Auftrags.
+
+EN: Deliver the cohesive intake admission, IR701/IR801 repair evidence,
+series/review bindings and preserved preimages. Correct stale unbound
+learner/review pointers to the existing current review; no new assessment
+or lifecycle change. Transactional staging copies remain local, untouched
+and excluded. P1-1 traceability is partial; other compliance work is out of scope.
+
+Documentation Impact: UpdateRequired. Owner: Maintainer. Audience:
+Maintainers and intake reviewers. Canonical sources: current intake receipts,
+series manifest and review result. Reader paths: existing order views,
+review status and statistics ledger. German-first/equivalent English;
+sourceOnly, no Home sync. Reevaluate after target, binding, graph or review drift.
+
+## Prüfgrenze / Proof boundary
+
+DE: Installierte Quellen-, Serien- und Ergebnisvalidatoren sowie statische
+Compose-, Secret- und Lieferumfangsprüfungen werden vor Commit ausgeführt.
+Technische Sandbox-/Plattform-/A11Y-Abnahmen bleiben separat; die gestoppte
+Podman-VM ist kein statischer Compose-Fehler. Exakte Ausgaben und Remote-Gates
+werden im Veröffentlichungs-PR nachgewiesen, nicht vorweg als Pass erklärt.
+
+EN: Run installed provenance, series and result validators plus static
+Compose, secret and delivery-set checks before commit. Sandbox, platform
+and human accessibility acceptance remain separate. A stopped Podman VM is
+not a static Compose failure. Record executed outputs and remote gates in
+the delivery PR without predicting success.
+
+## Ausgeführtes Ergebnis / Executed outcome
+
+DE: Vor Commit gestoppt. Bash-Prüfungen aller vier aktiven Receipts
+(71/7/77/73 Quellen), Governance-Konfiguration, Serien-Receipt, aktuelles
+Vollreview, git diff --check und podman-compose config bestanden.
+PowerShell-Serien-/Ergebnisprüfung bestanden; die noch laufende Receipt-
+Prüfung wurde nach dem technischen Lieferstopp abgebrochen (Exit 130),
+kein neuer PowerShell-Receipt-Pass behauptet.
+Gitleaks über den exakten Staging-Diff bestand. Keine Secrets ausgegeben.
+
+EN: Stopped before commit. Bash validation of all four current receipts
+(71/7/77/73 sources), configuration, series receipt, current full review,
+whitespace diff and static Compose passed. PowerShell series/result checks
+passed; the still-running receipt check was interrupted after the delivery
+blocker (exit 130), not reported as a new PowerShell receipt pass. Gitleaks passed on the exact
+staged diff; no secret values were printed.
+
+DE: Lieferumfangsprüfung AEI007: aktive Update-Datei enthält Markdown-
+Hardbreak-Leerzeichen ab Zeile 4. Eine inhaltlich neutrale Korrektur verändert
+den gebundenen Hash und benötigt kontrollierte Provenienzpflege. Lychee
+meldet neun nicht auflösbare relative Links in drei neu archivierten Texten:
+IR801 report.md, früherer learner-review-marker.md und requirements-index.md.
+Archivbytes dürfen nicht zur Linkkorrektur verändert werden. Benötigt wird
+eine explizite Entscheidung über eng begrenzte Archiv-Linkbehandlung im CI;
+keine pauschale Linkprüfungs- oder Validatorabschwächung.
+
+EN: Delivery-set gate AEI007 finds Markdown hardbreak trailing spaces in the
+active update target starting at line 4. Neutral formatting changes alter its
+bound hash and require controlled provenance renewal. Lychee finds nine
+unresolved relative links in three new archived texts: IR801 report.md,
+previous learner-review-marker.md and requirements-index.md. Do not rewrite
+archive bytes. A narrowly scoped archive-link CI decision is needed, not a
+blanket link or validator exemption.
+
+DE: Statistikrenderer meldet erwarteten Drift und verweigert Änderungen im
+schmutzigen Arbeitsbaum; Rendern erst nach zulässigem Inhaltscommit.
+pre-commit über uvx konnte wegen DNS/PyPI nicht starten, nicht bestanden.
+GitHub-Remote und Admin-/Push-Berechtigung wurden mit freigegebenem
+Netzwerkzugriff bestätigt. Kein Commit, Push, PR oder Merge; der zunächst
+erzeugte Indexkandidat wurde vollständig zurückgenommen, alle Dateien
+erhalten. Historische transaktionale staging-Kopien unangetastet.
+
+EN: Statistics reports drift and correctly refuses writing a dirty worktree;
+render after an authorized content commit. uvx pre-commit could not start
+because PyPI DNS failed; this is not a pass. Approved network access confirmed
+the live remote and admin/push permission. No commit, push, PR or merge.
+Unstage the selected candidate while preserving every worktree file;
+historical transactional staging copies remain untouched.
+
+## Ausdrücklich freigegebene Fortsetzung / Explicitly approved continuation
+
+DE: Der Owner bestätigte danach den konkreten Reparaturvertrag mit
+„Reparaturfreigabe erteilt“. Kanonischer Vertrag:
+`docs/maintenance/intake-delivery-repair-2026-10-30.md`. Die isolierte
+Transaktion entfernt nur sechs Leerzeichen an drei Metadatenzeilen des
+Update-Lastenhefts und erneuert alle vier betroffenen Receipts (73/9/79/75
+Quellen). Die drei übrigen aktiven Texte und die archivierte Root bleiben
+bytegleich, ebenso Graph und Lifecycle. 13 weitere Vorstände sind archiviert.
+Das vollständige neue Review `ab11aa4c-d97a-458e-99f5-526ea89dbd56` ist Ready
+ohne offene Findings, Fragen oder akzeptierte Risiken.
+
+EN: The owner subsequently approved the quoted bounded repair. The canonical
+contract above authorizes removing six spaces at three metadata locations and
+renewing four affected receipts (73/9/79/75 sources). Other active targets,
+archived root, graph and lifecycle remain unchanged; preserve 13 preimages.
+Complete new review ab11aa4c-d97a-458e-99f5-526ea89dbd56 is Ready with no
+findings, unanswered questions or accepted risks.
+
+DE: Archivchecker: drei exakte Rohhashes/neun Originalkontext-Ziele, sechs
+Negativfixtures bestanden. Lychee mit Fragmentprüfung: 2036 Links, null
+Fehler. PSScriptAnalyzer der beiden neuen Skripte: null Findings.
+12 Lernendendokumentations- und fünf CI-Vertragsregressionen bestanden.
+Die erneut mit freigegebenem Netzwerkzugriff gestartete vollständige
+Pre-Commit-Suite einschließlich Gitleaks bestand. Die anfänglichen
+Staging-Generatorfehler (PowerShell-Alias, DateTime-Replace und unpassende
+Operationsstatuswerte) wurden ausschließlich isoliert korrigiert; sie waren
+keine bestandenen Versuche und änderten keine produktiven Intakes.
+Der Authoring-Artefaktvalidator gilt nicht für IntakeSeriesOperation;
+Serienmanifest/-Receipt werden mit ihren eigenen Validatoren geprüft.
+
+EN: The archive checker passes three exact raw hashes, nine original-context
+destinations and six negative fixtures. Lychee with fragments reports 2036
+links and zero errors. Both new scripts have zero analyzer findings. Twelve
+learner-documentation and five CI-contract regressions pass. Full pre-commit
+including Gitleaks passes after approved network access. Early isolated
+generation failures (alias, DateTime Replace, operation states) were corrected
+without touching active intakes and are not reported as passes. The authoring
+artifact validator does not handle IntakeSeriesOperation; use dedicated
+manifest/receipt validators for series bindings.
+
+DE: Historische Whitespace-Ausnahmen gelten ausschließlich für die vier
+exakt rohhashgebundenen neuen Archivdateien in
+`docs/maintenance/intake-delivery-historical-whitespace-2026-10-30.json`.
+Dies erhält die ausdrücklich geforderten Originalbytes; keine aktive Datei
+erhält eine Ausnahme. Staging-Duplikate bleiben unversioniert und unverändert.
+
+EN: Historical whitespace allowances cover only four exact raw-hash-bound
+new archive files listed in the paired manifest. This preserves explicitly
+required original bytes; no active file receives an exception. Transactional
+staging duplicates remain untracked and untouched.
+
+## Exakter Kandidatencheck nach Publikation / Exact candidate check after publication
+
+DE: Alle vier Receipt-Prüfungen bestanden schließlich auch PowerShell;
+Serien-/Ergebnisprüfungen beider Shells ebenfalls. 34 vorbereitete Artefakte
+wurden atomar übernommen, 13 Rohbyte-Vorstände bestätigt. Der Git-Kandidat
+umfasst 97 Dateien; elf transaktionale staging-Kopien bleiben unversioniert.
+PSScriptAnalyzer 1.25.0: alle 128 repo-eigenen Dateien bestanden, vier
+generierte Upstream-Dateien gemäß Registry ausgenommen. Exakter Staging-Diff-
+Secret-Scan und statische Compose-Konfiguration bestanden.
+
+EN: All four receipt checks eventually pass PowerShell, as do series/result
+checks in both shells. Publish 34 prepared artifacts atomically and verify
+13 raw-byte preimages. Candidate: 97 files; eleven transactional staging
+copies remain untracked. PSScriptAnalyzer 1.25.0 passes all 128 repository-owned
+files with four registry-declared upstream exclusions. Exact staged-diff secret
+scan and static Compose pass.
+
+DE: Noch KEIN Commit/Push: Der vollständige Staging-Validator meldet nun
+AEI010 wegen acht zusätzlichen Leerzeilen am Dateiende. Betroffen sind die
+aktive U-Datei, drei Issue-Snapshots, drei historische U-target.txt und ein
+historischer Single-Reviewbericht. Die vorhandene Rohhash-Ausnahme erlaubt
+nur nachgestellte Leerzeichen, nicht blank-at-EOF. Derselbe Stand liegt im
+kanonischen Preset-Repository. Keine Archivbytes geändert, keine Git-
+Whitespace-Regel abgeschwächt und kein fehlgeschlagener Gate als Pass
+ausgegeben. Die ergänzende Entscheidung über exakt gebundene EOF-Behandlung
+bleibt vor Commit erforderlich.
+
+EN: Still NO commit/push: the full staged validator reports AEI010 for eight
+extra end-of-file blank lines: active update, three issue snapshots, three
+historical U target.txt files and one historical Single-review report. The
+existing raw-hash allowance handles trailing spaces only, not blank-at-EOF;
+the canonical preset has the same limitation. Do not rewrite archives,
+weaken Git whitespace rules or call a failed gate green. An explicit decision
+on exact hash-bound EOF handling is needed before commit.

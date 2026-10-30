@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "a0d180b1-03a6-4002-94ea-a88d999e4a17",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.11"
+  },
+  "createdAt": "2026-10-28T11:51:35Z",
+  "operation": {
+    "type": "Update",
+    "operationId": "1cadc99c-e344-4fc9-9fa0-78414f2d82cd",
+    "authorityEvidence": "User annotation 1 explicitly admits the ready combined update into the proposed position after hardening and before acceptance; annotation 2 explicitly authorizes correcting stale review status views. User also requests series-next. Preserve all existing dependency gates and target identities; no implementation, autonomous run, new Intake Review, commit, push or remote mutation."
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "0f8f3685aaba88448bbe160e4b7b6d62f63b0508f96525179546e4d33f15bcf1"
+  },
+  "supersedes": {
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/receipt.json",
+    "manifestArchiveSha256": "936f44533c69d10563b7287a97ec12e16f74af9e0a8e6059b3f0a267e1b9b1bd",
+    "receiptNormalizedSha256": "b203b4208d10feda4666d16165077ffba99337c61b82e675b44ab63f7cde1659",
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/manifest.json"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json"
+}

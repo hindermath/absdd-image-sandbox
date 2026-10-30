@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "066e4c5e-7542-4d92-84e8-4ae75be96baa",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.11"
+  },
+  "createdAt": "2026-10-30T11:38:48Z",
+  "operation": {
+    "type": "Update",
+    "operationId": "d0c6bf80-d268-4a0f-92a2-70e748f8330a",
+    "authorityEvidence": "User explicitly approves the quoted bounded repair contract: three formatting-only Markdown hardbreak corrections; byte-preserving archives; renew affected intake/series/review bindings and perform complete five-member review; exact hash-bound original-context checks for nine archive links in three files, no archive rewriting or broad exclusions. Then continue authorized MergeAndSync/admin bypass; no feature implementation, runtime, Home or fleet changes."
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "a7d7ddac8ded520e202daf55d90d8280020de1cc66d4fe089759fb82d8b537a3"
+  },
+  "supersedes": {
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/d0c6bf80-d268-4a0f-92a2-70e748f8330a/receipt.json",
+    "receiptNormalizedSha256": "27c1acb18a2b790ca3cc484c0de4b9739b50978016b73203d73a3cbfb499545e",
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/d0c6bf80-d268-4a0f-92a2-70e748f8330a/manifest.json",
+    "manifestArchiveSha256": "8c83012b5fcbe7d2ec21709ff42536a72fd284a7652529bc8ae10a67f2282925"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json"
+}
