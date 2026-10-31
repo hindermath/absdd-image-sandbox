@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "feature": "004-container-hardening-followup",
-  "sourceRevision": "b36d774ebd6cb34f2f0dd2764488b9dee6aaf082",
+  "sourceRevision": "f59cc695f346ff48e32c44ec4454d7c7482c8e57",
   "scopePath": "specs/004-container-hardening-followup/coverage-scope.md",
   "scopeSourceHash": "1fcab3b72e5bcfaac9147b244710c4658ad07caa38a7ac83a8ff4edc319ff1d4",
   "inventoryStatus": "ReviewedProvisionalForT012; execution coverage remains Open",
@@ -42229,14 +42229,14 @@
     },
     {
       "path": "scripts/lib/workspace_storage_maintenance.py",
-      "sourceHash": "5086e62114583d66ac3a8d6e4e3bc6c778cf63d3eb13119598d87016b9e88a48",
+      "sourceHash": "9396fa6f59d15d6069ffc81c65f057fafeb6d5303b09bd4812dcd524716b761d",
       "language": "Python",
       "securityBoundary": "Host maintenance and project boundary",
       "branchModel": "planned coverage.py branch arcs plus exception/subprocess outcome review",
       "decisionSites": [
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:70:except",
-          "line": 70,
+          "id": "scripts/lib/workspace_storage_maintenance.py:71:except",
+          "line": 71,
           "construct": "except",
           "candidateOutcomes": [
             "taken",
@@ -42245,8 +42245,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:72:if",
-          "line": 72,
+          "id": "scripts/lib/workspace_storage_maintenance.py:73:if",
+          "line": 73,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42255,8 +42255,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:75:if",
-          "line": 75,
+          "id": "scripts/lib/workspace_storage_maintenance.py:76:if",
+          "line": 76,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42265,8 +42265,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:82:except",
-          "line": 82,
+          "id": "scripts/lib/workspace_storage_maintenance.py:83:except",
+          "line": 83,
           "construct": "except",
           "candidateOutcomes": [
             "taken",
@@ -42275,8 +42275,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:84:if",
-          "line": 84,
+          "id": "scripts/lib/workspace_storage_maintenance.py:85:if",
+          "line": 85,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42285,8 +42285,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:90:if",
-          "line": 90,
+          "id": "scripts/lib/workspace_storage_maintenance.py:91:if",
+          "line": 91,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42295,8 +42295,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:94:if",
-          "line": 94,
+          "id": "scripts/lib/workspace_storage_maintenance.py:95:if",
+          "line": 95,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42305,8 +42305,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:100:if",
-          "line": 100,
+          "id": "scripts/lib/workspace_storage_maintenance.py:101:if",
+          "line": 101,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42315,8 +42315,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:106:except",
-          "line": 106,
+          "id": "scripts/lib/workspace_storage_maintenance.py:107:except",
+          "line": 107,
           "construct": "except",
           "candidateOutcomes": [
             "taken",
@@ -42325,8 +42325,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:108:if",
-          "line": 108,
+          "id": "scripts/lib/workspace_storage_maintenance.py:109:if",
+          "line": 109,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42335,8 +42335,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:121:if",
-          "line": 121,
+          "id": "scripts/lib/workspace_storage_maintenance.py:122:if",
+          "line": 122,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42345,8 +42345,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:133:except",
-          "line": 133,
+          "id": "scripts/lib/workspace_storage_maintenance.py:134:except",
+          "line": 134,
           "construct": "except",
           "candidateOutcomes": [
             "taken",
@@ -42355,8 +42355,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:135:except",
-          "line": 135,
+          "id": "scripts/lib/workspace_storage_maintenance.py:136:except",
+          "line": 136,
           "construct": "except",
           "candidateOutcomes": [
             "taken",
@@ -42365,8 +42365,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:148:if",
-          "line": 148,
+          "id": "scripts/lib/workspace_storage_maintenance.py:149:if",
+          "line": 149,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42375,8 +42375,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:156:except",
-          "line": 156,
+          "id": "scripts/lib/workspace_storage_maintenance.py:157:except",
+          "line": 157,
           "construct": "except",
           "candidateOutcomes": [
             "taken",
@@ -42385,8 +42385,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:166:except",
-          "line": 166,
+          "id": "scripts/lib/workspace_storage_maintenance.py:167:except",
+          "line": 167,
           "construct": "except",
           "candidateOutcomes": [
             "taken",
@@ -42395,8 +42395,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:173:if",
-          "line": 173,
+          "id": "scripts/lib/workspace_storage_maintenance.py:174:if",
+          "line": 174,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42405,8 +42405,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:178:for",
-          "line": 178,
+          "id": "scripts/lib/workspace_storage_maintenance.py:179:for",
+          "line": 179,
           "construct": "for",
           "candidateOutcomes": [
             "taken",
@@ -42415,8 +42415,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:181:for",
-          "line": 181,
+          "id": "scripts/lib/workspace_storage_maintenance.py:182:for",
+          "line": 182,
           "construct": "for",
           "candidateOutcomes": [
             "taken",
@@ -42425,8 +42425,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:183:if",
-          "line": 183,
+          "id": "scripts/lib/workspace_storage_maintenance.py:184:if",
+          "line": 184,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42435,8 +42435,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:188:except",
-          "line": 188,
+          "id": "scripts/lib/workspace_storage_maintenance.py:189:except",
+          "line": 189,
           "construct": "except",
           "candidateOutcomes": [
             "taken",
@@ -42445,8 +42445,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:191:for",
-          "line": 191,
+          "id": "scripts/lib/workspace_storage_maintenance.py:192:for",
+          "line": 192,
           "construct": "for",
           "candidateOutcomes": [
             "taken",
@@ -42455,8 +42455,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:195:except",
-          "line": 195,
+          "id": "scripts/lib/workspace_storage_maintenance.py:196:except",
+          "line": 196,
           "construct": "except",
           "candidateOutcomes": [
             "taken",
@@ -42465,8 +42465,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:197:if",
-          "line": 197,
+          "id": "scripts/lib/workspace_storage_maintenance.py:198:if",
+          "line": 198,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42475,8 +42475,38 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:206:if",
-          "line": 206,
+          "id": "scripts/lib/workspace_storage_maintenance.py:209:for",
+          "line": 209,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:211:for",
+          "line": 211,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:215:except",
+          "line": 215,
+          "construct": "except",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:229:if",
+          "line": 229,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42485,8 +42515,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:208:conditional-expression",
-          "line": 208,
+          "id": "scripts/lib/workspace_storage_maintenance.py:231:conditional-expression",
+          "line": 231,
           "construct": "conditional-expression",
           "candidateOutcomes": [
             "taken",
@@ -42495,79 +42525,9 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:214:conditional-expression",
-          "line": 214,
-          "construct": "conditional-expression",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:224:if",
-          "line": 224,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:226:if",
-          "line": 226,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:230:if",
-          "line": 230,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:237:for",
+          "id": "scripts/lib/workspace_storage_maintenance.py:237:conditional-expression",
           "line": 237,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:238:if",
-          "line": 238,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:242:except",
-          "line": 242,
-          "construct": "except",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:244:if",
-          "line": 244,
-          "construct": "if",
+          "construct": "conditional-expression",
           "candidateOutcomes": [
             "taken",
             "other-or-failure"
@@ -42585,18 +42545,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:254:for",
-          "line": 254,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:256:if",
-          "line": 256,
+          "id": "scripts/lib/workspace_storage_maintenance.py:249:if",
+          "line": 249,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42605,8 +42555,38 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:260:except",
+          "id": "scripts/lib/workspace_storage_maintenance.py:253:if",
+          "line": 253,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:260:for",
           "line": 260,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:261:if",
+          "line": 261,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:265:except",
+          "line": 265,
           "construct": "except",
           "candidateOutcomes": [
             "taken",
@@ -42615,8 +42595,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:262:if",
-          "line": 262,
+          "id": "scripts/lib/workspace_storage_maintenance.py:267:if",
+          "line": 267,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42625,8 +42605,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:265:if",
-          "line": 265,
+          "id": "scripts/lib/workspace_storage_maintenance.py:270:if",
+          "line": 270,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42635,8 +42615,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:280:for",
-          "line": 280,
+          "id": "scripts/lib/workspace_storage_maintenance.py:277:for",
+          "line": 277,
           "construct": "for",
           "candidateOutcomes": [
             "taken",
@@ -42645,8 +42625,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:281:if",
-          "line": 281,
+          "id": "scripts/lib/workspace_storage_maintenance.py:279:if",
+          "line": 279,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42655,8 +42635,18 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:296:if",
-          "line": 296,
+          "id": "scripts/lib/workspace_storage_maintenance.py:283:except",
+          "line": 283,
+          "construct": "except",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:285:if",
+          "line": 285,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42665,8 +42655,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:300:if",
-          "line": 300,
+          "id": "scripts/lib/workspace_storage_maintenance.py:288:if",
+          "line": 288,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42675,9 +42665,9 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:302:if",
-          "line": 302,
-          "construct": "if",
+          "id": "scripts/lib/workspace_storage_maintenance.py:303:for",
+          "line": 303,
+          "construct": "for",
           "candidateOutcomes": [
             "taken",
             "other-or-failure"
@@ -42695,18 +42685,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:310:for",
-          "line": 310,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:312:if",
-          "line": 312,
+          "id": "scripts/lib/workspace_storage_maintenance.py:319:if",
+          "line": 319,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42715,18 +42695,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:316:except",
-          "line": 316,
-          "construct": "except",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:318:if",
-          "line": 318,
+          "id": "scripts/lib/workspace_storage_maintenance.py:323:if",
+          "line": 323,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42735,8 +42705,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:331:if",
-          "line": 331,
+          "id": "scripts/lib/workspace_storage_maintenance.py:325:if",
+          "line": 325,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42745,8 +42715,18 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:334:for",
-          "line": 334,
+          "id": "scripts/lib/workspace_storage_maintenance.py:327:if",
+          "line": 327,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:333:for",
+          "line": 333,
           "construct": "for",
           "candidateOutcomes": [
             "taken",
@@ -42765,8 +42745,18 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:338:if",
-          "line": 338,
+          "id": "scripts/lib/workspace_storage_maintenance.py:339:except",
+          "line": 339,
+          "construct": "except",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:341:if",
+          "line": 341,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42775,8 +42765,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:340:if",
-          "line": 340,
+          "id": "scripts/lib/workspace_storage_maintenance.py:354:if",
+          "line": 354,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42785,58 +42775,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:347:if",
-          "line": 347,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:351:if",
-          "line": 351,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:353:if",
-          "line": 353,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:356:if",
-          "line": 356,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:362:if",
-          "line": 362,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:366:for",
-          "line": 366,
+          "id": "scripts/lib/workspace_storage_maintenance.py:357:for",
+          "line": 357,
           "construct": "for",
           "candidateOutcomes": [
             "taken",
@@ -42845,8 +42785,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:367:if",
-          "line": 367,
+          "id": "scripts/lib/workspace_storage_maintenance.py:358:if",
+          "line": 358,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42855,8 +42795,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:371:if",
-          "line": 371,
+          "id": "scripts/lib/workspace_storage_maintenance.py:361:if",
+          "line": 361,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42865,8 +42805,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:388:if",
-          "line": 388,
+          "id": "scripts/lib/workspace_storage_maintenance.py:363:if",
+          "line": 363,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42875,8 +42815,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:405:if",
-          "line": 405,
+          "id": "scripts/lib/workspace_storage_maintenance.py:370:if",
+          "line": 370,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42885,28 +42825,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:409:conditional-expression",
-          "line": 409,
-          "construct": "conditional-expression",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:410:conditional-expression",
-          "line": 410,
-          "construct": "conditional-expression",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:417:if",
-          "line": 417,
+          "id": "scripts/lib/workspace_storage_maintenance.py:374:if",
+          "line": 374,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42915,8 +42835,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:421:if",
-          "line": 421,
+          "id": "scripts/lib/workspace_storage_maintenance.py:376:if",
+          "line": 376,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42925,8 +42845,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:424:if",
-          "line": 424,
+          "id": "scripts/lib/workspace_storage_maintenance.py:379:if",
+          "line": 379,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42935,8 +42855,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:428:if",
-          "line": 428,
+          "id": "scripts/lib/workspace_storage_maintenance.py:385:if",
+          "line": 385,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42945,9 +42865,69 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:439:for",
-          "line": 439,
+          "id": "scripts/lib/workspace_storage_maintenance.py:389:for",
+          "line": 389,
           "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:390:if",
+          "line": 390,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:394:if",
+          "line": 394,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:411:if",
+          "line": 411,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:429:if",
+          "line": 429,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:433:conditional-expression",
+          "line": 433,
+          "construct": "conditional-expression",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:434:conditional-expression",
+          "line": 434,
+          "construct": "conditional-expression",
           "candidateOutcomes": [
             "taken",
             "other-or-failure"
@@ -42965,18 +42945,38 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:443:for",
-          "line": 443,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:445:for",
+          "id": "scripts/lib/workspace_storage_maintenance.py:445:if",
           "line": 445,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:448:if",
+          "line": 448,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:452:if",
+          "line": 452,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:463:for",
+          "line": 463,
           "construct": "for",
           "candidateOutcomes": [
             "taken",
@@ -42985,8 +42985,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:446:if",
-          "line": 446,
+          "id": "scripts/lib/workspace_storage_maintenance.py:465:if",
+          "line": 465,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -42995,8 +42995,28 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:449:if",
-          "line": 449,
+          "id": "scripts/lib/workspace_storage_maintenance.py:467:for",
+          "line": 467,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:469:for",
+          "line": 469,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:470:if",
+          "line": 470,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43005,8 +43025,18 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:453:except",
-          "line": 453,
+          "id": "scripts/lib/workspace_storage_maintenance.py:473:if",
+          "line": 473,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:477:except",
+          "line": 477,
           "construct": "except",
           "candidateOutcomes": [
             "taken",
@@ -43015,109 +43045,9 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:476:if",
-          "line": 476,
+          "id": "scripts/lib/workspace_storage_maintenance.py:500:if",
+          "line": 500,
           "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:480:if",
-          "line": 480,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:482:if",
-          "line": 482,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:484:for",
-          "line": 484,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:485:if",
-          "line": 485,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:488:if",
-          "line": 488,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:490:for",
-          "line": 490,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:492:if",
-          "line": 492,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:494:if",
-          "line": 494,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:496:elif",
-          "line": 496,
-          "construct": "elif",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:502:for",
-          "line": 502,
-          "construct": "for",
           "candidateOutcomes": [
             "taken",
             "other-or-failure"
@@ -43135,18 +43065,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:506:for",
+          "id": "scripts/lib/workspace_storage_maintenance.py:506:if",
           "line": 506,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:507:if",
-          "line": 507,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43155,8 +43075,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:511:for",
-          "line": 511,
+          "id": "scripts/lib/workspace_storage_maintenance.py:508:for",
+          "line": 508,
           "construct": "for",
           "candidateOutcomes": [
             "taken",
@@ -43165,9 +43085,29 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:514:if",
+          "id": "scripts/lib/workspace_storage_maintenance.py:509:if",
+          "line": 509,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:512:if",
+          "line": 512,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:514:for",
           "line": 514,
-          "construct": "if",
+          "construct": "for",
           "candidateOutcomes": [
             "taken",
             "other-or-failure"
@@ -43175,18 +43115,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:516:for",
+          "id": "scripts/lib/workspace_storage_maintenance.py:516:if",
           "line": 516,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:517:if",
-          "line": 517,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43195,8 +43125,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:519:if",
-          "line": 519,
+          "id": "scripts/lib/workspace_storage_maintenance.py:518:if",
+          "line": 518,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43205,38 +43135,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:520:for",
+          "id": "scripts/lib/workspace_storage_maintenance.py:520:elif",
           "line": 520,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:521:if",
-          "line": 521,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:523:if",
-          "line": 523,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:525:elif",
-          "line": 525,
           "construct": "elif",
           "candidateOutcomes": [
             "taken",
@@ -43245,8 +43145,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:527:for",
-          "line": 527,
+          "id": "scripts/lib/workspace_storage_maintenance.py:526:for",
+          "line": 526,
           "construct": "for",
           "candidateOutcomes": [
             "taken",
@@ -43265,6 +43165,26 @@
           "reviewStatus": "StaticCandidate"
         },
         {
+          "id": "scripts/lib/workspace_storage_maintenance.py:530:for",
+          "line": 530,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:531:if",
+          "line": 531,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
           "id": "scripts/lib/workspace_storage_maintenance.py:535:for",
           "line": 535,
           "construct": "for",
@@ -43275,8 +43195,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:536:if",
-          "line": 536,
+          "id": "scripts/lib/workspace_storage_maintenance.py:538:if",
+          "line": 538,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43285,9 +43205,69 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:538:except",
-          "line": 538,
-          "construct": "except",
+          "id": "scripts/lib/workspace_storage_maintenance.py:540:for",
+          "line": 540,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:541:if",
+          "line": 541,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:543:if",
+          "line": 543,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:544:for",
+          "line": 544,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:545:if",
+          "line": 545,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:547:if",
+          "line": 547,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:549:elif",
+          "line": 549,
+          "construct": "elif",
           "candidateOutcomes": [
             "taken",
             "other-or-failure"
@@ -43305,8 +43285,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:553:if",
-          "line": 553,
+          "id": "scripts/lib/workspace_storage_maintenance.py:552:if",
+          "line": 552,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43315,58 +43295,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:556:if",
-          "line": 556,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:559:if",
+          "id": "scripts/lib/workspace_storage_maintenance.py:559:for",
           "line": 559,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:563:except",
-          "line": 563,
-          "construct": "except",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:565:if",
-          "line": 565,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:567:if",
-          "line": 567,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:571:for",
-          "line": 571,
           "construct": "for",
           "candidateOutcomes": [
             "taken",
@@ -43375,8 +43305,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:572:if",
-          "line": 572,
+          "id": "scripts/lib/workspace_storage_maintenance.py:560:if",
+          "line": 560,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43385,28 +43315,28 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:577:for",
+          "id": "scripts/lib/workspace_storage_maintenance.py:562:except",
+          "line": 562,
+          "construct": "except",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:575:for",
+          "line": 575,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:577:if",
           "line": 577,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:594:for",
-          "line": 594,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:595:if",
-          "line": 595,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43415,8 +43345,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:598:if",
-          "line": 598,
+          "id": "scripts/lib/workspace_storage_maintenance.py:580:if",
+          "line": 580,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43425,8 +43355,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:600:if",
-          "line": 600,
+          "id": "scripts/lib/workspace_storage_maintenance.py:583:if",
+          "line": 583,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43435,229 +43365,289 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:605:if",
-          "line": 605,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:610:if",
-          "line": 610,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:625:for",
-          "line": 625,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:627:if",
-          "line": 627,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:640:for",
-          "line": 640,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:641:for",
-          "line": 641,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:644:for",
-          "line": 644,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:645:if",
-          "line": 645,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:648:if",
-          "line": 648,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:649:if",
-          "line": 649,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:656:for",
-          "line": 656,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:674:for",
-          "line": 674,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:676:if",
-          "line": 676,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:681:for",
-          "line": 681,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:682:if",
-          "line": 682,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:683:if",
-          "line": 683,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:695:for",
-          "line": 695,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:696:if",
-          "line": 696,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:708:conditional-expression",
-          "line": 708,
-          "construct": "conditional-expression",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:716:conditional-expression",
-          "line": 716,
-          "construct": "conditional-expression",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:717:if",
-          "line": 717,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:719:conditional-expression",
-          "line": 719,
-          "construct": "conditional-expression",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:738:except",
-          "line": 738,
+          "id": "scripts/lib/workspace_storage_maintenance.py:587:except",
+          "line": 587,
           "construct": "except",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:589:if",
+          "line": 589,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:591:if",
+          "line": 591,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:595:for",
+          "line": 595,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:596:if",
+          "line": 596,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:601:for",
+          "line": 601,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:618:for",
+          "line": 618,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:619:if",
+          "line": 619,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:622:if",
+          "line": 622,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:624:if",
+          "line": 624,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:629:if",
+          "line": 629,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:634:if",
+          "line": 634,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:649:for",
+          "line": 649,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:651:if",
+          "line": 651,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:664:for",
+          "line": 664,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:665:for",
+          "line": 665,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:668:for",
+          "line": 668,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:669:if",
+          "line": 669,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:672:if",
+          "line": 672,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:673:if",
+          "line": 673,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:680:for",
+          "line": 680,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:698:for",
+          "line": 698,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:700:if",
+          "line": 700,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:705:for",
+          "line": 705,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:706:if",
+          "line": 706,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:707:if",
+          "line": 707,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:719:for",
+          "line": 719,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:720:if",
+          "line": 720,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:732:conditional-expression",
+          "line": 732,
+          "construct": "conditional-expression",
           "candidateOutcomes": [
             "taken",
             "other-or-failure"
@@ -43685,18 +43675,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:746:elif",
-          "line": 746,
-          "construct": "elif",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:747:conditional-expression",
-          "line": 747,
+          "id": "scripts/lib/workspace_storage_maintenance.py:743:conditional-expression",
+          "line": 743,
           "construct": "conditional-expression",
           "candidateOutcomes": [
             "taken",
@@ -43705,9 +43685,9 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:750:if",
-          "line": 750,
-          "construct": "if",
+          "id": "scripts/lib/workspace_storage_maintenance.py:762:except",
+          "line": 762,
+          "construct": "except",
           "candidateOutcomes": [
             "taken",
             "other-or-failure"
@@ -43715,18 +43695,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:754:if",
-          "line": 754,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:755:conditional-expression",
-          "line": 755,
+          "id": "scripts/lib/workspace_storage_maintenance.py:764:conditional-expression",
+          "line": 764,
           "construct": "conditional-expression",
           "candidateOutcomes": [
             "taken",
@@ -43735,8 +43705,18 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:757:elif",
-          "line": 757,
+          "id": "scripts/lib/workspace_storage_maintenance.py:765:if",
+          "line": 765,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:770:elif",
+          "line": 770,
           "construct": "elif",
           "candidateOutcomes": [
             "taken",
@@ -43745,8 +43725,18 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:760:if",
-          "line": 760,
+          "id": "scripts/lib/workspace_storage_maintenance.py:771:conditional-expression",
+          "line": 771,
+          "construct": "conditional-expression",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:774:if",
+          "line": 774,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43755,8 +43745,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:772:if",
-          "line": 772,
+          "id": "scripts/lib/workspace_storage_maintenance.py:778:if",
+          "line": 778,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43765,9 +43755,9 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:780:if",
-          "line": 780,
-          "construct": "if",
+          "id": "scripts/lib/workspace_storage_maintenance.py:779:conditional-expression",
+          "line": 779,
+          "construct": "conditional-expression",
           "candidateOutcomes": [
             "taken",
             "other-or-failure"
@@ -43775,9 +43765,9 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:782:for",
-          "line": 782,
-          "construct": "for",
+          "id": "scripts/lib/workspace_storage_maintenance.py:781:elif",
+          "line": 781,
+          "construct": "elif",
           "candidateOutcomes": [
             "taken",
             "other-or-failure"
@@ -43795,29 +43785,9 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:786:if",
-          "line": 786,
+          "id": "scripts/lib/workspace_storage_maintenance.py:796:if",
+          "line": 796,
           "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:789:if",
-          "line": 789,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:801:elif",
-          "line": 801,
-          "construct": "elif",
           "candidateOutcomes": [
             "taken",
             "other-or-failure"
@@ -43835,8 +43805,18 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:806:if",
+          "id": "scripts/lib/workspace_storage_maintenance.py:806:for",
           "line": 806,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:808:if",
+          "line": 808,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43845,8 +43825,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:812:if",
-          "line": 812,
+          "id": "scripts/lib/workspace_storage_maintenance.py:810:if",
+          "line": 810,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43855,18 +43835,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:813:conditional-expression",
+          "id": "scripts/lib/workspace_storage_maintenance.py:813:if",
           "line": 813,
-          "construct": "conditional-expression",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:815:if",
-          "line": 815,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43875,18 +43845,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:817:if",
-          "line": 817,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:820:elif",
-          "line": 820,
+          "id": "scripts/lib/workspace_storage_maintenance.py:825:elif",
+          "line": 825,
           "construct": "elif",
           "candidateOutcomes": [
             "taken",
@@ -43895,8 +43855,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:823:if",
-          "line": 823,
+          "id": "scripts/lib/workspace_storage_maintenance.py:828:if",
+          "line": 828,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43905,8 +43865,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:829:if",
-          "line": 829,
+          "id": "scripts/lib/workspace_storage_maintenance.py:830:if",
+          "line": 830,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43915,8 +43875,18 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:832:conditional-expression",
-          "line": 832,
+          "id": "scripts/lib/workspace_storage_maintenance.py:836:if",
+          "line": 836,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:837:conditional-expression",
+          "line": 837,
           "construct": "conditional-expression",
           "candidateOutcomes": [
             "taken",
@@ -43925,29 +43895,9 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:833:if",
-          "line": 833,
+          "id": "scripts/lib/workspace_storage_maintenance.py:839:if",
+          "line": 839,
           "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:835:if",
-          "line": 835,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:838:elif",
-          "line": 838,
-          "construct": "elif",
           "candidateOutcomes": [
             "taken",
             "other-or-failure"
@@ -43965,8 +43915,18 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:849:if",
-          "line": 849,
+          "id": "scripts/lib/workspace_storage_maintenance.py:844:elif",
+          "line": 844,
+          "construct": "elif",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:847:if",
+          "line": 847,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43975,8 +43935,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:852:if",
-          "line": 852,
+          "id": "scripts/lib/workspace_storage_maintenance.py:853:if",
+          "line": 853,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -43985,8 +43945,78 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:856:except",
+          "id": "scripts/lib/workspace_storage_maintenance.py:856:conditional-expression",
           "line": 856,
+          "construct": "conditional-expression",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:857:if",
+          "line": 857,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:859:if",
+          "line": 859,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:862:elif",
+          "line": 862,
+          "construct": "elif",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:865:if",
+          "line": 865,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:873:if",
+          "line": 873,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:876:if",
+          "line": 876,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:880:except",
+          "line": 880,
           "construct": "except",
           "candidateOutcomes": [
             "taken",
@@ -43995,8 +44025,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:858:if",
-          "line": 858,
+          "id": "scripts/lib/workspace_storage_maintenance.py:882:if",
+          "line": 882,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44005,8 +44035,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:860:for",
-          "line": 860,
+          "id": "scripts/lib/workspace_storage_maintenance.py:884:for",
+          "line": 884,
           "construct": "for",
           "candidateOutcomes": [
             "taken",
@@ -44015,8 +44045,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:861:if",
-          "line": 861,
+          "id": "scripts/lib/workspace_storage_maintenance.py:885:if",
+          "line": 885,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44025,8 +44055,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:864:if",
-          "line": 864,
+          "id": "scripts/lib/workspace_storage_maintenance.py:888:if",
+          "line": 888,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44035,8 +44065,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:869:except",
-          "line": 869,
+          "id": "scripts/lib/workspace_storage_maintenance.py:893:except",
+          "line": 893,
           "construct": "except",
           "candidateOutcomes": [
             "taken",
@@ -44045,8 +44075,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:871:if",
-          "line": 871,
+          "id": "scripts/lib/workspace_storage_maintenance.py:895:if",
+          "line": 895,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44055,8 +44085,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:884:if",
-          "line": 884,
+          "id": "scripts/lib/workspace_storage_maintenance.py:908:if",
+          "line": 908,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44065,8 +44095,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:891:if",
-          "line": 891,
+          "id": "scripts/lib/workspace_storage_maintenance.py:915:if",
+          "line": 915,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44075,8 +44105,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:898:if",
-          "line": 898,
+          "id": "scripts/lib/workspace_storage_maintenance.py:922:if",
+          "line": 922,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44085,8 +44115,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:901:if",
-          "line": 901,
+          "id": "scripts/lib/workspace_storage_maintenance.py:925:if",
+          "line": 925,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44095,89 +44125,9 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:907:if",
-          "line": 907,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:909:conditional-expression",
-          "line": 909,
-          "construct": "conditional-expression",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:910:if",
-          "line": 910,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:914:if",
-          "line": 914,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:917:if",
-          "line": 917,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:919:conditional-expression",
-          "line": 919,
-          "construct": "conditional-expression",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:920:if",
-          "line": 920,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:931:conditional-expression",
+          "id": "scripts/lib/workspace_storage_maintenance.py:931:if",
           "line": 931,
-          "construct": "conditional-expression",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:932:conditional-expression",
-          "line": 932,
-          "construct": "conditional-expression",
+          "construct": "if",
           "candidateOutcomes": [
             "taken",
             "other-or-failure"
@@ -44195,8 +44145,38 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:934:conditional-expression",
+          "id": "scripts/lib/workspace_storage_maintenance.py:934:if",
           "line": 934,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:938:if",
+          "line": 938,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:941:if",
+          "line": 941,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:943:conditional-expression",
+          "line": 943,
           "construct": "conditional-expression",
           "candidateOutcomes": [
             "taken",
@@ -44205,8 +44185,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:952:if",
-          "line": 952,
+          "id": "scripts/lib/workspace_storage_maintenance.py:944:if",
+          "line": 944,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44215,8 +44195,58 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:954:except",
-          "line": 954,
+          "id": "scripts/lib/workspace_storage_maintenance.py:955:conditional-expression",
+          "line": 955,
+          "construct": "conditional-expression",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:956:conditional-expression",
+          "line": 956,
+          "construct": "conditional-expression",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:957:conditional-expression",
+          "line": 957,
+          "construct": "conditional-expression",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:958:conditional-expression",
+          "line": 958,
+          "construct": "conditional-expression",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:976:if",
+          "line": 976,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:978:except",
+          "line": 978,
           "construct": "except",
           "candidateOutcomes": [
             "taken",
@@ -44225,8 +44255,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:956:if",
-          "line": 956,
+          "id": "scripts/lib/workspace_storage_maintenance.py:980:if",
+          "line": 980,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44235,8 +44265,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:958:if",
-          "line": 958,
+          "id": "scripts/lib/workspace_storage_maintenance.py:982:if",
+          "line": 982,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44245,8 +44275,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:985:if",
-          "line": 985,
+          "id": "scripts/lib/workspace_storage_maintenance.py:1009:if",
+          "line": 1009,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44255,8 +44285,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:993:for",
-          "line": 993,
+          "id": "scripts/lib/workspace_storage_maintenance.py:1017:for",
+          "line": 1017,
           "construct": "for",
           "candidateOutcomes": [
             "taken",
@@ -44265,8 +44295,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1001:if",
-          "line": 1001,
+          "id": "scripts/lib/workspace_storage_maintenance.py:1025:if",
+          "line": 1025,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44275,8 +44305,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1005:if",
-          "line": 1005,
+          "id": "scripts/lib/workspace_storage_maintenance.py:1029:if",
+          "line": 1029,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44285,8 +44315,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1010:except",
-          "line": 1010,
+          "id": "scripts/lib/workspace_storage_maintenance.py:1034:except",
+          "line": 1034,
           "construct": "except",
           "candidateOutcomes": [
             "taken",
@@ -44295,8 +44325,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1014:if",
-          "line": 1014,
+          "id": "scripts/lib/workspace_storage_maintenance.py:1038:if",
+          "line": 1038,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44305,8 +44335,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1018:if",
-          "line": 1018,
+          "id": "scripts/lib/workspace_storage_maintenance.py:1042:if",
+          "line": 1042,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44315,8 +44345,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1023:if",
-          "line": 1023,
+          "id": "scripts/lib/workspace_storage_maintenance.py:1047:if",
+          "line": 1047,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44325,8 +44355,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1040:if",
-          "line": 1040,
+          "id": "scripts/lib/workspace_storage_maintenance.py:1064:if",
+          "line": 1064,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44335,8 +44365,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1045:elif",
-          "line": 1045,
+          "id": "scripts/lib/workspace_storage_maintenance.py:1069:elif",
+          "line": 1069,
           "construct": "elif",
           "candidateOutcomes": [
             "taken",
@@ -44345,8 +44375,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1069:conditional-expression",
-          "line": 1069,
+          "id": "scripts/lib/workspace_storage_maintenance.py:1093:conditional-expression",
+          "line": 1093,
           "construct": "conditional-expression",
           "candidateOutcomes": [
             "taken",
@@ -44355,98 +44385,8 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1073:except",
-          "line": 1073,
-          "construct": "except",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1079:for",
-          "line": 1079,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1080:if",
-          "line": 1080,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1083:conditional-expression",
-          "line": 1083,
-          "construct": "conditional-expression",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1091:conditional-expression",
-          "line": 1091,
-          "construct": "conditional-expression",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1097:for",
+          "id": "scripts/lib/workspace_storage_maintenance.py:1097:except",
           "line": 1097,
-          "construct": "for",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1098:if",
-          "line": 1098,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1108:if",
-          "line": 1108,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1112:if",
-          "line": 1112,
-          "construct": "if",
-          "candidateOutcomes": [
-            "taken",
-            "other-or-failure"
-          ],
-          "reviewStatus": "StaticCandidate"
-        },
-        {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1122:except",
-          "line": 1122,
           "construct": "except",
           "candidateOutcomes": [
             "taken",
@@ -44455,8 +44395,98 @@
           "reviewStatus": "StaticCandidate"
         },
         {
-          "id": "scripts/lib/workspace_storage_maintenance.py:1163:if",
-          "line": 1163,
+          "id": "scripts/lib/workspace_storage_maintenance.py:1103:for",
+          "line": 1103,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:1104:if",
+          "line": 1104,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:1107:conditional-expression",
+          "line": 1107,
+          "construct": "conditional-expression",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:1115:conditional-expression",
+          "line": 1115,
+          "construct": "conditional-expression",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:1121:for",
+          "line": 1121,
+          "construct": "for",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:1122:if",
+          "line": 1122,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:1132:if",
+          "line": 1132,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:1136:if",
+          "line": 1136,
+          "construct": "if",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:1146:except",
+          "line": 1146,
+          "construct": "except",
+          "candidateOutcomes": [
+            "taken",
+            "other-or-failure"
+          ],
+          "reviewStatus": "StaticCandidate"
+        },
+        {
+          "id": "scripts/lib/workspace_storage_maintenance.py:1187:if",
+          "line": 1187,
           "construct": "if",
           "candidateOutcomes": [
             "taken",
@@ -44466,457 +44496,463 @@
         }
       ],
       "possibleOutcomes": [
-        "scripts/lib/workspace_storage_maintenance.py:70:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:70:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:72:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:72:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:75:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:75:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:82:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:82:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:84:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:84:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:90:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:90:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:94:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:94:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:100:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:100:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:106:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:106:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:108:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:108:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:121:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:121:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:133:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:133:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:135:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:135:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:148:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:148:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:156:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:156:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:166:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:166:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:173:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:173:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:178:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:178:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:181:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:181:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:183:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:183:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:188:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:188:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:191:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:191:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:195:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:195:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:197:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:197:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:206:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:206:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:208:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:208:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:214:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:214:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:224:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:224:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:226:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:226:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:230:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:230:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:237:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:237:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:238:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:238:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:242:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:242:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:244:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:244:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:71:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:71:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:73:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:73:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:76:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:76:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:83:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:83:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:85:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:85:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:91:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:91:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:95:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:95:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:101:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:101:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:107:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:107:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:109:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:109:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:122:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:122:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:134:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:134:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:136:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:136:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:149:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:149:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:157:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:157:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:167:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:167:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:174:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:174:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:179:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:179:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:182:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:182:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:184:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:184:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:189:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:189:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:192:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:192:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:196:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:196:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:198:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:198:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:209:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:209:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:211:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:211:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:215:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:215:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:229:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:229:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:231:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:231:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:237:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:237:conditional-expression:other-or-failure",
         "scripts/lib/workspace_storage_maintenance.py:247:if:taken",
         "scripts/lib/workspace_storage_maintenance.py:247:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:254:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:254:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:256:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:256:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:260:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:260:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:262:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:262:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:265:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:265:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:280:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:280:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:281:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:281:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:296:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:296:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:300:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:300:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:302:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:302:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:249:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:249:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:253:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:253:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:260:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:260:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:261:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:261:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:265:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:265:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:267:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:267:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:270:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:270:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:277:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:277:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:279:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:279:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:283:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:283:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:285:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:285:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:288:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:288:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:303:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:303:for:other-or-failure",
         "scripts/lib/workspace_storage_maintenance.py:304:if:taken",
         "scripts/lib/workspace_storage_maintenance.py:304:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:310:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:310:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:312:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:312:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:316:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:316:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:318:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:318:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:331:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:331:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:334:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:334:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:319:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:319:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:323:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:323:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:325:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:325:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:327:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:327:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:333:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:333:for:other-or-failure",
         "scripts/lib/workspace_storage_maintenance.py:335:if:taken",
         "scripts/lib/workspace_storage_maintenance.py:335:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:338:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:338:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:340:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:340:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:347:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:347:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:351:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:351:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:353:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:353:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:356:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:356:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:362:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:362:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:366:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:366:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:367:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:367:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:371:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:371:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:388:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:388:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:405:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:405:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:409:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:409:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:410:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:410:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:417:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:417:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:421:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:421:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:424:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:424:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:428:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:428:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:439:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:439:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:339:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:339:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:341:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:341:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:354:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:354:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:357:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:357:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:358:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:358:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:361:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:361:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:363:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:363:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:370:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:370:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:374:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:374:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:376:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:376:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:379:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:379:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:385:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:385:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:389:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:389:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:390:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:390:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:394:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:394:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:411:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:411:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:429:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:429:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:433:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:433:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:434:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:434:conditional-expression:other-or-failure",
         "scripts/lib/workspace_storage_maintenance.py:441:if:taken",
         "scripts/lib/workspace_storage_maintenance.py:441:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:443:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:443:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:445:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:445:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:446:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:446:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:449:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:449:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:453:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:453:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:476:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:476:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:480:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:480:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:482:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:482:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:484:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:484:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:485:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:485:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:488:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:488:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:490:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:490:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:492:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:492:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:494:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:494:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:496:elif:taken",
-        "scripts/lib/workspace_storage_maintenance.py:496:elif:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:502:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:502:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:445:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:445:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:448:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:448:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:452:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:452:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:463:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:463:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:465:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:465:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:467:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:467:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:469:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:469:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:470:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:470:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:473:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:473:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:477:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:477:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:500:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:500:if:other-or-failure",
         "scripts/lib/workspace_storage_maintenance.py:504:if:taken",
         "scripts/lib/workspace_storage_maintenance.py:504:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:506:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:506:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:507:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:507:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:511:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:511:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:514:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:514:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:516:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:516:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:517:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:517:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:519:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:519:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:520:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:520:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:521:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:521:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:523:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:523:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:525:elif:taken",
-        "scripts/lib/workspace_storage_maintenance.py:525:elif:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:527:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:527:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:506:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:506:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:508:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:508:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:509:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:509:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:512:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:512:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:514:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:514:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:516:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:516:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:518:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:518:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:520:elif:taken",
+        "scripts/lib/workspace_storage_maintenance.py:520:elif:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:526:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:526:for:other-or-failure",
         "scripts/lib/workspace_storage_maintenance.py:528:if:taken",
         "scripts/lib/workspace_storage_maintenance.py:528:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:530:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:530:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:531:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:531:if:other-or-failure",
         "scripts/lib/workspace_storage_maintenance.py:535:for:taken",
         "scripts/lib/workspace_storage_maintenance.py:535:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:536:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:536:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:538:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:538:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:538:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:538:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:540:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:540:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:541:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:541:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:543:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:543:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:544:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:544:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:545:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:545:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:547:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:547:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:549:elif:taken",
+        "scripts/lib/workspace_storage_maintenance.py:549:elif:other-or-failure",
         "scripts/lib/workspace_storage_maintenance.py:551:for:taken",
         "scripts/lib/workspace_storage_maintenance.py:551:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:553:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:553:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:556:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:556:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:559:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:559:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:563:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:563:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:565:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:565:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:567:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:567:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:571:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:571:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:572:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:572:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:577:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:577:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:594:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:594:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:595:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:595:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:598:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:598:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:600:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:600:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:605:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:605:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:610:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:610:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:625:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:625:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:627:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:627:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:640:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:640:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:641:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:641:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:644:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:644:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:645:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:645:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:648:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:648:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:649:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:649:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:656:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:656:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:674:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:674:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:676:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:676:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:681:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:681:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:682:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:682:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:683:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:683:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:695:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:695:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:696:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:696:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:708:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:708:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:716:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:716:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:717:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:717:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:719:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:719:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:738:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:738:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:552:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:552:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:559:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:559:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:560:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:560:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:562:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:562:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:575:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:575:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:577:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:577:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:580:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:580:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:583:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:583:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:587:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:587:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:589:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:589:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:591:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:591:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:595:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:595:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:596:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:596:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:601:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:601:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:618:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:618:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:619:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:619:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:622:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:622:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:624:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:624:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:629:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:629:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:634:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:634:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:649:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:649:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:651:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:651:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:664:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:664:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:665:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:665:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:668:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:668:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:669:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:669:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:672:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:672:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:673:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:673:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:680:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:680:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:698:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:698:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:700:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:700:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:705:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:705:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:706:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:706:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:707:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:707:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:719:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:719:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:720:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:720:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:732:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:732:conditional-expression:other-or-failure",
         "scripts/lib/workspace_storage_maintenance.py:740:conditional-expression:taken",
         "scripts/lib/workspace_storage_maintenance.py:740:conditional-expression:other-or-failure",
         "scripts/lib/workspace_storage_maintenance.py:741:if:taken",
         "scripts/lib/workspace_storage_maintenance.py:741:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:746:elif:taken",
-        "scripts/lib/workspace_storage_maintenance.py:746:elif:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:747:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:747:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:750:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:750:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:754:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:754:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:755:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:755:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:757:elif:taken",
-        "scripts/lib/workspace_storage_maintenance.py:757:elif:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:760:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:760:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:772:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:772:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:780:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:780:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:782:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:782:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:743:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:743:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:762:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:762:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:764:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:764:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:765:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:765:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:770:elif:taken",
+        "scripts/lib/workspace_storage_maintenance.py:770:elif:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:771:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:771:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:774:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:774:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:778:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:778:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:779:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:779:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:781:elif:taken",
+        "scripts/lib/workspace_storage_maintenance.py:781:elif:other-or-failure",
         "scripts/lib/workspace_storage_maintenance.py:784:if:taken",
         "scripts/lib/workspace_storage_maintenance.py:784:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:786:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:786:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:789:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:789:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:801:elif:taken",
-        "scripts/lib/workspace_storage_maintenance.py:801:elif:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:796:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:796:if:other-or-failure",
         "scripts/lib/workspace_storage_maintenance.py:804:if:taken",
         "scripts/lib/workspace_storage_maintenance.py:804:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:806:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:806:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:812:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:812:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:813:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:813:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:815:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:815:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:817:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:817:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:820:elif:taken",
-        "scripts/lib/workspace_storage_maintenance.py:820:elif:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:823:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:823:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:829:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:829:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:832:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:832:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:833:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:833:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:835:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:835:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:838:elif:taken",
-        "scripts/lib/workspace_storage_maintenance.py:838:elif:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:806:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:806:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:808:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:808:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:810:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:810:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:813:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:813:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:825:elif:taken",
+        "scripts/lib/workspace_storage_maintenance.py:825:elif:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:828:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:828:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:830:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:830:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:836:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:836:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:837:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:837:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:839:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:839:if:other-or-failure",
         "scripts/lib/workspace_storage_maintenance.py:841:if:taken",
         "scripts/lib/workspace_storage_maintenance.py:841:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:849:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:849:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:852:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:852:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:856:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:856:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:858:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:858:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:860:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:860:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:861:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:861:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:864:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:864:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:869:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:869:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:871:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:871:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:884:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:884:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:891:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:891:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:898:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:898:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:901:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:901:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:907:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:907:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:909:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:909:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:910:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:910:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:914:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:914:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:917:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:917:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:919:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:919:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:920:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:920:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:931:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:931:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:932:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:932:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:844:elif:taken",
+        "scripts/lib/workspace_storage_maintenance.py:844:elif:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:847:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:847:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:853:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:853:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:856:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:856:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:857:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:857:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:859:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:859:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:862:elif:taken",
+        "scripts/lib/workspace_storage_maintenance.py:862:elif:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:865:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:865:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:873:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:873:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:876:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:876:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:880:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:880:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:882:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:882:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:884:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:884:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:885:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:885:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:888:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:888:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:893:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:893:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:895:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:895:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:908:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:908:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:915:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:915:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:922:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:922:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:925:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:925:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:931:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:931:if:other-or-failure",
         "scripts/lib/workspace_storage_maintenance.py:933:conditional-expression:taken",
         "scripts/lib/workspace_storage_maintenance.py:933:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:934:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:934:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:952:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:952:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:954:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:954:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:956:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:956:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:958:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:958:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:985:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:985:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:993:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:993:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1001:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1001:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1005:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1005:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1010:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1010:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1014:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1014:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1018:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1018:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1023:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1023:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1040:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1040:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1045:elif:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1045:elif:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1069:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1069:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1073:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1073:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1079:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1079:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1080:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1080:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1083:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1083:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1091:conditional-expression:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1091:conditional-expression:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1097:for:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1097:for:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1098:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1098:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1108:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1108:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1112:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1112:if:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1122:except:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1122:except:other-or-failure",
-        "scripts/lib/workspace_storage_maintenance.py:1163:if:taken",
-        "scripts/lib/workspace_storage_maintenance.py:1163:if:other-or-failure"
+        "scripts/lib/workspace_storage_maintenance.py:934:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:934:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:938:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:938:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:941:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:941:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:943:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:943:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:944:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:944:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:955:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:955:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:956:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:956:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:957:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:957:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:958:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:958:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:976:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:976:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:978:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:978:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:980:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:980:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:982:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:982:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1009:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1009:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1017:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1017:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1025:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1025:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1029:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1029:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1034:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1034:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1038:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1038:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1042:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1042:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1047:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1047:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1064:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1064:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1069:elif:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1069:elif:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1093:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1093:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1097:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1097:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1103:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1103:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1104:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1104:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1107:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1107:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1115:conditional-expression:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1115:conditional-expression:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1121:for:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1121:for:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1122:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1122:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1132:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1132:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1136:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1136:if:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1146:except:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1146:except:other-or-failure",
+        "scripts/lib/workspace_storage_maintenance.py:1187:if:taken",
+        "scripts/lib/workspace_storage_maintenance.py:1187:if:other-or-failure"
       ],
       "observedOutcomes": [],
       "evidenceRefs": [],
-      "candidateOutcomeCount": 446.0,
-      "branchDenominator": 446.0,
+      "candidateOutcomeCount": 452.0,
+      "branchDenominator": 452.0,
       "denominatorStatus": "Provisional source-bound decision model; parser/runtime review and measured coverage pending",
       "nestedExecutableRegions": [],
       "unmeasuredNestedRegionCount": 0,

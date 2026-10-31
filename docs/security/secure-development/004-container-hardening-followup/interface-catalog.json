@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "feature": "004-container-hardening-followup",
-  "sourceRevision": "b36d774ebd6cb34f2f0dd2764488b9dee6aaf082",
+  "sourceRevision": "f59cc695f346ff48e32c44ec4454d7c7482c8e57",
   "catalogStatus": "ReviewedForT012; execution coverage remains Open",
   "independentReview": "2026-10-31: separate T007 subagent review; 94 unique IDs and variant/source/UI bindings accepted; executed cases and platform evidence pending",
   "publicEntrypointPaths": 56,

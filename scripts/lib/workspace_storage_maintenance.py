@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import csv
 import fnmatch
+import hashlib
 import json
 import os
 import pathlib
@@ -200,6 +201,28 @@ def directory_metrics(path: pathlib.Path) -> tuple[int, int, int]:
             total += information.st_size
             newest = max(newest, int(information.st_mtime))
     return total, files, newest
+
+
+def directory_layout_hash(path: pathlib.Path) -> str:
+    """Bind a cleanup candidate to its relative entries without reading file contents."""
+    entries: list[list[str | int]] = []
+    for root, directories, names in os.walk(path, followlinks=False):
+        root_path = pathlib.Path(root)
+        for name in sorted(directories + names):
+            entry = root_path / name
+            try:
+                information = entry.stat(follow_symlinks=False)
+            except OSError as exc:
+                raise StorageContractError(f"cleanup candidate entry changed: {entry}") from exc
+            entries.append([
+                entry.relative_to(path).as_posix(),
+                stat.S_IFMT(information.st_mode),
+                information.st_size,
+                information.st_mtime_ns,
+                information.st_ctime_ns,
+            ])
+    encoded = json.dumps(entries, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
 
 
 def age_days(newest_epoch: int, now_epoch: int | None = None) -> int:
@@ -399,6 +422,7 @@ def candidate_record(
         "observedDevice": identity.st_dev,
         "observedInode": identity.st_ino,
         "observedCtimeNs": identity.st_ctime_ns,
+        "observedLayoutHash": directory_layout_hash(contained),
         "observedNewestMtime": newest,
         "newestMtimeUtc": (
             datetime.fromtimestamp(newest, timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -416,7 +440,7 @@ def remove_candidate(repository: pathlib.Path, candidate: dict) -> int:
     identity = path.stat(follow_symlinks=False)
     if (identity.st_dev, identity.st_ino, identity.st_ctime_ns) != (
         candidate["observedDevice"], candidate["observedInode"], candidate["observedCtimeNs"]
-    ):
+    ) or directory_layout_hash(path) != candidate["observedLayoutHash"]:
         raise StorageContractError(f"candidate identity changed: {candidate['path']}")
     if not git_path_is_ignored_and_untracked(repository, path):
         raise StorageContractError(f"candidate lost ignored/untracked proof: {candidate['path']}")

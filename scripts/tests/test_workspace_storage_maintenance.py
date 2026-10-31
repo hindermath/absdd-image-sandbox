@@ -232,6 +232,12 @@ class WorkspaceStorageMaintenanceTests(unittest.TestCase):
             shutil.rmtree(repository / "wrk")
             (repository / "wrk").mkdir()
             (repository / "wrk" / "fresh.o").write_bytes(b"new")
+            # Force a device/inode/time collision so only the entry layout can reject reuse.
+            replacement = (repository / "wrk").stat(follow_symlinks=False)
+            stale["observedDevice"] = replacement.st_dev
+            stale["observedInode"] = replacement.st_ino
+            stale["observedCtimeNs"] = replacement.st_ctime_ns
+            stale["observedNewestMtime"] = storage.directory_metrics(repository / "wrk")[2]
             with self.assertRaisesRegex(storage.StorageContractError, "identity changed"):
                 storage.remove_candidate(repository, stale)
             self.assertTrue((repository / "wrk" / "fresh.o").exists())
