@@ -64,8 +64,8 @@
       "priority": 65,
       "enabled": true,
       "manifest_hash": "sha256:3d809c52a3c165818c4a33cee9c6efa69399597993d6700106e93263f1da589d",
-      "fileCount": 44,
-      "contentSha256": "d9bd93c7a025b1185fff5125760d19d7eb9a9b8ea2dd0a89c0d0a71488508be0"
+      "fileCount": 45,
+      "contentSha256": "79645f1919657a354b458d052b44016c58e586f1d06f351dca02cbc8bd865427"
     },
     {
       "id": "intake-sequencing-governance",
