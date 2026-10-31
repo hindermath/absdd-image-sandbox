@@ -19,6 +19,41 @@ public sealed class EventReaderTests
     }
 
     [TestMethod]
+    public void OversizedLineDegradesAndDiscardsUntilNewline()
+    {
+        var runId = Guid.NewGuid();
+        var reader = new MaintenanceEventReader(runId);
+
+        Assert.AreEqual(0, reader.Feed(new string('x', 70000)).Count);
+        Assert.AreEqual(EventDegradationReason.OversizedRecord,
+            reader.State.DegradationReason);
+        Assert.AreEqual(EventPresentationMode.Degraded,
+            reader.State.PresentationMode);
+
+        var later = reader.Feed("\n" + MaintenanceEventTests.EventJson(runId, 1) + "\n");
+        Assert.AreEqual(1, later.Count);
+        Assert.AreEqual(EventPresentationMode.Degraded,
+            reader.State.PresentationMode);
+    }
+
+    [TestMethod]
+    public void UnterminatedTailAfterValidEventDegradesAtCompletion()
+    {
+        var runId = Guid.NewGuid();
+        var reader = new MaintenanceEventReader(runId);
+
+        Assert.AreEqual(1,
+            reader.Feed(MaintenanceEventTests.EventJson(runId, 1) + "\n").Count);
+        reader.Feed("{incomplete");
+        reader.Complete();
+
+        Assert.AreEqual(EventPresentationMode.Degraded,
+            reader.State.PresentationMode);
+        Assert.AreEqual(EventDegradationReason.InvalidSchema,
+            reader.State.DegradationReason);
+    }
+
+    [TestMethod]
     [DataRow("{bad}\n", EventDegradationReason.InvalidJson)]
     public void InvalidRecordPermanentlyDegrades(string input, EventDegradationReason reason)
     {

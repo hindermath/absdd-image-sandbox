@@ -33,7 +33,10 @@ PowerShell-Modulpfleger installiert und geprueft.
 Ein normaler Lauf aktualisiert WinGet-Quellen, fuehrt `winget upgrade --all`
 aus und installiert fehlende Required-Pakete per `winget install --id <Id>
 --exact`.
-CLI-Versionsproben werden nach fuenf Sekunden beendet, damit interaktive oder
+Bei `-WhatIf` und `-CompareOnly` werden Registry-CLIs nur als externe
+Programme aufgeloest, nicht gestartet; Version und Funktion bleiben
+ungeprueft. Im autorisierten Update werden CLI-Versionsproben nach fuenf
+Sekunden beendet, damit interaktive oder
 festhaengende Agenten-CLIs den Wartungslauf nicht blockieren.
 Jeder WinGet-Unterprozess besitzt ebenfalls eine harte Zeitgrenze. Leseproben
 verwenden hoechstens 30 Sekunden. Bei einem Timeout wird der vollstaendige
@@ -55,8 +58,10 @@ agent CLIs `codex`, `claude`, and `copilot` plus required package `Google.Antigr
 Required PowerShell modules are installed and checked from
 `scripts/config/powershell-modules-registry.json` by the shared PowerShell
 module maintainer. A normal run refreshes WinGet sources, runs `winget upgrade --all`, and installs
-missing required packages via `winget install --id <Id> --exact`. CLI version
-probes stop after five seconds so interactive or stuck agent CLIs cannot block
+missing required packages via `winget install --id <Id> --exact`. `-WhatIf` and
+`-CompareOnly` resolve external registry CLIs without starting them; version
+and function remain unchecked. In an authorized update, CLI version probes
+stop after five seconds so interactive or stuck agent CLIs cannot block
 maintenance. Every WinGet subprocess also has a hard timeout, with read probes
 capped at 30 seconds. On timeout, the complete process tree is terminated and
 awaited for a bounded interval. Upgrade and install steps without current

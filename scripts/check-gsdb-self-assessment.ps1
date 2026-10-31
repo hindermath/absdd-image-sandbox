@@ -151,6 +151,7 @@ function Test-GsdbNonMslJustification {
 function Write-GsdbIntake {
     param([string]$Repository, [string]$ProjectName)
     $target = Join-Path $Repository 'Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md'
+    Assert-SdhSafeOutputPath -Repo $Repository -RelativePath 'Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md'
     $template = Join-Path $ScriptDir 'templates/gsdb-spec-kit-intensivpruefung-lastenheft.md'
     if (-not (Test-Path $template)) { throw "GSDB-Intake-Template nicht gefunden: $template" }
 
@@ -171,16 +172,17 @@ function Write-GsdbIntake {
 
     $today = Get-Date -Format 'yyyy-MM-dd'
     $rendered = (Get-Content $template -Raw).Replace('{{PROJECT_NAME}}', $ProjectName).Replace('{{DATE}}', $today)
+    Assert-SdhSafeOutputPath -Repo $Repository -RelativePath 'Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md'
     if (Test-Path $target) {
         $content = Get-Content $target -Raw
         if ($content -match '(?s)<!-- gsdb-spec-kit-intensivpruefung:start -->.*?<!-- gsdb-spec-kit-intensivpruefung:end -->') {
             $content = [regex]::Replace($content, '(?s)<!-- gsdb-spec-kit-intensivpruefung:start -->.*?<!-- gsdb-spec-kit-intensivpruefung:end -->', [System.Text.RegularExpressions.MatchEvaluator]{ param($m) $rendered })
-            $content | Set-Content -Path $target -Encoding UTF8
+            Write-SdhAtomicOutputFile -Repo $Repository -RelativePath 'Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md' -Content ($content.TrimEnd("`r", "`n") + [Environment]::NewLine)
         } else {
             Write-Host "  Hinweis: vorhandenes GSDB-Intake ohne Marker bleibt unveraendert: $target"
         }
     } else {
-        $rendered | Set-Content -Path $target -Encoding UTF8
+        Write-SdhAtomicOutputFile -Repo $Repository -RelativePath 'Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md' -Content ($rendered.TrimEnd("`r", "`n") + [Environment]::NewLine)
     }
 }
 
@@ -188,6 +190,21 @@ function Invoke-GsdbRepoCheck {
     param([string]$Repository)
     if (-not (Test-Path (Join-Path $Repository '.git'))) {
         throw "kein Git-Repository / not a Git repository: $Repository"
+    }
+    # Preflight all three publication paths before any repository mutation.
+    Assert-SdhSafeOutputPath -Repo $Repository -RelativePath 'Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md'
+    Assert-SdhSafeOutputPath -Repo $Repository -RelativePath 'Lastenheft_Abarbeitungsreihenfolge.md'
+    foreach ($relativeDirectory in @('docs', 'docs/security')) {
+        $directory = Join-Path $Repository $relativeDirectory
+        $item = Get-Item -LiteralPath $directory -Force -ErrorAction SilentlyContinue
+        if ($item) {
+            if (-not $item.PSIsContainer) { throw "LIE004: unsicheres Ausgabe-Verzeichnis / unsafe output directory: $relativeDirectory" }
+            $probe = "$relativeDirectory/.gsdb-output-probe"
+            Assert-SdhSafeOutputPath -Repo $Repository -RelativePath $probe
+        }
+    }
+    if (Test-Path -LiteralPath (Join-Path $Repository 'docs/security') -PathType Container) {
+        Assert-SdhSafeOutputPath -Repo $Repository -RelativePath 'docs/security/gsdb-self-assessment.md'
     }
 
     $projectName = Split-Path -Leaf $Repository
@@ -332,8 +349,12 @@ function Invoke-GsdbRepoCheck {
         Write-Host "  [WhatIf] docs/security/gsdb-self-assessment.md schreiben; Open=$open"
     } else {
         $securityDir = Join-Path $Repository 'docs/security'
+        if (Test-Path -LiteralPath (Join-Path $Repository 'docs') -PathType Container) {
+            Assert-SdhSafeOutputPath -Repo $Repository -RelativePath 'docs/.gsdb-output-probe'
+        }
         New-Item -ItemType Directory -Path $securityDir -Force | Out-Null
-        $lines -join [Environment]::NewLine | Set-Content -Path (Join-Path $securityDir 'gsdb-self-assessment.md') -Encoding UTF8
+        Assert-SdhSafeOutputPath -Repo $Repository -RelativePath 'docs/security/gsdb-self-assessment.md'
+        Write-SdhAtomicOutputFile -Repo $Repository -RelativePath 'docs/security/gsdb-self-assessment.md' -Content (($lines -join [Environment]::NewLine) + [Environment]::NewLine)
         Write-Host '  geschrieben: docs/security/gsdb-self-assessment.md'
     }
 

@@ -255,6 +255,7 @@ render_gsdb_intake() {
   local rendered tmp archived
 
   [ -f "$template" ] || die "GSDB-Intake-Template nicht gefunden: $template"
+  sdh_assert_safe_output_path "$repo" 'Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md' || die 'unsicherer GSDB-Intake-Ausgabepfad'
 
   archived="$(find_archived_intake "$repo" "$(basename "$target")")"
   if [ ! -f "$target" ] && [ -n "$archived" ]; then
@@ -277,6 +278,7 @@ render_gsdb_intake() {
     return 0
   fi
 
+  sdh_assert_safe_output_path "$repo" 'Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md' || die 'unsicherer GSDB-Intake-Ausgabepfad'
   rendered="$(mktemp)"
   sdh_render_template "$template" "$rendered" "$project_name"
 
@@ -343,6 +345,17 @@ check_repo() {
   local registry_meta registry_level="" registry_language="" registry_msl_status="" registry_preset_profile=""
 
   [ -e "$repo/.git" ] || die "kein Git-Repository: $repo"
+  # Validate every prospective output before publishing the first one.
+  sdh_assert_safe_output_path "$repo" 'Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md' || die 'unsicherer GSDB-Intake-Ausgabepfad'
+  sdh_assert_safe_output_path "$repo" 'Lastenheft_Abarbeitungsreihenfolge.md' || die 'unsicherer GSDB-Reihenfolge-Ausgabepfad'
+  if [ -e "$repo/docs" ] || [ -L "$repo/docs" ]; then
+    [ -d "$repo/docs" ] || die 'unsicherer docs-Ausgabepfad'
+    sdh_assert_safe_output_path "$repo" 'docs/.gsdb-output-probe' || die 'unsicherer docs-Ausgabepfad'
+  fi
+  if [ -e "$repo/docs/security" ] || [ -L "$repo/docs/security" ]; then
+    [ -d "$repo/docs/security" ] || die 'unsicherer docs/security-Ausgabepfad'
+    sdh_assert_safe_output_path "$repo" 'docs/security/gsdb-self-assessment.md' || die 'unsicherer GSDB-Berichtspfad'
+  fi
   project_name="$(basename "$repo")"
   registry_meta="$(registry_entry_for_repo "$repo" || true)"
   if [ -n "$registry_meta" ]; then
@@ -462,8 +475,12 @@ EOF
   elif $OPT_DRY_RUN; then
     printf '  [dry-run] docs/security/gsdb-self-assessment.md schreiben; Open=%s\n' "$open_count"
   else
+    if [ -e "$repo/docs" ] || [ -L "$repo/docs" ]; then
+      sdh_assert_safe_output_path "$repo" 'docs/.gsdb-output-probe' || die 'unsicherer docs-Ausgabepfad'
+    fi
     mkdir -p "$repo/docs/security"
     report_target="$repo/docs/security/gsdb-self-assessment.md"
+    sdh_assert_safe_output_path "$repo" 'docs/security/gsdb-self-assessment.md' || die 'unsicherer GSDB-Berichtspfad'
     mv "$report_tmp" "$report_target"
     printf '  geschrieben: docs/security/gsdb-self-assessment.md\n'
   fi
@@ -484,6 +501,8 @@ EOF
     else
       printf '  aktualisiert: Lastenheft_Abarbeitungsreihenfolge.md\n'
     fi
+  elif [ "$?" -eq 2 ]; then
+    die 'unsicherer GSDB-Reihenfolge-Ausgabepfad'
   elif $OPT_DRY_RUN && $gsdb_intake_missing; then
     printf '  [dry-run] Lastenheft_Abarbeitungsreihenfolge.md aktualisieren\n'
   else

@@ -33,7 +33,13 @@ function Export-AdeAgentAuditMetadata {
         [Parameter(Mandatory)] [string] $RepositoryPath
     )
 
-    $target = Join-Path $TargetDirectory "$(Get-Date -AsUTC -Format 'yyyy-MM-dd').jsonl"
+    $auditDate = if ($env:AUDIT_DATE) { $env:AUDIT_DATE } else { Get-Date -AsUTC -Format 'yyyy-MM-dd' }
+    $runId = if ($env:AUDIT_RUN_ID) { $env:AUDIT_RUN_ID } else { [guid]::NewGuid().ToString() }
+    if ($auditDate -notmatch '^\d{4}-\d{2}-\d{2}$') { throw 'Invalid audit UTC date' }
+    [void][DateOnly]::ParseExact($auditDate, 'yyyy-MM-dd')
+    if ($runId -notmatch '^[0-9a-fA-F-]{36}$') { throw 'Invalid audit run ID' }
+    [void][guid]::Parse($runId)
+    $target = Join-Path $TargetDirectory "$auditDate.jsonl"
     if (-not $PSCmdlet.ShouldProcess($target, 'Write allow-listed audit metadata')) {
         return
     }
@@ -42,6 +48,7 @@ function Export-AdeAgentAuditMetadata {
     $exportedAt = Get-Date -AsUTC -Format 'yyyy-MM-ddTHH:mm:ssZ'
     $actor = [Environment]::UserName
     $records = [System.Collections.Generic.List[object]]::new()
+    $sessionMetadataCount = 0
 
     $tools = @(
         @{ Name = 'opencode'; Command = 'opencode'; State = $(if ($env:OPENCODE_DATA_DIR) { $env:OPENCODE_DATA_DIR } else { '/home/adedev/.local/share/opencode' }) },
@@ -87,11 +94,26 @@ function Export-AdeAgentAuditMetadata {
                 project_path = $RepositoryPath; actor = $actor; source_type = 'file'
                 source_path = $item.FullName; exported_at = $exportedAt
             })
+            $sessionMetadataCount++
         }
     }
 
+    $records.Add([ordered]@{
+        record_type = 'audit-export-run'
+        run_id = $runId
+        audit_date = $auditDate
+        exported_at = $exportedAt
+        session_coverage = 'filesystem-metadata-only'
+        session_metadata_count = $sessionMetadataCount
+    })
     $lines = @($records | ForEach-Object { $_ | ConvertTo-Json -Compress -Depth 5 })
-    [IO.File]::WriteAllLines($target, $lines, [Text.UTF8Encoding]::new($false))
+    $temporary = Join-Path $TargetDirectory ('.audit-export-' + [guid]::NewGuid().ToString('N') + '.tmp')
+    try {
+        [IO.File]::WriteAllLines($temporary, $lines, [Text.UTF8Encoding]::new($false))
+        [IO.File]::Move($temporary, $target, $true)
+    } finally {
+        if ([IO.File]::Exists($temporary)) { [IO.File]::Delete($temporary) }
+    }
     Write-Output "Wrote $($lines.Count) audit metadata line(s) to $target"
 }
 

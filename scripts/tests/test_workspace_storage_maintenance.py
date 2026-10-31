@@ -176,31 +176,86 @@ class WorkspaceStorageMaintenanceTests(unittest.TestCase):
             self.assertEqual(["build"], [item["path"] for item in candidates])
             self.assertEqual("cmake-out-of-source", candidates[0]["adapter"])
 
-    def test_cc65_make_preview_rejects_protected_or_unbounded_deletion(self) -> None:
-        storage.validate_cc65_make_preview(
-            "rm -rf ../wrk ../bin\n",
-            ["wrk", "bin"],
-            ["*.d64", "*.prg"],
-        )
-        with self.assertRaisesRegex(storage.StorageContractError, "protected deletion"):
-            storage.validate_cc65_make_preview(
-                "rm -f samples/demo.d64\n",
-                ["wrk", "bin"],
-                ["*.d64", "*.prg"],
+    def test_cc65_never_parses_checkout_makefile_and_removes_only_curated_output(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = pathlib.Path(temporary)
+            repository = root / "repo"
+            initialize_repository(repository)
+            marker = root / "make-ran"
+            (repository / ".gitignore").write_text("wrk/\n", encoding="utf-8")
+            (repository / "Makefile").write_text(
+                f"$(shell touch {marker})\nclean:\n\ttouch {marker}\n", encoding="utf-8"
             )
-        with self.assertRaisesRegex(storage.StorageContractError, "outside declared group"):
-            storage.validate_cc65_make_preview(
-                "rm -rf ../samples\n",
-                ["wrk", "bin"],
-                ["*.d64", "*.prg"],
+            run("git", "add", ".gitignore", "Makefile", cwd=repository)
+            run("git", "commit", "-qm", "fixture", cwd=repository)
+            output = repository / "wrk"
+            output.mkdir()
+            (output / "generated.o").write_bytes(b"generated")
+            protected = repository / "sample.prg"
+            protected.write_bytes(b"protected")
+            adapter = json.loads(POLICY_PATH.read_text(encoding="utf-8"))["nonMslAdapters"][0]
+
+            preview, _, freed_preview, _, _ = storage.handle_cc65(
+                repository, adapter, mode="dry-run", profile="safe",
+                retention_days=7, pressure_mode=True, dirty=False, busy=False,
             )
-        with self.assertRaisesRegex(storage.StorageContractError, "outside declared group"):
-            storage.validate_cc65_make_preview(
-                "rm -rf ../wrk ../unexpected\n",
-                ["wrk", "bin"],
-                ["*.d64", "*.prg"],
+            self.assertEqual("RemoveCuratedGeneratedPath", preview[0]["action"])
+            self.assertEqual(0, freed_preview)
+            self.assertTrue(output.exists())
+            self.assertFalse(marker.exists())
+
+            changed, _, freed, status, _ = storage.handle_cc65(
+                repository, adapter, mode="update", profile="safe",
+                retention_days=7, pressure_mode=True, dirty=False, busy=False,
             )
+            self.assertEqual("Passed", status)
+            self.assertEqual("Removed", changed[0]["status"])
+            self.assertGreater(freed, 0)
+            self.assertFalse(output.exists())
+            self.assertTrue(protected.exists())
+            self.assertFalse(marker.exists())
         self.assertNotIn("zap", POLICY_PATH.read_text(encoding="utf-8").casefold())
+
+    def test_cc65_rechecks_candidate_identity_and_reports_partial_progress(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            repository = pathlib.Path(temporary) / "repo"
+            initialize_repository(repository)
+            (repository / ".gitignore").write_text("wrk/\nbin/\n", encoding="utf-8")
+            run("git", "add", ".gitignore", cwd=repository)
+            run("git", "commit", "-qm", "fixture", cwd=repository)
+            adapter = json.loads(POLICY_PATH.read_text(encoding="utf-8"))["nonMslAdapters"][0]
+            for name in ("wrk", "bin"):
+                (repository / name).mkdir()
+                (repository / name / "generated.o").write_bytes(b"old")
+
+            stale = storage.candidate_record(repository, repository / "wrk", "cc65-test", 7, True)
+            shutil.rmtree(repository / "wrk")
+            (repository / "wrk").mkdir()
+            (repository / "wrk" / "fresh.o").write_bytes(b"new")
+            with self.assertRaisesRegex(storage.StorageContractError, "identity changed"):
+                storage.remove_candidate(repository, stale)
+            self.assertTrue((repository / "wrk" / "fresh.o").exists())
+
+            duplicate = dict(adapter, safeGroups=[dict(adapter["safeGroups"][0], paths=["wrk", "wrk"])])
+            with self.assertRaisesRegex(storage.StorageContractError, "duplicate cc65 curated path"):
+                storage.handle_cc65(repository, duplicate, mode="update", profile="deep",
+                                    retention_days=7, pressure_mode=True, dirty=False, busy=False)
+            self.assertTrue((repository / "wrk").exists())
+
+            progress = {"candidates": [], "freedBytes": 0}
+            original = storage.remove_candidate
+            def fail_second(repo: pathlib.Path, candidate: dict) -> int:
+                if candidate["path"] == "bin":
+                    raise storage.StorageContractError("synthetic second removal failed")
+                return original(repo, candidate)
+            with mock.patch.object(storage, "remove_candidate", side_effect=fail_second):
+                with self.assertRaisesRegex(storage.StorageContractError, "second removal"):
+                    storage.handle_cc65(repository, adapter, mode="update", profile="safe",
+                                        retention_days=7, pressure_mode=True, dirty=False, busy=False,
+                                        progress=progress)
+            self.assertGreater(progress["freedBytes"], 0)
+            self.assertEqual("Removed", progress["candidates"][0]["status"])
+            self.assertTrue((repository / "bin").exists())
 
     def test_container_contract_prunes_only_dangling_images(self) -> None:
         with mock.patch.object(storage.shutil, "which", side_effect=lambda name: "/usr/bin/podman" if name == "podman" else None), \

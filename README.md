@@ -215,6 +215,22 @@ parsen kann. Fuer Build-, Start-, Exec- und Stop-Aktionen wird weiterhin
 `podman compose` verwendet; wenn `podman compose` auf einem System nicht
 verfuegbar ist, verwende `podman-compose` mit denselben Argumenten.
 
+Ein optionales `compose.read-only.yml` schränkt nur das Container-Root-
+Dateisystem ein. Prüfe es auf dem Host im Repository mit
+`podman-compose -f compose.yml -f compose.read-only.yml config`;
+Projekt-Mounts und Agenten-Volumes bleiben beschreibbar; fünf zusätzliche
+Volumes halten eng begrenzten OpenCode-, .NET- und PowerShell-Zustand. Die
+getrennten macOS-ARM64-Smokes bestanden am 31.10.2026, der beobachtete
+VS-Code-Attach und Windows-/WSL2-Belege fehlen noch. Ergebnisse und Grenzen
+stehen im [Plattforminventar](docs/security/secure-development/004-container-hardening-followup/platform-parity.md).
+
+*The optional `compose.read-only.yml` restricts only the container root
+filesystem. Check it on the host from the repository with the command above.
+Project mounts and agent volumes stay writable; five additional volumes keep
+specific OpenCode, .NET and PowerShell state. Separate macOS ARM64 smokes
+passed on 31 October 2026, while an observed VS Code attach and Windows/WSL2
+evidence are still missing. The platform inventory records the limits.*
+
 ### Podman-Endpunkt-Auswahl
 
 Dieses Repository nutzt Podman als Container-Laufzeit. Verwende fuer normale
@@ -348,15 +364,21 @@ Im Container stehen `agent-prompt` und
 `codex`, `claude`, `opencode`, `copilot`, `gemini` und `agy`; der nicht-
 interaktive Antigravity-Aufruf bleibt experimentell. Der Wrapper meldet keinen
 Agenten an, waehlt keinen Provider oder Modellanbieter und erweitert keine
-Berechtigungen. Fuer Prompts mit vertraulichem Inhalt stdin oder
-`--prompt-file` statt eines Shell-Arguments verwenden.
+Berechtigungen. Fuer vertrauliche Prompts bei Codex, Claude, OpenCode,
+Copilot und Gemini stdin oder `--prompt-file` statt eines Shell-Arguments
+verwenden; der Dispatcher uebergibt sie bis zur Agenten-CLI per stdin.
+Antigravity lehnt vertrauliche stdin-/Datei-Prompts derzeit ab, bis sein
+Streaming-Ein- und Ausgabeformat sicher angebunden ist.
 
 *The repository scripts send one prompt to the running `ade` service through
 `podman compose exec -T`, reusing the image-installed CLIs and their persistent
 state. Inside the container, use `agent-prompt` or the PowerShell entrypoint
 directly. The wrapper does not sign in, select a provider, or broaden agent
-permissions. Prefer standard input or `--prompt-file` for confidential prompt
-content. Antigravity print mode remains experimental.*
+permissions. For Codex, Claude, OpenCode, Copilot and Gemini, use stdin or
+`--prompt-file` for confidential prompts; the dispatcher passes them to the
+agent CLI on stdin. Antigravity currently rejects confidential stdin/file
+prompts until its streaming input/output format is safely adapted. Its print
+mode remains experimental.*
 
 Die vollstaendige Anleitung mit Arbeitsverzeichnis, Agentenargumenten und
 Fehlerbildern steht in

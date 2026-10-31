@@ -48,8 +48,14 @@ function Test-IntakeReviewResult {
         $Errors.Add("${Code}: $Message")
     }
     function Test-Relative([string]$Value) {
-        if ([IO.Path]::IsPathRooted($Value)) { return $false }
+        if (-not $Value -or $Value.Contains([char]92) -or $Value -match '^[A-Za-z]:' -or [IO.Path]::IsPathRooted($Value)) { return $false }
         return -not ($Value -split '[\\/]' | Where-Object { $_ -eq '..' })
+    }
+    function Resolve-ContainedFile([string]$RelativePath) {
+        $resolver = Join-Path $PSScriptRoot 'resolve-intake-review-repository-file.py'
+        $raw = & python3 $resolver --repo $Repo --file $RelativePath
+        if ($LASTEXITCODE -ne 0) { return '' }
+        return [string](($raw | ConvertFrom-Json).path)
     }
     function Get-NormalizedBytes([string]$Path) {
         $Bytes = [IO.File]::ReadAllBytes($Path)
@@ -98,8 +104,8 @@ function Test-IntakeReviewResult {
         if (-not (Test-Relative $Path) -or -not $TargetPaths.Add($Path)) { $Errors.Add("${Label}.path must be unique and repository-relative") }
         $TargetRoles[$Path] = $Role
         if ($Digest -notmatch '^[0-9a-f]{64}$') { $Errors.Add("${Label}.normalizedSha256 is invalid") }
-        $TargetPath = Join-Path ([IO.Path]::GetFullPath($Repo)) $Path
-        if (-not (Test-Path -LiteralPath $TargetPath -PathType Leaf)) { $Errors.Add("target missing: $Path") }
+        $TargetPath = if (Test-Relative $Path) { Resolve-ContainedFile $Path } else { '' }
+        if (-not $TargetPath) { $Errors.Add("target missing or outside repository: $Path") }
         else {
             try { $Actual = Get-NormalizedHash $TargetPath } catch { $Errors.Add("target ${Path}: $($_.Exception.Message)"); $Actual = '' }
             if ($Actual -and $Actual -ne $Digest) { $Errors.Add("target hash drift: $Path") }
@@ -121,11 +127,11 @@ function Test-IntakeReviewResult {
             if ($RequestDigest -notmatch '^[0-9a-f]{64}$') {
                 Add-GraphError 'IRG001' 'requestEvidence.normalizedSha256 is invalid'
             }
-            $RequestPath = Join-Path ([IO.Path]::GetFullPath($Repo)) $RequestPathText
+            $RequestPath = if (Test-Relative $RequestPathText) { Resolve-ContainedFile $RequestPathText } else { '' }
             $RequestData = $null
             $ActualRequestDigest = ''
-            if (-not (Test-Path -LiteralPath $RequestPath -PathType Leaf)) {
-                Add-GraphError 'IRG001' "request missing: $RequestPathText"
+            if (-not $RequestPath) {
+                Add-GraphError 'IRG001' "request missing or outside repository: $RequestPathText"
             }
             else {
                 try {

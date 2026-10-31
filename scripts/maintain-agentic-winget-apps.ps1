@@ -433,10 +433,43 @@ function Test-HBCommandWithTimeout {
     }
 }
 
+function Resolve-HBExternalCommandPath {
+    param([Parameter(Mandatory)][string] $Name)
+
+    # A registry name is data in preview: inspect PATH files without command
+    # discovery, because Get-Command may auto-import and run a matching module.
+    $extensions = if ([IO.Path]::GetExtension($Name)) {
+        @('')
+    } elseif ($IsWindows) {
+        @('') + @($env:PATHEXT -split ';' | Where-Object { $_ })
+    } else {
+        @('')
+    }
+    $directories = if ([IO.Path]::IsPathRooted($Name)) {
+        @('')
+    } else {
+        @($env:PATH -split [regex]::Escape([IO.Path]::PathSeparator) | Where-Object { $_ })
+    }
+    foreach ($directory in $directories) {
+        foreach ($extension in $extensions) {
+            $candidate = if ($directory) { Join-Path $directory ($Name + $extension) } else { $Name + $extension }
+            if ([IO.File]::Exists($candidate)) { return $candidate }
+        }
+    }
+    return $null
+}
+
 function Test-HBCLITool {
     param([Parameter(Mandatory)] $Tool)
 
-    $command = Get-Command $Tool.command -ErrorAction SilentlyContinue
+    if ($CompareOnly -or $WhatIfPreference) {
+        $resolved = Resolve-HBExternalCommandPath -Name ([string]$Tool.command)
+        if (-not $resolved) { return $false }
+        Write-Host "PREVIEW cli tool $($Tool.id): launcher resolved; version and function not checked."
+        return $true
+    } else {
+        $command = Get-Command $Tool.command -ErrorAction SilentlyContinue
+    }
     if (-not $command) { return $false }
 
     $arguments = @()
@@ -479,7 +512,14 @@ function Get-HBNpmAgentTools {
 function Test-HBNpmAgentTool {
     param([Parameter(Mandatory)] $Tool)
 
-    $command = Get-Command $Tool.command -ErrorAction SilentlyContinue
+    if ($CompareOnly -or $WhatIfPreference) {
+        $resolved = Resolve-HBExternalCommandPath -Name ([string]$Tool.command)
+        if (-not $resolved) { return $false }
+        Write-Host "PREVIEW npm agent cli $($Tool.id): launcher resolved; version and function not checked."
+        return $true
+    } else {
+        $command = Get-Command $Tool.command -ErrorAction SilentlyContinue
+    }
     if (-not $command) { return $false }
 
     $arguments = @()

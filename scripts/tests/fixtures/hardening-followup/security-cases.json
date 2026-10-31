@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "1.0",
+  "feature": "004-container-hardening-followup",
+  "status": "PlannedNotExecuted",
+  "syntheticOnly": true,
+  "cases": [
+    {
+      "id": "CFG-DEFAULT-01",
+      "boundary": "default compose runtime",
+      "setup": "static compose input with temporary environment paths",
+      "action": "inspect effective service configuration",
+      "expected": "adedev runtime, dropped capabilities, no-new-privileges, loopback ports, separate named agent volumes and writable default remain explicit",
+      "preserve": "no service start and no real mounted project access"
+    },
+    {
+      "id": "CFG-READONLY-01",
+      "boundary": "optional read-only override",
+      "setup": "synthetic Compose override plus test-owned temporary paths",
+      "action": "compose config and later disposable runtime smoke",
+      "expected": "read-only root is optional; required tmpfs/writable locations are explicit; default compose remains unchanged",
+      "preserve": "named volumes and host mount write permissions are not misrepresented as read-only"
+    },
+    {
+      "id": "CFG-READONLY-02",
+      "boundary": "optional read-only override",
+      "setup": "synthetic missing writable location",
+      "action": "run only in disposable candidate",
+      "expected": "clear tool failure and no fallback to broader privilege",
+      "preserve": "live learner container, image and volumes"
+    },
+    {
+      "id": "AUD-EXPORT-01",
+      "boundary": "audit export to host mount",
+      "setup": "fake Compose returns exit 0 without creating today's file",
+      "action": "invoke paired stop wrapper in temporary HOME",
+      "expected": "nonzero export-validation error; retention and down are not called",
+      "preserve": "all files and test-owned volumes"
+    },
+    {
+      "id": "AUD-EXPORT-02",
+      "boundary": "audit export to host mount",
+      "setup": "fake exporter writes empty file, wrong-mount file or symlinked target",
+      "action": "invoke paired stop wrapper",
+      "expected": "reject each unsafe artifact before retention or down",
+      "preserve": "current and historical audit metadata"
+    },
+    {
+      "id": "AUD-EXPORT-03",
+      "boundary": "audit export to host mount",
+      "setup": "zero synthetic sessions with truthful metadata-only day record",
+      "action": "invoke paired stop wrapper",
+      "expected": "record is nonempty and attributable; no invented session coverage",
+      "preserve": "no DB, WAL, SHM, prompt, response or credential content"
+    },
+    {
+      "id": "AUD-LOCK-01",
+      "boundary": "concurrent audited stop",
+      "setup": "owned lock for same canonical audit directory",
+      "action": "start a second paired wrapper process",
+      "expected": "second run exits nonzero before export, retention and down",
+      "preserve": "foreign lock is not removed"
+    },
+    {
+      "id": "AUD-LOCK-02",
+      "boundary": "orphaned or changed lock",
+      "setup": "ambiguous old lock or path/type replacement",
+      "action": "invoke stop or retry",
+      "expected": "fail closed with phase and safe next action; no automatic stale-lock repair",
+      "preserve": "unrelated locks and audit files"
+    },
+    {
+      "id": "AUD-RETENTION-01",
+      "boundary": "30-day metadata retention",
+      "setup": "fixed UTC day; -31, -30, -29, today and future ISO names plus wrong names and symlinks",
+      "action": "select then remove only eligible direct regular files",
+      "expected": "only -31 and older valid direct files removed; exact -30 and newer remain",
+      "preserve": "subdirectories, links, foreign files, all agent volumes"
+    },
+    {
+      "id": "AUD-RETENTION-02",
+      "boundary": "retention failure and retry",
+      "setup": "synthetic deletion fails after one old metadata file was removed",
+      "action": "run stop, then separate retry with new owned lock and fresh export",
+      "expected": "first run reports actual partial deletion and skips down; retry handles remaining files without claiming rollback",
+      "preserve": "current audit day and all agent volumes"
+    },
+    {
+      "id": "AUD-PREVIEW-01",
+      "boundary": "audited stop preview",
+      "setup": "temporary configuration and fake Compose with call recorder",
+      "action": "--dry-run or -WhatIf",
+      "expected": "text plan only; no exporter, lock, payload read, retention, down or runtime call",
+      "preserve": "all test files and volumes"
+    },
+    {
+      "id": "AGENT-PROMPT-01",
+      "boundary": "prompt to final CLI invocation",
+      "setup": "synthetic confidential marker over stdin or private prompt file",
+      "action": "dispatch in Bash and PowerShell using a fake final CLI",
+      "expected": "marker absent from process argv and redacted dry-run output",
+      "preserve": "legitimate prompt bytes reach only a supported confidential CLI input channel"
+    },
+    {
+      "id": "AGENT-PROMPT-02",
+      "boundary": "agent dispatch authority",
+      "setup": "synthetic agent selection and project path",
+      "action": "try login, provider/model selection or approval-bypass argument",
+      "expected": "dispatcher never automates those choices or broadens permissions",
+      "preserve": "documented local/container routing and ordinary arguments"
+    },
+    {
+      "id": "AGENT-POLICY-01",
+      "boundary": "OpenCode secret read versus grep",
+      "setup": "synthetic secret file and installed-version policy in isolated state",
+      "action": "exercise read and grep permission on the same denied path",
+      "expected": "both content-returning routes are denied or the limitation is marked Open with use restriction",
+      "preserve": "no real credentials or provider call"
+    },
+    {
+      "id": "MAINT-PREVIEW-01",
+      "boundary": "untrusted checkout in maintenance preview",
+      "setup": "temporary cc65-like repository with Makefile parse-time marker and ignored generated output",
+      "action": "run check-only and dry-run storage modes",
+      "expected": "no Makefile command executes and no marker is created",
+      "preserve": "bounded inventory and legitimate generated output"
+    },
+    {
+      "id": "MAINT-REGISTRY-01",
+      "boundary": "alternative maintenance registry",
+      "setup": "temporary registry with executable probe marker",
+      "action": "compare-only or dry-run",
+      "expected": "untrusted registry command is not started without explicit update authority",
+      "preserve": "normal comparison report and supported trusted registry behavior"
+    }
+  ]
+}

@@ -532,21 +532,29 @@ probe_cli_tool() {
   local probe_output probe_exit expected_swift arg
   local -a args=()
 
-  while IFS= read -r arg; do
-    args+=("$arg")
-  done < <(json_array_items "$args_json")
   probe_exit=0
-  probe_output="$(
-    python3 "$LINUX_HARDENING" probe \
-      --tool-id "$tool_id" \
-      --timeout-seconds 5 \
-      --redact "$HOME" \
-      -- "$command_name" "${args[@]}"
-  )" || probe_exit=$?
+  if [ "$DRY_RUN" -eq 1 ] || [ "$COMPARE_ONLY" -eq 1 ]; then
+    probe_output="$(
+      python3 "$LINUX_HARDENING" resolve-probe \
+        --tool-id "$tool_id" --launcher "$command_name"
+    )" || probe_exit=$?
+  else
+    while IFS= read -r arg; do
+      args+=("$arg")
+    done < <(json_array_items "$args_json")
+    probe_output="$(
+      python3 "$LINUX_HARDENING" probe \
+        --tool-id "$tool_id" \
+        --timeout-seconds 5 \
+        --redact "$HOME" \
+        -- "$command_name" "${args[@]}"
+    )" || probe_exit=$?
+  fi
   CURRENT_PROBE_JSON="$probe_output"
   parse_probe_fields "$probe_output" "cli-probe-${tool_id}"
   if [ "$tool_id" = "swift" ] && [ "$OS_NAME" = "Linux" ] \
-      && [ "$CURRENT_PROBE_STATUS" = "Available" ]; then
+      && [ "$CURRENT_PROBE_STATUS" = "Available" ] \
+      && [ "$DRY_RUN" -eq 0 ] && [ "$COMPARE_ONLY" -eq 0 ]; then
     expected_swift="$(
       python3 - "$CLI_REGISTRY" <<'PY'
 import json

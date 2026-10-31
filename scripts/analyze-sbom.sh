@@ -19,7 +19,7 @@ DE: CycloneDX-JSON-SBOM zusammenfassen und optional sicher scannen.
 EN: Summarize a CycloneDX JSON SBOM and optionally run a safe scan.
 
 Options:
-  --file PATH      SBOM file to analyze. Defaults to newest sboms/*.cdx.json.
+  --file PATH      Explicit CycloneDX SBOM file to analyze (required).
   --search REGEX   Search component name, version, and purl.
   --type TYPE      Restrict summary and search to a component type.
   --top N          Number of grouped rows to show. Default: 20.
@@ -82,23 +82,21 @@ case "${SCANNER}" in
   *) echo "Unknown or unpinned scanner: ${SCANNER}. Use grype." >&2; exit 2 ;;
 esac
 
+if [[ -z "${SBOM_PATH}" ]]; then
+  echo "--file is required; select the exact SBOM produced for the image under review." >&2
+  exit 2
+fi
+if [[ ! "${GRYPE_IMAGE}" =~ ^[^[:space:]@]+@sha256:[[:xdigit:]]{64}$ ]]; then
+  echo "GRYPE_IMAGE must name a scanner image pinned by SHA-256 digest." >&2
+  exit 2
+fi
+
 if [[ "${DRY_RUN}" == "true" ]]; then
   printf '%s\n' "DRY-RUN: summarize CycloneDX input without writes"
   if [[ "${SCAN}" == "true" ]]; then
     printf '%s\n' "DRY-RUN: podman run --rm <read-only-sbom-mount> ${GRYPE_IMAGE} sbom:/work/<sbom>"
   fi
   exit 0
-fi
-
-if [[ -z "${SBOM_PATH}" ]]; then
-  shopt -s nullglob
-  sbom_files=(sboms/*.cdx.json)
-  shopt -u nullglob
-  if [[ ${#sbom_files[@]} -eq 0 ]]; then
-    echo "No SBOM found. Generate one with ./scripts/build-and-sbom.sh first." >&2
-    exit 1
-  fi
-  SBOM_PATH="$(ls -t "${sbom_files[@]}" | head -n 1)"
 fi
 
 if [[ ! -s "${SBOM_PATH}" ]]; then

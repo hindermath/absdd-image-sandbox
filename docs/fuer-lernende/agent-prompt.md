@@ -72,13 +72,19 @@ lifecycle fallback with `--podman-compose`.
 **DE:** Ein Prompt als Shell-Argument kann in der Shell-Historie oder kurz in
 der Prozessliste sichtbar sein. Fuer vertraulichen Inhalt ist die Uebergabe
 ueber die Standardeingabe (stdin) oder eine geschuetzte Datei besser. Das
-Host-Skript liest `--prompt-file` auf dem Host und uebergibt nur den Inhalt an
-den Container.
+Host-Skript liest `--prompt-file` auf dem Host und uebergibt den Inhalt bis zur
+Agenten-CLI per stdin. Das gilt fuer Codex, Claude, OpenCode, Copilot und
+Gemini. Antigravity verweigert stdin-/Datei-Prompts derzeit, bis sein
+Streaming-Format sicher angebunden ist. Explizite Prompt-Argumente bleiben
+sichtbar und eignen sich nur fuer unkritische Inhalte.
 
 **EN:** A prompt passed as a shell argument can appear in shell history or
 briefly in the process list. For confidential content, use standard input
 (stdin) or a protected file. The host script reads `--prompt-file` on the host
-and sends only its content into the container.
+and passes its content to the agent CLI on stdin for Codex, Claude, OpenCode,
+Copilot and Gemini. Antigravity refuses stdin/file prompts until its streaming
+format is safely adapted. Explicit prompt arguments remain visible and should
+contain only non-sensitive text.
 
 ```bash
 printf '%s\n' 'Fasse die offenen Punkte zusammen.' | \

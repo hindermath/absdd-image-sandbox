@@ -441,6 +441,23 @@ function Assert-SdhSafeOutputPath {
     }
 }
 
+function Write-SdhAtomicOutputFile {
+    param([string]$Repo, [string]$RelativePath, [string]$Content)
+
+    Assert-SdhSafeOutputPath -Repo $Repo -RelativePath $RelativePath
+    $target = Join-Path $Repo $RelativePath
+    $parent = Split-Path -Parent $target
+    $temporary = Join-Path $parent ('.sdh-output-' + [guid]::NewGuid().ToString('N') + '.tmp')
+    try {
+        [IO.File]::WriteAllText($temporary, $Content, [Text.UTF8Encoding]::new($false))
+        Assert-SdhSafeOutputPath -Repo $Repo -RelativePath $RelativePath
+        # Rename replaces a link itself, instead of following its target.
+        [IO.File]::Move($temporary, $target, $true)
+    } finally {
+        if (Test-Path -LiteralPath $temporary) { Remove-Item -LiteralPath $temporary -Force }
+    }
+}
+
 function Read-SdhStrictUtf8File {
     param([string]$Path, [string]$Subject)
 
@@ -1031,6 +1048,7 @@ function Invoke-SdhLinkedIntakeProjection {
 function Update-SdhOrderFile {
     param([string]$Repo, [switch]$WhatIfMode)
 
+    Assert-SdhSafeOutputPath -Repo $Repo -RelativePath 'Lastenheft_Abarbeitungsreihenfolge.md'
     $orderFile = Join-Path $Repo 'Lastenheft_Abarbeitungsreihenfolge.md'
     $section = Get-SdhOrderSection -Repo $Repo
 
@@ -1061,7 +1079,8 @@ $section
 
     if ($WhatIfMode) { return $true }
 
-    [IO.File]::WriteAllText($orderFile, $newContent, [Text.UTF8Encoding]::new($false))
+    Assert-SdhSafeOutputPath -Repo $Repo -RelativePath 'Lastenheft_Abarbeitungsreihenfolge.md'
+    Write-SdhAtomicOutputFile -Repo $Repo -RelativePath 'Lastenheft_Abarbeitungsreihenfolge.md' -Content $newContent
     return $true
 }
 

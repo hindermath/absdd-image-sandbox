@@ -215,6 +215,19 @@ herunter. Das ist die Repository-Konvention — nicht `podman compose down` alle
 **first** exports the audit metadata and **then** shuts the container down. That
 is the repository convention — not `podman compose down` alone.
 
+**DE:** Du kannst auf dem Host in Bash zuerst `--dry-run` verwenden. Die
+Vorschau ändert nichts. Beim echten Stopp prüft der Wrapper den Audit-Mount,
+behält 30 UTC-Tage der passenden Tagesdateien und stoppt erst dann.
+Bei einem Fehler prüfe die genannte Phase und den Auditbereich; starte den
+Wrapper danach erneut. Entferne keine fremde Sperre. Die Vorschau beweist
+keinen erfolgreichen Export.
+
+**EN:** On the host in Bash, you can first use `--dry-run`. The preview changes
+nothing. A real stop checks the audit mount, retains 30 UTC days of matching
+day files, then stops. On failure, inspect the named phase and audit area,
+then retry the wrapper. Do not remove another owner's lock. A preview is not
+proof of a successful export.
+
 ```bash
 bash scripts/compose-down-with-audit.sh --podman
 ```

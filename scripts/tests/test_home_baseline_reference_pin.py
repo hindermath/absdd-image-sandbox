@@ -84,7 +84,9 @@ class ReferencePinTests(unittest.TestCase):
     def test_invalid_contracts_fail_before_git(self):
         for lock in (self.lock(schemaVersion=3), self.lock(tag="v0.18.0"),
                      self.lock(commit="main"), self.lock(refType="branch"),
-                     self.lock(source="https://example.invalid/repo.git")):
+                     self.lock(source="https://example.invalid/repo.git"),
+                     self.lock(license="UNKNOWN"),
+                     self.lock(commit="B" * 40)):
             with self.subTest(lock=lock):
                 result, log = self.run_install(lock)
                 self.assertNotEqual(result.returncode, 0)

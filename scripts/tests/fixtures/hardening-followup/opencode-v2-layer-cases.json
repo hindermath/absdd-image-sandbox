@@ -1,0 +1,12 @@
+{
+  "model": "synthetic-last-match-only; not a CLI runtime result",
+  "cases": [
+    {"id": "global-secret-deny", "layers": [], "action": "read", "resource": "nested/.env", "expected": "deny"},
+    {"id": "global-example-allow", "layers": [], "action": "read", "resource": "nested/.env.example", "expected": "allow"},
+    {"id": "agent-weakening", "layers": [{"kind": "agent", "rules": [{"action": "read", "resource": "**/.env", "effect": "allow"}]}], "action": "read", "resource": "nested/.env", "expected": "allow"},
+    {"id": "project-weakening", "layers": [{"kind": "project", "rules": [{"action": "shell", "resource": "rm *", "effect": "allow"}]}], "action": "shell", "resource": "rm -rf /workspace", "expected": "allow"},
+    {"id": "project-strengthening", "layers": [{"kind": "project", "rules": [{"action": "read", "resource": "src/private.txt", "effect": "deny"}]}], "action": "read", "resource": "src/private.txt", "expected": "deny"},
+    {"id": "subagent-weakening", "layers": [{"kind": "subagent", "rules": [{"action": "read", "resource": "**/.env", "effect": "allow"}]}], "action": "read", "resource": "nested/.env", "expected": "allow"},
+    {"id": "loop-review", "layers": [], "action": "doom_loop", "resource": "*", "expected": "ask"}
+  ]
+}

@@ -212,7 +212,8 @@ RUN set -eux; \
     install -m 0755 "${tmp_dir}/tinymist-${target}-unknown-linux-gnu/tinymist" /usr/local/bin/tinymist; \
     rm -rf "${tmp_dir}"; \
     tinymist --version
-# Update the existing tool when the stable PowerShell release is newer than MCR.
+# Install the checked package separately. Updating MCR's preinstalled tool in
+# place can fail under rootless overlay storage while moving its old package.
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
@@ -224,17 +225,17 @@ RUN set -eux; \
     package="PowerShell.Linux.${ps_arch}.${POWERSHELL_VERSION}.nupkg"; \
     curl -fsSL "https://powershellinfraartifacts-gkhedzdeaghdezhr.z01.azurefd.net/tool/${POWERSHELL_VERSION}/${package}" -o "${tmp_dir}/${package}"; \
     printf '%s  %s\n' "${ps_sha256}" "${tmp_dir}/${package}" | sha256sum -c -; \
-    /usr/bin/dotnet tool update --tool-path /usr/share/powershell --add-source "${tmp_dir}" --version "${POWERSHELL_VERSION}" "PowerShell.Linux.${ps_arch}"; \
+    /usr/bin/dotnet tool install --tool-path /opt/powershell-pinned --add-source "${tmp_dir}" --version "${POWERSHELL_VERSION}" "PowerShell.Linux.${ps_arch}"; \
+    ln -sfn /opt/powershell-pinned/pwsh /usr/bin/pwsh; \
     /usr/bin/dotnet nuget locals all --clear; \
     rm -rf "${tmp_dir}"
-# The SDK image's tool apphost can precede /usr/bin in PATH.
+# The checked tool is the effective command; the MCR copy stays untouched.
 RUN actual_version="$(pwsh -NoLogo -NoProfile -Command '$PSVersionTable.PSVersion.ToString()')" \
-    && ps_home="$(pwsh -NoLogo -NoProfile -Command '$PSHOME')" \
     && if [ "${actual_version}" != "${POWERSHELL_VERSION}" ]; then \
         echo "Expected PowerShell ${POWERSHELL_VERSION}, found ${actual_version}" >&2; \
         exit 1; \
     fi \
-    && ln -sf /usr/share/powershell/pwsh "${ps_home}/pwsh"
+    && test "$(readlink -f /usr/bin/pwsh)" = /opt/powershell-pinned/pwsh
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
@@ -297,7 +298,7 @@ RUN set -eux; \
     curl --compressed -fsSL "${swift_signing_keys_url}" -o "${tmp_dir}/swift-keys.asc"; \
     gpg --batch --quiet --import "${tmp_dir}/swift-keys.asc"; \
     gpg --batch --list-keys "${swift_signing_key}" >/dev/null; \
-    gpg --batch --verify "${tmp_dir}/swift.tar.gz.sig" "${tmp_dir}/swift.tar.gz"; \
+    gpg --batch --assert-signer "${swift_signing_key}" --verify "${tmp_dir}/swift.tar.gz.sig" "${tmp_dir}/swift.tar.gz"; \
     tar -xzf "${tmp_dir}/swift.tar.gz" --directory / --strip-components=1; \
     chmod -R o+r /usr/lib/swift; \
     rm -rf "${tmp_dir}"
@@ -328,32 +329,30 @@ RUN npm i -g \
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
-        amd64) syft_arch="amd64" ;; \
-        arm64) syft_arch="arm64" ;; \
+        amd64) syft_arch="amd64"; syft_sha256="bb65249542db5fedeeb4d3f9b018b75e7264dbfbbb10486f044581a92f90490d" ;; \
+        arm64) syft_arch="arm64"; syft_sha256="929bd163db2d7cd2255d3bcb8967208079813d7b46b0c952f7b794d8e2c7d304" ;; \
         *) echo "Unsupported Syft architecture: ${arch}" >&2; exit 1 ;; \
     esac; \
     archive="syft_${SYFT_VERSION}_linux_${syft_arch}.tar.gz"; \
     base_url="https://github.com/anchore/syft/releases/download/v${SYFT_VERSION}"; \
     tmp_dir="$(mktemp -d)"; \
     curl -fsSL "${base_url}/${archive}" -o "${tmp_dir}/${archive}"; \
-    curl -fsSL "${base_url}/syft_${SYFT_VERSION}_checksums.txt" -o "${tmp_dir}/checksums.txt"; \
-    (cd "${tmp_dir}" && grep "  ${archive}$" checksums.txt | sha256sum -c -); \
+    printf '%s  %s\n' "${syft_sha256}" "${tmp_dir}/${archive}" | sha256sum -c -; \
     tar -xzf "${tmp_dir}/${archive}" -C /usr/local/bin syft; \
     chmod 0755 /usr/local/bin/syft; \
     rm -rf "${tmp_dir}"
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
-        amd64) uv_target="x86_64-unknown-linux-gnu" ;; \
-        arm64) uv_target="aarch64-unknown-linux-gnu" ;; \
+        amd64) uv_target="x86_64-unknown-linux-gnu"; uv_sha256="f68d291c75783122dad58ab77def0e13f3233f358731db5d6d7e8715603b928f" ;; \
+        arm64) uv_target="aarch64-unknown-linux-gnu"; uv_sha256="4bb69cf95ed13f23713bb7bc09f241896ea0c75b7c557e615a20604b82f9c403" ;; \
         *) echo "Unsupported uv architecture: ${arch}" >&2; exit 1 ;; \
     esac; \
     uv_archive="uv-${uv_target}.tar.gz"; \
     uv_base_url="https://github.com/astral-sh/uv/releases/download/${UV_VERSION}"; \
     tmp_dir="$(mktemp -d)"; \
     curl -fsSL "${uv_base_url}/${uv_archive}" -o "${tmp_dir}/${uv_archive}"; \
-    curl -fsSL "${uv_base_url}/${uv_archive}.sha256" -o "${tmp_dir}/${uv_archive}.sha256"; \
-    (cd "${tmp_dir}" && sha256sum -c "${uv_archive}.sha256"); \
+    printf '%s  %s\n' "${uv_sha256}" "${tmp_dir}/${uv_archive}" | sha256sum -c -; \
     tar -xzf "${tmp_dir}/${uv_archive}" -C "${tmp_dir}"; \
     install -m 0755 "${tmp_dir}/uv-${uv_target}/uv" /usr/local/bin/uv; \
     install -m 0755 "${tmp_dir}/uv-${uv_target}/uvx" /usr/local/bin/uvx; \
@@ -367,6 +366,8 @@ RUN mkdir -p /etc/codex
 COPY ./codex/config.toml /etc/codex/config.toml
 COPY ./codex/requirements.toml /etc/codex/requirements.toml
 RUN chmod 0644 /etc/codex/config.toml /etc/codex/requirements.toml
+COPY ./gemini/system-settings.json /etc/gemini-cli/settings.json
+RUN chmod 0644 /etc/gemini-cli/settings.json
 
 RUN useradd -m adedev
 RUN mkdir -p /dotnet-build && chown adedev:adedev /dotnet-build
@@ -376,6 +377,8 @@ ENV CODEX_HOME="/home/adedev/.codex" \
     CLAUDE_CONFIG_DIR="/home/adedev/.claude" \
     GEMINI_CLI_HOME="/home/adedev/.gemini-home" \
     COPILOT_HOME="/home/adedev/.copilot" \
+    COPILOT_AUTO_UPDATE="false" \
+    AGY_CLI_DISABLE_AUTO_UPDATE="true" \
     DISABLE_AUTOUPDATER="1" \
     ADE_AGENT_PROMPT_TARGET="local"
 WORKDIR /home/adedev
@@ -429,6 +432,7 @@ RUN mkdir -p /usr/libexec \
         /home/adedev/codex-workspace/.agents \
         /home/adedev/codex-workspace/.codex
 COPY ./scripts/audit-export.sh /usr/local/bin/audit-export
+COPY ./scripts/lib/audit_retention.py /usr/local/bin/audit-retention
 COPY ./scripts/container-entrypoint.sh /usr/local/bin/ade-entrypoint
 COPY ./scripts/install-home-baseline-reference.sh /usr/local/bin/install-home-baseline-reference
 COPY ./scripts/sync-home-baseline-runtime.sh /usr/local/bin/sync-home-baseline-runtime
@@ -450,10 +454,10 @@ RUN set -eux; \
     tar -xzf "${tmp_dir}/${archive}" -C "${tmp_dir}" antigravity; \
     install -m 0755 "${tmp_dir}/antigravity" /usr/local/bin/agy; \
     rm -rf "${tmp_dir}"
-RUN sed -i 's/\r$//' /usr/local/bin/audit-export /usr/local/bin/ade-entrypoint \
+RUN sed -i 's/\r$//' /usr/local/bin/audit-export /usr/local/bin/audit-retention /usr/local/bin/ade-entrypoint \
         /usr/local/bin/install-home-baseline-reference /usr/local/bin/sync-home-baseline-runtime \
         /usr/local/bin/agent-prompt /usr/local/bin/agent-prompt.ps1 \
-    && chmod 0755 /usr/local/bin/audit-export /usr/local/bin/ade-entrypoint \
+    && chmod 0755 /usr/local/bin/audit-export /usr/local/bin/audit-retention /usr/local/bin/ade-entrypoint \
         /usr/local/bin/install-home-baseline-reference /usr/local/bin/sync-home-baseline-runtime \
         /usr/local/bin/agent-prompt /usr/local/bin/agent-prompt.ps1 \
     && install-home-baseline-reference \

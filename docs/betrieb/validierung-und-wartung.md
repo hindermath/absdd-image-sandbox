@@ -195,20 +195,32 @@ response text.
 
 ```bash
 bash scripts/build-and-sbom.sh --skip-build
-bash scripts/analyze-sbom.sh
+SBOM_FILE='sboms/replace-with-the-exact-generated-file.cdx.json'
+bash scripts/analyze-sbom.sh --file "$SBOM_FILE"
 ```
 
 ```powershell
 pwsh -NoProfile -File scripts/build-and-sbom.ps1 -SkipBuild
-pwsh -NoProfile -File scripts/analyze-sbom.ps1
+$SbomPath = 'sboms/replace-with-the-exact-generated-file.cdx.json'
+pwsh -NoProfile -File scripts/analyze-sbom.ps1 -SbomPath $SbomPath
 ```
 
-**DE:** Die CycloneDX-JSON-Datei unter `sboms/` ist ein Build-Artefakt und
+**DE:** Auf dem Host im Repository: Ersetze den Beispielpfad durch **genau**
+die vom vorigen Befehl ausgegebene Datei. Voraussetzung sind das geprüfte
+Image und Syft. Erwartet wird eine Komponentenübersicht der gewählten Datei.
+Bei „file required“ oder fehlender Datei prüfe zuerst den ausgegebenen
+SBOM-Pfad und die Image-ID; wähle nicht stillschweigend eine andere Datei.
+Die CycloneDX-JSON-Datei unter `sboms/` ist ein Build-Artefakt und
 bleibt ungetrackt, sofern der Releaseprozess keine Veröffentlichung verlangt.
 Eine SBOM beschreibt Komponenten; sie beweist nicht automatisch deren
 Sicherheit.
 
-**EN:** The CycloneDX JSON file under `sboms/` is a build artifact and remains
+**EN:** On the host in the repository, replace the sample path with the
+**exact** file printed by the previous command. The verified image and Syft
+are prerequisites. Expect a component summary for that chosen file. If a
+file is required or missing, check the printed SBOM path and image ID; do
+not silently choose a different file. The CycloneDX JSON file under
+`sboms/` is a build artifact and remains
 untracked unless the release process requires publication. An SBOM describes
 components; it does not automatically prove their security.
 

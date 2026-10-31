@@ -12,33 +12,25 @@
       "justification": "C89 and 6502 assembly are required for the 8-bit targets and historical cc65 toolchain compatibility.",
       "compensatingControls": [
         "Secure-C review",
-        "Makefile-chain review",
+        "curated generated-path validation",
         "generated-artefact hygiene",
         "target and sample validation"
       ],
       "safeGroups": [
         {
           "id": "host-tools",
-          "makeDirectory": "src",
-          "target": "clean",
           "paths": ["wrk", "bin"]
         },
         {
           "id": "runtime-libraries",
-          "makeDirectory": "libsrc",
-          "target": "clean",
           "paths": ["libwrk", "lib", "target"]
         },
         {
           "id": "generated-documentation",
-          "makeDirectory": "doc",
-          "target": "clean",
           "paths": ["html", "info"]
         },
         {
           "id": "regression-workdirs",
-          "makeDirectory": "test",
-          "target": "clean",
           "paths": ["testwrk"]
         }
       ],

@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import re
 import signal
+import shutil
 import subprocess
 import sys
 import tarfile
@@ -235,6 +236,35 @@ def bounded_probe(
             },
             result_exit,
         )
+
+
+def resolve_probe(tool_id: str, command: str) -> tuple[dict, int]:
+    """Preview a registry command by resolving its launcher without starting it."""
+    if not tool_id or not command:
+        raise ContractError("tool id and command are required")
+    resolved = shutil.which(command)
+    available = resolved is not None
+    return ({
+        "toolId": tool_id,
+        "commandLabel": Path(command).name,
+        "status": "Available" if available else "Missing",
+        "exitCode": None,
+        "durationMs": 0,
+        "timedOut": False,
+        "processTreeCleaned": True,
+        "sanitizedEvidence": (
+            "Launcher auflösbar; Version und Funktion nicht geprüft / "
+            "launcher resolved; version and function not checked."
+            if available else
+            "Befehl nicht gefunden / command not found."
+        ),
+        "nextAction": (
+            "Version und Funktion in autorisiertem Update prüfen / "
+            "check version and function in an authorized update."
+            if available else
+            "Werkzeug installieren / install the tool."
+        ),
+    }, 0 if available else 1)
 
 
 def parse_os_release(path: Path) -> tuple[str, str]:
@@ -717,6 +747,10 @@ def build_parser() -> argparse.ArgumentParser:
     probe.add_argument("--redact", action="append", default=[])
     probe.add_argument("probe_command", nargs=argparse.REMAINDER)
 
+    resolve = commands.add_parser("resolve-probe")
+    resolve.add_argument("--tool-id", required=True)
+    resolve.add_argument("--launcher", required=True)
+
     swift = commands.add_parser("swift-contract")
     swift.add_argument("--registry", type=Path, required=True)
     swift.add_argument("--os-release", type=Path, required=True)
@@ -764,6 +798,10 @@ def main() -> int:
                 args.max_evidence_bytes,
                 args.redact,
             )
+            emit(result)
+            return exit_code
+        if args.command == "resolve-probe":
+            result, exit_code = resolve_probe(args.tool_id, args.launcher)
             emit(result)
             return exit_code
         if args.command == "swift-contract":

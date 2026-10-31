@@ -115,17 +115,24 @@ if [[ "${SKIP_BUILD}" != "true" ]]; then
 fi
 bash "${script_dir}/check-container-architecture.sh" --platform "$PLATFORM" \
   ${architecture_args[@]+"${architecture_args[@]}"} --image "$IMAGE_NAME" >/dev/null
+image_id="$("${runtime}" image inspect --format '{{.Id}}' "$IMAGE_NAME")"
+if [[ ! "$image_id" =~ ^sha256:[[:xdigit:]]{64}$ ]]; then
+  echo "Podman did not return one immutable SHA-256 image ID for ${IMAGE_NAME}." >&2
+  exit 1
+fi
+bash "${script_dir}/check-container-architecture.sh" --platform "$PLATFORM" \
+  ${architecture_args[@]+"${architecture_args[@]}"} --image "$image_id" >/dev/null
 
 date_stamp="$(date +%Y-%m-%d)"
 safe_image="$(printf '%s' "${IMAGE_NAME}" | tr '/:@' '---' | tr -cd 'A-Za-z0-9._-')"
-out_file="${date_stamp}-${safe_image}.cdx.json"
+out_file="${date_stamp}-${safe_image}-${image_id:7:12}.cdx.json"
 out_path="${SBOM_DIR}/${out_file}"
 source_version="${IMAGE_NAME##*:}"
 
-if "${runtime}" run --rm --entrypoint syft "${IMAGE_NAME}" version >/dev/null 2>&1; then
+if "${runtime}" run --rm --entrypoint syft "${image_id}" version >/dev/null 2>&1; then
   # The one-shot scanner uses root only to read every image layer path; the
   # actual sandbox service continues to run as the non-root adedev user.
-  "${runtime}" run --rm --user 0 --entrypoint syft "${IMAGE_NAME}" \
+  "${runtime}" run --rm --user 0 --entrypoint syft "${image_id}" \
     "dir:/" \
     --select-catalogers "+javascript-package-cataloger" \
     --source-name "${IMAGE_NAME}" \
@@ -137,7 +144,7 @@ elif command -v syft >/dev/null 2>&1; then
     echo "Host Syft version mismatch: expected ${SYFT_VERSION}, observed ${observed_syft:-unknown}." >&2
     exit 1
   fi
-  syft "${IMAGE_NAME}" -o "cyclonedx-json=${out_path}"
+  syft "${image_id}" -o "cyclonedx-json=${out_path}"
 else
   echo "Syft is unavailable in the target image and no host Syft ${SYFT_VERSION} is available; refusing an unpinned fallback." >&2
   exit 1

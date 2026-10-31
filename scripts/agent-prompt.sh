@@ -43,6 +43,7 @@ agent=""
 work_dir=""
 prompt_file=""
 dry_run=false
+prompt_argv_from_stdin=false
 agent_args=()
 prompt_parts=()
 
@@ -81,6 +82,9 @@ while (($# > 0)); do
       ;;
     --dry-run)
       dry_run=true
+      ;;
+    --unsafe-prompt-argv-from-stdin)
+      prompt_argv_from_stdin=true
       ;;
     --)
       shift
@@ -129,6 +133,10 @@ else
 fi
 
 [[ "${prompt}" =~ [^[:space:]] ]] || fail "the prompt must not be empty"
+if [[ "${prompt_argv_from_stdin}" == true ]]; then
+  [[ "${prompt_source}" == stdin && "${target}" == local ]] || fail "--unsafe-prompt-argv-from-stdin requires local stdin transport"
+  prompt_source="argument"
+fi
 
 command_args=()
 case "${agent}" in
@@ -154,12 +162,18 @@ esac
 if ((${#agent_args[@]} > 0)); then
   command_args+=("${agent_args[@]}")
 fi
-case "${agent}" in
-  claude|copilot|gemini|agy)
-    command_args+=(-p)
-    ;;
-esac
-command_args+=("${prompt}")
+if [[ "${prompt_source}" == argument ]]; then
+  case "${agent}" in
+    claude|copilot|gemini|agy) command_args+=(-p) ;;
+  esac
+  command_args+=("${prompt}")
+else
+  case "${agent}" in
+    codex) command_args+=(-) ;;
+    claude) command_args+=(-p) ;;
+    agy) fail "Antigravity confidential stdin/file prompts need a verified streaming output adapter; use a non-confidential argument prompt only" ;;
+  esac
+fi
 
 print_dry_run() {
   printf 'Target: %s\n' "${target}"
@@ -168,7 +182,9 @@ print_dry_run() {
   printf 'Prompt source: %s\n' "${prompt_source}"
   printf 'Agent command:'
   local index
-  for ((index = 0; index < ${#command_args[@]} - 1; index++)); do
+  local visible_count=${#command_args[@]}
+  [[ "${prompt_source}" == argument ]] && visible_count=$((visible_count - 1))
+  for ((index = 0; index < visible_count; index++)); do
     printf ' %q' "${command_args[index]}"
   done
   printf ' %s\n' '<prompt:redacted>'
@@ -188,7 +204,11 @@ if [[ "${target}" == "local" ]]; then
   if [[ -n "${work_dir}" ]]; then
     cd "${work_dir}"
   fi
-  exec "${command_args[@]}"
+  if [[ "${prompt_source}" == argument ]]; then
+    exec "${command_args[@]}"
+  fi
+  printf '%s' "${prompt}" | "${command_args[@]}"
+  exit $?
 fi
 
 [[ "${target}" == "container" ]] || fail "ADE_AGENT_PROMPT_TARGET must be local or container"
@@ -215,6 +235,9 @@ case "${compose_mode}" in
 esac
 
 container_args=(--local)
+if [[ "${prompt_source}" == argument ]]; then
+  container_args+=(--unsafe-prompt-argv-from-stdin)
+fi
 if [[ -n "${work_dir}" ]]; then
   container_args+=(--cwd "${work_dir}")
 fi

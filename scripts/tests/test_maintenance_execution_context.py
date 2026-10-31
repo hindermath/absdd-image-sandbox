@@ -256,6 +256,21 @@ class ExecutionContextTests(unittest.TestCase):
                 worker.execute(payload)
             run.assert_not_called()
 
+    def test_worker_rejects_unknown_mode_and_phase_without_spawning(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            baseline = self.worker_payload(root)
+            for changes in ({"mode": "--update"}, {"phase": "shutdown"}):
+                with self.subTest(changes=changes):
+                    payload = {**baseline, **changes}
+                    before = {key: value for key, value in os.environ.items()
+                              if key.startswith("GIT_CONFIG_")}
+                    with patch.object(worker.subprocess, "run") as run, self.assertRaises(ValueError):
+                        worker.execute(payload)
+                    run.assert_not_called()
+                    self.assertEqual(before, {key: value for key, value in os.environ.items()
+                                              if key.startswith("GIT_CONFIG_")})
+
     @unittest.skipIf(os.name == "nt", "Linux leaf worker; native Windows wrapper is tested separately")
     @central_only
     def test_real_registry_worker_preserves_curated_metadata(self):

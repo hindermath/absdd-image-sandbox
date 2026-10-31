@@ -65,7 +65,9 @@ Fehlt `agy` auf Linux, wird der offizielle Installer nur nach erfolgreicher
 SHA-256-Pruefung gegen die Required-CLI-Registry ausgefuehrt.
 Registry-Schleifen verwenden geordnete Snapshots und eigene Dateideskriptoren.
 Ein Unterprozess, der stdin bis EOF liest, kann deshalb keine spaeteren
-Eintraege verschlucken. CLI-Funktionsproben laufen in einer eigenen
+Eintraege verschlucken. Bei `--dry-run` und `--compare-only` wird ein
+Registry-CLI nur aufgeloest, nicht gestartet; Version und Funktion bleiben
+ungeprueft. Im autorisierten Update laufen CLI-Funktionsproben in einer eigenen
 Prozessgruppe, werden nach fuenf Sekunden beendet und unterscheiden
 `Missing`, `Unusable`, `TimedOut` und `CapabilityBlocked`. Der strukturierte
 Ergebnisbericht ordnet jedem Eintrag genau einen Endstatus zu. Verbleibender
@@ -109,7 +111,9 @@ upgrade; `--compare-only` reports command-resolution drift without changing it.
 When `agy` is missing on Linux, the official installer runs only after its
 SHA-256 digest matches the required CLI registry.
 Registry loops use ordered snapshots and dedicated file descriptors, so a child
-that reads stdin to EOF cannot consume later entries. CLI probes run in their
+that reads stdin to EOF cannot consume later entries. `--dry-run` and
+`--compare-only` resolve registry CLIs without starting them; version and
+function remain unchecked. In an authorized update, CLI probes run in their
 own process group, stop after five seconds, and distinguish `Missing`,
 `Unusable`, `TimedOut`, and `CapabilityBlocked`. Every selected item receives
 one structured final status. Remaining required drift exits with `1`; optional

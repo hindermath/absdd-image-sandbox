@@ -1,0 +1,19 @@
+# BSI C3A: Cloud-Autonomie / Cloud autonomy applicability
+
+## Deutsch
+
+**Stand:** 2026-10-31. **Katalog:** [BSI C3A v1.0, 27.04.2026](https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Publications/CloudComputing/C3A_Cloud_Computing_Autonomy.pdf?__blob=publicationFile&v=5); lokale, quellgebundene [30-Gruppen-Referenz](../../../../.specify/presets/architecture-governance/templates/c3a-criteria-catalog.json) mit SHA-256 `d985b4e7a9969aefda5882a02eeaf4fd97636b2a3ae30f868b25c01a5dcffe2d`. C3A ist ein Bewertungsrahmen, keine eigenständige Rechts- oder Zertifizierungspflicht. **Entscheidung:** Open bis Repository Owner und Architecture Review die tatsächliche Cloud-/Providerrolle abnehmen.
+
+| Dienst-/Abhängigkeitsklasse | Aktueller Beleg und vorläufiger Scope | Offene Frage |
+| --- | --- | --- |
+| Lokale Podman-Image-Runtime und Projekt-Bind-Mounts | `compose.yml` beschreibt lokalen Container, keine bereitgestellte Cloud-Produkt-Runtime. Eine C3A-Kontrollprüfung am lokalen Container wäre **N/A** für diesen eng begrenzten Scope. | Bei institutionellem Hosting oder Managed-Service-Betrieb neu beurteilen. |
+| Git-Hosting/CI, MCR, Paket-/Release-Registries | Entwicklungs- und Build-Lieferkette; konkrete Quellen in `Dockerfile`, [Bedrohungsmodell](threat-model.md). Nicht als eigener Cloud-Dienst betrieben. | Verfügbarkeit, Jurisdiktion, Lock-in und Exit des gewählten Hostings/Registry-Anbieters durch Owner/Architecture Review prüfen; vertragliche C3A-Anforderung ist Unknown. |
+| Optionale KI-Provider und Agentenendpunkte | Kein Konto, Modell oder Anbieter voreingestellt. | Bei Wahl eines konkreten Dienstes Provider, Region, Unterauftragnehmer, Daten-/Schlüsselkontrolle, Exit und C5-Grundlage screenen; bis dahin Open. |
+
+**30-Gruppen-Vertrag:** Falls ein konkreter Cloud-Dienst wesentlich genutzt, ausgewählt oder bereitgestellt wird und C3A anwendbar ist, muss eine **neue dienst- und variantenbezogene** Bewertung alle 30 Gruppen aus der verlinkten Referenz enthalten: SOV-1 (4), SOV-2 (3), SOV-3 (5), SOV-4 (10), SOV-5 (5), SOV-6 (3). Je gewählter Gruppe sind die exakten `SOV-*-*-C*`- und `-AC*`-IDs, Servicevariante, Providerbeleg oder eigene Kunden-Evidenz, Ergebnis und offene Aktion zu erfassen. `SI` ist erläuternde Information, kein eigener Kontrollpass. Insbesondere ist `SOV-4-01-C3` im Original als zusätzliches Kriterium klassifiziert; SOV-7/8 gehören nicht zu diesem Katalog. Leere Zeilen, bloße Region „EU“ und ein C5-Bericht beweisen keine C3A-Erfüllung. Der vollständige 30-Gruppen-Katalog liegt bereits strukturiert im Preset; seine Nutzung im künftigen konkreten Assessment ist Pflicht, sobald der Scope gilt.
+
+**O-344-CLOUD:** Repository Owner mit Architecture Review. Aktion: tatsächliche Dienste, Vertrag, Provider/Region, Schutzbedarf, gewählte C3A-Variante, C5-Basis, Unterauftragnehmer, Exit und Kundenkontrollen entscheiden. Frist **vor Cloud-/Providererweiterung, Hosting-/Registrywechsel oder Cloud-Produktbetrieb**; Kalenderdatum setzt der Owner. Trigger: neuer oder wesentlich geänderter Cloud-Dienst, Region, Vertrag oder Rollenwechsel. Bis dahin keine Anbieter-Autonomie- oder Souveränitätsbehauptung.
+
+## English
+
+**Open, 2026-10-31.** The local Podman runtime is not itself a cloud product. Git hosting, MCR, package registries and optional AI providers are external development or operational dependencies whose exact provider and contractual scope require Architecture Review. If C3A becomes applicable to a material service, assess all 30 groups in the linked BSI-derived catalogue using exact C/AC identifiers, selected variants, evidence and customer responsibilities; SI text is explanatory. A C5 report or EU region does not establish C3A. The Repository Owner must decide before cloud/provider expansion, a hosting or registry change, or cloud product operation.

@@ -3,10 +3,10 @@
 test-ade-sandbox-hardening \- sichere Sandbox-Pruefung / secure sandbox validation
 .SH SYNOPSIS
 .B scripts/test-ade-sandbox-hardening.sh
-\fB--mode\fR MODE [\fB--evidence\fR PATH] [\fB--dry-run\fR]
+\fB--mode\fR MODE [\fB--evidence\fR PATH] [\fB--feature-directory\fR PATH] [\fB--dry-run\fR]
 .PP
 .B pwsh -NoProfile -File scripts/test-ade-sandbox-hardening.ps1
-\fB-Mode\fR MODE [\fB-EvidencePath\fR PATH] [\fB-WhatIf\fR]
+\fB-Mode\fR MODE [\fB-EvidencePath\fR PATH] [\fB-FeatureDirectory\fR PATH] [\fB-WhatIf\fR]
 .SH DESCRIPTION
 DE: Beide Einstiege verwenden denselben Python-Standardbibliothek-Kern. Ein
 Gate ist eine pruefbare Abnahmebedingung. RED bedeutet, dass ein Vertrag oder
@@ -59,17 +59,28 @@ files are read only.
 .B --evidence PATH, -EvidencePath PATH
 Repository-relativer Pfad. Traversierung und absolute Pfade werden abgelehnt.
 / Repository-relative path; traversal and absolute paths are rejected.
+.TP
+.B --feature-directory PATH, -FeatureDirectory PATH
+Waehlt ausschliesslich `specs/004-container-hardening-followup` und verlangt
+eine eigene Evidence-Datei fuer reale Pruefung. Ohne Option bleibt der
+historische Feature-003-Vertrag. Kein stiller Rueckfall auf alte Evidence. /
+Selects only Feature 004 and requires its own evidence for a real check.
+Omission keeps the historical Feature 003 contract; no evidence fallback.
 .SH EXIT STATUS
 0 bedeutet belegt; 1 ist RED; 2 ist ein Bedien-, JSON- oder Pfadfehler; 3
-bedeutet fehlende Plattform, Runner-, Werkzeug- oder Human-Evidenz. Wrapper
+bedeutet fehlende Plattform, Runner-, Werkzeug- oder Human-Evidenz. Vorschau
+mit Exit 0 ist kein bestandener Test; `All` mit offenen Pflicht-Gates liefert
+keinen Erfolg. Wrapper
 geben den Exitcode unveraendert weiter. / 0 evidenced; 1 RED; 2 usage, JSON, or
 path error; 3 missing platform, runner, tool, or human evidence. Wrappers
-preserve the exit code.
+preserve the exit code. Preview exit 0 is not a test pass; All with mandatory
+Open gates cannot succeed.
 .SH SAFE EXAMPLES
 .nf
 bash scripts/test-ade-sandbox-hardening.sh --mode input
 bash scripts/test-ade-sandbox-hardening.sh --mode static --dry-run
 pwsh -NoProfile -File scripts/test-ade-sandbox-hardening.ps1 -Mode Static -WhatIf
+bash scripts/test-ade-sandbox-hardening.sh --mode All --feature-directory specs/004-container-hardening-followup --dry-run
 .fi
 .SH LIMITATIONS
 Ein macOS-Lauf ersetzt weder die Windows-Host- noch die Ubuntu/WSL2-Evidenz.

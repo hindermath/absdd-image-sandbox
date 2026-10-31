@@ -95,6 +95,21 @@ class SwiftFingerprintExceptionTests(unittest.TestCase):
     def test_fingerprint_in_another_assignment_is_detected(self):
         self.scan("Dockerfile", assignment(FINGERPRINT).replace("swift_signing_key", "service_token"), 1)
 
+    def test_catalog_source_hash_exception_is_exact_and_path_bound(self):
+        catalog_path = "docs/security/secure-development/004-container-hardening-followup/interface-catalog.json"
+        catalog = json.loads((ROOT / catalog_path).read_text())
+        entry = next(item for item in catalog["interfaces"]
+                     if item["interfaceId"] == "scan-agent-secrets/Default")
+        for path, digest in entry["sourceHashes"].items():
+            line = f'  "{path}": "{digest}",\n'
+            with self.subTest(path=path):
+                self.scan(catalog_path, line, 0)
+                self.scan(catalog_path, "+" + line, 0)
+                self.scan("other-catalog.json", line, 1)
+                other = hashlib.sha256(path.encode()).hexdigest()
+                self.assertNotEqual(other, digest)
+                self.scan(catalog_path, f'  "{path}": "{other}",\n', 1)
+
 
 if __name__ == "__main__":
     unittest.main()

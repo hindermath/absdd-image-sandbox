@@ -1,6 +1,6 @@
 # Geheimnis-Überprüfung / Secret Scanning
 
-Stand: 2026-07-03
+Stand: 2026-10-31
 
 ## Deutsch
 
@@ -10,7 +10,7 @@ Kontrollen:
 
 - `.pre-commit-config.yaml` pinnt den Gitleaks-Hook auf `v8.30.1`.
 - `.gitleaks.toml` erweitert die Gitleaks-Standardregeln.
-- Die Allowlist erlaubt nur dokumentierte Platzhalterwerte in Beispiel-Dateien wie `opencode.env.example`.
+- Die Allowlist erlaubt dokumentierte Platzhalterwerte in Beispiel-Dateien sowie eng begrenzte oeffentliche Signierer- und Quellhash-Zeilen. Andere Werte und Pfade bleiben scanpflichtig.
 - `.github/workflows/homogeneity-check.yml` enthaelt Agent-Secret-Scan-Jobs
   fuer Linux, macOS und Windows.
 - Lokale Scan-Ergebnisse bleiben untracked und duerfen keine Klartext-Secrets
@@ -45,7 +45,7 @@ Controls:
 
 - `.pre-commit-config.yaml` pins the Gitleaks hook to `v8.30.1`.
 - `.gitleaks.toml` extends the Gitleaks default rules.
-- The allowlist permits only documented placeholder values in example files such as `opencode.env.example`.
+- The allowlist permits documented example placeholders and narrowly bound public signer and source-hash lines. Other values and paths remain subject to scanning.
 - `.github/workflows/homogeneity-check.yml` contains agent secret scan jobs
   for Linux, macOS, and Windows.
 - Local scan results remain untracked and must not introduce plaintext secrets

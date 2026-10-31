@@ -1,0 +1,459 @@
+{
+  "schemaVersion": "1.0",
+  "feature": "004-container-hardening-followup",
+  "gitHead": "51757c98f6a872419be6b9ae4d33685fe0782b67",
+  "sourceBindings": [
+    {
+      "path": "specs/004-container-hardening-followup/spec.md",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "2b4c407f2900e1cb97e8c373804e4f66dfb32a5eef2b7ec25b238811801cdf25",
+      "normalizedSha256": "2b4c407f2900e1cb97e8c373804e4f66dfb32a5eef2b7ec25b238811801cdf25"
+    },
+    {
+      "path": "specs/004-container-hardening-followup/plan.md",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "87d71fe0a6288068c0fb1f6e939981cb2f0d815aed02fadb1cb9b99cbcf682b5",
+      "normalizedSha256": "87d71fe0a6288068c0fb1f6e939981cb2f0d815aed02fadb1cb9b99cbcf682b5"
+    },
+    {
+      "path": "specs/004-container-hardening-followup/tasks.md",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "aaecb3043214ae99988074811c45d6855b62b6cba2312cf4a9964acb6a020d6e",
+      "normalizedSha256": "aaecb3043214ae99988074811c45d6855b62b6cba2312cf4a9964acb6a020d6e"
+    },
+    {
+      "path": "specs/004-container-hardening-followup/data-model.md",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "c5fcdf6152e3b384e7442eae9e7afbef498ea0406997bb7479353ec3c50c2c31",
+      "normalizedSha256": "c5fcdf6152e3b384e7442eae9e7afbef498ea0406997bb7479353ec3c50c2c31"
+    },
+    {
+      "path": "specs/004-container-hardening-followup/quickstart.md",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "cd3ca50c739aa8ee3e0eb7a0a5a37f378c7f2553db6730dd6e7342fa7177a5df",
+      "normalizedSha256": "cd3ca50c739aa8ee3e0eb7a0a5a37f378c7f2553db6730dd6e7342fa7177a5df"
+    },
+    {
+      "path": "specs/004-container-hardening-followup/coverage-scope.md",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "1fcab3b72e5bcfaac9147b244710c4658ad07caa38a7ac83a8ff4edc319ff1d4",
+      "normalizedSha256": "1fcab3b72e5bcfaac9147b244710c4658ad07caa38a7ac83a8ff4edc319ff1d4"
+    },
+    {
+      "path": "docs/security/secure-development/004-container-hardening-followup/input-bindings.md",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "2f249e4a060af83f156556be320ce8c0437cf17cdaa10bd7c4126e9cbbb26bc8",
+      "normalizedSha256": "2f249e4a060af83f156556be320ce8c0437cf17cdaa10bd7c4126e9cbbb26bc8"
+    },
+    {
+      "path": "docs/security/secure-development/004-container-hardening-followup/control-matrix.md",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "4bf7bd51f8c3eb64fbea7d59b34019b9dfad0674d6f4c3c0d49f6d925e0ddceb",
+      "normalizedSha256": "4bf7bd51f8c3eb64fbea7d59b34019b9dfad0674d6f4c3c0d49f6d925e0ddceb"
+    },
+    {
+      "path": "docs/security/secure-development/004-container-hardening-followup/checkpoints.md",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "dd58b2e42de225052e99e39427953f53e7dfaa0d8ac9a0b703e9b391612dd393",
+      "normalizedSha256": "dd58b2e42de225052e99e39427953f53e7dfaa0d8ac9a0b703e9b391612dd393"
+    },
+    {
+      "path": "docs/security/secure-development/004-container-hardening-followup/coverage-modules.json",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "499ff2717d71f96a67dae32646b639ce2996eb3351ca3f528e3637b5bd1ba9ab",
+      "normalizedSha256": "499ff2717d71f96a67dae32646b639ce2996eb3351ca3f528e3637b5bd1ba9ab"
+    },
+    {
+      "path": "docs/security/secure-development/004-container-hardening-followup/interface-catalog.json",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "09ada0013134ecb5cfcb2910638c1c93e01df22e1636d0c9c83a9300bb02dba2",
+      "normalizedSha256": "09ada0013134ecb5cfcb2910638c1c93e01df22e1636d0c9c83a9300bb02dba2"
+    },
+    {
+      "path": "docs/architecture/004-container-hardening-followup/context-and-decisions.md",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "fd3f94fcc8368d1520e135f176cd8ece625dd593fa254c31c8aa07278c9f79f9",
+      "normalizedSha256": "fd3f94fcc8368d1520e135f176cd8ece625dd593fa254c31c8aa07278c9f79f9"
+    },
+    {
+      "path": "docs/security/secure-development/004-container-hardening-followup/threat-model.md",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "692e35f0bf8ebc0a7c48643721e4393b4a4078715b09445b2367128b01da9296",
+      "normalizedSha256": "692e35f0bf8ebc0a7c48643721e4393b4a4078715b09445b2367128b01da9296"
+    },
+    {
+      "path": "docs/security/secure-development/004-container-hardening-followup/msl-applicability.md",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "ed76a84e23e8c6786e349aed5fa9a482ee597043cebbae09d9c2e7109f0b12c4",
+      "normalizedSha256": "ed76a84e23e8c6786e349aed5fa9a482ee597043cebbae09d9c2e7109f0b12c4"
+    },
+    {
+      "path": "docs/security/secure-development/004-container-hardening-followup/secure-coding-review.md",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "0ff207fc8b6ddc69b1e7318e158182da96499cd69836d2b57e661156e74b177f",
+      "normalizedSha256": "0ff207fc8b6ddc69b1e7318e158182da96499cd69836d2b57e661156e74b177f"
+    },
+    {
+      "path": "scripts/tests/fixtures/hardening-followup/security-cases.json",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "b2c13e40e74b8ebe1fc95f714d355e64cbd9cac224967aaa5a2b3ce8db20c3fb",
+      "normalizedSha256": "b2c13e40e74b8ebe1fc95f714d355e64cbd9cac224967aaa5a2b3ce8db20c3fb"
+    },
+    {
+      "path": "scripts/tests/fixtures/hardening-followup/assurance-mutation-matrix.json",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "e5fbe0569d758fab2068ae46197f6273b9ba32dab9649e0f854f08211f578e65",
+      "normalizedSha256": "e5fbe0569d758fab2068ae46197f6273b9ba32dab9649e0f854f08211f578e65"
+    },
+    {
+      "path": "scripts/config/spec-kit-secure-development-assurance-governance-presets.json",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "512d3a6e2b47a51a0e702b6a76b7555927adbf8e969efa7c2906164ade155d81",
+      "normalizedSha256": "512d3a6e2b47a51a0e702b6a76b7555927adbf8e969efa7c2906164ade155d81"
+    },
+    {
+      "path": ".specify/presets/secure-development-assurance-governance/preset.yml",
+      "hashKind": "text/raw-and-utf8-lf",
+      "rawSha256": "d6d15d42efd7d2fdf8efeecc9925bd82171a86181d295b734be6eb9db4d232bc",
+      "normalizedSha256": "d6d15d42efd7d2fdf8efeecc9925bd82171a86181d295b734be6eb9db4d232bc"
+    }
+  ],
+  "contractReview": {
+    "reviewedAtUtc": "2026-10-31T16:44:14Z",
+    "reviewer": "Codex",
+    "status": "ReviewedForScopedImplementation",
+    "checked": [
+      "18 unique G004 IDs from checkpoints",
+      "Q1-Q8 mapped to gates",
+      "Feature 004 and Assurance source bindings with explicit raw and normalized hashes",
+      "exact status enums and human-only boundaries"
+    ],
+    "limitation": "Contract review does not fulfill any gate or substitute executed evidence"
+  },
+  "gateCount": 18,
+  "quickstartCheckIds": [
+    "Q1",
+    "Q2",
+    "Q3",
+    "Q4",
+    "Q5",
+    "Q6",
+    "Q7",
+    "Q8"
+  ],
+  "statusContract": {
+    "applicability": [
+      "Applicable",
+      "N/A",
+      "Open"
+    ],
+    "implementation": [
+      "Fulfilled",
+      "Partly Fulfilled",
+      "Not Fulfilled",
+      "Not Assessed"
+    ],
+    "notApplicable": "N/A requires Not Assessed, rationale, owner and reevaluation trigger",
+    "openOrUnfulfilled": "Requires owner, reviewer, concrete next action, due boundary, trigger and residual risk",
+    "notRun": "No fabricated exit code, image ID, coverage or success outcome",
+    "sourceFreshness": "Exact raw or normalized hash, explicit kind; source/catalog changes reopen affected evidence",
+    "humanBoundary": "No technical evidence alone closes formal, legal, provider, A11Y or independent review"
+  },
+  "executedEvidenceRequiredFields": [
+    "evidenceId",
+    "gateId",
+    "commandArgv",
+    "cwdClass",
+    "gitHead",
+    "inputHashes",
+    "payloadSha256",
+    "decisionSha256",
+    "runner",
+    "platform",
+    "architecture",
+    "observedAt",
+    "exitCode",
+    "outcome",
+    "writeScope",
+    "logPath",
+    "limitations"
+  ],
+  "notRunEvidenceRequiredFields": [
+    "evidenceId",
+    "gateId",
+    "outcome",
+    "limitations",
+    "owner",
+    "nextAction",
+    "trigger"
+  ],
+  "coverageContract": {
+    "moduleMinimumPercent": 85,
+    "publicInterfaceMinimumPercent": 80,
+    "changedInterfacesRequirePositiveAndNegative": true,
+    "platformVariantsShareIdNotEvidence": true,
+    "provisionalInventoryIsNotMeasuredCoverage": true
+  },
+  "gates": [
+    {
+      "gateId": "G004-01",
+      "applicability": "Applicable",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`control-matrix.md`, `input-bindings.md`",
+      "owner": "Maintainer",
+      "reviewer": "Security Review",
+      "nextActionDueTrigger": "50er-Matrix nach finalen Änderungen reviewen; vor US3; bei Quellenwechsel.",
+      "quickstartChecks": [
+        "Q1"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "MaintainerEvidenceThenReview"
+    },
+    {
+      "gateId": "G004-02",
+      "applicability": "Applicable",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`platform-parity.md`, `threat-model.md`",
+      "owner": "Maintainer",
+      "reviewer": "Security Review",
+      "nextActionDueTrigger": "Rechte, Mounts und Egress prüfen; vor Runtime; bei Compose-/Mountwechsel.",
+      "quickstartChecks": [
+        "Q3",
+        "Q5"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "MaintainerEvidenceThenReview"
+    },
+    {
+      "gateId": "G004-03",
+      "applicability": "Applicable",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`platform-parity.md`, optionale Read-only-Konfiguration",
+      "owner": "Maintainer",
+      "reviewer": "Platform Review",
+      "nextActionDueTrigger": "Variante isoliert prüfen; vor Nutzung der Variante; bei neuem Schreibort.",
+      "quickstartChecks": [
+        "Q3",
+        "Q5"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "MaintainerEvidenceThenReview"
+    },
+    {
+      "gateId": "G004-04",
+      "applicability": "Applicable",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`coverage-modules.json`, `interface-catalog.json`, `secure-coding-review.md`, `msl-applicability.md`",
+      "owner": "Maintainer",
+      "reviewer": "unabhängiger Security Review",
+      "nextActionDueTrigger": "Nenner, Zweige und Fälle messen; vor Code-Freeze; bei Quell-/Katalogwechsel.",
+      "quickstartChecks": [
+        "Q2",
+        "Q4"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "MaintainerEvidenceThenReview"
+    },
+    {
+      "gateId": "G004-05",
+      "applicability": "Applicable",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`dependency-audit.md`",
+      "owner": "Maintainer",
+      "reviewer": "Security Review",
+      "nextActionDueTrigger": "Downloads, Pins und Herkunft prüfen; vor Image-Build; bei Abhängigkeitswechsel.",
+      "quickstartChecks": [
+        "Q2"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "MaintainerEvidenceThenReview"
+    },
+    {
+      "gateId": "G004-06",
+      "applicability": "Applicable",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`agent-security-review.md`",
+      "owner": "Maintainer",
+      "reviewer": "Security Review",
+      "nextActionDueTrigger": "Sechs Clients und effektive Updates/Overrides prüfen; vor Agentennutzung; bei Versions-/Konfigwechsel.",
+      "quickstartChecks": [
+        "Q2",
+        "Q5"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "MaintainerEvidenceThenReview"
+    },
+    {
+      "gateId": "G004-07",
+      "applicability": "Applicable",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`audit-retention-review.md`, `gdpr-applicability.md`",
+      "owner": "Maintainer",
+      "reviewer": "Security und Privacy Review",
+      "nextActionDueTrigger": "Export, 30-Tage-Auswahl und Stopp isoliert prüfen; vor auditpflichtigem Betrieb; bei Datenfluss-/Fristwechsel.",
+      "quickstartChecks": [
+        "Q2"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "MaintainerEvidenceThenReview"
+    },
+    {
+      "gateId": "G004-08",
+      "applicability": "Applicable",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`supply-chain-evidence.md`, finale SBOM",
+      "owner": "Maintainer",
+      "reviewer": "Security und Rights Review",
+      "nextActionDueTrigger": "T063/T064 nach finalem Image; vor Weitergabe; bei Image-/Lizenzwechsel. Kein vorgezogener Abschluss.",
+      "quickstartChecks": [
+        "Q6"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "MaintainerEvidenceThenReview"
+    },
+    {
+      "gateId": "G004-09",
+      "applicability": "Open",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`regulatory-applicability.md` und Rechtsdetaildateien",
+      "owner": "Repository Owner",
+      "reviewer": "qualifizierter Privacy/Legal Review",
+      "nextActionDueTrigger": "O-344-HUMAN: Land, Rolle und Pflicht entscheiden; vor betroffener Nutzung/Weitergabe, bei Rollenwechsel. Kalenderfrist durch Owner festlegen.",
+      "quickstartChecks": [
+        "Q1"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "HumanOrIndependentReviewRequired"
+    },
+    {
+      "gateId": "G004-10",
+      "applicability": "Applicable",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`crypto-tls-inventory.md`",
+      "owner": "Maintainer",
+      "reviewer": "Security Review",
+      "nextActionDueTrigger": "TLS/Signaturen und Migration prüfen; vor finalem Code-Freeze; bei Profilwechsel. Keine agentische Rotation.",
+      "quickstartChecks": [
+        "Q2"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "MaintainerEvidenceThenReview"
+    },
+    {
+      "gateId": "G004-11",
+      "applicability": "Applicable",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`preset-assurance-review.md`, datierter Assurance-Kontext",
+      "owner": "Maintainer",
+      "reviewer": "unabhängiger Security Review",
+      "nextActionDueTrigger": "14 Presets und Mutationsfälle prüfen; vor Review; quartalsweise, anlassbezogen und am 3. Oktober.",
+      "quickstartChecks": [
+        "Q1",
+        "Q2",
+        "Q7"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "MaintainerEvidenceThenReview"
+    },
+    {
+      "gateId": "G004-12",
+      "applicability": "Open",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`cloud-autonomy-applicability.md`, `cloud-compliance-assurance.md`",
+      "owner": "Repository Owner",
+      "reviewer": "Architecture Review",
+      "nextActionDueTrigger": "O-344-CLOUD: C3A/C5 und Providerrolle entscheiden; vor Cloud-/Providererweiterung, bei Hosting-/Registrywechsel. Kalenderfrist durch Owner festlegen.",
+      "quickstartChecks": [
+        "Q1"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "HumanOrIndependentReviewRequired"
+    },
+    {
+      "gateId": "G004-13",
+      "applicability": "Applicable",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`agent-parity-review.md`, `documentation-review.md`",
+      "owner": "Maintainer",
+      "reviewer": "Learning/Security Review",
+      "nextActionDueTrigger": "Agentenflächen und DE/EN-Leserpfade prüfen; vor Übergabe; bei gemeinsamer Regel-/Textänderung.",
+      "quickstartChecks": [
+        "Q2",
+        "Q8"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "MaintainerEvidenceThenReview"
+    },
+    {
+      "gateId": "G004-14",
+      "applicability": "Applicable",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`docs/accessibility/004-container-hardening-followup.md`, `learner-usability-review.md`",
+      "owner": "Learning/A11Y Review",
+      "reviewer": "unabhängiger Reviewer",
+      "nextActionDueTrigger": "Manuelle WCAG-/Erstnutzungsprüfung organisieren; vor A11Y-/unbegleitetem Erstnutzungsclaim; bei UI-/Dokumentationsänderung.",
+      "quickstartChecks": [
+        "Q8"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "HumanOrIndependentReviewRequired"
+    },
+    {
+      "gateId": "G004-15",
+      "applicability": "Applicable",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`platform-macos.md`",
+      "owner": "Maintainer",
+      "reviewer": "Platform Review",
+      "nextActionDueTrigger": "Nativen ARM64-Kandidaten getrennt prüfen; vor begrenzter technischer Übergabe; bei Head-/Imagewechsel.",
+      "quickstartChecks": [
+        "Q5"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "MaintainerEvidenceThenReview"
+    },
+    {
+      "gateId": "G004-16",
+      "applicability": "Applicable",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`platform-windows.md`",
+      "owner": "Windows Platform Review",
+      "reviewer": "unabhängiger Reviewer",
+      "nextActionDueTrigger": "UPD-AMD64: echten Windows-Host/Podman-Lauf nachweisen; vor AMD64-Nutzungsclaim; bei Head-/Imagewechsel. Fehlender Runner bleibt Open/Blocked.",
+      "quickstartChecks": [
+        "Q5"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "HumanOrIndependentReviewRequired"
+    },
+    {
+      "gateId": "G004-17",
+      "applicability": "Applicable",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`platform-wsl2.md`",
+      "owner": "Ubuntu/WSL2 Platform Review",
+      "reviewer": "unabhängiger Reviewer",
+      "nextActionDueTrigger": "UPD-AMD64: getrennten rootless WSL2-Lauf nachweisen; vor AMD64-Nutzungsclaim; bei Head-/Imagewechsel. Fehlender Runner bleibt Open/Blocked.",
+      "quickstartChecks": [
+        "Q5"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "HumanOrIndependentReviewRequired"
+    },
+    {
+      "gateId": "G004-18",
+      "applicability": "Applicable",
+      "implementation": "Not Assessed",
+      "evidenceRequirement": "`independent-review.md`, `handoff.md`",
+      "owner": "Repository Owner",
+      "reviewer": "unabhängiger Security Review",
+      "nextActionDueTrigger": "T068 und Übergabe nach eingefrorenem Paket; vor Handoff; nach jeder Korrektur neu prüfen.",
+      "quickstartChecks": [
+        "Q7",
+        "Q8"
+      ],
+      "evidenceState": "NotRun",
+      "decisionAuthority": "HumanOrIndependentReviewRequired"
+    }
+  ]
+}

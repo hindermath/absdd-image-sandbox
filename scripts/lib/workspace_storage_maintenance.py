@@ -15,7 +15,6 @@ import json
 import os
 import pathlib
 import re
-import shlex
 import shutil
 import stat
 import subprocess
@@ -389,6 +388,7 @@ def candidate_record(
     if contained.is_symlink():
         raise StorageContractError(f"cleanup candidate is a symlink: {contained}")
     size, files, newest = directory_metrics(contained)
+    identity = contained.stat(follow_symlinks=False)
     days = age_days(newest)
     eligible = pressure_mode or days >= retention_days
     return {
@@ -396,6 +396,9 @@ def candidate_record(
         "adapter": adapter,
         "sizeBytes": size,
         "fileCount": files,
+        "observedDevice": identity.st_dev,
+        "observedInode": identity.st_ino,
+        "observedNewestMtime": newest,
         "newestMtimeUtc": (
             datetime.fromtimestamp(newest, timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
             if newest else "N/A"
@@ -409,9 +412,16 @@ def candidate_record(
 
 def remove_candidate(repository: pathlib.Path, candidate: dict) -> int:
     path = contained_path(repository / candidate["path"], repository, "cleanup candidate")
+    identity = path.stat(follow_symlinks=False)
+    if (identity.st_dev, identity.st_ino) != (candidate["observedDevice"], candidate["observedInode"]):
+        raise StorageContractError(f"candidate identity changed: {candidate['path']}")
     if not git_path_is_ignored_and_untracked(repository, path):
         raise StorageContractError(f"candidate lost ignored/untracked proof: {candidate['path']}")
-    size_before = directory_metrics(path)[0]
+    size_before, files_before, newest_before = directory_metrics(path)
+    if (size_before, files_before, newest_before) != (
+        candidate["sizeBytes"], candidate["fileCount"], candidate["observedNewestMtime"]
+    ):
+        raise StorageContractError(f"candidate contents changed: {candidate['path']}")
     if path.is_dir() and not path.is_symlink():
         shutil.rmtree(path)
     else:
@@ -419,47 +429,6 @@ def remove_candidate(repository: pathlib.Path, candidate: dict) -> int:
     candidate["status"] = "Removed"
     candidate["freedBytes"] = size_before
     return size_before
-
-
-def make_preview(repository: pathlib.Path, make_directory: str, target: str) -> subprocess.CompletedProcess[str]:
-    return run_command(["make", "-C", make_directory, "-n", target], cwd=repository, timeout=120)
-
-
-def validate_cc65_make_preview(preview: str, allowed_paths: Iterable[str], protected: Iterable[str]) -> None:
-    allowed = {str(item).replace("\\", "/").strip("/").casefold() for item in allowed_paths}
-    protected_suffixes = tuple(pattern[1:].casefold() for pattern in protected if pattern.startswith("*."))
-    saw_delete = False
-    for line in preview.splitlines():
-        match = re.search(r"(?:^|\s)(rm|del)(?:\s|$)(.*)", line, re.IGNORECASE)
-        if not match:
-            continue
-        saw_delete = True
-        lower = line.casefold()
-        if ".git" in lower or any(suffix in lower for suffix in protected_suffixes):
-            raise StorageContractError(f"MakeCleanScopeDrift: protected deletion in preview: {line}")
-        try:
-            tokens = shlex.split(match.group(2), posix=os.name != "nt")
-        except ValueError as exc:
-            raise StorageContractError(f"MakeCleanScopeDrift: invalid deletion syntax: {line}") from exc
-        targets = [
-            token for token in tokens
-            if not token.startswith("-") and not (match.group(1).casefold() == "del" and token.startswith("/"))
-        ]
-        if not targets:
-            raise StorageContractError(f"MakeCleanScopeDrift: deletion has no bounded target: {line}")
-        for target in targets:
-            normalized = target.strip('"\'').replace("\\", "/")
-            if (
-                normalized.startswith("/")
-                or re.match(r"^[A-Za-z]:", normalized)
-                or any(character in normalized for character in ("*", "?", "$", "`", ";", "|", "&", ">", "<"))
-            ):
-                raise StorageContractError(f"MakeCleanScopeDrift: deletion outside declared group: {line}")
-            parts = [part.casefold() for part in normalized.split("/") if part not in {"", ".", ".."}]
-            if not parts or parts[0] not in allowed:
-                raise StorageContractError(f"MakeCleanScopeDrift: deletion outside declared group: {line}")
-    if not saw_delete:
-        raise StorageContractError("MakeCleanScopeDrift: make preview contains no bounded deletion")
 
 
 def protected_cc65_evidence(repository: pathlib.Path, patterns: list[str]) -> list[dict]:
@@ -494,14 +463,20 @@ def handle_cc65(
     pressure_mode: bool,
     dirty: bool,
     busy: bool,
+    progress: dict | None = None,
 ) -> tuple[list[dict], list[dict], int, str, list[str]]:
     candidates: list[dict] = []
     protected = protected_cc65_evidence(repository, list(adapter.get("protectedEvidencePatterns", [])))
     freed = 0
     status = "Passed"
     warnings: list[str] = []
+    if progress is not None:
+        progress["candidates"] = candidates
+        progress["preservedEvidence"] = protected
+    all_paths = [value for group in adapter["safeGroups"] for value in group["paths"]]
+    if len({value.casefold() for value in all_paths}) != len(all_paths):
+        raise StorageContractError("duplicate cc65 curated path")
     if profile == "deep":
-        all_paths = [path for group in adapter["safeGroups"] for path in group["paths"]]
         existing = [repository / path for path in all_paths if (repository / path).exists()]
         for path in existing:
             if not git_path_is_ignored_and_untracked(repository, path):
@@ -509,38 +484,16 @@ def handle_cc65(
             candidates.append(candidate_record(repository, path, "cc65-root-clean", retention_days, True))
         if not existing:
             return candidates, protected, 0, status, warnings
-        preview = run_command(["make", "-n", "clean"], cwd=repository, timeout=180)
-        try:
-            if preview.returncode != 0:
-                raise StorageContractError("cc65 root make clean preview failed")
-            validate_cc65_make_preview(
-                preview.stdout + "\n" + preview.stderr,
-                all_paths,
-                adapter.get("protectedEvidencePatterns", []),
-            )
-            for candidate in candidates:
-                candidate["action"] = "RootMakeClean"
+        for candidate in candidates:
+            candidate["action"] = "RemoveCuratedGeneratedPath"
             if mode == "update" and not dirty and not busy:
-                before = sum(item["sizeBytes"] for item in candidates)
-                result = run_command(["make", "clean"], cwd=repository, timeout=900)
-                if result.returncode != 0:
-                    raise StorageContractError("cc65 root make clean failed")
-                freed = before
-                for candidate in candidates:
-                    candidate["status"] = "Removed"
-                    candidate["freedBytes"] = candidate["sizeBytes"]
+                freed += remove_candidate(repository, candidate)
+                if progress is not None:
+                    progress["freedBytes"] = freed
             elif mode == "update":
                 status = "Warning"
-                for candidate in candidates:
-                    candidate["status"] = "SkippedDirtyOrBusy"
-            return candidates, protected, freed, status, warnings
-        except StorageContractError as exc:
-            # The upstream root clean currently reaches additional tool and
-            # sample paths. Preserve those paths and retain useful cleanup by
-            # falling back to the separately proven safe groups.
-            warnings.append(f"DeepRootCleanFallback: {exc}")
-            candidates.clear()
-            status = "Warning"
+                candidate["status"] = "SkippedDirtyOrBusy"
+        return candidates, protected, freed, status, warnings
 
     effective_pressure = pressure_mode or profile == "deep"
     for group in adapter.get("safeGroups", []):
@@ -557,31 +510,15 @@ def handle_cc65(
         candidates.extend(group_candidates)
         if not any(item["eligible"] for item in group_candidates):
             continue
-        preview = make_preview(repository, str(group["makeDirectory"]), str(group["target"]))
-        if preview.returncode != 0:
-            raise StorageContractError(f"cc65 make preview failed for {group['id']}")
-        validate_cc65_make_preview(
-            preview.stdout + "\n" + preview.stderr,
-            group["paths"],
-            adapter.get("protectedEvidencePatterns", []),
-        )
         for candidate in group_candidates:
             if candidate["eligible"]:
-                candidate["action"] = "NativeMakeClean"
+                candidate["action"] = "RemoveCuratedGeneratedPath"
         if mode == "update" and not dirty and not busy:
-            before = sum(item["sizeBytes"] for item in group_candidates if item["eligible"])
-            result = run_command(
-                ["make", "-C", str(group["makeDirectory"]), str(group["target"])],
-                cwd=repository,
-                timeout=900,
-            )
-            if result.returncode != 0:
-                raise StorageContractError(f"cc65 make clean failed for {group['id']}")
-            freed += before
             for candidate in group_candidates:
                 if candidate["eligible"]:
-                    candidate["status"] = "Removed"
-                    candidate["freedBytes"] = candidate["sizeBytes"]
+                    freed += remove_candidate(repository, candidate)
+                    if progress is not None:
+                        progress["freedBytes"] = freed
         elif mode == "update":
             status = "Warning"
             for candidate in group_candidates:
@@ -1091,6 +1028,7 @@ def execute(args: argparse.Namespace) -> int:
                         pressure_mode=pressure_mode,
                         dirty=dirty,
                         busy=busy,
+                        progress=repo_result,
                     )
                     repo_result["candidates"] = candidates
                     repo_result["preservedEvidence"] = preserved
