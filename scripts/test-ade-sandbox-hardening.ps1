@@ -7,10 +7,14 @@
     Verwendet denselben Python-Standardbibliothek-Kern wie der Bash-Einstieg.
     Dadurch bleiben Modi, Pfadgrenzen und Exitcodes gleich. Der WhatIf-Modus
     zeigt externe Pruefschritte, ohne sie auszufuehren.
+    Vorschau-Exit 0 ist kein bestandener Test. Feature 004 nutzt nur seine
+    eigene Evidence; All mit offenen Pflicht-Gates ist nie GREEN.
 
     Uses the same Python standard-library core as the Bash entry point. This
     keeps modes, path boundaries, and exit codes equivalent. WhatIf reports
     external checks without executing them.
+    Preview exit 0 is not a test pass. Feature 004 uses only its own evidence;
+    All with mandatory Open gates is never GREEN.
 
 .PARAMETER Mode
     Input, Static, Runtime, SupplyChain, Documentation, Accessibility oder All.
@@ -19,6 +23,11 @@
 .PARAMETER EvidencePath
     Repository-relativer Pfad zur Verifikationsevidenz. / Repository-relative
     path to verification evidence.
+
+.PARAMETER FeatureDirectory
+    Explizites Feature-004-Verzeichnis. Ohne Angabe gilt der historische
+    Feature-003-Vertrag. / Explicit Feature 004 directory; omission keeps the
+    historical Feature 003 contract.
 
 .EXAMPLE
     pwsh -NoProfile -File scripts/test-ade-sandbox-hardening.ps1 -Mode Input
@@ -36,7 +45,8 @@ param(
     [Parameter(Mandatory)]
     [ValidateSet('Input', 'Static', 'Runtime', 'SupplyChain', 'Documentation', 'Accessibility', 'All')]
     [string] $Mode,
-    [string] $EvidencePath = ''
+    [string] $EvidencePath = '',
+    [ValidateNotNullOrEmpty()] [string] $FeatureDirectory = ''
 )
 
 Set-StrictMode -Version Latest
@@ -48,7 +58,8 @@ function Test-AdeSandboxHardening {
         [Parameter(Mandatory)]
         [ValidateSet('Input', 'Static', 'Runtime', 'SupplyChain', 'Documentation', 'Accessibility', 'All')]
         [string] $Mode,
-        [string] $EvidencePath = ''
+        [string] $EvidencePath = '',
+        [ValidateNotNullOrEmpty()] [string] $FeatureDirectory = ''
     )
 
     $repositoryRoot = Split-Path -Parent $PSScriptRoot
@@ -63,6 +74,9 @@ function Test-AdeSandboxHardening {
     $arguments = @($core, 'run-mode', '--repo', $repositoryRoot, '--mode', $Mode)
     if ($EvidencePath) {
         $arguments += @('--evidence', $EvidencePath)
+    }
+    if ($FeatureDirectory) {
+        $arguments += @('--feature-directory', $FeatureDirectory)
     }
     if ($WhatIfPreference) {
         $arguments += '--dry-run'
@@ -79,5 +93,9 @@ function Test-AdeSandboxHardening {
 }
 
 $script:AdeHardeningExitCode = 2
-Test-AdeSandboxHardening -Mode $Mode -EvidencePath $EvidencePath -WhatIf:$WhatIfPreference
+$invocation = @{ Mode = $Mode; EvidencePath = $EvidencePath; WhatIf = $WhatIfPreference }
+if ($PSBoundParameters.ContainsKey('FeatureDirectory')) {
+    $invocation.FeatureDirectory = $FeatureDirectory
+}
+Test-AdeSandboxHardening @invocation
 exit $script:AdeHardeningExitCode

@@ -708,7 +708,10 @@ def execute_mode(
     mode: str,
     evidence_path: str | None,
     dry_run: bool,
+    feature_directory: str | None = None,
 ) -> int:
+    if feature_directory is not None:
+        return execute_feature_004_mode(repo, mode, evidence_path, dry_run, feature_directory)
     gaps_path = repo / "docs/security/secure-development/2026-08-30-container-hardening/gap-dispositions.json"
     requirements_path = repo / GATE_REQUIREMENTS_PATH
     errors: list[str] = []
@@ -796,9 +799,317 @@ def execute_mode(
             if result.returncode != 0:
                 print(f"RED [{selected}] exit {result.returncode}: {display}", file=sys.stderr)
                 return EXIT_VALIDATION
-        if not command_plan(repo, selected) or not dry_run:
+        if dry_run and not command_plan(repo, selected):
+            print(f"DRY-RUN / WHATIF [{selected}]: no executable checks in this mode")
+        elif not dry_run:
             print(f"GREEN [{selected}]: declared checks completed.")
     return EXIT_OK
+
+
+FEATURE_004_ID = "004-container-hardening-followup"
+FEATURE_004_GATES = {f"G004-{number:02d}" for number in range(1, 19)}
+FEATURE_004_APPLICABILITY = {"Applicable", "N/A", "Open"}
+FEATURE_004_IMPLEMENTATION = {
+    "Fulfilled", "Partly Fulfilled", "Not Fulfilled", "Not Assessed"
+}
+
+
+def validate_feature_004_assurance_profile(repo: Path) -> list[str]:
+    """Bind the fourteen local manifests to the pinned project registry."""
+    errors: list[str] = []
+    registry = load_json(safe_repo_path(
+        repo, "scripts/config/spec-kit-project-statistics-governance-presets.json"
+    ))
+    presets = registry.get("presets")
+    if not isinstance(presets, list) or len(presets) != 14:
+        return ["Feature 004 requires the fourteen-preset registry"]
+    seen_ids: set[str] = set()
+    seen_priorities: set[int] = set()
+    for preset in presets:
+        if not isinstance(preset, dict):
+            errors.append("invalid preset registry entry")
+            continue
+        preset_id = preset.get("id")
+        version = preset.get("version")
+        priority = preset.get("priority")
+        if (not isinstance(preset_id, str)
+                or not re.fullmatch(r"[a-z0-9-]+", preset_id)
+                or preset_id in seen_ids
+                or not isinstance(version, str)
+                or not re.fullmatch(r"v\d+\.\d+\.\d+", version)
+                or isinstance(priority, bool) or not isinstance(priority, int)
+                or priority in seen_priorities):
+            errors.append(f"invalid or duplicate preset metadata: {preset_id}")
+            continue
+        seen_ids.add(preset_id)
+        seen_priorities.add(priority)
+        path = safe_repo_path(repo, f".specify/presets/{preset_id}/preset.yml")
+        text = path.read_text(encoding="utf-8")
+        ids = re.findall(r'^  id: "([^"]+)"$', text, re.MULTILINE)
+        versions = re.findall(r'^  version: "([^"]+)"$', text, re.MULTILINE)
+        if ids != [preset_id] or versions != [version[1:]]:
+            errors.append(f"installed preset manifest differs from registry: {preset_id}")
+    if "secure-development-assurance-governance" not in seen_ids:
+        errors.append("Assurance preset is absent")
+    else:
+        assurance = next(
+            item for item in presets
+            if item.get("id") == "secure-development-assurance-governance"
+        )
+        if assurance.get("version") != "v0.1.8" or assurance.get("priority") != 15:
+            errors.append("Assurance preset must be v0.1.8 at priority 15")
+    preset_root = safe_repo_path(repo, ".specify/presets")
+    installed_ids = {item.name for item in preset_root.iterdir() if item.is_dir()}
+    if installed_ids != seen_ids:
+        errors.append("installed preset directory set differs from fourteen-preset registry")
+    return errors
+
+
+def execute_feature_004_mode(
+    repo: Path,
+    mode: str,
+    evidence_path: str | None,
+    dry_run: bool,
+    feature_directory: str,
+) -> int:
+    """Select Feature 004 explicitly; never reuse Feature 003 evidence paths."""
+    selected = safe_repo_path(repo, feature_directory)
+    if selected != safe_repo_path(repo, f"specs/{FEATURE_004_ID}") or not selected.is_dir():
+        raise ValueError("--feature-directory must select specs/004-container-hardening-followup")
+    requirements_path = safe_repo_path(
+        repo, f"specs/{FEATURE_004_ID}/gate-requirements.json"
+    )
+    requirements = load_json(requirements_path)
+    if dry_run:
+        print(f"DRY-RUN / WHATIF [{mode}]: validate Feature 004 gate contract and evidence; no checks executed")
+        return EXIT_OK
+    profile_errors = validate_feature_004_assurance_profile(repo)
+    if profile_errors:
+        return print_result(profile_errors, "Feature 004 preset profile")
+    if not evidence_path:
+        raise ValueError("Feature 004 requires --evidence; no historical evidence fallback")
+    document = load_json(safe_repo_path(repo, evidence_path))
+    errors = validate_feature_004_evidence(
+        document, requirements, repo, _sha256_raw(requirements_path)
+    )
+    if errors:
+        return print_result(errors, f"Feature 004 {mode} evidence contract")
+    mode_checks = {
+        "Input": {"Q1"}, "Static": {"Q2", "Q3", "Q4"},
+        "Runtime": {"Q5"}, "SupplyChain": {"Q6"},
+        "Documentation": {"Q8"}, "Accessibility": {"Q8"},
+        "All": {f"Q{number}" for number in range(1, 9)},
+    }[mode]
+    gate_checks = {
+        item["gateId"]: set(item.get("quickstartChecks", []))
+        for item in requirements["gates"]
+    }
+    relevant = [
+        item for item in document["checkpoints"]
+        if gate_checks.get(item["gateId"], set()) & mode_checks
+    ]
+    failed = [item["gateId"] for item in relevant if item["implementation"] == "Not Fulfilled"]
+    if failed:
+        print(f"RED [{mode}]: Not Fulfilled gates: {', '.join(failed)}", file=sys.stderr)
+        return EXIT_VALIDATION
+    open_gates = [
+        item["gateId"] for item in relevant
+        if item["implementation"] != "Fulfilled" and item["applicability"] != "N/A"
+    ]
+    if open_gates:
+        print(f"BLOCKED [{mode}]: required Feature 004 evidence is Open: {', '.join(open_gates)}", file=sys.stderr)
+        return EXIT_PLATFORM
+    print(f"GREEN [{mode}]: selected Feature 004 gates have current evidence.")
+    return EXIT_OK
+
+
+def _sha256_raw(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _valid_digest(value: Any) -> bool:
+    return isinstance(value, str) and bool(re.fullmatch(r"[0-9a-f]{64}", value))
+
+
+def validate_feature_004_evidence(
+    document: dict[str, Any],
+    requirements: dict[str, Any],
+    repo: Path,
+    requirements_hash: str,
+) -> list[str]:
+    """Validate current project evidence without changing Feature 003 contracts."""
+    errors: list[str] = []
+    if requirements.get("feature") != FEATURE_004_ID or requirements.get("schemaVersion") != "1.0":
+        errors.append("feature 004 requirements context is invalid")
+    gates = requirements.get("gates")
+    if (not isinstance(gates, list) or len(gates) != 18
+            or any(not isinstance(item, dict)
+                   or not isinstance(item.get("gateId"), str) for item in gates)
+            or {item["gateId"] for item in gates} != FEATURE_004_GATES):
+        errors.append("feature 004 requires exactly G004-01 through G004-18")
+        gates = []
+    if requirements.get("gateCount") != 18:
+        errors.append("feature 004 gate count is invalid")
+    quickstart_ids = requirements.get("quickstartCheckIds")
+    if (not isinstance(quickstart_ids, list)
+            or any(not isinstance(item, str) for item in quickstart_ids)
+            or set(quickstart_ids) != {
+        f"Q{number}" for number in range(1, 9)
+    }):
+        errors.append("feature 004 Q1-Q8 binding is incomplete")
+
+    bindings = requirements.get("sourceBindings")
+    if not isinstance(bindings, list) or not bindings:
+        errors.append("feature 004 source bindings are missing")
+        bindings = []
+    seen_paths: set[str] = set()
+    for index, binding in enumerate(bindings):
+        if not isinstance(binding, dict):
+            errors.append(f"source binding {index} must be an object")
+            continue
+        path_text = binding.get("path")
+        if not isinstance(path_text, str) or path_text in seen_paths:
+            errors.append(f"source binding {index} has missing or duplicate path")
+            continue
+        seen_paths.add(path_text)
+        try:
+            source = safe_repo_path(repo, path_text)
+            if binding.get("hashKind") != "text/raw-and-utf8-lf":
+                errors.append(f"source binding {path_text} hash kind is invalid")
+            if binding.get("rawSha256") != _sha256_raw(source):
+                errors.append(f"source binding {path_text} raw hash is stale")
+            if binding.get("normalizedSha256") != normalized_sha256(source):
+                errors.append(f"source binding {path_text} normalized hash is stale")
+        except (OSError, UnicodeError, ValueError) as exc:
+            errors.append(f"source binding {path_text}: {exc}")
+
+    if document.get("schemaVersion") != "1.0" or document.get("feature") != FEATURE_004_ID:
+        errors.append("feature 004 evidence context is invalid")
+    if document.get("gateRequirementsSha256") != requirements_hash:
+        errors.append("feature 004 gate requirements hash is stale")
+    if document.get("gitHead") != requirements.get("gitHead"):
+        errors.append("feature 004 Git context is stale")
+
+    records = document.get("evidenceRecords")
+    if not isinstance(records, list):
+        errors.append("evidenceRecords must be an array")
+        records = []
+    by_id: dict[str, dict[str, Any]] = {}
+    for index, record in enumerate(records):
+        if not isinstance(record, dict):
+            errors.append(f"evidence record {index} must be an object")
+            continue
+        evidence_id = record.get("evidenceId")
+        if not is_nonempty_text(evidence_id) or evidence_id in by_id:
+            errors.append(f"evidence record {index} has missing or duplicate ID")
+            continue
+        by_id[evidence_id] = record
+        if record.get("gateId") not in FEATURE_004_GATES:
+            errors.append(f"{evidence_id} has unknown gate")
+        if record.get("gitHead") != requirements.get("gitHead"):
+            errors.append(f"{evidence_id} has stale Git context")
+        outcome = record.get("outcome")
+        if outcome == "NotRun":
+            if "exitCode" in record or "imageId" in record:
+                errors.append(f"{evidence_id} invents execution data for NotRun")
+            for field in ("owner", "nextAction", "trigger", "limitations"):
+                if not is_nonempty_text(record.get(field)):
+                    errors.append(f"{evidence_id} missing {field}")
+        elif outcome in {"Passed", "Failed"}:
+            for field in requirements.get("executedEvidenceRequiredFields", []):
+                value = record.get(field)
+                if field == "exitCode":
+                    if isinstance(value, bool) or not isinstance(value, int):
+                        errors.append(f"{evidence_id} missing integer exitCode")
+                elif field == "commandArgv":
+                    if not isinstance(value, list) or not value or not all(
+                        is_nonempty_text(part) for part in value
+                    ):
+                        errors.append(f"{evidence_id} missing commandArgv")
+                elif field == "inputHashes":
+                    if not isinstance(value, dict):
+                        errors.append(f"{evidence_id} missing inputHashes")
+                    else:
+                        for path_text, hash_record in value.items():
+                            if not isinstance(hash_record, dict):
+                                errors.append(f"{evidence_id} invalid hash record")
+                                continue
+                            try:
+                                source = safe_repo_path(repo, path_text)
+                                kind = hash_record.get("kind")
+                                expected = (
+                                    _sha256_raw(source) if kind == "rawSha256"
+                                    else normalized_sha256(source)
+                                    if kind == "normalizedSha256" else None
+                                )
+                                if expected is None or hash_record.get("digest") != expected:
+                                    errors.append(
+                                        f"{evidence_id} stale or wrong-kind input hash: {path_text}"
+                                    )
+                            except (OSError, UnicodeError, ValueError) as exc:
+                                errors.append(f"{evidence_id} input hash {path_text}: {exc}")
+                elif field in {"payloadSha256", "decisionSha256"}:
+                    if not _valid_digest(value):
+                        errors.append(f"{evidence_id} missing {field}")
+                elif not is_nonempty_text(value):
+                    errors.append(f"{evidence_id} missing {field}")
+            parse_utc(record.get("observedAt"), f"{evidence_id}.observedAt", errors)
+        else:
+            errors.append(f"{evidence_id} has invalid outcome")
+
+    checkpoints = document.get("checkpoints")
+    if not isinstance(checkpoints, list):
+        errors.append("checkpoints must be an array")
+        checkpoints = []
+    seen_gates: set[str] = set()
+    for index, checkpoint in enumerate(checkpoints):
+        if not isinstance(checkpoint, dict):
+            errors.append(f"checkpoint {index} must be an object")
+            continue
+        gate_id = checkpoint.get("gateId")
+        if gate_id not in FEATURE_004_GATES or gate_id in seen_gates:
+            errors.append(f"checkpoint {index} has unknown or duplicate gate")
+            continue
+        seen_gates.add(gate_id)
+        applicability = checkpoint.get("applicability")
+        implementation = checkpoint.get("implementation")
+        if applicability not in FEATURE_004_APPLICABILITY or implementation not in FEATURE_004_IMPLEMENTATION:
+            errors.append(f"{gate_id} has invalid status enum")
+        if applicability in {"N/A", "Open"} and implementation != "Not Assessed":
+            errors.append(f"{gate_id} has invalid applicability/implementation pair")
+        for field in ("reason", "owner", "reviewer", "residualRisk",
+                      "nextAction", "dueAt", "reevaluationTrigger"):
+            if not is_nonempty_text(checkpoint.get(field)):
+                errors.append(f"{gate_id} missing {field}")
+        evidence_ids = checkpoint.get("evidenceIds")
+        if not isinstance(evidence_ids, list) or not all(
+            is_nonempty_text(value) for value in evidence_ids
+        ) or len(evidence_ids) != len(set(evidence_ids)):
+            errors.append(f"{gate_id} evidenceIds are invalid")
+            evidence_ids = []
+        for evidence_id in evidence_ids:
+            record = by_id.get(evidence_id)
+            if record is None or record.get("gateId") != gate_id:
+                errors.append(f"{gate_id} references missing or foreign evidence {evidence_id}")
+        if implementation == "Fulfilled":
+            if not evidence_ids or any(
+                by_id.get(value, {}).get("outcome") != "Passed"
+                for value in evidence_ids
+            ):
+                errors.append(f"{gate_id} Fulfilled lacks passed evidence")
+            if gate_id in {"G004-09", "G004-12", "G004-14", "G004-16",
+                           "G004-17", "G004-18"}:
+                authority_path = checkpoint.get("authorityEvidence")
+                if not is_nonempty_text(authority_path):
+                    errors.append(f"{gate_id} requires separate human or independent review")
+                else:
+                    try:
+                        safe_repo_path(repo, authority_path)
+                    except (OSError, ValueError) as exc:
+                        errors.append(f"{gate_id} authority evidence: {exc}")
+    if seen_gates != FEATURE_004_GATES:
+        errors.append("feature 004 checkpoint set is incomplete")
+    return errors
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -830,6 +1141,7 @@ def build_parser() -> argparse.ArgumentParser:
         choices=["Input", "Static", "Runtime", "SupplyChain", "Documentation", "Accessibility", "All"],
     )
     mode_parser.add_argument("--evidence")
+    mode_parser.add_argument("--feature-directory")
     mode_parser.add_argument("--dry-run", action="store_true")
     fixture_parser = subparsers.add_parser(
         "validate-fixture",
@@ -837,6 +1149,15 @@ def build_parser() -> argparse.ArgumentParser:
     )
     fixture_parser.add_argument("--repo", required=True)
     fixture_parser.add_argument("--fixture", required=True)
+    feature_004 = subparsers.add_parser(
+        "validate-feature-004", help="Validate current Feature 004 gate evidence."
+    )
+    feature_004.add_argument("--repo", required=True)
+    feature_004.add_argument("--evidence", required=True)
+    feature_004.add_argument(
+        "--requirements",
+        default="specs/004-container-hardening-followup/gate-requirements.json",
+    )
     return parser
 
 
@@ -850,8 +1171,21 @@ def main(argv: list[str] | None = None) -> int:
         if arguments.command == "hash":
             print(normalized_sha256(safe_repo_path(repo, arguments.path)))
             return EXIT_OK
+        if arguments.command == "validate-feature-004":
+            requirements_path = safe_repo_path(repo, arguments.requirements)
+            requirements = load_json(requirements_path)
+            evidence_document = load_json(safe_repo_path(repo, arguments.evidence))
+            feature_errors = validate_feature_004_evidence(
+                    evidence_document, requirements, repo,
+                    _sha256_raw(requirements_path),
+                )
+            feature_errors.extend(validate_feature_004_assurance_profile(repo))
+            return print_result(feature_errors, "feature 004 evidence")
         if arguments.command == "run-mode":
-            return execute_mode(repo, arguments.mode, arguments.evidence, arguments.dry_run)
+            return execute_mode(
+                repo, arguments.mode, arguments.evidence, arguments.dry_run,
+                arguments.feature_directory,
+            )
         if arguments.command == "validate-fixture":
             fixture = load_json(safe_repo_path(repo, arguments.fixture))
             if fixture.get("mutation") != "GAP-147 AlreadySatisfied without mount evidence":

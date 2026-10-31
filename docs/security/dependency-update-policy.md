@@ -105,26 +105,41 @@ vorangestellte Metadatenzeile mit passendem `argName` hat.
 Paket `openjdk-${JAVA_VERSION}-jdk-headless`. Die konkrete Ubuntu-Patchversion
 wird nicht exakt gepinnt und muss bei Renovate-PRs im Build validiert werden.
 
-`POWERSHELL_VERSION` pinnt die stabile PowerShell-Version. Wenn MCR noch eine
-alte Patchversion enthaelt, aktualisiert der Build dessen vorhandenes globales
-Tool aus dem offiziellen Microsoft-Paket mit festen AMD64-/ARM64-SHA-256-Hashes.
-Es entsteht keine zweite Tool-Installation. Paket-Hashes, Versions-ARG und
-Basisimage-Digest gemeinsam pruefen; der Build vergleicht das Ergebnis mit `pwsh`.
+`POWERSHELL_VERSION` pinnt die stabile PowerShell-Version. Der Build installiert
+das offizielle Microsoft-Paket nach fester AMD64-/ARM64-SHA-256-Prüfung in
+`/opt/powershell-pinned` und bindet `/usr/bin/pwsh` darauf. Die MCR-Kopie bleibt
+unangetastet, weil ein In-place-Update unter rootless Overlay-Speicher beim
+Entfernen des alten Pakets scheitern kann. Paket-Hashes, Versions-ARG und
+Basisimage-Digest gemeinsam prüfen; der Build prüft die effektive Version.
+
+Der Swift-Archiv-Build prueft die Signatur gegen den festgehaltenen
+6.x-Release-Fingerprint mit `gpg --assert-signer`. Bei Schluesselwechsel
+Fingerprint und offizielle Swift-Schluesselliste bewusst reviewen; eine
+gueltige Signatur eines anderen importierten Schluessels reicht nicht.
+
+Syft und uv verwenden fuer AMD64 und ARM64 fest hinterlegte SHA-256-Werte der
+konkreten Release-Archive. Ein Renovate-Versionswechsel muss deshalb fuer beide
+Architekturen mit offiziellen Release-Assets und zusaetzlicher Review-Evidenz
+abgeglichen und im Dockerfile zusammen mit dem ARG aktualisiert werden. Der
+Build liest keine zur Laufzeit austauschbare Begleit-Pruefsumme als alleinigen
+Integritaetsanker. Aktuelle Referenzen: [Syft 1.55.0](https://github.com/anchore/syft/releases/tag/v1.55.0),
+[uv 0.13.5](https://github.com/astral-sh/uv/releases/tag/0.13.5).
 
 ### Eingebettete Home-Baseline-Referenz
 
 `home-baseline.lock.json` behandelt die Level-0-Referenz als eingebettete
-Inhaltsabhaengigkeit. Die Lock-Datei enthaelt ausschliesslich die oeffentliche
-HTTPS-Quelle, einen stabilen Release-Tag, den exakten 40-stelligen Commit und
-die MIT-Lizenz. Ein eigener Renovate-Regex-Manager erfasst Tag und Commit-Digest
-gemeinsam; Auto-Merge bleibt deaktiviert.
+Inhaltsabhaengigkeit. Das aktive Schema 2 enthaelt die oeffentliche
+HTTPS-Quelle, `refType=commit`, den exakten 40-stelligen Commit und die
+MIT-Lizenz. Der fruehere Renovate-Regex-Manager fuer Tag plus Commit konnte
+dieses Schema nicht erfassen und wurde entfernt. Updates sind bewusst manuell;
+Auto-Merge bleibt deaktiviert.
 
-Ein Update ist nur zulaessig, wenn der Release veroeffentlicht ist, der Tag auf
-den eingetragenen Commit aufloest und der Build die erwartete Lizenz sowie die
-zentrale Lernenden-Anleitung findet. `scripts/check-home-baseline-lock.py`
-prueft die statische Lock-Struktur. Der Image-Build prueft den Tag gegen den
-Commit vor dem Checkout. Die lokale Arbeitskopie eines Maintainers ist keine
-zulaessige Build-Quelle.
+Ein Update braucht einen bewusst geprueften, oeffentlich erreichbaren Commit
+und eine erneute Rechte-/Inhaltspruefung. `scripts/check-home-baseline-lock.py`
+prueft die statische Lock-Struktur. Der Image-Build vergleicht den geholten
+Git-Commit vor dem Checkout mit dem Lock und verlangt die Lizenzdatei sowie die
+zentrale Lernenden-Anleitung. Die lokale Arbeitskopie eines Maintainers ist
+keine zulaessige Build-Quelle.
 
 ### Native npm-Installationsschritte / Native npm Install Hooks
 
@@ -236,24 +251,38 @@ package `openjdk-${JAVA_VERSION}-jdk-headless`. The concrete Ubuntu patch
 package version is not pinned exactly and must be validated in Renovate PR
 builds.
 
-`POWERSHELL_VERSION` pins stable PowerShell. If MCR still contains an older
-patch, the build updates its existing global tool using the official Microsoft
-package and committed AMD64/ARM64 SHA-256 hashes, not a second installation.
-Review package hashes, version ARG and base-image digest together. The build
-checks the resulting `pwsh` version.
+`POWERSHELL_VERSION` pins stable PowerShell. The build installs the official
+Microsoft package under `/opt/powershell-pinned` after checking the committed
+AMD64/ARM64 SHA-256 hash, then points `/usr/bin/pwsh` to it. The MCR copy stays
+untouched because an in-place update can fail while removing the old package
+under rootless overlay storage. Review package hashes, version ARG and base
+image digest together; the build checks the effective version.
+
+The Swift archive build binds signature verification to the pinned 6.x release
+fingerprint with `gpg --assert-signer`. Review a key change against Swift's
+official active-key list; a valid signature from another imported key is not
+sufficient.
+
+Syft and uv use committed SHA-256 values for the exact AMD64 and ARM64 release
+archives. For a Renovate version change, review both architecture assets and
+their release evidence, then update the Dockerfile digest literals together
+with the version ARG. A mutable companion checksum fetched during the build is
+not the sole integrity anchor. Current references: [Syft 1.55.0](https://github.com/anchore/syft/releases/tag/v1.55.0),
+[uv 0.13.5](https://github.com/astral-sh/uv/releases/tag/0.13.5).
 
 ### Embedded Home-Baseline Reference
 
 `home-baseline.lock.json` treats the Level-0 reference as an embedded content
-dependency. It records only the public HTTPS source, a stable release tag, the
-exact 40-character commit, and the MIT license. A dedicated Renovate regex
-manager captures the tag and commit digest together; automerge stays disabled.
+dependency. Active schema 2 records the public HTTPS source, `refType=commit`,
+the exact 40-character commit, and the MIT license. The former Renovate regex
+manager for tag plus commit did not match this schema and was removed. Updates
+are deliberately manual; automerge remains disabled.
 
-An update is allowed only after the release is published, the tag resolves to
-the recorded commit, and the build finds the expected license and canonical
-learner guide. `scripts/check-home-baseline-lock.py` validates the static lock
-shape. The image build verifies tag against commit before checkout. A
-maintainer's local working tree is not an allowed build source.
+An update requires a deliberately reviewed, publicly reachable commit and a
+fresh rights/content check. `scripts/check-home-baseline-lock.py` validates the
+static lock shape. The image build compares the fetched Git commit with the
+lock before checkout and requires the license file and canonical learner guide.
+A maintainer's local working tree is not an allowed build source.
 
 ### Spec Kit Commit Binding
 

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0",
+  "feature": "004-container-hardening-followup",
+  "installedPreset": "secure-development-assurance-governance",
+  "installedVersion": "0.1.8",
+  "matrixScript": ".specify/presets/secure-development-assurance-governance/tests/test-secure-development-assurance.ps1",
+  "requiredMutationTokens": [
+    "Manifest-Hashdrift",
+    "Checklisten-IDs müssen eindeutig",
+    "Sammelbanddrift",
+    "body-only",
+    "duplicate-section",
+    "**Dokument-ID / Document ID:** CL-03",
+    "| Versionsnummer | 1.0.0 |",
+    "| Version | 1.0.0 |"
+  ],
+  "expectedExecutionMarkers": [
+    "PASS: 47 rebound active-metadata negative cases per shell",
+    "PASS: four mixed-mode gate reviews",
+    "PASS: secure-development-assurance validator contract and Bash/PowerShell parity"
+  ]
+}

@@ -21,7 +21,7 @@ done
 python3 - "$result" "$repo" <<'PY'
 import hashlib, json, re, sys, uuid
 from datetime import datetime
-from pathlib import Path, PurePosixPath
+from pathlib import Path, PurePosixPath, PureWindowsPath
 
 result_path = Path(sys.argv[1])
 repo = Path(sys.argv[2]).resolve()
@@ -38,8 +38,19 @@ def required_text(obj, key, label):
     return value.strip()
 
 def relative(value):
+    if not value or "\\" in value or "\x00" in value or PureWindowsPath(value).drive:
+        return False
     p = PurePosixPath(value)
     return not p.is_absolute() and ".." not in p.parts
+
+def repository_file(value):
+    try:
+        path = (repo / value).resolve(strict=True)
+    except (OSError, RuntimeError) as exc:
+        raise ValueError("missing or unresolved repository file") from exc
+    if not path.is_relative_to(repo) or not path.is_file():
+        raise ValueError("repository file escapes selected repository or is not a file")
+    return path
 
 def normalized(path):
     raw = path.read_bytes()
@@ -97,10 +108,10 @@ for i, target in enumerate(targets):
     target_paths.add(path_text)
     target_roles[path_text] = role
     if not re.fullmatch(r"[0-9a-f]{64}", digest): errors.append(f"{label}.normalizedSha256 is invalid")
-    target_path = repo / path_text
-    if not target_path.is_file(): errors.append(f"target missing: {path_text}")
-    else:
-        try: actual = hashlib.sha256(normalized(target_path)).hexdigest()
+    if path_text and relative(path_text):
+        try:
+            target_path = repository_file(path_text)
+            actual = hashlib.sha256(normalized(target_path)).hexdigest()
         except ValueError as exc: errors.append(f"target {path_text}: {exc}")
         else:
             if actual != digest: errors.append(f"target hash drift: {path_text}")
@@ -117,12 +128,10 @@ if request_binding_required:
             graph_error("IRG001", "requestEvidence.path must be repository-relative")
         if not re.fullmatch(r"[0-9a-f]{64}", request_digest):
             graph_error("IRG001", "requestEvidence.normalizedSha256 is invalid")
-        request_path = repo / request_path_text
         request_data = None
-        if not request_path.is_file():
-            graph_error("IRG001", f"request missing: {request_path_text}")
-        else:
+        if request_path_text and relative(request_path_text):
             try:
+                request_path = repository_file(request_path_text)
                 request_bytes = normalized(request_path)
                 actual_request_digest = hashlib.sha256(request_bytes).hexdigest()
                 request_data = json.loads(request_bytes.decode("utf-8"))

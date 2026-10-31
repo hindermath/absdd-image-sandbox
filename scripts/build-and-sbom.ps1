@@ -82,17 +82,24 @@ function New-AdeSandboxSbom {
     $architectureArguments.Platform = $targetPlatform
     $architectureArguments.ImageName = $TargetImage
     $null = & "$PSScriptRoot/check-container-architecture.ps1" @architectureArguments
+    $imageIdOutput = @(& $runtimeCommand.Source @('image', 'inspect', '--format', '{{.Id}}', $TargetImage))
+    if ($LASTEXITCODE -ne 0 -or $imageIdOutput.Count -ne 1 -or $imageIdOutput[0] -notmatch '^sha256:[0-9a-fA-F]{64}$') {
+        throw "Podman did not return one immutable SHA-256 image ID for $TargetImage."
+    }
+    $imageId = [string] $imageIdOutput[0]
+    $architectureArguments.ImageName = $imageId
+    $null = & "$PSScriptRoot/check-container-architecture.ps1" @architectureArguments
 
     $safeImage = $TargetImage -replace '[/:@\\]+', '-' -replace '[^A-Za-z0-9._-]', ''
-    $outPath = Join-Path $resolvedOutput "$(Get-Date -Format 'yyyy-MM-dd')-$safeImage.cdx.json"
+    $outPath = Join-Path $resolvedOutput "$(Get-Date -Format 'yyyy-MM-dd')-$safeImage-$($imageId.Substring(7, 12)).cdx.json"
     $sourceVersion = ($TargetImage -split ':')[-1]
 
-    & $runtimeCommand.Source @('run', '--rm', '--entrypoint', 'syft', $TargetImage, 'version') *> $null
+    & $runtimeCommand.Source @('run', '--rm', '--entrypoint', 'syft', $imageId, 'version') *> $null
     $imageSyftAvailable = $LASTEXITCODE -eq 0
     $hostSyft = Get-Command syft -ErrorAction SilentlyContinue
     if ($imageSyftAvailable) {
         & $runtimeCommand.Source @(
-            'run', '--rm', '--user', '0', '--entrypoint', 'syft', $TargetImage,
+            'run', '--rm', '--user', '0', '--entrypoint', 'syft', $imageId,
             'dir:/', '--select-catalogers', '+javascript-package-cataloger',
             '--source-name', $TargetImage, '--source-version', $sourceVersion,
             '-o', 'cyclonedx-json'
@@ -104,7 +111,7 @@ function New-AdeSandboxSbom {
         if ($observedVersion -ne $RequiredSyftVersion) {
             throw "Host Syft version mismatch: expected $RequiredSyftVersion, observed $observedVersion."
         }
-        Invoke-AdeNativeCommand -FilePath $hostSyft.Source -Arguments @($TargetImage, '-o', "cyclonedx-json=$outPath")
+        Invoke-AdeNativeCommand -FilePath $hostSyft.Source -Arguments @($imageId, '-o', "cyclonedx-json=$outPath")
     } else {
         throw "Syft is unavailable in the image and host Syft $RequiredSyftVersion is unavailable; refusing an unpinned fallback."
     }

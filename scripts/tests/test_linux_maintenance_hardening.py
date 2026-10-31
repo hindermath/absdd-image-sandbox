@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import platform
 import shlex
+import shutil
 import signal
 import stat
 import subprocess
@@ -301,6 +302,102 @@ def base_report(run_id: str) -> dict:
 
 @unittest.skipIf(os.name == "nt", "Linux maintenance fixtures require a POSIX host.")
 class LinuxMaintenanceHardeningTests(unittest.TestCase):
+    def test_resolve_probe_does_not_execute_registry_launcher(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            marker = root / "executed"
+            launcher = root / "untrusted-probe"
+            write_executable(
+                launcher,
+                "#!/bin/sh\nprintf touched > " + shlex.quote(str(marker)) + "\n",
+            )
+            resolved = run_helper(
+                "resolve-probe", "--tool-id", "fixture",
+                "--launcher", str(launcher),
+            )
+            self.assertEqual(resolved.returncode, 0, resolved.stdout)
+            result = json.loads(resolved.stdout)
+            self.assertEqual(result["status"], "Available")
+            self.assertIn("not checked", result["sanitizedEvidence"])
+            self.assertFalse(marker.exists())
+
+    def test_brew_registry_preview_never_starts_cli_launcher(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            paths = empty_registries(root)
+            bin_dir, _, _ = install_fake_brew(root)
+            marker = root / "cli-executed"
+            write_executable(
+                bin_dir / "untrusted-preview-cli",
+                "#!/bin/sh\nprintf touched > " + shlex.quote(str(marker)) + "\n",
+            )
+            write_json(paths["cli"], {
+                "schemaVersion": 1,
+                "tools": [{
+                    "id": "untrusted-preview-cli",
+                    "scope": "required",
+                    "platforms": [platform.system()],
+                    "command": "untrusted-preview-cli",
+                    "args": ["--version"],
+                }],
+            })
+            for mode in ("--dry-run", "--compare-only"):
+                completed = run_brew_maintainer(root, paths, extra=(mode,))
+                self.assertEqual(completed.returncode, 0, completed.stdout)
+                self.assertFalse(marker.exists(), mode)
+                self.assertIn(
+                    "version and function not checked",
+                    (root / "toolchain-result.json").read_text(encoding="utf-8"),
+                )
+
+    @unittest.skipUnless(shutil.which("pwsh"), "PowerShell 7 unavailable")
+    def test_winget_preview_lookup_does_not_autoload_registry_module(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            module = root / "modules" / "ProbeTrap"
+            module.mkdir(parents=True)
+            marker = root / "module-executed"
+            (module / "ProbeTrap.psm1").write_text(
+                "Set-Content -LiteralPath $env:HB_TEST_MODULE_MARKER -Value touched\n"
+                "function ProbeTrap { 'version' }\n"
+                "Export-ModuleMember -Function ProbeTrap\n",
+                encoding="utf-8",
+            )
+            source = REPOSITORY / "scripts/maintain-agentic-winget-apps.ps1"
+            script = r"""
+$tokens=$null; $errors=$null
+$ast=[System.Management.Automation.Language.Parser]::ParseFile(
+    $env:HB_TEST_WINGET_SOURCE,[ref]$tokens,[ref]$errors)
+$definitions=@()
+foreach($name in @('Resolve-HBExternalCommandPath','Test-HBCLITool','Test-HBNpmAgentTool')){
+    $function=$ast.FindAll({
+        param($node)
+        $node -is [System.Management.Automation.Language.FunctionDefinitionAst] -and
+        $node.Name -eq $name
+    },$true) | Select-Object -First 1
+    $definitions += $function.Extent.Text
+}
+$calls=@'
+$script:CompareOnly=$true
+foreach($name in @('Test-HBCLITool','Test-HBNpmAgentTool')){
+    $result=& $name ([pscustomobject]@{id='fixture';command='ProbeTrap';args=@('--version')})
+    if($result){throw "$name unexpectedly resolved module function"}
+}
+'@
+Invoke-Expression (($definitions -join [Environment]::NewLine) + [Environment]::NewLine + $calls)
+if(Test-Path -LiteralPath $env:HB_TEST_MODULE_MARKER){throw 'module auto-loaded'}
+"""
+            env = os.environ.copy()
+            env["PSModulePath"] = str(root / "modules") + os.pathsep + env.get("PSModulePath", "")
+            env["HB_TEST_MODULE_MARKER"] = str(marker)
+            env["HB_TEST_WINGET_SOURCE"] = str(source)
+            completed = subprocess.run(
+                ["pwsh", "-NoProfile", "-Command", script],
+                env=env, text=True, capture_output=True, timeout=10,
+            )
+            self.assertEqual(completed.returncode, 0, completed.stderr)
+            self.assertFalse(marker.exists())
+
     def test_fixture_python_is_the_selected_test_interpreter(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

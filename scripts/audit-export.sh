@@ -1,5 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash -p
 set -euo pipefail
+
+# The image installs this script and its system tools in root-owned paths.
+# Agent-writable PATH entries must not select the interpreter or audit helpers.
+export PATH=/usr/local/bin:/usr/bin:/bin
 
 opencode_dir="${OPENCODE_DATA_DIR:-/home/adedev/.local/share/opencode}"
 codex_dir="${CODEX_DATA_DIR:-/home/adedev/.codex}"
@@ -9,9 +13,20 @@ copilot_dir="${COPILOT_HOME:-/home/adedev/.copilot}"
 audit_dir="${AUDIT_DIR:-/audit}"
 audit_date="${AUDIT_DATE:-$(date -u +%F)}"
 audit_output="${AUDIT_OUTPUT:-${audit_dir}/${audit_date}.jsonl}"
+audit_run_id="${AUDIT_RUN_ID:-$(python3 -c 'import uuid; print(uuid.uuid4())')}"
 project_path="${AUDIT_PROJECT_PATH:-${PWD:-unknown}}"
 actor="${AUDIT_ACTOR:-$(id -un 2>/dev/null || whoami 2>/dev/null || printf 'unknown')}"
 exported_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+session_entry_count=0
+
+[[ "$audit_date" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || {
+  printf 'Invalid audit UTC date\n' >&2
+  exit 2
+}
+[[ "$audit_run_id" =~ ^[0-9a-fA-F-]{36}$ ]] || {
+  printf 'Invalid audit run ID\n' >&2
+  exit 2
+}
 
 if ! command -v jq >/dev/null 2>&1; then
   printf 'audit-export requires jq in PATH\n' >&2
@@ -85,6 +100,7 @@ emit_entry() {
       source_path: $source_path,
       exported_at: $exported_at
     }' >>"$tmp_output"
+  session_entry_count=$((session_entry_count + 1))
 }
 
 emit_tool_version() {
@@ -162,7 +178,19 @@ collect_opencode
 collect_codex
 collect_claude
 
-cp "$tmp_output" "$audit_output"
+# A run record proves that this invocation wrote the current day file even
+# when no session metadata is discoverable. It does not claim session coverage.
+jq -cn \
+  --arg run_id "$audit_run_id" \
+  --arg audit_date "$audit_date" \
+  --arg exported_at "$exported_at" \
+  --argjson session_metadata_count "$session_entry_count" \
+  '{record_type: "audit-export-run", run_id: $run_id,
+    audit_date: $audit_date, exported_at: $exported_at,
+    session_coverage: "filesystem-metadata-only",
+    session_metadata_count: $session_metadata_count}' >>"$tmp_output"
+
+mv -f -- "$tmp_output" "$audit_output"
 chmod 0640 "$audit_output" 2>/dev/null || true
 line_count="$(wc -l <"$audit_output" | tr -d '[:space:]')"
 printf 'Wrote %s audit metadata line(s) to %s\n' "$line_count" "$audit_output" >&2

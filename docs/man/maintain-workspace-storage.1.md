@@ -46,17 +46,23 @@ Benutzerzugriff.
 ## NON-MSL ADAPTERS
 
 `C64Projects/cc65` verwendet absichtlich C89 und 6502-Assembly für 8-Bit-
-Kompatibilität. Safe führt nur vorab geprüfte native `make ... clean`-Gruppen
-für Hostwerkzeuge, Laufzeitbibliotheken, generierte Dokumentation und
-Regression-Arbeitsverzeichnisse aus. Sample- und Targettest-Nachweise wie
-Disk-Images, Zielbinärdateien, Maps, Labels und Debuglisten bleiben erhalten.
-`make zap` wird nie verwendet; Root-`make clean` gehört nur zu `deep`. Weicht
-dessen Vorschau von den deklarierten Pfaden ab, protokolliert Deep die
-Scope-Warnung und fällt auf die einzeln geprüften Safe-Gruppen zurück.
+Kompatibilität. Safe und Deep wählen nur die deklarierten generierten
+Verzeichnisse für Hostwerkzeuge, Laufzeitbibliotheken, Dokumentation und
+Regression. Vor dem Entfernen müssen die Verzeichnisse repo-intern, von Git
+ignoriert und ungetrackt sein. Der cc65-Adapter startet keinen `make`-Prozess und
+wertet auch in Vorschau oder Check keinen Checkout-`Makefile` aus. Deep
+erzwingt nur die Alters-Eignung der gleichen kuratierten Pfade. Sample- und
+Targettest-Nachweise wie Disk-Images, Zielbinärdateien, Maps, Labels und
+Debuglisten bleiben außerhalb dieser Pfade erhalten. Bei einem Fehler kann
+bereits ein Teil der kuratierten Verzeichnisse entfernt sein; es gibt kein
+automatisches Rollback.
 
-*`make zap` is never used, and root `make clean` belongs to `deep` only. If its
-preview exceeds the declared paths, Deep records the scope warning and falls
-back to the individually proven Safe groups.*
+*Safe and Deep select only curated generated directories. Each candidate must
+stay inside the repository and be ignored and untracked by Git before removal.
+The cc65 adapter does not run `make` or evaluate its checkout Makefile, including in previews.
+Deep only overrides the age threshold for the same curated paths. Protected
+sample and target-test evidence outside those paths remains untouched. A
+failure can follow a partial removal; there is no automatic rollback.*
 
 `CLionProjects/tvision` bleibt wegen Quell-/ABI-Kompatibilität C++14. Ein
 CMake-Buildverzeichnis wird nur akzeptiert, wenn sein `CMakeCache.txt` auf

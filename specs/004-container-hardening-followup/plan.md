@@ -427,7 +427,7 @@ this plan claims neither installation nor successful execution.
 | intake-authoring-governance | 0.3.10 | 64 |
 | intake-review-governance | 0.2.7 | 65 |
 | intake-sequencing-governance | 0.2.11 | 66 |
-| autonomous-run-governance | 0.4.7 | 70 |
+| autonomous-run-governance | 0.4.8 | 70 |
 | parallel-autonomous-run-governance | 0.2.9 | 80 |
 | project-statistics-governance | 0.1.3 | 90 |
 

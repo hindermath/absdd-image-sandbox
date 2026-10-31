@@ -16,6 +16,24 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class VersionPinTests(unittest.TestCase):
+    def test_release_archives_are_native_and_bound_to_independent_checks(self):
+        text = (ROOT / "Dockerfile").read_text()
+        sources = {
+            "python": ("github.com/astral-sh/python-build-standalone/releases/download/", "python_sha256"),
+            "go": ("go.dev/dl/go${GO_VERSION}.linux-${go_arch}.tar.gz", "go_sha256"),
+            "syft": ("github.com/anchore/syft/releases/download/", "syft_sha256"),
+            "uv": ("github.com/astral-sh/uv/releases/download/", "uv_sha256"),
+            "antigravity": ("github.com/google-antigravity/antigravity-cli/releases/download/", "agy_sha256"),
+        }
+        for name, (source, digest_name) in sources.items():
+            with self.subTest(name=name):
+                self.assertIn(source, text)
+                self.assertRegex(text, rf'amd64\) [^\n]*{digest_name}="[0-9a-f]{{64}}"')
+                self.assertRegex(text, rf'arm64\) [^\n]*{digest_name}="[0-9a-f]{{64}}"')
+                self.assertIn(f'"${{{digest_name}}}"', text)
+        self.assertIn('gpg --batch --assert-signer "${swift_signing_key}"', text)
+        self.assertIn('sha512sum -c -', text)
+
     def test_linux_swift_registry_matches_image_toolchain(self):
         text = (ROOT / "Dockerfile").read_text()
         tag = re.search(r"(?m)^ARG SWIFT_DOCKER_TAG=(\S+)$", text).group(1)
@@ -24,6 +42,33 @@ class VersionPinTests(unittest.TestCase):
         )
         swift = next(tool for tool in registry["tools"] if tool["id"] == "swift")
         self.assertEqual(swift["install"]["linux"]["swiftVersion"], tag.removesuffix("-noble"))
+
+    def test_swift_signature_must_match_pinned_signer(self):
+        text = (ROOT / "Dockerfile").read_text()
+        fingerprint = "".join(("52BB7E3DE2", "8A71BE22EC", "05FFEF80A8", "66B47A981F"))
+        self.assertIn(f'swift_signing_key="{fingerprint}"', text)
+        self.assertIn('gpg --batch --assert-signer "${swift_signing_key}" --verify '
+                      '"${tmp_dir}/swift.tar.gz.sig" "${tmp_dir}/swift.tar.gz"', text)
+        self.assertNotIn('gpg --batch --verify "${tmp_dir}/swift.tar.gz.sig"', text)
+
+    def test_syft_and_uv_archives_use_reviewed_digest_literals(self):
+        text = (ROOT / "Dockerfile").read_text()
+        expected = {
+            "syft": {
+                "amd64": "bb65249542db5fedeeb4d3f9b018b75e7264dbfbbb10486f044581a92f90490d",
+                "arm64": "929bd163db2d7cd2255d3bcb8967208079813d7b46b0c952f7b794d8e2c7d304",
+            },
+            "uv": {
+                "amd64": "f68d291c75783122dad58ab77def0e13f3233f358731db5d6d7e8715603b928f",
+                "arm64": "4bb69cf95ed13f23713bb7bc09f241896ea0c75b7c557e615a20604b82f9c403",
+            },
+        }
+        for tool, architectures in expected.items():
+            for architecture, digest in architectures.items():
+                self.assertRegex(text, rf'{architecture}\) [^\n]*{tool}_sha256="{digest}"')
+            self.assertIn(f'"${{{tool}_sha256}}" "${{tmp_dir}}/', text)
+        self.assertNotIn('syft_${SYFT_VERSION}_checksums.txt" -o', text)
+        self.assertNotIn('${uv_archive}.sha256" -o', text)
 
     def test_learner_language_versions_match_image_pins(self):
         text = (ROOT / "Dockerfile").read_text()

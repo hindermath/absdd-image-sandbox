@@ -8,7 +8,7 @@
     components and optionally runs only the version- and digest-pinned Grype
     image with a read-only SBOM mount.
 .PARAMETER SbomPath
-    SBOM-Datei; leer waehlt die neueste lokale Datei. / SBOM path; empty selects the latest local file.
+    Explizite SBOM-Datei (Pflicht). / Explicit SBOM file (required).
 .PARAMETER Scan
     Gepinnten Scan ausfuehren / run the pinned scan.
 .PARAMETER Scanner
@@ -16,7 +16,7 @@
 .PARAMETER ScanOutput
     Optionaler JSON-Ausgabepfad / optional JSON output path.
 .EXAMPLE
-    pwsh -NoProfile -File scripts/analyze-sbom.ps1 -Scan -Scanner grype -WhatIf
+    pwsh -NoProfile -File scripts/analyze-sbom.ps1 -SbomPath sboms/candidate.cdx.json -Scan -Scanner grype -WhatIf
 #>
 [CmdletBinding(SupportsShouldProcess)]
 param(
@@ -34,24 +34,19 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
+if ([string]::IsNullOrWhiteSpace($SbomPath)) {
+    throw 'SbomPath is required; select the exact SBOM produced for the image under review.'
+}
+if ($GrypeImage -notmatch '^[^\s@]+@sha256:[0-9a-fA-F]{64}$') {
+    throw 'GrypeImage must name a scanner image pinned by SHA-256 digest.'
+}
+
 if ($WhatIfPreference) {
     Write-Output "WHATIF: summarize CycloneDX input without writes"
     if ($Scan) {
         Write-Output "WHATIF: podman run --rm <read-only-sbom-mount> $GrypeImage sbom:/work/<sbom>"
     }
     exit 0
-}
-
-if ([string]::IsNullOrWhiteSpace($SbomPath)) {
-    $latest = Get-ChildItem -Path "sboms" -Filter "*.cdx.json" -File -ErrorAction SilentlyContinue |
-        Sort-Object LastWriteTime -Descending |
-        Select-Object -First 1
-
-    if (-not $latest) {
-        throw "No SBOM found. Generate one with .\scripts\build-and-sbom.ps1 first."
-    }
-
-    $SbomPath = $latest.FullName
 }
 
 $resolvedSbom = (Resolve-Path -LiteralPath $SbomPath).ProviderPath

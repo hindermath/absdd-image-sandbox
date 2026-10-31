@@ -16,6 +16,30 @@ regexes = [
 ]
 
 [[allowlists]]
+description = "Exact public PowerShell source SHA-256 line in Feature 004 catalog"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = [
+  '''^docs/security/secure-development/004-container-hardening-followup/interface-catalog\.json$''',
+]
+regexes = [
+  '''"scripts/scan-agent-secrets\.ps1": "0e8b8035b2b94b41(?:)cef29989fc373561650ece571f5ba42a16e07ef984aac0c9"''',
+]
+
+[[allowlists]]
+description = "Exact public shell source SHA-256 line in Feature 004 catalog"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "line"
+paths = [
+  '''^docs/security/secure-development/004-container-hardening-followup/interface-catalog\.json$''',
+]
+regexes = [
+  '''"scripts/scan-agent-secrets\.sh": "47df3ba6f31038487de8e1ac52e2b79b8(?:)dca84ba6d0f5a60c4a9fde941a73b96"''',
+]
+
+[[allowlists]]
 description = "Allow documented placeholder values in example files only"
 condition = "AND"
 regexTarget = "line"

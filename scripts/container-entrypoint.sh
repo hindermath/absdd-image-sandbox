@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash -p
 set -Eeuo pipefail
 
 audit_ran=0
@@ -17,12 +17,12 @@ run_audit_export() {
       ;;
   esac
 
-  if ! command -v audit-export >/dev/null 2>&1; then
+  if [ ! -x /usr/local/bin/audit-export ]; then
     printf 'audit-export is not available during shutdown; skipping audit export\n' >&2
     return 0
   fi
 
-  audit-export || printf 'audit-export failed during shutdown; continuing container stop\n' >&2
+  /usr/local/bin/audit-export || printf 'audit-export failed during shutdown; continuing container stop\n' >&2
 }
 
 shutdown() {

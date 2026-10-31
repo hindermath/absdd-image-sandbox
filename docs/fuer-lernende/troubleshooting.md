@@ -22,6 +22,24 @@ Look for the error that matches your message.
 
 ---
 
+## Audit-Stopp blockiert / Audit stop is blocked
+
+**DE:** Auf dem Host im Repository (Bash oder PowerShell 7) nennt der
+Stopp-Wrapper die Phase: Mount, Export, Verifikation oder Retention. Prüfe
+den `audit-logs/`-Mount und die Fehlermeldung. Bei Retention können bereits
+alte Tagesdateien entfernt sein; die Meldung nennt die Zahl, soweit
+ermittelbar. Wiederhole nach der Korrektur denselben Wrapper für einen neuen
+Export. Entferne keine fremde Sperre und nutze keinen direkten `down` als
+Fehlerumgehung. `--dry-run` beziehungsweise `-WhatIf` zeigt nur den Ablauf.
+
+**EN:** On the host in the repository (Bash or PowerShell 7), the stop
+wrapper names the failed phase: mount, export, verification, or retention.
+Inspect the `audit-logs/` mount and message. Retention may already have
+removed old day files; the message gives the count when known. After fixing
+the cause, retry the same wrapper for a new export. Do not remove a foreign
+lock or bypass the error with direct `down`. `--dry-run` or `-WhatIf` only
+previews the steps.
+
 ## `command not found` bei `podman` oder `git` / `command not found` for `podman` or `git`
 
 **DE:**

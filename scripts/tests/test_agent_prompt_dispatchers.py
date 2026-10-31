@@ -24,6 +24,80 @@ def clean_environment() -> dict[str, str]:
 
 
 class AgentPromptDispatcherTests(unittest.TestCase):
+    def test_confidential_sources_never_reach_child_argv(self) -> None:
+        for shell in ("bash", "pwsh"):
+            if not shutil.which(shell):
+                continue
+            for agent in ("codex", "claude", "opencode", "copilot", "gemini"):
+                with self.subTest(shell=shell, agent=agent), tempfile.TemporaryDirectory() as temporary:
+                    root = Path(temporary)
+                    bin_dir = root / "bin"
+                    bin_dir.mkdir()
+                    fake = bin_dir / agent
+                    fake.write_text("#!/bin/sh\nprintf '%s\\n' \"$@\" > \"$ADE_TEST_ARGS\"\n"
+                                    "cat > \"$ADE_TEST_STDIN\"\nprintf 'fixture-result\\n'\n",
+                                    encoding="utf-8")
+                    fake.chmod(0o755)
+                    args_file = root / "args"
+                    stdin_file = root / "stdin"
+                    env = dict(clean_environment(), PATH=f"{bin_dir}{os.pathsep}{os.environ['PATH']}",
+                               ADE_TEST_ARGS=str(args_file), ADE_TEST_STDIN=str(stdin_file))
+                    command = (["bash", str(BASH_DISPATCHER)] if shell == "bash" else
+                               ["pwsh", "-NoProfile", "-File", str(POWERSHELL_DISPATCHER)])
+                    prompt_file = root / "prompt.txt"
+                    prompt_file.write_text(SECRET_PROMPT, encoding="utf-8")
+                    for source in ("stdin", "file"):
+                        with self.subTest(source=source):
+                            input_text = SECRET_PROMPT if source == "stdin" else None
+                            source_args = [] if source == "stdin" else ["--prompt-file", str(prompt_file)]
+                            result = subprocess.run([*command, "--local", agent, *source_args],
+                                                    input=input_text, env=env, text=True,
+                                                    capture_output=True, timeout=20)
+                            self.assertEqual(0, result.returncode, result.stderr)
+                            self.assertIn("fixture-result", result.stdout)
+                            self.assertNotIn(SECRET_PROMPT, args_file.read_text(encoding="utf-8"))
+                            self.assertIn(SECRET_PROMPT, stdin_file.read_text(encoding="utf-8"))
+
+    def test_antigravity_confidential_source_fails_before_cli(self) -> None:
+        for runner in (self.run_bash, self.run_powershell):
+            with self.subTest(runner=runner.__name__):
+                result = runner("--local", "agy", stdin=SECRET_PROMPT)
+                self.assertEqual(2, result.returncode)
+                self.assertIn("streaming output adapter", result.stderr)
+
+    def test_container_transport_preserves_explicit_prompt_kind(self) -> None:
+        for shell in ("bash", "pwsh"):
+            if not shutil.which(shell):
+                continue
+            with self.subTest(shell=shell), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                bin_dir = root / "bin"
+                bin_dir.mkdir()
+                fake_podman = bin_dir / "podman"
+                fake_podman.write_text(
+                    '#!/bin/sh\nprintf "%s\\n" "$@" > "$ADE_TEST_COMPOSE_ARGS"\n'
+                    'shift 5\nADE_AGENT_PROMPT_TARGET=local exec bash "$ADE_TEST_DISPATCHER" "$@"\n',
+                    encoding="utf-8")
+                fake_podman.chmod(0o755)
+                fake_agent = bin_dir / "agy"
+                fake_agent.write_text(
+                    '#!/bin/sh\nprintf "%s\\n" "$@" > "$ADE_TEST_ARGS"\n'
+                    'cat > "$ADE_TEST_STDIN"\nprintf "fixture-result\\n"\n', encoding="utf-8")
+                fake_agent.chmod(0o755)
+                env = dict(clean_environment(), PATH=f"{bin_dir}{os.pathsep}{os.environ['PATH']}",
+                           ADE_TEST_COMPOSE_ARGS=str(root / "compose-args"),
+                           ADE_TEST_DISPATCHER=str(BASH_DISPATCHER),
+                           ADE_TEST_ARGS=str(root / "agent-args"),
+                           ADE_TEST_STDIN=str(root / "agent-stdin"))
+                command = (["bash", str(BASH_DISPATCHER)] if shell == "bash" else
+                           ["pwsh", "-NoProfile", "-File", str(POWERSHELL_DISPATCHER)])
+                result = subprocess.run([*command, "--podman", "agy", "--", SECRET_PROMPT],
+                                        env=env, text=True, capture_output=True, timeout=20)
+                self.assertEqual(0, result.returncode, result.stderr)
+                self.assertIn("fixture-result", result.stdout)
+                self.assertNotIn(SECRET_PROMPT, (root / "compose-args").read_text(encoding="utf-8"))
+                self.assertIn(SECRET_PROMPT, (root / "agent-args").read_text(encoding="utf-8"))
+
     def run_bash(self, *arguments: str, stdin: str | None = None) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
             ["bash", str(BASH_DISPATCHER), *arguments],

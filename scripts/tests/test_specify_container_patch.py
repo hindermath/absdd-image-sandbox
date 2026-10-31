@@ -74,6 +74,12 @@ assert (root / 'copied.txt').read_text() == 'bind mount contents'
                     MODULE.main()
             self.assertEqual(before, target.read_bytes())
 
+    def test_dockerfile_pins_release_commit_and_checks_package_version(self) -> None:
+        dockerfile = (Path(__file__).resolve().parents[2] / "Dockerfile").read_text()
+        self.assertIn("git+https://github.com/github/spec-kit.git@5ea8b1cf0a38699340a38e00d02770308997d8c0", dockerfile)
+        self.assertIn('assert actual == "1.2.3"', dockerfile)
+        self.assertIn("python3 /usr/local/bin/patch-specify-cli.py", dockerfile)
+
 
 if __name__ == "__main__":
     unittest.main()

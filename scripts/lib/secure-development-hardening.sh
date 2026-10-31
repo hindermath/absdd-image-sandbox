@@ -1187,6 +1187,8 @@ sdh_update_order_file() {
   local order_file="$repo/Lastenheft_Abarbeitungsreihenfolge.md"
   local section_file tmp_file normalized_file
 
+  sdh_assert_safe_output_path "$repo" 'Lastenheft_Abarbeitungsreihenfolge.md' || return 2
+
   section_file="$(mktemp)"
   tmp_file="$(mktemp)"
   normalized_file="$(mktemp)"
@@ -1250,6 +1252,10 @@ EOF
     return 0
   fi
 
+  if ! sdh_assert_safe_output_path "$repo" 'Lastenheft_Abarbeitungsreihenfolge.md'; then
+    rm -f "$section_file" "$tmp_file" "$normalized_file"
+    return 2
+  fi
   mv "$tmp_file" "$order_file"
   rm -f "$section_file" "$normalized_file"
   return 0
@@ -1289,6 +1295,12 @@ sdh_prepare_repo() {
     return 0
   fi
 
+  if ! sdh_assert_safe_output_path "$repo" 'Lastenheft_Abarbeitungsreihenfolge.md'; then
+    SDH_PREPARE_RESULT="error"
+    SDH_PREPARE_REASON="unsicherer Reihenfolge-Ausgabepfad"
+    return 1
+  fi
+
   script_dir="${script_dir:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." 2>/dev/null && pwd)}"
   source_dir="$(sdh_find_source_dir "$script_dir" 2>/dev/null || true)"
   template_file="$(sdh_find_template_file "$script_dir" 2>/dev/null || true)"
@@ -1326,6 +1338,12 @@ sdh_prepare_repo() {
   if sdh_update_order_file "$repo" "$dry_run"; then
     [ "$dry_run" = "1" ] && sdh_log "  [dry-run] Lastenheft_Abarbeitungsreihenfolge.md aktualisieren"
   else
+    local order_status=$?
+    if [ "$order_status" -ne 1 ]; then
+      SDH_PREPARE_RESULT="error"
+      SDH_PREPARE_REASON="Reihenfolge-Datei konnte nicht sicher aktualisiert werden"
+      return 1
+    fi
     [ "$dry_run" = "1" ] && sdh_log "  [dry-run] Lastenheft_Abarbeitungsreihenfolge.md unveraendert"
   fi
 

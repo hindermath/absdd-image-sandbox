@@ -101,12 +101,17 @@ not automate sign-in, provider selection, or model selection.
 **DE:** Die Bash- und PowerShell-Dispatcher besitzen dieselbe Zuordnung. Der
 Host-Aufruf zielt standardmäßig auf den laufenden Compose-Service `ade`; im
 Image wird die CLI direkt ausgeführt. Verwende stdin oder `--prompt-file`,
-wenn der Prompt nicht in Shell-Historie oder Prozessliste erscheinen soll.
+wenn der Prompt bei Codex, Claude, OpenCode, Copilot oder Gemini nicht in
+Shell-Historie oder Prozessliste erscheinen soll. Antigravity lehnt diesen
+vertraulichen Eingabeweg derzeit ab; nutze dort nur unkritische
+Prompt-Argumente.
 
 **EN:** The Bash and PowerShell dispatchers use the same mapping. The host
 entrypoint targets the running Compose service `ade` by default; inside the
 image it invokes the CLI directly. Use stdin or `--prompt-file` when the prompt
-must not appear in shell history or a process list.
+must not appear in shell history or a process list for Codex, Claude,
+OpenCode, Copilot or Gemini. Antigravity currently rejects this confidential
+input path; use only non-sensitive prompt arguments there.
 
 ```bash
 printf '%s\n' 'Pruefe den aktuellen Diff und aendere nichts.' | \

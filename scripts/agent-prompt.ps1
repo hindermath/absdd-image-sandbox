@@ -44,6 +44,7 @@ $agent = ''
 $workDir = ''
 $promptFile = ''
 $dryRun = $false
+$promptArgvFromStdin = $false
 $agentArguments = [System.Collections.Generic.List[string]]::new()
 $promptParts = [System.Collections.Generic.List[string]]::new()
 $inputArguments = @($args)
@@ -75,6 +76,7 @@ for ($index = 0; $index -lt $inputArguments.Count; $index++) {
             continue
         }
         '--dry-run' { $dryRun = $true; continue }
+        '--unsafe-prompt-argv-from-stdin' { $promptArgvFromStdin = $true; continue }
         '--' {
             for ($promptIndex = $index + 1; $promptIndex -lt $inputArguments.Count; $promptIndex++) {
                 $promptParts.Add($inputArguments[$promptIndex])
@@ -122,14 +124,30 @@ if ($promptFile) {
 }
 
 if ([string]::IsNullOrWhiteSpace($promptText)) { Write-AgentPromptFailure 'the prompt must not be empty' }
+if ($promptArgvFromStdin) {
+    if ($promptSource -ne 'stdin' -or $target -ne 'local') {
+        Write-AgentPromptFailure '--unsafe-prompt-argv-from-stdin requires local stdin transport'
+    }
+    $promptSource = 'argument'
+}
 
 switch ($agent) {
-    'codex' { $agentCommand = 'codex'; $commandArguments = @('exec') + $agentArguments + @($promptText) }
-    'claude' { $agentCommand = 'claude'; $commandArguments = @($agentArguments) + @('-p', $promptText) }
-    'opencode' { $agentCommand = 'opencode'; $commandArguments = @('run') + $agentArguments + @($promptText) }
-    'copilot' { $agentCommand = 'copilot'; $commandArguments = @($agentArguments) + @('-p', $promptText) }
-    'gemini' { $agentCommand = 'gemini'; $commandArguments = @($agentArguments) + @('-p', $promptText) }
-    'agy' { $agentCommand = 'agy'; $commandArguments = @($agentArguments) + @('-p', $promptText) }
+    'codex' { $agentCommand = 'codex'; $commandArguments = @('exec') + $agentArguments }
+    'claude' { $agentCommand = 'claude'; $commandArguments = @($agentArguments) }
+    'opencode' { $agentCommand = 'opencode'; $commandArguments = @('run') + $agentArguments }
+    'copilot' { $agentCommand = 'copilot'; $commandArguments = @($agentArguments) }
+    'gemini' { $agentCommand = 'gemini'; $commandArguments = @($agentArguments) }
+    'agy' { $agentCommand = 'agy'; $commandArguments = @($agentArguments) }
+}
+if ($promptSource -eq 'argument') {
+    if ($agent -in @('claude', 'copilot', 'gemini', 'agy')) { $commandArguments += '-p' }
+    $commandArguments += $promptText
+} else {
+    switch ($agent) {
+        'codex' { $commandArguments += '-' }
+        'claude' { $commandArguments += '-p' }
+        'agy' { Write-AgentPromptFailure 'Antigravity confidential stdin/file prompts need a verified streaming output adapter; use a non-confidential argument prompt only' }
+    }
 }
 
 if ($dryRun) {
@@ -137,7 +155,9 @@ if ($dryRun) {
     Write-Output "Agent: ${agent}"
     Write-Output "Working directory: $(if ($workDir) { $workDir } else { '<current>' })"
     Write-Output "Prompt source: ${promptSource}"
-    $visibleArguments = @($commandArguments[0..([Math]::Max(0, $commandArguments.Count - 2))])
+    $visibleCount = $commandArguments.Count
+    if ($promptSource -eq 'argument') { $visibleCount-- }
+    $visibleArguments = if ($visibleCount -gt 0) { @($commandArguments[0..($visibleCount - 1)]) } else { @() }
     Write-Output "Agent command: ${agentCommand} $($visibleArguments -join ' ') <prompt:redacted>"
     exit 0
 }
@@ -156,7 +176,11 @@ if ($target -eq 'local') {
     }
     if ($workDir) { Push-Location -LiteralPath $workDir }
     try {
-        & $agentCommand @commandArguments
+        if ($promptSource -eq 'argument') {
+            & $agentCommand @commandArguments
+        } else {
+            $promptText | & $agentCommand @commandArguments
+        }
         exit $LASTEXITCODE
     } finally {
         if ($workDir) { Pop-Location }
@@ -194,6 +218,7 @@ switch ($composeMode) {
 }
 
 $containerArguments = @('exec', '-T', 'ade', '/usr/local/bin/agent-prompt', '--local')
+if ($promptSource -eq 'argument') { $containerArguments += '--unsafe-prompt-argv-from-stdin' }
 if ($workDir) { $containerArguments += @('--cwd', $workDir) }
 foreach ($agentArgument in $agentArguments) {
     $containerArguments += @('--agent-arg', $agentArgument)

@@ -148,6 +148,16 @@ stehen in der [technischen Nachpruefung](../security/toolchain-followups-2026-10
 state. Failed audit export is an error, not permission to delete. See the
 technical follow-up for OpenCode 2 limitations.
 
+**DE:** Der aktuelle Stopp prüft auch den nichtleeren Tagesexport und behält
+30 UTC-Tage passender Auditdateien. Ein fehlender Mount, eine fremde Sperre
+oder ein Retentionfehler verhindert `down`. Prüfe die gemeldete Phase und
+versuche den Wrapper erneut; `--dry-run` ist nur eine schreibfreie Vorschau.
+
+**EN:** The current stop also verifies the nonempty day export and retains
+30 UTC days of matching audit files. A missing mount, foreign lock, or
+retention error blocks `down`. Inspect the reported phase and retry the
+wrapper; `--dry-run` is only a write-free preview.
+
 **DE:** Fehler? Lies die [FAQ](faq.md), danach die
 [Fehlerbehebung](troubleshooting.md). Keine globalen Prune- oder Reset-Befehle
 als Reparaturversuch verwenden.

@@ -136,8 +136,24 @@ def main() -> int:
         failures.append("Renovate supply-chain group is missing anchore/syft")
     if "syft version" not in smoke_text:
         failures.append("smoke test is missing: syft version")
-    if "syft_${SYFT_VERSION}_checksums.txt" not in dockerfile_text:
-        failures.append("Syft installation does not retrieve its checksum manifest")
+    # The security-pinned installer now uses reviewed per-architecture digests;
+    # a same-origin checksum-manifest download must not be required here.
+    archive_hash_contracts = {
+        "Syft": (
+            r'amd64\) syft_arch="amd64"; syft_sha256="[0-9a-f]{64}"',
+            r'arm64\) syft_arch="arm64"; syft_sha256="[0-9a-f]{64}"',
+            'printf \'%s  %s\\n\' "${syft_sha256}"',
+        ),
+        "uv": (
+            r'amd64\) uv_target="x86_64-unknown-linux-gnu"; uv_sha256="[0-9a-f]{64}"',
+            r'arm64\) uv_target="aarch64-unknown-linux-gnu"; uv_sha256="[0-9a-f]{64}"',
+            'printf \'%s  %s\\n\' "${uv_sha256}"',
+        ),
+    }
+    for label, (amd64, arm64, verifier) in archive_hash_contracts.items():
+        if not (re.search(amd64, dockerfile_text) and re.search(arm64, dockerfile_text)
+                and verifier in dockerfile_text):
+            failures.append(f"Dockerfile is missing fixed amd64/arm64 SHA-256 verification for {label}")
 
     if not re.search(r"^ARG POWERSHELL_VERSION=\S+$", dockerfile_text, re.MULTILINE):
         failures.append("required scripting tool ARG missing: POWERSHELL_VERSION")

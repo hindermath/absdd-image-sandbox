@@ -1,0 +1,24 @@
+# Optional restrictive profile. Use with: podman-compose -f compose.yml -f compose.read-only.yml config
+services:
+  ade:
+    read_only: true
+    tmpfs:
+      - /tmp:rw,nosuid,nodev,mode=1777
+      - /run:rw,nosuid,nodev,mode=755
+      # Podman 6.1 tmpfs accepts mode, not uid/gid; sticky cache is transient.
+      - /home/adedev/.cache:rw,nosuid,nodev,mode=1777
+    volumes:
+      # OpenCode needs writable XDG state for even --version. Keep it separate.
+      - opencode_state:/home/adedev/.local/state:U
+      # .NET and PowerShell need separate first-use state under a read-only root.
+      - dotnet_home:/home/adedev/.dotnet:U
+      - powershell_home:/home/adedev/.local/share/powershell:U
+      - dotnet_templates:/home/adedev/.templateengine:U
+      - nuget_home:/home/adedev/.nuget:U
+
+volumes:
+  opencode_state:
+  dotnet_home:
+  powershell_home:
+  dotnet_templates:
+  nuget_home:

@@ -3,6 +3,7 @@ set -euo pipefail
 
 MODE=""
 EVIDENCE=""
+FEATURE_DIRECTORY=""
 DRY_RUN="false"
 
 usage() {
@@ -16,7 +17,8 @@ Options:
   --mode MODE       Input, Static, Runtime, SupplyChain, Documentation,
                     Accessibility, or All.
   --evidence PATH   Repository-relative verification-evidence JSON path.
-  --dry-run         Show planned checks without executing external commands.
+  --feature-directory PATH  Explicit Feature 004 directory; requires its own evidence.
+  --dry-run         Show planned checks without execution; exit 0 is not a pass.
   -h, --help        Show this bilingual help.
 
 Exit codes:
@@ -24,6 +26,10 @@ Exit codes:
   1  Validation or observed check failed (RED).
   2  Usage, JSON contract, or repository-path error.
   3  Required platform, runner, executable, or human evidence is unavailable.
+
+DE: Feature 004 verwendet nur seine eigene Evidence. All mit offenen
+Pflicht-Gates ist nicht GREEN. / Feature 004 uses only its own evidence;
+All with mandatory Open gates is never GREEN.
 USAGE
 }
 
@@ -37,6 +43,11 @@ while [[ $# -gt 0 ]]; do
     --evidence)
       [[ $# -ge 2 ]] || { echo "--evidence requires a value" >&2; exit 2; }
       EVIDENCE="$2"
+      shift 2
+      ;;
+    --feature-directory)
+      [[ $# -ge 2 && -n "$2" ]] || { echo "--feature-directory requires a value" >&2; exit 2; }
+      FEATURE_DIRECTORY="$2"
       shift 2
       ;;
     --dry-run)
@@ -78,6 +89,9 @@ arguments=(
 )
 if [[ -n "${EVIDENCE}" ]]; then
   arguments+=(--evidence "${EVIDENCE}")
+fi
+if [[ -n "${FEATURE_DIRECTORY}" ]]; then
+  arguments+=(--feature-directory "${FEATURE_DIRECTORY}")
 fi
 if [[ "${DRY_RUN}" == "true" ]]; then
   arguments+=(--dry-run)

@@ -8,9 +8,14 @@ public sealed class RunResultReconciler
         Guid expectedRunId,
         int processExitCode,
         AtomicRunReport? report,
-        MaintenanceEvent? completionEvent)
+        MaintenanceEvent? completionEvent,
+        bool eventStreamDegraded = false)
     {
         var mismatches = new List<string>();
+        if (eventStreamDegraded)
+        {
+            mismatches.Add("Ereignisstrom ist beschädigt / event stream is degraded.");
+        }
         if (report is null)
         {
             mismatches.Add("Finalisierter Bericht fehlt / finalized report is missing.");

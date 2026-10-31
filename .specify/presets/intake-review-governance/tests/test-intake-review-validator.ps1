@@ -6,7 +6,9 @@ $ErrorActionPreference = 'Stop'
 
 $PresetRoot = Split-Path -Parent (Split-Path -Parent $PSCommandPath)
 $TempRoot = Join-Path ([IO.Path]::GetTempPath()) "intake-review-$([Guid]::NewGuid())"
+$OutsideRoot = Join-Path ([IO.Path]::GetTempPath()) "intake-review-outside-$([Guid]::NewGuid())"
 New-Item -ItemType Directory -Path (Join-Path $TempRoot 'intakes') -Force | Out-Null
+New-Item -ItemType Directory -Path $OutsideRoot -Force | Out-Null
 
 function Get-NormalizedHash([string]$Path) {
     $Utf8 = [Text.UTF8Encoding]::new($false, $true)
@@ -232,7 +234,25 @@ try {
         $Request.series.roots = @('intakes/a.md', 'intakes/b.md')
     }
 
-    Write-Output 'PASS: intake-review validator parity, Series 1.1 graph contract, and negative cases'
+    foreach ($KindOfEscape in @('target-file', 'request-file')) {
+        Reset-SeriesFixture
+        $Relative = if ($KindOfEscape -eq 'target-file') { 'intakes/a.md' } else { 'request.json' }
+        $Inside = Join-Path $TempRoot $Relative
+        $Outside = Join-Path $OutsideRoot ([IO.Path]::GetFileName($Relative))
+        Copy-Item -LiteralPath $Inside -Destination $Outside -Force
+        Remove-Item -LiteralPath $Inside -Force
+        New-Item -ItemType SymbolicLink -Path $Inside -Target $Outside | Out-Null
+        foreach ($Kind in @('Bash', 'PowerShell')) {
+            $Output = Invoke-Validator $Kind 2
+            if ($Output -notmatch 'escapes selected repository|outside repository|containment failed') {
+                throw "$Kind failed to reject $KindOfEscape`: $Output"
+            }
+        }
+        Remove-Item -LiteralPath $Inside -Force
+    }
+
+    Write-Output 'PASS: intake-review validator parity, Series 1.1 graph contract, containment and negative cases'
 } finally {
     Remove-Item -LiteralPath $TempRoot -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -LiteralPath $OutsideRoot -Recurse -Force -ErrorAction SilentlyContinue
 }

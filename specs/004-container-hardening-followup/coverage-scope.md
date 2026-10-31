@@ -1,18 +1,18 @@
 # Coverage Scope: Namentlicher Nenner / Named Denominator
 
-**Snapshot**: 2026-10-26, Git `5e60e2110e9b788ae8eff9561f11feb6c7850566`.
+**Snapshot**: 2026-10-31, Git `51757c98f6a872419be6b9ae4d33685fe0782b67`.
 **Requirement**: Spec FR-003, Clarification 2026-10-25, AC-H-344-02.
 
-DE: 104 bereits vorhandene Dateien als konservativer Messumfang. Nicht nur
+DE: 106 aktuell vorhandene Dateien als konservativer Messumfang. Nicht nur
 geänderte Helfer betrachten. Erfasst werden Argument-/Pfad-/Mount-/Netzwerk- /
 Download-/Integritäts-/Audit-/Dispatchgrenzen sowie ihre ausführbaren Wrapper.
 Die Liste schließt vorsorglich lokale Spec-Kit-Core-Skripte und zusätzliche
 Prüfeinstiege ein; keine bequeme Verkleinerung auf die geänderten Module.
-Der neue Retention-Kern kommt bei Implementierung hinzu. Zahlen sind eine
+Der neue Retention-Kern ist jetzt enthalten. Zahlen sind eine
 Dateiliste, keine Anzahl von Zweigen oder bestandenen Tests.
-EN: Use 104 existing files as a conservative scope, including unchanged
+EN: Use 106 current files as a conservative scope, including unchanged
 boundary helpers, local Spec Kit core and additional check entrypoints.
-Add the new retention core when implemented. This counts files, not branches
+The new retention core is included. This counts files, not branches
 or successful tests; never reduce scope to edited modules only.
 
 ## Module Inventory
@@ -33,6 +33,7 @@ scripts/build-and-sbom.ps1
 scripts/build-and-sbom.sh
 scripts/build-secure-development-docs.ps1
 scripts/build-secure-development-docs.sh
+scripts/check-archived-markdown-links.ps1
 scripts/check-container-architecture.ps1
 scripts/check-container-architecture.sh
 scripts/check-dockerfile-arg-renovate.py
@@ -55,6 +56,7 @@ scripts/install-spec-kit-governance-presets.ps1
 scripts/install-spec-kit-governance-presets.sh
 scripts/invoke-psscriptanalyzer.ps1
 scripts/lib/agentic_workspace_fleet.py
+scripts/lib/audit_retention.py
 scripts/lib/hg-a11y.ps1
 scripts/lib/hg-a11y.sh
 scripts/lib/hg-bilingual.ps1
