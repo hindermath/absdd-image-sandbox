@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "feature": "004-container-hardening-followup",
-  "sourceRevision": "51757c98f6a872419be6b9ae4d33685fe0782b67",
+  "sourceRevision": "b36d774ebd6cb34f2f0dd2764488b9dee6aaf082",
   "catalogStatus": "ReviewedForT012; execution coverage remains Open",
   "independentReview": "2026-10-31: separate T007 subagent review; 94 unique IDs and variant/source/UI bindings accepted; executed cases and platform evidence pending",
   "publicEntrypointPaths": 56,
@@ -1073,7 +1073,7 @@
         "scripts/check-dockerfile-arg-renovate.py"
       ],
       "sourceHashes": {
-        "scripts/check-dockerfile-arg-renovate.py": "9b036a5e53302e9d08ff963c6dca827cc9bcfafe7720f0dfe2cad8b036a4b0e4"
+        "scripts/check-dockerfile-arg-renovate.py": "ce2203b4dfb1cb7aba6eb304dc3e2678ea43d4e00d8d7d55d72d62afffbc7613"
       },
       "documentationPaths": [],
       "documentationSources": null,

@@ -398,6 +398,7 @@ def candidate_record(
         "fileCount": files,
         "observedDevice": identity.st_dev,
         "observedInode": identity.st_ino,
+        "observedCtimeNs": identity.st_ctime_ns,
         "observedNewestMtime": newest,
         "newestMtimeUtc": (
             datetime.fromtimestamp(newest, timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -413,7 +414,9 @@ def candidate_record(
 def remove_candidate(repository: pathlib.Path, candidate: dict) -> int:
     path = contained_path(repository / candidate["path"], repository, "cleanup candidate")
     identity = path.stat(follow_symlinks=False)
-    if (identity.st_dev, identity.st_ino) != (candidate["observedDevice"], candidate["observedInode"]):
+    if (identity.st_dev, identity.st_ino, identity.st_ctime_ns) != (
+        candidate["observedDevice"], candidate["observedInode"], candidate["observedCtimeNs"]
+    ):
         raise StorageContractError(f"candidate identity changed: {candidate['path']}")
     if not git_path_is_ignored_and_untracked(repository, path):
         raise StorageContractError(f"candidate lost ignored/untracked proof: {candidate['path']}")
