@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "feature": "004-container-hardening-followup",
-  "gitHead": "e115fa863e754a83eff212c72f130f6f8543a988",
+  "gitHead": "ae2b5523fb7389286998a4b9fe3fea5ec6fd177a",
   "sourceBindings": [
     {
       "path": "specs/004-container-hardening-followup/spec.md",
@@ -60,8 +60,8 @@
     {
       "path": "docs/security/secure-development/004-container-hardening-followup/coverage-modules.json",
       "hashKind": "text/raw-and-utf8-lf",
-      "rawSha256": "dfff185b1576ef18c5a1dff0e6c0e4144bc6cafd7f1f627bfdd4e8bcc4cd2056",
-      "normalizedSha256": "dfff185b1576ef18c5a1dff0e6c0e4144bc6cafd7f1f627bfdd4e8bcc4cd2056"
+      "rawSha256": "b117858431518718e009c76d5514286fb7e1f0629402540dfa83c74c8d1842f4",
+      "normalizedSha256": "b117858431518718e009c76d5514286fb7e1f0629402540dfa83c74c8d1842f4"
     },
     {
       "path": "docs/security/secure-development/004-container-hardening-followup/interface-catalog.json",
@@ -90,8 +90,8 @@
     {
       "path": "docs/security/secure-development/004-container-hardening-followup/secure-coding-review.md",
       "hashKind": "text/raw-and-utf8-lf",
-      "rawSha256": "73c45bb6d31ec5bdbb1fe592b7b5957cb8a87f76338eb950a6da6dc2652c9419",
-      "normalizedSha256": "73c45bb6d31ec5bdbb1fe592b7b5957cb8a87f76338eb950a6da6dc2652c9419"
+      "rawSha256": "ef08c72a02e9c8876d86261165e4ccb03e90c3a37847c1801c379da3b7974b2b",
+      "normalizedSha256": "ef08c72a02e9c8876d86261165e4ccb03e90c3a37847c1801c379da3b7974b2b"
     },
     {
       "path": "scripts/tests/fixtures/hardening-followup/security-cases.json",

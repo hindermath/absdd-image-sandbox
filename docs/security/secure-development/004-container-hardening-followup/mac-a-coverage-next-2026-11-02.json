@@ -1,0 +1,1213 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "PartialCoverageContinuation",
+  "feature": "004-container-hardening-followup",
+  "observedAt": "2026-11-02T21:38:35.3408420+00:00",
+  "baseGitHead": "ae2b5523fb7389286998a4b9fe3fea5ec6fd177a",
+  "branch": "codex/004-mac-a-coverage-next",
+  "authority": "User authorized targeted T041-T046 Mac-A tests/evidence only; no builds, actual Podman, installation, global maintenance, commits or pushes.",
+  "runner": {
+    "id": "Mac-A-macOS-ARM64",
+    "os": "macOS",
+    "architecture": "arm64",
+    "python": "3.15.2",
+    "coverage": "7.17.0"
+  },
+  "requirementsReview": {
+    "id": "04d3e335-7b7a-494d-bc78-9587e1659572",
+    "path": "specs/intake-review-results/sandbox-development-lifecycle.json",
+    "sha256": "70cc8a6d5a80df6c2974cc558355df341a967ead0eee37a800ee3cfc959845e1",
+    "outcome": "Ready",
+    "boundary": "Intake quality, not technical or human acceptance"
+  },
+  "previousMeasurement": {
+    "path": "docs/security/secure-development/004-container-hardening-followup/mac-a-coverage-continuation-2026-11-02.json",
+    "sha256": "e262c9a9d5daeb9806d0f7a0978c688384f330b0f3cedc8f8a20b711412595eb",
+    "baseGitHead": "e115fa863e754a83eff212c72f130f6f8543a988",
+    "status": "Historical same-product-source result, not fresh execution"
+  },
+  "thresholds": {
+    "perCriticalModuleBranchPercent": 85,
+    "completeInterfacePercent": 80,
+    "changedInterfacesBothCaseTypesPercent": 100,
+    "changed": false
+  },
+  "sourceHashes": [
+    {
+      "path": ".specify/scripts/bash/check-prerequisites.sh",
+      "sha256": "9e494525d24a8a7d99ac012ff9ea8d640fcd3664f4dc2285ea5dad940c6ff797"
+    },
+    {
+      "path": ".specify/scripts/bash/common.sh",
+      "sha256": "7be3fdf0c81fa4607716bb17f1cf9b2441758f856d5e32965b59daccb49d6634"
+    },
+    {
+      "path": ".specify/scripts/bash/create-new-feature.sh",
+      "sha256": "9af6ea9129c8dc126d01be4b2605182f52fe28ae77cd833a1eb73f20e64b4476"
+    },
+    {
+      "path": ".specify/scripts/bash/setup-plan.sh",
+      "sha256": "de18f6b69272676578d3dc223de1e739d392c733dc7cf5aadfeb46b259c570d7"
+    },
+    {
+      "path": "dotnet/dotnet-wrapper.sh",
+      "sha256": "062f1e02da1c7af7a8a20c6a87a73c9576b2eebebdd8c1407b21bbaf0b5c00b8"
+    },
+    {
+      "path": "scripts/agent-prompt.ps1",
+      "sha256": "85f5fd344a37ad203105790b4ef3a3a13da2166c2112da013e49bb19b9152fc6"
+    },
+    {
+      "path": "scripts/agent-prompt.sh",
+      "sha256": "bb2f6b67a4f04f272aaf992f8d063bfc6667dff25576c6fc131d3746084fce94"
+    },
+    {
+      "path": "scripts/analyze-sbom.ps1",
+      "sha256": "716ba6c2c98626ea9e6870e94d8eb26062a1c249673f0a459a5b2526cae4b267"
+    },
+    {
+      "path": "scripts/analyze-sbom.sh",
+      "sha256": "d1d6f85090cd89591a5ed23e06388bff2ff8611f560ede6681027d21b6ed8973"
+    },
+    {
+      "path": "scripts/audit-export.ps1",
+      "sha256": "579e8f1e4e20f399dd75203c99b0207dc7b391d3abecf2ceade4c7b50095e64c"
+    },
+    {
+      "path": "scripts/audit-export.sh",
+      "sha256": "a69d9af94d328ddab4c68226a14ab50968a8313b9504518631effc9c6e5feacf"
+    },
+    {
+      "path": "scripts/build-and-sbom.ps1",
+      "sha256": "42e6551a5e1e73d6fc0508591ee49f06ea1d3df8165a5adb1158b782d5736ef9"
+    },
+    {
+      "path": "scripts/build-and-sbom.sh",
+      "sha256": "135049322622382b025b677cc13dff57226b5b3e4276e0a750e3ea3d1bc7ed1f"
+    },
+    {
+      "path": "scripts/build-secure-development-docs.ps1",
+      "sha256": "a26d9ccd90428ea9f9df3af1b851b61c3d69bb491207674c104ef956fa97be70"
+    },
+    {
+      "path": "scripts/build-secure-development-docs.sh",
+      "sha256": "b6f0fed0360573c54f9c693fdf29d3f4f74b15347440fb2e2ec37a409c04709c"
+    },
+    {
+      "path": "scripts/check-archived-markdown-links.ps1",
+      "sha256": "94a8cda20f9357a10c446273746cf617ce76927cbc53111dfffabe1340dd6850"
+    },
+    {
+      "path": "scripts/check-container-architecture.ps1",
+      "sha256": "c6490dbddde8042ea79589288e6c26eccfb8cf30a22c0b82d032b88fd33759b5"
+    },
+    {
+      "path": "scripts/check-container-architecture.sh",
+      "sha256": "d6905abf1c436512049f1bc559c9dedd62f92b264c8867ddaaf1c6988d640259"
+    },
+    {
+      "path": "scripts/check-dockerfile-arg-renovate.py",
+      "sha256": "ce2203b4dfb1cb7aba6eb304dc3e2678ea43d4e00d8d7d55d72d62afffbc7613"
+    },
+    {
+      "path": "scripts/check-gsdb-self-assessment.ps1",
+      "sha256": "0a4e296b5ded77a6cbbeef996de0f55489022fa1908c8f754f17abedd483b30e"
+    },
+    {
+      "path": "scripts/check-gsdb-self-assessment.sh",
+      "sha256": "8b01e5e85d2f1a2a03bebc706153351c900a999629fc37a9ada56dd38255d2e5"
+    },
+    {
+      "path": "scripts/check-home-baseline-lock.py",
+      "sha256": "3a7f6d76967f996e973614abdb29aaee8c98ab0eb6f19d6fb3871f076626f135"
+    },
+    {
+      "path": "scripts/check-homogeneity.ps1",
+      "sha256": "a4dfe9d9b047c5f538fff1172eae21a0554a3d91528d0dbb726ffbc737a0e0fd"
+    },
+    {
+      "path": "scripts/check-homogeneity.sh",
+      "sha256": "5970aac2d69b3641a530d4d16dc24f4bf97d81debcfe3ccd605ce28235690c17"
+    },
+    {
+      "path": "scripts/codex-bwrap-wrapper.sh",
+      "sha256": "796e99d21d327b654a0e2370093d7436e9a21091d22990ab0f658754c3e2ea14"
+    },
+    {
+      "path": "scripts/compose-down-with-audit.ps1",
+      "sha256": "a01ae9944197f66c24323eedf033bf7de8c144d50337c43cddc02f39dc68ff33"
+    },
+    {
+      "path": "scripts/compose-down-with-audit.sh",
+      "sha256": "505919baf30060276a13e1f1e23f3effdc1ddb3b485a8ba1bb4ff659f876a8ff"
+    },
+    {
+      "path": "scripts/container-entrypoint.sh",
+      "sha256": "cbeacc63948ca31c50b2563cb0085c15a474690ba7503aaccfefae6eb775b942"
+    },
+    {
+      "path": "scripts/hooks/pre-push",
+      "sha256": "99267c4a91d11f37a1aab57a730f3ba516508be4e5f2568e12abbc954be9c2ec"
+    },
+    {
+      "path": "scripts/init-stats.ps1",
+      "sha256": "de11e70a8a7668a878f02ab008c167c6e498399aff9cdec2c49955c3891efcc2"
+    },
+    {
+      "path": "scripts/init-stats.sh",
+      "sha256": "d068ea35bb0b322d452009ecafa24bdd72692f97bfb145eba5ea0f9cb550ca11"
+    },
+    {
+      "path": "scripts/install-home-baseline-reference.sh",
+      "sha256": "71040410aff766017b3bb17d02582d1098a04267e794d4bdf2507f3611fbec65"
+    },
+    {
+      "path": "scripts/install-hooks.ps1",
+      "sha256": "57cd6a6e995da611fef2c0ce7ec9b8529e6383bbf78f8768f0dca3be6b9c87d4"
+    },
+    {
+      "path": "scripts/install-hooks.sh",
+      "sha256": "deca91c0346c5a6989a031ff6ac259ff9af39dc24738f58acf240251cd9990d0"
+    },
+    {
+      "path": "scripts/install-spec-kit-governance-presets.ps1",
+      "sha256": "0bdc3cf01ef84dcccbc54b5c8189cb7e29e5eb2913a5c08b7d4ca13800dfcc04"
+    },
+    {
+      "path": "scripts/install-spec-kit-governance-presets.sh",
+      "sha256": "649adfdd4d690d90b92a96169028db5406395beb4eb645422b7b0a15a46a63cd"
+    },
+    {
+      "path": "scripts/invoke-psscriptanalyzer.ps1",
+      "sha256": "ab38fe33e9d654659a67dfb2edce625bee4466641df610bbb418c8e534163711"
+    },
+    {
+      "path": "scripts/lib/agentic_workspace_fleet.py",
+      "sha256": "b04602b0fe56c171be32002b21e2e94acc0d39b0aa4430d27afe5fab2ce4adda"
+    },
+    {
+      "path": "scripts/lib/audit_retention.py",
+      "sha256": "2b6e12973057341c039ef280f656c4540dfe719480d343e28ced19824fdbf2a9"
+    },
+    {
+      "path": "scripts/lib/hg-a11y.ps1",
+      "sha256": "556436f282d1301d9a45ddf72326d34ae9241130e86a3ba167d094972e4bef85"
+    },
+    {
+      "path": "scripts/lib/hg-a11y.sh",
+      "sha256": "dfb740d0ea870ea0f7e22d924d83ddf3d9d0f7c5f67abbe4cb0ed8a55a2a5e98"
+    },
+    {
+      "path": "scripts/lib/hg-bilingual.ps1",
+      "sha256": "2ce4e72aae481246d767f974e02eaf6100c2d750283a86013eba3048866ed3c2"
+    },
+    {
+      "path": "scripts/lib/hg-bilingual.sh",
+      "sha256": "b46c4f587f337b504cf0b9a2a4b952e376880047a4f365ec1db5696e7d726f87"
+    },
+    {
+      "path": "scripts/lib/hg-deps.ps1",
+      "sha256": "50d19484342f9f2693c41120ad2164c9d7579b6bcd3a70e5ef33e6424e2c89b6"
+    },
+    {
+      "path": "scripts/lib/hg-deps.sh",
+      "sha256": "e313e742253b9e53946fdaed6c5bd4dca3b269f42a04c0f44983dae551fd83eb"
+    },
+    {
+      "path": "scripts/lib/hg-forgejo.ps1",
+      "sha256": "c6c4cd5f83abc2b319181589fda537b2b3f70615dbd25c2068ab179ef0607544"
+    },
+    {
+      "path": "scripts/lib/hg-forgejo.sh",
+      "sha256": "aa18d0cda561f945409093bfe18bac357bb4cbac86e7940131ca7391e7e29571"
+    },
+    {
+      "path": "scripts/lib/hg-git-scope.sh",
+      "sha256": "720af240a2b7b4e608d63662d1d5c64c860f3846a99322dd6e1cee4450d41a32"
+    },
+    {
+      "path": "scripts/lib/hg-hook.ps1",
+      "sha256": "b98a19bab0ef47ad4d9780abe4d0acf11ec3e48d229033882bddd9dde511a96b"
+    },
+    {
+      "path": "scripts/lib/hg-hook.sh",
+      "sha256": "c66b2b1685d43f9a194138f44900b4ecc152201112330d128d2044687c6ae641"
+    },
+    {
+      "path": "scripts/lib/hg-patch.ps1",
+      "sha256": "87b27a971cc4f7639abbca78b430bf98a7643fc19cf8c3c6557c057b5f812335"
+    },
+    {
+      "path": "scripts/lib/hg-patch.sh",
+      "sha256": "acce31daf1bbb40e414f3d76a62e8e425e669558276ed68ff2ecb01487337673"
+    },
+    {
+      "path": "scripts/lib/hg-scan.ps1",
+      "sha256": "6ecfbbe65f57da8c2823f7a158751fc27d2ebda210e0488e863a70ce23ead195"
+    },
+    {
+      "path": "scripts/lib/hg-scan.sh",
+      "sha256": "2446fcdb80eccbd52beb33e443dcd5ec117b237abb0083c80c4b5a6065d9b9cc"
+    },
+    {
+      "path": "scripts/lib/hg-secrets.ps1",
+      "sha256": "371d59ccc2f68bf406d29e2f16c146eadf4eeb667a3c19ffe03d1d1d397c3cbe"
+    },
+    {
+      "path": "scripts/lib/hg-secrets.sh",
+      "sha256": "73f190b90f9af254228378132ab9ce102089a765ae400f8565f8dc6d00e4fe25"
+    },
+    {
+      "path": "scripts/lib/hg-speckit.ps1",
+      "sha256": "737f9110fbd5684187aee1c5887e974fdd7d0eea02efdbfb8ba70346a701ba53"
+    },
+    {
+      "path": "scripts/lib/hg-speckit.sh",
+      "sha256": "095d7805ea10554da214dd22ed788e00d65d93772725faa8a3364f95d08bdf37"
+    },
+    {
+      "path": "scripts/lib/hg-stats.ps1",
+      "sha256": "24a9066190ead3b3836a96094ccaa7186ccfa05dd0cca0eb87772a209a67e4af"
+    },
+    {
+      "path": "scripts/lib/hg-stats.sh",
+      "sha256": "faa699c2eed3539ed0443a9e7ff8d4e4d2d3882e089ae048de6041130c587d28"
+    },
+    {
+      "path": "scripts/lib/linux-maintenance-hardening.py",
+      "sha256": "283fa569d21adc1ff8cfe65f52f4bbf3d92d9dc0b2097d740fbc595aaa4510ba"
+    },
+    {
+      "path": "scripts/lib/maintenance_container_worker.py",
+      "sha256": "4c755ea2780e19dfd6f546be4fc02c2bd0d1e6d084a128ec2c6e38743ec78202"
+    },
+    {
+      "path": "scripts/lib/maintenance_execution_context.py",
+      "sha256": "e9566dffca28d3a64f9dff352c90d202c64709e6d6e2f405a7d392d8215addc7"
+    },
+    {
+      "path": "scripts/lib/resolve-home-baseline-source.ps1",
+      "sha256": "11c46fddf6b73bd91fe8a6f0ffbfbdf63dffd20b40d64081f31aee548d6c08bb"
+    },
+    {
+      "path": "scripts/lib/resolve-home-baseline-source.sh",
+      "sha256": "1c6828fc41040dc66123a7a62d6bc6a732ccb126c96d899f3387088c4a201bad"
+    },
+    {
+      "path": "scripts/lib/secure-development-hardening.ps1",
+      "sha256": "b5512c5fcdabd1d39cf3bb154794fc764939c4f7440d297af228b543048355fb"
+    },
+    {
+      "path": "scripts/lib/secure-development-hardening.sh",
+      "sha256": "e88ca3a40a96b932031467a13fc2bb81e0dafe773067228584bf9586813b5959"
+    },
+    {
+      "path": "scripts/lib/secure_development_hardening.py",
+      "sha256": "d84777350ce22327a82f9ded551a78c0694c367aa5a4401269cf90afefe713d4"
+    },
+    {
+      "path": "scripts/lib/statistics-ci-evidence.ps1",
+      "sha256": "badabd767e5c09b909a9818f251bfab8fe63bb6b1deddf1547bb473d81f43779"
+    },
+    {
+      "path": "scripts/lib/windows-maintenance-hardening.psm1",
+      "sha256": "60f483fb8e26d4247b0b3ec31c521f0920ba23b70dd5095d2f1a3c34dd9a7616"
+    },
+    {
+      "path": "scripts/lib/workspace_storage_maintenance.py",
+      "sha256": "9396fa6f59d15d6069ffc81c65f057fafeb6d5303b09bd4812dcd524716b761d"
+    },
+    {
+      "path": "scripts/maintain-agentic-brew-apps.sh",
+      "sha256": "7219cbe022c593dfb3d6b5f60cc4199972676fc9ca2606819910aac0bfd90901"
+    },
+    {
+      "path": "scripts/maintain-agentic-winget-apps.ps1",
+      "sha256": "58acf1cd284982d677eb1f110a2b62840f4eb7b95d3514c1506a1846a5876a4d"
+    },
+    {
+      "path": "scripts/maintain-agentic-workspace.ps1",
+      "sha256": "b916adbe375311fd47bd08b18de9decacf117ab86f2d378d7a152a6e2fbc924d"
+    },
+    {
+      "path": "scripts/maintain-agentic-workspace.sh",
+      "sha256": "d1892fbfc09da1e44a5755e8d152a54625953355a504d44d5a759ae9fe210cef"
+    },
+    {
+      "path": "scripts/maintain-powershell-modules.ps1",
+      "sha256": "e601b534f4fe559b51a5c315f7939723366063e00d8fc745868a28c6caf6eaae"
+    },
+    {
+      "path": "scripts/maintain-workspace-storage.ps1",
+      "sha256": "aaa13bf37bbdb3d486dbd242a518dd15acc2d6b1b49a4dcd78270f2957facd16"
+    },
+    {
+      "path": "scripts/maintain-workspace-storage.sh",
+      "sha256": "f938098ece6f41158e45ad55947671502ef2dd9b36e568968475229c15346e89"
+    },
+    {
+      "path": "scripts/rename-lastenheft.ps1",
+      "sha256": "5e25b6cb0095085b7378ecc3483b674c0e1d78936bf16284b6ff056cc52b8f4d"
+    },
+    {
+      "path": "scripts/rename-lastenheft.sh",
+      "sha256": "e925051b2ca4fdb7b4f12348a8bc9f8792e3adc6db88ec7b7998828339575741"
+    },
+    {
+      "path": "scripts/render-project-statistics.ps1",
+      "sha256": "53bef2515ad48ce13db2b8792ccb506cbf72c367e0eb4e4c3a935ded41048b3a"
+    },
+    {
+      "path": "scripts/render-project-statistics.sh",
+      "sha256": "2abd9614be59dd36d0635a1de4226b3f71f83fdc4012e0e6e315a5fdd889899e"
+    },
+    {
+      "path": "scripts/render-requirements-intake-governance.ps1",
+      "sha256": "06c55cd408352d4a6fd10395421b58b8c2a744c3263b6af0dc6c79a47c4edc39"
+    },
+    {
+      "path": "scripts/render-requirements-intake-governance.sh",
+      "sha256": "564f7331e3d1244031b5976325f66ced0fc32fb60e876ddc3f26d0513a9f3ef4"
+    },
+    {
+      "path": "scripts/resolve-model-routing.ps1",
+      "sha256": "bd17cb214f860077efe20748522a7b8f1326a14b668dbb783813c0b992f678dc"
+    },
+    {
+      "path": "scripts/resolve-model-routing.sh",
+      "sha256": "3dec790ee7a48a92d0ca7b116c5d30841bf7215f93f1915bb37578a6b44bf86c"
+    },
+    {
+      "path": "scripts/sandbox-lifecycle.ps1",
+      "sha256": "4191e5583a40a3ff8817027e6069c0843903c31fe37ccbd9e43d3ec799fa0602"
+    },
+    {
+      "path": "scripts/sandbox-lifecycle.sh",
+      "sha256": "e8632c5630ae60af8eea113a3c94e6834c816252530c29756f388f74707b3f71"
+    },
+    {
+      "path": "scripts/scan-agent-secrets.ps1",
+      "sha256": "0e8b8035b2b94b41cef29989fc373561650ece571f5ba42a16e07ef984aac0c9"
+    },
+    {
+      "path": "scripts/scan-agent-secrets.sh",
+      "sha256": "47df3ba6f31038487de8e1ac52e2b79b8dca84ba6d0f5a60c4a9fde941a73b96"
+    },
+    {
+      "path": "scripts/setup-antigravity-settings.ps1",
+      "sha256": "2acce584b522374a7d0044e87e9f558afa5f4b448a07f393cbd43835708ce468"
+    },
+    {
+      "path": "scripts/setup-antigravity-settings.sh",
+      "sha256": "7acecda96bc188fc2d530cacbb54b16e440fb1f9d4729d563744dd418fa7e625"
+    },
+    {
+      "path": "scripts/smoke-test-documentation.sh",
+      "sha256": "63878daeb7b82f0c9f040d8d7e88165f4217cf29c0ea6fe89235ba24a154f1fc"
+    },
+    {
+      "path": "scripts/smoke-test-toolchains.sh",
+      "sha256": "871f944251d1dc17b074c474f079243366f29bcceadb4e90bd3e8a109b463ab6"
+    },
+    {
+      "path": "scripts/sync-home-baseline-runtime.sh",
+      "sha256": "dbae00d0089a2fec7171b0e1c1a89c5d8a816afd65ba251a6421982801d27449"
+    },
+    {
+      "path": "scripts/templates/antigravity-statusline.ps1",
+      "sha256": "3c9568e0258d67f39e97c30d1e3e1fa3573c284da1a944f689ae9fa4b9fb1bfe"
+    },
+    {
+      "path": "scripts/templates/antigravity-statusline.sh",
+      "sha256": "1809bf1e12f3328ed82c8b51ec00d9871f618bddc738910bc0b0673fbefff9a8"
+    },
+    {
+      "path": "scripts/test-ade-sandbox-hardening.ps1",
+      "sha256": "27968761ad1206812bc5fc980ad4088e9d116e36cf65f3178979093f5ee73ab3"
+    },
+    {
+      "path": "scripts/test-ade-sandbox-hardening.sh",
+      "sha256": "0020221ef3a93a5c1e5af9c889e3bf49e5a67bf82b4cfed32e876e92aa4776f3"
+    },
+    {
+      "path": "scripts/test-documentation-impact.ps1",
+      "sha256": "ee2bce0be68ae843b81cbf9ddfd1cc96e8afc8979c6ec6dd4c745236bf70c403"
+    },
+    {
+      "path": "scripts/test-documentation-impact.sh",
+      "sha256": "b5ae90e59749b01230890c157757b3ded55233e55808d869606c65f93b092f4a"
+    },
+    {
+      "path": "scripts/test-requirements-intake-governance.ps1",
+      "sha256": "cd763b87dd792ce7102d49de41fb5bea862278bcaae651bb9e12c33832242146"
+    },
+    {
+      "path": "scripts/test-requirements-intake-governance.sh",
+      "sha256": "f0f81a4ad0b0cc84697d559ed5f1b668dc5de615674f228e85532236a7dbbf58"
+    },
+    {
+      "path": "scripts/validate-documentation-impact.ps1",
+      "sha256": "afeea486d8b2899889dc0c2fbb94f02d03daa3c37e9629201ec14c7cde9bf645"
+    },
+    {
+      "path": "scripts/validate-documentation-impact.sh",
+      "sha256": "fee32782674d0d2f37c147c46b8f1d8bc2ef9446f618b839ed89956246a02fe5"
+    },
+    {
+      "path": "spec-kit/patch-specify-cli.py",
+      "sha256": "f46f8941e713c4e50ba700f1b4f686cce961ada09504e8b13d2a400f54319ca2"
+    }
+  ],
+  "configuration": {
+    "path": "scripts/tests/fixtures/hardening-followup/coverage-mac-a.ini",
+    "sha256": "7bdb45fea9ea4a2bfab01c07d5bf223f6b859e9e906926d5d30097e9625fffb2",
+    "branch": true,
+    "subprocessPatch": true,
+    "scope": "Ten named Python files only; full module inventory retained"
+  },
+  "tool": {
+    "source": "https://pypi.org/project/coverage/7.17.0/",
+    "wheel": "coverage-7.17.0-cp315-cp315-macosx_11_0_arm64.whl",
+    "sha256": "66efc0fb99cee34626fc17d3adac9c3cd816bfdad563bb1e983c3ef432f566d4",
+    "installation": "Owned disposable venv; no global package or image change"
+  },
+  "catalogBindings": [
+    {
+      "path": "docs/security/secure-development/004-container-hardening-followup/interface-catalog.json",
+      "sha256": "19696881c017a9c2383007ef42f474833fc89dd793c78a51a69d6dd37046566e"
+    },
+    {
+      "path": "docs/security/secure-development/004-container-hardening-followup/coverage-modules.json",
+      "sha256": "b117858431518718e009c76d5514286fb7e1f0629402540dfa83c74c8d1842f4"
+    }
+  ],
+  "newTests": {
+    "discovered": 44,
+    "executed": 44,
+    "skipped": 0,
+    "suites": [
+      {
+        "module": "scripts.tests.test_feature004_hardening_branches",
+        "count": 11,
+        "seconds": 0.065
+      },
+      {
+        "module": "scripts.tests.test_feature004_storage_branches",
+        "count": 16,
+        "seconds": 0.046
+      },
+      {
+        "module": "scripts.tests.test_feature004_fleet_branches",
+        "count": 13,
+        "seconds": 0.016
+      },
+      {
+        "module": "scripts.tests.test_feature004_child_and_preview",
+        "count": 4,
+        "seconds": 13.545
+      }
+    ],
+    "failedDiagnosticRunsExcluded": [
+      "hardening: incorrect fixture expectation of seven rather than six required learner diagnostics",
+      "fleet: result-reader fixture file not reset between independent readers"
+    ],
+    "scope": "Corrected only fixture expectations/state. Ran affected new suites again; no production changes, relaxed requirements or increased existing timeouts.",
+    "isolation": "Owned temporary HOME/USERPROFILE/temp/cache, cleared inherited environment; all actual fleet/Git/provider/installer/delete calls intercepted except declared safe child/preview fixtures.",
+    "existingBroadSuitesRepeated": false
+  },
+  "combined": {
+    "discovered": 249,
+    "executed": 239,
+    "skipped": 10,
+    "numericNamedFilesAtLeast85Percent": 9,
+    "totalNamedPythonFiles": 10,
+    "wholeScopeGate": "Open",
+    "globalInterfacePercent": null,
+    "sourceIdentityRule": "Old Git base and current Git base differ, but all 106 measured product hashes and measurement configuration match exactly before/after every selected run. Old data are reused, not relabelled fresh.",
+    "rawInputs": [
+      {
+        "path": "${PRIOR_MEASUREMENT_ROOT}/measurement-continuation-final/.coverage",
+        "sha256": "1f2f9bdb6d27ce36c0812d80ad238ac9837b2bc962701d7526bd16b481f20783"
+      },
+      {
+        "path": "${NEXT_MEASUREMENT_ROOT}/hardening-final/.coverage",
+        "sha256": "eaf064a8d287d5eafd3ceb69a7595afcdc08c0b4a678fba3d523b48b1961f682"
+      },
+      {
+        "path": "${NEXT_MEASUREMENT_ROOT}/storage-v2/.coverage",
+        "sha256": "658927b4cc36c3db66bfa236aa89a7f4a1110cdf5e9e6ab24b6c9f5690824411"
+      },
+      {
+        "path": "${NEXT_MEASUREMENT_ROOT}/fleet-final/.coverage",
+        "sha256": "2eb6efdedd1d35e06a5801fef56cda792b59a5715d91363811de56bc7c1f18a6"
+      },
+      {
+        "path": "${NEXT_MEASUREMENT_ROOT}/children/.coverage",
+        "sha256": "fc72cdb0e1e51f6b93961890cff2cf5d3576b644ab93e976d784f6a856bf93db"
+      }
+    ],
+    "combinedRawSha256": "899a8d880bfbb44fc0410065360ed31a259391806473a50fd9c7f596259e7f38",
+    "combinedJsonSha256": "4902e60c24fff38b6ed119ce63c80b8bb50951b00f5079e7f4143a2141ba357a",
+    "aggregation": {
+      "startedAt": "2026-11-02T21:38:33.3136860+00:00",
+      "finishedAt": "2026-11-02T21:38:35.3408420+00:00",
+      "exitCode": 0,
+      "commands": [
+        [
+          "${PRIOR_MEASUREMENT_ROOT}/venv/bin/python",
+          "-m",
+          "coverage",
+          "combine",
+          "--keep",
+          "--data-file",
+          "${NEXT_MEASUREMENT_ROOT}/final-v2/.coverage",
+          "${PRIOR_MEASUREMENT_ROOT}/measurement-continuation-final/.coverage",
+          "${NEXT_MEASUREMENT_ROOT}/hardening-final/.coverage",
+          "${NEXT_MEASUREMENT_ROOT}/storage-v2/.coverage",
+          "${NEXT_MEASUREMENT_ROOT}/fleet-final/.coverage",
+          "${NEXT_MEASUREMENT_ROOT}/children/.coverage"
+        ],
+        [
+          "${PRIOR_MEASUREMENT_ROOT}/venv/bin/python",
+          "-m",
+          "coverage",
+          "json",
+          "--data-file",
+          "${NEXT_MEASUREMENT_ROOT}/final-v2/.coverage",
+          "-o",
+          "${NEXT_MEASUREMENT_ROOT}/final-v2/coverage.json"
+        ]
+      ]
+    }
+  },
+  "runs": [
+    {
+      "runner": "Mac-A-macOS-ARM64",
+      "baseHead": "ae2b5523fb7389286998a4b9fe3fea5ec6fd177a",
+      "requirementsReviewId": "04d3e335-7b7a-494d-bc78-9587e1659572",
+      "configurationSha256": "7bdb45fea9ea4a2bfab01c07d5bf223f6b859e9e906926d5d30097e9625fffb2",
+      "testHashes": {
+        "scripts/tests/test_feature004_hardening_branches.py": "1dfdbc7a47a836217ebfb7991166544f99bbcbec1a7a124d55089a31f95883aa"
+      },
+      "commands": [
+        {
+          "name": "tests",
+          "argv": [
+            "${PRIOR_MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "run",
+            "--rcfile",
+            "${REPO_ROOT}/scripts/tests/fixtures/hardening-followup/coverage-mac-a.ini",
+            "-m",
+            "unittest",
+            "-v",
+            "scripts.tests.test_feature004_hardening_branches"
+          ],
+          "startedAt": "2026-11-02T22:29:33.006511+01:00",
+          "finishedAt": "2026-11-02T22:29:33.631478+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "0671d597daf68f71cabd640c02b8fbb0c2fb853987d7c9ebb81c64c0f7245db9"
+        },
+        {
+          "name": "combine",
+          "argv": [
+            "${PRIOR_MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "combine",
+            "--keep",
+            "${NEXT_MEASUREMENT_ROOT}/hardening-final"
+          ],
+          "startedAt": "2026-11-02T22:29:33.635226+01:00",
+          "finishedAt": "2026-11-02T22:29:33.76529+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "ab66d9c0c2c0b0b9d837f4b5e3f9615bbf8311eac5eea5654cb08af752d9a02b"
+        },
+        {
+          "name": "json",
+          "argv": [
+            "${PRIOR_MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "json",
+            "-o",
+            "${NEXT_MEASUREMENT_ROOT}/hardening-final/python-coverage.json"
+          ],
+          "startedAt": "2026-11-02T22:29:33.766986+01:00",
+          "finishedAt": "2026-11-02T22:29:34.338994+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "740ec59b1e4c79a2bcc67e921e3b6a22881e9771fcaccc69b5de805c1853f602"
+        }
+      ],
+      "thresholdChange": false,
+      "scopeReduction": false
+    },
+    {
+      "runner": "Mac-A-macOS-ARM64",
+      "baseHead": "ae2b5523fb7389286998a4b9fe3fea5ec6fd177a",
+      "requirementsReviewId": "04d3e335-7b7a-494d-bc78-9587e1659572",
+      "configurationSha256": "7bdb45fea9ea4a2bfab01c07d5bf223f6b859e9e906926d5d30097e9625fffb2",
+      "testHashes": {
+        "scripts/tests/test_feature004_storage_branches.py": "91ea0298080a47caae01e1e5ccc9859e841f0e32483eb46718faf0829767b563"
+      },
+      "commands": [
+        {
+          "name": "tests",
+          "argv": [
+            "${PRIOR_MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "run",
+            "--rcfile",
+            "${REPO_ROOT}/scripts/tests/fixtures/hardening-followup/coverage-mac-a.ini",
+            "-m",
+            "unittest",
+            "-v",
+            "scripts.tests.test_feature004_storage_branches"
+          ],
+          "startedAt": "2026-11-02T22:37:46.992783+01:00",
+          "finishedAt": "2026-11-02T22:37:47.507534+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "6f56e0601c44a0e738818a1f1aed0c7f2bfd6e76a99c9af40f2aaaa1f98db0dc"
+        },
+        {
+          "name": "combine",
+          "argv": [
+            "${PRIOR_MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "combine",
+            "--keep",
+            "${NEXT_MEASUREMENT_ROOT}/storage-v2"
+          ],
+          "startedAt": "2026-11-02T22:37:47.513954+01:00",
+          "finishedAt": "2026-11-02T22:37:47.647543+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "ab66d9c0c2c0b0b9d837f4b5e3f9615bbf8311eac5eea5654cb08af752d9a02b"
+        },
+        {
+          "name": "json",
+          "argv": [
+            "${PRIOR_MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "json",
+            "-o",
+            "${NEXT_MEASUREMENT_ROOT}/storage-v2/python-coverage.json"
+          ],
+          "startedAt": "2026-11-02T22:37:47.648914+01:00",
+          "finishedAt": "2026-11-02T22:37:48.312578+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "9355df5ac31197ad08faeea100aea5d167c79ed6460d985fe7dd7aafa25ad869"
+        }
+      ],
+      "thresholdChange": false,
+      "scopeReduction": false
+    },
+    {
+      "runner": "Mac-A-macOS-ARM64",
+      "baseHead": "ae2b5523fb7389286998a4b9fe3fea5ec6fd177a",
+      "requirementsReviewId": "04d3e335-7b7a-494d-bc78-9587e1659572",
+      "configurationSha256": "7bdb45fea9ea4a2bfab01c07d5bf223f6b859e9e906926d5d30097e9625fffb2",
+      "testHashes": {
+        "scripts/tests/test_feature004_fleet_branches.py": "ccb56efe683d49ceefacc018fde65fda088c7cb1563dacc87097407bfd7c4856"
+      },
+      "commands": [
+        {
+          "name": "tests",
+          "argv": [
+            "${PRIOR_MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "run",
+            "--rcfile",
+            "${REPO_ROOT}/scripts/tests/fixtures/hardening-followup/coverage-mac-a.ini",
+            "-m",
+            "unittest",
+            "-v",
+            "scripts.tests.test_feature004_fleet_branches"
+          ],
+          "startedAt": "2026-11-02T22:33:43.0491+01:00",
+          "finishedAt": "2026-11-02T22:33:43.484734+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "a3d5421a7ee9bfc61cb136e077e614a82091ecdaeb29cdb7ed13c7341c672cdd"
+        },
+        {
+          "name": "combine",
+          "argv": [
+            "${PRIOR_MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "combine",
+            "--keep",
+            "${NEXT_MEASUREMENT_ROOT}/fleet-final"
+          ],
+          "startedAt": "2026-11-02T22:33:43.487714+01:00",
+          "finishedAt": "2026-11-02T22:33:43.622784+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "ab66d9c0c2c0b0b9d837f4b5e3f9615bbf8311eac5eea5654cb08af752d9a02b"
+        },
+        {
+          "name": "json",
+          "argv": [
+            "${PRIOR_MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "json",
+            "-o",
+            "${NEXT_MEASUREMENT_ROOT}/fleet-final/python-coverage.json"
+          ],
+          "startedAt": "2026-11-02T22:33:43.624095+01:00",
+          "finishedAt": "2026-11-02T22:33:44.45585+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "748aedb9226f9d7e41fc2ddb77005d56219a5b4ea21dd42c1934bf89205340f4"
+        }
+      ],
+      "thresholdChange": false,
+      "scopeReduction": false
+    },
+    {
+      "runner": "Mac-A-macOS-ARM64",
+      "baseHead": "ae2b5523fb7389286998a4b9fe3fea5ec6fd177a",
+      "requirementsReviewId": "04d3e335-7b7a-494d-bc78-9587e1659572",
+      "configurationSha256": "7bdb45fea9ea4a2bfab01c07d5bf223f6b859e9e906926d5d30097e9625fffb2",
+      "testHashes": {
+        "scripts/tests/test_feature004_child_and_preview.py": "72d4d5ecb629500e789b034adc2896a491bbc80260736b9001821bc4f2f97d25"
+      },
+      "commands": [
+        {
+          "name": "tests",
+          "argv": [
+            "${PRIOR_MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "run",
+            "--rcfile",
+            "${REPO_ROOT}/scripts/tests/fixtures/hardening-followup/coverage-mac-a.ini",
+            "-m",
+            "unittest",
+            "-v",
+            "scripts.tests.test_feature004_child_and_preview"
+          ],
+          "startedAt": "2026-11-02T22:35:22.573165+01:00",
+          "finishedAt": "2026-11-02T22:35:36.434562+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "91141400b6ee630d0867561969c0a6e4764d5763d73fa0bbabe2190df5bfa82c"
+        },
+        {
+          "name": "combine",
+          "argv": [
+            "${PRIOR_MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "combine",
+            "--keep",
+            "${NEXT_MEASUREMENT_ROOT}/children"
+          ],
+          "startedAt": "2026-11-02T22:35:36.442532+01:00",
+          "finishedAt": "2026-11-02T22:35:36.567536+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "c06ccb2511c2863592aea54fd043c07cc396b03d3d1605830172c891f92cce36"
+        },
+        {
+          "name": "json",
+          "argv": [
+            "${PRIOR_MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "json",
+            "-o",
+            "${NEXT_MEASUREMENT_ROOT}/children/python-coverage.json"
+          ],
+          "startedAt": "2026-11-02T22:35:36.569169+01:00",
+          "finishedAt": "2026-11-02T22:35:37.061492+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "4286d29ebb30e5145e901cc0cae2a289c06fd14c0fbc620d578e436f879b3155"
+        }
+      ],
+      "thresholdChange": false,
+      "scopeReduction": false
+    }
+  ],
+  "modules": [
+    {
+      "path": "scripts/check-dockerfile-arg-renovate.py",
+      "covered": 64,
+      "denominator": 64,
+      "percent": 100,
+      "previousCovered": 64,
+      "missingBranchCount": 0,
+      "missingBranchSample": []
+    },
+    {
+      "path": "scripts/check-home-baseline-lock.py",
+      "covered": 19,
+      "denominator": 22,
+      "percent": 86.36,
+      "previousCovered": 19,
+      "missingBranchCount": 3,
+      "missingBranchSample": [
+        [
+          36,
+          37
+        ],
+        [
+          42,
+          43
+        ],
+        [
+          55,
+          -1
+        ]
+      ]
+    },
+    {
+      "path": "scripts/lib/agentic_workspace_fleet.py",
+      "covered": 276,
+      "denominator": 1274,
+      "percent": 21.66,
+      "previousCovered": 43,
+      "missingBranchCount": 998,
+      "missingBranchSample": [
+        [
+          62,
+          64
+        ],
+        [
+          130,
+          148
+        ],
+        [
+          208,
+          210
+        ],
+        [
+          256,
+          257
+        ],
+        [
+          399,
+          401
+        ],
+        [
+          402,
+          401
+        ],
+        [
+          414,
+          -354
+        ],
+        [
+          439,
+          440
+        ]
+      ]
+    },
+    {
+      "path": "scripts/lib/audit_retention.py",
+      "covered": 48,
+      "denominator": 50,
+      "percent": 96,
+      "previousCovered": 48,
+      "missingBranchCount": 2,
+      "missingBranchSample": [
+        [
+          35,
+          37
+        ],
+        [
+          42,
+          43
+        ]
+      ]
+    },
+    {
+      "path": "scripts/lib/linux-maintenance-hardening.py",
+      "covered": 139,
+      "denominator": 150,
+      "percent": 92.67,
+      "previousCovered": 139,
+      "missingBranchCount": 11,
+      "missingBranchSample": [
+        [
+          80,
+          79
+        ],
+        [
+          213,
+          225
+        ],
+        [
+          243,
+          244
+        ],
+        [
+          280,
+          276
+        ],
+        [
+          348,
+          349
+        ],
+        [
+          521,
+          522
+        ],
+        [
+          787,
+          788
+        ],
+        [
+          792,
+          794
+        ]
+      ]
+    },
+    {
+      "path": "scripts/lib/maintenance_container_worker.py",
+      "covered": 56,
+      "denominator": 58,
+      "percent": 96.55,
+      "previousCovered": 56,
+      "missingBranchCount": 2,
+      "missingBranchSample": [
+        [
+          19,
+          20
+        ],
+        [
+          115,
+          117
+        ]
+      ]
+    },
+    {
+      "path": "scripts/lib/maintenance_execution_context.py",
+      "covered": 87,
+      "denominator": 90,
+      "percent": 96.67,
+      "previousCovered": 87,
+      "missingBranchCount": 3,
+      "missingBranchSample": [
+        [
+          201,
+          199
+        ],
+        [
+          215,
+          216
+        ],
+        [
+          358,
+          359
+        ]
+      ]
+    },
+    {
+      "path": "scripts/lib/secure_development_hardening.py",
+      "covered": 376,
+      "denominator": 432,
+      "percent": 87.04,
+      "previousCovered": 269,
+      "missingBranchCount": 56,
+      "missingBranchSample": [
+        [
+          274,
+          275
+        ],
+        [
+          276,
+          277
+        ],
+        [
+          278,
+          279
+        ],
+        [
+          282,
+          283
+        ],
+        [
+          292,
+          293
+        ],
+        [
+          295,
+          296
+        ],
+        [
+          299,
+          300
+        ],
+        [
+          328,
+          329
+        ]
+      ]
+    },
+    {
+      "path": "scripts/lib/workspace_storage_maintenance.py",
+      "covered": 292,
+      "denominator": 336,
+      "percent": 86.9,
+      "previousCovered": 129,
+      "missingBranchCount": 44,
+      "missingBranchSample": [
+        [
+          73,
+          76
+        ],
+        [
+          109,
+          110
+        ],
+        [
+          247,
+          248
+        ],
+        [
+          249,
+          250
+        ],
+        [
+          249,
+          251
+        ],
+        [
+          253,
+          255
+        ],
+        [
+          270,
+          260
+        ],
+        [
+          341,
+          333
+        ]
+      ]
+    },
+    {
+      "path": "spec-kit/patch-specify-cli.py",
+      "covered": 14,
+      "denominator": 14,
+      "percent": 100,
+      "previousCovered": 14,
+      "missingBranchCount": 0,
+      "missingBranchSample": []
+    }
+  ],
+  "embeddedProgramExecution": [
+    {
+      "sourcePath": "scripts/lib/maintenance_execution_context.py",
+      "constant": "REMOTE_PROGRAM",
+      "contentSha256": "9587ee962f82afe1484d73d5db4b11ccfc1f730c0d8b6884731fae86ce4abd75",
+      "startLine": 77,
+      "endLine": 115,
+      "status": "Synthetic direct child executed with positive and negative cases",
+      "branchPercent": null,
+      "coverageAttribution": "Not separately measured; literal execution is not embedded-program branch acceptance"
+    },
+    {
+      "sourcePath": "scripts/lib/maintenance_execution_context.py",
+      "constant": "PHASE_PROGRAM",
+      "contentSha256": "3dff0192d2fbb94c7f289a9f614c7763b79490ab3dbcd3a6fe01b6221f96aef3",
+      "startLine": 117,
+      "endLine": 132,
+      "status": "Synthetic direct child executed with positive and negative cases",
+      "branchPercent": null,
+      "coverageAttribution": "Not separately measured; literal execution is not embedded-program branch acceptance"
+    },
+    {
+      "sourcePath": "scripts/lib/maintenance_execution_context.py",
+      "constant": "SOURCE_PROGRAM",
+      "contentSha256": "0f1254e2776a3423ce5093bc99ea8ab2897638a1e70d68529f5f7d5442406784",
+      "startLine": 135,
+      "endLine": 150,
+      "status": "Synthetic direct child executed with positive and negative cases",
+      "branchPercent": null,
+      "coverageAttribution": "Not separately measured; literal execution is not embedded-program branch acceptance"
+    }
+  ],
+  "localInterfaceObservations": [
+    {
+      "interfaceId": "test-ade-sandbox-hardening/Preview",
+      "test": "scripts.tests.test_feature004_child_and_preview.ChildAndPreviewTests.test_native_bash_and_powershell_preview_use_real_core_without_execution",
+      "positive": "Bash and macOS PowerShell invoke actual shared core for explicit Feature 004 All preview; expect exit 0, no checks executed and unchanged fixture tree",
+      "negative": "Same native entrypoints reject wrong feature selection with exit 2 and unchanged fixture tree",
+      "observedVariants": [
+        "macOS/Bash",
+        "macOS/PowerShell7 supplementary"
+      ],
+      "missingRequiredVariants": [
+        "Ubuntu-WSL2/Bash",
+        "Windows/PowerShell7"
+      ],
+      "countsAsCompleteAllVariantId": false
+    }
+  ],
+  "denominators": {
+    "productPaths": 106,
+    "namedPythonFiles": 10,
+    "shellPowerShellPaths": 96,
+    "unattributedNestedRegions": 48,
+    "logicalInterfaces": 94,
+    "publicAndCriticalUiInterfaces": 88,
+    "internalInterfaces": 6,
+    "changed": false
+  },
+  "taskDisposition": {
+    "T041": "Partial: hardening and storage named-file ratios above 85%; fleet, full child/import/exception attribution remain open",
+    "T042": "Partial: extra real native Bash/shared-core preview pair only, not all Bash outcomes",
+    "T043": "Partial: extra real macOS PowerShell/shared-core preview pair only, no Windows acceptance",
+    "T044": "Partial: additional local Preview observation; no all-variant complete interface credited",
+    "T045": "Partial same-source measurement, not complete scope or final freeze",
+    "T046": "Two more named-file gaps closed; fleet remains 276/1274 and broad shell/nested/interface coverage is open",
+    "checkedTasks": 52,
+    "totalTasks": 80,
+    "newCheckboxes": 0
+  },
+  "limitations": [
+    "Nine named-file ratios >=85% do not establish full critical-module coverage. Provisional outcome catalog and coverage.py branch arcs retain distinct denominators.",
+    "Fleet still lacks 998 branch outcomes. Large missing functions include StageBTargetTransaction.execute, _validate_ci_profiles, classify_repository, load_manifest, _validate_ci_paths, execute_fleet and StageBFleetPreflight.execute.",
+    "All 48 previously unattributed nested regions remain unresolved. Three explicit constant programs have execution/literal-hash evidence only; no arithmetic subtraction from the 48-region denominator.",
+    "SOURCE_PROGRAM probes only owned synthetic files. REMOTE_PROGRAM invokes recording fake Git. PHASE_PROGRAM imports a synthetic fixture worker, not the real fleet worker.",
+    "No full 96-file Bash/PowerShell decision register/trace, global 80% interface score or all changed-interface variants proven.",
+    "No current native Windows, Ubuntu/WSL2, Linux-hardware, image/SBOM, human, WCAG or final T053 acceptance.",
+    "Earlier broad regression/real REV-TEST-TIMING evidence remains historical identical-source data. Only the four new suites are fresh.",
+    "No independent technical review of these new fixtures is claimed; current Ready is intake review only."
+  ],
+  "openWork": [
+    {
+      "owner": "Maintainer/Security Review",
+      "followUp": "Prioritize isolated fleet classification/manifest/CI-profile/preflight/transaction cases and complete imported/inline/child and shell/PowerShell outcome evidence.",
+      "due": "Before T053 and SC-003 acceptance",
+      "reevaluationTrigger": "Product/test/catalog/configuration change or new runner"
+    },
+    {
+      "owner": "Windows/WSL2 Platform Reviewer",
+      "followUp": "Use coverage-platform-handoff.md for separate native same-reviewed-head observations after explicit runtime authority.",
+      "due": "Before affected AMD64 use/acceptance",
+      "reevaluationTrigger": "Approved Windows and Ubuntu/WSL2 runners available"
+    },
+    {
+      "owner": "Independent Technical Reviewer",
+      "followUp": "Review current tests and evidence before final T053 package acceptance; do not convert intake Ready into technical approval.",
+      "due": "Before claiming complete final coverage",
+      "reevaluationTrigger": "Current candidate ready for final review"
+    }
+  ]
+}
