@@ -1,5 +1,26 @@
 # Mac A: gezielte Coverage-Runde / Targeted Coverage Round
 
+## Lieferkorrektur / Delivery Correction
+
+DE: Beim Lieferauftrag am 02.11.2026 erkannte der zusaetzliche Pre-Push-
+Mustercheck den harmlosen Redigierungs-Testtext als Secretverdacht. Nur die
+Darstellung dieses synthetischen Textes wurde strukturiert zusammengesetzt;
+keine Scannerregel, Ausnahme, Produktlogik oder Anforderung geaendert.
+Die 13 Fleet-Methoden erneut erfolgreich in 0,030 s. Alle 106 Produktquellen,
+Konfiguration und zehn Branch-Nenner/-Zaehler unveraendert. Der bisherige
+JSON-Bericht bleibt byte-identischer historischer Stand. Fuer die aktuelle
+Fleet-Testdateibindung gilt der
+[Lieferkorrektur-Nachweis](mac-a-coverage-delivery-correction-2026-11-02.json).
+Kein doppeltes Zaehlen des Wiederholungslaufs, keine weitere Gateerfuellung.
+
+EN: On the 2026-11-02 delivery, the additional pre-push regex flagged inert
+redaction fixture text. Only its source representation changed to structured
+construction; scanner rules/exceptions, product code and requirements remain.
+All 13 fleet methods passed again in 0.030 s; 106 product hashes, configuration
+and ten branch numerators/denominators match. Preserve the prior JSON byte-
+identically as historical; the linked correction supplies the current fleet
+test binding. Do not double-count the rerun or infer any gate approval.
+
 ## Deutsch
 
 Stand 02.11.2026, Mac A, macOS/ARM64; Basis `ae2b552`,

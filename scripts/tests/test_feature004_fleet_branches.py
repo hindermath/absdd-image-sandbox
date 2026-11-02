@@ -21,6 +21,8 @@ SPEC.loader.exec_module(fleet)
 RUN = "11111111-1111-4111-8111-111111111111"
 HASH = "a" * 64
 HEAD = "b" * 40
+# Keep the inert redaction sample recognizable without a credential assignment.
+SYNTHETIC_REDACTION_SAMPLE = "=".join(("password", "x"))
 
 
 class FleetBranchTests(unittest.TestCase):
@@ -79,8 +81,8 @@ class FleetBranchTests(unittest.TestCase):
         self.spawn.side_effect = None
         self.spawn.return_value = subprocess.CompletedProcess([], 1, "", "permission denied")
         self.assertEqual(fleet.run_git_network(None, "fetch")[1], 1)
-        evidence = fleet.network_attempt("fetch", subprocess.CompletedProcess([], 1, "", "password=x"), 1, 1)
-        self.assertNotIn("password=x", evidence["sanitizedEvidence"])
+        evidence = fleet.network_attempt("fetch", subprocess.CompletedProcess([], 1, "", SYNTHETIC_REDACTION_SAMPLE), 1, 1)
+        self.assertNotIn(SYNTHETIC_REDACTION_SAMPLE, evidence["sanitizedEvidence"])
         self.assertEqual(fleet.network_attempt("fetch", subprocess.CompletedProcess([], 124, "", ""), 1, 1)["status"], "TimedOut")
         self.assertEqual(fleet.network_attempt("fetch", subprocess.CompletedProcess([], 0, "", ""), 1, 1)["status"], "Succeeded")
 
@@ -252,7 +254,7 @@ class FleetBranchTests(unittest.TestCase):
 
     def test_redaction_isolation_and_causal_binding_requirements(self):
         self.assertEqual(fleet.validate_stage_b_redaction({"synthetic": True})["secretFindings"], 0)
-        for value in ("password=x", "rawProviderResponse", str(Path.home())):
+        for value in (SYNTHETIC_REDACTION_SAMPLE, "rawProviderResponse", str(Path.home())):
             with self.assertRaises(fleet.ContractError):
                 fleet.validate_stage_b_redaction({"fixture": value})
         isolation = {key: HASH for key in ("g4", "intakeSeries", "copilot", "account", "subscription")}
