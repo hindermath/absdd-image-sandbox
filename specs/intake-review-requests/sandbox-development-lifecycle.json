@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.1",
-  "reviewId": "aa89a3d1-59a0-42bb-965b-1614e3758c04",
+  "reviewId": "04d3e335-7b7a-494d-bc78-9587e1659572",
   "mode": "Series",
   "policy": "learner-a11y-bilingual-series",
   "targets": [
@@ -155,30 +155,35 @@
     "docs/maintenance/historical-eof-integration-2026-10-30.md",
     "specs/intake-review-archive/ab11aa4c-d97a-458e-99f5-526ea89dbd56/b2e17f24-435e-4ea7-86e5-e68edbea0803/result.json",
     "docs/maintenance/template-series-fixture-alignment-2026-10-30.md",
-    "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/result.json"
+    "specs/intake-review-archive/09d784df-eae0-4952-9f5f-a458379ed9c6/869be6a5-a352-4f1f-baaf-aad2d6efd086/result.json",
+    "docs/maintenance/intake-source-alignment-2026-11-02.md",
+    "specs/intake-review-archive/aa89a3d1-59a0-42bb-965b-1614e3758c04/f4aa58a9-39ce-4808-b373-89f557054ce4/result.json",
+    "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+    "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json"
   ],
-  "authorityEvidence": "Existing explicit publication/repair authority includes mechanically aligning regression fixtures to the approved five-member series and separating preserved dated workshop evidence from current operational installation metadata. Renew only affected H/A/L source receipts with byte-preserving lineage and complete series review; no target, scope, graph, lifecycle, export, runtime, Home or fleet changes.",
-  "operationId": "869be6a5-a352-4f1f-baaf-aad2d6efd086",
-  "reviewScope": "Complete five-target semantic re-review after source-only CI fixture alignment; all target texts, U receipt and series manifest/receipt unchanged.",
+  "authorityEvidence": "User explicitly authorizes targeted intake source-binding renewal with byte-identical archives and independent complete review on 2026-11-02, followed by Mac-A coverage and Windows/WSL2 handoff. Requirements, 85/80 thresholds, intake identities, five-member lifecycle and start/delivery authority remain unchanged; no commit or push. This operation owns provenance authoring only, not technical implementation or review adjudication.",
+  "operationId": "f4aa58a9-39ce-4808-b373-89f557054ce4",
+  "reviewScope": "Independent complete semantic review of all five unchanged intake texts and the full series after seven PR107 source changes in H/A/L receipts; inspect archive fidelity, provenance, preserved 85/80 thresholds and authority. Author performs no adjudication.",
   "seriesManifest": {
     "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
-    "normalizedSha256": "6f3c90e8fe8165d8925c59241f06597f346aa24923d83717c6e764e958dfd0db"
+    "normalizedSha256": "01931b50fe0d9a88b6bb8b1d518ab17f536db647a570221a507adc7d84ed77e2"
   },
   "seriesReceipt": {
-    "receiptId": "2b1ab440-21e3-4158-8ee2-eb70227be4d3",
+    "receiptId": "2d55c819-910c-446d-9e78-61c340ffb592",
     "path": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
-    "normalizedSha256": "88341c3454c98dc8880634817ed303f475dc89e6f390ccfa55e5ba60e41229ef"
+    "normalizedSha256": "22190af06a7c5cf73c3f1c54890a4ad2a66013421e13d1915be8154a3b8a2060"
   },
-  "supersedesReviewId": "09d784df-eae0-4952-9f5f-a458379ed9c6",
+  "supersedesReviewId": "aa89a3d1-59a0-42bb-965b-1614e3758c04",
   "admissionEvidence": {
     "requestedNotExecuted": false,
     "priorSeriesReviewPath": "specs/intake-review-archive/5c452360-9bf7-44d9-84e0-10cae34e72ea/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/result.json",
     "priorSingleReviewPath": "specs/intake-review-archive/0b5f49ef-5dcc-449c-a438-cdc8115ec0be/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/result.json"
   },
-  "repairAuthorization": {
-    "finding": "DELIVERY-FORMAT-001",
-    "contractPath": "docs/maintenance/template-series-fixture-alignment-2026-10-30.md",
-    "authorityEvidence": "Existing explicit publication/repair authority includes mechanically aligning regression fixtures to the approved five-member series and separating preserved dated workshop evidence from current operational installation metadata. Renew only affected H/A/L source receipts with byte-preserving lineage and complete series review; no target, scope, graph, lifecycle, export, runtime, Home or fleet changes.",
-    "operationId": "869be6a5-a352-4f1f-baaf-aad2d6efd086"
+  "preparedState": "PreparedForIndependentReview",
+  "supersededReview": {
+    "reviewId": "aa89a3d1-59a0-42bb-965b-1614e3758c04",
+    "archiveResultPath": "specs/intake-review-archive/aa89a3d1-59a0-42bb-965b-1614e3758c04/f4aa58a9-39ce-4808-b373-89f557054ce4/result.json",
+    "archiveResultRawSha256": "bb938648633a97bd9a7e544e2a3cd46cf7867ddcea52790d771719ad0bfb09ff",
+    "reason": "Source bindings changed; old Ready is historical only, no current review outcome claimed."
   }
 }

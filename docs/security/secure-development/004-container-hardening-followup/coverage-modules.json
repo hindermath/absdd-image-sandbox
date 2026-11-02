@@ -8,6 +8,14 @@
   "independentReview": "2026-10-31: separate T006 subagent review; 106 paths and 48 nested regions accepted as provisional inventory; parser/runtime measurement deferred to T040/T053",
   "moduleCount": 106,
   "plannedAdditions": [],
+  "partialMeasurementRefs": [
+    {
+      "path": "docs/security/secure-development/004-container-hardening-followup/mac-a-coverage-continuation-2026-11-02.json",
+      "scope": "Ten named Python files; two native shell adapters with recording fake core",
+      "status": "Open; separate numeric branch model, no replacement of provisional outcomes",
+      "preservesAllModuleAndNestedRegionDenominators": true
+    }
+  ],
   "modules": [
     {
       "path": ".specify/scripts/bash/check-prerequisites.sh",

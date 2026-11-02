@@ -1,0 +1,1153 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "PartialCoverageMeasurement",
+  "feature": "004-container-hardening-followup",
+  "observedAt": "2026-11-02T08:13:08.5966870+00:00",
+  "runner": {
+    "id": "Mac-A-macOS-ARM64",
+    "os": "macOS",
+    "architecture": "arm64",
+    "python": "3.15.2",
+    "coverage": "7.17.0"
+  },
+  "baseGitHead": "e115fa863e754a83eff212c72f130f6f8543a988",
+  "branch": "codex/004-mac-a-coverage",
+  "worktree": "Uncommitted provenance and test additions; not a final T053 freeze",
+  "authority": "User 2026-11-02: source renewal/archive/independent review, then Mac-A coverage and Windows/WSL2 handoff; no commit/push/runtime",
+  "requirementsReview": {
+    "id": "04d3e335-7b7a-494d-bc78-9587e1659572",
+    "path": "specs/intake-review-results/sandbox-development-lifecycle.json",
+    "sha256": "70cc8a6d5a80df6c2974cc558355df341a967ead0eee37a800ee3cfc959845e1",
+    "outcome": "Ready",
+    "boundary": "Intake quality, not technical or human acceptance"
+  },
+  "tool": {
+    "source": "https://pypi.org/project/coverage/7.17.0/",
+    "wheel": "coverage-7.17.0-cp315-cp315-macosx_11_0_arm64.whl",
+    "sha256": "66efc0fb99cee34626fc17d3adac9c3cd816bfdad563bb1e983c3ef432f566d4",
+    "installation": "Owned disposable venv; no global package or image change"
+  },
+  "configuration": {
+    "path": "scripts/tests/fixtures/hardening-followup/coverage-mac-a.ini",
+    "sha256": "7bdb45fea9ea4a2bfab01c07d5bf223f6b859e9e906926d5d30097e9625fffb2",
+    "branch": true,
+    "subprocessPatch": true,
+    "scope": "Ten named Python files only; full module inventory retained"
+  },
+  "thresholds": {
+    "perCriticalModuleBranchPercent": 85,
+    "completeInterfacePercent": 80,
+    "changedInterfacesBothCaseTypesPercent": 100,
+    "changed": false
+  },
+  "scope": {
+    "catalogPath": "docs/security/secure-development/004-container-hardening-followup/coverage-modules.json",
+    "catalogSha256": "b05f57ffe9ed10d7d6d8d0f8d871a90b5bdff710414902a18a87478f2419f87b",
+    "totalModuleCount": 106,
+    "pythonFilesMeasured": 10,
+    "shellPowerShellModuleCount": 96,
+    "unattributedNestedExecutableRegions": 48,
+    "all106SourceHashesVerifiedBeforeAndAfter": true,
+    "sourceHashes": [
+      {
+        "path": ".specify/scripts/bash/check-prerequisites.sh",
+        "sha256": "9e494525d24a8a7d99ac012ff9ea8d640fcd3664f4dc2285ea5dad940c6ff797"
+      },
+      {
+        "path": ".specify/scripts/bash/common.sh",
+        "sha256": "7be3fdf0c81fa4607716bb17f1cf9b2441758f856d5e32965b59daccb49d6634"
+      },
+      {
+        "path": ".specify/scripts/bash/create-new-feature.sh",
+        "sha256": "9af6ea9129c8dc126d01be4b2605182f52fe28ae77cd833a1eb73f20e64b4476"
+      },
+      {
+        "path": ".specify/scripts/bash/setup-plan.sh",
+        "sha256": "de18f6b69272676578d3dc223de1e739d392c733dc7cf5aadfeb46b259c570d7"
+      },
+      {
+        "path": "dotnet/dotnet-wrapper.sh",
+        "sha256": "062f1e02da1c7af7a8a20c6a87a73c9576b2eebebdd8c1407b21bbaf0b5c00b8"
+      },
+      {
+        "path": "scripts/agent-prompt.ps1",
+        "sha256": "85f5fd344a37ad203105790b4ef3a3a13da2166c2112da013e49bb19b9152fc6"
+      },
+      {
+        "path": "scripts/agent-prompt.sh",
+        "sha256": "bb2f6b67a4f04f272aaf992f8d063bfc6667dff25576c6fc131d3746084fce94"
+      },
+      {
+        "path": "scripts/analyze-sbom.ps1",
+        "sha256": "716ba6c2c98626ea9e6870e94d8eb26062a1c249673f0a459a5b2526cae4b267"
+      },
+      {
+        "path": "scripts/analyze-sbom.sh",
+        "sha256": "d1d6f85090cd89591a5ed23e06388bff2ff8611f560ede6681027d21b6ed8973"
+      },
+      {
+        "path": "scripts/audit-export.ps1",
+        "sha256": "579e8f1e4e20f399dd75203c99b0207dc7b391d3abecf2ceade4c7b50095e64c"
+      },
+      {
+        "path": "scripts/audit-export.sh",
+        "sha256": "a69d9af94d328ddab4c68226a14ab50968a8313b9504518631effc9c6e5feacf"
+      },
+      {
+        "path": "scripts/build-and-sbom.ps1",
+        "sha256": "42e6551a5e1e73d6fc0508591ee49f06ea1d3df8165a5adb1158b782d5736ef9"
+      },
+      {
+        "path": "scripts/build-and-sbom.sh",
+        "sha256": "135049322622382b025b677cc13dff57226b5b3e4276e0a750e3ea3d1bc7ed1f"
+      },
+      {
+        "path": "scripts/build-secure-development-docs.ps1",
+        "sha256": "a26d9ccd90428ea9f9df3af1b851b61c3d69bb491207674c104ef956fa97be70"
+      },
+      {
+        "path": "scripts/build-secure-development-docs.sh",
+        "sha256": "b6f0fed0360573c54f9c693fdf29d3f4f74b15347440fb2e2ec37a409c04709c"
+      },
+      {
+        "path": "scripts/check-archived-markdown-links.ps1",
+        "sha256": "94a8cda20f9357a10c446273746cf617ce76927cbc53111dfffabe1340dd6850"
+      },
+      {
+        "path": "scripts/check-container-architecture.ps1",
+        "sha256": "c6490dbddde8042ea79589288e6c26eccfb8cf30a22c0b82d032b88fd33759b5"
+      },
+      {
+        "path": "scripts/check-container-architecture.sh",
+        "sha256": "d6905abf1c436512049f1bc559c9dedd62f92b264c8867ddaaf1c6988d640259"
+      },
+      {
+        "path": "scripts/check-dockerfile-arg-renovate.py",
+        "sha256": "ce2203b4dfb1cb7aba6eb304dc3e2678ea43d4e00d8d7d55d72d62afffbc7613"
+      },
+      {
+        "path": "scripts/check-gsdb-self-assessment.ps1",
+        "sha256": "0a4e296b5ded77a6cbbeef996de0f55489022fa1908c8f754f17abedd483b30e"
+      },
+      {
+        "path": "scripts/check-gsdb-self-assessment.sh",
+        "sha256": "8b01e5e85d2f1a2a03bebc706153351c900a999629fc37a9ada56dd38255d2e5"
+      },
+      {
+        "path": "scripts/check-home-baseline-lock.py",
+        "sha256": "3a7f6d76967f996e973614abdb29aaee8c98ab0eb6f19d6fb3871f076626f135"
+      },
+      {
+        "path": "scripts/check-homogeneity.ps1",
+        "sha256": "a4dfe9d9b047c5f538fff1172eae21a0554a3d91528d0dbb726ffbc737a0e0fd"
+      },
+      {
+        "path": "scripts/check-homogeneity.sh",
+        "sha256": "5970aac2d69b3641a530d4d16dc24f4bf97d81debcfe3ccd605ce28235690c17"
+      },
+      {
+        "path": "scripts/codex-bwrap-wrapper.sh",
+        "sha256": "796e99d21d327b654a0e2370093d7436e9a21091d22990ab0f658754c3e2ea14"
+      },
+      {
+        "path": "scripts/compose-down-with-audit.ps1",
+        "sha256": "a01ae9944197f66c24323eedf033bf7de8c144d50337c43cddc02f39dc68ff33"
+      },
+      {
+        "path": "scripts/compose-down-with-audit.sh",
+        "sha256": "505919baf30060276a13e1f1e23f3effdc1ddb3b485a8ba1bb4ff659f876a8ff"
+      },
+      {
+        "path": "scripts/container-entrypoint.sh",
+        "sha256": "cbeacc63948ca31c50b2563cb0085c15a474690ba7503aaccfefae6eb775b942"
+      },
+      {
+        "path": "scripts/hooks/pre-push",
+        "sha256": "99267c4a91d11f37a1aab57a730f3ba516508be4e5f2568e12abbc954be9c2ec"
+      },
+      {
+        "path": "scripts/init-stats.ps1",
+        "sha256": "de11e70a8a7668a878f02ab008c167c6e498399aff9cdec2c49955c3891efcc2"
+      },
+      {
+        "path": "scripts/init-stats.sh",
+        "sha256": "d068ea35bb0b322d452009ecafa24bdd72692f97bfb145eba5ea0f9cb550ca11"
+      },
+      {
+        "path": "scripts/install-home-baseline-reference.sh",
+        "sha256": "71040410aff766017b3bb17d02582d1098a04267e794d4bdf2507f3611fbec65"
+      },
+      {
+        "path": "scripts/install-hooks.ps1",
+        "sha256": "57cd6a6e995da611fef2c0ce7ec9b8529e6383bbf78f8768f0dca3be6b9c87d4"
+      },
+      {
+        "path": "scripts/install-hooks.sh",
+        "sha256": "deca91c0346c5a6989a031ff6ac259ff9af39dc24738f58acf240251cd9990d0"
+      },
+      {
+        "path": "scripts/install-spec-kit-governance-presets.ps1",
+        "sha256": "0bdc3cf01ef84dcccbc54b5c8189cb7e29e5eb2913a5c08b7d4ca13800dfcc04"
+      },
+      {
+        "path": "scripts/install-spec-kit-governance-presets.sh",
+        "sha256": "649adfdd4d690d90b92a96169028db5406395beb4eb645422b7b0a15a46a63cd"
+      },
+      {
+        "path": "scripts/invoke-psscriptanalyzer.ps1",
+        "sha256": "ab38fe33e9d654659a67dfb2edce625bee4466641df610bbb418c8e534163711"
+      },
+      {
+        "path": "scripts/lib/agentic_workspace_fleet.py",
+        "sha256": "b04602b0fe56c171be32002b21e2e94acc0d39b0aa4430d27afe5fab2ce4adda"
+      },
+      {
+        "path": "scripts/lib/audit_retention.py",
+        "sha256": "2b6e12973057341c039ef280f656c4540dfe719480d343e28ced19824fdbf2a9"
+      },
+      {
+        "path": "scripts/lib/hg-a11y.ps1",
+        "sha256": "556436f282d1301d9a45ddf72326d34ae9241130e86a3ba167d094972e4bef85"
+      },
+      {
+        "path": "scripts/lib/hg-a11y.sh",
+        "sha256": "dfb740d0ea870ea0f7e22d924d83ddf3d9d0f7c5f67abbe4cb0ed8a55a2a5e98"
+      },
+      {
+        "path": "scripts/lib/hg-bilingual.ps1",
+        "sha256": "2ce4e72aae481246d767f974e02eaf6100c2d750283a86013eba3048866ed3c2"
+      },
+      {
+        "path": "scripts/lib/hg-bilingual.sh",
+        "sha256": "b46c4f587f337b504cf0b9a2a4b952e376880047a4f365ec1db5696e7d726f87"
+      },
+      {
+        "path": "scripts/lib/hg-deps.ps1",
+        "sha256": "50d19484342f9f2693c41120ad2164c9d7579b6bcd3a70e5ef33e6424e2c89b6"
+      },
+      {
+        "path": "scripts/lib/hg-deps.sh",
+        "sha256": "e313e742253b9e53946fdaed6c5bd4dca3b269f42a04c0f44983dae551fd83eb"
+      },
+      {
+        "path": "scripts/lib/hg-forgejo.ps1",
+        "sha256": "c6c4cd5f83abc2b319181589fda537b2b3f70615dbd25c2068ab179ef0607544"
+      },
+      {
+        "path": "scripts/lib/hg-forgejo.sh",
+        "sha256": "aa18d0cda561f945409093bfe18bac357bb4cbac86e7940131ca7391e7e29571"
+      },
+      {
+        "path": "scripts/lib/hg-git-scope.sh",
+        "sha256": "720af240a2b7b4e608d63662d1d5c64c860f3846a99322dd6e1cee4450d41a32"
+      },
+      {
+        "path": "scripts/lib/hg-hook.ps1",
+        "sha256": "b98a19bab0ef47ad4d9780abe4d0acf11ec3e48d229033882bddd9dde511a96b"
+      },
+      {
+        "path": "scripts/lib/hg-hook.sh",
+        "sha256": "c66b2b1685d43f9a194138f44900b4ecc152201112330d128d2044687c6ae641"
+      },
+      {
+        "path": "scripts/lib/hg-patch.ps1",
+        "sha256": "87b27a971cc4f7639abbca78b430bf98a7643fc19cf8c3c6557c057b5f812335"
+      },
+      {
+        "path": "scripts/lib/hg-patch.sh",
+        "sha256": "acce31daf1bbb40e414f3d76a62e8e425e669558276ed68ff2ecb01487337673"
+      },
+      {
+        "path": "scripts/lib/hg-scan.ps1",
+        "sha256": "6ecfbbe65f57da8c2823f7a158751fc27d2ebda210e0488e863a70ce23ead195"
+      },
+      {
+        "path": "scripts/lib/hg-scan.sh",
+        "sha256": "2446fcdb80eccbd52beb33e443dcd5ec117b237abb0083c80c4b5a6065d9b9cc"
+      },
+      {
+        "path": "scripts/lib/hg-secrets.ps1",
+        "sha256": "371d59ccc2f68bf406d29e2f16c146eadf4eeb667a3c19ffe03d1d1d397c3cbe"
+      },
+      {
+        "path": "scripts/lib/hg-secrets.sh",
+        "sha256": "73f190b90f9af254228378132ab9ce102089a765ae400f8565f8dc6d00e4fe25"
+      },
+      {
+        "path": "scripts/lib/hg-speckit.ps1",
+        "sha256": "737f9110fbd5684187aee1c5887e974fdd7d0eea02efdbfb8ba70346a701ba53"
+      },
+      {
+        "path": "scripts/lib/hg-speckit.sh",
+        "sha256": "095d7805ea10554da214dd22ed788e00d65d93772725faa8a3364f95d08bdf37"
+      },
+      {
+        "path": "scripts/lib/hg-stats.ps1",
+        "sha256": "24a9066190ead3b3836a96094ccaa7186ccfa05dd0cca0eb87772a209a67e4af"
+      },
+      {
+        "path": "scripts/lib/hg-stats.sh",
+        "sha256": "faa699c2eed3539ed0443a9e7ff8d4e4d2d3882e089ae048de6041130c587d28"
+      },
+      {
+        "path": "scripts/lib/linux-maintenance-hardening.py",
+        "sha256": "283fa569d21adc1ff8cfe65f52f4bbf3d92d9dc0b2097d740fbc595aaa4510ba"
+      },
+      {
+        "path": "scripts/lib/maintenance_container_worker.py",
+        "sha256": "4c755ea2780e19dfd6f546be4fc02c2bd0d1e6d084a128ec2c6e38743ec78202"
+      },
+      {
+        "path": "scripts/lib/maintenance_execution_context.py",
+        "sha256": "e9566dffca28d3a64f9dff352c90d202c64709e6d6e2f405a7d392d8215addc7"
+      },
+      {
+        "path": "scripts/lib/resolve-home-baseline-source.ps1",
+        "sha256": "11c46fddf6b73bd91fe8a6f0ffbfbdf63dffd20b40d64081f31aee548d6c08bb"
+      },
+      {
+        "path": "scripts/lib/resolve-home-baseline-source.sh",
+        "sha256": "1c6828fc41040dc66123a7a62d6bc6a732ccb126c96d899f3387088c4a201bad"
+      },
+      {
+        "path": "scripts/lib/secure-development-hardening.ps1",
+        "sha256": "b5512c5fcdabd1d39cf3bb154794fc764939c4f7440d297af228b543048355fb"
+      },
+      {
+        "path": "scripts/lib/secure-development-hardening.sh",
+        "sha256": "e88ca3a40a96b932031467a13fc2bb81e0dafe773067228584bf9586813b5959"
+      },
+      {
+        "path": "scripts/lib/secure_development_hardening.py",
+        "sha256": "d84777350ce22327a82f9ded551a78c0694c367aa5a4401269cf90afefe713d4"
+      },
+      {
+        "path": "scripts/lib/statistics-ci-evidence.ps1",
+        "sha256": "badabd767e5c09b909a9818f251bfab8fe63bb6b1deddf1547bb473d81f43779"
+      },
+      {
+        "path": "scripts/lib/windows-maintenance-hardening.psm1",
+        "sha256": "60f483fb8e26d4247b0b3ec31c521f0920ba23b70dd5095d2f1a3c34dd9a7616"
+      },
+      {
+        "path": "scripts/lib/workspace_storage_maintenance.py",
+        "sha256": "9396fa6f59d15d6069ffc81c65f057fafeb6d5303b09bd4812dcd524716b761d"
+      },
+      {
+        "path": "scripts/maintain-agentic-brew-apps.sh",
+        "sha256": "7219cbe022c593dfb3d6b5f60cc4199972676fc9ca2606819910aac0bfd90901"
+      },
+      {
+        "path": "scripts/maintain-agentic-winget-apps.ps1",
+        "sha256": "58acf1cd284982d677eb1f110a2b62840f4eb7b95d3514c1506a1846a5876a4d"
+      },
+      {
+        "path": "scripts/maintain-agentic-workspace.ps1",
+        "sha256": "b916adbe375311fd47bd08b18de9decacf117ab86f2d378d7a152a6e2fbc924d"
+      },
+      {
+        "path": "scripts/maintain-agentic-workspace.sh",
+        "sha256": "d1892fbfc09da1e44a5755e8d152a54625953355a504d44d5a759ae9fe210cef"
+      },
+      {
+        "path": "scripts/maintain-powershell-modules.ps1",
+        "sha256": "e601b534f4fe559b51a5c315f7939723366063e00d8fc745868a28c6caf6eaae"
+      },
+      {
+        "path": "scripts/maintain-workspace-storage.ps1",
+        "sha256": "aaa13bf37bbdb3d486dbd242a518dd15acc2d6b1b49a4dcd78270f2957facd16"
+      },
+      {
+        "path": "scripts/maintain-workspace-storage.sh",
+        "sha256": "f938098ece6f41158e45ad55947671502ef2dd9b36e568968475229c15346e89"
+      },
+      {
+        "path": "scripts/rename-lastenheft.ps1",
+        "sha256": "5e25b6cb0095085b7378ecc3483b674c0e1d78936bf16284b6ff056cc52b8f4d"
+      },
+      {
+        "path": "scripts/rename-lastenheft.sh",
+        "sha256": "e925051b2ca4fdb7b4f12348a8bc9f8792e3adc6db88ec7b7998828339575741"
+      },
+      {
+        "path": "scripts/render-project-statistics.ps1",
+        "sha256": "53bef2515ad48ce13db2b8792ccb506cbf72c367e0eb4e4c3a935ded41048b3a"
+      },
+      {
+        "path": "scripts/render-project-statistics.sh",
+        "sha256": "2abd9614be59dd36d0635a1de4226b3f71f83fdc4012e0e6e315a5fdd889899e"
+      },
+      {
+        "path": "scripts/render-requirements-intake-governance.ps1",
+        "sha256": "06c55cd408352d4a6fd10395421b58b8c2a744c3263b6af0dc6c79a47c4edc39"
+      },
+      {
+        "path": "scripts/render-requirements-intake-governance.sh",
+        "sha256": "564f7331e3d1244031b5976325f66ced0fc32fb60e876ddc3f26d0513a9f3ef4"
+      },
+      {
+        "path": "scripts/resolve-model-routing.ps1",
+        "sha256": "bd17cb214f860077efe20748522a7b8f1326a14b668dbb783813c0b992f678dc"
+      },
+      {
+        "path": "scripts/resolve-model-routing.sh",
+        "sha256": "3dec790ee7a48a92d0ca7b116c5d30841bf7215f93f1915bb37578a6b44bf86c"
+      },
+      {
+        "path": "scripts/sandbox-lifecycle.ps1",
+        "sha256": "4191e5583a40a3ff8817027e6069c0843903c31fe37ccbd9e43d3ec799fa0602"
+      },
+      {
+        "path": "scripts/sandbox-lifecycle.sh",
+        "sha256": "e8632c5630ae60af8eea113a3c94e6834c816252530c29756f388f74707b3f71"
+      },
+      {
+        "path": "scripts/scan-agent-secrets.ps1",
+        "sha256": "0e8b8035b2b94b41cef29989fc373561650ece571f5ba42a16e07ef984aac0c9"
+      },
+      {
+        "path": "scripts/scan-agent-secrets.sh",
+        "sha256": "47df3ba6f31038487de8e1ac52e2b79b8dca84ba6d0f5a60c4a9fde941a73b96"
+      },
+      {
+        "path": "scripts/setup-antigravity-settings.ps1",
+        "sha256": "2acce584b522374a7d0044e87e9f558afa5f4b448a07f393cbd43835708ce468"
+      },
+      {
+        "path": "scripts/setup-antigravity-settings.sh",
+        "sha256": "7acecda96bc188fc2d530cacbb54b16e440fb1f9d4729d563744dd418fa7e625"
+      },
+      {
+        "path": "scripts/smoke-test-documentation.sh",
+        "sha256": "63878daeb7b82f0c9f040d8d7e88165f4217cf29c0ea6fe89235ba24a154f1fc"
+      },
+      {
+        "path": "scripts/smoke-test-toolchains.sh",
+        "sha256": "871f944251d1dc17b074c474f079243366f29bcceadb4e90bd3e8a109b463ab6"
+      },
+      {
+        "path": "scripts/sync-home-baseline-runtime.sh",
+        "sha256": "dbae00d0089a2fec7171b0e1c1a89c5d8a816afd65ba251a6421982801d27449"
+      },
+      {
+        "path": "scripts/templates/antigravity-statusline.ps1",
+        "sha256": "3c9568e0258d67f39e97c30d1e3e1fa3573c284da1a944f689ae9fa4b9fb1bfe"
+      },
+      {
+        "path": "scripts/templates/antigravity-statusline.sh",
+        "sha256": "1809bf1e12f3328ed82c8b51ec00d9871f618bddc738910bc0b0673fbefff9a8"
+      },
+      {
+        "path": "scripts/test-ade-sandbox-hardening.ps1",
+        "sha256": "27968761ad1206812bc5fc980ad4088e9d116e36cf65f3178979093f5ee73ab3"
+      },
+      {
+        "path": "scripts/test-ade-sandbox-hardening.sh",
+        "sha256": "0020221ef3a93a5c1e5af9c889e3bf49e5a67bf82b4cfed32e876e92aa4776f3"
+      },
+      {
+        "path": "scripts/test-documentation-impact.ps1",
+        "sha256": "ee2bce0be68ae843b81cbf9ddfd1cc96e8afc8979c6ec6dd4c745236bf70c403"
+      },
+      {
+        "path": "scripts/test-documentation-impact.sh",
+        "sha256": "b5ae90e59749b01230890c157757b3ded55233e55808d869606c65f93b092f4a"
+      },
+      {
+        "path": "scripts/test-requirements-intake-governance.ps1",
+        "sha256": "cd763b87dd792ce7102d49de41fb5bea862278bcaae651bb9e12c33832242146"
+      },
+      {
+        "path": "scripts/test-requirements-intake-governance.sh",
+        "sha256": "f0f81a4ad0b0cc84697d559ed5f1b668dc5de615674f228e85532236a7dbbf58"
+      },
+      {
+        "path": "scripts/validate-documentation-impact.ps1",
+        "sha256": "afeea486d8b2899889dc0c2fbb94f02d03daa3c37e9629201ec14c7cde9bf645"
+      },
+      {
+        "path": "scripts/validate-documentation-impact.sh",
+        "sha256": "fee32782674d0d2f37c147c46b8f1d8bc2ef9446f618b839ed89956246a02fe5"
+      },
+      {
+        "path": "spec-kit/patch-specify-cli.py",
+        "sha256": "f46f8941e713c4e50ba700f1b4f686cce961ada09504e8b13d2a400f54319ca2"
+      }
+    ]
+  },
+  "runs": [
+    {
+      "name": "baseline",
+      "tests": 169,
+      "skipped": 10,
+      "executed": 159,
+      "seconds": 507.711,
+      "commands": [
+        {
+          "name": "tests",
+          "argv": [
+            "${MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "run",
+            "--rcfile",
+            "${REPO_ROOT}/scripts/tests/fixtures/hardening-followup/coverage-mac-a.ini",
+            "-m",
+            "unittest",
+            "-v",
+            "scripts.tests.test_linux_maintenance_hardening",
+            "scripts.tests.test_agent_prompt_dispatchers",
+            "scripts.tests.test_audit_storage_metadata",
+            "scripts.tests.test_audit_shutdown_fail_closed",
+            "scripts.tests.test_audit_retention",
+            "scripts.tests.test_hardening_followup",
+            "scripts.tests.test_dockerfile_arg_renovate",
+            "scripts.tests.test_home_baseline_reference_pin",
+            "scripts.tests.test_specify_container_patch",
+            "scripts.tests.test_secure_development_container_hardening",
+            "scripts.tests.test_maintenance_execution_context",
+            "scripts.tests.test_workspace_storage_maintenance",
+            "scripts.tests.test_feature004_audit_coverage"
+          ],
+          "startedAt": "2026-11-02T08:26:57.451787+01:00",
+          "finishedAt": "2026-11-02T08:35:26.105908+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "2ec0707d266efc48b84d17fbadb653e188b6322f89fcf4323d1971a02a390ba1"
+        },
+        {
+          "name": "combine",
+          "argv": [
+            "${MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "combine",
+            "--keep",
+            "${MEASUREMENT_ROOT}/measurement"
+          ],
+          "startedAt": "2026-11-02T08:35:26.115303+01:00",
+          "finishedAt": "2026-11-02T08:35:26.513747+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "a3a4ff5a97509ff82c68a89b1aedd81a67dd9a15b2297e7992e029821d962615"
+        },
+        {
+          "name": "json",
+          "argv": [
+            "${MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "json",
+            "-o",
+            "${MEASUREMENT_ROOT}/measurement/python-coverage.json"
+          ],
+          "startedAt": "2026-11-02T08:35:26.51609+01:00",
+          "finishedAt": "2026-11-02T08:35:28.022046+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "b8780521ec47b23420447cea2fe70a573d524e8e28d821b1f2160e7de300e489"
+        }
+      ],
+      "testHashes": {
+        "scripts/tests/test_linux_maintenance_hardening.py": "9e8ecd56fa9052f94d3d150ba631f04aedc57ef7c5bad8fe17994403b2b63579",
+        "scripts/tests/test_agent_prompt_dispatchers.py": "855606ceb9a08e8c6b689535897d16cd438b08da7e9c6357fd1a4d469dc0bb7e",
+        "scripts/tests/test_audit_storage_metadata.py": "7a88ac939ddc704350ebc6ecb1ae0c3b4d4c248e196978dcc089a51c8fc5e31b",
+        "scripts/tests/test_audit_shutdown_fail_closed.py": "3620d53d9137580c48c36fc20232cc43f7bc4708e2c5a2f50970ea49d6859b6b",
+        "scripts/tests/test_audit_retention.py": "a405d7e1f454ad993a2f63a3f56708493952ddd571fb5a034c2bbeaf4be6921d",
+        "scripts/tests/test_hardening_followup.py": "f76ba37b94658350e266c763e2cfad15e50b538d498978a332511dfc53e29c56",
+        "scripts/tests/test_dockerfile_arg_renovate.py": "f58177d2c0c7e7049e50ec7b94aa3d69649c4b2491fab7266d54df2d2ce100d4",
+        "scripts/tests/test_home_baseline_reference_pin.py": "c4a6ba643d4e617d17703018bb5bad8b017a5d527c3933f44ba4e34274c6c949",
+        "scripts/tests/test_specify_container_patch.py": "e082cf910823232e5cdb962836c06cbd0ff5e1ae5d424eb12b7263e70d219b10",
+        "scripts/tests/test_secure_development_container_hardening.py": "419c524e71284a00763359eee76768c95104a755b08977916afa0c8ab882ef54",
+        "scripts/tests/test_maintenance_execution_context.py": "596febd383d4d86b6f213a8af699aee820be9963603be6a9e4f2c85a72c2f5e1",
+        "scripts/tests/test_workspace_storage_maintenance.py": "dc33d911f8d76bdfb96a902d0219862e9ba26ccd6c7579496e439b7bb929ded8",
+        "scripts/tests/test_feature004_audit_coverage.py": "6f551feab638e61225549816d53776a1bb3123d8a35d3bed32f7aa6a408a7f75"
+      }
+    },
+    {
+      "name": "targeted-pin-extension-final",
+      "tests": 8,
+      "skipped": 0,
+      "executed": 8,
+      "seconds": 23.116,
+      "commands": [
+        {
+          "name": "tests",
+          "argv": [
+            "${MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "run",
+            "--rcfile",
+            "${REPO_ROOT}/scripts/tests/fixtures/hardening-followup/coverage-mac-a.ini",
+            "-m",
+            "unittest",
+            "-v",
+            "scripts.tests.test_feature004_pin_coverage"
+          ],
+          "startedAt": "2026-11-02T09:10:44.573433+01:00",
+          "finishedAt": "2026-11-02T09:11:08.198415+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "8320bbfc3ea15e860036596916337e5190d95da7d18f6be0353e6b9850b82bf2"
+        },
+        {
+          "name": "combine",
+          "argv": [
+            "${MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "combine",
+            "--keep",
+            "${MEASUREMENT_ROOT}/measurement-increment"
+          ],
+          "startedAt": "2026-11-02T09:11:08.208675+01:00",
+          "finishedAt": "2026-11-02T09:11:08.416204+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "721c01e26cbf8aff93524fc03b2e6e0dcf776b4598b0ab6bf69302171859d04b"
+        },
+        {
+          "name": "json",
+          "argv": [
+            "${MEASUREMENT_ROOT}/venv/bin/python",
+            "-m",
+            "coverage",
+            "json",
+            "-o",
+            "${MEASUREMENT_ROOT}/measurement-increment/python-coverage.json"
+          ],
+          "startedAt": "2026-11-02T09:11:08.418719+01:00",
+          "finishedAt": "2026-11-02T09:11:09.203212+01:00",
+          "exitCode": 0,
+          "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderrSha256": "54512e68794b6e142994e13957b791492ee519f84cb88959aae837b7c963dff9"
+        }
+      ],
+      "testHashes": {
+        "scripts/tests/test_feature004_pin_coverage.py": "d12fe2e996f161297b97bf841cceb9ba9f4364379cf2edf2b4cf17906ca515bf"
+      }
+    }
+  ],
+  "combined": {
+    "tests": 177,
+    "executed": 167,
+    "skipped": 10,
+    "allTestExitCodes": 0,
+    "sameProductSourcesAndConfiguration": true,
+    "thresholdMetForNamedFiles": 4,
+    "overallGate": "Open",
+    "fullScopeCoveragePercent": null
+  },
+  "modules": [
+    {
+      "path": "scripts/check-dockerfile-arg-renovate.py",
+      "sourceSha256": "ce2203b4dfb1cb7aba6eb304dc3e2678ea43d4e00d8d7d55d72d62afffbc7613",
+      "coveredBranches": 64,
+      "totalBranches": 64,
+      "percent": 100,
+      "numericFileThresholdMet": true,
+      "missingBranchCount": 0,
+      "missingBranchSamples": [],
+      "acceptance": "Open: file ratio is not complete module/embedded/platform acceptance"
+    },
+    {
+      "path": "scripts/check-home-baseline-lock.py",
+      "sourceSha256": "3a7f6d76967f996e973614abdb29aaee8c98ab0eb6f19d6fb3871f076626f135",
+      "coveredBranches": 19,
+      "totalBranches": 22,
+      "percent": 86.36,
+      "numericFileThresholdMet": true,
+      "missingBranchCount": 3,
+      "missingBranchSamples": [
+        [
+          36,
+          37
+        ],
+        [
+          42,
+          43
+        ],
+        [
+          55,
+          -1
+        ]
+      ],
+      "acceptance": "Open: file ratio is not complete module/embedded/platform acceptance"
+    },
+    {
+      "path": "scripts/lib/agentic_workspace_fleet.py",
+      "sourceSha256": "b04602b0fe56c171be32002b21e2e94acc0d39b0aa4430d27afe5fab2ce4adda",
+      "coveredBranches": 43,
+      "totalBranches": 1274,
+      "percent": 3.38,
+      "numericFileThresholdMet": false,
+      "missingBranchCount": 1231,
+      "missingBranchSamples": [
+        [
+          60,
+          61
+        ],
+        [
+          60,
+          65
+        ],
+        [
+          62,
+          63
+        ],
+        [
+          62,
+          64
+        ],
+        [
+          66,
+          67
+        ],
+        [
+          66,
+          68
+        ],
+        [
+          70,
+          71
+        ],
+        [
+          70,
+          73
+        ],
+        [
+          84,
+          85
+        ],
+        [
+          84,
+          86
+        ]
+      ],
+      "acceptance": "Open: file ratio is not complete module/embedded/platform acceptance"
+    },
+    {
+      "path": "scripts/lib/audit_retention.py",
+      "sourceSha256": "2b6e12973057341c039ef280f656c4540dfe719480d343e28ced19824fdbf2a9",
+      "coveredBranches": 48,
+      "totalBranches": 50,
+      "percent": 96,
+      "numericFileThresholdMet": true,
+      "missingBranchCount": 2,
+      "missingBranchSamples": [
+        [
+          35,
+          37
+        ],
+        [
+          42,
+          43
+        ]
+      ],
+      "acceptance": "Open: file ratio is not complete module/embedded/platform acceptance"
+    },
+    {
+      "path": "scripts/lib/linux-maintenance-hardening.py",
+      "sourceSha256": "283fa569d21adc1ff8cfe65f52f4bbf3d92d9dc0b2097d740fbc595aaa4510ba",
+      "coveredBranches": 85,
+      "totalBranches": 150,
+      "percent": 56.67,
+      "numericFileThresholdMet": false,
+      "missingBranchCount": 65,
+      "missingBranchSamples": [
+        [
+          80,
+          79
+        ],
+        [
+          86,
+          87
+        ],
+        [
+          109,
+          110
+        ],
+        [
+          126,
+          127
+        ],
+        [
+          129,
+          130
+        ],
+        [
+          213,
+          225
+        ],
+        [
+          243,
+          244
+        ],
+        [
+          277,
+          278
+        ],
+        [
+          280,
+          276
+        ],
+        [
+          284,
+          285
+        ]
+      ],
+      "acceptance": "Open: file ratio is not complete module/embedded/platform acceptance"
+    },
+    {
+      "path": "scripts/lib/maintenance_container_worker.py",
+      "sourceSha256": "4c755ea2780e19dfd6f546be4fc02c2bd0d1e6d084a128ec2c6e38743ec78202",
+      "coveredBranches": 34,
+      "totalBranches": 58,
+      "percent": 58.62,
+      "numericFileThresholdMet": false,
+      "missingBranchCount": 24,
+      "missingBranchSamples": [
+        [
+          19,
+          20
+        ],
+        [
+          70,
+          71
+        ],
+        [
+          73,
+          74
+        ],
+        [
+          90,
+          96
+        ],
+        [
+          96,
+          97
+        ],
+        [
+          96,
+          115
+        ],
+        [
+          98,
+          99
+        ],
+        [
+          98,
+          101
+        ],
+        [
+          105,
+          106
+        ],
+        [
+          105,
+          107
+        ]
+      ],
+      "acceptance": "Open: file ratio is not complete module/embedded/platform acceptance"
+    },
+    {
+      "path": "scripts/lib/maintenance_execution_context.py",
+      "sourceSha256": "e9566dffca28d3a64f9dff352c90d202c64709e6d6e2f405a7d392d8215addc7",
+      "coveredBranches": 40,
+      "totalBranches": 90,
+      "percent": 44.44,
+      "numericFileThresholdMet": false,
+      "missingBranchCount": 50,
+      "missingBranchSamples": [
+        [
+          43,
+          44
+        ],
+        [
+          52,
+          53
+        ],
+        [
+          56,
+          57
+        ],
+        [
+          60,
+          61
+        ],
+        [
+          63,
+          64
+        ],
+        [
+          65,
+          66
+        ],
+        [
+          69,
+          70
+        ],
+        [
+          163,
+          171
+        ],
+        [
+          166,
+          170
+        ],
+        [
+          185,
+          186
+        ]
+      ],
+      "acceptance": "Open: file ratio is not complete module/embedded/platform acceptance"
+    },
+    {
+      "path": "scripts/lib/secure_development_hardening.py",
+      "sourceSha256": "d84777350ce22327a82f9ded551a78c0694c367aa5a4401269cf90afefe713d4",
+      "coveredBranches": 269,
+      "totalBranches": 432,
+      "percent": 62.27,
+      "numericFileThresholdMet": false,
+      "missingBranchCount": 163,
+      "missingBranchSamples": [
+        [
+          176,
+          177
+        ],
+        [
+          187,
+          188
+        ],
+        [
+          194,
+          195
+        ],
+        [
+          197,
+          198
+        ],
+        [
+          201,
+          202
+        ],
+        [
+          213,
+          214
+        ],
+        [
+          274,
+          275
+        ],
+        [
+          276,
+          277
+        ],
+        [
+          278,
+          279
+        ],
+        [
+          282,
+          283
+        ]
+      ],
+      "acceptance": "Open: file ratio is not complete module/embedded/platform acceptance"
+    },
+    {
+      "path": "scripts/lib/workspace_storage_maintenance.py",
+      "sourceSha256": "9396fa6f59d15d6069ffc81c65f057fafeb6d5303b09bd4812dcd524716b761d",
+      "coveredBranches": 129,
+      "totalBranches": 336,
+      "percent": 38.39,
+      "numericFileThresholdMet": false,
+      "missingBranchCount": 207,
+      "missingBranchSamples": [
+        [
+          73,
+          74
+        ],
+        [
+          73,
+          76
+        ],
+        [
+          76,
+          77
+        ],
+        [
+          85,
+          86
+        ],
+        [
+          91,
+          92
+        ],
+        [
+          95,
+          96
+        ],
+        [
+          109,
+          110
+        ],
+        [
+          122,
+          123
+        ],
+        [
+          149,
+          150
+        ],
+        [
+          149,
+          151
+        ]
+      ],
+      "acceptance": "Open: file ratio is not complete module/embedded/platform acceptance"
+    },
+    {
+      "path": "spec-kit/patch-specify-cli.py",
+      "sourceSha256": "f46f8941e713c4e50ba700f1b4f686cce961ada09504e8b13d2a400f54319ca2",
+      "coveredBranches": 14,
+      "totalBranches": 14,
+      "percent": 100,
+      "numericFileThresholdMet": true,
+      "missingBranchCount": 0,
+      "missingBranchSamples": [],
+      "acceptance": "Open: file ratio is not complete module/embedded/platform acceptance"
+    }
+  ],
+  "interfaces": {
+    "catalogPath": "docs/security/secure-development/004-container-hardening-followup/interface-catalog.json",
+    "catalogSha256": "19696881c017a9c2383007ef42f474833fc89dd793c78a51a69d6dd37046566e",
+    "logicalIds": 94,
+    "publicModes": 81,
+    "criticalFlows": 7,
+    "internalBoundaries": 6,
+    "publicAndCriticalDenominator": 88,
+    "fullAllVariantCoveragePercent": null,
+    "localCaseEvidence": [
+      {
+        "testId": "scripts.tests.test_agent_prompt_dispatchers.AgentPromptDispatcherTests.test_confidential_sources_never_reach_child_argv",
+        "outcome": "Passed"
+      },
+      {
+        "testId": "scripts.tests.test_agent_prompt_dispatchers.AgentPromptDispatcherTests.test_antigravity_confidential_source_fails_before_cli",
+        "outcome": "Passed"
+      },
+      {
+        "testId": "scripts.tests.test_agent_prompt_dispatchers.AgentPromptDispatcherTests.test_agent_command_mappings_match",
+        "outcome": "Passed"
+      },
+      {
+        "testId": "scripts.tests.test_agent_prompt_dispatchers.AgentPromptDispatcherTests.test_unknown_agent_is_rejected",
+        "outcome": "Passed"
+      },
+      {
+        "testId": "scripts.tests.test_audit_shutdown_fail_closed.AuditShutdownFailClosedTests.test_successful_export_precedes_down",
+        "outcome": "Passed"
+      },
+      {
+        "testId": "scripts.tests.test_audit_shutdown_fail_closed.AuditShutdownFailClosedTests.test_failed_export_blocks_every_down_variant",
+        "outcome": "Passed"
+      },
+      {
+        "testId": "scripts.tests.test_audit_shutdown_fail_closed.AuditShutdownFailClosedTests.test_preview_is_write_free_and_never_calls_compose",
+        "outcome": "Passed"
+      }
+    ],
+    "matchedIds": [
+      {
+        "id": "agent-prompt/Dispatch",
+        "localPositiveAndNegative": true
+      },
+      {
+        "id": "agent-prompt/Preview",
+        "localPositiveAndNegative": true
+      },
+      {
+        "id": "compose-down-with-audit/AuditedStop",
+        "localPositiveAndNegative": true
+      },
+      {
+        "id": "compose-down-with-audit/Preview",
+        "localPositiveAndNegative": false
+      }
+    ],
+    "observedVariant": "macOS/Bash",
+    "supplementalShell": "macOS/PowerShell7 is not Windows/PowerShell7",
+    "allVariantAcceptance": false,
+    "evidenceBoundary": "Synthetic adapter tests only, not real agents or Podman; no complete shell decision/outcome trace"
+  },
+  "skips": [
+    {
+      "count": 2,
+      "reason": "Linux-only Swift provisioning"
+    },
+    {
+      "count": 7,
+      "reason": "Canonical Level-0 integration fixtures are not included in this consumer"
+    },
+    {
+      "count": 1,
+      "reason": "Full installed Assurance mutation matrix is opt-in and was not repeated in this coverage slice"
+    }
+  ],
+  "rawArtifacts": {
+    "locationClass": "Owned temporary directory; retained locally, not a tracked artifact",
+    "sha256": {
+      "measurement/tests.stderr.log": "2ec0707d266efc48b84d17fbadb653e188b6322f89fcf4323d1971a02a390ba1",
+      "measurement/tests.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "measurement/run-manifest.json": "437a8916c5dc10d2b61021bc65001ce7a4da780f5533725253d7a8b54cd90d35",
+      "measurement/python-coverage.json": "974c7d54ca5162f3d6eaed28736d93b00777e510321c3ad25463d8c3b9f669cc",
+      "measurement-increment/tests.stderr.log": "8320bbfc3ea15e860036596916337e5190d95da7d18f6be0353e6b9850b82bf2",
+      "measurement-increment/tests.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "measurement-increment/run-manifest.json": "a67eede48e41e2d358959b964036f23ca25208927d9adcd0f67a1ceb49c1edf8",
+      "measurement-increment/python-coverage.json": "6309d08852c6fb861062bb958c1c55fabe071fed475c5b5e7122a333590f3342",
+      "measurement-final/python-coverage.json": "d0feedf1f81a7106c656fc2789a524ffeb3e84be3eb676204f8518c2476dbeac",
+      "measurement-final/.coverage": "20a8cca2e92d5b79c07709b03b3cc8b91a295406ce8f542fe4a8932407552675"
+    },
+    "commandsUsePlaceholders": true,
+    "exactArgvAvailableInLocalRunManifests": true
+  },
+  "limitations": [
+    "No Windows/Ubuntu-WSL2 execution or live container access",
+    "No complete Shell/PowerShell decision-outcome trace",
+    "Embedded/generated/isolated-interpreter programs are not fully attributed; parent file ratios do not prove them",
+    "Six named Python files below 85%; no average or reduced denominator",
+    "No full all-variant interface percentage, no T053 freeze, no T063 SBOM/CVE, no human acceptance",
+    "Earlier targeted extension preserved as diagnostic history; only corrected final extension data used"
+  ],
+  "taskDisposition": {
+    "T041": "Partial",
+    "T042": "Open",
+    "T043": "Open",
+    "T044": "Partial",
+    "T045": "Partial",
+    "T046": "Partial",
+    "T053": "Open",
+    "T059": "Open",
+    "T060": "Open",
+    "T061": "Open",
+    "completedTaskCountUnchanged": 52
+  },
+  "nextActions": [
+    {
+      "owner": "Maintainer / Security Review",
+      "action": "Add safe tests for six sub-threshold modules, separate missing canonical fixtures and embedded/child measurement gaps",
+      "trigger": "Before T053; source/test/catalog changes"
+    },
+    {
+      "owner": "Windows Platform Review",
+      "action": "Independent native Windows run after reviewed final head and runtime authority",
+      "trigger": "Runner available and final T053 context"
+    },
+    {
+      "owner": "Ubuntu/WSL2 Platform Review",
+      "action": "Independent own rootless WSL2 runtime and editor proof",
+      "trigger": "Runner available and final T053 context"
+    }
+  ]
+}

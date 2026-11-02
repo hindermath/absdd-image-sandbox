@@ -1,8 +1,37 @@
-# Reviewstand nach Serienaufnahme / Review after series admission
+# Feature-Update-Reviewverweis / Feature-update review reference
 
-DE: Das frühere Single-Ready ist bytegleich archiviert. Das vollständige fünfgliedrige Nachreview `aa89a3d1-59a0-42bb-965b-1614e3758c04` ist nach bestätigter IR801-Reparatur Ready und deckt den Feature-Update-Intake einzeln ab. Kein neues Single-Review, keine technische oder menschliche Abnahme. Die Update-Stufe bleibt Blocked; Eligible ist keine Startfreigabe.
+DE: Das unabhängige vollständige Serienreview
+`04d3e335-7b7a-494d-bc78-9587e1659572` ist am 02.11.2026 **Ready**,
+einschließlich vollständiger Einzelprüfung dieses Intakes. Maßgeblich sind
+der [Serienbericht](sandbox-development-lifecycle.md) und das zugehörige
+JSON-Ergebnis. Kein separates neues Single-Review, keine technische Abnahme,
+Lifecycle-Änderung oder Startautorität. Der folgende Übergabestand ist historisch.
 
-EN: The prior Single Ready is archived byte for byte. Complete five-member re-review `aa89a3d1-59a0-42bb-965b-1614e3758c04` is Ready after approved IR801 repair and individually covers the feature-update intake. No new Single review or technical/human acceptance. The update stage remains Blocked; eligibility is not execution authority.
+EN: Independent complete Series review above is **Ready** on 2 November
+2026 and includes full individual review of this intake. The linked Series
+report and corresponding JSON result are authoritative. No separate new
+Single review, technical acceptance, lifecycle change or execution authority.
+The following handoff state is historical.
 
-Archiv / Archive: specs/intake-review-archive/0b5f49ef-5dcc-449c-a438-cdc8115ec0be/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/report.md
-Neuer Auftrag / New request: specs/intake-review-requests/sandbox-development-lifecycle.json
+## Übergabe vor dem Vollreview / Handoff Before Full Review
+
+DE: Stand 2026-11-02: `PreparedForIndependentReview`. Neuer Auftrag:
+`specs/intake-review-requests/sandbox-development-lifecycle.json`,
+Review-ID `04d3e335-7b7a-494d-bc78-9587e1659572`. Alle fünf Intake-Texte
+und die vollständige Reihe sind unabhängig zu prüfen. Der Autor hat kein
+Review-Ergebnis festgestellt und keine Risiken akzeptiert.
+
+EN: Status on 2026-11-02: `PreparedForIndependentReview`. New request:
+`specs/intake-review-requests/sandbox-development-lifecycle.json`,
+review ID `04d3e335-7b7a-494d-bc78-9587e1659572`. All five intake texts
+and the complete series require independent full review. The author has
+not adjudicated an outcome or accepted risks.
+
+DE: Das frühere Ready `aa89a3d1-59a0-42bb-965b-1614e3758c04` bleibt
+bytegleich unter `specs/intake-review-archive/aa89a3d1-59a0-42bb-965b-1614e3758c04/f4aa58a9-39ce-4808-b373-89f557054ce4/`
+archiviert und ist historisch, nicht aktuell. Keine technische oder
+menschliche Abnahme, Lifecycle-Änderung oder neue Startautorität.
+
+EN: Previous Ready `aa89a3d1-59a0-42bb-965b-1614e3758c04` remains
+byte-identical in that archive and is historical, not current. No technical
+or human acceptance, lifecycle change or new execution authority.

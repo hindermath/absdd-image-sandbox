@@ -1,0 +1,346 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeOperation",
+  "operationId": "f4aa58a9-39ce-4808-b373-89f557054ce4",
+  "type": "Update",
+  "status": "PreparedForIndependentReview",
+  "createdAt": "2026-11-02T07:08:30Z",
+  "authorityEvidence": "User explicitly authorizes targeted intake source-binding renewal with byte-identical archives and independent complete review on 2026-11-02, followed by Mac-A coverage and Windows/WSL2 handoff. Requirements, 85/80 thresholds, intake identities, five-member lifecycle and start/delivery authority remain unchanged; no commit or push. This operation owns provenance authoring only, not technical implementation or review adjudication.",
+  "repositoryHead": "e115fa863e754a83eff212c72f130f6f8543a988",
+  "archiveEvidence": [
+    {
+      "source": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/f4aa58a9-39ce-4808-b373-89f557054ce4/manifest.json",
+      "rawSha256": "6f3c90e8fe8165d8925c59241f06597f346aa24923d83717c6e764e958dfd0db",
+      "normalizedSha256": "6f3c90e8fe8165d8925c59241f06597f346aa24923d83717c6e764e958dfd0db"
+    },
+    {
+      "source": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/f4aa58a9-39ce-4808-b373-89f557054ce4/receipt.json",
+      "rawSha256": "88341c3454c98dc8880634817ed303f475dc89e6f390ccfa55e5ba60e41229ef",
+      "normalizedSha256": "88341c3454c98dc8880634817ed303f475dc89e6f390ccfa55e5ba60e41229ef"
+    },
+    {
+      "source": "Lastenheft_Abarbeitungsreihenfolge.md",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/f4aa58a9-39ce-4808-b373-89f557054ce4/root-order.txt",
+      "rawSha256": "d1dfda6cf01b36e2c8e37d85e682f7a400d5a9939e42ada72ec6777b5ddeab08",
+      "normalizedSha256": "d1dfda6cf01b36e2c8e37d85e682f7a400d5a9939e42ada72ec6777b5ddeab08"
+    },
+    {
+      "source": "specs/intake-series/sandbox-development-lifecycle/order.md",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/f4aa58a9-39ce-4808-b373-89f557054ce4/order.txt",
+      "rawSha256": "cedb7593c99bffcc5d30e27c5a63e267b7906672e6598ea0f2ed6671f3a0f446",
+      "normalizedSha256": "cedb7593c99bffcc5d30e27c5a63e267b7906672e6598ea0f2ed6671f3a0f446"
+    },
+    {
+      "source": "Pflichtenheft.md",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/f4aa58a9-39ce-4808-b373-89f557054ce4/pflichtenheft.txt",
+      "rawSha256": "7ccd64c2ac8023da5d56916a71945e4a43d2c6c65650b5e2908099c4355f60e7",
+      "normalizedSha256": "7ccd64c2ac8023da5d56916a71945e4a43d2c6c65650b5e2908099c4355f60e7"
+    },
+    {
+      "source": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+      "archive": "specs/intake-review-archive/aa89a3d1-59a0-42bb-965b-1614e3758c04/f4aa58a9-39ce-4808-b373-89f557054ce4/request.json",
+      "rawSha256": "7dbcd4e08d8a6852e512379391d303f5ebc5d4f73e5fddf67d9998ca75d3faf1",
+      "normalizedSha256": "7dbcd4e08d8a6852e512379391d303f5ebc5d4f73e5fddf67d9998ca75d3faf1"
+    },
+    {
+      "source": "specs/intake-review-results/sandbox-development-lifecycle.json",
+      "archive": "specs/intake-review-archive/aa89a3d1-59a0-42bb-965b-1614e3758c04/f4aa58a9-39ce-4808-b373-89f557054ce4/result.json",
+      "rawSha256": "bb938648633a97bd9a7e544e2a3cd46cf7867ddcea52790d771719ad0bfb09ff",
+      "normalizedSha256": "bb938648633a97bd9a7e544e2a3cd46cf7867ddcea52790d771719ad0bfb09ff"
+    },
+    {
+      "source": "specs/intake-review-reports/sandbox-development-lifecycle.md",
+      "archive": "specs/intake-review-archive/aa89a3d1-59a0-42bb-965b-1614e3758c04/f4aa58a9-39ce-4808-b373-89f557054ce4/report.txt",
+      "rawSha256": "55cdcf4c0ce979015cd5ed897e558c96ec9aeefa7b6de9829165051d27596a86",
+      "normalizedSha256": "55cdcf4c0ce979015cd5ed897e558c96ec9aeefa7b6de9829165051d27596a86"
+    },
+    {
+      "source": "specs/intake-review-reports/sandbox-development-lifecycle-independent.txt",
+      "archive": "specs/intake-review-archive/aa89a3d1-59a0-42bb-965b-1614e3758c04/f4aa58a9-39ce-4808-b373-89f557054ce4/independent.txt",
+      "rawSha256": "67ce726a1924ddad1bd7c0966b7aaef6884d161d8918ff316067606b0a4c5d91",
+      "normalizedSha256": "67ce726a1924ddad1bd7c0966b7aaef6884d161d8918ff316067606b0a4c5d91"
+    },
+    {
+      "source": "specs/intake-review-results/learner-fork-self-build-sandbox.json",
+      "archive": "specs/intake-review-archive/aa89a3d1-59a0-42bb-965b-1614e3758c04/f4aa58a9-39ce-4808-b373-89f557054ce4/learner-fork-self-build-sandbox-result.json",
+      "rawSha256": "7011ddfa7fada77b00cee4dfc24d41b329e364592df46e29a614da8e83541e3f",
+      "normalizedSha256": "7011ddfa7fada77b00cee4dfc24d41b329e364592df46e29a614da8e83541e3f"
+    },
+    {
+      "source": "specs/intake-review-reports/learner-fork-self-build-sandbox.md",
+      "archive": "specs/intake-review-archive/aa89a3d1-59a0-42bb-965b-1614e3758c04/f4aa58a9-39ce-4808-b373-89f557054ce4/learner-fork-self-build-sandbox-report.txt",
+      "rawSha256": "4fdaba0750bd989fea958ba80648bf092f3ec1af2de02369e7bb5d0d099b7362",
+      "normalizedSha256": "4fdaba0750bd989fea958ba80648bf092f3ec1af2de02369e7bb5d0d099b7362"
+    },
+    {
+      "source": "specs/intake-review-results/sandbox-feature-update-2026-10-28.json",
+      "archive": "specs/intake-review-archive/aa89a3d1-59a0-42bb-965b-1614e3758c04/f4aa58a9-39ce-4808-b373-89f557054ce4/sandbox-feature-update-2026-10-28-result.json",
+      "rawSha256": "7778ccf153dc9ea45632f664c254c990981d23963594a69852edf949a5c0dce6",
+      "normalizedSha256": "7778ccf153dc9ea45632f664c254c990981d23963594a69852edf949a5c0dce6"
+    },
+    {
+      "source": "specs/intake-review-reports/sandbox-feature-update-2026-10-28.md",
+      "archive": "specs/intake-review-archive/aa89a3d1-59a0-42bb-965b-1614e3758c04/f4aa58a9-39ce-4808-b373-89f557054ce4/sandbox-feature-update-2026-10-28-report.txt",
+      "rawSha256": "fd7bb51fbdeae8c90c39494f7bf09b49e250cc2cd4eb8df25d8770e6e79d8777",
+      "normalizedSha256": "fd7bb51fbdeae8c90c39494f7bf09b49e250cc2cd4eb8df25d8770e6e79d8777"
+    },
+    {
+      "source": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "archive": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/f4aa58a9-39ce-4808-b373-89f557054ce4/target.txt",
+      "rawSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560"
+    },
+    {
+      "source": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "archive": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/f4aa58a9-39ce-4808-b373-89f557054ce4/receipt.json",
+      "rawSha256": "6dd378395037179ac12f059b9608e92b305c369542bec16b0ed60adc8f8f59b4",
+      "normalizedSha256": "6dd378395037179ac12f059b9608e92b305c369542bec16b0ed60adc8f8f59b4"
+    },
+    {
+      "source": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "archive": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/f4aa58a9-39ce-4808-b373-89f557054ce4/target.txt",
+      "rawSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a",
+      "normalizedSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a"
+    },
+    {
+      "source": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "archive": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/f4aa58a9-39ce-4808-b373-89f557054ce4/receipt.json",
+      "rawSha256": "8e8e0d6be4de1dccf1c7ae74f53e334b510a2e03302f6f52711b099983510ae3",
+      "normalizedSha256": "8e8e0d6be4de1dccf1c7ae74f53e334b510a2e03302f6f52711b099983510ae3"
+    },
+    {
+      "source": "intakes/learner-fork-self-build-sandbox.md",
+      "archive": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/f4aa58a9-39ce-4808-b373-89f557054ce4/target.txt",
+      "rawSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338"
+    },
+    {
+      "source": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "archive": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/f4aa58a9-39ce-4808-b373-89f557054ce4/receipt.json",
+      "rawSha256": "b7eadb86c4e28c4feb27fbd6d6b5e1f0e2a0dd6ff9a20d8cb242e668d473a95b",
+      "normalizedSha256": "b7eadb86c4e28c4feb27fbd6d6b5e1f0e2a0dd6ff9a20d8cb242e668d473a95b"
+    }
+  ],
+  "sourceChanges": [
+    {
+      "receipt": "learner-fork-self-build-sandbox.json",
+      "path": "docs/maintenance/gsdb-344-preset-installed-lock.json",
+      "previousNormalizedSha256": "80107431c8d8121c719d2e538cd48ba402809ecd6362559ef8bc35a8fe2e65e2",
+      "currentNormalizedSha256": "1b013dee1b6090482876b2ad2c89da95a290d7946200c8055f849d1e60cc0943",
+      "historyBaseline": "30f3312^:docs/maintenance/gsdb-344-preset-installed-lock.json",
+      "changeCommit": "30f3312a5e7db753ab673517a313f77996a8e147"
+    },
+    {
+      "receipt": "learner-fork-self-build-sandbox.json",
+      "path": "scripts/tests/test_toolchain_version_pins.py",
+      "previousNormalizedSha256": "3a4e032b61badae73987760c6a97d423de51a12e58a47ecb84f57b57836a2ba8",
+      "currentNormalizedSha256": "f9d0257c5b1dd28979a9c315a8e947db97b2b3596c60e83e8dcbfe8ef599c05f",
+      "historyBaseline": "30491d0^:scripts/tests/test_toolchain_version_pins.py",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "learner-fork-self-build-sandbox.json",
+      "path": "Dockerfile",
+      "previousNormalizedSha256": "a98213c4abe13322ce0be2d9012c7fad52033e04f525c453beca386161fa33d7",
+      "currentNormalizedSha256": "7254a6a29d87088d1c3da35cd71e0591c5eb9a940eecfc5dbed842ea828923ac",
+      "historyBaseline": "30491d0^:Dockerfile",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "learner-fork-self-build-sandbox.json",
+      "path": "README.md",
+      "previousNormalizedSha256": "18c968e1d3f8f438f79cf3394d0a0d37aaca44b5be5d4434bcf90416c24ed431",
+      "currentNormalizedSha256": "1a01c964cbf0b02a97309029152d30e4fc1aaff7bcce9a320bbd322795b14096",
+      "historyBaseline": "30491d0^:README.md",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "learner-fork-self-build-sandbox.json",
+      "path": "docs/fuer-lernende/erste-schritte.md",
+      "previousNormalizedSha256": "ba1bdab5500b448c18e8654999cd78cc507584903a6bd186878e74eb470ea589",
+      "currentNormalizedSha256": "d9ef3ec24ca9f8562214c17014e04ef74be165d5a81f6e26c7ee0bf56c464926",
+      "historyBaseline": "30491d0^:docs/fuer-lernende/erste-schritte.md",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "learner-fork-self-build-sandbox.json",
+      "path": "docs/fuer-lernende/troubleshooting.md",
+      "previousNormalizedSha256": "7367f3d82cb26296558305b8e0c6827bd96534ffca441832fbd23b9f742dd7f3",
+      "currentNormalizedSha256": "b66fc48d043fc8b94479bd9a101251c54ee00c7eed1b016b376093469854c427",
+      "historyBaseline": "30491d0^:docs/fuer-lernende/troubleshooting.md",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "learner-fork-self-build-sandbox.json",
+      "path": "docs/fuer-lernende/alltag.md",
+      "previousNormalizedSha256": "46ea6cac96f5cd73331372af50ea9354e2845166e766ab0bd7648b80bcc5a66f",
+      "currentNormalizedSha256": "8601bf210abce856f205a5ac675cb2eeb6e8301e938c2514ed4a44f0a354e030",
+      "historyBaseline": "30491d0^:docs/fuer-lernende/alltag.md",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "sandbox-secure-development-selbstpruefung.json",
+      "path": "docs/maintenance/gsdb-344-preset-installed-lock.json",
+      "previousNormalizedSha256": "80107431c8d8121c719d2e538cd48ba402809ecd6362559ef8bc35a8fe2e65e2",
+      "currentNormalizedSha256": "1b013dee1b6090482876b2ad2c89da95a290d7946200c8055f849d1e60cc0943",
+      "historyBaseline": "30f3312^:docs/maintenance/gsdb-344-preset-installed-lock.json",
+      "changeCommit": "30f3312a5e7db753ab673517a313f77996a8e147"
+    },
+    {
+      "receipt": "sandbox-secure-development-selbstpruefung.json",
+      "path": "scripts/tests/test_toolchain_version_pins.py",
+      "previousNormalizedSha256": "3a4e032b61badae73987760c6a97d423de51a12e58a47ecb84f57b57836a2ba8",
+      "currentNormalizedSha256": "f9d0257c5b1dd28979a9c315a8e947db97b2b3596c60e83e8dcbfe8ef599c05f",
+      "historyBaseline": "30491d0^:scripts/tests/test_toolchain_version_pins.py",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "sandbox-secure-development-selbstpruefung.json",
+      "path": "Dockerfile",
+      "previousNormalizedSha256": "a98213c4abe13322ce0be2d9012c7fad52033e04f525c453beca386161fa33d7",
+      "currentNormalizedSha256": "7254a6a29d87088d1c3da35cd71e0591c5eb9a940eecfc5dbed842ea828923ac",
+      "historyBaseline": "30491d0^:Dockerfile",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "sandbox-secure-development-selbstpruefung.json",
+      "path": "README.md",
+      "previousNormalizedSha256": "18c968e1d3f8f438f79cf3394d0a0d37aaca44b5be5d4434bcf90416c24ed431",
+      "currentNormalizedSha256": "1a01c964cbf0b02a97309029152d30e4fc1aaff7bcce9a320bbd322795b14096",
+      "historyBaseline": "30491d0^:README.md",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "sandbox-secure-development-selbstpruefung.json",
+      "path": "docs/fuer-lernende/erste-schritte.md",
+      "previousNormalizedSha256": "ba1bdab5500b448c18e8654999cd78cc507584903a6bd186878e74eb470ea589",
+      "currentNormalizedSha256": "d9ef3ec24ca9f8562214c17014e04ef74be165d5a81f6e26c7ee0bf56c464926",
+      "historyBaseline": "30491d0^:docs/fuer-lernende/erste-schritte.md",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "sandbox-secure-development-selbstpruefung.json",
+      "path": "docs/fuer-lernende/troubleshooting.md",
+      "previousNormalizedSha256": "7367f3d82cb26296558305b8e0c6827bd96534ffca441832fbd23b9f742dd7f3",
+      "currentNormalizedSha256": "b66fc48d043fc8b94479bd9a101251c54ee00c7eed1b016b376093469854c427",
+      "historyBaseline": "30491d0^:docs/fuer-lernende/troubleshooting.md",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "sandbox-secure-development-selbstpruefung.json",
+      "path": "docs/fuer-lernende/alltag.md",
+      "previousNormalizedSha256": "46ea6cac96f5cd73331372af50ea9354e2845166e766ab0bd7648b80bcc5a66f",
+      "currentNormalizedSha256": "8601bf210abce856f205a5ac675cb2eeb6e8301e938c2514ed4a44f0a354e030",
+      "historyBaseline": "30491d0^:docs/fuer-lernende/alltag.md",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "secure-development-container-hardening.json",
+      "path": "docs/maintenance/gsdb-344-preset-installed-lock.json",
+      "previousNormalizedSha256": "80107431c8d8121c719d2e538cd48ba402809ecd6362559ef8bc35a8fe2e65e2",
+      "currentNormalizedSha256": "1b013dee1b6090482876b2ad2c89da95a290d7946200c8055f849d1e60cc0943",
+      "historyBaseline": "30f3312^:docs/maintenance/gsdb-344-preset-installed-lock.json",
+      "changeCommit": "30f3312a5e7db753ab673517a313f77996a8e147"
+    },
+    {
+      "receipt": "secure-development-container-hardening.json",
+      "path": "scripts/tests/test_toolchain_version_pins.py",
+      "previousNormalizedSha256": "3a4e032b61badae73987760c6a97d423de51a12e58a47ecb84f57b57836a2ba8",
+      "currentNormalizedSha256": "f9d0257c5b1dd28979a9c315a8e947db97b2b3596c60e83e8dcbfe8ef599c05f",
+      "historyBaseline": "30491d0^:scripts/tests/test_toolchain_version_pins.py",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "secure-development-container-hardening.json",
+      "path": "Dockerfile",
+      "previousNormalizedSha256": "a98213c4abe13322ce0be2d9012c7fad52033e04f525c453beca386161fa33d7",
+      "currentNormalizedSha256": "7254a6a29d87088d1c3da35cd71e0591c5eb9a940eecfc5dbed842ea828923ac",
+      "historyBaseline": "30491d0^:Dockerfile",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "secure-development-container-hardening.json",
+      "path": "README.md",
+      "previousNormalizedSha256": "18c968e1d3f8f438f79cf3394d0a0d37aaca44b5be5d4434bcf90416c24ed431",
+      "currentNormalizedSha256": "1a01c964cbf0b02a97309029152d30e4fc1aaff7bcce9a320bbd322795b14096",
+      "historyBaseline": "30491d0^:README.md",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "secure-development-container-hardening.json",
+      "path": "docs/fuer-lernende/erste-schritte.md",
+      "previousNormalizedSha256": "ba1bdab5500b448c18e8654999cd78cc507584903a6bd186878e74eb470ea589",
+      "currentNormalizedSha256": "d9ef3ec24ca9f8562214c17014e04ef74be165d5a81f6e26c7ee0bf56c464926",
+      "historyBaseline": "30491d0^:docs/fuer-lernende/erste-schritte.md",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "secure-development-container-hardening.json",
+      "path": "docs/fuer-lernende/troubleshooting.md",
+      "previousNormalizedSha256": "7367f3d82cb26296558305b8e0c6827bd96534ffca441832fbd23b9f742dd7f3",
+      "currentNormalizedSha256": "b66fc48d043fc8b94479bd9a101251c54ee00c7eed1b016b376093469854c427",
+      "historyBaseline": "30491d0^:docs/fuer-lernende/troubleshooting.md",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    },
+    {
+      "receipt": "secure-development-container-hardening.json",
+      "path": "docs/fuer-lernende/alltag.md",
+      "previousNormalizedSha256": "46ea6cac96f5cd73331372af50ea9354e2845166e766ab0bd7648b80bcc5a66f",
+      "currentNormalizedSha256": "8601bf210abce856f205a5ac675cb2eeb6e8301e938c2514ed4a44f0a354e030",
+      "historyBaseline": "30491d0^:docs/fuer-lernende/alltag.md",
+      "changeCommit": "30491d065f5d33b7dc065b923e19a900a32c0772"
+    }
+  ],
+  "affectedReceipts": [
+    "secure-development-container-hardening",
+    "sandbox-secure-development-selbstpruefung",
+    "learner-fork-self-build-sandbox"
+  ],
+  "unchangedIntakeTexts": true,
+  "unchangedThresholds": [
+    85,
+    80
+  ],
+  "unchangedLifecycle": [
+    "Completed",
+    "Eligible",
+    "Blocked",
+    "Blocked",
+    "Blocked"
+  ],
+  "reviewId": "04d3e335-7b7a-494d-bc78-9587e1659572",
+  "requestPath": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+  "supersedesReviewId": "aa89a3d1-59a0-42bb-965b-1614e3758c04",
+  "reviewArchive": "specs/intake-review-archive/aa89a3d1-59a0-42bb-965b-1614e3758c04/f4aa58a9-39ce-4808-b373-89f557054ce4",
+  "validation": {
+    "bash": "Passed three renewed receipts, manifest and series receipt",
+    "powerShell": "Passed three renewed receipts, manifest and series receipt",
+    "independentReview": "NotPerformedByAuthor",
+    "seriesManifestBash": "Passed",
+    "seriesManifestPowerShell": "Passed",
+    "seriesReceiptBash": "Passed",
+    "seriesReceiptPowerShell": "Passed",
+    "archiveFidelity": "Passed 19/19 raw SHA-256 identical",
+    "renderer": "Passed existing PowerShell renderer -OrderOnly -AllowDirty -Write; graph/lifecycle unchanged",
+    "diffCheck": "Passed",
+    "allLocalReceiptSources": "Passed 256/256 normalized file hashes current",
+    "allTargetTexts": "Passed 5/5 normalized hashes unchanged; three archived active texts raw-byte identical",
+    "receiptBash": "Passed all three H/A/L renewed receipts",
+    "receiptPowerShell": "Passed all three H/A/L renewed receipts"
+  },
+  "nextAction": "$speckit-intake-review specs/intake-review-requests/sandbox-development-lifecycle.json",
+  "transitiveBoundary": "Learner receipt binds the same seven changed paths directly, so only H/A/L receipts renew. Archived GSDB and active feature-update receipt have zero drift and remain byte-identical; all five intake texts and prompts remain byte-identical.",
+  "reviewHandoff": "Canonical request/result/report/status-pointer ownership handed to independent reviewer Raman after source freeze. Author will only finalize this journal validation fields; no outcome adjudication.",
+  "changedBoundPaths": [
+    "Dockerfile",
+    "docs/fuer-lernende/alltag.md",
+    "docs/fuer-lernende/erste-schritte.md",
+    "docs/fuer-lernende/troubleshooting.md",
+    "docs/maintenance/gsdb-344-preset-installed-lock.json",
+    "README.md",
+    "scripts/tests/test_toolchain_version_pins.py"
+  ],
+  "preparedAt": "2026-11-02T07:22:14Z"
+}

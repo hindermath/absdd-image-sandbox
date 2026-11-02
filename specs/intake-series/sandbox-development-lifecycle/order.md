@@ -21,33 +21,36 @@ veraltet. Dieses Review und das Single-Ready des Feature-Updates nach IR701
 bleiben bytegleich archiviert. Sie gelten nach Aufnahme und geändertem
 Graph nicht als aktuelle Prüfung der fünfgliedrigen Reihe.
 Der [neue vollständige Reviewauftrag](../../../specs/intake-review-requests/sandbox-development-lifecycle.json)
-wurde nach dem bestätigten IR801-Vertrag erneuert und vollständig ausgeführt. Ergebnis: Ready (Review-ID aa89a3d1-59a0-42bb-965b-1614e3758c04). Dies ist Inhaltsbereitschaft, keine technische oder menschliche Abnahme und keine Startfreigabe.
+wurde nach dem Quellenabgleich vom 2026-11-02 erneut vorbereitet:
+`PreparedForIndependentReview` (Review-ID `04d3e335-7b7a-494d-bc78-9587e1659572`).
+Das vorherige Ready `aa89a3d1-59a0-42bb-965b-1614e3758c04` ist bytegleich
+archiviert und historisch, nicht die Bewertung der erneuerten Quellenbindungen.
+Keine technische oder menschliche Abnahme und keine neue Startfreigabe.
 
 EN: The four-member full review above was Ready on 2026-10-27; describing
 that review as pending was stale. It and the feature update's post-IR701
 Single Ready remain archived byte for byte. Following admission and graph
 changes, neither is current acceptance of the five-member series.
-The renewed complete review is Ready (review ID aa89a3d1-59a0-42bb-965b-1614e3758c04) after authorized IR801 repair. This is requirement readiness, not product/human acceptance or execution authority.
+The full review was prepared again after source alignment on 2026-11-02:
+`PreparedForIndependentReview` (review ID `04d3e335-7b7a-494d-bc78-9587e1659572`).
+Previous Ready `aa89a3d1-59a0-42bb-965b-1614e3758c04` is archived byte for
+byte and historical, not an assessment of the renewed source bindings.
+No technical/human acceptance or new execution authority.
 
 <!-- secure-development-hardening-order:start -->
 ## Verlinkte Lastenheft-Reihenfolge / Linked Requirements Order
 
-DE: Jede Zeile nennt den vollständigen Dateinamen, Status und alle direkten
-bindenden Vorgänger. Die Tabelle und folgende Liste sind die vollständige
-Textalternative zum ergänzenden Diagramm. Spec-Kit-Feature-Zuordnungen werden
-nicht aus einer Serienposition abgeleitet.
+Diese Tabelle wird aus dem kanonischen Series-Manifest und ausdruecklicher Feature-Evidence erzeugt. Vollstaendige Dateinamen, direkte eingehende Kanten und sichtbare Positionen bleiben erhalten. Manuelle Abschnitte ausserhalb dieses Markers bleiben unberuehrt.
 
-EN: Each row lists the full filename, status and all direct binding
-predecessors. The table and ordered text below fully explain the diagram.
-No Spec Kit feature assignment is inferred from series position.
+*This table is generated from the canonical series manifest and explicit feature evidence. Complete filenames, direct incoming edges, and visible positions are preserved. Manual sections outside this marker remain unchanged.*
 
 | Position | Status | Lastenheft/Intake | Abhängigkeiten / Dependencies | Spec-Kit-Feature |
 |---:|---|---|---|---|
-| 1 | Completed | [Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md](../../../specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md) | — (Root / keine direkte Abhängigkeit) | — |
-| 2 | Eligible | [Lastenheft_Secure-Development-Container-Hardening.md](../../../Lastenheft_Secure-Development-Container-Hardening.md) | [Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md](../../../specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md) → current (`AssessmentBaseline`, binding: true) | — |
-| 3 | Blocked | [Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md](../../../Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md) | [Lastenheft_Secure-Development-Container-Hardening.md](../../../Lastenheft_Secure-Development-Container-Hardening.md) → current (`SandboxBaseline`, binding: true) | — |
-| 4 | Blocked | [Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md](../../../Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md) | [Lastenheft_Secure-Development-Container-Hardening.md](../../../Lastenheft_Secure-Development-Container-Hardening.md); [Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md](../../../Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md) → current (jeweils / each `SandboxBaseline`, binding: true) | — |
-| 5 | Blocked | [learner-fork-self-build-sandbox.md](../../../intakes/learner-fork-self-build-sandbox.md) | [Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md](../../../Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md) → current (`HardCompletionGate`, binding: true) | — |
+| 1 | Completed | [Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md](../../intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md) | — (Root / keine direkte Abhängigkeit) | — (kein Spec-Kit-Feature / no Spec Kit feature) |
+| 2 | Eligible | [Lastenheft_Secure-Development-Container-Hardening.md](../../../Lastenheft_Secure-Development-Container-Hardening.md) | [Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md](../../intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md) → current (`AssessmentBaseline`, binding: true) | — (kein Spec-Kit-Feature / no Spec Kit feature) |
+| 3 | Blocked | [Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md](../../../Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md) | [Lastenheft_Secure-Development-Container-Hardening.md](../../../Lastenheft_Secure-Development-Container-Hardening.md) → current (`SandboxBaseline`, binding: true) | — (kein Spec-Kit-Feature / no Spec Kit feature) |
+| 4 | Blocked | [Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md](../../../Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md) | [Lastenheft_Secure-Development-Container-Hardening.md](../../../Lastenheft_Secure-Development-Container-Hardening.md) → current (`SandboxBaseline`, binding: true)<br>[Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md](../../../Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md) → current (`SandboxBaseline`, binding: true) | — (kein Spec-Kit-Feature / no Spec Kit feature) |
+| 5 | Blocked | [learner-fork-self-build-sandbox.md](../../../intakes/learner-fork-self-build-sandbox.md) | [Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md](../../../Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md) → current (`HardCompletionGate`, binding: true) | — (kein Spec-Kit-Feature / no Spec Kit feature) |
 <!-- secure-development-hardening-order:end -->
 
 ## Bindende Abhängigkeiten / Binding dependencies
@@ -92,14 +95,14 @@ No formal, product, accessibility or platform approval or autonomous run.
 
 ## Nächste fachliche Aktion / Next substantive action
 
-DE: Das vollständige fünfgliedrige Nachreview ist Ready. Status und
-Kandidatenauswahl bleiben schreibfrei; kein Befehl wird hier ausgeführt.
+DE: Das vollständige fünfgliedrige unabhängige Nachreview ist als nächster
+Schritt angefordert. Bis dahin wird kein aktuelles Ready behauptet.
 
-EN: The complete five-member re-review is Ready. Status and
-candidate selection remain read-only; no command is executed here.
+EN: The complete five-member independent re-review is requested next.
+Until then no current Ready is claimed.
 
 ```text
-$speckit-intake-series-next specs/intake-series/sandbox-development-lifecycle/manifest.json
+$speckit-intake-review specs/intake-review-requests/sandbox-development-lifecycle.json
 ```
 
 IR801-Reparatur / IR801 repair: [Vertrag / Contract](../../../docs/maintenance/ir801-repair-2026-10-30.md). Alle fünf Statuswerte und Kanten bleiben unverändert / All five statuses and edges remain unchanged.

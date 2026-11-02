@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "feature": "004-container-hardening-followup",
-  "gitHead": "f59cc695f346ff48e32c44ec4454d7c7482c8e57",
+  "gitHead": "e115fa863e754a83eff212c72f130f6f8543a988",
   "sourceBindings": [
     {
       "path": "specs/004-container-hardening-followup/spec.md",
@@ -42,8 +42,8 @@
     {
       "path": "docs/security/secure-development/004-container-hardening-followup/input-bindings.md",
       "hashKind": "text/raw-and-utf8-lf",
-      "rawSha256": "2f249e4a060af83f156556be320ce8c0437cf17cdaa10bd7c4126e9cbbb26bc8",
-      "normalizedSha256": "2f249e4a060af83f156556be320ce8c0437cf17cdaa10bd7c4126e9cbbb26bc8"
+      "rawSha256": "ef6fa201fd352d5f6be2febb88ac6a365da8c55425feb15e9566d96e4d1d9dd6",
+      "normalizedSha256": "ef6fa201fd352d5f6be2febb88ac6a365da8c55425feb15e9566d96e4d1d9dd6"
     },
     {
       "path": "docs/security/secure-development/004-container-hardening-followup/control-matrix.md",
@@ -60,8 +60,8 @@
     {
       "path": "docs/security/secure-development/004-container-hardening-followup/coverage-modules.json",
       "hashKind": "text/raw-and-utf8-lf",
-      "rawSha256": "b05f57ffe9ed10d7d6d8d0f8d871a90b5bdff710414902a18a87478f2419f87b",
-      "normalizedSha256": "b05f57ffe9ed10d7d6d8d0f8d871a90b5bdff710414902a18a87478f2419f87b"
+      "rawSha256": "dfff185b1576ef18c5a1dff0e6c0e4144bc6cafd7f1f627bfdd4e8bcc4cd2056",
+      "normalizedSha256": "dfff185b1576ef18c5a1dff0e6c0e4144bc6cafd7f1f627bfdd4e8bcc4cd2056"
     },
     {
       "path": "docs/security/secure-development/004-container-hardening-followup/interface-catalog.json",
@@ -90,8 +90,8 @@
     {
       "path": "docs/security/secure-development/004-container-hardening-followup/secure-coding-review.md",
       "hashKind": "text/raw-and-utf8-lf",
-      "rawSha256": "0ff207fc8b6ddc69b1e7318e158182da96499cd69836d2b57e661156e74b177f",
-      "normalizedSha256": "0ff207fc8b6ddc69b1e7318e158182da96499cd69836d2b57e661156e74b177f"
+      "rawSha256": "73c45bb6d31ec5bdbb1fe592b7b5957cb8a87f76338eb950a6da6dc2652c9419",
+      "normalizedSha256": "73c45bb6d31ec5bdbb1fe592b7b5957cb8a87f76338eb950a6da6dc2652c9419"
     },
     {
       "path": "scripts/tests/fixtures/hardening-followup/security-cases.json",

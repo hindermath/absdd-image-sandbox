@@ -1,0 +1,17 @@
+{
+  "supersededAt": "2026-10-28T11:51:35Z",
+  "reviewId": "0b5f49ef-5dcc-449c-a438-cdc8115ec0be",
+  "archivedResultRawSha256": "119d485d1e56448f9d8ead90d4a75f3a5b952505f63527131fec8c288e527d79",
+  "priorReviewStatus": "Ready",
+  "archivedResultPath": "specs/intake-review-archive/0b5f49ef-5dcc-449c-a438-cdc8115ec0be/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/result.json",
+  "schemaVersion": "1.0",
+  "documentType": "IntakeReviewSupersession",
+  "reason": "Explicit series admission supersedes the historical Single Ready. Complete five-target Series re-review is Ready after authorized IR801 repair; no technical acceptance or execution authority.",
+  "currentRequestPath": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+  "operationId": "1cadc99c-e344-4fc9-9fa0-78414f2d82cd",
+  "status": "Superseded",
+  "requestedReviewId": "aa89a3d1-59a0-42bb-965b-1614e3758c04",
+  "currentReviewId": "aa89a3d1-59a0-42bb-965b-1614e3758c04",
+  "currentReviewStatus": "Ready",
+  "currentReviewedAt": "2026-10-30T17:35:11Z"
+}

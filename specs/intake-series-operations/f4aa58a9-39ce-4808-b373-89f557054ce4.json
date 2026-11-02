@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesOperation",
+  "operationId": "f4aa58a9-39ce-4808-b373-89f557054ce4",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "type": "Update",
+  "status": "PreparedForIndependentReview",
+  "authorityEvidence": "User explicitly authorizes targeted intake source-binding renewal with byte-identical archives and independent complete review on 2026-11-02, followed by Mac-A coverage and Windows/WSL2 handoff. Requirements, 85/80 thresholds, intake identities, five-member lifecycle and start/delivery authority remain unchanged; no commit or push. This operation owns provenance authoring only, not technical implementation or review adjudication.",
+  "createdAt": "2026-11-02T07:08:30Z",
+  "archiveEvidence": [
+    {
+      "source": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/f4aa58a9-39ce-4808-b373-89f557054ce4/manifest.json",
+      "rawSha256": "6f3c90e8fe8165d8925c59241f06597f346aa24923d83717c6e764e958dfd0db",
+      "normalizedSha256": "6f3c90e8fe8165d8925c59241f06597f346aa24923d83717c6e764e958dfd0db"
+    },
+    {
+      "source": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/f4aa58a9-39ce-4808-b373-89f557054ce4/receipt.json",
+      "rawSha256": "88341c3454c98dc8880634817ed303f475dc89e6f390ccfa55e5ba60e41229ef",
+      "normalizedSha256": "88341c3454c98dc8880634817ed303f475dc89e6f390ccfa55e5ba60e41229ef"
+    },
+    {
+      "source": "Lastenheft_Abarbeitungsreihenfolge.md",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/f4aa58a9-39ce-4808-b373-89f557054ce4/root-order.txt",
+      "rawSha256": "d1dfda6cf01b36e2c8e37d85e682f7a400d5a9939e42ada72ec6777b5ddeab08",
+      "normalizedSha256": "d1dfda6cf01b36e2c8e37d85e682f7a400d5a9939e42ada72ec6777b5ddeab08"
+    },
+    {
+      "source": "specs/intake-series/sandbox-development-lifecycle/order.md",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/f4aa58a9-39ce-4808-b373-89f557054ce4/order.txt",
+      "rawSha256": "cedb7593c99bffcc5d30e27c5a63e267b7906672e6598ea0f2ed6671f3a0f446",
+      "normalizedSha256": "cedb7593c99bffcc5d30e27c5a63e267b7906672e6598ea0f2ed6671f3a0f446"
+    },
+    {
+      "source": "Pflichtenheft.md",
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/f4aa58a9-39ce-4808-b373-89f557054ce4/pflichtenheft.txt",
+      "rawSha256": "7ccd64c2ac8023da5d56916a71945e4a43d2c6c65650b5e2908099c4355f60e7",
+      "normalizedSha256": "7ccd64c2ac8023da5d56916a71945e4a43d2c6c65650b5e2908099c4355f60e7"
+    }
+  ],
+  "changes": "Evidence paths and source-only lineage renewed; five identities, target hashes, roots, edges, order and lifecycle unchanged.",
+  "validation": {
+    "powerShell": "Passed manifest + receipt",
+    "bash": "Passed manifest + receipt"
+  },
+  "nextAction": "$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json"
+}
