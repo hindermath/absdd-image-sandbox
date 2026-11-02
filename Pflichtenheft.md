@@ -14,13 +14,19 @@ This does not start work.
 
 DE: Das frühere viergliedrige Vollreview war Ready, nicht mehr ausstehend.
 Es bleibt archivierte historische Evidence. Für die aufgenommene fünfgliedrige
-Reihe wurde nach bestätigter IR801-Reparatur vollständig nachreviewt: Ready (Review-ID aa89a3d1-59a0-42bb-965b-1614e3758c04), ohne Produktstart oder neue menschliche Freigabe.
+Reihe wird nach dem Quellenabgleich vom 2026-11-02 erneut unabhängig geprüft:
+`PreparedForIndependentReview`, Review-ID `04d3e335-7b7a-494d-bc78-9587e1659572`.
+Das Ready `aa89a3d1-59a0-42bb-965b-1614e3758c04` bleibt archivierte Historie.
 Das frühere Single-Ready des Updates wird nicht als aktuelle Serienabnahme
 übernommen. Keine technische oder menschliche Freigabe wird neu behauptet.
 
 EN: The old four-member full review was Ready rather than pending and remains
 archived historical evidence. A new full review of the admitted five-member
-series is now Ready (review ID aa89a3d1-59a0-42bb-965b-1614e3758c04) after authorized IR801 repair, with no product execution or new human approval. The prior update Single Ready does not
+series is prepared for independent re-review after source alignment on
+2026-11-02: `PreparedForIndependentReview`, review ID
+`04d3e335-7b7a-494d-bc78-9587e1659572`. Ready
+`aa89a3d1-59a0-42bb-965b-1614e3758c04` remains archived history.
+The prior update Single Ready does not
 become current series acceptance; no new technical or human approval is asserted.
 
 - Reihenfolge / Order: [Lastenheft_Abarbeitungsreihenfolge.md](Lastenheft_Abarbeitungsreihenfolge.md)

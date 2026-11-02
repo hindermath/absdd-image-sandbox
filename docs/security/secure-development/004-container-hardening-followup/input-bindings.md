@@ -32,3 +32,44 @@ DE: `scripts/lib/secure_development_hardening.py` setzt derzeit `FEATURE_DIR` fe
 Vor T012 sind nach T006–T011 folgende isolierte Vertragsfälle in `gate-requirements.json` und Tests zu binden: gültiges Feature-004-Verzeichnis; fehlendes, absolutes oder aus dem Repository führendes Verzeichnis; fehlende oder alte Gate-Datei; exakte Statuskombinationen `Applicable`/`N/A`/`Open` gegenüber `Fulfilled`/`Partly Fulfilled`/`Not Fulfilled`/`Not Assessed`; Pflichtfelder für Owner, Reviewer, Restrisiko, Folgeaktion, Frist und Trigger; normalisierter Texthash gegenüber rohem Binärhash; veralteter Quellen-/Katalog-/Imagekontext; `All` mit fehlenden Pflichtnachweisen; Vorschau ohne Tests und Schreibzugriff. Ohne `--feature-directory`/`-FeatureDirectory` müssen die bestehenden Feature-003-Pfade, Exitklassen und historischen Fixtures unverändert gelten. Ein explizites Feature 004 darf nicht still auf Feature-003-Evidence zurückfallen.
 
 EN: The current core fixes `FEATURE_DIR` to Feature 003 and uses its historical bindings and gate requirements. Existing public wrappers do not pass a feature selector. Preserve this default. Before T012, bind the listed positive and negative Feature 004 cases to reviewed inventories and gate requirements, including exact status combinations, required ownership fields, raw versus normalized hashes, stale context, missing evidence and write-free preview. Explicit Feature 004 selection must never fall back to Feature 003 evidence. T005 involved source and test reading only, with no production edit or test execution.
+
+## Aktuelle Fortsetzung am 02.11.2026 / Current continuation on 2026-11-02
+
+DE: Die vorherigen Abschnitte sind historische T001-/T005-Aufzeichnungen,
+nicht die aktuellen Receipt- oder Reviewkennungen. Die autorisierte Operation
+`f4aa58a9-39ce-4808-b373-89f557054ce4` bindet die sieben erklaerten PR-107-
+Quellen neu, mit 19 bytegleichen Vorgaengerarchiven und unveraenderten
+Intake-Texten. Aktuell: Hardening-Receipt
+`1bc91192-2ccf-48b5-977c-d0ca0a957472` (79 Quellen), Selbstpruefung
+`17aaf045-b6e1-4c67-b3df-5a386c46123a` (85) und Lernenden-Selbstbau
+`9887132c-ac8a-49b8-b842-e20111114cfa` (81). Mit den elf unveraenderten
+Update-Quellen sind 256 lokale Referenzen geprueft. Bash-/PowerShell-
+Receipt-/Reihenvalidatoren bestanden; der unabhaengige Fuenf-Ziel-Review
+`04d3e335-7b7a-494d-bc78-9587e1659572` ist Ready ohne Findings.
+
+DE: Erst danach begann die gesondert beauftragte Mac-A-Teilmessung auf Basis
+`e115fa863e754a83eff212c72f130f6f8543a988`. Neue Tests/Evidenz sind
+uncommittet auf `codex/004-mac-a-coverage`. Das ist kein T053-Freeze und
+keine Lieferung. [Aktueller Messbericht](mac-a-coverage-2026-11-02.md) und
+[Plattformuebergabe](coverage-platform-handoff.md) trennen Messung, fehlende
+Varianten und Startautoritaet. Anforderungen, 85/80 und der fuenfgliedrige
+Lifecycle bleiben unveraendert. Die zwei aktualisierten Evidenztexte werden
+im Feature-Gatevertrag neu gehasht, ohne einen Gate-Status zu schliessen;
+sie sind keine Intake-Quellen. Spaetere Drift verlangt erneut betroffene
+Pruefung, nicht stilles Ersetzen.
+
+EN: Earlier sections are historical T001/T005 records, not current receipt
+or review identities. The authorized operation above renews seven explained
+PR-107 sources with 19 byte-identical predecessor archives and unchanged
+intake texts. Current hardening, acceptance and learner receipt IDs/counts
+are listed above: 79, 85 and 81 sources, plus eleven unchanged update sources.
+All 256 local references and native Bash/PowerShell receipt/series validators
+passed. Independent five-target review 04d3e335-7b7a-494d-bc78-9587e1659572
+is Ready with no findings, not technical or human acceptance.
+
+EN: Only then did the separately authorized Mac-A measurement begin at the
+base SHA above. New tests/evidence are uncommitted, not T053 freeze or delivery.
+The linked report/handoff retain missing variants and separate authority.
+Requirements, 85/80 and lifecycle remain unchanged. Refresh only the two
+changed evidence hashes in the feature gate contract; no gate closure or
+intake source change. Revalidate later drift rather than silently replacing it.

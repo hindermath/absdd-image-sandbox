@@ -22,3 +22,35 @@ Diese Fixture beschreibt nur künstliche Testdaten. Testprozesse erhalten ein fr
 ## English
 
 Use a fresh temporary HOME, project, registry, audit directory and result directory with synthetic data only. Never use personal agent state, secrets, mounted learner projects or the live Podman service. Fake Compose records arguments and exits in its own temporary area; preview must not call it, and export or retention failure must prevent `down`. Unit tests use offline stubs and report unavailable tools or platform behavior honestly. A PATH stub does not replace an absolute executable: isolate that real process boundary or use an owned disposable container. Run tests from the repository root with the stated host shell and prerequisites, record the actual result and exit, and remove only test-owned temporary resources. macOS results do not prove Windows or Ubuntu/WSL2 behavior.
+
+## Mac-A-Messkonfiguration / Mac-A measurement configuration
+
+DE: `coverage-mac-a.ini` misst Zweige der zehn benannten Python-Dateien mit
+explizitem `ADE_COVERAGE_REPO`, auch bei anderem Kindprozess-cwd. Es ersetzt
+weder das 106-Dateien-Inventar noch Shell-/PowerShell-Outcomes oder native
+Plattformbelege. Erst aktuelle Quellen/Review und die isolierte Messumgebung
+pruefen; Rohdaten nicht aus verschiedenen Quellstaenden mischen.
+[Aktueller Teilbericht und Reproduktion](../../../../docs/security/secure-development/004-container-hardening-followup/mac-a-coverage-2026-11-02.md)
+beschreiben Versionen, tatsaechliche argv, Testumgebung und fehlende Belege.
+Die 85-/80-%-Anforderungen bleiben unveraendert; kein globales Maintenance.
+
+EN: The configuration measures the ten named Python files with explicit
+ADE_COVERAGE_REPO across child working directories. It does not replace the
+106-file inventory, shell outcomes or native platform evidence. Validate
+current sources/review and an isolated tool environment first; never merge
+different source contexts. The linked report supplies reproduction inputs,
+commands, environment and limitations. Keep 85/80 unchanged; no global work.
+
+## T041-T046: gezielte Fortsetzung / Targeted Continuation
+
+DE: `test_feature004_delegation_coverage.py` und
+`test_feature004_registry_coverage.py` blockieren echte Transport-/Installer-
+Aufrufe. `test_feature004_wrapper_outcomes.py` startet native Host-Shells
+gegen einen aufzeichnenden Fake-Python-Kern in eigener temporaerer Kopie.
+Keine echte Wartung, kein Podman. Siehe
+[Messbericht](../../../../docs/security/secure-development/004-container-hardening-followup/mac-a-coverage-continuation-2026-11-02.md).
+
+EN: The delegation/registry tests intercept real transport/installation.
+Wrapper tests run native host shells against a recording fake Python core in
+an owned temporary copy. No real maintenance/Podman; the linked report keeps
+partial adapter evidence separate from full branch/platform acceptance.

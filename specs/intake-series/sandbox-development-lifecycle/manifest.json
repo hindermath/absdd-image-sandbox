@@ -103,6 +103,8 @@
     "specs/intake-review-requests/sandbox-development-lifecycle.json",
     "docs/maintenance/ir801-repair-2026-10-30.md",
     "docs/maintenance/intake-delivery-repair-2026-10-30.md",
-    "docs/maintenance/historical-eof-integration-2026-10-30.md"
+    "docs/maintenance/historical-eof-integration-2026-10-30.md",
+    "docs/maintenance/intake-source-alignment-2026-11-02.md",
+    "specs/intake-authoring-operations/f4aa58a9-39ce-4808-b373-89f557054ce4/operation.json"
   ]
 }

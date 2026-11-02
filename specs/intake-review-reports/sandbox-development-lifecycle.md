@@ -1,93 +1,121 @@
-# Vollständiges Serienreview nach CI-Quellenabgleich / Full series review after CI source alignment
+# Unabhängiges Vollreview / Independent Complete Review
 
-## Deutsch
+## Ergebnis und Grenze / Outcome and Boundary
 
-Ergebnis **Ready**, Review aa89a3d1-59a0-42bb-965b-1614e3758c04;
-Operation 869be6a5-a352-4f1f-baaf-aad2d6efd086. Codex, agentisches Intake-
-Review ohne Produkt-/Human-/WCAG-Abnahme. Fünf Ziele, null Findings, Fragen,
-akzeptierte Risiken oder Worker. Das vorherige vollständige Ready bleibt
-bytegleich archiviert, nicht als neue Bewertung ausgegeben.
+DE: **Ready** am 02.11.2026 für alle fünf Intakes und die vollständige Reihe.
+Review-ID: `04d3e335-7b7a-494d-bc78-9587e1659572`.
+Reviewer: Raman, unabhängiger Codex-Reviewer, nicht Quellenautor Dalton.
+Der Quellenautor hat die Eingaben eingefroren und nur die Review-Ausgaben
+übergeben. Dies ist ein inhaltliches Anforderungsreview, keine technische,
+Plattform-, Usability-, WCAG-, Rechts- oder menschliche Freigabe.
+Keine Findings, akzeptierten Risiken oder offenen materiellen Intake-Fragen.
 
-Die vollständige erneute Beurteilung betrifft Identität, Zielgruppe/Vorwissen,
-Begriffe/DE-EN/B2/textorientierte A11Y, Ziel/Scope/Nicht-Ziele, Anforderungen,
-messbare Abnahme, Quellen, Risiken, Artefakte, Plattform/Security/Privacy,
-Lieferrechte, Übergaben und beide Folgeprompts für jedes Ziel:
+EN: **Ready** on 2 November 2026 for all five intakes and the complete series.
+The review ID is shown above. Raman is the independent Codex reviewer, not
+provenance author Dalton. The author froze inputs and handed over only review
+outputs. This is semantic requirements review, not technical, platform,
+usability, WCAG, legal or human approval. No findings, accepted risks or open
+material intake questions remain.
 
-| Ziel | Erneute Beurteilung |
+## Fachlicher Prüfumfang / Substantive Scope
+
+DE: Alle Texte vollständig gelesen, einschließlich Anforderungen,
+Akzeptanzkriterien und Folgeprompts; nicht nur Hashes geprüft. Zweck,
+Zielgruppen, Vorwissen, Umfang/Nicht-Ziele, Messbarkeit, Übergaben, Risiken,
+Security/Datenschutz/Lieferkette, Sprache, A11Y und Autorität wurden bewertet.
+
+EN: Read every text in full, including requirements, acceptance criteria and
+follow-up prompts, not merely hashes. Assessed purpose, audience, assumed
+knowledge, scope/non-goals, measurability, handoffs, risks, security/privacy/
+supply chain, language, accessibility and authority.
+
+| Intake | Inhaltliches Ergebnis / Semantic outcome |
 |---|---|
-| GSDB, Completed | Abgeschlossene historische Matrix und priorisierte Lücken liefern die H-Baseline; menschliche Entscheidungen werden nicht neu geschlossen. |
-| H, Eligible | Sieben Grundanforderungen, H-344-01–10/AC-H-344-01–10, 50 Delta-IDs, 85/80-Schwellen, nachvollziehbare Evidence und Human-only-Grenzen unverändert. Feature 004 besteht bereits, keine Doppelanlage. |
-| U, Blocked | FU-001–023/FA-001–012, native Architektur-/Basis-/Versionsnachweise, Passwort/Readiness/Clients, sieben Profile, Security/Daten/Audit und SBOM unverändert. Historische Aufnahmehinweise im Text sind kein heutiger Reviewstatus. |
-| A, Blocked | H und U auf derselben finalen Quell-/Imageidentität; A-344 und A-FU-01/02 mit unabhängigen positiven/negativen Gegenprüfungen, begründeter Evidenceübernahme und Verbot der Selbstabnahme erhalten. |
-| L, Blocked | Erfolgreiche unabhängige A-Abnahme und neue Startautorität, persönlicher Fork/origin/upstream, optionale Template-Rechte, sechs Sprachen im Standard all, providerfreier Selbstbau und Sicherheits-/Lernendengrenzen bleiben. |
+| Archivierte GSDB-Root / Archived GSDB root | Historische Bestandsprüfung und angenommene Lückenliste bleiben Ausgangspunkt; keine Erfüllung ihrer Befunde. / Retains the historical assessment and accepted gap list, not fulfillment of its findings. |
+| Container-Hardening | Historische Befunde, 50 Delta-IDs und H-344-01–10 mit AC-H-344-01–10 bleiben erhalten. 85 % Zweigabdeckung je sicherheitskritischem Modul und 80 % Interface-Abdeckung unverändert; fehlende Messung bleibt Open. / Preserves historical gaps, all delta IDs, ten H/AC-H pairs and unchanged 85/80 thresholds; missing measurement remains Open. |
+| Ubuntu/OpenCode-Web/MSL-Update | FU-001–023 und FA-001–012 decken Basis/Architektur, Web/Readiness, Profile und gemeinsame Schutz-/Daten-/Lernendenverträge ab; bleibt nach H blockiert. / Covers base/architecture, Web/readiness, profiles and shared security/data/learner contracts; stays blocked behind H. |
+| Unabhängige Sandbox-Abnahme / Independent acceptance | A-344 und A-FU/AC-A-FU binden H UND U an denselben finalen Quell-/Imagestand, risikobasierte Gegenprüfung und belegte Übernahmen. Keine Selbstabnahme. / Binds H AND U to the same final source/image, risk-based counterchecks and justified reuse; no self-acceptance. |
+| Lernenden-Selbstbau / Learner self-build | Fork/upstream, lokaler Selbstbau, kein fertiges Projekt-Image, Lizenz-/Template- und menschliche Grenzen bleiben erhalten; Standardprofil mit sechs Sprachen widerspricht reduzierten Profilen nicht. / Retains fork/upstream, local self-build, no ready-made image and rights/template/human boundaries; six-language default does not conflict with reduced profiles. |
 
-Alle fünf Zieltexte, das U-Receipt und aktive Serienmanifest/-Receipt bleiben
-bytegleich. Schema-2 de-DE-Rollen/Collections/Index, fünf eindeutige Ziele,
-eine abgeschlossene archivierte Root und fünf azyklische bindende Kanten sind
-weiter konsistent. Lifecycle und Prompts erteilen keine neue Startautorität.
-Nur H-/A-/L-Receipts erneuern kontrolliert die gebundene Template-Testquelle;
-Vorstände, Quelle und vorheriges Request/Ergebnis/Bericht sind archiviert.
-Vorgänger ist erste Quelle, expliziter begrenzter Quellenabgleich zweite,
-danach die bisherigen Quellen in derselben Reihenfolge. Intake-IDs erhalten.
+DE: Voraussetzungen sind erklärt, Lernendenpfade sind DE zuerst/EN danach,
+etwa B2 und textorientiert. Die verlinkten Lernwege benennen alle vier
+IHK-IT-Berufe und vier Fachinformatiker-Fachrichtungen. Die archivierte Root
+wird als historische Quelle bewertet, nicht nachträglich umgeschrieben.
+Vorhandene Dokumentation ist kein Beleg praktischer Verständlichkeit oder
+bestandener WCAG-Abnahme.
 
-Der Template-Test prüft nun die bereits genehmigten fünf Statuswerte und
-beide Update-Kanten statt der veralteten Viererannahme. Workshopquellen,
-Notizen und Exporte bleiben unverändert: ihr ausdrücklich datiertes Profil
-vom 25.10.2026 wird an die erhaltene Rohhash-Quelle gebunden. Manipulierte
-Snapshots scheitern. Die heutige operative 14er-Matrix wird weiterhin separat
-gegen aktuelle Paket-/Quellenlocks geprüft. Keine Testabschaltung, keine
-neue Präsentation oder Runtimeprüfung als ausgeführt behauptet.
+EN: Prerequisites are explained and learner paths are German-first/English-
+second, around B2 and text-first. Linked paths name all four IHK IT occupations
+and four IT-specialist tracks. The archived root is historical input, not
+rewritten retroactively. Documentation does not prove practical usability or
+successful WCAG acceptance.
 
-Vor Veröffentlichung bestehen die betroffenen Source-/Serien-/Review-
-Validatoren beider Shells und die tatsächlichen Regressionen. Frühere CI-
-Fehler bleiben im Lieferprotokoll erhalten. Ready ist Inhaltsbereitschaft,
-keine technische/Plattform-/Rechts-/WCAG- oder menschliche Freigabe.
+## Quellen, Archive und Reihe / Sources, Archives and Series
 
-Documentation Impact: UpdateRequired, Maintainer-Owner, vorhandene Reader-
-Pfade und ausdrücklicher veröffentlichungsbezogener Quellenabgleich;
-sourceOnly, kein Home-Sync oder Flotten-/Image-/Container-/Feature-004-Lauf.
-Neubewertung bei Ziel-, Quellen-, Hash-, Review- oder Autoritätsdrift.
+DE: Die sieben PR-107-Pfade wurden gegen ihre Git-Vorgänger geprüft:
+Preset-Inventar, Toolchain-Pin-Tests, Dockerfile, README und drei
+Lernendenpfade für Einstieg/Stopp/Fehlerhilfe. Sie konkretisieren bestehende
+Anforderungen; kein neuer Scope und keine Abnahmeschwelle. Alle **245**
+lokalen Quellenbindungen der drei erneuerten Receipts stimmen. Genau **21**
+übernommene Hashbindungen ändern sich, sieben je Receipt; das Lernenden-
+Receipt bindet diese Quellen selbst und muss ebenfalls erneuert werden.
+Vorgänger und autorisierter Abgleich stehen vor der erhaltenen Quellenfolge.
+GSDB- und U-Receipt sind unverändert. Alle **19 Archive** stimmen sowohl mit
+den aufgezeichneten SHA-256-Werten als auch mit den Bytes von Git-HEAD vor
+der Aktualisierung überein. Alle fünf Intake-Texte und Prompts sind bytegleich.
 
-Nächste Aktion:
-`$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json`.
+EN: Compared all seven PR-107 paths with their Git predecessors: preset
+inventory, toolchain-pin tests, Dockerfile, README and three entry/stop/recovery
+paths. They clarify existing requirements, not new scope or thresholds. All
+**245** local sources in the three renewed receipts are current. Exactly
+**21** inherited hashes change, seven per receipt; the learner receipt has
+its own direct bindings and therefore also needs renewal. Predecessor and
+authorized alignment precede the preserved source order. GSDB and U receipts
+are unchanged. All **19 archives** match both recorded SHA-256 values and
+pre-update Git HEAD bytes. All five intake texts/prompts are byte-identical.
 
-## English
+DE: Fünf eindeutige Mitglieder, eine archivierte abgeschlossene Root und
+fünf bindende azyklische Kanten stimmen zwischen Auftrag, Manifest und
+Receipt überein. Status bleiben **Completed → Eligible → Blocked → Blocked
+→ Blocked**. A benötigt H und U; L benötigt erfolgreiche A und eigene
+Startautorität. Schema-2-Konfiguration, Rollen, Sammlungen und Index sind
+Aligned. Das frühere Ready `aa89a3d1-59a0-42bb-965b-1614e3758c04` ist
+bytegleich archiviert und ausdrücklich durch dieses neue Vollreview ersetzt.
+Vorbereitungsnotizen mit `PreparedForIndependentReview` beschreiben die
+Übergabe vor diesem Review, nicht dessen aktuelles Ergebnis; gebundene
+Vorbereitungstexte wurden dafür nicht erneut verändert.
 
-Outcome **Ready**, review aa89a3d1-59a0-42bb-965b-1614e3758c04, operation
-869be6a5-a352-4f1f-baaf-aad2d6efd086. Codex performs agent intake review,
-not product/human/accessibility acceptance. Five targets, no findings,
-unanswered questions, accepted risks or workers. Preserve the prior complete
-Ready byte for byte, rather than reusing it as a current assessment.
+EN: Five unique targets, one archived completed root and five binding acyclic
+edges agree across request, manifest and receipt. Lifecycle stays **Completed
+→ Eligible → Blocked → Blocked → Blocked**. A requires H and U; L requires
+successful A plus separate authority. Schema-2 roles, collections and index
+are Aligned. Previous Ready is byte-identically archived and explicitly
+superseded by this full review. Preparation notes describe the pre-review
+handoff, not the current outcome; already-bound preparation texts were not
+changed again merely to update that historical phrase.
 
-Reassess every target's identity, audience/prior knowledge, first-use terms,
-equivalent bilingual B2/text accessibility, purpose/scope/non-goals,
-requirements/acceptance, references/evidence/risks/artifacts, security/privacy/
-platform, authority, dependencies/handoffs and both prompts. Completed GSDB
-supplies historical baseline and gaps; H preserves seven base and ten delta
-groups, 50 controls, 85/80 thresholds and human boundaries; U preserves every
-FU/FA/native base/version/web/readiness/profile/audit/SBOM contract; A consumes
-both final H/U handoffs with independent positive/negative checks and no
-self-acceptance; L remains behind successful A and separate authority with
-fork/upstream, optional-template rights, six-language default and provider-free
-self-build unchanged. Existing Feature 004 planning is not duplicated.
+## Validierung und nächste Aktion / Validation and Next Action
 
-All five targets, U receipt and active series manifest/receipt remain
-byte-identical. Preserve de-DE schema-2 roles/collections, five unique targets,
-one archived completed root, five binding acyclic edges and lifecycle. Renew
-only the three affected H/A/L source receipts, retaining intake IDs and source
-order after preserved predecessor/explicit alignment contract. Archive prior
-targets, receipts, test source and review evidence.
+DE: Eigene read-only Bash-Prüfungen aller fünf Authoring-Receipts, des
+Reihenmanifests, Reihenreceipts und der Governance-Konfiguration bestanden.
+Die Ergebnisvalidatoren prüfen Auftrag-/Ziel-/Graphbindung in Bash und
+PowerShell; Ergebnisse werden im maschinenlesbaren Review vermerkt.
+Keine Featuretests, Builds oder Containeraktionen in diesem Review.
 
-Align the template fixture to the already approved five states and two update
-edges. Preserve dated workshop sources, notes and exports against an exact raw-
-hash snapshot with tamper negatives, not today's operational matrix. Separately
-retain strict current fourteen-preset payload/source checks. Disable no test
-and infer no presentation/runtime execution or approval.
+EN: Independent read-only Bash checks passed for all five authoring receipts,
+series manifest/receipt and governance configuration. Bash and PowerShell
+result validators check request/target/graph binding; results are recorded
+in the machine-readable review. No feature tests, builds or container actions
+were performed in this review.
 
-Both-shell provenance/series/review validation and actual regressions precede
-publication; retain initial CI failures in evidence. Documentation Impact is
-UpdateRequired, Maintainer owner, existing reader paths and explicit bounded
-publication alignment. Source-only, no Home/fleet/image/container/Feature004
-execution. Reevaluate on target/source/hash/review/authority drift.
+DE: Nächster Schritt ist nur der bereits beauftragte Mac-A-Coverage-Umfang
+mit Windows-/WSL2-Übergabe. Fehlende Plattform-, praktische Usability-,
+WCAG- und menschliche Nachweise bleiben getrennt Open/Blocked. Keine
+Grenzwertsenkung, kein Commit/Push und kein impliziter Start eines Folge-
+Intakes. Bei Änderung an Quelle, Ziel, Receipt, Auftrag oder Graph neu prüfen.
 
-Next: `$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json`.
+EN: Next perform only the already-authorized Mac-A coverage work and Windows/
+WSL2 handoff preparation. Missing platform, practical usability, WCAG and
+human proof remain separately Open/Blocked. No lowered thresholds, commit/
+push or implicit successor intake start. Re-review changed sources, targets,
+receipts, request or graph.

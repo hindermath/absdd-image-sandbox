@@ -55,3 +55,78 @@ After the Dockerfile-ARG-validator correction, an independent delta review
 passed all 106 current hashes, 48 nested regions, 5,395 provisional decision
 sites and 11,313 candidate outcomes. The affected source hash was rebound;
 observed outcomes remain zero.
+
+## Mac-A-Teilmessung vom 02.11.2026 / Mac-A partial measurement on 2026-11-02
+
+DE: Der Stand vom 31. Oktober oben bleibt historisch. Nach erneuerten
+Quellenbindungen und unabhaengigem Ready wurde coverage.py 7.17.0 in einem
+eigenen temporaeren CPython-3.15.2-venv mit geprueftem ARM64-Wheel bereitgestellt.
+169 Tests mit zehn Skips bestanden; nur die gezielte Pin-/Patcher-Ergaenzung
+mit acht Tests wurde danach ausgefuehrt. Finale Daten: 177 Testmethoden,
+167 ausgefuehrt, zehn Skips, unveraenderte Produktquellen und Grenzwerte.
+
+DE: [Bericht und Grenzen](mac-a-coverage-2026-11-02.md) sowie
+[hashgebundene Messdatenuebersicht](mac-a-coverage-2026-11-02.json) zeigen
+vier numerische Dateiquoten ab 85 %: Dockerfile-ARG-Validator 100 %, Home-
+Baseline-Validator 86,36 %, Audit-Retention 96 %, Spec-Kit-Patcher 100 %.
+Sechs weitere Python-Dateien liegen darunter. Diese Dateiquoten beweisen
+weder die vollstaendige Zuordnung der 48 eingebetteten Bereiche noch
+Bash-/PowerShell-Entscheidungsabdeckung oder alle Interfacevarianten.
+Insbesondere ist die Patcher-Dateiquote keine Quote ihres injizierten Codes.
+Der vollstaendige 106-Dateien-/Interface-Nenner bleibt erhalten; T041-T046,
+T053 und G004-04 bleiben als Gesamtaufgaben Open. Keine Coverage-Senkung,
+kein finaler Freeze, keine Plattform-/Human-Abnahme.
+
+DE: Owner der weiteren Messluecken: Maintainer/Security Review. Follow-up:
+fehlende Zweige der sechs Module, Inline-/Kindprozesse und Shell-/PWS-
+Outcomes mit sicheren Fixtures bearbeiten. Trigger: vor T053 und bei
+Quell-/Test-/Katalogaenderung. Windows/WSL2 erhalten getrennte Auftraege
+nach der [vorbereiteten Uebergabe](coverage-platform-handoff.md).
+
+EN: Preserve the historical 31 October record above. After renewed bindings
+and independent Ready, an owned temporary CPython 3.15.2 environment used
+the SHA-verified ARM64 coverage.py 7.17.0 wheel. Baseline 169 tests with ten
+skips passed; only eight targeted pin/patcher tests followed. Final data
+cover 177 test methods, 167 executed and ten skipped, with unchanged product
+sources and thresholds. The linked report/JSON bind actual inputs and limits.
+
+EN: Four named file ratios reach 85%: ARG validator 100%, baseline validator
+86.36%, retention 96%, patcher 100%. Six Python files remain below threshold.
+File ratios do not prove 48 nested programs, shell/PowerShell decisions or
+all interface variants; the patcher ratio does not measure injected code.
+Preserve all scope and leave complete T041-T046/T053/G004-04 Open. No lower
+threshold, freeze or platform/human acceptance. Maintainer/Security Review
+owns safe missing-branch/child/shell fixtures before T053 and after source,
+test or catalog changes; separate Windows/WSL2 work follows the linked handoff.
+
+## Gezielte Fortsetzung / Targeted Continuation
+
+DE: Die obige erste Messung bleibt historischer Zwischenstand. Der
+[Fortsetzungsbericht](mac-a-coverage-continuation-2026-11-02.md) mit
+[aktueller Messbindung](mac-a-coverage-continuation-2026-11-02.json) ergaenzt
+28 erfolgreiche Testmethoden ohne Skips, nur isolierte neue Faelle. Gleiche
+106 Produktquellen/Konfiguration: 205 Methoden im kombinierten Bestand,
+195 ausgefuehrt und zehn historische Skips, nicht 205 frische Ausfuehrungen.
+Linux-Maintenance 139/150 (92,67 %), Worker 56/58 (96,55 %), Kontext 87/90
+(96,67 %): jetzt sieben von zehn numerischen Dateiquoten ab 85 %.
+Fleet/Hardening-Kern/Storage bleiben darunter. Der Modulkatalog verweist auf
+Teilmessungen, der Interfacekatalog bleibt unveraendert. Nenner/Outcomes
+werden nicht geaendert. 52 native
+Shell-/PWS-Wrapperaufrufe gegen aufzeichnenden Fake-Kern sind Adapterbelege,
+keine komplette Interface-/Windows-Abnahme. T041-T046/T053/G004-04 Open;
+85/80/100 und alle Plattform-/Human-Grenzen unveraendert. Maintainer/Security
+Review bearbeitet verbleibende Python-/Nested-/Shell-/Kernluecken vor T053;
+Trigger Quell-/Test-/Katalogwechsel. Keine Builds oder Containeraktionen.
+
+EN: The earlier measurement remains historical. The linked continuation adds
+28 passing methods without skips using isolated fixtures. Identical 106
+product hashes/configuration yield 205 combined methods, 195 executed and ten
+historical skips, not 205 fresh executions. Linux maintenance reaches 139/150
+(92.67%), worker 56/58 (96.55%), context 87/90 (96.67%): seven named files
+reach 85%. Fleet/hardening/storage still do not. The module catalog links
+partial measurements; interface catalog, denominators and outcomes stay unchanged.
+Fifty-two native shell/PowerShell
+wrapper invocations use a recording fake core: adapter proof, not complete
+interface/Windows acceptance. Keep T041-T046/T053/G004-04 Open and 85/80/100
+unchanged. Maintainer/Security Review owns remaining Python/nested/shell/core
+gaps before T053, reevaluated on source/test/catalog change. No build/runtime.
