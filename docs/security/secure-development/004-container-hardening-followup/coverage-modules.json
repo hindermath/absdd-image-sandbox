@@ -14,6 +14,12 @@
       "scope": "Ten named Python files; two native shell adapters with recording fake core",
       "status": "Open; separate numeric branch model, no replacement of provisional outcomes",
       "preservesAllModuleAndNestedRegionDenominators": true
+    },
+    {
+      "path": "docs/security/secure-development/004-container-hardening-followup/mac-a-coverage-next-2026-11-02.json",
+      "scope": "Targeted hardening, storage, fleet and source-bound child/preview tests on Mac A",
+      "status": "Open; named-file ratios and child execution do not complete module/variant coverage",
+      "preservesAllModuleAndNestedRegionDenominators": true
     }
   ],
   "modules": [

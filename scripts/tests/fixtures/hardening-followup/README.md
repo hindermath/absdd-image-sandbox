@@ -54,3 +54,19 @@ EN: The delegation/registry tests intercept real transport/installation.
 Wrapper tests run native host shells against a recording fake Python core in
 an owned temporary copy. No real maintenance/Podman; the linked report keeps
 partial adapter evidence separate from full branch/platform acceptance.
+
+## Weitere Zweigfaelle / Further Branch Cases
+
+DE: `test_feature004_{hardening,storage,fleet}_branches.py` verwendet nur
+synthetische Vertragsanfragen/eigene temporaere Dateien und abgefangene
+Prozess-/Providergrenzen. `test_feature004_child_and_preview.py` startet
+isolierte echte Kindprozesse und native Vorschauen, aber nie Podman oder
+globale Wartung. Der PHASE-Worker und Git sind Test-Stellvertreter; SOURCE
+prueft ausschliesslich eigene Read-only-Fixtures. Siehe
+[Messung und Grenzen](../../../../docs/security/secure-development/004-container-hardening-followup/mac-a-coverage-next-2026-11-02.md).
+
+EN: The additional branch suites use synthetic requests, owned temporary files
+and intercepted process/provider boundaries. Child/preview tests run isolated
+real children and native previews, never Podman/global maintenance. PHASE
+worker and Git are stand-ins; SOURCE sees owned read-only fixtures only.
+The linked report distinguishes execution, branch, interface and platform proof.

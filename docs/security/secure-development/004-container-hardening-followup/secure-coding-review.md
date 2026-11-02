@@ -130,3 +130,33 @@ wrapper invocations use a recording fake core: adapter proof, not complete
 interface/Windows acceptance. Keep T041-T046/T053/G004-04 Open and 85/80/100
 unchanged. Maintainer/Security Review owns remaining Python/nested/shell/core
 gaps before T053, reevaluated on source/test/catalog change. No build/runtime.
+
+## Zweite gezielte Runde / Second Targeted Round
+
+DE: Nach ae2b552, ohne Produktquellaenderung, weitere 44 neue Methoden
+erfolgreich, null Skips. [Neuer Bericht](mac-a-coverage-next-2026-11-02.md)
+und [aktuelle Messbindung](mac-a-coverage-next-2026-11-02.json): Hardening
+376/432 (87,04 %), Storage 292/336 (86,90 %), Fleet 276/1274 (21,66 %).
+Jetzt neun von zehn numerischen Dateiquoten mindestens 85 %. Identische
+106 Produktquellhashes/Konfiguration geprueft; kombinierter Bestand 249
+Methoden, 239 ausgefuehrt, zehn historische Skips, keine frische Vollsuite.
+Drei sourcegebundene Literalprogramme in isolierten Kindprozessen und vier
+native Bash-/PWS-Vorschauen mit echtem Kern ausgefuehrt; keine Podmanaktion.
+Literal-Ausfuehrung ist keine vollstaendige Branchquote, Mac-PWS kein Windows.
+Alle 106/96/48/94-Nenner bleiben. T041-T046/T053 und G004-04 bleiben Open,
+52/80 Checkboxen, keine Grenzwertsenkung. Maintainer/Security Review:
+998 fehlende Fleet-Outcomes, Inline-/Import-/Kindprozesszuordnung sowie
+komplette Shell-/Interfacefaelle vor T053; Trigger Quell-/Test-/Katalogwechsel.
+
+EN: After ae2b552 with unchanged product sources, 44 new methods passed
+without skips. The linked current report binds hardening 376/432 (87.04%),
+storage 292/336 (86.90%) and fleet 276/1274 (21.66%): nine of ten file ratios
+reach 85%. Verified identical 106 source hashes/configuration; aggregate
+249 methods, 239 executed and ten historical skips, not a fresh full suite.
+Three bound literal programs ran in isolated children; four native shell/
+PowerShell previews used the real core without Podman. Neither literal
+execution nor macOS PowerShell proves complete branch/Windows coverage.
+Preserve all denominators, thresholds and 52/80 checkboxes. T041-T046/T053/
+G004-04 remain Open. Maintainer/Security Review owns 998 remaining fleet
+outcomes, nested/import/child attribution and complete shell/interface cases
+before T053; reevaluate on source/test/catalog changes.
