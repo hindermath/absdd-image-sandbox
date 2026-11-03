@@ -4,7 +4,7 @@ set -euo pipefail
 IMAGE_NAME="${IMAGE_NAME:-localhost/absdd-image-sandbox_ade:latest}"
 SBOM_DIR="${SBOM_DIR:-sboms}"
 CONTAINER_RUNTIME="${CONTAINER_RUNTIME:-podman}"
-SYFT_VERSION="${SYFT_VERSION:-1.55.0}"
+SYFT_VERSION="${SYFT_VERSION:-}"
 SKIP_BUILD="${SKIP_BUILD:-false}"
 DRY_RUN="false"
 PLATFORM=""
@@ -94,6 +94,14 @@ detect_runtime() {
   return
 }
 
+if [[ -z "$SYFT_VERSION" ]]; then
+  # DE: Ein Versionswert bleibt kanonisch. EN: Keep one canonical version.
+  SYFT_VERSION="$(sed -n 's/^ARG SYFT_VERSION=//p' "${script_dir}/../Dockerfile")"
+fi
+[[ "$SYFT_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || {
+  printf '%s\n' 'Invalid pinned Syft version in Dockerfile or SYFT_VERSION.' >&2
+  exit 1
+}
 runtime="$(detect_runtime)"
 architecture_args=()
 [[ -z "$PLATFORM" ]] || architecture_args+=(--platform "$PLATFORM")

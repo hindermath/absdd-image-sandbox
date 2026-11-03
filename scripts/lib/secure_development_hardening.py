@@ -594,7 +594,7 @@ def command_plan(repo: Path, mode: str) -> list[list[str]]:
         "Input": [],
         "Static": [
             [python, "-m", "unittest", "scripts.tests.test_secure_development_container_hardening"],
-            [python, "scripts/check-dockerfile-arg-renovate.py"],
+            [python, "scripts/check-toolchain-pins.py"],
             [python, "scripts/check-home-baseline-lock.py"],
             [python, "scripts/tests/test_agent_prompt_dispatchers.py"],
             [python, "scripts/tests/test_spec_kit_agent_surface_parity.py"],

@@ -9,10 +9,10 @@ Je Oekosystem sind hoechstens fuenf Versions-PRs gleichzeitig offen.
 Sicherheitsupdates verwenden eigene Gruppen und warten nicht auf den Wochenlauf.
 Vorhandene SHA-Pins bleiben erhalten. Es wird kein Auto-Merge eingerichtet.
 
-Kopierte Maintenance-TUI-Dateien und zentral verteilte Wartungsworkflows werden in home-baseline gepflegt. Ihre Aktualisierung erfolgt ueber den bestehenden Propagationsprozess. Renovate bleibt fuer Dockerfile-Basisimage und Toolchain-ARGs zustaendig. Dependabot pflegt Actions und externe pre-commit-Hooks; lokale Hooks besitzen keine Remote-Version.
+Kopierte Maintenance-TUI-Dateien und zentral verteilte Wartungsworkflows werden in home-baseline gepflegt. Ihre Aktualisierung erfolgt ueber den bestehenden Propagationsprozess. Dependabot pflegt Basisimage-Digests im freigegebenen 10.0-Kanal, Actions und externe pre-commit-Hooks. Der [Pin-Update-Workflow](workflows/toolchain-pins.yml) pflegt die 29 ARGs ueber ein vollstaendiges Register und gepruefte Podman-Vorschlaege; lokale Hooks besitzen keine Remote-Version. Renovate ist abgeloest. Details: [Update-Policy](../docs/security/dependency-update-policy.md).
 Historische Specs, Archive und Evidence-Fixtures werden nicht automatisch umgeschrieben.
 Aktive Produkt-, Beispiel- und Testabhaengigkeiten bleiben erfasst.
-Nicht in Manifesten erfasste Downloads und Toolversionen benoetigen weiterhin ihren eigenen Wartungsprozess.
+Toolchain-Pins ausserhalb unterstuetzter Manifeste verwenden den separat geprueften Pin-Update-Workflow.
 
 Naechster Schritt: [Dependabot-Laeufe](https://github.com/hindermath/absdd-image-sandbox/actions/workflows/dependabot/dependabot-updates)
 und [Sicherheitsmeldungen](https://github.com/hindermath/absdd-image-sandbox/security/dependabot) pruefen.
@@ -29,10 +29,10 @@ Each ecosystem allows at most five open version PRs.
 Security updates use independent groups and do not wait for the weekly run.
 Existing SHA pins remain intact. This change configures no auto-merge.
 
-Copied Maintenance TUI files and centrally distributed maintenance workflows are maintained in home-baseline and updated through the existing propagation process. Renovate remains responsible for the Dockerfile base image and toolchain ARGs. Dependabot maintains Actions and external pre-commit hooks; local hooks have no remote version.
+Copied Maintenance TUI files and centrally distributed maintenance workflows are maintained in home-baseline and updated through the existing propagation process. Dependabot maintains base-image digests within the approved 10.0 channel, Actions and external pre-commit hooks. The [pin-update workflow](workflows/toolchain-pins.yml) covers all 29 ARGs through a complete registry and verified Podman proposals; local hooks have no remote version. Renovate is retired. See the [update policy](../docs/security/dependency-update-policy.md).
 Historical specs, archives and evidence fixtures are not rewritten automatically.
 Active product, example and test dependencies remain covered.
-Downloads and tool versions outside supported manifests still need their existing maintenance process.
+Toolchain pins outside supported manifests use the separately tested pin-update workflow.
 
 Next, inspect [Dependabot runs](https://github.com/hindermath/absdd-image-sandbox/actions/workflows/dependabot/dependabot-updates)
 and [security alerts](https://github.com/hindermath/absdd-image-sandbox/security/dependabot).
@@ -46,6 +46,7 @@ Passing checks do not establish product, platform or accessibility acceptance.
 |---|---|
 | `github-actions` | `/` |
 | `pre-commit` | `/` |
+| `docker` (Podman build) | `/` |
 
 ## Dokumentationsentscheidung / Documentation Decision
 

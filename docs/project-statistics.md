@@ -289,6 +289,25 @@ policy, documentation, delivery scope and secret scan passed. Hosted checks
 are tracked on the PR. No packages updated; Git statistics do not measure
 AI time savings.
 
+### 2026-11-03 - Verifizierte Pin-Updates / Verified pin updates
+
+DE: Renovate durch Dependabot fuer den Basisimage-Digest und einen eigenen
+PowerShell-7-Pin-Workflow ersetzt. Alle 29 ARGs besitzen Quellenabdeckung;
+Architektur-Hashes werden gemeinsam mit Versionen vorgeschlagen. Podman-
+Build, Smokes und SBOM sind Gates vor kuenftigen Update-PRs. 81 Offline-
+Assertions und bestehende Pin-/Hardening-Pruefungen sichern Grenzen und
+negative Faelle ab. Der read-only Herstellerabgleich ist Ready; Swift bleibt
+bis zur koordinierten Level-0-Registry-Pflege zurueckgehalten. Keine Paket-
+Upgrades und kein laufender Containerwechsel in dieser Einrichtung.
+
+EN: Replaces Renovate with Dependabot for the base digest and a PowerShell7
+pin workflow. All29 ARGs have explicit sources; versions and architecture
+hashes move together. Podman build, smokes and SBOM gate future update PRs.
+81 offline assertions and existing pin/hardening checks cover boundaries and
+negative cases. Read-only upstream discovery is Ready; Swift remains held
+pending coordinated Level-0 registry maintenance. This setup performs no
+package upgrade or running-container switch.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->

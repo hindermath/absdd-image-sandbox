@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "scope": "Replace Renovate with Dependabot base-image maintenance and a verified ARG updater; no package upgrades or running-container switch",
+  "documentationImpact": [
+    {
+      "decision": "UpdateRequired",
+      "owner": "Repository Maintainer",
+      "audiences": ["Maintainers", "AI agents"],
+      "readerPaths": ["Dependabot configuration -> maintenance guide -> update policy -> CLI manpage or workflow -> reviewed PR"],
+      "canonicalSources": ["Dockerfile", "scripts/config/toolchain-pins.json", ".github/dependabot.yml", ".github/workflows/toolchain-pins.yml"],
+      "documents": ["docs/security/dependency-update-policy.md", "docs/man/update-toolchain-pins.1.md", ".github/DEPENDENCY-MAINTENANCE.md", "docs/betrieb/image-aufbau.md", "docs/betrieb/validierung-und-wartung.md", "AGENTS.md", "CLAUDE.md", "GEMINI.md", ".github/copilot-instructions.md", ".github/agents/copilot-instructions.md"],
+      "navigationImpact": "Existing maintenance and operations entry points link to the policy and manual",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first, equivalent English in each document",
+      "languagePartners": [],
+      "platformAndExampleProof": "macOS offline fixtures and official-source discovery; hosted Linux/macOS/Windows contract matrix. Future proposals require native Linux/AMD64 Podman evidence; ARM64 execution remains separate.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "risk": "Official source formats can drift; missing metadata blocks proposals. Human review, branch protection and native platform acceptance remain binding.",
+      "reevaluationTrigger": "Changed channels, source hosts, signing keys, install mechanisms or permission boundaries"
+    },
+    {
+      "decision": "GeneratedUpdate",
+      "scope": "Legacy and preset statistics outputs",
+      "canonicalSource": "Committed migration and repository Git history",
+      "owner": "Repository Maintainer",
+      "documents": ["docs/project-statistics.md", "docs/project-statistics/report.md", "docs/project-statistics/snapshot.json"],
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "Renderer check-only/status after content and generated commits"
+    }
+  ],
+  "validation": {
+    "offlineAssertions": 81,
+    "existingFocusedPythonTests": 61,
+    "upstreamDiscovery": {"status": "Ready", "groups": 28, "channelsPinned": 2, "candidates": 12, "policyHeld": 1, "blocked": 0},
+    "packageVersionsChanged": false,
+    "nativePodmanBuild": "NotPerformed for configuration migration; required by hosted updater before each generated proposal",
+    "runningContainerChanged": false,
+    "actionsPrCreation": {
+      "default_workflow_permissions": "read",
+      "can_approve_pull_request_reviews": true,
+      "reason": "GitHub couples PR creation and approval in one repository setting; enabled for the requested PR publisher. The workflow contains no review-approval or merge action; branch rules remain binding."
+    }
+  }
+}

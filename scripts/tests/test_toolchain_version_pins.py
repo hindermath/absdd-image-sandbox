@@ -64,7 +64,22 @@ class VersionPinTests(unittest.TestCase):
             },
         }
         for tool, architectures in expected.items():
+            arg = {"syft": "SYFT_VERSION", "uv": "UV_VERSION"}[tool]
+            reviewed = {"syft": "1.55.0", "uv": "0.13.5"}[tool]
+            version = re.search(r"(?m)^ARG " + arg + r"=(\S+)$", text).group(1)
+            if version != reviewed:
+                # A later automated update must retain its own version/hash proof.
+                # Separate group records survive subsequent unrelated updates.
+                record = json.loads((ROOT / "docs/maintenance/toolchain-update-proposals"
+                                     / f"{arg.lower()}.json").read_text())
+                self.assertEqual(arg, record["proposal"]["group"])
+                self.assertEqual(version, record["proposal"]["updates"][arg])
+                self.assertEqual("podman", record["proof"]["runtime"])
+                self.assertEqual(0, record["proof"]["buildExit"])
+                architectures = record["proposal"]["hashes"]
+                self.assertEqual({"amd64", "arm64"}, set(architectures))
             for architecture, digest in architectures.items():
+                self.assertRegex(digest, r"^[0-9a-f]{64}$")
                 self.assertRegex(text, rf'{architecture}\) [^\n]*{tool}_sha256="{digest}"')
             self.assertIn(f'"${{{tool}_sha256}}" "${{tmp_dir}}/', text)
         self.assertNotIn('syft_${SYFT_VERSION}_checksums.txt" -o', text)
@@ -208,20 +223,17 @@ esac
         self.check_maven_download("missing", False, ["cdn", "archive"])
 
     def test_lts_args_remain_major_numbers(self):
-        config = json.loads((ROOT / "renovate.json").read_text())
+        config = json.loads((ROOT / "scripts/config/toolchain-pins.json").read_text())
         text = (ROOT / "Dockerfile").read_text()
-        self.assertIn("dockerfile", config["enabledManagers"])
+        self.assertEqual("podman", config["runtime"])
+        self.assertEqual("10.0", config["baseImage"]["tag"])
         self.assertRegex(text, r"(?m)^ARG NPM_VERSION=12\.[0-9]+\.[0-9]+$")
         self.assertIn('"npm@${NPM_VERSION}"', text)
-        for package, arg in (("java-jdk", "JAVA_VERSION"), ("node", "NODE_MAJOR")):
+        for arg, channel in (("JAVA_VERSION", "25"), ("NODE_MAJOR", "24")):
             major = re.search(r"(?m)^ARG " + arg + r"=([0-9]+)$", text).group(1)
-            rule = next(
-                rule for rule in config["packageRules"]
-                if package in rule.get("matchPackageNames", [])
-            )
-            pattern = rule["extractVersion"].replace("(?<version>", "(?P<version>")
-            self.assertEqual(re.match(pattern, f"v{major}.99.1")["version"], major)
-            self.assertEqual(rule["allowedVersions"], f"/^{major}$/")
+            pin = next(pin for pin in config["pins"] if pin["arg"] == arg)
+            self.assertEqual(channel, major)
+            self.assertEqual(channel, pin["channel"])
 
 
 if __name__ == "__main__":

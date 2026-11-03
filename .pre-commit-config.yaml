@@ -1,18 +1,18 @@
 repos:
   - repo: local
     hooks:
-      - id: dockerfile-arg-renovate-metadata
-        name: check Dockerfile ARG Renovate metadata
-        entry: python scripts/check-dockerfile-arg-renovate.py
+      - id: toolchain-pin-coverage
+        name: check Dockerfile pin policy and coverage
+        entry: python scripts/check-toolchain-pins.py
         language: python
         pass_filenames: false
-        files: ^(Dockerfile|renovate\.json|scripts/check-dockerfile-arg-renovate\.py|scripts/smoke-test-toolchains\.sh)$
+        files: ^(Dockerfile|scripts/config/toolchain-pins\.json|scripts/check-toolchain-pins\.py|scripts/smoke-test-toolchains\.sh)$
       - id: home-baseline-lock
         name: check pinned home-baseline reference
         entry: python scripts/check-home-baseline-lock.py
         language: python
         pass_filenames: false
-        files: ^(home-baseline\.lock\.json|renovate\.json|scripts/check-home-baseline-lock\.py|scripts/install-home-baseline-reference\.sh)$
+        files: ^(home-baseline\.lock\.json|scripts/config/toolchain-pins\.json|scripts/check-home-baseline-lock\.py|scripts/install-home-baseline-reference\.sh)$
       - id: agent-prompt-dispatcher-parity
         name: check Bash and PowerShell agent prompt dispatcher parity
         entry: python scripts/tests/test_agent_prompt_dispatchers.py
@@ -30,13 +30,13 @@ repos:
         entry: python scripts/tests/test_opencode_v2_policy.py
         language: python
         pass_filenames: false
-        files: ^(Dockerfile|renovate\.json|opencode\.jsonc|scripts/build-and-sbom\.(sh|ps1)|scripts/tests/test_opencode_v2_policy\.py|scripts/tests/fixtures/opencode-v1-policy\.json)$
+        files: ^(Dockerfile|scripts/config/toolchain-pins\.json|opencode\.jsonc|scripts/build-and-sbom\.(sh|ps1)|scripts/tests/test_opencode_v2_policy\.py|scripts/tests/fixtures/opencode-v1-policy\.json)$
       - id: toolchain-version-pins
         name: check native Python Maven and LTS pins
         entry: python scripts/tests/test_toolchain_version_pins.py
         language: python
         pass_filenames: false
-        files: ^(Dockerfile|renovate\.json|scripts/config/required-cli-tools-registry\.json|docs/fuer-lernende/sandbox-profil\.md|scripts/tests/test_toolchain_version_pins\.py)$
+        files: ^(Dockerfile|scripts/config/toolchain-pins\.json|scripts/config/required-cli-tools-registry\.json|docs/fuer-lernende/sandbox-profil\.md|scripts/tests/test_toolchain_version_pins\.py)$
       - id: audit-storage-metadata
         name: check metadata-only audit exporter parity
         entry: python scripts/tests/test_audit_storage_metadata.py

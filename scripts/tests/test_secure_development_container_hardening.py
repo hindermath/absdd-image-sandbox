@@ -396,7 +396,7 @@ class CommandLineContractTests(unittest.TestCase):
         self.assertEqual(bash_result.returncode, 0, bash_result.stderr)
         self.assertEqual(powershell_result.returncode, 0, powershell_result.stderr)
         self.assertEqual(before, after)
-        for token in ("unittest", "check-dockerfile-arg-renovate.py", "git diff --check"):
+        for token in ("unittest", "check-toolchain-pins.py", "git diff --check"):
             self.assertIn(token, bash_result.stdout)
             self.assertIn(token, powershell_result.stdout)
 

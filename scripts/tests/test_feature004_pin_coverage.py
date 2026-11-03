@@ -23,7 +23,7 @@ def load(name, relative):
     return module
 
 
-PINS = load("feature004_pin_coverage", "scripts/check-dockerfile-arg-renovate.py")
+PINS = load("feature004_pin_coverage", "scripts/check-toolchain-pins.py")
 PATCHER = load("feature004_patch_coverage", "spec-kit/patch-specify-cli.py")
 
 
@@ -31,7 +31,7 @@ class PinValidationCoverageTests(unittest.TestCase):
     def check_mutation(self, relative, mutate, expected):
         with tempfile.TemporaryDirectory(prefix="ade004-pin-negative-") as directory:
             root = Path(directory)
-            for path in ("Dockerfile", "renovate.json", "scripts/smoke-test-toolchains.sh",
+            for path in ("Dockerfile", "scripts/config/toolchain-pins.json", "scripts/smoke-test-toolchains.sh",
                          "codex/config.toml", "codex/requirements.toml"):
                 target = root / path
                 target.parent.mkdir(parents=True, exist_ok=True)
@@ -42,7 +42,7 @@ class PinValidationCoverageTests(unittest.TestCase):
             self.assertNotEqual(before, after, "Fixture mutation must change input")
             target.write_text(after, encoding="utf-8")
             result = subprocess.run(
-                [sys.executable, str(ROOT / "scripts/check-dockerfile-arg-renovate.py")],
+                [sys.executable, str(ROOT / "scripts/check-toolchain-pins.py")],
                 cwd=root, capture_output=True, text=True, timeout=10,
             )
             self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
@@ -50,17 +50,14 @@ class PinValidationCoverageTests(unittest.TestCase):
 
     def remove_package(self, text, package):
         config = json.loads(text)
-        for rule in config["packageRules"]:
-            if "matchPackageNames" in rule:
-                rule["matchPackageNames"] = [name for name in rule["matchPackageNames"]
-                                             if name != package]
+        config["pins"] = [pin for pin in config["pins"] if pin.get("package") != package]
         return json.dumps(config)
 
     def test_each_metadata_failure_is_rejected(self):
         cases = (
             (lambda text: "ARG FIXTURE_FIRST=1\n" + text, "ARG FIXTURE_FIRST has no metadata line"),
             (lambda text: text + "\nARG FIXTURE_NO_META=1\n", "ARG FIXTURE_NO_META is missing"),
-            (lambda text: text + "\n# renovate: datasource=github-releases depName=fixture argName=OTHER\n"
+            (lambda text: text + "\n# toolchain-pin: argName=OTHER\n"
              "ARG FIXTURE_WRONG=1\n", "ARG FIXTURE_WRONG metadata uses argName=OTHER"),
         )
         for mutate, expected in cases:
@@ -74,8 +71,8 @@ class PinValidationCoverageTests(unittest.TestCase):
                  f"required agent ARG missing: {arg}"),
                 ("Dockerfile", lambda text, marker=marker: text.replace(marker, "fixture-removed"),
                  f"Dockerfile does not install {package}"),
-                ("renovate.json", lambda text, package=package: self.remove_package(text, package),
-                 f"Renovate agent CLI group is missing {package}"),
+                ("scripts/config/toolchain-pins.json", lambda text, package=package: self.remove_package(text, package),
+                 f"Pin registry agent CLI group is missing {package}"),
                 ("scripts/smoke-test-toolchains.sh",
                  lambda text, version=version: text.replace(version, "fixture-removed"),
                  f"smoke test is missing: {version}"),
@@ -112,14 +109,14 @@ class PinValidationCoverageTests(unittest.TestCase):
              "Codex requirements must support interactive and headless approval modes"),
             ("Dockerfile", lambda text: re.sub(r"(?m)^ARG SYFT_VERSION=.*\n", "", text),
              "required SBOM tool ARG missing: SYFT_VERSION"),
-            ("renovate.json", lambda text: self.remove_package(text, "anchore/syft"),
-             "Renovate supply-chain group is missing anchore/syft"),
+            ("scripts/config/toolchain-pins.json", lambda text: self.remove_package(text, "anchore/syft"),
+             "Pin registry supply-chain group is missing anchore/syft"),
             ("scripts/smoke-test-toolchains.sh", lambda text: text.replace("syft version", "fixture-removed"),
              "smoke test is missing: syft version"),
             ("Dockerfile", lambda text: re.sub(r"(?m)^ARG POWERSHELL_VERSION=.*\n", "", text),
              "required scripting tool ARG missing: POWERSHELL_VERSION"),
-            ("renovate.json", lambda text: self.remove_package(text, "PowerShell/PowerShell"),
-             "Renovate scripting tool group is missing PowerShell/PowerShell"),
+            ("scripts/config/toolchain-pins.json", lambda text: self.remove_package(text, "PowerShell/PowerShell"),
+             "Pin registry scripting tool group is missing PowerShell/PowerShell"),
             ("Dockerfile", lambda text: text.replace("pwsh -NoLogo -NoProfile", "fixture-removed"),
              "Dockerfile does not verify the bundled PowerShell version"),
             ("scripts/smoke-test-toolchains.sh", lambda text: text.replace("pwsh --version", "fixture-removed"),

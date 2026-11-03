@@ -2,62 +2,62 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:747cbade5bfd918a175ac32f8f1d931edec2c7d0d5397a3de72eaef1ac1f66d2 AS dotnet-base
 FROM dotnet-base AS sandbox
 
-# renovate: datasource=java-version depName=java packageName=java-jdk versioning=semver-coerced argName=JAVA_VERSION
+# toolchain-pin: argName=JAVA_VERSION
 ARG JAVA_VERSION=25
-# renovate: datasource=maven depName=org.apache.maven:apache-maven versioning=maven argName=MAVEN_VERSION
+# toolchain-pin: argName=MAVEN_VERSION
 ARG MAVEN_VERSION=3.10.0
-# renovate: datasource=python-version depName=python versioning=pep440 argName=PYTHON_VERSION
+# toolchain-pin: argName=PYTHON_VERSION
 ARG PYTHON_VERSION=3.15.1
-# renovate: datasource=github-releases depName=astral-sh/python-build-standalone versioning=loose argName=PYTHON_BUILD_DATE
+# toolchain-pin: argName=PYTHON_BUILD_DATE
 ARG PYTHON_BUILD_DATE=20261021
-# renovate: datasource=github-releases depName=PowerShell/PowerShell versioning=semver argName=POWERSHELL_VERSION
+# toolchain-pin: argName=POWERSHELL_VERSION
 ARG POWERSHELL_VERSION=7.6.8
-# renovate: datasource=golang-version depName=go versioning=semver argName=GO_VERSION
+# toolchain-pin: argName=GO_VERSION
 ARG GO_VERSION=1.27.3
-# renovate: datasource=go depName=golang.org/x/tools/gopls versioning=semver argName=GOPLS_VERSION
+# toolchain-pin: argName=GOPLS_VERSION
 ARG GOPLS_VERSION=v0.24.0
-# renovate: datasource=go depName=honnef.co/go/tools versioning=semver argName=STATICCHECK_VERSION
+# toolchain-pin: argName=STATICCHECK_VERSION
 ARG STATICCHECK_VERSION=v0.8.2
-# renovate: datasource=go depName=golang.org/x/vuln versioning=semver argName=GOVULNCHECK_VERSION
+# toolchain-pin: argName=GOVULNCHECK_VERSION
 ARG GOVULNCHECK_VERSION=v1.9.0
-# renovate: datasource=go depName=github.com/go-delve/delve versioning=semver argName=DELVE_VERSION
+# toolchain-pin: argName=DELVE_VERSION
 ARG DELVE_VERSION=v1.27.2
-# renovate: datasource=rust-version depName=rust versioning=rust-release-channel argName=RUST_TOOLCHAIN
+# toolchain-pin: argName=RUST_TOOLCHAIN
 ARG RUST_TOOLCHAIN=1.99.1
-# renovate: datasource=github-releases depName=rust-lang/rustup versioning=semver argName=RUSTUP_VERSION
+# toolchain-pin: argName=RUSTUP_VERSION
 ARG RUSTUP_VERSION=1.29.2
-# renovate: datasource=docker depName=swift versioning=docker argName=SWIFT_DOCKER_TAG
+# toolchain-pin: argName=SWIFT_DOCKER_TAG
 ARG SWIFT_DOCKER_TAG=6.4.1-noble
-# renovate: datasource=node-version depName=node versioning=node argName=NODE_MAJOR
+# toolchain-pin: argName=NODE_MAJOR
 ARG NODE_MAJOR=24
-# renovate: datasource=github-releases depName=astral-sh/uv versioning=semver argName=UV_VERSION
+# toolchain-pin: argName=UV_VERSION
 ARG UV_VERSION=0.13.5
-# renovate: datasource=npm depName=@opencode/cli versioning=npm argName=OPENCODE_VERSION
+# toolchain-pin: argName=OPENCODE_VERSION
 ARG OPENCODE_VERSION=2.1.4
-# renovate: datasource=npm depName=@openai/codex versioning=npm argName=CODEX_VERSION
+# toolchain-pin: argName=CODEX_VERSION
 ARG CODEX_VERSION=0.164.0
-# renovate: datasource=npm depName=@anthropic-ai/claude-code versioning=npm argName=CLAUDE_CODE_VERSION
+# toolchain-pin: argName=CLAUDE_CODE_VERSION
 ARG CLAUDE_CODE_VERSION=2.1.310
-# renovate: datasource=npm depName=@google/gemini-cli versioning=npm argName=GEMINI_CLI_VERSION
+# toolchain-pin: argName=GEMINI_CLI_VERSION
 ARG GEMINI_CLI_VERSION=0.65.0
-# renovate: datasource=github-releases depName=google-antigravity/antigravity-cli versioning=semver argName=ANTIGRAVITY_CLI_VERSION
+# toolchain-pin: argName=ANTIGRAVITY_CLI_VERSION
 ARG ANTIGRAVITY_CLI_VERSION=1.4.7
-# renovate: datasource=npm depName=@github/copilot versioning=npm argName=COPILOT_CLI_VERSION
+# toolchain-pin: argName=COPILOT_CLI_VERSION
 ARG COPILOT_CLI_VERSION=1.0.103
-# renovate: datasource=github-releases depName=anchore/syft versioning=semver argName=SYFT_VERSION
+# toolchain-pin: argName=SYFT_VERSION
 ARG SYFT_VERSION=1.55.0
-# renovate: datasource=github-releases depName=rhysd/actionlint versioning=semver argName=ACTIONLINT_VERSION
+# toolchain-pin: argName=ACTIONLINT_VERSION
 ARG ACTIONLINT_VERSION=1.7.12
-# renovate: datasource=dotnet-version depName=dotnet-sdk versioning=semver argName=DOTNET_COMPAT_SDK_VERSION
+# toolchain-pin: argName=DOTNET_COMPAT_SDK_VERSION
 ARG DOTNET_COMPAT_SDK_VERSION=10.0.303
 
-# renovate: datasource=github-releases depName=jgm/pandoc versioning=semver-coerced argName=PANDOC_VERSION
+# toolchain-pin: argName=PANDOC_VERSION
 ARG PANDOC_VERSION=3.12.1
-# renovate: datasource=github-releases depName=lycheeverse/lychee versioning=semver argName=LYCHEE_VERSION
+# toolchain-pin: argName=LYCHEE_VERSION
 ARG LYCHEE_VERSION=0.24.2
-# renovate: datasource=github-releases depName=typst/typst versioning=semver argName=TYPST_VERSION
+# toolchain-pin: argName=TYPST_VERSION
 ARG TYPST_VERSION=0.15.1
-# renovate: datasource=github-releases depName=Myriad-Dreamin/tinymist versioning=semver argName=TINYMIST_VERSION
+# toolchain-pin: argName=TINYMIST_VERSION
 ARG TINYMIST_VERSION=0.15.10
 
 USER root
@@ -126,9 +126,10 @@ RUN sed -i \
 RUN set -eux; \
     tmp_dir="$(mktemp -d)"; \
     archive="apache-maven-${MAVEN_VERSION}-bin.tar.gz"; \
+    maven_major="${MAVEN_VERSION%%.*}"; \
     maven_sha512="908b1501bfb420bf7c8affb855534a9c407fd6099367bfb9f2f2dcb8e9799102bffb84518cde74c679bd76870247c6528683abdd620581bffa90f95d92d175aa"; \
-    if ! curl -fsSL "https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/${archive}" -o "${tmp_dir}/${archive}"; then \
-        curl -fsSL "https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/${archive}" -o "${tmp_dir}/${archive}"; \
+    if ! curl -fsSL "https://dlcdn.apache.org/maven/maven-${maven_major}/${MAVEN_VERSION}/binaries/${archive}" -o "${tmp_dir}/${archive}"; then \
+        curl -fsSL "https://archive.apache.org/dist/maven/maven-${maven_major}/${MAVEN_VERSION}/binaries/${archive}" -o "${tmp_dir}/${archive}"; \
     fi; \
     printf '%s  %s\n' "${maven_sha512}" "${tmp_dir}/${archive}" | sha512sum -c -; \
     tar -xzf "${tmp_dir}/${archive}" -C /opt; \
@@ -481,7 +482,7 @@ RUN apt-get -y update \
         "$(npm root -g)/@google/gemini-cli/node_modules/@github/keytar" \
         "$(npm root -g)/@google/gemini-cli/node_modules/@lydell/node-pty" \
         "$(npm root -g)/@google/gemini-cli/node_modules/node-pty"
-# renovate: datasource=npm depName=npm versioning=npm argName=NPM_VERSION
+# toolchain-pin: argName=NPM_VERSION
 ARG NPM_VERSION=12.2.1
 RUN npm install --global "npm@${NPM_VERSION}" \
     && npm --version

@@ -221,7 +221,9 @@ Use two-space indentation for JSON and YAML. Keep shell commands simple and copy
 
 Prefer explicit configuration over hidden behavior. Keep secrets out of tracked files.
 
-Every `ARG` in `Dockerfile` must have an immediately preceding Renovate metadata comment with a matching `argName`. Use the generic form `# renovate: datasource=<renovate-datasource> depName=<dependency-name> versioning=<versioning> argName=<ARG_NAME>` when the value is a simple version. Add or update a dedicated `renovate.json` custom manager when the value needs special parsing, and keep `docs/security/dependency-update-policy.md` in sync. The local pre-commit hook `dockerfile-arg-renovate-metadata` enforces this for current and future Dockerfile `ARG` lines.
+DE: Jedes `ARG` im `Dockerfile` braucht unmittelbar davor `# toolchain-pin: argName=<ARG_NAME>` und genau einen Eintrag in `scripts/config/toolchain-pins.json`. Dependabot pflegt den Basisimage-Digest im freigegebenen 10.0-Kanal; `toolchain-pins.yml` pflegt ARG-Versionen und ihre Architektur-Pruefsummen gemeinsam. Podman bleibt die Build-Engine. Keine automatischen Merges; bei fehlender Hersteller-Evidence bleibt das Update gesperrt. Neue Pins brauchen Provider-, Negativ- und Payload-Tests. Halte `docs/security/dependency-update-policy.md` synchron; der Hook `toolchain-pin-coverage` prueft die Abdeckung.
+
+EN: Every Dockerfile ARG needs an immediately preceding `# toolchain-pin: argName=<ARG_NAME>` and exactly one record in `scripts/config/toolchain-pins.json`. Dependabot maintains the base-image digest within the approved 10.0 channel; `toolchain-pins.yml` updates ARG versions together with architecture checksums. Podman remains the build engine. No automatic merges; missing upstream evidence blocks an update. New pins need provider, negative and payload tests. Keep the dependency update policy synchronized; the `toolchain-pin-coverage` hook enforces coverage.
 
 ## Agentische Skriptausfuehrung / Agentic Script Execution
 
