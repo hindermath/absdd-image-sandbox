@@ -1,0 +1,112 @@
+name: Base image Podman proof
+
+on:
+  pull_request:
+    paths:
+      - Dockerfile
+      - .dockerignore
+      - .containerignore
+      - .github/workflows/base-image-proof.yml
+      - scripts/smoke-test-toolchains.sh
+      - scripts/smoke-test-documentation.sh
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: base-image-proof-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  native-amd64:
+    name: Native Podman build and smoke (linux/amd64)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+      PROOF_IMAGE: localhost/base-image-proof:${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Bind source and prepare isolated runner space
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$EXPECTED_HEAD" =~ ^[a-f0-9]{40}$ ]]
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          mkdir -p "$RUNNER_TEMP/base-image-proof"
+          printf '%s\n' "$EXPECTED_HEAD" > "$RUNNER_TEMP/base-image-proof/source-head.txt"
+          sha256sum Dockerfile > "$RUNNER_TEMP/base-image-proof/dockerfile.sha256"
+          # DE: Nur entbehrliche Vorinstallationen dieses kurzlebigen CI-Runners entfernen.
+          # EN: Reclaim unused preinstalled SDKs only on this disposable CI runner.
+          test "$RUNNER_ENVIRONMENT" = github-hosted
+          test "$RUNNER_OS" = Linux
+          for directory in /usr/local/lib/android /usr/share/dotnet /opt/ghc /opt/hostedtoolcache; do
+            if [[ -d "$directory" && ! -L "$directory" ]]; then
+              sudo rm -rf -- "$directory"
+            fi
+          done
+          available=$(df -PB1 "$RUNNER_TEMP" | awk 'NR == 2 {print $4}')
+          if (( available < 32 * 1024 * 1024 * 1024 )); then
+            df -h "$RUNNER_TEMP"
+            printf '%s\n' 'Insufficient disposable-runner space for the full sandbox build.' >&2
+            exit 1
+          fi
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y podman
+          podman version > "$RUNNER_TEMP/base-image-proof/podman-version.txt"
+      - name: Build the exact candidate with Podman
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          podman build --pull --platform linux/amd64 -t "$PROOF_IMAGE" . \
+            2>&1 | tee "$RUNNER_TEMP/base-image-proof/build.log"
+          podman image inspect --format '{{.Id}}' "$PROOF_IMAGE" \
+            > "$RUNNER_TEMP/base-image-proof/image-id.txt"
+      - name: Run offline toolchain and documentation smoke tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          for suite in toolchains documentation; do
+            podman run --rm --network=none --cap-drop=ALL --security-opt=no-new-privileges \
+              --mount "type=bind,source=$PWD/scripts,destination=/proof,ro" \
+              --entrypoint /bin/bash "$PROOF_IMAGE" "/proof/smoke-test-${suite}.sh" \
+              2>&1 | tee "$RUNNER_TEMP/base-image-proof/smoke-${suite}.log"
+          done
+      - name: Generate SBOM and bound evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          directory="$RUNNER_TEMP/base-image-proof"
+          podman run --rm --network=none --user 0 --cap-drop=ALL --security-opt=no-new-privileges \
+            --entrypoint syft "$PROOF_IMAGE" dir:/ \
+            --select-catalogers '+javascript-package-cataloger' \
+            -o cyclonedx-json > "$directory/sbom.cdx.json"
+          jq -e '.bomFormat == "CycloneDX"' "$directory/sbom.cdx.json" > /dev/null
+          jq -n --arg source "$EXPECTED_HEAD" \
+            --arg dockerfile "$(sha256sum Dockerfile | cut -d ' ' -f 1)" \
+            --arg image "$(cat "$directory/image-id.txt")" \
+            --arg sbom "$(sha256sum "$directory/sbom.cdx.json" | cut -d ' ' -f 1)" \
+            '{schemaVersion:1,sourceRevision:$source,dockerfileSha256:$dockerfile,
+              runtime:"podman",platform:"linux/amd64",imageId:$image,sbomSha256:$sbom,
+              buildExit:0,toolchainSmokeExit:0,documentationSmokeExit:0,sbomExit:0,
+              arm64Execution:"NotPerformed",humanReview:"Pending",imagePublication:"NotPerformed"}' \
+            > "$directory/proof.json"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: base-image-podman-proof
+          path: ${{ runner.temp }}/base-image-proof/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Remove only this job's temporary image
+        if: always()
+        shell: bash
+        run: |
+          if command -v podman >/dev/null 2>&1 && podman image exists "$PROOF_IMAGE"; then
+            podman image rm "$PROOF_IMAGE"
+          fi

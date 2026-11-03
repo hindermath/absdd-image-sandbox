@@ -1,5 +1,5 @@
-# Tag 10.0 observed on 2026-10-25: SDK 10.0.402, native AMD64/ARM64 manifest.
-FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:747cbade5bfd918a175ac32f8f1d931edec2c7d0d5397a3de72eaef1ac1f66d2 AS dotnet-base
+# Approved .NET 10 channel; the immutable MCR digest binds the SDK and platform manifests.
+FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:de4fe90a98845d75910b9769662465c84de1a934665c431279d1382b2bddc02b AS dotnet-base
 FROM dotnet-base AS sandbox
 
 # toolchain-pin: argName=JAVA_VERSION
