@@ -1,5 +1,10 @@
 # Agentische Podman-Sandbox / Agentic Podman Sandbox
 
+Model Routing Governance **0.2.1**: Diese Lieferung aktualisiert die lokale
+Preset-Integration und ihre Resolver. [Nachweis und Grenzen](docs/maintenance/model-routing-v021-installation.md).
+This delivery updates the local preset integration and its resolvers; see the
+linked evidence and verification limits.
+
 **DE:** [Lizenz und Herkunft](docs/licensing.md): MIT für nachweislich eigene
 Inhalte, fremde Rechte bleiben erhalten. Der Standardbezug bleibt Fork oder
 institutionelle Kopie mit gemeinsamer Historie. Das

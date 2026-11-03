@@ -1,0 +1,29 @@
+name: Model Routing Installation
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  routing:
+    name: Installed routing (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, ubuntu-24.04, windows-2022]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Root/preset parity and broad model selection (offline)
+        shell: pwsh
+        run: |
+          pwsh -NoProfile -File scripts/tests/test-model-routing-installation.ps1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          pwsh -NoProfile -File .specify/presets/model-routing-governance/tests/test-broad-model-selection.ps1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          git diff --exit-code
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          if (@(git status --porcelain --untracked-files=all).Count) { throw 'Routing tests changed checkout' }
