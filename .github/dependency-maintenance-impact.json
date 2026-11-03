@@ -10,7 +10,8 @@
       "documents": [
         ".github/DEPENDENCY-MAINTENANCE.md",
         "docs/betrieb/validierung-und-wartung.md",
-        "docs/security/agent-session-log/2026-11-03-dependabot.md"
+        "docs/security/agent-session-log/2026-11-03-dependabot.md",
+        "docs/project-statistics.md"
       ],
       "owner": "Repository Maintainer",
       "audiences": [
@@ -25,7 +26,7 @@
       "documentClass": "ActiveSemantic",
       "languageStrategy": "German first, equivalent English in the same file",
       "languagePartners": [],
-      "platformAndExampleProof": "Local macOS YAML round-trip, SchemaStore Dependabot schema and manifest coverage checks; exact-head hosted checks on the PR.",
+      "platformAndExampleProof": "Local macOS YAML round-trip, SchemaStore Dependabot schema and manifest coverage checks; exact-head hosted checks on the PR. Statistics outputs are regenerated from the committed dependency-maintenance revision and checked for drift before delivery.",
       "distributionClass": "sourceOnly",
       "homeSyncRequired": false,
       "evidence": ".github/DEPENDENCY-MAINTENANCE.md",
