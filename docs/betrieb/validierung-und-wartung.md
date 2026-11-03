@@ -391,3 +391,13 @@ Markdown-to-PDF conversion, page count, and extracted text. It uses temporary
 files and no external downloads. The full toolchain smoke test also runs it.
 The result does not prove PDF accessibility. Tinymist is a CLI language
 server; installing it does not automatically install an editor extension.
+
+## Abhaengigkeits-PRs / Dependency PRs
+
+DE: Der [Dependabot-Wartungspfad](../../.github/DEPENDENCY-MAINTENANCE.md)
+erklaert Wochenlauf, Sicherheitsgruppen, Review und Fehleranalyse.
+Renovate bleibt fuer Dockerfile- und Toolchain-Pins zustaendig.
+
+EN: The [Dependabot maintenance guide](../../.github/DEPENDENCY-MAINTENANCE.md)
+explains weekly checks, security groups, review and troubleshooting.
+Renovate retains ownership of Dockerfile and toolchain pins.
