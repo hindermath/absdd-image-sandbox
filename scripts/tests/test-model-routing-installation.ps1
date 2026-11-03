@@ -33,7 +33,7 @@ function global:copilot { $global:LASTEXITCODE=0; 'fixture-cli 1.0' }
 function global:opencode { $global:LASTEXITCODE=0; 'fixture-cli 1.0' }
 try {
     $null=New-Item -ItemType Directory $temporary
-    foreach($path in @('scripts/resolve-model-routing.ps1','scripts/resolve-model-routing.sh','scripts/adapters/new-harnesses.ps1','scripts/adapters/discover-sdk.mjs','scripts/adapters/selection-policy.json')){
+    foreach($path in @('scripts/resolve-model-routing.ps1','scripts/resolve-model-routing.sh','scripts/adapters/new-harnesses.ps1','scripts/adapters/invoke-harness-with-result.ps1','scripts/adapters/discover-sdk.mjs','scripts/adapters/selection-policy.json')){
         Assert-Installation ((Get-FileHash (Join-Path $root $path)).Hash -ceq (Get-FileHash (Join-Path $package $path)).Hash) "Runtime closure differs from installed release: ${path}"
     }
     foreach($family in @('Codex','Antigravity','Claude','Copilot','OpenCode')){
@@ -59,6 +59,12 @@ try {
         $arguments.Action='Refresh'
         $refresh=& (Join-Path $root 'scripts/resolve-model-routing.ps1') @arguments
         Assert-Installation ($LASTEXITCODE -eq 0) "$family root refresh failed: $refresh"
+        if($family -in @('Claude','Copilot','OpenCode')){
+            $profileData=Get-Content $config -Raw|ConvertFrom-Json -AsHashtable
+            foreach($runnerProfileData in $profileData.profiles.Values){
+                Assert-Installation ($runnerProfileData.executable -ceq 'pwsh' -and '{outputFile}' -cin $runnerProfileData.arguments) "$family lacks structured result transport."
+            }
+        }
         $before=(Get-FileHash $config).Hash
         $arguments.Action='Status'
         $rootStatus=& (Join-Path $root 'scripts/resolve-model-routing.ps1') @arguments

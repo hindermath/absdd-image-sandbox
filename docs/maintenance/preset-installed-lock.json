@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "hashContract": "sha256-utf8-lf-bom-or-raw-v1",
   "baselineCommit": "5ac59b1fa81b01147f024e65bb62a9083225e5af",
-  "registrySha256": "1837dab15480f11a4f3a0608010362c0834f80baaf82cf31eb5e7b8a93556276",
+  "registrySha256": "ff8f296810f490101b30e17e367fa11d698853d5f0c5e8a5a407d2935948bda8",
   "presets": [
     {
       "id": "a11y-governance",
@@ -87,12 +87,12 @@
     },
     {
       "id": "model-routing-governance",
-      "version": "0.2.1",
+      "version": "0.2.3",
       "priority": 61,
       "enabled": true,
-      "manifest_hash": "sha256:76e85056a99d016ebf46dd55c429c2f62357682ea9036a0da9d69656a4d28a79",
-      "fileCount": 49,
-      "contentSha256": "47d952cddff1ddfb6055d6bd893855762654ac482665e5b07d0a0b4d652ff329"
+      "manifest_hash": "sha256:2fe75f9246a92dcacc19b8dfac66adc69421cb9623922cf844bc752d4c46646c",
+      "fileCount": 55,
+      "contentSha256": "915c6a9dbd6501235e635e52ee121c17a54403953303d2d5e8c012b375ec1391"
     },
     {
       "id": "parallel-autonomous-run-governance",
@@ -131,5 +131,5 @@
       "contentSha256": "fd85afeba0588b280169059543e13229c6abbc4d141658c9515ac8f7f3f3f3e1"
     }
   ],
-  "purpose": "Bounded Model Routing 0.2.1 installation; other preset payloads and registry entries byte/semantically preserved. No model call or personal-profile migration."
+  "purpose": "Bounded Model Routing 0.2.3 installation; other preset payloads and registry entries byte/semantically preserved. No model call or personal-profile migration."
 }

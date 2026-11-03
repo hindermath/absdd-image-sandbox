@@ -60,11 +60,11 @@
     },
     {
       "id": "model-routing-governance",
-      "tag": "v0.2.1",
-      "commit": "6cf0c98d80f3f68d73ac8148dbbb4d29fe614f95",
+      "tag": "v0.2.3",
+      "commit": "282a5d7c9df5587fabf4f2164d837a4f1003c8fc",
       "repository": "https://github.com/hindermath/spec-kit-preset-model-routing-governance",
-      "archiveUrl": "https://github.com/hindermath/spec-kit-preset-model-routing-governance/archive/refs/tags/v0.2.1.zip",
-      "archiveSha256": "5e85338327f5c738dfe4c009b7ba8bcdd2ac664f721447d6561bdc1b8c29bbca"
+      "archiveUrl": "https://github.com/hindermath/spec-kit-preset-model-routing-governance/archive/refs/tags/v0.2.3.zip",
+      "archiveSha256": "b04afda98c642147bc89fa5f6d11a5e34a8e6b0d47443e223753bba477cd72c6"
     },
     {
       "id": "intake-authoring-governance",

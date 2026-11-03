@@ -643,9 +643,9 @@
       "installed_at": "2026-10-24T19:50:50.285673+02:00"
     },
     "model-routing-governance": {
-      "version": "0.2.1",
+      "version": "0.2.3",
       "source": "local",
-      "manifest_hash": "sha256:76e85056a99d016ebf46dd55c429c2f62357682ea9036a0da9d69656a4d28a79",
+      "manifest_hash": "sha256:2fe75f9246a92dcacc19b8dfac66adc69421cb9623922cf844bc752d4c46646c",
       "enabled": true,
       "priority": 61,
       "registered_commands": {
@@ -678,7 +678,7 @@
         "speckit-model-routing-status",
         "speckit-model-routing-refresh"
       ],
-      "installed_at": "2026-11-03T20:49:06.866625+00:00"
+      "installed_at": "2026-11-03T21:27:22.502759+00:00"
     }
   }
 }

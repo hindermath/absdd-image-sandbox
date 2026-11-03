@@ -16,6 +16,7 @@
       "scripts/resolve-model-routing.sh",
       "scripts/resolve-model-routing.ps1",
       "scripts/adapters/new-harnesses.ps1",
+      "scripts/adapters/invoke-harness-with-result.ps1",
       "scripts/adapters/discover-sdk.mjs",
       "scripts/tests/test-model-routing-installation.ps1"
     ]

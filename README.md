@@ -1,7 +1,7 @@
 # Agentische Podman-Sandbox / Agentic Podman Sandbox
 
-Model Routing Governance **0.2.1**: Diese Lieferung aktualisiert die lokale
-Preset-Integration und ihre Resolver. [Nachweis und Grenzen](docs/maintenance/model-routing-v021-installation.md).
+Model Routing Governance **0.2.3**: Diese Lieferung aktualisiert die lokale
+Preset-Integration und ihre Resolver. [Nachweis und Grenzen](docs/maintenance/model-routing-v023-installation.md).
 This delivery updates the local preset integration and its resolvers; see the
 linked evidence and verification limits.
 
