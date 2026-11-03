@@ -142,3 +142,6 @@ try{
 }finally{if(Test-Path $fixture){Remove-Item $fixture -Recurse -Force}}
 Set-AdePinFixtures $null
 Write-Output "PASS: $script:Assertions assertions; offline providers, hash coupling, payload boundaries and read-only checks."
+# DE: Erwartete Fehlercodes der Negativtests nicht an CI vererben.
+# EN: Do not leak expected negative-test exit codes into the CI caller.
+exit 0
