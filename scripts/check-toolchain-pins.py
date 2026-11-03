@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Require Renovate metadata for every Dockerfile ARG."""
+"""Validate complete toolchain pin coverage and fixed archive hashes."""
 
 from pathlib import Path
 import json
@@ -8,8 +8,8 @@ import sys
 
 
 ARG_RE = re.compile(r"^\s*ARG\s+([A-Z][A-Z0-9_]*)\s*=")
-RENOVATE_RE = re.compile(
-    r"^\s*#\s+renovate(?:-dotnet)?:\s+.*\bargName=([A-Z][A-Z0-9_]*)\b"
+PIN_RE = re.compile(
+    r"^\s*#\s+toolchain-pin:\s+.*\bargName=([A-Z][A-Z0-9_]*)\b"
 )
 
 REQUIRED_AGENT_CLIS = {
@@ -46,7 +46,7 @@ def main() -> int:
     lines = dockerfile.read_text(encoding="utf-8").splitlines()
     dockerfile_text = "\n".join(lines)
     smoke_text = Path("scripts/smoke-test-toolchains.sh").read_text(encoding="utf-8")
-    renovate = json.loads(Path("renovate.json").read_text(encoding="utf-8"))
+    registry = json.loads(Path("scripts/config/toolchain-pins.json").read_text(encoding="utf-8"))
     failures: list[str] = []
 
     for index, line in enumerate(lines):
@@ -59,11 +59,11 @@ def main() -> int:
             failures.append(f"line {index + 1}: ARG {arg_name} has no metadata line")
             continue
 
-        metadata = RENOVATE_RE.match(lines[index - 1])
+        metadata = PIN_RE.match(lines[index - 1])
         if metadata is None:
             failures.append(
                 f"line {index + 1}: ARG {arg_name} is missing an immediately "
-                "preceding # renovate metadata line"
+                "preceding # toolchain-pin metadata line"
             )
             continue
 
@@ -73,18 +73,32 @@ def main() -> int:
                 f"line {index + 1}: ARG {arg_name} metadata uses argName={metadata_arg}"
             )
 
-    renovate_packages = {
+    args = re.findall(r"^ARG ([A-Z][A-Z0-9_]*)=", dockerfile_text, re.MULTILINE)
+    records = registry.get("pins", [])
+    registered = [pin.get("arg") for pin in records]
+    providers = {"github", "npm", "gomod", "go", "rust", "rustup", "maven", "python",
+                 "powershell", "dotnet", "java-channel", "node-channel", "companion"}
+    if len(args) != len(set(args)) or len(registered) != len(set(registered)):
+        failures.append("Duplicate Dockerfile ARG or pin registry entry")
+    if set(args) != set(registered):
+        failures.append("Dockerfile ARG and pin registry coverage differ")
+    if any(pin.get("provider") not in providers for pin in records):
+        failures.append("Unknown pin registry provider")
+    if registry.get("runtime") != "podman":
+        failures.append("Pin updates require Podman")
+
+    registered_packages = {
         package
-        for rule in renovate.get("packageRules", [])
-        for package in rule.get("matchPackageNames", [])
+        for pin in registry.get("pins", [])
+        for package in [pin.get("package", "")]
     }
     for arg_name, (package, install_marker, version_command) in REQUIRED_AGENT_CLIS.items():
         if not re.search(rf"^ARG {re.escape(arg_name)}=\S+$", dockerfile_text, re.MULTILINE):
             failures.append(f"required agent ARG missing: {arg_name}")
         if install_marker not in dockerfile_text:
             failures.append(f"Dockerfile does not install {package} from {arg_name}")
-        if package not in renovate_packages:
-            failures.append(f"Renovate agent CLI group is missing {package}")
+        if package not in registered_packages:
+            failures.append(f"Pin registry agent CLI group is missing {package}")
         if version_command not in smoke_text:
             failures.append(f"smoke test is missing: {version_command}")
 
@@ -132,8 +146,8 @@ def main() -> int:
 
     if not re.search(r"^ARG SYFT_VERSION=\S+$", dockerfile_text, re.MULTILINE):
         failures.append("required SBOM tool ARG missing: SYFT_VERSION")
-    if "anchore/syft" not in renovate_packages:
-        failures.append("Renovate supply-chain group is missing anchore/syft")
+    if "anchore/syft" not in registered_packages:
+        failures.append("Pin registry supply-chain group is missing anchore/syft")
     if "syft version" not in smoke_text:
         failures.append("smoke test is missing: syft version")
     # The security-pinned installer now uses reviewed per-architecture digests;
@@ -157,25 +171,25 @@ def main() -> int:
 
     if not re.search(r"^ARG POWERSHELL_VERSION=\S+$", dockerfile_text, re.MULTILINE):
         failures.append("required scripting tool ARG missing: POWERSHELL_VERSION")
-    if "PowerShell/PowerShell" not in renovate_packages:
-        failures.append("Renovate scripting tool group is missing PowerShell/PowerShell")
+    if "PowerShell/PowerShell" not in registered_packages:
+        failures.append("Pin registry scripting tool group is missing PowerShell/PowerShell")
     if 'pwsh -NoLogo -NoProfile' not in dockerfile_text:
         failures.append("Dockerfile does not verify the bundled PowerShell version")
     if "pwsh --version" not in smoke_text:
         failures.append("smoke test is missing: pwsh --version")
 
     if failures:
-        print("Every Dockerfile ARG must have matching Renovate metadata.")
+        print("Every Dockerfile ARG must have matching pin metadata and a registered provider.")
         print("Use this form directly above the ARG:")
         print(
-            "# renovate: datasource=<datasource> depName=<dependency> "
-            "versioning=<versioning> argName=<ARG_NAME>"
+            "# toolchain-pin: "
+            "argName=<ARG_NAME>"
         )
         print()
         print("\n".join(failures))
         return 1
 
-    print("Dockerfile ARG Renovate metadata OK")
+    print("Dockerfile toolchain pin policy OK")
     return 0
 
 

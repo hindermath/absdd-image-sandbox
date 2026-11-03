@@ -1,0 +1,281 @@
+name: Toolchain pin maintenance
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '20 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Check upstream metadata or prepare one reviewed update PR'
+        type: choice
+        options: [check, propose]
+        default: check
+
+permissions:
+  contents: read
+
+concurrency:
+  group: toolchain-pins-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  contracts:
+    name: Pin contracts (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15, windows-2022]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - name: Preserve source bytes
+        shell: pwsh
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Offline provider and payload regression checks
+        shell: pwsh
+        run: |
+          ./scripts/tests/test-toolchain-pin-updates.ps1
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python scripts/check-toolchain-pins.py
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python -m unittest scripts.tests.test_toolchain_pin_contract scripts.tests.test_feature004_pin_coverage scripts.tests.test_toolchain_version_pins scripts.tests.test_opencode_v2_policy
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          if (@(git status --porcelain=v1 --untracked-files=all).Count) { throw 'Offline tests modified checkout.' }
+
+  inspect:
+    name: Discover and validate one pin update with Podman
+    needs: contracts
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      changed: ${{ steps.candidate.outputs.changed }}
+      base: ${{ steps.candidate.outputs.base }}
+      group: ${{ steps.candidate.outputs.group }}
+      dockerfile_sha256: ${{ steps.candidate.outputs.dockerfile_sha256 }}
+      proposal_sha256: ${{ steps.candidate.outputs.proposal_sha256 }}
+      proof_sha256: ${{ steps.proof.outputs.proof_sha256 }}
+    steps:
+      # Only reviewed default-branch code may receive discovery credentials.
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Read-only upstream check
+        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'check'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ./scripts/update-toolchain-pins.ps1 -Action Check -Json -OutputDirectory (Join-Path $env:RUNNER_TEMP 'pin-report')
+          exit $LASTEXITCODE
+      - name: Prepare one group without modifying checkout
+        id: candidate
+        if: github.event_name == 'schedule' || inputs.mode == 'propose'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $open = gh pr list --state open --limit 100 --json headRefName | ConvertFrom-Json
+          if ($LASTEXITCODE) { throw 'Cannot inspect open update PRs.' }
+          $owned = @($open | Where-Object headRefName -match '^codex/toolchain-pin-')
+          if ($owned.Count -ge 5) { 'changed=false' >> $env:GITHUB_OUTPUT; exit 0 }
+          $skip = @($owned | ForEach-Object { $_.headRefName.Substring('codex/toolchain-pin-'.Length).ToUpperInvariant() })
+          $directory = Join-Path $env:RUNNER_TEMP 'pin-payload'
+          ./scripts/update-toolchain-pins.ps1 -Action Prepare -OutputDirectory $directory -SkipGroups $skip -Json
+          if ($LASTEXITCODE) { throw 'Upstream pin discovery is blocked; inspect report.json.' }
+          $proposalPath = Join-Path $directory 'proposal.json'
+          if (-not (Test-Path $proposalPath)) { 'changed=false' >> $env:GITHUB_OUTPUT; exit 0 }
+          $proposal = Get-Content $proposalPath -Raw | ConvertFrom-Json
+          if ($proposal.group -cnotmatch '^[A-Z][A-Z0-9_]*$' -or $proposal.baseHead -cnotmatch '^[a-f0-9]{40}$') { throw 'Invalid proposal binding.' }
+          'changed=true' >> $env:GITHUB_OUTPUT
+          "base=$($proposal.baseHead)" >> $env:GITHUB_OUTPUT
+          "group=$($proposal.group)" >> $env:GITHUB_OUTPUT
+          "dockerfile_sha256=$($proposal.resultSha256)" >> $env:GITHUB_OUTPUT
+          "proposal_sha256=$((Get-FileHash $proposalPath -Algorithm SHA256).Hash.ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+          ./scripts/update-toolchain-pins.ps1 -Action Apply -PayloadDirectory $directory -Json
+          if ($LASTEXITCODE) { throw 'Payload verification failed.' }
+          python scripts/check-toolchain-pins.py
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Build and smoke-test isolated native AMD64 image
+        if: steps.candidate.outputs.changed == 'true'
+        shell: bash
+        env:
+          PROOF_IMAGE: localhost/toolchain-proof:${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y podman
+          podman build --pull --platform linux/amd64 -t "$PROOF_IMAGE" .
+          podman run --rm --network=none --cap-drop=ALL --security-opt=no-new-privileges \
+            --mount "type=bind,source=$PWD/scripts,destination=/proof,ro" \
+            --entrypoint /bin/bash "$PROOF_IMAGE" /proof/smoke-test-toolchains.sh
+          podman run --rm --network=none --cap-drop=ALL --security-opt=no-new-privileges \
+            --mount "type=bind,source=$PWD/scripts,destination=/proof,ro" \
+            --entrypoint /bin/bash "$PROOF_IMAGE" /proof/smoke-test-documentation.sh
+          podman run --rm --network=none --user 0 --cap-drop=ALL --security-opt=no-new-privileges \
+            --entrypoint syft "$PROOF_IMAGE" dir:/ \
+            --select-catalogers '+javascript-package-cataloger' \
+            -o cyclonedx-json > "$RUNNER_TEMP/pin-payload/sbom.cdx.json"
+          podman image inspect --format '{{.Id}}' "$PROOF_IMAGE" > "$RUNNER_TEMP/pin-payload/image-id.txt"
+      - name: Bind Podman validation evidence
+        id: proof
+        if: steps.candidate.outputs.changed == 'true'
+        shell: pwsh
+        env:
+          PROOF_RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          $directory = Join-Path $env:RUNNER_TEMP 'pin-payload'
+          $proposal = Get-Content (Join-Path $directory 'proposal.json') -Raw | ConvertFrom-Json -AsHashtable
+          $imageId = (Get-Content (Join-Path $directory 'image-id.txt') -Raw).Trim()
+          if ($imageId -cmatch '^[a-f0-9]{64}$') { $imageId = 'sha256:'+$imageId }
+          if ($imageId -cnotmatch '^sha256:[a-f0-9]{64}$') { throw 'Invalid Podman image identity.' }
+          $sbomPath = Join-Path $directory 'sbom.cdx.json'
+          $sbom = Get-Content $sbomPath -Raw | ConvertFrom-Json
+          if ($sbom.bomFormat -cne 'CycloneDX') { throw 'Invalid SBOM.' }
+          $proof = @{schemaVersion=1;sourceRevision=$proposal.baseHead;dockerfileSha256=$proposal.resultSha256;
+            platform='linux/amd64';runtime='podman';imageId=$imageId;run=$env:PROOF_RUN;
+            buildExit=0;toolchainSmokeExit=0;documentationSmokeExit=0;sbomExit=0;
+            sbomSha256=(Get-FileHash $sbomPath -Algorithm SHA256).Hash.ToLowerInvariant();arm64Execution='NotPerformed';humanReview='Pending'}
+          $proofPath = Join-Path $directory 'proof.json'
+          $proof | ConvertTo-Json -Depth 10 | Set-Content $proofPath -Encoding utf8NoBOM
+          "proof_sha256=$((Get-FileHash $proofPath -Algorithm SHA256).Hash.ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always() && steps.candidate.outputs.changed == 'true'
+        with:
+          name: toolchain-pin-payload
+          path: ${{ runner.temp }}/pin-payload/
+          if-no-files-found: ignore
+          retention-days: 14
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: toolchain-pin-discovery
+          path: |
+            ${{ runner.temp }}/pin-payload/report.json
+            ${{ runner.temp }}/pin-report/report.json
+          if-no-files-found: ignore
+          retention-days: 14
+
+  publish:
+    name: Publish verified pin-update PR
+    needs: inspect
+    if: >-
+      github.ref == 'refs/heads/main' && needs.inspect.result == 'success' &&
+      needs.inspect.outputs.changed == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ needs.inspect.outputs.base }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: toolchain-pin-payload
+          path: ${{ runner.temp }}/verified-pin-payload
+      - name: Verify immutable payload and publish a regular PR
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_BASE: ${{ needs.inspect.outputs.base }}
+          EXPECTED_GROUP: ${{ needs.inspect.outputs.group }}
+          EXPECTED_DOCKERFILE_HASH: ${{ needs.inspect.outputs.dockerfile_sha256 }}
+          EXPECTED_PROPOSAL_HASH: ${{ needs.inspect.outputs.proposal_sha256 }}
+          EXPECTED_PROOF_HASH: ${{ needs.inspect.outputs.proof_sha256 }}
+        run: |
+          Set-StrictMode -Version Latest
+          $ErrorActionPreference = 'Stop'
+          $directory = Join-Path $env:RUNNER_TEMP 'verified-pin-payload'
+          foreach ($pair in @(@('Dockerfile',$env:EXPECTED_DOCKERFILE_HASH),@('proposal.json',$env:EXPECTED_PROPOSAL_HASH),@('proof.json',$env:EXPECTED_PROOF_HASH))) {
+            if ($pair[1] -cnotmatch '^[a-f0-9]{64}$' -or (Get-FileHash (Join-Path $directory $pair[0]) -Algorithm SHA256).Hash.ToLowerInvariant() -cne $pair[1]) { throw 'Unbound or tampered update payload.' }
+          }
+          $remote = gh api "repos/$env:GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha
+          if ($LASTEXITCODE -or $remote -cne $env:EXPECTED_BASE) { throw 'Default branch advanced; retry from its new reviewed head.' }
+          if ($env:EXPECTED_GROUP -cnotmatch '^[A-Z][A-Z0-9_]*$') { throw 'Unsafe branch group.' }
+          $proposal = Get-Content (Join-Path $directory 'proposal.json') -Raw | ConvertFrom-Json -AsHashtable
+          $proof = Get-Content (Join-Path $directory 'proof.json') -Raw | ConvertFrom-Json
+          if ($proposal.group -cne $env:EXPECTED_GROUP -or $proof.sourceRevision -cne $env:EXPECTED_BASE -or $proof.dockerfileSha256 -cne $env:EXPECTED_DOCKERFILE_HASH -or
+            $proof.runtime -cne 'podman' -or $proof.platform -cne 'linux/amd64' -or $proof.buildExit -ne 0 -or $proof.toolchainSmokeExit -ne 0 -or $proof.documentationSmokeExit -ne 0 -or $proof.sbomExit -ne 0) { throw 'Missing native Podman evidence.' }
+          Import-Module ./scripts/lib/toolchain-pins.psm1 -Force
+          $learnerProfile = Get-AdePinLearnerProfile (Get-AdePinContext .) $proposal
+          ./scripts/update-toolchain-pins.ps1 -Action Apply -PayloadDirectory $directory -Json
+          if ($LASTEXITCODE) { throw 'Payload contains changes beyond the registered version/hash group.' }
+          $profilePath = 'docs/fuer-lernende/sandbox-profil.md'
+          if ($null -ne $learnerProfile) { [IO.File]::WriteAllText((Join-Path $PWD $profilePath),$learnerProfile,[Text.UTF8Encoding]::new($false)) }
+          $branch = 'codex/toolchain-pin-'+$env:EXPECTED_GROUP.ToLowerInvariant()
+          git switch -c $branch
+          if ($LASTEXITCODE) { throw 'Cannot create isolated proposal branch.' }
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          $evidenceDirectory = 'docs/maintenance/toolchain-update-proposals'
+          $null = New-Item -ItemType Directory -Path $evidenceDirectory -Force
+          $evidence = $evidenceDirectory+'/'+$env:EXPECTED_GROUP.ToLowerInvariant()+'.json'
+          @{schemaVersion=1;proposal=$proposal;proof=$proof;documentationImpact=@(
+            @{decision='NoUpdateRequired';scope='Reader guidance; versions remain canonical in Dockerfile';owner='Repository Maintainer';reevaluation='Changed update source, channel, trust boundary or install mechanism'},
+            @{decision='GeneratedUpdate';scope='Configured statistics outputs and any derived Go/Rust learner version row';owner='Repository Maintainer';source='Committed Dockerfile and Git history';distributionClass='sourceOnly';homeSyncRequired=$false})} |
+            ConvertTo-Json -Depth 24 | Set-Content $evidence -Encoding utf8NoBOM
+          git add -- Dockerfile $evidence
+          $candidatePaths = @('Dockerfile',$evidence)
+          if ($null -ne $learnerProfile) { git add -- $profilePath; $candidatePaths += $profilePath }
+          $staged = @(git diff --cached --name-only)
+          if ($LASTEXITCODE -or (Compare-Object $candidatePaths $staged)) { throw 'Unexpected staged candidate delivery.' }
+          git diff --cached --check
+          if ($LASTEXITCODE) { throw 'Staged whitespace error.' }
+          git commit -m "chore(deps): propose $($env:EXPECTED_GROUP) toolchain update"
+          if ($LASTEXITCODE) { throw 'Candidate commit failed.' }
+          # Commit legacy output before the second renderer, which requires a clean tree.
+          ./scripts/render-project-statistics.ps1 -Repo .
+          if ($LASTEXITCODE) { throw 'Legacy statistics rendering failed.' }
+          git add -- docs/project-statistics.md
+          if (@(git diff --cached --name-only | Where-Object { $_ -cne 'docs/project-statistics.md' }).Count) { throw 'Unexpected staged statistics paths.' }
+          git diff --cached --quiet
+          if ($LASTEXITCODE -eq 1) { git commit -m 'docs: render pin-update statistics'; if ($LASTEXITCODE) { throw 'Statistics commit failed.' } }
+          if (Test-Path docs/project-statistics/config.json) {
+            ./.specify/presets/project-statistics-governance/scripts/project-statistics.ps1 -Action Update -Repo . -Config docs/project-statistics/config.json
+            if ($LASTEXITCODE) { throw 'Statistics context rendering failed.' }
+            git add -- docs/project-statistics/report.md docs/project-statistics/snapshot.json
+            if (@(git diff --cached --name-only | Where-Object { $_ -cnotin @('docs/project-statistics/report.md','docs/project-statistics/snapshot.json') }).Count) { throw 'Unexpected staged context paths.' }
+            git diff --cached --quiet
+            if ($LASTEXITCODE -eq 1) { git commit -m 'docs: refresh pin-update statistics context'; if ($LASTEXITCODE) { throw 'Context commit failed.' } }
+            ./.specify/presets/project-statistics-governance/scripts/project-statistics.ps1 -Action Status -Repo . -Config docs/project-statistics/config.json -Json
+            if ($LASTEXITCODE) { throw 'Statistics context is not current.' }
+          }
+          ./scripts/render-project-statistics.ps1 -Repo . -CheckOnly
+          if ($LASTEXITCODE) { throw 'Legacy statistics drift.' }
+          python scripts/check-toolchain-pins.py
+          if ($LASTEXITCODE) { throw 'Final pin contract failed.' }
+          $allowed = @($candidatePaths)+@('docs/project-statistics.md','docs/project-statistics/report.md','docs/project-statistics/snapshot.json')
+          $changed = @(git diff --name-only $env:EXPECTED_BASE HEAD)
+          if ($LASTEXITCODE -or @($changed | Where-Object { $_ -cnotin $allowed }).Count -or @(git status --porcelain=v1).Count) { throw 'Unexpected delivery paths or dirty checkout.' }
+          $head = (git rev-parse HEAD).Trim()
+          $bodyPath = Join-Path $env:RUNNER_TEMP 'pin-pr.md'
+          @("Updates only registered group $env:EXPECTED_GROUP with its complete AMD64/ARM64 hash set.",
+            '',"Native linux/amd64 Podman build, toolchain/documentation smoke tests and CycloneDX SBOM passed: $($proof.run)",
+            '',"Dockerfile SHA-256: $env:EXPECTED_DOCKERFILE_HASH. Published head: $head.",
+            '',"ARM64 execution and human review remain separate gates. No auto-merge. GITHUB_TOKEN-created PR checks may require selecting 'Approve workflows to run'.",
+            '',"Documentation Impact: reader guidance NoUpdateRequired; existing statistics outputs regenerated from committed sources.") | Set-Content $bodyPath -Encoding utf8NoBOM
+          gh auth setup-git
+          if ($LASTEXITCODE) { throw 'Cannot configure runner-only Git credentials.' }
+          git push origin "HEAD:refs/heads/$branch"
+          if ($LASTEXITCODE) { throw 'Push failed; no force update is permitted.' }
+          gh pr create --base main --head $branch --title "chore(deps): update $env:EXPECTED_GROUP toolchain pin" --body-file $bodyPath
+          if ($LASTEXITCODE) { throw 'PR creation failed.' }

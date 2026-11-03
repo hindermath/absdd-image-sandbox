@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "scope": "Local pin script family; copied maintenance scripts retain their Level-0 catalog.",
+  "categories": {
+    "dependency-maintenance": [
+      "scripts/update-toolchain-pins.sh",
+      "scripts/update-toolchain-pins.ps1",
+      "scripts/lib/toolchain-pins.psm1"
+    ],
+    "dependency-validation": [
+      "scripts/check-toolchain-pins.py",
+      "scripts/tests/test-toolchain-pin-updates.ps1",
+      "scripts/tests/test_toolchain_pin_contract.py"
+    ]
+  },
+  "manual": "docs/man/update-toolchain-pins.1.md"
+}

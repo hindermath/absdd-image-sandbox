@@ -37,7 +37,7 @@ repository variant. Do not introduce a new language merely for convenience.
 ```bash
 podman-compose config
 git diff --check
-python3 scripts/check-dockerfile-arg-renovate.py
+python3 scripts/check-toolchain-pins.py
 python3 scripts/check-home-baseline-lock.py
 python3 scripts/tests/test_home_baseline_documentation_contract.py
 python3 scripts/tests/test_agent_prompt_dispatchers.py
@@ -391,3 +391,13 @@ Markdown-to-PDF conversion, page count, and extracted text. It uses temporary
 files and no external downloads. The full toolchain smoke test also runs it.
 The result does not prove PDF accessibility. Tinymist is a CLI language
 server; installing it does not automatically install an editor extension.
+
+## Abhaengigkeits-PRs / Dependency PRs
+
+DE: Der [Dependabot-Wartungspfad](../../.github/DEPENDENCY-MAINTENANCE.md)
+erklaert Wochenlauf, Sicherheitsgruppen, Review und Fehleranalyse.
+Dependabot pflegt den Basisimage-Digest; der [Pin-Workflow](../security/dependency-update-policy.md) prueft ARG-Updates mit Podman.
+
+EN: The [Dependabot maintenance guide](../../.github/DEPENDENCY-MAINTENANCE.md)
+explains weekly checks, security groups, review and troubleshooting.
+Dependabot maintains the base-image digest; the [pin workflow](../security/dependency-update-policy.md) validates ARG updates with Podman.

@@ -15,7 +15,8 @@
 .PARAMETER Runtime
     Nur Podman / Podman only.
 .PARAMETER SyftVersion
-    Exakt erlaubte Host-Version / exact allowed host version.
+    Exakt erlaubte Host-Version, Standard aus Dockerfile.
+    Exact allowed host version; defaults to the Dockerfile pin.
 .PARAMETER SkipBuild
     Vorhandenes Image verwenden / use the existing image.
 .PARAMETER Platform
@@ -30,7 +31,7 @@ param(
     [string] $ImageName = '',
     [string] $SbomDir = '',
     [ValidateSet('podman')] [string] $Runtime = 'podman',
-    [string] $SyftVersion = '1.55.0',
+    [string] $SyftVersion = '',
     [switch] $SkipBuild,
     [string] $Platform = '',
     [switch] $AllowCrossArchitecture
@@ -124,4 +125,11 @@ function New-AdeSandboxSbom {
 
 if (-not $ImageName) { $ImageName = if ($env:IMAGE_NAME) { $env:IMAGE_NAME } else { 'localhost/absdd-image-sandbox_ade:latest' } }
 if (-not $SbomDir) { $SbomDir = if ($env:SBOM_DIR) { $env:SBOM_DIR } else { 'sboms' } }
+if (-not $SyftVersion) {
+    $pin = @(Get-Content -LiteralPath (Join-Path $PSScriptRoot '../Dockerfile') |
+        Where-Object { $_ -cmatch '^ARG SYFT_VERSION=\d+\.\d+\.\d+$' })
+    if ($pin.Count -ne 1) { throw 'Dockerfile must contain one exact Syft pin.' }
+    $SyftVersion = $pin[0].Substring('ARG SYFT_VERSION='.Length)
+}
+if ($SyftVersion -cnotmatch '^\d+\.\d+\.\d+$') { throw 'Invalid pinned Syft version.' }
 New-AdeSandboxSbom -TargetImage $ImageName -OutputDirectory $SbomDir -ContainerRuntime $Runtime -RequiredSyftVersion $SyftVersion -UseExistingImage:$SkipBuild -TargetPlatform $Platform -PermitCrossArchitecture:$AllowCrossArchitecture -WhatIf:$WhatIfPreference

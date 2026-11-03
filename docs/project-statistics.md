@@ -269,6 +269,45 @@ four receipts and complete Ready series review; preserve 26 preimages.
 Historical EOF allowances bind exact raw bytes; normalize the active update
 without semantic change. No Feature 004 execution, global rollout or runtime action.
 
+### 2026-11-03 - Dependabot-Wartung / Dependabot maintenance
+
+DE: Branch `codex/dependabot-maintenance-20261103`, Arbeitsfenster 2026-11-03.
+Repository-spezifische Versions-/Sicherheitsgruppen und zweisprachige
+Wartungshinweise ergaenzt. Kein Produktions- oder Testcode geaendert;
+Konfigurations-/Dokumentationsumfang ist im PR-Diff belegt. Profil 2 wird
+aus der committed Inhaltsrevision gerendert; bestehende Referenzen bleiben.
+YAML/Schema, Manifestabdeckung, Policy, Dokumentation, Liefermenge und
+Secret-Scan bestanden. Hosted-Checks werden am PR verfolgt. Keine Pakete
+aktualisiert; Git-basierte Statistik misst keine KI-Zeitersparnis.
+
+EN: Branch `codex/dependabot-maintenance-20261103`, work window 2026-11-03.
+Adds repository-specific version/security groups and bilingual maintenance
+guidance. No production or test code changed; the PR diff records the exact
+configuration/documentation scope. Profile 2 is rendered from the committed
+content revision with existing references. YAML/schema, manifest coverage,
+policy, documentation, delivery scope and secret scan passed. Hosted checks
+are tracked on the PR. No packages updated; Git statistics do not measure
+AI time savings.
+
+### 2026-11-03 - Verifizierte Pin-Updates / Verified pin updates
+
+DE: Renovate durch Dependabot fuer den Basisimage-Digest und einen eigenen
+PowerShell-7-Pin-Workflow ersetzt. Alle 29 ARGs besitzen Quellenabdeckung;
+Architektur-Hashes werden gemeinsam mit Versionen vorgeschlagen. Podman-
+Build, Smokes und SBOM sind Gates vor kuenftigen Update-PRs. 81 Offline-
+Assertions und bestehende Pin-/Hardening-Pruefungen sichern Grenzen und
+negative Faelle ab. Der read-only Herstellerabgleich ist Ready; Swift bleibt
+bis zur koordinierten Level-0-Registry-Pflege zurueckgehalten. Keine Paket-
+Upgrades und kein laufender Containerwechsel in dieser Einrichtung.
+
+EN: Replaces Renovate with Dependabot for the base digest and a PowerShell7
+pin workflow. All29 ARGs have explicit sources; versions and architecture
+hashes move together. Podman build, smokes and SBOM gate future update PRs.
+81 offline assertions and existing pin/hardening checks cover boundaries and
+negative cases. Read-only upstream discovery is Ready; Swift remains held
+pending coordinated Level-0 registry maintenance. This setup performs no
+package upgrade or running-container switch.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
@@ -279,29 +318,29 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 539175 lines |
-| Textdateien / Text files | 2378 |
-| Beobachtbarer Zeitraum / Observable period | 2025-11-09..2026-11-02 |
-| Aktivtage / Active days | 89 |
-| Relevante Commits / Relevant commits | 292 |
-| Zeilen je Aktivtag / Lines per active day | 6058.1 |
+| Textbasis / Text base | 540557 lines |
+| Textdateien / Text files | 2391 |
+| Beobachtbarer Zeitraum / Observable period | 2025-11-09..2026-11-03 |
+| Aktivtage / Active days | 90 |
+| Relevante Commits / Relevant commits | 299 |
+| Zeilen je Aktivtag / Lines per active day | 6006.2 |
 | Peak-Tag im Fenster / Peak day in window | 2026-10-25 / 101840 |
 | Peak-Woche im Fenster / Peak week in window | 2026-10-25 / 266277 |
 | Laengste Serie / Longest streak | 8 days |
-| Speedup vs. 80 lines/day | 75.7x |
-| Speedup vs. 100 lines/day | 60.6x |
-| Methodik / Methodology | v2; source `da76703537cd` |
+| Speedup vs. 80 lines/day | 75.1x |
+| Speedup vs. 100 lines/day | 60.1x |
+| Methodik / Methodology | v2; source `643186e9f89f` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [#...................]   0.0% | 97
-Tests                           [#...................]   3.1% | 16446
-Dokumentation / Documentation   [#############.......]  63.2% | 340755
-Skripte / Scripts               [##..................]   7.5% | 40608
-Konfiguration / Configuration   [###.................]  17.3% | 93307
+Tests                           [#...................]   3.1% | 16599
+Dokumentation / Documentation   [#############.......]  63.1% | 340860
+Skripte / Scripts               [##..................]   7.7% | 41485
+Konfiguration / Configuration   [###.................]  17.3% | 93553
 Daten und Medien / Data and media [....................]   0.0% | 0
-Sonstiger Text / Other text     [##..................]   8.9% | 47962
+Sonstiger Text / Other text     [##..................]   8.9% | 47963
 ```
 
 Die Balken teilen die aktuelle getrackte Textbasis in stabile Kategorien. Prozent und Zeilenwert sind die genaue, textorientierte Aussage.
@@ -325,7 +364,7 @@ Sa/Sa  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0
 Wochen / Weeks 27..52 | 2026-05-10..2026-11-07
 So/Su  0 3 2 1 0 4 0 0 4 2 4 4 1 4 4 0 4 4 4 4 0 3 0 0 4 0
 Mo/Mo  3 0 3 2 0 0 0 0 0 4 4 0 0 0 2 0 0 4 2 0 0 0 0 4 0 4
-Di/Tu  3 3 2 3 0 0 0 0 0 3 4 4 0 0 0 0 0 4 4 0 0 4 0 4 4 -
+Di/Tu  3 3 2 3 0 0 0 0 0 3 4 4 0 0 0 0 0 4 4 0 0 4 0 4 4 4
 Mi/We  0 0 2 4 0 0 0 0 2 1 2 4 0 0 2 0 0 0 0 0 0 0 0 4 0 -
 Do/Th  3 3 0 4 3 0 0 0 0 1 3 0 0 4 0 0 0 0 0 0 0 0 0 0 2 -
 Fr/Fr  2 1 3 0 0 0 2 4 4 4 4 1 0 4 0 0 3 0 3 0 0 0 0 0 4 -
@@ -418,8 +457,8 @@ Die festen Slots halten den Phasenvergleich auch bei fehlenden oder spaeter erga
 
 ```text
 Scale: 0..100x
-80 lines/day       [###############.....] 75.7x
-100 lines/day      [############........] 60.6x
+80 lines/day       [###############.....] 75.1x
+100 lines/day      [############........] 60.1x
 ```
 
 Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen Referenzen. Sie messen keine Arbeitszeit.
@@ -432,7 +471,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..10000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 100
-Visible repository [############........] 6058.1
+Visible repository [############........] 6006.2
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -441,9 +480,9 @@ Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schre
 
 ### Textalternative / Text Alternative
 
-DE: Das Fenster beginnt am 2025-11-09 und endet am 2026-11-02. Es enthaelt 89 aktive und 270 inaktive vergangene Tage. Peak-Tag: 2026-10-25 / 101840. Peak-Woche: 2026-10-25 / 266277. Laengste Serie: 8 Tage (2026-07-10..2026-07-17).
+DE: Das Fenster beginnt am 2025-11-09 und endet am 2026-11-03. Es enthaelt 90 aktive und 270 inaktive vergangene Tage. Peak-Tag: 2026-10-25 / 101840. Peak-Woche: 2026-10-25 / 266277. Laengste Serie: 8 Tage (2026-07-10..2026-07-17).
 
-*EN: The window starts on 2025-11-09 and ends on 2026-11-02. It contains 89 active and 270 inactive elapsed days. Peak day: 2026-10-25 / 101840. Peak week: 2026-10-25 / 266277. Longest streak: 8 days (2026-07-10..2026-07-17).*
+*EN: The window starts on 2025-11-09 and ends on 2026-11-03. It contains 90 active and 270 inactive elapsed days. Peak day: 2026-10-25 / 101840. Peak week: 2026-10-25 / 266277. Longest streak: 8 days (2026-07-10..2026-07-17).*
 
 | Monat / Month | Geaenderte Textzeilen / Changed text lines |
 |---|---:|
@@ -458,6 +497,6 @@ DE: Das Fenster beginnt am 2025-11-09 und endet am 2026-11-02. Es enthaelt 89 ak
 | 2026-08 | 96264 |
 | 2026-09 | 61410 |
 | 2026-10 | 325107 |
-| 2026-11 | 17476 |
+| 2026-11 | 20006 |
 
 <!-- project-statistics-v2:end -->

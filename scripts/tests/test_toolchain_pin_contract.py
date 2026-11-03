@@ -9,15 +9,15 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[2]
-VALIDATOR = ROOT / "scripts/check-dockerfile-arg-renovate.py"
+VALIDATOR = ROOT / "scripts/check-toolchain-pins.py"
 
 
-class DockerfileArgRenovateTests(unittest.TestCase):
+class ToolchainPinContractTests(unittest.TestCase):
     def run_fixture(self, mutation=None):
         with tempfile.TemporaryDirectory(prefix="ade004-dockerfile-contract-") as directory:
             fixture = Path(directory)
             for relative in (
-                "Dockerfile", "renovate.json", "scripts/smoke-test-toolchains.sh",
+                "Dockerfile", "scripts/config/toolchain-pins.json", "scripts/smoke-test-toolchains.sh",
                 "codex/config.toml", "codex/requirements.toml",
             ):
                 destination = fixture / relative

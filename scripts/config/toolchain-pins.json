@@ -1,0 +1,309 @@
+{
+  "schemaVersion": 1,
+  "dockerfile": "Dockerfile",
+  "baseImage": {
+    "dependency": "mcr.microsoft.com/dotnet/sdk",
+    "tag": "10.0",
+    "owner": "dependabot"
+  },
+  "runtime": "podman",
+  "pins": [
+    {
+      "arg": "JAVA_VERSION",
+      "group": "JAVA_VERSION",
+      "package": "java",
+      "provider": "java-channel",
+      "tagPrefix": "",
+      "tagSuffix": "",
+      "channel": "25"
+    },
+    {
+      "arg": "MAVEN_VERSION",
+      "group": "MAVEN_VERSION",
+      "package": "org.apache.maven:apache-maven",
+      "provider": "maven",
+      "tagPrefix": "",
+      "tagSuffix": "",
+      "hashVariable": "maven_sha512",
+      "algorithm": "sha512"
+    },
+    {
+      "arg": "PYTHON_VERSION",
+      "group": "PYTHON_RUNTIME",
+      "package": "astral-sh/python-build-standalone",
+      "provider": "python",
+      "tagPrefix": "",
+      "tagSuffix": "",
+      "hashVariable": "python_sha256",
+      "algorithm": "sha256"
+    },
+    {
+      "arg": "PYTHON_BUILD_DATE",
+      "group": "PYTHON_RUNTIME",
+      "package": "astral-sh/python-build-standalone",
+      "provider": "companion",
+      "tagPrefix": "",
+      "tagSuffix": ""
+    },
+    {
+      "arg": "POWERSHELL_VERSION",
+      "group": "POWERSHELL_VERSION",
+      "package": "PowerShell/PowerShell",
+      "provider": "powershell",
+      "tagPrefix": "v",
+      "tagSuffix": "",
+      "hashVariable": "ps_sha256",
+      "algorithm": "sha256"
+    },
+    {
+      "arg": "GO_VERSION",
+      "group": "GO_VERSION",
+      "package": "go",
+      "provider": "go",
+      "tagPrefix": "",
+      "tagSuffix": "",
+      "hashVariable": "go_sha256",
+      "algorithm": "sha256"
+    },
+    {
+      "arg": "GOPLS_VERSION",
+      "group": "GOPLS_VERSION",
+      "package": "golang.org/x/tools/gopls",
+      "provider": "gomod",
+      "tagPrefix": "v",
+      "tagSuffix": ""
+    },
+    {
+      "arg": "STATICCHECK_VERSION",
+      "group": "STATICCHECK_VERSION",
+      "package": "honnef.co/go/tools",
+      "provider": "gomod",
+      "tagPrefix": "v",
+      "tagSuffix": ""
+    },
+    {
+      "arg": "GOVULNCHECK_VERSION",
+      "group": "GOVULNCHECK_VERSION",
+      "package": "golang.org/x/vuln",
+      "provider": "gomod",
+      "tagPrefix": "v",
+      "tagSuffix": ""
+    },
+    {
+      "arg": "DELVE_VERSION",
+      "group": "DELVE_VERSION",
+      "package": "github.com/go-delve/delve",
+      "provider": "gomod",
+      "tagPrefix": "v",
+      "tagSuffix": ""
+    },
+    {
+      "arg": "RUST_TOOLCHAIN",
+      "group": "RUST_TOOLCHAIN",
+      "package": "rust",
+      "provider": "rust",
+      "tagPrefix": "",
+      "tagSuffix": ""
+    },
+    {
+      "arg": "RUSTUP_VERSION",
+      "group": "RUSTUP_VERSION",
+      "package": "rust-lang/rustup",
+      "provider": "rustup",
+      "tagPrefix": "",
+      "tagSuffix": ""
+    },
+    {
+      "arg": "SWIFT_DOCKER_TAG",
+      "group": "SWIFT_DOCKER_TAG",
+      "package": "swiftlang/swift",
+      "provider": "github",
+      "tagPrefix": "swift-",
+      "tagSuffix": "-RELEASE",
+      "valueSuffix": "-noble",
+      "channel": "6"
+    },
+    {
+      "arg": "NODE_MAJOR",
+      "group": "NODE_MAJOR",
+      "package": "node",
+      "provider": "node-channel",
+      "tagPrefix": "",
+      "tagSuffix": "",
+      "channel": "24"
+    },
+    {
+      "arg": "UV_VERSION",
+      "group": "UV_VERSION",
+      "package": "astral-sh/uv",
+      "provider": "github",
+      "tagPrefix": "",
+      "tagSuffix": "",
+      "hashVariable": "uv_sha256",
+      "algorithm": "sha256",
+      "assets": {
+        "amd64": "uv-x86_64-unknown-linux-gnu.tar.gz",
+        "arm64": "uv-aarch64-unknown-linux-gnu.tar.gz"
+      }
+    },
+    {
+      "arg": "OPENCODE_VERSION",
+      "group": "OPENCODE_VERSION",
+      "package": "@opencode/cli",
+      "provider": "npm",
+      "tagPrefix": "",
+      "tagSuffix": ""
+    },
+    {
+      "arg": "CODEX_VERSION",
+      "group": "CODEX_VERSION",
+      "package": "@openai/codex",
+      "provider": "npm",
+      "tagPrefix": "",
+      "tagSuffix": ""
+    },
+    {
+      "arg": "CLAUDE_CODE_VERSION",
+      "group": "CLAUDE_CODE_VERSION",
+      "package": "@anthropic-ai/claude-code",
+      "provider": "npm",
+      "tagPrefix": "",
+      "tagSuffix": ""
+    },
+    {
+      "arg": "GEMINI_CLI_VERSION",
+      "group": "GEMINI_CLI_VERSION",
+      "package": "@google/gemini-cli",
+      "provider": "npm",
+      "tagPrefix": "",
+      "tagSuffix": ""
+    },
+    {
+      "arg": "ANTIGRAVITY_CLI_VERSION",
+      "group": "ANTIGRAVITY_CLI_VERSION",
+      "package": "google-antigravity/antigravity-cli",
+      "provider": "github",
+      "tagPrefix": "",
+      "tagSuffix": "",
+      "hashVariable": "agy_sha256",
+      "algorithm": "sha256",
+      "assets": {
+        "amd64": "agy_cli_linux_x64.tar.gz",
+        "arm64": "agy_cli_linux_arm64.tar.gz"
+      }
+    },
+    {
+      "arg": "COPILOT_CLI_VERSION",
+      "group": "COPILOT_CLI_VERSION",
+      "package": "@github/copilot",
+      "provider": "npm",
+      "tagPrefix": "",
+      "tagSuffix": ""
+    },
+    {
+      "arg": "SYFT_VERSION",
+      "group": "SYFT_VERSION",
+      "package": "anchore/syft",
+      "provider": "github",
+      "tagPrefix": "v",
+      "tagSuffix": "",
+      "hashVariable": "syft_sha256",
+      "algorithm": "sha256",
+      "assets": {
+        "amd64": "syft_{version}_linux_amd64.tar.gz",
+        "arm64": "syft_{version}_linux_arm64.tar.gz"
+      }
+    },
+    {
+      "arg": "ACTIONLINT_VERSION",
+      "group": "ACTIONLINT_VERSION",
+      "package": "rhysd/actionlint",
+      "provider": "github",
+      "tagPrefix": "v",
+      "tagSuffix": "",
+      "hashVariable": "actionlint_sha256",
+      "algorithm": "sha256",
+      "assets": {
+        "amd64": "actionlint_{version}_linux_amd64.tar.gz",
+        "arm64": "actionlint_{version}_linux_arm64.tar.gz"
+      }
+    },
+    {
+      "arg": "DOTNET_COMPAT_SDK_VERSION",
+      "group": "DOTNET_COMPAT_SDK_VERSION",
+      "package": "dotnet-sdk",
+      "provider": "dotnet",
+      "tagPrefix": "",
+      "tagSuffix": "",
+      "channel": "10.0",
+      "featureBand": 3,
+      "hashVariable": "dotnet_sha512",
+      "algorithm": "sha512"
+    },
+    {
+      "arg": "PANDOC_VERSION",
+      "group": "PANDOC_VERSION",
+      "package": "jgm/pandoc",
+      "provider": "github",
+      "tagPrefix": "",
+      "tagSuffix": "",
+      "hashVariable": "checksum",
+      "algorithm": "sha256",
+      "assets": {
+        "amd64": "pandoc-{version}-linux-amd64.tar.gz",
+        "arm64": "pandoc-{version}-linux-arm64.tar.gz"
+      }
+    },
+    {
+      "arg": "LYCHEE_VERSION",
+      "group": "LYCHEE_VERSION",
+      "package": "lycheeverse/lychee",
+      "provider": "github",
+      "tagPrefix": "lychee-v",
+      "tagSuffix": "",
+      "hashVariable": "checksum",
+      "algorithm": "sha256",
+      "assets": {
+        "amd64": "lychee-x86_64-unknown-linux-gnu.tar.gz",
+        "arm64": "lychee-aarch64-unknown-linux-gnu.tar.gz"
+      }
+    },
+    {
+      "arg": "TYPST_VERSION",
+      "group": "TYPST_VERSION",
+      "package": "typst/typst",
+      "provider": "github",
+      "tagPrefix": "v",
+      "tagSuffix": "",
+      "hashVariable": "checksum",
+      "algorithm": "sha256",
+      "assets": {
+        "amd64": "typst-x86_64-unknown-linux-musl.tar.xz",
+        "arm64": "typst-aarch64-unknown-linux-musl.tar.xz"
+      }
+    },
+    {
+      "arg": "TINYMIST_VERSION",
+      "group": "TINYMIST_VERSION",
+      "package": "Myriad-Dreamin/tinymist",
+      "provider": "github",
+      "tagPrefix": "v",
+      "tagSuffix": "",
+      "hashVariable": "checksum",
+      "algorithm": "sha256",
+      "assets": {
+        "amd64": "tinymist-x86_64-unknown-linux-gnu.tar.gz",
+        "arm64": "tinymist-aarch64-unknown-linux-gnu.tar.gz"
+      }
+    },
+    {
+      "arg": "NPM_VERSION",
+      "group": "NPM_VERSION",
+      "package": "npm",
+      "provider": "npm",
+      "tagPrefix": "",
+      "tagSuffix": "",
+      "channel": "12"
+    }
+  ]
+}

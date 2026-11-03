@@ -1,0 +1,73 @@
+# Wartung und Grenzen / Maintenance and boundaries: .github/DEPENDENCY-MAINTENANCE.md
+# Major-Updates bleiben einzeln; Sicherheitsupdates haben eigene Gruppen.
+# Major updates stay separate; security updates use independent groups.
+---
+version: 2
+updates:
+- package-ecosystem: docker
+  directory: "/"
+  schedule:
+    interval: weekly
+    day: monday
+    time: '07:00'
+    timezone: Europe/Berlin
+  open-pull-requests-limit: 5
+  # Keep the approved 10.0 channel; refresh its pinned manifest digest.
+  # Docker is the manifest ecosystem, Podman remains the build engine.
+  # Dependabot stores the registry separately from the dependency name.
+  allow:
+  - dependency-name: dotnet/sdk
+  ignore:
+  - dependency-name: dotnet/sdk
+    versions: ["> 10.0"]
+  groups:
+    docker-minor-patch:
+      applies-to: version-updates
+      patterns: ["*"]
+      update-types: [minor, patch]
+    docker-security:
+      applies-to: security-updates
+      patterns: ["*"]
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: weekly
+    day: monday
+    time: '07:00'
+    timezone: Europe/Berlin
+  open-pull-requests-limit: 5
+  groups:
+    github-actions-minor-patch:
+      applies-to: version-updates
+      patterns:
+      - "*"
+      update-types:
+      - minor
+      - patch
+    github-actions-security:
+      applies-to: security-updates
+      patterns:
+      - "*"
+  exclude-paths:
+  - ".github/workflows/maintenance-tui.yml"
+  - ".github/workflows/powershell-analysis.yml"
+- package-ecosystem: pre-commit
+  directory: "/"
+  schedule:
+    interval: weekly
+    day: monday
+    time: '07:00'
+    timezone: Europe/Berlin
+  open-pull-requests-limit: 5
+  groups:
+    pre-commit-minor-patch:
+      applies-to: version-updates
+      patterns:
+      - "*"
+      update-types:
+      - minor
+      - patch
+    pre-commit-security:
+      applies-to: security-updates
+      patterns:
+      - "*"

@@ -72,24 +72,21 @@ class OpenCodePolicyTests(unittest.TestCase):
                         result = rule["effect"]
                 self.assertEqual(result, expected)
 
-    def test_package_and_renovate_follow_v2(self):
+    def test_package_and_pin_registry_follow_v2(self):
         dockerfile = (ROOT / "Dockerfile").read_text()
         self.assertIn('"@opencode/cli@${OPENCODE_VERSION}"', dockerfile)
         self.assertNotIn('"opencode-ai@${OPENCODE_VERSION}"', dockerfile)
-        self.assertIn('"@opencode/cli"', (ROOT / "renovate.json").read_text())
+        self.assertIn('"@opencode/cli"', (ROOT / "scripts/config/toolchain-pins.json").read_text())
 
     def test_sbom_fallback_matches_image_syft(self):
         dockerfile = (ROOT / "Dockerfile").read_text()
-        version = next(
-            line.split("=", 1)[1] for line in dockerfile.splitlines()
-            if line.startswith("ARG SYFT_VERSION=")
-        )
+        self.assertEqual(1, sum(line.startswith("ARG SYFT_VERSION=") for line in dockerfile.splitlines()))
         self.assertIn(
-            "${SYFT_VERSION:-" + version + "}",
+            "s/^ARG SYFT_VERSION=//p",
             (ROOT / "scripts/build-and-sbom.sh").read_text(),
         )
         self.assertIn(
-            "$SyftVersion = '" + version + "'",
+            "Substring('ARG SYFT_VERSION='.Length)",
             (ROOT / "scripts/build-and-sbom.ps1").read_text(),
         )
 

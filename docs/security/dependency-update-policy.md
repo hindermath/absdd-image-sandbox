@@ -1,313 +1,179 @@
-# Abhängigkeits-Update-Richtlinie / Dependency-Update-Policy
-
-Stand: 2026-10-25
-
-Aktueller Abgleich / Current audit:
-[2026-10-25](../maintenance/toolchain-version-audit-2026-10-25.md).
-Java und Node verwenden aktuelle LTS-Linien; .NET bleibt auf 10 LTS.
-Python und Maven werden separat auf stabile Upstream-Versionen gepinnt.
-Nur das System-Python und die weiteren APT-Pakete folgen Ubuntu 24.04.
-Go- und Python-Downloads erhalten feste Architektur-Hashes; Maven erhaelt
-eine feste SHA-512-Pruefsumme fuer das architekturunabhaengige Java-Archiv.
-
-Der zusaetzliche Renovate-Dockerfile-Manager verfolgt auch den MCR-Basisdigest.
-Die LTS-Grenzen bleiben bewusst bei .NET 10.0, Java 25 und Node 24; ein
-kuenftiger LTS-Wechsel benoetigt die gemeinsame Anpassung der Paketregeln.
-Java-/Node-Versionen werden fuer diese Major-ARGs auf ihre Hauptnummer
-normalisiert, damit keine Paketnamen wie `openjdk-25.0.4-jdk-headless` oder
-NodeSource-Pfade wie `node_24.22.1.x` entstehen.
-
-*The Dockerfile manager also tracks the MCR base digest. Rules intentionally
-retain .NET 10.0, Java 25 and Node 24; a future LTS switch must update these
-package rules together. Java/Node release versions are normalized to their
-major number so APT package names and NodeSource paths remain valid.*
-
-*Java and Node use current LTS lines; .NET stays on 10 LTS. Python and Maven
-use separately pinned stable upstream releases. System Python and remaining
-APT packages follow Ubuntu 24.04. Go/Python downloads use architecture hashes;
-Maven's architecture-independent Java archive has a committed SHA-512 hash.*
-
-Dokumentationswerkzeuge / Documentation tools: Pandoc, Lychee, Typst und
-Tinymist verwenden native AMD64-/ARM64-Releases mit fest hinterlegten
-SHA-256-Pruefsummen. Versionsupdates muessen die jeweiligen Pruefsummen
-gemeinsam aktualisieren und den Dokumentations-Smoke-Test bestehen.
-Lychee-Tags tragen das Praefix `lychee-v`; Renovate entfernt dieses Praefix
-vor dem Versionsvergleich.
-
-Pandoc, Lychee, Typst, and Tinymist use native AMD64/ARM64 releases with
-committed SHA-256 checksums. Version updates must update the matching
-checksums and pass the documentation smoke test.
+# Dependency Update Policy / Abhaengigkeits-Updates
 
 ## Deutsch
 
-Dieses Dokument beschreibt die Repository-seitige Renovate-Konfiguration fuer
-P3-3 aus `COMPLIANCE-PLAN_RL-SE-001.md`.
+Owner ist der Repository-Maintainer. Das `Dockerfile` bleibt die einzige Quelle
+fuer Versionswerte und Archiv-Pruefsummen. Das [Pin-Register](../../scripts/config/toolchain-pins.json)
+ordnet alle 29 ARGs offiziellen Quellen und 28 Gruppen zu. Python-Version und
+Builddatum bewegen sich gemeinsam. Renovate ist abgeloest; historische Evidence
+bleibt unveraendert.
 
-### Ziel
+[Dependabot](../../.github/dependabot.yml) pflegt Actions, externe pre-commit-
+Hooks und Basisimage-Digests im freigegebenen MCR-Tag `10.0`. Hoehere Versionen
+sind ausgeschlossen. `docker` bezeichnet das Manifestformat; **Podman bleibt
+die verbindliche Build-Engine**. Zeitplan, Gruppierung und Ausschluesse stehen
+im [Wartungspfad](../../.github/DEPENDENCY-MAINTENANCE.md). Sicherheitsgruppen
+ersetzen keinen Schwachstellen-Scanner fuer beliebige ARGs.
 
-`renovate.json` bereitet automatisierte Dependency-Pull-Requests fuer die im
-`Dockerfile` gepinnten Build-Argumente vor. Renovate darf keine Aenderungen
-direkt auf `main` schreiben und kein Auto-Merge ausfuehren. Jede Aenderung
-bleibt ein normaler Pull Request mit Review, Build und Toolchecks.
+Der [Pin-Workflow](../../.github/workflows/toolchain-pins.yml) prueft montags
+06:20 UTC (07:20 MEZ / 08:20 MESZ) die ARGs. Manuell ist `check` der read-only
+Standard; `propose` bereitet hoechstens einen Gruppen-PR vor. Gruppen mit offenem
+PR werden uebersprungen; maximal fuenf eigene PRs bleiben offen. Kein direktes
+Push nach main, kein Force-Update und kein Auto-Merge. Bestehende Gruppen-PRs
+werden manuell abgeschlossen, bevor der naechste Vorschlag folgt.
 
-### Dockerfile-ARG-Konvention
+### Quellen und Schutzregeln
 
-Alle `ARG`-Zeilen im `Dockerfile` muessen von Renovate erfasst werden. Dazu
-steht direkt oberhalb des `ARG` eine Metadatenzeile:
+Nur feste offizielle HTTPS-Hosts sind erlaubt. Redirects, uebergrosse Antworten,
+fehlende oder mehrdeutige Metadaten werden abgewiesen. Ein optionales GH_TOKEN
+geht nur an api.github.com. Downloads werden gehasht, niemals ausgefuehrt.
+Offline-Fixtures besitzen keinen Netzwerk-Fallback.
 
-```dockerfile
-# renovate: datasource=<renovate-datasource> depName=<dependency-name> versioning=<versioning> argName=<ARG_NAME>
-ARG <ARG_NAME>=<version>
-```
+- Java LTS25, Node LTS24 und npm12 bleiben ihre freigegebenen Kanaele. APT
+  liefert Java-/Node-Patchpakete beim Build. Das Kompatibilitaets-SDK bleibt
+  bei .NET10.0.3xx. Andere Feature-Baender brauchen bewusste Freigabe.
+- Swift bleibt wegen des gepinnten 6.x-Signierschluessels bei Major6. Ein neuer
+  Major erzeugt PolicyHeld; der Schluesselwechsel braucht eigenes Review.
+  Auch Patch-Wechsel bleiben PolicyHeld, solange das zentral verteilte
+  Level-0-Swift-Register nicht koordiniert aktualisiert wurde. Go-/Rust-PRs
+  fuehren die daraus abgeleiteten Versionen der Lernenden-Tabelle mit.
+- Andere stabile Releases werden ohne Downgrades vorgeschlagen. GitHub-Assets
+  brauchen eindeutige SHA-256-Digests. Go, Maven und .NET verwenden offizielle
+  Pruefsummen. PowerShell-Pakete werden von einer festen Microsoft-Quelle
+  gestreamt und SHA-256-gehasht. Versionswerte und vollstaendige AMD64-/ARM64-
+  Hashes bewegen sich atomar. Syfts Standardversion liest auch das Build-/SBOM-
+  Skript aus dem Dockerfile; explizite lokale Overrides bleiben erkennbar.
+- Fehlende Hersteller-Evidence blockiert den gesamten Vorschlagslauf als
+  Blocked. Der Bericht nennt die betroffene Gruppe. Es gibt keinen unsicheren
+  Ersatzwert. PolicyHeld kennzeichnet dagegen eine bewusste Kanalgrenze.
 
-Wenn kuenftig ein weiteres `ARG` ergaenzt wird, muss es nach dieser Konvention
-eine Renovate-Metadatenzeile bekommen. Wenn der Wert nicht als einfache Version
-aktualisierbar ist, muss `renovate.json` um eine passende Sonderregel
-erweitert werden. Der lokale Pre-commit-Hook
-`dockerfile-arg-renovate-metadata` prueft, dass jedes `ARG` eine direkt
-vorangestellte Metadatenzeile mit passendem `argName` hat.
+Home Baseline Schema2 bleibt manuell reviewpflichtig: oeffentliche HTTPS-Quelle,
+refType commit, exakter 40-stelliger Commit und MIT-Lizenz. Der Build verifiziert
+Commit, Lizenz und Lernenden-Anleitung; lokale Maintainer-Kopien sind keine
+Quelle. Der eingebettete Spec-Kit-Release-Commit bleibt ebenfalls manuell;
+Struktur-/Idempotenztests des Container-Patches und CLI-/Installations-Smokes
+sind erforderlich. Diese Inhalts-Pins sind keine ARG-Gruppen.
 
-### Aktuell erfasste ARGs
+Archiv-Hashes, Swift `gpg --assert-signer`, rootless Runtime, entfernte
+Capabilities und no-new-privileges bleiben verbindlich. Keine globale npm-
+Skriptfreigabe: Nur die bestehenden benannten OpenCode-, Claude-Code-, keytar-
+und node-pty-Hooks werden abgeschlossen; Versions-/Modul-Ladechecks bleiben
+erforderlich. Ein neuer Kanal oder Installationsmechanismus braucht Review.
 
-| ARG | Renovate datasource | Dependency |
-|---|---|---|
-| `JAVA_VERSION` | `java-version` | `java` |
-| `MAVEN_VERSION` | `maven` | `org.apache.maven:apache-maven` |
-| `PYTHON_VERSION` | `python-version` | `python` |
-| `PYTHON_BUILD_DATE` | `github-releases` | `astral-sh/python-build-standalone` |
-| `POWERSHELL_VERSION` | `github-releases` | `PowerShell/PowerShell` |
-| `GO_VERSION` | `golang-version` | `go` |
-| `GOPLS_VERSION` | `go` | `golang.org/x/tools/gopls` |
-| `STATICCHECK_VERSION` | `go` | `honnef.co/go/tools` |
-| `GOVULNCHECK_VERSION` | `go` | `golang.org/x/vuln` |
-| `DELVE_VERSION` | `go` | `github.com/go-delve/delve` |
-| `RUST_TOOLCHAIN` | `rust-version` | `rust` |
-| `RUSTUP_VERSION` | `github-releases` | `rust-lang/rustup` |
-| `SWIFT_DOCKER_TAG` | `docker` | `swift` |
-| `NODE_MAJOR` | `node-version` | `node` |
-| `NPM_VERSION` | `npm` | `npm` |
-| `UV_VERSION` | `github-releases` | `astral-sh/uv` |
-| `OPENCODE_VERSION` | `npm` | `@opencode/cli` |
-| `CODEX_VERSION` | `npm` | `@openai/codex` |
-| `CLAUDE_CODE_VERSION` | `npm` | `@anthropic-ai/claude-code` |
-| `GEMINI_CLI_VERSION` | `npm` | `@google/gemini-cli` |
-| `ANTIGRAVITY_CLI_VERSION` | `github-releases` | `google-antigravity/antigravity-cli` |
-| `COPILOT_CLI_VERSION` | `npm` | `@github/copilot` |
-| `SYFT_VERSION` | `github-releases` | `anchore/syft` |
-| `PANDOC_VERSION` | `github-releases` | `jgm/pandoc` |
-| `LYCHEE_VERSION` | `github-releases` | `lycheeverse/lychee` |
-| `TYPST_VERSION` | `github-releases` | `typst/typst` |
-| `TINYMIST_VERSION` | `github-releases` | `Myriad-Dreamin/tinymist` |
-| `ACTIONLINT_VERSION` | `github-releases` | `rhysd/actionlint` |
-| `DOTNET_COMPAT_SDK_VERSION` | `dotnet-version` | `dotnet-sdk` |
+### Pruefung und Betrieb
 
-`JAVA_VERSION` versioniert bewusst die Java-Major-Linie fuer das Ubuntu-APT-
-Paket `openjdk-${JAVA_VERSION}-jdk-headless`. Die konkrete Ubuntu-Patchversion
-wird nicht exakt gepinnt und muss bei Renovate-PRs im Build validiert werden.
-
-`POWERSHELL_VERSION` pinnt die stabile PowerShell-Version. Der Build installiert
-das offizielle Microsoft-Paket nach fester AMD64-/ARM64-SHA-256-Prüfung in
-`/opt/powershell-pinned` und bindet `/usr/bin/pwsh` darauf. Die MCR-Kopie bleibt
-unangetastet, weil ein In-place-Update unter rootless Overlay-Speicher beim
-Entfernen des alten Pakets scheitern kann. Paket-Hashes, Versions-ARG und
-Basisimage-Digest gemeinsam prüfen; der Build prüft die effektive Version.
-
-Der Swift-Archiv-Build prueft die Signatur gegen den festgehaltenen
-6.x-Release-Fingerprint mit `gpg --assert-signer`. Bei Schluesselwechsel
-Fingerprint und offizielle Swift-Schluesselliste bewusst reviewen; eine
-gueltige Signatur eines anderen importierten Schluessels reicht nicht.
-
-Syft und uv verwenden fuer AMD64 und ARM64 fest hinterlegte SHA-256-Werte der
-konkreten Release-Archive. Ein Renovate-Versionswechsel muss deshalb fuer beide
-Architekturen mit offiziellen Release-Assets und zusaetzlicher Review-Evidenz
-abgeglichen und im Dockerfile zusammen mit dem ARG aktualisiert werden. Der
-Build liest keine zur Laufzeit austauschbare Begleit-Pruefsumme als alleinigen
-Integritaetsanker. Aktuelle Referenzen: [Syft 1.55.0](https://github.com/anchore/syft/releases/tag/v1.55.0),
-[uv 0.13.5](https://github.com/astral-sh/uv/releases/tag/0.13.5).
-
-### Eingebettete Home-Baseline-Referenz
-
-`home-baseline.lock.json` behandelt die Level-0-Referenz als eingebettete
-Inhaltsabhaengigkeit. Das aktive Schema 2 enthaelt die oeffentliche
-HTTPS-Quelle, `refType=commit`, den exakten 40-stelligen Commit und die
-MIT-Lizenz. Der fruehere Renovate-Regex-Manager fuer Tag plus Commit konnte
-dieses Schema nicht erfassen und wurde entfernt. Updates sind bewusst manuell;
-Auto-Merge bleibt deaktiviert.
-
-Ein Update braucht einen bewusst geprueften, oeffentlich erreichbaren Commit
-und eine erneute Rechte-/Inhaltspruefung. `scripts/check-home-baseline-lock.py`
-prueft die statische Lock-Struktur. Der Image-Build vergleicht den geholten
-Git-Commit vor dem Checkout mit dem Lock und verlangt die Lizenzdatei sowie die
-zentrale Lernenden-Anleitung. Die lokale Arbeitskopie eines Maintainers ist
-keine zulaessige Build-Quelle.
-
-### Native npm-Installationsschritte / Native npm Install Hooks
-
-DE: npm blockiert nicht ausdruecklich erlaubte Installationsskripte. Der Build
-schliesst deshalb nur die benannten Hooks von `@opencode/cli`,
-`@anthropic-ai/claude-code`, `@github/keytar` und `node-pty` explizit ab. Es gibt
-keine globale Freigabe aller Skripte und keine persistierte npm-Freigabe.
-`libsecret-1-0` liefert die Laufzeitbibliothek fuer das vorhandene Keytar-Addon;
-das konfiguriert weder Schluesselbund, Konto noch Zugangsdaten. Versions- und
-Modul-Ladechecks muessen danach erfolgreich sein.
-
-EN: npm blocks unapproved install scripts. The build explicitly finalizes only
-the named hooks for OpenCode, Claude Code, keytar and node-pty. No blanket or
-persistent npm script approval is configured. libsecret supplies the existing
-keytar addon's runtime library, without configuring a keyring, account or
-credentials. Version and native module load checks must pass afterwards.
-
-### Spec-Kit-Commitbindung
-
-Spec Kit 1.2.3 ist im Dockerfile direkt auf seinen Release-Commit gepinnt.
-Dieser Pin wird bewusst geprueft und nicht vom ARG-Manager automatisch
-aktualisiert. Der Image-Build prueft die installierte Paketversion; der lokale
-Hook `specify-container-patch` prueft den Bind-Mount-Patch fuer die alte und
-neue Modulstruktur, Idempotenz und die Blockierung unbekannter Strukturen.
-Ein Versionswechsel benoetigt Image-Build und CLI-/Installations-Smokes.
-
-### GitHub-Betriebskontext
-
-Dieses Repository enthaelt nur die Renovate-Konfiguration. Damit Renovate
-tatsaechlich Pull Requests erstellt, muss ein Renovate-Bot, eine passende
-CI-Ausfuehrung oder ein externer Renovate-Service fuer GitHub aktiviert
-werden. Bis zur Plattform-Einrichtung gilt P3-3 repo-seitig als vorbereitet;
-die serverseitige Ausfuehrung ist ein Betriebs-/Admin-Schritt.
-
-### Validierung vor Merge
-
-Jeder Renovate-PR muss mindestens diese Pruefungen bestehen:
+macOS/Linux verwenden die Bash-Oberflaeche, Windows direkt PowerShell7:
 
 ```bash
-podman-compose config
-podman compose build --pull
-uvx pre-commit run --all-files
+bash scripts/update-toolchain-pins.sh --help
+bash scripts/update-toolchain-pins.sh --action Check --json
+pwsh -NoProfile -File scripts/tests/test-toolchain-pin-updates.ps1
+python3 scripts/check-toolchain-pins.py
 ```
 
-Bei Toolchain-Aenderungen sind zusaetzlich die Toolchecks aus `AGENTS.md`
-auszufuehren.
+Check laesst das Repository unveraendert. Exit0 bedeutet vollstaendigen Abgleich,
+Exit1 eine blockierte Quelle, Exit2 einen Eingabe-/Vertragsfehler. Prepare
+verlangt einen sauberen Commit und ein neues externes Verzeichnis. Verify
+prueft offline HEAD, Quellbytes und erlaubte Aenderungen. Apply wird zuerst mit
+--dry-run bzw. -WhatIf geprueft und ersetzt ausschliesslich das verifizierte
+Dockerfile atomar. Siehe [Manpage](../man/update-toolchain-pins.1.md). Diese
+Befehle installieren nichts, starten keine Container und publizieren kein Git.
+
+Nur bereits gepruefter Code auf main darf Quellen abfragen und publizieren.
+PRs fuehren Offline-Vertraege auf Linux, macOS und Windows aus. Kein
+pull_request_target, keine Host-Zugangsdaten im Container. Der Discovery-Job
+hat Leserechte, bindet eine Payload an HEAD und SHA-256 und verlangt vor
+Publikation einen isolierten nativen Linux/AMD64-Podman-Build, Toolchain-/
+Dokumentations-Smokes und CycloneDX-SBOM. Smokes laufen ohne Netz, ohne
+Capabilities und mit no-new-privileges. Vorschlag, Quellbindung, Image-ID, SBOM
+und Proof bleiben 14 Tage als Artefakte erhalten. ARM64-Ausfuehrung ist darin
+ausdruecklich NotPerformed und bleibt ein separater Nachweis.
+
+Erst danach erhaelt der getrennte Publisher contents/write und
+pull-requests/write. Er prueft Payload, aktuellen main-HEAD und erlaubte Pfade
+erneut, regeneriert die konfigurierten Statistik-Ausgaben und erstellt einen regulaeren PR.
+Er nutzt das kurzlebige GITHUB_TOKEN, kein neues PAT und keinen externen Bot.
+Actions muss in den Repository-Einstellungen PRs erstellen duerfen. Token-
+erzeugte PR-Workflows koennen **Approve workflows to run** durch einen Menschen
+benoetigen; der Vorlauf ersetzt diese PR-Checks nicht.
+
+Vor Merge Hersteller-Release, Hashes, Kanaele, Installation, native Architekturen,
+SBOM und erforderliche exakte Head-Checks pruefen. AMD64 beweist weder ARM64
+noch Produkt-/Barrierefreiheitsabnahme. Menschliches Review und Branch-Schutz
+bleiben verbindlich. Nach Merge erste Dependabot-/Pin-Laeufe und Artefakte
+pruefen; bei Blocked die genannte Quelle korrigieren. Die Einrichtung ersetzt
+keinen laufenden Container.
 
 ## English
 
-### Goal
+The repository maintainer owns this policy. The Dockerfile remains the sole
+source of versions and archive hashes. The registry covers all 29 ARGs in
+28 groups; Python version/date move together. Renovate is retired; historical
+evidence is retained. Dependabot maintains Actions, external pre-commit hooks
+and the base digest within approved MCR tag10.0; higher versions are excluded.
+Docker is the manifest ecosystem; **Podman is the required engine**. See the
+maintenance guide for schedules, grouping and exclusions. Security groups do
+not scan arbitrary ARGs for vulnerabilities.
 
-`renovate.json` prepares automated dependency pull requests for pinned
-Dockerfile build arguments. Renovate must not write directly to `main` and must
-not automerge. Every change remains a normal pull request with review, build,
-and tool checks.
+The pin workflow runs Monday06:20UTC (07:20CET / 08:20CEST). Manual dispatch
+defaults to read-only check; propose emits at most one group PR. Groups with
+open PRs are skipped and at most five own PRs remain open. There is no direct
+main push, force update or auto-merge. Review/close an existing group PR before
+its next proposal. Only fixed official HTTPS hosts are read. Redirects,
+excessive responses and missing/ambiguous metadata fail closed. GH_TOKEN is
+sent only to api.github.com. Downloads are hashed, never executed. Offline
+fixtures never fall back to network access.
 
-### Dockerfile ARG Convention
+Java LTS25, Node LTS24 and npm12 remain approved channels. APT supplies Java/
+Node patch packages at build time. The compatibility SDK stays in .NET10.0.3xx.
+Swift stays within major6 because of its pinned signing key; a new major
+produces PolicyHeld pending key/channel review. Other stable releases may be
+proposed without downgrades. GitHub archive assets need unique SHA-256 digests;
+Go, Maven and .NET use official checksums. PowerShell packages are streamed
+from a fixed Microsoft source and SHA-256 hashed. Versions and complete AMD64/
+ARM64 hash sets move atomically. Syft's build/SBOM default also comes from the
+Dockerfile; explicit local overrides remain supported. Missing evidence blocks
+the entire proposal run and names its group. No insecure fallback is used;
+PolicyHeld records a deliberate channel boundary. Swift patch changes are
+also held until the canonical Level-0 registry is updated through coordinated
+propagation. Go/Rust proposals update their derived learner version rows.
 
-All `ARG` lines in the `Dockerfile` must be visible to Renovate. A metadata
-line must be placed directly above the `ARG`:
+Home Baseline schema2 content pins remain manual: public HTTPS source,
+refType commit, exact 40-character commit and MIT license. Builds verify the
+commit, license and learner guide; local maintainer copies are not sources.
+The embedded Spec Kit release commit also remains manual, with container-patch
+structure/idempotency tests and CLI/install smokes. Neither content pin is an
+ARG group. Fixed archive hashes, Swift assert-signer, rootless runtime, dropped
+capabilities and no-new-privileges remain required. No blanket npm script
+approval is introduced; only existing named OpenCode, Claude Code, keytar and
+node-pty hooks may be finalized, followed by version/native-module checks.
+New channels or install mechanisms require review.
 
-```dockerfile
-# renovate: datasource=<renovate-datasource> depName=<dependency-name> versioning=<versioning> argName=<ARG_NAME>
-ARG <ARG_NAME>=<version>
-```
+Use the Bash wrapper on macOS/Linux and PowerShell7 directly on Windows.
+Commands and the linked manpage above apply to both. Check does not change
+the repository: exit0 means complete discovery, exit1 a blocked source, exit2
+an input/contract error. Prepare requires a clean commit and a new external
+directory. Verify checks source HEAD, bytes and permitted changes offline.
+Preview Apply with --dry-run/-WhatIf; it atomically replaces only the verified
+Dockerfile. These scripts do not install, start containers or publish Git.
 
-When a new `ARG` is added later, it must follow this convention. If the value
-cannot be updated as a simple version, `renovate.json` must receive a dedicated
-rule for that argument. The local pre-commit hook
-`dockerfile-arg-renovate-metadata` checks that every `ARG` has an immediately
-preceding metadata line with a matching `argName`.
+Only reviewed main code may discover/publish. PRs run offline contracts on
+Linux, macOS and Windows. No pull_request_target or host credentials inside
+containers. The read-only discovery job binds a payload to HEAD/SHA-256 and
+requires an isolated native Linux/AMD64 Podman build, toolchain/documentation
+smokes and CycloneDX SBOM before publication. Smokes use no network, dropped
+capabilities and no-new-privileges. Proposal, source binding, image ID, SBOM
+and proof artifacts remain for14days. ARM64 execution is explicitly
+NotPerformed and requires separate evidence.
 
-### Currently Covered ARGs
-
-| ARG | Renovate datasource | Dependency |
-|---|---|---|
-| `JAVA_VERSION` | `java-version` | `java` |
-| `MAVEN_VERSION` | `maven` | `org.apache.maven:apache-maven` |
-| `PYTHON_VERSION` | `python-version` | `python` |
-| `PYTHON_BUILD_DATE` | `github-releases` | `astral-sh/python-build-standalone` |
-| `POWERSHELL_VERSION` | `github-releases` | `PowerShell/PowerShell` |
-| `GO_VERSION` | `golang-version` | `go` |
-| `GOPLS_VERSION` | `go` | `golang.org/x/tools/gopls` |
-| `STATICCHECK_VERSION` | `go` | `honnef.co/go/tools` |
-| `GOVULNCHECK_VERSION` | `go` | `golang.org/x/vuln` |
-| `DELVE_VERSION` | `go` | `github.com/go-delve/delve` |
-| `RUST_TOOLCHAIN` | `rust-version` | `rust` |
-| `RUSTUP_VERSION` | `github-releases` | `rust-lang/rustup` |
-| `SWIFT_DOCKER_TAG` | `docker` | `swift` |
-| `NODE_MAJOR` | `node-version` | `node` |
-| `NPM_VERSION` | `npm` | `npm` |
-| `UV_VERSION` | `github-releases` | `astral-sh/uv` |
-| `OPENCODE_VERSION` | `npm` | `@opencode/cli` |
-| `CODEX_VERSION` | `npm` | `@openai/codex` |
-| `CLAUDE_CODE_VERSION` | `npm` | `@anthropic-ai/claude-code` |
-| `GEMINI_CLI_VERSION` | `npm` | `@google/gemini-cli` |
-| `ANTIGRAVITY_CLI_VERSION` | `github-releases` | `google-antigravity/antigravity-cli` |
-| `COPILOT_CLI_VERSION` | `npm` | `@github/copilot` |
-| `SYFT_VERSION` | `github-releases` | `anchore/syft` |
-| `PANDOC_VERSION` | `github-releases` | `jgm/pandoc` |
-| `LYCHEE_VERSION` | `github-releases` | `lycheeverse/lychee` |
-| `TYPST_VERSION` | `github-releases` | `typst/typst` |
-| `TINYMIST_VERSION` | `github-releases` | `Myriad-Dreamin/tinymist` |
-| `ACTIONLINT_VERSION` | `github-releases` | `rhysd/actionlint` |
-| `DOTNET_COMPAT_SDK_VERSION` | `dotnet-version` | `dotnet-sdk` |
-
-`JAVA_VERSION` deliberately versions the Java major line for the Ubuntu APT
-package `openjdk-${JAVA_VERSION}-jdk-headless`. The concrete Ubuntu patch
-package version is not pinned exactly and must be validated in Renovate PR
-builds.
-
-`POWERSHELL_VERSION` pins stable PowerShell. The build installs the official
-Microsoft package under `/opt/powershell-pinned` after checking the committed
-AMD64/ARM64 SHA-256 hash, then points `/usr/bin/pwsh` to it. The MCR copy stays
-untouched because an in-place update can fail while removing the old package
-under rootless overlay storage. Review package hashes, version ARG and base
-image digest together; the build checks the effective version.
-
-The Swift archive build binds signature verification to the pinned 6.x release
-fingerprint with `gpg --assert-signer`. Review a key change against Swift's
-official active-key list; a valid signature from another imported key is not
-sufficient.
-
-Syft and uv use committed SHA-256 values for the exact AMD64 and ARM64 release
-archives. For a Renovate version change, review both architecture assets and
-their release evidence, then update the Dockerfile digest literals together
-with the version ARG. A mutable companion checksum fetched during the build is
-not the sole integrity anchor. Current references: [Syft 1.55.0](https://github.com/anchore/syft/releases/tag/v1.55.0),
-[uv 0.13.5](https://github.com/astral-sh/uv/releases/tag/0.13.5).
-
-### Embedded Home-Baseline Reference
-
-`home-baseline.lock.json` treats the Level-0 reference as an embedded content
-dependency. Active schema 2 records the public HTTPS source, `refType=commit`,
-the exact 40-character commit, and the MIT license. The former Renovate regex
-manager for tag plus commit did not match this schema and was removed. Updates
-are deliberately manual; automerge remains disabled.
-
-An update requires a deliberately reviewed, publicly reachable commit and a
-fresh rights/content check. `scripts/check-home-baseline-lock.py` validates the
-static lock shape. The image build compares the fetched Git commit with the
-lock before checkout and requires the license file and canonical learner guide.
-A maintainer's local working tree is not an allowed build source.
-
-### Spec Kit Commit Binding
-
-The Dockerfile pins Spec Kit 1.2.3 directly to its release commit. Review this
-pin deliberately; the ARG manager does not update it automatically. The image
-build checks installed package metadata. The `specify-container-patch` local
-hook tests old and new module layouts, idempotency and unknown-layout blocking.
-A version change requires an image build plus CLI and installation smoke tests.
-
-### GitHub Operation Context
-
-This repository only contains the Renovate configuration. For Renovate to
-actually create pull requests, a Renovate bot, suitable CI execution, or an
-external Renovate service must be enabled for GitHub. Until platform setup is
-complete, P3-3 is prepared on the repository side; server-side execution is an
-operations or admin step.
-
-### Validation Before Merge
-
-Every Renovate PR must pass at least these checks:
-
-```bash
-podman-compose config
-podman compose build --pull
-uvx pre-commit run --all-files
-```
-
-For toolchain changes, also run the tool checks from `AGENTS.md`.
+Only then does a separate publisher gain contents/write and pull-requests/write.
+It rechecks immutable payloads, current main and permitted paths, regenerates
+configured statistics outputs and creates a regular PR using short-lived GITHUB_TOKEN.
+No new PAT or external bot is needed. Repository settings must allow Actions
+to create PRs. Token-generated PR workflows may need human **Approve workflows
+to run**; prior build proof does not replace PR checks. Review official releases,
+hashes, channels, installation, native architectures, SBOM and required exact-
+head checks before merge. AMD64 proves neither ARM64 nor product/accessibility
+acceptance. Human review/branch protection remain binding. Inspect first runs
+and artifacts after merge; correct the named source on Blocked. This setup
+does not replace any running container.

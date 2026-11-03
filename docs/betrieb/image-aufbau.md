@@ -5,7 +5,7 @@
 | Thema / Topic | Kanonische Quelle / Canonical source |
 |---|---|
 | Basisimage, Toolversionen, Installation | `Dockerfile` |
-| Renovate-Erkennung | Kommentare direkt vor jedem `ARG` und `renovate.json` |
+| Update-Erkennung / Update discovery | `scripts/config/toolchain-pins.json`, `.github/dependabot.yml` |
 | Codex-Untergrenzen | `codex/config.toml`, `codex/requirements.toml` |
 | OpenCode-Berechtigungen | `opencode.jsonc` |
 | Spec-Kit-Installationspatch | `spec-kit/patch-specify-cli.py` |
@@ -39,12 +39,12 @@ from the base image receives a hash-verified update.
 Project CPython and Apache Maven use separate hash-verified releases.
 Node.js is installed from a signed NodeSource APT repository.
 
-**DE:** Jede `ARG`-Zeile besitzt unmittelbar davor Renovate-Metadaten mit
+**DE:** Jede `ARG`-Zeile besitzt unmittelbar davor `toolchain-pin`-Metadaten mit
 passendem `argName`. Ein Update ist erst nach Build, Toolchecks und Review
 zulässig. `latest` ist keine zulässige Versionsstrategie für die im
 Dockerfile verwalteten Werkzeuge.
 
-**EN:** Every `ARG` line has Renovate metadata with a matching `argName`
+**EN:** Every `ARG` line has `toolchain-pin` metadata with a matching `argName`
 immediately above it. An update is acceptable only after build, tool checks,
 and review. `latest` is not an acceptable version strategy for tools managed
 by the Dockerfile.
@@ -261,12 +261,12 @@ kill or host abort can bypass it.
 
 ## Änderungskontrolle / Change Control
 
-**DE:** Bei Änderungen am Dockerfile mindestens Renovate-Metadaten, Digest-
+**DE:** Bei Änderungen am Dockerfile mindestens Pin-Register, Digest-
 und Checksum-Verträge, beide Architekturen, Build, Toolversionen, Smoke-Test,
 SBOM und Dokumentation prüfen. Ein erfolgreicher Build auf nur einer
 Architektur ist kein vollständiger Multi-Arch-Nachweis.
 
-**EN:** For Dockerfile changes, verify at least Renovate metadata, digest and
+**EN:** For Dockerfile changes, verify at least the pin registry, digest and
 checksum contracts, both architectures, build, tool versions, smoke test,
 SBOM, and documentation. A successful build on one architecture is not full
 multi-architecture evidence.
