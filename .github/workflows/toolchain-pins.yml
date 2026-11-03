@@ -231,7 +231,7 @@ jobs:
           $evidence = $evidenceDirectory+'/'+$env:EXPECTED_GROUP.ToLowerInvariant()+'.json'
           @{schemaVersion=1;proposal=$proposal;proof=$proof;documentationImpact=@(
             @{decision='NoUpdateRequired';scope='Reader guidance; versions remain canonical in Dockerfile';owner='Repository Maintainer';reevaluation='Changed update source, channel, trust boundary or install mechanism'},
-            @{decision='GeneratedUpdate';scope='Statistics outputs and any derived Go/Rust learner version row';owner='Repository Maintainer';source='Committed Dockerfile and Git history';distributionClass='sourceOnly';homeSyncRequired=$false})} |
+            @{decision='GeneratedUpdate';scope='Configured statistics outputs and any derived Go/Rust learner version row';owner='Repository Maintainer';source='Committed Dockerfile and Git history';distributionClass='sourceOnly';homeSyncRequired=$false})} |
             ConvertTo-Json -Depth 24 | Set-Content $evidence -Encoding utf8NoBOM
           git add -- Dockerfile $evidence
           $candidatePaths = @('Dockerfile',$evidence)

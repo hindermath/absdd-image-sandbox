@@ -91,7 +91,7 @@ ausdruecklich NotPerformed und bleibt ein separater Nachweis.
 
 Erst danach erhaelt der getrennte Publisher contents/write und
 pull-requests/write. Er prueft Payload, aktuellen main-HEAD und erlaubte Pfade
-erneut, regeneriert beide Statistik-Ausgaben und erstellt einen regulaeren PR.
+erneut, regeneriert die konfigurierten Statistik-Ausgaben und erstellt einen regulaeren PR.
 Er nutzt das kurzlebige GITHUB_TOKEN, kein neues PAT und keinen externen Bot.
 Actions muss in den Repository-Einstellungen PRs erstellen duerfen. Token-
 erzeugte PR-Workflows koennen **Approve workflows to run** durch einen Menschen
@@ -168,7 +168,7 @@ NotPerformed and requires separate evidence.
 
 Only then does a separate publisher gain contents/write and pull-requests/write.
 It rechecks immutable payloads, current main and permitted paths, regenerates
-both statistics outputs and creates a regular PR using short-lived GITHUB_TOKEN.
+configured statistics outputs and creates a regular PR using short-lived GITHUB_TOKEN.
 No new PAT or external bot is needed. Repository settings must allow Actions
 to create PRs. Token-generated PR workflows may need human **Approve workflows
 to run**; prior build proof does not replace PR checks. Review official releases,

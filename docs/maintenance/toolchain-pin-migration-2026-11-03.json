@@ -21,10 +21,10 @@
     },
     {
       "decision": "GeneratedUpdate",
-      "scope": "Legacy and preset statistics outputs",
+      "scope": "Installed legacy statistics output; preset context rendering remains conditional on an installed context config",
       "canonicalSource": "Committed migration and repository Git history",
       "owner": "Repository Maintainer",
-      "documents": ["docs/project-statistics.md", "docs/project-statistics/report.md", "docs/project-statistics/snapshot.json"],
+      "documents": ["docs/project-statistics.md"],
       "distributionClass": "sourceOnly",
       "homeSyncRequired": false,
       "evidence": "Renderer check-only/status after content and generated commits"
