@@ -309,44 +309,6 @@
       ],
       "installed_at": "2026-10-24T19:50:41.279974+02:00"
     },
-    "model-routing-governance": {
-      "version": "0.1.7",
-      "source": "local",
-      "manifest_hash": "sha256:9e1165e8178d05fef4c989c991ce138ad0a202e1c3f830dc2d8e1b75c0579bbc",
-      "enabled": true,
-      "priority": 61,
-      "registered_commands": {
-        "agy": [
-          "speckit.model-routing-status",
-          "speckit.model-routing-refresh"
-        ],
-        "claude": [
-          "speckit.model-routing-status",
-          "speckit.model-routing-refresh"
-        ],
-        "codex": [
-          "speckit.model-routing-status",
-          "speckit.model-routing-refresh"
-        ],
-        "copilot": [
-          "speckit.model-routing-status",
-          "speckit.model-routing-refresh"
-        ],
-        "opencode": [
-          "speckit.model-routing-status",
-          "speckit.model-routing-refresh"
-        ],
-        "zed": [
-          "speckit.model-routing-status",
-          "speckit.model-routing-refresh"
-        ]
-      },
-      "registered_skills": [
-        "speckit-model-routing-status",
-        "speckit-model-routing-refresh"
-      ],
-      "installed_at": "2026-10-24T19:50:42.509372+02:00"
-    },
     "intake-authoring-governance": {
       "version": "0.3.10",
       "source": "local",
@@ -679,6 +641,44 @@
         "speckit-statistics-update"
       ],
       "installed_at": "2026-10-24T19:50:50.285673+02:00"
+    },
+    "model-routing-governance": {
+      "version": "0.2.3",
+      "source": "local",
+      "manifest_hash": "sha256:2fe75f9246a92dcacc19b8dfac66adc69421cb9623922cf844bc752d4c46646c",
+      "enabled": true,
+      "priority": 61,
+      "registered_commands": {
+        "agy": [
+          "speckit.model-routing-status",
+          "speckit.model-routing-refresh"
+        ],
+        "claude": [
+          "speckit.model-routing-status",
+          "speckit.model-routing-refresh"
+        ],
+        "codex": [
+          "speckit.model-routing-status",
+          "speckit.model-routing-refresh"
+        ],
+        "copilot": [
+          "speckit.model-routing-status",
+          "speckit.model-routing-refresh"
+        ],
+        "opencode": [
+          "speckit.model-routing-status",
+          "speckit.model-routing-refresh"
+        ],
+        "zed": [
+          "speckit.model-routing-status",
+          "speckit.model-routing-refresh"
+        ]
+      },
+      "registered_skills": [
+        "speckit-model-routing-status",
+        "speckit-model-routing-refresh"
+      ],
+      "installed_at": "2026-11-03T21:27:22.502759+00:00"
     }
   }
 }

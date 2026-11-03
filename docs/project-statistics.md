@@ -83,6 +83,8 @@ tracked files; they are an artefact-volume measure, not a quality measure.
 
 | 2026-09-20 | codex/maintenance-closeout-image-pin | N/A | N/A | N/A | UpdateRequired: finalen Wartungskorrektur-Commit 586c142 einschliesslich Consumer-Testgrenze und erzeugter Referenz gepinnt; neun Pin-/Dokumentationstests, Pre-commit, 22 zentrale Delegations- und 23 Wrapper-Tests im finalen Image bestanden. Hashbindung und Schreibschutz geprueft, SBOM mit 28.970 Komponenten erstellt. Aktivierung und abschliessender Flottenlauf folgen nach technischer PR-Abnahme; Details im Sitzungsprotokoll 2026-09-20-1055-maintenance-closeout.md. / Pin final maintenance corrections including consumer discovery, verify image tests and inventory; activation and fleet closeout remain separate evidence. |
 | 2026-10-06 | macOS-15 CI runner migration | — | — | — | CI-Matrizen und gemeinsame Guidance auf macOS 15 umgestellt; Linux-/Windows-Auswahl erhalten, Required-Check-Migration und exakte PR-CI als Liefergates. / Migrated CI labels and guidance; preserved other platforms and required exact-head CI proof. |
+| 2026-11-03 | Model Routing Governance 0.2.1 | N/A | N/A | N/A | UpdateRequired: hashgebundenes Release, ein Preset aktualisiert, andere 13 erhalten; vollständige Resolver-Ressourcen und Root-/Preset-Parität geprüft. Keine Modellaufrufe oder Profilmigration. / Hash-bound release, one preset updated, other 13 preserved; complete runtime closure and root/preset parity verified. No inference or profile migration. [Evidence](maintenance/model-routing-v021-installation.md). |
+| 2026-11-03 | Model Routing Governance 0.2.3 | N/A | N/A | N/A | UpdateRequired: hashgebundenes Release mit strukturiertem Harness-Rückkanal und kanonischem Adapterpfad, ein Preset aktualisiert, andere 13 erhalten; vollständige Resolver-Ressourcen und Root-/Preset-Parität geprüft. Keine Modellaufrufe oder Profilmigration. / Hash-bound release with structured harness result transport and canonical adapter path, one preset updated, other 13 preserved; complete runtime closure and root/preset parity verified. No inference or profile migration. [Evidence](maintenance/model-routing-v023-installation.md). |
 
 ## Gesamtstand des Repositories / Repository Snapshot
 
@@ -318,29 +320,29 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 540795 lines |
-| Textdateien / Text files | 2393 |
+| Textbasis / Text base | 543845 lines |
+| Textdateien / Text files | 2432 |
 | Beobachtbarer Zeitraum / Observable period | 2025-11-09..2026-11-03 |
 | Aktivtage / Active days | 90 |
-| Relevante Commits / Relevant commits | 308 |
-| Zeilen je Aktivtag / Lines per active day | 6008.8 |
+| Relevante Commits / Relevant commits | 311 |
+| Zeilen je Aktivtag / Lines per active day | 6042.7 |
 | Peak-Tag im Fenster / Peak day in window | 2026-10-25 / 101840 |
 | Peak-Woche im Fenster / Peak week in window | 2026-10-25 / 266277 |
 | Laengste Serie / Longest streak | 8 days |
-| Speedup vs. 80 lines/day | 75.1x |
-| Speedup vs. 100 lines/day | 60.1x |
-| Methodik / Methodology | v2; source `375879eea154` |
+| Speedup vs. 80 lines/day | 75.5x |
+| Speedup vs. 100 lines/day | 60.4x |
+| Methodik / Methodology | v2; source `9ad75a4c82af` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [#...................]   0.0% | 97
-Tests                           [#...................]   3.1% | 16599
-Dokumentation / Documentation   [#############.......]  63.1% | 340986
-Skripte / Scripts               [##..................]   7.7% | 41485
-Konfiguration / Configuration   [###.................]  17.3% | 93665
+Tests                           [#...................]   3.1% | 16681
+Dokumentation / Documentation   [#############.......]  63.2% | 343494
+Skripte / Scripts               [##..................]   7.7% | 41916
+Konfiguration / Configuration   [###.................]  17.2% | 93694
 Daten und Medien / Data and media [....................]   0.0% | 0
-Sonstiger Text / Other text     [##..................]   8.9% | 47963
+Sonstiger Text / Other text     [##..................]   8.8% | 47963
 ```
 
 Die Balken teilen die aktuelle getrackte Textbasis in stabile Kategorien. Prozent und Zeilenwert sind die genaue, textorientierte Aussage.
@@ -420,7 +422,7 @@ Wochen / Weeks 01..26 | 2025-11-09..2026-05-09
 Wochen / Weeks 27..52 | 2026-05-10..2026-11-07
  cap 1000000 | . . . . . . . . . . . . . . . . . . . . . . . . . .
       833333 | . . . . . . . . . . . . . . . . . . . . . . . . . .
-      666667 | . . . . . . . . . . . . . . . . . . . . . . . . . .
+      666667 | . . . . . . . . . . . . . . . . . . . . . . . . . #
       500000 | . . . . . . . . . . . . . . . . . . . . . . . . # #
       333333 | . . . . . . . . . . . . . . . . . . . . . . . # # #
       166667 | . . . . . . . . . . . . . # # # # # # # # # # # # #
@@ -457,8 +459,8 @@ Die festen Slots halten den Phasenvergleich auch bei fehlenden oder spaeter erga
 
 ```text
 Scale: 0..100x
-80 lines/day       [###############.....] 75.1x
-100 lines/day      [############........] 60.1x
+80 lines/day       [###############.....] 75.5x
+100 lines/day      [############........] 60.4x
 ```
 
 Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen Referenzen. Sie messen keine Arbeitszeit.
@@ -471,7 +473,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..10000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 100
-Visible repository [############........] 6008.8
+Visible repository [############........] 6042.7
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -497,6 +499,6 @@ DE: Das Fenster beginnt am 2025-11-09 und endet am 2026-11-03. Es enthaelt 90 ak
 | 2026-08 | 96264 |
 | 2026-09 | 61410 |
 | 2026-10 | 325107 |
-| 2026-11 | 20636 |
+| 2026-11 | 24154 |
 
 <!-- project-statistics-v2:end -->

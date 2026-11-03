@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-03",
+  "target": "absdd-image-sandbox",
+  "baseCommit": "5ac59b1fa81b01147f024e65bb62a9083225e5af",
+  "presetId": "model-routing-governance",
+  "previousVersion": "0.1.7",
+  "version": "0.2.1",
+  "priority": 61,
+  "tag": "v0.2.1",
+  "commit": "6cf0c98d80f3f68d73ac8148dbbb4d29fe614f95",
+  "archiveUrl": "https://github.com/hindermath/spec-kit-preset-model-routing-governance/archive/refs/tags/v0.2.1.zip",
+  "archiveSha256": "5e85338327f5c738dfe4c009b7ba8bcdd2ac664f721447d6561bdc1b8c29bbca",
+  "archiveBytes": 97749,
+  "archiveFiles": 49,
+  "archivePayloadMatchesCommit": true,
+  "installedPayloadMatchesRelease": true,
+  "installedPayload": {
+    "fileCount": 49,
+    "contentSha256": "47d952cddff1ddfb6055d6bd893855762654ac482665e5b07d0a0b4d652ff329"
+  },
+  "registrySha256": "1837dab15480f11a4f3a0608010362c0834f80baaf82cf31eb5e7b8a93556276",
+  "otherPresetsPreserved": 13,
+  "autonomousVersion": "0.4.8",
+  "topLevelRuntimeClosureMatchesRelease": true,
+  "modelCalls": false,
+  "privateProfileRefreshOrMigration": false,
+  "imageBuildOrContainerReplacement": false,
+  "scope": "One preset in the four explicitly named repositories; no other fleet targets."
+}
