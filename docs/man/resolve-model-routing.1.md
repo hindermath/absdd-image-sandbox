@@ -20,7 +20,7 @@ ausgewählte lokale Profil nur, wenn Discovery und Validierung genau eine
 bekannte Zuordnung bestätigen. Unbekannte oder mehrdeutige Modelle blockieren.
 Keine Aktion verändert das Repository oder erteilt Delivery-Autorität.
 
-Alle fünf Harnesses haben automatische Pfade im Kandidaten 0.2.0. Claude/Copilot benötigen -SdkModulePath (absoluter vorhandener SDK-Einstieg). OpenCode benötigt -OpenCodeServerUrl (HTTP, 127.0.0.1 oder [::1], kein Pfad/Query/Redirect) und -OpenCodeProvider (verbunden). Siehe ../automatic-discovery.md. Keine automatische Installation oder Serverstarts. Refresh prüft Metadaten; er
+Alle fünf Harnesses haben automatische Pfade im Kandidaten 0.2.0. Claude/Copilot benötigen -SdkModulePath (absoluter vorhandener SDK-Einstieg). OpenCode benötigt -OpenCodeServerUrl (HTTP, 127.0.0.1 oder [::1], kein Pfad/Query/Redirect) und -OpenCodeProvider (verbunden). Siehe [Automatische Erkennung](../../.specify/presets/model-routing-governance/docs/automatic-discovery.md). Keine automatische Installation oder Serverstarts. Refresh prüft Metadaten; er
 führt keinen Modellzugangs-Preflight aus. Der spätere Runner-Preflight kann
 Kontingent verbrauchen und braucht die passende Ausführungsautorität.
 
@@ -31,7 +31,7 @@ a known, unique mapping passes discovery and validation. Unknown or ambiguous
 models fail closed. Neither action changes a repository or grants delivery
 authority.
 
-All five harnesses have automatic paths in candidate 0.2.0. Claude/Copilot require -SdkModulePath (absolute existing SDK entry). OpenCode requires -OpenCodeServerUrl (HTTP loopback origin only) and -OpenCodeProvider (connected). See ../automatic-discovery.EN.md. No automatic installation or server startup.
+All five harnesses have automatic paths in candidate 0.2.0. Claude/Copilot require -SdkModulePath (absolute existing SDK entry). OpenCode requires -OpenCodeServerUrl (HTTP loopback origin only) and -OpenCodeProvider (connected). See [Automatic discovery](../../.specify/presets/model-routing-governance/docs/automatic-discovery.EN.md). No automatic installation or server startup.
 Refresh checks metadata; it does not run a model-access preflight. A later
 runner preflight can consume quota and needs applicable execution authority.
 
