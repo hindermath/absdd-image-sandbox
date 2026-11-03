@@ -34,7 +34,7 @@ jobs:
       - name: Preserve source bytes
         shell: pwsh
         run: git config --global core.autocrlf false
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
@@ -69,7 +69,7 @@ jobs:
       proof_sha256: ${{ steps.proof.outputs.proof_sha256 }}
     steps:
       # Only reviewed default-branch code may receive discovery credentials.
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
         with:
           ref: ${{ github.sha }}
           fetch-depth: 0
@@ -183,7 +183,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
         with:
           ref: ${{ needs.inspect.outputs.base }}
           fetch-depth: 0
