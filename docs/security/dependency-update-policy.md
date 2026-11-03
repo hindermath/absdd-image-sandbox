@@ -177,3 +177,27 @@ head checks before merge. AMD64 proves neither ARM64 nor product/accessibility
 acceptance. Human review/branch protection remain binding. Inspect first runs
 and artifacts after merge; correct the named source on Blocked. This setup
 does not replace any running container.
+
+## Basisimage-Nachweis / Base-image evidence
+
+DE: Dockerfile- und Basisdigest-Aenderungen erhalten im Workflow
+[Base image Podman proof](../../.github/workflows/base-image-proof.yml) einen
+isolierten nativen Linux/AMD64-Build mit Podman, Offline-Smoke-Tests der
+Toolchains und Dokumentationswerkzeuge sowie ein CycloneDX-SBOM. Der Nachweis
+bindet PR-Head, Dockerfile-Hash, Image-ID und SBOM-Hash. Der kurzlebige
+GitHub-Runner darf unbenoetigte vorinstallierte SDKs entfernen, um den vollen
+Build mit mindestens 32 GiB freiem Platz zu starten. Der Job hat nur Leserechte,
+keine Publishing-Credentials und verteilt kein Image. Native ARM64-Ausfuehrung,
+menschliche Freigabe und Flotten-Rollout bleiben getrennte Nachweise.
+Owner: Repository-Maintainer. Neu pruefen bei Basisimage-, Build- oder
+Runner-Aenderungen.
+
+EN: Dockerfile and base-digest changes receive an isolated native Linux/AMD64
+Podman build, offline toolchain/documentation smoke tests and a CycloneDX SBOM
+in [Base image Podman proof](../../.github/workflows/base-image-proof.yml).
+Evidence binds the PR head, Dockerfile hash, image ID and SBOM hash. The
+disposable GitHub runner may remove unused preinstalled SDKs to start the full
+build with at least 32 GiB free space. The job has read-only permissions, no
+publishing credentials and publishes no image. Native ARM64 execution, human
+approval and fleet rollout remain separate evidence boundaries.
+Owner: repository maintainer. Reevaluate after base-image, build or runner changes.
