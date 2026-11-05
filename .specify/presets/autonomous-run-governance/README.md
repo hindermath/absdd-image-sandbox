@@ -1,10 +1,14 @@
 # Autonomous Run Governance
 
-<!-- current-package: 0.4.8 -->
+[Git-Dateiinventar / Git path inventory](docs/git-path-inventory.md)
 
-Paketkennung: **v0.4.8**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.4.8-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
+[Model-Routing-Ausfuehrung / Model-routing execution](docs/model-routing-execution.md)
 
-<span lang="en">Package identity: v0.4.8. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
+<!-- current-package: 0.4.10 -->
+
+Paketkennung: **v0.4.10**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.4.10-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
+
+<span lang="en">Package identity: v0.4.10. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
 
 [Release-Abschluss und Verbesserungsprofil / Publication closeout and improvement profile](docs/release-0.4.6-validation.md).
 
@@ -29,7 +33,24 @@ guide. Behavior and authority boundaries remain unchanged.*
 Permission-bounded, evidence-first governance for one explicitly delegated
 autonomous Spec Kit run.
 
-Version `0.4.8` | Priority `70` | Spec Kit `>=0.8.3`
+Version `0.4.10` | Priority `70` | Spec Kit `>=0.8.3`
+
+Version 0.4.10 prueft Git-Dateiinventare NUL-sicher. Dadurch bleiben auch
+versionierte Pfade mit Zeilenumbruechen oder anderen ungewoehnlichen Zeichen
+Teil der Evidence-Pruefung, statt unbemerkt aus dem Inventar zu fallen.
+
+*Version 0.4.10 parses Git path inventories with NUL delimiters. Tracked paths
+containing newlines or other unusual characters therefore remain part of the
+evidence check instead of silently disappearing from the inventory.*
+
+Version 0.4.9 bindet den normalen Phasenrunner an die rollenbezogene
+Ausfuehrungspolicy aus Model Routing Governance v0.2.4. Lesende Fast-Profile
+behalten ihre Schreibsperre; native agy-Ergebnisse speichert der Host nach
+strikter JSON-Pruefung.
+
+*Version 0.4.9 binds the normal phase runner to the role-aware execution policy
+from Model Routing Governance v0.2.4. Read-only fast profiles retain their write
+boundary; the host persists native agy results after strict JSON validation.*
 
 Version 0.4.8 erhaelt historische Leerzeilen am Dateiende nur mit derselben
 ausdruecklichen Pfad-/Rohhashbindung wie historische Leerzeichen. Im Staged-
@@ -189,7 +210,7 @@ have succeeded.
 1. Preset installieren:
 
    ```bash
-   specify preset add --from https://github.com/hindermath/spec-kit-preset-autonomous-run-governance/archive/refs/tags/v0.4.8.zip --priority 70
+   specify preset add --from https://github.com/hindermath/spec-kit-preset-autonomous-run-governance/archive/refs/tags/v0.4.10.zip --priority 70
    ```
 
 2. Installation pruefen:
@@ -262,7 +283,7 @@ bypass, secret, or provider-administration authority.
 1. Install the preset:
 
    ```bash
-   specify preset add --from https://github.com/hindermath/spec-kit-preset-autonomous-run-governance/archive/refs/tags/v0.4.8.zip --priority 70
+   specify preset add --from https://github.com/hindermath/spec-kit-preset-autonomous-run-governance/archive/refs/tags/v0.4.10.zip --priority 70
    ```
 
 2. Verify the installation:

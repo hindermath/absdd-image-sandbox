@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-05",
+  "target": "absdd-model-routing-v026",
+  "baseCommit": "f8a4cd78bcee9db1ec2303f1313d317cd88f4b4f",
+  "profile": "project-statistics-fourteen-governance-presets",
+  "presets": [
+    {
+      "id": "model-routing-governance",
+      "previousVersion": "0.2.5",
+      "version": "0.2.6",
+      "priority": 61,
+      "tag": "v0.2.6",
+      "commit": "bf4509b364a89d276740470741e3a9d239b3eb72",
+      "archiveUrl": "https://github.com/hindermath/spec-kit-preset-model-routing-governance/archive/refs/tags/v0.2.6.zip",
+      "archiveSha256": "ed2bf38dda728f9b8be4df7e539367b1a3eea56b74402c283587e0fca571f17f",
+      "archiveBytes": 204941,
+      "archiveFiles": 95,
+      "installedContentSha256": "eda1081e1bc1e3cf8ca68193c9c4aee9cf8fd16d6e161ae2b2444c3d10628630"
+    },
+    {
+      "id": "autonomous-run-governance",
+      "previousVersions": [
+        "0.4.7",
+        "0.4.8",
+        "0.4.9"
+      ],
+      "version": "0.4.10",
+      "priority": 70,
+      "tag": "v0.4.10",
+      "commit": "2de46fd1c1342bba195ab0487d82f0d1d4c22602",
+      "archiveUrl": "https://github.com/hindermath/spec-kit-preset-autonomous-run-governance/archive/refs/tags/v0.4.10.zip",
+      "archiveSha256": "1e825c75bcf0c73b4a7c2065096ff4d4c015ba2fc67ca507b40170f0d3884765",
+      "archiveBytes": 168607,
+      "archiveFiles": 80,
+      "installedContentSha256": "2a89c2a7b860e96636b963448c5cf2a20a7b09eb0b50e53bd08cc89f118031ca"
+    }
+  ],
+  "registrySha256": "beac42fc9e092e683dbfa9f3554a1b7d599ce6df5203ced48e2816a6ba72c708",
+  "installedPayloadsMatchReleases": true,
+  "otherPresetsPreserved": 12,
+  "topLevelModelRoutingRuntimeMatchesRelease": true,
+  "targets": [
+    "home-baseline",
+    "Show-CommandTui400",
+    "TinyCalc",
+    "absdd-image-sandbox"
+  ],
+  "modelCalls": false,
+  "privateProfileRefreshOrMigration": false,
+  "apiKeyConfiguration": false,
+  "imageBuildOrContainerReplacement": false,
+  "homeSync": {
+    "required": true,
+    "scope": "manifest-bound Level-0 homeRuntime",
+    "mode": "runtime-only-no-pull-after-central-delivery"
+  },
+  "scope": "Two published presets in four explicitly named repositories; no other fleet targets."
+}
