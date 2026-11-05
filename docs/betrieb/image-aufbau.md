@@ -1,5 +1,19 @@
 # Image-Aufbau / Image Construction
 
+Der Image-Refresh vom 05.11.2026 bindet die Level-0-Quelle
+`9107cff07a73892076c18c6a28a4e396a250f519` mit Model Routing 0.2.6 und
+Autonomous Run 0.4.10. Ein Build verwendet ein separates Image-Tag;
+die Aktivierung im bestehenden Container bleibt ein eigener Schritt.
+Der manuelle Runtime-Wrapper akzeptiert Release-Locks (Schema 1) und
+Commit-Locks (Schema 2). Er wendet beim Image-Build nichts automatisch an.
+Pruefergebnisse: [Refresh-Nachweis](../maintenance/image-refresh-routing-v026.md).
+
+The 2026-11-05 image refresh pins the Level 0 source above with Model Routing
+0.2.6 and Autonomous Run 0.4.10. Build with a separate image tag; activating
+it in the existing container is a separate step. The manual runtime wrapper
+accepts release locks (schema 1) and commit locks (schema 2). Image builds
+never apply the Home Runtime automatically. See the linked validation record.
+
 ## Verbindliche Quellen / Authoritative Sources
 
 | Thema / Topic | Kanonische Quelle / Canonical source |
