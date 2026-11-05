@@ -480,9 +480,9 @@
       "installed_at": "2026-10-24T19:50:46.265009+02:00"
     },
     "autonomous-run-governance": {
-      "version": "0.4.8",
+      "version": "0.4.9",
       "source": "local",
-      "manifest_hash": "sha256:3f52b84de645299244346d5c5f2784e10f30302715561ae3c8c9b46279cab6a7",
+      "manifest_hash": "sha256:00c8714b76572a5a67e1db46dc9755d9094cdd2376046b5b5df5417acf872327",
       "enabled": true,
       "priority": 70,
       "registered_commands": {
@@ -536,7 +536,7 @@
         "speckit-autonomous-stop",
         "speckit-autonomous-resume"
       ],
-      "installed_at": "2026-10-30T15:51:12Z"
+      "installed_at": "2026-11-05T11:02:24.527359+00:00"
     },
     "parallel-autonomous-run-governance": {
       "version": "0.2.9",
@@ -643,9 +643,9 @@
       "installed_at": "2026-10-24T19:50:50.285673+02:00"
     },
     "model-routing-governance": {
-      "version": "0.2.3",
+      "version": "0.2.5",
       "source": "local",
-      "manifest_hash": "sha256:2fe75f9246a92dcacc19b8dfac66adc69421cb9623922cf844bc752d4c46646c",
+      "manifest_hash": "sha256:08dfe8be0ed1864d90810369010c1a76ae01819b7c633e459c74001a1f204c53",
       "enabled": true,
       "priority": 61,
       "registered_commands": {
@@ -678,7 +678,7 @@
         "speckit-model-routing-status",
         "speckit-model-routing-refresh"
       ],
-      "installed_at": "2026-11-03T21:27:22.502759+00:00"
+      "installed_at": "2026-11-05T11:02:18.903084+00:00"
     }
   }
 }

@@ -33,7 +33,7 @@ Workspace-Familie ist:
 | `autonomous-run-governance` | Autonomous Run Governance | `v0.4.4` | `70` |
 | `parallel-autonomous-run-governance` | Parallel Autonomous Run Governance | `v0.2.6` | `80` |
 
-Optional koennen `model-routing-governance` v0.2.1 mit Prioritaet `61`,
+Optional koennen `model-routing-governance` v0.2.5 mit Prioritaet `61`,
 `intake-authoring-governance` v0.3.10 mit Prioritaet `64`,
 `intake-review-governance` v0.2.7 mit Prioritaet `65` und
 `intake-sequencing-governance` v0.2.11 mit Prioritaet `66` zwischen Agent Parity
@@ -188,7 +188,7 @@ zero-write values. A partial proof is not a full regression pass.
 | `autonomous-run-governance` | Autonomous Run Governance | `v0.4.4` | `70` |
 | `parallel-autonomous-run-governance` | Parallel Autonomous Run Governance | `v0.2.6` | `80` |
 
-Optionally install `model-routing-governance` v0.2.1 at priority `61`,
+Optionally install `model-routing-governance` v0.2.5 at priority `61`,
 `intake-authoring-governance` v0.3.10 at priority `64`,
 `intake-review-governance` v0.2.7 at priority `65`, and
 `intake-sequencing-governance` v0.2.11 at priority `66` between Agent Parity and
@@ -269,7 +269,7 @@ preflight before any worker starts. `requireAutonomousPreset: false` is valid
 only for isolated internal fixtures and is not a production mode.
 
 The original six presets have been in the `github/spec-kit` community catalog
-since 2026-05-04, and `autonomous-run-governance` v0.4.7 was verified there on
+since 2026-05-04, and `autonomous-run-governance` v0.4.9 was verified there on
 2026-07-17. Registered level-0, level-1, and level-2 repositories default to
 all eight presets unless a justified exception is documented. After install or
 update, verify with `install-spec-kit-governance-presets.* --check-only` /
