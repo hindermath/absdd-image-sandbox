@@ -84,6 +84,10 @@ function New-AdeSandboxSbom {
     $architectureArguments.ImageName = $TargetImage
     $null = & "$PSScriptRoot/check-container-architecture.ps1" @architectureArguments
     $imageIdOutput = @(& $runtimeCommand.Source @('image', 'inspect', '--format', '{{.Id}}', $TargetImage))
+    # Podman may omit the algorithm prefix for an otherwise complete digest.
+    if ($imageIdOutput.Count -eq 1 -and $imageIdOutput[0] -match '^[0-9a-fA-F]{64}$') {
+        $imageIdOutput = @("sha256:$($imageIdOutput[0])")
+    }
     if ($LASTEXITCODE -ne 0 -or $imageIdOutput.Count -ne 1 -or $imageIdOutput[0] -notmatch '^sha256:[0-9a-fA-F]{64}$') {
         throw "Podman did not return one immutable SHA-256 image ID for $TargetImage."
     }

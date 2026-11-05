@@ -135,7 +135,7 @@ erweitern.
 | Spec Kit | `specify-cli` `v0.8.3` aus `github.com/github/spec-kit.git` |
 | Syft | `anchore/syft` `1.46.0`, SHA256-Pruefung im Image-Build |
 | uv / uvx | `0.11.16` aus GitHub-Release-Artefakt, SHA256-Pruefung im Image-Build |
-| home-baseline Level-0-Quelle | Commit-Pin (kein Release-Tag) `932a5eac8f853e916f03aa16b5b8591f76a27d9f`, MIT; Schema 2 in `home-baseline.lock.json`; Aktivierungsnachweis fuer diesen Pin noch ausstehend |
+| home-baseline Level-0-Quelle | Commit-Pin (kein Release-Tag) `9107cff07a73892076c18c6a28a4e396a250f519`, MIT; Schema 2 in `home-baseline.lock.json`; separater Image-Refresh beauftragt, Aktivierungsnachweis noch ausstehend |
 
 Am 20.09.2026 genehmigte der Owner ausdruecklich das Sandbox-Image-Update
 als Erweiterung des Wartungsauftrags. Es aktualisiert die eingebettete

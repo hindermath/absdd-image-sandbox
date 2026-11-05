@@ -124,6 +124,10 @@ fi
 bash "${script_dir}/check-container-architecture.sh" --platform "$PLATFORM" \
   ${architecture_args[@]+"${architecture_args[@]}"} --image "$IMAGE_NAME" >/dev/null
 image_id="$("${runtime}" image inspect --format '{{.Id}}' "$IMAGE_NAME")"
+# Podman versions may return the same digest with or without its algorithm.
+if [[ "$image_id" =~ ^[[:xdigit:]]{64}$ ]]; then
+  image_id="sha256:${image_id}"
+fi
 if [[ ! "$image_id" =~ ^sha256:[[:xdigit:]]{64}$ ]]; then
   echo "Podman did not return one immutable SHA-256 image ID for ${IMAGE_NAME}." >&2
   exit 1

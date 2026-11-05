@@ -51,7 +51,8 @@ case "${resolved_source}" in
 	;;
 esac
 
-jq -e '.schemaVersion == 1 and (.commit | test("^[0-9a-f]{40}$"))' \
+# Both published release locks and exact-commit locks are valid image inputs.
+jq -e '(.schemaVersion == 1 or (.schemaVersion == 2 and .refType == "commit")) and (.commit | type == "string" and test("^[0-9a-f]{40}$"))' \
 	"${lock_file}" >/dev/null
 
 sync_args=(--runtime-only)
