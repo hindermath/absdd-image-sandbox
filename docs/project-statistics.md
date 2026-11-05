@@ -311,6 +311,19 @@ negative cases. Read-only upstream discovery is Ready; Swift remains held
 pending coordinated Level-0 registry maintenance. This setup performs no
 package upgrade or running-container switch.
 
+## Image-Refresh vom 05.11.2026 / Image refresh
+
+Der separate ARM64-Kandidat enthaelt Model Routing 0.2.6 und Autonomous Run
+0.4.10. Build, SBOM, isolierter Runtime-Sync, 48 Routing-Assertions und der
+vollstaendige Toolchain-Smoke sind erfolgreich; der bestehende Container wurde
+nicht ersetzt. Nachweis: [Image-Refresh](maintenance/image-refresh-routing-v026.md).
+Documentation Impact: `GeneratedUpdate` fuer den folgenden Statistikblock;
+kanonische Quelle sind die Git-Historie und `docs/project-statistics.config.json`.
+
+The separate ARM64 candidate passed build, SBOM generation, isolated runtime
+sync, routing assertions and full toolchain smoke. The existing container is
+preserved. Git history and the statistics configuration generate the block below.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
