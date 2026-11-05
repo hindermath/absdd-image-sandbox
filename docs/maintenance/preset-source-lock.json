@@ -60,11 +60,11 @@
     },
     {
       "id": "model-routing-governance",
-      "tag": "v0.2.5",
-      "commit": "2af10967ef58f5f59f4141edf77489644c994b38",
+      "tag": "v0.2.6",
+      "commit": "bf4509b364a89d276740470741e3a9d239b3eb72",
       "repository": "https://github.com/hindermath/spec-kit-preset-model-routing-governance",
-      "archiveUrl": "https://github.com/hindermath/spec-kit-preset-model-routing-governance/archive/refs/tags/v0.2.5.zip",
-      "archiveSha256": "e1e864d5554fe1df5382e928bb6e0b8b1b07416cf4b59a4de7e38822d0a42293"
+      "archiveUrl": "https://github.com/hindermath/spec-kit-preset-model-routing-governance/archive/refs/tags/v0.2.6.zip",
+      "archiveSha256": "ed2bf38dda728f9b8be4df7e539367b1a3eea56b74402c283587e0fca571f17f"
     },
     {
       "id": "intake-authoring-governance",
@@ -92,11 +92,11 @@
     },
     {
       "id": "autonomous-run-governance",
-      "tag": "v0.4.9",
-      "commit": "7d3fb918378a2eb75fed7b149e1dd8db9f25812f",
+      "tag": "v0.4.10",
+      "commit": "2de46fd1c1342bba195ab0487d82f0d1d4c22602",
       "repository": "https://github.com/hindermath/spec-kit-preset-autonomous-run-governance",
-      "archiveUrl": "https://github.com/hindermath/spec-kit-preset-autonomous-run-governance/archive/refs/tags/v0.4.9.zip",
-      "archiveSha256": "062fa5e9f5276a7044812197896aa69e28ba01880c6ff4f4cad1d85388e5530f"
+      "archiveUrl": "https://github.com/hindermath/spec-kit-preset-autonomous-run-governance/archive/refs/tags/v0.4.10.zip",
+      "archiveSha256": "1e825c75bcf0c73b4a7c2065096ff4d4c015ba2fc67ca507b40170f0d3884765"
     },
     {
       "id": "parallel-autonomous-run-governance",

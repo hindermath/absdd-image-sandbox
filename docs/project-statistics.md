@@ -85,7 +85,7 @@ tracked files; they are an artefact-volume measure, not a quality measure.
 | 2026-10-06 | macOS-15 CI runner migration | — | — | — | CI-Matrizen und gemeinsame Guidance auf macOS 15 umgestellt; Linux-/Windows-Auswahl erhalten, Required-Check-Migration und exakte PR-CI als Liefergates. / Migrated CI labels and guidance; preserved other platforms and required exact-head CI proof. |
 | 2026-11-03 | Model Routing Governance 0.2.1 | N/A | N/A | N/A | UpdateRequired: hashgebundenes Release, ein Preset aktualisiert, andere 13 erhalten; vollständige Resolver-Ressourcen und Root-/Preset-Parität geprüft. Keine Modellaufrufe oder Profilmigration. / Hash-bound release, one preset updated, other 13 preserved; complete runtime closure and root/preset parity verified. No inference or profile migration. [Evidence](maintenance/model-routing-v021-installation.md). |
 | 2026-11-03 | Model Routing Governance 0.2.3 | N/A | N/A | N/A | UpdateRequired: hashgebundenes Release mit strukturiertem Harness-Rückkanal und kanonischem Adapterpfad, ein Preset aktualisiert, andere 13 erhalten; vollständige Resolver-Ressourcen und Root-/Preset-Parität geprüft. Keine Modellaufrufe oder Profilmigration. / Hash-bound release with structured harness result transport and canonical adapter path, one preset updated, other 13 preserved; complete runtime closure and root/preset parity verified. No inference or profile migration. [Evidence](maintenance/model-routing-v023-installation.md). |
-| 2026-11-05 | Model Routing 0.2.5 und Autonomous Run 0.4.9 | N/A | N/A | N/A | UpdateRequired: zwei hashgebundene Presets installiert, andere zwölf erhalten; Matrix, Payloads und lokale Verträge grün. Keine Modellaufrufe oder Profilmigration. / Two hash-bound presets installed, other twelve preserved; matrix, payload and local contracts passed. No model calls or profile migration. [Evidence](maintenance/model-routing-v025-installation.md). |
+| 2026-11-05 | Model Routing 0.2.6 und Autonomous Run 0.4.10 | N/A | N/A | N/A | UpdateRequired: zwei hashgebundene Presets installiert, andere zwölf erhalten; Matrix, Payloads und lokale Verträge grün. Keine Modellaufrufe oder Profilmigration. / Two hash-bound presets installed, other twelve preserved; matrix, payload and local contracts passed. No model calls or profile migration. [Evidence](maintenance/model-routing-v026-installation.md). |
 
 ## Gesamtstand des Repositories / Repository Snapshot
 
@@ -321,25 +321,25 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 548378 lines |
-| Textdateien / Text files | 2477 |
+| Textbasis / Text base | 548789 lines |
+| Textdateien / Text files | 2485 |
 | Beobachtbarer Zeitraum / Observable period | 2025-11-09..2026-11-05 |
 | Aktivtage / Active days | 91 |
-| Relevante Commits / Relevant commits | 313 |
-| Zeilen je Aktivtag / Lines per active day | 6026.1 |
+| Relevante Commits / Relevant commits | 314 |
+| Zeilen je Aktivtag / Lines per active day | 6030.6 |
 | Peak-Tag im Fenster / Peak day in window | 2026-10-25 / 101840 |
 | Peak-Woche im Fenster / Peak week in window | 2026-10-25 / 266277 |
 | Laengste Serie / Longest streak | 8 days |
-| Speedup vs. 80 lines/day | 75.3x |
+| Speedup vs. 80 lines/day | 75.4x |
 | Speedup vs. 100 lines/day | 60.3x |
-| Methodik / Methodology | v2; source `99f276a1c770` |
+| Methodik / Methodology | v2; source `871974b800df` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [#...................]   0.0% | 97
 Tests                           [#...................]   3.0% | 16681
-Dokumentation / Documentation   [#############.......]  63.4% | 347817
+Dokumentation / Documentation   [#############.......]  63.5% | 348228
 Skripte / Scripts               [##..................]   7.7% | 42126
 Konfiguration / Configuration   [###.................]  17.1% | 93694
 Daten und Medien / Data and media [....................]   0.0% | 0
@@ -460,7 +460,7 @@ Die festen Slots halten den Phasenvergleich auch bei fehlenden oder spaeter erga
 
 ```text
 Scale: 0..100x
-80 lines/day       [###############.....] 75.3x
+80 lines/day       [###############.....] 75.4x
 100 lines/day      [############........] 60.3x
 ```
 
@@ -474,7 +474,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..10000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 100
-Visible repository [############........] 6026.1
+Visible repository [############........] 6030.6
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -500,6 +500,6 @@ DE: Das Fenster beginnt am 2025-11-09 und endet am 2026-11-05. Es enthaelt 91 ak
 | 2026-08 | 96264 |
 | 2026-09 | 61410 |
 | 2026-10 | 325107 |
-| 2026-11 | 29241 |
+| 2026-11 | 30046 |
 
 <!-- project-statistics-v2:end -->

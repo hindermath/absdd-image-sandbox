@@ -1,8 +1,8 @@
 # Agentische Podman-Sandbox / Agentic Podman Sandbox
 
-Model Routing Governance **0.2.5** und Autonomous Run Governance **0.4.9**:
+Model Routing Governance **0.2.6** und Autonomous Run Governance **0.4.10**:
 Diese Lieferung aktualisiert die lokale Preset-Integration und den geprüften
-normalen Ausführungspfad. [Nachweis und Grenzen](docs/maintenance/model-routing-v025-installation.md).
+normalen Ausführungspfad. [Nachweis und Grenzen](docs/maintenance/model-routing-v026-installation.md).
 
 **DE:** [Lizenz und Herkunft](docs/licensing.md): MIT für nachweislich eigene
 Inhalte, fremde Rechte bleiben erhalten. Der Standardbezug bleibt Fork oder

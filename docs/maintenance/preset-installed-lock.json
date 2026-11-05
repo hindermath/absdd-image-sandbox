@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "hashContract": "sha256-utf8-lf-bom-or-raw-v1",
   "baselineCommit": "f8a4cd78bcee9db1ec2303f1313d317cd88f4b4f",
-  "registrySha256": "ea05aafc0eccb3b9c717f960aca4adda3e02600952fb0f9ffa9c99984c48192b",
+  "registrySha256": "beac42fc9e092e683dbfa9f3554a1b7d599ce6df5203ced48e2816a6ba72c708",
   "presets": [
     {
       "id": "a11y-governance",
@@ -33,12 +33,12 @@
     },
     {
       "id": "autonomous-run-governance",
-      "version": "0.4.9",
+      "version": "0.4.10",
       "priority": 70,
       "enabled": true,
-      "manifest_hash": "sha256:00c8714b76572a5a67e1db46dc9755d9094cdd2376046b5b5df5417acf872327",
-      "fileCount": 77,
-      "contentSha256": "3cd195b512983e7778f0d23cb11f2d4bf0011d148bbbf6c57eb34004c1724eb7"
+      "manifest_hash": "sha256:6f9fdbfe309fbed551b7b72c5a2098ffd80797da2c3e64e077d4d3e752ddf97b",
+      "fileCount":  80,
+      "contentSha256": "2a89c2a7b860e96636b963448c5cf2a20a7b09eb0b50e53bd08cc89f118031ca"
     },
     {
       "id": "cross-platform-governance",
@@ -87,12 +87,12 @@
     },
     {
       "id": "model-routing-governance",
-      "version": "0.2.5",
+      "version": "0.2.6",
       "priority": 61,
       "enabled": true,
-      "manifest_hash": "sha256:08dfe8be0ed1864d90810369010c1a76ae01819b7c633e459c74001a1f204c53",
-      "fileCount": 91,
-      "contentSha256": "bd815e009d80a2ed00de6ad6f38e01d88e64544e9e3e00fbccadd708f73cbf64"
+      "manifest_hash": "sha256:9a2d7db1f148dbf58b3405a164cee07ae89cc6834cdc056b1be27d2ab1d85e07",
+      "fileCount":  95,
+      "contentSha256": "eda1081e1bc1e3cf8ca68193c9c4aee9cf8fd16d6e161ae2b2444c3d10628630"
     },
     {
       "id": "parallel-autonomous-run-governance",
