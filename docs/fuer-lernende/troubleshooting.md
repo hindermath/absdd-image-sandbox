@@ -116,7 +116,7 @@ Podman machine; keep the Windows-host and Ubuntu/WSL2 execution paths distinct.
 - **Symptom:** Beim Start erscheint `address already in use` oder `bind:
   address already in use` für einen Port zwischen 5100 und 5199.
 - **Ursache:** Ein anderes Programm belegt bereits den Port. Der Container
-  veröffentlicht `127.0.0.1:5100-5199` für Web-App-Tests.
+  veröffentlicht `127.0.0.1:5100-5198` für Apps und `5199` für OpenCode.
 - **Lösung:** Beim Containerstart wird die gesamte Spanne gebunden. Ein anderer
   Port deiner Test-App löst diesen Compose-Konflikt daher nicht. Lass den
   belegenden Prozess mit der Lernbegleitung identifizieren. Beende nur ein
@@ -125,14 +125,14 @@ Podman machine; keep the Windows-host and Ubuntu/WSL2 execution paths distinct.
   lokale Portkonfiguration mit der Lernbegleitung klären, Loopback-Bindung
   erhalten. Die gemeinsame `compose.yml` nicht ungefragt ändern.
   Nur bei einem App-internen Konflikt im bereits laufenden Container kann ein
-  anderer freier App-Port innerhalb 5100–5199 helfen.
+  anderer freier App-Port innerhalb 5100–5198 helfen.
 
 **EN:**
 
 - **Symptom:** On start you see `address already in use` or `bind: address
   already in use` for a port between 5100 and 5199.
 - **Cause:** Another program already uses the port. The container publishes
-  `127.0.0.1:5100-5199` for web app tests.
+  `127.0.0.1:5100-5198` for apps and `5199` for OpenCode.
 - **Solution:** Container startup binds the entire range; choosing another
   app port cannot fix this Compose conflict. Ask your instructor to identify
   the occupying process. Stop only your own program whose shutdown you can
@@ -140,7 +140,7 @@ Podman machine; keep the Windows-host and Ubuntu/WSL2 execution paths distinct.
   service; arrange separately reviewed local port configuration, preserving
   loopback binding. Do not change shared compose.yml without authority.
   Only an app-internal conflict in an already running container may be solved
-  by another free app port within 5100–5199.
+  by another free app port within 5100–5198.
 
 ---
 

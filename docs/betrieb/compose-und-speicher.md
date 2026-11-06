@@ -14,14 +14,14 @@ learning environment deliberately uses the Compose default bridge with free
 outbound network access. This is a documented risk decision, not a technical
 allow-list.
 
-**DE:** Eingehend veröffentlicht Compose nur `127.0.0.1:5100-5199`. Eine
-Webanwendung bindet im Container an `0.0.0.0` und verwendet einen Port aus
-diesem Bereich. Andere Ports sind nicht Teil des öffentlichen Vertrags.
+**DE:** Eingehend veröffentlicht Compose nur `127.0.0.1:5100-5199`.
+Port `5199` gehört dem passwortgeschützten OpenCode-Server; eigene Web-Apps
+verwenden `5100-5198` und binden im Container an `0.0.0.0`.
 
 **EN:** For inbound access, Compose publishes only
-`127.0.0.1:5100-5199`. A web application binds to `0.0.0.0` inside the
-container and uses a port from that range. Other ports are not part of the
-public contract.
+`127.0.0.1:5100-5199`. Port `5199` is reserved for the password-protected
+OpenCode server. Other web apps bind to `0.0.0.0` inside the container and use
+`5100-5198`.
 
 ## Bind-Mounts / Bind Mounts
 
@@ -95,14 +95,23 @@ to `/opt/home-baseline`.
 
 ## Umgebungsvariablen und Secrets / Environment Variables and Secrets
 
-**DE:** `opencode.env` ist ungetrackt und darf leer bleiben. Es ist nur für
-eine bewusst lokal konfigurierte OpenCode-Provider-Variable vorgesehen.
+**DE:** `opencode.env` ist ungetrackt. Vor dem Webstart muss es ein privates
+`OPENCODE_PASSWORD` mit mindestens 16 Zeichen enthalten; leere Werte und
+bekannte Platzhalter werden abgewiesen. Oeffne danach am Host
+`http://127.0.0.1:5199` und melde dich mit Benutzer `opencode` an. Fehlende
+Passwoerter verursachen bei `restart: unless-stopped` wiederholte Startfehler;
+Portkonflikte erfordern einen freien Host-Port oder das Stoppen des anderen
+Stacks. Provider-Variablen bleiben optional.
 Normale Agentenanmeldungen verwenden die offiziellen interaktiven Flows und
 die benannten Volumes. Echte Secrets werden weder ausgegeben noch in
 Dokumentation, Audit-JSONL oder Screenshots übernommen.
 
-**EN:** `opencode.env` is untracked and may remain empty. It is intended only
-for a deliberately local OpenCode provider variable. Normal agent sign-ins use
+**EN:** `opencode.env` is untracked. Before starting the web service, set a
+private `OPENCODE_PASSWORD` of at least 16 characters; empty and known
+placeholder values fail. Open `http://127.0.0.1:5199` on the host and sign in
+as `opencode`. A missing password can cause repeated starts under
+`restart: unless-stopped`; resolve a port conflict by freeing the host port
+or stopping the other stack. Provider variables remain optional. Agent sign-ins use
 official interactive flows and named volumes. Real secrets are never printed
 or copied into documentation, audit JSONL, or screenshots.
 

@@ -439,6 +439,11 @@ COPY ./scripts/install-home-baseline-reference.sh /usr/local/bin/install-home-ba
 COPY ./scripts/sync-home-baseline-runtime.sh /usr/local/bin/sync-home-baseline-runtime
 COPY ./scripts/agent-prompt.sh /usr/local/bin/agent-prompt
 COPY ./scripts/agent-prompt.ps1 /usr/local/bin/agent-prompt.ps1
+COPY ./scripts/opencode-web.sh /usr/local/bin/opencode-web
+COPY ./scripts/opencode-tui.sh /usr/local/bin/opencode-tui
+COPY ./scripts/opencode-tui-mini.sh /usr/local/bin/opencode-tui-mini
+COPY ./scripts/healthcheck-opencode-web.py /usr/local/bin/healthcheck-opencode-web
+COPY ./scripts/test-opencode-local-web.py /usr/local/bin/test-opencode-local-web
 COPY ./home-baseline.lock.json /usr/local/share/absdd-image-sandbox/home-baseline.lock.json
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
@@ -458,9 +463,11 @@ RUN set -eux; \
 RUN sed -i 's/\r$//' /usr/local/bin/audit-export /usr/local/bin/audit-retention /usr/local/bin/ade-entrypoint \
         /usr/local/bin/install-home-baseline-reference /usr/local/bin/sync-home-baseline-runtime \
         /usr/local/bin/agent-prompt /usr/local/bin/agent-prompt.ps1 \
+        /usr/local/bin/opencode-web /usr/local/bin/opencode-tui /usr/local/bin/opencode-tui-mini /usr/local/bin/healthcheck-opencode-web /usr/local/bin/test-opencode-local-web \
     && chmod 0755 /usr/local/bin/audit-export /usr/local/bin/audit-retention /usr/local/bin/ade-entrypoint \
         /usr/local/bin/install-home-baseline-reference /usr/local/bin/sync-home-baseline-runtime \
         /usr/local/bin/agent-prompt /usr/local/bin/agent-prompt.ps1 \
+        /usr/local/bin/opencode-web /usr/local/bin/opencode-tui /usr/local/bin/opencode-tui-mini /usr/local/bin/healthcheck-opencode-web /usr/local/bin/test-opencode-local-web \
     && install-home-baseline-reference \
         /usr/local/share/absdd-image-sandbox/home-baseline.lock.json \
         /opt/home-baseline \
@@ -502,4 +509,5 @@ RUN set -eux; \
 USER adedev
 
 ENTRYPOINT ["/usr/local/bin/ade-entrypoint"]
-CMD ["/bin/bash", "-c", "while :; do sleep 1; done;"]
+HEALTHCHECK --interval=10s --timeout=50s --start-period=45s --retries=3 CMD ["/usr/local/bin/healthcheck-opencode-web"]
+CMD ["/usr/local/bin/opencode-web"]

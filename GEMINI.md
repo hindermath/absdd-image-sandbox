@@ -387,7 +387,7 @@ the skipped check and the reason in the pull request text or in the agent
 session log.
 
 For documented web-app examples, bind the app to `0.0.0.0` inside the container
-and use a port from the published `5100-5199` range. During practical checks,
+and use a port from the published app range `5100-5198`. During practical checks,
 verify that the app responds over HTTP and stop any background test process
 before ending the session.
 
@@ -407,7 +407,7 @@ For PowerShell projects, use `/powershell-projects` unless a project-specific mo
 
 For Swift projects, use `/swift-projects` unless a project-specific mount is configured. Keep dependencies in `Package.swift`, run `swift build`, `swift test`, and `swift run` for executable smoke checks. The image includes SourceKit-LSP for editors that attach through VS Code Dev Containers or another LSP-capable client.
 
-ASP.NET apps must bind to `0.0.0.0` inside the container to be reachable from Windows. Compose publishes `127.0.0.1:5100-5199:5100-5199`; keep sample web app ports in that range unless the Compose file is updated.
+ASP.NET apps must bind to `0.0.0.0` inside the container to be reachable from Windows. Compose publishes `127.0.0.1:5100-5198:5100-5198` for apps; port 5199 is reserved for OpenCode.
 
 The Compose environment disables general .NET workload update notifications with `DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE=true` and disables the MSBuild workload resolver with `MSBuildEnableWorkloadResolver=false`. Install real workloads explicitly in the Dockerfile and re-enable the resolver if a project requires MAUI, WebAssembly, or another optional SDK workload.
 

@@ -94,9 +94,9 @@ sign-in. Keep the public GitHub URL as provenance, not as the only clone path.
 
 ## Project Structure & Module Organization
 
-This repository contains a Podman-based agentic learning sandbox with OpenCode, four required agent CLIs, six required memory-safe language toolchains (.NET/C#, Java, Go, Rust, Python, and Swift), PowerShell 7 as a second scripting foundation, Node.js/npm as supporting tooling, Syft, and Spec Kit; it is not an application codebase.
+This repository contains a Podman-based agentic learning sandbox with OpenCode, four required agent CLIs, and six required memory-safe language toolchains (.NET/C#, Java, Go, Rust, Python, and Swift) in the default `all` image. The five focused profiles install only their selected language toolchain plus .NET/C#. PowerShell 7 as a second scripting foundation, Node.js/npm as supporting tooling, Syft, and Spec Kit are shared; this is not an application codebase.
 
-- `Dockerfile`: builds from the Microsoft .NET SDK image in MCR pinned by digest and provides the six required language toolchains (.NET/C#, Java, Go, Rust, Python, and Swift), a version-checked PowerShell 7 from the base image as a second scripting foundation, Node.js/npm as supporting tooling, pinned OpenCode, Codex, Claude Code, Antigravity CLI, GitHub Copilot CLI, Syft, `uv`, Spec Kit, and common CLI helper tools.
+- `Dockerfile`: builds from the Microsoft .NET SDK image in MCR pinned by digest; `ADE_MSL_PROFILE` selects `dotnet`, `java`, `go`, `rust`, `python`, `swift`, or the full default `all`. It also provides version-checked PowerShell 7, Node.js/npm, pinned agent CLIs, Syft, `uv`, Spec Kit, and common tools.
 - `compose.yml`: defines the `ade` service, builds the local image, and mounts separate persistent state volumes for OpenCode and all four required agents.
 - `home-baseline.lock.json`: pins the public `home-baseline` release and exact commit embedded as a read-only shallow Git reference under `/opt/home-baseline`.
 - `scripts/sync-home-baseline-runtime.sh`: installs the explicit three-mode wrapper that previews, checks, or applies manifest-defined Home Runtime content without Git side effects.
@@ -104,7 +104,7 @@ This repository contains a Podman-based agentic learning sandbox with OpenCode, 
 - The container runs commands as the Linux user `adedev`; keep home-directory paths under `/home/adedev`.
 - `opencode.jsonc`: configures OpenCode safety defaults without an API key or preselected model. Keep comments useful for first-year IT specialist apprentices.
 - Agent state is isolated in `codex_data`, `claude_data`, `gemini_data`, and `copilot_data`; do not replace these with bind mounts to committed directories.
-- `opencode.env.example`: documents that no OpenCode provider environment variable is required by this image.
+- `opencode.env.example`: documents the local web password; no OpenCode provider variable is required by the image.
 - `workspace/`: mounted into the container as `/workspace`; place working project files there.
 - `ADE_DEV_SANDBOX_DIR`: host checkout of this repository mounted into the container as `/ade-dev-sandbox` for controlled repository maintenance tasks from inside the container.
 - `HOME_BASELINE_DIR`: optional persistent host checkout of the learner's personal `home-baseline-source` fork, used only with `compose.home-baseline.yml` and mounted over `/opt/home-baseline`; `/home/adedev/home-baseline-source` is canonical and `/home/adedev/home-baseline-tmp` is transitional.
@@ -387,7 +387,7 @@ the skipped check and the reason in the pull request text or in the agent
 session log.
 
 For documented web-app examples, bind the app to `0.0.0.0` inside the container
-and use a port from the published `5100-5199` range. During practical checks,
+and use a port from the published `5100-5198` app range; `5199` belongs to OpenCode. During practical checks,
 verify that the app responds over HTTP and stop any background test process
 before ending the session.
 
@@ -407,13 +407,13 @@ For PowerShell projects, use `/powershell-projects` unless a project-specific mo
 
 For Swift projects, use `/swift-projects` unless a project-specific mount is configured. Keep dependencies in `Package.swift`, run `swift build`, `swift test`, and `swift run` for executable smoke checks. The image includes SourceKit-LSP for editors that attach through VS Code Dev Containers or another LSP-capable client.
 
-ASP.NET apps must bind to `0.0.0.0` inside the container to be reachable from Windows. Compose publishes `127.0.0.1:5100-5199:5100-5199`; keep sample web app ports in that range unless the Compose file is updated.
+ASP.NET apps must bind to `0.0.0.0` inside the container to be reachable from Windows. Compose publishes app ports `127.0.0.1:5100-5198:5100-5198` and reserves `127.0.0.1:5199:5199` for OpenCode.
 
 The Compose environment disables general .NET workload update notifications with `DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE=true` and disables the MSBuild workload resolver with `MSBuildEnableWorkloadResolver=false`. Install real workloads explicitly in the Dockerfile and re-enable the resolver if a project requires MAUI, WebAssembly, or another optional SDK workload.
 
 The `dotnet` wrapper must only filter the exact workload verification message. Do not broaden the filter, because normal warnings and build errors must stay visible.
 
-Spec Kit is installed from the exact release commit pinned in `Dockerfile`; the build verifies its package version. Keep the commit and version check synchronized when upgrading. See `docs/maintenance/toolchain-version-audit-2026-10-25.md` for the latest version audit.
+Spec Kit is installed from the exact release commit pinned in `Dockerfile`; the build verifies its package version. Keep the commit and version check synchronized when upgrading. See `docs/maintenance/toolchain-version-audit-2026-11-06.md` for the latest version audit.
 
 For Spec Kit initialization under `/rider-projects`, prefer `specify init . --integration opencode --force`. If prompted for script type, choose `sh` in this Linux container. For each application repository, decide whether `.opencode/` or sensitive parts of it belong in that repository's `.gitignore`.
 

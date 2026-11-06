@@ -379,7 +379,7 @@ the skipped check and the reason in the pull request text or in the agent
 session log.
 
 For documented web-app examples, bind the app to `0.0.0.0` inside the container
-and use a port from the published `5100-5199` range. During practical checks,
+and use a port from the published app range `5100-5198`. During practical checks,
 verify that the app responds over HTTP and stop any background test process
 before ending the session.
 
@@ -397,7 +397,7 @@ For Python projects, use `/python-projects` unless a project-specific mount is c
 
 For PowerShell projects, use `/powershell-projects` unless a project-specific mount is configured. Run scripts with `pwsh -NoLogo -NoProfile`, keep modules project-local or explicitly versioned, and validate repository-owned scripts with PSScriptAnalyzer when that module is available.
 
-ASP.NET apps must bind to `0.0.0.0` inside the container to be reachable from Windows. Compose publishes `127.0.0.1:5100-5199:5100-5199`; keep sample web app ports in that range unless the Compose file is updated.
+ASP.NET apps must bind to `0.0.0.0` inside the container to be reachable from Windows. Compose publishes `127.0.0.1:5100-5198:5100-5198` for apps; port 5199 is reserved for OpenCode.
 
 The Compose environment disables general .NET workload update notifications with `DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE=true` and disables the MSBuild workload resolver with `MSBuildEnableWorkloadResolver=false`. Install real workloads explicitly in the Dockerfile and re-enable the resolver if a project requires MAUI, WebAssembly, or another optional SDK workload.
 

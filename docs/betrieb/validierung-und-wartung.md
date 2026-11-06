@@ -192,12 +192,12 @@ runtime content already matches.
 ## Web-App-Prüfung / Web App Check
 
 **DE:** Lege das Beispiel unter `/tmp` an, binde es im Container an
-`0.0.0.0`, wähle einen freien Port aus `5100-5199`, prüfe die Antwort vom Host
+`0.0.0.0`, wähle einen freien App-Port aus `5100-5198`, prüfe die Antwort vom Host
 und stoppe den Prozess. Dokumentiere den genauen Port und Exitcode. Lege keine
 Dokumentationsbeispiele in `/workspace` oder einem echten Projekt-Mount ab.
 
 **EN:** Create the example under `/tmp`, bind it to `0.0.0.0` inside the
-container, choose a free port from `5100-5199`, check the response from the
+container, choose a free app port from `5100-5198`, check the response from the
 host, and stop the process. Record the exact port and exit status. Do not place
 documentation examples in `/workspace` or a real project mount.
 
@@ -325,7 +325,7 @@ Zurück zum [Betriebsindex](README.md). / Return to the
 
 **DE:** Der folgende Abschnitt beschreibt den damaligen Feature-003-Stand,
 nicht das neue Pruefimage. Aktuelle Grenzen stehen im
-[Versionsabgleich](../maintenance/toolchain-version-audit-2026-10-25.md) und
+[Versionsabgleich](../maintenance/toolchain-version-audit-2026-11-06.md) und
 in den [Nachpruefungen](../security/toolchain-followups-2026-10-25.md).
 Die alten Befehle sind historische Referenz, kein Auftrag zur Wiederholung
 eines Gesamtmodus oder zur Aenderung abgeschlossener Run-States.
