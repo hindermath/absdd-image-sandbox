@@ -9,11 +9,11 @@
 # DE: /home/adedev/.codex wird durch das Podman-Volume codex_data ueberlagert.
 # EN: /home/adedev/.codex is overlaid by the Podman volume codex_data.
 
-# DE: "untrusted" erlaubt nur Codex' vertrauenswuerdige Basisbefehle ohne Nachfrage.
-# EN: "untrusted" allows only Codex's trusted basic commands without approval.
-# DE: Alles andere wird dem Benutzer zur Freigabe vorgelegt.
-# EN: Everything else is presented to the user for approval.
-approval_policy = "untrusted"
+# DE: Interaktive Freigaben verwenden den unterstuetzten Modus "on-request".
+# EN: Interactive approvals use the supported "on-request" mode.
+# DE: Sandbox- und Requirements-Grenzen gelten unabhaengig davon weiterhin.
+# EN: Sandbox and requirements boundaries remain independently enforced.
+approval_policy = "on-request"
 
 # DE: Codex darf im Workspace schreiben, aber nicht mit Vollzugriff laufen.
 # EN: Codex may write in the workspace, but must not run with full access.

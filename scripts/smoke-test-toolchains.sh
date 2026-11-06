@@ -39,6 +39,7 @@ commands = {
     "actionlint": ["actionlint", "-version"],
     "bash": ["bash", "--version"],
     "codex": ["codex", "--version"],
+    "codex-config": ["codex", "features", "list"],
     "dotnet": ["dotnet", "--version"],
     "git": ["git", "--version"],
     "jq": ["jq", "--version"],
@@ -108,6 +109,11 @@ section() {
 section "identity"
 whoami
 pwd
+
+section "Codex configuration"
+# Version output bypasses configuration loading. This offline command must
+# load the image defaults and requirements without overriding either policy.
+codex features list >/dev/null
 
 section "tool versions"
 dotnet --info

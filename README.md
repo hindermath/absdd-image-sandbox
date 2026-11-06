@@ -315,7 +315,17 @@ Schritte.
 
 ```bash
 podman compose exec ade sh -lc 'opencode --version && codex --version && claude --version && gemini --version && agy --version && copilot --version && syft version'
+podman compose exec ade codex features list
 ```
+
+`codex --version` laedt keine Konfiguration. `codex features list` prueft
+zusaetzlich die Image- und Benutzerkonfiguration ohne Modellaufruf. Der
+interaktive Image-Standard ist `approval_policy = "on-request"`;
+`untrusted` darf nicht mehr explizit als Standard gesetzt werden.
+
+*`codex --version` does not load configuration. `codex features list` also
+checks image and user configuration without a model call. The interactive
+image default is `on-request`; explicitly selecting `untrusted` is unsupported.*
 
 Die vollstaendige Toolchain prueft:
 

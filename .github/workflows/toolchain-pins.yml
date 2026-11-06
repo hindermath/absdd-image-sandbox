@@ -45,7 +45,7 @@ jobs:
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
           python scripts/check-toolchain-pins.py
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          python -m unittest scripts.tests.test_toolchain_pin_contract scripts.tests.test_feature004_pin_coverage scripts.tests.test_toolchain_version_pins scripts.tests.test_opencode_v2_policy
+          python -m unittest scripts.tests.test_toolchain_pin_contract scripts.tests.test_feature004_pin_coverage scripts.tests.test_toolchain_version_pins scripts.tests.test_opencode_v2_policy scripts.tests.test_codex_configuration_smoke
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
           if (@(git status --porcelain=v1 --untracked-files=all).Count) { throw 'Offline tests modified checkout.' }
 

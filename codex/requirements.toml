@@ -7,10 +7,12 @@
 # DE: Normale Benutzer- oder Projektkonfiguration darf diese Schranken nicht abschwaechen.
 # EN: Normal user or project configuration must not weaken these constraints.
 
-# DE: Interaktive Laeufe verwenden "untrusted" oder "on-request". Der
+# DE: Interaktive Laeufe verwenden "on-request". "untrusted" bleibt nur fuer
+# automatisch aus unvertrauten Projekten abgeleitete Policies erlaubt. Der
 # nicht-interaktive `codex exec`-Pfad erzwingt "never" selbst; er bleibt deshalb
 # innerhalb der unten fest vorgegebenen read-only/workspace-write-Sandbox erlaubt.
-# EN: Interactive runs use "untrusted" or "on-request". The non-interactive
+# EN: Interactive runs use "on-request". "untrusted" remains allowed only for
+# policies derived automatically from untrusted projects. The non-interactive
 # `codex exec` path enforces "never" itself, so it remains allowed only inside
 # the read-only/workspace-write sandbox fixed below.
 allowed_approval_policies = ["untrusted", "on-request", "never"]
