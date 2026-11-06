@@ -27,7 +27,7 @@ function Assert-PinThrows {
 }
 function ConvertTo-PinFixtureJson { param($Value) ConvertTo-Json -InputObject $Value -Depth 20 -Compress }
 $context=Get-AdePinContext $root
-Assert-Pin ($context.values.Count -eq 29) 'all existing ARGs have explicit coverage'
+Assert-Pin ($context.values.Count -eq 30) 'all existing ARGs have explicit coverage'
 $before=Get-AdePinTextHash $context.text
 $fixtures=@{}
 $fixtures['https://api.adoptium.net/v3/info/available_releases']='{"available_lts_releases":[21,25]}'

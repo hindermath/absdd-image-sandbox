@@ -145,9 +145,9 @@ class VersionPinTests(unittest.TestCase):
         if os.name == "nt" or not shutil.which("sh"):
             self.skipTest("Dockerfile download fixtures require a POSIX shell")
         text = (ROOT / "Dockerfile").read_text()
-        block = re.search(r'(?ms)^RUN set -eux; \\\n    tmp_dir=.*?archive="apache-maven-.*?(?=^RUN )', text).group()
+        block = re.search(r'(?ms)^RUN if [^\n]*ADE_MSL_PROFILE[^\n]*; then \\\n    set -eux; \\\n    tmp_dir=.*?archive="apache-maven-.*?(?=^RUN )', text).group()
         # Execute the actual download/checksum prefix, never tar or installation.
-        prefix = block.split("    tar -xzf", 1)[0].removeprefix("RUN ").replace("\\\n", "\n")
+        prefix = re.sub(r'^RUN if .*?; then \\\n', '', block.split("    tar -xzf", 1)[0]).replace("\\\n", "\n")
         self.assertNotIn("/opt", prefix)
         version = re.search(r"(?m)^ARG MAVEN_VERSION=(\S+)$", text).group(1)
         with tempfile.TemporaryDirectory(prefix="ade-maven-download-") as directory:

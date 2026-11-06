@@ -77,7 +77,7 @@ def main() -> int:
     records = registry.get("pins", [])
     registered = [pin.get("arg") for pin in records]
     providers = {"github", "npm", "gomod", "go", "rust", "rustup", "maven", "python",
-                 "powershell", "dotnet", "java-channel", "node-channel", "companion"}
+                 "powershell", "dotnet", "java-channel", "node-channel", "companion", "selector"}
     if len(args) != len(set(args)) or len(registered) != len(set(registered)):
         failures.append("Duplicate Dockerfile ARG or pin registry entry")
     if set(args) != set(registered):

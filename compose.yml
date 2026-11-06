@@ -5,6 +5,9 @@ services:
     build:
       context: .
       pull: true
+      target: ade-${ADE_MSL_PROFILE:-all}
+      args:
+        ADE_MSL_PROFILE: ${ADE_MSL_PROFILE:-all}
     volumes:
       - ./workspace:/workspace
       # Repository self-mount for controlled maintenance tasks from inside the

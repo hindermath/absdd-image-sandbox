@@ -1,6 +1,6 @@
 # Sandbox-Profil: absdd-image-sandbox / Sandbox Profile
 
-**Stand / Date:** 2026-10-25
+**Stand / Date:** 2026-11-06 (neuer Image-Kandidat, finale Abnahme offen / new image candidate, final acceptance open)
 **Ausrichtung / Orientation:** DE-first, EN-second, CEFR B2, WCAG 2.2 AA
 
 **DE:** Dieses Dokument ist das konsolidierte Sandbox-Profil für Lernende. Es fasst alle Informationen
@@ -20,10 +20,10 @@ files are linked under `Verweise / References`.
 | Eigenschaft / Property | Wert / Value |
 |---|---|
 | Container-Engine | Podman |
-| Basis-Image | `mcr.microsoft.com/dotnet/sdk:10.0` (per SHA256-Digest gepinnt / pinned by SHA256 digest) |
+| Basis-Image | `mcr.microsoft.com/dotnet/sdk:10.0.403-resolute` (per SHA256-Digest gepinnt / pinned by SHA256 digest) |
 | Benutzer im Container / User inside | `adedev` (kein Root-Zugriff zur Laufzeit / no root access at runtime) |
-| Betriebssystem im Container / OS inside | Ubuntu (Linux) |
-| Ports nach außen / Ports to host | `127.0.0.1:5100-5199` — nur für Web-App-Tests, nicht dauerhaft belegt |
+| Betriebssystem im Container / OS inside | Ubuntu 26.04 (Linux) |
+| Ports nach außen / Ports to host | `127.0.0.1:5100-5198` für Apps; `5199` für OpenCode |
 | Starten / Start | `podman compose up -d` |
 | Stoppen / Stop | `bash scripts/compose-down-with-audit.sh --podman` (empfohlen / recommended) |
 
@@ -37,10 +37,10 @@ Audit-Metadaten sind kein Backup der Agentendaten.
 | Property | Value |
 |---|---|
 | Container engine | Podman |
-| Base image | `mcr.microsoft.com/dotnet/sdk:10.0` (pinned by SHA256 digest) |
+| Base image | `mcr.microsoft.com/dotnet/sdk:10.0.403-resolute` (pinned by SHA256 digest) |
 | User inside | `adedev` (no root access at runtime) |
-| OS inside | Ubuntu (Linux) |
-| Ports to host | `127.0.0.1:5100-5199` — for web app tests only, not permanently occupied |
+| OS inside | Ubuntu 26.04 (Linux) |
+| Ports to host | `127.0.0.1:5100-5198` for apps; `5199` for OpenCode |
 | Start | `podman compose up -d` |
 | Stop | `bash scripts/compose-down-with-audit.sh --podman` (recommended) |
 
@@ -151,7 +151,7 @@ sources.
 | Verbindung / Connection | Erlaubt? / Allowed? | Zweck / Purpose |
 |---|---|---|
 | Ausgehender Internetzugriff (Egress) / Outbound internet (egress) | Ja / Yes (dokumentiertes Risiko / documented risk) | Paketregister, MCR, GitHub, go.dev, crates.io, npm, PyPI |
-| Eingehender Zugriff (Ingress) / Inbound access (ingress) | Nur Ports 5100–5199 vom Host / Only ports 5100–5199 from host | Web-App-Tests lokal |
+| Eingehender Zugriff (Ingress) / Inbound access (ingress) | App-Ports 5100–5198 und OpenCode 5199 nur vom Host / App ports 5100–5198 and OpenCode 5199 from host only | lokale Browser-Nutzung / local browser use |
 | Codex-Shell-Netzwerkzugriff / Codex shell network access | **Nein / No** | In `codex/config.toml` deaktiviert (`network_access = false`) |
 | KI-Provider-Endpunkte / AI provider endpoints | Nur nach lokaler Anmeldung und Freigabe / Only after local sign-in and approval | OpenCode sowie Codex-, Anthropic-, Google- und GitHub-Dienste je gewaehltem Agenten |
 
@@ -189,33 +189,35 @@ nutzt oder nicht.
 
 **DE:** MSL bedeutet Memory-Safe Language — eine Programmiersprache, die häufige Speicherfehler durch
 ihr Design verhindert. Die Sandbox unterstützt sechs MSL-Sprachen. Die Tabelle zeigt Version, Test-Befehl
-und Audit-Tool je Sprache. `Supported` = funktioniert, `Open` = in Arbeit, `N/A` = nicht zutreffend.
+und Audit-Tool je Sprache. `Supported` = auf dem genannten finalen Image und
+den Plattformen geprueft, `Open` = finale Image-Abnahme steht aus, `N/A` = nicht zutreffend.
 
 **EN:** MSL means Memory-Safe Language — a programming language that prevents common memory errors by design.
 The sandbox supports six MSL languages. The table shows version, test command, and audit tool per language.
-`Supported` = works, `Open` = in progress, `N/A` = not applicable.
+`Supported` = works on the stated final image and platforms, `Open` = final
+image acceptance is pending, `N/A` = not applicable.
 
 | Sprache / Language | Version | Status | Test-Befehl / Test Command | Audit-Tool |
 |---|---|---|---|---|
-| **C# / .NET** | .NET SDK 10.0 (MCR) | `Supported` | `dotnet test` | `dotnet list package --vulnerable` |
-| **Go** | 1.27.3 | `Supported` | `go test ./...` | `govulncheck ./...` |
-| **Java** | OpenJDK 25 LTS | `Supported` | `mvn test` | `mvn dependency:analyze` |
-| **Python** | CPython 3.15.2 | `Supported` | `python -m pytest` | `pip-audit` (via `uv`) |
-| **Rust** | 1.99.1 | `Supported` | `cargo test` | `cargo audit` |
+| **C# / .NET** | .NET SDK 10.0 (MCR) | `Open` | `dotnet test` | `dotnet list package --vulnerable` |
+| **Go** | 1.27.3 | `Open` | `go test ./...` | `govulncheck ./...` |
+| **Java** | OpenJDK 25 LTS | `Open` | `mvn test` | `mvn dependency:analyze` |
+| **Python** | CPython 3.15.2 | `Open` | `python -m pytest` | `pip-audit` (via `uv`) |
+| **Rust** | 1.99.1 | `Open` | `cargo test` | `cargo audit` |
 | **Swift** | 6.4.2 | `Open` | `swift test` | Kein globales Audit-Tool installiert / No global audit tool installed |
 
 **DE:** Python ist einer der sechs verbindlichen MSL-Pfade und zugleich die
 erste Skriptgrundlage. Zusaetzlich stellt die Sandbox PowerShell 7 als zweite
 Skriptgrundlage bereit; PowerShell wird nicht als siebte Sprache in dieser
-MSL-Matrix gezaehlt. Die Version des mit dem MCR-.NET-SDK-Image gelieferten
-`pwsh` wird beim Image-Build gegen `POWERSHELL_VERSION` geprueft;
+MSL-Matrix gezaehlt. Die separat installierte `pwsh`-Version wird beim
+Image-Build gegen `POWERSHELL_VERSION` geprueft;
 Skriptprojekte liegen unter `/powershell-projects`.
 
 **EN:** Python is one of the six required MSL paths and also the first scripting
 foundation. The sandbox additionally provides PowerShell 7 as the second
 scripting foundation; PowerShell is not counted as a seventh entry in this MSL
-matrix. The image build checks the `pwsh` version supplied by the MCR .NET SDK
-image against `POWERSHELL_VERSION`; script projects use `/powershell-projects`.
+matrix. The image build checks the separately installed `pwsh` version against
+`POWERSHELL_VERSION`; script projects use `/powershell-projects`.
 
 **DE:** Swift läuft im Container, aber iOS-Build-Tools und vollständige Apple-Plattform-Unterstützung fehlen.
 Das ist als `Open` dokumentiert.

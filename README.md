@@ -312,6 +312,12 @@ AUDIT_DIR=./audit-logs
 ```
 
 Nicht gesetzte Variablen fallen auf lokale Repository-Verzeichnisse zurueck.
+`ADE_MSL_PROFILE` in `.env` waehlt beim Build `dotnet`, `java`, `go`, `rust`,
+`python`, `swift` oder `all`; ohne Wert gilt `all`. .NET und gemeinsame
+Agenten-/Dokumentationswerkzeuge bleiben in jedem Profil. Ein Wechsel
+benoetigt Neubau und Container-Neuerstellung, aber keine Volume-Loeschung.
+Die genaue Anleitung steht unter
+[Compose und Speicher](docs/betrieb/compose-und-speicher.md).
 
 ## Installierte Agenten pruefen
 
@@ -677,6 +683,8 @@ Updating the CLI does not start a Spec Kit feature.*
 
 [Aktueller Versionsabgleich / Current version audit](docs/maintenance/toolchain-version-audit-2026-11-06.md)
 
+[Feature-Abnahme #101/#102/#104 / Feature acceptance](docs/maintenance/feature-update-2026-11-06-acceptance.md)
+
 OpenCode 2 wird als `@opencode/cli` installiert. Die geordneten V2-
 `permissions` in `opencode.jsonc` erhalten die bisherigen Schutzregeln;
 `update: "disable"` verhindert automatische Updates. Vor dem ersten V2-Start
@@ -899,6 +907,10 @@ Before starting, put a private `OPENCODE_PASSWORD` of at least 16 characters
 in that ignored file. Sign in at `http://127.0.0.1:5199` as `opencode`.
 Keep the password out of examples, command arguments and logs. An invalid
 password prevents startup; check other local stacks if port 5199 is occupied.
+Set `ADE_MSL_PROFILE` in local `.env` to `dotnet`, `java`, `go`, `rust`,
+`python`, `swift`, or `all` (the default). .NET and shared tools stay in every
+profile. A change requires rebuilding and recreating the container while
+preserving volumes.
 
 3. Build and start:
 

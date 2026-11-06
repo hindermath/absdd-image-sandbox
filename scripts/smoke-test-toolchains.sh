@@ -1,6 +1,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+profile="${ADE_MSL_PROFILE:-all}"
+case "$profile" in dotnet|java|go|rust|python|swift|all) ;; *) echo "Invalid ADE_MSL_PROFILE: $profile" >&2; exit 2 ;; esac
+
+has_toolchain() { [[ "$profile" == all || "$profile" == "$1" ]]; }
+check_absent() {
+  local tool
+  for tool in "$@"; do
+    if command -v "$tool" >/dev/null 2>&1; then
+      printf 'Excluded profile %s unexpectedly contains %s.\n' "$profile" "$tool" >&2
+      exit 1
+    fi
+  done
+}
 
 json_mode=false
 repository=""
@@ -45,7 +58,7 @@ commands = {
     "git": ["git", "--version"],
     "jq": ["jq", "--version"],
     "pwsh": ["pwsh", "--version"],
-    "python": ["python3", "--version"],
+    "python3": ["python3", "--version"],
     "yq": ["yq", "--version"],
 }
 results = []
@@ -110,6 +123,13 @@ section() {
 section "identity"
 whoami
 pwd
+python3 - "$profile" <<'PY'
+import json
+import sys
+from pathlib import Path
+manifest = json.loads(Path('/usr/local/share/ade/msl-profile.json').read_text())
+assert manifest == {'profile': sys.argv[1]}, manifest
+PY
 
 section "Codex configuration"
 # Version output bypasses configuration loading. This offline command must
@@ -122,25 +142,14 @@ python3 "$script_dir/lib/codex_session_smoke.py"
 section "tool versions"
 dotnet --info
 dotnet --version
-java --version
-javac --version
-mvn --version
-go version
-gopls version
-staticcheck -version
-govulncheck -version
-dlv version
-rustc --version
-rustup --version
-cargo --version
-cargo clippy --version
-python --version
+if has_toolchain java; then java --version; javac --version; mvn --version; else check_absent java javac mvn; fi
+if has_toolchain go; then go version; gopls version; staticcheck -version; govulncheck -version; dlv version; else check_absent go gopls staticcheck govulncheck dlv; fi
+if has_toolchain rust; then rustc --version; rustup --version; cargo --version; cargo clippy --version; else check_absent rustc rustup cargo; fi
+if has_toolchain python; then python --version; else check_absent python; /usr/bin/python3 --version; fi
 pwsh --version
 node --version
 npm --version
-swift --version
-swiftc --version
-command -v sourcekit-lsp
+if has_toolchain swift; then swift --version; swiftc --version; command -v sourcekit-lsp; else check_absent swift swiftc sourcekit-lsp; fi
 opencode --version
 codex --version
 claude --version
@@ -161,6 +170,7 @@ mkdir -p "${dotnet_dir}"
   dotnet run
 )
 
+if has_toolchain java; then
 section "Java"
 java_dir="${work_dir}/java"
 mkdir -p "${java_dir}"
@@ -173,7 +183,9 @@ public final class Main {
 JAVA
 javac "${java_dir}/Main.java"
 java -cp "${java_dir}" Main
+fi
 
+if has_toolchain go; then
 section "Go"
 go_dir="${work_dir}/go"
 mkdir -p "${go_dir}"
@@ -193,7 +205,9 @@ func TestSmoke(t *testing.T) {
 GO
   go test ./...
 )
+fi
 
+if has_toolchain rust; then
 section "Rust"
 rust_dir="${work_dir}/rust"
 cargo new "${rust_dir}" --bin
@@ -202,13 +216,16 @@ cargo new "${rust_dir}" --bin
   cargo test
   cargo clippy -- -D warnings
 )
+fi
 
+if has_toolchain python; then
 section "Python"
 python_dir="${work_dir}/python"
 python -m venv "${python_dir}/.venv"
 "${python_dir}/.venv/bin/python" - <<'PY'
 print("hello from python")
 PY
+fi
 
 section "PowerShell"
 # PowerShell variables must remain literal until pwsh expands them.
@@ -223,6 +240,7 @@ section "Node.js"
 node -e 'console.log("hello from node")'
 npm --version >/dev/null
 
+if has_toolchain swift; then
 section "Swift"
 swift_dir="${work_dir}/swift"
 mkdir -p "${swift_dir}"
@@ -232,6 +250,7 @@ mkdir -p "${swift_dir}"
   swift build
   swift run SwiftSmoke
 )
+fi
 
 section "Documentation"
 bash "${script_dir}/smoke-test-documentation.sh"

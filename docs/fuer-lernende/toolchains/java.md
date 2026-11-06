@@ -3,11 +3,11 @@
 ## Einordnung / Context
 
 **DE:** Java-Projekte liegen standardmäßig unter `/java-projects`. Das Image
-enthält ein JDK 25 LTS und Apache Maven 3.10.0. Eine projektspezifische Maven- oder Gradle-
+enthält im Profil `java` oder `all` ein JDK 25 LTS und Apache Maven 3.10.0. Eine projektspezifische Maven- oder Gradle-
 Wrapperdatei hat Vorrang, wenn das Repository sie mitliefert.
 
 **EN:** Java projects normally live under `/java-projects`. The image contains
-JDK 25 LTS and Apache Maven 3.10.0. A project-specific Maven or Gradle wrapper takes precedence
+JDK 25 LTS and Apache Maven 3.10.0 in the `java` or `all` profile. A project-specific Maven or Gradle wrapper takes precedence
 when the repository provides one.
 
 ## Werkzeuge prüfen / Check the Tools
