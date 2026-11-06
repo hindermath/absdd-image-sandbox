@@ -54,7 +54,8 @@ services:
       - gemini_data:/home/adedev/.gemini-home
       - copilot_data:/home/adedev/.copilot
     ports:
-      - "127.0.0.1:5100-5199:5100-5199"
+      - "127.0.0.1:5100-5198:5100-5198"
+      - "127.0.0.1:5199:5199"
     # P3-4 defense-in-depth: prevent processes from gaining new privileges
     # through setuid/setgid binaries or file capabilities at runtime.
     security_opt:
@@ -83,6 +84,12 @@ services:
       COPILOT_HOME: /home/adedev/.copilot
       DISABLE_AUTOUPDATER: "1"
       ADE_AGENT_PROMPT_TARGET: local
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/healthcheck-opencode-web"]
+      interval: 10s
+      timeout: 50s
+      start_period: 45s
+      retries: 3
     restart: unless-stopped
 
 volumes:

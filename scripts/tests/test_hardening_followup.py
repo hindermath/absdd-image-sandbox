@@ -308,7 +308,7 @@ class OptionalReadOnlyAndLifecycleTests(unittest.TestCase):
             self.assertEqual(0, result.returncode, result.stderr)
             outputs.append(result.stdout)
             for token in ("cap_drop:", "- ALL", "no-new-privileges:true",
-                          "127.0.0.1:5100-5199:5100-5199", "codex_data:",
+                          "127.0.0.1:5100-5198:5100-5198", "127.0.0.1:5199:5199", "codex_data:",
                           "claude_data:", "gemini_data:", "copilot_data:",
                           "opencode_data:", "dotnet_build:"):
                 self.assertIn(token, result.stdout)

@@ -153,7 +153,8 @@ understandable with screen readers and Braille displays.
   Hilfswerkzeuge bereit.
 - `compose.yml`: definiert den Service `ade`, getrennte persistente
   Podman-Volumes fuer die Agentenzustaende, die Host-Mounts und die
-  Portfreigabe `127.0.0.1:5100-5199`.
+  Portfreigaben `127.0.0.1:5100-5198` fuer Apps und `127.0.0.1:5199`
+  fuer OpenCode.
 - `home-baseline.lock.json`: pinnt Release, Commit, Quelle und Lizenz der
   read-only Level-0-Referenz unter `/opt/home-baseline`.
 - `compose.home-baseline.yml`: optionale Compose-Erweiterung, die die
@@ -280,6 +281,13 @@ Kopiere die Beispielumgebungsdatei, damit `compose.yml` eine vorhandene
 if [ ! -e opencode.env ]; then cp opencode.env.example opencode.env; fi
 chmod 600 opencode.env
 ```
+
+Vor `podman compose up -d` in dieser ignorierten Datei ein privates
+`OPENCODE_PASSWORD` mit mindestens 16 Zeichen setzen. Der lokale Webserver
+verlangt es beim Start; Benutzername im Browser ist `opencode`, Adresse
+`http://127.0.0.1:5199`. Keine Platzhalter oder echten Passwoerter in
+Beispielen, Shell-Argumenten oder Logs verwenden. Ohne gueltiges Passwort
+startet der Dienst nicht; bei Portkonflikten pruefe andere lokale Stacks.
 
 Dieses Image konfiguriert keinen OpenCode-API-Key und kein vorausgewaehltes
 Modell. Die eingebaute OpenCode-Provider-Auswahl bleibt verfuegbar; wenn eine
@@ -529,6 +537,10 @@ podman compose exec ade bash
 
 Der Container startet im Arbeitsverzeichnis `/rider-projects`. Das Image
 laeuft nach dem Build als Linux-Benutzer `adedev`.
+Im Hostbrowser ist OpenCode unter `http://127.0.0.1:5199` erreichbar. In der
+Container-Bash starten `opencode-tui` die Fullscreen-Ansicht und
+`opencode-tui-mini` die kompakte Ansicht aus dem aktuellen Projektverzeichnis.
+Beide nutzen denselben Server. Eigene Web-Apps nutzen Ports `5100-5198`.
 
 ## VS Code von aussen verbinden
 
@@ -568,7 +580,7 @@ pwd
 ```
 
 `whoami` muss `adedev` ausgeben. Wenn ein Projekt Web-Ports braucht, weiter
-Ports aus dem bereits veroeffentlichten Bereich `5100-5199` verwenden oder
+Ports aus dem bereits veroeffentlichten App-Bereich `5100-5198` verwenden oder
 temporaer ueber VS Code weiterleiten.
 
 Wenn `specify check` im Container `Visual Studio Code (not found)` meldet, ist
@@ -641,7 +653,7 @@ behauptet; sie gehoeren bei Bedarf als projektlokale Abhaengigkeiten in das
 jeweilige Projekt.
 
 Fuer dokumentierte Web-App-Beispiele im Container an `0.0.0.0` binden und
-Ports aus `5100-5199` verwenden. Praktische Checks sollen HTTP-Antworten
+Ports aus `5100-5198` verwenden. Praktische Checks sollen HTTP-Antworten
 pruefen und Hintergrundprozesse am Ende stoppen.
 
 Ausfuehrliche, projektbezogene Anleitungen fuer .NET, Java, Go, Rust, Python,
@@ -663,7 +675,7 @@ retains the bind-mount patch and checks package metadata during build.
 Existing containers need a rebuild and recreation, not just a restart.
 Updating the CLI does not start a Spec Kit feature.*
 
-[Aktueller Versionsabgleich / Current version audit](docs/maintenance/toolchain-version-audit-2026-10-25.md)
+[Aktueller Versionsabgleich / Current version audit](docs/maintenance/toolchain-version-audit-2026-11-06.md)
 
 OpenCode 2 wird als `@opencode/cli` installiert. Die geordneten V2-
 `permissions` in `opencode.jsonc` erhalten die bisherigen Schutzregeln;
@@ -883,6 +895,11 @@ if [ ! -e opencode.env ]; then cp opencode.env.example opencode.env; fi
 chmod 600 opencode.env
 ```
 
+Before starting, put a private `OPENCODE_PASSWORD` of at least 16 characters
+in that ignored file. Sign in at `http://127.0.0.1:5199` as `opencode`.
+Keep the password out of examples, command arguments and logs. An invalid
+password prevents startup; check other local stacks if port 5199 is occupied.
+
 3. Build and start:
 
 ```bash
@@ -891,6 +908,11 @@ podman compose build --pull
 podman compose up -d
 podman compose exec ade bash
 ```
+
+The browser UI uses `http://127.0.0.1:5199`; in a container Bash shell,
+`opencode-tui` starts the full-screen client and `opencode-tui-mini` starts
+the compact client from the current project directory. Both share the local
+server. Other web apps use ports `5100-5198`.
 
 4. The image includes a pinned, read-only shallow Git reference at
    `~/home-baseline-source`. The deprecated `~/home-baseline-tmp` path remains

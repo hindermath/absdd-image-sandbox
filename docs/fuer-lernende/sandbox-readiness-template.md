@@ -48,7 +48,7 @@ Entscheidung — `Applicable`, `N/A` oder `Open` mit Begründung — ist selbst 
 |---|---|
 | Öffentliche Referenz / Public reference | `https://github.com/hindermath/absdd-image-sandbox` |
 | Container-Engine | `Podman` |
-| Basis-Image | `mcr.microsoft.com/dotnet/sdk:10.0`; der konkrete SHA256-Digest steht im `Dockerfile`. |
+| Basis-Image | `mcr.microsoft.com/dotnet/sdk:10.0.403-resolute`; der konkrete SHA256-Digest steht im `Dockerfile`. |
 | Benutzer im Container / User inside | `adedev` |
 
 ---

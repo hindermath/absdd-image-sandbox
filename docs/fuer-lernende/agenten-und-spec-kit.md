@@ -17,7 +17,7 @@ model for you.
 
 | Werkzeug / Tool | Kommando / Command | Rolle im Image / Role in image | Persistenter Zustand / Persistent state |
 |---|---|---|---|
-| OpenCode | `opencode` | zusätzliche, providerneutrale Oberfläche / additional provider-neutral interface | `opencode_data` |
+| OpenCode | `opencode-tui`, `opencode-tui-mini` | lokale Fullscreen-/Mini-TUI am gemeinsamen Server / local full-screen and mini TUI on the shared server | `opencode_data` |
 | Codex CLI | `codex` | Required-Agent / required agent | `codex_data` |
 | Claude Code | `claude` | Required-Agent / required agent | `claude_data` |
 | Gemini CLI | `gemini` | zusätzliches Google-CLI / additional Google CLI | `gemini_data` |
@@ -50,6 +50,32 @@ and verify that deletion is truly intended.
 
 ## Interaktiver Einstieg / Interactive Entry
 
+**DE:** Vor dem Containerstart setzt du auf dem Host ein privates
+`OPENCODE_PASSWORD` mit mindestens 16 Zeichen in der ignorierten Datei
+`opencode.env`. Der OpenCode-Server startet im Container auf Port `5199`;
+im Hostbrowser erreichst du `http://127.0.0.1:5199` mit Benutzer
+`opencode`. Das Passwort gehoert nicht in Befehlsargumente oder URLs.
+Im laufenden Container und im gewuenschten Projektverzeichnis startet
+`opencode-tui` die bildschirmfuellende Ansicht und `opencode-tui-mini` die
+kompakte Ansicht. Beide nutzen denselben Server. `opencode run --server
+http://127.0.0.1:5199` ist der nichtinteraktive Anschluss; eine echte
+Modellanfrage braucht weiterhin die separate Freigabe. Verwende bei
+gleichzeitiger Arbeit getrennte Sitzungen statt paralleler Prompts in
+derselben Sitzung. Ein fehlendes Passwort verhindert den Serverstart;
+bei `503` kurz auf Bereitschaft warten und danach die Containerlogs pruefen.
+
+**EN:** Before starting the container, put a private `OPENCODE_PASSWORD` of
+at least 16 characters in the ignored host file `opencode.env`. The server
+listens on container port `5199`; open `http://127.0.0.1:5199` on the host
+and sign in as `opencode`. Keep the password out of arguments and URLs. In
+the running container, change to the intended project directory and use
+`opencode-tui` for the full-screen view or `opencode-tui-mini` for the compact
+view. Both use the same server. `opencode run --server
+http://127.0.0.1:5199` connects a noninteractive client; a real model call
+still requires separate approval. Use separate sessions for concurrent work.
+If the password is missing, startup fails; for HTTP `503`, wait briefly for
+readiness and then inspect container logs.
+
 **DE:** OpenCode 2 hat offene Kontroll- und Audit-Nachpruefungen; siehe
 [V2-Sicherheitsreview](../security/toolchain-followups-2026-10-25.md).
 Installiert bedeutet hier nicht fuer reale Provider-Nutzung abgenommen.
@@ -80,7 +106,8 @@ git status --short --branch
 ```
 
 ```text
-opencode
+opencode-tui
+opencode-tui-mini
 codex
 claude
 gemini

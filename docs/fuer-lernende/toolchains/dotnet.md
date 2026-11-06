@@ -38,11 +38,11 @@ dotnet list package --vulnerable --include-transitive
 ## ASP.NET vom Host erreichen / Reach ASP.NET from the Host
 
 **DE:** Compose veröffentlicht ausschließlich die Hostadresse `127.0.0.1` und
-die Ports `5100` bis `5199`. Die Anwendung muss im Container an `0.0.0.0`
+die App-Ports `5100` bis `5198`; `5199` ist fuer OpenCode reserviert. Die Anwendung muss im Container an `0.0.0.0`
 binden. Dieses Beispiel verwendet Port `5100`:
 
 **EN:** Compose publishes only host address `127.0.0.1` and ports `5100`
-through `5199`. The application must bind to `0.0.0.0` inside the container.
+through `5198`; `5199` is reserved for OpenCode. The application must bind to `0.0.0.0` inside the container.
 This example uses port `5100`:
 
 ```bash

@@ -141,7 +141,7 @@ your machine stays invisible and protected.
 |   |   +-----------------------------------------------+   |   |
 |   +-------------------------------------------------------+   |
 |                                                               |
-|   Ports: 127.0.0.1:5100-5199  (nur Web-App-Tests / web only)  |
+|   Ports: 127.0.0.1:5100-5198 (Apps); 5199 (OpenCode)       |
 +---------------------------------------------------------------+
         |
         v  Egress (ausgehend / outbound): Paketregister, GitHub, MCR ...
