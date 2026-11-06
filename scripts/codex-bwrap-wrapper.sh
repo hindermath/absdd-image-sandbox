@@ -12,6 +12,7 @@ while (($# > 0)); do
   if (($# >= 5)) \
     && [[ "$1" == --perms && "$2" == 000 && "$3" == --ro-bind-data ]] \
     && [[ "$5" == /home/adedev/.codex/auth.json \
+      || "$5" == /home/adedev/.codex/history.jsonl \
       || "$5" == /home/adedev/.codex/config.toml ]]; then
     # Codex supplies an inaccessible in-memory replacement for denied files.
     # A writable bind-data mount is required only because rootless Podman
@@ -24,7 +25,8 @@ while (($# > 0)); do
     && [[ "$1" == --perms && "$2" == 000 && "$3" == --tmpfs ]] \
     && [[ "$4" == /home/adedev/.codex/log \
       || "$4" == /home/adedev/.codex/sessions \
-      || "$4" == /home/adedev/.local/share/opencode ]] \
+      || "$4" == /home/adedev/.local/share/opencode \
+      || "$4" == "/tmp/codex-daemon-$(id -u)" ]] \
     && [[ "$5" == --remount-ro && "$6" == "$4" ]]; then
     # The isolated replacement is empty and remains denied by Landlock. Avoid
     # only the unsupported remount operation in the nested user namespace.
@@ -34,10 +36,33 @@ while (($# > 0)); do
   fi
   if (($# >= 6)) \
     && [[ "$1" == --perms && "$2" == 555 && "$3" == --tmpfs ]] \
-    && [[ "$4" == /tmp/.git || "$4" == /tmp/.agents || "$4" == /tmp/.codex ]] \
+    && [[ "$4" == /tmp/.git || "$4" == /tmp/.agents || "$4" == /tmp/.codex || "$4" == /tmp/.aws ]] \
     && [[ "$5" == --remount-ro && "$6" == "$4" ]]; then
     # /tmp stays read-only in this container profile, so synthetic metadata
     # mounts below it are unnecessary and cannot be created rootlessly.
+    shift 6
+    continue
+  fi
+  if (($# >= 6)) \
+    && [[ "$1" == --perms && "$2" == 555 && "$3" == --tmpfs ]] \
+    && [[ "$4" == */.git || "$4" == */.agents || "$4" == */.codex || "$4" == */.aws ]] \
+    && [[ "$5" == --remount-ro && "$6" == "$4" ]] \
+    && [[ ! -L "$4" ]] \
+    && { [[ ! -e "$4" ]] || { [[ -d "$4" ]] \
+      && [[ -z "$(find "$4" -mindepth 1 -print -quit)" ]]; }; }; then
+    # Codex masks missing protected metadata with an empty read-only mount.
+    # Bind an immutable empty directory instead; never expose or replace real
+    # nonempty project metadata or turn a read-only placeholder into a write
+    # root. Codex can pre-create the otherwise missing empty mount targets.
+    empty=/usr/libexec/codex-empty-readonly
+    if [[ ! -d "$empty" || -L "$empty" ]] \
+      || [[ "$(stat -c %u "$empty")" != 0 ]] \
+      || [[ -n "$(find "$empty" -mindepth 1 -print -quit)" ]] \
+      || [[ -n "$(find "$empty" -maxdepth 0 -perm /022 -print)" ]]; then
+      printf '%s\n' 'Unsafe Codex read-only placeholder.' >&2
+      exit 126
+    fi
+    rewritten+=(--ro-bind "$empty" "$4")
     shift 6
     continue
   fi

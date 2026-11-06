@@ -419,6 +419,7 @@ COPY --chown=adedev:adedev ./opencode.jsonc /home/adedev/.config/opencode/openco
 USER root
 COPY ./scripts/codex-bwrap-wrapper.sh /usr/local/libexec/codex-bwrap-wrapper
 RUN mkdir -p /usr/libexec \
+    && install -d -m 0555 /usr/libexec/codex-empty-readonly \
     && mv /usr/bin/bwrap /usr/libexec/codex-bwrap.real \
     && install -m 0755 /usr/local/libexec/codex-bwrap-wrapper /usr/bin/bwrap \
     && mkdir -p /home/adedev/codex-workspace/.git \

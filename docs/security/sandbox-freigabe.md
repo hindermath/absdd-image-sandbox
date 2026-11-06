@@ -113,7 +113,7 @@ Installation und Tests vorgesehen; Agentenaenderungen werden ueber den internen
 Transaktionspfad kontrolliert ein- und ausgefuehrt. Der Adapter benoetigt weder
 Capabilities noch einen privilegierten Containerstart.
 
-Interaktive Codex-Sitzungen verwenden weiterhin `untrusted` oder `on-request`.
+Interaktive Codex-Sitzungen verwenden `on-request`.
 Der nicht-interaktive `codex exec`-Modus setzt technisch `never`; dieser Modus
 ist nur zusammen mit den erzwungenen `read-only`- oder `workspace-write`-
 Profilen zugelassen und kann die Dateisystem- oder Netzwerkgrenzen nicht

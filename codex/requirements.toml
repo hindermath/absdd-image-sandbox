@@ -7,10 +7,12 @@
 # DE: Normale Benutzer- oder Projektkonfiguration darf diese Schranken nicht abschwaechen.
 # EN: Normal user or project configuration must not weaken these constraints.
 
-# DE: Interaktive Laeufe verwenden "untrusted" oder "on-request". Der
+# DE: Interaktive Laeufe verwenden "on-request". "untrusted" bleibt nur fuer
+# automatisch aus unvertrauten Projekten abgeleitete Policies erlaubt. Der
 # nicht-interaktive `codex exec`-Pfad erzwingt "never" selbst; er bleibt deshalb
 # innerhalb der unten fest vorgegebenen read-only/workspace-write-Sandbox erlaubt.
-# EN: Interactive runs use "untrusted" or "on-request". The non-interactive
+# EN: Interactive runs use "on-request". "untrusted" remains allowed only for
+# policies derived automatically from untrusted projects. The non-interactive
 # `codex exec` path enforces "never" itself, so it remains allowed only inside
 # the read-only/workspace-write sandbox fixed below.
 allowed_approval_policies = ["untrusted", "on-request", "never"]
@@ -31,14 +33,8 @@ computer_use = false
 in_app_browser = false
 
 [permissions.filesystem]
-# DE: Linux muss **-Muster vor dem Bubblewrap-Start auf konkrete Pfade
-# abbilden. Die begrenzte Tiefe verhindert eine unbeschraenkte Mount-Liste;
-# tiefere Secret-Pfade bleiben durch die expliziten Agent-State-Wurzeln und
-# die Container-/Repository-Grenzen abgedeckt.
-# EN: Linux expands ** patterns to concrete paths before Bubblewrap starts.
-# The bounded depth prevents an unbounded mount list; deeper secret paths stay
-# covered by the explicit agent-state roots and container/repository boundary.
-glob_scan_max_depth = 4
+# DE: Explizite Mustertiefen begrenzen die Expansion ohne ignorierte Option.
+# EN: Explicit pattern depths bound expansion without an ignored setting.
 
 # DE: Diese Pfade und Muster darf Codex nicht lesen.
 # EN: Codex must not read these paths and patterns.

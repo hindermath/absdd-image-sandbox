@@ -126,6 +126,7 @@ agent check without a provider call:
 ```bash
 podman compose exec ade sh -lc \
   'opencode --version; codex --version; claude --version; gemini --version; agy --version; copilot --version'
+podman compose exec ade codex features list
 podman compose exec ade agent-prompt --dry-run codex -- \
   'Dieser Prompt wird nicht ausgegeben.'
 ```
@@ -136,6 +137,31 @@ Image-Abnahme nicht erforderlich.
 
 **EN:** `--version` or `--help` confirms installation, not sign-in or provider
 approval. A real model call is not required for image acceptance.
+
+**DE:** Codex laedt mit `--version` seine Konfiguration nicht. Deshalb fuehrt
+der Smoke-Test (auch im JSON-Modus) zusaetzlich `codex features list` ohne
+Policy-Override aus. Ein Konfigurationsfehler bricht den Test ab. Der
+Image-Standard ist `on-request`; `untrusted` bleibt in den Requirements fuer
+automatisch abgeleitete Projekt-Policies erlaubt, ist aber kein explizit
+setzbarer Standard. Sandbox, Netzwerk- und Secret-Grenzen bleiben erhalten.
+
+**EN:** Codex skips configuration loading with `--version`. Both smoke modes
+therefore also run `codex features list` without policy overrides. A loading
+failure fails the test. The image default is `on-request`; requirements retain
+`untrusted` for automatically derived project policies, not explicit selection.
+Sandbox, network and secret boundaries are preserved.
+
+[Aenderung und Abnahme / Change and validation](../maintenance/codex-approval-default.md).
+
+**DE:** Ein Konfigurations-Ladetest allein startet noch keine Sitzung.
+Beide Smoke-Modi pruefen deshalb zusaetzlich einen ephemeren lokalen
+App-Server-Sitzungsstart mit `AGENTS.md`, ohne Modell-Turn. Das Zeitlimit
+betraegt 45 Sekunden, danach werden Server und Hilfsprozesse beendet.
+
+**EN:** Loading configuration alone does not start a session. Both smoke
+modes therefore also create an ephemeral local app-server session with
+AGENTS.md, without a model turn. A 45-second deadline and process-group
+cleanup bound server and helper lifetime.
 
 ## Home-Baseline-Grenze prüfen / Check the Home Baseline Boundary
 

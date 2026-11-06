@@ -22,7 +22,7 @@ while (($# > 0)); do
 done
 
 if $json_mode; then
-  python3 - "$repository" <<'PY'
+  python3 - "$repository" "$script_dir" <<'PY'
 import json
 import platform
 import shutil
@@ -39,6 +39,8 @@ commands = {
     "actionlint": ["actionlint", "-version"],
     "bash": ["bash", "--version"],
     "codex": ["codex", "--version"],
+    "codex-config": ["codex", "features", "list"],
+    "codex-session": ["python3", str(Path(sys.argv[2]) / "lib/codex_session_smoke.py")],
     "dotnet": ["dotnet", "--version"],
     "git": ["git", "--version"],
     "jq": ["jq", "--version"],
@@ -108,6 +110,14 @@ section() {
 section "identity"
 whoami
 pwd
+
+section "Codex configuration"
+# Version output bypasses configuration loading. This offline command must
+# load the image defaults and requirements without overriding either policy.
+codex features list >/dev/null
+
+section "Codex session startup"
+python3 "$script_dir/lib/codex_session_smoke.py"
 
 section "tool versions"
 dotnet --info

@@ -59,6 +59,9 @@ services:
     # through setuid/setgid binaries or file capabilities at runtime.
     security_opt:
       - no-new-privileges:true
+      # Nested Codex Bubblewrap needs the engine SELinux type for bind mounts.
+      # Retain SELinux enforcement, non-root, cap_drop ALL and inner policies.
+      - label=type:container_engine_t
     # P3-4 test hardening profile: start with all Linux capabilities dropped.
     # If a required tool breaks, add back only the specific capability needed.
     cap_drop:
