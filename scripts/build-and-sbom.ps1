@@ -21,7 +21,7 @@
     Vorhandenes Image verwenden / use the existing image.
 .PARAMETER Platform
     Explizite Linux-Zielplattform / explicit Linux target platform.
-.PARAMETER Profile
+.PARAMETER LanguageProfile
     Build-Profil / build-time language profile.
 .PARAMETER AllowCrossArchitecture
     Cross-Build mit expliziter Plattform erlauben / approve an explicit cross-build.
@@ -34,7 +34,7 @@ param(
     [string] $SbomDir = '',
     [ValidateSet('podman')] [string] $Runtime = 'podman',
     [string] $SyftVersion = '',
-    [ValidateSet('dotnet','java','go','rust','python','swift','all')] [string] $Profile = '',
+    [Alias('Profile')] [ValidateSet('dotnet','java','go','rust','python','swift','all')] [string] $LanguageProfile = '',
     [switch] $SkipBuild,
     [string] $Platform = '',
     [switch] $AllowCrossArchitecture
@@ -137,8 +137,8 @@ function New-AdeSandboxSbom {
 }
 
 if (-not $ImageName) { $ImageName = if ($env:IMAGE_NAME) { $env:IMAGE_NAME } else { 'localhost/absdd-image-sandbox_ade:latest' } }
-if (-not $Profile) { $Profile = if ($env:ADE_MSL_PROFILE) { $env:ADE_MSL_PROFILE } else { 'all' } }
-if ($Profile -cnotin @('dotnet','java','go','rust','python','swift','all')) { throw "Invalid profile: $Profile" }
+if (-not $LanguageProfile) { $LanguageProfile = if ($env:ADE_MSL_PROFILE) { $env:ADE_MSL_PROFILE } else { 'all' } }
+if ($LanguageProfile -cnotin @('dotnet','java','go','rust','python','swift','all')) { throw "Invalid profile: $LanguageProfile" }
 if (-not $SbomDir) { $SbomDir = if ($env:SBOM_DIR) { $env:SBOM_DIR } else { 'sboms' } }
 if (-not $SyftVersion) {
     $pin = @(Get-Content -LiteralPath (Join-Path $PSScriptRoot '../Dockerfile') |
@@ -147,4 +147,4 @@ if (-not $SyftVersion) {
     $SyftVersion = $pin[0].Substring('ARG SYFT_VERSION='.Length)
 }
 if ($SyftVersion -cnotmatch '^\d+\.\d+\.\d+$') { throw 'Invalid pinned Syft version.' }
-New-AdeSandboxSbom -TargetImage $ImageName -OutputDirectory $SbomDir -ContainerRuntime $Runtime -RequiredSyftVersion $SyftVersion -SelectedProfile $Profile -UseExistingImage:$SkipBuild -TargetPlatform $Platform -PermitCrossArchitecture:$AllowCrossArchitecture -WhatIf:$WhatIfPreference
+New-AdeSandboxSbom -TargetImage $ImageName -OutputDirectory $SbomDir -ContainerRuntime $Runtime -RequiredSyftVersion $SyftVersion -SelectedProfile $LanguageProfile -UseExistingImage:$SkipBuild -TargetPlatform $Platform -PermitCrossArchitecture:$AllowCrossArchitecture -WhatIf:$WhatIfPreference
