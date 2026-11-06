@@ -41,10 +41,6 @@ file_opener = "none"
 # EN: Reasoning events should not unnecessarily appear in TUI or exec output.
 hide_agent_reasoning = true
 
-# DE: Keine automatische Co-Author-Zeile in Git-Commits erzwingen.
-# EN: Do not force an automatic co-author trailer in Git commits.
-commit_attribution = ""
-
 [history]
 # DE: Session-Transkripte werden nicht dauerhaft gespeichert.
 # EN: Session transcripts are not persisted.

@@ -12,7 +12,7 @@ class CodexConfigurationSmokeTests(unittest.TestCase):
     def test_configuration_failure_is_not_hidden_by_version_success(self):
         source = (ROOT / "scripts/smoke-test-toolchains.sh").read_text()
         stage = source.split('section "Codex configuration"', 1)[1].split(
-            'section "tool versions"', 1)[0]
+            'section "Codex session startup"', 1)[0]
         with tempfile.TemporaryDirectory() as directory:
             cli = Path(directory) / "codex"
             cli.write_text('#!/bin/sh\nif [ "$1" = "--version" ]; then echo codex-test; exit 0; fi\n'

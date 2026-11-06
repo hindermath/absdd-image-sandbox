@@ -327,6 +327,10 @@ interaktive Image-Standard ist `approval_policy = "on-request"`;
 checks image and user configuration without a model call. The interactive
 image default is `on-request`; explicitly selecting `untrusted` is unsupported.*
 
+Der vollstaendige Smoke-Test prueft ausserdem einen lokalen Sitzungsstart
+mit `AGENTS.md`, ohne Modellanfrage. / The full smoke also tests local
+session startup with AGENTS.md, without a model request.
+
 Die vollstaendige Toolchain prueft:
 
 ```bash

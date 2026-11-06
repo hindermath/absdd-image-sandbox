@@ -153,6 +153,16 @@ Sandbox, network and secret boundaries are preserved.
 
 [Aenderung und Abnahme / Change and validation](../maintenance/codex-approval-default.md).
 
+**DE:** Ein Konfigurations-Ladetest allein startet noch keine Sitzung.
+Beide Smoke-Modi pruefen deshalb zusaetzlich einen ephemeren lokalen
+App-Server-Sitzungsstart mit `AGENTS.md`, ohne Modell-Turn. Das Zeitlimit
+betraegt 45 Sekunden, danach werden Server und Hilfsprozesse beendet.
+
+**EN:** Loading configuration alone does not start a session. Both smoke
+modes therefore also create an ephemeral local app-server session with
+AGENTS.md, without a model turn. A 45-second deadline and process-group
+cleanup bound server and helper lifetime.
+
 ## Home-Baseline-Grenze prüfen / Check the Home Baseline Boundary
 
 ```bash

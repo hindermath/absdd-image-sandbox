@@ -140,6 +140,12 @@ def main() -> int:
         failures.append("Codex interactive default must remain on-request")
     if "codex features list" not in smoke_text:
         failures.append("smoke test is missing: codex features list")
+    if "lib/codex_session_smoke.py" not in smoke_text:
+        failures.append("smoke test is missing: Codex session startup")
+    if re.search(r'^\s*commit_attribution\s*=', codex_config, re.MULTILINE):
+        failures.append("Codex config contains ignored commit_attribution")
+    if re.search(r'^\s*glob_scan_max_depth\s*=', codex_requirements, re.MULTILINE):
+        failures.append("Codex requirements contain ignored glob_scan_max_depth")
     if not re.search(
         r'allowed_approval_policies\s*=\s*\[[^\]]*"untrusted"[^\]]*"on-request"[^\]]*"never"',
         codex_requirements,
