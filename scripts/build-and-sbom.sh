@@ -6,6 +6,7 @@ SBOM_DIR="${SBOM_DIR:-sboms}"
 CONTAINER_RUNTIME="${CONTAINER_RUNTIME:-podman}"
 SYFT_VERSION="${SYFT_VERSION:-}"
 SKIP_BUILD="${SKIP_BUILD:-false}"
+PROFILE="${ADE_MSL_PROFILE:-all}"
 DRY_RUN="false"
 PLATFORM=""
 ALLOW_CROSS="false"
@@ -25,6 +26,7 @@ Options:
   --skip-build        Scan the existing image without rebuilding it.
   --dry-run           Show the planned build and SBOM checks without writes.
   --platform VALUE    Explicit linux/arm64 or linux/amd64 target.
+  --profile VALUE     Build-time language profile; defaults to ADE_MSL_PROFILE or all.
   --allow-cross-architecture  Approve a non-native target with --platform.
   -h, --help          Show this help.
 
@@ -34,7 +36,7 @@ Sicherheit / Security:
   no moving fallback is used.
 
 Environment variables with the same names are also supported:
-IMAGE_NAME, SBOM_DIR, CONTAINER_RUNTIME, SYFT_VERSION, SKIP_BUILD.
+IMAGE_NAME, SBOM_DIR, CONTAINER_RUNTIME, SYFT_VERSION, SKIP_BUILD, ADE_MSL_PROFILE.
 USAGE
 }
 
@@ -64,6 +66,10 @@ while [[ $# -gt 0 ]]; do
     PLATFORM="${2:?--platform requires a value}"
     shift 2
     ;;
+  --profile)
+    PROFILE="${2:?--profile requires a value}"
+    shift 2
+    ;;
   --allow-cross-architecture)
     ALLOW_CROSS="true"
     shift
@@ -79,6 +85,8 @@ while [[ $# -gt 0 ]]; do
     ;;
   esac
 done
+
+case "$PROFILE" in dotnet|java|go|rust|python|swift|all) ;; *) echo "Invalid profile: $PROFILE" >&2; exit 2 ;; esac
 
 detect_runtime() {
   if [[ "${CONTAINER_RUNTIME}" != "podman" ]]; then
@@ -110,7 +118,7 @@ if [[ "$SKIP_BUILD" == true ]]; then architecture_args+=(--image "$IMAGE_NAME");
 PLATFORM="$(bash "${script_dir}/check-container-architecture.sh" ${architecture_args[@]+"${architecture_args[@]}"})"
 
 if [[ "${DRY_RUN}" == "true" ]]; then
-  printf '%s\n' "DRY-RUN: ${runtime} build --pull --platform ${PLATFORM} -t <local-image> . (unless --skip-build)"
+  printf '%s\n' "DRY-RUN: ${runtime} build --pull --format docker --platform ${PLATFORM} --target ade-${PROFILE} --build-arg ADE_MSL_PROFILE=${PROFILE} -t <local-image> . (unless --skip-build)"
   printf '%s\n' "DRY-RUN: require image-integrated Syft or host Syft exactly ${SYFT_VERSION}; no moving container fallback"
   printf '%s\n' "DRY-RUN: write one CycloneDX JSON file below ${SBOM_DIR}"
   exit 0
@@ -119,7 +127,13 @@ fi
 mkdir -p "${SBOM_DIR}"
 
 if [[ "${SKIP_BUILD}" != "true" ]]; then
-  "${runtime}" build --pull --platform "$PLATFORM" -t "${IMAGE_NAME}" .
+  "${runtime}" build --pull --format docker --platform "$PLATFORM" --target "ade-${PROFILE}" \
+    --build-arg "ADE_MSL_PROFILE=${PROFILE}" -t "${IMAGE_NAME}" .
+fi
+observed_profile="$("${runtime}" image inspect --format '{{ index .Labels "org.absdd-image-sandbox.msl-profile" }}' "$IMAGE_NAME")"
+if [[ "$observed_profile" != "$PROFILE" ]]; then
+  echo "Image profile mismatch: expected ${PROFILE}, observed ${observed_profile:-unknown}." >&2
+  exit 1
 fi
 bash "${script_dir}/check-container-architecture.sh" --platform "$PLATFORM" \
   ${architecture_args[@]+"${architecture_args[@]}"} --image "$IMAGE_NAME" >/dev/null
@@ -137,7 +151,7 @@ bash "${script_dir}/check-container-architecture.sh" --platform "$PLATFORM" \
 
 date_stamp="$(date +%Y-%m-%d)"
 safe_image="$(printf '%s' "${IMAGE_NAME}" | tr '/:@' '---' | tr -cd 'A-Za-z0-9._-')"
-out_file="${date_stamp}-${safe_image}-${image_id:7:12}.cdx.json"
+out_file="${date_stamp}-${safe_image}-${PROFILE}-${PLATFORM#linux/}-${image_id:7:12}.cdx.json"
 out_path="${SBOM_DIR}/${out_file}"
 source_version="${IMAGE_NAME##*:}"
 

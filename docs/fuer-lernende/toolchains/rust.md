@@ -3,12 +3,12 @@
 ## Einordnung / Context
 
 **DE:** Rust-Projekte liegen standardmäßig unter `/rust-projects`. Das Image
-installiert eine festgelegte Rust-Toolchain sowie `rustfmt`, Clippy,
+installiert im Profil `rust` oder `all` eine festgelegte Rust-Toolchain sowie `rustfmt`, Clippy,
 `rust-analyzer` und die Rust-Quellen. Cargo-Abhängigkeiten gehören in
 `Cargo.toml`; `Cargo.lock` bleibt für ausführbare Anwendungen eingecheckt.
 
-**EN:** Rust projects normally live under `/rust-projects`. The image installs
-a pinned Rust toolchain plus `rustfmt`, Clippy, `rust-analyzer`, and the Rust
+**EN:** Rust projects normally live under `/rust-projects`. The `rust` or `all`
+profile installs a pinned Rust toolchain plus `rustfmt`, Clippy, `rust-analyzer`, and the Rust
 sources. Cargo dependencies belong in `Cargo.toml`; executable applications
 keep `Cargo.lock` committed.
 

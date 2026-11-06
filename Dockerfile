@@ -86,9 +86,6 @@ RUN sed -i \
         just \
         libcurl4-openssl-dev \
         libedit2 \
-        libpython3-dev \
-        openjdk-${JAVA_VERSION}-jdk-headless \
-        python3-venv \
         libgcc-15-dev \
         libncurses5-dev \
         libsqlite3-0 \
@@ -122,7 +119,18 @@ RUN sed -i \
     && apt-get -y install --no-install-recommends nodejs \
     && ln -sf /usr/bin/fdfind /usr/local/bin/fd \
     && rm -rf /var/lib/apt/lists/*
-RUN set -eux; \
+# Build selector follows the large common APT layer so profiles share that cache.
+# toolchain-pin: argName=ADE_MSL_PROFILE
+ARG ADE_MSL_PROFILE=all
+RUN case "${ADE_MSL_PROFILE}" in dotnet|java|go|rust|python|swift|all) ;; *) echo "Invalid ADE_MSL_PROFILE: ${ADE_MSL_PROFILE}" >&2; exit 2 ;; esac
+ENV ADE_MSL_PROFILE=${ADE_MSL_PROFILE}
+RUN if [ "${ADE_MSL_PROFILE}" = java ] || [ "${ADE_MSL_PROFILE}" = all ]; then \
+      apt-get -y update \
+      && apt-get -y install --no-install-recommends "openjdk-${JAVA_VERSION}-jdk-headless" \
+      && rm -rf /var/lib/apt/lists/*; \
+    fi
+RUN if [ "${ADE_MSL_PROFILE}" = java ] || [ "${ADE_MSL_PROFILE}" = all ]; then \
+    set -eux; \
     tmp_dir="$(mktemp -d)"; \
     archive="apache-maven-${MAVEN_VERSION}-bin.tar.gz"; \
     maven_major="${MAVEN_VERSION%%.*}"; \
@@ -134,8 +142,13 @@ RUN set -eux; \
     tar -xzf "${tmp_dir}/${archive}" -C /opt; \
     ln -s "/opt/apache-maven-${MAVEN_VERSION}/bin/mvn" /usr/local/bin/mvn; \
     rm -rf "${tmp_dir}"; \
-    mvn --version
-RUN set -eux; \
+    mvn --version; \
+    fi
+RUN if [ "${ADE_MSL_PROFILE}" = python ] || [ "${ADE_MSL_PROFILE}" = all ]; then \
+    set -eux; \
+    apt-get -y update; \
+    apt-get -y install --no-install-recommends libpython3-dev python3-venv; \
+    rm -rf /var/lib/apt/lists/*; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
         amd64) python_target="x86_64"; python_sha256="7b03163a980c607ba8194709d4a4086735a7a9c488cc475b098157306927b36b" ;; \
@@ -151,7 +164,8 @@ RUN set -eux; \
     ln -s /opt/cpython/bin/python3 /usr/local/bin/python; \
     ln -s /opt/cpython/bin/python3 /usr/local/bin/python3; \
     rm -rf "${tmp_dir}"; \
-    python3 -c 'import sys; assert sys.version.split()[0] == "'"${PYTHON_VERSION}"'", sys.version'
+    python3 -c 'import sys; assert sys.version.split()[0] == "'"${PYTHON_VERSION}"'", sys.version'; \
+    fi
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
@@ -267,7 +281,8 @@ RUN set -eux; \
     install -m 0755 "${tmp_dir}/actionlint" /usr/local/bin/actionlint; \
     rm -rf "${tmp_dir}"; \
     actionlint -version
-RUN set -eux; \
+RUN if [ "${ADE_MSL_PROFILE}" = swift ] || [ "${ADE_MSL_PROFILE}" = all ]; then \
+    set -eux; \
     case "${SWIFT_DOCKER_TAG}" in \
         *-resolute) ;; \
         *) echo "Unsupported Swift Docker tag for Ubuntu 26.04 base image: ${SWIFT_DOCKER_TAG}" >&2; exit 1 ;; \
@@ -304,8 +319,10 @@ RUN set -eux; \
     rm -rf "${tmp_dir}"; \
     swift --version; \
     swiftc --version; \
-    command -v sourcekit-lsp
-RUN set -eux; \
+    command -v sourcekit-lsp; \
+    fi
+RUN if [ "${ADE_MSL_PROFILE}" = go ] || [ "${ADE_MSL_PROFILE}" = all ]; then \
+    set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
         amd64) go_arch="amd64"; go_sha256="65efbc80fdc1fa2cd2631cad5b481777a68e8725f34e89f50fc6ac714e379b40" ;; \
@@ -316,7 +333,8 @@ RUN set -eux; \
     printf '%s  %s\n' "${go_sha256}" /tmp/go.tgz | sha256sum -c -; \
     rm -rf /usr/local/go; \
     tar -C /usr/local -xzf /tmp/go.tgz; \
-    rm /tmp/go.tgz
+    rm /tmp/go.tgz; \
+    fi
 RUN printf '%s\n' 'export PATH="/usr/local/go/bin:/home/adedev/go/bin:/home/adedev/.cargo/bin:${PATH}"' \
     > /etc/profile.d/ade-toolchains.sh
 RUN npm i -g \
@@ -382,11 +400,14 @@ ENV CODEX_HOME="/home/adedev/.codex" \
     DISABLE_AUTOUPDATER="1" \
     ADE_AGENT_PROMPT_TARGET="local"
 WORKDIR /home/adedev
-RUN go install "golang.org/x/tools/gopls@${GOPLS_VERSION}" \
+RUN if [ "${ADE_MSL_PROFILE}" = go ] || [ "${ADE_MSL_PROFILE}" = all ]; then \
+      go install "golang.org/x/tools/gopls@${GOPLS_VERSION}" \
       && go install "honnef.co/go/tools/cmd/staticcheck@${STATICCHECK_VERSION}" \
       && go install "golang.org/x/vuln/cmd/govulncheck@${GOVULNCHECK_VERSION}" \
-      && go install "github.com/go-delve/delve/cmd/dlv@${DELVE_VERSION}"
-RUN set -eux; \
+      && go install "github.com/go-delve/delve/cmd/dlv@${DELVE_VERSION}"; \
+    fi
+RUN if [ "${ADE_MSL_PROFILE}" = rust ] || [ "${ADE_MSL_PROFILE}" = all ]; then \
+    set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
         amd64) rust_host="x86_64-unknown-linux-gnu" ;; \
@@ -401,7 +422,8 @@ RUN set -eux; \
     chmod 0755 "${tmp_dir}/rustup-init"; \
     "${tmp_dir}/rustup-init" -y --no-modify-path --profile minimal --default-host "${rust_host}" --default-toolchain "${RUST_TOOLCHAIN}"; \
     rm -rf "${tmp_dir}"; \
-    rustup component add rustfmt clippy rust-analyzer rust-src
+    rustup component add rustfmt clippy rust-analyzer rust-src; \
+    fi
 # Spec Kit v1.2.3: pin the peeled release commit, not a movable tag.
 # Keep the existing bind-mount patch and reject unexpected package metadata.
 RUN uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@5ea8b1cf0a38699340a38e00d02770308997d8c0 \
@@ -506,8 +528,30 @@ RUN set -eux; \
         done; \
     done; \
     /usr/bin/dotnet --list-runtimes
+RUN install -d -m 0755 /usr/local/share/ade \
+    && printf '{"profile":"%s"}\n' "${ADE_MSL_PROFILE}" > /usr/local/share/ade/msl-profile.json
+LABEL org.absdd-image-sandbox.msl-profile="${ADE_MSL_PROFILE}"
 USER adedev
 
 ENTRYPOINT ["/usr/local/bin/ade-entrypoint"]
 HEALTHCHECK --interval=10s --timeout=50s --start-period=45s --retries=3 CMD ["/usr/local/bin/healthcheck-opencode-web"]
 CMD ["/usr/local/bin/opencode-web"]
+
+# Buildah visits preceding named stages when targeting ade-all. Keep these
+# aliases side-effect-free; the validated ARG sets contents, manifest and label.
+FROM sandbox AS ade-dotnet
+
+FROM sandbox AS ade-java
+
+FROM sandbox AS ade-go
+
+FROM sandbox AS ade-rust
+
+FROM sandbox AS ade-python
+
+FROM sandbox AS ade-swift
+
+FROM sandbox AS ade-all
+
+# An unqualified direct build preserves the original six-toolchain image.
+FROM ade-all AS sandbox-default

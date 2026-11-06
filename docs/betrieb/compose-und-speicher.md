@@ -23,6 +23,49 @@ verwenden `5100-5198` und binden im Container an `0.0.0.0`.
 OpenCode server. Other web apps bind to `0.0.0.0` inside the container and use
 `5100-5198`.
 
+## Build-Profil / Build Profile
+
+**DE:** `ADE_MSL_PROFILE` in der lokalen `.env` waehlt beim Build `dotnet`,
+`java`, `go`, `rust`, `python`, `swift` oder `all`. `.NET` und gemeinsame
+Infrastruktur sind immer enthalten; `all` behaelt alle sechs Toolchains.
+Eine Aenderung ist kein Laufzeitschalter: im Host-Terminal mit Podman-Compose
+und vorhandener `opencode.env` neu bauen, den bisherigen Service ueber
+`scripts/compose-down-with-audit.sh --podman` mit Metadatenexport stoppen und
+mit `podman compose up -d` neu erstellen. Die benannten Volumes bleiben
+erhalten. Erwartet wird das Profil in `/usr/local/share/ade/msl-profile.json`
+und im Image-Label. Bei einem unbekannten Profil bricht der Build ab; bei
+Socketfehlern den lokalen Podman-Machine-Socket pruefen. Fuer `all` den Wert
+entfernen oder `ADE_MSL_PROFILE=all` setzen.
+
+**EN:** Set `ADE_MSL_PROFILE` in local `.env` to `dotnet`, `java`, `go`,
+`rust`, `python`, `swift`, or `all` at build time. .NET and shared tools are
+always present; `all` keeps all six toolchains. Changing this value requires
+a rebuild and container recreation. In a host shell with Podman Compose and
+`opencode.env`, build, stop through `scripts/compose-down-with-audit.sh
+--podman`, then run `podman compose up -d`. Named volumes remain. Check the
+manifest and image label for the selected profile. Unknown profiles fail the
+build; check the local Podman machine socket if the engine is unreachable.
+Remove the setting or use `ADE_MSL_PROFILE=all` to return to the full image.
+
+**DE:** Ein direkter Host-Build ohne Zielangabe verwendet `all`. Fuer einen
+gezielten direkten ARM64- oder AMD64-Build auf einem **nativen** Podman-Host
+werden Ziel und ARG gemeinsam gesetzt, etwa in Bash fuer Java:
+
+```bash
+podman build --pull --format docker --target ade-java \
+  --build-arg ADE_MSL_PROFILE=java -t localhost/ade-java:local .
+```
+
+Erwartet wird ein Image mit Profil-Label `java`. Wenn Podman den Machine-Socket
+oder eine Downloadquelle nicht erreicht, diesen Zugang vor dem Wiederholen
+pruefen. Der direkte Image-Tag ist von der Compose-Auswahl getrennt.
+
+**EN:** A direct host build without a target uses `all`. For a focused direct
+build on a **native** Podman host, set the target and ARG together as above.
+The expected result is an image labelled `java`; if Podman cannot reach its
+machine socket or a download source, fix that access before retrying. The
+Compose selection above remains separate from direct build tags.
+
 ## Bind-Mounts / Bind Mounts
 
 | Variable oder Quelle / Variable or source | Containerziel / Container target | Zweck / Purpose |

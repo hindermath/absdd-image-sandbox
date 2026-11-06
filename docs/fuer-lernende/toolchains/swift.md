@@ -3,12 +3,13 @@
 ## Einordnung / Context
 
 **DE:** Swift-Projekte liegen standardmäßig unter `/swift-projects`. Das Image
-enthält die native Swift-Toolchain für Ubuntu 24.04, Swift Package Manager
+enthält im Profil `swift` oder `all` die native Swift-6.4.2-Toolchain für Ubuntu 26.04, Swift Package Manager
 (SwiftPM) und SourceKit-LSP. Damit lassen sich plattformunabhängige Swift-
 Pakete und Kommandozeilenprogramme bauen.
 
 **EN:** Swift projects normally live under `/swift-projects`. The image
-contains the native Swift toolchain for Ubuntu 24.04, Swift Package Manager
+contains the native Swift 6.4.2 toolchain for Ubuntu 26.04 in the `swift` or
+`all` profile, Swift Package Manager
 (SwiftPM), and SourceKit-LSP. It can build platform-independent Swift packages
 and command-line programs.
 

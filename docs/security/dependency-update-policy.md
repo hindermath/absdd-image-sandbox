@@ -4,7 +4,8 @@
 
 Owner ist der Repository-Maintainer. Das `Dockerfile` bleibt die einzige Quelle
 fuer Versionswerte und Archiv-Pruefsummen. Das [Pin-Register](../../scripts/config/toolchain-pins.json)
-ordnet alle 29 ARGs offiziellen Quellen und 28 Gruppen zu. Python-Version und
+ordnet 29 Versions-ARGs offiziellen Quellen und 28 Gruppen zu; das 30. ARG
+`ADE_MSL_PROFILE` ist ein geprüfter Build-Selektor. Python-Version und
 Builddatum bewegen sich gemeinsam. Renovate ist abgeloest; historische Evidence
 bleibt unveraendert.
 
@@ -107,8 +108,8 @@ keinen laufenden Container.
 ## English
 
 The repository maintainer owns this policy. The Dockerfile remains the sole
-source of versions and archive hashes. The registry covers all 29 ARGs in
-28 groups; Python version/date move together. Renovate is retired; historical
+source of versions and archive hashes. The registry covers 29 version ARGs in
+28 groups plus the validated `ADE_MSL_PROFILE` build selector; Python version/date move together. Renovate is retired; historical
 evidence is retained. Dependabot maintains Actions, external pre-commit hooks
 and the base digest within approved MCR tag `10.0.403-resolute`; higher versions are excluded.
 Docker is the manifest ecosystem; **Podman is the required engine**. See the

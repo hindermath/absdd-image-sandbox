@@ -3,11 +3,11 @@
 ## Einordnung / Context
 
 **DE:** Go-Projekte liegen standardmäßig unter `/go-projects`. Neben dem
-Compiler enthält das Image `gopls`, `staticcheck`, `govulncheck` und `dlv`.
+Compiler enthält das Profil `go` oder `all` auch `gopls`, `staticcheck`, `govulncheck` und `dlv`.
 Abhängigkeiten bleiben im jeweiligen `go.mod` und `go.sum` nachvollziehbar.
 
 **EN:** Go projects normally live under `/go-projects`. In addition to the
-compiler, the image contains `gopls`, `staticcheck`, `govulncheck`, and `dlv`.
+compiler, the `go` or `all` profile contains `gopls`, `staticcheck`, `govulncheck`, and `dlv`.
 Dependencies remain traceable in each project's `go.mod` and `go.sum`.
 
 ## Projekt anlegen / Create a Project

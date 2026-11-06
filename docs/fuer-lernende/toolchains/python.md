@@ -3,13 +3,14 @@
 ## Einordnung / Context
 
 **DE:** Python-Projekte liegen standardmäßig unter `/python-projects`. Das
-Image enthält Python 3.15.1, virtuelle Umgebungen sowie die fest installierten
-Werkzeuge `uv` und `uvx`. Anwendungsabhängigkeiten werden nicht global in das
-Image installiert.
+Profil `python` oder `all` enthält Python 3.15.2 und virtuelle Umgebungen;
+`uv` und `uvx` sind gemeinsame Werkzeuge in allen Profilen. Anwendungsabhängigkeiten
+werden nicht global in das Image installiert.
 
 **EN:** Python projects normally live under `/python-projects`. The image
-contains Python 3.15.1, virtual environments, and the pinned `uv` and `uvx` tools.
-Application dependencies are not installed globally in the image.
+contains Python 3.15.2 and virtual environments in the `python` or `all`
+profile; pinned `uv` and `uvx` are shared tools in every profile. Application
+dependencies are not installed globally in the image.
 
 **DE:** `python` und `python3` verwenden den hashgeprüften CPython-Build unter
 `/opt/cpython`. Das Ubuntu-System-Python unter `/usr/bin/python3` bleibt für

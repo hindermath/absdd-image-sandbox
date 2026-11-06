@@ -2,6 +2,9 @@
 
 ## Prüftiefe wählen / Choose Validation Depth
 
+Aktueller Kandidatenstand / Current candidate evidence:
+[Feature-Update #101/#102/#104](../maintenance/feature-update-2026-11-06-acceptance.md).
+
 **DE:** Eine **statische Prüfung** liest Konfiguration und Dateien, ohne einen
 Container zu starten. Eine **praktische Prüfung** baut oder startet das Image
 und führt Befehle im Linux-Container aus. Plattformakzeptanz bedeutet

@@ -9,6 +9,14 @@
   "runtime": "podman",
   "pins": [
     {
+      "arg": "ADE_MSL_PROFILE",
+      "group": "ADE_MSL_PROFILE",
+      "package": "absdd-image-sandbox-build-profile",
+      "provider": "selector",
+      "tagPrefix": "",
+      "tagSuffix": ""
+    },
+    {
       "arg": "JAVA_VERSION",
       "group": "JAVA_VERSION",
       "package": "java",

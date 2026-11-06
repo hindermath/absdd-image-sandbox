@@ -190,6 +190,21 @@ esac
         self.assertNotIn("build --pull", self.commands())
         self.assertNotIn("run --rm", self.commands())
 
+    def test_sbom_profile_argument_overrides_environment(self):
+        self.env["ADE_MSL_PROFILE"] = "java"
+        for shell in self.shells():
+            dry_run = self.option(shell, "--dry-run", "-WhatIf")
+            profile = self.option(shell, "--profile", "-Profile")
+            inherited = self.run_script("build-and-sbom", dry_run, shell=shell)
+            self.assertEqual(inherited.returncode, 0, inherited.stderr)
+            self.assertIn("--target ade-java", inherited.stdout)
+            explicit = self.run_script("build-and-sbom", dry_run, profile, "swift", shell=shell)
+            self.assertEqual(explicit.returncode, 0, explicit.stderr)
+            self.assertIn("--target ade-swift", explicit.stdout)
+            invalid = self.run_script("build-and-sbom", dry_run, profile, "invalid", shell=shell)
+            self.assertNotEqual(invalid.returncode, 0)
+        self.assertNotIn("build --pull", self.commands())
+
 
 if __name__ == "__main__":
     unittest.main()
