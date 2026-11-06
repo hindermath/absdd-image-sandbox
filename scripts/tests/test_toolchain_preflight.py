@@ -25,6 +25,27 @@ class ToolchainPreflightTests(unittest.TestCase):
             body = "#!/bin/sh\n"
             if tool == "dotnet":
                 body += "printf '%s\\n' '10.0.301'\n"
+            elif tool == "codex":
+                body = '''#!/usr/bin/env python3
+import json, sys
+from pathlib import Path
+if sys.argv[1] != 'app-server':
+    print('codex test-version')
+else:
+    for line in sys.stdin:
+        row = json.loads(line)
+        if 'id' not in row: continue
+        payload = {}
+        if row['method'] == 'thread/start':
+            if Path(__file__).with_name('fail-session').exists():
+                print(json.dumps({'id': row['id'], 'error': {'message': 'fixture startup error'}}), flush=True)
+                continue
+            payload = {'thread': {'id': 'fixture'}, 'approvalPolicy': 'on-request',
+                       'sandbox': {'type': 'workspaceWrite', 'networkAccess': False,
+                                   'excludeSlashTmp': True},
+                       'instructionSources': [row['params']['cwd'] + '/AGENTS.md']}
+        print(json.dumps({'id': row['id'], 'result': payload}), flush=True)
+'''
             else:
                 body += f"printf '%s\\n' '{tool} test-version'\n"
             path = bin_dir / tool
@@ -38,6 +59,7 @@ class ToolchainPreflightTests(unittest.TestCase):
             command.extend(["--repo", str(repository)])
         environment = os.environ.copy()
         environment["PATH"] = f"{fake_path}:/usr/bin:/bin"
+        environment["HOME"] = str(fake_path.parent)
         return subprocess.run(command, cwd=ROOT, env=environment, text=True,
                               stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
 
@@ -67,6 +89,16 @@ class ToolchainPreflightTests(unittest.TestCase):
             document = json.loads(result.stdout)
             actionlint = next(item for item in document["tools"] if item["tool"] == "actionlint")
             self.assertEqual(actionlint["status"], "Missing")
+
+    def test_session_error_fails_despite_version_success(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            fake_path = self.make_path(Path(directory))
+            (fake_path / 'fail-session').touch()
+            result = self.run_preflight(fake_path)
+            self.assertEqual(result.returncode, 1)
+            tools = {item['tool']: item['status'] for item in json.loads(result.stdout)['tools']}
+            self.assertEqual(tools['codex'], 'Pass')
+            self.assertEqual(tools['codex-session'], 'Fail')
 
     def test_missing_documentation_tools_fail(self) -> None:
         for tool in ("pandoc", "lychee", "typst", "tinymist"):
