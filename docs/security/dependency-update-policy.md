@@ -9,7 +9,7 @@ Builddatum bewegen sich gemeinsam. Renovate ist abgeloest; historische Evidence
 bleibt unveraendert.
 
 [Dependabot](../../.github/dependabot.yml) pflegt Actions, externe pre-commit-
-Hooks und Basisimage-Digests im freigegebenen MCR-Tag `10.0`. Hoehere Versionen
+Hooks und Basisimage-Digests im freigegebenen MCR-Tag `10.0.403-resolute`. Hoehere Versionen
 sind ausgeschlossen. `docker` bezeichnet das Manifestformat; **Podman bleibt
 die verbindliche Build-Engine**. Zeitplan, Gruppierung und Ausschluesse stehen
 im [Wartungspfad](../../.github/DEPENDENCY-MAINTENANCE.md). Sicherheitsgruppen
@@ -110,7 +110,7 @@ The repository maintainer owns this policy. The Dockerfile remains the sole
 source of versions and archive hashes. The registry covers all 29 ARGs in
 28 groups; Python version/date move together. Renovate is retired; historical
 evidence is retained. Dependabot maintains Actions, external pre-commit hooks
-and the base digest within approved MCR tag10.0; higher versions are excluded.
+and the base digest within approved MCR tag `10.0.403-resolute`; higher versions are excluded.
 Docker is the manifest ecosystem; **Podman is the required engine**. See the
 maintenance guide for schedules, grouping and exclusions. Security groups do
 not scan arbitrary ARGs for vulnerabilities.

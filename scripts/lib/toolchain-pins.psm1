@@ -85,7 +85,7 @@ function Get-AdePinJson {
 
 function Get-AdePinVersion {
     param([string]$Value)
-    $plain = $Value -replace '^v','' -replace '-noble$',''
+    $plain = $Value -replace '^v','' -replace '-(?:noble|resolute)$',''
     if ($plain -cnotmatch '^\d+\.\d+(?:\.\d+){0,2}$') { throw "Invalid stable version: ${Value}" }
     if (($plain -split '\.').Count -eq 2) { $plain += '.0' }
     [version]$plain
@@ -102,24 +102,27 @@ function Get-AdePinContext {
     $text = [IO.File]::ReadAllText($path)
     $registry = [IO.File]::ReadAllText($registryPath) | ConvertFrom-Json -AsHashtable
     if ($registry.schemaVersion -ne 1 -or $registry.runtime -cne 'podman' -or $registry.dockerfile -cne 'Dockerfile') { throw 'Unsupported pin registry.' }
-    if ($registry.baseImage.owner -cne 'dependabot' -or $registry.baseImage.dependency -cne 'mcr.microsoft.com/dotnet/sdk' -or $registry.baseImage.tag -cne '10.0' -or
-        $text -cnotmatch '(?m)^FROM mcr\.microsoft\.com/dotnet/sdk:10\.0@sha256:[a-f0-9]{64} AS dotnet-base\r?$') { throw 'Approved base-image channel/digest has drifted.' }
+    if ($registry.baseImage.owner -cne 'dependabot' -or $registry.baseImage.dependency -cne 'mcr.microsoft.com/dotnet/sdk' -or $registry.baseImage.tag -cne '10.0.403-resolute' -or
+        $text -cnotmatch '(?m)^FROM mcr\.microsoft\.com/dotnet/sdk:10\.0\.403-resolute@sha256:[a-f0-9]{64} AS dotnet-base\r?$') { throw 'Approved base-image channel/digest has drifted.' }
     $values = @{}
     foreach ($match in [regex]::Matches($text,'(?m)^ARG ([A-Z][A-Z0-9_]*)=([^\r\n]+)\r?$')) {
         $name = $match.Groups[1].Value
         if ($values.ContainsKey($name)) { throw "Duplicate ARG: ${name}" }
         $value = $match.Groups[2].Value.TrimEnd("`r")
-        if ($value -cnotmatch '^(?:v?\d+(?:\.\d+){0,3}(?:-noble)?)$') { throw "Unsafe ARG value: ${name}" }
+        if ($name -ceq 'ADE_MSL_PROFILE') {
+            if ($value -cne 'all') { throw 'Invalid default build profile.' }
+        } elseif ($value -cnotmatch '^(?:v?\d+(?:\.\d+){0,3}(?:-(?:noble|resolute))?)$') { throw "Unsafe ARG value: ${name}" }
         $values[$name] = $value
     }
     $names = @($registry.pins | ForEach-Object { $_.arg })
     if ($names.Count -ne $values.Count -or @($names | Select-Object -Unique).Count -ne $names.Count -or
         @($names | Where-Object { -not $values.ContainsKey($_) }).Count) { throw 'Pin coverage differs from Dockerfile ARGs.' }
-    $providers = @('github','npm','gomod','go','rust','rustup','maven','python','powershell','dotnet','java-channel','node-channel','companion')
+    $providers = @('github','npm','gomod','go','rust','rustup','maven','python','powershell','dotnet','java-channel','node-channel','companion','selector')
     foreach ($pin in $registry.pins) {
         if ($pin.arg -cnotmatch '^[A-Z][A-Z0-9_]*$' -or $pin.group -cnotmatch '^[A-Z][A-Z0-9_]*$' -or
             $pin.provider -cnotin $providers -or $pin.package -cnotmatch '^[@A-Za-z0-9][A-Za-z0-9@:._/-]*$') { throw 'Invalid pin record.' }
         if ($pin.provider -ceq 'companion' -and $pin.arg -cne 'PYTHON_BUILD_DATE') { throw 'Unknown companion ARG.' }
+        if ($pin.provider -ceq 'selector' -and $pin.arg -cne 'ADE_MSL_PROFILE') { throw 'Unknown selector ARG.' }
     }
     @{ root=$root; text=$text; registry=$registry; values=$values }
 }
@@ -296,7 +299,7 @@ function Get-AdePinReport {
     param([System.Collections.IDictionary]$Context)
     $groups = [Collections.Generic.List[object]]::new()
     foreach ($pin in $Context.registry.pins) {
-        if ($pin.provider -ceq 'companion') { continue }
+        if ($pin.provider -cin @('companion','selector')) { continue }
         try { $groups.Add((Get-AdePinCandidate $pin $Context.values)) }
         catch { $groups.Add(@{group=$pin.group;status='Blocked';updates=@{};hashes=@{};reason=$_.Exception.Message}) }
     }

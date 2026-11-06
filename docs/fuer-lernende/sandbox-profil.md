@@ -200,9 +200,9 @@ The sandbox supports six MSL languages. The table shows version, test command, a
 | **C# / .NET** | .NET SDK 10.0 (MCR) | `Supported` | `dotnet test` | `dotnet list package --vulnerable` |
 | **Go** | 1.27.3 | `Supported` | `go test ./...` | `govulncheck ./...` |
 | **Java** | OpenJDK 25 LTS | `Supported` | `mvn test` | `mvn dependency:analyze` |
-| **Python** | CPython 3.15.1 | `Supported` | `python -m pytest` | `pip-audit` (via `uv`) |
+| **Python** | CPython 3.15.2 | `Supported` | `python -m pytest` | `pip-audit` (via `uv`) |
 | **Rust** | 1.99.1 | `Supported` | `cargo test` | `cargo audit` |
-| **Swift** | 6.4.1 | `Open` | `swift test` | Kein globales Audit-Tool installiert / No global audit tool installed |
+| **Swift** | 6.4.2 | `Open` | `swift test` | Kein globales Audit-Tool installiert / No global audit tool installed |
 
 **DE:** Python ist einer der sechs verbindlichen MSL-Pfade und zugleich die
 erste Skriptgrundlage. Zusaetzlich stellt die Sandbox PowerShell 7 als zweite

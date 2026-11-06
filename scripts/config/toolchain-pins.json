@@ -3,7 +3,7 @@
   "dockerfile": "Dockerfile",
   "baseImage": {
     "dependency": "mcr.microsoft.com/dotnet/sdk",
-    "tag": "10.0",
+    "tag": "10.0.403-resolute",
     "owner": "dependabot"
   },
   "runtime": "podman",
@@ -120,7 +120,7 @@
       "provider": "github",
       "tagPrefix": "swift-",
       "tagSuffix": "-RELEASE",
-      "valueSuffix": "-noble",
+      "valueSuffix": "-resolute",
       "channel": "6"
     },
     {

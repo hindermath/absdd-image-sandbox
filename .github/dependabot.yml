@@ -12,7 +12,7 @@ updates:
     time: '07:00'
     timezone: Europe/Berlin
   open-pull-requests-limit: 5
-  # Keep the approved 10.0 channel; refresh its pinned manifest digest.
+  # Keep the reviewed 10.0.403-resolute base tag; refresh its pinned digest.
   # Docker is the manifest ecosystem, Podman remains the build engine.
   # Dependabot stores the registry separately from the dependency name.
   allow:

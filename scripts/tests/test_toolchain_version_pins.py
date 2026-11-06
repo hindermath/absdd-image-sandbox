@@ -41,7 +41,7 @@ class VersionPinTests(unittest.TestCase):
             (ROOT / "scripts/config/required-cli-tools-registry.json").read_text()
         )
         swift = next(tool for tool in registry["tools"] if tool["id"] == "swift")
-        self.assertEqual(swift["install"]["linux"]["swiftVersion"], tag.removesuffix("-noble"))
+        self.assertEqual(swift["install"]["linux"]["swiftVersion"], tag.removesuffix("-resolute"))
 
     def test_swift_signature_must_match_pinned_signer(self):
         text = (ROOT / "Dockerfile").read_text()
@@ -59,13 +59,13 @@ class VersionPinTests(unittest.TestCase):
                 "arm64": "929bd163db2d7cd2255d3bcb8967208079813d7b46b0c952f7b794d8e2c7d304",
             },
             "uv": {
-                "amd64": "f68d291c75783122dad58ab77def0e13f3233f358731db5d6d7e8715603b928f",
-                "arm64": "4bb69cf95ed13f23713bb7bc09f241896ea0c75b7c557e615a20604b82f9c403",
+                "amd64": "c5221ff41b7892bfc223543883600125f6a47fe845093e0f5bdff4f359196d83",
+                "arm64": "71279f8d3c67241e807b9d8db872d1bf541579fb9f08b7d1eb1682196d1e57dc",
             },
         }
         for tool, architectures in expected.items():
             arg = {"syft": "SYFT_VERSION", "uv": "UV_VERSION"}[tool]
-            reviewed = {"syft": "1.55.0", "uv": "0.13.5"}[tool]
+            reviewed = {"syft": "1.55.0", "uv": "0.13.7"}[tool]
             version = re.search(r"(?m)^ARG " + arg + r"=(\S+)$", text).group(1)
             if version != reviewed:
                 # A later automated update must retain its own version/hash proof.
@@ -91,7 +91,7 @@ class VersionPinTests(unittest.TestCase):
         for language, arg in (("Go", "GO_VERSION"), ("Rust", "RUST_TOOLCHAIN"),
                               ("Swift", "SWIFT_DOCKER_TAG")):
             version = re.search(r"(?m)^ARG " + arg + r"=(\S+)$", text).group(1)
-            version = version.removesuffix("-noble")
+            version = version.removesuffix("-resolute")
             row = re.search(r"(?m)^\| \*\*" + language + r"\*\* \| ([^|]+)\|", profile)
             self.assertIsNotNone(row, language)
             self.assertEqual(row.group(1).strip(), version, language)
@@ -103,8 +103,8 @@ class VersionPinTests(unittest.TestCase):
             "COPY --from=dotnet-base /usr/share/dotnet/dotnet /usr/share/dotnet/dotnet",
             text,
         )
-        self.assertIn('${DOTNET_VERSION%.*}', text)
-        self.assertIn('"${path##*/}" != "${DOTNET_VERSION}"', text)
+        self.assertIn('newest="$(find', text)
+        self.assertIn('"${path##*/}" != "${newest}"', text)
 
     def test_native_agent_hooks_are_narrow_and_checked(self):
         text = (ROOT / "Dockerfile").read_text()
@@ -226,7 +226,7 @@ esac
         config = json.loads((ROOT / "scripts/config/toolchain-pins.json").read_text())
         text = (ROOT / "Dockerfile").read_text()
         self.assertEqual("podman", config["runtime"])
-        self.assertEqual("10.0", config["baseImage"]["tag"])
+        self.assertEqual("10.0.403-resolute", config["baseImage"]["tag"])
         self.assertRegex(text, r"(?m)^ARG NPM_VERSION=12\.[0-9]+\.[0-9]+$")
         self.assertIn('"npm@${NPM_VERSION}"', text)
         for arg, channel in (("JAVA_VERSION", "25"), ("NODE_MAJOR", "24")):
