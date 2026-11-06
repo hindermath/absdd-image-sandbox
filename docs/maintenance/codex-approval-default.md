@@ -45,6 +45,10 @@ Der Owner hat Image-Build und Container-Austausch aus dem PR-Branch
 ausdruecklich autorisiert, jedoch keinen Merge. Native ARM64-Abnahme:
 Sitzungsstart sowie synthetische Schreib-, Secret- und Socket-Negativtests.
 Windows-/AMD64-Abnahme offen.
+Fuer Host-Bind-Mounts setzt Compose den SELinux-Typ `container_engine_t`,
+ohne SELinux oder die innere Sandbox abzuschalten. Der vorherige Standardtyp
+blockierte den verschachtelten Bind-Mount von `/rider-projects`.
+Abgrenzung: [Isolationsnachweis](../security/sandbox-isolation.md).
 Lokal bestanden: 2 Smoke-Regressionstests, 8 Pin-Abdeckungstests,
 15 Versions-Pin-Tests, Pin-Validator, Bash-Syntax und Compose-Konfiguration.
 Die Pin-CI fuehrt den neuen Regressionstest explizit auf ihrer vorhandenen
@@ -78,5 +82,8 @@ The owner authorized native ARM64 image build and container replacement from
 the PR branch, without merging. Validation includes session startup and
 synthetic negative write, secret-read and daemon-socket tests.
 Windows/AMD64 acceptance remains open.
+For host bind mounts Compose uses the SELinux `container_engine_t` type.
+The prior default type blocked the nested /rider-projects bind mount.
+SELinux and inner sandbox restrictions remain enabled; see the isolation record.
 
 Reference: [Official configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference).

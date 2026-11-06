@@ -11,6 +11,14 @@ ROOT = Path(__file__).resolve().parents[2]
 
 @unittest.skipUnless(os.name == "posix", "Linux adapter uses POSIX ownership semantics")
 class BwrapAdapterTests(unittest.TestCase):
+    def test_compose_preserves_hardening_with_nested_mount_type(self):
+        compose = (ROOT / 'compose.yml').read_text()
+        for setting in ('label=type:container_engine_t', 'no-new-privileges:true',
+                        'cap_drop:', '- ALL'):
+            self.assertIn(setting, compose)
+        self.assertNotIn('privileged: true', compose)
+        self.assertNotIn('label=disable', compose)
+
     def run_adapter(self, args, unsafe=False, target_state=None):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

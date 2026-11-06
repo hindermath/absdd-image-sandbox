@@ -2,6 +2,29 @@
 
 Stand: 2026-07-05
 
+## Ergaenzung 2026-11-06 / Update
+
+Codex 0.164.0 benoetigt fuer seine innere Bubblewrap-Sandbox auf der
+SELinux-geschuetzten Podman-VM den Typ `container_engine_t`. Compose setzt
+deshalb `label=type:container_engine_t`; SELinux wird nicht deaktiviert.
+Das ist eine gezielte Aenderung der aeusseren SELinux-Mount-Berechtigung.
+Non-root, `cap_drop: ALL`, `no-new-privileges`, die bestehenden Mounts und
+die innere Codex-Dateisystem-/Netzwerkpolicy bleiben erhalten. Native ARM64-
+Tests pruefen den Start ueber einen Host-Bind-Mount sowie erlaubte Workspace-
+Schreibzugriffe und verbotene Schreibzugriffe ausserhalb des Workspaces,
+auf `/tmp`, geschuetzte Metadaten und einen weiteren Host-Mount. Secret-
+Lesen und Verbindung zum synthetischen Daemon-Socket bleiben blockiert.
+Kein Nachweis fuer Windows/AMD64 oder eine formale Sandbox-Freigabe.
+
+Codex 0.164.0 needs the `container_engine_t` SELinux type for inner Bubblewrap
+bind mounts on the SELinux-protected Podman VM. Compose sets that type while
+retaining SELinux enforcement. This deliberately changes the outer SELinux
+mount permission, not the non-root, capability, no-new-privileges, mount or
+inner filesystem/network boundaries. Native ARM64 tests cover host-mount
+startup, permitted workspace writes and denied outside/tmp/metadata/other-
+host-mount writes, secret reads and synthetic daemon-socket connections.
+Windows/AMD64 and formal sandbox approval are separate unproven gates.
+
 Dieses Dokument konsolidiert die technischen Isolationsmechanismen der
 `absdd-image-sandbox`. Es beschreibt vorhandene Konfigurationen und aendert keine
 Sandbox-Einstellung.
