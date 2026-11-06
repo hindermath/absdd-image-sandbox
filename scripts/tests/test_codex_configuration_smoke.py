@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class CodexConfigurationSmokeTests(unittest.TestCase):
+    @unittest.skipUnless(os.name == "posix", "Native shell fixture targets the Linux image")
     def test_configuration_failure_is_not_hidden_by_version_success(self):
         source = (ROOT / "scripts/smoke-test-toolchains.sh").read_text()
         stage = source.split('section "Codex configuration"', 1)[1].split(

@@ -14,6 +14,7 @@ smoke = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(smoke)
 
 
+@unittest.skipUnless(os.name == "posix", "Image session cleanup uses POSIX process groups")
 class SessionSmokeTests(unittest.TestCase):
     def run_probe(self, second, timeout=2):
         class FakeProcess:
