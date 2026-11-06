@@ -9,7 +9,7 @@ Je Oekosystem sind hoechstens fuenf Versions-PRs gleichzeitig offen.
 Sicherheitsupdates verwenden eigene Gruppen und warten nicht auf den Wochenlauf.
 Vorhandene SHA-Pins bleiben erhalten. Es wird kein Auto-Merge eingerichtet.
 
-Kopierte Maintenance-TUI-Dateien und zentral verteilte Wartungsworkflows werden in home-baseline gepflegt. Ihre Aktualisierung erfolgt ueber den bestehenden Propagationsprozess. Dependabot pflegt Basisimage-Digests im freigegebenen 10.0-Kanal, Actions und externe pre-commit-Hooks. Der [Pin-Update-Workflow](workflows/toolchain-pins.yml) pflegt die 29 ARGs ueber ein vollstaendiges Register und gepruefte Podman-Vorschlaege; lokale Hooks besitzen keine Remote-Version. Renovate ist abgeloest. Details: [Update-Policy](../docs/security/dependency-update-policy.md).
+Kopierte Maintenance-TUI-Dateien und zentral verteilte Wartungsworkflows werden in home-baseline gepflegt. Ihre Aktualisierung erfolgt ueber den bestehenden Propagationsprozess. Dependabot pflegt Basisimage-Digests im freigegebenen Tag 10.0.403-resolute, Actions und externe pre-commit-Hooks. Der [Pin-Update-Workflow](workflows/toolchain-pins.yml) pflegt 29 Versions-ARGs; ADE_MSL_PROFILE ist ein geprüfter Build-Selektor. Lokale Hooks besitzen keine Remote-Version. Renovate ist abgeloest. Details: [Update-Policy](../docs/security/dependency-update-policy.md).
 Historische Specs, Archive und Evidence-Fixtures werden nicht automatisch umgeschrieben.
 Aktive Produkt-, Beispiel- und Testabhaengigkeiten bleiben erfasst.
 Toolchain-Pins ausserhalb unterstuetzter Manifeste verwenden den separat geprueften Pin-Update-Workflow.
@@ -29,7 +29,7 @@ Each ecosystem allows at most five open version PRs.
 Security updates use independent groups and do not wait for the weekly run.
 Existing SHA pins remain intact. This change configures no auto-merge.
 
-Copied Maintenance TUI files and centrally distributed maintenance workflows are maintained in home-baseline and updated through the existing propagation process. Dependabot maintains base-image digests within the approved 10.0 channel, Actions and external pre-commit hooks. The [pin-update workflow](workflows/toolchain-pins.yml) covers all 29 ARGs through a complete registry and verified Podman proposals; local hooks have no remote version. Renovate is retired. See the [update policy](../docs/security/dependency-update-policy.md).
+Copied Maintenance TUI files and centrally distributed maintenance workflows are maintained in home-baseline and updated through the existing propagation process. Dependabot maintains base-image digests within the approved 10.0.403-resolute tag, Actions and external pre-commit hooks. The [pin-update workflow](workflows/toolchain-pins.yml) covers 29 version ARGs; ADE_MSL_PROFILE is a validated build selector. Local hooks have no remote version. Renovate is retired. See the [update policy](../docs/security/dependency-update-policy.md).
 Historical specs, archives and evidence fixtures are not rewritten automatically.
 Active product, example and test dependencies remain covered.
 Toolchain pins outside supported manifests use the separately tested pin-update workflow.

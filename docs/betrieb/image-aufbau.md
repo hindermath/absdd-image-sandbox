@@ -85,7 +85,7 @@ documentation smoke test.
 | Java | Ubuntu OpenJDK 25 LTS und hashgeprüftes Apache Maven 3.10.0 / Ubuntu OpenJDK 25 LTS and hash-verified Apache Maven 3.10.0 |
 | Go | Releasearchiv; zusätzliche Werkzeuge als Benutzer `adedev` / release archive; additional tools as user `adedev` |
 | Rust | festes `rustup-init` mit SHA256-Prüfung; Komponenten über gepinnte Toolchain / pinned `rustup-init` with SHA256 verification; components through pinned toolchain |
-| Python | nativer CPython-Standalone-Build 3.15.1 mit SHA-256 unter `/opt/cpython`; Ubuntu-System-Python unverändert / native SHA-256-verified CPython 3.15.1 under `/opt/cpython`; system Python unchanged |
+| Python | nativer CPython-Standalone-Build 3.15.2 mit SHA-256 unter `/opt/cpython`; Ubuntu-System-Python unverändert / native SHA-256-verified CPython 3.15.2 under `/opt/cpython`; system Python unchanged |
 | Swift | signiertes Ubuntu-Release, Architekturprüfung, SourceKit-LSP / signed Ubuntu release, architecture check, SourceKit-LSP |
 | Node.js | signierte APT-Quelle; npm für globale Agentenpakete / signed APT source; npm for global agent packages |
 | GitHub Actions | hashgeprüftes `actionlint`-Release für `amd64` und `arm64`; `gh` bleibt auf der Control Plane / hash-verified `actionlint` release for `amd64` and `arm64`; `gh` remains on the control plane |

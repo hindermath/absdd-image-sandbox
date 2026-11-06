@@ -94,7 +94,7 @@
         "manager": "swiftly",
         "linux": {
           "swiftlyVersion": "1.1.2",
-          "swiftVersion": "6.4.1",
+          "swiftVersion": "6.4.2",
           "profiles": {
             "ubuntu:22.04": "ubuntu2204",
             "ubuntu:24.04": "ubuntu2404"

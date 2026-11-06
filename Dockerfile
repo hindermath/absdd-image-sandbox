@@ -1,5 +1,5 @@
-# Approved .NET 10 channel; the immutable MCR digest binds the SDK and platform manifests.
-FROM mcr.microsoft.com/dotnet/sdk:10.0@sha256:de4fe90a98845d75910b9769662465c84de1a934665c431279d1382b2bddc02b AS dotnet-base
+# .NET 10.0.403 on Ubuntu 26.04; MCR index verified for linux/amd64 and linux/arm64 on 2026-11-06.
+FROM mcr.microsoft.com/dotnet/sdk:10.0.403-resolute@sha256:2107242a0f56885d09f8a536ac300f6cb1a2b3f6d40605e5ff81bbd83ad91e3f AS dotnet-base
 FROM dotnet-base AS sandbox
 
 # toolchain-pin: argName=JAVA_VERSION
@@ -7,11 +7,11 @@ ARG JAVA_VERSION=25
 # toolchain-pin: argName=MAVEN_VERSION
 ARG MAVEN_VERSION=3.10.0
 # toolchain-pin: argName=PYTHON_VERSION
-ARG PYTHON_VERSION=3.15.1
+ARG PYTHON_VERSION=3.15.2
 # toolchain-pin: argName=PYTHON_BUILD_DATE
-ARG PYTHON_BUILD_DATE=20261021
+ARG PYTHON_BUILD_DATE=20261026
 # toolchain-pin: argName=POWERSHELL_VERSION
-ARG POWERSHELL_VERSION=7.6.8
+ARG POWERSHELL_VERSION=7.6.9
 # toolchain-pin: argName=GO_VERSION
 ARG GO_VERSION=1.27.3
 # toolchain-pin: argName=GOPLS_VERSION
@@ -25,25 +25,25 @@ ARG DELVE_VERSION=v1.27.2
 # toolchain-pin: argName=RUST_TOOLCHAIN
 ARG RUST_TOOLCHAIN=1.99.1
 # toolchain-pin: argName=RUSTUP_VERSION
-ARG RUSTUP_VERSION=1.29.2
+ARG RUSTUP_VERSION=1.29.3
 # toolchain-pin: argName=SWIFT_DOCKER_TAG
-ARG SWIFT_DOCKER_TAG=6.4.1-noble
+ARG SWIFT_DOCKER_TAG=6.4.2-resolute
 # toolchain-pin: argName=NODE_MAJOR
 ARG NODE_MAJOR=24
 # toolchain-pin: argName=UV_VERSION
-ARG UV_VERSION=0.13.5
+ARG UV_VERSION=0.13.7
 # toolchain-pin: argName=OPENCODE_VERSION
 ARG OPENCODE_VERSION=2.1.4
 # toolchain-pin: argName=CODEX_VERSION
 ARG CODEX_VERSION=0.164.0
 # toolchain-pin: argName=CLAUDE_CODE_VERSION
-ARG CLAUDE_CODE_VERSION=2.1.310
+ARG CLAUDE_CODE_VERSION=2.1.319
 # toolchain-pin: argName=GEMINI_CLI_VERSION
 ARG GEMINI_CLI_VERSION=0.65.0
 # toolchain-pin: argName=ANTIGRAVITY_CLI_VERSION
 ARG ANTIGRAVITY_CLI_VERSION=1.4.7
 # toolchain-pin: argName=COPILOT_CLI_VERSION
-ARG COPILOT_CLI_VERSION=1.0.103
+ARG COPILOT_CLI_VERSION=1.0.106
 # toolchain-pin: argName=SYFT_VERSION
 ARG SYFT_VERSION=1.55.0
 # toolchain-pin: argName=ACTIONLINT_VERSION
@@ -58,7 +58,7 @@ ARG LYCHEE_VERSION=0.24.2
 # toolchain-pin: argName=TYPST_VERSION
 ARG TYPST_VERSION=0.15.1
 # toolchain-pin: argName=TINYMIST_VERSION
-ARG TINYMIST_VERSION=0.15.10
+ARG TINYMIST_VERSION=0.15.12
 
 USER root
 ENV POWERSHELL_TELEMETRY_OPTOUT=1
@@ -86,20 +86,19 @@ RUN sed -i \
         just \
         libcurl4-openssl-dev \
         libedit2 \
-        libgcc-13-dev \
-        libncurses-dev \
         libpython3-dev \
+        openjdk-${JAVA_VERSION}-jdk-headless \
+        python3-venv \
+        libgcc-15-dev \
+        libncurses5-dev \
         libsqlite3-0 \
         libssl-dev \
-        libstdc++-13-dev \
+        libstdc++-15-dev \
         libxml2-dev \
         libz3-dev \
-        openjdk-${JAVA_VERSION}-jdk-headless \
         pkg-config \
         poppler-utils \
-        python-is-python3 \
         python3 \
-        python3-venv \
         ripgrep \
         shellcheck \
         shfmt \
@@ -139,8 +138,8 @@ RUN set -eux; \
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
-        amd64) python_target="x86_64"; python_sha256="01d901e09ca673c99a6c9bd9ec2cfbd58dbe8813d07514c36cb73cfd20b18bd8" ;; \
-        arm64) python_target="aarch64"; python_sha256="6efe65c43ae0bdebebeab4607f91a0053dd36d5e51cfd69a791d544e9b122be7" ;; \
+        amd64) python_target="x86_64"; python_sha256="7b03163a980c607ba8194709d4a4086735a7a9c488cc475b098157306927b36b" ;; \
+        arm64) python_target="aarch64"; python_sha256="0f23351c03b39beb880de668976074fcc3c082d9c3b03d0b43185632b2b270a0" ;; \
         *) echo "Unsupported Python architecture: ${arch}" >&2; exit 1 ;; \
     esac; \
     archive="cpython-${PYTHON_VERSION}+${PYTHON_BUILD_DATE}-${python_target}-unknown-linux-gnu-install_only_stripped.tar.gz"; \
@@ -201,8 +200,8 @@ RUN set -eux; \
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
-        amd64) target="x86_64"; checksum="10df33ec0b6cb380b1354b55bd8a32fdc2f00fec281b7dc0a41086bd0038e0fc" ;; \
-        arm64) target="aarch64"; checksum="0a545957d894cec8a4ca9010d05a7fa27beb1e356c2b221b7f7f704538ff0bb0" ;; \
+        amd64) target="x86_64"; checksum="95f98715f2bc3ecff528124dd691db074c15de1fe0ed2dfa8be43dda6dbbb967" ;; \
+        arm64) target="aarch64"; checksum="d75cabad569b8fc7d24fa326a36ce0c2e3a287c5a4f66204c1fc302185225678" ;; \
         *) echo "Unsupported tinymist architecture: ${arch}" >&2; exit 1 ;; \
     esac; \
     archive="tinymist-${target}-unknown-linux-gnu.tar.gz"; \
@@ -218,8 +217,8 @@ RUN set -eux; \
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
-        amd64) ps_arch="x64"; ps_sha256="caeeff1d808dd54a9fde06976e17c5c92061989dc5fbe21e13bd5690883e4eb1" ;; \
-        arm64) ps_arch="arm64"; ps_sha256="6cddb58e698125156c725d57b5942f7e0468cd75e8f7b78b133641ede1a28a8e" ;; \
+        amd64) ps_arch="x64"; ps_sha256="e14ad06e1192ccb221a6bfbc804476dabae792bb5c9c7ad62793e5ff058d826e" ;; \
+        arm64) ps_arch="arm64"; ps_sha256="9d098cb700f518702a87bbc037dadb6a9d6b34489012431756fb2531503f436b" ;; \
         *) echo "Unsupported PowerShell architecture: ${arch}" >&2; exit 1 ;; \
     esac; \
     tmp_dir="$(mktemp -d)"; \
@@ -270,8 +269,8 @@ RUN set -eux; \
     actionlint -version
 RUN set -eux; \
     case "${SWIFT_DOCKER_TAG}" in \
-        *-noble) ;; \
-        *) echo "Unsupported Swift Docker tag for Ubuntu 24.04 base image: ${SWIFT_DOCKER_TAG}" >&2; exit 1 ;; \
+        *-resolute) ;; \
+        *) echo "Unsupported Swift Docker tag for Ubuntu 26.04 base image: ${SWIFT_DOCKER_TAG}" >&2; exit 1 ;; \
     esac; \
     swift_base_version="${SWIFT_DOCKER_TAG%%-*}"; \
     case "${swift_base_version}" in \
@@ -286,14 +285,14 @@ RUN set -eux; \
     esac; \
     swift_signing_key="52BB7E3DE28A71BE22EC05FFEF80A866B47A981F"; \
     swift_signing_keys_url="https://www.swift.org/keys/release-key-swift-6.x.asc"; \
-    swift_platform="ubuntu24.04"; \
+    swift_platform="ubuntu26.04"; \
     swift_branch="swift-${swift_base_version}-release"; \
     swift_version="swift-${swift_base_version}-RELEASE"; \
     swift_webdir="https://download.swift.org/${swift_branch}/$(printf '%s' "${swift_platform}" | tr -d .)${os_arch_suffix}"; \
     swift_bin_url="${swift_webdir}/${swift_version}/${swift_version}-${swift_platform}${os_arch_suffix}.tar.gz"; \
     tmp_dir="$(mktemp -d)"; \
     export GNUPGHOME="${tmp_dir}/gnupg"; \
-    mkdir -p "${GNUPGHOME}"; \
+    install -d -m 0700 "${GNUPGHOME}"; \
     curl -fsSL "${swift_bin_url}" -o "${tmp_dir}/swift.tar.gz"; \
     curl -fsSL "${swift_bin_url}.sig" -o "${tmp_dir}/swift.tar.gz.sig"; \
     curl --compressed -fsSL "${swift_signing_keys_url}" -o "${tmp_dir}/swift-keys.asc"; \
@@ -302,10 +301,10 @@ RUN set -eux; \
     gpg --batch --assert-signer "${swift_signing_key}" --verify "${tmp_dir}/swift.tar.gz.sig" "${tmp_dir}/swift.tar.gz"; \
     tar -xzf "${tmp_dir}/swift.tar.gz" --directory / --strip-components=1; \
     chmod -R o+r /usr/lib/swift; \
-    rm -rf "${tmp_dir}"
-RUN swift --version \
-    && swiftc --version \
-    && command -v sourcekit-lsp
+    rm -rf "${tmp_dir}"; \
+    swift --version; \
+    swiftc --version; \
+    command -v sourcekit-lsp
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
@@ -345,8 +344,8 @@ RUN set -eux; \
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
-        amd64) uv_target="x86_64-unknown-linux-gnu"; uv_sha256="f68d291c75783122dad58ab77def0e13f3233f358731db5d6d7e8715603b928f" ;; \
-        arm64) uv_target="aarch64-unknown-linux-gnu"; uv_sha256="4bb69cf95ed13f23713bb7bc09f241896ea0c75b7c557e615a20604b82f9c403" ;; \
+        amd64) uv_target="x86_64-unknown-linux-gnu"; uv_sha256="c5221ff41b7892bfc223543883600125f6a47fe845093e0f5bdff4f359196d83" ;; \
+        arm64) uv_target="aarch64-unknown-linux-gnu"; uv_sha256="71279f8d3c67241e807b9d8db872d1bf541579fb9f08b7d1eb1682196d1e57dc" ;; \
         *) echo "Unsupported uv architecture: ${arch}" >&2; exit 1 ;; \
     esac; \
     uv_archive="uv-${uv_target}.tar.gz"; \
@@ -384,9 +383,9 @@ ENV CODEX_HOME="/home/adedev/.codex" \
     ADE_AGENT_PROMPT_TARGET="local"
 WORKDIR /home/adedev
 RUN go install "golang.org/x/tools/gopls@${GOPLS_VERSION}" \
-    && go install "honnef.co/go/tools/cmd/staticcheck@${STATICCHECK_VERSION}" \
-    && go install "golang.org/x/vuln/cmd/govulncheck@${GOVULNCHECK_VERSION}" \
-    && go install "github.com/go-delve/delve/cmd/dlv@${DELVE_VERSION}"
+      && go install "honnef.co/go/tools/cmd/staticcheck@${STATICCHECK_VERSION}" \
+      && go install "golang.org/x/vuln/cmd/govulncheck@${GOVULNCHECK_VERSION}" \
+      && go install "github.com/go-delve/delve/cmd/dlv@${DELVE_VERSION}"
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
@@ -484,15 +483,17 @@ RUN apt-get -y update \
         "$(npm root -g)/@google/gemini-cli/node_modules/@lydell/node-pty" \
         "$(npm root -g)/@google/gemini-cli/node_modules/node-pty"
 # toolchain-pin: argName=NPM_VERSION
-ARG NPM_VERSION=12.2.1
+ARG NPM_VERSION=12.2.2
 RUN npm install --global "npm@${NPM_VERSION}" \
     && npm --version
 # The compatibility SDK archive must not downgrade the base host or retain old runtimes.
 COPY --from=dotnet-base /usr/share/dotnet/dotnet /usr/share/dotnet/dotnet
 RUN set -eux; \
     for root in /usr/share/dotnet/shared/Microsoft.NETCore.App /usr/share/dotnet/shared/Microsoft.AspNetCore.App /usr/share/dotnet/host/fxr; do \
-        for path in "${root}/${DOTNET_VERSION%.*}".*; do \
-            if [ -d "${path}" ] && [ "${path##*/}" != "${DOTNET_VERSION}" ]; then \
+        newest="$(find "${root}" -mindepth 1 -maxdepth 1 -type d -name '10.*' -exec basename {} \; | sort -V | tail -n 1)"; \
+        test -n "${newest}"; \
+        for path in "${root}"/10.*; do \
+            if [ -d "${path}" ] && [ "${path##*/}" != "${newest}" ]; then \
                 rm -rf "${path}"; \
             fi; \
         done; \
