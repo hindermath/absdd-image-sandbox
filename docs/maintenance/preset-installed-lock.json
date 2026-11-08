@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "hashContract": "sha256-utf8-lf-bom-or-raw-v1",
   "baselineCommit": "59bdf14405e890aca5fe1d950532bfeb5fbe3b01",
-  "registrySha256": "1ebbdf2fd8acb2530c1b5dae32d70a2c5cee32b6a75a678c5bac3d49c235a84c",
+  "registrySha256": "aae17f9211a2361cffab583d3bae28bc6e46177abb7fb9cacf84d4c287dd3769",
   "presets": [
     {
       "id": "a11y-governance",
@@ -87,12 +87,12 @@
     },
     {
       "id": "model-routing-governance",
-      "version": "0.2.7",
+      "version": "0.2.8",
       "priority": 61,
       "enabled": true,
-      "manifest_hash": "sha256:cce5e0178d40e633df8465ac5fd9494d102ae2f0dd195aed1e98c50ba56b00e4",
-      "fileCount": 97,
-      "contentSha256": "1d61aaaea37f19c577afd08e2422565018c490263db6902fda603d31bdfcb196"
+      "manifest_hash": "sha256:32605362dc5ab22e8d48a77a04497d7c8c346e113101b2a45ab550ea8d9b5c13",
+      "fileCount": 99,
+      "contentSha256": "f9f432f04f8028fd16db6e72d8364fe01e9c82a602bc3cc4cae449c33e81c566"
     },
     {
       "id": "parallel-autonomous-run-governance",
