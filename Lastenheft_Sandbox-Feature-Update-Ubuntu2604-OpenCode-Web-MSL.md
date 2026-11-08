@@ -60,7 +60,7 @@ Funktionen, Grenzwerte oder Berechtigungen.
 | Sitzung / Fork / Standalone / Dispatcher | Eine Sitzung fasst zusammengehörige Agentenarbeit. Ein Sitzungs-Fork zweigt ihren Verlauf ab; ein Repository-Fork ist eine eigene Repository-Kopie. Standalone arbeitet ohne gemeinsamen Server; ein Dispatcher reicht Aufträge an die gewählte CLI weiter. |
 | Provider / Modell / Inferenz | Ein Provider stellt einen KI-Dienst bereit. Ein Modell verarbeitet Eingaben; Inferenz ist ein tatsächlicher Modellaufruf. Ein lokales Webpasswort ist keine Anmeldung bei einem Provider. |
 | SBOM / CycloneDX / Syft | Eine SBOM ist ein maschinenlesbares Software-Komponentenverzeichnis. CycloneDX ist dessen hier verwendetes Format. Syft ermittelt die Komponenten für dieses Verzeichnis. |
-| Renovate / ARG / Regression / Pre-Commit | Renovate schlägt Versionsupdates vor. ARG benennt eine Dockerfile-Buildvariable. Eine Regression ist ein unbeabsichtigter Rückschritt; Regressionstests suchen danach. Pre-Commit führt Prüfungen vor einem Commit aus. |
+| Renovate / ARG / Regression / Pre-Commit | Dependabot und der Pin-Workflow schlagen Versionsupdates vor; Renovate ist historischer Kontext. ARG benennt eine Dockerfile-Buildvariable. Eine Regression ist ein unbeabsichtigter Rückschritt; Regressionstests suchen danach. Pre-Commit führt Prüfungen vor einem Commit aus. |
 | Git / Repository / Head / Commit / Push | Git verwaltet Dateiversionen; das Repository enthält deren Historie. Head bezeichnet den gewählten Commit. Ein Commit speichert einen Versionsstand; Push überträgt Commits an eine Gegenstelle. |
 | Pull Request / Merge Request / Merge | Ein Pull oder Merge Request schlägt Änderungen zur Prüfung vor. Merge integriert geprüfte Änderungen in einen Zielbranch, also eine Entwicklungslinie. |
 | Snapshot / Receipt / Provenienz / Git-Blob | Ein Snapshot hält einen gelesenen Stand fest. Ein Receipt protokolliert Herkunft und Prüfwerte. Provenienz macht die Änderungsgeschichte nachvollziehbar. Ein Git-Blob ist ein Inhaltsobjekt für Dateidaten. |
@@ -242,8 +242,9 @@ scheitern. Profil und Architektur müssen im SBOM-Dateinamen erkennbar sein.
 
 **FU-018 – Lieferkette:** Podman MUSS Zielruntime bleiben. SBOM-Erzeugung
 verwendet imageintegriertes oder exakt gepinntes Host-Syft; bewegliche
-Scanner-Fallbacks sind verboten. Pins, Renovate-ARG-Metadaten und
-Dependency-Dokumentation müssen zusammenpassen.
+Scanner-Fallbacks sind verboten. Pins, `toolchain-pin`-ARG-Markierungen, `scripts/config/toolchain-pins.json`
+und Dependency-Dokumentation müssen zusammenpassen. Dependabot und
+`toolchain-pins.yml` pflegen den genehmigten Stand; keine automatischen Merges.
 
 **FU-019 – Daten und Audit:** Neustart und Profilwechsel MÜSSEN persistente
 Daten erhalten. Normaler Stop läuft über den vorhandenen Audit-Wrapper.
@@ -391,6 +392,27 @@ autorisiert und dokumentiert; Review und Ausführungsfreigabe bleiben getrennt.
 Der genaue generische Labelname, interne Schichtung und Wrapper-Präzedenz
 werden in späterer Planung unter den obigen Verträgen festgelegt.
 
+## Quellenstand nach IR901–IR903 / Source State after IR901–IR903 — 2026-11-08
+
+DE: Maßgeblich ist der [begrenzte Quellenabgleich](docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md).
+Vorhandene Resolute-/Web-/Profilfunktionen sind zuerst zu bewerten, nicht
+erneut einzuführen. Frühere Ausgangslagen und Statusangaben sind datierter
+Authoring-Kontext. Assurance 0.1.8 bezeichnet den historischen Werkzeugstand;
+aktuell installiert ist 0.1.9 mit denselben Kontrollprüfzielen und strengeren
+Risikometadaten. GSDB 3.4.4, Anforderungen, Grenzwerte, Plattformnachweise,
+Unabhängigkeit und menschliche Entscheidungen bleiben verbindlich.
+Dieser Abgleich übernimmt keine vollständige technische Abnahme, verändert
+keinen Lifecycle und erteilt keine Implementierungs- oder Lieferfreigabe.
+
+EN: The [bounded source alignment](docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md) governs current context.
+Assess existing Resolute/Web/profile functionality before later work;
+earlier current-state/status statements are dated authoring context.
+Assurance 0.1.8 denotes the historical tool baseline; installed 0.1.9 keeps
+control-check goals with stricter risk metadata. Preserve GSDB 3.4.4,
+requirements, thresholds, platform evidence, independence and human decisions.
+This alignment grants no complete technical acceptance, lifecycle change,
+implementation or delivery authority.
+
 <!-- intake-authoring:prompts -->
 ## Vorbereitete spätere Spec-Kit-Prompts / Prepared Future Spec Kit Prompts
 
@@ -408,6 +430,7 @@ Enabled means copy-ready syntax rather than permission.
 
 ```text
 $speckit-specify Erstelle nur nach gesondertem Auftrag eine Spezifikation aus Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md. Bewahre FU-001 bis FU-023, FA-001 bis FA-012 und die Quellen #101/#102/#104 als einen gemeinsamen Feature-Update-Block. Beachte Hardening-Erhalt, DE/EN-Leserpfade, A11Y, Plattform- und Daten-/Audit-Grenzen. Die Serienposition ist genehmigt; das neue Serienreview ist noch ausstehend. Keine Implementierung, kein Build, Containerstart, Commit, Push, Pull Request, Merge oder sonstige Remote-Schreiboperation.
+Berücksichtige docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md: vorhandene Umsetzung bewerten, aktuelle Pin-Governance und Assurance-0.1.9-Prüfwerkzeuge berücksichtigen; Kontroll-IDs, Schwellen und menschliche Gates erhalten. Keine neue Start- oder Lieferautorität.
 ```
 
 <!-- spec-kit-command-id: speckit.autonomous -->
@@ -415,6 +438,7 @@ $speckit-specify Erstelle nur nach gesondertem Auftrag eine Spezifikation aus La
 
 ```text
 $speckit-autonomous Starte einen Lauf für Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md ausschließlich nach gesonderter ausdrücklicher Startfreigabe, aktuellem Intake-Review, geklärter Serienaufnahme und Abschluss der genehmigten Vorgänger. Delivery Authority LocalImplementation ist die maximale lokale Obergrenze; dieser vorbereitete Prompt erteilt selbst keine Startautorität. Bewahre sämtliche FU-/FA-Verträge und bestehende Sicherheits-/Human-Gates. Keine bestehenden Läufe automatisch fortsetzen. Stoppe vor Commit, Push, Pull Request, Merge, Veröffentlichung, Provider-/Secret- oder Plattformänderungen.
+Berücksichtige docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md: vorhandene Umsetzung bewerten, aktuelle Pin-Governance und Assurance-0.1.9-Prüfwerkzeuge berücksichtigen; Kontroll-IDs, Schwellen und menschliche Gates erhalten. Keine neue Start- oder Lieferautorität.
 ```
 
 ## English
@@ -465,7 +489,7 @@ It is equivalent to the German glossary.
 | Sitzung / Fork / Standalone / Dispatcher | A session groups related agent work. A session fork branches its history; a repository fork is a separate repository copy. Standalone runs without a shared server; a dispatcher forwards requests to the selected CLI. |
 | Provider / Modell / Inferenz | A provider supplies an AI service. A model processes input; inference is an actual model call. A local web password is not a provider sign-in. |
 | SBOM / CycloneDX / Syft | An SBOM is a machine-readable software component inventory. CycloneDX is the format used here. Syft identifies components for that inventory. |
-| Renovate / ARG / Regression / Pre-Commit | Renovate proposes dependency updates. ARG declares a Dockerfile build variable. A regression is an unintended loss of behavior; regression tests detect it. Pre-Commit runs checks before a commit. |
+| Renovate / ARG / Regression / Pre-Commit | Dependabot and the pin workflow propose dependency updates; Renovate is historical context. ARG declares a Dockerfile build variable. A regression is an unintended loss of behavior; regression tests detect it. Pre-Commit runs checks before a commit. |
 | Git / Repository / Head / Commit / Push | Git manages file versions; the repository contains their history. Head identifies the selected commit. A commit records a revision; push transfers commits to a remote. |
 | Pull Request / Merge Request / Merge | A pull or merge request proposes changes for review. Merge integrates reviewed changes into a target branch, which is a development line. |
 | Snapshot / Receipt / Provenienz / Git-Blob | A snapshot captures the version read. A receipt records origins and hashes. Provenance makes change history traceable. A Git blob is a content object for file data. |
@@ -525,7 +549,7 @@ secret rotation, platform rules, template activation and unrelated intakes.
 | FU-015 | Install selected development tools/LSP/analysis only, without indirect excluded toolchains; preserve target versions. |
 | FU-016 | Retain system python3, Node/npm, PowerShell, uv, all agents including Gemini/Copilot, Spec Kit, 14 presets, documentation tools and Home Baseline/runtime contracts in every profile; distinguish /opt/cpython development from infrastructure and keep web/health in the shared core. |
 | FU-017 | Give Bash/PowerShell matching profile options, environment/default behavior and documented precedence; verify actual image profile even with SkipBuild; distinguish profile/architecture in SBOM filenames. |
-| FU-018 | Keep Podman, integrated or exactly pinned host Syft without moving fallback; align version pins, Renovate metadata and dependency guidance. |
+| FU-018 | Keep Podman, integrated or exactly pinned host Syft without moving fallback; align version pins, toolchain-pin ARG markers, scripts/config/toolchain-pins.json and dependency guidance; use approved Dependabot/toolchain-pins.yml without automatic merges. |
 | FU-019 | Preserve data across restart/profile changes and use audited normal shutdown; do not bypass export failure. Export permitted metadata only; retain session_coverage=not-exported and never export database/prompt/response/secret contents. |
 | FU-020 | Retain rootless/non-root, cap_drop ALL, no-new-privileges, standard Seccomp and existing agent policies across profiles. |
 | FU-021 | Extend existing learner/operations paths, README, AGENTS and examples; German first/equivalent English around B2, explain terms, no second learning series. |

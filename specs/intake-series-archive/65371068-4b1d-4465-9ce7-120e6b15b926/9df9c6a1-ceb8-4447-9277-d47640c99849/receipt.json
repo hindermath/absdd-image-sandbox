@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "IntakeSeriesReceipt",
+  "receiptId": "2d55c819-910c-446d-9e78-61c340ffb592",
+  "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
+  "generator": {
+    "preset": "intake-sequencing-governance",
+    "version": "0.2.11"
+  },
+  "createdAt": "2026-11-02T07:08:30Z",
+  "operation": {
+    "type": "Update",
+    "operationId": "f4aa58a9-39ce-4808-b373-89f557054ce4",
+    "authorityEvidence": "User explicitly authorizes targeted intake source-binding renewal with byte-identical archives and independent complete review on 2026-11-02, followed by Mac-A coverage and Windows/WSL2 handoff. Requirements, 85/80 thresholds, intake identities, five-member lifecycle and start/delivery authority remain unchanged; no commit or push. This operation owns provenance authoring only, not technical implementation or review adjudication."
+  },
+  "status": "Ready",
+  "manifest": {
+    "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "normalizedSha256": "01931b50fe0d9a88b6bb8b1d518ab17f536db647a570221a507adc7d84ed77e2"
+  },
+  "supersedes": {
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/f4aa58a9-39ce-4808-b373-89f557054ce4/receipt.json",
+    "receiptNormalizedSha256": "88341c3454c98dc8880634817ed303f475dc89e6f390ccfa55e5ba60e41229ef",
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/f4aa58a9-39ce-4808-b373-89f557054ce4/manifest.json",
+    "manifestArchiveSha256": "6f3c90e8fe8165d8925c59241f06597f346aa24923d83717c6e764e958dfd0db"
+  },
+  "tombstone": {
+    "path": "N/A",
+    "normalizedSha256": "N/A"
+  },
+  "nextAction": "$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json"
+}

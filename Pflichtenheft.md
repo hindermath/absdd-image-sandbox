@@ -12,22 +12,18 @@ independent acceptance and self-build. The archived root remains completed;
 hardening is the sole Eligible target, the remaining three are Blocked.
 This does not start work.
 
-DE: Das frühere viergliedrige Vollreview war Ready, nicht mehr ausstehend.
-Es bleibt archivierte historische Evidence. Für die aufgenommene fünfgliedrige
-Reihe wird nach dem Quellenabgleich vom 2026-11-02 erneut unabhängig geprüft:
-`PreparedForIndependentReview`, Review-ID `04d3e335-7b7a-494d-bc78-9587e1659572`.
-Das Ready `aa89a3d1-59a0-42bb-965b-1614e3758c04` bleibt archivierte Historie.
-Das frühere Single-Ready des Updates wird nicht als aktuelle Serienabnahme
-übernommen. Keine technische oder menschliche Freigabe wird neu behauptet.
+## Reviewstand / Review state — 2026-11-08
 
-EN: The old four-member full review was Ready rather than pending and remains
-archived historical evidence. A new full review of the admitted five-member
-series is prepared for independent re-review after source alignment on
-2026-11-02: `PreparedForIndependentReview`, review ID
-`04d3e335-7b7a-494d-bc78-9587e1659572`. Ready
-`aa89a3d1-59a0-42bb-965b-1614e3758c04` remains archived history.
-The prior update Single Ready does not
-become current series acceptance; no new technical or human approval is asserted.
+DE: IR901–IR903 sind behoben. Das vollständige fünfgliedrige Nachreview ist Ready.
+Der [aktuelle vollständige Prüfbericht](specs/intake-review-reports/sandbox-development-lifecycle.md) und das JSON-Ergebnis sind
+maßgeblich; vorbereitete Aufträge und ältere Ready-Ergebnisse sind keine
+aktuelle Abnahme. Review-ID: `796186b3-1508-4e81-8dd4-8cf8ac968bfa`. Status und Implementierungsautorität
+bleiben getrennt. Alle bisherigen Reviewstände sind bytegleich archiviert.
+
+EN: IR901–IR903 are resolved; the complete five-member re-review is Ready. The current full
+report and JSON result govern; prepared requests and older Ready results do
+not establish current acceptance. The review ID is shown above. Review status
+and implementation authority remain separate; prior evidence is archived exactly.
 
 - Reihenfolge / Order: [Lastenheft_Abarbeitungsreihenfolge.md](Lastenheft_Abarbeitungsreihenfolge.md)
 - Serie / Series: [manifest.json](specs/intake-series/sandbox-development-lifecycle/manifest.json)
