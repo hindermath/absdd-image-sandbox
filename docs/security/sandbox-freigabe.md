@@ -6,6 +6,37 @@ Dieses Dokument hält die ausdrückliche Owner-Entscheidung fest. Sie ist keine 
 
 ## Deutsch
 
+### Image-Kandidat vom 08.11.2026: noch nicht freigegeben
+
+Der separat beauftragte Build pinnt die Home-Baseline-Referenz auf Commit
+`b232d5881f1d75092ddd9ecb345d210b4213732a` aus dem geprueften
+[Transport-PR 366](https://github.com/hindermath/home-baseline/pull/366).
+Dies ist ein Kandidatenstand, keine neue Owner-Freigabe. Image-ID und
+Paketfingerabdruck muessen nach Build und Pruefung konkret durch den Owner
+freigegeben werden. Bis dahin bleibt `PendingOwnerApproval` wirksam; der alte
+gestoppte Container und seine Volumes bleiben erhalten. Das Ablaufdatum
+31.12.2026 und die offenen organisatorischen Rollenfreigaben bleiben bestehen.
+
+*The separately requested candidate build pins Home Baseline to commit
+`b232d5881f1d75092ddd9ecb345d210b4213732a` from reviewed transport PR 366.
+This is not a new owner approval. After build and verification, the owner must
+explicitly approve the exact image ID and package fingerprint. Until then,
+PendingOwnerApproval remains effective; the old stopped container and volumes
+are preserved. Expiry remains 31 December 2026, separate from pending role
+approvals.*
+
+Gepruefter Kandidat, weiterhin nicht freigegeben / Verified candidate, still
+not approved:
+
+- Image: `sha256:5f530d888485537c160bddf9330f56844d99e98518d97e2d842bb27a76a1391d`.
+- Paket / Package: `d18fc9005b6dda4023676c8fb22a032b6a4423cee187bc47924728aed322f5e0`.
+- Build, SBOM und isolierter Smoke erfolgreich; keine Betriebsaktivierung.
+  Build, SBOM and isolated smoke passed; no operational activation.
+- Nachweis / Evidence: [Sitzungsprotokoll](agent-session-log/2026-11-08-1726.md).
+
+Die folgende historische Entscheidung wird nicht auf dieses Image uebertragen.
+The historical decision below is not transferred to this image.
+
 | Feld | Wert |
 |---|---|
 | Sandbox-Typ | Container (Podman) |
