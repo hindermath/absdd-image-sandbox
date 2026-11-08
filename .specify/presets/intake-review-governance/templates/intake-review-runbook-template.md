@@ -21,6 +21,9 @@ semantic readiness evidence. The preset accepts generic UTF-8 Markdown or text;
 
 - `Ready`: no open material finding or risk.
 - `ReadyWithAcceptedRisks`: only human-accepted Medium/Low residual risks.
+  Accepted results use `Resolved` or `Remediated` for closed findings and
+  `AcceptedRisk` for residual findings. Each `AcceptedRisk` finding needs one
+  matching human `acceptedRisks` entry with the same ID and severity.
 - `NeedsClarification`: material answers are missing.
 - `NeedsRemediation`: the intent is known but target changes are required.
 - `Rejected`: unsafe, contradictory, unauthorized, or unusable intake.

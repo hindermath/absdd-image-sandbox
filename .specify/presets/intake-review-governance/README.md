@@ -1,10 +1,10 @@
 # Intake Review Governance Preset
 
-<!-- current-package: 0.2.7 -->
+<!-- current-package: 0.2.8 -->
 
-Paketkennung: **v0.2.7**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.2.7-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
+Paketkennung: **v0.2.8**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.2.8-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
 
-<span lang="en">Package identity: v0.2.7. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
+<span lang="en">Package identity: v0.2.8. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
 
 [Release-Abschluss und Verbesserungsprofil / Publication closeout and improvement profile](docs/release-0.2.6-validation.md).
 
@@ -26,7 +26,7 @@ Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
 *Patch 0.2.6 packages the improved bilingual getting-started and composition
 guide. Behavior and authority boundaries remain unchanged.*
 
-Paketversion / Package version: **0.2.7**. Laufende `Active`-Serien mit
+Paketversion / Package version: **0.2.8**. Laufende `Active`-Serien mit
 mindestens einem `Active`-Mitglied bleiben ohne weiteren `Eligible`-Kandidaten
 gueltig; `eligibleCandidate` ist dann `N/A`. `Ready` verlangt weiterhin genau
 einen Kandidaten. Mehrfachkandidaten, Hash-, Pfad- und Abhaengigkeitsfehler
@@ -142,7 +142,7 @@ Leserpfad / Reader path: [Install](#install) → [Commands](#commands) →
 ## Install
 
 ```bash
-specify preset add --from https://github.com/hindermath/spec-kit-preset-intake-review-governance/archive/refs/tags/v0.2.7.zip --priority 65
+specify preset add --from https://github.com/hindermath/spec-kit-preset-intake-review-governance/archive/refs/tags/v0.2.8.zip --priority 65
 specify preset list
 specify preset resolve intake-review-policy-template
 ```

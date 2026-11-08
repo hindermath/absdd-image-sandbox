@@ -1,6 +1,6 @@
 {
   "id": "intake-sequencing-governance",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "priority": 66,
   "readers": [
     "docs/user-guide.md",

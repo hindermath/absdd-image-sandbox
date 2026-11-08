@@ -856,8 +856,8 @@ def validate_feature_004_assurance_profile(repo: Path) -> list[str]:
             item for item in presets
             if item.get("id") == "secure-development-assurance-governance"
         )
-        if assurance.get("version") != "v0.1.8" or assurance.get("priority") != 15:
-            errors.append("Assurance preset must be v0.1.8 at priority 15")
+        if assurance.get("version") != "v0.1.9" or assurance.get("priority") != 15:
+            errors.append("Assurance preset must be v0.1.9 at priority 15")
     preset_root = safe_repo_path(repo, ".specify/presets")
     installed_ids = {item.name for item in preset_root.iterdir() if item.is_dir()}
     if installed_ids != seen_ids:

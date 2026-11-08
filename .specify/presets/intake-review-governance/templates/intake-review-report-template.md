@@ -29,6 +29,9 @@ semantic review.
 `ReadyWithAcceptedRisks` requires a human owner, rationale, acceptance date,
 evidence, and re-evaluation trigger for every Medium or Low risk. Autonomous
 agents cannot accept risk.
+Accepted results mark closed findings `Resolved` or `Remediated` and residual
+findings `AcceptedRisk`; each residual finding has one matching risk entry with
+the same ID and severity.
 
 ## Nutzungshilfe / Reader help
 

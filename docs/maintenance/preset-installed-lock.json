@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "hashContract": "sha256-utf8-lf-bom-or-raw-v1",
-  "baselineCommit": "f8a4cd78bcee9db1ec2303f1313d317cd88f4b4f",
-  "registrySha256": "beac42fc9e092e683dbfa9f3554a1b7d599ce6df5203ced48e2816a6ba72c708",
+  "baselineCommit": "59bdf14405e890aca5fe1d950532bfeb5fbe3b01",
+  "registrySha256": "1ebbdf2fd8acb2530c1b5dae32d70a2c5cee32b6a75a678c5bac3d49c235a84c",
   "presets": [
     {
       "id": "a11y-governance",
@@ -33,12 +33,12 @@
     },
     {
       "id": "autonomous-run-governance",
-      "version": "0.4.10",
+      "version": "0.4.11",
       "priority": 70,
       "enabled": true,
-      "manifest_hash": "sha256:6f9fdbfe309fbed551b7b72c5a2098ffd80797da2c3e64e077d4d3e752ddf97b",
-      "fileCount":  80,
-      "contentSha256": "2a89c2a7b860e96636b963448c5cf2a20a7b09eb0b50e53bd08cc89f118031ca"
+      "manifest_hash": "sha256:c7e326fb543700c479636ed29f3467e7bbae485de026217072e9e0fc5d6855ba",
+      "fileCount": 82,
+      "contentSha256": "a5f5d96bf1e45cc6d18d49a3f22dd09135d1e8a44208e39ba256af3cba942fd7"
     },
     {
       "id": "cross-platform-governance",
@@ -51,30 +51,30 @@
     },
     {
       "id": "intake-authoring-governance",
-      "version": "0.3.10",
+      "version": "0.3.12",
       "priority": 64,
       "enabled": true,
-      "manifest_hash": "sha256:4916fe3d0d4da69fc61eb6fc3f8d8920363bc9b35dfef6795d41ec27d287fd0a",
-      "fileCount": 59,
-      "contentSha256": "f70d27819c40f95274888aa64c085ee094fdf462cb6bbe3256ca76dfc6fdee39"
+      "manifest_hash": "sha256:506c90b03454da3b890dc16c0f3b4a8144ba97db59723c77c154468783c380a4",
+      "fileCount": 66,
+      "contentSha256": "ca115e1196b87cfc8eb8cf96e304fe2abbbdedd819a847ed7003ba530b3a5b7b"
     },
     {
       "id": "intake-review-governance",
-      "version": "0.2.7",
+      "version": "0.2.8",
       "priority": 65,
       "enabled": true,
-      "manifest_hash": "sha256:3d809c52a3c165818c4a33cee9c6efa69399597993d6700106e93263f1da589d",
-      "fileCount": 45,
-      "contentSha256": "79645f1919657a354b458d052b44016c58e586f1d06f351dca02cbc8bd865427"
+      "manifest_hash": "sha256:006d1db8a56069378ded57095deacd316f4042ba10bec73ef941171f524a9eba",
+      "fileCount": 49,
+      "contentSha256": "d66d0e46d78178178c5702dd7d85b658080c40f7f5d2e9507468a538e73dfc8b"
     },
     {
       "id": "intake-sequencing-governance",
-      "version": "0.2.11",
+      "version": "0.2.12",
       "priority": 66,
       "enabled": true,
-      "manifest_hash": "sha256:a5ffd10ffeb01c3c8672dda4339f0367b2f18c04cc3b5d1c7a97c951d94b728c",
-      "fileCount": 56,
-      "contentSha256": "615007775a219a99e4b3b33bb6f8803142497ba2cca29bed236ab1c79ac6cf44"
+      "manifest_hash": "sha256:984f4f9157d8a3601f30853f876a38ca1a2b3a33a70d03962337423a5fd1158b",
+      "fileCount": 61,
+      "contentSha256": "8d7863736dbb0bd4da17fdabdf681ee0e663d45e111d8af0b270700185f1145c"
     },
     {
       "id": "isaqb-architecture-governance",
@@ -87,21 +87,21 @@
     },
     {
       "id": "model-routing-governance",
-      "version": "0.2.6",
+      "version": "0.2.7",
       "priority": 61,
       "enabled": true,
-      "manifest_hash": "sha256:9a2d7db1f148dbf58b3405a164cee07ae89cc6834cdc056b1be27d2ab1d85e07",
-      "fileCount":  95,
-      "contentSha256": "eda1081e1bc1e3cf8ca68193c9c4aee9cf8fd16d6e161ae2b2444c3d10628630"
+      "manifest_hash": "sha256:cce5e0178d40e633df8465ac5fd9494d102ae2f0dd195aed1e98c50ba56b00e4",
+      "fileCount": 97,
+      "contentSha256": "1d61aaaea37f19c577afd08e2422565018c490263db6902fda603d31bdfcb196"
     },
     {
       "id": "parallel-autonomous-run-governance",
-      "version": "0.2.9",
+      "version": "0.2.12",
       "priority": 80,
       "enabled": true,
-      "manifest_hash": "sha256:481e7f725160672f00bc63e681b4e69f94be76477e649e56e5670ad1c401a103",
-      "fileCount": 58,
-      "contentSha256": "5282442c018906f4b2ccc857d8b1af648306d0fa92c6a62e2ad77086f3b1e462"
+      "manifest_hash": "sha256:c69325791c98fe2fe6381a1b4ea9501ad795a5fbaf5a6f06b42d03e0b5b89c6b",
+      "fileCount": 68,
+      "contentSha256": "e76425982c473de4bb859094cfa8ef3c17b598438de4b2922ce2348c54fd35d1"
     },
     {
       "id": "project-statistics-governance",
@@ -114,12 +114,12 @@
     },
     {
       "id": "secure-development-assurance-governance",
-      "version": "0.1.8",
+      "version": "0.1.9",
       "priority": 15,
       "enabled": true,
-      "manifest_hash": "sha256:d6d15d42efd7d2fdf8efeecc9925bd82171a86181d295b734be6eb9db4d232bc",
-      "fileCount": 37,
-      "contentSha256": "6267363a7423de63aa96f7539cc185c5d5fdafd9448a7d7cd0f8c1d45d750127"
+      "manifest_hash": "sha256:2f6032b0ab80b18efcfa1bee8ef2aa35cffe54c39e01ebd3b2edcc9ee8bd5b45",
+      "fileCount": 42,
+      "contentSha256": "232d128e71f917667b3fa64ab4cba5fe50d4587685a8ac8cde2605097a3e74ad"
     },
     {
       "id": "security-governance",
@@ -128,7 +128,7 @@
       "enabled": true,
       "manifest_hash": "sha256:c7dd3e6d099f90e6e3b6b2dc4eb91f08fbd0f0e24f138c75bd6f189cc06f2b84",
       "fileCount": 46,
-      "contentSha256": "fd85afeba0588b280169059543e13229c6abbc4d141658c9515ac8f7f3f3f3e1"
+      "contentSha256": "fbe5dc1c5e77c5111c027fa8f8b3dacf987b5d6a95fee7ea87ac47a996aaeb76"
     }
   ],
   "purpose": "Bounded Model Routing 0.2.5 and Autonomous Run 0.4.9 installation; other preset payloads and registry entries byte/semantically preserved. No model call or personal-profile migration."
