@@ -294,7 +294,7 @@ function Invoke-PARProfileCommand {
     } finally {
         if ($null -ne $processInfo) {
             if (-not $processInfo.Process.HasExited) {
-                try { $processInfo.Process.Kill($true) } catch [InvalidOperationException] { }
+                try { $processInfo.Process.Kill($true) } catch [InvalidOperationException] { Write-Verbose 'Prozess beendete sich bereits waehrend der Bereinigung.' }
                 [void] $processInfo.Process.WaitForExit(5000)
             }
             $processInfo.StdoutStream.Dispose()
@@ -698,15 +698,15 @@ function Test-PARFixtureExemption {
             if (-not $repository.StartsWith($prefix, $comparison)) { return $false }
             $profileName = Get-PARRunnerProfileName $Campaign $worker
             if (-not $Profiles.profiles.ContainsKey($profileName)) { return $false }
-            $profile = $Profiles.profiles[$profileName]
-            $arguments = @($profile.arguments)
+            $runnerProfile = $Profiles.profiles[$profileName]
+            $arguments = @($runnerProfile.arguments)
             $expected = @('-NoProfile', '-File', $fixtureRunner,
                 '-CampaignId', '{campaignId}', '-WorkerId', '{workerId}',
                 '-RunId', '{runId}', '-AttemptId', '{attemptId}',
                 '-Worktree', '{worktree}', '-ResultFile', '{resultFile}',
                 '-Mode', 'Completed', '-HandoffsJson', '{handoffsJson}',
                 '-DelayMilliseconds', '0')
-            if ([string] $profile.executable -cne 'pwsh' -or $profile.ContainsKey('preflight') -or
+            if ([string] $runnerProfile.executable -cne 'pwsh' -or $runnerProfile.ContainsKey('preflight') -or
                 $arguments.Count -notin @(21, 23) -or
                 -not [IO.Path]::IsPathFullyQualified([string] $arguments[2]) -or
                 -not [string]::Equals([IO.Path]::GetFullPath([string] $arguments[2]), $fixtureRunner, $comparison)) {
@@ -780,15 +780,15 @@ function Test-PARFixtureExemption {
 
 function Test-PARFixtureProfileCommand {
     param(
-        [Parameter(Mandatory)][hashtable] $Profile,
+        [Parameter(Mandatory)][hashtable] $RunnerProfile,
         [Parameter(Mandatory)][object[]] $Expected,
         [Parameter(Mandatory)][int] $StateFileIndex,
         [Parameter(Mandatory)][string] $Prefix,
         [Parameter(Mandatory)][StringComparison] $Comparison
     )
 
-    $arguments = @($Profile.arguments)
-    if ([string] $Profile.executable -cne 'pwsh' -or $arguments.Count -ne $Expected.Count) { return $false }
+    $arguments = @($RunnerProfile.arguments)
+    if ([string] $RunnerProfile.executable -cne 'pwsh' -or $arguments.Count -ne $Expected.Count) { return $false }
     for ($index = 0; $index -lt $Expected.Count; $index++) {
         $actual = [string] $arguments[$index]
         if ($index -eq 2 -or $index -eq $StateFileIndex) {
