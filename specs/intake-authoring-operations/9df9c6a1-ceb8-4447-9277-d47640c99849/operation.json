@@ -27,7 +27,7 @@
       "source": "specs/intake-review-results/sandbox-development-lifecycle.json"
     },
     {
-      "archive": "specs/intake-review-archive/04d3e335-7b7a-494d-bc78-9587e1659572/9df9c6a1-ceb8-4447-9277-d47640c99849/report.md",
+      "archive": "specs/intake-review-archive/04d3e335-7b7a-494d-bc78-9587e1659572/9df9c6a1-ceb8-4447-9277-d47640c99849/report.txt",
       "normalizedSha256": "a7b06e5435628c0d5f09aaadcb0814da0428f8083d8283cd94fc2c520b11cc7c",
       "rawSha256": "a7b06e5435628c0d5f09aaadcb0814da0428f8083d8283cd94fc2c520b11cc7c",
       "source": "specs/intake-review-reports/sandbox-development-lifecycle.md"
@@ -177,7 +177,7 @@
   ],
   "publicationArtifacts": [
     "specs/intake-review-archive/04d3e335-7b7a-494d-bc78-9587e1659572/9df9c6a1-ceb8-4447-9277-d47640c99849/result.json",
-    "specs/intake-review-archive/04d3e335-7b7a-494d-bc78-9587e1659572/9df9c6a1-ceb8-4447-9277-d47640c99849/report.md",
+    "specs/intake-review-archive/04d3e335-7b7a-494d-bc78-9587e1659572/9df9c6a1-ceb8-4447-9277-d47640c99849/report.txt",
     "specs/intake-review-archive/04d3e335-7b7a-494d-bc78-9587e1659572/9df9c6a1-ceb8-4447-9277-d47640c99849/request.json",
     "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/9df9c6a1-ceb8-4447-9277-d47640c99849/manifest.json",
     "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/9df9c6a1-ceb8-4447-9277-d47640c99849/receipt.json",
