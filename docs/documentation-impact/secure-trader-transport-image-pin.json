@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.1",
+  "feature": "secure-trader-transport-image-pin",
+  "entries": [
+    {
+      "changeId": "CHG027",
+      "scope": "Embed the separately reviewed Secure Trader bundle transport in the existing sandbox image",
+      "decision": "UpdateRequired",
+      "rationale": "Maintainers must distinguish image build acceptance from explicit owner approval and operational activation.",
+      "documents": [
+        "home-baseline.lock.json",
+        "docs/betrieb/validierung-und-wartung.md",
+        "docs/security/sandbox-freigabe.md",
+        "docs/security/agent-session-log/2026-11-08-1726.md",
+        "docs/project-statistics.md"
+      ],
+      "owner": "Repository Maintainer",
+      "audiences": ["Maintainers", "Security reviewers", "Learners"],
+      "readerPaths": ["Operations validation", "Pinned Home Baseline reference", "Concrete image approval before activation"],
+      "canonicalSource": "home-baseline.lock.json for embedded source; published Home Baseline for transport; this image repository for build and runtime evidence",
+      "navigationImpact": "Extend the existing operations validation page with the dated image-pin session evidence.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and equivalent English second, around CEFR B2.",
+      "languagePartners": [],
+      "platformAndExampleProof": "After an initial ENOSPC failure and separately authorized reference-checked image cleanup, the native ARM64 standard build, CycloneDX SBOM, non-root immutable-reference/package proof and isolated full toolchain/documentation smoke passed. Exact image and SBOM hashes are in the session evidence. No operational activation, PDF accessibility acceptance, live model inference or other native platform acceptance is claimed.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/security/agent-session-log/2026-11-08-1726.md",
+      "risk": "Confusing a built image with an approved operational sandbox could bypass the exact-image and package decision. Approval remains pending until the owner explicitly decides.",
+      "criticality": "Security",
+      "reevaluationTrigger": "Any source pin, actual image, package fingerprint, mount, credential boundary or expiry change."
+    }
+  ]
+}

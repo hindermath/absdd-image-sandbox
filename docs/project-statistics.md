@@ -324,6 +324,23 @@ The separate ARM64 candidate passed build, SBOM generation, isolated runtime
 sync, routing assertions and full toolchain smoke. The existing container is
 preserved. Git history and the statistics configuration generate the block below.
 
+## Bundle-Transport-Image-Pin vom 08.11.2026 / Bundle transport image pin
+
+Die unveraenderliche Home-Baseline-Referenz pinnt den gelieferten Bundle-
+Transport auf `b232d5881f1d75092ddd9ecb345d210b4213732a`. Nach einem
+Speicherabbruch und separat genehmigter Bereinigung bestanden nativer ARM64-
+Build, CycloneDX-SBOM, Non-root-/Paketnachweis und der isolierte vollstaendige
+Toolchain-/Dokumentations-Smoke. Die konkrete Owner-Freigabe bleibt ausstehend;
+Bestandscontainer und sechs Volumes sind erhalten. Kein Home-Sync und kein
+21-Repo-Wartungslauf. Nachweis: [Sitzungsprotokoll](security/agent-session-log/2026-11-08-1726.md).
+Documentation Impact: `UpdateRequired`; der Profil-2-Nachlauf ist `GeneratedUpdate`.
+
+The immutable Home Baseline reference embeds the delivered bundle transport.
+After the initial storage failure and separately authorized cleanup, native
+ARM64 build, SBOM, immutable package proof and isolated full smoke passed.
+Concrete owner approval remains pending; the old container and six volumes
+are preserved. No Home sync or 21-repository maintenance was performed.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->

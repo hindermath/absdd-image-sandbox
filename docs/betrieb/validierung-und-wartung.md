@@ -192,6 +192,31 @@ also remains write-free, but exits with code `1` when it detects drift. This is
 a check result, not an execution failure; exit code `0` means that the selected
 runtime content already matches.
 
+## Secure-Trader-Transport und Image-Freigabe / Secure Trader Transport and Image Approval
+
+**DE:** Der Commit in `home-baseline.lock.json` bestimmt das eingebettete
+Wartungspaket unter `/opt/home-baseline`. Der Bundle-Transport laedt
+Remote-Objekte auf dem Host in isolierte Bare-Repositories; nur Daten und
+Metadaten gelangen zur Sandbox, keine GitHub-Zugangsdaten. Lokale Git-Pruefungen
+und Fast-forwards bleiben in der Sandbox. Ein erfolgreicher Image-Build oder
+CI-Lauf aktiviert die Freigabe nicht. Vor dem ersten echten Wartungslauf muss
+der Owner die konkrete Image-ID und den Paketfingerabdruck ausdruecklich
+freigeben; `PendingOwnerApproval` bleibt bis dahin gesperrt. Ein zusaetzlicher
+Owner-Schluessel ist nicht erforderlich. Das Ablaufdatum bleibt 31.12.2026;
+offene organisatorische Rollenfreigaben bleiben davon getrennt.
+
+**EN:** The commit in `home-baseline.lock.json` selects the maintenance package
+embedded at `/opt/home-baseline`. Bundle transport downloads remote objects
+into isolated bare repositories on the host; only data and metadata reach the
+sandbox, never GitHub credentials. Local Git checks and fast-forwards remain
+inside the sandbox. Successful image builds or CI do not activate approval.
+Before real maintenance, the owner must explicitly approve the exact image ID
+and package fingerprint; `PendingOwnerApproval` blocks until then. No extra
+owner signing key is needed. Expiry remains 31 December 2026, separate from
+pending organizational role approvals.
+
+[Pruef- und Aktivierungsgrenze vom 08.11.2026 / Validation and activation boundary](../security/agent-session-log/2026-11-08-1726.md).
+
 ## Web-App-Prüfung / Web App Check
 
 **DE:** Lege das Beispiel unter `/tmp` an, binde es im Container an
