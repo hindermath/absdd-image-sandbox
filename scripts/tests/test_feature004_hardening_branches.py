@@ -161,7 +161,7 @@ class HardeningBranchTests(unittest.TestCase):
 
     def profile(self):
         entries = [{"id": f"synthetic-{n}", "version": "v1.0.0", "priority": n} for n in range(13)]
-        entries.append({"id": "secure-development-assurance-governance", "version": "v0.1.8", "priority": 15})
+        entries.append({"id": "secure-development-assurance-governance", "version": "v0.1.9", "priority": 15})
         for entry in entries:
             self.write(f".specify/presets/{entry['id']}/preset.yml",
                 f"preset:\n  id: \"{entry['id']}\"\n  version: \"{entry['version'][1:]}\"\n")

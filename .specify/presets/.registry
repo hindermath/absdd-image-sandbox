@@ -393,9 +393,9 @@
       "installed_at": "2026-11-08T00:29:33.847814+00:00"
     },
     "intake-authoring-governance": {
-      "version": "0.3.11",
+      "version": "0.3.12",
       "source": "local",
-      "manifest_hash": "sha256:d420431146140d5fcc1079978367a4b52a6e53196ec14b13bcbd2a0a891b8f20",
+      "manifest_hash": "sha256:506c90b03454da3b890dc16c0f3b4a8144ba97db59723c77c154468783c380a4",
       "enabled": true,
       "priority": 64,
       "registered_commands": {

@@ -312,7 +312,12 @@ switch ($DocumentType) {
                 $targetsProperty = $proposal.PSObject.Properties['targets']
                 $rawRows = $null
                 if ($null -ne $targetsProperty) { $rawRows = $targetsProperty.Value }
-                if ($rawRows -isnot [array]) { throw 'proposal.targets must be an array of target records' }
+                if ($null -eq $rawRows -and (Get-HBProperty $proposal 'documentType') -ceq 'LearningPackageProposal' -and
+                    (Get-HBProperty $Data 'publicationScope') -ceq 'ReusableDraftPackageOnly') {
+                    # Historical portable drafts retain the same path, digest and receipt binding.
+                    $rawRows = Get-HBProperty $proposal 'orderedMembers'
+                }
+                if ($rawRows -isnot [array]) { throw 'proposal target records are missing' }
                 $rows = @($rawRows)
                 $proposedPaths = @($rows | ForEach-Object { Get-HBProperty $_ 'path' })
                 $uniqueProposed = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)

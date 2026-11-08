@@ -380,7 +380,7 @@ class Feature004CliSelectionTests(unittest.TestCase):
                 destination.mkdir(parents=True)
                 shutil.copy2(source, destination / "preset.yml")
             manifest = fixture / ".specify/presets/secure-development-assurance-governance/preset.yml"
-            manifest.write_text(manifest.read_text().replace('version: "0.1.8"',
+            manifest.write_text(manifest.read_text().replace('version: "0.1.9"',
                                                            'version: "0.1.7"'),
                                 encoding="utf-8")
             errors = MODULE.validate_feature_004_assurance_profile(fixture)

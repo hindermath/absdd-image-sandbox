@@ -160,7 +160,7 @@ try {
             throw 'Receipt validation changed input bytes'
         }
     }
-    foreach ($LegacyGenerator in @('0.3.3', '0.3.4', '0.3.5', '0.3.6', '0.3.7', '0.3.8', '0.3.9')) {
+    foreach ($LegacyGenerator in @('0.3.3', '0.3.4', '0.3.5', '0.3.6', '0.3.7', '0.3.8', '0.3.9', '0.3.10', '0.3.11')) {
         $Receipt.generator.version = $LegacyGenerator
         Write-HBText $ReceiptPath ($Receipt | ConvertTo-Json -Depth 20)
         Invoke-HBPair Receipt $ReceiptPath $Root 0 "known schema-2 generator ${LegacyGenerator}"
@@ -404,6 +404,21 @@ try {
     $OperationPath = Join-Path $Root 'specs/intake-authoring-operations/operation.json'
     Write-HBText $OperationPath ($Operation | ConvertTo-Json -Depth 30)
     Invoke-HBPair Artifact $OperationPath $Root 0 'completed transaction'
+    $LegacyProposal = [ordered]@{ documentType = 'LearningPackageProposal'; orderedMembers = @($Proposal.targets) }
+    Write-HBText (Join-Path $Root $ProposalRelative) ($LegacyProposal | ConvertTo-Json -Depth 20)
+    $Operation.publicationScope = 'ReusableDraftPackageOnly'
+    $Operation.proposalNormalizedSha256 = Get-HBHash (Join-Path $Root $ProposalRelative)
+    Write-HBText $OperationPath ($Operation | ConvertTo-Json -Depth 30)
+    Invoke-HBPair Artifact $OperationPath $Root 0 'bound historical learning proposal'
+    $LegacyProposal.orderedMembers[0].normalizedSha256 = ('0' * 64)
+    Write-HBText (Join-Path $Root $ProposalRelative) ($LegacyProposal | ConvertTo-Json -Depth 20)
+    $Operation.proposalNormalizedSha256 = Get-HBHash (Join-Path $Root $ProposalRelative)
+    Write-HBText $OperationPath ($Operation | ConvertTo-Json -Depth 30)
+    Invoke-HBPair Artifact $OperationPath $Root 2 'historical learning proposal with stale target hash' 'hash'
+    $Operation.Remove('publicationScope')
+    $Proposal.targets[0].normalizedSha256 = Get-HBHash $Target
+    Write-HBText (Join-Path $Root $ProposalRelative) ($Proposal | ConvertTo-Json -Depth 20)
+    $Operation.proposalNormalizedSha256 = Get-HBHash (Join-Path $Root $ProposalRelative)
     $Proposal.targets = @($Proposal.targets[0])
     Write-HBText (Join-Path $Root $ProposalRelative) ($Proposal | ConvertTo-Json -Depth 20)
     $Operation.proposalNormalizedSha256 = Get-HBHash (Join-Path $Root $ProposalRelative)

@@ -340,8 +340,14 @@ elif document_type == "IntakeOperation":
                 raise ValueError("proposal resolves outside repository")
             proposal = json.loads(resolved_proposal.read_text(encoding="utf-8-sig"))
             rows = proposal.get("targets") if isinstance(proposal, dict) else None
+            if (rows is None and isinstance(proposal, dict)
+                    and proposal.get("documentType") == "LearningPackageProposal"
+                    and data.get("publicationScope") == "ReusableDraftPackageOnly"):
+                # Historical portable draft proposals use orderedMembers with the same
+                # path, digest and receipt binding as current target records.
+                rows = proposal.get("orderedMembers")
             if not isinstance(rows, list) or not all(isinstance(row, dict) for row in rows):
-                raise ValueError("proposal.targets must be an array of target records")
+                raise ValueError("proposal target records are missing")
             proposed_paths = [row.get("path") for row in rows]
             if not all(isinstance(path, str) for path in proposed_paths):
                 raise ValueError("proposal.targets paths must be strings")

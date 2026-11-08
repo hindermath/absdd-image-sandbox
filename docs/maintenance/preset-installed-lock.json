@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "hashContract": "sha256-utf8-lf-bom-or-raw-v1",
   "baselineCommit": "59bdf14405e890aca5fe1d950532bfeb5fbe3b01",
-  "registrySha256": "19df667dfb4591abc2cd1026225eca6dd172dfc30bfcc8171b15215fefe93a00",
+  "registrySha256": "1ebbdf2fd8acb2530c1b5dae32d70a2c5cee32b6a75a678c5bac3d49c235a84c",
   "presets": [
     {
       "id": "a11y-governance",
@@ -51,12 +51,12 @@
     },
     {
       "id": "intake-authoring-governance",
-      "version": "0.3.11",
+      "version": "0.3.12",
       "priority": 64,
       "enabled": true,
-      "manifest_hash": "sha256:d420431146140d5fcc1079978367a4b52a6e53196ec14b13bcbd2a0a891b8f20",
-      "fileCount": 64,
-      "contentSha256": "c0ebe04d30d262f955d6f4a67dae27440857eba6b3d6a29bba2b6fe4fe889922"
+      "manifest_hash": "sha256:506c90b03454da3b890dc16c0f3b4a8144ba97db59723c77c154468783c380a4",
+      "fileCount": 66,
+      "contentSha256": "ca115e1196b87cfc8eb8cf96e304fe2abbbdedd819a847ed7003ba530b3a5b7b"
     },
     {
       "id": "intake-review-governance",

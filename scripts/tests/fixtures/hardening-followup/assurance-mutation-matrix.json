@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "feature": "004-container-hardening-followup",
   "installedPreset": "secure-development-assurance-governance",
-  "installedVersion": "0.1.8",
+  "installedVersion": "0.1.9",
   "matrixScript": ".specify/presets/secure-development-assurance-governance/tests/test-secure-development-assurance.ps1",
   "requiredMutationTokens": [
     "Manifest-Hashdrift",
