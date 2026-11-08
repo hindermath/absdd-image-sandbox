@@ -1,10 +1,10 @@
 # Intake Sequencing Governance
 
-<!-- current-package: 0.2.11 -->
+<!-- current-package: 0.2.12 -->
 
-Paketkennung: **v0.2.11**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.2.11-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
+Paketkennung: **v0.2.12**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.2.12-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
 
-<span lang="en">Package identity: v0.2.11. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
+<span lang="en">Package identity: v0.2.12. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
 
 [Release-Abschluss und Verbesserungsprofil / Publication closeout and improvement profile](docs/release-0.2.10-validation.md).
 
@@ -26,7 +26,7 @@ Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
 *Patch 0.2.10 packages the improved bilingual getting-started and composition
 guide. Behavior and authority boundaries remain unchanged.*
 
-Paketversion / Package version: **0.2.11**. Der Installationsbefehl steht
+Paketversion / Package version: **0.2.12**. Der Installationsbefehl steht
 auf einer Zeile und ist direkt vom Community-Validator auswertbar. Die
 Sequencing-Logik ist gegenueber 0.2.7 unveraendert; bestehende Tags und
 Archive bleiben erhalten. Siehe [Patch-Nachweis](docs/release-0.2.8-validation.md).
@@ -149,7 +149,7 @@ Ein gewöhnlicher zweiter Index im selben Repository bleibt ein Fehler.*
 ## Installation
 
 ```bash
-specify preset add --from https://github.com/hindermath/spec-kit-preset-intake-sequencing-governance/archive/refs/tags/v0.2.11.zip --priority 66
+specify preset add --from https://github.com/hindermath/spec-kit-preset-intake-sequencing-governance/archive/refs/tags/v0.2.12.zip --priority 66
 ```
 
 ## Commands

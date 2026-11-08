@@ -1,6 +1,6 @@
 {
   "id": "intake-review-governance",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "priority": 65,
   "readers": [
     "docs/user-guide.md",

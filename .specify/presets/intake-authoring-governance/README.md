@@ -1,10 +1,10 @@
 # Intake Authoring Governance Preset
 
-<!-- current-package: 0.3.10 -->
+<!-- current-package: 0.3.11 -->
 
-Paketkennung: **v0.3.10**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.3.10-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
+Paketkennung: **v0.3.11**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.3.11-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
 
-<span lang="en">Package identity: v0.3.10. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
+<span lang="en">Package identity: v0.3.11. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
 
 [Release-Abschluss und Verbesserungsprofil / Publication closeout and improvement profile](docs/release-0.3.9-validation.md).
 
@@ -26,15 +26,15 @@ Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
 *Patch 0.3.9 packages the improved bilingual getting-started and composition
 guide. Behavior and authority boundaries remain unchanged.*
 
-Paketversion / Package version: **0.3.10**. Der Installationsbefehl steht
+Paketversion / Package version: **0.3.11**. Der Installationsbefehl steht
 auf einer Zeile und bindet das genaue Release-ZIP, damit die automatische
 Community-Prüfung ihn direkt auswerten kann. Die Generatorvorlage bindet
-0.3.10; bekannte Schema-2-Receipts einschließlich 0.3.6, 0.3.7, 0.3.8 und 0.3.9 bleiben
+0.3.11; bekannte Schema-2-Receipts einschließlich 0.3.6, 0.3.7, 0.3.8 und 0.3.9 bleiben
 gültig und unverändert. Dieser Patch gleicht die DE-/EN-Anleitung aneinander an.
 Keine neue Command-, Schema-, Prioritäts- oder Ausführungsberechtigung.
 
 The installation command is a single line bound to the exact release ZIP for
-automatic community validation. The generator template binds 0.3.10 and keeps
+automatic community validation. The generator template binds 0.3.11 and keeps
 known schema-2 receipts, including 0.3.6, 0.3.7, 0.3.8 and 0.3.9, valid without rewriting
 them. This patch aligns the German/English instructions. No new command,
 schema, priority or execution authority is introduced.
@@ -176,7 +176,7 @@ and freshness without writing.*
 ## Install
 
 ```bash
-specify preset add --from https://github.com/hindermath/spec-kit-preset-intake-authoring-governance/archive/refs/tags/v0.3.10.zip --priority 64
+specify preset add --from https://github.com/hindermath/spec-kit-preset-intake-authoring-governance/archive/refs/tags/v0.3.11.zip --priority 64
 specify preset list
 specify preset info intake-authoring-governance
 specify preset resolve intake-authoring-policy-template
@@ -318,6 +318,8 @@ supersede. With explicit current update authority, use provenance mode
 `LegacyAdoption`. Record the prior normalized target hash as an ordered source,
 plus either its exact Git blob or a clearly bounded snapshot-only proof. Keep
 the same target path and never fabricate an earlier receipt.
+The validators read Git blobs only up to 8 MiB; use bounded snapshot evidence
+or split the source if the historical blob is larger.
 
 Ein bestehender Intake aus der Zeit vor diesem Preset besitzt kein
 wahrheitsgemaesses Vorgänger-Receipt. Mit ausdruecklicher aktueller
@@ -325,6 +327,8 @@ Update-Autoritaet wird `LegacyAdoption` verwendet. Der vorherige normalisierte
 Zielhash wird als geordnete Quelle und zusammen mit dem exakten Git-Blob oder
 einer klar begrenzten Snapshot-Evidence festgehalten. Der Zielpfad bleibt
 unveraendert; ein frueheres Receipt wird nicht erfunden.
+Die Validatoren lesen Git-Blobs nur bis 8 MiB; bei groesseren historischen
+Blobs ist begrenzte Snapshot-Evidence oder eine Aufteilung der Quelle noetig.
 
 ## Source Contract / Quellenvertrag
 
@@ -375,6 +379,21 @@ Only explicit approval of that proposal permits writes. All members are staged
 and validated before any active member is published. Failure cannot leave a
 partially active series. The next action is Intake Review mode `Series`; review
 does not start automatically.
+
+Completed Create/Update operations, including series operations, bind each
+published target to the approved proposal. The proposal JSON contains a
+`targets` array in publication order. Each entry names `path`,
+`normalizedSha256`, and `receiptPath`. The operation validator checks the exact
+target set, published file contents, and receipt identity against its
+`operationId`; an empty or merely claimed publication cannot complete.
+
+Abgeschlossene Create-/Update-Operationen einschließlich Serien binden jedes
+veröffentlichte Ziel an den freigegebenen Vorschlag. Dessen JSON enthält
+`targets` in Veröffentlichungsreihenfolge; jeder Eintrag nennt `path`,
+`normalizedSha256` und `receiptPath`. Der Validator prüft die genaue Zielmenge,
+Dateiinhalte und den vollständigen Receipt samt `operationId`.
+Bei Delete-/DeleteSeries-Operationen ohne neu veröffentlichte Ziele ist
+`targets` eine leere Liste.
 
 ## Language And Accessibility / Sprache und Barrierefreiheit
 
