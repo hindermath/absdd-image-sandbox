@@ -1,28 +1,28 @@
 {
   "schemaVersion": "1.0",
   "documentType": "IntakeSeriesReceipt",
-  "receiptId": "2d55c819-910c-446d-9e78-61c340ffb592",
+  "receiptId": "49946885-cc4f-40ca-a2ab-e898d5703485",
   "seriesId": "65371068-4b1d-4465-9ce7-120e6b15b926",
   "generator": {
     "preset": "intake-sequencing-governance",
     "version": "0.2.11"
   },
-  "createdAt": "2026-11-02T07:08:30Z",
+  "createdAt": "2026-11-08T15:30:03Z",
   "operation": {
-    "type": "Update",
-    "operationId": "f4aa58a9-39ce-4808-b373-89f557054ce4",
-    "authorityEvidence": "User explicitly authorizes targeted intake source-binding renewal with byte-identical archives and independent complete review on 2026-11-02, followed by Mac-A coverage and Windows/WSL2 handoff. Requirements, 85/80 thresholds, intake identities, five-member lifecycle and start/delivery authority remain unchanged; no commit or push. This operation owns provenance authoring only, not technical implementation or review adjudication."
+    "operationId": "9df9c6a1-ceb8-4447-9277-d47640c99849",
+    "authorityEvidence": "User annotation on 2026-11-08 explicitly authorizes executing bounded IR901–IR903 repair and then a complete five-member re-review. Preserve intake identities, scope, 85/80 thresholds, lifecycle, dependencies and human gates. No sandbox feature implementation, runtime action, commit, push or remote write.",
+    "type": "Update"
   },
   "status": "Ready",
   "manifest": {
     "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
-    "normalizedSha256": "01931b50fe0d9a88b6bb8b1d518ab17f536db647a570221a507adc7d84ed77e2"
+    "normalizedSha256": "5dd6b930a55bea2d3e8dcdc3f9c0a0ba9b61664897aa1fd18dfa2e11383c298c"
   },
   "supersedes": {
-    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/f4aa58a9-39ce-4808-b373-89f557054ce4/receipt.json",
-    "receiptNormalizedSha256": "88341c3454c98dc8880634817ed303f475dc89e6f390ccfa55e5ba60e41229ef",
-    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/f4aa58a9-39ce-4808-b373-89f557054ce4/manifest.json",
-    "manifestArchiveSha256": "6f3c90e8fe8165d8925c59241f06597f346aa24923d83717c6e764e958dfd0db"
+    "receiptPath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/9df9c6a1-ceb8-4447-9277-d47640c99849/receipt.json",
+    "manifestArchiveSha256": "01931b50fe0d9a88b6bb8b1d518ab17f536db647a570221a507adc7d84ed77e2",
+    "manifestArchivePath": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/9df9c6a1-ceb8-4447-9277-d47640c99849/manifest.json",
+    "receiptNormalizedSha256": "22190af06a7c5cf73c3f1c54890a4ad2a66013421e13d1915be8154a3b8a2060"
   },
   "tombstone": {
     "path": "N/A",

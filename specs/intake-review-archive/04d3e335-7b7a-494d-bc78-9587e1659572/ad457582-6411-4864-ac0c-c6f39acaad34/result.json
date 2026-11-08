@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "1.1",
+  "documentType": "IntakeReviewResult",
+  "reviewId": "04d3e335-7b7a-494d-bc78-9587e1659572",
+  "mode": "Series",
+  "status": "Ready",
+  "policy": "learner-a11y-bilingual-series",
+  "reviewedAt": "2026-11-02T07:22:27Z",
+  "repository": {
+    "root": ".",
+    "head": "e115fa863e754a83eff212c72f130f6f8543a988"
+  },
+  "reviewer": {
+    "name": "Raman (independent Codex reviewer)",
+    "type": "Agent",
+    "independence": "Did not author operation f4aa58a9-39ce-4808-b373-89f557054ce4. Provenance author Dalton froze inputs and handed over only review outputs; author retains journal validation ownership. This is agent attribution, not a human owner approval.",
+    "scope": "Complete semantic review of all five intake texts and the full series, plus source/archive verification; no technical, usability, WCAG, platform or human acceptance"
+  },
+  "requestEvidence": {
+    "path": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "normalizedSha256": "5104dc741d64012505bba27f4041edfb137fd3a948894cea73b18f8d36bb13fc"
+  },
+  "targets": [
+    {
+      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "role": "Primary",
+      "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a",
+      "gitBlob": "68efb8d13f8635ef9994b37c771298f70019ed80"
+    },
+    {
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "gitBlob": "2c3cb1efec12ff00bd24927d45fb93c3a5c115e6"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "a9c3e49d227f13b69716b62930417cdbebb09d0df129eac23385a1adc122f7f6",
+      "gitBlob": "0316144f09335c4b786c5a3bbd2cefa3b82b92cf"
+    },
+    {
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a",
+      "gitBlob": "7010736daefb84c5e7b9cb853efc32933d52576b"
+    },
+    {
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "role": "OrderedMember",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "gitBlob": "eff599a62a6b4328449d8a10eba2e6ca4387739a"
+    }
+  ],
+  "series": {
+    "orderedTargetPaths": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "roots": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+    ],
+    "dependencies": [
+      {
+        "from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+        "to": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "kind": "AssessmentBaseline"
+      },
+      {
+        "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "kind": "SandboxBaseline"
+      },
+      {
+        "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "to": "intakes/learner-fork-self-build-sandbox.md",
+        "kind": "HardCompletionGate"
+      },
+      {
+        "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "to": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+        "kind": "SandboxBaseline"
+      },
+      {
+        "from": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+        "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "kind": "SandboxBaseline"
+      }
+    ]
+  },
+  "findings": [],
+  "questions": [],
+  "acceptedRisks": [],
+  "operatorExceptions": [],
+  "coverage": {
+    "individual": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "series": [
+      "Read all five full texts, every requirement/acceptance criterion and prepared prompt: audience, prior knowledge, purpose, scope/non-goals, dependency/handoff, evidence, risks, DE/EN readability, security/privacy/A11Y/platform and authority. Not a hash-only review.",
+      "Archived GSDB root retains the historical assessment and accepted gap-list handoff, not gap fulfillment or present sandbox approval. Older four-member statements remain dated context under the current five-member manifest.",
+      "Hardening preserves historical gaps, all 50 delta mappings, H-344-01..10 and AC-H-344-01..10; 85% security-critical module branch and 80% documented-interface thresholds remain binding, with missing measurements Open. No new application or threshold reduction.",
+      "Update FU-001..023/FA-001..012 retain native Ubuntu/base integrity, all-six default and optional profiles, authenticated shared Web/TUI/CLI, bounded readiness, audit/data/security and bilingual learners. Update stays Blocked pending H.",
+      "Acceptance A-344, A-FU-01/02 and AC-A-FU-01/02 require both H/U on the same final source/image, risk-based independent positive/negative checks, justified evidence reuse and no self-acceptance. Missing native/human evidence blocks overall closure.",
+      "Learner FR-001..015, L-FR-016..023, AC-001..012 and L-AC-013..020 preserve fork/upstream, self-build/no project-image publication, optional template/licensing and human gates. Six languages describe the standard profile, not every reduced future profile.",
+      "Five unique targets, one completed archived root, five binding DAG edges, lifecycle Completed/Eligible/Blocked/Blocked/Blocked. A requires both H and U; L requires accepted A and separate authority. No new eligibility/start rights.",
+      "Reviewed seven PR107 source diffs against their Git parents: preset-lock inventory, version-pin tests, Dockerfile integrity/agent/retention, README read-only/confidential prompts and three learner stop/recovery paths. Fit existing requirements; source adoption is not runtime/control-effectiveness proof.",
+      "Independently verified 245 current source bindings in three renewed receipts, unchanged intake IDs and original ordered source chain after explicit predecessor/alignment prefix. Exactly 21 inherited hash changes across seven paths. Learner renewal is needed by its own direct bindings; GSDB and U receipts are unchanged.",
+      "All 19 archive raw hashes match the journal AND pre-update Git HEAD bytes. Five targets/prompts unchanged; current request, manifest and series receipt separately bound. Prior Ready explicitly archived/superseded, not reused as current adjudication.",
+      "Schema2 de-DE portable roles, six collection paths, canonical index, bounded legacy learner alias and computed inventory are aligned. Linked learner paths cover all four IHK occupations and four Fachinformatiker tracks; prerequisites, terms and text alternatives remain explicit.",
+      "Practical usability, WCAG human review, observed macOS VS-Code attach, Windows and Ubuntu/WSL2 rootless acceptance remain separate. CI/Mac PowerShell does not prove other platforms. No real credentials, human approval or risk acceptance inferred.",
+      "Frozen alignment/preparation views describe PreparedForIndependentReview at handoff; this current result/report records adjudication without mutating bound preparation sources again. Historical evidence remains immutable."
+    ],
+    "workers": []
+  },
+  "summary": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "supersedes": "specs/intake-review-archive/aa89a3d1-59a0-42bb-965b-1614e3758c04/f4aa58a9-39ce-4808-b373-89f557054ce4/result.json",
+  "preservedPriorState": {
+    "reviewId": "aa89a3d1-59a0-42bb-965b-1614e3758c04",
+    "resultRawSha256": "bb938648633a97bd9a7e544e2a3cd46cf7867ddcea52790d771719ad0bfb09ff",
+    "meaning": "Immutable historical Ready; current complete independent review separately evaluates renewed bindings"
+  },
+  "seriesBinding": {
+    "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
+    "manifestNormalizedSha256": "01931b50fe0d9a88b6bb8b1d518ab17f536db647a570221a507adc7d84ed77e2",
+    "receiptPath": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+    "receiptNormalizedSha256": "22190af06a7c5cf73c3f1c54890a4ad2a66013421e13d1915be8154a3b8a2060"
+  },
+  "sourceRenewal": {
+    "operationId": "f4aa58a9-39ce-4808-b373-89f557054ce4",
+    "renewedReceiptCount": 3,
+    "changedUniqueSourceCount": 7,
+    "changedBindingCount": 21,
+    "verifiedRenewedSourceCount": 245,
+    "byteIdenticalArchiveCount": 19,
+    "hardeningReceiptRawSha256": "d72722fa247cdb5cdb4ca6ac50424997a2d4f655f5e3fcbdfa8bd174709700be",
+    "acceptanceReceiptRawSha256": "bda109d67d5bca97507066cb95f810f86ffcc0c2319faba80cd891bccafbee16",
+    "learnerReceiptRawSha256": "1a6d3b1cfdf4981b05ef6a2a9311d68f6e17b470cd9bdba74ab09de3bc976bdb"
+  },
+  "validation": {
+    "requirementsConfig": "Passed installed Bash validator; schema2 Aligned",
+    "authoringReceipts": "Passed installed Bash validators for all five receipts; renewed source and archive hashes independently verified",
+    "seriesManifestAndReceipt": "Passed installed Bash validators; native author checks recorded in the operation journal",
+    "resultBash": "Passed installed read-only result validator",
+    "resultPowerShell": "Passed installed native PowerShell read-only result validator",
+    "technicalAcceptance": "NotPerformed; semantic requirements review and provenance verification only"
+  },
+  "nextAction": "Continue only user-authorized Mac-A coverage and Windows/WSL2 handoff preparation; preserve thresholds and blocked platform/human gates, no commit/push or implicit successor start."
+}

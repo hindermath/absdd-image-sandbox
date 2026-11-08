@@ -1,121 +1,125 @@
-# Unabhängiges Vollreview / Independent Complete Review
+# Nachreview IR901–IR903 / IR901–IR903 Re-review — 2026-11-08
 
-## Ergebnis und Grenze / Outcome and Boundary
+## Deutsch
 
-DE: **Ready** am 02.11.2026 für alle fünf Intakes und die vollständige Reihe.
-Review-ID: `04d3e335-7b7a-494d-bc78-9587e1659572`.
-Reviewer: Raman, unabhängiger Codex-Reviewer, nicht Quellenautor Dalton.
-Der Quellenautor hat die Eingaben eingefroren und nur die Review-Ausgaben
-übergeben. Dies ist ein inhaltliches Anforderungsreview, keine technische,
-Plattform-, Usability-, WCAG-, Rechts- oder menschliche Freigabe.
-Keine Findings, akzeptierten Risiken oder offenen materiellen Intake-Fragen.
+**Ergebnis: Ready.** Die vollständige fünfgliedrige Reihe wurde nach der
+autorisierten Reparatur erneut fachlich geprüft. Null offene Befunde aller
+Schweregrade, keine akzeptierten Risiken, keine offenen Fragen, null Worker.
+Ready bewertet die Anforderungs- und Provenienzbereitschaft; es startet keine
+Implementierung und ersetzt keine unabhängige technische oder menschliche Abnahme.
 
-EN: **Ready** on 2 November 2026 for all five intakes and the complete series.
-The review ID is shown above. Raman is the independent Codex reviewer, not
-provenance author Dalton. The author froze inputs and handed over only review
-outputs. This is semantic requirements review, not technical, platform,
-usability, WCAG, legal or human approval. No findings, accepted risks or open
-material intake questions remain.
-
-## Fachlicher Prüfumfang / Substantive Scope
-
-DE: Alle Texte vollständig gelesen, einschließlich Anforderungen,
-Akzeptanzkriterien und Folgeprompts; nicht nur Hashes geprüft. Zweck,
-Zielgruppen, Vorwissen, Umfang/Nicht-Ziele, Messbarkeit, Übergaben, Risiken,
-Security/Datenschutz/Lieferkette, Sprache, A11Y und Autorität wurden bewertet.
-
-EN: Read every text in full, including requirements, acceptance criteria and
-follow-up prompts, not merely hashes. Assessed purpose, audience, assumed
-knowledge, scope/non-goals, measurability, handoffs, risks, security/privacy/
-supply chain, language, accessibility and authority.
-
-| Intake | Inhaltliches Ergebnis / Semantic outcome |
+| Befund | Reparatur und erneute Bewertung |
 |---|---|
-| Archivierte GSDB-Root / Archived GSDB root | Historische Bestandsprüfung und angenommene Lückenliste bleiben Ausgangspunkt; keine Erfüllung ihrer Befunde. / Retains the historical assessment and accepted gap list, not fulfillment of its findings. |
-| Container-Hardening | Historische Befunde, 50 Delta-IDs und H-344-01–10 mit AC-H-344-01–10 bleiben erhalten. 85 % Zweigabdeckung je sicherheitskritischem Modul und 80 % Interface-Abdeckung unverändert; fehlende Messung bleibt Open. / Preserves historical gaps, all delta IDs, ten H/AC-H pairs and unchanged 85/80 thresholds; missing measurement remains Open. |
-| Ubuntu/OpenCode-Web/MSL-Update | FU-001–023 und FA-001–012 decken Basis/Architektur, Web/Readiness, Profile und gemeinsame Schutz-/Daten-/Lernendenverträge ab; bleibt nach H blockiert. / Covers base/architecture, Web/readiness, profiles and shared security/data/learner contracts; stays blocked behind H. |
-| Unabhängige Sandbox-Abnahme / Independent acceptance | A-344 und A-FU/AC-A-FU binden H UND U an denselben finalen Quell-/Imagestand, risikobasierte Gegenprüfung und belegte Übernahmen. Keine Selbstabnahme. / Binds H AND U to the same final source/image, risk-based counterchecks and justified reuse; no self-acceptance. |
-| Lernenden-Selbstbau / Learner self-build | Fork/upstream, lokaler Selbstbau, kein fertiges Projekt-Image, Lizenz-/Template- und menschliche Grenzen bleiben erhalten; Standardprofil mit sechs Sprachen widerspricht reduzierten Profilen nicht. / Retains fork/upstream, local self-build, no ready-made image and rights/template/human boundaries; six-language default does not conflict with reduced profiles. |
+| IR901 | Die 17 Quellenänderungen wurden fachlich eingeordnet. Alle 293 Repository-Quellenbindungen in vier erneuerten Receipts sind aktuell; bisherige Quellenreihenfolge erhalten. Resolved. |
+| IR902 | Tatsächlich konsumiertes Vorgänger-Receipt und seine Archivkopie sind getrennte, bytegleiche Dateien gemäß kanonischem Vertrag. Alle vier neuen Receipts bestehen; historische Receipts bleiben unverändert. Keine Validatoränderung. Resolved. |
+| IR903 | FU-018, Glossar und Selbstbau-Qualitätsregeln verwenden die aktuelle Pin-Register-/Dependabot-Governance in DE/EN. Integritätsziele und manuelle Gates erhalten. Resolved. |
 
-DE: Voraussetzungen sind erklärt, Lernendenpfade sind DE zuerst/EN danach,
-etwa B2 und textorientiert. Die verlinkten Lernwege benennen alle vier
-IHK-IT-Berufe und vier Fachinformatiker-Fachrichtungen. Die archivierte Root
-wird als historische Quelle bewertet, nicht nachträglich umgeschrieben.
-Vorhandene Dokumentation ist kein Beleg praktischer Verständlichkeit oder
-bestandener WCAG-Abnahme.
+### Vollständige Prüfungsabdeckung
 
-EN: Prerequisites are explained and learner paths are German-first/English-
-second, around B2 and text-first. Linked paths name all four IHK IT occupations
-and four IT-specialist tracks. The archived root is historical input, not
-rewritten retroactively. Documentation does not prove practical usability or
-successful WCAG acceptance.
+| Mitglied | Inhalt und Übergabe |
+|---|---|
+| Archivierte GSDB-Bestandsprüfung | Identität, Zielgruppe, zwölf Checklisten, Anwendbarkeit/Evidenz, Open/N/A, priorisierte Lückenliste und menschliche Grenzen geprüft. Keine Neubewertung historischer Kontrollerfüllung. |
+| Container-Hardening | Allgemeine Anforderungen, H-344-01–10 und AC-H-344-01–10, zehn Delta-Gruppen, 85 % Branch-/80 % Interface-/UI-Abdeckung, Lieferkette, Daten/Privacy, Presets und offene Übergaben vollständig geprüft. |
+| Ubuntu/OpenCode-Web/MSL | Alle FU-001–023/FA-001–012 einschließlich Basis/Architektur, Ausgabepfade, Passwort/Readiness, gemeinsame Clients, sieben Profile, Wrapper, SBOM, Daten/Audit, Sicherheitsbestand, DE/EN und A11Y vollständig geprüft. |
+| Unabhängige Selbstprüfung | A-344-/AC-A-344- und A-FU-/AC-A-FU-Verträge verlangen beide abgeschlossenen Vorgänger auf passender gemeinsamer Quellrevision/Image-ID, vollständige FU/FA-Zuordnung und unabhängige risikobasierte Gegenprüfungen ohne Selbstabnahme. |
+| Lernenden-Selbstbau | FR-001–015, L-FR-016–023, AC-001–012, L-AC-013–020 einschließlich Fork/Institution, origin/upstream, Selbstbau, sechs Sprachen im Standardprofil all, keine Registry-Verteilung und optionale Template-/Lizenz-/menschliche Gates vollständig geprüft. |
 
-## Quellen, Archive und Reihe / Sources, Archives and Series
+Je Ziel wurden zusätzlich Voraussetzungen/Begriffe, Scope/Nicht-Ziele,
+Messbarkeit, Risiken, Referenzen, kopierbare Prompts, Deutsch/Englisch,
+textorientierte Status-/Abhängigkeitserklärungen und Lieferautorität geprüft.
+Die vier Quellenstand-Nachträge machen historische Versions-/Statusangaben
+als Kontext erkennbar und nennen installierte Assurance-0.1.9-Prüfwerkzeuge
+bei erhaltener GSDB-3.4.4-Baseline und strengeren menschlichen Risikometadaten.
+Vorhandene Resolute-/Web-/Profilimplementierung zuerst bewerten; kein Auftrag
+zur Doppelimplementierung. Datierte ARM64-Kandidatennachweise sind keine
+vollständige native AMD64-/Windows-/WSL2-, WCAG- oder formale Abnahme.
 
-DE: Die sieben PR-107-Pfade wurden gegen ihre Git-Vorgänger geprüft:
-Preset-Inventar, Toolchain-Pin-Tests, Dockerfile, README und drei
-Lernendenpfade für Einstieg/Stopp/Fehlerhilfe. Sie konkretisieren bestehende
-Anforderungen; kein neuer Scope und keine Abnahmeschwelle. Alle **245**
-lokalen Quellenbindungen der drei erneuerten Receipts stimmen. Genau **21**
-übernommene Hashbindungen ändern sich, sieben je Receipt; das Lernenden-
-Receipt bindet diese Quellen selbst und muss ebenfalls erneuert werden.
-Vorgänger und autorisierter Abgleich stehen vor der erhaltenen Quellenfolge.
-GSDB- und U-Receipt sind unverändert. Alle **19 Archive** stimmen sowohl mit
-den aufgezeichneten SHA-256-Werten als auch mit den Bytes von Git-HEAD vor
-der Aktualisierung überein. Alle fünf Intake-Texte und Prompts sind bytegleich.
+Fünf Mitglieder, eine Root und fünf bindende Kanten sind konsistent.
+GSDB → Hardening; Hardening → Update und Selbstprüfung; Update → Selbstprüfung;
+Selbstprüfung → Selbstbau. Reihenfolge und Lifecycle bleiben
+Completed/Eligible/Blocked/Blocked/Blocked. Eligible bedeutet Kandidat,
+keine Startautorität. Historische Completed-Läufe ersetzen keine aktuelle
+Übergabe zum erweiterten Hardening-Intake. Vier portable Rollen, sechs
+Collections, de-DE-Namensprofil, kanonischer Index und Legacy-Alias sind konsistent.
 
-EN: Compared all seven PR-107 paths with their Git predecessors: preset
-inventory, toolchain-pin tests, Dockerfile, README and three entry/stop/recovery
-paths. They clarify existing requirements, not new scope or thresholds. All
-**245** local sources in the three renewed receipts are current. Exactly
-**21** inherited hashes change, seven per receipt; the learner receipt has
-its own direct bindings and therefore also needs renewal. Predecessor and
-authorized alignment precede the preserved source order. GSDB and U receipts
-are unchanged. All **19 archives** match both recorded SHA-256 values and
-pre-update Git HEAD bytes. All five intake texts/prompts are byte-identical.
+### Provenienz, Validierung und Grenzen
 
-DE: Fünf eindeutige Mitglieder, eine archivierte abgeschlossene Root und
-fünf bindende azyklische Kanten stimmen zwischen Auftrag, Manifest und
-Receipt überein. Status bleiben **Completed → Eligible → Blocked → Blocked
-→ Blocked**. A benötigt H und U; L benötigt erfolgreiche A und eigene
-Startautorität. Schema-2-Konfiguration, Rollen, Sammlungen und Index sind
-Aligned. Das frühere Ready `aa89a3d1-59a0-42bb-965b-1614e3758c04` ist
-bytegleich archiviert und ausdrücklich durch dieses neue Vollreview ersetzt.
-Vorbereitungsnotizen mit `PreparedForIndependentReview` beschreiben die
-Übergabe vor diesem Review, nicht dessen aktuelles Ergebnis; gebundene
-Vorbereitungstexte wurden dafür nicht erneut verändert.
+Vier Intake-IDs bleiben erhalten. Neue Receipt-/Operations-IDs und
+Vorgängerbindungen sind im
+[Reparaturnachweis](sandbox-development-lifecycle-2026-11-08-repair-evidence.json)
+aufgeführt. 22 Vorgängersicherungen sind bytegleich. Der vorherige
+NeedsRemediation-Bericht, sein JSON und der Auftrag sind archiviert;
+`supersedes` benennt die ersetzte Bewertung ausdrücklich.
 
-EN: Five unique targets, one archived completed root and five binding acyclic
-edges agree across request, manifest and receipt. Lifecycle stays **Completed
-→ Eligible → Blocked → Blocked → Blocked**. A requires H and U; L requires
-successful A plus separate authority. Schema-2 roles, collections and index
-are Aligned. Previous Ready is byte-identically archived and explicitly
-superseded by this full review. Preparation notes describe the pre-review
-handoff, not the current outcome; already-bound preparation texts were not
-changed again merely to update that historical phrase.
+Bash-/PowerShell-Receipt-Prüfungen, Serienmanifest/-Receipt und die
+vorhandenen positiven/negativen Lifecycle-Fixtures prüfen die reparierte
+Bindung. Die Ergebnisvalidatoren prüfen anschließend das neue Ready auf
+aktuelle Ziel-/Auftragshashes. Das ist keine praktische Produktabnahme.
 
-## Validierung und nächste Aktion / Validation and Next Action
+Autor und Reviewer dieser begrenzten Intake-Reparatur sind derselbe Agent.
+Dieses vollständige Nachreview ist entsprechend transparent; es behauptet
+keine unabhängige technische oder menschliche Abnahme. Die spätere
+Unabhängigkeit je selbst implementiertem Hardening-/Update-Anteil bleibt
+verbindlich. Kein Risiko wird agentisch akzeptiert.
+Keine Feature-Implementierung, Builds, Containeraktionen, Inferenz,
+Commit-, Push- oder Remote-Schreiboperationen.
 
-DE: Eigene read-only Bash-Prüfungen aller fünf Authoring-Receipts, des
-Reihenmanifests, Reihenreceipts und der Governance-Konfiguration bestanden.
-Die Ergebnisvalidatoren prüfen Auftrag-/Ziel-/Graphbindung in Bash und
-PowerShell; Ergebnisse werden im maschinenlesbaren Review vermerkt.
-Keine Featuretests, Builds oder Containeraktionen in diesem Review.
+Nächste Aktion, nicht ausgeführt:
 
-EN: Independent read-only Bash checks passed for all five authoring receipts,
-series manifest/receipt and governance configuration. Bash and PowerShell
-result validators check request/target/graph binding; results are recorded
-in the machine-readable review. No feature tests, builds or container actions
-were performed in this review.
+```text
+$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json
+```
 
-DE: Nächster Schritt ist nur der bereits beauftragte Mac-A-Coverage-Umfang
-mit Windows-/WSL2-Übergabe. Fehlende Plattform-, praktische Usability-,
-WCAG- und menschliche Nachweise bleiben getrennt Open/Blocked. Keine
-Grenzwertsenkung, kein Commit/Push und kein impliziter Start eines Folge-
-Intakes. Bei Änderung an Quelle, Ziel, Receipt, Auftrag oder Graph neu prüfen.
+## English
 
-EN: Next perform only the already-authorized Mac-A coverage work and Windows/
-WSL2 handoff preparation. Missing platform, practical usability, WCAG and
-human proof remain separately Open/Blocked. No lowered thresholds, commit/
-push or implicit successor intake start. Re-review changed sources, targets,
-receipts, request or graph.
+**Outcome: Ready.** The complete five-member series was semantically
+re-reviewed after the authorized repair. No open findings at any severity,
+accepted risks, unanswered questions or campaign workers. Ready concerns
+requirements/provenance readiness, without implementation authority or
+independent technical/human acceptance.
+
+IR901 is Resolved: all 17 source changes were assessed and all 293 local
+source bindings in four successor receipts are current, preserving inherited
+order. IR902 is Resolved: the consumed predecessor receipt and its archival
+copy are distinct files with identical bytes, following the canonical
+positive/negative contract. Historical receipts are unchanged and validators
+were not modified. IR903 is Resolved: FU-018, glossary and learner quality
+rules now name current pin-registry/Dependabot governance in both languages,
+preserving integrity and manual gates.
+
+Full coverage includes the archived twelve-checklist GSDB assessment;
+hardening general/H-344/AC-H-344 requirements and 85%/80% thresholds;
+all FU-001–023/FA-001–012; acceptance A-344/AC-A-344 and A-FU/AC-A-FU handoffs;
+learner FR-001–015, L-FR-016–023, AC-001–012 and L-AC-013–020.
+Audience, prerequisites, terms, scope/non-goals, measurability, risks,
+references, prompts, language, text-first states and authority were reviewed
+for every target. Acceptance still consumes both completed H/U handoffs on
+the same final source/image per profile/architecture, with complete FU/FA
+mapping, independent risk-based counterchecks and justified evidence reuse.
+Learner standard all retains six languages; optional template, licence and
+human gates remain separate from fork/institution self-build.
+
+Current Assurance 0.1.9 is separated from historical 0.1.8 references while
+retaining GSDB3.4.4 and stricter human risk metadata. Existing Resolute/Web/
+profile work must be assessed before later changes. Dated ARM64 candidate
+evidence grants no complete native AMD64/Windows/WSL2, WCAG or formal approval.
+
+Five members, one root and five binding DAG edges are preserved, with
+Completed/Eligible/Blocked/Blocked/Blocked lifecycle. H precedes U and A;
+U also precedes A; A precedes L; GSDB supplies H's baseline. Eligibility
+grants no execution authority. Historical completed runs do not close today's
+expanded handoff. Schema2 de-DE roles/collections, canonical index/order and
+bounded legacy alias remain consistent.
+
+Intake identities are retained; successor receipts and operation evidence
+bind current hashes and 22 exact predecessor snapshots. Prior
+NeedsRemediation/report/request are explicitly archived and superseded.
+Both-shell receipts, series validators and canonical positive/negative
+lifecycle fixtures validate the repair; result validators bind the new
+outcome to current targets/request. No product acceptance follows from this.
+
+The same agent repaired and re-reviewed these intake artifacts; no independent
+external, technical or human review is claimed. Later portion-specific
+independence and human decisions remain mandatory. No risks were accepted.
+No feature implementation, builds, runtime, inference, commits, pushes or
+remote writes. Next action is the read-only series-status command above.

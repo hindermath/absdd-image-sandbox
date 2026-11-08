@@ -15,25 +15,25 @@
     {
       "path": "Lastenheft_Secure-Development-Container-Hardening.md",
       "role": "OrderedMember",
-      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "normalizedSha256": "204d88a3977213f8764c3beaced0b2c089baed95d63bb55d696c462717c1e9fa",
       "status": "Eligible"
     },
     {
       "role": "OrderedMember",
       "status": "Blocked",
       "path": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
-      "normalizedSha256": "a9c3e49d227f13b69716b62930417cdbebb09d0df129eac23385a1adc122f7f6"
+      "normalizedSha256": "d6af174d6d1b201e5bae8571d8e698a65bccf2ad8b9e5549ecd86d82af9f2288"
     },
     {
       "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
       "role": "OrderedMember",
-      "normalizedSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a",
+      "normalizedSha256": "821a011ad4c48a287bca11096599416b42914a909bfcfe8fb503d7b6a155e871",
       "status": "Blocked"
     },
     {
       "path": "intakes/learner-fork-self-build-sandbox.md",
       "role": "OrderedMember",
-      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "normalizedSha256": "97e46b84644fd70b4dab747af0d820187821c4e288f68add3e70677ceb7f14e7",
       "status": "Blocked"
     }
   ],
@@ -105,6 +105,8 @@
     "docs/maintenance/intake-delivery-repair-2026-10-30.md",
     "docs/maintenance/historical-eof-integration-2026-10-30.md",
     "docs/maintenance/intake-source-alignment-2026-11-02.md",
-    "specs/intake-authoring-operations/f4aa58a9-39ce-4808-b373-89f557054ce4/operation.json"
+    "specs/intake-authoring-operations/f4aa58a9-39ce-4808-b373-89f557054ce4/operation.json",
+    "docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md",
+    "specs/intake-authoring-operations/9df9c6a1-ceb8-4447-9277-d47640c99849/operation.json"
   ]
 }
