@@ -1,0 +1,1720 @@
+{
+  "validation": {
+    "stagedSeries": "Manifest/receipt both shells passed",
+    "result": "Both Bash and PowerShell passed: Series, Ready, five targets",
+    "technicalAcceptance": "NotPerformed",
+    "canonicalLifecycle": "Existing positive/negative lifecycle fixture suite passed",
+    "stagedReceipts": "All four Bash and PowerShell passed"
+  },
+  "sourceBindingCount": 293,
+  "identities": [
+    {
+      "normalizedSha256": "204d88a3977213f8764c3beaced0b2c089baed95d63bb55d696c462717c1e9fa",
+      "sourceCount": 88,
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md",
+      "receiptId": "59a173e6-5bd5-45c9-810f-cbf28b4989d2",
+      "intakeId": "a92a7ced-bbf3-4408-9754-7b739be19a41",
+      "receiptPath": "specs/intake-authoring-receipts/secure-development-container-hardening.json"
+    },
+    {
+      "normalizedSha256": "d6af174d6d1b201e5bae8571d8e698a65bccf2ad8b9e5549ecd86d82af9f2288",
+      "sourceCount": 21,
+      "path": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "receiptId": "19ce7687-7bb7-4c57-bb5b-ce581207dd4a",
+      "intakeId": "0c9292bb-f43b-4f7b-905e-f602b5b229f5",
+      "receiptPath": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json"
+    },
+    {
+      "normalizedSha256": "821a011ad4c48a287bca11096599416b42914a909bfcfe8fb503d7b6a155e871",
+      "sourceCount": 94,
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "receiptId": "ef9d87da-80b5-4b5b-bb6e-5b04b6eea9b0",
+      "intakeId": "51d24064-dfa6-4375-9bcd-58cccc545167",
+      "receiptPath": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json"
+    },
+    {
+      "normalizedSha256": "97e46b84644fd70b4dab747af0d820187821c4e288f68add3e70677ceb7f14e7",
+      "sourceCount": 90,
+      "path": "intakes/learner-fork-self-build-sandbox.md",
+      "receiptId": "b7ce76cf-f5fc-4eff-9932-a7467d76d421",
+      "intakeId": "5926e53e-39b7-475f-8a6b-e2ec08b0a803",
+      "receiptPath": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json"
+    }
+  ],
+  "preserved": {
+    "validatorsUnmodified": true,
+    "roots": 1,
+    "targets": 5,
+    "thresholds": "85/80 unchanged",
+    "bindingEdges": 5,
+    "lifecycle": [
+      "Completed",
+      "Eligible",
+      "Blocked",
+      "Blocked",
+      "Blocked"
+    ]
+  },
+  "operationId": "9df9c6a1-ceb8-4447-9277-d47640c99849",
+  "schemaVersion": "1.0",
+  "sourceBindings": [
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "source": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/9df9c6a1-ceb8-4447-9277-d47640c99849/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "6cf89227ed9f68de15444ffeb6ad433ab4e174753a4b6e19b81408d6cd7503aa",
+      "source": "docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "source": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/f4aa58a9-39ce-4808-b373-89f557054ce4/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "c0926016c68a963d56fe714781c946bbb2cc8a91f24b6fb9a3bd1da322bf4e21",
+      "source": "docs/maintenance/intake-source-alignment-2026-11-02.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "source": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/869be6a5-a352-4f1f-baaf-aad2d6efd086/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "63ab7a7d5638358c30b1b91a23408bcfe29aa76e83f6fd2375a49aa3bd9d320f",
+      "source": "docs/maintenance/template-series-fixture-alignment-2026-10-30.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "source": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/b2e17f24-435e-4ea7-86e5-e68edbea0803/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "a09b8bd730f13313a6aa0a85cebdbf1e7486eafa6e791743b339ef483b83aa7d",
+      "source": "docs/maintenance/historical-eof-integration-2026-10-30.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "source": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "aa311a3f4f1b0ebe56b4748a34390650cdc80d02248c31d489989d5fd349f7a8",
+      "source": "docs/maintenance/intake-delivery-repair-2026-10-30.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "8a9fac14e92da1a901504a1daa15e56bf744b1d6c8cf192f0385716bcddbcaf3",
+      "source": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/99ecfd91-17f2-4154-9d4e-e559242c5ce9/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "d73564dce25433aee2e3d5bc3df1cf18b3f5944c9e4197fff95ab5af2dfd385d",
+      "source": "docs/secure-development/baseline-manifest.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "05787af045845a45093ef473a9abc3c0ecd20460dd36911e69f3e81ea71b26ae",
+      "source": "docs/maintenance/gsdb-344-control-delta.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "dde3500a80dd392ae88076d6361ee0d9dd51d7bdd511e3d57e7d3d187d441fc8",
+      "source": ".specify/presets/secure-development-assurance-governance/templates/secure-development-evidence-contract.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "461a01f311fffc5655a4ba175da8052cb88845dd0e4c56cbe90c345f550cf60c",
+      "source": "AGENTS.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "eccc16f09a31b1cf1b644574e17a22b353db6523baf5b2fa6139b51d2de7d540",
+      "source": "docs/maintenance/documentation-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "5f27bebe0d4698737c77b27d31373374a25d2a6e5f83acb58d906cf0471f4203",
+      "source": "docs/security/toolchain-followups-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "50b0444645b5e936d2c6b9b71e9ba916c3f7c59332deda1216352c3c3d325b19",
+      "source": "docs/fuer-lernende/lernwege.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "ed0dc1fcd700882941d99fee7f0df9eb2f67ed22147d99a5f947cdd32efdf425",
+      "source": "docs/fuer-lernende/barrierefreiheit.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "2e1c90d4b43d8c3e22f35235011a27a497e6a535515b65cf71be1ab2efd585f4",
+      "source": "docs/maintenance/intake-sources-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "1b013dee1b6090482876b2ad2c89da95a290d7946200c8055f849d1e60cc0943",
+      "source": "docs/maintenance/gsdb-344-preset-installed-lock.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "bf5f0c2381ce00da9f9c0dc03f0cd17737f115ae0b81e951f677efc75f28fd02",
+      "source": "docs/maintenance/stable-preset-rollout-2026-10-24.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "0b329d2b68ccec96dca635f58564348dac88527f7f515f4f422fddf974657a12",
+      "source": "docs/maintenance/stable-preset-source-lock-2026-10-24.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "7db6043a5dd680a033be126aaf39b13a1006605a1ace2a460795c8034831469f",
+      "source": "docs/maintenance/stable-preset-installed-lock-2026-10-24.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "9d03e6ab54c6bb61207a63a37e44a0ecb1dd8b7e1fce6029a5e508342a497e3c",
+      "source": "docs/maintenance/gsdb-344-source-inventory.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "8b4c39378079fe624128c12b2f94c25423e7edb317f79e8965ad4927a065320f",
+      "source": "docs/maintenance/intake-gsdb344-delta-2026-10-21.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "32f8ca77698e577286c4da6424152fa15e67ad835e383f5136037512972ac85d",
+      "source": ".specify/presets/secure-development-assurance-governance/docs/release-0.1.8-validation.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "a1ab9750af08d57675e12da567d2d99f12486a2a7da00df141566dc7ed5b132b",
+      "source": ".specify/presets/secure-development-assurance-governance/docs/user-guide.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "803bc1e639741a8c47cba55fc3288c558ae8e7caead0db028ab36753ae0dda4d",
+      "source": ".specify/presets/secure-development-assurance-governance/docs/user-guide.EN.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "314a8c7d0aa3cc8b81e96b9091e3d77aa5fa5365f14e84eb615a805f0103b2cd",
+      "source": "COMPLIANCE-PLAN_RL-SE-001.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "53776e64d116f71b9448ee945943ee7cfb13566aaacc97f2f79e1a4739b2a2b0",
+      "source": "docs/maintenance/sandbox-current-state-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "2283aa9cc1e6e1dae4ec4cbd4b147c4fd98587ab12156b079fbce3a02517fb11",
+      "source": "docs/maintenance/toolchain-version-audit-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "b1bd990e86b27ed89a2384715f97266a38ccf7b1bf0ae9a327bcde1384dbd390",
+      "source": "scripts/config/required-cli-tools-registry.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "55c6e72023a4825ce9237404b5ae08ea882d31a007f4ced698c65b1c577f2de8",
+      "source": "scripts/tests/test_toolchain_version_pins.py"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "f14ba825a5878cb9103a597c556e1f5abd8431236ce84ff6bd3679686c035da0",
+      "source": "docs/fuer-lernende/sandbox-profil.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "151e1b51bd99afa777e8f1046694e0957fdf6ff95da9ef19fc794a399e0fd2ed",
+      "source": "docs/security/agent-session-log/2026-10-25-1047.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "ec66528d6336e86d3757f64d3d168e1eb4d6c551d7f1838549bc553fdda7d3d4",
+      "source": "Dockerfile"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "b657955d235eb6ec7070b508060b596411ff76106fe96e9ac76897a8ab097f6e",
+      "source": "docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "3e7f95f4d86a300c67d459ce839036fbb15c2a20fb3f5825dea6be2bd79e64a3",
+      "source": "docs/maintenance/documentation-impact-2026-10-25.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "fa6db19fcebeaefb5f045ef20aee1e82325670388f3bd0acd31345da59e4985a",
+      "source": "LICENSE"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "910e686c32bd1b5bf07c547fd6b3043c369c5b92c85380dd5ed05d8b5f4af6ab",
+      "source": "docs/licensing.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "89b074e42ed36cec5ae47cf099c0479c8cf744bbb18c4630401320f554b9e9ab",
+      "source": "docs/maintenance/template-profile-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "cbc239473c3ca4759e6507739477fce02f407469acbc300242fd363a13b59d89",
+      "source": "docs/fuer-lernende/template-profil.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "82d117f79082fa5188248e85722295c7afec6280a9457163d20ada5f98a0be0a",
+      "source": "docs/betrieb/template-erstuebernahme.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "07e32a32769686cacf39c39fb6bc811ebc44a9a703241d210983aca30669422e",
+      "source": "README.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "a9c47de83a4d2dc29e33285b375a3a8ec576287beb5e3f2701900ac974f6b307",
+      "source": "CLAUDE.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "9a469af7f23748e10b5cd68f123cd832a757477da01731bec45a5b55b8b62316",
+      "source": "GEMINI.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "7f76e55718be492d045e03fd0583ac878bc6d932a30c89cbb3a8e02dc0397125",
+      "source": ".github/copilot-instructions.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "36699eda23eae71d67b252d0161b9d389d5bf2a2a51724ef2d5ea21ff563e69d",
+      "source": ".github/agents/copilot-instructions.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "04b84ff4b62596bdbc3b75744cc35eddbaac576f63b0c6809cd7b4edcf5871cb",
+      "source": "docs/fuer-lernende/git-und-hosting.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "ce1d111399a36567afe2de8b8fa2f7edc5fb591b6d39afdff4fc3f4ee262d256",
+      "source": "docs/fuer-lernende/installation.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "2b3e3757915a5e89e5f350f0818c75834d74e2765785b3e85c9de9b365074133",
+      "source": "docs/fuer-lernende/entwickler-kurzpfad.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "61f02e9632785795a591cd9e8e3ff6d581063f820047fa25cee1805815647957",
+      "source": "docs/fuer-lernende/faq.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "d0cbabef81408d2e03118292d7864f7424a04649cc9d04006132c961a271ef31",
+      "source": "docs/fuer-lernende/README.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "37492b107ba5d219af638d854bf5a5c37cf8fc29dcf8bf991ff4aad3b8d3b6ba",
+      "source": "docs/lernwerkstaetten/README.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "58c7c5305546b604d55144d3c00e90eb2cea9182e35641f50ec06b4263c93d20",
+      "source": "docs/lernwerkstaetten/moderation.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "680046d33bb22fec738df148607e888347be61780b86247b067a44e95d297563",
+      "source": ".github/workflows/gsdb-pilot-contracts.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "eed6d7c753e73df33c91b1ef0cce2e5214f6272c311a4e5f06c3a4b9a946511b",
+      "source": ".github/workflows/project-statistics-pilot-native-proof.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "1700bda98186aec0ee0e76d95969008f6f124c9ccda8619a5e90150ba7f26a91",
+      "source": "scripts/tests/test_template_profile.py"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "8e3e084595734f1009aa02c1936090ec2c8127b0498fa49c208b15c0a1447293",
+      "source": "docs/praesentationen/workshop-spec-kit.de.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "89519500f1ef8d880de81f360f88c392f55e2dc3c259b1fc4c55a02a3ae800a2",
+      "source": "docs/praesentationen/workshop-spec-kit.en.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "60eb3df8ef47a2564ae10d64cfeab063604f42800e8872a024367c8e679a106a",
+      "source": "docs/praesentationen/werkstatt-sysinfo.de.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "0b87f648717df7f249a6c57d3c1b3df7b2e02cd76df5bcb977607a5e9962ede5",
+      "source": "docs/praesentationen/werkstatt-sysinfo.en.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "cc8b2cd012636a52274e39f7c6e9203ed4efb58872702d56b763f18dc1428bff",
+      "source": "docs/praesentationen/werkstatt-web.de.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "97ba23094259c245c7fa195d16455c04265d7e68049a3367e663ea9cd3ca2423",
+      "source": "docs/praesentationen/werkstatt-web.en.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "8474d0d6f5c845b32c2dd7fae62c6460f87bbc88960172edad64ac637d5c7843",
+      "source": ".github/workflows/documentation-and-sandbox.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "33eae4087fe68cde8e2c474b61fe130ea56024a61b80f262216946a6ec8fe7b6",
+      "source": "docs/maintenance/closeout-rights-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "6bc68381c8f44c2f93cd6aa3b56c241c877391175f92993ecefcf795390ca0cd",
+      "source": "docs/praesentationen/README.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "d49b8e4397a3fe6845469317f9b6f15ac4a6292032b9c11160493cf6c87866aa",
+      "source": "docs/maintenance/closeout-review-remediation-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "cc2ac202e03e5ab735572d67fad359d58bc0de79ba2841740e871292a905b12f",
+      "source": "scripts/tests/test_learner_documentation_contract.py"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "9a2e1dab5f0cd6d8263740d96af45db5cf7d54e8fa8034c6838fbe7628ef870a",
+      "source": "docs/maintenance/closeout-eof-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "61fe0260c9a36708cde94e562ec9e295542923ff1b11799e6ba8208508b960f3",
+      "source": "docs/maintenance/closeout-ci-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "cdab6b0c7d97d618b8671baf493a05ed9159737f2f436197ef7107a51e1dbd10",
+      "source": "scripts/tests/test_closeout_ci_contracts.py"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "f57c19b2f75670c3340dac3c2132d50b18dde8ba31a8f5e11c9dad897893910d",
+      "source": ".github/workflows/maintenance-tui.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "fe805962cecaf6de8926cee10b8e6f70baaf456a722814a72ed5e22b64b0121a",
+      "source": "docs/maintenance/closeout-statistics-history-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "badabd767e5c09b909a9818f251bfab8fe63bb6b1deddf1547bb473d81f43779",
+      "source": "scripts/lib/statistics-ci-evidence.ps1"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "2980a039cd6db2681243f7e3762b6ced729f74bd794c3977e342f8d01fc003ef",
+      "source": "scripts/tests/Test-StatisticsCiEvidence.ps1"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "d9ef3ec24ca9f8562214c17014e04ef74be165d5a81f6e26c7ee0bf56c464926",
+      "source": "docs/fuer-lernende/erste-schritte.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "d7b0caa82e892d1ebae43a8a3358ead25fe98f14bb0dccb8a064d68e4c5ead8e",
+      "source": "docs/fuer-lernende/troubleshooting.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "8601bf210abce856f205a5ac675cb2eeb6e8301e938c2514ed4a44f0a354e030",
+      "source": "docs/fuer-lernende/alltag.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "a4794de74ca9c4f6309fce6248ddca0fe2d201ae0411a22e2e96bbf51510d9a1",
+      "source": "docs/maintenance/usability-alignment-2026-10-27.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "e9dc3213f200c01cf59efe6af2df74c751f664042063c9e6221a48c2049febd5",
+      "source": "docs/security/dependency-update-policy.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "522029b97fc79ce4d01f95efd85dc29e179a6a90327eadbef3d75c96b30da35a",
+      "source": "scripts/config/toolchain-pins.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "8cea29a127199c8f109b48469f774d697b10b5a1147cc6b341794574633d4e38",
+      "source": ".github/dependabot.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "67c9761aa5e4bf7947f982fb53ebe5d0432050ecef65a3463f49d2e0e4d6c4d1",
+      "source": ".github/workflows/toolchain-pins.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "bbb13fc922cc765249aecd732759a37c8bb45f5dd4837a0645f3948ceee9a5fa",
+      "source": "docs/maintenance/toolchain-version-audit-2026-11-06.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "20bb55a5aea5a19ed1db1dac3bf05f9941b8a86efa3cd25a8e4ec25b7401038d",
+      "source": "docs/maintenance/feature-update-2026-11-06-acceptance.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "normalizedSha256": "fceee684358c0262e3b73f901c3d85b5ac50d2cfba9d2dc332f2f304f438152d",
+      "source": ".specify/presets/intake-authoring-governance/tests/test-intake-authoring-lifecycle.ps1"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "a9c3e49d227f13b69716b62930417cdbebb09d0df129eac23385a1adc122f7f6",
+      "source": "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/9df9c6a1-ceb8-4447-9277-d47640c99849/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "6cf89227ed9f68de15444ffeb6ad433ab4e174753a4b6e19b81408d6cd7503aa",
+      "source": "docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "af29857c02b5fd62a286dfc2c4c1552ccb8bdbefb21b29ed85ee417a23841bfd",
+      "source": "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/b2e17f24-435e-4ea7-86e5-e68edbea0803/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "a09b8bd730f13313a6aa0a85cebdbf1e7486eafa6e791743b339ef483b83aa7d",
+      "source": "docs/maintenance/historical-eof-integration-2026-10-30.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "54813beb0eb4c523d5b6529739b24b196a3ffdab1ca1ac602abaad479d5d6e88",
+      "source": "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "aa311a3f4f1b0ebe56b4748a34390650cdc80d02248c31d489989d5fd349f7a8",
+      "source": "docs/maintenance/intake-delivery-repair-2026-10-30.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "da1d114d1c95026900daf8a27f922654e5cc91041ced17009fa4c3c6f6b9e795",
+      "source": "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "a833c5ad3ee0dade8b176e6ad04426e27dbb1ac09a6411718d341c656b357991",
+      "source": "specs/intake-series-operations/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/proposal.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "c84477a1676ebbf42f5c2b0a6f9797f9d1d41857c8d4ebe2bcc2b7cb44586d4b",
+      "source": "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/37ca62a8-7797-44d6-9f51-3801d5406771/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "c3a508326469600325e1dae1be82bdb8d0cced5bc2179a436c0cece09daeca46",
+      "source": "specs/intake-review-archive/4ca2cab9-38dd-4394-8c72-d31852829226/37ca62a8-7797-44d6-9f51-3801d5406771/result.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "f4fe7d475f6b94269631b56e65918c82b5add51e032d2994df4a46f7f06f4bdb",
+      "source": "requirements/baseline/sandbox-feature-update-2026-10-28/issue-101.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "9f5885f5b6005c2ccf1b23d0442bf03a7a941c73cdd455d23744bcbb23701423",
+      "source": "requirements/baseline/sandbox-feature-update-2026-10-28/issue-102.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "bc930ff2245d3111faef9d5de5b70cbc2a0f9a18e410f54479df76392ca13d45",
+      "source": "requirements/baseline/sandbox-feature-update-2026-10-28/issue-104.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "461a01f311fffc5655a4ba175da8052cb88845dd0e4c56cbe90c345f550cf60c",
+      "source": "AGENTS.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "e9dc3213f200c01cf59efe6af2df74c751f664042063c9e6221a48c2049febd5",
+      "source": "docs/security/dependency-update-policy.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "522029b97fc79ce4d01f95efd85dc29e179a6a90327eadbef3d75c96b30da35a",
+      "source": "scripts/config/toolchain-pins.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "8cea29a127199c8f109b48469f774d697b10b5a1147cc6b341794574633d4e38",
+      "source": ".github/dependabot.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "67c9761aa5e4bf7947f982fb53ebe5d0432050ecef65a3463f49d2e0e4d6c4d1",
+      "source": ".github/workflows/toolchain-pins.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "bbb13fc922cc765249aecd732759a37c8bb45f5dd4837a0645f3948ceee9a5fa",
+      "source": "docs/maintenance/toolchain-version-audit-2026-11-06.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "20bb55a5aea5a19ed1db1dac3bf05f9941b8a86efa3cd25a8e4ec25b7401038d",
+      "source": "docs/maintenance/feature-update-2026-11-06-acceptance.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "fceee684358c0262e3b73f901c3d85b5ac50d2cfba9d2dc332f2f304f438152d",
+      "source": ".specify/presets/intake-authoring-governance/tests/test-intake-authoring-lifecycle.ps1"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a",
+      "source": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/9df9c6a1-ceb8-4447-9277-d47640c99849/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "6cf89227ed9f68de15444ffeb6ad433ab4e174753a4b6e19b81408d6cd7503aa",
+      "source": "docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a",
+      "source": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/f4aa58a9-39ce-4808-b373-89f557054ce4/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "c0926016c68a963d56fe714781c946bbb2cc8a91f24b6fb9a3bd1da322bf4e21",
+      "source": "docs/maintenance/intake-source-alignment-2026-11-02.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a",
+      "source": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/869be6a5-a352-4f1f-baaf-aad2d6efd086/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "63ab7a7d5638358c30b1b91a23408bcfe29aa76e83f6fd2375a49aa3bd9d320f",
+      "source": "docs/maintenance/template-series-fixture-alignment-2026-10-30.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a",
+      "source": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/b2e17f24-435e-4ea7-86e5-e68edbea0803/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "a09b8bd730f13313a6aa0a85cebdbf1e7486eafa6e791743b339ef483b83aa7d",
+      "source": "docs/maintenance/historical-eof-integration-2026-10-30.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a",
+      "source": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "aa311a3f4f1b0ebe56b4748a34390650cdc80d02248c31d489989d5fd349f7a8",
+      "source": "docs/maintenance/intake-delivery-repair-2026-10-30.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f",
+      "source": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/0ad06585-48d6-4e43-a7cc-714d580eef0e/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "7e6eb212f78467c7c12c085ccf2d056a3de2f4a55a368d9d206c2c909c569282",
+      "source": "docs/maintenance/ir801-repair-2026-10-30.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "15fd694ae540516f0e2347bb6724f40dba8cd33989e04b9f5262b4144cbe78d3",
+      "source": "specs/intake-review-archive/505a9246-a7a7-4a37-9fe4-eb73f3a2705d/0ad06585-48d6-4e43-a7cc-714d580eef0e/result.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "d6af174d6d1b201e5bae8571d8e698a65bccf2ad8b9e5549ecd86d82af9f2288",
+      "source": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "18f3c78ce08b757add6c30811a68debc1e5ff3967bfc598a7fa552121affc59f",
+      "source": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "a833c5ad3ee0dade8b176e6ad04426e27dbb1ac09a6411718d341c656b357991",
+      "source": "specs/intake-series-operations/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/proposal.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "23fb312bc8821f7cea59222c4b53959e790d972db7968f1955ca64be87d50f5a",
+      "source": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/99ecfd91-17f2-4154-9d4e-e559242c5ce9/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "d73564dce25433aee2e3d5bc3df1cf18b3f5944c9e4197fff95ab5af2dfd385d",
+      "source": "docs/secure-development/baseline-manifest.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "05787af045845a45093ef473a9abc3c0ecd20460dd36911e69f3e81ea71b26ae",
+      "source": "docs/maintenance/gsdb-344-control-delta.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "dde3500a80dd392ae88076d6361ee0d9dd51d7bdd511e3d57e7d3d187d441fc8",
+      "source": ".specify/presets/secure-development-assurance-governance/templates/secure-development-evidence-contract.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "461a01f311fffc5655a4ba175da8052cb88845dd0e4c56cbe90c345f550cf60c",
+      "source": "AGENTS.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "eccc16f09a31b1cf1b644574e17a22b353db6523baf5b2fa6139b51d2de7d540",
+      "source": "docs/maintenance/documentation-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "5f27bebe0d4698737c77b27d31373374a25d2a6e5f83acb58d906cf0471f4203",
+      "source": "docs/security/toolchain-followups-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "50b0444645b5e936d2c6b9b71e9ba916c3f7c59332deda1216352c3c3d325b19",
+      "source": "docs/fuer-lernende/lernwege.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "ed0dc1fcd700882941d99fee7f0df9eb2f67ed22147d99a5f947cdd32efdf425",
+      "source": "docs/fuer-lernende/barrierefreiheit.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "2e1c90d4b43d8c3e22f35235011a27a497e6a535515b65cf71be1ab2efd585f4",
+      "source": "docs/maintenance/intake-sources-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "1b013dee1b6090482876b2ad2c89da95a290d7946200c8055f849d1e60cc0943",
+      "source": "docs/maintenance/gsdb-344-preset-installed-lock.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "bf5f0c2381ce00da9f9c0dc03f0cd17737f115ae0b81e951f677efc75f28fd02",
+      "source": "docs/maintenance/stable-preset-rollout-2026-10-24.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "0b329d2b68ccec96dca635f58564348dac88527f7f515f4f422fddf974657a12",
+      "source": "docs/maintenance/stable-preset-source-lock-2026-10-24.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "7db6043a5dd680a033be126aaf39b13a1006605a1ace2a460795c8034831469f",
+      "source": "docs/maintenance/stable-preset-installed-lock-2026-10-24.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "9d03e6ab54c6bb61207a63a37e44a0ecb1dd8b7e1fce6029a5e508342a497e3c",
+      "source": "docs/maintenance/gsdb-344-source-inventory.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "8b4c39378079fe624128c12b2f94c25423e7edb317f79e8965ad4927a065320f",
+      "source": "docs/maintenance/intake-gsdb344-delta-2026-10-21.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "32f8ca77698e577286c4da6424152fa15e67ad835e383f5136037512972ac85d",
+      "source": ".specify/presets/secure-development-assurance-governance/docs/release-0.1.8-validation.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "a1ab9750af08d57675e12da567d2d99f12486a2a7da00df141566dc7ed5b132b",
+      "source": ".specify/presets/secure-development-assurance-governance/docs/user-guide.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "803bc1e639741a8c47cba55fc3288c558ae8e7caead0db028ab36753ae0dda4d",
+      "source": ".specify/presets/secure-development-assurance-governance/docs/user-guide.EN.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "314a8c7d0aa3cc8b81e96b9091e3d77aa5fa5365f14e84eb615a805f0103b2cd",
+      "source": "COMPLIANCE-PLAN_RL-SE-001.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "53776e64d116f71b9448ee945943ee7cfb13566aaacc97f2f79e1a4739b2a2b0",
+      "source": "docs/maintenance/sandbox-current-state-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "2283aa9cc1e6e1dae4ec4cbd4b147c4fd98587ab12156b079fbce3a02517fb11",
+      "source": "docs/maintenance/toolchain-version-audit-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "b1bd990e86b27ed89a2384715f97266a38ccf7b1bf0ae9a327bcde1384dbd390",
+      "source": "scripts/config/required-cli-tools-registry.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "55c6e72023a4825ce9237404b5ae08ea882d31a007f4ced698c65b1c577f2de8",
+      "source": "scripts/tests/test_toolchain_version_pins.py"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "f14ba825a5878cb9103a597c556e1f5abd8431236ce84ff6bd3679686c035da0",
+      "source": "docs/fuer-lernende/sandbox-profil.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "151e1b51bd99afa777e8f1046694e0957fdf6ff95da9ef19fc794a399e0fd2ed",
+      "source": "docs/security/agent-session-log/2026-10-25-1047.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "ec66528d6336e86d3757f64d3d168e1eb4d6c551d7f1838549bc553fdda7d3d4",
+      "source": "Dockerfile"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "b657955d235eb6ec7070b508060b596411ff76106fe96e9ac76897a8ab097f6e",
+      "source": "docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "3e7f95f4d86a300c67d459ce839036fbb15c2a20fb3f5825dea6be2bd79e64a3",
+      "source": "docs/maintenance/documentation-impact-2026-10-25.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "fa6db19fcebeaefb5f045ef20aee1e82325670388f3bd0acd31345da59e4985a",
+      "source": "LICENSE"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "910e686c32bd1b5bf07c547fd6b3043c369c5b92c85380dd5ed05d8b5f4af6ab",
+      "source": "docs/licensing.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "89b074e42ed36cec5ae47cf099c0479c8cf744bbb18c4630401320f554b9e9ab",
+      "source": "docs/maintenance/template-profile-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "cbc239473c3ca4759e6507739477fce02f407469acbc300242fd363a13b59d89",
+      "source": "docs/fuer-lernende/template-profil.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "82d117f79082fa5188248e85722295c7afec6280a9457163d20ada5f98a0be0a",
+      "source": "docs/betrieb/template-erstuebernahme.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "07e32a32769686cacf39c39fb6bc811ebc44a9a703241d210983aca30669422e",
+      "source": "README.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "a9c47de83a4d2dc29e33285b375a3a8ec576287beb5e3f2701900ac974f6b307",
+      "source": "CLAUDE.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "9a469af7f23748e10b5cd68f123cd832a757477da01731bec45a5b55b8b62316",
+      "source": "GEMINI.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "7f76e55718be492d045e03fd0583ac878bc6d932a30c89cbb3a8e02dc0397125",
+      "source": ".github/copilot-instructions.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "36699eda23eae71d67b252d0161b9d389d5bf2a2a51724ef2d5ea21ff563e69d",
+      "source": ".github/agents/copilot-instructions.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "04b84ff4b62596bdbc3b75744cc35eddbaac576f63b0c6809cd7b4edcf5871cb",
+      "source": "docs/fuer-lernende/git-und-hosting.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "ce1d111399a36567afe2de8b8fa2f7edc5fb591b6d39afdff4fc3f4ee262d256",
+      "source": "docs/fuer-lernende/installation.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "2b3e3757915a5e89e5f350f0818c75834d74e2765785b3e85c9de9b365074133",
+      "source": "docs/fuer-lernende/entwickler-kurzpfad.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "61f02e9632785795a591cd9e8e3ff6d581063f820047fa25cee1805815647957",
+      "source": "docs/fuer-lernende/faq.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "d0cbabef81408d2e03118292d7864f7424a04649cc9d04006132c961a271ef31",
+      "source": "docs/fuer-lernende/README.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "37492b107ba5d219af638d854bf5a5c37cf8fc29dcf8bf991ff4aad3b8d3b6ba",
+      "source": "docs/lernwerkstaetten/README.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "58c7c5305546b604d55144d3c00e90eb2cea9182e35641f50ec06b4263c93d20",
+      "source": "docs/lernwerkstaetten/moderation.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "680046d33bb22fec738df148607e888347be61780b86247b067a44e95d297563",
+      "source": ".github/workflows/gsdb-pilot-contracts.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "eed6d7c753e73df33c91b1ef0cce2e5214f6272c311a4e5f06c3a4b9a946511b",
+      "source": ".github/workflows/project-statistics-pilot-native-proof.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "1700bda98186aec0ee0e76d95969008f6f124c9ccda8619a5e90150ba7f26a91",
+      "source": "scripts/tests/test_template_profile.py"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "8e3e084595734f1009aa02c1936090ec2c8127b0498fa49c208b15c0a1447293",
+      "source": "docs/praesentationen/workshop-spec-kit.de.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "89519500f1ef8d880de81f360f88c392f55e2dc3c259b1fc4c55a02a3ae800a2",
+      "source": "docs/praesentationen/workshop-spec-kit.en.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "60eb3df8ef47a2564ae10d64cfeab063604f42800e8872a024367c8e679a106a",
+      "source": "docs/praesentationen/werkstatt-sysinfo.de.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "0b87f648717df7f249a6c57d3c1b3df7b2e02cd76df5bcb977607a5e9962ede5",
+      "source": "docs/praesentationen/werkstatt-sysinfo.en.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "cc8b2cd012636a52274e39f7c6e9203ed4efb58872702d56b763f18dc1428bff",
+      "source": "docs/praesentationen/werkstatt-web.de.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "97ba23094259c245c7fa195d16455c04265d7e68049a3367e663ea9cd3ca2423",
+      "source": "docs/praesentationen/werkstatt-web.en.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "8474d0d6f5c845b32c2dd7fae62c6460f87bbc88960172edad64ac637d5c7843",
+      "source": ".github/workflows/documentation-and-sandbox.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "33eae4087fe68cde8e2c474b61fe130ea56024a61b80f262216946a6ec8fe7b6",
+      "source": "docs/maintenance/closeout-rights-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "6bc68381c8f44c2f93cd6aa3b56c241c877391175f92993ecefcf795390ca0cd",
+      "source": "docs/praesentationen/README.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "d49b8e4397a3fe6845469317f9b6f15ac4a6292032b9c11160493cf6c87866aa",
+      "source": "docs/maintenance/closeout-review-remediation-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "cc2ac202e03e5ab735572d67fad359d58bc0de79ba2841740e871292a905b12f",
+      "source": "scripts/tests/test_learner_documentation_contract.py"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "9a2e1dab5f0cd6d8263740d96af45db5cf7d54e8fa8034c6838fbe7628ef870a",
+      "source": "docs/maintenance/closeout-eof-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "61fe0260c9a36708cde94e562ec9e295542923ff1b11799e6ba8208508b960f3",
+      "source": "docs/maintenance/closeout-ci-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "cdab6b0c7d97d618b8671baf493a05ed9159737f2f436197ef7107a51e1dbd10",
+      "source": "scripts/tests/test_closeout_ci_contracts.py"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "f57c19b2f75670c3340dac3c2132d50b18dde8ba31a8f5e11c9dad897893910d",
+      "source": ".github/workflows/maintenance-tui.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "fe805962cecaf6de8926cee10b8e6f70baaf456a722814a72ed5e22b64b0121a",
+      "source": "docs/maintenance/closeout-statistics-history-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "badabd767e5c09b909a9818f251bfab8fe63bb6b1deddf1547bb473d81f43779",
+      "source": "scripts/lib/statistics-ci-evidence.ps1"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "2980a039cd6db2681243f7e3762b6ced729f74bd794c3977e342f8d01fc003ef",
+      "source": "scripts/tests/Test-StatisticsCiEvidence.ps1"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "d9ef3ec24ca9f8562214c17014e04ef74be165d5a81f6e26c7ee0bf56c464926",
+      "source": "docs/fuer-lernende/erste-schritte.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "d7b0caa82e892d1ebae43a8a3358ead25fe98f14bb0dccb8a064d68e4c5ead8e",
+      "source": "docs/fuer-lernende/troubleshooting.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "8601bf210abce856f205a5ac675cb2eeb6e8301e938c2514ed4a44f0a354e030",
+      "source": "docs/fuer-lernende/alltag.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "a4794de74ca9c4f6309fce6248ddca0fe2d201ae0411a22e2e96bbf51510d9a1",
+      "source": "docs/maintenance/usability-alignment-2026-10-27.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "e9dc3213f200c01cf59efe6af2df74c751f664042063c9e6221a48c2049febd5",
+      "source": "docs/security/dependency-update-policy.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "522029b97fc79ce4d01f95efd85dc29e179a6a90327eadbef3d75c96b30da35a",
+      "source": "scripts/config/toolchain-pins.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "8cea29a127199c8f109b48469f774d697b10b5a1147cc6b341794574633d4e38",
+      "source": ".github/dependabot.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "67c9761aa5e4bf7947f982fb53ebe5d0432050ecef65a3463f49d2e0e4d6c4d1",
+      "source": ".github/workflows/toolchain-pins.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "bbb13fc922cc765249aecd732759a37c8bb45f5dd4837a0645f3948ceee9a5fa",
+      "source": "docs/maintenance/toolchain-version-audit-2026-11-06.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "20bb55a5aea5a19ed1db1dac3bf05f9941b8a86efa3cd25a8e4ec25b7401038d",
+      "source": "docs/maintenance/feature-update-2026-11-06-acceptance.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "fceee684358c0262e3b73f901c3d85b5ac50d2cfba9d2dc332f2f304f438152d",
+      "source": ".specify/presets/intake-authoring-governance/tests/test-intake-authoring-lifecycle.ps1"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "source": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/9df9c6a1-ceb8-4447-9277-d47640c99849/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "6cf89227ed9f68de15444ffeb6ad433ab4e174753a4b6e19b81408d6cd7503aa",
+      "source": "docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "source": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/f4aa58a9-39ce-4808-b373-89f557054ce4/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "c0926016c68a963d56fe714781c946bbb2cc8a91f24b6fb9a3bd1da322bf4e21",
+      "source": "docs/maintenance/intake-source-alignment-2026-11-02.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "source": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/869be6a5-a352-4f1f-baaf-aad2d6efd086/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "63ab7a7d5638358c30b1b91a23408bcfe29aa76e83f6fd2375a49aa3bd9d320f",
+      "source": "docs/maintenance/template-series-fixture-alignment-2026-10-30.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "source": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/b2e17f24-435e-4ea7-86e5-e68edbea0803/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "a09b8bd730f13313a6aa0a85cebdbf1e7486eafa6e791743b339ef483b83aa7d",
+      "source": "docs/maintenance/historical-eof-integration-2026-10-30.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "source": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/d0c6bf80-d268-4a0f-92a2-70e748f8330a/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "aa311a3f4f1b0ebe56b4748a34390650cdc80d02248c31d489989d5fd349f7a8",
+      "source": "docs/maintenance/intake-delivery-repair-2026-10-30.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "source": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "a833c5ad3ee0dade8b176e6ad04426e27dbb1ac09a6411718d341c656b357991",
+      "source": "specs/intake-series-operations/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/proposal.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "d73d504931a2b1d8bae483edbd8e65c47de5aea29fa0eb78e39166de9f5b0f41",
+      "source": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/99ecfd91-17f2-4154-9d4e-e559242c5ce9/target.txt"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "d73564dce25433aee2e3d5bc3df1cf18b3f5944c9e4197fff95ab5af2dfd385d",
+      "source": "docs/secure-development/baseline-manifest.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "05787af045845a45093ef473a9abc3c0ecd20460dd36911e69f3e81ea71b26ae",
+      "source": "docs/maintenance/gsdb-344-control-delta.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "dde3500a80dd392ae88076d6361ee0d9dd51d7bdd511e3d57e7d3d187d441fc8",
+      "source": ".specify/presets/secure-development-assurance-governance/templates/secure-development-evidence-contract.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "461a01f311fffc5655a4ba175da8052cb88845dd0e4c56cbe90c345f550cf60c",
+      "source": "AGENTS.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "eccc16f09a31b1cf1b644574e17a22b353db6523baf5b2fa6139b51d2de7d540",
+      "source": "docs/maintenance/documentation-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "5f27bebe0d4698737c77b27d31373374a25d2a6e5f83acb58d906cf0471f4203",
+      "source": "docs/security/toolchain-followups-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "50b0444645b5e936d2c6b9b71e9ba916c3f7c59332deda1216352c3c3d325b19",
+      "source": "docs/fuer-lernende/lernwege.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "ed0dc1fcd700882941d99fee7f0df9eb2f67ed22147d99a5f947cdd32efdf425",
+      "source": "docs/fuer-lernende/barrierefreiheit.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "2e1c90d4b43d8c3e22f35235011a27a497e6a535515b65cf71be1ab2efd585f4",
+      "source": "docs/maintenance/intake-sources-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "1b013dee1b6090482876b2ad2c89da95a290d7946200c8055f849d1e60cc0943",
+      "source": "docs/maintenance/gsdb-344-preset-installed-lock.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "bf5f0c2381ce00da9f9c0dc03f0cd17737f115ae0b81e951f677efc75f28fd02",
+      "source": "docs/maintenance/stable-preset-rollout-2026-10-24.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "0b329d2b68ccec96dca635f58564348dac88527f7f515f4f422fddf974657a12",
+      "source": "docs/maintenance/stable-preset-source-lock-2026-10-24.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "7db6043a5dd680a033be126aaf39b13a1006605a1ace2a460795c8034831469f",
+      "source": "docs/maintenance/stable-preset-installed-lock-2026-10-24.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "9d03e6ab54c6bb61207a63a37e44a0ecb1dd8b7e1fce6029a5e508342a497e3c",
+      "source": "docs/maintenance/gsdb-344-source-inventory.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "8b4c39378079fe624128c12b2f94c25423e7edb317f79e8965ad4927a065320f",
+      "source": "docs/maintenance/intake-gsdb344-delta-2026-10-21.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "32f8ca77698e577286c4da6424152fa15e67ad835e383f5136037512972ac85d",
+      "source": ".specify/presets/secure-development-assurance-governance/docs/release-0.1.8-validation.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "a1ab9750af08d57675e12da567d2d99f12486a2a7da00df141566dc7ed5b132b",
+      "source": ".specify/presets/secure-development-assurance-governance/docs/user-guide.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "803bc1e639741a8c47cba55fc3288c558ae8e7caead0db028ab36753ae0dda4d",
+      "source": ".specify/presets/secure-development-assurance-governance/docs/user-guide.EN.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "314a8c7d0aa3cc8b81e96b9091e3d77aa5fa5365f14e84eb615a805f0103b2cd",
+      "source": "COMPLIANCE-PLAN_RL-SE-001.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "53776e64d116f71b9448ee945943ee7cfb13566aaacc97f2f79e1a4739b2a2b0",
+      "source": "docs/maintenance/sandbox-current-state-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "2283aa9cc1e6e1dae4ec4cbd4b147c4fd98587ab12156b079fbce3a02517fb11",
+      "source": "docs/maintenance/toolchain-version-audit-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "b1bd990e86b27ed89a2384715f97266a38ccf7b1bf0ae9a327bcde1384dbd390",
+      "source": "scripts/config/required-cli-tools-registry.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "55c6e72023a4825ce9237404b5ae08ea882d31a007f4ced698c65b1c577f2de8",
+      "source": "scripts/tests/test_toolchain_version_pins.py"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "f14ba825a5878cb9103a597c556e1f5abd8431236ce84ff6bd3679686c035da0",
+      "source": "docs/fuer-lernende/sandbox-profil.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "151e1b51bd99afa777e8f1046694e0957fdf6ff95da9ef19fc794a399e0fd2ed",
+      "source": "docs/security/agent-session-log/2026-10-25-1047.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "ec66528d6336e86d3757f64d3d168e1eb4d6c551d7f1838549bc553fdda7d3d4",
+      "source": "Dockerfile"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "b657955d235eb6ec7070b508060b596411ff76106fe96e9ac76897a8ab097f6e",
+      "source": "docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "3e7f95f4d86a300c67d459ce839036fbb15c2a20fb3f5825dea6be2bd79e64a3",
+      "source": "docs/maintenance/documentation-impact-2026-10-25.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "fa6db19fcebeaefb5f045ef20aee1e82325670388f3bd0acd31345da59e4985a",
+      "source": "LICENSE"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "910e686c32bd1b5bf07c547fd6b3043c369c5b92c85380dd5ed05d8b5f4af6ab",
+      "source": "docs/licensing.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "89b074e42ed36cec5ae47cf099c0479c8cf744bbb18c4630401320f554b9e9ab",
+      "source": "docs/maintenance/template-profile-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "cbc239473c3ca4759e6507739477fce02f407469acbc300242fd363a13b59d89",
+      "source": "docs/fuer-lernende/template-profil.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "82d117f79082fa5188248e85722295c7afec6280a9457163d20ada5f98a0be0a",
+      "source": "docs/betrieb/template-erstuebernahme.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "07e32a32769686cacf39c39fb6bc811ebc44a9a703241d210983aca30669422e",
+      "source": "README.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "a9c47de83a4d2dc29e33285b375a3a8ec576287beb5e3f2701900ac974f6b307",
+      "source": "CLAUDE.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "9a469af7f23748e10b5cd68f123cd832a757477da01731bec45a5b55b8b62316",
+      "source": "GEMINI.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "7f76e55718be492d045e03fd0583ac878bc6d932a30c89cbb3a8e02dc0397125",
+      "source": ".github/copilot-instructions.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "36699eda23eae71d67b252d0161b9d389d5bf2a2a51724ef2d5ea21ff563e69d",
+      "source": ".github/agents/copilot-instructions.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "04b84ff4b62596bdbc3b75744cc35eddbaac576f63b0c6809cd7b4edcf5871cb",
+      "source": "docs/fuer-lernende/git-und-hosting.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "ce1d111399a36567afe2de8b8fa2f7edc5fb591b6d39afdff4fc3f4ee262d256",
+      "source": "docs/fuer-lernende/installation.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "2b3e3757915a5e89e5f350f0818c75834d74e2765785b3e85c9de9b365074133",
+      "source": "docs/fuer-lernende/entwickler-kurzpfad.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "61f02e9632785795a591cd9e8e3ff6d581063f820047fa25cee1805815647957",
+      "source": "docs/fuer-lernende/faq.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "d0cbabef81408d2e03118292d7864f7424a04649cc9d04006132c961a271ef31",
+      "source": "docs/fuer-lernende/README.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "37492b107ba5d219af638d854bf5a5c37cf8fc29dcf8bf991ff4aad3b8d3b6ba",
+      "source": "docs/lernwerkstaetten/README.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "58c7c5305546b604d55144d3c00e90eb2cea9182e35641f50ec06b4263c93d20",
+      "source": "docs/lernwerkstaetten/moderation.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "680046d33bb22fec738df148607e888347be61780b86247b067a44e95d297563",
+      "source": ".github/workflows/gsdb-pilot-contracts.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "eed6d7c753e73df33c91b1ef0cce2e5214f6272c311a4e5f06c3a4b9a946511b",
+      "source": ".github/workflows/project-statistics-pilot-native-proof.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "1700bda98186aec0ee0e76d95969008f6f124c9ccda8619a5e90150ba7f26a91",
+      "source": "scripts/tests/test_template_profile.py"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "8e3e084595734f1009aa02c1936090ec2c8127b0498fa49c208b15c0a1447293",
+      "source": "docs/praesentationen/workshop-spec-kit.de.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "89519500f1ef8d880de81f360f88c392f55e2dc3c259b1fc4c55a02a3ae800a2",
+      "source": "docs/praesentationen/workshop-spec-kit.en.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "60eb3df8ef47a2564ae10d64cfeab063604f42800e8872a024367c8e679a106a",
+      "source": "docs/praesentationen/werkstatt-sysinfo.de.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "0b87f648717df7f249a6c57d3c1b3df7b2e02cd76df5bcb977607a5e9962ede5",
+      "source": "docs/praesentationen/werkstatt-sysinfo.en.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "cc8b2cd012636a52274e39f7c6e9203ed4efb58872702d56b763f18dc1428bff",
+      "source": "docs/praesentationen/werkstatt-web.de.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "97ba23094259c245c7fa195d16455c04265d7e68049a3367e663ea9cd3ca2423",
+      "source": "docs/praesentationen/werkstatt-web.en.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "8474d0d6f5c845b32c2dd7fae62c6460f87bbc88960172edad64ac637d5c7843",
+      "source": ".github/workflows/documentation-and-sandbox.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "33eae4087fe68cde8e2c474b61fe130ea56024a61b80f262216946a6ec8fe7b6",
+      "source": "docs/maintenance/closeout-rights-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "6bc68381c8f44c2f93cd6aa3b56c241c877391175f92993ecefcf795390ca0cd",
+      "source": "docs/praesentationen/README.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "d49b8e4397a3fe6845469317f9b6f15ac4a6292032b9c11160493cf6c87866aa",
+      "source": "docs/maintenance/closeout-review-remediation-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "cc2ac202e03e5ab735572d67fad359d58bc0de79ba2841740e871292a905b12f",
+      "source": "scripts/tests/test_learner_documentation_contract.py"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "9a2e1dab5f0cd6d8263740d96af45db5cf7d54e8fa8034c6838fbe7628ef870a",
+      "source": "docs/maintenance/closeout-eof-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "61fe0260c9a36708cde94e562ec9e295542923ff1b11799e6ba8208508b960f3",
+      "source": "docs/maintenance/closeout-ci-alignment-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "cdab6b0c7d97d618b8671baf493a05ed9159737f2f436197ef7107a51e1dbd10",
+      "source": "scripts/tests/test_closeout_ci_contracts.py"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "f57c19b2f75670c3340dac3c2132d50b18dde8ba31a8f5e11c9dad897893910d",
+      "source": ".github/workflows/maintenance-tui.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "fe805962cecaf6de8926cee10b8e6f70baaf456a722814a72ed5e22b64b0121a",
+      "source": "docs/maintenance/closeout-statistics-history-2026-10-25.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "badabd767e5c09b909a9818f251bfab8fe63bb6b1deddf1547bb473d81f43779",
+      "source": "scripts/lib/statistics-ci-evidence.ps1"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "2980a039cd6db2681243f7e3762b6ced729f74bd794c3977e342f8d01fc003ef",
+      "source": "scripts/tests/Test-StatisticsCiEvidence.ps1"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "d9ef3ec24ca9f8562214c17014e04ef74be165d5a81f6e26c7ee0bf56c464926",
+      "source": "docs/fuer-lernende/erste-schritte.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "d7b0caa82e892d1ebae43a8a3358ead25fe98f14bb0dccb8a064d68e4c5ead8e",
+      "source": "docs/fuer-lernende/troubleshooting.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "8601bf210abce856f205a5ac675cb2eeb6e8301e938c2514ed4a44f0a354e030",
+      "source": "docs/fuer-lernende/alltag.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "a4794de74ca9c4f6309fce6248ddca0fe2d201ae0411a22e2e96bbf51510d9a1",
+      "source": "docs/maintenance/usability-alignment-2026-10-27.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "e9dc3213f200c01cf59efe6af2df74c751f664042063c9e6221a48c2049febd5",
+      "source": "docs/security/dependency-update-policy.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "522029b97fc79ce4d01f95efd85dc29e179a6a90327eadbef3d75c96b30da35a",
+      "source": "scripts/config/toolchain-pins.json"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "8cea29a127199c8f109b48469f774d697b10b5a1147cc6b341794574633d4e38",
+      "source": ".github/dependabot.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "67c9761aa5e4bf7947f982fb53ebe5d0432050ecef65a3463f49d2e0e4d6c4d1",
+      "source": ".github/workflows/toolchain-pins.yml"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "bbb13fc922cc765249aecd732759a37c8bb45f5dd4837a0645f3948ceee9a5fa",
+      "source": "docs/maintenance/toolchain-version-audit-2026-11-06.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "20bb55a5aea5a19ed1db1dac3bf05f9941b8a86efa3cd25a8e4ec25b7401038d",
+      "source": "docs/maintenance/feature-update-2026-11-06-acceptance.md"
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "fceee684358c0262e3b73f901c3d85b5ac50d2cfba9d2dc332f2f304f438152d",
+      "source": ".specify/presets/intake-authoring-governance/tests/test-intake-authoring-lifecycle.ps1"
+    }
+  ],
+  "resolvedFindings": [
+    {
+      "priorSeverity": "High",
+      "id": "IR901",
+      "reevaluationTrigger": "Any target, source, provenance, validator-contract, graph or authority change requires renewed review.",
+      "evidence": "Seventeen changed sources semantically assessed; 293 current receipt source bindings recomputed and validated, including unchanged inherited order.",
+      "status": "Resolved",
+      "authority": "User annotation on 2026-11-08 explicitly authorizes executing bounded IR901–IR903 repair and then a complete five-member re-review. Preserve intake identities, scope, 85/80 thresholds, lifecycle, dependencies and human gates. No sandbox feature implementation, runtime action, commit, push or remote write."
+    },
+    {
+      "priorSeverity": "High",
+      "id": "IR902",
+      "reevaluationTrigger": "Any target, source, provenance, validator-contract, graph or authority change requires renewed review.",
+      "evidence": "Canonical distinct predecessor-source/archive custody applied in all four successor receipts; exact bytes/IDs preserved; both receipt validators and lifecycle positive/negative fixtures validate the contract without validator mutation.",
+      "status": "Resolved",
+      "authority": "User annotation on 2026-11-08 explicitly authorizes executing bounded IR901–IR903 repair and then a complete five-member re-review. Preserve intake identities, scope, 85/80 thresholds, lifecycle, dependencies and human gates. No sandbox feature implementation, runtime action, commit, push or remote write."
+    },
+    {
+      "priorSeverity": "Medium",
+      "id": "IR903",
+      "reevaluationTrigger": "Any target, source, provenance, validator-contract, graph or authority change requires renewed review.",
+      "evidence": "FU-018 DE/EN and learner quality clauses now use the current pin registry/Dependabot contract; glossary, context and prepared prompts aligned without lowering integrity or acceptance thresholds.",
+      "status": "Resolved",
+      "authority": "User annotation on 2026-11-08 explicitly authorizes executing bounded IR901–IR903 repair and then a complete five-member re-review. Preserve intake identities, scope, 85/80 thresholds, lifecycle, dependencies and human gates. No sandbox feature implementation, runtime action, commit, push or remote write."
+    }
+  ],
+  "reviewedAt": "2026-11-08T15:40:49Z",
+  "reviewId": "796186b3-1508-4e81-8dd4-8cf8ac968bfa",
+  "documentType": "IntakeRepairReviewEvidence",
+  "archiveEvidence": [
+    {
+      "archive": "specs/intake-review-archive/04d3e335-7b7a-494d-bc78-9587e1659572/9df9c6a1-ceb8-4447-9277-d47640c99849/result.json",
+      "normalizedSha256": "f7bf89c216a24279d4e6ede82037e2ac4ae180ace11c0515155b13097ae5577e",
+      "rawSha256": "f7bf89c216a24279d4e6ede82037e2ac4ae180ace11c0515155b13097ae5577e",
+      "source": "specs/intake-review-results/sandbox-development-lifecycle.json"
+    },
+    {
+      "archive": "specs/intake-review-archive/04d3e335-7b7a-494d-bc78-9587e1659572/9df9c6a1-ceb8-4447-9277-d47640c99849/report.txt",
+      "normalizedSha256": "a7b06e5435628c0d5f09aaadcb0814da0428f8083d8283cd94fc2c520b11cc7c",
+      "rawSha256": "a7b06e5435628c0d5f09aaadcb0814da0428f8083d8283cd94fc2c520b11cc7c",
+      "source": "specs/intake-review-reports/sandbox-development-lifecycle.md"
+    },
+    {
+      "archive": "specs/intake-review-archive/04d3e335-7b7a-494d-bc78-9587e1659572/9df9c6a1-ceb8-4447-9277-d47640c99849/request.json",
+      "normalizedSha256": "5104dc741d64012505bba27f4041edfb137fd3a948894cea73b18f8d36bb13fc",
+      "rawSha256": "5104dc741d64012505bba27f4041edfb137fd3a948894cea73b18f8d36bb13fc",
+      "source": "specs/intake-review-requests/sandbox-development-lifecycle.json"
+    },
+    {
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/9df9c6a1-ceb8-4447-9277-d47640c99849/manifest.json",
+      "normalizedSha256": "01931b50fe0d9a88b6bb8b1d518ab17f536db647a570221a507adc7d84ed77e2",
+      "rawSha256": "01931b50fe0d9a88b6bb8b1d518ab17f536db647a570221a507adc7d84ed77e2",
+      "source": "specs/intake-series/sandbox-development-lifecycle/manifest.json"
+    },
+    {
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/9df9c6a1-ceb8-4447-9277-d47640c99849/receipt.json",
+      "normalizedSha256": "22190af06a7c5cf73c3f1c54890a4ad2a66013421e13d1915be8154a3b8a2060",
+      "rawSha256": "22190af06a7c5cf73c3f1c54890a4ad2a66013421e13d1915be8154a3b8a2060",
+      "source": "specs/intake-series/sandbox-development-lifecycle/receipt.json"
+    },
+    {
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/9df9c6a1-ceb8-4447-9277-d47640c99849/root-order.txt",
+      "normalizedSha256": "a0726424b12fa7bcfef24e95d53410ac3336554805628e8752d99085e75ef93a",
+      "rawSha256": "a0726424b12fa7bcfef24e95d53410ac3336554805628e8752d99085e75ef93a",
+      "source": "Lastenheft_Abarbeitungsreihenfolge.md"
+    },
+    {
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/9df9c6a1-ceb8-4447-9277-d47640c99849/order.txt",
+      "normalizedSha256": "ecac23d309bbe41420b2f5429d4240299642d54977c1c602d8b6e9af2981a049",
+      "rawSha256": "ecac23d309bbe41420b2f5429d4240299642d54977c1c602d8b6e9af2981a049",
+      "source": "specs/intake-series/sandbox-development-lifecycle/order.md"
+    },
+    {
+      "archive": "specs/intake-series-archive/65371068-4b1d-4465-9ce7-120e6b15b926/9df9c6a1-ceb8-4447-9277-d47640c99849/index.txt",
+      "normalizedSha256": "ed6d6da131299b6adb57570193af5d3091eda62879fb83bc31e737bf28626bc6",
+      "rawSha256": "ed6d6da131299b6adb57570193af5d3091eda62879fb83bc31e737bf28626bc6",
+      "source": "Pflichtenheft.md"
+    },
+    {
+      "archive": "specs/intake-review-archive/04d3e335-7b7a-494d-bc78-9587e1659572/9df9c6a1-ceb8-4447-9277-d47640c99849/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "16cb8bbaaa691744946c4d21bb9219036987aa47ec89658e28b3ca1749b7aa1b",
+      "rawSha256": "16cb8bbaaa691744946c4d21bb9219036987aa47ec89658e28b3ca1749b7aa1b",
+      "source": "specs/intake-review-results/learner-fork-self-build-sandbox.json"
+    },
+    {
+      "archive": "specs/intake-review-archive/04d3e335-7b7a-494d-bc78-9587e1659572/9df9c6a1-ceb8-4447-9277-d47640c99849/sandbox-feature-update-2026-10-28.json",
+      "normalizedSha256": "4bb47440ce9bdbaf38f175839c42f4649a1408583980074de8ef80caf1e1a463",
+      "rawSha256": "4bb47440ce9bdbaf38f175839c42f4649a1408583980074de8ef80caf1e1a463",
+      "source": "specs/intake-review-results/sandbox-feature-update-2026-10-28.json"
+    },
+    {
+      "archive": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/9df9c6a1-ceb8-4447-9277-d47640c99849/target.txt",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "rawSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "source": "Lastenheft_Secure-Development-Container-Hardening.md"
+    },
+    {
+      "archive": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/9df9c6a1-ceb8-4447-9277-d47640c99849/receipt.json",
+      "normalizedSha256": "d72722fa247cdb5cdb4ca6ac50424997a2d4f655f5e3fcbdfa8bd174709700be",
+      "rawSha256": "d72722fa247cdb5cdb4ca6ac50424997a2d4f655f5e3fcbdfa8bd174709700be",
+      "source": "specs/intake-authoring-receipts/secure-development-container-hardening.json"
+    },
+    {
+      "archive": "specs/intake-authoring-operations/9df9c6a1-ceb8-4447-9277-d47640c99849/predecessor-inputs/secure-development-container-hardening.json",
+      "normalizedSha256": "d72722fa247cdb5cdb4ca6ac50424997a2d4f655f5e3fcbdfa8bd174709700be",
+      "rawSha256": "d72722fa247cdb5cdb4ca6ac50424997a2d4f655f5e3fcbdfa8bd174709700be",
+      "source": "specs/intake-authoring-receipts/secure-development-container-hardening.json"
+    },
+    {
+      "archive": "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/9df9c6a1-ceb8-4447-9277-d47640c99849/target.txt",
+      "normalizedSha256": "a9c3e49d227f13b69716b62930417cdbebb09d0df129eac23385a1adc122f7f6",
+      "rawSha256": "a9c3e49d227f13b69716b62930417cdbebb09d0df129eac23385a1adc122f7f6",
+      "source": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md"
+    },
+    {
+      "archive": "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/9df9c6a1-ceb8-4447-9277-d47640c99849/receipt.json",
+      "normalizedSha256": "bf6a752d5f2fcbbdceb06f9ca3f349e6c7151d62a1428ae769a9e2b598b885fa",
+      "rawSha256": "bf6a752d5f2fcbbdceb06f9ca3f349e6c7151d62a1428ae769a9e2b598b885fa",
+      "source": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json"
+    },
+    {
+      "archive": "specs/intake-authoring-operations/9df9c6a1-ceb8-4447-9277-d47640c99849/predecessor-inputs/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "normalizedSha256": "bf6a752d5f2fcbbdceb06f9ca3f349e6c7151d62a1428ae769a9e2b598b885fa",
+      "rawSha256": "bf6a752d5f2fcbbdceb06f9ca3f349e6c7151d62a1428ae769a9e2b598b885fa",
+      "source": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json"
+    },
+    {
+      "archive": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/9df9c6a1-ceb8-4447-9277-d47640c99849/target.txt",
+      "normalizedSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a",
+      "rawSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a",
+      "source": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md"
+    },
+    {
+      "archive": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/9df9c6a1-ceb8-4447-9277-d47640c99849/receipt.json",
+      "normalizedSha256": "bda109d67d5bca97507066cb95f810f86ffcc0c2319faba80cd891bccafbee16",
+      "rawSha256": "bda109d67d5bca97507066cb95f810f86ffcc0c2319faba80cd891bccafbee16",
+      "source": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json"
+    },
+    {
+      "archive": "specs/intake-authoring-operations/9df9c6a1-ceb8-4447-9277-d47640c99849/predecessor-inputs/sandbox-secure-development-selbstpruefung.json",
+      "normalizedSha256": "bda109d67d5bca97507066cb95f810f86ffcc0c2319faba80cd891bccafbee16",
+      "rawSha256": "bda109d67d5bca97507066cb95f810f86ffcc0c2319faba80cd891bccafbee16",
+      "source": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json"
+    },
+    {
+      "archive": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/9df9c6a1-ceb8-4447-9277-d47640c99849/target.txt",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "rawSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "source": "intakes/learner-fork-self-build-sandbox.md"
+    },
+    {
+      "archive": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/9df9c6a1-ceb8-4447-9277-d47640c99849/receipt.json",
+      "normalizedSha256": "1a6d3b1cfdf4981b05ef6a2a9311d68f6e17b470cd9bdba74ab09de3bc976bdb",
+      "rawSha256": "1a6d3b1cfdf4981b05ef6a2a9311d68f6e17b470cd9bdba74ab09de3bc976bdb",
+      "source": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json"
+    },
+    {
+      "archive": "specs/intake-authoring-operations/9df9c6a1-ceb8-4447-9277-d47640c99849/predecessor-inputs/learner-fork-self-build-sandbox.json",
+      "normalizedSha256": "1a6d3b1cfdf4981b05ef6a2a9311d68f6e17b470cd9bdba74ab09de3bc976bdb",
+      "rawSha256": "1a6d3b1cfdf4981b05ef6a2a9311d68f6e17b470cd9bdba74ab09de3bc976bdb",
+      "source": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json"
+    }
+  ],
+  "lineage": [
+    {
+      "receipt": "specs/intake-authoring-receipts/secure-development-container-hardening.json",
+      "rawSha256": "d72722fa247cdb5cdb4ca6ac50424997a2d4f655f5e3fcbdfa8bd174709700be",
+      "archive": "specs/intake-authoring-archive/a92a7ced-bbf3-4408-9754-7b739be19a41/9df9c6a1-ceb8-4447-9277-d47640c99849/receipt.json",
+      "predecessor": "specs/intake-authoring-operations/9df9c6a1-ceb8-4447-9277-d47640c99849/predecessor-inputs/secure-development-container-hardening.json",
+      "separateFiles": true
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "rawSha256": "bf6a752d5f2fcbbdceb06f9ca3f349e6c7151d62a1428ae769a9e2b598b885fa",
+      "archive": "specs/intake-authoring-archive/0c9292bb-f43b-4f7b-905e-f602b5b229f5/9df9c6a1-ceb8-4447-9277-d47640c99849/receipt.json",
+      "predecessor": "specs/intake-authoring-operations/9df9c6a1-ceb8-4447-9277-d47640c99849/predecessor-inputs/sandbox-feature-update-ubuntu2604-opencode-web-msl.json",
+      "separateFiles": true
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
+      "rawSha256": "bda109d67d5bca97507066cb95f810f86ffcc0c2319faba80cd891bccafbee16",
+      "archive": "specs/intake-authoring-archive/51d24064-dfa6-4375-9bcd-58cccc545167/9df9c6a1-ceb8-4447-9277-d47640c99849/receipt.json",
+      "predecessor": "specs/intake-authoring-operations/9df9c6a1-ceb8-4447-9277-d47640c99849/predecessor-inputs/sandbox-secure-development-selbstpruefung.json",
+      "separateFiles": true
+    },
+    {
+      "receipt": "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+      "rawSha256": "1a6d3b1cfdf4981b05ef6a2a9311d68f6e17b470cd9bdba74ab09de3bc976bdb",
+      "archive": "specs/intake-authoring-archive/5926e53e-39b7-475f-8a6b-e2ec08b0a803/9df9c6a1-ceb8-4447-9277-d47640c99849/receipt.json",
+      "predecessor": "specs/intake-authoring-operations/9df9c6a1-ceb8-4447-9277-d47640c99849/predecessor-inputs/learner-fork-self-build-sandbox.json",
+      "separateFiles": true
+    }
+  ]
+}

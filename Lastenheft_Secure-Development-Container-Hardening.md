@@ -505,16 +505,39 @@ prepared, not enabled. Copied states/statistics/approvals are not personal
 evidence. Preserve hardening/acceptance gates and thresholds. Source maintenance
 starts no product or blocked self-build work and changes no hosting setting.
 
+## Quellenstand nach IR901–IR903 / Source State after IR901–IR903 — 2026-11-08
+
+DE: Maßgeblich ist der [begrenzte Quellenabgleich](docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md).
+Vorhandene Resolute-/Web-/Profilfunktionen sind zuerst zu bewerten, nicht
+erneut einzuführen. Frühere Ausgangslagen und Statusangaben sind datierter
+Authoring-Kontext. Assurance 0.1.8 bezeichnet den historischen Werkzeugstand;
+aktuell installiert ist 0.1.9 mit denselben Kontrollprüfzielen und strengeren
+Risikometadaten. GSDB 3.4.4, Anforderungen, Grenzwerte, Plattformnachweise,
+Unabhängigkeit und menschliche Entscheidungen bleiben verbindlich.
+Dieser Abgleich übernimmt keine vollständige technische Abnahme, verändert
+keinen Lifecycle und erteilt keine Implementierungs- oder Lieferfreigabe.
+
+EN: The [bounded source alignment](docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md) governs current context.
+Assess existing Resolute/Web/profile functionality before later work;
+earlier current-state/status statements are dated authoring context.
+Assurance 0.1.8 denotes the historical tool baseline; installed 0.1.9 keeps
+control-check goals with stricter risk metadata. Preserve GSDB 3.4.4,
+requirements, thresholds, platform evidence, independence and human decisions.
+This alignment grants no complete technical acceptance, lifecycle change,
+implementation or delivery authority.
+
 <!-- intake-authoring:prompts -->
 ## Kopierbare Folgekommandos / Copy-Ready Follow-Up Commands
 
 <!-- spec-kit-command-id: speckit.specify -->
 ```text
 $speckit-specify Erstelle eine Spezifikation auf Grundlage von Lastenheft_Secure-Development-Container-Hardening.md, der historischen GSDB-Lueckenliste und docs/maintenance/intake-gsdb344-delta-2026-10-21.md. Beruecksichtige H-344-01 bis H-344-10 und deren Akzeptanzkriterien, GSDB 3.4.4 und Assurance 0.1.8. Plane technische und dokumentarische Haertung ohne Registry-Verteilung oder formale Freigabe; keine Implementierung starten. Beruecksichtige den Dokumentations- und Versionsnachtrag vom 2026-10-25 sowie docs/maintenance/documentation-alignment-2026-10-25.md und docs/security/toolchain-followups-2026-10-25.md; offene Nachweise nicht als erledigt behandeln. Aktuellen Statusnachtrag docs/maintenance/sandbox-current-state-2026-10-25.md mit REV-001 bis REV-003 beruecksichtigen; technische und menschliche Nachweise nicht vorwegnehmen. Beruecksichtige docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md; isolierte Downloadtests sind kein Image-Build oder neue Abnahme. Beruecksichtige docs/maintenance/template-profile-alignment-2026-10-25.md und die neuen Rechte-/Historiengrenzen; Fork bleibt Standard, Template ist nicht aktiviert, bestehende Lifecycle- und Startgates bleiben erhalten. Beruecksichtige docs/maintenance/closeout-rights-alignment-2026-10-25.md: Ownerrechte nur fuer die benannte Lernmaterial-Lieferung bestaetigt; LIC-01 und andere LIC-02-Betroffenheiten sowie saemtliche Startgates bleiben offen. Beruecksichtige docs/maintenance/closeout-review-remediation-2026-10-25.md: IR201/IR202 nur als nachreviewte Quellenkorrektur behandeln; Lifecycle und Startautoritaet bleiben unveraendert. Beruecksichtige docs/maintenance/usability-alignment-2026-10-27.md und die dort benannten drei Lernendenpfade: begrenzte Usability-Konkretisierung ohne Scope-Ausweitung, Schutzlockerung, Pilot-Ausfuehrung oder neue Startautoritaet; unabhaengiges Vollreview erforderlich.
+Berücksichtige docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md: vorhandene Umsetzung bewerten, aktuelle Pin-Governance und Assurance-0.1.9-Prüfwerkzeuge berücksichtigen; Kontroll-IDs, Schwellen und menschliche Gates erhalten. Keine neue Start- oder Lieferautorität.
 ```
 
 <!-- spec-kit-command-id: speckit.autonomous -->
 ```text
 $speckit-autonomous Fuehre erst nach aktuellem Review und gesonderter Startautoritaet den vollstaendigen Spec-Kit-Lauf fuer Lastenheft_Secure-Development-Container-Hardening.md mit Delivery Authority LocalImplementation aus. Bewahre historische Befunde, den GSDB-3.4.4-Delta-Abgleich, Assurance 0.1.8 und offene menschliche Entscheidungen. Implementiere und pruefe die priorisierten Haertungen lokal und stoppe vor Commit, Push, Pull Request, Merge oder Hosting-Aenderungen. Beruecksichtige den Dokumentations- und Versionsnachtrag vom 2026-10-25 sowie docs/maintenance/documentation-alignment-2026-10-25.md und docs/security/toolchain-followups-2026-10-25.md; offene Nachweise nicht als erledigt behandeln. Aktuellen Statusnachtrag docs/maintenance/sandbox-current-state-2026-10-25.md mit REV-001 bis REV-003 beruecksichtigen; technische und menschliche Nachweise nicht vorwegnehmen. Beruecksichtige docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md; isolierte Downloadtests sind kein Image-Build oder neue Abnahme. Beruecksichtige docs/maintenance/template-profile-alignment-2026-10-25.md und die neuen Rechte-/Historiengrenzen; Fork bleibt Standard, Template ist nicht aktiviert, bestehende Lifecycle- und Startgates bleiben erhalten. Beruecksichtige docs/maintenance/closeout-rights-alignment-2026-10-25.md: Ownerrechte nur fuer die benannte Lernmaterial-Lieferung bestaetigt; LIC-01 und andere LIC-02-Betroffenheiten sowie saemtliche Startgates bleiben offen. Beruecksichtige docs/maintenance/closeout-review-remediation-2026-10-25.md: IR201/IR202 nur als nachreviewte Quellenkorrektur behandeln; Lifecycle und Startautoritaet bleiben unveraendert. Beruecksichtige docs/maintenance/usability-alignment-2026-10-27.md und die dort benannten drei Lernendenpfade: begrenzte Usability-Konkretisierung ohne Scope-Ausweitung, Schutzlockerung, Pilot-Ausfuehrung oder neue Startautoritaet; unabhaengiges Vollreview erforderlich.
+Berücksichtige docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md: vorhandene Umsetzung bewerten, aktuelle Pin-Governance und Assurance-0.1.9-Prüfwerkzeuge berücksichtigen; Kontroll-IDs, Schwellen und menschliche Gates erhalten. Keine neue Start- oder Lieferautorität.
 ```
 <!-- intake-authoring:end -->

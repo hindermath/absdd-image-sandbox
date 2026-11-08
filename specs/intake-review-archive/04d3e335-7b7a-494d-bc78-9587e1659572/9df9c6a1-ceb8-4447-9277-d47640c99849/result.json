@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "1.1",
+  "documentType": "IntakeReviewResult",
+  "reviewId": "04d3e335-7b7a-494d-bc78-9587e1659572",
+  "revisionId": "ad457582-6411-4864-ac0c-c6f39acaad34",
+  "mode": "Series",
+  "status": "NeedsRemediation",
+  "policy": "learner-a11y-bilingual-series",
+  "reviewedAt": "2026-11-08T14:49:56Z",
+  "repository": {
+    "root": ".",
+    "head": "d165d49a1b206cc94cce3b640dd14dec88b8857f"
+  },
+  "reviewer": {
+    "type": "Agent",
+    "scope": "Current five-member semantic review and local provenance validation; no implementation or product/platform acceptance",
+    "name": "Codex",
+    "independence": "Current reviewer did not author the November source changes or receipts. Historical authoring in this conversation is disclosed; no independent human or technical acceptance is claimed."
+  },
+  "requestEvidence": {
+    "path": "specs/intake-review-requests/sandbox-development-lifecycle.json",
+    "normalizedSha256": "5104dc741d64012505bba27f4041edfb137fd3a948894cea73b18f8d36bb13fc"
+  },
+  "targets": [
+    {
+      "role": "Primary",
+      "gitBlob": "68efb8d13f8635ef9994b37c771298f70019ed80",
+      "normalizedSha256": "9b1963a5cc1e4f074e8fc918455f0285a0e1138334451523bd957ff21e72026a",
+      "path": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+    },
+    {
+      "role": "OrderedMember",
+      "gitBlob": "2c3cb1efec12ff00bd24927d45fb93c3a5c115e6",
+      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560",
+      "path": "Lastenheft_Secure-Development-Container-Hardening.md"
+    },
+    {
+      "role": "OrderedMember",
+      "gitBlob": "0316144f09335c4b786c5a3bbd2cefa3b82b92cf",
+      "normalizedSha256": "a9c3e49d227f13b69716b62930417cdbebb09d0df129eac23385a1adc122f7f6",
+      "path": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md"
+    },
+    {
+      "role": "OrderedMember",
+      "gitBlob": "7010736daefb84c5e7b9cb853efc32933d52576b",
+      "normalizedSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a",
+      "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md"
+    },
+    {
+      "role": "OrderedMember",
+      "gitBlob": "eff599a62a6b4328449d8a10eba2e6ca4387739a",
+      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338",
+      "path": "intakes/learner-fork-self-build-sandbox.md"
+    }
+  ],
+  "series": {
+    "orderedTargetPaths": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "dependencies": [
+      {
+        "from": "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+        "to": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "kind": "AssessmentBaseline"
+      },
+      {
+        "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "kind": "SandboxBaseline"
+      },
+      {
+        "from": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "to": "intakes/learner-fork-self-build-sandbox.md",
+        "kind": "HardCompletionGate"
+      },
+      {
+        "from": "Lastenheft_Secure-Development-Container-Hardening.md",
+        "to": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+        "kind": "SandboxBaseline"
+      },
+      {
+        "from": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+        "to": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+        "kind": "SandboxBaseline"
+      }
+    ],
+    "roots": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md"
+    ]
+  },
+  "findings": [
+    {
+      "title": "51 veraltete Quellenbindungen in drei Receipts / 51 stale source bindings in three receipts",
+      "id": "IR901",
+      "requiredAction": "Quelländerungen semantisch abgleichen, autorisierte Provenienzaktualisierung mit unveränderten Vorgängerarchiven vornehmen und danach vollständig neu prüfen. Keine bloße Hash-Ersetzung. / Review source changes semantically, perform an authorized provenance update with exact predecessor archives, then repeat the full review; do not merely refresh hashes.",
+      "category": "ProvenanceFreshness",
+      "reevaluationTrigger": "Nach autorisierter Quellen-/Receipt-Erneuerung sowie bei jeder weiteren Quellenänderung / After authorized renewal and on any further source change.",
+      "disposition": "Open",
+      "severity": "High",
+      "impact": "Das Ready vom 2026-11-02 deckt die aktuellen Quellen nicht ab. / The 2026-11-02 Ready does not cover current sources.",
+      "owner": "Repository Owner / Intake Maintainer",
+      "evidence": "Installed Bash receipt validators exit 2 for hardening, acceptance and learner receipts. Independently recomputed normalized SHA-256 identifies the same 17 changed repository paths in each receipt, 51 bindings total. See sourceDrift in the evidence artifact; target/request/manifest hashes themselves still match.",
+      "target": "specs/intake-authoring-receipts/secure-development-container-hardening.json"
+    },
+    {
+      "title": "Vier Vorgängerbindungen scheitern am installierten Vertrag / Four predecessor bindings fail the installed contract",
+      "id": "IR902",
+      "requiredAction": "Historisches Receipt-Format gegen kanonischen Governance-Vertrag prüfen; separat autorisierte, konsistente Kompatibilitäts- oder Provenienzreparatur mit positiven/negativen Tests. Keine Schutzumgehung oder künstliche Kopie nur zum Bestehen. / Reconcile historical receipt semantics with the canonical governance contract through a separately authorized compatibility/provenance repair and positive/negative checks; do not bypass containment or duplicate evidence merely to pass.",
+      "category": "ReceiptValidatorCompatibility",
+      "reevaluationTrigger": "Nach konsistenter Vertragskorrektur und erfolgreicher Bash-/PowerShell-Receipt-Prüfung / After contract reconciliation and passing both receipt validators.",
+      "disposition": "Open",
+      "severity": "High",
+      "impact": "Aktuelle Receipts sind mit dem installierten Validator nicht akzeptierbar; dies beweist weder verlorene Archivbytes noch Manipulation. / Current receipts fail the installed validator; this proves neither lost archives nor tampering.",
+      "owner": "Repository Owner / Intake Governance Maintainer",
+      "evidence": "All four active receipts set supersedes.receiptPath equal to supersedes.archiveReceiptPath. Installed validate-intake-authoring-receipt.sh lines 570-572 rejects samefile with supersession archive must be separate from active evidence; matching PowerShell logic is at lines 664-666. Feature-update receipt has no source hash drift yet fails this gate. See lineage in the evidence artifact.",
+      "target": "specs/intake-authoring-receipts/sandbox-feature-update-ubuntu2604-opencode-web-msl.json"
+    },
+    {
+      "title": "Renovate-Pflicht widerspricht der aktuellen Pin-Governance / Renovate requirement conflicts with current pin governance",
+      "id": "IR903",
+      "requiredAction": "Nach ausdrücklicher Autorisierung den veralteten Mechanismusbezug in DE/EN auf die genehmigte Pin-Governance abstimmen, Integritäts- und Reviewziele erhalten, betroffene Prompt-/Receipt-/Reviewbindungen erneuern. / With explicit authority align the DE/EN mechanism references to approved pin governance while retaining integrity/review requirements and renewing affected bindings.",
+      "category": "NormativeSourceConsistency",
+      "reevaluationTrigger": "Nach autorisiertem Anforderungsabgleich und Provenienzerneuerung / After authorized requirements alignment and provenance renewal.",
+      "disposition": "Open",
+      "severity": "Medium",
+      "impact": "Ein Folgelauf könnte abgelöste Update-Automation wieder einführen oder die aktuelle Governance verletzen. / A future run could restore retired automation or violate current governance.",
+      "owner": "Repository Owner / Requirements Maintainer",
+      "evidence": "FU-018 (DE lines 243-246; EN equivalent FU-018) mandates Renovate ARG metadata. Learner Quality And Governance also preserves Renovate rules. Current AGENTS.md lines 224-226 requires toolchain-pin markers plus scripts/config/toolchain-pins.json and Dependabot/toolchain-pins.yml; docs/security/dependency-update-policy.md lines 6-12 and 112-113 explicitly retires Renovate. Dockerfile already uses the new markers.",
+      "target": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md"
+    }
+  ],
+  "questions": [],
+  "acceptedRisks": [],
+  "operatorExceptions": [],
+  "coverage": {
+    "workers": [],
+    "individual": [
+      "specs/intake-authoring-archive/ec50344b-6a7b-45bf-b67c-a67f24f56c01/9d9fce68-15cc-490c-afe0-16b98eda8a54/Lastenheft_GSDB-Spec-Kit-Intensivpruefung.md",
+      "Lastenheft_Secure-Development-Container-Hardening.md",
+      "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
+      "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
+      "intakes/learner-fork-self-build-sandbox.md"
+    ],
+    "series": [
+      "All five full texts read, including every normative requirement, acceptance criterion, glossary and prepared Specify/Autonomous prompt. Review assesses requirements, not implementation acceptance.",
+      "GSDB archived root: assessment-only scope, twelve-checklist completeness, explicit Open/N/A ownership, prioritized gap handoff; historical authority and old root-name prompts confer no current start rights.",
+      "Hardening: seven general requirements, H-344-01..10 and AC-H-344-01..10, all ten delta groups, 85% critical-module branch and 80% documented-interface/critical-UI coverage; missing measurements stay Open. No new legal or platform approval inferred.",
+      "Feature update: FU-001..023 and FA-001..012; Ubuntu/base and Swift integrity, output collision prevention, shared authenticated Web/TUI/CLI, bounded readiness, seven selectable profiles and six-toolchain all default, profile identity/wrapper parity, immutable data and metadata-only audit, native platform matrix, no weakening controls. IR903 records obsolete update-mechanism requirements.",
+      "Acceptance: A-344/AC-A-344 plus A-FU-01/02 and AC-A-FU-01/02 explicitly consume both H/U handoffs on the same final revision and image per profile/architecture. All FU/FA IDs map to risk-based independent checks; reused evidence requires scope, provenance and rationale; no self-acceptance.",
+      "Learner: FR-001..015, L-FR-016..023, AC-001..012 and L-AC-013..020; fork/institution origin-upstream, self-build, hosting neutrality, no project-image publication, optional template and licensing/human gates. Six-toolchain smoke criteria concern the standard all profile; reduced profiles remain governed by U. IR903 also affects preserved Renovate rules.",
+      "German-first/equivalent English, first-year audience and prerequisites, term explanations, text-first dependency/status/actions and applicable WCAG 2.2 AA/inclusive-learning expectations reviewed. Dense historical addenda are context, not permission; no practical readability, browser, usability or WCAG acceptance performed.",
+      "Five unique targets, one declared archived completed root, five unique binding forward DAG edges. H precedes U and A; U precedes A; A precedes L. Manifest, request, both order views and canonical index resolve the same paths. No gaps or duplicate implementation ownership; security preservation and independent retest are distinct duties.",
+      "Schema2 de-DE, German naming profile, four portable roles, six collection paths, one bounded learner legacy alias and SeriesManifest inventory validated Aligned. Six physical active files include standalone intakes; four active series targets plus one archived root. H remains declared Eligible; this does not validate completed delivery or grant execution authority.",
+      "All target/request/manifest/series-receipt bindings are current; authoring source freshness and predecessor contract are not: IR901 and IR902 block Ready. Seventeen source paths drift across three receipts; U sources are unchanged. Exact expected/actual hashes retained separately.",
+      "Historical 003 run says Completed but binds a different hardening input hash; it cannot by itself close the current expanded hardening intake. No automatic lifecycle promotion from historical run state or current Dockerfile implementation. Fresh handoff/authority remains separate.",
+      "Issue snapshots and linked ADE reports remain dated 2026-10-27/28 provenance, not freshly polled remote status. Current local source already contains Resolute, Web and profiles; existing work must be assessed before any future implementation. No builds, runtime checks, API calls or remote writes performed.",
+      "No exposed credentials or unnecessary personal data identified in reviewed requirements. Persistent agent storage is distinct from audit metadata; session_coverage=not-exported retained. Human-only approvals, secrets, rights, provider/model and hosting decisions remain separate.",
+      "Old 2026-11-02 Ready result/report and unchanged request archived byte-identically. Same logical request reviewId retained, new revisionId and reviewedAt distinguish this rerun; explicit supersedes records historical meaning without changing reviewed inputs."
+    ]
+  },
+  "summary": {
+    "medium": 1,
+    "low": 0,
+    "critical": 0,
+    "high": 2
+  },
+  "supersedes": "specs/intake-review-archive/04d3e335-7b7a-494d-bc78-9587e1659572/ad457582-6411-4864-ac0c-c6f39acaad34/result.json",
+  "preservedPriorState": {
+    "meaning": "Historical Ready retained byte-identically; this rerun blocks current readiness.",
+    "reviewId": "04d3e335-7b7a-494d-bc78-9587e1659572",
+    "status": "Ready",
+    "reviewedAt": "2026-11-02T07:22:27Z",
+    "rawSha256": "70cc8a6d5a80df6c2974cc558355df341a967ead0eee37a800ee3cfc959845e1"
+  },
+  "seriesBinding": {
+    "receiptPath": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
+    "manifestNormalizedSha256": "01931b50fe0d9a88b6bb8b1d518ab17f536db647a570221a507adc7d84ed77e2",
+    "receiptNormalizedSha256": "22190af06a7c5cf73c3f1c54890a4ad2a66013421e13d1915be8154a3b8a2060",
+    "manifestPath": "specs/intake-series/sandbox-development-lifecycle/manifest.json"
+  },
+  "evidencePath": "specs/intake-review-reports/sandbox-development-lifecycle-2026-11-08-evidence.json",
+  "authorityEvidence": "User explicitly requested the complete five-member review on 2026-11-08 and prohibited implementation. Review writes only result/report/evidence, predecessor review archives and required session log.",
+  "nextAction": "Separately authorize repair of IR901, IR902 and IR903, preserving predecessor evidence, requirements thresholds and existing human gates; then rerun the complete five-member review. Do not start implementation."
+}

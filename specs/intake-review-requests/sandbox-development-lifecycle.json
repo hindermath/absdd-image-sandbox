@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.1",
-  "reviewId": "04d3e335-7b7a-494d-bc78-9587e1659572",
+  "reviewId": "796186b3-1508-4e81-8dd4-8cf8ac968bfa",
   "mode": "Series",
   "policy": "learner-a11y-bilingual-series",
   "targets": [
@@ -12,22 +12,22 @@
     {
       "role": "OrderedMember",
       "path": "Lastenheft_Secure-Development-Container-Hardening.md",
-      "normalizedSha256": "b90f4fe498c573d0e5e4036d01aaee76551195f5c2ffa82ae19abb05dadb9560"
+      "normalizedSha256": "204d88a3977213f8764c3beaced0b2c089baed95d63bb55d696c462717c1e9fa"
     },
     {
       "role": "OrderedMember",
       "path": "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
-      "normalizedSha256": "a9c3e49d227f13b69716b62930417cdbebb09d0df129eac23385a1adc122f7f6"
+      "normalizedSha256": "d6af174d6d1b201e5bae8571d8e698a65bccf2ad8b9e5549ecd86d82af9f2288"
     },
     {
       "role": "OrderedMember",
       "path": "Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md",
-      "normalizedSha256": "327cf33a840fa26ab659646fd33d7b490031d11c252b4992276147b67ee38b8a"
+      "normalizedSha256": "821a011ad4c48a287bca11096599416b42914a909bfcfe8fb503d7b6a155e871"
     },
     {
       "role": "OrderedMember",
       "path": "intakes/learner-fork-self-build-sandbox.md",
-      "normalizedSha256": "e447fbf8751a1bf9eb9c53c099fce8272e501c2305f43765f4cba62f0129f338"
+      "normalizedSha256": "97e46b84644fd70b4dab747af0d820187821c4e288f68add3e70677ceb7f14e7"
     }
   ],
   "series": {
@@ -146,7 +146,6 @@
     "docs/fuer-lernende/alltag.md",
     "docs/maintenance/usability-alignment-2026-10-27.md",
     "specs/intake-series-operations/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/proposal.json",
-    "Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md",
     "docs/maintenance/ir801-repair-2026-10-30.md",
     "specs/intake-review-archive/505a9246-a7a7-4a37-9fe4-eb73f3a2705d/0ad06585-48d6-4e43-a7cc-714d580eef0e/result.json",
     "specs/intake-authoring-receipts/sandbox-secure-development-selbstpruefung.json",
@@ -159,31 +158,39 @@
     "docs/maintenance/intake-source-alignment-2026-11-02.md",
     "specs/intake-review-archive/aa89a3d1-59a0-42bb-965b-1614e3758c04/f4aa58a9-39ce-4808-b373-89f557054ce4/result.json",
     "specs/intake-authoring-receipts/secure-development-container-hardening.json",
-    "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json"
+    "specs/intake-authoring-receipts/learner-fork-self-build-sandbox.json",
+    "docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md",
+    "docs/security/dependency-update-policy.md",
+    "scripts/config/toolchain-pins.json",
+    ".github/dependabot.yml",
+    ".github/workflows/toolchain-pins.yml",
+    "docs/maintenance/toolchain-version-audit-2026-11-06.md",
+    "docs/maintenance/feature-update-2026-11-06-acceptance.md",
+    ".specify/presets/intake-authoring-governance/tests/test-intake-authoring-lifecycle.ps1"
   ],
-  "authorityEvidence": "User explicitly authorizes targeted intake source-binding renewal with byte-identical archives and independent complete review on 2026-11-02, followed by Mac-A coverage and Windows/WSL2 handoff. Requirements, 85/80 thresholds, intake identities, five-member lifecycle and start/delivery authority remain unchanged; no commit or push. This operation owns provenance authoring only, not technical implementation or review adjudication.",
-  "operationId": "f4aa58a9-39ce-4808-b373-89f557054ce4",
-  "reviewScope": "Independent complete semantic review of all five unchanged intake texts and the full series after seven PR107 source changes in H/A/L receipts; inspect archive fidelity, provenance, preserved 85/80 thresholds and authority. Author performs no adjudication.",
+  "authorityEvidence": "User annotation on 2026-11-08 explicitly authorizes executing bounded IR901–IR903 repair and then a complete five-member re-review. Preserve intake identities, scope, 85/80 thresholds, lifecycle, dependencies and human gates. No sandbox feature implementation, runtime action, commit, push or remote write.",
+  "operationId": "9df9c6a1-ceb8-4447-9277-d47640c99849",
+  "reviewScope": "Complete five-member semantic re-review after explicitly authorized IR901–IR903 repair; assess all requirements, current source deltas, distinct predecessor/archive custody, invariants and authority; no implementation.",
   "seriesManifest": {
     "path": "specs/intake-series/sandbox-development-lifecycle/manifest.json",
-    "normalizedSha256": "01931b50fe0d9a88b6bb8b1d518ab17f536db647a570221a507adc7d84ed77e2"
+    "normalizedSha256": "5dd6b930a55bea2d3e8dcdc3f9c0a0ba9b61664897aa1fd18dfa2e11383c298c"
   },
   "seriesReceipt": {
-    "receiptId": "2d55c819-910c-446d-9e78-61c340ffb592",
+    "normalizedSha256": "9515626e2a6a4be5e016a672ed414dafa1550030a141797fa56c606ee22bfd06",
     "path": "specs/intake-series/sandbox-development-lifecycle/receipt.json",
-    "normalizedSha256": "22190af06a7c5cf73c3f1c54890a4ad2a66013421e13d1915be8154a3b8a2060"
+    "receiptId": "49946885-cc4f-40ca-a2ab-e898d5703485"
   },
-  "supersedesReviewId": "aa89a3d1-59a0-42bb-965b-1614e3758c04",
+  "supersedesReviewId": "04d3e335-7b7a-494d-bc78-9587e1659572",
   "admissionEvidence": {
     "requestedNotExecuted": false,
     "priorSeriesReviewPath": "specs/intake-review-archive/5c452360-9bf7-44d9-84e0-10cae34e72ea/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/result.json",
     "priorSingleReviewPath": "specs/intake-review-archive/0b5f49ef-5dcc-449c-a438-cdc8115ec0be/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/result.json"
   },
-  "preparedState": "PreparedForIndependentReview",
+  "preparedState": "PreparedForCompleteReview",
   "supersededReview": {
-    "reviewId": "aa89a3d1-59a0-42bb-965b-1614e3758c04",
-    "archiveResultPath": "specs/intake-review-archive/aa89a3d1-59a0-42bb-965b-1614e3758c04/f4aa58a9-39ce-4808-b373-89f557054ce4/result.json",
-    "archiveResultRawSha256": "bb938648633a97bd9a7e544e2a3cd46cf7867ddcea52790d771719ad0bfb09ff",
-    "reason": "Source bindings changed; old Ready is historical only, no current review outcome claimed."
+    "reviewId": "04d3e335-7b7a-494d-bc78-9587e1659572",
+    "archiveResultPath": "specs/intake-review-archive/04d3e335-7b7a-494d-bc78-9587e1659572/9df9c6a1-ceb8-4447-9277-d47640c99849/result.json",
+    "reason": "Authorized repair; prior NeedsRemediation preserved exactly.",
+    "archiveResultRawSha256": "f7bf89c216a24279d4e6ede82037e2ac4ae180ace11c0515155b13097ae5577e"
   }
 }

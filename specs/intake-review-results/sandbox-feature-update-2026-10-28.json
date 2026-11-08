@@ -6,11 +6,11 @@
   "archivedResultPath": "specs/intake-review-archive/0b5f49ef-5dcc-449c-a438-cdc8115ec0be/1cadc99c-e344-4fc9-9fa0-78414f2d82cd/result.json",
   "schemaVersion": "1.0",
   "documentType": "IntakeReviewSupersession",
-  "reason": "Historical Single and prior Series reviews are superseded; current independent full five-member Series review is Ready after bounded PR107 source renewal. No new Single adjudication, technical acceptance or execution authority.",
+  "reason": "Historical Single remains superseded; current complete five-member repair re-review is Ready. No technical/human acceptance or start authority.",
   "currentRequestPath": "specs/intake-review-requests/sandbox-development-lifecycle.json",
   "operationId": "1cadc99c-e344-4fc9-9fa0-78414f2d82cd",
   "status": "Superseded",
-  "requestedReviewId": "04d3e335-7b7a-494d-bc78-9587e1659572",
-  "currentReviewId": "04d3e335-7b7a-494d-bc78-9587e1659572",
+  "requestedReviewId": "796186b3-1508-4e81-8dd4-8cf8ac968bfa",
+  "currentReviewId": "796186b3-1508-4e81-8dd4-8cf8ac968bfa",
   "currentReviewStatus": "Ready"
 }

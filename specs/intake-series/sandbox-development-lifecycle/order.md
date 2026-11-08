@@ -13,29 +13,18 @@ hardening and before acceptance. The manifest is authoritative. The five
 states are Completed, Eligible, Blocked, Blocked, Blocked. Eligible selects
 a candidate only; it grants no implementation or delivery authority.
 
-## Reviewstand / Review state
+## Reviewstand / Review state — 2026-11-08
 
-DE: Das viergliedrige Vollreview `5c452360-9bf7-44d9-84e0-10cae34e72ea`
-vom 2026-10-27 war Ready. Die frühere Meldung „ausstehend“ war dafür
-veraltet. Dieses Review und das Single-Ready des Feature-Updates nach IR701
-bleiben bytegleich archiviert. Sie gelten nach Aufnahme und geändertem
-Graph nicht als aktuelle Prüfung der fünfgliedrigen Reihe.
-Der [neue vollständige Reviewauftrag](../../../specs/intake-review-requests/sandbox-development-lifecycle.json)
-wurde nach dem Quellenabgleich vom 2026-11-02 erneut vorbereitet:
-`PreparedForIndependentReview` (Review-ID `04d3e335-7b7a-494d-bc78-9587e1659572`).
-Das vorherige Ready `aa89a3d1-59a0-42bb-965b-1614e3758c04` ist bytegleich
-archiviert und historisch, nicht die Bewertung der erneuerten Quellenbindungen.
-Keine technische oder menschliche Abnahme und keine neue Startfreigabe.
+DE: IR901–IR903 sind behoben. Das vollständige fünfgliedrige Nachreview ist Ready.
+Der [aktuelle vollständige Prüfbericht](../../intake-review-reports/sandbox-development-lifecycle.md) und das JSON-Ergebnis sind
+maßgeblich; vorbereitete Aufträge und ältere Ready-Ergebnisse sind keine
+aktuelle Abnahme. Review-ID: `796186b3-1508-4e81-8dd4-8cf8ac968bfa`. Status und Implementierungsautorität
+bleiben getrennt. Alle bisherigen Reviewstände sind bytegleich archiviert.
 
-EN: The four-member full review above was Ready on 2026-10-27; describing
-that review as pending was stale. It and the feature update's post-IR701
-Single Ready remain archived byte for byte. Following admission and graph
-changes, neither is current acceptance of the five-member series.
-The full review was prepared again after source alignment on 2026-11-02:
-`PreparedForIndependentReview` (review ID `04d3e335-7b7a-494d-bc78-9587e1659572`).
-Previous Ready `aa89a3d1-59a0-42bb-965b-1614e3758c04` is archived byte for
-byte and historical, not an assessment of the renewed source bindings.
-No technical/human acceptance or new execution authority.
+EN: IR901–IR903 are resolved; the complete five-member re-review is Ready. The current full
+report and JSON result govern; prepared requests and older Ready results do
+not establish current acceptance. The review ID is shown above. Review status
+and implementation authority remain separate; prior evidence is archived exactly.
 
 <!-- secure-development-hardening-order:start -->
 ## Verlinkte Lastenheft-Reihenfolge / Linked Requirements Order
@@ -95,14 +84,14 @@ No formal, product, accessibility or platform approval or autonomous run.
 
 ## Nächste fachliche Aktion / Next substantive action
 
-DE: Das vollständige fünfgliedrige unabhängige Nachreview ist als nächster
-Schritt angefordert. Bis dahin wird kein aktuelles Ready behauptet.
+DE: Das vollständige fünfgliedrige Nachreview ist Ready. Als Nächstes ist die
+schreibfreie Serienstatusprüfung vorgesehen; keine Implementierung wird gestartet.
 
-EN: The complete five-member independent re-review is requested next.
-Until then no current Ready is claimed.
+EN: The complete five-member re-review is Ready. Next inspect series status
+read-only; no implementation is started.
 
 ```text
-$speckit-intake-review specs/intake-review-requests/sandbox-development-lifecycle.json
+$speckit-intake-series-status specs/intake-series/sandbox-development-lifecycle/manifest.json
 ```
 
 IR801-Reparatur / IR801 repair: [Vertrag / Contract](../../../docs/maintenance/ir801-repair-2026-10-30.md). Alle fünf Statuswerte und Kanten bleiben unverändert / All five statuses and edges remain unchanged.

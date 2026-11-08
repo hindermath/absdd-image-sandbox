@@ -461,6 +461,27 @@ prepared, not enabled. Copied states/statistics/approvals are not personal
 evidence. Preserve hardening/acceptance gates and thresholds. Source maintenance
 starts no product or blocked self-build work and changes no hosting setting.
 
+## Quellenstand nach IR901–IR903 / Source State after IR901–IR903 — 2026-11-08
+
+DE: Maßgeblich ist der [begrenzte Quellenabgleich](docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md).
+Vorhandene Resolute-/Web-/Profilfunktionen sind zuerst zu bewerten, nicht
+erneut einzuführen. Frühere Ausgangslagen und Statusangaben sind datierter
+Authoring-Kontext. Assurance 0.1.8 bezeichnet den historischen Werkzeugstand;
+aktuell installiert ist 0.1.9 mit denselben Kontrollprüfzielen und strengeren
+Risikometadaten. GSDB 3.4.4, Anforderungen, Grenzwerte, Plattformnachweise,
+Unabhängigkeit und menschliche Entscheidungen bleiben verbindlich.
+Dieser Abgleich übernimmt keine vollständige technische Abnahme, verändert
+keinen Lifecycle und erteilt keine Implementierungs- oder Lieferfreigabe.
+
+EN: The [bounded source alignment](docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md) governs current context.
+Assess existing Resolute/Web/profile functionality before later work;
+earlier current-state/status statements are dated authoring context.
+Assurance 0.1.8 denotes the historical tool baseline; installed 0.1.9 keeps
+control-check goals with stricter risk metadata. Preserve GSDB 3.4.4,
+requirements, thresholds, platform evidence, independence and human decisions.
+This alignment grants no complete technical acceptance, lifecycle change,
+implementation or delivery authority.
+
 <!-- intake-authoring:prompts -->
 ## Kopierbare Folgekommandos / Copy-Ready Follow-Up Commands
 
@@ -468,11 +489,13 @@ starts no product or blocked self-build work and changes no hosting setting.
 ```text
 $speckit-specify Erstelle eine Spezifikation auf Grundlage von Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md, docs/maintenance/intake-gsdb344-delta-2026-10-21.md und der vollstaendigen Hardening-Uebergabe. Beruecksichtige A-344-01 bis A-344-04 und deren Akzeptanzkriterien sowie GSDB 3.4.4 und Assurance 0.1.8. Plane unabhaengige technische Abnahme ohne weitere Haertung oder formale Freigabe; keine Implementierung starten. Beruecksichtige den Dokumentations- und Versionsnachtrag vom 2026-10-25 sowie docs/maintenance/documentation-alignment-2026-10-25.md und docs/security/toolchain-followups-2026-10-25.md; offene Nachweise nicht als erledigt behandeln. Aktuellen Statusnachtrag docs/maintenance/sandbox-current-state-2026-10-25.md mit REV-001 bis REV-003 beruecksichtigen; technische und menschliche Nachweise nicht vorwegnehmen. Beruecksichtige docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md; isolierte Downloadtests sind kein Image-Build oder neue Abnahme. Beruecksichtige docs/maintenance/template-profile-alignment-2026-10-25.md und die neuen Rechte-/Historiengrenzen; Fork bleibt Standard, Template ist nicht aktiviert, bestehende Lifecycle- und Startgates bleiben erhalten. Beruecksichtige docs/maintenance/closeout-rights-alignment-2026-10-25.md: Ownerrechte nur fuer die benannte Lernmaterial-Lieferung bestaetigt; LIC-01 und andere LIC-02-Betroffenheiten sowie saemtliche Startgates bleiben offen. Beruecksichtige docs/maintenance/closeout-review-remediation-2026-10-25.md: IR201/IR202 nur als nachreviewte Quellenkorrektur behandeln; Lifecycle und Startautoritaet bleiben unveraendert. Beruecksichtige docs/maintenance/usability-alignment-2026-10-27.md und die dort benannten drei Lernendenpfade: begrenzte Usability-Konkretisierung ohne Scope-Ausweitung, Schutzlockerung, Pilot-Ausfuehrung oder neue Startautoritaet; unabhaengiges Vollreview erforderlich.
 Zusätzliche verbindliche Eingabe ist Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md mit FU-001–023 und FA-001–012. Übernimm beide abgeschlossenen Vorgänger und dieselbe finale Quellrevision/Image-ID nach A-FU-01/02 und AC-A-FU-01/02; plane risikobasierte unabhängige positive/negative Gegenprüfungen und begründete Evidenceübernahmen statt pauschaler Testverdopplung. Niemand darf die jeweils selbst implementierten Hardening- oder Update-Anteile abnehmen. Bestehende Schwellen, Graph- und Human-only-Gates bleiben erhalten; dieser Specify-Auftrag startet keine technische Abnahme oder Implementierung.
+Berücksichtige docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md: vorhandene Umsetzung bewerten, aktuelle Pin-Governance und Assurance-0.1.9-Prüfwerkzeuge berücksichtigen; Kontroll-IDs, Schwellen und menschliche Gates erhalten. Keine neue Start- oder Lieferautorität.
 ```
 
 <!-- spec-kit-command-id: speckit.autonomous -->
 ```text
 $speckit-autonomous Fuehre erst nach abgeschlossener Haertung, aktuellem Review und gesonderter Startautoritaet den vollstaendigen Spec-Kit-Lauf fuer Lastenheft_Sandbox-Secure-Development-Selbstpruefung.md mit Delivery Authority LocalImplementation aus. Pruefe den GSDB-3.4.4-Delta-Abgleich und Assurance 0.1.8 unabhaengig, dokumentiere Plattformgrenzen und offene menschliche Entscheidungen und stoppe vor Commit, Push, Pull Request, Merge oder Hosting-Aenderungen. Beruecksichtige den Dokumentations- und Versionsnachtrag vom 2026-10-25 sowie docs/maintenance/documentation-alignment-2026-10-25.md und docs/security/toolchain-followups-2026-10-25.md; offene Nachweise nicht als erledigt behandeln. Aktuellen Statusnachtrag docs/maintenance/sandbox-current-state-2026-10-25.md mit REV-001 bis REV-003 beruecksichtigen; technische und menschliche Nachweise nicht vorwegnehmen. Beruecksichtige docs/maintenance/maven-fallback-intake-alignment-2026-10-25.md; isolierte Downloadtests sind kein Image-Build oder neue Abnahme. Beruecksichtige docs/maintenance/template-profile-alignment-2026-10-25.md und die neuen Rechte-/Historiengrenzen; Fork bleibt Standard, Template ist nicht aktiviert, bestehende Lifecycle- und Startgates bleiben erhalten. Beruecksichtige docs/maintenance/closeout-rights-alignment-2026-10-25.md: Ownerrechte nur fuer die benannte Lernmaterial-Lieferung bestaetigt; LIC-01 und andere LIC-02-Betroffenheiten sowie saemtliche Startgates bleiben offen. Beruecksichtige docs/maintenance/closeout-review-remediation-2026-10-25.md: IR201/IR202 nur als nachreviewte Quellenkorrektur behandeln; Lifecycle und Startautoritaet bleiben unveraendert. Beruecksichtige docs/maintenance/usability-alignment-2026-10-27.md und die dort benannten drei Lernendenpfade: begrenzte Usability-Konkretisierung ohne Scope-Ausweitung, Schutzlockerung, Pilot-Ausfuehrung oder neue Startautoritaet; unabhaengiges Vollreview erforderlich.
 Zusätzlich vor jedem Start müssen Hardening UND Lastenheft_Sandbox-Feature-Update-Ubuntu2604-OpenCode-Web-MSL.md abgeschlossen und auf dieselbe finale Quellrevision/Image-ID gebunden sein. Prüfe FU-001–023/FA-001–012 nach A-FU-01/02 und AC-A-FU-01/02 risikobasiert unabhängig, einschließlich Web-Anmeldung/Readiness, Clients, Profilen und erhaltener Security-/Auditkontrollen. Übernommene Evidence begründen; keine pauschale Testverdopplung. Keine Selbstabnahme eigener Hardening-/Update-Anteile, keine Änderung bestehender Schwellen oder Human-only-Gates. Dieser Prompt ist keine Startfreigabe.
+Berücksichtige docs/maintenance/intake-ir901-ir903-repair-2026-11-08.md: vorhandene Umsetzung bewerten, aktuelle Pin-Governance und Assurance-0.1.9-Prüfwerkzeuge berücksichtigen; Kontroll-IDs, Schwellen und menschliche Gates erhalten. Keine neue Start- oder Lieferautorität.
 ```
 <!-- intake-authoring:end -->
