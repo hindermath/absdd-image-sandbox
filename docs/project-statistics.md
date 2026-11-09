@@ -341,6 +341,21 @@ ARM64 build, SBOM, immutable package proof and isolated full smoke passed.
 Concrete owner approval remains pending; the old container and six volumes
 are preserved. No Home sync or 21-repository maintenance was performed.
 
+### 2026-11-09 - OpenCode-Pin-PR #129 / OpenCode pin PR #129
+
+DE: Vorhandenen Vorschlag fuer OpenCode 2.2.6 gegen Herstellerquelle und
+npm-Metadaten geprueft; main-Historie integriert und den reinen Statistik-
+Konflikt zur Neugenerierung aufgeloest. Sitzungsnachweis: agent-session-log
+2026-11-09-pr129-pin-review.md. NoUpdateRequired fuer bestehende Anleitungen,
+GeneratedUpdate fuer Profil 2; Source-only, kein Home-Sync. Exakte gruene
+PR-Checks bleiben Merge-Gate. Native ARM64- und Runtime-Abnahme bleiben separat.
+EN: Reviewed the existing OpenCode 2.2.6 proposal against official release and
+npm metadata; integrated main history and resolved generated statistics for
+regeneration. Session evidence: agent-session-log 2026-11-09-pr129-pin-review.md.
+NoUpdateRequired for reader guidance, GeneratedUpdate for Profile 2;
+source-only, no Home sync. Exact green PR checks remain the merge gate.
+Native ARM64 and runtime acceptance remain separate.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
@@ -351,27 +366,27 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 575490 lines |
-| Textdateien / Text files | 2590 |
+| Textbasis / Text base | 575591 lines |
+| Textdateien / Text files | 2592 |
 | Beobachtbarer Zeitraum / Observable period | 2025-11-16..2026-11-09 |
 | Aktivtage / Active days | 95 |
-| Relevante Commits / Relevant commits | 336 |
-| Zeilen je Aktivtag / Lines per active day | 6057.8 |
+| Relevante Commits / Relevant commits | 338 |
+| Zeilen je Aktivtag / Lines per active day | 6058.9 |
 | Peak-Tag im Fenster / Peak day in window | 2026-10-25 / 101840 |
 | Peak-Woche im Fenster / Peak week in window | 2026-10-25 / 266277 |
 | Laengste Serie / Longest streak | 8 days |
 | Speedup vs. 80 lines/day | 75.7x |
 | Speedup vs. 100 lines/day | 60.6x |
-| Methodik / Methodology | v2; source `9e50c188a9da` |
+| Methodik / Methodology | v2; source `acdbe4c5ff90` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [#...................]   0.0% | 97
 Tests                           [#...................]   3.0% | 17104
-Dokumentation / Documentation   [############........]  61.7% | 354932
+Dokumentation / Documentation   [############........]  61.7% | 355033
 Skripte / Scripts               [#...................]   7.4% | 42487
-Konfiguration / Configuration   [####................]  19.2% | 110207
+Konfiguration / Configuration   [####................]  19.1% | 110207
 Daten und Medien / Data and media [....................]   0.0% | 0
 Sonstiger Text / Other text     [##..................]   8.8% | 50663
 ```
@@ -396,7 +411,7 @@ Sa/Sa  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0
 ```text
 Wochen / Weeks 27..52 | 2026-05-17..2026-11-14
 So/Su  3 2 1 0 4 0 0 4 2 4 4 1 4 4 0 4 4 4 4 0 3 0 0 4 0 4
-Mo/Mo  0 3 2 0 0 0 0 0 4 4 0 0 0 2 0 0 4 2 0 0 0 0 4 0 4 2
+Mo/Mo  0 3 2 0 0 0 0 0 4 4 0 0 0 2 0 0 4 2 0 0 0 0 4 0 4 3
 Di/Tu  3 2 3 0 0 0 0 0 3 4 4 0 0 0 0 0 4 4 0 0 4 0 4 4 4 -
 Mi/We  0 2 4 0 0 0 0 2 1 2 4 0 0 2 0 0 0 0 0 0 0 0 4 0 0 -
 Do/Th  3 0 4 3 0 0 0 0 1 3 0 0 4 0 0 0 0 0 0 0 0 0 0 2 4 -
@@ -504,7 +519,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..10000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 100
-Visible repository [############........] 6057.8
+Visible repository [############........] 6058.9
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -530,6 +545,6 @@ DE: Das Fenster beginnt am 2025-11-16 und endet am 2026-11-09. Es enthaelt 95 ak
 | 2026-08 | 96264 |
 | 2026-09 | 61410 |
 | 2026-10 | 325107 |
-| 2026-11 | 60929 |
+| 2026-11 | 61032 |
 
 <!-- project-statistics-v2:end -->
