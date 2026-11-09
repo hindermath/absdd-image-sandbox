@@ -341,6 +341,21 @@ ARM64 build, SBOM, immutable package proof and isolated full smoke passed.
 Concrete owner approval remains pending; the old container and six volumes
 are preserved. No Home sync or 21-repository maintenance was performed.
 
+### 2026-11-09 - OpenCode-Pin-PR #129 / OpenCode pin PR #129
+
+DE: Vorhandenen Vorschlag fuer OpenCode 2.2.6 gegen Herstellerquelle und
+npm-Metadaten geprueft; main-Historie integriert und den reinen Statistik-
+Konflikt zur Neugenerierung aufgeloest. Sitzungsnachweis: agent-session-log
+2026-11-09-pr129-pin-review.md. NoUpdateRequired fuer bestehende Anleitungen,
+GeneratedUpdate fuer Profil 2; Source-only, kein Home-Sync. Exakte gruene
+PR-Checks bleiben Merge-Gate. Native ARM64- und Runtime-Abnahme bleiben separat.
+EN: Reviewed the existing OpenCode 2.2.6 proposal against official release and
+npm metadata; integrated main history and resolved generated statistics for
+regeneration. Session evidence: agent-session-log 2026-11-09-pr129-pin-review.md.
+NoUpdateRequired for reader guidance, GeneratedUpdate for Profile 2;
+source-only, no Home sync. Exact green PR checks remain the merge gate.
+Native ARM64 and runtime acceptance remain separate.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
