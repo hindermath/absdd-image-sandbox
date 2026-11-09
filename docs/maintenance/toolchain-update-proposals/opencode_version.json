@@ -1,0 +1,47 @@
+{
+  "proposal": {
+    "resultSha256": "2c3c03baf2c83914d0c4889c8760378a657e996758f53ca345a4dd199ed6b120",
+    "hashes": {},
+    "baseHead": "ac38872ff22d23afbeae1266434e7dfdf560d75b",
+    "baseSha256": "ec66528d6336e86d3757f64d3d168e1eb4d6c551d7f1838549bc553fdda7d3d4",
+    "group": "OPENCODE_VERSION",
+    "source": "https://registry.npmjs.org/%40opencode%2Fcli/latest",
+    "updates": {
+      "OPENCODE_VERSION": "2.2.6"
+    },
+    "schemaVersion": 1
+  },
+  "schemaVersion": 1,
+  "documentationImpact": [
+    {
+      "decision": "NoUpdateRequired",
+      "scope": "Reader guidance; versions remain canonical in Dockerfile",
+      "reevaluation": "Changed update source, channel, trust boundary or install mechanism",
+      "owner": "Repository Maintainer"
+    },
+    {
+      "homeSyncRequired": false,
+      "source": "Committed Dockerfile and Git history",
+      "decision": "GeneratedUpdate",
+      "owner": "Repository Maintainer",
+      "distributionClass": "sourceOnly",
+      "scope": "Configured statistics outputs and any derived Go/Rust learner version row"
+    }
+  ],
+  "proof": {
+    "sourceRevision": "ac38872ff22d23afbeae1266434e7dfdf560d75b",
+    "schemaVersion": 1,
+    "sbomExit": 0,
+    "toolchainSmokeExit": 0,
+    "documentationSmokeExit": 0,
+    "run": "https://github.com/hindermath/absdd-image-sandbox/actions/runs/42574672301",
+    "sbomSha256": "f8ee3a5ab3f3612016ec2b788e06abe1562c3aaf04f34701208342f9b0fa25c8",
+    "platform": "linux/amd64",
+    "dockerfileSha256": "2c3c03baf2c83914d0c4889c8760378a657e996758f53ca345a4dd199ed6b120",
+    "arm64Execution": "NotPerformed",
+    "runtime": "podman",
+    "buildExit": 0,
+    "imageId": "sha256:d17cfd27f422a416e77a7eb4a3e20df1c65168ee16fe541b24e2fa85e2099915",
+    "humanReview": "Pending"
+  }
+}
