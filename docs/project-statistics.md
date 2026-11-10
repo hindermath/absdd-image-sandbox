@@ -356,6 +356,19 @@ NoUpdateRequired for reader guidance, GeneratedUpdate for Profile 2;
 source-only, no Home sync. Exact green PR checks remain the merge gate.
 Native ARM64 and runtime acceptance remain separate.
 
+### 2026-11-10 - Statistik-Drift nach Datumswechsel / Statistics date rollover
+
+DE: Profil 2 nach dem Merge von PR #131 am 10.11.2026 aus committierten
+Quellen neu erzeugt. Der Stand vom 09.11. war durch den Datumswechsel
+veraltet; Konfiguration und Methodik bleiben erhalten. GeneratedUpdate;
+Owner: Repository-Maintainer; Source-only, kein Home-Sync. Lokale Vorschau
+und Driftkontrolle sowie exakte Head-Checks bilden den technischen Nachweis.
+EN: Regenerated Profile 2 from committed sources after PR #131 merged on
+10 November 2026. The previous day's snapshot became stale at date rollover;
+retain configuration and methodology. GeneratedUpdate; repository-maintainer
+owner; source-only, no Home sync. Preview, drift validation and exact-head
+checks provide technical evidence.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
@@ -366,8 +379,8 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 576120 lines |
-| Textdateien / Text files | 2601 |
+| Textbasis / Text base | 576123 lines |
+| Textdateien / Text files | 2600 |
 | Beobachtbarer Zeitraum / Observable period | 2025-11-16..2026-11-10 |
 | Aktivtage / Active days | 96 |
 | Relevante Commits / Relevant commits | 341 |
@@ -377,14 +390,14 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 | Laengste Serie / Longest streak | 8 days |
 | Speedup vs. 80 lines/day | 75.0x |
 | Speedup vs. 100 lines/day | 60.0x |
-| Methodik / Methodology | v2; source `685fbf5d74e3` |
+| Methodik / Methodology | v2; source `050c66809fb7` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [#...................]   0.0% | 97
 Tests                           [#...................]   3.0% | 17104
-Dokumentation / Documentation   [############........]  61.7% | 355562
+Dokumentation / Documentation   [############........]  61.7% | 355565
 Skripte / Scripts               [#...................]   7.4% | 42487
 Konfiguration / Configuration   [####................]  19.1% | 110207
 Daten und Medien / Data and media [....................]   0.0% | 0
@@ -545,6 +558,6 @@ DE: Das Fenster beginnt am 2025-11-16 und endet am 2026-11-10. Es enthaelt 96 ak
 | 2026-08 | 96264 |
 | 2026-09 | 61410 |
 | 2026-10 | 325107 |
-| 2026-11 | 61569 |
+| 2026-11 | 61572 |
 
 <!-- project-statistics-v2:end -->
