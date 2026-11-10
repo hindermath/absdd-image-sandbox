@@ -356,6 +356,19 @@ NoUpdateRequired for reader guidance, GeneratedUpdate for Profile 2;
 source-only, no Home sync. Exact green PR checks remain the merge gate.
 Native ARM64 and runtime acceptance remain separate.
 
+### 2026-11-10 - Statistik-Drift nach Datumswechsel / Statistics date rollover
+
+DE: Profil 2 nach dem Merge von PR #131 am 10.11.2026 aus committierten
+Quellen neu erzeugt. Der Stand vom 09.11. war durch den Datumswechsel
+veraltet; Konfiguration und Methodik bleiben erhalten. GeneratedUpdate;
+Owner: Repository-Maintainer; Source-only, kein Home-Sync. Lokale Vorschau
+und Driftkontrolle sowie exakte Head-Checks bilden den technischen Nachweis.
+EN: Regenerated Profile 2 from committed sources after PR #131 merged on
+10 November 2026. The previous day's snapshot became stale at date rollover;
+retain configuration and methodology. GeneratedUpdate; repository-maintainer
+owner; source-only, no Home sync. Preview, drift validation and exact-head
+checks provide technical evidence.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
