@@ -66,16 +66,28 @@ and outcome for each step.
    **EN:** A non-specialist follows the path and explains mount, data-loss
    and approval boundaries in their own words.
 
-**DE:** Status `Open`: diese menschlichen Beobachtungen fehlen im aktuellen
-Auftrag. Owner: Learning/A11Y Review. Follow-up: Tests mit echten
+**DE:** Status `Open`: die vollständigen menschlichen Beobachtungen fehlen.
+Der [begrenzte Safari-Durchlauf vom 2026-11-09](../accessibility/feature-update-macos-2026-11-09.md)
+enthält Tastatur-/Zoom-Teilergebnisse und eine vom Owner bestätigte hörbare
+VoiceOver-Ausgabe. Die erste VM-Blockade wurde im Folgeversuch aufgehoben;
+der begrenzte OpenCode-Web-Durchlauf wurde mit bestätigter Anmeldung und
+VoiceOver-Zweckansage nachgeholt. Braille blieb ungeprüft; Fokus-Rückgabe
+und weitere Prüfungen bleiben offen. Das ersetzt keine vollständige Abnahme.
+Owner: Learning/A11Y Review. Follow-up: Tests mit echten
 Teilnehmenden aus den vier Berufen und Einsteiger-Entwicklern organisieren.
 Trigger: vor A11Y-Konformitaetsbehauptung oder unbegleitetem Rollout und bei
 wesentlichen Navigationsaenderungen. Automatische Linktests schliessen dies
 nicht. Markdown-Sprachbloecke garantieren keine korrekte `lang`-Auszeichnung
 durch GitHub. Eine spaetere PDF braucht eine eigene Barrierefreiheitspruefung.
 
-**EN:** Open: these human observations are missing in this task. Owner:
-Learning/A11Y Review. Follow up with real participants from the four
+**EN:** Open: complete human observations are still missing. The
+[limited Safari review dated 2026-11-09](../accessibility/feature-update-macos-2026-11-09.md)
+records keyboard/zoom samples and owner-confirmed audible VoiceOver output.
+The initial VM blocker was resolved in a follow-up, and the limited OpenCode
+Web review included verified login and owner-confirmed VoiceOver purpose
+announcement. Braille was untested; focus restoration and other checks remain
+open. This is not complete acceptance. Owner: Learning/A11Y Review. Follow up
+with real participants from the four
 occupations and non-specialist developers. Re-evaluate before claiming A11Y
 conformance or unattended rollout, and after major navigation changes.
 Automated links do not close this item. Markdown language blocks do not
