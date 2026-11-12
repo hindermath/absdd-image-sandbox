@@ -383,6 +383,23 @@ retaining the other thirteen packages and runtime contracts. Updated matrices
 and source/installed bindings; see the linked rollout record. Statistics are
 generated from the existing methodology, not measured working time.
 
+### 2026-11-12 — Sicherheitsrichtlinie / Security policy
+
+DE: Genehmigte Sicherheitsrichtlinie DE zuerst/EN danach auf CEFR-B2-Niveau
+harmonisiert, projektspezifische Grenzen und bestehende Reaktionsziele erhalten.
+Private Advisory-Links und Sprach-/Überschriftenstruktur geprüft.
+Documentation Impact: UpdateRequired; Nachweis unter
+`docs/documentation-impact/security-policy-2026-11-12.json`.
+Keine Produktlogik geändert; CodeQL unter Tools wird nach Lieferung separat
+eingerichtet. Keine AI-Scan-Aktivierung oder neue praktische A11Y-Abnahme.
+
+EN: Harmonised the approved German-first/English-second security policy at
+CEFR B2, preserving project boundaries and existing response targets. Checked
+private advisory links, language boundaries and heading structure.
+Documentation Impact: UpdateRequired; see the evidence path above.
+No product logic changed; CodeQL under Tools is configured separately after
+delivery. No AI Scan activation or new practical accessibility acceptance.
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
