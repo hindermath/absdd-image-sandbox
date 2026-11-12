@@ -496,72 +496,6 @@
       ],
       "installed_at": "2026-11-08T00:29:37.321527+00:00"
     },
-    "intake-sequencing-governance": {
-      "version": "0.2.12",
-      "source": "local",
-      "manifest_hash": "sha256:984f4f9157d8a3601f30853f876a38ca1a2b3a33a70d03962337423a5fd1158b",
-      "enabled": true,
-      "priority": 66,
-      "registered_commands": {
-        "agy": [
-          "speckit.intake-series-create",
-          "speckit.intake-series-read",
-          "speckit.intake-series-update",
-          "speckit.intake-series-delete",
-          "speckit.intake-series-status",
-          "speckit.intake-series-next"
-        ],
-        "claude": [
-          "speckit.intake-series-create",
-          "speckit.intake-series-read",
-          "speckit.intake-series-update",
-          "speckit.intake-series-delete",
-          "speckit.intake-series-status",
-          "speckit.intake-series-next"
-        ],
-        "codex": [
-          "speckit.intake-series-create",
-          "speckit.intake-series-read",
-          "speckit.intake-series-update",
-          "speckit.intake-series-delete",
-          "speckit.intake-series-status",
-          "speckit.intake-series-next"
-        ],
-        "copilot": [
-          "speckit.intake-series-create",
-          "speckit.intake-series-read",
-          "speckit.intake-series-update",
-          "speckit.intake-series-delete",
-          "speckit.intake-series-status",
-          "speckit.intake-series-next"
-        ],
-        "opencode": [
-          "speckit.intake-series-create",
-          "speckit.intake-series-read",
-          "speckit.intake-series-update",
-          "speckit.intake-series-delete",
-          "speckit.intake-series-status",
-          "speckit.intake-series-next"
-        ],
-        "zed": [
-          "speckit.intake-series-create",
-          "speckit.intake-series-read",
-          "speckit.intake-series-update",
-          "speckit.intake-series-delete",
-          "speckit.intake-series-status",
-          "speckit.intake-series-next"
-        ]
-      },
-      "registered_skills": [
-        "speckit-intake-series-create",
-        "speckit-intake-series-read",
-        "speckit-intake-series-update",
-        "speckit-intake-series-delete",
-        "speckit-intake-series-status",
-        "speckit-intake-series-next"
-      ],
-      "installed_at": "2026-11-08T00:29:39.073600+00:00"
-    },
     "autonomous-run-governance": {
       "version": "0.4.11",
       "source": "local",
@@ -679,6 +613,72 @@
         "speckit-parallel-autonomous-consolidate"
       ],
       "installed_at": "2026-11-08T00:54:30.216115+00:00"
+    },
+    "intake-sequencing-governance": {
+      "version": "0.2.13",
+      "source": "local",
+      "manifest_hash": "sha256:209a3b03ce3f12e97b6dbc6ab16088bad8433b9aaaffc159fa80c55c1916e153",
+      "enabled": true,
+      "priority": 66,
+      "registered_commands": {
+        "agy": [
+          "speckit.intake-series-create",
+          "speckit.intake-series-read",
+          "speckit.intake-series-update",
+          "speckit.intake-series-delete",
+          "speckit.intake-series-status",
+          "speckit.intake-series-next"
+        ],
+        "claude": [
+          "speckit.intake-series-create",
+          "speckit.intake-series-read",
+          "speckit.intake-series-update",
+          "speckit.intake-series-delete",
+          "speckit.intake-series-status",
+          "speckit.intake-series-next"
+        ],
+        "codex": [
+          "speckit.intake-series-create",
+          "speckit.intake-series-read",
+          "speckit.intake-series-update",
+          "speckit.intake-series-delete",
+          "speckit.intake-series-status",
+          "speckit.intake-series-next"
+        ],
+        "copilot": [
+          "speckit.intake-series-create",
+          "speckit.intake-series-read",
+          "speckit.intake-series-update",
+          "speckit.intake-series-delete",
+          "speckit.intake-series-status",
+          "speckit.intake-series-next"
+        ],
+        "opencode": [
+          "speckit.intake-series-create",
+          "speckit.intake-series-read",
+          "speckit.intake-series-update",
+          "speckit.intake-series-delete",
+          "speckit.intake-series-status",
+          "speckit.intake-series-next"
+        ],
+        "zed": [
+          "speckit.intake-series-create",
+          "speckit.intake-series-read",
+          "speckit.intake-series-update",
+          "speckit.intake-series-delete",
+          "speckit.intake-series-status",
+          "speckit.intake-series-next"
+        ]
+      },
+      "registered_skills": [
+        "speckit-intake-series-create",
+        "speckit-intake-series-read",
+        "speckit-intake-series-update",
+        "speckit-intake-series-delete",
+        "speckit-intake-series-status",
+        "speckit-intake-series-next"
+      ],
+      "installed_at": "2026-11-12T11:51:15.583518+00:00"
     }
   }
 }

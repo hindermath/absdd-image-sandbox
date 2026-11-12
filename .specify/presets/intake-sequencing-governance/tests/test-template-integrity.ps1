@@ -1,15 +1,17 @@
-# DE: Jede ausgelieferte JSON-Vorlage muss parsebar sein; Generatoren binden das Release.
-# EN: Every shipped JSON template must parse and generators must bind this release.
+# DE/EN: JSON templates parse; documentation-only 0.2.13 preserves generator 0.2.12.
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $Root = Split-Path $PSScriptRoot -Parent
 $Preset = Get-Content (Join-Path $Root 'preset.yml') -Raw
 $Version = [regex]::Match($Preset, '(?m)^\s+version:\s*"?([^"\s]+)').Groups[1].Value
 if (-not $Version) { throw 'Missing preset version' }
+# DE/EN: The package metadata advances without rewriting receipt provenance.
+# All other versions retain the original package/generator equality contract.
+$GeneratorVersion = if ($Version -ceq '0.2.13') { '0.2.12' } else { $Version }
 $Count = 0
 foreach ($File in Get-ChildItem (Join-Path $Root 'templates') -Filter '*.json' -Recurse) {
     $Data = Get-Content $File.FullName -Raw | ConvertFrom-Json -AsHashtable
-    if ($Data.ContainsKey('generator') -and $Data.generator.version -ne $Version) {
+    if ($Data.ContainsKey('generator') -and $Data.generator.version -ne $GeneratorVersion) {
         throw "Generator version mismatch: $($File.Name)"
     }
     $Count++
@@ -38,4 +40,4 @@ foreach ($InvalidCommand in @(
         throw 'Installation-line regression: invalid command accepted'
     }
 }
-Write-Output "PASS: ${Count} shipped JSON templates parse and bind release ${Version}"
+Write-Output "PASS: ${Count} shipped JSON templates parse; package ${Version}, receipt generator ${GeneratorVersion}"

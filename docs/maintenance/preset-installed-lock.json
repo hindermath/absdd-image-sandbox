@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "hashContract": "sha256-utf8-lf-bom-or-raw-v1",
-  "baselineCommit": "59bdf14405e890aca5fe1d950532bfeb5fbe3b01",
-  "registrySha256": "aae17f9211a2361cffab583d3bae28bc6e46177abb7fb9cacf84d4c287dd3769",
+  "baselineCommit": "bca045d4ed38b347a941886f7a20ce8fea48d770",
+  "registrySha256": "e36cd814b9895156035b298e6017d79603c9a4ff9fbd308b43a53f6aecdae649",
   "presets": [
     {
       "id": "a11y-governance",
@@ -69,12 +69,12 @@
     },
     {
       "id": "intake-sequencing-governance",
-      "version": "0.2.12",
+      "version": "0.2.13",
       "priority": 66,
       "enabled": true,
-      "manifest_hash": "sha256:984f4f9157d8a3601f30853f876a38ca1a2b3a33a70d03962337423a5fd1158b",
-      "fileCount": 61,
-      "contentSha256": "8d7863736dbb0bd4da17fdabdf681ee0e663d45e111d8af0b270700185f1145c"
+      "manifest_hash": "sha256:209a3b03ce3f12e97b6dbc6ab16088bad8433b9aaaffc159fa80c55c1916e153",
+      "fileCount": 63,
+      "contentSha256": "65fa8a20d50e92f716b29cf82d14a09bb51caf20e9094d1a221d254b35c60cc5"
     },
     {
       "id": "isaqb-architecture-governance",

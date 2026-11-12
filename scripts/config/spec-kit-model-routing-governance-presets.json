@@ -67,10 +67,10 @@
     },
     {
       "id": "intake-sequencing-governance",
-      "version": "v0.2.12",
+      "version": "v0.2.13",
       "priority": 66,
       "repository": "https://github.com/hindermath/spec-kit-preset-intake-sequencing-governance",
-      "archiveUrl": "https://github.com/hindermath/spec-kit-preset-intake-sequencing-governance/archive/refs/tags/v0.2.12.zip"
+      "archiveUrl": "https://github.com/hindermath/spec-kit-preset-intake-sequencing-governance/archive/refs/tags/v0.2.13.zip"
     },
     {
       "id": "autonomous-run-governance",
