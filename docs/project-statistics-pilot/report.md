@@ -17,7 +17,7 @@ Git-bound inventory and activity; not a measure of quality, learning performance
 | Zeitzone / Time zone | UTC |
 
 Quellrevision / Source revision:
-cceb2eb0f85e2779bd24974d87151a5913862a67
+2ca5caf9e16faba122315b67ae05a5d2bf4cbfc1
 
 ### Artefakte / Artifacts
 
