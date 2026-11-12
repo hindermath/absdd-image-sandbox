@@ -84,11 +84,11 @@
     },
     {
       "id": "intake-sequencing-governance",
-      "tag": "v0.2.12",
-      "commit": "9b09f9356b74dc9329418da6817964ea85b34530",
+      "tag": "v0.2.13",
+      "commit": "41ffb8fc93f857d1914e8be3693b7f6d021f5231",
       "repository": "https://github.com/hindermath/spec-kit-preset-intake-sequencing-governance",
-      "archiveUrl": "https://github.com/hindermath/spec-kit-preset-intake-sequencing-governance/archive/refs/tags/v0.2.12.zip",
-      "archiveSha256": "794bd7257d442eb4958f407d7118b7f49be9492aadc3a8edd911667e6a563ab7"
+      "archiveUrl": "https://github.com/hindermath/spec-kit-preset-intake-sequencing-governance/archive/refs/tags/v0.2.13.zip",
+      "archiveSha256": "7dd29964d16bb8a8e0a107c2054ae8e0f69da99bdb7a6d5f320337d055fde3de"
     },
     {
       "id": "autonomous-run-governance",

@@ -1068,12 +1068,14 @@ Das ausdrücklich freigegebene 13-Preset-Profil ergänzt die bisherigen zwölf P
 
 *The explicitly approved thirteen-preset profile preserves the existing twelve presets. See the linked usage and integration record.*
 
-Aktueller begrenzter Nachlauf: Security 0.7.4, Architecture 0.6.5 und Intake
-Authoring 0.3.10 / Review 0.2.7 / Sequencing 0.2.11 im optionalen 14er-Profil.
-[Quellen, Pruefungen und Freigabegrenzen](docs/maintenance/stable-preset-rollout-2026-10-24.md).
+Aktueller begrenzter Nachlauf: Intake Sequencing Governance v0.2.13 im
+bestehenden 14er-Profil. Die anderen 13 Presets bleiben unveraendert;
+Source- und Installed-Locks enthalten ihre genauen Versionen.
+[Quellen, Pruefungen und Freigabegrenzen](docs/maintenance/intake-sequencing-v0213-rollout-2026-11-12.md).
 
-*Current bounded follow-up: all fourteen governance patches in the optional
-fourteen-preset profile. See the linked sources, checks and approval boundaries.*
+*Current bounded follow-up: Intake Sequencing Governance v0.2.13 in the existing
+fourteen-preset profile. The other thirteen presets are unchanged; source and
+installed locks record their exact versions. See the linked rollout record.*
 
 <!-- BEGIN spec-kit-diagrams-completion -->
 ## Diagramme und Ergebnisberichte / Diagrams and outcome reports

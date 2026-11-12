@@ -144,6 +144,20 @@ if ($id -like 'intake-*-governance') {
         foreach ($pairVersion in @('0.3.10','0.2.7','0.2.11')) { Assert-DocRequirement ($text.Contains($pairVersion)) 'coordinated intake targets' }
     }
 }
+if ($id -ceq 'intake-sequencing-governance') {
+    function Test-DocSequencingReleaseClaim {
+        param([string]$Text)
+        # DE/EN: Older package prose must not erase the shipped security changes.
+        $normal = [regex]::Replace($Text, '\s+', ' ')
+        return $normal -notmatch 'Sequencing-Logik ist gegenueber 0\.2\.7 unveraendert|Sequencing behavior is unchanged from 0\.2\.7'
+    }
+    Assert-DocRequirement (Test-DocSequencingReleaseClaim $readme) 'current release acknowledges security changes'
+    Assert-DocRequirement (-not (Test-DocSequencingReleaseClaim ($readme + ' Sequencing-Logik ist gegenueber 0.2.7 unveraendert'))) 'German stale release claim rejected'
+    Assert-DocRequirement (-not (Test-DocSequencingReleaseClaim ($readme + ' Sequencing behavior is unchanged from 0.2.7'))) 'English stale release claim rejected'
+    $previousReadme = @(& git -C $root show 'v0.2.12:README.md')
+    if ($LASTEXITCODE -ne 0) { throw 'Cannot read historical v0.2.12 README regression fixture' }
+    Assert-DocRequirement (-not (Test-DocSequencingReleaseClaim ($previousReadme -join "`n"))) 'actual released v0.2.12 README rejected'
+}
 if ($CohortRoot) {
     $count = 0
     foreach ($entry in $cohort.presets.GetEnumerator()) {
