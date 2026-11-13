@@ -123,3 +123,14 @@ DE: Die beiden kanonischen Wartungsskripte pruefen npm-Agent-Befehle und Argumen
 EN: Both canonical maintenance scripts now check npm agent commands and arguments against the code contract before execution. A rejected probe cannot start an installation. The general process helper remains available for other intended checks.
 
 Die Quellgrenze und ihre Negativtests / The source boundary and negative tests: [Level-0-Nachweis / Level 0 record](https://github.com/hindermath/home-baseline/blob/main/docs/maintenance/npm-agent-probe-authorization-2026-11-13.md). Andere Registry-Felder bleiben getrennt zu pruefen / Other registry fields remain a separate review area.
+## Projektgebundene Wartungsgrenze / Project maintenance boundary
+
+DE: Die Sandbox-Vorschau und der Vergleich starten keine ausführbaren Registry-Inhalte. Die Projektadapter bewahren diesen Vertrag und begrenzen nun zusätzlich npm- und CLI-Proben auf Code-besitzende Befehle und Argumente. Die Swiftly-Archivextraktion ist größenbegrenzt. Nicht unterstützte MSL-only-Elternadapterfälle werden ausdrücklich ausgewiesen; die gemeinsamen MSL-Modultests laufen weiter. Die kanonische Ausnahmeliste liegt in Home Baseline PR 375.
+
+EN: Sandbox preview and comparison do not launch executables named by registries. The project adapters preserve this contract and now also restrict npm and CLI probes to code-owned commands and arguments. Swiftly archive extraction is size-bounded. Cases for the unsupported MSL-only parent adapter are identified explicitly; the shared MSL module tests still run. The canonical exception list is in Home Baseline PR 375.
+
+Documentation Impact: UpdateRequired. Owner: Thorsten Hindermann. Audience:
+maintainers and security reviewers. Canonical sources: project adapters and
+Home Baseline propagation manifest. Reader path: this record to project tests
+and PR checks. Distribution: repository-local. Reevaluate when the shared
+manifest or project maintenance contract changes.

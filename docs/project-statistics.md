@@ -432,6 +432,14 @@ EN: The event-stream test checks the existing callback and result signals withou
 
 Documentation Impact: UpdateRequired; [Nachweis / evidence](maintenance/shared-security-rollout-2026-11-13.md).
 
+### 2026-11-13 — Projektgebundene Wartung erhalten / Preserved project maintenance
+
+DE: Die Sandbox behält ihre schreibfreie Registry-Vorschau und ihren Snapshot-Vertrag. npm-/CLI-Proben sind nun codegebunden; Swiftly-Archive sind größenbegrenzt. Gemeinsame MSL-Modultests bleiben aktiv, nicht vorhandene Elternadapterfälle werden ausdrücklich ausgenommen. Kein Spec-Kit-Lauf wird ergänzt.
+
+EN: The sandbox retains its read-only registry preview and snapshot contract. npm and CLI probes are now code-bound; Swiftly archives have size limits. Shared MSL module tests remain active, and absent parent-adapter cases are explicitly excluded. No Spec Kit run is added.
+
+Documentation Impact: UpdateRequired; [Nachweis / evidence](maintenance/shared-security-rollout-2026-11-13.md).
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->

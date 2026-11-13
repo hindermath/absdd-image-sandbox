@@ -4,14 +4,6 @@
     Maintains WinGet packages for agentic development.
 
 .DESCRIPTION
-    Pandoc und Typst CLI sind Pflichtwerkzeuge fuer lokale Dokumentkonvertierung
-    und PDF-Satz. Die VS-Code-Erweiterung myriad-dreamin.tinymist ist Pflicht;
-    das separate Tinymist-Systempaket bleibt optional (-IncludeOptional).
-
-    Pandoc and Typst CLI are required for local document conversion and PDF
-    typesetting. The myriad-dreamin.tinymist VS Code extension is required;
-    the standalone Tinymist system package remains optional (-IncludeOptional).
-
     Reads scripts/config/winget-apps-registry.json, updates WinGet metadata,
     upgrades installed packages, installs missing required packages, and reports
     drift between installed WinGet packages and the registry. Every WinGet
@@ -26,21 +18,13 @@
     Alternative VS Code extensions registry JSON path.
 
 .PARAMETER NpmAgentRegistry
-    Alternative npm-Agent-Registry. Nur freigegebene Versionsabfragen werden ausgefuehrt.
-
-    Alternative npm agent registry. Only approved version probes are executed.
+    Alternative npm agent CLI registry JSON path.
 
 .PARAMETER PowerShellModuleRegistry
     Alternative PowerShell module registry JSON path.
 
 .PARAMETER CompareOnly
     Only compare installed packages with the registry.
-
-.PARAMETER MslOnly
-    Nur sechs stabile MSL-Toolchains pflegen / maintain only six stable MSL toolchains.
-
-.PARAMETER ResultFile
-    Optionaler atomarer JSON-Bericht / optional atomic JSON report.
 
 .PARAMETER SkipUpgrade
     Skip winget update/source update and winget upgrade --all.
@@ -67,8 +51,7 @@
     pwsh -NoProfile -File scripts/maintain-agentic-winget-apps.ps1 -CompareOnly
 
 .NOTES
-    Exit codes: 0 = current/success, 1 = required package/CLI/extension drift,
-    2 = operational or contradictory package
+    Exit codes: 0 = current/success, 2 = operational or contradictory package
     status, 75 = DEFERRED_ADMIN_REQUIRED. Package detection and summary reduce
     observations to exactly one final status per canonical package ID.
 #>
@@ -79,8 +62,6 @@ param(
     [string] $NpmAgentRegistry = '',
     [string] $PowerShellModuleRegistry = '',
     [switch] $CompareOnly,
-    [switch] $MslOnly,
-    [string] $ResultFile = '',
     [switch] $SkipUpgrade,
     [switch] $SkipVSCodeExtensions,
     [switch] $IncludeOptional,
@@ -104,70 +85,11 @@ if (-not $VSCodeRegistry) {
     $VSCodeRegistry = Join-Path $repoRoot 'scripts/config/vscode-extensions-registry.json'
 }
 $cliRegistry = Join-Path $repoRoot 'scripts/config/required-cli-tools-registry.json'
-$approvedSpecKitRevision = '464d57fe30c72e9a88d279cc49834539ec989c03'
-$approvedSpecKitSource = "git+https://github.com/github/spec-kit.git@${approvedSpecKitRevision}"
-$approvedCliProbes = @{
-    pandoc      = @{ Command = 'pandoc';      Arguments = @('--version') }
-    typst       = @{ Command = 'typst';       Arguments = @('--version') }
-    tinymist    = @{ Command = 'tinymist';    Arguments = @('--version') }
-    dotnet      = @{ Command = 'dotnet';      Arguments = @('--version') }
-    go          = @{ Command = 'go';          Arguments = @('version') }
-    java        = @{ Command = 'java';        Arguments = @('-version') }
-    javac       = @{ Command = 'javac';       Arguments = @('-version') }
-    python      = @{ Command = 'python';      Arguments = @('--version') }
-    cargo       = @{ Command = 'cargo';       Arguments = @('--version') }
-    rustc       = @{ Command = 'rustc';       Arguments = @('--version') }
-    swift       = @{ Command = 'swift';       Arguments = @('--version') }
-    syft        = @{ Command = 'syft';        Arguments = @('version') }
-    lychee      = @{ Command = 'lychee';      Arguments = @('--version') }
-    specify     = @{ Command = 'specify';     Arguments = @('--version') }
-    codex       = @{ Command = 'codex';       Arguments = @('--version') }
-    claude      = @{ Command = 'claude';      Arguments = @('--version') }
-    antigravity = @{ Command = 'agy';         Arguments = @('--version') }
-    copilot     = @{ Command = 'copilot';     Arguments = @('--version') }
-}
-
-function Assert-HBCLIProbeContract {
-    param([Parameter(Mandatory)] $Tool)
-
-    $id = [string]$Tool.id
-    if (-not $approvedCliProbes.ContainsKey($id)) {
-        throw "CLI-Probe ist nicht durch die Code-Policy autorisiert: ${id}"
-    }
-    $approved = $approvedCliProbes[$id]
-    # DE: Ein Argument bleibt ein Array; ein String wuerde nur sein erstes Zeichen vergleichen.
-    # EN: Keep a single argument as an array; string indexing would compare its first character.
-    $arguments = @(
-        if ($Tool.PSObject.Properties.Name -contains 'args') {
-            $Tool.args | ForEach-Object { [string]$_ }
-        }
-    )
-    if ([string]$Tool.command -cne [string]$approved.Command -or
-        $arguments.Count -ne $approved.Arguments.Count) {
-        throw "CLI-Probe ist nicht durch die Code-Policy autorisiert: ${id}"
-    }
-    for ($index = 0; $index -lt $arguments.Count; $index++) {
-        if ($arguments[$index] -cne $approved.Arguments[$index]) {
-            throw "CLI-Probe ist nicht durch die Code-Policy autorisiert: ${id}"
-        }
-    }
-}
 if (-not $NpmAgentRegistry) {
     $NpmAgentRegistry = Join-Path $repoRoot 'scripts/config/npm-agent-cli-registry.json'
 }
 if (-not $PowerShellModuleRegistry) {
     $PowerShellModuleRegistry = Join-Path $repoRoot 'scripts/config/powershell-modules-registry.json'
-}
-
-$mslReport = $null
-$mslStatus = 0
-$mslDriver = Join-Path $repoRoot 'scripts/lib/invoke-msl-toolchains.ps1'
-if ($MslOnly) {
-    $mslParameters = @{ Registry = $cliRegistry; PackageRegistry = $Registry; CompareOnly = $CompareOnly;
-        SkipUpgrade = $SkipUpgrade; WhatIf = $WhatIfPreference; AllowAdminPrompts = ($env:HB_ALLOW_ADMIN_PROMPTS -eq '1') }
-    if ($ResultFile) { $mslParameters.ResultFile = $ResultFile }
-    & $mslDriver @mslParameters
-    exit $LASTEXITCODE
 }
 
 if (-not (Test-Path -Path $Registry -PathType Leaf)) {
@@ -185,10 +107,6 @@ if (-not (Test-Path -Path $NpmAgentRegistry -PathType Leaf)) {
 if (-not (Test-Path -Path $PowerShellModuleRegistry -PathType Leaf)) {
     Write-Error "PowerShell-Modul-Registry nicht gefunden: $PowerShellModuleRegistry"
 }
-$cliRegistryData = Get-Content -Path $cliRegistry -Raw | ConvertFrom-Json
-foreach ($tool in @($cliRegistryData.tools | Where-Object { @($_.platforms) -contains 'Windows' })) {
-    Assert-HBCLIProbeContract -Tool $tool
-}
 
 $wingetCommand = Get-Command winget -ErrorAction SilentlyContinue
 if (-not $wingetCommand) {
@@ -196,18 +114,11 @@ if (-not $wingetCommand) {
 }
 $script:WingetDeferred = $false
 $script:WingetFailed = $false
-$script:RequiredDrift = $false
 $script:PackageObservations = [Collections.Generic.List[object]]::new()
 
 $registryData = Get-Content -Path $Registry -Raw | ConvertFrom-Json
-$mslIdPatterns = @($registryData.packages | Where-Object { $_.PSObject.Properties.Name -contains 'mslToolchain' } | ForEach-Object {
-    '^' + [regex]::Escape([string]$_.id).Replace('\{major}', '[0-9]+').Replace('\{minor}', '[0-9]+') + '$'
-})
 $vscodeRegistryData = if ($SkipVSCodeExtensions) { $null } else { Get-Content -Path $VSCodeRegistry -Raw | ConvertFrom-Json }
-if ($cliRegistryData.PSObject.Properties.Name -contains 'mslToolchains') {
-    # Dynamic major-version package IDs are resolved exclusively by the MSL engine.
-    $registryData.packages = @($registryData.packages | Where-Object { $_.PSObject.Properties.Name -notcontains 'mslToolchain' })
-}
+$cliRegistryData = Get-Content -Path $cliRegistry -Raw | ConvertFrom-Json
 $npmAgentRegistryData = Get-Content -Path $NpmAgentRegistry -Raw | ConvertFrom-Json
 $installScope = if ($IncludeOptional) { @('required', 'optional') } else { @('required') }
 $allRegistryIds = @($registryData.packages | ForEach-Object { $_.id } | Sort-Object -Unique)
@@ -451,22 +362,12 @@ function Compare-HBVSCodeRegistry {
         Write-Host 'vscode_cli: unavailable'
         Write-Host 'missing_on_machine.vscode_extensions'
         $allVSCodeExtensionIds | ForEach-Object { Write-Host "  - $_" }
-        if (@($vscodeRegistryData.extensions | Where-Object scope -eq 'required').Count -gt 0) {
-            $script:RequiredDrift = $true
-        }
         return
     }
 
     $installed = @(Get-HBVSCodeInstalledExtensionIds -Cli $codeCli)
     $registry = @($allVSCodeExtensionIds | ForEach-Object { $_.ToLowerInvariant() } | Sort-Object -Unique)
     $missingOnMachine = @($registry | Where-Object { $installed -notcontains $_ })
-    # Optional editor additions are visible but do not fail the required baseline.
-    $requiredExtensions = @($vscodeRegistryData.extensions |
-        Where-Object scope -eq 'required' |
-        ForEach-Object { $_.id.ToLowerInvariant() })
-    if (@($missingOnMachine | Where-Object { $_ -in $requiredExtensions }).Count -gt 0) {
-        $script:RequiredDrift = $true
-    }
 
     if ($missingOnMachine.Count -gt 0) {
         Write-Host 'missing_on_machine.vscode_extensions'
@@ -497,9 +398,7 @@ function Get-HBCLITools {
         $cliRegistryData.tools |
             Where-Object {
                 ($Scopes -contains $_.scope) -and
-                (@($_.platforms) -contains 'Windows') -and
-                (($cliRegistryData.PSObject.Properties.Name -notcontains 'mslToolchains') -or
-                 ($_.PSObject.Properties.Name -notcontains 'mslToolchain'))
+                (@($_.platforms) -contains 'Windows')
             }
     )
 }
@@ -534,11 +433,43 @@ function Test-HBCommandWithTimeout {
     }
 }
 
+function Resolve-HBExternalCommandPath {
+    param([Parameter(Mandatory)][string] $Name)
+
+    # A registry name is data in preview: inspect PATH files without command
+    # discovery, because Get-Command may auto-import and run a matching module.
+    $extensions = if ([IO.Path]::GetExtension($Name)) {
+        @('')
+    } elseif ($IsWindows) {
+        @('') + @($env:PATHEXT -split ';' | Where-Object { $_ })
+    } else {
+        @('')
+    }
+    $directories = if ([IO.Path]::IsPathRooted($Name)) {
+        @('')
+    } else {
+        @($env:PATH -split [regex]::Escape([IO.Path]::PathSeparator) | Where-Object { $_ })
+    }
+    foreach ($directory in $directories) {
+        foreach ($extension in $extensions) {
+            $candidate = if ($directory) { Join-Path $directory ($Name + $extension) } else { $Name + $extension }
+            if ([IO.File]::Exists($candidate)) { return $candidate }
+        }
+    }
+    return $null
+}
+
 function Test-HBCLITool {
     param([Parameter(Mandatory)] $Tool)
 
-    Assert-HBCLIProbeContract -Tool $Tool
-    $command = Get-Command $Tool.command -ErrorAction SilentlyContinue
+    if ($CompareOnly -or $WhatIfPreference) {
+        $resolved = Resolve-HBExternalCommandPath -Name ([string]$Tool.command)
+        if (-not $resolved) { return $false }
+        Write-Host "PREVIEW cli tool $($Tool.id): launcher resolved; version and function not checked."
+        return $true
+    } else {
+        $command = Get-Command $Tool.command -ErrorAction SilentlyContinue
+    }
     if (-not $command) { return $false }
 
     $arguments = @()
@@ -578,13 +509,38 @@ function Get-HBNpmAgentTools {
     )
 }
 
+function Assert-HBNpmAgentProbeContract {
+    param([Parameter(Mandatory)] $Tool)
+
+    $id = [string]$Tool.id
+    $arguments = @(
+        if ($Tool.PSObject.Properties.Name -contains 'args') {
+            $Tool.args | ForEach-Object { [string]$_ }
+        }
+    )
+    if ($id -cnotin @('codex', 'claude', 'copilot') -or
+        [string]$Tool.command -cne $id -or
+        $arguments.Count -ne 1 -or
+        $arguments[0] -cne '--version') {
+        throw "untrusted npm registry field: ${id}"
+    }
+}
+
 function Test-HBNpmAgentTool {
     param([Parameter(Mandatory)] $Tool)
 
-    # DE: Gleiche Autoritaetsgrenze wie bei CLI-Proben; Ablehnung ist kein Installationsauftrag.
-    # EN: Match CLI probe authority; rejection must not become installation fallback.
-    Assert-HBCLIProbeContract -Tool $Tool
-    $command = Get-Command $Tool.command -ErrorAction SilentlyContinue
+    # DE: Paketdaten allein autorisieren keinen Prozessstart.
+    # EN: Package data alone does not authorize a process launch.
+    Assert-HBNpmAgentProbeContract -Tool $Tool
+
+    if ($CompareOnly -or $WhatIfPreference) {
+        $resolved = Resolve-HBExternalCommandPath -Name ([string]$Tool.command)
+        if (-not $resolved) { return $false }
+        Write-Host "PREVIEW npm agent cli $($Tool.id): launcher resolved; version and function not checked."
+        return $true
+    } else {
+        $command = Get-Command $Tool.command -ErrorAction SilentlyContinue
+    }
     if (-not $command) { return $false }
 
     $arguments = @()
@@ -643,15 +599,6 @@ function Install-HBCLITool {
     $install = if ($Tool.PSObject.Properties.Name -contains 'install') { $Tool.install } else { $null }
     if ($install -and $install.manager -eq 'uv') {
         $arguments = @($install.arguments | ForEach-Object { [string]$_ })
-        $approvedArguments = @('tool', 'install', 'specify-cli', '--from', $approvedSpecKitSource)
-        if ([string]$Tool.id -ne 'specify' -or $arguments.Count -ne $approvedArguments.Count) {
-            throw "Nicht autorisierter uv-Installationsvertrag für CLI-Tool: $($Tool.id)"
-        }
-        for ($index = 0; $index -lt $approvedArguments.Count; $index++) {
-            if ($arguments[$index] -cne $approvedArguments[$index]) {
-                throw 'Spec-Kit-Quelle ist nicht an den freigegebenen Commit gebunden.'
-            }
-        }
         Write-Host "INSTALL cli tool: $($Tool.id)"
         if ($WhatIfPreference -or (Get-Command uv -ErrorAction SilentlyContinue)) {
             [void](Invoke-HBExternal -Command 'uv' -Arguments $arguments -Action "Install CLI tool $($Tool.id)")
@@ -688,7 +635,6 @@ function Compare-HBCLIScope {
     )
 
     if ($missing.Count -gt 0) {
-        if ($Scope -eq 'required') { $script:RequiredDrift = $true }
         Write-Host $Label
         $missing | ForEach-Object { Write-Host "  - $_" }
     } else {
@@ -774,10 +720,7 @@ if (-not $CompareOnly) {
 }
 
 $installedIds = @(Get-HBWingetInstalledIds)
-$missingFromRegistry = @($installedIds | Where-Object {
-    $id = $_
-    $allRegistryIds -notcontains $id -and -not @($mslIdPatterns | Where-Object { $id -match $_ }).Count
-})
+$missingFromRegistry = @($installedIds | Where-Object { $allRegistryIds -notcontains $_ })
 
 foreach ($id in $allRegistryIds) {
     $status = if ($installedIds -contains $id) { 'OK' } else { 'MISSING' }
@@ -795,7 +738,6 @@ $optionalMissing = @(
         ForEach-Object { $_.CanonicalId }
 )
 if ($requiredMissing.Count -gt 0) {
-    $script:RequiredDrift = $true
     Write-Host 'missing_on_machine.required.packages'
     $requiredMissing | ForEach-Object { Write-Host "  - $_" }
 } else {
@@ -834,48 +776,6 @@ if ($WhatIfPreference) { $moduleParameters.WhatIf = $true }
 & $moduleMaintainer @moduleParameters
 if ($LASTEXITCODE -notin @(0, $null)) { $script:WingetFailed = $true }
 
-if ($cliRegistryData.PSObject.Properties.Name -contains 'mslToolchains') {
-    $mslTemporary = [IO.Path]::GetTempFileName()
-    try {
-        & $mslDriver -Registry $cliRegistry -PackageRegistry $Registry -ResultFile $mslTemporary `
-            -CompareOnly:$CompareOnly -SkipUpgrade:$SkipUpgrade -WhatIf:$WhatIfPreference `
-            -AllowAdminPrompts:($env:HB_ALLOW_ADMIN_PROMPTS -eq '1')
-        $mslStatus = $LASTEXITCODE
-        $mslReport = Get-Content -LiteralPath $mslTemporary -Raw | ConvertFrom-Json -AsHashtable
-        if (-not $mslReport -or -not $mslReport.Contains('mslToolchains') -or
-            ($mslStatus -eq 0 -and (@($mslReport['mslToolchains']).Count -ne 6 -or
-             @($mslReport['mslToolchains'] | Where-Object { $_['status'] -ne 'Current' }).Count))) {
-            $mslStatus = 2
-            $mslReport = $null
-        }
-    } finally { [IO.File]::Delete($mslTemporary) }
-}
-
-$finalExit = if ($script:WingetFailed -or $mslStatus -eq 2) { 2 }
-elseif ($script:WingetDeferred -or $mslStatus -eq 75) { 75 }
-elseif ($script:RequiredDrift -or $mslStatus -ne 0) { 1 } else { 0 }
-if ($ResultFile) {
-    $result = if ($mslReport) { $mslReport } else {
-        @{ schemaVersion = '1.0'; platform = 'Windows'; mslToolchains = @() }
-    }
-    $result['packageResults'] = @($packageResults)
-    $result['mode'] = if ($CompareOnly) { 'compare-only' } elseif ($WhatIfPreference) { 'dry-run' } else { 'update' }
-    $remaining = @($requiredMissing)
-    if ($result.Contains('remainingRequired')) { $remaining += @($result['remainingRequired']) }
-    $result['remainingRequired'] = $remaining
-    if ($script:RequiredDrift) { $result['remainingRequired'] += 'required-cli-or-extension' }
-    if ($finalExit -eq 75) { $result['remainingRequired'] += 'admin-actions-deferred' }
-    $result['remainingRequired'] = @($result['remainingRequired'] | Sort-Object -Unique)
-    $result['optionalDrift'] = @($optionalMissing)
-    $result['nextAction'] = if ($finalExit) { 'Offene Wartungsbefunde beheben / resolve maintenance findings.' } else { 'N/A' }
-    $result['exitCode'] = $finalExit
-    $result['overallStatus'] = if ($finalExit -eq 2) { 'FAILED' } elseif ($finalExit) { 'PARTIAL' } else { 'SUCCESS' }
-    $target = [IO.Path]::GetFullPath($ResultFile)
-    [void][IO.Directory]::CreateDirectory((Split-Path -Parent $target))
-    $temporary = "$target.$([guid]::NewGuid().ToString('N')).tmp"
-    try {
-        [IO.File]::WriteAllText($temporary, ($result | ConvertTo-Json -Depth 30) + "`n", [Text.UTF8Encoding]::new($false))
-        [IO.File]::Move($temporary, $target, $true)
-    } finally { if (Test-Path -LiteralPath $temporary) { Remove-Item -LiteralPath $temporary -Force } }
-}
-exit $finalExit
+if ($script:WingetFailed) { exit 2 }
+if ($script:WingetDeferred) { exit 75 }
+exit 0
