@@ -440,6 +440,20 @@ EN: The sandbox retains its read-only registry preview and snapshot contract. np
 
 Documentation Impact: UpdateRequired; [Nachweis / evidence](maintenance/shared-security-rollout-2026-11-13.md).
 
+### 2026-11-13 — npm-Cachepfad der Sandbox gebunden / Bound sandbox npm cache path
+
+DE: Die eigene Speicherwartung der Sandbox liest den tatsächlich konfigurierten
+npm-Cachepfad, prüft ihn innerhalb des Home-Verzeichnisses und bindet genau
+diesen Pfad an `verify` und `clean`. Ein abweichender Pfad aus `.npmrc` kann
+die spätere Bereinigung nicht mehr umleiten. Kein Spec-Kit-Lauf wird ergänzt.
+
+EN: The sandbox's storage maintainer reads npm's effective cache path, checks
+it inside home, and binds that exact path to `verify` and `clean`. A different
+path from `.npmrc` can no longer redirect the later cleanup. No Spec Kit run
+is added.
+
+Documentation Impact: UpdateRequired; [Nachweis / evidence](documentation-impact/npm-cache-boundary-2026-11-13.json).
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
