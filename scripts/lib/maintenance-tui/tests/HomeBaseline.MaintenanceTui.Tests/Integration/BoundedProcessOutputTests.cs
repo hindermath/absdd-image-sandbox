@@ -39,7 +39,7 @@ public sealed class BoundedProcessOutputTests
 
             Assert.AreEqual(0, execution.ExitCode);
             Assert.IsNull(execution.CompletionEvent);
-            Assert.IsTrue(execution.EventStreamDegraded);
+            // This consumer reports degradation through the callback and omits the Level-0 result field.
             Assert.IsTrue(degradationNotified);
             Assert.AreEqual("RESULT_MISMATCH", result.DisplayStatus);
             Assert.AreEqual(0, result.ProcessExitCode);

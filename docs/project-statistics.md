@@ -424,6 +424,14 @@ EN: Distributed maintenance scripts bound npm agent probes before execution. Tin
 
 Documentation Impact: UpdateRequired; [Nachweis / evidence](maintenance/shared-security-rollout-2026-11-13.md).
 
+### 2026-11-13 — Nativer CI-Vertrag / Native CI contract
+
+DE: Der Ereignisstrom-Test prueft die vorhandenen Callback- und Ergebnis-Signale ohne ein hier nicht vorhandenes Level-0-Feld. Kein neuer Spec-Kit-Lauf.
+
+EN: The event-stream test checks the existing callback and result signals without a Level-0-only field. No new Spec Kit run.
+
+Documentation Impact: UpdateRequired; [Nachweis / evidence](maintenance/shared-security-rollout-2026-11-13.md).
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->

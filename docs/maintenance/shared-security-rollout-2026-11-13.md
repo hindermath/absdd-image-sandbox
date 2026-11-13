@@ -103,6 +103,19 @@ locks. TuiVision's new historical input copies use shorter relative paths for
 Windows; their bytes and hashes remain unchanged. Existing technical checks
 remain mandatory.
 
+## Ereignisstrom-Testvertrag / Event-stream test contract
+
+DE: Der verteilte Integrationstest verwendete ein Level-0-Ergebnisfeld, das
+dieser Verbraucher nicht bereitstellt. Die pruefbare Sicherheitsgrenze bleibt:
+Ein unvollstaendiger UTF-8-Ereignisstrom verliert das Abschlussereignis,
+meldet die Verschlechterung ueber den bestehenden Callback und endet mit
+`RESULT_MISMATCH`. Der Test prueft diese beobachtbaren Signale weiter.
+
+EN: The distributed integration test used a Level-0 result field that this
+consumer does not provide. The test still checks the security boundary: an
+incomplete UTF-8 event stream loses its completion event, reports degradation
+through the existing callback and ends with `RESULT_MISMATCH`.
+
 ## npm-Agent-Proben / npm agent probes
 
 DE: Die beiden kanonischen Wartungsskripte pruefen npm-Agent-Befehle und Argumente jetzt vor jeder Ausfuehrung gegen den Codevertrag. Eine abgelehnte Probe startet keine Installation. Die allgemeine Prozesshilfe bleibt fuer andere vorgesehene Pruefungen erhalten.
