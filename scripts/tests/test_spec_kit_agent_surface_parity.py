@@ -249,6 +249,11 @@ class SpecKitAgentSurfaceParityTests(unittest.TestCase):
 
         validate_release_sources(CONFIG, read_json(REPOSITORY / "docs/maintenance/preset-source-lock.json"))
 
+    def test_gsdb_rollout_installed_payload_and_release_bindings(self) -> None:
+        # Preserve the existing CI entry point and independent release/install proofs.
+        validate_installed_lock(PRESETS, read_json(REPOSITORY / "docs/maintenance/preset-installed-lock.json"))
+        validate_release_sources(CONFIG, read_json(REPOSITORY / "docs/maintenance/preset-source-lock.json"))
+
     def test_installed_presets_match_the_separate_immutable_binding(self) -> None:
         # DE: Neue Release-Ziele sind keine Rollout-Autoritaet. Der Iststand bleibt exakt gebunden.
         # EN: New release targets grant no rollout authority. Bind installed state independently.
