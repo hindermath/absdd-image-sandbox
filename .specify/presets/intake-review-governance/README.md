@@ -1,10 +1,10 @@
 # Intake Review Governance Preset
 
-<!-- current-package: 0.2.8 -->
+<!-- current-package: 0.2.9 -->
 
-Paketkennung: **v0.2.8**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.2.8-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
+Paketkennung: **v0.2.9**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.2.9-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
 
-<span lang="en">Package identity: v0.2.8. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
+<span lang="en">Package identity: v0.2.9. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
 
 [Release-Abschluss und Verbesserungsprofil / Publication closeout and improvement profile](docs/release-0.2.6-validation.md).
 
@@ -142,7 +142,7 @@ Leserpfad / Reader path: [Install](#install) → [Commands](#commands) →
 ## Install
 
 ```bash
-specify preset add --from https://github.com/hindermath/spec-kit-preset-intake-review-governance/archive/refs/tags/v0.2.8.zip --priority 65
+specify preset add --from https://github.com/hindermath/spec-kit-preset-intake-review-governance/archive/refs/tags/v0.2.9.zip --priority 65
 specify preset list
 specify preset resolve intake-review-policy-template
 ```

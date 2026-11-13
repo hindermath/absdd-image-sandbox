@@ -74,7 +74,6 @@ public enum EventDegradationReason
     InvalidSchema,
     SequenceGap,
     RunMismatch,
-    OversizedRecord,
 }
 
 public enum EventPresentationMode

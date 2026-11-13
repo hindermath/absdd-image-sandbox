@@ -5,7 +5,7 @@ description: Generate an actionable, dependency-ordered tasks.md for the feature
 compatibility: Requires spec-kit project structure with .specify/ directory
 metadata:
   author: github-spec-kit
-  source: security-governance:speckit.tasks.md
+  source: security-governance v0.7.5:speckit.tasks.md
 ---
 
 Before continuing, apply the Security Governance preset:

@@ -555,7 +555,7 @@ shell commands, and other important information, read the current plan
 
 ## Secure Development Assurance – freigegebenes Projektprofil / Approved Project Profile
 
-- Die unveraenderte Basis des optionalen 14er-Statistik-Piloten ist `secure-development-assurance-thirteen-governance-presets`: die bisherigen zwölf Presets plus `secure-development-assurance-governance` v0.1.8, aktiviert mit Priorität 15. Andere Profile und globale Defaults bleiben unverändert.
+- Die unveraenderte Basis des optionalen 14er-Statistik-Piloten ist `secure-development-assurance-thirteen-governance-presets`: die bisherigen zwölf Presets plus `secure-development-assurance-governance` v0.1.10, aktiviert mit Priorität 15. Andere Profile und globale Defaults bleiben unverändert.
 - Maßgebliche Produktquellen sind ausschließlich die veröffentlichten eigenständigen GitHub-Preset-Repositories. Lokale Installationen sind Integrationskopien, keine zusätzlichen Produktquellen; Änderungen entstehen im jeweiligen Preset-Repository, nicht in einem Home-Baseline-Scaffold.
 - `speckit.secure-development-status` prüft Evidence strikt lesend. `speckit.secure-development-review` benötigt einen ausdrücklich beauftragten Gate-/Kontext-Review; die Installation startet keine Reviews und erteilt keine menschlichen Freigaben.
 - Keine C5-Testat-, Zertifizierungs- oder vollständige Readiness-Prüfung; `Ready` gilt nur für den gebundenen Evidence-Kontext. Projektgeführte Baseline-Versionen werden nicht durch die Preset-Version ersetzt.
@@ -602,7 +602,7 @@ across Spec Kit updates.*
 
 Dieses Projekt verwendet im genehmigten Pilotbranch das Profil
 `project-statistics-fourteen-governance-presets`: unveraenderte 13er-Basis plus
-`project-statistics-governance` v0.1.3, aktiviert mit Prioritaet 90.
+`project-statistics-governance` v0.1.4, aktiviert mit Prioritaet 90.
 Das Preset dient reproduzierbarer Projekttransparenz, nicht der Bewertung von
 Lernenden, Qualitaet oder KI-Zeitersparnis. Die bestehende Statistik bleibt
 kanonisch. Der kuenftige getrennte Kontext ist `docs/project-statistics-pilot/`;

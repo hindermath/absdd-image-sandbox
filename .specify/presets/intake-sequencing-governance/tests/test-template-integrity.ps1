@@ -1,4 +1,4 @@
-# DE/EN: JSON templates parse; documentation-only 0.2.13 preserves generator 0.2.12.
+# DE/EN: JSON templates parse; documentation-only 0.2.13/0.2.14 preserve generator 0.2.12.
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $Root = Split-Path $PSScriptRoot -Parent
@@ -7,7 +7,7 @@ $Version = [regex]::Match($Preset, '(?m)^\s+version:\s*"?([^"\s]+)').Groups[1].V
 if (-not $Version) { throw 'Missing preset version' }
 # DE/EN: The package metadata advances without rewriting receipt provenance.
 # All other versions retain the original package/generator equality contract.
-$GeneratorVersion = if ($Version -ceq '0.2.13') { '0.2.12' } else { $Version }
+$GeneratorVersion = if ($Version -cin @('0.2.13', '0.2.14')) { '0.2.12' } else { $Version }
 $Count = 0
 foreach ($File in Get-ChildItem (Join-Path $Root 'templates') -Filter '*.json' -Recurse) {
     $Data = Get-Content $File.FullName -Raw | ConvertFrom-Json -AsHashtable

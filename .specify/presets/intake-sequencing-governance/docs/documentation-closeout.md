@@ -1,6 +1,6 @@
 # Dokumentationsabschluss / Documentation closeout: v0.2.10
 
-<!-- current-package: 0.2.13 -->
+<!-- current-package: 0.2.14 -->
 
 ## Veröffentlichungsabschluss / Publication closeout
 

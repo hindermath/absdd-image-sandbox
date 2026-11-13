@@ -160,7 +160,7 @@ try {
             throw 'Receipt validation changed input bytes'
         }
     }
-    foreach ($LegacyGenerator in @('0.3.3', '0.3.4', '0.3.5', '0.3.6', '0.3.7', '0.3.8', '0.3.9', '0.3.10', '0.3.11')) {
+    foreach ($LegacyGenerator in @('0.3.3', '0.3.4', '0.3.5', '0.3.6', '0.3.7', '0.3.8', '0.3.9', '0.3.10', '0.3.11', '0.3.12')) {
         $Receipt.generator.version = $LegacyGenerator
         Write-HBText $ReceiptPath ($Receipt | ConvertTo-Json -Depth 20)
         Invoke-HBPair Receipt $ReceiptPath $Root 0 "known schema-2 generator ${LegacyGenerator}"

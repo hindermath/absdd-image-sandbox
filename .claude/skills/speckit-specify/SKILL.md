@@ -5,7 +5,7 @@ description: Create or update the feature specification from a natural language 
 compatibility: Requires spec-kit project structure with .specify/ directory
 metadata:
   author: github-spec-kit
-  source: security-governance:speckit.specify.md
+  source: security-governance v0.7.5:speckit.specify.md
 ---
 
 Before continuing, apply the Security Governance preset:

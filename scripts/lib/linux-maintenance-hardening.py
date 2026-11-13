@@ -10,7 +10,6 @@ import os
 from pathlib import Path
 import re
 import signal
-import shutil
 import subprocess
 import sys
 import tarfile
@@ -49,6 +48,9 @@ SECRET_PATTERNS = (
     re.compile(r"\bAIza[0-9A-Za-z_-]{20,}\b"),
 )
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
+MAX_SWIFTLY_ARCHIVE_MEMBERS = 4096
+MAX_SWIFTLY_ARCHIVE_EXPANDED_BYTES = 1024 * 1024 * 1024
+MAX_SWIFTLY_BINARY_BYTES = 256 * 1024 * 1024
 
 
 class ContractError(RuntimeError):
@@ -238,35 +240,6 @@ def bounded_probe(
         )
 
 
-def resolve_probe(tool_id: str, command: str) -> tuple[dict, int]:
-    """Preview a registry command by resolving its launcher without starting it."""
-    if not tool_id or not command:
-        raise ContractError("tool id and command are required")
-    resolved = shutil.which(command)
-    available = resolved is not None
-    return ({
-        "toolId": tool_id,
-        "commandLabel": Path(command).name,
-        "status": "Available" if available else "Missing",
-        "exitCode": None,
-        "durationMs": 0,
-        "timedOut": False,
-        "processTreeCleaned": True,
-        "sanitizedEvidence": (
-            "Launcher auflösbar; Version und Funktion nicht geprüft / "
-            "launcher resolved; version and function not checked."
-            if available else
-            "Befehl nicht gefunden / command not found."
-        ),
-        "nextAction": (
-            "Version und Funktion in autorisiertem Update prüfen / "
-            "check version and function in an authorized update."
-            if available else
-            "Werkzeug installieren / install the tool."
-        ),
-    }, 0 if available else 1)
-
-
 def parse_os_release(path: Path) -> tuple[str, str]:
     try:
         lines = path.read_text(encoding="utf-8").splitlines()
@@ -347,6 +320,42 @@ def classify_toolchain_result(path: Path) -> tuple[dict | None, str | None]:
     expected_exit = 2 if value["overallStatus"] == "FAILED" else 1 if value["overallStatus"] == "PARTIAL" else 0
     if value["exitCode"] != expected_exit:
         return None, "ResultSchemaMismatch"
+    if "mslToolchains" in value:
+        msl = value["mslToolchains"]
+        expected_ids = {"dotnet", "go", "java", "python", "rust", "swift"}
+        # Legacy reports remain valid; new version evidence must not permit a
+        # successful parent result with missing, duplicate or unresolved MSLs.
+        if not isinstance(msl, list):
+            return None, "ResultSchemaMismatch"
+        if value["overallStatus"] == "FAILED" and not msl:
+            return value, None
+        if len(msl) != 6 or any(not isinstance(item, dict) for item in msl):
+            return None, "ResultSchemaMismatch"
+        if any(not isinstance(item.get("toolchainId"), str) for item in msl):
+            return None, "ResultSchemaMismatch"
+        if {item.get("toolchainId") for item in msl} != expected_ids:
+            return None, "ResultSchemaMismatch"
+        statuses = {"Current", "Unknown", "Missing", "PathMismatch", "SourceBehind",
+                    "UpdateAvailable", "Planned", "Failed", "DeferredAdminRequired"}
+        for item in msl:
+            if not isinstance(item.get("status"), str) or item["status"] not in statuses or any(
+                not isinstance(item.get(key), str)
+                for key in ("activeVersion", "installedVersion", "sourceVersion",
+                            "latestStableVersion", "checkedAt", "sourceUrl", "executable", "nextAction")
+            ):
+                return None, "ResultSchemaMismatch"
+            if item["status"] != "Current":
+                if not {item["toolchainId"], "msl:" + item["toolchainId"]} & set(value["remainingRequired"]):
+                    return None, "ResultSchemaMismatch"
+            else:
+                versions = []
+                for key in ("activeVersion", "latestStableVersion"):
+                    if len(item[key]) > 32 or not re.fullmatch(r"\d+(?:\.\d+){0,3}", item[key]):
+                        return None, "ResultSchemaMismatch"
+                    parts = tuple(map(int, item[key].split(".")))
+                    versions.append(parts + (0,) * (4 - len(parts)))
+                if versions[0] < versions[1]:
+                    return None, "ResultSchemaMismatch"
     return value, None
 
 
@@ -418,7 +427,11 @@ def resolve_swift_contract(
     swift_version = linux.get("swiftVersion")
     if not isinstance(swiftly_version, str) or not re.fullmatch(r"\d+\.\d+\.\d+", swiftly_version):
         raise ContractError("swiftlyVersion must be a stable semantic version")
-    if not isinstance(swift_version, str) or not re.fullmatch(r"\d+\.\d+\.\d+", swift_version):
+    stable_policy = swift_version == "latest-stable" and any(
+        isinstance(item, dict) and item.get("id") == "swift" and item.get("provider") == "swift"
+        for item in registry.get("mslToolchains", [])
+    )
+    if not stable_policy and (not isinstance(swift_version, str) or not re.fullmatch(r"\d+\.\d+\.\d+", swift_version)):
         raise ContractError("swiftVersion must be a stable semantic version")
 
     distribution, version = parse_os_release(os_release_path)
@@ -508,11 +521,23 @@ def extract_swiftly(archive: Path, output: Path) -> tuple[dict, int]:
     """Extract only the regular swiftly binary without trusting archive paths."""
     try:
         with tarfile.open(archive, mode="r:gz") as bundle:
-            matches = [
-                member
-                for member in bundle.getmembers()
-                if member.isfile() and Path(member.name).name == "swiftly"
-            ]
+            matches = []
+            member_count = 0
+            expanded_bytes = 0
+            for member in bundle:
+                member_count += 1
+                if member_count > MAX_SWIFTLY_ARCHIVE_MEMBERS:
+                    raise ContractError("swiftly archive contains too many members")
+                if member.size < 0:
+                    raise ContractError("swiftly archive contains an invalid member size")
+                if member.isfile():
+                    expanded_bytes += member.size
+                    if expanded_bytes > MAX_SWIFTLY_ARCHIVE_EXPANDED_BYTES:
+                        raise ContractError("swiftly archive expanded size exceeds the limit")
+                    if Path(member.name).name == "swiftly":
+                        if member.size > MAX_SWIFTLY_BINARY_BYTES:
+                            raise ContractError("swiftly binary exceeds the expanded size limit")
+                        matches.append(member)
             if len(matches) != 1:
                 raise ContractError(
                     "swiftly archive must contain exactly one regular swiftly binary"
@@ -523,9 +548,15 @@ def extract_swiftly(archive: Path, output: Path) -> tuple[dict, int]:
             output.parent.mkdir(parents=True, exist_ok=True)
             temporary = output.with_name(f".{output.name}.{uuid.uuid4().hex}.tmp")
             try:
-                with temporary.open("wb") as target:
+                copied = 0
+                with temporary.open("xb") as target:
                     while block := source.read(1024 * 1024):
+                        copied += len(block)
+                        if copied > MAX_SWIFTLY_BINARY_BYTES or copied > matches[0].size:
+                            raise ContractError("swiftly binary stream exceeds its declared size or limit")
                         target.write(block)
+                if copied != matches[0].size:
+                    raise ContractError("swiftly binary stream is truncated")
                 temporary.chmod(0o755)
                 os.replace(temporary, output)
             finally:
@@ -654,91 +685,9 @@ def summarize_results(input_path: Path, output_path: Path, platform: str, mode: 
     return exit_code
 
 
-def snapshot_registries(output: Path, brew_path: Path, cli_path: Path,
-                        npm_path: Path, platform: str, vscode_path: Path | None) -> int:
-    """Read registry inputs once; never cache probes or installation results."""
-    def load(path: Path) -> dict:
-        try:
-            value = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, UnicodeError, ValueError) as exc:
-            raise ContractError(f"registry cannot be read: {exc}") from exc
-        if not isinstance(value, dict):
-            raise ContractError("registry root must be an object")
-        return value
-
-    def write(name: str, rows: list[list[str]]) -> None:
-        if any(not isinstance(field, str) or any(c in field for c in "\t\r\n")
-               for row in rows for field in row):
-            raise ContractError("registry fields must be single-line strings")
-        (output / name).write_text(
-            "".join("\t".join(row) + "\n" for row in rows), encoding="utf-8"
-        )
-
-    def select(items: list, scope: str) -> list:
-        return [item for item in items
-                if scope == "all" or item.get("scope", "required") == scope]
-
-    def records(value) -> list:
-        if not isinstance(value, list) or any(not isinstance(item, dict) for item in value):
-            raise ContractError("registry entries must be an array of objects")
-        return value
-
-    brew, cli, npm = load(brew_path), load(cli_path), load(npm_path)
-    vscode = load(vscode_path) if vscode_path else {}
-    output.mkdir(parents=True, exist_ok=True)
-    for section in ("formulae", "casks", "aptFallback"):
-        fallback = brew.get("aptFallback", {})
-        if not isinstance(fallback, dict):
-            raise ContractError("apt fallback must be an object")
-        items = records(fallback.get("packages", []) if section == "aptFallback"
-                        else brew.get(section, []))
-        for scope in ("all", "required", "optional"):
-            write(f"brew-{section}-{scope}.tsv",
-                  [[item["name"]] for item in select(items, scope) if item.get("name")])
-        write(f"brew-{section}-scoped.tsv",
-              [[item["name"], item.get("scope", "required")] for item in items
-               if item.get("name") and item.get("scope", "required") in SCOPES])
-    for family, registry in (("cli", cli), ("npm", npm)):
-        items = [item for item in records(registry.get("tools", []))
-                 if platform in item.get("platforms", [])]
-        for scope in ("all", "required", "optional"):
-            rows = []
-            for item in select(items, scope):
-                args = json.dumps(item.get("args", []), separators=(",", ":"))
-                if family == "cli":
-                    install = item.get("install", {})
-                    if not isinstance(install, dict):
-                        raise ContractError("tool installation metadata must be an object")
-                    rows.append([item.get("id", ""), item.get("command", ""), args,
-                                 install.get("manager") or "-",
-                                 json.dumps(install.get("arguments", []), separators=(",", ":")),
-                                 install.get("url", ""), install.get("sha256", ""),
-                                 install.get("interpreter", "")])
-                else:
-                    rows.append([item.get("id", ""), item.get("package", ""),
-                                 item.get("command", ""), args])
-            write(f"{family}-{scope}.tsv", rows)
-    items = records(vscode.get("extensions", []))
-    for scope in ("all", "required", "optional"):
-        write(f"vscode-{scope}.tsv",
-              [[item["id"]] for item in select(items, scope) if item.get("id")])
-    write("vscode-scoped.tsv", [[item["id"], item.get("scope", "required")]
-                              for item in items if item.get("id")
-                              and item.get("scope", "required") in SCOPES])
-    return 0
-
-
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
     commands = parser.add_subparsers(dest="command", required=True)
-
-    snapshots = commands.add_parser("snapshot-registries")
-    snapshots.add_argument("--output", type=Path, required=True)
-    snapshots.add_argument("--brew", type=Path, required=True)
-    snapshots.add_argument("--cli", type=Path, required=True)
-    snapshots.add_argument("--npm", type=Path, required=True)
-    snapshots.add_argument("--platform", required=True)
-    snapshots.add_argument("--vscode", type=Path)
 
     probe = commands.add_parser("probe")
     probe.add_argument("--tool-id", required=True)
@@ -746,10 +695,6 @@ def build_parser() -> argparse.ArgumentParser:
     probe.add_argument("--max-evidence-bytes", type=int, default=2048)
     probe.add_argument("--redact", action="append", default=[])
     probe.add_argument("probe_command", nargs=argparse.REMAINDER)
-
-    resolve = commands.add_parser("resolve-probe")
-    resolve.add_argument("--tool-id", required=True)
-    resolve.add_argument("--launcher", required=True)
 
     swift = commands.add_parser("swift-contract")
     swift.add_argument("--registry", type=Path, required=True)
@@ -784,9 +729,6 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> int:
     args = build_parser().parse_args()
     try:
-        if args.command == "snapshot-registries":
-            return snapshot_registries(args.output, args.brew, args.cli, args.npm,
-                                       args.platform, args.vscode)
         if args.command == "probe":
             command = args.probe_command
             if command and command[0] == "--":
@@ -798,10 +740,6 @@ def main() -> int:
                 args.max_evidence_bytes,
                 args.redact,
             )
-            emit(result)
-            return exit_code
-        if args.command == "resolve-probe":
-            result, exit_code = resolve_probe(args.tool_id, args.launcher)
             emit(result)
             return exit_code
         if args.command == "swift-contract":
