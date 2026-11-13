@@ -434,9 +434,9 @@ Documentation Impact: UpdateRequired; [Nachweis / evidence](maintenance/shared-s
 
 ### 2026-11-13 — Projektgebundene Wartung erhalten / Preserved project maintenance
 
-DE: Die Sandbox behält ihre schreibfreie Registry-Vorschau und ihren Snapshot-Vertrag. npm-/CLI-Proben sind nun codegebunden; Swiftly-Archive sind größenbegrenzt. Der projektgebundene Maintenance-TUI-Runner samt Tests und Paketbindung bleibt erhalten. Gemeinsame MSL-Modultests bleiben aktiv, nicht vorhandene Elternadapterfälle werden ausdrücklich ausgenommen. Kein Spec-Kit-Lauf wird ergänzt.
+DE: Die Sandbox behält ihre schreibfreie Registry-Vorschau und ihren Snapshot-Vertrag. npm-/CLI-Proben sind nun codegebunden; Swiftly-Archive sind größenbegrenzt. Der projektgebundene Maintenance-TUI-Runner sowie die Feature-004-Ausführungs- und Speichergrenzen bleiben erhalten. Gemeinsame MSL-Modultests bleiben aktiv, nicht vorhandene Elternadapterfälle werden ausdrücklich ausgenommen. Kein Spec-Kit-Lauf wird ergänzt.
 
-EN: The sandbox retains its read-only registry preview and snapshot contract. npm and CLI probes are now code-bound; Swiftly archives have size limits. The project Maintenance TUI runner, tests and package lock remain intact. Shared MSL module tests remain active, and absent parent-adapter cases are explicitly excluded. No Spec Kit run is added.
+EN: The sandbox retains its read-only registry preview and snapshot contract. npm and CLI probes are now code-bound; Swiftly archives have size limits. The project Maintenance TUI runner and the Feature 004 execution and storage boundaries remain intact. Shared MSL module tests remain active, and absent parent-adapter cases are explicitly excluded. No Spec Kit run is added.
 
 Documentation Impact: UpdateRequired; [Nachweis / evidence](maintenance/shared-security-rollout-2026-11-13.md).
 

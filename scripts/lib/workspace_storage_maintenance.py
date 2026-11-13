@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import csv
 import fnmatch
+import hashlib
 import json
 import os
 import pathlib
@@ -202,6 +203,28 @@ def directory_metrics(path: pathlib.Path) -> tuple[int, int, int]:
     return total, files, newest
 
 
+def directory_layout_hash(path: pathlib.Path) -> str:
+    """Bind a cleanup candidate to its relative entries without reading file contents."""
+    entries: list[list[str | int]] = []
+    for root, directories, names in os.walk(path, followlinks=False):
+        root_path = pathlib.Path(root)
+        for name in sorted(directories + names):
+            entry = root_path / name
+            try:
+                information = entry.stat(follow_symlinks=False)
+            except OSError as exc:
+                raise StorageContractError(f"cleanup candidate entry changed: {entry}") from exc
+            entries.append([
+                entry.relative_to(path).as_posix(),
+                stat.S_IFMT(information.st_mode),
+                information.st_size,
+                information.st_mtime_ns,
+                information.st_ctime_ns,
+            ])
+    encoded = json.dumps(entries, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
 def age_days(newest_epoch: int, now_epoch: int | None = None) -> int:
     if newest_epoch <= 0:
         return 0
@@ -388,6 +411,7 @@ def candidate_record(
     if contained.is_symlink():
         raise StorageContractError(f"cleanup candidate is a symlink: {contained}")
     size, files, newest = directory_metrics(contained)
+    identity = contained.stat(follow_symlinks=False)
     days = age_days(newest)
     eligible = pressure_mode or days >= retention_days
     return {
@@ -395,6 +419,11 @@ def candidate_record(
         "adapter": adapter,
         "sizeBytes": size,
         "fileCount": files,
+        "observedDevice": identity.st_dev,
+        "observedInode": identity.st_ino,
+        "observedCtimeNs": identity.st_ctime_ns,
+        "observedLayoutHash": directory_layout_hash(contained),
+        "observedNewestMtime": newest,
         "newestMtimeUtc": (
             datetime.fromtimestamp(newest, timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
             if newest else "N/A"
@@ -408,9 +437,18 @@ def candidate_record(
 
 def remove_candidate(repository: pathlib.Path, candidate: dict) -> int:
     path = contained_path(repository / candidate["path"], repository, "cleanup candidate")
+    identity = path.stat(follow_symlinks=False)
+    if (identity.st_dev, identity.st_ino, identity.st_ctime_ns) != (
+        candidate["observedDevice"], candidate["observedInode"], candidate["observedCtimeNs"]
+    ) or directory_layout_hash(path) != candidate["observedLayoutHash"]:
+        raise StorageContractError(f"candidate identity changed: {candidate['path']}")
     if not git_path_is_ignored_and_untracked(repository, path):
         raise StorageContractError(f"candidate lost ignored/untracked proof: {candidate['path']}")
-    size_before = directory_metrics(path)[0]
+    size_before, files_before, newest_before = directory_metrics(path)
+    if (size_before, files_before, newest_before) != (
+        candidate["sizeBytes"], candidate["fileCount"], candidate["observedNewestMtime"]
+    ):
+        raise StorageContractError(f"candidate contents changed: {candidate['path']}")
     if path.is_dir() and not path.is_symlink():
         shutil.rmtree(path)
     else:
@@ -452,12 +490,37 @@ def handle_cc65(
     pressure_mode: bool,
     dirty: bool,
     busy: bool,
+    progress: dict | None = None,
 ) -> tuple[list[dict], list[dict], int, str, list[str]]:
     candidates: list[dict] = []
     protected = protected_cc65_evidence(repository, list(adapter.get("protectedEvidencePatterns", [])))
     freed = 0
     status = "Passed"
     warnings: list[str] = []
+    if progress is not None:
+        progress["candidates"] = candidates
+        progress["preservedEvidence"] = protected
+    all_paths = [value for group in adapter["safeGroups"] for value in group["paths"]]
+    if len({value.casefold() for value in all_paths}) != len(all_paths):
+        raise StorageContractError("duplicate cc65 curated path")
+    if profile == "deep":
+        existing = [repository / path for path in all_paths if (repository / path).exists()]
+        for path in existing:
+            if not git_path_is_ignored_and_untracked(repository, path):
+                raise StorageContractError(f"cc65 deep candidate is not ignored and untracked: {path}")
+            candidates.append(candidate_record(repository, path, "cc65-root-clean", retention_days, True))
+        if not existing:
+            return candidates, protected, 0, status, warnings
+        for candidate in candidates:
+            candidate["action"] = "RemoveCuratedGeneratedPath"
+            if mode == "update" and not dirty and not busy:
+                freed += remove_candidate(repository, candidate)
+                if progress is not None:
+                    progress["freedBytes"] = freed
+            elif mode == "update":
+                status = "Warning"
+                candidate["status"] = "SkippedDirtyOrBusy"
+        return candidates, protected, freed, status, warnings
 
     effective_pressure = pressure_mode or profile == "deep"
     for group in adapter.get("safeGroups", []):
@@ -476,18 +539,18 @@ def handle_cc65(
             continue
         for candidate in group_candidates:
             if candidate["eligible"]:
-                candidate["action"] = "RemoveVerifiedGeneratedTree"
-        if mode != "update":
-            continue
-        if dirty or busy:
+                candidate["action"] = "RemoveCuratedGeneratedPath"
+        if mode == "update" and not dirty and not busy:
+            for candidate in group_candidates:
+                if candidate["eligible"]:
+                    freed += remove_candidate(repository, candidate)
+                    if progress is not None:
+                        progress["freedBytes"] = freed
+        elif mode == "update":
             status = "Warning"
             for candidate in group_candidates:
                 if candidate["eligible"]:
                     candidate["status"] = "SkippedDirtyOrBusy"
-            continue
-        for candidate in group_candidates:
-            if candidate["eligible"]:
-                freed += remove_candidate(repository, candidate)
     return candidates, protected, freed, status, warnings
 
 
@@ -555,7 +618,7 @@ def handle_cmake(
     for candidate in candidates:
         if not candidate["eligible"]:
             continue
-        candidate["action"] = "RemoveVerifiedBuildTree"
+        candidate["action"] = "CMakeCleanAndRemoveTree"
         if mode != "update":
             continue
         if dirty or busy:
@@ -563,6 +626,16 @@ def handle_cmake(
             status = "Warning"
             continue
         build = contained_path(repository / candidate["path"], repository, "CMake build tree")
+        if shutil.which("cmake") is None:
+            candidate["status"] = "ProviderUnavailable"
+            status = "Warning"
+            continue
+        result = run_command(["cmake", "--build", str(build), "--target", "clean"], timeout=900)
+        if result.returncode != 0:
+            candidate["status"] = "NativeCleanFailed"
+            candidate["providerExitCode"] = result.returncode
+            status = "Warning"
+            continue
         freed += remove_candidate(repository, candidate)
     return candidates, freed, status
 
@@ -982,6 +1055,7 @@ def execute(args: argparse.Namespace) -> int:
                         pressure_mode=pressure_mode,
                         dirty=dirty,
                         busy=busy,
+                        progress=repo_result,
                     )
                     repo_result["candidates"] = candidates
                     repo_result["preservedEvidence"] = preserved

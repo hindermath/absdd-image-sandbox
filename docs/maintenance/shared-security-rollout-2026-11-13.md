@@ -131,11 +131,20 @@ EN: Sandbox preview and comparison do not launch executables named by registries
 
 DE: Der eigene Maintenance-TUI-Runner behält begrenzte Diagnostik-Endstücke
 und stuft unvollständige Ereignisströme als Abweichung ein. Seine Tests und
-Paketbindung bleiben an diese Projektversion gebunden.
+Paketbindung bleiben an diese Projektversion gebunden. Die Feature-004-Grenze
+bewahrt ihre Sandbox-Ausführungskontexte und prüft die Identität von
+Speicherbereinigungszielen vor dem Löschen. Der Wartungsworkflow verwendet
+weiterhin den festgelegten .NET-SDK-Stand. Die Feature-004-Prüfung bindet die
+bereits installierte Assurance-Version 0.1.10 bei unveränderter Priorität 15;
+historische Nachweise werden nicht umgeschrieben.
 
 EN: The project Maintenance TUI runner retains bounded diagnostic tails
 and treats incomplete event streams as mismatches. Its tests and package
-lock remain bound to this project version.
+lock remain bound to this project version. The Feature 004 boundary keeps
+its sandbox execution contexts and checks the identity of storage cleanup
+targets before deletion. The maintenance workflow keeps its pinned .NET SDK.
+Feature 004 validation binds the already installed Assurance version 0.1.10
+at the same priority 15; historical evidence is not rewritten.
 
 Documentation Impact: UpdateRequired. Owner: Thorsten Hindermann. Audience:
 maintainers and security reviewers. Canonical sources: project adapters and
