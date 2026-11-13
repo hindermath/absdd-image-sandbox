@@ -25,6 +25,7 @@ public sealed class MaintenanceTuiApplication
             invocation.RunId,
             execution.ExitCode,
             execution.Report,
-            execution.CompletionEvent);
+            execution.CompletionEvent,
+            execution.EventStreamDegraded);
     }
 }

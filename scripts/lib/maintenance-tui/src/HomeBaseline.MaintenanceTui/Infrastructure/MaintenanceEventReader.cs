@@ -6,8 +6,7 @@ namespace HomeBaseline.MaintenanceTui.Infrastructure;
 
 public sealed class MaintenanceEventReader
 {
-    private const int MaximumRecordCharacters = 65_536;
-    private const int MaximumPendingCharacters = 131_072;
+    private const int MaximumRecordChars = 65536;
     private static readonly HashSet<string> AllowedProperties = new(StringComparer.Ordinal)
     {
         "schemaVersion",
@@ -25,6 +24,7 @@ public sealed class MaintenanceEventReader
 
     private readonly Guid _runId;
     private readonly StringBuilder _pending = new();
+    private bool _discardOversizedRecord;
     private long _byteOffset;
     private long _expectedSequence = 1;
     private EventPresentationMode _presentationMode = EventPresentationMode.Enhanced;
@@ -46,46 +46,57 @@ public sealed class MaintenanceEventReader
             return [];
         }
 
-        if (_pending.Length + content.Length > MaximumPendingCharacters)
-        {
-            _pending.Clear();
-            Degrade(EventDegradationReason.InvalidSchema);
-            return [];
-        }
-        _pending.Append(content);
         var records = new List<MaintenanceEvent>();
-        while (true)
+        foreach (var character in content)
         {
-            var snapshot = _pending.ToString();
-            var newline = snapshot.IndexOf('\n', StringComparison.Ordinal);
-            if (newline < 0)
+            if (_discardOversizedRecord)
             {
-                break;
-            }
-
-            var line = snapshot[..newline].TrimEnd('\r');
-            _pending.Remove(0, newline + 1);
-            _byteOffset += Encoding.UTF8.GetByteCount(snapshot[..(newline + 1)]);
-            if (line.Length == 0 || line.Length > MaximumRecordCharacters)
-            {
-                Degrade(EventDegradationReason.InvalidSchema);
+                if (character == '\n')
+                {
+                    _discardOversizedRecord = false;
+                }
                 continue;
             }
-
-            var parsed = Parse(line);
-            if (parsed is not null)
+            if (character == '\n')
             {
-                records.Add(parsed);
+                var line = _pending.ToString().TrimEnd('\r');
+                _pending.Clear();
+                if (line.Length == 0)
+                {
+                    Degrade(EventDegradationReason.InvalidSchema);
+                    continue;
+                }
+                var parsed = Parse(line);
+                if (parsed is not null)
+                {
+                    records.Add(parsed);
+                }
+                continue;
             }
+            if (_pending.Length >= MaximumRecordChars)
+            {
+                // Drop through the next newline; a later completion cannot
+                // silently repair a missing middle event.
+                _pending.Clear();
+                _discardOversizedRecord = true;
+                Degrade(EventDegradationReason.OversizedRecord);
+                continue;
+            }
+            _pending.Append(character);
         }
+        _byteOffset += Encoding.UTF8.GetByteCount(content);
 
         return records;
     }
 
-    public void DegradeForOverflow()
+    public void Complete()
     {
-        _pending.Clear();
-        Degrade(EventDegradationReason.InvalidSchema);
+        if (_discardOversizedRecord || _pending.Length > 0)
+        {
+            _pending.Clear();
+            _discardOversizedRecord = false;
+            Degrade(EventDegradationReason.InvalidSchema);
+        }
     }
 
     private MaintenanceEvent? Parse(string line)

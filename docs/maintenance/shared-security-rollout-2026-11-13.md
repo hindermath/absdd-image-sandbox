@@ -129,6 +129,14 @@ DE: Die Sandbox-Vorschau und der Vergleich starten keine ausführbaren Registry-
 
 EN: Sandbox preview and comparison do not launch executables named by registries. The project adapters preserve this contract and now also restrict npm and CLI probes to code-owned commands and arguments. Swiftly archive extraction is size-bounded. Cases for the unsupported MSL-only parent adapter are identified explicitly; the shared MSL module tests still run. The canonical exception list is in Home Baseline PR 375.
 
+DE: Der eigene Maintenance-TUI-Runner behält begrenzte Diagnostik-Endstücke
+und stuft unvollständige Ereignisströme als Abweichung ein. Seine Tests und
+Paketbindung bleiben an diese Projektversion gebunden.
+
+EN: The project Maintenance TUI runner retains bounded diagnostic tails
+and treats incomplete event streams as mismatches. Its tests and package
+lock remain bound to this project version.
+
 Documentation Impact: UpdateRequired. Owner: Thorsten Hindermann. Audience:
 maintainers and security reviewers. Canonical sources: project adapters and
 Home Baseline propagation manifest. Reader path: this record to project tests

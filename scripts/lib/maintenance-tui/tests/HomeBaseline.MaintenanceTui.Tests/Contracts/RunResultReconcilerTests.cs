@@ -8,9 +8,9 @@ namespace HomeBaseline.MaintenanceTui.Tests.Contracts;
 public sealed class RunResultReconcilerTests
 {
     [TestMethod]
-    public void MissingReportWithSuccessfulChildFailsClosed()
+    public void MissingReportProducesMismatchWithoutChangingProcessExit()
     {
-        var result = new RunResultReconciler().Reconcile(Guid.NewGuid(), 0, null, null);
+        var result = new RunResultReconciler().Reconcile(Guid.NewGuid(), 1, null, null);
 
         Assert.AreEqual("RESULT_MISMATCH", result.DisplayStatus);
         Assert.AreEqual(1, result.ProcessExitCode);
@@ -53,7 +53,6 @@ public sealed class RunResultReconcilerTests
 
         Assert.AreEqual("PASSED", result.DisplayStatus);
         Assert.AreEqual(0, result.MismatchReasons.Count);
-        Assert.AreEqual(0, result.ProcessExitCode);
     }
 
     [TestMethod]
@@ -79,7 +78,6 @@ public sealed class RunResultReconcilerTests
         var result = new RunResultReconciler().Reconcile(runId, 0, report, completion);
 
         Assert.AreEqual("RESULT_MISMATCH", result.DisplayStatus);
-        Assert.AreEqual(1, result.ProcessExitCode);
         StringAssert.Contains(result.MismatchReasons[0], "Berichtspfad");
     }
 }

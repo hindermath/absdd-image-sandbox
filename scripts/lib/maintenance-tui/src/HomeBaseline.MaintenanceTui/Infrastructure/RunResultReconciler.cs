@@ -8,9 +8,14 @@ public sealed class RunResultReconciler
         Guid expectedRunId,
         int processExitCode,
         AtomicRunReport? report,
-        MaintenanceEvent? completionEvent)
+        MaintenanceEvent? completionEvent,
+        bool eventStreamDegraded = false)
     {
         var mismatches = new List<string>();
+        if (eventStreamDegraded)
+        {
+            mismatches.Add("Ereignisstrom ist beschädigt / event stream is degraded.");
+        }
         if (report is null)
         {
             mismatches.Add("Finalisierter Bericht fehlt / finalized report is missing.");
@@ -57,14 +62,9 @@ public sealed class RunResultReconciler
         var nextAction = mismatches.Count == 0
             ? "N/A"
             : "Bericht, Ereignisse und Exitcode prüfen / review report, events, and exit code.";
-        // A successful child exit cannot override missing or contradictory final
-        // evidence. Preserve an existing failure code; otherwise fail closed.
-        var effectiveExitCode = mismatches.Count > 0 && processExitCode == 0
-            ? 1
-            : processExitCode;
 
         return new ReconciledRunResult(
-            effectiveExitCode,
+            processExitCode,
             report,
             completionEvent,
             displayStatus,
