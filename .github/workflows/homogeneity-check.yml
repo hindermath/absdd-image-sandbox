@@ -10,6 +10,11 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
+# DE: Nur lesender Checkout; unbenannte Token-Rechte bleiben gesperrt.
+# EN: Read-only checkout; unspecified token permissions remain disabled.
+permissions:
+  contents: read
+
 jobs:
   check:
     name: Agent Secret Scan (${{ matrix.os }})

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.1",
+  "feature": "npm-cache-boundary-2026-11-13",
+  "entries": [
+    {
+      "changeId": "CHG001",
+      "scope": "Bind sandbox storage maintenance to the verified effective npm cache path",
+      "decision": "UpdateRequired",
+      "rationale": "The sandbox keeps its project-specific storage implementation while aligning the npm cache cleanup boundary with the Level-0 source fix.",
+      "documents": [
+        "docs/man/maintain-workspace-storage.1.md",
+        "docs/project-statistics.md"
+      ],
+      "owner": "Thorsten Hindermann",
+      "audiences": [
+        "Sandbox operators",
+        "Maintainers",
+        "Security reviewers"
+      ],
+      "readerPaths": [
+        "Storage cleanup manpage",
+        "Project statistics"
+      ],
+      "canonicalSource": "scripts/lib/workspace_storage_maintenance.py",
+      "navigationImpact": "The existing storage manpage remains the operator entry point.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and equivalent English in the bilingual manpage and ledger.",
+      "languagePartners": [],
+      "platformAndExampleProof": "The focused npm boundary tests and the complete owning storage test module pass on macOS; PR CI must confirm other platforms.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "scripts/tests/test_workspace_storage_maintenance.py",
+      "risk": "An .npmrc could redirect npm cleanup away from the cache path checked by the sandbox storage maintainer.",
+      "criticality": "Security",
+      "reevaluationTrigger": "The npm cache configuration or project-specific storage provider changes."
+    }
+  ]
+}

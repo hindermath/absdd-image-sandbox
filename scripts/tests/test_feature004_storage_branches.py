@@ -216,6 +216,8 @@ class StorageBranchTests(unittest.TestCase):
                 ("deep", "update", {storage.PROCESS_INVENTORY_UNAVAILABLE})):
             with patch.dict(os.environ, {"npm_config_cache": str(self.home / ".npm")}), \
                     patch.object(storage.shutil, "which", side_effect=lambda name: str(self.home / name)), \
+                    patch.object(storage, "run_command",
+                        return_value=result(stdout=f"{self.home / '.npm'}\n")), \
                     patch.object(storage, "cache_path_metrics", return_value=(100, 1)), \
                     patch.object(storage, "execute_provider") as execute:
                 items = storage.handle_cache_providers(self.home, mode=mode, profile=profile,
@@ -227,6 +229,8 @@ class StorageBranchTests(unittest.TestCase):
                     self.assertGreaterEqual(execute.call_count, 4)
         with patch.dict(os.environ, {"npm_config_cache": str(self.home.parent)}), \
                 patch.object(storage.shutil, "which", side_effect=lambda name: "fake-npm" if name == "npm" else None), \
+                patch.object(storage, "run_command",
+                    return_value=result(stdout=f"{self.home.parent}\n")), \
                 patch.object(storage, "cache_path_metrics", return_value=(0, 0)):
             items = storage.handle_cache_providers(self.home, mode="update", profile="safe",
                 pressure_mode=False, retention_days=7, processes=set())

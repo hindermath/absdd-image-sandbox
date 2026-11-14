@@ -34,8 +34,15 @@ space, pressure mode makes safe candidates eligible regardless of age.*
 Das Profil `deep` nimmt zusätzlich wiederherstellbare Dependency-Caches auf
 und erfordert in einem echten Lauf `--confirm-deep-cleanup` beziehungsweise
 `-ConfirmDeepCleanup`. `none` ist ein explizites No-op-Profil. `check-only`
-inventarisiert, Dry-run/WhatIf zeigt den Plan und nur ein bestätigter echter
-Lauf führt Providerbefehle oder Löschungen aus.
+inventarisiert, Dry-run/WhatIf zeigt den Plan und beide Modi starten keine
+projektgesteuerten Buildsysteme. Nur ein bestätigter echter Lauf führt
+Providerbefehle oder Löschungen aus.
+
+*The `deep` profile also includes recoverable dependency caches and requires
+`--confirm-deep-cleanup` or `-ConfirmDeepCleanup` for an update run. `none` is
+an explicit no-op profile. Check-only inventories state and dry-run/WhatIf
+shows the plan; neither mode starts project-controlled build systems. Only a
+confirmed update run invokes provider commands or performs deletion.*
 
 Providerwarnungen werden im privaten, atomaren JSON-Bericht festgehalten und
 haben Exitcode `0`. Aufruf-, Policy-, Pfad- und Betriebsfehler haben Exitcode
@@ -46,23 +53,22 @@ Benutzerzugriff.
 ## NON-MSL ADAPTERS
 
 `C64Projects/cc65` verwendet absichtlich C89 und 6502-Assembly für 8-Bit-
-Kompatibilität. Safe und Deep wählen nur die deklarierten generierten
-Verzeichnisse für Hostwerkzeuge, Laufzeitbibliotheken, Dokumentation und
-Regression. Vor dem Entfernen müssen die Verzeichnisse repo-intern, von Git
-ignoriert und ungetrackt sein. Der cc65-Adapter startet keinen `make`-Prozess und
-wertet auch in Vorschau oder Check keinen Checkout-`Makefile` aus. Deep
-erzwingt nur die Alters-Eignung der gleichen kuratierten Pfade. Sample- und
-Targettest-Nachweise wie Disk-Images, Zielbinärdateien, Maps, Labels und
-Debuglisten bleiben außerhalb dieser Pfade erhalten. Bei einem Fehler kann
-bereits ein Teil der kuratierten Verzeichnisse entfernt sein; es gibt kein
-automatisches Rollback.
+Kompatibilität. Safe führt nur vorab geprüfte native `make ... clean`-Gruppen
+für Hostwerkzeuge, Laufzeitbibliotheken, generierte Dokumentation und
+Regression-Arbeitsverzeichnisse aus. Sample- und Targettest-Nachweise wie
+Disk-Images, Zielbinärdateien, Maps, Labels und Debuglisten bleiben erhalten.
+`make zap` wird nie verwendet; Root-`make clean` gehört nur zu `deep`. Weicht
+dessen Scope-Prüfung im autorisierten, sauberen und nicht beschäftigten
+Updatepfad von den deklarierten Pfaden ab, protokolliert Deep die Scope-Warnung
+und fällt auf die einzeln geprüften Safe-Gruppen zurück. Check-only und Dry-run
+leiten den Plan ausschließlich aus Policy und Dateisystemzustand ab und werten
+kein Makefile aus.
 
-*Safe and Deep select only curated generated directories. Each candidate must
-stay inside the repository and be ignored and untracked by Git before removal.
-The cc65 adapter does not run `make` or evaluate its checkout Makefile, including in previews.
-Deep only overrides the age threshold for the same curated paths. Protected
-sample and target-test evidence outside those paths remains untouched. A
-failure can follow a partial removal; there is no automatic rollback.*
+*`make zap` is never used, and root `make clean` belongs to `deep` only. If its
+scope check in the authorized, clean, idle update path exceeds the declared
+paths, Deep records the scope warning and falls back to the individually
+proven Safe groups. Check-only and dry-run derive the plan from policy and
+filesystem state only and do not evaluate a Makefile.*
 
 `CLionProjects/tvision` bleibt wegen Quell-/ABI-Kompatibilität C++14. Ein
 CMake-Buildverzeichnis wird nur akzeptiert, wenn sein `CMakeCache.txt` auf
@@ -86,6 +92,18 @@ reported but never handled by generic deletion rules.*
 - Podman auf macOS: Socket wird pro Lauf aus `podman machine inspect`
   ermittelt und als existierender Unix-Socket verifiziert. TCP-Fallbacks und
   gespeicherte Hostpfade sind unzulässig.
+
+Für npm wird das tatsächlich konfigurierte Cache-Verzeichnis einschließlich
+`.npmrc` schreibfrei ermittelt. Es muss ein eigenes Verzeichnis innerhalb des
+verifizierten Home sein und darf nicht selbst ein Symlink sein. Genau dieser
+geprüfte Pfad wird für `verify` und `clean` an npm gebunden. Ist er nicht
+prüfbar, bleibt die npm-Wartung aus und der Bericht zeigt eine Warnung.
+
+*For npm, the effective cache directory, including `.npmrc` settings, is read
+without changing it. It must be a separate directory inside the verified home
+and must not itself be a symlink. The verified path is bound to both `verify`
+and `clean`. If it cannot be verified, npm maintenance is skipped and the
+report shows a warning.*
 
 Cargo-, Maven-, Gradle- und Swift-Dependency-Stores bleiben in Version 1
 unberührt.

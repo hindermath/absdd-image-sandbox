@@ -400,6 +400,60 @@ Documentation Impact: UpdateRequired; see the evidence path above.
 No product logic changed; CodeQL under Tools is configured separately after
 delivery. No AI Scan activation or new practical accessibility acceptance.
 
+### 2026-11-13 — Gemeinsame Preset-Sicherheitswartung / Shared preset security maintenance
+
+Vierzehn veroeffentlichte Patch-Releases sind ueber echte Quellen- und Installationsbindungen uebernommen. Gemeinsame Workflow-Rechte sind explizit begrenzt; Produktlogik und Lifecycle bleiben unveraendert. Offene CodeQL-Belegluecken bleiben offen, ohne automatische Alert-Verwerfung.
+
+Fourteen published patches are recorded through real source and installed bindings. Shared workflow permissions are explicitly restricted; product logic and lifecycle remain unchanged. Open CodeQL evidence gaps remain open without automatic alert dismissal.
+
+Documentation Impact: UpdateRequired; [Wartungsnachweis / maintenance evidence](maintenance/shared-security-rollout-2026-11-13.md).
+
+### 2026-11-13 — Intake Authoring 0.3.14 / Intake-Authoring-Folgekorrektur
+
+DE: Die geprüfte Patch-Version 0.3.14 ergänzt den Sicherheitsrollout; Quellen- und Installationsbindungen sowie kompatible Nachweise bleiben getrennt nachvollziehbar. Keine neue Produktfunktion oder menschliche Sicherheitsabnahme.
+
+EN: Verified patch 0.3.14 supplements the security rollout; source, installation and compatible evidence remain separately traceable. No new product feature or human security acceptance.
+
+Documentation Impact: UpdateRequired; [Nachweis / evidence](maintenance/shared-security-rollout-2026-11-13.md).
+
+### 2026-11-13 — npm-Agent-Proben begrenzt / Bound npm agent probes
+
+DE: Die verteilten Wartungsskripte begrenzen npm-Agent-Proben vor der Ausfuehrung. TinyPl0 behaelt seine ausdrueckliche Freigabe fuer alternative Registries. Es wird kein Spec-Kit-Lauf hinzugezaehlt.
+
+EN: Distributed maintenance scripts bound npm agent probes before execution. TinyPl0 retains its explicit opt-in for alternate registries. No Spec Kit run is added.
+
+Documentation Impact: UpdateRequired; [Nachweis / evidence](maintenance/shared-security-rollout-2026-11-13.md).
+
+### 2026-11-13 — Nativer CI-Vertrag / Native CI contract
+
+DE: Der Ereignisstrom-Test prueft die vorhandenen Callback- und Ergebnis-Signale ohne ein hier nicht vorhandenes Level-0-Feld. Kein neuer Spec-Kit-Lauf.
+
+EN: The event-stream test checks the existing callback and result signals without a Level-0-only field. No new Spec Kit run.
+
+Documentation Impact: UpdateRequired; [Nachweis / evidence](maintenance/shared-security-rollout-2026-11-13.md).
+
+### 2026-11-13 — Projektgebundene Wartung erhalten / Preserved project maintenance
+
+DE: Die Sandbox behält ihre schreibfreie Registry-Vorschau und ihren Snapshot-Vertrag. npm-/CLI-Proben sind nun codegebunden; Swiftly-Archive sind größenbegrenzt. Der projektgebundene Maintenance-TUI-Runner sowie die Feature-004-Ausführungs- und Speichergrenzen bleiben erhalten. Gemeinsame MSL-Modultests bleiben aktiv, nicht vorhandene Elternadapterfälle werden ausdrücklich ausgenommen. Kein Spec-Kit-Lauf wird ergänzt.
+
+EN: The sandbox retains its read-only registry preview and snapshot contract. npm and CLI probes are now code-bound; Swiftly archives have size limits. The project Maintenance TUI runner and the Feature 004 execution and storage boundaries remain intact. Shared MSL module tests remain active, and absent parent-adapter cases are explicitly excluded. No Spec Kit run is added.
+
+Documentation Impact: UpdateRequired; [Nachweis / evidence](maintenance/shared-security-rollout-2026-11-13.md).
+
+### 2026-11-13 — npm-Cachepfad der Sandbox gebunden / Bound sandbox npm cache path
+
+DE: Die eigene Speicherwartung der Sandbox liest den tatsächlich konfigurierten
+npm-Cachepfad, prüft ihn innerhalb des Home-Verzeichnisses und bindet genau
+diesen Pfad an `verify` und `clean`. Ein abweichender Pfad aus `.npmrc` kann
+die spätere Bereinigung nicht mehr umleiten. Kein Spec-Kit-Lauf wird ergänzt.
+
+EN: The sandbox's storage maintainer reads npm's effective cache path, checks
+it inside home, and binds that exact path to `verify` and `clean`. A different
+path from `.npmrc` can no longer redirect the later cleanup. No Spec Kit run
+is added.
+
+Documentation Impact: UpdateRequired; [Nachweis / evidence](documentation-impact/npm-cache-boundary-2026-11-13.json).
+
 ## Gesamtstatistik / Overall Statistics
 
 <!-- project-statistics-v2:begin -->
@@ -410,29 +464,29 @@ Profil 2 verwendet Git-getrackte Textdateien und sichtbare Git-Aktivitaet. Die W
 
 | Kennzahl / Metric | Wert / Value |
 |---|---:|
-| Textbasis / Text base | 576411 lines |
-| Textdateien / Text files | 2606 |
-| Beobachtbarer Zeitraum / Observable period | 2025-11-16..2026-11-12 |
-| Aktivtage / Active days | 97 |
-| Relevante Commits / Relevant commits | 345 |
-| Zeilen je Aktivtag / Lines per active day | 5942.4 |
+| Textbasis / Text base | 584479 lines |
+| Textdateien / Text files | 2698 |
+| Beobachtbarer Zeitraum / Observable period | 2025-11-16..2026-11-14 |
+| Aktivtage / Active days | 99 |
+| Relevante Commits / Relevant commits | 358 |
+| Zeilen je Aktivtag / Lines per active day | 5903.8 |
 | Peak-Tag im Fenster / Peak day in window | 2026-10-25 / 101840 |
 | Peak-Woche im Fenster / Peak week in window | 2026-10-25 / 266277 |
 | Laengste Serie / Longest streak | 8 days |
-| Speedup vs. 80 lines/day | 74.3x |
-| Speedup vs. 100 lines/day | 59.4x |
-| Methodik / Methodology | v2; source `2ca5caf9e16f` |
+| Speedup vs. 80 lines/day | 73.8x |
+| Speedup vs. 100 lines/day | 59.0x |
+| Methodik / Methodology | v2; source `f35d9e0ef12e` |
 
 ### Artefaktmix / Artifact Mix
 
 ```text
 Produktiv / Production          [#...................]   0.0% | 97
-Tests                           [#...................]   3.0% | 17104
-Dokumentation / Documentation   [############........]  61.7% | 355853
-Skripte / Scripts               [#...................]   7.4% | 42487
-Konfiguration / Configuration   [####................]  19.1% | 110207
+Tests                           [#...................]   3.1% | 17975
+Dokumentation / Documentation   [############........]  61.6% | 360036
+Skripte / Scripts               [##..................]   7.8% | 45496
+Konfiguration / Configuration   [####................]  18.9% | 110212
 Daten und Medien / Data and media [....................]   0.0% | 0
-Sonstiger Text / Other text     [##..................]   8.8% | 50663
+Sonstiger Text / Other text     [##..................]   8.7% | 50663
 ```
 
 Die Balken teilen die aktuelle getrackte Textbasis in stabile Kategorien. Prozent und Zeilenwert sind die genaue, textorientierte Aussage.
@@ -459,8 +513,8 @@ Mo/Mo  0 3 2 0 0 0 0 0 4 4 0 0 0 2 0 0 4 2 0 0 0 0 4 0 4 3
 Di/Tu  3 2 3 0 0 0 0 0 3 4 4 0 0 0 0 0 4 4 0 0 4 0 4 4 4 2
 Mi/We  0 2 4 0 0 0 0 2 1 2 4 0 0 2 0 0 0 0 0 0 0 0 4 0 0 0
 Do/Th  3 0 4 3 0 0 0 0 1 3 0 0 4 0 0 0 0 0 0 0 0 0 0 2 4 3
-Fr/Fr  1 3 0 0 0 2 4 4 4 4 1 0 4 0 0 3 0 3 0 0 0 0 0 4 3 -
-Sa/Sa  2 0 0 0 2 0 4 4 0 4 2 0 2 0 0 0 4 1 3 0 4 0 4 4 3 -
+Fr/Fr  1 3 0 0 0 2 4 4 4 4 1 0 4 0 0 3 0 3 0 0 0 0 0 4 3 4
+Sa/Sa  2 0 0 0 2 0 4 4 0 4 2 0 2 0 0 0 4 1 3 0 4 0 4 4 3 1
 ```
 
 DE: 0 = keine Aenderung; 1 = 1..79; 2 = 80..399; 3 = 400..1599; 4 = 1600+ geaenderte Textzeilen; - = noch nicht abgelaufen.
@@ -549,8 +603,8 @@ Die festen Slots halten den Phasenvergleich auch bei fehlenden oder spaeter erga
 
 ```text
 Scale: 0..100x
-80 lines/day       [###############.....] 74.3x
-100 lines/day      [############........] 59.4x
+80 lines/day       [###############.....] 73.8x
+100 lines/day      [############........] 59.0x
 ```
 
 Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen Referenzen. Sie messen keine Arbeitszeit.
@@ -563,7 +617,7 @@ Die Faktoren vergleichen sichtbare Lieferdichte mit den dokumentierten manuellen
 Scale: 0..10000 lines/day
 Experienced manual [#...................] 80
 Thorsten solo      [#...................] 100
-Visible repository [############........] 5942.4
+Visible repository [############........] 5903.8
 ```
 
 Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schreibt die Git-Aktivitaet keiner Person oder KI pauschal zu.
@@ -572,9 +626,9 @@ Die gemeinsame Skala vergleicht Referenzen und sichtbare Lieferdichte. Sie schre
 
 ### Textalternative / Text Alternative
 
-DE: Das Fenster beginnt am 2025-11-16 und endet am 2026-11-12. Es enthaelt 97 aktive und 265 inaktive vergangene Tage. Peak-Tag: 2026-10-25 / 101840. Peak-Woche: 2026-10-25 / 266277. Laengste Serie: 8 Tage (2026-07-10..2026-07-17).
+DE: Das Fenster beginnt am 2025-11-16 und endet am 2026-11-14. Es enthaelt 99 aktive und 265 inaktive vergangene Tage. Peak-Tag: 2026-10-25 / 101840. Peak-Woche: 2026-10-25 / 266277. Laengste Serie: 8 Tage (2026-07-10..2026-07-17).
 
-*EN: The window starts on 2025-11-16 and ends on 2026-11-12. It contains 97 active and 265 inactive elapsed days. Peak day: 2026-10-25 / 101840. Peak week: 2026-10-25 / 266277. Longest streak: 8 days (2026-07-10..2026-07-17).*
+*EN: The window starts on 2025-11-16 and ends on 2026-11-14. It contains 99 active and 265 inactive elapsed days. Peak day: 2026-10-25 / 101840. Peak week: 2026-10-25 / 266277. Longest streak: 8 days (2026-07-10..2026-07-17).*
 
 | Monat / Month | Geaenderte Textzeilen / Changed text lines |
 |---|---:|
@@ -589,6 +643,6 @@ DE: Das Fenster beginnt am 2025-11-16 und endet am 2026-11-12. Es enthaelt 97 ak
 | 2026-08 | 96264 |
 | 2026-09 | 61410 |
 | 2026-10 | 325107 |
-| 2026-11 | 62132 |
+| 2026-11 | 80234 |
 
 <!-- project-statistics-v2:end -->

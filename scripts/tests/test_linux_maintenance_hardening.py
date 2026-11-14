@@ -343,10 +343,10 @@ class LinuxMaintenanceHardeningTests(unittest.TestCase):
             })
             for mode in ("--dry-run", "--compare-only"):
                 completed = run_brew_maintainer(root, paths, extra=(mode,))
-                self.assertEqual(completed.returncode, 0, completed.stdout)
+                self.assertEqual(completed.returncode, 1, completed.stdout)
                 self.assertFalse(marker.exists(), mode)
                 self.assertIn(
-                    "version and function not checked",
+                    "CapabilityBlocked",
                     (root / "toolchain-result.json").read_text(encoding="utf-8"),
                 )
 

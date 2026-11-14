@@ -51,6 +51,11 @@ SECRET_PATTERNS = (
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 
 
+MAX_SWIFTLY_ARCHIVE_MEMBERS = 4096
+MAX_SWIFTLY_ARCHIVE_EXPANDED_BYTES = 1024 * 1024 * 1024
+MAX_SWIFTLY_BINARY_BYTES = 256 * 1024 * 1024
+
+
 class ContractError(RuntimeError):
     """Raised when an input violates a fail-closed maintenance contract."""
 
@@ -508,11 +513,23 @@ def extract_swiftly(archive: Path, output: Path) -> tuple[dict, int]:
     """Extract only the regular swiftly binary without trusting archive paths."""
     try:
         with tarfile.open(archive, mode="r:gz") as bundle:
-            matches = [
-                member
-                for member in bundle.getmembers()
-                if member.isfile() and Path(member.name).name == "swiftly"
-            ]
+            matches = []
+            member_count = 0
+            expanded_bytes = 0
+            for member in bundle:
+                member_count += 1
+                if member_count > MAX_SWIFTLY_ARCHIVE_MEMBERS:
+                    raise ContractError("swiftly archive contains too many members")
+                if member.size < 0:
+                    raise ContractError("swiftly archive contains an invalid member size")
+                if member.isfile():
+                    expanded_bytes += member.size
+                    if expanded_bytes > MAX_SWIFTLY_ARCHIVE_EXPANDED_BYTES:
+                        raise ContractError("swiftly archive expanded size exceeds the limit")
+                    if Path(member.name).name == "swiftly":
+                        if member.size > MAX_SWIFTLY_BINARY_BYTES:
+                            raise ContractError("swiftly binary exceeds the expanded size limit")
+                        matches.append(member)
             if len(matches) != 1:
                 raise ContractError(
                     "swiftly archive must contain exactly one regular swiftly binary"
@@ -523,9 +540,15 @@ def extract_swiftly(archive: Path, output: Path) -> tuple[dict, int]:
             output.parent.mkdir(parents=True, exist_ok=True)
             temporary = output.with_name(f".{output.name}.{uuid.uuid4().hex}.tmp")
             try:
-                with temporary.open("wb") as target:
+                copied = 0
+                with temporary.open("xb") as target:
                     while block := source.read(1024 * 1024):
+                        copied += len(block)
+                        if copied > MAX_SWIFTLY_BINARY_BYTES or copied > matches[0].size:
+                            raise ContractError("swiftly binary stream exceeds its declared size or limit")
                         target.write(block)
+                if copied != matches[0].size:
+                    raise ContractError("swiftly binary stream is truncated")
                 temporary.chmod(0o755)
                 os.replace(temporary, output)
             finally:

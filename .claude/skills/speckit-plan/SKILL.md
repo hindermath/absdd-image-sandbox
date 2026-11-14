@@ -5,7 +5,7 @@ description: Execute the implementation planning workflow using the plan templat
 compatibility: Requires spec-kit project structure with .specify/ directory
 metadata:
   author: github-spec-kit
-  source: security-governance:speckit.plan.md
+  source: security-governance v0.7.5:speckit.plan.md
 ---
 
 Before continuing, apply the Security Governance preset:

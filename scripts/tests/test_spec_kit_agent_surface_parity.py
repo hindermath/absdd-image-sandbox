@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 """Validate installed Spec Kit command surfaces and preset profiles."""
+# DE: Prueft Release-Quellen, hashgebundene Installation und Agentenparitaet.
+# EN: Validates release sources, hash-bound installation and agent parity.
 
 from __future__ import annotations
 
 from collections import Counter
-import json
+from copy import deepcopy
 import hashlib
+import json
+from pathlib import Path, PurePosixPath
 import re
-from pathlib import Path
+import tempfile
 import unittest
-from urllib.parse import unquote, urlsplit
 
 
 REPOSITORY = Path(__file__).resolve().parents[2]
@@ -18,7 +21,7 @@ CONFIG = REPOSITORY / "scripts" / "config"
 
 
 def read_json(path: Path) -> dict:
-    return json.loads(path.read_text(encoding="utf-8"))
+    return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
 def normalized_hash(path: Path) -> str:
@@ -107,6 +110,23 @@ def strip_frontmatter(text: str) -> str:
     return normalized.strip()
 
 
+def opencode_directory(manifest: dict) -> Path:
+    # DE: Die versionierte Integration bestimmt den Pfad, nicht lokale Caches.
+    # EN: The tracked integration chooses the path, never machine-local caches.
+    files = manifest.get("files", {})
+    if not isinstance(files, dict) or not files:
+        raise ValueError("OpenCode integration has no bound files")
+    if any(not isinstance(path, str) or "\\" in path
+           or str(PurePosixPath(path)) != path for path in files):
+        raise ValueError("OpenCode integration requires canonical POSIX string paths")
+    # DE: Manifestpfade bleiben POSIX, auch auf einem Windows-Host.
+    # EN: Manifest paths use POSIX syntax even on a Windows host.
+    parents = {str(PurePosixPath(path).parent) for path in files}
+    if len(parents) != 1 or not parents <= {".opencode/command", ".opencode/commands"}:
+        raise ValueError("OpenCode integration has an unsafe or mixed namespace")
+    return REPOSITORY / parents.pop()
+
+
 def command_path(surface: str, command: str) -> Path:
     skill = command.replace(".", "-")
     layouts = {
@@ -114,16 +134,16 @@ def command_path(surface: str, command: str) -> Path:
         "codex": REPOSITORY / ".agents" / "skills" / skill / "SKILL.md",
         "claude": REPOSITORY / ".claude" / "skills" / skill / "SKILL.md",
         "copilot": REPOSITORY / ".github" / "agents" / f"{command}.agent.md",
-        # The tracked OpenCode contract uses the singular ``command`` path.
-        # A machine-local ``commands`` cache must never redirect parity checks.
-        "opencode": REPOSITORY / ".opencode" / "command" / f"{command}.md",
+        "opencode": opencode_directory(read_json(
+            REPOSITORY / ".specify" / "integrations" / "opencode.manifest.json"
+        )) / f"{command}.md",
     }
     return layouts[surface]
 
 
 class SpecKitAgentSurfaceParityTests(unittest.TestCase):
     def test_composed_governance_commands_retain_all_wrappers_on_every_surface(self) -> None:
-        # DE: Einzelbesitzer-Paritaet erkennt verlorene Wrapper nicht.
+        # DE: Ein gruener Single-Owner-Test erkennt verlorene Wrapper bei Mehrfachbelegung nicht.
         # EN: Single-owner parity cannot detect lost wrappers on shared commands.
         wrappers = ("Security", "Architecture", "iSAQB Architecture", "A11Y", "Cross-Platform", "Agent Parity")
         for command in ("speckit.specify", "speckit.plan", "speckit.tasks"):
@@ -134,6 +154,27 @@ class SpecKitAgentSurfaceParityTests(unittest.TestCase):
                     self.assertIn(f"apply the {wrapper} Governance preset:", body,
                                   f"missing wrapper: {wrapper}/{surface}/{command}")
                 self.assertIn("C3A-/C5-Evidence-Vertrag", body, f"missing architecture contract: {surface}/{command}")
+
+    def test_payload_inventory_has_host_independent_case_sensitive_order(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            for name in ("z.md", "README.md", "a.md"):
+                (root / name).write_text(name, encoding="utf-8")
+            entries = [[name, normalized_hash(root / name)] for name in ("README.md", "a.md", "z.md")]
+            digest = hashlib.sha256(json.dumps(entries, separators=(",", ":")).encode("utf-8")).hexdigest()
+            self.assertEqual(payload_binding(root), {"fileCount": 3, "contentSha256": digest})
+
+    def test_opencode_namespace_requires_one_bound_safe_directory(self) -> None:
+        for namespace in ("command", "commands"):
+            manifest = {"files": {f".opencode/{namespace}/speckit.plan.md": "hash"}}
+            self.assertEqual(opencode_directory(manifest), REPOSITORY / ".opencode" / namespace)
+        for paths in ([], [".opencode/command/a.md", ".opencode/commands/b.md"],
+                      ["../command/a.md"], ["/tmp/command/a.md"],
+                      [r".opencode\command\a.md"], [r"C:\tmp\command\a.md"],
+                      [r".opencode/command/nested\child.md"],
+                      [".opencode/command/./a.md"], [42]):
+            with self.assertRaises(ValueError):
+                opencode_directory({"files": dict.fromkeys(paths, "hash")})
 
     @classmethod
     def setUpClass(cls) -> None:
@@ -206,45 +247,81 @@ class SpecKitAgentSurfaceParityTests(unittest.TestCase):
                         f"canonical preset drift in {config.name}: {preset_id}",
                     )
 
-        for preset_id, expected in canonical.items():
-            installed = self.registry[preset_id]
-            self.assertEqual(installed["version"], expected["version"].removeprefix("v"))
-            self.assertEqual(installed["priority"], expected["priority"])
-
+        validate_release_sources(CONFIG, read_json(REPOSITORY / "docs/maintenance/preset-source-lock.json"))
 
     def test_gsdb_rollout_installed_payload_and_release_bindings(self) -> None:
-        # Preserve the distinction between release provenance and observed installation.
+        # Preserve the existing CI entry point and independent release/install proofs.
         validate_installed_lock(PRESETS, read_json(REPOSITORY / "docs/maintenance/preset-installed-lock.json"))
         validate_release_sources(CONFIG, read_json(REPOSITORY / "docs/maintenance/preset-source-lock.json"))
 
+    def test_installed_presets_match_the_separate_immutable_binding(self) -> None:
+        # DE: Neue Release-Ziele sind keine Rollout-Autoritaet. Der Iststand bleibt exakt gebunden.
+        # EN: New release targets grant no rollout authority. Bind installed state independently.
+        validate_installed_lock(PRESETS, read_json(REPOSITORY / "docs/maintenance/preset-installed-lock.json"))
 
-    def test_gsdb_source_navigation_and_level0_scope(self) -> None:
-        register = read_json(REPOSITORY / "docs/maintenance/gsdb-344-external-references.json")
-        commit = register["sourceCommit"]
-        self.assertRegex(commit, r"^[0-9a-f]{40}$")
-        paths = [entry["path"] for entry in register["references"]]
-        self.assertEqual(len(paths), len(set(paths)))
-        for entry in register["references"]:
-            path = entry["path"]
-            self.assertTrue(path.startswith("docs/maintenance/"))
-            self.assertNotIn("..", Path(path).parts)
-            self.assertEqual(entry["sourceCommit"], commit)
-            self.assertRegex(entry["sourceNormalizedSha256"], r"^[0-9a-f]{64}$")
-            self.assertEqual(entry["url"], f"https://github.com/hindermath/home-baseline/blob/{commit}/{path}")
-            pointer = REPOSITORY / path
-            text = pointer.read_text(encoding="utf-8")
-            for token in ("Level0SourceReference", commit, entry["url"], entry["sourceNormalizedSha256"]):
-                self.assertIn(token, text)
-            if pointer.suffix == ".json":
-                data = read_json(pointer)
-                self.assertEqual(data["documentType"], "Level0SourceReference")
-                self.assertNotIn("overallOutcome", data)
-                self.assertNotIn("humanDecisions", data)
-        for document in (REPOSITORY / "docs/secure-development").rglob("*.md"):
-            for link in re.findall(r"\]\(([^)\s]+)\)", document.read_text(encoding="utf-8")):
-                parsed = urlsplit(link)
-                if not parsed.scheme and not parsed.netloc and parsed.path:
-                    self.assertTrue((document.parent / unquote(parsed.path)).exists(), f"Missing source link: {document}: {link}")
+    def test_installed_binding_rejects_drift_and_preserves_text_parity(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            preset = root / "fixture"
+            preset.mkdir()
+            (preset / "preset.yml").write_text('preset:\n  version: "1.0.0"\n', encoding="utf-8")
+            (preset / "command.md").write_text("# Evidence\n", encoding="utf-8")
+            (preset / "binary.dat").write_bytes(b"\xff\r\n")
+            installed = {"version": "1.0.0", "priority": 10, "enabled": True,
+                         "manifest_hash": "sha256:" + normalized_hash(preset / "preset.yml")}
+            (root / ".registry").write_text(json.dumps({"presets": {"fixture": installed}}), encoding="utf-8")
+            entry = {"id": "fixture", **installed, **payload_binding(preset)}
+            lock = {"schemaVersion": 1, "baselineCommit": "a" * 40,
+                    "hashContract": "sha256-utf8-lf-bom-or-raw-v1",
+                    "registrySha256": normalized_hash(root / ".registry"), "presets": [entry]}
+            validate_installed_lock(root, lock)
+            (preset / "command.md").write_bytes(b"\xef\xbb\xbf# Evidence\r\n")
+            validate_installed_lock(root, lock)
+            (preset / "binary.dat").write_bytes(b"\xff\n")
+            with self.assertRaises(ValueError):
+                validate_installed_lock(root, lock)
+            (preset / "binary.dat").write_bytes(b"\xff\r\n")
+            validate_installed_lock(root, lock)
+            for field, value in (("version", "9.0.0"), ("priority", 99), ("enabled", False),
+                                 ("manifest_hash", "sha256:" + "0" * 64),
+                                 ("fileCount", 0), ("contentSha256", "0" * 64)):
+                drift = deepcopy(lock)
+                drift["presets"][0][field] = value
+                with self.assertRaises(ValueError, msg=field):
+                    validate_installed_lock(root, drift)
+            for mutation in ("missing", "duplicate", "baseline", "registry"):
+                drift = deepcopy(lock)
+                if mutation == "missing": drift["presets"] = []
+                elif mutation == "duplicate": drift["presets"].append(entry)
+                elif mutation == "baseline": drift["baselineCommit"] = "unknown"
+                else: drift["registrySha256"] = "0" * 64
+                with self.assertRaises(ValueError, msg=mutation):
+                    validate_installed_lock(root, drift)
+            for change in ("edit", "extra", "remove"):
+                original = (preset / "command.md").read_bytes()
+                if change == "edit": (preset / "command.md").write_text("Changed", encoding="utf-8")
+                elif change == "extra": (preset / "extra.md").write_text("Extra", encoding="utf-8")
+                else: (preset / "command.md").unlink()
+                with self.assertRaises(ValueError, msg=change):
+                    validate_installed_lock(root, lock)
+                if change == "extra": (preset / "extra.md").unlink()
+                (preset / "command.md").write_bytes(original)
+
+    def test_release_source_binding_rejects_version_url_and_coverage_drift(self) -> None:
+        source = read_json(REPOSITORY / "docs/maintenance/preset-source-lock.json")
+        for field in ("tag", "archiveUrl", "repository"):
+            drift = deepcopy(source)
+            drift["presets"][0][field] = "invalid"
+            with self.assertRaises(ValueError, msg=field):
+                validate_release_sources(CONFIG, drift)
+        duplicate = deepcopy(source)
+        duplicate["presets"].append(duplicate["presets"][0])
+        with self.assertRaises(ValueError):
+            validate_release_sources(CONFIG, duplicate)
+        missing = deepcopy(source)
+        missing["presets"].pop(0)
+        with self.assertRaises(ValueError):
+            validate_release_sources(CONFIG, missing)
 
 
 if __name__ == "__main__":

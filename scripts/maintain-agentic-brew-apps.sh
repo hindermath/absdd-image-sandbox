@@ -527,10 +527,50 @@ for value in json.loads(sys.argv[1] or "[]"):
 PY
 }
 
+validate_cli_probe_contract() {
+  local id="$1" command_name="$2" args_json="$3"
+  python3 - "$id" "$command_name" "$args_json" <<'PY'
+import json
+import sys
+
+item_id, command_name, args_json = sys.argv[1:4]
+approved = {
+    "pandoc": ("pandoc", ["--version"]), "typst": ("typst", ["--version"]),
+    "tinymist": ("tinymist", ["--version"]),
+    "bash": ("bash", ["--noprofile", "--norc", "-c", "printf '%s\\n' \"$BASH_VERSION\"; (( BASH_VERSINFO[0] >= 5 ))"]),
+    "dotnet": ("dotnet", ["--version"]), "go": ("go", ["version"]),
+    "java": ("java", ["-version"]), "javac": ("javac", ["-version"]),
+    "python3": ("python3", ["--version"]), "python": ("python", ["--version"]),
+    "cargo": ("cargo", ["--version"]), "rustc": ("rustc", ["--version"]),
+    "swift": ("swift", ["--version"]), "syft": ("syft", ["version"]),
+    "lychee": ("lychee", ["--version"]), "specify": ("specify", ["--version"]),
+    "codex": ("codex", ["--version"]), "claude": ("claude", ["--version"]),
+    "antigravity": ("agy", ["--version"]), "copilot": ("copilot", ["--version"]),
+}
+expected = approved.get(item_id)
+if expected is None:
+    raise SystemExit(1)
+try:
+    arguments = json.loads(args_json)
+except (TypeError, ValueError):
+    raise SystemExit(1)
+if command_name != expected[0] or arguments != expected[1]:
+    raise SystemExit(1)
+PY
+}
+
 probe_cli_tool() {
   local tool_id="$1" command_name="$2" args_json="$3"
   local probe_output probe_exit expected_swift arg
   local -a args=()
+
+  if ! validate_cli_probe_contract "$tool_id" "$command_name" "$args_json"; then
+    CURRENT_PROBE_JSON=""
+    CURRENT_PROBE_STATUS="CapabilityBlocked"
+    CURRENT_PROBE_EVIDENCE="Probe ist nicht durch die Code-Policy autorisiert."
+    CURRENT_PROBE_NEXT_ACTION="Registry an den kanonischen Probevertrag angleichen."
+    return 2
+  fi
 
   probe_exit=0
   if [ "$DRY_RUN" -eq 1 ] || [ "$COMPARE_ONLY" -eq 1 ]; then
@@ -805,12 +845,28 @@ install_cli_tools() {
   while IFS=$'\t' read -r -u 3 id command_name args_json manager install_args_json install_url install_sha256 interpreter; do
     [ -n "$id" ] || continue
     validate_item_id "$id"
+    if ! validate_cli_probe_contract "$id" "$command_name" "$args_json"; then
+      log "SKIP cli tool probe: $id (nicht durch Code-Policy autorisiert)"
+      mark_failed_attempt cli "$id"
+      continue
+    fi
     if cli_tool_available "$id" "$command_name" "$args_json"; then
       log "OK cli tool: $id"
     else
       install_cli_tool "$id" "$manager" "$install_args_json" "$install_url" "$install_sha256" "$interpreter"
     fi
   done 3< "$snapshot"
+}
+
+validate_npm_agent_probe_contract() {
+  local tool_id="$1" command_name="$2" args_json="$3"
+  # DE: Registrierte Paketdaten erteilen keine Berechtigung zum Prozessstart.
+  # EN: Registry package data does not authorize process execution.
+  case "$tool_id" in
+    codex|claude|copilot) ;;
+    *) return 1 ;;
+  esac
+  [ "$command_name" = "$tool_id" ] && [ "$args_json" = '["--version"]' ]
 }
 
 install_npm_agent_tools() {
@@ -823,6 +879,11 @@ install_npm_agent_tools() {
     [ -n "$id" ] || continue
     validate_item_id "$id"
     validate_item_id "$package_name"
+    if ! validate_npm_agent_probe_contract "$id" "$command_name" "$args_json"; then
+      log "SKIP npm agent probe: $id (nicht durch Code-Policy autorisiert)"
+      mark_failed_attempt npm-cli "$id"
+      continue
+    fi
     if cli_tool_available "$id" "$command_name" "$args_json"; then
       log "OK npm agent cli: $id"
     elif [ "$DRY_RUN" -eq 1 ] || command -v npm >/dev/null 2>&1; then
@@ -886,6 +947,12 @@ compare_npm_agent_scope() {
 
   while IFS=$'\t' read -r -u 3 id package_name command_name args_json; do
     [ -n "$id" ] || continue
+    if ! validate_npm_agent_probe_contract "$id" "$command_name" "$args_json"; then
+      missing="${missing}${id}"$'\n'
+      record_result npm-cli "$id" "$scope" false Failed \
+        CapabilityBlocked "untrusted npm registry field" "Use the code-owned probe contract."
+      continue
+    fi
     attempted=false
     was_attempted npm-cli "$id" && attempted=true
     if cli_tool_available "$id" "$command_name" "$args_json"; then

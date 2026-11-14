@@ -1,6 +1,6 @@
 {
   "id": "project-statistics-governance",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "priority": 90,
   "readers": [
     "docs/user-guide.md",
