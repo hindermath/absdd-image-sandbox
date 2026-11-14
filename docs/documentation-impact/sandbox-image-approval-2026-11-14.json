@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.1",
+  "feature": "sandbox-image-approval-2026-11-14",
+  "entries": [
+    {
+      "changeId": "CHG001",
+      "scope": "Pin current Level-0 in isolated sandbox candidate for Secure Trader maintenance",
+      "decision": "UpdateRequired",
+      "rationale": "The new image and package identifiers and pending activation must be visible after the exact owner decision.",
+      "documents": [
+        "home-baseline.lock.json",
+        "docs/betrieb/validierung-und-wartung.md",
+        "docs/security/sandbox-freigabe.md",
+        "docs/security/agent-session-log/2026-11-14-1751-image-candidate.md"
+      ],
+      "owner": "Repository Maintainer and Workspace Owner",
+      "audiences": [
+        "Maintainers",
+        "Security reviewers",
+        "Learners"
+      ],
+      "readerPaths": [
+        "Operations validation",
+        "Pinned Home Baseline reference",
+        "Concrete image approval before activation"
+      ],
+      "canonicalSource": "home-baseline.lock.json for embedded source; Level-0 source for package; immutable Podman image and local test evidence for candidate",
+      "navigationImpact": "Link the dated candidate evidence from the existing operations validation and approval pages.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and equivalent English second.",
+      "languagePartners": [],
+      "platformAndExampleProof": "Native ARM64 all-profile build and CycloneDX SBOM passed. Isolated non-root immutable-reference check and offline toolchain/documentation smoke passed. Exact owner approval was then granted. No activation, Windows/AMD64 acceptance, PDF accessibility acceptance or formal organizational role approval is claimed.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/security/agent-session-log/2026-11-14-1751-image-candidate.md",
+      "risk": "Treating an approved candidate as activated could bypass image/package binding and backup gates.",
+      "criticality": "Security",
+      "reevaluationTrigger": "Owner decision, source revision, image ID, package digest, mount boundary or expiry change."
+    }
+  ]
+}
