@@ -6,11 +6,17 @@ Dieses Dokument hält die ausdrückliche Owner-Entscheidung fest. Sie ist keine 
 
 ## Deutsch
 
-### Image-Kandidat vom 14.11.2026: exakte Owner-Freigabe erteilt, Aktivierung ausstehend
+### Image vom 15.11.2026: exakte Owner-Freigabe erteilt, Aktivierung ausstehend
 
-Der neue ARM64-`all`-Kandidat `sha256:f7cade21c421c19ee7ecfcbb1f4a44870be87b3dc4d1a851417993b359f43df2` enthält Level-0 `816efa2222f3d2054fb80ac945cea116e657b99a`. Sein Paketfingerabdruck lautet `40d302d05a0596a3593bad069a12d80755f77bc32ce30f049ed468059547e71f`. [Build-, SBOM- und Smoke-Nachweis](agent-session-log/2026-11-14-1751-image-candidate.md) sind vorbereitet. Thorsten Hindermann antwortete auf die ausdrücklich mit dieser Image-ID und diesem Paketfingerabdruck gestellte Frage am 14.11.2026: „Freigabe erteilt.“ Der [gebundene Owner-Nachweis in Level-0](https://github.com/hindermath/home-baseline/blob/main/docs/maintenance/secure-trader-owner-approval-2026-11-14.md) dokumentiert Umfang und Ablaufdatum. Die frühere Owner-Aussage zum laufenden Image `12359cbf…` wurde nicht auf andere Kandidaten übertragen. Bis zum technischen Aktivierungs-Preflight bleibt der bisherige Container in Betrieb. Die organisatorischen Rollenfreigaben bleiben gesondert offen.
+Das neue ARM64-`all`-Image `sha256:53830cee3164a5112067a3681095e7d26f58ce930f452c7f9114592b0e1edb49` enthält Level-0 `a56d19cea928edb8048589428828727b76c51d6f` und den Paketfingerabdruck `37dee3bcbdb81874ba890110e7a7c4bcab0564e3d0a5f464ea5a62ec2f0ba3fd`. [Build-, SBOM- und Smoke-Nachweis](agent-session-log/2026-11-15-image-candidate.md) liegen vor. Thorsten antwortete auf die exakte Kandidatenfrage am 15.11.2026: „Ja, exakt dieses Image freigeben“. Der [gebundene Owner-Nachweis in Level-0](https://github.com/hindermath/home-baseline/blob/main/docs/maintenance/secure-trader-owner-approval-2026-11-15.md) begrenzt Umfang und Laufzeit. Bis zum technischen Wechsel läuft das vorherige Image weiter. Organisatorische Rollenfreigaben bleiben offen.
 
-*The new ARM64 all-profile candidate passed build and isolated checks. Thorsten explicitly approved its exact image and package on 14 November 2026. Prior approval of the running image did not transfer. Activation gates and organizational role approvals remain pending.*
+*The exact new image and package are owner-approved for bounded maintenance. Activation and formal role approvals remain separate.*
+
+### Image vom 14.11.2026: historischer Owner-Nachweis; aktiviert
+
+Der neue ARM64-`all`-Kandidat `sha256:f7cade21c421c19ee7ecfcbb1f4a44870be87b3dc4d1a851417993b359f43df2` enthält Level-0 `816efa2222f3d2054fb80ac945cea116e657b99a`. Sein Paketfingerabdruck lautet `40d302d05a0596a3593bad069a12d80755f77bc32ce30f049ed468059547e71f`. [Build-, SBOM- und Smoke-Nachweis](agent-session-log/2026-11-14-1751-image-candidate.md) sind vorbereitet. Thorsten Hindermann antwortete auf die ausdrücklich mit dieser Image-ID und diesem Paketfingerabdruck gestellte Frage am 14.11.2026: „Freigabe erteilt.“ Der [gebundene Owner-Nachweis in Level-0](https://github.com/hindermath/home-baseline/blob/main/docs/maintenance/secure-trader-owner-approval-2026-11-14.md) dokumentiert Umfang und Ablaufdatum. Die frühere Owner-Aussage zum laufenden Image `12359cbf…` wurde nicht auf andere Kandidaten übertragen. Das Image wurde nach Auditexport, Volume-Sicherung und technischem Preflight am 14.11.2026 aktiviert. Die organisatorischen Rollenfreigaben bleiben gesondert offen.
+
+*The ARM64 all-profile candidate passed build and isolated checks. Thorsten explicitly approved its exact image and package on 14 November 2026. It was activated after verified audit export, volume backup and technical preflight. Separate organizational role approvals remain pending.*
 
 ### Image-Kandidat vom 08.11.2026: noch nicht freigegeben
 
