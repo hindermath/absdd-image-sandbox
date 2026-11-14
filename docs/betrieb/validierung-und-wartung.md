@@ -3,7 +3,7 @@
 ## Prüftiefe wählen / Choose Validation Depth
 
 Aktueller Kandidatenstand / Current candidate evidence:
-[Image-Kandidat vom 14.11.2026](../security/agent-session-log/2026-11-14-1751-image-candidate.md): Build und isolierter Smoke bestanden; exakte Owner-Freigabe erteilt, Aktivierung steht aus. / Build and isolated smoke passed; exact owner approval granted, activation remains pending.
+[Image-Kandidat vom 15.11.2026](../security/agent-session-log/2026-11-15-image-candidate.md): Build, SBOM, Offline-Smoke und exakte Owner-Freigabe bestanden; Aktivierung steht aus. / Build, SBOM, offline smoke and exact owner approval passed; activation remains pending. Der [Kandidat vom 14.11.2026](../security/agent-session-log/2026-11-14-1751-image-candidate.md) wurde anschließend aktiviert. / The 14 November candidate was subsequently activated.
 [Feature-Update #101/#102/#104](../maintenance/feature-update-2026-11-06-acceptance.md).
 
 **DE:** Eine **statische Prüfung** liest Konfiguration und Dateien, ohne einen

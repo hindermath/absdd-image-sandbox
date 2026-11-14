@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.1",
+  "feature": "sandbox-image-approval-2026-11-15",
+  "entries": [
+    {
+      "changeId": "CHG001",
+      "scope": "Pin Level-0 a56d19ce in the exact owner-approved sandbox image candidate",
+      "decision": "UpdateRequired",
+      "rationale": "Five bound Level-0 TUI files changed, requiring a new image/package binding before Level-0 fast-forward and future protected maintenance.",
+      "documents": [
+        "home-baseline.lock.json",
+        "docs/betrieb/validierung-und-wartung.md",
+        "docs/security/sandbox-freigabe.md",
+        "docs/security/agent-session-log/2026-11-15-image-candidate.md"
+      ],
+      "owner": "Repository Maintainer and Workspace Owner",
+      "audiences": [
+        "Maintainers",
+        "Security reviewers",
+        "Learners"
+      ],
+      "readerPaths": [
+        "Operations validation",
+        "Pinned Home Baseline reference",
+        "Concrete image approval before activation"
+      ],
+      "canonicalSource": "home-baseline.lock.json for embedded source; Level-0 source for package; immutable Podman image and local test evidence for candidate",
+      "navigationImpact": "Link the dated candidate evidence from the existing operations validation and approval pages.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first and equivalent English second.",
+      "languagePartners": [],
+      "platformAndExampleProof": "Native ARM64 all-profile build, CycloneDX SBOM, 172-member immutable package check and offline toolchain/documentation smoke passed. Exact owner approval granted; actual mount/activation preflight remains a separate gate.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/security/agent-session-log/2026-11-15-image-candidate.md",
+      "risk": "Treating an approved candidate as activated could bypass image/package binding and backup gates.",
+      "criticality": "Security",
+      "reevaluationTrigger": "Owner decision, source revision, image ID, package digest, mount boundary or expiry change."
+    }
+  ]
+}
