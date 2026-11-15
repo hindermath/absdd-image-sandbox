@@ -84,6 +84,19 @@ environment, not an application.
 | Maintainer und Review / Maintainers and review | [docs/betrieb/README.md](docs/betrieb/README.md) | Image-Aufbau, Compose-Grenzen, Validierung, Audit, SBOM und Wartung / image construction, Compose boundaries, validation, audit, SBOM, and maintenance |
 | Security Review | [docs/security/](docs/security/) | Freigabe-, Inventar-, Isolations- und Evidenzstand / approval, inventory, isolation, and evidence state |
 
+Der [Praxisleitfaden für sichere Entwicklung](https://github.com/hindermath/home-baseline/blob/main/docs/secure-development/praxisleitfaden-sichere-entwicklung.md)
+([English version](https://github.com/hindermath/home-baseline/blob/main/docs/secure-development/praxisleitfaden-sichere-entwicklung.en.md))
+erklärt typische Risiken und Gegenmaßnahmen. Für diese Sandbox gelten
+zusätzlich die [Isolationsgrenzen](docs/security/sandbox-isolation.md):
+Projekt-Mounts können Host-Dateien sichtbar machen; Zugangsdaten gehören
+nicht in Prompts, Commits oder Audit-Exporte.
+
+*The [secure development practice guide](https://github.com/hindermath/home-baseline/blob/main/docs/secure-development/praxisleitfaden-sichere-entwicklung.en.md)
+explains common risks and safeguards. The [sandbox isolation record](docs/security/sandbox-isolation.md)
+defines this environment's additional boundaries: project mounts can expose
+host files, and credentials must stay out of prompts, commits, and audit
+exports.*
+
 Die Detailseiten beschreiben den aktuellen lokalen Image-Vertrag. `Dockerfile`,
 Compose-Dateien, Repository-Skripte und praktisch validiertes Verhalten bleiben
 die technische Wahrheit.
