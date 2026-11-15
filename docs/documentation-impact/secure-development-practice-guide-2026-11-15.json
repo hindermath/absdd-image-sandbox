@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.1",
+  "feature": "secure-development-practice-guide-2026-11-15",
+  "entries": [
+    {
+      "changeId": "CHG001",
+      "scope": "Sandbox README and learner navigation to the canonical Level-0 practice guide",
+      "decision": "UpdateRequired",
+      "rationale": "Sandbox readers need a short route to the new guide and a clear reminder of local mount and credential boundaries.",
+      "documents": [
+        "README.md",
+        "docs/fuer-lernende/README.md"
+      ],
+      "owner": "Thorsten Hindermann",
+      "audiences": [
+        "Apprentices",
+        "Developers without specialist security knowledge",
+        "Sandbox maintainers"
+      ],
+      "readerPaths": [
+        "Sandbox README -> online Level-0 practice guide -> sandbox isolation record",
+        "Learner documentation -> practice guide -> local script and mount rules"
+      ],
+      "canonicalSource": "README.md",
+      "navigationImpact": "Short links in the existing documentation-path table and learner index; no local copy of the practice guide.",
+      "documentClass": "ActiveSemantic",
+      "languageStrategy": "German first, equivalent English second; descriptive text links and applicable WCAG 2.2 AA criteria.",
+      "languagePartners": [],
+      "platformAndExampleProof": "Local links and repository documentation checks; the embedded Level-0 source remains pinned and may lag the online guide. No image build, practical screen-reader test, or Braille test is claimed.",
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false,
+      "evidence": "docs/fuer-lernende/README.md",
+      "risk": "The public Level-0 guide link will not resolve until that source is published; local pinned source may remain older.",
+      "criticality": "Security",
+      "reevaluationTrigger": "Level-0 guide location or publication, sandbox mount policy, credential boundary, or embedded source pin changes."
+    }
+  ]
+}

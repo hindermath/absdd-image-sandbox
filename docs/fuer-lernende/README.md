@@ -224,6 +224,25 @@ tools and stop cleanly — both explained step by step in
 | [../../README.md](../../README.md) | Ausführliche Anleitung für Entwickler und Administratoren / Detailed guide for developers and administrators |
 | [../betrieb/README.md](../betrieb/README.md) | Technische Image-, Compose-, Validierungs- und Wartungsreferenz / Technical image, Compose, validation and maintenance reference |
 | [../secure-development/](../secure-development/) | Richtlinie, 12 Checklisten und Leitlinien für sichere Entwicklung / Guideline, twelve checklists and secure-development guidance |
+| [Praxisleitfaden Sicher entwickeln](https://github.com/hindermath/home-baseline/blob/main/docs/secure-development/praxisleitfaden-sichere-entwicklung.md) / [Secure development practice guide](https://github.com/hindermath/home-baseline/blob/main/docs/secure-development/praxisleitfaden-sichere-entwicklung.en.md) | Beispiele zu Alerts, Datenflüssen, sechs MSL-Familien und Skripten / Examples about alerts, data flows, six MSL families, and scripts |
+
+---
+
+**DE:** Lies zum Einstieg den oben verlinkten Praxisleitfaden. Prüfe bei Arbeiten in dieser
+Sandbox zusätzlich die [Isolationsgrenzen](../security/sandbox-isolation.md)
+und die [Regeln für Python, Bash und PowerShell](../security/secure-coding-language-rules.md).
+Ein Mount macht Host-Dateien sichtbar; lege keine Zugangsdaten in Prompts,
+Commits oder Audit-Exporte. Die eingebaute Level-0-Kopie ist an
+`home-baseline.lock.json` gebunden und kann älter als der verlinkte Online-
+Leitfaden sein.
+
+**EN:** Start with the [secure development practice guide](https://github.com/hindermath/home-baseline/blob/main/docs/secure-development/praxisleitfaden-sichere-entwicklung.en.md).
+For work in this sandbox, also read the
+[isolation record](../security/sandbox-isolation.md) and the
+[Python, Bash, and PowerShell rules](../security/secure-coding-language-rules.md).
+A mount can expose host files; keep credentials out of prompts, commits, and
+audit exports. The embedded Level 0 copy is pinned by
+`home-baseline.lock.json` and may be older than the linked online guide.
 
 ---
 
