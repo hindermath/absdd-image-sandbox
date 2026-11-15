@@ -53,6 +53,16 @@ taegliche Nutzung helfen [Alltag](alltag.md), [FAQ](faq.md) und die
 use the short path. Daily workflow, FAQ and accessibility guidance support
 repeated use.
 
+**DE:** Eine betreute Übung zum sicheren Anlegen und Prüfen lokaler Projekte
+steht im [Home-Baseline-Runbook](https://github.com/hindermath/home-baseline/blob/main/docs/runbooks/security-baseline-integration-test.md).
+Du brauchst dafür keine privaten Repositories. Der vollständige Flottentest
+bleibt eine gesondert beauftragte Maintainer-Aufgabe.
+
+**EN:** The [Home Baseline runbook](https://github.com/hindermath/home-baseline/blob/main/docs/runbooks/security-baseline-integration-test.md)
+provides a supervised exercise for creating and checking local projects
+safely. It needs no private repositories. The full fleet test remains a
+separately requested maintainer task.
+
 **DE:** Für angeleitete Gruppenarbeit gibt es den
 [neutralen Spec-Kit-Workshop](../praesentationen/README.md) als Markdown und
 PowerPoint, jeweils auf Deutsch und Englisch. Beispiele sind keine

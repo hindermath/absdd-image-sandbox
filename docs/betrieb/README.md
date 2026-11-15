@@ -58,6 +58,7 @@ is the correct starting point for the guided path from the first training year.
 | Thema / Topic | Kanonische Quelle / Canonical source |
 |---|---|
 | Lernpfad, institutionelles Git-Hosting, Governance und Home-Source-/Runtime-Vertrag / learner path, institutional Git hosting, governance, and Home source/runtime contract | [Home-Baseline-Architektur](https://github.com/hindermath/home-baseline/blob/main/docs/architecture/source-and-home-runtime.md) und die dort verlinkten Lernleitfaeden / Home Baseline architecture and its linked learner guides |
+| Wiederholbarer Integrations-Testplan und Berichtsvorlage / repeatable integration test plan and report template | [Home-Baseline-Runbook](https://github.com/hindermath/home-baseline/blob/main/docs/runbooks/security-baseline-integration-test.md) und [leere Vorlage](https://github.com/hindermath/home-baseline/blob/main/docs/runbooks/security-baseline-integration-test-report-template.md) / runbook and blank template; execution requires a separate maintainer request |
 | Image-Build, Toolversionen, Container-Mounts, Laufzeitbefehle und installierter Runtime-Wrapper / image build, tool versions, container mounts, runtime commands, and installed runtime wrapper | dieses Repository: `Dockerfile`, Compose-Dateien, Skripte und `docs/betrieb/` / this repository: `Dockerfile`, Compose files, scripts, and `docs/betrieb/` |
 
 **DE:** `home-baseline.lock.json` bestimmt den exakten eingebetteten und offline

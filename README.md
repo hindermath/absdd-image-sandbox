@@ -80,6 +80,7 @@ environment, not an application.
 | Lernende / Learners | [docs/fuer-lernende/README.md](docs/fuer-lernende/README.md) | geführter Einstieg, Toolchains, Agenten, Git und Fehlerhilfe / guided setup, toolchains, agents, Git, and troubleshooting |
 | Berufe und Fachrichtungen / Occupations and specialisations | [Lernwege](docs/fuer-lernende/lernwege.md) | gemeinsame Grundlage ab Lehrjahr 1 und passende Vertiefungen / shared first-year foundation and suitable follow-ups |
 | Entwickler ohne Spezialkenntnisse / Non-specialist developers | [Entwickler-Kurzpfad](docs/fuer-lernende/entwickler-kurzpfad.md) | kompakter Einstieg ohne Sicherheitsabkuerzung / compact entry without security shortcuts |
+| Wiederholbarer Integrationstest / Repeatable integration test | [Home-Baseline-Runbook](https://github.com/hindermath/home-baseline/blob/main/docs/runbooks/security-baseline-integration-test.md) | angeleitete lokale Übung und gesonderter Maintainer-Lauf / guided local exercise and separate maintainer run |
 | Wiederkehrende Arbeit / Daily use | [Alltag](docs/fuer-lernende/alltag.md) und [FAQ](docs/fuer-lernende/faq.md) | Daten erhalten, Aenderungen verstehen und sicher stoppen / preserve data, understand changes and stop safely |
 | Maintainer und Review / Maintainers and review | [docs/betrieb/README.md](docs/betrieb/README.md) | Image-Aufbau, Compose-Grenzen, Validierung, Audit, SBOM und Wartung / image construction, Compose boundaries, validation, audit, SBOM, and maintenance |
 | Security Review | [docs/security/](docs/security/) | Freigabe-, Inventar-, Isolations- und Evidenzstand / approval, inventory, isolation, and evidence state |
@@ -96,6 +97,9 @@ explains common risks and safeguards. The [sandbox isolation record](docs/securi
 defines this environment's additional boundaries: project mounts can expose
 host files, and credentials must stay out of prompts, commits, and audit
 exports.*
+
+Das Runbook liegt im kanonischen `main`-Branch von Home Baseline. / The runbook
+is available on Home Baseline's canonical `main` branch.
 
 Die Detailseiten beschreiben den aktuellen lokalen Image-Vertrag. `Dockerfile`,
 Compose-Dateien, Repository-Skripte und praktisch validiertes Verhalten bleiben
