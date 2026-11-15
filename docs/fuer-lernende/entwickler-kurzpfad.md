@@ -15,12 +15,12 @@ learning paths. This is a shorter reading route, not a security bypass.
 
 **DE:** Für einen wiederholbaren Testablauf mit Lernübung und getrenntem
 Maintainer-Teil siehe das
-[Home-Baseline-Runbook](https://github.com/hindermath/home-baseline/blob/b9e28a466528b66e904038c2673a48b26bcccb74/docs/runbooks/security-baseline-integration-test.md).
+[Home-Baseline-Runbook](https://github.com/hindermath/home-baseline/blob/main/docs/runbooks/security-baseline-integration-test.md).
 Das Lesen startet keine Tests.
 
 **EN:** For a repeatable test process with a guided exercise and separate
 maintainer section, read the
-[Home Baseline runbook](https://github.com/hindermath/home-baseline/blob/b9e28a466528b66e904038c2673a48b26bcccb74/docs/runbooks/security-baseline-integration-test.md).
+[Home Baseline runbook](https://github.com/hindermath/home-baseline/blob/main/docs/runbooks/security-baseline-integration-test.md).
 Reading it starts no tests.
 
 ## Ablauf / Workflow

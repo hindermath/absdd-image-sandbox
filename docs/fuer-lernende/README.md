@@ -54,11 +54,11 @@ use the short path. Daily workflow, FAQ and accessibility guidance support
 repeated use.
 
 **DE:** Eine betreute Übung zum sicheren Anlegen und Prüfen lokaler Projekte
-steht im [Home-Baseline-Runbook](https://github.com/hindermath/home-baseline/blob/b9e28a466528b66e904038c2673a48b26bcccb74/docs/runbooks/security-baseline-integration-test.md).
+steht im [Home-Baseline-Runbook](https://github.com/hindermath/home-baseline/blob/main/docs/runbooks/security-baseline-integration-test.md).
 Du brauchst dafür keine privaten Repositories. Der vollständige Flottentest
 bleibt eine gesondert beauftragte Maintainer-Aufgabe.
 
-**EN:** The [Home Baseline runbook](https://github.com/hindermath/home-baseline/blob/b9e28a466528b66e904038c2673a48b26bcccb74/docs/runbooks/security-baseline-integration-test.md)
+**EN:** The [Home Baseline runbook](https://github.com/hindermath/home-baseline/blob/main/docs/runbooks/security-baseline-integration-test.md)
 provides a supervised exercise for creating and checking local projects
 safely. It needs no private repositories. The full fleet test remains a
 separately requested maintainer task.
