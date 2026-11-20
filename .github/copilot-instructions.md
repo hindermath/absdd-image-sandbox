@@ -8,6 +8,14 @@ für deine Aufgabe. Sie ergänzen die verbindlichen Arbeits-, Sicherheits-, Prü
 EN: Read the project constitution and the relevant [detailed rules](../docs/agent-guidance.md)
 before working. They supplement the binding work, security, verification and approval rules.
 
+DE: Das Standardprofil `all` enthält sechs erforderliche speichersichere
+Toolchains (.NET/C#, Java, Go, Rust, Python und Swift). PowerShell 7 ist die
+zweite Skriptgrundlage. Node.js/npm sind unterstützende Werkzeuge.
+
+EN: The default `all` image includes six required memory-safe language
+toolchains (.NET/C#, Java, Go, Rust, Python, and Swift). It includes
+PowerShell 7 as a second scripting foundation and Node.js/npm as supporting tooling.
+
 <!-- documentation-reader-contract:start -->
 ## Dokumentationspflege / Documentation Maintenance
 
