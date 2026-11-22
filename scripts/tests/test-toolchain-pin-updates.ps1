@@ -27,7 +27,7 @@ function Assert-PinThrows {
 }
 function ConvertTo-PinFixtureJson { param($Value) ConvertTo-Json -InputObject $Value -Depth 20 -Compress }
 $context=Get-AdePinContext $root
-Assert-Pin ($context.values.Count -eq 30) 'all existing ARGs have explicit coverage'
+Assert-Pin ($context.values.Count -eq 29) 'all existing ARGs have explicit coverage'
 $before=Get-AdePinTextHash $context.text
 $fixtures=@{}
 $fixtures['https://api.adoptium.net/v3/info/available_releases']='{"available_lts_releases":[21,25]}'
@@ -39,9 +39,6 @@ $fixtures['https://static.rust-lang.org/rustup/release-stable.toml']="schema-ver
 $fixtures['https://go.dev/dl/?mode=json&include=all']=ConvertTo-PinFixtureJson @(@{version='go1.27.4';stable=$true;files=@(
     @{os='linux';arch='amd64';kind='archive';filename='go1.27.4.linux-amd64.tar.gz';sha256=('a'*64)},
     @{os='linux';arch='arm64';kind='archive';filename='go1.27.4.linux-arm64.tar.gz';sha256=('b'*64)})})
-$fixtures['https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/10.0/releases.json']=ConvertTo-PinFixtureJson @{releases=@(@{sdks=@(
-    @{version='10.0.304';files=@(@{rid='linux-x64';url='https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.304/dotnet-sdk-10.0.304-linux-x64.tar.gz';hash=('a'*128)},@{rid='linux-arm64';url='https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.304/dotnet-sdk-10.0.304-linux-arm64.tar.gz';hash=('b'*128)})},
-    @{version='10.0.499';files=@()})})}
 $fixtures['https://api.github.com/repos/astral-sh/python-build-standalone/releases/latest']=ConvertTo-PinFixtureJson @{tag_name='20261022';draft=$false;prerelease=$false;assets=@(
     @{name='cpython-3.15.2+20261022-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz';digest=('sha256:'+('a'*64))},
     @{name='cpython-3.15.2+20261022-aarch64-unknown-linux-gnu-install_only_stripped.tar.gz';digest=('sha256:'+('b'*64))})}
@@ -68,7 +65,7 @@ Set-AdePinFixtures $fixtures
 $report=Get-AdePinReport $context
 foreach($entry in $report.groups){ if($entry.status -ceq 'Blocked'){Write-Output "$($entry.group): $($entry.reason)"} }
 Assert-Pin ($report.status -ceq 'Ready') 'all provider families resolve against fixtures'
-Assert-Pin (@($report.groups).Count -eq 28) 'Python version and date are one atomic group'
+Assert-Pin (@($report.groups).Count -eq 27) 'Python version and date are one atomic group'
 Assert-Pin (@($report.groups|Where-Object status -eq 'Candidate').Count -gt 0) 'fixtures still produce mutable group proposals'
 Assert-Pin (@($report.groups|Where-Object { $_.group -ceq 'SWIFT_DOCKER_TAG' -and $_.status -ceq 'PolicyHeld' }).Count -eq 1) 'Swift update awaits canonical Level-0 registry propagation'
 foreach($arg in @('GO_VERSION','RUST_TOOLCHAIN')) {
@@ -84,8 +81,8 @@ foreach($proposal in @($report.groups|Where-Object status -eq 'Candidate')){
 Assert-Pin ((Get-AdePinTextHash $context.text) -ceq $before) 'discovery and preparation leave source bytes unchanged'
 $npm=@($report.groups|Where-Object group -eq 'NPM_VERSION')[0]
 Assert-Pin ($npm.status -ceq 'Current' -and $context.values.NPM_VERSION -ceq '12.2.2') 'npm retains its pinned major'
-$sdk=@($report.groups|Where-Object group -eq 'DOTNET_COMPAT_SDK_VERSION')[0]
-Assert-Pin ($sdk.updates.DOTNET_COMPAT_SDK_VERSION -ceq '10.0.304') 'compatibility SDK retains its feature band'
+Assert-Pin ($context.registry.baseImage.tag -ceq '11.0.100-resolute') 'MCR provides the SDK'
+Assert-Pin ($context.registry.compatibilityRuntimeImage.tag -ceq '10.0.15-resolute') 'MCR provides the compatibility runtime'
 $uv=@($report.groups|Where-Object group -eq 'UV_VERSION')[0]
 Assert-PinThrows {Update-AdePinDockerfile $context @{group='UV_VERSION';updates=@{UV_VERSION='9.0.0'};hashes=@{amd64=('a'*64)}}} 'missing ARM64 hash rejected'
 Assert-PinThrows {Update-AdePinDockerfile $context @{group='UV_VERSION';updates=@{UV_VERSION='9.0.0'};hashes=@{amd64=('a'*63);arm64=('b'*64)}}} 'malformed hash rejected'
@@ -93,7 +90,6 @@ Assert-PinThrows {Update-AdePinDockerfile $context @{group='UV_VERSION';updates=
 Assert-PinThrows {Update-AdePinDockerfile $context @{group='UV_VERSION';updates=@{UV_VERSION='0.0.1'};hashes=@{}}} 'downgrade rejected'
 Assert-PinThrows {Update-AdePinDockerfile $context @{group='CODEX_VERSION';updates=@{CODEX_VERSION='9.0.0; command'};hashes=@{}}} 'version command injection rejected'
 Assert-PinThrows {Update-AdePinDockerfile $context @{group='PYTHON_RUNTIME';updates=@{PYTHON_VERSION='3.15.2'};hashes=@{amd64=('a'*64);arm64=('b'*64)}}} 'Python companion update required'
-Assert-PinThrows {Update-AdePinDockerfile $context @{group='DOTNET_COMPAT_SDK_VERSION';updates=@{DOTNET_COMPAT_SDK_VERSION='10.0.499'};hashes=@{amd64=('a'*128);arm64=('b'*128)}}} 'SDK feature-band escape rejected'
 foreach($url in @('http://api.github.com/repos/x/y','https://localhost/releases','https://api.github.com:444/x','https://user:secret@api.github.com/x','https://api.github.com/x#fragment')){
     Assert-PinThrows {Invoke-AdePinRequest $url} 'unapproved source boundary rejected before any network'
 }

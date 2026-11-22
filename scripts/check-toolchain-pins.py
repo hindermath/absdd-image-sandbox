@@ -37,7 +37,6 @@ REQUIRED_AGENT_CLIS = {
 
 REQUIRED_OPERATIONAL_TOOLS = {
     "ACTIONLINT_VERSION": ("rhysd/actionlint", "actionlint_${ACTIONLINT_VERSION}", "actionlint -version"),
-    "DOTNET_COMPAT_SDK_VERSION": ("dotnet-sdk", "dotnet-sdk-${DOTNET_COMPAT_SDK_VERSION}", "dotnet --version"),
 }
 
 
@@ -48,6 +47,17 @@ def main() -> int:
     smoke_text = Path("scripts/smoke-test-toolchains.sh").read_text(encoding="utf-8")
     registry = json.loads(Path("scripts/config/toolchain-pins.json").read_text(encoding="utf-8"))
     failures: list[str] = []
+    mcr_images = {
+        "baseImage": ("sdk", "11.0.100-resolute", "dotnet-base"),
+        "compatibilityRuntimeImage": ("aspnet", "10.0.15-resolute", "dotnet-compat-runtime"),
+    }
+    for key, (kind, tag, stage) in mcr_images.items():
+        dependency = f"mcr.microsoft.com/dotnet/{kind}"
+        ref = re.escape(f"{dependency}:{tag}")
+        pattern = rf"^FROM {ref}@sha256:[0-9a-f]{{64}} AS {stage}$"
+        pin = {"dependency": dependency, "tag": tag, "owner": "dependabot"}
+        if registry.get(key) != pin or len(re.findall(pattern, dockerfile_text, re.MULTILINE)) != 1:
+            failures.append(f"Approved MCR image channel/digest has drifted: {key}.")
 
     for index, line in enumerate(lines):
         match = ARG_RE.match(line)
@@ -77,7 +87,7 @@ def main() -> int:
     records = registry.get("pins", [])
     registered = [pin.get("arg") for pin in records]
     providers = {"github", "npm", "gomod", "go", "rust", "rustup", "maven", "python",
-                 "powershell", "dotnet", "java-channel", "node-channel", "companion", "selector"}
+                 "powershell", "java-channel", "node-channel", "companion", "selector"}
     if len(args) != len(set(args)) or len(registered) != len(set(registered)):
         failures.append("Duplicate Dockerfile ARG or pin registry entry")
     if set(args) != set(registered):
@@ -115,10 +125,6 @@ def main() -> int:
         "actionlint": (
             r'amd64\) actionlint_arch="amd64"; actionlint_sha256="[0-9a-f]{64}"',
             r'arm64\) actionlint_arch="arm64"; actionlint_sha256="[0-9a-f]{64}"',
-        ),
-        ".NET compatibility SDK": (
-            r'amd64\) dotnet_rid="linux-x64"; dotnet_sha512="[0-9a-f]{128}"',
-            r'arm64\) dotnet_rid="linux-arm64"; dotnet_sha512="[0-9a-f]{128}"',
         ),
     }
     for label, patterns in architecture_contracts.items():

@@ -13,7 +13,7 @@ $script:PinFixtures = $null
 $script:PinCache = @{}
 $script:PinHosts = @('api.github.com','registry.npmjs.org','proxy.golang.org','go.dev',
     'static.rust-lang.org','repo.maven.apache.org','dlcdn.apache.org','archive.apache.org',
-    'dotnetcli.blob.core.windows.net','api.adoptium.net','nodejs.org',
+    'api.adoptium.net','nodejs.org',
     'powershellinfraartifacts-gkhedzdeaghdezhr.z01.azurefd.net')
 
 function Set-AdePinFixtures {
@@ -102,8 +102,18 @@ function Get-AdePinContext {
     $text = [IO.File]::ReadAllText($path)
     $registry = [IO.File]::ReadAllText($registryPath) | ConvertFrom-Json -AsHashtable
     if ($registry.schemaVersion -ne 1 -or $registry.runtime -cne 'podman' -or $registry.dockerfile -cne 'Dockerfile') { throw 'Unsupported pin registry.' }
-    if ($registry.baseImage.owner -cne 'dependabot' -or $registry.baseImage.dependency -cne 'mcr.microsoft.com/dotnet/sdk' -or $registry.baseImage.tag -cne '10.0.403-resolute' -or
-        $text -cnotmatch '(?m)^FROM mcr\.microsoft\.com/dotnet/sdk:10\.0\.403-resolute@sha256:[a-f0-9]{64} AS dotnet-base\r?$') { throw 'Approved base-image channel/digest has drifted.' }
+    foreach ($expected in @(
+        @{ key='baseImage'; dependency='mcr.microsoft.com/dotnet/sdk'; tag='11.0.100-resolute'; stage='dotnet-base' },
+        @{ key='compatibilityRuntimeImage'; dependency='mcr.microsoft.com/dotnet/aspnet'; tag='10.0.15-resolute'; stage='dotnet-compat-runtime' }
+    )) {
+        $pin = $registry[$expected.key]
+        $ref = [regex]::Escape("$($expected.dependency):$($expected.tag)")
+        $pattern = "(?m)^FROM $ref@sha256:[a-f0-9]{64} AS $($expected.stage)\r?$"
+        if ($null -eq $pin -or $pin.owner -cne 'dependabot' -or $pin.dependency -cne $expected.dependency -or
+            $pin.tag -cne $expected.tag -or [regex]::Matches($text,$pattern).Count -ne 1) {
+            throw "Approved MCR image channel/digest has drifted: $($expected.key)."
+        }
+    }
     $values = @{}
     foreach ($match in [regex]::Matches($text,'(?m)^ARG ([A-Z][A-Z0-9_]*)=([^\r\n]+)\r?$')) {
         $name = $match.Groups[1].Value
@@ -117,7 +127,7 @@ function Get-AdePinContext {
     $names = @($registry.pins | ForEach-Object { $_.arg })
     if ($names.Count -ne $values.Count -or @($names | Select-Object -Unique).Count -ne $names.Count -or
         @($names | Where-Object { -not $values.ContainsKey($_) }).Count) { throw 'Pin coverage differs from Dockerfile ARGs.' }
-    $providers = @('github','npm','gomod','go','rust','rustup','maven','python','powershell','dotnet','java-channel','node-channel','companion','selector')
+    $providers = @('github','npm','gomod','go','rust','rustup','maven','python','powershell','java-channel','node-channel','companion','selector')
     foreach ($pin in $registry.pins) {
         if ($pin.arg -cnotmatch '^[A-Z][A-Z0-9_]*$' -or $pin.group -cnotmatch '^[A-Z][A-Z0-9_]*$' -or
             $pin.provider -cnotin $providers -or $pin.package -cnotmatch '^[@A-Za-z0-9][A-Za-z0-9@:._/-]*$') { throw 'Invalid pin record.' }
@@ -226,21 +236,6 @@ function Get-AdePinCandidate {
                 $hashes['all'] = $match.Groups['hash'].Value.ToLowerInvariant()
             }
         }
-        'dotnet' {
-            $source = "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/$($Pin.channel)/releases.json"
-            $data = Get-AdePinJson $source
-            $sdks = @($data.releases | ForEach-Object {$_.sdks} | Where-Object { $_.version -cmatch '^\d+\.\d+\.\d+$' -and ([version]$_.version).ToString(2) -ceq $Pin.channel -and [math]::Floor(([version]$_.version).Build/100) -eq $Pin.featureBand } | Sort-Object {[version]$_.version} -Descending)
-            if ($sdks.Count -eq 0) { throw 'No compatibility SDK in the pinned feature band.' }
-            $version = $sdks[0].version
-            if ((Get-AdePinVersion $version) -gt (Get-AdePinVersion $current)) {
-                foreach ($arch in @('amd64','arm64')) {
-                    $rid = if ($arch -ceq 'amd64') {'linux-x64'} else {'linux-arm64'}
-                    $files = @($sdks[0].files | Where-Object { $_.rid -ceq $rid -and $_.url.EndsWith("/dotnet-sdk-${version}-${rid}.tar.gz",[StringComparison]::Ordinal) })
-                    if ($files.Count -ne 1 -or $files[0].hash -cnotmatch '^[a-fA-F0-9]{128}$') { throw 'Missing compatibility SDK architecture digest.' }
-                    $hashes[$arch] = $files[0].hash.ToLowerInvariant()
-                }
-            }
-        }
         'python' {
             $source = 'https://api.github.com/repos/astral-sh/python-build-standalone/releases/latest'
             $release = Get-AdePinJson $source
@@ -318,7 +313,6 @@ function Update-AdePinDockerfile {
             if ($value -cnotmatch '^\d{8}$' -or $value -lt $Context.values[$arg]) { throw 'Invalid Python build date.' }
         } elseif ((Get-AdePinVersion $value) -lt (Get-AdePinVersion $Context.values[$arg])) { throw 'Pin downgrade rejected.' }
         $pin = @($pins | Where-Object {$_.arg -ceq $arg})[0]
-        if ($pin.ContainsKey('channel') -and $pin.provider -ceq 'dotnet' -and (([version]$value).ToString(2) -cne $pin.channel -or [math]::Floor(([version]$value).Build/100) -ne $pin.featureBand)) { throw 'SDK feature-band drift.' }
         if ($pin.ContainsKey('channel') -and $pin.provider -cin @('npm','github') -and (Get-AdePinVersion $value).Major.ToString() -cne $pin.channel) { throw 'Pinned channel drift.' }
         if ($pin.ContainsKey('valueSuffix') -and -not $value.EndsWith($pin.valueSuffix,[StringComparison]::Ordinal)) { throw 'Pinned platform suffix drift.' }
         $pattern = '(?m)(^ARG '+[regex]::Escape($arg)+'=)[^\r\n]+'

@@ -85,14 +85,26 @@ documentation smoke test.
 
 | Familie / Family | Installation und Kontrolle / Installation and control |
 |---|---|
-| .NET und PowerShell | gepinntes Basisimage plus hashgeprüftes Kompatibilitäts-SDK `10.0.303`; vorhandenes PowerShell-Tool hashgeprüft aktualisiert / pinned base image plus hash-verified compatibility SDK `10.0.303`; hash-verified update of existing PowerShell tool |
-| Java | Ubuntu OpenJDK 25 LTS und hashgeprüftes Apache Maven 3.10.0 / Ubuntu OpenJDK 25 LTS and hash-verified Apache Maven 3.10.0 |
+| .NET und PowerShell | MCR SDK 11 und zusätzliche .NET-/ASP.NET-Core-10-Runtimes per Digest; PowerShell-Pin unverändert / digest-pinned MCR SDK 11 and additional .NET/ASP.NET Core 10 runtimes; unchanged PowerShell pin |
+| Java | Ubuntu OpenJDK 25 LTS und hashgeprüftes Apache Maven 3.10.1 / Ubuntu OpenJDK 25 LTS and hash-verified Apache Maven 3.10.1 |
 | Go | Releasearchiv; zusätzliche Werkzeuge als Benutzer `adedev` / release archive; additional tools as user `adedev` |
 | Rust | festes `rustup-init` mit SHA256-Prüfung; Komponenten über gepinnte Toolchain / pinned `rustup-init` with SHA256 verification; components through pinned toolchain |
 | Python | nativer CPython-Standalone-Build 3.15.2 mit SHA-256 unter `/opt/cpython` im Profil `python`/`all`; Ubuntu-System-Python unverändert / native SHA-256-verified CPython 3.15.2 in the `python`/`all` profile; system Python unchanged |
 | Swift | signiertes Ubuntu-Release, Architekturprüfung, SourceKit-LSP / signed Ubuntu release, architecture check, SourceKit-LSP |
 | Node.js | signierte APT-Quelle; npm für globale Agentenpakete / signed APT source; npm for global agent packages |
 | GitHub Actions | hashgeprüftes `actionlint`-Release für `amd64` und `arm64`; `gh` bleibt auf der Control Plane / hash-verified `actionlint` release for `amd64` and `arm64`; `gh` remains on the control plane |
+
+**DE:** Im Container zeigen `dotnet --list-sdks` und `dotnet --list-runtimes`
+den Unterschied: Ein `net10.0`-Programm kann mit der .NET-10-Runtime starten.
+Ein Projekt, dessen `global.json` ein .NET-10-SDK verlangt, kann damit allein
+nicht gebaut werden. Ein SDK-11-Projekt mit Ziel `net10.0` benötigt beim
+Build gegebenenfalls zusätzliche Zielplattformpakete aus dem Paket-Feed.
+
+**EN:** In the container, `dotnet --list-sdks` and `dotnet --list-runtimes`
+show the distinction: A `net10.0` application can start on the .NET 10 runtime.
+A project whose `global.json` requires an SDK 10 cannot build with that runtime
+alone. An SDK 11 project targeting `net10.0` may need to restore additional
+targeting packs from the package feed.
 
 Das Swift-6-Archiv wird mit dem versionsspezifischen offiziellen
 Release-Schlüssel und dessen fest erwarteter Fingerprint-Identität geprüft.

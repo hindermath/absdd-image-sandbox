@@ -1,6 +1,10 @@
-# .NET 10.0.403 on Ubuntu 26.04; MCR index verified for linux/amd64 and linux/arm64 on 2026-11-06.
-FROM mcr.microsoft.com/dotnet/sdk:10.0.403-resolute@sha256:2107242a0f56885d09f8a536ac300f6cb1a2b3f6d40605e5ff81bbd83ad91e3f AS dotnet-base
+# Ubuntu 26.04; both MCR indexes contain native linux/amd64 and linux/arm64.
+FROM mcr.microsoft.com/dotnet/aspnet:10.0.15-resolute@sha256:b5e72aa3bc183d98a0fc5739c583201a4b97bdbaadcb9dcd1b69d428a8bd172b AS dotnet-compat-runtime
+FROM mcr.microsoft.com/dotnet/sdk:11.0.100-resolute@sha256:65f3c7c6a25a239ab3e6719f2896147e7b68242ff2d8818dd70498bde6ef8bea AS dotnet-base
 FROM dotnet-base AS sandbox
+# Preserve .NET 10 runtime compatibility without copying another SDK or host.
+# This must precede installation of the pinned PowerShell tool.
+COPY --from=dotnet-compat-runtime /usr/share/dotnet/shared/ /usr/share/dotnet/shared/
 
 # toolchain-pin: argName=JAVA_VERSION
 ARG JAVA_VERSION=25
@@ -48,8 +52,6 @@ ARG COPILOT_CLI_VERSION=1.0.106
 ARG SYFT_VERSION=1.55.0
 # toolchain-pin: argName=ACTIONLINT_VERSION
 ARG ACTIONLINT_VERSION=1.7.12
-# toolchain-pin: argName=DOTNET_COMPAT_SDK_VERSION
-ARG DOTNET_COMPAT_SDK_VERSION=10.0.303
 
 # toolchain-pin: argName=PANDOC_VERSION
 ARG PANDOC_VERSION=3.12.1
@@ -250,21 +252,6 @@ RUN actual_version="$(pwsh -NoLogo -NoProfile -Command '$PSVersionTable.PSVersio
         exit 1; \
     fi \
     && test "$(readlink -f /usr/bin/pwsh)" = /opt/powershell-pinned/pwsh
-RUN set -eux; \
-    arch="$(dpkg --print-architecture)"; \
-    case "${arch}" in \
-        amd64) dotnet_rid="linux-x64"; dotnet_sha512="538df11ceb9d86bdda061bab6ede3d1f6d46bb9ba087ae905643f3d456afe982949d1b952bceb305a5d22d2d6e69cc0e5100216ffcc709aaa86e867f2d9cdf9a" ;; \
-        arm64) dotnet_rid="linux-arm64"; dotnet_sha512="622e059198058ee5f92d7817bdd83885480a979628348f878201cb8dba52d168c1a324f9943a0e7a03ad547d85332aa82f16aced29da599ef02422b5378452de" ;; \
-        *) echo "Unsupported .NET compatibility SDK architecture: ${arch}" >&2; exit 1 ;; \
-    esac; \
-    archive="dotnet-sdk-${DOTNET_COMPAT_SDK_VERSION}-${dotnet_rid}.tar.gz"; \
-    url="https://builds.dotnet.microsoft.com/dotnet/Sdk/${DOTNET_COMPAT_SDK_VERSION}/${archive}"; \
-    tmp_dir="$(mktemp -d)"; \
-    curl -fsSL "${url}" -o "${tmp_dir}/${archive}"; \
-    printf '%s  %s\n' "${dotnet_sha512}" "${tmp_dir}/${archive}" | sha512sum -c -; \
-    tar -xzf "${tmp_dir}/${archive}" -C /usr/share/dotnet; \
-    rm -rf "${tmp_dir}"; \
-    /usr/bin/dotnet --list-sdks | grep -F "${DOTNET_COMPAT_SDK_VERSION} ["
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
     case "${arch}" in \
@@ -515,19 +502,16 @@ RUN apt-get -y update \
 ARG NPM_VERSION=12.2.2
 RUN npm install --global "npm@${NPM_VERSION}" \
     && npm --version
-# The compatibility SDK archive must not downgrade the base host or retain old runtimes.
-COPY --from=dotnet-base /usr/share/dotnet/dotnet /usr/share/dotnet/dotnet
 RUN set -eux; \
-    for root in /usr/share/dotnet/shared/Microsoft.NETCore.App /usr/share/dotnet/shared/Microsoft.AspNetCore.App /usr/share/dotnet/host/fxr; do \
-        newest="$(find "${root}" -mindepth 1 -maxdepth 1 -type d -name '10.*' -exec basename {} \; | sort -V | tail -n 1)"; \
-        test -n "${newest}"; \
-        for path in "${root}"/10.*; do \
-            if [ -d "${path}" ] && [ "${path##*/}" != "${newest}" ]; then \
-                rm -rf "${path}"; \
-            fi; \
+    sdks="$(/usr/bin/dotnet --list-sdks)"; \
+    test "$(printf '%s\n' "${sdks}" | cut -d ' ' -f1)" = "${DOTNET_SDK_VERSION}"; \
+    runtimes="$(/usr/bin/dotnet --list-runtimes)"; \
+    for framework in Microsoft.NETCore.App Microsoft.AspNetCore.App; do \
+        for major in 10 11; do \
+            test "$(printf '%s\n' "${runtimes}" | awk -v framework="${framework}" -v major="${major}" '$1 == framework && index($2, major ".") == 1 { n++ } END { print n+0 }')" = 1; \
         done; \
     done; \
-    /usr/bin/dotnet --list-runtimes
+    printf '%s\n' "${runtimes}"
 RUN install -d -m 0755 /usr/local/share/ade \
     && printf '{"profile":"%s"}\n' "${ADE_MSL_PROFILE}" > /usr/local/share/ade/msl-profile.json
 LABEL org.absdd-image-sandbox.msl-profile="${ADE_MSL_PROFILE}"

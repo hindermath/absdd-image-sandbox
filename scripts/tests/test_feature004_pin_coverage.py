@@ -136,11 +136,20 @@ class PinValidationCoverageTests(unittest.TestCase):
                 self.check_mutation(relative, mutate, expected)
 
     def test_architecture_hash_guards_reject_each_missing_digest(self):
-        for variable, expected in (("actionlint_sha256", "hashes for actionlint"),
-                                   ("dotnet_sha512", "hashes for .NET compatibility SDK")):
-            with self.subTest(variable=variable):
-                self.check_mutation("Dockerfile", lambda text, variable=variable:
-                                    re.sub(rf'{variable}="[0-9a-f]+"', f'{variable}="0"', text), expected)
+        for arch in ("amd64", "arm64"):
+            with self.subTest(arch=arch):
+                self.check_mutation("Dockerfile", lambda text, arch=arch:
+                                    re.sub(rf'({arch}\) actionlint_arch="{arch}"; actionlint_sha256=")[0-9a-f]+',
+                                           r'\g<1>0', text), "hashes for actionlint")
+
+    def test_mcr_sdk_and_runtime_reject_missing_digests(self):
+        for stage, key in (("dotnet-base", "baseImage"),
+                           ("dotnet-compat-runtime", "compatibilityRuntimeImage")):
+            with self.subTest(stage=stage):
+                self.check_mutation("Dockerfile", lambda text, stage=stage:
+                                    re.sub(rf'@sha256:[0-9a-f]{{64}} AS {stage}$',
+                                           f' AS {stage}', text, flags=re.MULTILINE),
+                                    f"Approved MCR image channel/digest has drifted: {key}")
 
 
 class SpecifyPatchCoverageTests(unittest.TestCase):

@@ -3,7 +3,12 @@
   "dockerfile": "Dockerfile",
   "baseImage": {
     "dependency": "mcr.microsoft.com/dotnet/sdk",
-    "tag": "10.0.403-resolute",
+    "tag": "11.0.100-resolute",
+    "owner": "dependabot"
+  },
+  "compatibilityRuntimeImage": {
+    "dependency": "mcr.microsoft.com/dotnet/aspnet",
+    "tag": "10.0.15-resolute",
     "owner": "dependabot"
   },
   "runtime": "podman",
@@ -235,18 +240,6 @@
         "amd64": "actionlint_{version}_linux_amd64.tar.gz",
         "arm64": "actionlint_{version}_linux_arm64.tar.gz"
       }
-    },
-    {
-      "arg": "DOTNET_COMPAT_SDK_VERSION",
-      "group": "DOTNET_COMPAT_SDK_VERSION",
-      "package": "dotnet-sdk",
-      "provider": "dotnet",
-      "tagPrefix": "",
-      "tagSuffix": "",
-      "channel": "10.0",
-      "featureBand": 3,
-      "hashVariable": "dotnet_sha512",
-      "algorithm": "sha512"
     },
     {
       "arg": "PANDOC_VERSION",
