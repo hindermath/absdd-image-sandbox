@@ -96,15 +96,15 @@ class VersionPinTests(unittest.TestCase):
             self.assertIsNotNone(row, language)
             self.assertEqual(row.group(1).strip(), version, language)
 
-    def test_compat_sdk_keeps_the_base_host_and_runtime_patch(self):
+    def test_compat_runtime_does_not_replace_the_mcr_sdk_host(self):
         text = (ROOT / "Dockerfile").read_text()
         self.assertIn("AS dotnet-base", text)
-        self.assertIn(
-            "COPY --from=dotnet-base /usr/share/dotnet/dotnet /usr/share/dotnet/dotnet",
-            text,
-        )
-        self.assertIn('newest="$(find', text)
-        self.assertIn('"${path##*/}" != "${newest}"', text)
+        copies = re.findall(r"^COPY --from=dotnet-compat-runtime (.+)$", text, re.MULTILINE)
+        self.assertEqual(["/usr/share/dotnet/shared/ /usr/share/dotnet/shared/"], copies)
+        self.assertNotIn("DOTNET_COMPAT_SDK_VERSION", text)
+        self.assertNotIn("COPY --from=dotnet-base", text)
+        self.assertLess(text.index("COPY --from=dotnet-compat-runtime"), text.index("dotnet tool install"))
+        self.assertIn("for major in 10 11", text)
 
     def test_native_agent_hooks_are_narrow_and_checked(self):
         text = (ROOT / "Dockerfile").read_text()
@@ -226,7 +226,8 @@ esac
         config = json.loads((ROOT / "scripts/config/toolchain-pins.json").read_text())
         text = (ROOT / "Dockerfile").read_text()
         self.assertEqual("podman", config["runtime"])
-        self.assertEqual("10.0.403-resolute", config["baseImage"]["tag"])
+        self.assertEqual("11.0.100-resolute", config["baseImage"]["tag"])
+        self.assertEqual("10.0.15-resolute", config["compatibilityRuntimeImage"]["tag"])
         self.assertRegex(text, r"(?m)^ARG NPM_VERSION=12\.[0-9]+\.[0-9]+$")
         self.assertIn('"npm@${NPM_VERSION}"', text)
         for arg, channel in (("JAVA_VERSION", "25"), ("NODE_MAJOR", "24")):

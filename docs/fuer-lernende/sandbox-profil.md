@@ -20,7 +20,7 @@ files are linked under `Verweise / References`.
 | Eigenschaft / Property | Wert / Value |
 |---|---|
 | Container-Engine | Podman |
-| Basis-Image | `mcr.microsoft.com/dotnet/sdk:10.0.403-resolute` (per SHA256-Digest gepinnt / pinned by SHA256 digest) |
+| Basis-Image | `mcr.microsoft.com/dotnet/sdk:11.0.100-resolute`; zusätzlich .NET- und ASP.NET-Core-10-Runtimes aus MCR, kein .NET-10-SDK |
 | Benutzer im Container / User inside | `adedev` (kein Root-Zugriff zur Laufzeit / no root access at runtime) |
 | Betriebssystem im Container / OS inside | Ubuntu 26.04 (Linux) |
 | Ports nach außen / Ports to host | `127.0.0.1:5100-5198` für Apps; `5199` für OpenCode |
@@ -37,7 +37,7 @@ Audit-Metadaten sind kein Backup der Agentendaten.
 | Property | Value |
 |---|---|
 | Container engine | Podman |
-| Base image | `mcr.microsoft.com/dotnet/sdk:10.0.403-resolute` (pinned by SHA256 digest) |
+| Base image | `mcr.microsoft.com/dotnet/sdk:11.0.100-resolute`; additional .NET and ASP.NET Core 10 runtimes from MCR, no .NET 10 SDK |
 | User inside | `adedev` (no root access at runtime) |
 | OS inside | Ubuntu 26.04 (Linux) |
 | Ports to host | `127.0.0.1:5100-5198` for apps; `5199` for OpenCode |
@@ -199,7 +199,7 @@ image acceptance is pending, `N/A` = not applicable.
 
 | Sprache / Language | Version | Status | Test-Befehl / Test Command | Audit-Tool |
 |---|---|---|---|---|
-| **C# / .NET** | .NET SDK 10.0 (MCR) | `Open` | `dotnet test` | `dotnet list package --vulnerable` |
+| **C# / .NET** | .NET SDK 11.0 (MCR) | `Open` | `dotnet test` | `dotnet list package --vulnerable` |
 | **Go** | 1.27.3 | `Open` | `go test ./...` | `govulncheck ./...` |
 | **Java** | OpenJDK 25 LTS | `Open` | `mvn test` | `mvn dependency:analyze` |
 | **Python** | CPython 3.15.2 | `Open` | `python -m pytest` | `pip-audit` (via `uv`) |

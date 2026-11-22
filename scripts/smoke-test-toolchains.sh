@@ -166,8 +166,26 @@ dotnet_dir="${work_dir}/dotnet"
 mkdir -p "${dotnet_dir}"
 (
   cd "${dotnet_dir}"
-  dotnet new console --framework net10.0 --no-restore
-  dotnet run
+  sdk=$(dotnet --version)
+  [[ "$sdk" == 11.* ]]
+  dotnet --list-sdks | awk '$1 !~ /^11\./ {bad=1} END {exit (NR != 1 || bad)}'
+  dotnet new console --framework net11.0 --no-restore --output net11
+  printf '%s\n' 'return System.Environment.Version.Major == 11 ? 0 : 1;' >net11/Program.cs
+  dotnet run --project net11
+
+  # Compile the offline probe against the installed .NET 10 runtime assemblies.
+  # Normal net10.0 project builds resolve their own targeting packs.
+  runtime10=$(dotnet --list-runtimes | awk '$1=="Microsoft.NETCore.App" && $2 ~ /^10\./ {print $2}')
+  [[ "$runtime10" =~ ^10\.[0-9]+\.[0-9]+$ ]]
+  refs="/usr/share/dotnet/shared/Microsoft.NETCore.App/$runtime10"
+  printf '%s\n' 'public static class Probe { public static int Main() => System.Environment.Version.Major == 10 ? 0 : 1; }' >Probe.cs
+  dotnet "/usr/share/dotnet/sdk/$sdk/Roslyn/bincore/csc.dll" \
+    -nologo -noconfig -nostdlib+ -target:exe -out:Probe.dll \
+    -r:"$refs/System.Private.CoreLib.dll" -r:"$refs/System.Runtime.dll" Probe.cs
+  printf '{"runtimeOptions":{"tfm":"net10.0","rollForward":"Disable","framework":{"name":"Microsoft.NETCore.App","version":"%s"}}}\n' \
+    "$runtime10" >Probe.runtimeconfig.json
+  dotnet Probe.dll
+  printf '%s\n' 'PASS: .NET 11 SDK, .NET 11 executable, .NET 10 executable'
 )
 
 if has_toolchain java; then

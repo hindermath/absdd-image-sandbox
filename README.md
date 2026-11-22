@@ -60,7 +60,7 @@ environment, not an application.
 | Compose-Lifecycle-Befehl | `podman compose` |
 | Compose-Config-Validierung | `podman-compose config` |
 | Lifecycle-Fallback | `podman-compose`, falls `podman compose` lokal nicht verfuegbar ist |
-| Basisimage | Microsoft .NET SDK aus MCR, im `Dockerfile` per Digest gepinnt |
+| Basisimage / Base image | Microsoft .NET SDK 11 aus MCR und zusätzliche .NET-/ASP.NET-Core-10-Runtimes, per Digest gepinnt / Microsoft .NET SDK 11 and additional .NET/ASP.NET Core 10 runtimes from MCR, pinned by digest |
 | Verbindliche MSL-Pfade | .NET/C#, Java, Go, Rust, Python und Swift |
 | Zusaetzliche Skript- und Werkzeugbasis | PowerShell 7 als zweite Skriptbasis; Node.js/npm als unterstuetzendes Werkzeug |
 | OpenCode | Installiert, aber ohne vorkonfigurierten Modellanbieter |

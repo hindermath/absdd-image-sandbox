@@ -4,13 +4,14 @@
 
 Owner ist der Repository-Maintainer. Das `Dockerfile` bleibt die einzige Quelle
 fuer Versionswerte und Archiv-Pruefsummen. Das [Pin-Register](../../scripts/config/toolchain-pins.json)
-ordnet 29 Versions-ARGs offiziellen Quellen und 28 Gruppen zu; das 30. ARG
+ordnet 28 Versions-ARGs offiziellen Quellen und 27 Gruppen zu; das 29. ARG
 `ADE_MSL_PROFILE` ist ein geprüfter Build-Selektor. Python-Version und
 Builddatum bewegen sich gemeinsam. Renovate ist abgeloest; historische Evidence
 bleibt unveraendert.
 
 [Dependabot](../../.github/dependabot.yml) pflegt Actions, externe pre-commit-
-Hooks und Basisimage-Digests im freigegebenen MCR-Tag `10.0.403-resolute`. Hoehere Versionen
+Hooks und die Digests der freigegebenen MCR-Tags `11.0.100-resolute` (SDK)
+und `10.0.15-resolute` (ASP.NET-Runtime). Höhere Versionen
 sind ausgeschlossen. `docker` bezeichnet das Manifestformat; **Podman bleibt
 die verbindliche Build-Engine**. Zeitplan, Gruppierung und Ausschluesse stehen
 im [Wartungspfad](../../.github/DEPENDENCY-MAINTENANCE.md). Sicherheitsgruppen
@@ -31,8 +32,8 @@ geht nur an api.github.com. Downloads werden gehasht, niemals ausgefuehrt.
 Offline-Fixtures besitzen keinen Netzwerk-Fallback.
 
 - Java LTS25, Node LTS24 und npm12 bleiben ihre freigegebenen Kanaele. APT
-  liefert Java-/Node-Patchpakete beim Build. Das Kompatibilitaets-SDK bleibt
-  bei .NET10.0.3xx. Andere Feature-Baender brauchen bewusste Freigabe.
+  liefert Java-/Node-Patchpakete beim Build. Das Image enthält SDK 11, aber
+  kein SDK 10. Die .NET-10- und ASP.NET-Core-10-Runtimes laufen parallel.
 - Swift bleibt wegen des gepinnten 6.x-Signierschluessels bei Major6. Ein neuer
   Major erzeugt PolicyHeld; der Schluesselwechsel braucht eigenes Review.
   Auch Patch-Wechsel bleiben PolicyHeld, solange das zentral verteilte
@@ -108,10 +109,11 @@ keinen laufenden Container.
 ## English
 
 The repository maintainer owns this policy. The Dockerfile remains the sole
-source of versions and archive hashes. The registry covers 29 version ARGs in
-28 groups plus the validated `ADE_MSL_PROFILE` build selector; Python version/date move together. Renovate is retired; historical
+source of versions and archive hashes. The registry covers 28 version ARGs in
+27 groups plus the validated `ADE_MSL_PROFILE` build selector; Python version/date move together. Renovate is retired; historical
 evidence is retained. Dependabot maintains Actions, external pre-commit hooks
-and the base digest within approved MCR tag `10.0.403-resolute`; higher versions are excluded.
+and the digests of the approved MCR tags `11.0.100-resolute` (SDK) and
+`10.0.15-resolute` (ASP.NET runtime); higher versions are excluded.
 Docker is the manifest ecosystem; **Podman is the required engine**. See the
 maintenance guide for schedules, grouping and exclusions. Security groups do
 not scan arbitrary ARGs for vulnerabilities.
@@ -126,11 +128,12 @@ sent only to api.github.com. Downloads are hashed, never executed. Offline
 fixtures never fall back to network access.
 
 Java LTS25, Node LTS24 and npm12 remain approved channels. APT supplies Java/
-Node patch packages at build time. The compatibility SDK stays in .NET10.0.3xx.
+Node patch packages at build time. The image includes SDK 11, not SDK 10.
+The .NET and ASP.NET Core 10 runtimes run side by side with version 11.
 Swift stays within major6 because of its pinned signing key; a new major
 produces PolicyHeld pending key/channel review. Other stable releases may be
 proposed without downgrades. GitHub archive assets need unique SHA-256 digests;
-Go, Maven and .NET use official checksums. PowerShell packages are streamed
+Go and Maven use official checksums; both .NET images use MCR index digests. PowerShell packages are streamed
 from a fixed Microsoft source and SHA-256 hashed. Versions and complete AMD64/
 ARM64 hash sets move atomically. Syft's build/SBOM default also comes from the
 Dockerfile; explicit local overrides remain supported. Missing evidence blocks
