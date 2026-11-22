@@ -5,7 +5,7 @@ FROM dotnet-base AS sandbox
 # toolchain-pin: argName=JAVA_VERSION
 ARG JAVA_VERSION=25
 # toolchain-pin: argName=MAVEN_VERSION
-ARG MAVEN_VERSION=3.10.0
+ARG MAVEN_VERSION=3.10.1
 # toolchain-pin: argName=PYTHON_VERSION
 ARG PYTHON_VERSION=3.15.2
 # toolchain-pin: argName=PYTHON_BUILD_DATE
@@ -134,7 +134,7 @@ RUN if [ "${ADE_MSL_PROFILE}" = java ] || [ "${ADE_MSL_PROFILE}" = all ]; then \
     tmp_dir="$(mktemp -d)"; \
     archive="apache-maven-${MAVEN_VERSION}-bin.tar.gz"; \
     maven_major="${MAVEN_VERSION%%.*}"; \
-    maven_sha512="908b1501bfb420bf7c8affb855534a9c407fd6099367bfb9f2f2dcb8e9799102bffb84518cde74c679bd76870247c6528683abdd620581bffa90f95d92d175aa"; \
+    maven_sha512="8af2fcc48ee6b8f8fc0b21054226e14404b88500df6483cdeb3ae603408f6de27b1397ac591a9fb0d98fee64f4f624fee1383efd25b8998786cda1598fb9ea39"; \
     if ! curl -fsSL "https://dlcdn.apache.org/maven/maven-${maven_major}/${MAVEN_VERSION}/binaries/${archive}" -o "${tmp_dir}/${archive}"; then \
         curl -fsSL "https://archive.apache.org/dist/maven/maven-${maven_major}/${MAVEN_VERSION}/binaries/${archive}" -o "${tmp_dir}/${archive}"; \
     fi; \
