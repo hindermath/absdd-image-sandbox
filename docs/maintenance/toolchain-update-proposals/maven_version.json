@@ -2,48 +2,48 @@
   "schemaVersion": 1,
   "documentationImpact": [
     {
-      "decision": "NoUpdateRequired",
       "scope": "Reader guidance; versions remain canonical in Dockerfile",
       "reevaluation": "Changed update source, channel, trust boundary or install mechanism",
+      "decision": "NoUpdateRequired",
       "owner": "Repository Maintainer"
     },
     {
-      "homeSyncRequired": false,
-      "source": "Committed Dockerfile and Git history",
-      "distributionClass": "sourceOnly",
+      "owner": "Repository Maintainer",
       "scope": "Configured statistics outputs and any derived Go/Rust learner version row",
+      "source": "Committed Dockerfile and Git history",
       "decision": "GeneratedUpdate",
-      "owner": "Repository Maintainer"
+      "distributionClass": "sourceOnly",
+      "homeSyncRequired": false
     }
   ],
   "proof": {
-    "run": "https://github.com/hindermath/absdd-image-sandbox/actions/runs/43819534370",
-    "toolchainSmokeExit": 0,
-    "imageId": "sha256:a94550a02f6ab4916622be8614880267d67a8b617ec0284b1204f5769c0c445f",
-    "runtime": "podman",
-    "sbomSha256": "e77d7fc3ee9d4aa7084dbb2117ad080fb143b5d5ac3a867cf8694bc0757be72c",
+    "arm64Execution": "NotPerformed",
     "sbomExit": 0,
-    "schemaVersion": 1,
-    "humanReview": "Pending",
-    "dockerfileSha256": "50e708d7cb12ae27470d8a35be7f583b24287e1b3a40c2e62e063f7813453250",
-    "documentationSmokeExit": 0,
+    "runtime": "podman",
+    "sourceRevision": "abe3f1006952dfdd7ddd165f373726f505d7a02c",
+    "imageId": "sha256:d908d6ff81e9466e7c1a21377fc5e69325046ea9673be68d377c1fcb3234010b",
     "platform": "linux/amd64",
-    "sourceRevision": "6e5a235f608902ba598ea839a0475ee87b10908d",
+    "run": "https://github.com/hindermath/absdd-image-sandbox/actions/runs/45126178167",
+    "sbomSha256": "7cea95846b20eea4254db51de8237889f8a49d4360d9256f925ae22e12fecfaf",
+    "dockerfileSha256": "593a5f5dc1e2e8f9122cb1a599191689b6ca2d2d71c672aaa2640525a8539820",
+    "humanReview": "Pending",
+    "schemaVersion": 1,
     "buildExit": 0,
-    "arm64Execution": "NotPerformed"
+    "documentationSmokeExit": 0,
+    "toolchainSmokeExit": 0
   },
   "proposal": {
-    "baseHead": "6e5a235f608902ba598ea839a0475ee87b10908d",
-    "hashes": {
-      "all": "8af2fcc48ee6b8f8fc0b21054226e14404b88500df6483cdeb3ae603408f6de27b1397ac591a9fb0d98fee64f4f624fee1383efd25b8998786cda1598fb9ea39"
-    },
-    "source": "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/maven-metadata.xml",
-    "updates": {
-      "MAVEN_VERSION": "3.10.1"
-    },
-    "schemaVersion": 1,
     "group": "MAVEN_VERSION",
-    "baseSha256": "2c3c03baf2c83914d0c4889c8760378a657e996758f53ca345a4dd199ed6b120",
-    "resultSha256": "50e708d7cb12ae27470d8a35be7f583b24287e1b3a40c2e62e063f7813453250"
+    "source": "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/maven-metadata.xml",
+    "hashes": {
+      "all": "57d2db6b37e7582119137ade544557bba741b29e62109ef81539a2bdfd6d0e641fdd5d8edb014af1816d0510deac6fac8f347433b3a1aa36316ba85aa77b8119"
+    },
+    "updates": {
+      "MAVEN_VERSION": "3.10.2"
+    },
+    "resultSha256": "593a5f5dc1e2e8f9122cb1a599191689b6ca2d2d71c672aaa2640525a8539820",
+    "baseHead": "abe3f1006952dfdd7ddd165f373726f505d7a02c",
+    "baseSha256": "a7dfedeed1df88460dfa82e9bd4638d9a3f82a1d7448119b06f7a57991a1115e",
+    "schemaVersion": 1
   }
 }
