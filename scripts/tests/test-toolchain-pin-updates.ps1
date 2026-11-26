@@ -32,8 +32,13 @@ $before=Get-AdePinTextHash $context.text
 $fixtures=@{}
 $fixtures['https://api.adoptium.net/v3/info/available_releases']='{"available_lts_releases":[21,25]}'
 $fixtures['https://nodejs.org/dist/index.json']='[{"version":"v24.22.1","lts":"Fixture"}]'
-$fixtures['https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/maven-metadata.xml']='<metadata><versioning><versions><version>3.10.1</version><version>4.0.0-rc-1</version></versions></versioning></metadata>'
-$fixtures['https://archive.apache.org/dist/maven/maven-3/3.10.1/binaries/apache-maven-3.10.1-bin.tar.gz.sha512']='c'*128
+# DE: Das Testrelease liegt immer einen Patch über dem geprüften Pin.
+# EN: The fixture release is always one patch ahead of the pin under test.
+$mavenPin = [version]$context.values.MAVEN_VERSION
+$mavenFixtureVersion = '{0}.{1}.{2}' -f $mavenPin.Major, $mavenPin.Minor, ($mavenPin.Build + 1)
+$fixtures['https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/maven-metadata.xml'] = "<metadata><versioning><versions><version>$mavenFixtureVersion</version><version>4.0.0-rc-1</version></versions></versioning></metadata>"
+$mavenArchive = "apache-maven-$mavenFixtureVersion-bin.tar.gz"
+$fixtures["https://archive.apache.org/dist/maven/maven-$($mavenPin.Major)/$mavenFixtureVersion/binaries/$mavenArchive.sha512"] = 'c' * 128
 $fixtures['https://static.rust-lang.org/dist/channel-rust-stable.toml']="[pkg.rust]`nversion = `"1.99.2 (fixture)`"`n"
 $fixtures['https://static.rust-lang.org/rustup/release-stable.toml']="schema-version = '1'`nversion = '1.99.2'`n"
 $fixtures['https://go.dev/dl/?mode=json&include=all']=ConvertTo-PinFixtureJson @(@{version='go1.27.4';stable=$true;files=@(
